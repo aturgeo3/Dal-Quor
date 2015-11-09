@@ -15,4 +15,6 @@ The rest is for you to discover.
 _DEV may be unstable, below that should be a stable release.
 
 ## Modpacks
-Sure, provide a link to this github.
+* Sure, provide a link to this github.
+* Don't claim the mod as your own.
+* Can't make money off of the pack.
