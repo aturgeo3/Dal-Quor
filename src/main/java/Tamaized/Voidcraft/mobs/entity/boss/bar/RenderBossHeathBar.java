@@ -1,3 +1,10 @@
+/**
+ * Original Class file: BossBarHandler
+ * Mod: Botania
+ * Author: Vazkii
+ * 
+ * This is a custom version of it therefore I wont claim this file truly as my own.
+ */
 package Tamaized.Voidcraft.mobs.entity.boss.bar;
 
 import java.awt.Rectangle;
