@@ -10,9 +10,9 @@ To get started, simply enter The End and search for the Void Crystal Ore. Each o
 The rest is for you to discover.
 
 ## Downloads
-[Can be found here](https://github.com/Tamaized/VoidCraft/tree/master/build)
+[Can be found here](http://voidcraft.tamaized.tk/mod.php)
 
-_DEV may be unstable, below that should be a stable release.
+DEV may be unstable but is the latest
 
 ## Modpacks
 * Sure, provide a link to this github.
