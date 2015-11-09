@@ -1,0 +1,16 @@
+[
+{
+  "modid": "voidcraft",
+  "name": "VoidCraft",
+  "description": "Explore the Void",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Tamaized"],
+  "credits": "Tamaized for being awesome?",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
