@@ -50,7 +50,7 @@ public class RenderBossHeathBar {
 		int y = 20;
 		int xf = x + (bgRect.width - fgRect.width) / 2;
 		int yf = y + (bgRect.height - fgRect.height) / 2;
-		int bossHpPerc = (int) ((double) fgRect.width * ((voidBoss.getHealth()) / voidBoss.getMaxHealth()));
+		int bossHpPerc = (int) ((double) fgRect.width * voidBoss.getPercentHP());
 		int tx = c - mc.fontRenderer.getStringWidth(name) / 2;
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);

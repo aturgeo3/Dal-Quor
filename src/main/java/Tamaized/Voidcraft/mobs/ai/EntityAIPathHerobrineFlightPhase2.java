@@ -2,11 +2,15 @@ package Tamaized.Voidcraft.mobs.ai;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import Tamaized.Voidcraft.blocks.AIBlock;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 
 public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
@@ -27,6 +31,8 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 	private int tick_Damage = 0;
 	
 	private int callTick = 2*20;
+	
+	private boolean inBlock = false;
 	
 	public EntityAIPathHerobrineFlightPhase2(EntityVoidNPC entityMobHerobrine, ArrayList<Class> c) {
 		watchedClass = new ArrayList<Class>();
@@ -155,6 +161,21 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 			entity.posX += dx;
 			entity.posZ += dz;
 			entity.posY += dy;
+		}
+		
+		if(!entity.worldObj.isRemote){
+			Block b = entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ));
+			if(b instanceof AIBlock){
+				if(!inBlock){
+					TileEntity te = ((AIBlock) b).getMyTileEntity(entity.worldObj, MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ));
+					if(te instanceof TileEntityAIBlock){
+						((TileEntityAIBlock) te).boom();
+						inBlock = true;
+					}
+				}
+			}else{
+				inBlock = false;
+			}
 		}
 
 	}

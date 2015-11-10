@@ -53,6 +53,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     
     public void doDamage(int a){
     	this.setHealth(this.getHealth() - a);
+    	if(phase == PHASE_02) getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()+0.05D);
     }
     
     public boolean isAIEnabled() {
@@ -71,8 +72,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     
 	@Override
 	public float getPercentHP() {
-		float f = this.getHealth() / this.getMaxHealth();
-		return f < 0 ? 0 : f < 1 ? 1 : f; //Keep the number no less than 0 but ni higher than 1, even though it's impossible to reach below/beyond.
+		return this.getHealth() / this.getMaxHealth();
 	}
     
     protected void updateAITick(){
@@ -138,9 +138,10 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		 *  - Herobrine must run through a pillar to be dealt damage.
     		 *  - Pillars Spawn every 5 seconds
     		 *  - Max of 6 Pillars at a time
+    		 *  - Increase his speed everytime he is hurt
     		 */
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-    		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
+    		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D);
     		this.setHealth(this.getMaxHealth());
              
     		EntityVoidNPCAIBase newAI = new EntityAIPathHerobrineFlightPhase2(this, filter);
