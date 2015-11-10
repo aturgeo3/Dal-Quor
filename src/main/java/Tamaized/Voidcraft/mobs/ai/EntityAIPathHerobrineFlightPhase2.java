@@ -6,8 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
@@ -33,6 +36,7 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 	private int callTick = 2*20;
 	
 	private boolean inBlock = false;
+	private int blockTick = 0;
 	
 	public EntityAIPathHerobrineFlightPhase2(EntityVoidNPC entityMobHerobrine, ArrayList<Class> c) {
 		watchedClass = new ArrayList<Class>();
@@ -71,6 +75,11 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
     	}
 		
 		if(closestEntity != null){
+			if(closestEntity instanceof EntityPlayer && ((EntityPlayer) closestEntity).capabilities.isFlying){
+				((EntityPlayer) closestEntity).capabilities.isFlying = false;
+				((EntityPlayer) closestEntity).addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+			}
+			
 			theWatcher.getLookHelper().setLookPosition(closestEntity.posX, closestEntity.posY + (double)closestEntity.getEyeHeight() - 1, closestEntity.posZ, 10.0F, (float)theWatcher.getVerticalFaceSpeed());
 			
 			double d0 = closestEntity.posX - theWatcher.posX;
@@ -125,7 +134,7 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 			double exMax = closestEntity.boundingBox.maxX;
 			if(tick_Damage <= 0){
 				if(z >= ezMin && z <= ezMax && x >= exMin && x <= exMax){
-					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(entity), 35);
+					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(entity), 45);
 					tick_Damage = 20;
 				}
 			}else{
@@ -171,10 +180,12 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 					if(te instanceof TileEntityAIBlock){
 						((TileEntityAIBlock) te).boom();
 						inBlock = true;
+						blockTick = 40;
 					}
 				}
 			}else{
-				inBlock = false;
+				if(blockTick <= 0) inBlock = false;
+				else blockTick--;
 			}
 		}
 

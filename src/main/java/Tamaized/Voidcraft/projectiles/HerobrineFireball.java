@@ -38,7 +38,7 @@ public class HerobrineFireball extends EntityFireball {
     protected void onImpact(MovingObjectPosition p_70227_1_){
         if (!this.worldObj.isRemote){
             if (p_70227_1_.entityHit != null){
-                p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 35.0F);
+                p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
             }else if(p_70227_1_.typeOfHit == MovingObjectType.BLOCK){
             	Block b = worldObj.getBlock(p_70227_1_.blockX, p_70227_1_.blockY, p_70227_1_.blockZ);
             	if(b instanceof AIBlock){
