@@ -23,7 +23,7 @@ public class VoidCraftThaumRecipes {
 	}
 	
 	public void register(){
-		listCrucible.put("vc.CorruptedSword", instance.addCrucibleRecipe("vc.CorruptedSword", new ItemStack(voidCraft.thaumcraftIntegration.items.corruptedSword), voidCraft.tools.voidSword, new AspectList().add(Aspect.ENTROPY, 24).add(Aspect.TAINT, 12)));
+		listCrucible.put("vc.CorruptedSword", instance.addCrucibleRecipe("vc.CorruptedSword", new ItemStack(voidCraft.thaumcraftIntegration.items.corruptedSword), new ItemStack(voidCraft.tools.voidSword), new AspectList().add(Aspect.ENTROPY, 24).add(Aspect.TAINT, 12)));
 	}
 
 }
