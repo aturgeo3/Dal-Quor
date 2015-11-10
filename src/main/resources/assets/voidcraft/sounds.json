@@ -1,0 +1,20 @@
+{
+  "lich.lichLive": {"category": "hostile","sounds": [{"name": "mobs/lich/lichLive","stream": false}]},
+  "lich.lichDeath": {"category": "hostile","sounds": [{"name": "mobs/lich/lichDeath","stream": false}]},
+  "lich.lichActive": {"category": "hostile","sounds": [{"name": "mobs/lich/lichActive","stream": false}]},
+  "chain.chainLive": {"category": "hostile","sounds": [{"name": "mobs/spectrechain/chainLive","stream": false}]},
+  "wraith.wraithLive": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithLive","stream": false}]},
+  "wraith.wraithHurt": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithHurt","stream": false}]},
+  "wraith.wraithDeath": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithDeath","stream": false}]},
+  "wrath.breathe1": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/breathe1","stream": false}]},
+  "wrath.breathe2": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/breathe2","stream": false}]},
+  "wrath.death": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/death","stream": false}]},
+  "wrath.hit": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/hit","stream": false}]},
+  
+  "portal.Xia": {"category": "ambient","sounds": [{"name": "portal/Xia","stream": true}]},
+  
+  "music.wish": {"category": "music","sounds": [{"name": "music/Emile van Krieken - A morning wish","stream": true}]},
+  "music.nether": {"category": "music","sounds": [{"name": "music/Emile van Krieken - Nether menu _Unreleased_","stream": true}]},
+  
+  "random.chain": {"category": "ambient","sounds": [{"name": "random/chain","stream": true}]}
+}

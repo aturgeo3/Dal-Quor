@@ -1,8 +1,6 @@
 *
-!/src/main/java/
-!/src/main/java/**
-!/src/main/resources/
-!/src/main/resources/**
+!/src/
+!/src/**
 /src/main/resources/assets/records.voidcraft/
 /src/main/resources/assets/records.voidcraft/**
 !build.gradle

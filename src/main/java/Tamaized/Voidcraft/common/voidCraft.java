@@ -455,13 +455,6 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
 		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
-	
-		// Creative Tabs
-		LanguageRegistry.instance().addStringLocalization("itemGroup.tabVoid", "en_US", "VoidCraft");
-		LanguageRegistry.instance().addStringLocalization("itemGroup.tForge", "en_US", "Star Forge");
-		
-		//Language
-		LanguageRegistry.instance().addStringLocalization("container.voidMacerator", "Void Infused Macerator");
 		
 		//MISC BLOCK STUFF
 		GameRegistry.registerBlock(blockVoidFluid, "blockVoidFluid");
@@ -672,46 +665,36 @@ public class voidCraft {
 		// Mobs
 		EntityRegistry.registerGlobalEntityID(EntityMobWraith.class, "Wraith", EntityRegistry.findGlobalUniqueEntityId(), 0xFFFFFF, 0x000000);
 		EntityRegistry.addSpawn(EntityMobWraith.class, 1, 0, 1, EnumCreatureType.monster, biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Wraith.name", "en_US", "Wraith");
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobSpectreChain.class, "SpectreChain",EntityRegistry.findGlobalUniqueEntityId(), 0xAA00FF, 0x000000);
 		EntityRegistry.addSpawn(EntityMobSpectreChain.class, 1, 0, 1, EnumCreatureType.monster, biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.SpectreChain.name", "en_US", "Chained Spectre");
 
 		EntityRegistry.registerGlobalEntityID(EntityMobVoidWrath.class, "VoidWrath", EntityRegistry.findGlobalUniqueEntityId(), 0xFF0000, 0x000000);
 		EntityRegistry.addSpawn(EntityMobVoidWrath.class, 0, 0, 0, EnumCreatureType.monster, biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.VoidWrath.name", "en_US", "Void's Wrath");
 		
 		//TODO MORE CONTENT TO ENTITY
 		EntityRegistry.registerGlobalEntityID(EntityMobLich.class, "Lich", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x4444FF);
 		EntityRegistry.addSpawn(EntityMobLich.class, 3, 0, 1, EnumCreatureType.monster, BiomeGenBase.swampland);
-		LanguageRegistry.instance().addStringLocalization("entity.Lich.name", "en_US", "Lich");
 		
 		//TODO FIX THE ENTITY
 		EntityRegistry.registerGlobalEntityID(EntityMobVoidBoss.class, "VoidBoss", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
 		EntityRegistry.addSpawn(EntityMobVoidBoss.class, 0, 0, 0, EnumCreatureType.monster, biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.VoidBoss.name", "en_US", "Corrupted Pawn");
 		
 		//npcs
 		EntityRegistry.registerGlobalEntityID(EntityMobHerobrine.class, "Herobrine", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
 		EntityRegistry.addSpawn(EntityMobHerobrine.class, 0, 0, 0, EnumCreatureType.monster, this.biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Herobrine.name", "en_US", "Avatar of Herobrine");
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobDol.class, "Dol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x775500);
 		EntityRegistry.addSpawn(EntityMobDol.class, 0, 0, 0, EnumCreatureType.monster, this.biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Dol.name", "en_US", "Dol");
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobZol.class, "Zol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x8888FF);
 		EntityRegistry.addSpawn(EntityMobZol.class, 0, 0, 0, EnumCreatureType.monster, this.biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Zol.name", "en_US", "Zol");
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobXia.class, "Xia", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
 		EntityRegistry.addSpawn(EntityMobXia.class, 0, 0, 0, EnumCreatureType.monster, this.biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Xia.name", "en_US", "Xia");
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobXia2.class, "Xia2", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
 		EntityRegistry.addSpawn(EntityMobXia2.class, 0, 0, 0, EnumCreatureType.monster, this.biomeVoid);
-		LanguageRegistry.instance().addStringLocalization("entity.Xia2.name", "en_US", "Xia");
 		
 		//Add Void Macerator Recipes
 		//--OreDict
