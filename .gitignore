@@ -1,6 +1,6 @@
 *
 !/src/main/java/
-!/src/main/java/*
+!/src/main/java/**
 !build.gradle
 !LICENSE
 !README.md
