@@ -126,7 +126,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class voidCraft {
 	
-	protected final static String version = "0.5.7a_DEV";
+	protected final static String version = "0.5.8a";
 
 	public static final String modid = "voidcraft";
 	
