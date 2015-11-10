@@ -2,15 +2,16 @@ package Tamaized.Voidcraft.Addons.thaumcraft;
 
 import thaumcraft.api.ThaumcraftApi;
 
-public class voidCraftThaum{
+public class VoidCraftThaum{
 	
 	private ThaumcraftApi instance;
 	public AspectsForItems aspects;
 	public VoidCraftSpells spells;
+	public voidItemsThaumcraft items;
 	public VoidCraftThaumRecipes recipes;
 	public VoidCraftResearch research;
 	
-	public voidCraftThaum(){
+	public VoidCraftThaum(){
 		
 		//Register Aspects on Items
 		aspects = new AspectsForItems(instance);
@@ -18,11 +19,14 @@ public class voidCraftThaum{
 		//Register Spells
 		//spells = new VoidCraftSpells(instance);
 		
+		//Register Items
+		items = new voidItemsThaumcraft(instance);
+		
 		//Register Recipes
-		//recipes = new VoidCraftThaumRecipes(instance);
+		recipes = new VoidCraftThaumRecipes(instance);
 		
 		//Research Tab
-		//research = new VoidCraftResearch(recipes);
+		research = new VoidCraftResearch(recipes);
 	}
 	
 }
