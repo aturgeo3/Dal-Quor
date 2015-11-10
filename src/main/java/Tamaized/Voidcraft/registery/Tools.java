@@ -37,11 +37,11 @@ public class Tools extends RegistryBase {
 	public void preInit() {
 		// Tools
 		// void
-		voidPickaxe = new VoidPickaxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidPickaxe").setTextureName("VoidCraft:voidCraft.items.voidcrystal_Pickaxe");
-		voidSpade = new VoidSpade(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidShovel").setTextureName("VoidCraft:voidCraft.items.voidcrystal_Shovel");
-		voidAxe = new VoidAxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidAxe").setTextureName("VoidCraft:voidCraft.items.voidcrystal_Axe");
-		voidSword = new VoidSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidSword").setTextureName("VoidCraft:voidCraft.items.voidcrystal_Sword");
-		voidHoe = new VoidHoe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidHoe").setTextureName("VoidCraft:voidCraft.items.voidcrystal_Hoe");
+		voidPickaxe = new VoidPickaxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidPickaxe").setTextureName("VoidCraft:voidcrystal_Pickaxe");
+		voidSpade = new VoidSpade(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidShovel").setTextureName("VoidCraft:voidcrystal_Shovel");
+		voidAxe = new VoidAxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidAxe").setTextureName("VoidCraft:voidcrystal_Axe");
+		voidSword = new VoidSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidSword").setTextureName("VoidCraft:voidcrystal_Sword");
+		voidHoe = new VoidHoe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidHoe").setTextureName("VoidCraft:voidcrystal_Hoe");
 
 		// spectre
 		angelicSword = new angelicSword(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("angelicSword").setTextureName("VoidCraft:angelicSword");
