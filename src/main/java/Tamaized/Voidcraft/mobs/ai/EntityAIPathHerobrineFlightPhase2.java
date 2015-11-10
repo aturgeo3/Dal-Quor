@@ -75,9 +75,15 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
     	}
 		
 		if(closestEntity != null){
-			if(closestEntity instanceof EntityPlayer && ((EntityPlayer) closestEntity).capabilities.isFlying){
-				((EntityPlayer) closestEntity).capabilities.isFlying = false;
-				((EntityPlayer) closestEntity).addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+			if(closestEntity instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer) closestEntity;
+				if(!player.capabilities.isCreativeMode && player.capabilities.isFlying){
+					player.capabilities.allowFlying = false;
+					player.capabilities.isFlying = false;
+					player.capabilities.disableDamage = false;
+					player.sendPlayerAbilities();
+					((EntityPlayer) closestEntity).addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+				}
 			}
 			
 			theWatcher.getLookHelper().setLookPosition(closestEntity.posX, closestEntity.posY + (double)closestEntity.getEyeHeight() - 1, closestEntity.posZ, 10.0F, (float)theWatcher.getVerticalFaceSpeed());

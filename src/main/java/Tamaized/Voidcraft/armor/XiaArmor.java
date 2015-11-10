@@ -42,10 +42,10 @@ public class XiaArmor extends ItemArmor {
 	private void setTextureName(String type, int armorPart){
 		
 		if(armorType == 0 || armorType == 1 || armorType == 3){
-			this.texturePath += type + "_layer_1.png";
+			this.texturePath = voidCraft.modid + ":" + "textures/models/armor/" + type + "_layer_1.png";
 		
 		}else{
-			this.texturePath += type + "_layer_2.png";
+			this.texturePath = voidCraft.modid + ":" + "textures/models/armor/" + type + "_layer_2.png";
 			}
 		
 	}
@@ -60,7 +60,7 @@ public class XiaArmor extends ItemArmor {
 		return this.texturePath;
 	}
 	
-	//Thanks to Vazkii's Botania Mod Source for this part (I thought you did this in a Tick update Handler) 
+	//Thanks to Vazkii's Botania Mod Source for this part
 	@SubscribeEvent
 	public void updatePlayerFlyStatus(LivingUpdateEvent event) {
 		if(event.entityLiving instanceof EntityPlayer) {
