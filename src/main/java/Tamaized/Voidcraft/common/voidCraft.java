@@ -32,7 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Tamaized.Voidcraft.Addons.AE2.voidCraftAE;
-import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
+import Tamaized.Voidcraft.Addons.thaumcraft.voidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.armor.DemonArmor;
 import Tamaized.Voidcraft.armor.VoidArmor;
@@ -154,7 +154,7 @@ public class voidCraft {
 	public VoidTickEvent VoidTickEvent;
 
 	//Public API Integrations
-	public static VoidCraftThaum thaumcraftIntegration;
+	public static voidCraftThaum thaumcraftIntegration;
 	public static voidCraftAE aeIntegration;
 
 	//Materials
@@ -753,7 +753,7 @@ public class voidCraft {
 		if (Loader.isModLoaded("Thaumcraft")) {
 			logger.info("Thaumcraft Detected. Attempting to load API");
 			try {
-				thaumcraftIntegration = new VoidCraftThaum();
+				thaumcraftIntegration = new voidCraftThaum();
 				logger.info("Loaded ThaumcraftAPI into VoidCraft");
 			}catch (Exception e1) {
 				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
