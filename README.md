@@ -12,7 +12,7 @@ The rest is for you to discover.
 ## Downloads
 [Can be found here](http://voidcraft.tamaized.tk/mod.php)
 
-DEV may be unstable but is the latest
+DEV is an unstable version meant for testing purposes. It may sometimes be a later build than the stable, it may not.
 
 ## Modpacks
 * Sure, provide a link to this github.
