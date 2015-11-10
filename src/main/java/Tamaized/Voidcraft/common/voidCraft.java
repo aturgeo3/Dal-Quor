@@ -289,11 +289,11 @@ public class voidCraft {
 
 		// Enum Tool Material
 		voidTools = EnumHelper.addToolMaterial("voidcrystal", 3, 2000, 12.0F, 8.0F, 30);
-		spectreTools = EnumHelper.addToolMaterial("ectoplasm", 4, 4000, 30.0F, 16.0F, 30);
-		chainTools = EnumHelper.addToolMaterial("voidChain", 5, 6000, 35.0F, 24.0F, 30);
-		MoltenTools = EnumHelper.addToolMaterial("MoltenvoidChain", 6, 8000, 40.0F, 32.0F, 30);
-		ArchTools = EnumHelper.addToolMaterial("burnBone", 7, 10000, 45.0F, 40.0F, 30);
-		DemonTools = EnumHelper.addToolMaterial("voidStar", 8, 12000, 50.0F, 48.0F, 30);
+		spectreTools = EnumHelper.addToolMaterial("ectoplasm", 4, 4000, 30.0F, 9.0F, 30);
+		chainTools = EnumHelper.addToolMaterial("voidChain", 5, 6000, 35.0F, 10.0F, 30);
+		MoltenTools = EnumHelper.addToolMaterial("MoltenvoidChain", 6, 8000, 40.0F, 11.0F, 30);
+		ArchTools = EnumHelper.addToolMaterial("burnBone", 7, 10000, 45.0F, 12.0F, 30);
+		DemonTools = EnumHelper.addToolMaterial("voidStar", 8, 12000, 50.0F, 13.0F, 30);
 
 		// Enum Armor Material
 		voidArmor = EnumHelper.addArmorMaterial("Void", 120, new int[] {4, 8, 6, 4}, 30); //22

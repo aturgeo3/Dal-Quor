@@ -14,7 +14,7 @@ public class chainSword extends ItemSword {
 	
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
         par1ItemStack.damageItem(1, par3EntityLivingBase);
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(2, 300));
+        par2EntityLivingBase.addPotionEffect(new PotionEffect(2, 5*20));
         return true;
     }
 

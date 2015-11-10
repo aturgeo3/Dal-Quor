@@ -14,8 +14,8 @@ public class moltenSword extends ItemSword {
 	
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
         par1ItemStack.damageItem(1, par3EntityLivingBase);
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(9, 300));
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(18, 300));
+        par2EntityLivingBase.addPotionEffect(new PotionEffect(9, 5*20));
+        par2EntityLivingBase.addPotionEffect(new PotionEffect(18, 5*20));
         par2EntityLivingBase.setFire(100);
         return true;
     }
