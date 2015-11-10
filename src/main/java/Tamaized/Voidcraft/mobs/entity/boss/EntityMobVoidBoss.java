@@ -172,7 +172,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IBossDisplay
     }
     
     protected Item getDropItem() {
-        return voidCraft.items.voidStar;
+        return voidCraft.voidStar;
     }
     
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_){

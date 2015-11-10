@@ -63,9 +63,9 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 		int nY = parent.getY();
 		int nZ = (parent.getZ()-8)+randZ;
 		if(parent.getEntity().worldObj.getTileEntity(nX, nY, nZ) == null){
-			parent.getEntity().worldObj.setBlock(nX, nY, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(true));
-			parent.getEntity().worldObj.setBlock(nX, nY+1, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false));
-			parent.getEntity().worldObj.setBlock(nX, nY+2, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false));
+			parent.getEntity().worldObj.setBlock(nX, nY, nZ, ((AIBlock) voidCraft.AIBlock).allowTileEntityCreation(true));
+			parent.getEntity().worldObj.setBlock(nX, nY+1, nZ, ((AIBlock) voidCraft.AIBlock).allowTileEntityCreation(false));
+			parent.getEntity().worldObj.setBlock(nX, nY+2, nZ, ((AIBlock) voidCraft.AIBlock).allowTileEntityCreation(false));
 			TileEntityAIBlock b = (TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(nX, nY, nZ);
 			raw.put(new int[]{nX, nY, nZ}, b);
 			b.aiHandler = parent;

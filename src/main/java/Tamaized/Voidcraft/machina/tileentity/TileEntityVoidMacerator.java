@@ -160,7 +160,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ISidedInvento
 	
 	public void updateEntity(){
 		
-		//voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+		//voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 		//burnTime = voidTank.getFluidAmount();
 		//if(burnTime > 0)System.out.println(burnTime +" : "+ voidTank.getFluidAmount());
 		
@@ -174,7 +174,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ISidedInvento
 		
 		if(this.burnTime > 0 && this.cookTime > 0) {
 			this.burnTime --;
-			voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+			voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 			//this.burnTime = doDrain(ForgeDirection.NORTH, 1, true);
 		}
 		
@@ -185,7 +185,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ISidedInvento
 				if(getItemBurnTime(this.slots[1]) > 0){
 					flag1 = true;
 					
-					fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, getItemBurnTime(this.slots[1])), true);
+					fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluidVoid, getItemBurnTime(this.slots[1])), true);
 					this.currentItemBurnTime = this.burnTime = voidTank.getFluidAmount();
 					
 					if(this.slots[1] != null){
@@ -350,7 +350,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ISidedInvento
 			ItemStack i = itemstack;
 			Item item  = itemstack.getItem();
 			
-			if(item == voidCraft.fluids.voidBucket) return 1000;
+			if(item == voidCraft.voidBucket) return 1000;
 			
 			
 			return 0;

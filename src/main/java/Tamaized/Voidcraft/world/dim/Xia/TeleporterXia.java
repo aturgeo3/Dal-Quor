@@ -50,7 +50,7 @@ public class TeleporterXia extends Teleporter {
 							if (b != Blocks.stone)
 								par1WorldServer.setBlock(cx, cy + 160, cz, b, spring.data[i], 2);
 							else
-								par1WorldServer.setBlock(cx, cy + 160, cz, voidCraft.blocks.blockNoBreak, spring.data[i], 2);
+								par1WorldServer.setBlock(cx, cy + 160, cz, voidCraft.blockNoBreak, spring.data[i], 2);
 						}
 						i++;
 					}

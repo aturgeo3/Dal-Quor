@@ -12,6 +12,7 @@ import thaumcraft.api.ThaumcraftApi;
 public class VoidCraftSpells {
 	
 	public static SpellAcid acid;
+	private ArrayList<VoidSpellFocus> ItemList = new ArrayList<VoidSpellFocus>();
 
 	public VoidCraftSpells(ThaumcraftApi instance) {
 		
@@ -19,11 +20,17 @@ public class VoidCraftSpells {
 		
 		((SpellAcid) acid
 			.setUnlocalizedName("voidfociAcid")
-			.setCreativeTab(voidCraft.tabs.tabVoid))
+			.setCreativeTab(voidCraft.tabVoid))
 			.setMyName("Wand Focus: Acid");
 		
 		GameRegistry.registerItem(acid, "voidfociAcid");
 		
+		ItemList.add(acid);
+		
+	}
+	
+	public ArrayList<VoidSpellFocus> getItems(){
+		return ItemList;
 	}
 
 }

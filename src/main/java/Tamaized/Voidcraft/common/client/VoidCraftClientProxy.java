@@ -102,11 +102,11 @@ public void registerRenders(){
 	
 	RenderHeimdall renderHeimdall = new RenderHeimdall();
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeimdall.class, renderHeimdall);
-	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.Heimdall), new ItemRenderHeimdall(renderHeimdall, new TileEntityHeimdall()));
+	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.Heimdall), new ItemRenderHeimdall(renderHeimdall, new TileEntityHeimdall()));
 	
 	RenderNoBreak renderNoBreak = new RenderNoBreak();
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
-	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
+	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
 	
 }
 

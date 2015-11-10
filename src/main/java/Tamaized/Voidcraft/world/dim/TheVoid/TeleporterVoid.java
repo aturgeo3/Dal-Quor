@@ -35,7 +35,7 @@ public class TeleporterVoid extends Teleporter {
 	 */
 	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
 	{
-		if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
+		if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.voidCraftAchMainLine_2, 1);
 	
 		if (this.worldServerInstance.provider.dimensionId != 1)
 		{
@@ -64,7 +64,7 @@ public class TeleporterVoid extends Teleporter {
 					 	boolean flag = j1 < 0;
 					
 					 	/** change this block **/
-					 	this.worldServerInstance.setBlock(k1, l1, i2, flag ? voidCraft.blocks.blockVoidcrystal : Blocks.air);
+					 	this.worldServerInstance.setBlock(k1, l1, i2, flag ? voidCraft.blockVoidcrystal : Blocks.air);
 					}
 				}
 			}
@@ -112,9 +112,9 @@ public class TeleporterVoid extends Teleporter {
 	
 	                for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
 	                {
-	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockTeleporterVoid)
+	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blockTeleporterVoid)
 	                    {
-	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockTeleporterVoid)
+	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blockTeleporterVoid)
 	                        {
 	                            --i2;
 	                        }
@@ -148,22 +148,22 @@ public class TeleporterVoid extends Teleporter {
 	        d4 = (double)k + 0.5D;
 	        int j2 = -1;
 	
-	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blockTeleporterVoid)
 	        {
 	            j2 = 2;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blockTeleporterVoid)
 	        {
 	            j2 = 0;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blockTeleporterVoid)
 	        {
 	            j2 = 3;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blockTeleporterVoid)
 	        {
 	            j2 = 1;
 	        }
@@ -419,7 +419,7 @@ public class TeleporterVoid extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : Blocks.air);
+						this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blockVoidcrystal : Blocks.air);
 					}
 				}
 			}
@@ -432,7 +432,7 @@ public class TeleporterVoid extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : voidCraft.blocks.blockTeleporterVoid, 0, 2);
+					this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blockVoidcrystal : voidCraft.blockTeleporterVoid, 0, 2);
 				}
 			}
 

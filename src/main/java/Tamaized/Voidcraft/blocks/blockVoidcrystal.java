@@ -29,7 +29,7 @@ public class blockVoidcrystal extends Block {
 	
 	public Item getItemDropped(int par1, Random par2Random, int par3)
     {
-		return voidCraft.items.voidcrystal;
+		return voidCraft.voidcrystal;
     }
 	
 	public int quantityDropped(Random random){

@@ -17,14 +17,14 @@ abstract public class ComponentTestPiece extends StructureComponent{
 		new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5),
 		new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 5),
 		new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 15),
-		new WeightedRandomChestContent(voidCraft.items.voidCloth, 0, 1, 3, 5),
-		new WeightedRandomChestContent(voidCraft.items.voidcrystal, 0, 2, 5, 15),
-		new WeightedRandomChestContent(voidCraft.items.ectoplasm, 0, 1, 3, 5),
-		new WeightedRandomChestContent(voidCraft.items.MoltenvoidChain, 0, 1, 1, 2),
-		new WeightedRandomChestContent(voidCraft.armors.demonBoots, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonLegs, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonHelmet, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonChest, 0, 0, 1, 1)
+		new WeightedRandomChestContent(voidCraft.voidCloth, 0, 1, 3, 5),
+		new WeightedRandomChestContent(voidCraft.voidcrystal, 0, 2, 5, 15),
+		new WeightedRandomChestContent(voidCraft.ectoplasm, 0, 1, 3, 5),
+		new WeightedRandomChestContent(voidCraft.MoltenvoidChain, 0, 1, 1, 2),
+		new WeightedRandomChestContent(voidCraft.demonBoots, 0, 0, 1, 1),
+		new WeightedRandomChestContent(voidCraft.demonLegs, 0, 0, 1, 1),
+		new WeightedRandomChestContent(voidCraft.demonHelmet, 0, 0, 1, 1),
+		new WeightedRandomChestContent(voidCraft.demonChest, 0, 0, 1, 1)
 		};
 
     public ComponentTestPiece() {}

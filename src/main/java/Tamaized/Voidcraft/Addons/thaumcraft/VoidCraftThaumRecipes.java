@@ -16,7 +16,7 @@ public class VoidCraftThaumRecipes {
 
 	public VoidCraftThaumRecipes(ThaumcraftApi instance) {
 		
-		list.put("vc.CorruptedSword", instance.addShapelessArcaneCraftingRecipe("vc.CorruptedSword", new ItemStack(voidCraft.tools.demonSword), new AspectList().add(Aspect.ENTROPY, 25), voidCraft.tools.voidSword));
+		list.put("vc.CorruptedSword", instance.addShapelessArcaneCraftingRecipe("vc.CorruptedSword", new ItemStack(voidCraft.demonSword), new AspectList().add(Aspect.ENTROPY, 25), voidCraft.voidSword));
 		
 	}
 

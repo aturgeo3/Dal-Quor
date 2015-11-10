@@ -59,15 +59,15 @@ public class ComponentTestCorridor extends ComponentTestPiece{
      */
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 1, 4, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 1, 4, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 4, 5, 4, Blocks.air, Blocks.air, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 2, 0, 4, 5, 4, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 3, 1, 4, 4, 1, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 3, 3, 4, 4, 3, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 5, 0, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 4, 3, 5, 4, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 4, 1, 4, 4, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 3, 3, 4, 3, 4, 4, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 2, 0, 4, 5, 4, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 3, 1, 4, 4, 1, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 3, 3, 4, 4, 3, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 5, 0, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 4, 3, 5, 4, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 4, 1, 4, 4, voidCraft.blockVoidfence, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 3, 3, 4, 3, 4, 4, voidCraft.blockVoidfence, voidCraft.blockVoidbrick, false);
         int i;
         int j;
 
@@ -84,13 +84,13 @@ public class ComponentTestCorridor extends ComponentTestPiece{
             }
         }
 
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 0, 4, 6, 4, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 0, 4, 6, 4, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
 
         for (i = 0; i <= 4; ++i)
         {
             for (j = 0; j <= 4; ++j)
             {
-                //this.fillCurrentPositionBlocksDownwards(par1World, voidCraft.blocks.blockVoidbrick, 0, i, -1, j, par3StructureBoundingBox);
+                //this.fillCurrentPositionBlocksDownwards(par1World, voidCraft.blockVoidbrick, 0, i, -1, j, par3StructureBoundingBox);
             }
         }
 

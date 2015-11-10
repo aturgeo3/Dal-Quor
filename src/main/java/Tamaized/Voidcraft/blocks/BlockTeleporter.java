@@ -111,11 +111,11 @@ public class BlockTeleporter extends BlockBreakable {
 		byte b0 = 0;
 		byte b1 = 0;
 
-		if (par1World.getBlock(par2 - 1, par3, par4) == voidCraft.blocks.blockVoidcrystal || par1World.getBlock(par2 + 1, par3, par4) == voidCraft.blocks.blockVoidcrystal) {
+		if (par1World.getBlock(par2 - 1, par3, par4) == voidCraft.blockVoidcrystal || par1World.getBlock(par2 + 1, par3, par4) == voidCraft.blockVoidcrystal) {
 			b0 = 1;
 		}
 
-		if (par1World.getBlock(par2, par3, par4 - 1) == voidCraft.blocks.blockVoidcrystal || par1World.getBlock(par2, par3, par4 + 1) == voidCraft.blocks.blockVoidcrystal) {
+		if (par1World.getBlock(par2, par3, par4 - 1) == voidCraft.blockVoidcrystal || par1World.getBlock(par2, par3, par4 + 1) == voidCraft.blockVoidcrystal) {
 			b1 = 1;
 		}
 
@@ -141,10 +141,10 @@ public class BlockTeleporter extends BlockBreakable {
 								par2 + b0 * l, par3 + i1, par4 + b1 * l);
 
 						if (flag) {
-							if (j1 != voidCraft.blocks.blockVoidcrystal) {
+							if (j1 != voidCraft.blockVoidcrystal) {
 								return false;
 							}
-						} else if (!isAirBlock && j1 != voidCraft.blocks.fireVoid) {
+						} else if (!isAirBlock && j1 != voidCraft.fireVoid) {
 							return false;
 						}
 					}
@@ -154,7 +154,7 @@ public class BlockTeleporter extends BlockBreakable {
 			for (l = 0; l < 2; ++l) {
 				for (i1 = 0; i1 < 3; ++i1) {
 					par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l,
-							voidCraft.blocks.blockTeleporterVoid, 0, 2);
+							voidCraft.blockTeleporterVoid, 0, 2);
 				}
 			}
 
@@ -179,7 +179,7 @@ public class BlockTeleporter extends BlockBreakable {
 			;
 		}
 
-		if (par1World.getBlock(par2, i1 - 1, par4) != voidCraft.blocks.blockVoidcrystal) {
+		if (par1World.getBlock(par2, i1 - 1, par4) != voidCraft.blockVoidcrystal) {
 			par1World.setBlockToAir(par2, par3, par4);
 		} else {
 			int j1;
@@ -190,7 +190,7 @@ public class BlockTeleporter extends BlockBreakable {
 			}
 
 			if (j1 == 3
-					&& par1World.getBlock(par2, i1 + j1, par4) == voidCraft.blocks.blockVoidcrystal) {
+					&& par1World.getBlock(par2, i1 + j1, par4) == voidCraft.blockVoidcrystal) {
 				boolean flag = par1World.getBlock(par2 - 1, par3, par4) == this
 						|| par1World.getBlock(par2 + 1, par3, par4) == this;
 				boolean flag1 = par1World.getBlock(par2, par3, par4 - 1) == this
@@ -199,9 +199,9 @@ public class BlockTeleporter extends BlockBreakable {
 				if (flag && flag1) {
 					par1World.setBlockToAir(par2, par3, par4);
 				} else {
-					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != voidCraft.blocks.blockVoidcrystal || par1World
+					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != voidCraft.blockVoidcrystal || par1World
 							.getBlock(par2 - b0, par3, par4 - b1) != this)
-							&& (par1World.getBlock(par2 - b0, par3, par4 - b1) != voidCraft.blocks.blockVoidcrystal || par1World
+							&& (par1World.getBlock(par2 - b0, par3, par4 - b1) != voidCraft.blockVoidcrystal || par1World
 									.getBlock(par2 + b0, par3, par4 + b1) != this)) {
 						par1World.setBlockToAir(par2, par3, par4);
 					}

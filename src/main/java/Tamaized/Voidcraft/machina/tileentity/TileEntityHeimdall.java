@@ -165,7 +165,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 		if(this.burnTime < 10000){
 			int rand = (int) Math.floor(Math.random()*this.yCoord);
 			if(rand == 0){
-				fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, 1), true);
+				fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluidVoid, 1), true);
 			}
 		}
 		
@@ -174,9 +174,9 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 			if(this.burnTime > 999){
 				if(this.slots[0] != null && this.slots[0].getItem() == Items.bucket){
 					this.burnTime-=1000; //Drain TileEntity Value of Fluid Amount
-					voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime)); //Drains Fluid Amount
+					voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime)); //Drains Fluid Amount
 					this.slots[0].stackSize--;
-					this.slots[0] = new ItemStack(voidCraft.fluids.voidBucket);
+					this.slots[0] = new ItemStack(voidCraft.voidBucket);
 				}
 			}
 		}
@@ -197,16 +197,16 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 					
@@ -218,17 +218,17 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 						
@@ -240,16 +240,16 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 							
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 					
@@ -261,16 +261,16 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 					
@@ -282,17 +282,17 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 					
@@ -304,16 +304,16 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						
 							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
 								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevm.burnTime));
+								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevm.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
-								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, tevi.burnTime));
+								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, tevi.burnTime));
 								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+								this.voidTank.setFluid(new FluidStack(voidCraft.fluidVoid, this.burnTime));
 							}
 						}
 					}
@@ -416,7 +416,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 			ItemStack i = itemstack;
 			Item item  = itemstack.getItem();
 			
-			if(item == voidCraft.fluids.voidBucket) return 1000;
+			if(item == voidCraft.voidBucket) return 1000;
 			
 			
 			return 0;

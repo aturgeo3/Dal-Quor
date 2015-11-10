@@ -17,54 +17,54 @@ public class AspectsForItems {
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.VOID, 4);
 		daAspectList.add(aspects.CRYSTAL, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.voidcrystal), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.voidcrystal), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.AURA, 4);
 		daAspectList.add(aspects.AIR, 4);
 		daAspectList.add(aspects.COLD, 4);
 		daAspectList.add(aspects.SOUL, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.ectoplasm), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.ectoplasm), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.VOID, 4);
 		daAspectList.add(aspects.METAL, 4);
 		daAspectList.add(aspects.TRAP, 4);
 		daAspectList.add(aspects.ELDRITCH, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.voidChain), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.voidChain), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.FIRE, 4);
 		daAspectList.add(aspects.DARKNESS, 4);
 		daAspectList.add(aspects.DEATH, 4);
 		daAspectList.add(aspects.ELDRITCH, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.burnBone), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.burnBone), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.FIRE, 4);
 		daAspectList.add(aspects.METAL, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.MoltenvoidChainPart), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.MoltenvoidChainPart), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.FIRE, 4);
 		daAspectList.add(aspects.METAL, 4);
 		daAspectList.add(aspects.ELDRITCH, 4);
 		daAspectList.add(aspects.TRAP, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.MoltenvoidChain), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.MoltenvoidChain), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.MAGIC, 4);
 		daAspectList.add(aspects.VOID, 4);
 		daAspectList.add(aspects.ELDRITCH, 4);
 		daAspectList.add(aspects.CLOTH, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.voidCloth), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.voidCloth), daAspectList);
 		
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.ENTROPY, 4);
 		daAspectList.add(aspects.VOID, 4);
 		daAspectList.add(aspects.ELDRITCH, 4);
 		daAspectList.add(aspects.DARKNESS, 4);
-		instance.registerObjectTag(new ItemStack(voidCraft.items.voidStar), daAspectList);
+		instance.registerObjectTag(new ItemStack(voidCraft.voidStar), daAspectList);
 	}
 
 }

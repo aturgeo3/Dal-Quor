@@ -29,7 +29,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 		int Zcoord = BlockZ + random.nextInt(16);
 		int Ycoord = random.nextInt(62);
 
-		(new WorldGenMinable (voidCraft.blocks.oreVoidcrystal,5,Blocks.end_stone)).generate(world, random, Xcoord, Ycoord, Zcoord);
+		(new WorldGenMinable (voidCraft.oreVoidcrystal,5,Blocks.end_stone)).generate(world, random, Xcoord, Ycoord, Zcoord);
 		}
 		
 		for(int i = 0; i<1; i++) {
