@@ -36,7 +36,7 @@ public class OverlayEvent {
 				GL11.glDepthMask(false);
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, j);
-				IIcon iicon = voidCraft.blockTeleporterVoid.getBlockTextureFromSide(1);
+				IIcon iicon = voidCraft.blocks.blockTeleporterVoid.getBlockTextureFromSide(1);
 				mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 				float f1 = iicon.getMinU();
 				float f2 = iicon.getMinV();

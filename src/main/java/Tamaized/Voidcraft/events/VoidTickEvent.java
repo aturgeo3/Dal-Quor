@@ -38,7 +38,7 @@ public class VoidTickEvent {
 		
 		if(portalTick.get(e.player.getGameProfile().getName()) != null){
 			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
-			if(e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ)) == voidCraft.blockTeleporterVoid){
+			if(e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ)) == voidCraft.blocks.blockTeleporterVoid){
 				float j = portalTick.get(e.player.getGameProfile().getName());
 				if(j < 0.8F) j = j + 0.004F;
 				else j = 0.8F;

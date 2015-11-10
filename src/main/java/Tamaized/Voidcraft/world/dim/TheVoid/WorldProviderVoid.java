@@ -53,7 +53,7 @@ public class WorldProviderVoid extends WorldProvider
      */
     public void registerWorldChunkManager()
     {
-        this.worldChunkMgr = new WorldChunkManagerHell(voidCraft.biomeVoid, 1.0F);
+        this.worldChunkMgr = new WorldChunkManagerHell(voidCraft.biomes.biomeVoid, 1.0F);
         this.isHellWorld = true;
         this.hasNoSky = true;
         this.dimensionId = -2;

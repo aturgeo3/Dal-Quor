@@ -125,7 +125,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     }
     
     protected Item getDropItem() {
-        return voidCraft.voidCloth;
+        return voidCraft.items.voidCloth;
     }
     
     public EntityAgeable createChild(EntityAgeable var1) {
@@ -146,11 +146,11 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     		for(double nx=posX-r; nx<posX+r; nx++){
     			for(double nz=posZ-r; nz<posZ+r; nz++){
     				if(worldObj.isAirBlock((int) nx, (int) posY-1, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY-1, (int) nz, voidCraft.fireVoid);
+    					worldObj.setBlock((int) nx, (int) posY-1, (int) nz, voidCraft.blocks.fireVoid);
     				}else if(worldObj.isAirBlock((int) nx, (int) posY, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY, (int) nz, voidCraft.fireVoid);
+    					worldObj.setBlock((int) nx, (int) posY, (int) nz, voidCraft.blocks.fireVoid);
     				}else if(worldObj.isAirBlock((int) nx, (int) posY+1, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY+1, (int) nz, voidCraft.fireVoid);
+    					worldObj.setBlock((int) nx, (int) posY+1, (int) nz, voidCraft.blocks.fireVoid);
     				}
     			}
     		}

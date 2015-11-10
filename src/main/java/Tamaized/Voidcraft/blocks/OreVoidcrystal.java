@@ -82,7 +82,7 @@ public class OreVoidcrystal extends Block {
 	}
 	
 	public Item getItemDropped(int par1, Random par2Random, int par3){
-		return voidCraft.voidcrystal;
+		return voidCraft.items.voidcrystal;
 	}
 	
 	public int quantityDropped(Random random){

@@ -41,7 +41,7 @@ public class VoidBurner extends Item{
 		}else{
 		if(world.isAirBlock(x, y, z)){
 		world.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "fire.ignite", 1F, itemRand.nextFloat()*0.4F + 0.8F);
-		world.setBlock(x, y, z, voidCraft.fireVoid);
+		world.setBlock(x, y, z, voidCraft.blocks.fireVoid);
 		}
 
 		itemstack.damageItem(1, player);

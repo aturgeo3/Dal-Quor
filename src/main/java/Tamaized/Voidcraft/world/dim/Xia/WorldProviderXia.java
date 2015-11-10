@@ -15,7 +15,7 @@ public class WorldProviderXia extends WorldProvider{
      */
     public void registerWorldChunkManager()
     {
-        this.worldChunkMgr = new WorldChunkManagerHell(voidCraft.biomeXia, 1.0F);
+        this.worldChunkMgr = new WorldChunkManagerHell(voidCraft.biomes.biomeXia, 1.0F);
         this.isHellWorld = false;
         this.hasNoSky = true;
         this.dimensionId = voidCraft.dimensionIdXia;

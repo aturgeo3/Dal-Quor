@@ -139,12 +139,12 @@ public class BlockTeleporterXia extends BlockBreakable {
         byte b0 = 0;
         byte b1 = 0;
 
-        if (par1World.getBlock(par2 - 1, par3, par4) == voidCraft.blockFakeBedrock || par1World.getBlock(par2 + 1, par3, par4) == voidCraft.blockFakeBedrock)
+        if (par1World.getBlock(par2 - 1, par3, par4) == voidCraft.blocks.blockFakeBedrock || par1World.getBlock(par2 + 1, par3, par4) == voidCraft.blocks.blockFakeBedrock)
         {
             b0 = 1;
         }
 
-        if (par1World.getBlock(par2, par3, par4 - 1) == voidCraft.blockFakeBedrock || par1World.getBlock(par2, par3, par4 + 1) == voidCraft.blockFakeBedrock)
+        if (par1World.getBlock(par2, par3, par4 - 1) == voidCraft.blocks.blockFakeBedrock || par1World.getBlock(par2, par3, par4 + 1) == voidCraft.blocks.blockFakeBedrock)
         {
             b1 = 1;
         }
@@ -177,12 +177,12 @@ public class BlockTeleporterXia extends BlockBreakable {
 
                         if (flag)
                         {
-                            if (j1 != voidCraft.blockFakeBedrock)
+                            if (j1 != voidCraft.blocks.blockFakeBedrock)
                             {
                                 return false;
                             }
                         }
-                        else if (!isAirBlock && j1 != voidCraft.fireVoid)
+                        else if (!isAirBlock && j1 != voidCraft.blocks.fireVoid)
                         {
                             return false;
                         }
@@ -194,7 +194,7 @@ public class BlockTeleporterXia extends BlockBreakable {
             {
                 for (i1 = 0; i1 < 3; ++i1)
                 {
-                    par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l, voidCraft.blockTeleporterXia, 0, 2);
+                    par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l, voidCraft.blocks.blockTeleporterXia, 0, 2);
                 }
             }
 
@@ -220,7 +220,7 @@ public class BlockTeleporterXia extends BlockBreakable {
             ;
         }
 
-        if (par1World.getBlock(par2, i1 - 1, par4) != voidCraft.blockFakeBedrock)
+        if (par1World.getBlock(par2, i1 - 1, par4) != voidCraft.blocks.blockFakeBedrock)
         {
             par1World.setBlockToAir(par2, par3, par4);
         }
@@ -233,7 +233,7 @@ public class BlockTeleporterXia extends BlockBreakable {
                 ;
             }
 
-            if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == voidCraft.blockFakeBedrock)
+            if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == voidCraft.blocks.blockFakeBedrock)
             {
                 boolean flag = par1World.getBlock(par2 - 1, par3, par4) == this || par1World.getBlock(par2 + 1, par3, par4) == this;
                 boolean flag1 = par1World.getBlock(par2, par3, par4 - 1) == this || par1World.getBlock(par2, par3, par4 + 1) == this;
@@ -244,7 +244,7 @@ public class BlockTeleporterXia extends BlockBreakable {
                 }
                 else
                 {
-                    if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != voidCraft.blockFakeBedrock || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != voidCraft.blockFakeBedrock || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
+                    if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != voidCraft.blocks.blockFakeBedrock || par1World.getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != voidCraft.blocks.blockFakeBedrock || par1World.getBlock(par2 + b0, par3, par4 + b1) != this))
                     {
                         par1World.setBlockToAir(par2, par3, par4);
                     }

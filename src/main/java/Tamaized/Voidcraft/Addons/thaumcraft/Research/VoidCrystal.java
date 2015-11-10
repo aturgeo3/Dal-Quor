@@ -21,7 +21,7 @@ public class VoidCrystal extends ResearchItem {
 		super("vc.VoidCrystal", "VoidCraft", aspects, 2, 1, 1, new ResourceLocation("VoidCraft:textures/items/voidcrystal.png")); 
 		
 		this.setHidden();
-		this.setItemTriggers(new ItemStack(voidCraft.voidcrystal));
+		this.setItemTriggers(new ItemStack(voidCraft.items.voidcrystal));
 		
 		ResearchPage[] pages = {
 				new ResearchPage(
