@@ -9,14 +9,14 @@ import thaumcraft.api.research.ResearchPage;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaumRecipes;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class VoidCrystal extends ResearchItem {
+public class VoidCrystalResearch extends ResearchItem {
 	
 	private final static AspectList aspects = new AspectList()
 	.add(Aspect.TAINT, 1)
 	.add(Aspect.VOID, 1)
 	.add(Aspect.ENTROPY, 1);
 
-	public VoidCrystal(VoidCraftThaumRecipes recipes) {
+	public VoidCrystalResearch(VoidCraftThaumRecipes recipes) {
 		
 		super("vc.VoidCrystal", "VoidCraft", aspects, 2, 1, 1, new ResourceLocation("VoidCraft:textures/items/voidcrystal.png")); 
 		

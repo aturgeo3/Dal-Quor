@@ -8,12 +8,16 @@ import Tamaized.Voidcraft.common.voidCraft;
 
 public class AspectsForItems {
 	
+	private ThaumcraftApi instance;
+	
 	private Aspect aspects;
 	private AspectList daAspectList;
 	
-	public AspectsForItems(ThaumcraftApi instance){
-		
-		
+	public AspectsForItems(ThaumcraftApi i){
+		instance = i;
+	}
+	
+	public void register(){
 		daAspectList = new AspectList();
 		daAspectList.add(aspects.VOID, 4);
 		daAspectList.add(aspects.CRYSTAL, 4);

@@ -160,8 +160,20 @@ public class voidCraft {
 		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc11").setTextureName("VoidCraft:voidDisc"));
 		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc12").setTextureName("VoidCraft:voidDisc"));
 		
-
-	
+		//API Loader
+		if (Loader.isModLoaded("Thaumcraft")) {
+			logger.info("Thaumcraft Detected. Attempting to load API");
+			try {
+				thaumcraftIntegration = new VoidCraftThaum();
+				logger.info("Loaded ThaumcraftAPI into VoidCraft");
+			}catch (Exception e1) {
+				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
+				e1.printStackTrace(System.err);
+			}
+		}
+		
+		if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
+		
 	}
 
 
@@ -267,6 +279,8 @@ public class voidCraft {
 		
 		EntityRegistry.registerGlobalEntityID(EntityMobXia2.class, "Xia2", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
 		EntityRegistry.addSpawn(EntityMobXia2.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+
+		if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 	}
 
 	@EventHandler
@@ -274,19 +288,6 @@ public class voidCraft {
 		logger.info("Starting VoidCraft PostInit");
 		
 		achievements.postInit();
-		
-		//API Loader
-		if (Loader.isModLoaded("Thaumcraft")) {
-			logger.info("Thaumcraft Detected. Attempting to load API");
-			try {
-				thaumcraftIntegration = new VoidCraftThaum();
-				logger.info("Loaded ThaumcraftAPI into VoidCraft");
-			}catch (Exception e1) {
-				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
-            	e1.printStackTrace(System.err);
-			}
-		}
-		
 		
 		channel.register(new VoidCraftServerPacketHandler());
 		proxy.registerNetwork();
@@ -296,6 +297,8 @@ public class voidCraft {
 		proxy.registerItems();
 		proxy.registerMISC();
 		proxy.registerAchievements();
+
+		if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 	}
 
 	
