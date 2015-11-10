@@ -35,7 +35,7 @@ public class FireVoid extends BlockFire{
 	}
 	
 	public void onBlockAdded(World world, int x, int y, int z){
-		if(world.getBlock(x, y-1, z) != voidCraft.blockVoidcrystal || !((BlockTeleporter)voidCraft.blockTeleporterVoid).tryToCreatePortal(world, x, y, z)){
+		if(world.getBlock(x, y-1, z) != voidCraft.blocks.blockVoidcrystal || !((BlockTeleporter)voidCraft.blocks.blockTeleporterVoid).tryToCreatePortal(world, x, y, z)){
 			if(!world.doesBlockHaveSolidTopSurface(world, x, y-1, z) && !this.canNeighborBurn(world, x, y, z)){
 				world.setBlockToAir(x, y, z);
 			}else{

@@ -57,19 +57,19 @@ public class ComponentTestEnd extends ComponentTestPiece{
             for (j = 3; j <= 4; ++j)
             {
                 k = random1.nextInt(8);
-                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
             }
         }
 
         i = random1.nextInt(8);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 0, 5, i, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 0, 5, i, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
         i = random1.nextInt(8);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 0, 4, 5, i, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 0, 4, 5, i, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
 
         for (i = 0; i <= 4; ++i)
         {
             j = random1.nextInt(5);
-            this.fillWithBlocks(par1World, par3StructureBoundingBox, i, 2, 0, i, 2, j, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+            this.fillWithBlocks(par1World, par3StructureBoundingBox, i, 2, 0, i, 2, j, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
         }
 
         for (i = 0; i <= 4; ++i)
@@ -77,7 +77,7 @@ public class ComponentTestEnd extends ComponentTestPiece{
             for (j = 0; j <= 1; ++j)
             {
                 k = random1.nextInt(3);
-                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
+                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
             }
         }
 

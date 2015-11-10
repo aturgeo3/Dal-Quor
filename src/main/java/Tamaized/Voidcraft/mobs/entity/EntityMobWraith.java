@@ -111,7 +111,7 @@ public class EntityMobWraith extends EntityVoidMob implements IMob{
     }
     
     protected Item getDropItem() {
-        return voidCraft.ectoplasm;
+        return voidCraft.items.ectoplasm;
 }
     
     public EntityAgeable createChild(EntityAgeable var1) {

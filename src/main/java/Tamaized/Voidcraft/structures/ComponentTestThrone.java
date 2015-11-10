@@ -52,23 +52,23 @@ public class ComponentTestThrone extends ComponentTestPiece{
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 6, 7, 7, Blocks.air, Blocks.air, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 0, 0, 5, 1, 7, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 2, 1, 5, 2, 7, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 2, 5, 3, 7, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 4, 3, 5, 4, 7, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 2, 0, 1, 4, 2, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 0, 5, 4, 2, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 5, 2, 1, 5, 3, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 2, 5, 5, 3, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 3, 0, 5, 8, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 5, 3, 6, 5, 8, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 5, 8, 5, 5, 8, voidCraft.blockVoidbrick, voidCraft.blockVoidbrick, false);
-        this.placeBlockAtCurrentPosition(par1World, voidCraft.blockVoidfence, 0, 1, 6, 3, par3StructureBoundingBox);
-        this.placeBlockAtCurrentPosition(par1World, voidCraft.blockVoidfence, 0, 5, 6, 3, par3StructureBoundingBox);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 3, 0, 6, 8, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 6, 3, 6, 6, 8, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 6, 8, 5, 7, 8, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 8, 8, 4, 8, 8, voidCraft.blockVoidfence, voidCraft.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 0, 0, 5, 1, 7, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 2, 1, 5, 2, 7, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 2, 5, 3, 7, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 4, 3, 5, 4, 7, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 2, 0, 1, 4, 2, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 0, 5, 4, 2, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 5, 2, 1, 5, 3, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 2, 5, 5, 3, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 3, 0, 5, 8, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 5, 3, 6, 5, 8, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 5, 8, 5, 5, 8, voidCraft.blocks.blockVoidbrick, voidCraft.blocks.blockVoidbrick, false);
+        this.placeBlockAtCurrentPosition(par1World, voidCraft.blocks.blockVoidfence, 0, 1, 6, 3, par3StructureBoundingBox);
+        this.placeBlockAtCurrentPosition(par1World, voidCraft.blocks.blockVoidfence, 0, 5, 6, 3, par3StructureBoundingBox);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 3, 0, 6, 8, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 6, 3, 6, 6, 8, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 6, 8, 5, 7, 8, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 8, 8, 4, 8, 8, voidCraft.blocks.blockVoidfence, voidCraft.blocks.blockVoidfence, false);
         int i;
         int j;
 
@@ -95,7 +95,7 @@ public class ComponentTestThrone extends ComponentTestPiece{
         {
             for (j = 0; j <= 6; ++j)
             {
-                //this.fillCurrentPositionBlocksDownwards(par1World, voidCraft.blockVoidbrick, 0, i, -1, j, par3StructureBoundingBox);
+                //this.fillCurrentPositionBlocksDownwards(par1World, voidCraft.blocks.blockVoidbrick, 0, i, -1, j, par3StructureBoundingBox);
             }
         }
 

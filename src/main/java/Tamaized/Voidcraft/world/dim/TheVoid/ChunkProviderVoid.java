@@ -176,23 +176,23 @@ public class ChunkProviderVoid implements IChunkProvider
                                 	double rand4Fluid = Math.round(Math.random()*600);
                                 	
                                 	if(rand4Fluid == 400){
-                                    l2 = voidCraft.blockVoidFluid; //lavaStill
+                                    l2 = voidCraft.fluids.blockVoidFluid; //lavaStill
                                 	//}else if(rand4Fluid > 200 && rand4Fluid < 400){
-                                	//	l2 = voidCraft.blockFakeBedrock;
+                                	//	l2 = voidCraft.blocks.blockFakeBedrock;
                                 	}
                                 	else{
                                 		//double randy = Math.round(Math.random()*4);
                                 		//if(randy == 1) l2 = Blocks.air;
                                 		//else if(randy == 2) l2 = Blocks.end_stone;
                                 		//else if(randy == 3) l2 = Blocks.skull;
-                                		//else l2 = voidCraft.blockFakeBedrock; //TODO not implementing this change yet cuz I wanna think on it some more.
-                                		l2 = voidCraft.blockFakeBedrock;
+                                		//else l2 = voidCraft.blocks.blockFakeBedrock; //TODO not implementing this change yet cuz I wanna think on it some more.
+                                		l2 = voidCraft.blocks.blockFakeBedrock;
                                 	}
                                 }
 
                                 if (d15 > 0.0D)
                                 {
-                                    l2 = voidCraft.blockFakeBedrock; //netherrack
+                                    l2 = voidCraft.blocks.blockFakeBedrock; //netherrack
                                 }
                                 
                                 p_147420_3_[j2] = (Block)l2;
@@ -238,8 +238,8 @@ public class ChunkProviderVoid implements IChunkProvider
                 boolean flag1 = this.gravelNoise[k + l * 16] + this.hellRNG.nextDouble() * 0.2D > 0.0D;
                 int i1 = (int)(this.netherrackExclusivityNoise[k + l * 16] / 3.0D + 3.0D + this.hellRNG.nextDouble() * 0.25D);
                 int j1 = -1;
-                Block b1 = voidCraft.blockFakeBedrock; //netherrack
-                Block b2 = voidCraft.blockFakeBedrock; //netherrack
+                Block b1 = voidCraft.blocks.blockFakeBedrock; //netherrack
+                Block b2 = voidCraft.blocks.blockFakeBedrock; //netherrack
 
                 for (int k1 = 127; k1 >= 0; --k1)
                 {
@@ -253,44 +253,44 @@ public class ChunkProviderVoid implements IChunkProvider
                         {
                         	   j1 = -1;
                         }
-                        else if (b3 == voidCraft.blockFakeBedrock) //netherrack
+                        else if (b3 == voidCraft.blocks.blockFakeBedrock) //netherrack
                         {
                             if (j1 == -1)
                             {
                                 if (i1 <= 0)
                                 {
-                                    b1 = voidCraft.blockFakeBedrock;
-                                    b2 = voidCraft.blockFakeBedrock; //netherrack
+                                    b1 = voidCraft.blocks.blockFakeBedrock;
+                                    b2 = voidCraft.blocks.blockFakeBedrock; //netherrack
                                 }
                                 else if (k1 >= b0 - 4 && k1 <= b0 + 1)
                                 {
-                                    b1 = voidCraft.blockFakeBedrock; //netherrack
-                                    b2 = voidCraft.blockFakeBedrock; //netherrack
+                                    b1 = voidCraft.blocks.blockFakeBedrock; //netherrack
+                                    b2 = voidCraft.blocks.blockFakeBedrock; //netherrack
 
                                     if (flag1)
                                     {
-                                        b1 = voidCraft.blockFakeBedrock; //gravel
+                                        b1 = voidCraft.blocks.blockFakeBedrock; //gravel
                                     }
 
                                     if (flag1)
                                     {
-                                        b2 = voidCraft.blockFakeBedrock; //netherrack
+                                        b2 = voidCraft.blocks.blockFakeBedrock; //netherrack
                                     }
 
                                     if (flag)
                                     {
-                                        b1 = voidCraft.blockFakeBedrock; //slowSand
+                                        b1 = voidCraft.blocks.blockFakeBedrock; //slowSand
                                     }
 
                                     if (flag)
                                     {
-                                        b2 = voidCraft.blockFakeBedrock; // slowSand
+                                        b2 = voidCraft.blocks.blockFakeBedrock; // slowSand
                                     }
                                 }
 
                                 if (k1 < b0 && b1 == Blocks.air)
                                 {
-                                    b1 = voidCraft.blockFakeBedrock; //lavaStill
+                                    b1 = voidCraft.blocks.blockFakeBedrock; //lavaStill
                                 }
 
                                 j1 = i1;
@@ -313,7 +313,7 @@ public class ChunkProviderVoid implements IChunkProvider
                     }
                     else
                     {
-                    	p_147421_3_[l1] = voidCraft.blockFakeBedrock; //bedrock
+                    	p_147421_3_[l1] = voidCraft.blocks.blockFakeBedrock; //bedrock
                     }
                 }
             }
@@ -340,7 +340,7 @@ public class ChunkProviderVoid implements IChunkProvider
         this.hellRNG.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
         Block[] abyte = new Block[32768];
         byte[] byteArray = new byte[32768];
-        //abyte[0] = voidCraft.blockFakeBedrock;
+        //abyte[0] = voidCraft.blocks.blockFakeBedrock;
         this.generateTerrain(par1, par2, abyte);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1*16, par2*16, 16, 16);
         this.replaceBlocksForBiome(par1, par2, abyte, byteArray, this.biomesForGeneration);
@@ -597,7 +597,7 @@ public class ChunkProviderVoid implements IChunkProvider
       //      (new WorldGenFlowers(Block.mushroomRed.blockID)).generate(this.worldObj, this.hellRNG, j1, k1, l1);
         }
 
-        WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.oreVoidcrystal, 5, voidCraft.blockFakeBedrock);
+        WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal, 5, voidCraft.blocks.blockFakeBedrock);
         int j2;
 
         for (k1 = 0; k1 < 16; ++k1)
@@ -685,7 +685,7 @@ public class ChunkProviderVoid implements IChunkProvider
             }
         	}
 
-            if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blockVoidbrick)
+            if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blocks.blockVoidbrick)
             {
                 return this.genTest.getSpawnList();
             }

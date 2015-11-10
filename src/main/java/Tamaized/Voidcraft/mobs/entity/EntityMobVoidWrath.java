@@ -112,7 +112,7 @@ public class EntityMobVoidWrath extends EntityVoidMob implements IMob{
     }
     
     protected Item getDropItem() {
-        return voidCraft.burnBone;
+        return voidCraft.items.burnBone;
 }
     
     public EntityAgeable createChild(EntityAgeable var1) {

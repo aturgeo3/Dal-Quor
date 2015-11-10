@@ -30,7 +30,7 @@ public class XiaArmor extends ItemArmor {
 		super(armorMaterial, par3, par4);
 		
 		this.setMaxStackSize(1);
-		this.setCreativeTab(voidCraft.tabVoid);
+		this.setCreativeTab(voidCraft.tabs.tabVoid);
 		this.setTextureName(type, par4);
 		
 		MinecraftForge.EVENT_BUS.register(this);

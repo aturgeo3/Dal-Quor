@@ -9,8 +9,8 @@ public class PickUpEvent {
 	
 	@SubscribeEvent
 	public void SomethingPickedup(EntityItemPickupEvent event){
-		if (event.item.getEntityItem().isItemEqual(new ItemStack(voidCraft.voidcrystal))){
-			event.entityPlayer.addStat(voidCraft.voidCraftAchMainLine_1, 1);
+		if (event.item.getEntityItem().isItemEqual(new ItemStack(voidCraft.items.voidcrystal))){
+			event.entityPlayer.addStat(voidCraft.achievements.voidCraftAchMainLine_1, 1);
 		}
 	}
 

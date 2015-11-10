@@ -106,7 +106,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
     }
     
     protected Item getDropItem() {
-        return voidCraft.voidChain;
+        return voidCraft.items.voidChain;
     }
     
     public EntityAgeable createChild(EntityAgeable var1) {
