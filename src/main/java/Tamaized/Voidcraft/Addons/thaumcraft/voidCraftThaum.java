@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.Addons.thaumcraft;
 
 import thaumcraft.api.ThaumcraftApi;
 
-public class voidCraftThaum{
+public class VoidCraftThaum{
 	
 	private ThaumcraftApi instance;
 	public AspectsForItems aspects;
@@ -10,7 +10,7 @@ public class voidCraftThaum{
 	public VoidCraftThaumRecipes recipes;
 	public VoidCraftResearch research;
 	
-	public voidCraftThaum(){
+	public VoidCraftThaum(){
 		
 		//Register Aspects on Items
 		aspects = new AspectsForItems(instance);
