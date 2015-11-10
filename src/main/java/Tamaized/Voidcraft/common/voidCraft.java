@@ -3,15 +3,11 @@ package Tamaized.Voidcraft.common;
 import java.util.ArrayList;
 
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -22,21 +18,14 @@ import org.apache.logging.log4j.Logger;
 import Tamaized.Voidcraft.Addons.AE2.voidCraftAE;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
-import Tamaized.Voidcraft.blocks.blockFakeBedrock;
-import Tamaized.Voidcraft.blocks.blockNoBreak;
-import Tamaized.Voidcraft.blocks.blockVoidbrick;
-import Tamaized.Voidcraft.blocks.blockVoidcrystal;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.common.handlers.CraftingHandler;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
-import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.VoidRecord;
-import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.addons.MaceratorRecipeList;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -67,17 +56,8 @@ import Tamaized.Voidcraft.registery.VoidItems;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.structures.StructureTestPieces;
 import Tamaized.Voidcraft.structures.StructureTestStart;
-import Tamaized.Voidcraft.tools.angelicSword;
-import Tamaized.Voidcraft.tools.archSword;
-import Tamaized.Voidcraft.tools.chainSword;
-import Tamaized.Voidcraft.tools.demonSword;
-import Tamaized.Voidcraft.tools.moltenSword;
-import Tamaized.Voidcraft.tools.spectreAxe;
-import Tamaized.Voidcraft.tools.spectrePickaxe;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
-import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
-import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -97,7 +77,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class voidCraft {
 	
-	protected final static String version = "0.5.8a";
+	protected final static String version = "0.5.9a_DEV";
 
 	public static final String modid = "voidcraft";
 	
