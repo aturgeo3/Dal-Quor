@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
+import thaumcraft.common.items.wands.ItemWandCasting;
 
 public class SpellAcid extends VoidSpellFocus{
 	
@@ -39,20 +40,37 @@ public class SpellAcid extends VoidSpellFocus{
 
 	@Override
 	public AspectList getVisCost(ItemStack focusstack) {
-		AspectList daAspectList = new AspectList();
-		daAspectList.add(aspects.EARTH, 1);
-		return daAspectList;
+		return new AspectList().add(aspects.EARTH, 10);
 	}
 	
-	public ItemStack onFocusRightClick(ItemStack wandstack, World world,EntityPlayer player, MovingObjectPosition movingobjectposition) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public WandFocusAnimation getAnimation(ItemStack focusstack) {
+		return WandFocusAnimation.CHARGE;
 	}
 	
-	public void onUsingFocusTick(ItemStack wandstack, EntityPlayer player, int count) { //Never called I guess, try a system.out sometime
+	public ItemStack onFocusRightClick(ItemStack wandstack, World world, EntityPlayer player, MovingObjectPosition movingobjectposition) {
+		if(!world.isRemote && ((ItemWandCasting)wandstack.getItem()).consumeAllVis(wandstack, player, getVisCost(wandstack), true, false)) shoot(world, player);
+		player.setItemInUse(wandstack, Integer.MAX_VALUE);
+		return wandstack;
+	}
+	
+	public void onUsingFocusTick(ItemStack wandstack, EntityPlayer player, int count) {
+		if(!player.worldObj.isRemote){
+			ItemWandCasting wand = (ItemWandCasting) wandstack.getItem();
+			if(wand.consumeAllVis(wandstack, player, getVisCost(wandstack), true, false)) shoot(player.worldObj, player);
+		}
+	}
+	
+	private void shoot(World world, EntityPlayer player){
 		AcidBall spell = new AcidBall(player.worldObj, player, 1.6F);
-		spell.setDamage(10.0D);
-		player.worldObj.spawnEntityInWorld(spell);
+		spell.setDamageRangeSpeed(6D, 0.00F, 1.7D);
+		world.spawnEntityInWorld(spell);
+		//TODO sound effects
+	}
+	
+	@Override
+	public int getActivationCooldown(ItemStack focusstack) {
+		return 500;
 	}
 	
 	public void onPlayerStoppedUsingFocus(ItemStack wandstack, World world,	EntityPlayer player, int count) {
@@ -64,5 +82,16 @@ public class SpellAcid extends VoidSpellFocus{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int getFocusColor(ItemStack focusstack) {
+		return 0x00AA00;
+	}
+
+	@Override
+	public boolean isVisCostPerTick(ItemStack focusstack) {
+		return true;
+	}
+	
 
 }

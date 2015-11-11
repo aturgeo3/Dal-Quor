@@ -130,10 +130,12 @@ achievement.achS2_4.desc=Infuse the Legendary sword with the power of the Void!
 # Thaumcraft
 # -- Research
 tc.research_category.VoidCraft=VoidCraft
-tc.research_name.vc.CorruptedSword=Corrupted Sword
-tc.research_text.vc.CorruptedSword=Evil side of things
 tc.research_name.vc.VoidCrystal=Crystallized Void
 tc.research_text.vc.VoidCrystal=Do not fear the unknown
+tc.research_name.vc.CorruptedSword=Corrupted Sword
+tc.research_text.vc.CorruptedSword=Evil side of things
+tc.research_name.vc.FociAcid=Wand Focus: Acid
+tc.research_text.vc.FociAcid=It came from the ground!
 # -- Items
 item.corruptedSword.name=Corrupted Sword
 # -- Foci

@@ -47,6 +47,9 @@ public class AcidBall extends EntityArrow implements IProjectile{
     private double damage = 2.0D;
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
+    
+    private double speed = 0.3D;
+    private float range = 0.4F;
 
     public AcidBall(World p_i1753_1_)
     {
@@ -167,7 +170,7 @@ public class AcidBall extends EntityArrow implements IProjectile{
         this.motionX = p_70016_1_;
         this.motionY = p_70016_3_;
         this.motionZ = p_70016_5_;
-
+        
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
         {
             float f = MathHelper.sqrt_double(p_70016_1_ * p_70016_1_ + p_70016_5_ * p_70016_5_);
@@ -185,9 +188,8 @@ public class AcidBall extends EntityArrow implements IProjectile{
      */
     public void onUpdate()
     {
-        super.onUpdate();
+        //super.onUpdate();
         
-        Minecraft.getMinecraft().effectRenderer.addEffect(new AcidFX(this.worldObj, this.posX, this.posY, this.posZ)); //TODO
 
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
         {
@@ -360,7 +362,7 @@ public class AcidBall extends EntityArrow implements IProjectile{
                             }
                         }
 
-                        this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+                        this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F)); //TODO
 
                         if (!(movingobjectposition.entityHit instanceof EntityEnderman))
                         {
@@ -391,7 +393,7 @@ public class AcidBall extends EntityArrow implements IProjectile{
                     this.posX -= this.motionX / (double)f2 * 0.05000000074505806D;
                     this.posY -= this.motionY / (double)f2 * 0.05000000074505806D;
                     this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
-                    this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+                    this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F)); //TODO
                     this.inGround = true;
                     this.arrowShake = 7;
                     this.setIsCritical(false);
@@ -411,9 +413,9 @@ public class AcidBall extends EntityArrow implements IProjectile{
                 }
             }
 
-            this.posX += this.motionX;
-            this.posY += this.motionY;
-            this.posZ += this.motionZ;
+            this.posX += this.motionX * speed;
+            this.posY += this.motionY * speed;
+            this.posZ += this.motionZ * speed;
             f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
@@ -440,7 +442,7 @@ public class AcidBall extends EntityArrow implements IProjectile{
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
             float f3 = 0.99F;
-            f1 = 0.05F;
+            f1 = range;
 
             if (this.isInWater())
             {
@@ -465,6 +467,8 @@ public class AcidBall extends EntityArrow implements IProjectile{
             this.setPosition(this.posX, this.posY, this.posZ);
             this.func_145775_I();
         }
+
+        if(this.worldObj.isRemote) Minecraft.getMinecraft().effectRenderer.addEffect(new AcidFX(this.worldObj, this.posX, this.posY, this.posZ)); //Particles
     }
 
     /**
@@ -536,9 +540,14 @@ public class AcidBall extends EntityArrow implements IProjectile{
         return 0.0F;
     }
 
-    public void setDamage(double p_70239_1_)
-    {
+    public void setDamage(double p_70239_1_){
         this.damage = p_70239_1_;
+    }
+    
+    public void setDamageRangeSpeed(double d, float r, double s){
+    	damage = d;
+    	range = r;
+    	speed = s;
     }
 
     public double getDamage()
