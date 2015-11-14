@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -58,8 +58,8 @@ public class VoidBlocks extends RegistryBase {
 		blockVoidBrickSlab = new VoidSlab(false, Material.rock).setCreativeTab(voidCraft.tabs.tabVoid).setBlockName("blockVoidslab").setBlockTextureName("VoidCraft:VoidBrick");
 		AIBlock = new AIBlock().setBlockUnbreakable().setBlockName("aiBlock");
 
-		blockTeleporterVoid = new BlockTeleporter().setBlockName("blockTeleporterVoid").setCreativeTab(voidCraft.tabs.tabVoid);
-		blockTeleporterXia = new BlockTeleporterXia().setBlockName("blockTeleporterXia").setCreativeTab(voidCraft.tabs.tabVoid);
+		blockTeleporterVoid = new BlockTeleporter().setBlockName("blockTeleporterVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockTeleporterXia = new BlockTeleporterXia().setBlockName("blockTeleporterXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		fireVoid = new FireVoid().setBlockName("voidfire").setCreativeTab(voidCraft.tabs.tabVoid).setBlockTextureName("VoidCraft:fireVoid");
 
 		voidMacerator = new VoidMacerator().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F).setBlockName("voidMaceratorOff");

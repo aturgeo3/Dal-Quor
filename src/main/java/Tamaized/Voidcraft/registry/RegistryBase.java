@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 public abstract class RegistryBase {
 	

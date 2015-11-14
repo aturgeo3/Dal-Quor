@@ -1,10 +1,11 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.items.BasicVoidItems;
 import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.Debugger;
+import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,6 +37,7 @@ public class VoidItems extends RegistryBase {
 	public static Item quartzDust;
 
 	public static Item debugger;
+	public static Item hookShot;
 
 	@Override
 	public void preInit() {
@@ -62,6 +64,7 @@ public class VoidItems extends RegistryBase {
 		quartzDust = new BasicVoidItems().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("quartzDust").setTextureName("voidCraft:itemDustQuartz");
 
 		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("debugger").setTextureName("voidCraft:debug");
+		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("hookShot").setTextureName("voidCraft:hookShot");
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.creativetab.CreativeTabs;

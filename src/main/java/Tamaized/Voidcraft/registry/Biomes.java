@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
 import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;

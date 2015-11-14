@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registery;
+package Tamaized.Voidcraft.registry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import Tamaized.Voidcraft.armor.DemonArmor;
