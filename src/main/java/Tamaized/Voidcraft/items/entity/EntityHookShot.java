@@ -105,7 +105,12 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 	 */
 	public void onUpdate() {
 		
-		if(shootingEntity == null || shootingEntity.inventory.currentItem != lastItem){
+		if(shootingEntity == null){
+			this.setDead();
+			return;
+		}
+		
+		if(shootingEntity.inventory.currentItem != lastItem){
 			HookShot.handler.put(shootingEntity.getGameProfile().getId(), false);
 			this.setDead();
 			return;
