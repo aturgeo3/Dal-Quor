@@ -69,6 +69,11 @@ public class VoidTickEvent {
 		            	transferPlayerToDimension(thePlayer.mcServer, thePlayer, 0, new TeleporterVoid(thePlayer.mcServer.worldServerForDimension(0)));
 		            }
 		            hasTeleported.put(e.player.getGameProfile().getName(), true);
+		        }else{
+		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
+		        	voidCraft.logger.info(err);
+		        	System.out.println(err);
+		        	hasTeleported.put(e.player.getGameProfile().getName(), true);
 		        }
 			}
 			

@@ -23,7 +23,6 @@ public class VoidItems extends RegistryBase {
 	public static Item burnBone;
 	public static Item voidStar;
 	public static Item ChainedSkull;
-	public static Item HookShot;
 	public static Item voidCloth;
 	public static Item voidCrystalBucket;
 
@@ -63,8 +62,8 @@ public class VoidItems extends RegistryBase {
 		leadDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("leadDust").setTextureName("voidCraft:itemDustLead");
 		quartzDust = new BasicVoidItems().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("quartzDust").setTextureName("voidCraft:itemDustQuartz");
 
-		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("debugger").setTextureName("voidCraft:debug");
-		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("hookShot").setTextureName("voidCraft:hookShot");
+		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("debugger").setTextureName("voidCraft:debug");
+		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("hookShot").setTextureName("voidCraft:HookShot_uncast");
 	}
 
 	@Override
@@ -81,6 +80,7 @@ public class VoidItems extends RegistryBase {
 		GameRegistry.registerItem(voidBurner, voidBurner.getUnlocalizedName());
 		GameRegistry.registerItem(ChainedSkull, ChainedSkull.getUnlocalizedName());
 		GameRegistry.registerItem(debugger, debugger.getUnlocalizedName());
+		GameRegistry.registerItem(hookShot, hookShot.getUnlocalizedName());
 
 		GameRegistry.registerItem(ironDust, ironDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustIron", ironDust);

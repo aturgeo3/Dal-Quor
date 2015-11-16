@@ -26,6 +26,7 @@ import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.items.VoidRecord;
+import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.addons.MaceratorRecipeList;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -217,12 +218,17 @@ public class voidCraft {
 		}
 		
 		//Projectiles
-		EntityRegistry.registerGlobalEntityID(VoidChain.class, "VoidChain", EntityRegistry.findGlobalUniqueEntityId()); 
+		//EntityRegistry.registerGlobalEntityID(VoidChain.class, "VoidChain", EntityRegistry.findGlobalUniqueEntityId()); 
 		EntityRegistry.registerModEntity(VoidChain.class, "VoidChain", 0, this, 128, 1, true);
-		EntityRegistry.registerGlobalEntityID(AcidBall.class, "AcidBall", EntityRegistry.findGlobalUniqueEntityId()); 
+		
+		//EntityRegistry.registerGlobalEntityID(AcidBall.class, "AcidBall", EntityRegistry.findGlobalUniqueEntityId()); 
 		EntityRegistry.registerModEntity(AcidBall.class, "AcidBall", 1, this, 128, 1, true);
-		EntityRegistry.registerGlobalEntityID(HerobrineFireball.class, "HerobrineFireball", EntityRegistry.findGlobalUniqueEntityId()); 
-		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 2, this, 128, 1, true);
+		
+		//EntityRegistry.registerGlobalEntityID(Hook.class, "Hook", EntityRegistry.findGlobalUniqueEntityId()); 
+		EntityRegistry.registerModEntity(EntityHookShot.class, "HookShot", 2, this, 128, 1, true);
+		
+		//EntityRegistry.registerGlobalEntityID(HerobrineFireball.class, "HerobrineFireball", EntityRegistry.findGlobalUniqueEntityId()); 
+		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 3, this, 128, 1, true);
 
 		//Dimension
 		DimensionManager.registerProviderType(dimensionIdVoid, WorldProviderVoid.class, false);

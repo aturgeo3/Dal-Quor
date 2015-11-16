@@ -1,20 +1,17 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.Spells;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.projectiles.AcidBall;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import Tamaized.Voidcraft.projectiles.AcidBall;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SpellAcid extends VoidSpellFocus{
 	

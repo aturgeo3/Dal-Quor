@@ -3,10 +3,8 @@ package Tamaized.Voidcraft.common.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.item.Item;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
-import Tamaized.Voidcraft.Addons.thaumcraft.Spells.VoidSpellFocus;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.ItemRenderHeimdall;
 import Tamaized.Voidcraft.blocks.render.RenderHeimdall;
@@ -15,7 +13,7 @@ import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
-import Tamaized.Voidcraft.items.VoidRecord;
+import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
@@ -50,11 +48,11 @@ import Tamaized.Voidcraft.mobs.xia.RenderXia2;
 import Tamaized.Voidcraft.projectiles.AcidBall;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.RenderAcidBall;
+import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -94,6 +92,7 @@ public void registerRenders(){
 	//Projectiles
 	RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain());
 	RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall());
+	RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook());
 	RenderingRegistry.registerEntityRenderingHandler(HerobrineFireball.class, new RenderFireball(2.0F));
 	
 	//Blocks

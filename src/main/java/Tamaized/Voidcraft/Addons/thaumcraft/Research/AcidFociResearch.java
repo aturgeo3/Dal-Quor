@@ -24,7 +24,7 @@ public class AcidFociResearch extends ResearchItem {
 		ResearchPage[] pages = {
 				new ResearchPage(
 						"Apparently a Void Crystal is the perfect catalyst for an acid based Wand Foci, other metals and gems simply just melt away.\n\n"
-						+ "This Wand Foci is able to convert Terra Vis from your wand into clumps of Acid which then are shot out towards your enemies. "),
+						+ "This Wand Foci is able to convert Terra Vis from your wand into clumps of Acid which shoot out towards your enemies. "),
 				new ResearchPage(recipes.listShaped.get("vc.FociAcid"))
 		};
 		
