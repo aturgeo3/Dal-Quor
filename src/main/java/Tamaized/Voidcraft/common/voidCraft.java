@@ -78,7 +78,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class voidCraft {
 	
-	protected final static String version = "0.5.9a_DEV";
+	protected final static String version = "0.5.9b_DEV";
 
 	public static final String modid = "voidcraft";
 	
