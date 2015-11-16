@@ -18,3 +18,10 @@ DEV is an unstable version meant for testing purposes. It may sometimes be a lat
 * Sure, provide a link to this github.
 * Don't claim the mod as your own.
 * Can't make money off of the pack.
+ 
+## Other Mod Integrations
+ This mod currently has integrations with:
+ * NEI
+ * Thaumcraft
+ 
+ Note: These Mods are NOT required in order to use this mod.
