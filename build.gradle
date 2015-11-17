@@ -24,7 +24,7 @@ repositories {
 
 apply plugin: 'forge'
 
-version = "1.7.10-0.5.9c_DEV"
+version = "1.7.10-0.5.9d_DEV"
 group= "tk.tamaized.voidCraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "voidCraft"
 
