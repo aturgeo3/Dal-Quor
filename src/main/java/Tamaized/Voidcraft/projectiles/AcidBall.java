@@ -1,11 +1,9 @@
 package Tamaized.Voidcraft.projectiles;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.List;
 
-import Tamaized.Voidcraft.DamageSources.DamageSourceAcid;
-import Tamaized.Voidcraft.particles.AcidFX;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -17,8 +15,6 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
@@ -27,8 +23,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import Tamaized.Voidcraft.DamageSources.DamageSourceAcid;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class AcidBall extends EntityArrow implements IProjectile{
+public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditionalSpawnData{
 	
 	private int field_145791_d = -1;
     private int field_145792_e = -1;
@@ -58,45 +58,6 @@ public class AcidBall extends EntityArrow implements IProjectile{
         this.setSize(0.5F, 0.5F);
     }
 
-    public AcidBall(World p_i1754_1_, double p_i1754_2_, double p_i1754_4_, double p_i1754_6_)
-    {
-        super(p_i1754_1_);
-        this.renderDistanceWeight = 10.0D;
-        this.setSize(0.5F, 0.5F);
-        this.setPosition(p_i1754_2_, p_i1754_4_, p_i1754_6_);
-        this.yOffset = 0.0F;
-    }
-
-    public AcidBall(World p_i1755_1_, EntityLivingBase p_i1755_2_, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
-    {
-        super(p_i1755_1_);
-        this.renderDistanceWeight = 10.0D;
-        this.shootingEntity = p_i1755_2_;
-
-        if (p_i1755_2_ instanceof EntityPlayer)
-        {
-            this.canBePickedUp = 1;
-        }
-
-        this.posY = p_i1755_2_.posY + (double)p_i1755_2_.getEyeHeight() - 0.10000000149011612D;
-        double d0 = p_i1755_3_.posX - p_i1755_2_.posX;
-        double d1 = p_i1755_3_.boundingBox.minY + (double)(p_i1755_3_.height / 3.0F) - this.posY;
-        double d2 = p_i1755_3_.posZ - p_i1755_2_.posZ;
-        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-
-        if (d3 >= 1.0E-7D)
-        {
-            float f2 = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-            float f3 = (float)(-(Math.atan2(d1, d3) * 180.0D / Math.PI));
-            double d4 = d0 / d3;
-            double d5 = d2 / d3;
-            this.setLocationAndAngles(p_i1755_2_.posX + d4, this.posY, p_i1755_2_.posZ + d5, f2, f3);
-            this.yOffset = 0.0F;
-            float f4 = (float)d3 * 0.2F;
-            this.setThrowableHeading(d0, d1 + (double)f4, d2, p_i1755_4_, p_i1755_5_);
-        }
-    }
-
     public AcidBall(World p_i1756_1_, EntityLivingBase p_i1756_2_, float p_i1756_3_)
     {
         super(p_i1756_1_);
@@ -120,6 +81,18 @@ public class AcidBall extends EntityArrow implements IProjectile{
         this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, p_i1756_3_ * 1.5F, 1.0F);
     }
+    
+    @Override
+	public void writeSpawnData(ByteBuf buffer) {
+		buffer.writeDouble(posX);
+		buffer.writeDouble(posY);
+		buffer.writeDouble(posZ);
+	}
+
+	@Override
+	public void readSpawnData(ByteBuf additionalData) {
+		this.setPosition(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
+	}
 
     protected void entityInit()
     {
@@ -467,8 +440,13 @@ public class AcidBall extends EntityArrow implements IProjectile{
             this.setPosition(this.posX, this.posY, this.posZ);
             this.func_145775_I();
         }
-
-        if(this.worldObj.isRemote) Minecraft.getMinecraft().effectRenderer.addEffect(new AcidFX(this.worldObj, this.posX, this.posY, this.posZ)); //Particles
+        
+        if(this.worldObj.isRemote) particles();
+    }
+    
+    @SideOnly(Side.CLIENT)
+    private void particles(){
+    	Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.AcidFX(this.worldObj, this.posX, this.posY, this.posZ));
     }
 
     /**
@@ -487,6 +465,8 @@ public class AcidBall extends EntityArrow implements IProjectile{
         p_70014_1_.setByte("pickup", (byte)this.canBePickedUp);
         p_70014_1_.setDouble("damage", this.damage);
     }
+    
+    
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
@@ -596,6 +576,8 @@ public class AcidBall extends EntityArrow implements IProjectile{
         byte b0 = this.dataWatcher.getWatchableObjectByte(16);
         return (b0 & 1) != 0;
     }
+
+	
 
 
 }

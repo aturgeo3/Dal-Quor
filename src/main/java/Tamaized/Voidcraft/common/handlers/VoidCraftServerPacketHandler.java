@@ -21,6 +21,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetworkManager;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -34,6 +35,7 @@ public class VoidCraftServerPacketHandler {
 	public static final int TYPE_VOIDBOX_STOP = 1;
 	public static final int TYPE_VOIDBOX_LOOP = 2;
 	public static final int TYPE_VOIDBOX_AUTO = 3;
+	public static final int TYPE_HOOKSHOT_STOP = 4;
 	
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
@@ -52,8 +54,7 @@ public class VoidCraftServerPacketHandler {
 		}
 	}
 	
-	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP playerEntityMP){
-		Entity playerEntity = (Entity)playerEntityMP;
+	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP player){
 		TileEntityVoidBox thisTileEntity; 
 	  
 		if(parSide == Side.SERVER){
@@ -62,7 +63,7 @@ public class VoidCraftServerPacketHandler {
 			try {
 				pktType = bbis.readInt();
 				if(pktType == TYPE_VOIDBOX_PLAY){
-					thisTileEntity = (TileEntityVoidBox) playerEntity.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
@@ -70,7 +71,7 @@ public class VoidCraftServerPacketHandler {
 					thisTileEntity.isPlaying = true;
 					thisTileEntity.doPlay = true;
 				}else if(pktType == TYPE_VOIDBOX_STOP){
-					thisTileEntity = (TileEntityVoidBox) playerEntity.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
@@ -78,19 +79,21 @@ public class VoidCraftServerPacketHandler {
 					thisTileEntity.isPlaying = false;
 					thisTileEntity.loop = false;
 				}else if(pktType == TYPE_VOIDBOX_LOOP){
-					thisTileEntity = (TileEntityVoidBox) playerEntity.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
 					}
 					thisTileEntity.loop = bbis.readBoolean();
 				}else if(pktType == TYPE_VOIDBOX_AUTO){
-					thisTileEntity = (TileEntityVoidBox) playerEntity.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
 					}
 					thisTileEntity.autoFill = bbis.readBoolean();
+				}else if(pktType == TYPE_HOOKSHOT_STOP){
+					HookShot.handler.put(player, false);
 				}
 			 }catch(Exception e){
 				 try {

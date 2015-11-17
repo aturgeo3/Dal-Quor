@@ -107,7 +107,7 @@ public class VoidCraftClientPacketHandler{
 				vbox.loop = bbis.readBoolean();
 				vbox.autoFill = bbis.readBoolean();
 				theWorld.markBlockForUpdate(vbox.xCoord, vbox.yCoord, vbox.zCoord);
-			}   
+			}
 			bbis.close();   
 		}
 	}

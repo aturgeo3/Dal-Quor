@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import static org.lwjgl.opengl.GL11.*;
 
-public class AcidFX extends EntityFX{
+public class AcidFX extends EntityFX {
 
 	private static final ResourceLocation texture = new ResourceLocation("VoidCraft:textures/particle/AcidFX.png");
 	/*

@@ -69,6 +69,10 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
      * @param buffer The packet data stream
      */
     public void writeSpawnData(ByteBuf buffer){
+    	if(shootingEntity == null){
+    		this.setDead();
+    		return;
+    	}
     	buffer.writeInt(shootingEntity.getEntityId());
     	buffer.writeDouble(posX);
     	buffer.writeDouble(posY);
@@ -82,12 +86,17 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
      * @param data The packet data stream
      */
     public void readSpawnData(ByteBuf additionalData){
-    	Entity e = worldObj.getEntityByID(additionalData.readInt());
-    	EntityPlayer player = e instanceof EntityPlayer ? (EntityPlayer) e : null;
-    	this.setPosition(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
-        this.ignoreFrustumCheck = true;
-        field_146042_b = shootingEntity = player;
-        lastItem = shootingEntity == null ? null : shootingEntity.inventory.currentItem;
+    	try{
+    		Entity e = worldObj.getEntityByID(additionalData.readInt());
+    		EntityPlayer player = e instanceof EntityPlayer ? (EntityPlayer) e : null;
+    		this.setPosition(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
+    		this.ignoreFrustumCheck = true;
+        	field_146042_b = shootingEntity = player;
+        	lastItem = shootingEntity == null ? null : shootingEntity.inventory.currentItem;
+    	}catch(IndexOutOfBoundsException e){
+    		//No Data was sent, just kill the entity
+    		this.setDead();
+    	}
     }
     
     public void setRangeAndSpeed(float r, double s){
@@ -104,19 +113,23 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 	 * Called to update the entity's position/logic.
 	 */
 	public void onUpdate() {
+		ticksExisted++;
 		
 		if(shootingEntity == null){
 			this.setDead();
 			return;
 		}
 		
-		if(shootingEntity.inventory.currentItem != lastItem){
-			HookShot.handler.put(shootingEntity.getGameProfile().getId(), false);
-			this.setDead();
-			return;
+		if(!worldObj.isRemote){
+			if(!HookShot.handler.containsKey(shootingEntity) || !HookShot.handler.get(shootingEntity)){
+				this.setDead();
+			}
+			if(shootingEntity.inventory.currentItem != lastItem || (((ticksExisted % (20*3)) == 0) && !inGround) || (ticksExisted % (20*15)) == 0){
+				HookShot.handler.put(shootingEntity, false);
+				this.setDead();
+			}
 		}
 		
-		if(!HookShot.handler.containsKey(shootingEntity.getGameProfile().getId()) || !HookShot.handler.get(shootingEntity.getGameProfile().getId())) this.setDead();
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
 			float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -148,13 +161,13 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 				if (shootingEntity != null) {
 					int shootingEntityBlockX = MathHelper.floor_double(shootingEntity.posX);
 					int shootingEntityBlockY = MathHelper.floor_double(shootingEntity.boundingBox.minY)-1;
-			    	int shootingEntityBlockZ = MathHelper.floor_double(shootingEntity.posZ);
+					int shootingEntityBlockZ = MathHelper.floor_double(shootingEntity.posZ);
 			    
-			    	if(shootingEntityBlockX-this.blockX > -3 && shootingEntityBlockX-this.blockX < 3){
+					if(shootingEntityBlockX-this.blockX > -3 && shootingEntityBlockX-this.blockX < 3){
 			    		if(shootingEntityBlockY-this.blockY > -3 && shootingEntityBlockY-this.blockY < 3){
 			    			if(shootingEntityBlockZ-this.blockZ > -3 && shootingEntityBlockZ-this.blockZ < 3){
 			    				this.setDead();
-			    				if(shootingEntity instanceof EntityPlayer) HookShot.handler.put(((EntityPlayer)shootingEntity).getGameProfile().getId(), false);
+			    				if(!worldObj.isRemote && shootingEntity instanceof EntityPlayer) HookShot.handler.put(((EntityPlayer)shootingEntity), false);
 			    			}
 			    		}
 			    	}
@@ -170,11 +183,12 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			    	double MathX = gX ? 1 : gY ? (preMathX/preMathY) : (preMathX/preMathZ);
 			    	double MathY = gY ? 1 : gX ? (preMathY/preMathX) : (preMathY/preMathZ);
 			    	double MathZ = gZ ? 1 : gY ? (preMathZ/preMathY) : (preMathZ/preMathX);
-			    	
-					shootingEntity.setVelocity(this.blockX > shootingEntityBlockX ? MathX : -MathX, this.blockY > shootingEntityBlockY ? MathY : -MathY, this.blockZ > shootingEntityBlockZ ? MathZ : -MathZ);
-					shootingEntity.velocityChanged = true;
+						
+			    	shootingEntity.motionX = this.blockX > shootingEntityBlockX ? MathX : -MathX;
+			    	shootingEntity.motionY = this.blockY > shootingEntityBlockY ? MathY : -MathY;
+			    	shootingEntity.motionZ = this.blockZ > shootingEntityBlockZ ? MathZ : -MathZ;
+			    	shootingEntity.velocityChanged = true;
 				}
-				
 			} else {
 				this.inGround = false;
 				this.motionX *= (double) (this.rand.nextFloat() * 0.2F);

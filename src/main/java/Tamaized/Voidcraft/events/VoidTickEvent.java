@@ -35,7 +35,6 @@ public class VoidTickEvent {
 			acp.func_152121_a(Type.SKIN, skin);
 		}*/
 		
-		
 		if(portalTick.get(e.player.getGameProfile().getName()) != null){
 			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
 			if(e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ)) == voidCraft.blocks.blockTeleporterVoid){
@@ -135,9 +134,6 @@ public class VoidTickEvent {
         p_82448_3_.theProfiler.endSection();
         p_82448_1_.setWorld(p_82448_4_);
 	}
-
-	
-	
 	
 	
 }
