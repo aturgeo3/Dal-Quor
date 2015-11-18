@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class DemonArmor extends ItemArmor {
 
-	private String texturePath = voidCraft.modid + ":" + "textures/models/armor/";
+	private String texturePath = voidCraft.modid + ":textures/models/armor/";
 	
 	public DemonArmor(ArmorMaterial armorMaterial, int par3, int par4, String type) {
 		super(armorMaterial, par3, par4);

@@ -1,14 +1,18 @@
 package Tamaized.Voidcraft.items;
 
 import java.util.List;
+import java.util.Random;
 
+import Tamaized.Voidcraft.structures.ComponentTestCorridor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.items.entity.EntityHookShot;
-import Tamaized.Voidcraft.projectiles.AcidBall;
+import net.minecraftforge.common.ChestGenHooks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,19 +22,26 @@ public class Debugger extends Item {
 		
 	}
 	
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10){	
-		if(par3World.isRemote) return true;
-		EntityHookShot entityarrow = new EntityHookShot(par3World, par2EntityPlayer, 2.0F);
-		par3World.spawnEntityInWorld(entityarrow);
-        return true;
+	/**
+	 * On Block
+	 */
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){	
+		Random rand = new Random();
+    	world.setBlock(x, y+1, z, Blocks.chest, 0, 2);
+        TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, y+1, z);
+
+        if (tileentitychest != null)
+        {
+            WeightedRandomChestContent.generateChestContents(rand, ComponentTestCorridor.field_111019_a, tileentitychest, 1 + rand.nextInt(5));
+        }
+    	return true;
     }
 	
+	/**
+	 * In Air
+	 */
 	public ItemStack onItemRightClick(ItemStack p_77659_1_, World par3World, EntityPlayer par2EntityPlayer){
-		if(par3World.isRemote) return p_77659_1_;
-		EntityHookShot entityarrow = new EntityHookShot(par3World, par2EntityPlayer, 2.0F);
-		par3World.spawnEntityInWorld(entityarrow);
 		return p_77659_1_;
-		
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class XiaArmor extends ItemArmor {
 
-	private String texturePath = voidCraft.modid + ":" + "textures/models/armor/";
+	private String texturePath = voidCraft.modid + ":textures/models/armor/";
 	public static List<String> playersWithFlight = new ArrayList();
 	
 	public XiaArmor(ArmorMaterial armorMaterial, int par3, int par4, String type) {

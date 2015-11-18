@@ -13,7 +13,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 
 abstract public class ComponentTestPiece extends StructureComponent{
 	
-	protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[] {
+	public static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[] {
 		new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5),
 		new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 5),
 		new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 15),
@@ -21,10 +21,10 @@ abstract public class ComponentTestPiece extends StructureComponent{
 		new WeightedRandomChestContent(voidCraft.items.voidcrystal, 0, 2, 5, 15),
 		new WeightedRandomChestContent(voidCraft.items.ectoplasm, 0, 1, 3, 5),
 		new WeightedRandomChestContent(voidCraft.items.MoltenvoidChain, 0, 1, 1, 2),
-		new WeightedRandomChestContent(voidCraft.armors.demonBoots, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonLegs, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonHelmet, 0, 0, 1, 1),
-		new WeightedRandomChestContent(voidCraft.armors.demonChest, 0, 0, 1, 1)
+		new WeightedRandomChestContent(voidCraft.armors.demonBoots, 0, 1, 1, 1),
+		new WeightedRandomChestContent(voidCraft.armors.demonLegs, 0, 1, 1, 1),
+		new WeightedRandomChestContent(voidCraft.armors.demonHelmet, 0, 1, 1, 1),
+		new WeightedRandomChestContent(voidCraft.armors.demonChest, 0, 1, 1, 1)
 		};
 
     public ComponentTestPiece() {}

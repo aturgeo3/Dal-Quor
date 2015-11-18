@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class VoidArmor extends ItemArmor {
 
-	private String texturePath = "voidcraft:textures/models/armor/";
+	private String texturePath = voidCraft.modid+":textures/models/armor/";
 	
 	public VoidArmor(ArmorMaterial armorMaterial, int par3, int par4, String type) {
 		super(armorMaterial, par3, par4);
