@@ -24,12 +24,12 @@ public class OverlayEvent {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityClientPlayerMP player = mc.thePlayer;
 		
-		if(voidCraft.instance.VoidTickEvent.portalTick.get(player.getGameProfile().getName()) != null){
+		if(voidCraft.instance.VoidTickEvent.portalTick.get(player.getGameProfile().getId()) != null){
 			if(e.type == e.type.PORTAL){
 				ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 				int k = scaledresolution.getScaledWidth();
 				int l = scaledresolution.getScaledHeight();
-				float j = voidCraft.instance.VoidTickEvent.portalTick.get(player.getGameProfile().getName());
+				float j = voidCraft.instance.VoidTickEvent.portalTick.get(player.getGameProfile().getId());
 			
 				GL11.glDisable(GL11.GL_ALPHA_TEST);
 				GL11.glDisable(GL11.GL_DEPTH_TEST);
