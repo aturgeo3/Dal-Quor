@@ -8,6 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
@@ -36,13 +38,11 @@ public class TeleporterXia extends Teleporter {
 
 		this.worldServerInstance = par1WorldServer;
 		this.random = new Random(par1WorldServer.getSeed());
-		doStructure(par1WorldServer);
 	}
 	
 	private void doStructure(WorldServer par1WorldServer){
 		if(par1WorldServer == null) return;
-		if (!this.worldServerInstance.isRemote && this.worldServerInstance.provider.dimensionId == voidCraft.dimensionIdXia) {
-			/*sut = new SchematicLoader();
+			sut = new SchematicLoader();
 			Schematic spring = sut.get("VoidCastle-Redstone_WithTnT.schematic");
 			int i = 0;
 			for (int cy = 0; cy < spring.height; cy++){
@@ -51,28 +51,34 @@ public class TeleporterXia extends Teleporter {
 
 						Block b = Block.getBlockById(spring.blocks[i]);
 						if (b != Blocks.air) {
-							par1WorldServer.setBlockToAir(cx, cy + 160, cz);
+							par1WorldServer.setBlockToAir(cx, cy + 60, cz);
 							if (b != Blocks.stone)
-								par1WorldServer.setBlock(cx, cy + 160, cz, b, spring.data[i], 2);
+								par1WorldServer.setBlock(cx, cy + 60, cz, b, spring.data[i], 2);
 							else
-								par1WorldServer.setBlock(cx, cy + 160, cz, voidCraft.blocks.blockNoBreak, spring.data[i], 2);
+								par1WorldServer.setBlock(cx, cy + 60, cz, voidCraft.blocks.blockNoBreak, spring.data[i], 2);
 						}
 						i++;
 					}
 				}
-			}*/
-
-		}
+			}
 	}
 	
 	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
 	{
 		//if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
-		par1Entity.setPosition(0, 60, 0);
+		if(par1Entity.dimension == 0){
+			ChunkCoordinates chunkcoordinates = par1Entity instanceof EntityPlayer ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
+            //chunkcoordinates.posY = par1Entity.worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
+            System.out.println(chunkcoordinates.posY);
+            par1Entity.setLocationAndAngles((double)chunkcoordinates.posX, (double)chunkcoordinates.posY, (double)chunkcoordinates.posZ, par1Entity.rotationYaw, par1Entity.rotationPitch);
+			return;
+		}
+		par1Entity.setPosition(0.5, 60, 0.5);
 		if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)){
 			this.makePortal(par1Entity);
 			this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
 		}
+		par1Entity.setPosition(0.5, 60, 0.5);
 	}
 
     /**
@@ -92,8 +98,7 @@ public class TeleporterXia extends Teleporter {
 	    double d4;
 	    int k1;
 	
-	    if (this.destinationCoordinateCache.containsItem(j1))
-	    {
+	    if (this.destinationCoordinateCache.containsItem(j1)){
 	        PortalPosition portalposition = (PortalPosition)this.destinationCoordinateCache.getValueByKey(j1);
 	        d3 = 0.0D;
 	        i = portalposition.posX;
@@ -101,32 +106,24 @@ public class TeleporterXia extends Teleporter {
 	        k = portalposition.posZ;
 	        portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
 	        flag = false;
-	    }
-	    else
-	    {
-	        for (k1 = l - short1; k1 <= l + short1; ++k1)
-	        {
+	    }else{
+	        for (k1 = l - short1; k1 <= l + short1; ++k1){
 	            double d5 = (double)k1 + 0.5D - par1Entity.posX;
 	
-	            for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1)
-	            {
+	            for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1){
 	                double d6 = (double)l1 + 0.5D - par1Entity.posZ;
 	
-	                for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-	                {
-	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockPortalVoid)
-	                    {
-	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockPortalVoid)
-	                        {
-	                            --i2;
+	                for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2){
+	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockNoBreak){
+	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockNoBreak){
+	                        	--i2;
 	                        }
 	
 	                        d4 = (double)i2 + 0.5D - par1Entity.posY;
 	                        double d7 = d5 * d5 + d4 * d4 + d6 * d6;
 	
-	                        if (d3 < 0.0D || d7 < d3)
-	                        {
-	                            d3 = d7;
+	                        if (d3 < 0.0D || d7 < d3){
+	                        	d3 = d7;
 	                            i = k1;
 	                            j = i2;
 	                            k = l1;
@@ -137,10 +134,8 @@ public class TeleporterXia extends Teleporter {
 	        }
 	    }
 	
-	    if (d3 >= 0.0D)
-	    {
-	        if (flag)
-	        {
+	    if (d3 >= 0.0D){
+	        if (flag){
 	            this.destinationCoordinateCache.add(j1, new PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
 	            this.destinationCoordinateKeys.add(Long.valueOf(j1));
 	        }
@@ -149,32 +144,27 @@ public class TeleporterXia extends Teleporter {
 	        double d9 = (double)j + 0.5D;
 	        d4 = (double)k + 0.5D;
 	        int j2 = -1;
-	
-	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockPortalVoid)
-	        {
+	        /*
+	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockPortalVoid){
 	            j2 = 2;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockPortalVoid)
-	        {
+	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockPortalVoid){
 	            j2 = 0;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockPortalVoid)
-	        {
+	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockPortalVoid){
 	            j2 = 3;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockPortalVoid)
-	        {
+	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockPortalVoid){
 	            j2 = 1;
 	        }
-	
+	        */
 	        int k2 = par1Entity.getTeleportDirection();
 	
-	        if (j2 > -1)
-	        {
-	            int l2 = Direction.rotateLeft[j2];
+	        if (j2 > -1){
+	        	int l2 = Direction.rotateLeft[j2];
 	            int i3 = Direction.offsetX[j2];
 	            int j3 = Direction.offsetZ[j2];
 	            int k3 = Direction.offsetX[l2];
@@ -182,8 +172,7 @@ public class TeleporterXia extends Teleporter {
 	            boolean flag1 = !this.worldServerInstance.isAirBlock(i + i3 + k3, j, k + j3 + l3) || !this.worldServerInstance.isAirBlock(i + i3 + k3, j + 1, k + j3 + l3);
 	            boolean flag2 = !this.worldServerInstance.isAirBlock(i + i3, j, k + j3) || !this.worldServerInstance.isAirBlock(i + i3, j + 1, k + j3);
 	
-	            if (flag1 && flag2)
-	            {
+	            if (flag1 && flag2){
 	                j2 = Direction.rotateOpposite[j2];
 	                l2 = Direction.rotateOpposite[l2];
 	                i3 = Direction.offsetX[j2];
@@ -201,16 +190,11 @@ public class TeleporterXia extends Teleporter {
 	            float f1 = 0.5F;
 	            float f2 = 0.5F;
 	
-	            if (!flag1 && flag2)
-	            {
+	            if (!flag1 && flag2){
 	                f1 = 1.0F;
-	            }
-	            else if (flag1 && !flag2)
-	            {
+	            }else if (flag1 && !flag2){
 	                f1 = 0.0F;
-	            }
-	            else if (flag1 && flag2)
-	            {
+	            }else if (flag1 && flag2){
 	                f2 = 0.0F;
 	            }
 	
@@ -221,23 +205,16 @@ public class TeleporterXia extends Teleporter {
 	            float f5 = 0.0F;
 	            float f6 = 0.0F;
 	
-	            if (j2 == k2)
-	            {
+	            if (j2 == k2){
 	                f3 = 1.0F;
 	                f4 = 1.0F;
-	            }
-	            else if (j2 == Direction.rotateOpposite[k2])
-	            {
+	            }else if (j2 == Direction.rotateOpposite[k2]){
 	                f3 = -1.0F;
 	                f4 = -1.0F;
-	            }
-	            else if (j2 == Direction.rotateRight[k2])
-	            {
+	            }else if (j2 == Direction.rotateRight[k2]){
 	                f5 = 1.0F;
 	                f6 = -1.0F;
-	            }
-	            else
-	            {
+	            }else{
 	                f5 = -1.0F;
 	                f6 = 1.0F;
 	            }
@@ -247,17 +224,13 @@ public class TeleporterXia extends Teleporter {
 	            par1Entity.motionX = d10 * (double)f3 + d11 * (double)f6;
 	            par1Entity.motionZ = d10 * (double)f5 + d11 * (double)f4;
 	            par1Entity.rotationYaw = par8 - (float)(k2 * 90) + (float)(j2 * 90);
-	        }
-	        else
-	        {
+	        }else{
 	            par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 	        }
 	
 	        par1Entity.setLocationAndAngles(d8, d9, d4, par1Entity.rotationYaw, par1Entity.rotationPitch);
 	        return true;
-	    }
-	    else
-	    {
+	    }else{
 	        return false;
 	    }
 	}
@@ -270,7 +243,16 @@ public class TeleporterXia extends Teleporter {
 		int k = MathHelper.floor_double(e.posZ);
 		
 		if(e.dimension == voidCraft.dimensionIdXia){
-			
+			boolean flag = false;
+			for(int a=0; a<3; a++){
+				for(int q=0; q<3; q++){
+					for(int w=0; w<3; w++){
+						if(!flag) worldServerInstance.setBlock(i-1+q, j-1+a, k-1+w, voidCraft.blocks.blockNoBreak);
+						else worldServerInstance.setBlockToAir(i-1+q, j-1+a, k-1+w);
+					}
+				}
+				flag = true;
+			}
 		}else{
 			
 		}

@@ -43,7 +43,7 @@ public class ChunkProviderVoid implements IChunkProvider
     
     private boolean hasXiaGen = false;
     
-    private BiomeGenBase[] biomesForGeneration;
+    //private BiomeGenBase[] biomesForGeneration;
 
     /** A NoiseGeneratorOctaves used in generating nether terrain */
     private NoiseGeneratorOctaves netherNoiseGen1;
@@ -336,7 +336,7 @@ public class ChunkProviderVoid implements IChunkProvider
     
     public Chunk provideChunk(int par1, int par2)
     {
-    	
+    	/*
         this.hellRNG.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
         Block[] abyte = new Block[32768];
         byte[] byteArray = new byte[32768];
@@ -357,6 +357,23 @@ public class ChunkProviderVoid implements IChunkProvider
         }
 
         chunk.generateSkylightMap();
+        return chunk;
+        */
+        Block[] ablock = new Block[32768];
+        byte[] meta = new byte[ablock.length];
+        BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
+        this.generateTerrain(par1, par2, ablock);
+        this.replaceBlocksForBiome(par1, par2, ablock, meta, abiomegenbase);
+        this.genTest.func_151539_a(this, this.worldObj, par1, par2, ablock);
+        Chunk chunk = new Chunk(this.worldObj, ablock, meta, par1, par2);
+        byte[] abyte = chunk.getBiomeArray();
+
+        for (int k = 0; k < abyte.length; ++k)
+        {
+            abyte[k] = (byte)abiomegenbase[k].biomeID;
+        }
+        
+        chunk.resetRelightChecks();
         return chunk;
     }
 
@@ -513,7 +530,7 @@ public class ChunkProviderVoid implements IChunkProvider
      * Checks to see if a chunk exists at x, y
      */
     
-    public boolean chunkExists(int par1, int par2)
+    public boolean chunkExists(int x, int y)
     {
         return true;
     }
@@ -718,8 +735,7 @@ public class ChunkProviderVoid implements IChunkProvider
 
 
 	@Override
-	public ChunkPosition func_147416_a(World arg0, String arg1, int arg2,
-			int arg3, int arg4) {
+	public ChunkPosition func_147416_a(World arg0, String arg1, int arg2, int arg3, int arg4) {
 		return null;
 	}
 }

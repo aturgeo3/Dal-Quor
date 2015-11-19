@@ -65,7 +65,7 @@ public class VoidTickEvent {
 				if (e.player instanceof EntityPlayerMP){
 		            teleport((EntityPlayerMP) e.player);
 		        }else if(e.player instanceof EntityClientPlayerMP){
-		        	teleport(Minecraft.getMinecraft().getIntegratedServer().getConfigurationManager().func_152612_a(e.player.getCommandSenderName()));
+		        	//Client Side do nothing
 		        }else{
 		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
 		        	voidCraft.logger.info(err);
@@ -84,21 +84,20 @@ public class VoidTickEvent {
 	}
 	
 	private void teleport(EntityPlayerMP player){
-		PortalDataHandler dat = data.get(player.getGameProfile().getId());
-		if(player.dimension != data.get(player.getGameProfile().getId()).type && player.dimension != 1 && player.dimension != dat.PORTAL_VOID && player.dimension != dat.PORTAL_XIA) { //Teleport into void/xia
-        	dat.lastDim = player.dimension;
-        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
+		if(player.dimension != data.get(player.getGameProfile().getId()).type && player.dimension != 1 && player.dimension != data.get(player.getGameProfile().getId()).PORTAL_VOID && player.dimension != data.get(player.getGameProfile().getId()).PORTAL_XIA) { //Teleport into void/xia
+        	data.get(player.getGameProfile().getId()).lastDim = player.dimension;
+        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
         }else if(player.dimension == 1){ //From end
-        	dat.lastDim = player.dimension;
-        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
-        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
+        	data.get(player.getGameProfile().getId()).lastDim = player.dimension;
+        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
+        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
         }else{ //Teleport out of void/xia
-        	dat.lastDim = dat.lastDim == PortalDataHandler.PORTAL_VOID ? 0 : dat.lastDim == PortalDataHandler.PORTAL_XIA ? 0 : dat.lastDim; //Ensure lastDim never equals Void or Xia IDs
-        	transferPlayerToDimension(player.mcServer, player, dat.lastDim, dat.getTeleporter(player));
+        	data.get(player.getGameProfile().getId()).lastDim = data.get(player.getGameProfile().getId()).lastDim == PortalDataHandler.PORTAL_VOID ? 0 : data.get(player.getGameProfile().getId()).lastDim == PortalDataHandler.PORTAL_XIA ? 0 : data.get(player.getGameProfile().getId()).lastDim; //Ensure lastDim never equals Void or Xia IDs
+        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).lastDim, data.get(player.getGameProfile().getId()).getTeleporter(player));
         }
 	}
 	
-	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP p_72356_1_, int p_72356_2_, Teleporter teleporter){ //Custom Made to handle teleporting to The End (DIM 1)
+	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP p_72356_1_, int p_72356_2_, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
 		int j = p_72356_1_.dimension;
 		WorldServer worldserver = mcServer.worldServerForDimension(p_72356_1_.dimension);
 		p_72356_1_.dimension = p_72356_2_;
@@ -120,7 +119,7 @@ public class VoidTickEvent {
 		FMLCommonHandler.instance().firePlayerChangedDimensionEvent(p_72356_1_, j, p_72356_2_);
 	}
 	
-	private void transferEntityToWorld(Entity p_82448_1_, int p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_, Teleporter teleporter){ //Custom Made to handle teleporting to The End (DIM 1)
+	private void transferEntityToWorld(Entity p_82448_1_, int p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
 		WorldProvider pOld = p_82448_3_.provider;
 		WorldProvider pNew = p_82448_4_.provider;
         double moveFactor = pOld.getMovementFactor() / pNew.getMovementFactor();
