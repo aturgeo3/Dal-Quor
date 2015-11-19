@@ -33,43 +33,12 @@ public class TeleporterVoid extends Teleporter {
 	/**
 	 * Place an entity in a nearby portal, creating one if necessary.
 	 */
-	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
-	{
+	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8){
 		if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
 	
-		if (this.worldServerInstance.provider.dimensionId != 1)
-		{
-			if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8))
-			{
-				this.makePortal(par1Entity);
-				this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
-			}
-		}
-		else
-		{
-			int i = MathHelper.floor_double(par1Entity.posX);
-			int j = MathHelper.floor_double(par1Entity.posY) - 1;
-			int k = MathHelper.floor_double(par1Entity.posZ);
-			byte b0 = 1;
-			byte b1 = 0;
-			for (int l = -2; l <= 2; ++l)
-			{
-				for (int i1 = -2; i1 <= 2; ++i1)
-				{
-					for (int j1 = -1; j1 < 3; ++j1)
-					{
-						int k1 = i + i1 * b0 + l * b1;
-						int l1 = j + j1;
-					 	int i2 = k + i1 * b1 - l * b0;
-					 	boolean flag = j1 < 0;
-					
-					 	/** change this block **/
-					 	this.worldServerInstance.setBlock(k1, l1, i2, flag ? voidCraft.blocks.blockVoidcrystal : Blocks.air);
-					}
-				}
-			}
-			par1Entity.setLocationAndAngles((double)i, (double)j, (double)k, par1Entity.rotationYaw, 0.0F);
-			par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+		if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)){
+			this.makePortal(par1Entity);
+			this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
 		}
 	}
 
@@ -112,9 +81,9 @@ public class TeleporterVoid extends Teleporter {
 	
 	                for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
 	                {
-	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockTeleporterVoid)
+	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockPortalVoid)
 	                    {
-	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockTeleporterVoid)
+	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockPortalVoid)
 	                        {
 	                            --i2;
 	                        }
@@ -148,22 +117,22 @@ public class TeleporterVoid extends Teleporter {
 	        d4 = (double)k + 0.5D;
 	        int j2 = -1;
 	
-	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockPortalVoid)
 	        {
 	            j2 = 2;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockPortalVoid)
 	        {
 	            j2 = 0;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockPortalVoid)
 	        {
 	            j2 = 3;
 	        }
 	
-	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockTeleporterVoid)
+	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockPortalVoid)
 	        {
 	            j2 = 1;
 	        }
@@ -432,7 +401,7 @@ public class TeleporterVoid extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : voidCraft.blocks.blockTeleporterVoid, 0, 2);
+					this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : voidCraft.blocks.blockPortalVoid, 0, 2);
 				}
 			}
 

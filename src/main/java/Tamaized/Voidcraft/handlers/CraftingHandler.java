@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.handlers;
+package Tamaized.Voidcraft.handlers;
 
 import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.common.voidCraft;

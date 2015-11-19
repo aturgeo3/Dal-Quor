@@ -5,9 +5,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.network.play.server.S1DPacketEntityEffect;
@@ -18,93 +19,83 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.handlers.PortalDataHandler;
 import Tamaized.Voidcraft.world.dim.TheVoid.TeleporterVoid;
+import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
 
 public class VoidTickEvent {
 	
-	public Map<UUID, Float> portalTick = new HashMap<UUID, Float>();
-	public Map<UUID, Boolean> hasTeleported = new HashMap<UUID, Boolean>();
-	public Map<UUID, Integer> teleportLoc = new HashMap<UUID, Integer>();
+	public Map<UUID, PortalDataHandler> data = new HashMap<UUID, PortalDataHandler>();
 	
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
 		
-		//Set Skin on Player based on Name
-		/*if(e.side.isClient() && e.player.getGameProfile().getId().equals("Tamaized")){
-			AbstractClientPlayer acp = (AbstractClientPlayer) e.player;
-			acp.func_152121_a(Type.SKIN, skin);
-		}*/
-		
-		if(portalTick.get(e.player.getGameProfile().getId()) != null){
+		if(data.get(e.player.getGameProfile().getId()) != null){
+			
 			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
-			if(e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ)) == voidCraft.blocks.blockTeleporterVoid){
-				float j = portalTick.get(e.player.getGameProfile().getId());
+			Block block = e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ));
+			float j = data.get(e.player.getGameProfile().getId()).tick;
+			if(j <= 0){
+				if(data.get(e.player.getGameProfile().getId()).type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid){
+					data.get(e.player.getGameProfile().getId()).type = PortalDataHandler.PORTAL_VOID;
+				}else if(data.get(e.player.getGameProfile().getId()).type != PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia){
+					data.get(e.player.getGameProfile().getId()).type = PortalDataHandler.PORTAL_XIA;
+				}else{
+					data.get(e.player.getGameProfile().getId()).type = 0;
+				}
+			}
+			
+			if((data.get(e.player.getGameProfile().getId()).type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) || (data.get(e.player.getGameProfile().getId()).type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)){
 				if(j < 0.8F) j = j + 0.004F;
 				else j = 0.8F;
-				portalTick.put(e.player.getGameProfile().getId(), j);
+				data.get(e.player.getGameProfile().getId()).tick = j;
 			}else{
-				float j = portalTick.get(e.player.getGameProfile().getId());
+				j = data.get(e.player.getGameProfile().getId()).tick;
 				if(j > 0.0F) j = j - 0.005F;
 				else j = 0.0F;
-				portalTick.put(e.player.getGameProfile().getId(), j);
+				data.get(e.player.getGameProfile().getId()).tick = j;
 			}
 			
 			//Teleport Player to Dimension when Ready
-			
-			if(!hasTeleported.get(e.player.getGameProfile().getId()) && portalTick.get(e.player.getGameProfile().getId()) >= 0.8F){
+			if(!data.get(e.player.getGameProfile().getId()).hasTeleported && data.get(e.player.getGameProfile().getId()).tick >= 0.8F){
 				System.out.println(e.player);
 				if (e.player instanceof EntityPlayerMP){
-		            EntityPlayerMP player = (EntityPlayerMP)e.player;
-		            if(teleportLoc.containsKey(player.getGameProfile().getId()) && player.dimension == voidCraft.dimensionIdVoid){
-		            	player.mcServer.getConfigurationManager().transferPlayerToDimension(player, teleportLoc.get(player.getGameProfile().getId()), new TeleporterVoid(player.mcServer.worldServerForDimension(teleportLoc.get(player.getGameProfile().getId()))));
-		            	//if(teleportLoc.get(player.getGameProfile().getId())==1) player.mcServer.getConfigurationManager().transferPlayerToDimension(player, teleportLoc.get(player.getGameProfile().getId()), new TeleporterVoid(player.mcServer.worldServerForDimension(teleportLoc.get(player.getGameProfile().getId()))));
-		            }else if(player.dimension != voidCraft.dimensionIdVoid && player.dimension != 1) {
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	player.mcServer.getConfigurationManager().transferPlayerToDimension(player, voidCraft.dimensionIdVoid, new TeleporterVoid(player.mcServer.worldServerForDimension(voidCraft.dimensionIdVoid)));
-		            }else if(player.dimension == 1){
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	player.mcServer.getConfigurationManager().transferPlayerToDimension(player, voidCraft.dimensionIdVoid, new TeleporterVoid(player.mcServer.worldServerForDimension(voidCraft.dimensionIdVoid)));
-		            	player.mcServer.getConfigurationManager().transferPlayerToDimension(player, voidCraft.dimensionIdVoid, new TeleporterVoid(player.mcServer.worldServerForDimension(voidCraft.dimensionIdVoid)));
-		            }else{
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	transferPlayerToDimension(player.mcServer, player, 0, new TeleporterVoid(player.mcServer.worldServerForDimension(0)));
-		            }
+		            teleport((EntityPlayerMP) e.player);
 		        }else if(e.player instanceof EntityClientPlayerMP){
-		        	EntityClientPlayerMP player = (EntityClientPlayerMP) e.player;
-		        	if(teleportLoc.containsKey(player.getGameProfile().getId()) && player.dimension == voidCraft.dimensionIdVoid){
-		            	player.travelToDimension(teleportLoc.get(player.getGameProfile().getId()));
-		            	//if(teleportLoc.get(player.getGameProfile().getId())==1) player.mcServer.getConfigurationManager().transferPlayerToDimension(player, teleportLoc.get(player.getGameProfile().getId()), new TeleporterVoid(player.mcServer.worldServerForDimension(teleportLoc.get(player.getGameProfile().getId()))));
-		            }else if(player.dimension != voidCraft.dimensionIdVoid && player.dimension != 1) {
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	player.travelToDimension(voidCraft.dimensionIdVoid);
-		            }else if(player.dimension == 1){
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	player.travelToDimension(voidCraft.dimensionIdVoid);
-		            	player.travelToDimension(voidCraft.dimensionIdVoid);
-		            }else{
-		            	teleportLoc.put(player.getGameProfile().getId(), player.dimension);
-		            	player.travelToDimension(0);
-		            }
+		        	teleport(Minecraft.getMinecraft().getIntegratedServer().getConfigurationManager().func_152612_a(e.player.getCommandSenderName()));
 		        }else{
 		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
 		        	voidCraft.logger.info(err);
 		        	System.out.println(err);
 		        }
-	            hasTeleported.put(e.player.getGameProfile().getId(), true);
+				data.get(e.player.getGameProfile().getId()).hasTeleported = true;
 			}
 			
-			if(portalTick.get(e.player.getGameProfile().getId()) <= 0.0F){
-				hasTeleported.put(e.player.getGameProfile().getId(), false);
+			if(data.get(e.player.getGameProfile().getId()).tick <= 0.0F){
+				data.get(e.player.getGameProfile().getId()).hasTeleported = false;
 			}
 		}else{
-			voidCraft.logger.info("Adding UUID: '"+e.player.getGameProfile().getId()+"' to Portal Overlay Handler");
-			portalTick.put(e.player.getGameProfile().getId(), 0.0F);
-			hasTeleported.put(e.player.getGameProfile().getId(), false);
+			voidCraft.logger.info("Adding UUID: '"+e.player.getGameProfile().getId()+"' ("+e.player.getGameProfile().getName()+") to Portal Overlay Handler");
+			data.put(e.player.getGameProfile().getId(), new PortalDataHandler(e.player.getGameProfile().getId(), e.player.dimension == PortalDataHandler.PORTAL_VOID ? 0 : e.player.dimension == PortalDataHandler.PORTAL_XIA ? 0 : e.player.dimension));
 		}	
+	}
+	
+	private void teleport(EntityPlayerMP player){
+		PortalDataHandler dat = data.get(player.getGameProfile().getId());
+		if(player.dimension != data.get(player.getGameProfile().getId()).type && player.dimension != 1 && player.dimension != dat.PORTAL_VOID && player.dimension != dat.PORTAL_XIA) { //Teleport into void/xia
+        	dat.lastDim = player.dimension;
+        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
+        }else if(player.dimension == 1){ //From end
+        	dat.lastDim = player.dimension;
+        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
+        	transferPlayerToDimension(player.mcServer, player, dat.type, dat.getTeleporter(player));
+        }else{ //Teleport out of void/xia
+        	dat.lastDim = dat.lastDim == PortalDataHandler.PORTAL_VOID ? 0 : dat.lastDim == PortalDataHandler.PORTAL_XIA ? 0 : dat.lastDim; //Ensure lastDim never equals Void or Xia IDs
+        	transferPlayerToDimension(player.mcServer, player, dat.lastDim, dat.getTeleporter(player));
+        }
 	}
 	
 	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP p_72356_1_, int p_72356_2_, Teleporter teleporter){ //Custom Made to handle teleporting to The End (DIM 1)

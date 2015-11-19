@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.BucketHandler;
-import Tamaized.Voidcraft.fluid.BlockVoidFluid;
-import Tamaized.Voidcraft.items.ItemVoidCraftBucket;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -15,8 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
+import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.fluid.BlockVoidFluid;
+import Tamaized.Voidcraft.handlers.BucketHandler;
+import Tamaized.Voidcraft.items.ItemVoidCraftBucket;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidFluids extends RegistryBase {
 

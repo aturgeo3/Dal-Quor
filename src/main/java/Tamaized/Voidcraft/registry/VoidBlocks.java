@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -8,8 +7,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.BasicVoidBlock;
-import Tamaized.Voidcraft.blocks.BlockTeleporter;
-import Tamaized.Voidcraft.blocks.BlockTeleporterXia;
+import Tamaized.Voidcraft.blocks.BlockPortalVoid;
+import Tamaized.Voidcraft.blocks.BlockPortalXia;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import Tamaized.Voidcraft.blocks.VoidFence;
@@ -24,6 +23,7 @@ import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidBlocks extends RegistryBase {
 
@@ -35,8 +35,8 @@ public class VoidBlocks extends RegistryBase {
 	public static Block blockVoidfence;
 	public static Block blockVoidstairs;
 	public static Block blockVoidBrickSlab;
-	public static Block blockTeleporterVoid;
-	public static Block blockTeleporterXia;
+	public static Block blockPortalVoid;
+	public static Block blockPortalXia;
 	public static Block fireVoid;
 	public static Block voidBox;
 	public static Block voidMacerator;
@@ -58,8 +58,8 @@ public class VoidBlocks extends RegistryBase {
 		blockVoidBrickSlab = new VoidSlab(false, Material.rock).setCreativeTab(voidCraft.tabs.tabVoid).setBlockName("blockVoidslab").setBlockTextureName("VoidCraft:VoidBrick");
 		AIBlock = new AIBlock().setBlockUnbreakable().setBlockName("aiBlock");
 
-		blockTeleporterVoid = new BlockTeleporter().setBlockName("blockTeleporterVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		blockTeleporterXia = new BlockTeleporterXia().setBlockName("blockTeleporterXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockPortalVoid = new BlockPortalVoid("VoidCraft:blockPortalVoid").setBlockName("blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockPortalXia = new BlockPortalXia("VoidCraft:blockPortalXia").setBlockName("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		fireVoid = new FireVoid().setBlockName("voidfire").setCreativeTab(voidCraft.tabs.tabVoid).setBlockTextureName("VoidCraft:fireVoid");
 
 		voidMacerator = new VoidMacerator().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F).setBlockName("voidMaceratorOff");
@@ -87,8 +87,8 @@ public class VoidBlocks extends RegistryBase {
 		GameRegistry.registerBlock(Heimdall, Heimdall.getUnlocalizedName());
 		GameRegistry.registerBlock(AIBlock, AIBlock.getUnlocalizedName());
 		GameRegistry.registerBlock(fireVoid, fireVoid.getUnlocalizedName());
-		GameRegistry.registerBlock(blockTeleporterVoid, blockTeleporterVoid.getUnlocalizedName());
-		GameRegistry.registerBlock(blockTeleporterXia, blockTeleporterXia.getUnlocalizedName());
+		GameRegistry.registerBlock(blockPortalVoid, blockPortalVoid.getUnlocalizedName());
+		GameRegistry.registerBlock(blockPortalXia, blockPortalXia.getUnlocalizedName());
 
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', voidCraft.items.voidCloth, 'Z', Items.cauldron);

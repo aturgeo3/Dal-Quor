@@ -14,7 +14,7 @@ public class Tabs extends RegistryBase{
 		tabVoid = new CreativeTabs("tabVoid") {
 			@Override
 			public Item getTabIconItem() {
-				return Item.getItemFromBlock(voidCraft.blocks.blockTeleporterVoid);
+				return Item.getItemFromBlock(voidCraft.blocks.blockPortalVoid);
 			}
 		};
 	
