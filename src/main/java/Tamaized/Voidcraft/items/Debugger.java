@@ -5,6 +5,9 @@ import java.util.Random;
 
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.structures.ComponentTestCorridor;
+import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.world.SchematicLoader.Schematic;
+import net.minecraft.block.Block;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,14 +33,30 @@ public class Debugger extends Item {
 	 * On Block
 	 */
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10){	
-		Random rand = new Random();
-    	world.setBlock(x, y+1, z, Blocks.chest, 0, 2);
-        TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, y+1, z);
-
-        if (tileentitychest != null)
-        {
-            WeightedRandomChestContent.generateChestContents(rand, ComponentTestCorridor.field_111019_a, tileentitychest, 1 + rand.nextInt(5));
-        }
+		SchematicLoader sut = new SchematicLoader();
+		Schematic spring = sut.get("voidcraft.schematic");
+		int i = 0;
+		for (int cy = 0; cy < spring.height; cy++){
+			for (int cz = 0; cz < spring.length; cz++){
+				for (int cx = 0; cx < spring.width; cx++) {
+					int id = spring.blocks[i];
+					Block b = Blocks.bedrock;
+					world.setBlockToAir(cx+x+1, cy+y, cz+z+1);
+					switch (id){
+					case 7:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidbrick, 0, 2);
+						break;
+					case 20:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidBrickSlab, 1, 2);
+						break;
+					default:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, Block.getBlockById(id), spring.data[i], 2);
+						break;
+					}
+					i++;
+				}
+			}
+		}
     	return true;
     }
 	

@@ -78,7 +78,7 @@ public class TeleporterXia extends Teleporter {
 			this.makePortal(par1Entity);
 			this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
 		}
-		par1Entity.setPosition(0.5, 60, 0.5);
+		par1Entity.setLocationAndAngles(0.5, 60, 0.5, 0, 0);
 	}
 
     /**

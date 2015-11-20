@@ -6,22 +6,22 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.network.play.server.S1DPacketEntityEffect;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
-import Tamaized.Voidcraft.world.dim.TheVoid.TeleporterVoid;
-import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -32,6 +32,18 @@ public class VoidTickEvent {
 	
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
+		
+		//Prevent players from flying in Xia DIM
+		if(e.player instanceof EntityPlayerMP && e.player.dimension == voidCraft.dimensionIdXia){
+			EntityPlayerMP player = (EntityPlayerMP) e.player;
+			if(!player.capabilities.isCreativeMode && player.capabilities.isFlying){
+				player.capabilities.allowFlying = false;
+				player.capabilities.isFlying = false;
+				player.capabilities.disableDamage = false;
+				player.sendPlayerAbilities();
+				player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+			}
+		}
 		
 		if(data.get(e.player.getGameProfile().getId()) != null){
 			
@@ -61,7 +73,7 @@ public class VoidTickEvent {
 			
 			//Teleport Player to Dimension when Ready
 			if(!data.get(e.player.getGameProfile().getId()).hasTeleported && data.get(e.player.getGameProfile().getId()).tick >= 0.8F){
-				System.out.println(e.player);
+				//System.out.println(e.player);
 				if (e.player instanceof EntityPlayerMP){
 		            teleport((EntityPlayerMP) e.player);
 		        }else if(e.player instanceof EntityClientPlayerMP){
