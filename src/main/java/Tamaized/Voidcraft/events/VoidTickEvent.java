@@ -29,19 +29,31 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class VoidTickEvent {
 	
 	public Map<UUID, PortalDataHandler> data = new HashMap<UUID, PortalDataHandler>();
+	private Map<UUID, Boolean> canEdit = new HashMap<UUID, Boolean>();
 	
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
 		
-		//Prevent players from flying in Xia DIM
-		if(e.player instanceof EntityPlayerMP && e.player.dimension == voidCraft.dimensionIdXia){
+		//Prevent players from flying aswell as breaking and placing blocks in Xia DIM
+		if(e.player instanceof EntityPlayerMP){
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
-			if(!player.capabilities.isCreativeMode && player.capabilities.isFlying){
-				player.capabilities.allowFlying = false;
-				player.capabilities.isFlying = false;
-				player.capabilities.disableDamage = false;
-				player.sendPlayerAbilities();
-				player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+			if(e.player.dimension == voidCraft.dimensionIdXia){
+				if(!player.capabilities.isCreativeMode && player.capabilities.isFlying){
+					player.capabilities.allowFlying = false;
+					player.capabilities.isFlying = false;
+					player.capabilities.disableDamage = false;
+					player.sendPlayerAbilities();
+					player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+				}
+				if(!player.capabilities.isCreativeMode && player.capabilities.allowEdit == true){
+					canEdit.put(player.getGameProfile().getId(), false);
+					player.capabilities.allowEdit = false;
+				}
+			}else{
+				if(canEdit.containsKey(player.getGameProfile().getId()) && !canEdit.get(player.getGameProfile().getId())){
+					player.capabilities.allowEdit = true;
+					canEdit.put(player.getGameProfile().getId(), true);
+				}
 			}
 		}
 		

@@ -23,7 +23,7 @@ import Tamaized.Voidcraft.world.SchematicLoader.Schematic;
 
 public class TeleporterXia extends Teleporter {
 
-	private SchematicLoader sut;
+	private SchematicLoader sut = new SchematicLoader();
 
 	private final WorldServer worldServerInstance;
 	private final Random random;
@@ -40,27 +40,51 @@ public class TeleporterXia extends Teleporter {
 		this.random = new Random(par1WorldServer.getSeed());
 	}
 	
-	private void doStructure(WorldServer par1WorldServer){
-		if(par1WorldServer == null) return;
-			sut = new SchematicLoader();
-			Schematic spring = sut.get("VoidCastle-Redstone_WithTnT.schematic");
-			int i = 0;
-			for (int cy = 0; cy < spring.height; cy++){
-				for (int cz = 0; cz < spring.length; cz++){
-					for (int cx = 0; cx < spring.width; cx++) {
-
-						Block b = Block.getBlockById(spring.blocks[i]);
-						if (b != Blocks.air) {
-							par1WorldServer.setBlockToAir(cx, cy + 60, cz);
-							if (b != Blocks.stone)
-								par1WorldServer.setBlock(cx, cy + 60, cz, b, spring.data[i], 2);
-							else
-								par1WorldServer.setBlock(cx, cy + 60, cz, voidCraft.blocks.blockNoBreak, spring.data[i], 2);
-						}
-						i++;
+	private void doStructure(WorldServer world, int x, int y, int z){
+		if(world == null) return;
+		Schematic spring = sut.get("voidcraft.schematic");
+		int i = 0;
+		for (int cy = 0; cy < spring.height; cy++){
+			for (int cz = 0; cz < spring.length; cz++){
+				for (int cx = 0; cx < spring.width; cx++) {
+					int id = spring.blocks[i];
+					int meta = spring.data[i];
+					world.setBlockToAir(cx+x+1, cy+y, cz+z+1);
+					
+					switch (id){
+					case 849:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.fluids.blockVoidFluid, meta, 2);
+						break;
+					case 851:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockFakeBedrock, meta, 2);
+						break;
+					case 852:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockNoBreak, meta, 2);
+						break;
+					case 854:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidbrick, meta, 2);
+						break;
+					case 853:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidcrystal, meta, 2);
+						break;
+					case 857:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidfence, meta, 2);
+						break;
+					case 856:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidBrickSlab, meta, 2);
+						break;
+					case 855:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidstairs, meta, 2);
+						break;
+					default:
+						world.setBlock(cx+x+1, cy+y, cz+z+1, Block.getBlockById(id), meta, 2);
+						break;
 					}
+					
+					i++;
 				}
 			}
+		}
 	}
 	
 	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
@@ -243,16 +267,7 @@ public class TeleporterXia extends Teleporter {
 		int k = MathHelper.floor_double(e.posZ);
 		
 		if(e.dimension == voidCraft.dimensionIdXia){
-			boolean flag = false;
-			for(int a=0; a<3; a++){
-				for(int q=0; q<3; q++){
-					for(int w=0; w<3; w++){
-						if(!flag) worldServerInstance.setBlock(i-1+q, j-1+a, k-1+w, voidCraft.blocks.blockNoBreak);
-						else worldServerInstance.setBlockToAir(i-1+q, j-1+a, k-1+w);
-					}
-				}
-				flag = true;
-			}
+			doStructure(this.worldServerInstance, -11, 59, -4);
 		}else{
 			
 		}

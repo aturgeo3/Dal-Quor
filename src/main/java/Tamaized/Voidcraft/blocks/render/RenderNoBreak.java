@@ -117,7 +117,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
             tessellator.addVertex(x + 0, y + 1, z + 0);
             tessellator.addVertex(x + 0, y + 1, z + 1);
             tessellator.addVertex(x + 1, y + 1, z + 1);
-            tessellator.addVertex(x + 1, y + 1, z + 0);
+            tessellator.addVertex(x + 1, y + 1, z + 0);/*
             //East
             tessellator.addVertex(x + 1, y + 1, z + 1);
             tessellator.addVertex(x + 1, y + 0, z + 1);
@@ -143,7 +143,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
             tessellator.addVertex(x + 1, y + 0, z + 0);
             tessellator.addVertex(x + 1, y + 0, z + 1);
             tessellator.addVertex(x + 0, y + 0, z + 1);
-            
+            */
             tessellator.draw();
             GL11.glPopMatrix();
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
