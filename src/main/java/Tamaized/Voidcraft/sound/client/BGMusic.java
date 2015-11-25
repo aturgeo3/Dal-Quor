@@ -5,11 +5,11 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -20,6 +20,7 @@ public class BGMusic {
 	private static ISound sound;
 	public static boolean isPlaying = false;
 	public static int tick = 0;
+	public static boolean pause = false;
 	
 	@SubscribeEvent
 	public void PlaySoundEvent(PlaySoundEvent17 e){
@@ -32,15 +33,16 @@ public class BGMusic {
 	
 	@SubscribeEvent
 	public void tick(ClientTickEvent e){
-		if(e.phase == Phase.START){
+		if(e.phase == Phase.END){
 			World world = Minecraft.getMinecraft().theWorld;
 			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+			pause = (Minecraft.getMinecraft().currentScreen instanceof GuiIngameMenu);
 			if(world != null && world.provider != null && world.provider.dimensionId == voidCraft.dimensionIdXia){
 				if(BossMusicManager.isPlaying){
 					if(isPlaying) StopMusic();
 					tick = 0;
 				}else{
-					if(tick > 0) tick--;
+					if(tick > 0 && !pause) tick--;
 					if(tick <= 0) PlayMusic();
 				}
 			}else{

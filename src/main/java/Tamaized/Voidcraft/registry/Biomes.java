@@ -19,8 +19,8 @@ public class Biomes extends RegistryBase {
 	@Override
 	public void init() {
 		Height bvoidmm = new Height(-1F, 0.1F);
-		biomeVoid = new BiomeGenVoid(251).setBiomeName("The Void").setHeight(bvoidmm).setTemperatureRainfall(0.10F, 0.0F).setDisableRain();
-		biomeXia = new BiomeGenXia(252).setBiomeName("???").setHeight(bvoidmm).setTemperatureRainfall(0.10F, 0.0F).setDisableRain();
+		biomeVoid = new BiomeGenVoid(251).setBiomeName("The Void").setHeight(bvoidmm).setTemperatureRainfall(0.21F, 0.0F).setDisableRain();
+		biomeXia = new BiomeGenXia(252).setBiomeName("???").setHeight(bvoidmm).setTemperatureRainfall(0.21F, 0.0F).setDisableRain();
 		//BiomeManager.coolBiomes.add(new BiomeEntry(biomeVoid, 100));
 	}
 
