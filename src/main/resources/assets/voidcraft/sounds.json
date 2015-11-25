@@ -13,8 +13,7 @@
   
   "portal.Xia": {"category": "ambient","sounds": [{"name": "portal/Xia","stream": true}]},
   
-  "music.wish": {"category": "music","sounds": [{"name": "music/Emile van Krieken - A morning wish","stream": true}]},
-  "music.nether": {"category": "music","sounds": [{"name": "music/Emile van Krieken - Nether menu _Unreleased_","stream": true}]},
+  "music.undertale": {"category": "music","sounds": [{"name": "music/Undertale - Another Medium","stream": true}]},
   
   "random.chain": {"category": "ambient","sounds": [{"name": "random/chain","stream": true}]}
 }

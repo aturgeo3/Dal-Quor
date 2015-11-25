@@ -51,8 +51,10 @@ import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
+import Tamaized.Voidcraft.sound.client.BGMusic;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -71,8 +73,8 @@ public void registerRenders(){
 	//Events
 	MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 	MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
-	//MinecraftForge.EVENT_BUS.register(new MusicEvent());
-	//FMLCommonHandler.instance().bus().register(new MusicEvent()); 
+	MinecraftForge.EVENT_BUS.register(new BGMusic());
+	FMLCommonHandler.instance().bus().register(new BGMusic()); 
 	//MinecraftForge.EVENT_BUS.register(new DebugEvent());
 	
 	float shadowSize = 0.5F;

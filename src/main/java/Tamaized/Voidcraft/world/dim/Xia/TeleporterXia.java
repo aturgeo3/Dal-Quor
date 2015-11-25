@@ -87,11 +87,10 @@ public class TeleporterXia extends Teleporter {
 		}
 	}
 	
-	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
-	{
+	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8){
 		//if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
 		if(par1Entity.dimension == 0){
-			ChunkCoordinates chunkcoordinates = par1Entity instanceof EntityPlayer ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
+			ChunkCoordinates chunkcoordinates = par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getBedLocation(0) != null ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
             //chunkcoordinates.posY = par1Entity.worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
             System.out.println(chunkcoordinates.posY);
             par1Entity.setLocationAndAngles((double)chunkcoordinates.posX, (double)chunkcoordinates.posY, (double)chunkcoordinates.posZ, par1Entity.rotationYaw, par1Entity.rotationPitch);

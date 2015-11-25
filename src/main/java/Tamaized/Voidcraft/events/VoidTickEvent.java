@@ -29,12 +29,11 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class VoidTickEvent {
 	
 	public Map<UUID, PortalDataHandler> data = new HashMap<UUID, PortalDataHandler>();
-	private Map<UUID, Boolean> canEdit = new HashMap<UUID, Boolean>();
 	
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
 		
-		//Prevent players from flying aswell as breaking and placing blocks in Xia DIM
+		//Prevent players from flying in Xia DIM
 		if(e.player instanceof EntityPlayerMP){
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
 			if(e.player.dimension == voidCraft.dimensionIdXia){
@@ -44,15 +43,6 @@ public class VoidTickEvent {
 					player.capabilities.disableDamage = false;
 					player.sendPlayerAbilities();
 					player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
-				}
-				if(!player.capabilities.isCreativeMode && player.capabilities.allowEdit == true){
-					canEdit.put(player.getGameProfile().getId(), false);
-					player.capabilities.allowEdit = false;
-				}
-			}else{
-				if(canEdit.containsKey(player.getGameProfile().getId()) && !canEdit.get(player.getGameProfile().getId())){
-					player.capabilities.allowEdit = true;
-					canEdit.put(player.getGameProfile().getId(), true);
 				}
 			}
 		}
@@ -93,7 +83,7 @@ public class VoidTickEvent {
 		        }else{
 		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
 		        	voidCraft.logger.info(err);
-		        	System.out.println(err);
+		        	//System.out.println(err);
 		        }
 				data.get(e.player.getGameProfile().getId()).hasTeleported = true;
 			}
