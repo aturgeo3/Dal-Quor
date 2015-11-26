@@ -92,6 +92,7 @@ public class TeleporterXia extends Teleporter {
             par1Entity.setLocationAndAngles((double)chunkcoordinates.posX, (double)chunkcoordinates.posY, (double)chunkcoordinates.posZ, par1Entity.rotationYaw, par1Entity.rotationPitch);
 			return;
 		}
+		if(par1Entity instanceof EntityPlayer) ((EntityPlayer)par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_6, 1);
 		par1Entity.setPosition(0.5, 60, 0.5);
 		if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)){
 			this.makePortal(par1Entity);

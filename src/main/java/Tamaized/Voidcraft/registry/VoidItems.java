@@ -1,16 +1,17 @@
 package Tamaized.Voidcraft.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.items.BasicVoidItems;
 import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
+import Tamaized.Voidcraft.items.VoidStar;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidItems extends RegistryBase {
 
@@ -47,7 +48,7 @@ public class VoidItems extends RegistryBase {
 		MoltenvoidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChain").setTextureName("VoidCraft:MoltenvoidChain");
 		MoltenvoidChainPart = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChainPart").setTextureName("VoidCraft:MoltenvoidChainPart");
 		burnBone = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("burnBone").setTextureName("VoidCraft:Bone");
-		voidStar = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidStar").setTextureName("VoidCraft:voidStar");
+		voidStar = new VoidStar().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidStar").setTextureName("VoidCraft:voidStar");
 		ChainedSkull = new ChainedSkull().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ChainedSkull").setTextureName("VoidCraft:ChainedSkull");
 		voidCloth = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCloth").setTextureName("VoidCraft:voidCloth");
 		voidCrystalBucket = new BasicVoidItems().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCrystalBucket").setTextureName("VoidCraft:voidCrystalBucket");
