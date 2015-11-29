@@ -39,7 +39,7 @@ public class TeleporterXia extends Teleporter {
 	
 	private void doStructure(WorldServer world, int x, int y, int z){
 		if(world == null) return;
-		Schematic spring = sut.get("voidcraft.schematic");
+		Schematic spring = sut.get("XiaCastle.schematic");
 		int i = 0;
 		for (int cy = 0; cy < spring.height; cy++){
 			for (int cz = 0; cz < spring.length; cz++){
@@ -49,28 +49,28 @@ public class TeleporterXia extends Teleporter {
 					world.setBlockToAir(cx+x+1, cy+y, cz+z+1);
 					
 					switch (id){
-					case 849:
+					case 727:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.fluids.blockVoidFluid, meta, 2);
 						break;
-					case 851:
+					case 729:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockFakeBedrock, meta, 2);
 						break;
-					case 852:
+					case 730:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockNoBreak, meta, 2);
 						break;
-					case 854:
+					case 732:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidbrick, meta, 2);
 						break;
-					case 853:
+					case 731:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidcrystal, meta, 2);
 						break;
-					case 857:
+					case 735:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidfence, meta, 2);
 						break;
-					case 856:
+					case 734:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidBrickSlab, meta, 2);
 						break;
-					case 855:
+					case 733:
 						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidstairs, meta, 2);
 						break;
 					default:
@@ -118,6 +118,7 @@ public class TeleporterXia extends Teleporter {
 		
 		if(e.dimension == voidCraft.dimensionIdXia){
 			doStructure(this.worldServerInstance, -11, 59, -4);
+			worldServerInstance.setBlock(0, 0, 58, voidCraft.blocks.xiaBlock);
 		}else{
 			
 		}

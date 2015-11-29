@@ -20,6 +20,7 @@ import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.PickUpEvent;
@@ -204,6 +205,7 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
 		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
+		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		
 		fluids.init();
 		blocks.init();

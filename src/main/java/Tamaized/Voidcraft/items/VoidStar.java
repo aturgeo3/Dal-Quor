@@ -47,7 +47,7 @@ public class VoidStar extends Item{
 				entityItem.worldObj.setBlock(xCoord, yCoord, zCoord, voidCraft.blocks.blockPortalXia);
 				if(entityItem.func_145800_j() != null){
 					EntityPlayer entityplayer = entityItem.worldObj.getPlayerEntityByName(entityItem.func_145800_j());
-					entityplayer.addStat(voidCraft.achievements.voidCraftAchMainLine_5, 1);
+					if(entityplayer != null) entityplayer.addStat(voidCraft.achievements.voidCraftAchMainLine_5, 1);
 				}
 				entityItem.setDead();
 				return true;

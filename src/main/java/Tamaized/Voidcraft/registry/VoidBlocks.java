@@ -14,6 +14,7 @@ import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import Tamaized.Voidcraft.blocks.VoidFence;
 import Tamaized.Voidcraft.blocks.VoidSlab;
 import Tamaized.Voidcraft.blocks.VoidStairs;
+import Tamaized.Voidcraft.blocks.XiaBlock;
 import Tamaized.Voidcraft.blocks.blockFakeBedrock;
 import Tamaized.Voidcraft.blocks.blockNoBreak;
 import Tamaized.Voidcraft.blocks.blockVoidbrick;
@@ -44,6 +45,7 @@ public class VoidBlocks extends RegistryBase {
 	public static Block voidInfuser;
 	public static Block Heimdall;
 	public static Block AIBlock;
+	public static Block xiaBlock;
 
 	@Override
 	public void preInit() {
@@ -57,6 +59,7 @@ public class VoidBlocks extends RegistryBase {
 		blockVoidstairs = new VoidStairs(blockVoidbrick, 0).setCreativeTab(voidCraft.tabs.tabVoid).setBlockName("blockVoidstairs").setBlockTextureName("VoidCraft:VoidBrick");
 		blockVoidBrickSlab = new VoidSlab(false, Material.rock).setCreativeTab(voidCraft.tabs.tabVoid).setBlockName("blockVoidslab").setBlockTextureName("VoidCraft:VoidBrick");
 		AIBlock = new AIBlock().setBlockUnbreakable().setBlockName("aiBlock");
+		xiaBlock = new XiaBlock().setBlockUnbreakable().setBlockName("xiaBlock");
 
 		blockPortalVoid = new BlockPortalVoid("VoidCraft:blockPortalVoid").setBlockName("blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		blockPortalXia = new BlockPortalXia("VoidCraft:blockPortalXia").setBlockName("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
