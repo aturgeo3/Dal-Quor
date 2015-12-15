@@ -243,12 +243,12 @@ public class voidCraft {
 		DimensionManager.registerDimension(dimensionIdXia, dimensionIdXia);
 		
 		//Discs
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "ZCC", "CXC", "CCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "CZC", "CXC", "CCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "CCZ", "CXC", "CCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "CCC", "ZXC", "CCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "CCC", "CXZ", "CCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "CCC", "CXC", "ZCC", 'Z', items.burnBone, 'X', items.voidcrystal, 'C', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ", "ZXZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
 
 		// World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);

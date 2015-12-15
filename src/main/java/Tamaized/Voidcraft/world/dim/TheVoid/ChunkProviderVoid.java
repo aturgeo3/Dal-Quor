@@ -689,13 +689,13 @@ public class ChunkProviderVoid implements IChunkProvider
     	
     	if(this.genTest != null){
     		if (this.genTest.hasStructureAt(par2, par3, par4)){
-    			//if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
-    			if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
+    			if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
+    			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
             }
     	}
     	if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blocks.blockVoidbrick){
-    		//if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
-			if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
+    		if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
+			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
     	}
     	
     	return this.worldObj.getBiomeGenForCoords(par2, par4).getSpawnableList(par1EnumCreatureType);
