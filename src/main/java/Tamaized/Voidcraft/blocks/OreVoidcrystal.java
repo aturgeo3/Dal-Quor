@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
@@ -93,5 +94,9 @@ public class OreVoidcrystal extends Block {
 		if (entity instanceof EntityDragon) return false;        
 		return true;
 	}
+	
+	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z){
+        return true;
+    }
 
 }

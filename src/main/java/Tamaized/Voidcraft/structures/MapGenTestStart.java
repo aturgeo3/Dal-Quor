@@ -19,7 +19,7 @@ public class MapGenTestStart extends MapGenStructure {
 
     public MapGenTestStart()
     {       
-    	this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 1, 1, 1));
+    	this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 1, 0, 1));
     }
 
     public String func_143025_a()

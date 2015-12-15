@@ -24,6 +24,7 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.PickUpEvent;
+import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.items.VoidRecord;
@@ -121,7 +122,7 @@ public class voidCraft {
 	public static Achievements achievements = new Achievements();
 	
 	//Discs
-	public static ArrayList<Item> voidDiscs = new ArrayList<Item>();
+	public static ArrayList<Item> voidDiscs;
 
 	public static final int dimensionIdVoid = -2;
 	public static final int dimensionIdXia = -3;
@@ -149,6 +150,7 @@ public class voidCraft {
 		fluids.preInit();
 		
 		// disc
+		voidDiscs = new ArrayList<Item>();
 		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc1").setTextureName("VoidCraft:voidDisc"));
 		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc2").setTextureName("VoidCraft:voidDisc"));
 		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc3").setTextureName("VoidCraft:voidDisc"));
@@ -195,6 +197,7 @@ public class voidCraft {
 		//Register Events
 		FMLCommonHandler.instance().bus().register(VoidTickEvent);
 		MinecraftForge.EVENT_BUS.register(new PickUpEvent());
+		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
 		FMLCommonHandler.instance().bus().register(new CraftingHandler()); 
 		FMLCommonHandler.instance().bus().register(BossMusicManager.instance); //We want to give this class a tick updater
 				
@@ -255,39 +258,50 @@ public class voidCraft {
 		
 
 		// Mobs
-		EntityRegistry.registerGlobalEntityID(EntityMobWraith.class, "Wraith", EntityRegistry.findGlobalUniqueEntityId(), 0xFFFFFF, 0x000000);
-		EntityRegistry.addSpawn(EntityMobWraith.class, 1, 0, 1, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", 4, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobSpectreChain.class, "SpectreChain", 5, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobVoidWrath.class, "VoidWrath", 6, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobLich.class, "Lich", 7, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobVoidBoss.class, "VoidBoss", 8, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobHerobrine.class, "Herobrine", 9, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobDol.class, "Dol", 10, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", 11, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
+		/*
+		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", EntityRegistry.findGlobalUniqueEntityId(), 0xFFFFFF, 0x000000);
+		EntityRegistry.addSpawn(EntityMobWraith.class, 1, 0, 10, EnumCreatureType.creature, biomes.biomeVoid);
 		
-		EntityRegistry.registerGlobalEntityID(EntityMobSpectreChain.class, "SpectreChain",EntityRegistry.findGlobalUniqueEntityId(), 0xAA00FF, 0x000000);
-		EntityRegistry.addSpawn(EntityMobSpectreChain.class, 1, 0, 1, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobSpectreChain.class, "SpectreChain",EntityRegistry.findGlobalUniqueEntityId(), 0xAA00FF, 0x000000);
+		EntityRegistry.addSpawn(EntityMobSpectreChain.class, 1, 0, 10, EnumCreatureType.creature, biomes.biomeVoid);
 
-		EntityRegistry.registerGlobalEntityID(EntityMobVoidWrath.class, "VoidWrath", EntityRegistry.findGlobalUniqueEntityId(), 0xFF0000, 0x000000);
-		EntityRegistry.addSpawn(EntityMobVoidWrath.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobVoidWrath.class, "VoidWrath", EntityRegistry.findGlobalUniqueEntityId(), 0xFF0000, 0x000000);
+		EntityRegistry.addSpawn(EntityMobVoidWrath.class, 0, 0, 10, EnumCreatureType.creature, biomes.biomeVoid);
 		
 		//TODO MORE CONTENT TO ENTITY
-		EntityRegistry.registerGlobalEntityID(EntityMobLich.class, "Lich", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x4444FF);
-		EntityRegistry.addSpawn(EntityMobLich.class, 3, 0, 1, EnumCreatureType.monster, BiomeGenBase.swampland);
+		EntityRegistry.registerModEntity(EntityMobLich.class, "Lich", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x4444FF);
+		EntityRegistry.addSpawn(EntityMobLich.class, 3, 0, 1, EnumCreatureType.creature, BiomeGenBase.swampland);
 		
 		//TODO FIX THE ENTITY
-		EntityRegistry.registerGlobalEntityID(EntityMobVoidBoss.class, "VoidBoss", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
-		EntityRegistry.addSpawn(EntityMobVoidBoss.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobVoidBoss.class, "VoidBoss", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
+		EntityRegistry.addSpawn(EntityMobVoidBoss.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
 		
 		//npcs
-		EntityRegistry.registerGlobalEntityID(EntityMobHerobrine.class, "Herobrine", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
-		EntityRegistry.addSpawn(EntityMobHerobrine.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobHerobrine.class, "Herobrine", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFF0000);
+		EntityRegistry.addSpawn(EntityMobHerobrine.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
 		
-		EntityRegistry.registerGlobalEntityID(EntityMobDol.class, "Dol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x775500);
-		EntityRegistry.addSpawn(EntityMobDol.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobDol.class, "Dol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x775500);
+		EntityRegistry.addSpawn(EntityMobDol.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
 		
-		EntityRegistry.registerGlobalEntityID(EntityMobZol.class, "Zol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x8888FF);
-		EntityRegistry.addSpawn(EntityMobZol.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x8888FF);
+		EntityRegistry.addSpawn(EntityMobZol.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
 		
-		EntityRegistry.registerGlobalEntityID(EntityMobXia.class, "Xia", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
-		EntityRegistry.addSpawn(EntityMobXia.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
+		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
+		EntityRegistry.addSpawn(EntityMobXia.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
 		
-		EntityRegistry.registerGlobalEntityID(EntityMobXia2.class, "Xia2", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
-		EntityRegistry.addSpawn(EntityMobXia2.class, 0, 0, 0, EnumCreatureType.monster, biomes.biomeVoid);
-
+		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0xFFFF00);
+		EntityRegistry.addSpawn(EntityMobXia2.class, 0, 0, 0, EnumCreatureType.creature, biomes.biomeVoid);
+		 */
 		if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 	}
 

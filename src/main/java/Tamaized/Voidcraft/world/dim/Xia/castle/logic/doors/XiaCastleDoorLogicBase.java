@@ -17,7 +17,7 @@ public class XiaCastleDoorLogicBase extends XiaCastleBase{
 	public XiaCastleDoorLogicBase(XiaCastleHandler handler, int[][] d, AxisAlignedBB bounds) {
 		super(handler);
 		door = d;
-		trigger = bounds;;
+		trigger = bounds;
 	}
 
 	@Override

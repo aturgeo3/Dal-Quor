@@ -18,8 +18,8 @@ item.leadDust.name=Void Infused Lead Dust
 item.quartzDust.name=Void Infused Quartz Dust
 item.debugger.name=Debug Tool
 item.voidChain.name=Void Chain
-item.MoltenvoidChain.name=Molten Void Chain Part
-item.MoltenvoidChainPart.name=Molten Void Chain
+item.MoltenvoidChain.name=Molten Void Chain
+item.MoltenvoidChainPart.name=Molten Void Chain Part
 
 # Blocks
 tile.fluidVoid.name=Liquid Void
@@ -94,10 +94,10 @@ itemGroup.tabVoid=VoidCraft
 itemGroup.tForge=Star Forge
 
 # Entity
-entity.Wraith.name=Wraith
+entity.Wraith.name=Void Wraith
 entity.SpectreChain.name=Chained Spectre
 entity.VoidWrath.name=Void's Wrath
-entity.Lich.name=Lich
+entity.Lich.name=Void Lich
 entity.VoidBoss.name=Corrupted Pawn
 entity.Herobrine.name=Avatar of Herobrine
 entity.Dol.name=Dol

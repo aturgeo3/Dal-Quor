@@ -5,10 +5,10 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -18,6 +18,7 @@ import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
@@ -35,7 +36,11 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
+import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
+import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
 import Tamaized.Voidcraft.structures.MapGenTestStart;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderVoid implements IChunkProvider
 {
@@ -91,9 +96,10 @@ public class ChunkProviderVoid implements IChunkProvider
     
     int[][] field_73203_h = new int[32][32];
     private static final String __OBFID = "CL_00000397";
+    
+    private final ArrayList blankSpawnList = new ArrayList();
 
-    public ChunkProviderVoid(World par1World, long par2)
-    {
+    public ChunkProviderVoid(World par1World, long par2){
     	//biomesForGeneration = voidCraft.biomeVoid;
         this.worldObj = par1World;
         this.hellRNG = new Random(par2);
@@ -114,8 +120,6 @@ public class ChunkProviderVoid implements IChunkProvider
         this.netherrackExculsivityNoiseGen = noiseGens[4];
         this.netherNoiseGen6 = noiseGens[5];
         this.netherNoiseGen7 = noiseGens[6];
-        
-        
     }
 
     
@@ -681,36 +685,21 @@ public class ChunkProviderVoid implements IChunkProvider
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
-    {
-        if (par1EnumCreatureType == EnumCreatureType.monster)
-        {
-           /* if (this.genNetherBridge.hasStructureAt(par2, par3, par4))
-            {
-                return this.genNetherBridge.getSpawnList();
+    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4){
+    	
+    	if(this.genTest != null){
+    		if (this.genTest.hasStructureAt(par2, par3, par4)){
+    			//if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
+    			if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
             }
-
-            if (this.genNetherBridge.func_142038_b(par2, par3, par4) && this.worldObj.getBlockId(par2, par3 - 1, par4) == Block.netherBrick.blockID)
-            {
-                return this.genNetherBridge.getSpawnList();
-            }*/
-        	
-        	if(this.genTest != null){
-        	if (this.genTest.hasStructureAt(par2, par3, par4))
-            {
-                return this.genTest.getSpawnList();
-            }
-        	}
-
-            if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blocks.blockVoidbrick)
-            {
-                return this.genTest.getSpawnList();
-            }
-            
-        }
-
-        BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(par2, par4);
-        return biomegenbase == null ? null : biomegenbase.getSpawnableList(par1EnumCreatureType);
+    	}
+    	if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blocks.blockVoidbrick){
+    		//if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
+			if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
+    	}
+    	
+    	return this.worldObj.getBiomeGenForCoords(par2, par4).getSpawnableList(par1EnumCreatureType);
+    	     
     }
 
     /**

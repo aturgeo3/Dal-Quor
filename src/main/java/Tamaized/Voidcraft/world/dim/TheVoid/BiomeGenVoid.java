@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
 
 public class BiomeGenVoid extends BiomeGenBase {
@@ -17,7 +18,8 @@ public class BiomeGenVoid extends BiomeGenBase {
         this.spawnableCaveCreatureList.clear();
         //this.topBlock = voidCraft.blockFakeBedrock;
 		//this.fillerBlock = voidCraft.blockFakeBedrock;
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityMobWraith.class, 1, 1, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobWraith.class, 1, 0, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobSpectreChain.class, 1, 0, 1));
 		}
 	
 	@SideOnly(Side.CLIENT)

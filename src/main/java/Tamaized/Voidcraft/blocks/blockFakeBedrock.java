@@ -16,7 +16,7 @@ public class blockFakeBedrock extends Block{
 	
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z)
     {
-        return false;
+        return true;
     }
 
 }
