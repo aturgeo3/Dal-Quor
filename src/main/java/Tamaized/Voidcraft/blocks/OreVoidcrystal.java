@@ -5,27 +5,17 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class OreVoidcrystal extends Block {
-	
-	@SideOnly(Side.CLIENT)
-	private IIcon iconEnd;
-	@SideOnly(Side.CLIENT)
-	private IIcon iconVoid;
-	@SideOnly(Side.CLIENT)
-	private IIcon overlay;
 	
 	public OreVoidcrystal(Material Material) {
 		super(Material);

@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.GUI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import Tamaized.Voidcraft.GUI.client.HeimdallGUI;
 import Tamaized.Voidcraft.GUI.client.VoidBoxGUI;
 import Tamaized.Voidcraft.GUI.client.voidInfuserGUI;
@@ -16,7 +17,6 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 	

@@ -6,8 +6,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.common.IWorldGenerator;
 import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGeneratorVoid implements IWorldGenerator {
 

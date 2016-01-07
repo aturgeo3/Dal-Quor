@@ -1,20 +1,17 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.Spells;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.ItemFocusBasic;
-import thaumcraft.api.wands.ItemFocusBasic.WandFocusAnimation;
 
 public abstract class VoidSpellFocus extends ItemFocusBasic {
 
-	public abstract void registerIcons(IIconRegister p_94581_1_);
+	//public abstract void registerIcons(IIconRegister p_94581_1_);
 	
-	public abstract IIcon getIconFromDamage(int par1);
+	//public abstract IIcon getIconFromDamage(int par1);
 
 	/**
 	 * How much vis does this focus consume per activation.

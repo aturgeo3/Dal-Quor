@@ -1,19 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.Spells;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.common.items.wands.ItemWandCasting;
-import Tamaized.Voidcraft.projectiles.AcidBall;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class SpellAcid extends VoidSpellFocus{
+public class SpellAcid {/*extends VoidSpellFocus{
 	
 	private IIcon itemIcon;
 	private Aspect aspects;
@@ -23,7 +11,7 @@ public class SpellAcid extends VoidSpellFocus{
 		this.setTextureName("VoidCraft:Thaumcraft/Spells/Acid");
 	}
 	
-	 @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	    public void registerIcons(IIconRegister p_94581_1_)
 	    {
 	        this.itemIcon = p_94581_1_.registerIcon(this.getIconString());
@@ -90,5 +78,5 @@ public class SpellAcid extends VoidSpellFocus{
 		return true;
 	}
 	
-
+*/
 }

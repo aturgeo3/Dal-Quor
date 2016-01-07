@@ -8,14 +8,13 @@ import org.lwjgl.opengl.GL11;
 
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 
-public class OreRenderer implements ISimpleBlockRenderingHandler {
+public class OreRenderer {/*
 
-	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
         
         if( block instanceof OreVoidcrystal ) {
         	OreVoidcrystal ore = (OreVoidcrystal) block;
-        	Tessellator tessellator = Tessellator.instance;
+        	Tessellator tessellator = Tessellator.getInstance();
         	
         	GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
@@ -140,5 +139,5 @@ public class OreRenderer implements ISimpleBlockRenderingHandler {
 	public int getRenderId() {
 		return VoidCraftClientProxy.OreRenderType;
 	}
-	
+	*/
 }

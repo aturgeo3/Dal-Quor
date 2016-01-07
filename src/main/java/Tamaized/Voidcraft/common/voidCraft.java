@@ -2,14 +2,25 @@ package Tamaized.Voidcraft.common;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.FMLEventChannel;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.LogManager;
@@ -62,19 +73,6 @@ import Tamaized.Voidcraft.structures.StructureTestStart;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid=voidCraft.modid, name="VoidCraft", version=voidCraft.version)
 
@@ -151,18 +149,18 @@ public class voidCraft {
 		
 		// disc
 		voidDiscs = new ArrayList<Item>();
-		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc1").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc2").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc3").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:They Will Die", 250).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc4").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Warriors", 171).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc5").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Imagine Dragons - Shots (Broiler Remix)", 190).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc6").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Asgore", 154).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc7").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Core", 164).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc8").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Megalovania", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc9").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc10").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc11").setTextureName("VoidCraft:voidDisc"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc12").setTextureName("VoidCraft:voidDisc"));
+		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc1"));
+		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc2"));
+		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc3"));
+		voidDiscs.add(new VoidRecord("voidCraft:They Will Die", 250).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc4"));
+		voidDiscs.add(new VoidRecord("voidCraft:Warriors", 171).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc5"));
+		voidDiscs.add(new VoidRecord("voidCraft:Imagine Dragons - Shots (Broiler Remix)", 190).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc6"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Asgore", 154).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc7"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Core", 164).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc8"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Megalovania", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc9"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc10"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc11"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc12"));
 		
 		//API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
