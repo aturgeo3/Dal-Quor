@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.common.server;
 
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class VoidCraftCommonProxy {
 
