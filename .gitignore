@@ -1,10 +1,10 @@
 *
+!/gradle
+!/gradle/**
 !/src/
 !/src/**
 /src/main/resources/assets/records.voidcraft/
 /src/main/resources/assets/records.voidcraft/**
-!/gradle/wrapper/
-!/gradle/wrapper/**
 !build.gradle
 !LICENSE
 !README.md
