@@ -1,18 +1,20 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
-import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 
-public class TileEntityXiaCastle extends TileEntity{
+public class TileEntityXiaCastle extends TileEntity implements IUpdatePlayerListBox{
 	
 	private boolean running = false;
 	private XiaCastleHandler handler;
 	
-	public void updateEntity(){
+	@Override
+	public void update(){
 		if(!worldObj.isRemote){
 			if(running){
 				handler.update();
@@ -27,12 +29,12 @@ public class TileEntityXiaCastle extends TileEntity{
 	public Packet getDescriptionPacket(){	
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 2, nbt);
+		return new S35PacketUpdateTileEntity(pos, 2, nbt);
 	}
 	
 	@Override
 	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt){

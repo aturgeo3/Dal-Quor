@@ -1,9 +1,9 @@
 package Tamaized.Voidcraft.events;
 
-import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class PickUpEvent {
 	

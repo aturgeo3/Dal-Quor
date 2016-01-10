@@ -16,15 +16,19 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.items.VoidRecord;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
+public class TileEntityVoidBox extends TileEntity implements IUpdatePlayerListBox, ISidedInventory{
 	
 	public static NBTTagCompound znbtc = new NBTTagCompound();
 	
@@ -70,7 +74,7 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 		
 		if(nbt.getTag("loop") != null){
 			NBTTagString nbtLoop = (NBTTagString) nbt.getTag("loop");
-			loop = nbtLoop.func_150285_a_().equals("true");
+			loop = nbtLoop.getString().equals("true");
 		}
 		
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
@@ -138,8 +142,8 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
      */
 	public void PlayTheSound(ItemStack itemStack){
 		if(itemStack != null){
-                this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, this.xCoord, this.yCoord, this.zCoord, Item.getIdFromItem(itemStack.getItem()));
+                //this.worldObj.setBlockMetadataWithNotify(pos.getX(), pos.getY(), pos.getZ(), 1, 2);
+                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, pos, Item.getIdFromItem(itemStack.getItem()));
 		}else{
 			System.out.println("NULL SLOT DETECTED");
 		}
@@ -150,8 +154,8 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 	 *   
      */
 	public void StopTheSound(){
-                this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, this.xCoord, this.yCoord, this.zCoord, 0);
+		//this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
+		this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, pos, 0);
 	}
 
 	@Override
@@ -180,12 +184,11 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false: entityplayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(pos) != this ? false: entityplayer.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
-	
-	
-	public void updateEntity(){
+	@Override
+	public void update(){
 		if(!this.worldObj.isRemote){
 			if(!pulsed && isPowered){
 				pulsed = true;
@@ -262,9 +265,9 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 		DataOutputStream outputStream = new DataOutputStream(bos);
 	    try {
 	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_VOIDBOX_UPDATE);
-	        outputStream.writeInt(this.xCoord);
-	        outputStream.writeInt(this.yCoord);
-	        outputStream.writeInt(this.zCoord);
+	        outputStream.writeInt(pos.getX());
+	        outputStream.writeInt(pos.getY());
+	        outputStream.writeInt(pos.getZ());
 	        outputStream.writeBoolean(this.isPlaying);
 	        if(this.oldRecord == null) outputStream.writeBoolean(false);
 	        else{
@@ -275,8 +278,8 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 	        outputStream.writeInt(this.maxLoopTime);
 	        outputStream.writeBoolean(this.loop);
 	        outputStream.writeBoolean(this.autoFill);
-	        FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10.0D);
+	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+		    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
 		    this.getDescriptionPacket();
 		    this.markDirty();
@@ -314,12 +317,12 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 			nbt.setString("CustomName", this.localizedName);
 		}
 		
-	 return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 2, nbt);
+	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
 	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
-	 readFromNBT(packet.func_148857_g());
+	 readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
@@ -333,20 +336,21 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 	 * rest = sides
 	 */
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
+	public int[] getSlotsForFace(EnumFacing side) {
 		return slots_accessable;
 	}
 
 	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		return isItemValidForSlot(i, itemstack);
+	public boolean canInsertItem(int index, ItemStack itemstack, EnumFacing i) {
+		return isItemValidForSlot(i.getIndex(), itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
 		return i==2 ? true : false;
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbt){
 		super.writeToNBT(nbt);
 		
@@ -372,23 +376,53 @@ public class TileEntityVoidBox extends TileEntity implements ISidedInventory{
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
 		
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

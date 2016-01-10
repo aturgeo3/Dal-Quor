@@ -1,7 +1,6 @@
 package Tamaized.Voidcraft.mobs.ai.handler;
 
-import net.minecraft.tileentity.TileEntity;
-import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
+import net.minecraft.util.BlockPos;
 
 public interface IHandlerAI {
 	
@@ -9,7 +8,7 @@ public interface IHandlerAI {
 	
 	public void update();
 	
-	public void removeTileEntity(int[] i);
+	public void removeTileEntity(BlockPos pos);
 
 	public void kill();
 

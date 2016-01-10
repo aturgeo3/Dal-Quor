@@ -15,21 +15,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.machina.addons.InfuserRecipes;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory, IFluidHandler{
+public class TileEntityVoidInfuser extends TileEntity implements IUpdatePlayerListBox, ISidedInventory, IFluidHandler{
 	
 	private String localizedName;
 	
@@ -152,13 +155,12 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false: entityplayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(pos) != this ? false: entityplayer.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	
-	
-	public void updateEntity(){
-		
+	@Override
+	public void update(){
 		
 		if(this.burnTime > 3000) this.currentItemBurnTime = this.burnTime = 3000;
 		if(this.burnTime < 0) this.currentItemBurnTime = this.burnTime = 0;
@@ -179,7 +181,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 				if(getItemBurnTime(this.slots[1]) > 0){
 					flag1 = true;
 					
-					fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, getItemBurnTime(this.slots[1])), true);
+					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, getItemBurnTime(this.slots[1])), true);
 					this.currentItemBurnTime = this.burnTime = voidTank.getFluidAmount();
 					
 					if(this.slots[1] != null){
@@ -225,18 +227,18 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 		DataOutputStream outputStream = new DataOutputStream(bos);
 	    try {
 	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_TE_UPDATE);
-	        outputStream.writeInt(this.xCoord);
-	        outputStream.writeInt(this.yCoord);
-	        outputStream.writeInt(this.zCoord);
+	        outputStream.writeInt(this.pos.getX());
+	        outputStream.writeInt(this.pos.getY());
+	        outputStream.writeInt(this.pos.getZ());
 	        outputStream.writeInt(this.burnTime);
 	        outputStream.writeInt(this.cookTime);
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
 	    }
 	               
-	    FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+	    FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 
-	    TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10.0D);
+	    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
 	    //if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
 	    this.getDescriptionPacket();
@@ -276,13 +278,13 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 			nbt.setString("CustomName", this.localizedName);
 		}
 		
-	 return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 2, nbt);
+	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
 	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet)
 	{
-	 readFromNBT(packet.func_148857_g());
+	 readFromNBT(packet.getNbtCompound());
 	}
 
 	private void smeltItem() {
@@ -350,18 +352,18 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
+	public int[] getSlotsForFace(EnumFacing var1) {
 		return slots_all;
 	}
 
 	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+	public boolean canInsertItem(int i, ItemStack itemstack, EnumFacing j) {
 		return this.isItemValidForSlot(i, itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return j != 0 || i != 1 || itemstack == new ItemStack(Items.bucket);
+	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
+		return j.getIndex() != 0 || i != 1 || itemstack == new ItemStack(Items.bucket);
 	}
 
 	public int getBurnTimeRemainingScaled(int i) {
@@ -376,7 +378,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 	
 	
-	
+	@Override
 	public void writeToNBT(NBTTagCompound nbt){
 		super.writeToNBT(nbt);
 		
@@ -403,7 +405,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+	public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
 		if(voidTank.fill(resource, false) > 0){
 			this.burnTime += resource.amount;
 		}
@@ -411,7 +413,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
 		
 		
 		
@@ -427,7 +429,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
 		
 		//if(this.burnTime > 0 && voidTank.getFluidAmount() > 0){
 		//	this.burnTime-=maxDrain;
@@ -442,7 +444,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 		}
 	}
 	
-	public int doDrain(ForgeDirection from, int maxDrain, boolean doDrain){
+	public int doDrain(EnumFacing from, int maxDrain, boolean doDrain){
 		FluidStack retF = drain(from, maxDrain, doDrain);
 		
 		int retI = 0;
@@ -454,7 +456,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(EnumFacing from, Fluid fluid) {
 		if (voidTank.getFluid() == null)
 		{
 			return true;
@@ -464,7 +466,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(EnumFacing from, Fluid fluid) {
 		if (voidTank.getFluid() == null)
 		{
 			return false;
@@ -474,31 +476,61 @@ public class TileEntityVoidInfuser extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(EnumFacing from) {
 		return new FluidTankInfo[] {new FluidTankInfo(voidTank.getFluid(), voidTank.getCapacity())};
 	}
 
 	@Override
-	public void closeInventory() {
+	public void openInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getInventoryName() {
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
+	public IChatComponent getDisplayName() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 }

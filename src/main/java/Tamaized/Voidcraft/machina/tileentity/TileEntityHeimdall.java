@@ -15,21 +15,24 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
-import Tamaized.Voidcraft.machina.addons.InfuserRecipes;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
-public class TileEntityHeimdall extends TileEntity implements ISidedInventory, IFluidHandler{
+public class TileEntityHeimdall extends TileEntity implements IUpdatePlayerListBox, ISidedInventory, IFluidHandler{
 	
 	private String localizedName;
 	
@@ -151,21 +154,21 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false: entityplayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(pos) != this ? false: entityplayer.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	
-	
-	public void updateEntity(){
+	@Override
+	public void update(){
 		//Ensure min and max are never passed
 		if(this.burnTime > 10000) this.currentItemBurnTime = this.burnTime = 10000;
 		if(this.burnTime < 0) this.currentItemBurnTime = this.burnTime = 0;
 		
 		//Generate Fluid
 		if(this.burnTime < 10000){
-			int rand = (int) Math.floor(Math.random()*this.yCoord);
+			int rand = (int) Math.floor(Math.random()*this.pos.getY());
 			if(rand == 0){
-				fill(ForgeDirection.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, 1), true);
+				fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, 1), true);
 			}
 		}
 		
@@ -190,7 +193,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 					TileEntityVoidInfuser tevi = null;
 					if(this.burnTime > 0){
 						if(i==0){
-							te = this.worldObj.getTileEntity(xCoord+1, yCoord, zCoord);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ()));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -211,7 +214,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						}
 					
 						if(i==1){
-							te = this.worldObj.getTileEntity(xCoord-1, yCoord, zCoord);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ()));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -233,7 +236,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						}
 						
 						if(i==2){
-							te = this.worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -254,7 +257,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						}
 					
 						if(i==3){
-							te = this.worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ()));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -275,7 +278,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						}
 					
 						if(i==4){
-							te = this.worldObj.getTileEntity(xCoord, yCoord, zCoord+1);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -297,7 +300,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 						}
 					
 						if(i==5){
-							te = this.worldObj.getTileEntity(xCoord, yCoord, zCoord-1);
+							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1));
 						
 							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
@@ -332,18 +335,18 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 		DataOutputStream outputStream = new DataOutputStream(bos);
 	    try {
 	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_TE_UPDATE);
-	        outputStream.writeInt(this.xCoord);
-	        outputStream.writeInt(this.yCoord);
-	        outputStream.writeInt(this.zCoord);
+	        outputStream.writeInt(this.pos.getX());
+	        outputStream.writeInt(this.pos.getY());
+	        outputStream.writeInt(this.pos.getZ());
 	        outputStream.writeInt(this.burnTime);
 	        outputStream.writeInt(this.cookTime);
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
 	    }
 	               
-	    FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+	    FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 
-	    TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 10.0D);
+	    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
 	    //if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
 	    this.getDescriptionPacket();
@@ -383,13 +386,13 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 			nbt.setString("CustomName", this.localizedName);
 		}
 		
-	 return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 2, nbt);
+	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
 	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet)
 	{
-	 readFromNBT(packet.func_148857_g());
+	 readFromNBT(packet.getNbtCompound());
 	}
 
 
@@ -424,18 +427,18 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		return var1 == 0 ? slot : (var1 == 1 ? slot : slot);
+	public int[] getSlotsForFace(EnumFacing side) {
+		return side.getIndex() == 0 ? slot : (side.getIndex() == 1 ? slot : slot);
 	}
 
 	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+	public boolean canInsertItem(int i, ItemStack itemstack, EnumFacing j) {
 		return this.isItemValidForSlot(i, itemstack);
 	}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return j != 0 || i != 1 || itemstack == new ItemStack(Items.bucket);
+	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
+		return j.getIndex() != 0 || i != 1 || itemstack == new ItemStack(Items.bucket);
 	}
 
 	public int getBurnTimeRemainingScaled(int i) {
@@ -477,7 +480,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+	public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
 		if(voidTank.fill(resource, false) > 0){
 			this.burnTime += resource.amount;
 		}
@@ -486,7 +489,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
 		
 		
 		
@@ -502,7 +505,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
 		
 		if(this.burnTime > 0 && voidTank.getFluidAmount() > 0){
 			this.burnTime-=maxDrain;
@@ -512,7 +515,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(EnumFacing from, Fluid fluid) {
 		if (voidTank.getFluid() == null)
 		{
 			return true;
@@ -522,7 +525,7 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(EnumFacing from, Fluid fluid) {
 		if (voidTank.getFluid() == null)
 		{
 			return false;
@@ -532,32 +535,62 @@ public class TileEntityHeimdall extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(EnumFacing from) {
 		return new FluidTankInfo[] {new FluidTankInfo(voidTank.getFluid(), voidTank.getCapacity())};
 	}
 
 	@Override
-	public void closeInventory() {
+	public void openInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getInventoryName() {
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openInventory() {
+	public IChatComponent getDisplayName() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	

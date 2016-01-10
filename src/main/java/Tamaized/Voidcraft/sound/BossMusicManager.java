@@ -3,13 +3,14 @@ package Tamaized.Voidcraft.sound;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import cpw.mods.fml.relauncher.Side;
 
 public class BossMusicManager {
 	
@@ -48,7 +49,7 @@ public class BossMusicManager {
 			loop = l;
 			item = itemStack;
 			if(loop && itemStack.getItem() instanceof VoidRecord) tick = (((VoidRecord) itemStack.getItem()).getTime()*20)-1;
-			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, location[0], location[1], location[2], Item.getIdFromItem(itemStack.getItem()));
+			worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, new BlockPos(location[0], location[1], location[2]), Item.getIdFromItem(itemStack.getItem()));
 			isPlaying = true;
 		}else{
 			System.out.println("NULL SLOT DETECTED");
@@ -62,7 +63,7 @@ public class BossMusicManager {
      */
 	public static void StopTheSound(){
 		if(!isPlaying) return;
-		worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, location[0], location[1], location[2], 0);
+		worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, new BlockPos(location[0], location[1], location[2]), 0);
 		isPlaying = false;
 		boss = null;
 	}

@@ -6,26 +6,23 @@ import io.netty.buffer.Unpooled;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-import Tamaized.Voidcraft.blocks.AIBlock;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
-import Tamaized.Voidcraft.machina.addons.VoidTank;
 import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAIBlock extends TileEntity {
+public class TileEntityAIBlock extends TileEntity implements IUpdatePlayerListBox{
 	
 	public EntityAIHandler aiHandler;
 	public IHandlerAI ai;
@@ -45,25 +42,27 @@ public class TileEntityAIBlock extends TileEntity {
 		if(aiHandler != null && aiHandler.getEntity() instanceof EntityMobHerobrine && state < 3) state++;
 		if(state > 2){
 			((EntityMobHerobrine) aiHandler.getEntity()).doDamage(20);
-			ai.removeTileEntity(new int[]{xCoord, yCoord, zCoord});
-			this.worldObj.setBlockToAir(xCoord, yCoord+2, zCoord);
-			this.worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-			this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			this.worldObj.removeTileEntity(xCoord, yCoord, zCoord);
+			ai.removeTileEntity(pos);
+			this.worldObj.setBlockToAir(pos.add(0, 2, 0));
+			this.worldObj.setBlockToAir(pos.add(0, 1, 0));
+			this.worldObj.setBlockToAir(pos);
+			this.worldObj.removeTileEntity(pos);
 		}
 	}
 	
-	public void updateEntity(){
+	@Override
+	public void update(){
 		if(!this.worldObj.isRemote){
 			if(aiHandler == null || ai == null || !keep){
-				this.worldObj.setBlockToAir(xCoord, yCoord+2, zCoord);
-				this.worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
-				this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-				this.worldObj.removeTileEntity(xCoord, yCoord, zCoord);
+				this.worldObj.setBlockToAir(pos.add(0, 2, 0));
+				this.worldObj.setBlockToAir(pos.add(0, 1, 0));
+				this.worldObj.setBlockToAir(pos);
+				this.worldObj.removeTileEntity(pos);
 			}else{
 				for(int i=0; i<3; i++){
-					if(this.worldObj.getBlockMetadata(xCoord, yCoord+i, zCoord) != state){
-						this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord+i, zCoord, state, 2);
+					IBlockState Bstate = this.worldObj.getBlockState(pos.add(0, i, 0));
+					if(Bstate.getBlock().getMetaFromState(Bstate) != state){
+						worldObj.setBlockState(pos.add(0, i, 0), Bstate.getBlock().getStateFromMeta(state), 2);
 					}
 				}
 			}
@@ -79,12 +78,12 @@ public class TileEntityAIBlock extends TileEntity {
 		DataOutputStream outputStream = new DataOutputStream(bos);
 	    try {
 	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_TE_UPDATE);
-	        outputStream.writeInt(this.xCoord);
-	        outputStream.writeInt(this.yCoord);
-	        outputStream.writeInt(this.zCoord);
+	        outputStream.writeInt(this.pos.getX());
+	        outputStream.writeInt(this.pos.getY());
+	        outputStream.writeInt(this.pos.getZ());
 	        outputStream.writeInt(this.state);
-	        FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 50.0D);
+	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+		    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 50.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
 		    this.getDescriptionPacket();
 		    this.markDirty();
@@ -100,12 +99,12 @@ public class TileEntityAIBlock extends TileEntity {
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeToNBT(nbt);
 		nbt.setInteger("state", state);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 2, nbt);
+		return new S35PacketUpdateTileEntity(pos, 2, nbt);
 	}
 	
 	@Override
 	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
-		readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.getNbtCompound());
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt){
