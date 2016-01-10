@@ -1,16 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import java.util.ArrayList;
 
-import net.minecraft.item.Item;
-import cpw.mods.fml.common.registry.GameRegistry;
-import Tamaized.Voidcraft.Addons.thaumcraft.Spells.SpellAcid;
-import Tamaized.Voidcraft.Addons.thaumcraft.Spells.VoidSpellFocus;
-import Tamaized.Voidcraft.Addons.thaumcraft.items.ItemCorruptedSword;
-import Tamaized.Voidcraft.common.voidCraft;
-import thaumcraft.api.ThaumcraftApi;
-
-public class VoidCraftSpells {
+public class VoidCraftSpells {/*
 	
 	private ThaumcraftApi instance;
 	
@@ -31,5 +22,5 @@ public class VoidCraftSpells {
 	public void postInit(){
 		
 	}
-
+*/
 }

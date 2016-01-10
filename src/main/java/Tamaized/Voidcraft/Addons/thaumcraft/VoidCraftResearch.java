@@ -1,12 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import net.minecraft.util.ResourceLocation;
-import thaumcraft.api.research.ResearchCategories;
-import Tamaized.Voidcraft.Addons.thaumcraft.Research.AcidFociResearch;
-import Tamaized.Voidcraft.Addons.thaumcraft.Research.CorruptedSwordResearch;
-import Tamaized.Voidcraft.Addons.thaumcraft.Research.VoidCrystalResearch;
 
-public class VoidCraftResearch {
+public class VoidCraftResearch {/*
 	
 	private VoidCraftThaumRecipes recipes;
 	
@@ -21,5 +16,5 @@ public class VoidCraftResearch {
 		ResearchCategories.addResearch(new CorruptedSwordResearch(recipes));
 		ResearchCategories.addResearch(new AcidFociResearch(recipes));
 	}
-
+*/
 }

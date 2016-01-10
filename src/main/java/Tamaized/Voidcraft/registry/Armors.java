@@ -1,12 +1,12 @@
 package Tamaized.Voidcraft.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import Tamaized.Voidcraft.armor.DemonArmor;
 import Tamaized.Voidcraft.armor.VoidArmor;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import Tamaized.Voidcraft.common.voidCraft;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class Armors extends RegistryBase {
 

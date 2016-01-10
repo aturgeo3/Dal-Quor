@@ -166,7 +166,7 @@ public class voidCraft {
 		if (Loader.isModLoaded("Thaumcraft")) {
 			logger.info("Thaumcraft Detected. Attempting to load API");
 			try {
-				thaumcraftIntegration = new VoidCraftThaum();
+				//thaumcraftIntegration = new VoidCraftThaum();
 				logger.info("Loaded ThaumcraftAPI into VoidCraft");
 			}catch (Exception e1) {
 				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
@@ -174,7 +174,7 @@ public class voidCraft {
 			}
 		}
 		
-		if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
+		//if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
 		
 	}
 
@@ -260,7 +260,7 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
 		
-		if(thaumcraftIntegration != null) thaumcraftIntegration.init();
+		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 	}
 
 	@EventHandler
@@ -278,6 +278,6 @@ public class voidCraft {
 		proxy.registerMISC();
 		proxy.registerAchievements();
 
-		if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
+		//if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 	}
 }

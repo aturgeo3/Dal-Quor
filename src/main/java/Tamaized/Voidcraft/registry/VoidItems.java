@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.registry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.items.BasicVoidItems;
@@ -11,7 +12,6 @@ import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
 import Tamaized.Voidcraft.items.VoidStar;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidItems extends RegistryBase {
 
@@ -41,30 +41,30 @@ public class VoidItems extends RegistryBase {
 
 	@Override
 	public void preInit() {
-		voidBurner = new VoidBurner().setUnlocalizedName("voidBurner").setCreativeTab(voidCraft.tabs.tabVoid).setTextureName("VoidCraft:voidBurner");
-		ectoplasm = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ectoplasm").setTextureName("VoidCraft:ectoplasm");
-		voidcrystal = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidcrystal").setTextureName("VoidCraft:voidcrystal");
-		voidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidChain").setTextureName("VoidCraft:voidChain");
-		MoltenvoidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChain").setTextureName("VoidCraft:MoltenvoidChain");
-		MoltenvoidChainPart = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChainPart").setTextureName("VoidCraft:MoltenvoidChainPart");
-		burnBone = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("burnBone").setTextureName("VoidCraft:Bone");
-		voidStar = new VoidStar().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidStar").setTextureName("VoidCraft:voidStar");
-		ChainedSkull = new ChainedSkull().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ChainedSkull").setTextureName("VoidCraft:ChainedSkull");
-		voidCloth = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCloth").setTextureName("VoidCraft:voidCloth");
-		voidCrystalBucket = new BasicVoidItems().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCrystalBucket").setTextureName("VoidCraft:voidCrystalBucket");
+		voidBurner = new VoidBurner().setUnlocalizedName("voidBurner").setCreativeTab(voidCraft.tabs.tabVoid);
+		ectoplasm = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ectoplasm");
+		voidcrystal = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidcrystal");
+		voidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidChain");
+		MoltenvoidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChain");
+		MoltenvoidChainPart = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChainPart");
+		burnBone = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("burnBone");
+		voidStar = new VoidStar().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidStar");
+		ChainedSkull = new ChainedSkull().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ChainedSkull");
+		voidCloth = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCloth");
+		voidCrystalBucket = new BasicVoidItems().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCrystalBucket");
 	
 		// dust
-		ironDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ironDust").setTextureName("voidCraft:itemDustIron");
-		goldDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("goldDust").setTextureName("voidCraft:itemDustGold");
-		diamondDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("diamondDust").setTextureName("voidCraft:itemDustDiamond");
-		coalDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("coalDust").setTextureName("voidCraft:itemDustCoal");
-		copperDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("copperDust").setTextureName("voidCraft:itemDustCopper");
-		tinDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("tinDust").setTextureName("voidCraft:itemDustTin");
-		leadDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("leadDust").setTextureName("voidCraft:itemDustLead");
-		quartzDust = new BasicVoidItems().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("quartzDust").setTextureName("voidCraft:itemDustQuartz");
+		ironDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ironDust");
+		goldDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("goldDust");
+		diamondDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("diamondDust");
+		coalDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("coalDust");
+		copperDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("copperDust");
+		tinDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("tinDust");
+		leadDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("leadDust");
+		quartzDust = new BasicVoidItems().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("quartzDust");
 
-		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("debugger").setTextureName("voidCraft:debug");
-		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("hookShot").setTextureName("voidCraft:HookShot_uncast");
+		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("debugger");
+		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("hookShot");
 	}
 
 	@Override

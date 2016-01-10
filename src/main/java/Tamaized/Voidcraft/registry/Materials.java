@@ -26,9 +26,9 @@ public class Materials extends RegistryBase{
 		ArchTools = EnumHelper.addToolMaterial("burnBone", 7, 10000, 45.0F, 12.0F, 30);
 		DemonTools = EnumHelper.addToolMaterial("voidStar", 8, 12000, 50.0F, 13.0F, 30);
 		
-		voidArmor = EnumHelper.addArmorMaterial("Void", 120, new int[] {4, 8, 6, 4}, 30); //22
-		demonArmor = EnumHelper.addArmorMaterial("Demon", 240, new int[] {4, 10, 6, 4}, 30); //24
-		xiaArmor = EnumHelper.addArmorMaterial("Xia", 480, new int[] {1, 10, 1, 1}, 30);
+		voidArmor = EnumHelper.addArmorMaterial("Void", "", 120, new int[] {4, 8, 6, 4}, 30); //22
+		demonArmor = EnumHelper.addArmorMaterial("Demon", "", 240, new int[] {4, 10, 6, 4}, 30); //24
+		xiaArmor = EnumHelper.addArmorMaterial("Xia", "", 480, new int[] {1, 10, 1, 1}, 30);
 	}
 
 	@Override

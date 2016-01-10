@@ -1,21 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import thaumcraft.api.ItemApi;
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.ShapedArcaneRecipe;
-import thaumcraft.api.crafting.ShapelessArcaneRecipe;
-import thaumcraft.common.Thaumcraft;
-import Tamaized.Voidcraft.common.voidCraft;
-
-public class VoidCraftThaumRecipes {
+public class VoidCraftThaumRecipes {/*
 
 	private ThaumcraftApi instance;
 	
@@ -33,5 +19,5 @@ public class VoidCraftThaumRecipes {
 		
 		listCrucible.put("vc.CorruptedSword", instance.addCrucibleRecipe("vc.CorruptedSword", new ItemStack(voidCraft.thaumcraftIntegration.items.corruptedSword), new ItemStack(voidCraft.tools.voidSword), new AspectList().add(Aspect.ENTROPY, 24).add(Aspect.TAINT, 12)));
 	}
-
+*/
 }

@@ -1,10 +1,10 @@
 package Tamaized.Voidcraft.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.tools.VoidAxe;
 import Tamaized.Voidcraft.tools.VoidHoe;
 import Tamaized.Voidcraft.tools.VoidPickaxe;
@@ -37,24 +37,24 @@ public class Tools extends RegistryBase {
 	public void preInit() {
 		// Tools
 		// void
-		voidPickaxe = new VoidPickaxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidPickaxe").setTextureName("VoidCraft:voidcrystal_Pickaxe");
-		voidSpade = new VoidSpade(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidShovel").setTextureName("VoidCraft:voidcrystal_Shovel");
-		voidAxe = new VoidAxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidAxe").setTextureName("VoidCraft:voidcrystal_Axe");
-		voidSword = new VoidSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidSword").setTextureName("VoidCraft:voidcrystal_Sword");
-		voidHoe = new VoidHoe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidHoe").setTextureName("VoidCraft:voidcrystal_Hoe");
+		voidPickaxe = new VoidPickaxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidPickaxe");
+		voidSpade = new VoidSpade(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidShovel");
+		voidAxe = new VoidAxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidAxe");
+		voidSword = new VoidSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidSword");
+		voidHoe = new VoidHoe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidHoe");
 
 		// spectre
-		angelicSword = new angelicSword(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("angelicSword").setTextureName("VoidCraft:angelicSword");
-		spectrePickaxe = new spectrePickaxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectrePickaxe").setTextureName("VoidCraft:spectre_Pickaxe");
-		spectreAxe = new spectreAxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectreAxe").setTextureName("VoidCraft:spectre_Axe");
+		angelicSword = new angelicSword(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("angelicSword");
+		spectrePickaxe = new spectrePickaxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectrePickaxe");
+		spectreAxe = new spectreAxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectreAxe");
 		// chain
-		chainSword = new chainSword(voidCraft.materials.chainTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("chainSword").setTextureName("VoidCraft:bindSword");
+		chainSword = new chainSword(voidCraft.materials.chainTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("chainSword");
 		// molten
-		moltenSword = new moltenSword(voidCraft.materials.MoltenTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("moltenSword").setTextureName("VoidCraft:moltenVoidSword");
+		moltenSword = new moltenSword(voidCraft.materials.MoltenTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("moltenSword");
 		// arch
-		archSword = new archSword(voidCraft.materials.ArchTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("archSword").setTextureName("VoidCraft:archAngelicSword");
+		archSword = new archSword(voidCraft.materials.ArchTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("archSword");
 		// demon
-		demonSword = new demonSword(voidCraft.materials.DemonTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("demonSword").setTextureName("VoidCraft:demonSword");
+		demonSword = new demonSword(voidCraft.materials.DemonTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("demonSword");
 	}
 
 	@Override

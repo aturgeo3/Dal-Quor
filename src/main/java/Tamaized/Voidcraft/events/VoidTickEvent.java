@@ -6,25 +6,25 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.network.play.server.S1DPacketEntityEffect;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class VoidTickEvent {
 	
@@ -50,7 +50,7 @@ public class VoidTickEvent {
 		if(data.get(e.player.getGameProfile().getId()) != null){
 			
 			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
-			Block block = e.player.worldObj.getBlock(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.yOffset) + 1, MathHelper.floor_double(e.player.posZ));
+			Block block = e.player.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()) + 1, MathHelper.floor_double(e.player.posZ))).getBlock();
 			float j = data.get(e.player.getGameProfile().getId()).tick;
 			if(j <= 0){
 				if(data.get(e.player.getGameProfile().getId()).type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid){
@@ -78,7 +78,7 @@ public class VoidTickEvent {
 				//System.out.println(e.player);
 				if (e.player instanceof EntityPlayerMP){
 		            teleport((EntityPlayerMP) e.player);
-		        }else if(e.player instanceof EntityClientPlayerMP){
+		        }else if(e.player instanceof EntityOtherPlayerMP){
 		        	//Client Side do nothing
 		        }else{
 		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
@@ -116,7 +116,7 @@ public class VoidTickEvent {
 		WorldServer worldserver = mcServer.worldServerForDimension(p_72356_1_.dimension);
 		p_72356_1_.dimension = p_72356_2_;
 		WorldServer worldserver1 = mcServer.worldServerForDimension(p_72356_1_.dimension);
-		p_72356_1_.playerNetServerHandler.sendPacket(new S07PacketRespawn(p_72356_1_.dimension, worldserver1.difficultySetting, worldserver1.getWorldInfo().getTerrainType(), p_72356_1_.theItemInWorldManager.getGameType())); // Forge: Use new dimensions information
+		p_72356_1_.playerNetServerHandler.sendPacket(new S07PacketRespawn(p_72356_1_.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), p_72356_1_.theItemInWorldManager.getGameType())); // Forge: Use new dimensions information
 		worldserver.removePlayerEntityDangerously(p_72356_1_);
 		p_72356_1_.isDead = false;
 		transferEntityToWorld(p_72356_1_, j, worldserver, worldserver1, teleporter);
@@ -152,7 +152,7 @@ public class VoidTickEvent {
 
         if (p_82448_1_.isEntityAlive()){
         	p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-        	teleporter.placeInPortal(p_82448_1_, d3, d4, d5, f);
+        	teleporter.placeInPortal(p_82448_1_, f);
         	p_82448_4_.spawnEntityInWorld(p_82448_1_);
         	p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
         }

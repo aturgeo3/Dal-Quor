@@ -12,11 +12,11 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.fluid.BlockVoidFluid;
 import Tamaized.Voidcraft.handlers.BucketHandler;
 import Tamaized.Voidcraft.items.ItemVoidCraftBucket;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class VoidFluids extends RegistryBase {
 
@@ -36,8 +36,8 @@ public class VoidFluids extends RegistryBase {
 		// -This has to be here for Fluids
 		FluidRegistry.registerFluid(fluidVoid);
 		// +This here must be last
-		blockVoidFluid = new BlockVoidFluid(fluidVoid, Material.water).setDensity(-400).setBlockName("fluidVoid").setBlockTextureName("VoidCraft:voidFluid");
-		voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid).setTextureName("VoidCraft:voidBucket");
+		blockVoidFluid = new BlockVoidFluid(fluidVoid, Material.water).setDensity(-400);
+		voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid);
 		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluidVoid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(voidBucket), new ItemStack(Items.bucket)));
 		BucketHandler.INSTANCE.buckets.put(blockVoidFluid, voidBucket);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);

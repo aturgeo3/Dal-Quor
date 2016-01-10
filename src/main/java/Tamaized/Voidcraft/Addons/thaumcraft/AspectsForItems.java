@@ -1,12 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import net.minecraft.item.ItemStack;
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import Tamaized.Voidcraft.common.voidCraft;
 
-public class AspectsForItems {
+public class AspectsForItems {/*
 	
 	private ThaumcraftApi instance;
 	
@@ -70,5 +65,5 @@ public class AspectsForItems {
 		daAspectList.add(aspects.DARKNESS, 4);
 		instance.registerObjectTag(new ItemStack(voidCraft.items.voidStar), daAspectList);
 	}
-
+*/
 }

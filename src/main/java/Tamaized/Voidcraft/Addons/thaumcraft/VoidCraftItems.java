@@ -1,13 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import Tamaized.Voidcraft.Addons.thaumcraft.items.ItemCorruptedSword;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.tools.angelicSword;
-import net.minecraft.item.Item;
-import thaumcraft.api.ThaumcraftApi;
 
-public class VoidCraftItems {
+public class VoidCraftItems {/*
 	
 	private ThaumcraftApi instance;
 	
@@ -28,5 +22,5 @@ public class VoidCraftItems {
 	public void postInit(){
 		
 	}
-	
+	*/
 }

@@ -1,8 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft;
 
-import thaumcraft.api.ThaumcraftApi;
 
-public class VoidCraftThaum{
+public class VoidCraftThaum{/*
 	
 	private ThaumcraftApi instance;
 	public AspectsForItems aspects;
@@ -44,5 +43,5 @@ public class VoidCraftThaum{
 		aspects.register();
 		research.register();
 	}
-	
+	*/
 }

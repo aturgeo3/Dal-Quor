@@ -43,14 +43,6 @@ public class VoidRecord extends ItemRecord {
 		return time;
 	}
 
-	@SideOnly(Side.CLIENT)
-	/**
-	 * Gets an icon index based on an item's damage value
-	 */
-	public IIcon getIconFromDamage(int par1) {
-		return this.itemIcon;
-	}
-
 	/**
 	 * Callback for item usage. If the item does something special on right
 	 * clicking, he will have one of those. Return True if something happen and
@@ -87,7 +79,7 @@ public class VoidRecord extends ItemRecord {
 	 * Return an item rarity from EnumRarity
 	 */
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		return EnumRarity.rare;
+		return EnumRarity.RARE;
 	}
 
 	@SideOnly(Side.CLIENT)
