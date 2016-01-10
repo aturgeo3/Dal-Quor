@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,13 +18,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VoidChain extends EntityArrow implements IProjectile{
 	
@@ -58,7 +61,6 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	        this.renderDistanceWeight = 10.0D;
 	        this.setSize(0.5F, 0.5F);
 	        this.setPosition(par2, par4, par6);
-	        this.yOffset = 0.0F;
 	    }
 
 	    public VoidChain(World par1World, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase, float par4, float par5)
@@ -74,7 +76,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 
 	        this.posY = par2EntityLivingBase.posY + (double)par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
 	        double d0 = par3EntityLivingBase.posX - par2EntityLivingBase.posX;
-	        double d1 = par3EntityLivingBase.boundingBox.minY + (double)(par3EntityLivingBase.height / 3.0F) - this.posY;
+	        double d1 = par3EntityLivingBase.getBoundingBox().minY + (double)(par3EntityLivingBase.height / 3.0F) - this.posY;
 	        double d2 = par3EntityLivingBase.posZ - par2EntityLivingBase.posZ;
 	        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
@@ -85,7 +87,6 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	            double d4 = d0 / d3;
 	            double d5 = d2 / d3;
 	            this.setLocationAndAngles(par2EntityLivingBase.posX + d4, this.posY, par2EntityLivingBase.posZ + d5, f2, f3);
-	            this.yOffset = 0.0F;
 	            float f4 = (float)d3 * 0.2F;
 	            this.setThrowableHeading(d0, d1 + (double)f4, d2, par4, par5);
 	        }
@@ -108,7 +109,6 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	        this.posY -= 0.10000000149011612D;
 	        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
 	        this.setPosition(this.posX, this.posY, this.posZ);
-	        this.yOffset = 0.0F;
 	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
 	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
 	        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
@@ -195,14 +195,14 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0D / Math.PI);
 	        }
 
-	        Block block = this.worldObj.getBlock(this.field_145791_d, this.field_145792_e, this.field_145789_f);
+	        Block block = this.worldObj.getBlockState(new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f)).getBlock();
 
 	        if (block.getMaterial() != Material.air)
 	        {
-	            block.setBlockBoundsBasedOnState(this.worldObj, this.field_145791_d, this.field_145792_e, this.field_145789_f);
-	            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.field_145791_d, this.field_145792_e, this.field_145789_f);
+	            block.setBlockBoundsBasedOnState(this.worldObj, new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f));
+	            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(this.worldObj, new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f), worldObj.getBlockState(new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f)));
 
-	            if (axisalignedbb != null && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
+	            if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3(this.posX, this.posY, this.posZ)))
 	            {
 	                this.inGround = true;
 	            }
@@ -216,7 +216,8 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	        if (this.inGround)
 	        {
 	        	this.setDead();
-	            int j = this.worldObj.getBlockMetadata(this.field_145791_d, this.field_145792_e, this.field_145789_f);
+	        	IBlockState Bstate = this.worldObj.getBlockState(new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f));
+	            int j = Bstate.getBlock().getMetaFromState(Bstate);
 
 	            if (block == this.field_145790_g && j == this.inData)
 	            {
@@ -240,19 +241,19 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	        else
 	        {
 	            ++this.ticksInAir;
-	            Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-	            Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-	            MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
-	            vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-	            vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+	            Vec3 vec31 = new Vec3(this.posX, this.posY, this.posZ);
+	            Vec3 vec3 = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+	            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec31, vec3, false, true, false);
+	            vec31 = new Vec3(this.posX, this.posY, this.posZ);
+	            vec3 = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 	            if (movingobjectposition != null)
 	            {
-	                vec3 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+	                vec3 = new Vec3(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
 	            }
 
 	            Entity entity = null;
-	            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+	            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 	            double d0 = 0.0D;
 	            int i;
 	            float f1;
@@ -264,7 +265,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	                if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5))
 	                {
 	                    f1 = 0.3F;
-	                    AxisAlignedBB axisalignedbb1 = entity1.boundingBox.expand((double)f1, (double)f1, (double)f1);
+	                    AxisAlignedBB axisalignedbb1 = entity1.getBoundingBox().expand((double)f1, (double)f1, (double)f1);
 	                    MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
 	                    if (movingobjectposition1 != null)
@@ -378,11 +379,12 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	                }
 	                else
 	                {
-	                    this.field_145791_d = movingobjectposition.blockX;
-	                    this.field_145792_e = movingobjectposition.blockY;
-	                    this.field_145789_f = movingobjectposition.blockZ;
-	                    this.field_145790_g = this.worldObj.getBlock(this.field_145791_d, this.field_145792_e, this.field_145789_f);
-	                    this.inData = this.worldObj.getBlockMetadata(this.field_145791_d, this.field_145792_e, this.field_145789_f);
+	                    this.field_145791_d = movingobjectposition.getBlockPos().getX();
+	                    this.field_145792_e = movingobjectposition.getBlockPos().getY();
+	                    this.field_145789_f = movingobjectposition.getBlockPos().getZ();
+	                    IBlockState bState = this.worldObj.getBlockState(new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f));
+	                    this.field_145790_g = bState.getBlock();
+	                    this.inData = bState.getBlock().getMetaFromState(bState);
 	                    this.motionX = (double)((float)(movingobjectposition.hitVec.xCoord - this.posX));
 	                    this.motionY = (double)((float)(movingobjectposition.hitVec.yCoord - this.posY));
 	                    this.motionZ = (double)((float)(movingobjectposition.hitVec.zCoord - this.posZ));
@@ -397,7 +399,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 
 	                    if (this.field_145790_g.getMaterial() != Material.air)
 	                    {
-	                        this.field_145790_g.onEntityCollidedWithBlock(this.worldObj, this.field_145791_d, this.field_145792_e, this.field_145789_f, this);
+	                        this.field_145790_g.onEntityCollidedWithBlock(this.worldObj, new BlockPos(this.field_145791_d, this.field_145792_e, this.field_145789_f), this);
 	                    }
 	                }
 	            }
@@ -406,7 +408,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	            {
 	                for (i = 0; i < 4; ++i)
 	                {
-	                    this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double)i / 4.0D, this.posY + this.motionY * (double)i / 4.0D, this.posZ + this.motionZ * (double)i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+	                    this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)i / 4.0D, this.posY + this.motionY * (double)i / 4.0D, this.posZ + this.motionZ * (double)i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
 	                }
 	            }
 
@@ -446,7 +448,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	                for (int l = 0; l < 4; ++l)
 	                {
 	                    f4 = 0.25F;
-	                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f4, this.posY - this.motionY * (double)f4, this.posZ - this.motionZ * (double)f4, this.motionX, this.motionY, this.motionZ);
+	                    this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * (double)f4, this.posY - this.motionY * (double)f4, this.posZ - this.motionZ * (double)f4, this.motionX, this.motionY, this.motionZ);
 	                }
 
 	                f3 = 0.8F;
@@ -462,7 +464,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	            this.motionZ *= (double)f3;
 	            this.motionY -= (double)f1;
 	            this.setPosition(this.posX, this.posY, this.posZ);
-	            this.func_145775_I();
+	            this.doBlockCollisions();
 	        }
 	    }
 

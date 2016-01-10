@@ -3,20 +3,23 @@ package Tamaized.Voidcraft.items.entity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.items.HookShot;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityHookShot extends EntityFishHook implements IProjectile, IEntityAdditionalSpawnData  {
 
@@ -46,7 +49,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
         super(world);
         this.renderDistanceWeight = 10.0D;
         this.ignoreFrustumCheck = true;
-        field_146042_b = shootingEntity = player;
+        shootingEntity = player;
         lastItem = shootingEntity.inventory.currentItem;
         this.setSize(0.5F, 0.5F);
         this.setLocationAndAngles(player.posX, player.posY + (double)player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
@@ -54,7 +57,6 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
         this.posY -= 0.10000000149011612D;
         this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.yOffset = 0.0F;
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
@@ -91,7 +93,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
     		EntityPlayer player = e instanceof EntityPlayer ? (EntityPlayer) e : null;
     		this.setPosition(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
     		this.ignoreFrustumCheck = true;
-        	field_146042_b = shootingEntity = player;
+    		shootingEntity = player;
         	lastItem = shootingEntity == null ? null : shootingEntity.inventory.currentItem;
     	}catch(IndexOutOfBoundsException e){
     		//No Data was sent, just kill the entity
@@ -137,19 +139,22 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f) * 180.0D / Math.PI);
 		}
 
-		Block block = this.worldObj.getBlock(this.blockX, this.blockY, this.blockZ);
+		 Block block = this.worldObj.getBlockState(new BlockPos(this.blockX, this.blockY, this.blockZ)).getBlock();
 
-		if (block.getMaterial() != Material.air){ //Checks if we hit a block
-			block.setBlockBoundsBasedOnState(this.worldObj, this.blockX, this.blockY, this.blockZ);
-			AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, this.blockX, this.blockY, this.blockZ);
+	        if (block.getMaterial() != Material.air) //check if hit block
+	        {
+	        	block.setBlockBoundsBasedOnState(this.worldObj, new BlockPos(this.blockX, this.blockY, this.blockZ));
+	            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(this.worldObj, new BlockPos(this.blockX, this.blockY, this.blockZ), worldObj.getBlockState(new BlockPos(this.blockX, this.blockY, this.blockZ)));
 
-			if (axisalignedbb != null && axisalignedbb.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ))) {
-				this.inGround = true;
-			}
-		}
+	            if (axisalignedbb != null && axisalignedbb.isVecInside(new Vec3(this.posX, this.posY, this.posZ)))
+	            {
+	                this.inGround = true;
+	            }
+	        }
 
 		if (this.inGround){ 
-			int j = this.worldObj.getBlockMetadata(this.blockX, this.blockY, this.blockZ);
+			IBlockState Bstate = this.worldObj.getBlockState(new BlockPos(this.blockX, this.blockY, this.blockZ));
+        int j = Bstate.getBlock().getMetaFromState(Bstate);
 
 			if (block == this.inBlock && j == this.inBlockMeta) {
 				++this.ticksInGround;
@@ -160,7 +165,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 				//Do work here TODO
 				if (shootingEntity != null) {
 					int shootingEntityBlockX = MathHelper.floor_double(shootingEntity.posX);
-					int shootingEntityBlockY = MathHelper.floor_double(shootingEntity.boundingBox.minY)-1;
+					int shootingEntityBlockY = MathHelper.floor_double(shootingEntity.getBoundingBox().minY)-1;
 					int shootingEntityBlockZ = MathHelper.floor_double(shootingEntity.posZ);
 			    
 					if(shootingEntityBlockX-this.blockX > -3 && shootingEntityBlockX-this.blockX < 3){
@@ -200,24 +205,27 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			
 		} else { // Traveling
 			++this.ticksInAir;
-			Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
-			vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 vec31 = new Vec3(this.posX, this.posY, this.posZ);
+            Vec3 vec3 = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec31, vec3, false, true, false);
+            vec31 = new Vec3(this.posX, this.posY, this.posZ);
+            vec3 = new Vec3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
-			if (movingobjectposition != null) vec3 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+			if (movingobjectposition != null){
+                vec3 = new Vec3(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+			}
 
 			float f1;
             float f2;
             float f4;
 
 			if (movingobjectposition != null) {
-				this.blockX = movingobjectposition.blockX;
-				this.blockY = movingobjectposition.blockY;
-				this.blockZ = movingobjectposition.blockZ;
-				this.inBlock = this.worldObj.getBlock(this.blockX, this.blockY, this.blockZ);
-				this.inBlockMeta = this.worldObj.getBlockMetadata(this.blockX, this.blockY,this.blockZ);
+				this.blockX = movingobjectposition.getBlockPos().getX();
+				this.blockY = movingobjectposition.getBlockPos().getY();
+				this.blockZ = movingobjectposition.getBlockPos().getZ();
+                IBlockState bState = this.worldObj.getBlockState(new BlockPos(this.blockX, this.blockY, this.blockZ));
+                this.inBlock = bState.getBlock();
+				this.inBlockMeta = bState.getBlock().getMetaFromState(bState);
 				this.motionX = (double) ((float) (movingobjectposition.hitVec.xCoord - this.posX));
 				this.motionY = (double) ((float) (movingobjectposition.hitVec.yCoord - this.posY));
 				this.motionZ = (double) ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
@@ -227,7 +235,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 				this.posZ -= this.motionZ / (double) f2 * 0.05000000074505806D;
 				this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F)); // TODO
 				this.inGround = true;
-				if (this.inBlock.getMaterial() != Material.air) this.inBlock.onEntityCollidedWithBlock(this.worldObj, this.blockX, this.blockY, this.blockZ, this);
+				if (this.inBlock.getMaterial() != Material.air) this.inBlock.onEntityCollidedWithBlock(this.worldObj, new BlockPos(this.blockX, this.blockY, this.blockZ), this);
 			}
 		
 
@@ -261,7 +269,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			if (this.isInWater()) {
 				for (int l = 0; l < 4; ++l) {
 					f4 = 0.25F;
-					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double) f4, this.posY - this.motionY * (double) f4, this.posZ - this.motionZ * (double) f4, this.motionX, this.motionY, this.motionZ);
+					this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * (double) f4, this.posY - this.motionY * (double) f4, this.posZ - this.motionZ * (double) f4, this.motionX, this.motionY, this.motionZ);
 				}
 
 				f3 = 0.8F;
@@ -276,7 +284,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			this.motionZ *= (double) f3;
 			this.motionY -= (double) f1;
 			this.setPosition(this.posX, this.posY, this.posZ);
-			this.func_145775_I();
+            this.doBlockCollisions();
 		}
 	}
 	

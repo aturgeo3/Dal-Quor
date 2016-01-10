@@ -10,10 +10,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class HerobrineFireball extends EntityFireball {
 
@@ -40,9 +40,9 @@ public class HerobrineFireball extends EntityFireball {
             if (p_70227_1_.entityHit != null){
                 p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
             }else if(p_70227_1_.typeOfHit == MovingObjectType.BLOCK){
-            	Block b = worldObj.getBlock(p_70227_1_.blockX, p_70227_1_.blockY, p_70227_1_.blockZ);
+            	Block b = worldObj.getBlockState(p_70227_1_.getBlockPos()).getBlock();
             	if(b instanceof AIBlock){
-            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.blockX, p_70227_1_.blockY, p_70227_1_.blockZ);
+            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.getBlockPos().getX(), p_70227_1_.getBlockPos().getY(), p_70227_1_.getBlockPos().getZ());
             		if(te instanceof TileEntityAIBlock){
             			((TileEntityAIBlock) te).boom();
             		}
