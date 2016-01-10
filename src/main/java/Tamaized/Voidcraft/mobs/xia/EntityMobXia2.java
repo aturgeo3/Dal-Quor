@@ -4,13 +4,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidBossMob;
-import Tamaized.Voidcraft.mobs.EntityVoidMob;
 
 public class EntityMobXia2 extends EntityVoidBossMob{
 	
@@ -96,8 +95,8 @@ public class EntityMobXia2 extends EntityVoidBossMob{
         return null;
 }
 
-	public String getDisplayName() {
-		return "Xia";
+	public IChatComponent getDisplayName() {
+		return new ChatComponentText("Xia");
 	}
 
     

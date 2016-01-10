@@ -1,44 +1,7 @@
 package Tamaized.Voidcraft.Addons.NEI;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.machina.addons.InfuserRecipes;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
-import Tamaized.Voidcraft.GUI.client.voidInfuserGUI;
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiFurnace;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.ResourceLocation;
-import codechicken.nei.ItemList;
-import codechicken.nei.NEIClientUtils;
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.api.IOverlayHandler;
-import codechicken.nei.api.IRecipeOverlayRenderer;
-import codechicken.nei.recipe.FurnaceRecipeHandler;
-import codechicken.nei.recipe.GuiRecipe;
-import codechicken.nei.recipe.ICraftingHandler;
-import codechicken.nei.recipe.TemplateRecipeHandler;
-import codechicken.nei.recipe.FurnaceRecipeHandler.FuelPair;
-import codechicken.nei.recipe.FurnaceRecipeHandler.SmeltingPair;
-import codechicken.nei.recipe.TemplateRecipeHandler.CachedRecipe;
-import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
-
-public class VoidInfuserHandler extends TemplateRecipeHandler {
+public class VoidInfuserHandler {/*extends TemplateRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
@@ -182,5 +145,5 @@ public class VoidInfuserHandler extends TemplateRecipeHandler {
         return "Void Infuser";
     }
 	
-
+*/
 }

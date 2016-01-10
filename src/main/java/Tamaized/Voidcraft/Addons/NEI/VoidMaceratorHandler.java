@@ -1,33 +1,7 @@
 package Tamaized.Voidcraft.Addons.NEI;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import Tamaized.Voidcraft.GUI.client.voidMaceratorGUI;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.machina.addons.InfuserRecipes;
-import Tamaized.Voidcraft.machina.addons.MaceratorRecipes;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
-import codechicken.nei.ItemList;
-import codechicken.nei.NEIClientUtils;
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
-import codechicken.nei.recipe.TemplateRecipeHandler.RecipeTransferRect;
-
-public class VoidMaceratorHandler extends TemplateRecipeHandler {
+public class VoidMaceratorHandler{/* extends TemplateRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
@@ -168,5 +142,5 @@ public class VoidMaceratorHandler extends TemplateRecipeHandler {
         return "Void Macerator";
     }
 	
-
+*/
 }

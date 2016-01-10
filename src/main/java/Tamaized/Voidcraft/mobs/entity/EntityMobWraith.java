@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.mobs.entity;
 
+import com.google.common.base.Predicate;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -38,7 +40,7 @@ public class EntityMobWraith extends EntityVoidMob implements IMob{
     	 
          this.setSize(0.9F, 3.0F);
          
-         this.getNavigator().setBreakDoors(true);
+         //this.getNavigator().setBreakDoors(true);
          this.tasks.addTask(0, new EntityAISwimming(this));
          this.tasks.addTask(1, new EntityAIBreakDoor(this));
          this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
@@ -50,15 +52,20 @@ public class EntityMobWraith extends EntityVoidMob implements IMob{
          this.tasks.addTask(7, new EntityAILookIdle(this));
          this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
          
-         IEntitySelector ies = new IEntitySelector()
+         Predicate ies = new Predicate()
          {
              private static final String __OBFID = "CL_00001621";
              /**
               * Return whether the specified entity is applicable to this filter.
               */
-             public boolean isEntityApplicable(Entity p_82704_1_){
+             public boolean apply(Entity p_82704_1_)
+             {
             	 if(p_82704_1_ instanceof EntitySkeleton && Integer.valueOf(((EntitySkeleton)p_82704_1_).getDataWatcher().getWatchableObjectByte(13))==1) return false;
             	 else return true;
+             }
+             public boolean apply(Object p_apply_1_)
+             {
+                 return p_apply_1_ instanceof Entity ? this.apply((Entity)p_apply_1_) : false;
              }
          };
          

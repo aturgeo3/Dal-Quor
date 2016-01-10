@@ -1,13 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.Spells;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.wands.ItemFocusBasic;
 
-public abstract class VoidSpellFocus extends ItemFocusBasic {
+public abstract class VoidSpellFocus{/* extends ItemFocusBasic {
 
 	//public abstract void registerIcons(IIconRegister p_94581_1_);
 	
@@ -15,7 +9,7 @@ public abstract class VoidSpellFocus extends ItemFocusBasic {
 
 	/**
 	 * How much vis does this focus consume per activation.
-	 */
+	 /
 	public abstract AspectList getVisCost(ItemStack focusstack);
 	
 	public abstract boolean isVisCostPerTick(ItemStack focusstack);
@@ -33,5 +27,5 @@ public abstract class VoidSpellFocus extends ItemFocusBasic {
 	public abstract boolean onFocusBlockStartBreak(ItemStack wandstack, int x, int y,int z, EntityPlayer player);
 	
 	public abstract int getFocusColor(ItemStack focusstack);
-
+*/
 }

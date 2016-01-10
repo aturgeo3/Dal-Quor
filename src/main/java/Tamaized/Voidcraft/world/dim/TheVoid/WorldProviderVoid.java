@@ -35,16 +35,13 @@ public class WorldProviderVoid extends WorldProvider{
 
 
 
-import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderHell;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class WorldProviderVoid extends WorldProvider
 {
@@ -66,7 +63,7 @@ public class WorldProviderVoid extends WorldProvider
      */
     public Vec3 getFogColor(float par1, float par2)
     {
-    	return Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
+    	return new Vec3(0.0D, 0.0D, 0.0D);
         //return this.worldObj.getWorldVec3Pool().getVecFromPool(0.0D,0.0D,0.0D);//0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
     }
 
@@ -146,4 +143,10 @@ public class WorldProviderVoid extends WorldProvider
     {
     	return "Void Dimension";
     }
+
+	@Override
+	public String getInternalNameSuffix() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

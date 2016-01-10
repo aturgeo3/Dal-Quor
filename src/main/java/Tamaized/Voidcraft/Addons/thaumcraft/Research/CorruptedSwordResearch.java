@@ -1,17 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.Research;
 
-import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaumRecipes;
-import Tamaized.Voidcraft.common.voidCraft;
-import net.minecraft.util.ResourceLocation;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.crafting.ShapedArcaneRecipe;
-import thaumcraft.api.crafting.ShapelessArcaneRecipe;
-import thaumcraft.api.research.ResearchItem;
-import thaumcraft.api.research.ResearchPage;
 
-public class CorruptedSwordResearch extends ResearchItem {
+public class CorruptedSwordResearch {/*extends ResearchItem {
 	
 	private final static AspectList aspects = new AspectList()
 	.add(Aspect.TAINT, 1)
@@ -32,5 +22,5 @@ public class CorruptedSwordResearch extends ResearchItem {
 		
 		this.setPages(pages);
 	}
-
+*/
 }

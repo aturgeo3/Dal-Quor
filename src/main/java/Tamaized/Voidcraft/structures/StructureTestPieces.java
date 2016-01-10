@@ -13,21 +13,21 @@ public class StructureTestPieces {
 
     public static void func_143049_a()
     {
-        MapGenStructureIO.func_143031_a(ComponentTestCrossing3.class, "NeVBCr");
-        MapGenStructureIO.func_143031_a(ComponentTestEnd.class, "NeVBEF");
-        MapGenStructureIO.func_143031_a(ComponentTestStraight.class, "NeVBS");
-        MapGenStructureIO.func_143031_a(ComponentTestCorridor3.class, "NeVCCS");
-        MapGenStructureIO.func_143031_a(ComponentTestCorridor4.class, "NeVCTB");
-        MapGenStructureIO.func_143031_a(ComponentTestEntrance.class, "NeVCE");
-        MapGenStructureIO.func_143031_a(ComponentTestCrossing2.class, "NeVSCSC");
-        MapGenStructureIO.func_143031_a(ComponentTestCorridor.class, "NeVSCLT");
-        MapGenStructureIO.func_143031_a(ComponentTestCorridor5.class, "NeVSC");
-        MapGenStructureIO.func_143031_a(ComponentTestCorridor2.class, "NeVSCRT");
-        MapGenStructureIO.func_143031_a(ComponentTestNetherStalkRoom.class, "NeVCSR");
-        MapGenStructureIO.func_143031_a(ComponentTestThrone.class, "NeVMT");
-        MapGenStructureIO.func_143031_a(ComponentTestCrossing.class, "NeVRC");
-        MapGenStructureIO.func_143031_a(ComponentTestStairs.class, "NeVSR");
-        MapGenStructureIO.func_143031_a(ComponentTestStartPiece.class, "NeVStart");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCrossing3.class, "VoidCraft:NeVBCr");
+        MapGenStructureIO.registerStructureComponent(ComponentTestEnd.class, "VoidCraft:NeVBEF");
+        MapGenStructureIO.registerStructureComponent(ComponentTestStraight.class, "VoidCraft:NeVBS");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCorridor3.class, "VoidCraft:NeVCCS");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCorridor4.class, "VoidCraft:NeVCTB");
+        MapGenStructureIO.registerStructureComponent(ComponentTestEntrance.class, "VoidCraft:NeVCE");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCrossing2.class, "VoidCraft:NeVSCSC");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCorridor.class, "VoidCraft:NeVSCLT");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCorridor5.class, "VoidCraft:NeVSC");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCorridor2.class, "VoidCraft:NeVSCRT");
+        MapGenStructureIO.registerStructureComponent(ComponentTestNetherStalkRoom.class, "VoidCraft:NeVCSR");
+        MapGenStructureIO.registerStructureComponent(ComponentTestThrone.class, "VoidCraft:NeVMT");
+        MapGenStructureIO.registerStructureComponent(ComponentTestCrossing.class, "VoidCraft:NeVRC");
+        MapGenStructureIO.registerStructureComponent(ComponentTestStairs.class, "VoidCraft:NeVSR");
+        MapGenStructureIO.registerStructureComponent(ComponentTestStartPiece.class, "VoidCraft:NeVStart");
     }
 
     private static ComponentTestPiece createNextComponentRandom(StructureTestPieceWeight par0StructureNetherBridgePieceWeight, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)

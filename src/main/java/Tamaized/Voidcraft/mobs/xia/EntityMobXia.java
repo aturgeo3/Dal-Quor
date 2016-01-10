@@ -6,6 +6,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 
@@ -94,8 +96,8 @@ public class EntityMobXia extends EntityVoidNPC{
         return null;
 }
 
-	public String getDisplayName() {
-		return "Xia";
+	public IChatComponent getDisplayName() {
+		return new ChatComponentText("Xia");
 	}
 
     

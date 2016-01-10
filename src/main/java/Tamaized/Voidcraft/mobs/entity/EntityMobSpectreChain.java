@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.mobs.entity;
 
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -21,12 +20,15 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.blockVoidbrick;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
 import Tamaized.Voidcraft.projectiles.VoidChain;
+
+import com.google.common.base.Predicate;
 
 public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttackMob{
 	
@@ -47,15 +49,20 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
          this.tasks.addTask(1, new EntityAIArrowAttack(this, 1.0D, 20, 50, 15.0F));
          this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
          
-         IEntitySelector ies = new IEntitySelector()
+         Predicate ies = new Predicate()
          {
              private static final String __OBFID = "CL_00001621";
              /**
               * Return whether the specified entity is applicable to this filter.
               */
-             public boolean isEntityApplicable(Entity p_82704_1_){
+             public boolean apply(Entity p_82704_1_)
+             {
             	 if(p_82704_1_ instanceof EntitySkeleton && Integer.valueOf(((EntitySkeleton)p_82704_1_).getDataWatcher().getWatchableObjectByte(13))==1) return false;
             	 else return true;
+             }
+             public boolean apply(Object p_apply_1_)
+             {
+                 return p_apply_1_ instanceof Entity ? this.apply((Entity)p_apply_1_) : false;
              }
          };
          
@@ -82,7 +89,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
  
     public void onUpdate(){
         super.onUpdate();
-        if(this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY-0.2D - (double)this.yOffset) + 1, MathHelper.floor_double(this.posZ)) instanceof blockVoidbrick) this.setDead();
+        if(this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY-0.2D - (double)this.getYOffset()) + 1, MathHelper.floor_double(this.posZ))).getBlock() instanceof blockVoidbrick) this.setDead();
     }
 
     @Override
@@ -115,7 +122,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
     
     public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2){
     	if(!canAttack(par1EntityLivingBase)) return;
-    	VoidChain entityarrow = new VoidChain(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+    	VoidChain entityarrow = new VoidChain(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.getDifficulty().getDifficultyId() * 4));
     	//EntityArrow entityarrow = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
         int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());

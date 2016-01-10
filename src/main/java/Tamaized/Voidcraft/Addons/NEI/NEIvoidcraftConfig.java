@@ -1,12 +1,7 @@
 package Tamaized.Voidcraft.Addons.NEI;
 
-import Tamaized.Voidcraft.GUI.client.voidInfuserGUI;
-import Tamaized.Voidcraft.GUI.client.voidMaceratorGUI;
-import Tamaized.Voidcraft.common.voidCraft;
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
 
-public class NEIvoidcraftConfig implements IConfigureNEI{ //loadConfig will only be called when NEI is installed.
+public class NEIvoidcraftConfig{/* implements IConfigureNEI{ //loadConfig will only be called when NEI is installed.
 
 	@Override
 	public void loadConfig() {
@@ -30,5 +25,5 @@ public class NEIvoidcraftConfig implements IConfigureNEI{ //loadConfig will only
 	public String getVersion() {
 		return voidCraft.getVersion();
 	}
-
+*/
 }

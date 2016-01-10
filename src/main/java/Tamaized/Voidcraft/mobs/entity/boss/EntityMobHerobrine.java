@@ -8,11 +8,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
@@ -197,7 +199,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
                 double d2 = this.rand.nextGaussian() * 0.02D;
                 double d0 = this.rand.nextGaussian() * 0.02D;
                 double d1 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle("explode", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1);
+                this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1);
             }
         }
     }
@@ -280,7 +282,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
         return 0.0F;
     }
 
-	public String getDisplayName() {
-		return "Avatar of Herobrine";
+	public IChatComponent getDisplayName() {
+		
+		return new ChatComponentText("Avatar of Herobrine");
 	}
 }

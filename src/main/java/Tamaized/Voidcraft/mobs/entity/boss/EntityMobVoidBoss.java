@@ -1,7 +1,6 @@
 package Tamaized.Voidcraft.mobs.entity.boss;
 
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
@@ -22,6 +21,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidBossMob;
@@ -69,7 +69,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IBossDisplay
     }
 	
 	private void BeginAI(){
-		this.getNavigator().setBreakDoors(true);
+		//this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
@@ -84,12 +84,12 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IBossDisplay
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, 0, true)); //IronGolem and Snowman extend this
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true)); //Normal Minecraft mobs
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true)); //Passive animals
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, 0, true)); //Slime extends living so need to add it manually
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, true)); //IronGolem and Snowman extend this
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, true)); //Normal Minecraft mobs
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, true)); //Passive animals
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, true)); //Slime extends living so need to add it manually
 	}
 	
 	
@@ -122,7 +122,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IBossDisplay
     		if(this.getHealth() >= this.getMaxHealth()){
     			this.hasExploded = true;
     			this.worldObj.newExplosion(this, this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, 7.0F, false, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
-                this.worldObj.playBroadcastSound(1013, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                this.worldObj.playBroadcastSound(1013, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
                 this.BeginAI();
                 this.setInvul(false);
     		}

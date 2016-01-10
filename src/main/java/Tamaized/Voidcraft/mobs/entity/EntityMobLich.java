@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.mobs.entity;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,12 +27,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
+
+import com.google.common.base.Predicate;
 
 public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
 	
@@ -62,15 +60,20 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
          this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
          this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
          
-         IEntitySelector ies = new IEntitySelector()
+         Predicate ies = new Predicate()
          {
              private static final String __OBFID = "CL_00001621";
              /**
               * Return whether the specified entity is applicable to this filter.
               */
-             public boolean isEntityApplicable(Entity p_82704_1_){
-            	 if(p_82704_1_ instanceof EntitySkeleton && p_82704_1_ instanceof EntitySkeleton && Integer.valueOf(((EntitySkeleton)p_82704_1_).getDataWatcher().getWatchableObjectByte(13))==1) return false;
+             public boolean apply(Entity p_82704_1_)
+             {
+            	 if(p_82704_1_ instanceof EntitySkeleton && Integer.valueOf(((EntitySkeleton)p_82704_1_).getDataWatcher().getWatchableObjectByte(13))==1) return false;
             	 else return true;
+             }
+             public boolean apply(Object p_apply_1_)
+             {
+                 return p_apply_1_ instanceof Entity ? this.apply((Entity)p_apply_1_) : false;
              }
          };
          
@@ -145,12 +148,12 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     		int r = 6;
     		for(double nx=posX-r; nx<posX+r; nx++){
     			for(double nz=posZ-r; nz<posZ+r; nz++){
-    				if(worldObj.isAirBlock((int) nx, (int) posY-1, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY-1, (int) nz, voidCraft.blocks.fireVoid);
-    				}else if(worldObj.isAirBlock((int) nx, (int) posY, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY, (int) nz, voidCraft.blocks.fireVoid);
-    				}else if(worldObj.isAirBlock((int) nx, (int) posY+1, (int) nz)){
-    					worldObj.setBlock((int) nx, (int) posY+1, (int) nz, voidCraft.blocks.fireVoid);
+    				if(worldObj.isAirBlock(new BlockPos((int) nx, (int) posY-1, (int) nz))){
+    					worldObj.setBlockState(new BlockPos((int) nx, (int) posY-1, (int) nz), voidCraft.blocks.fireVoid.getDefaultState());
+    				}else if(worldObj.isAirBlock(new BlockPos((int) nx, (int) posY, (int) nz))){
+    					worldObj.setBlockState(new BlockPos((int) nx, (int) posY, (int) nz), voidCraft.blocks.fireVoid.getDefaultState());
+    				}else if(worldObj.isAirBlock(new BlockPos((int) nx, (int) posY+1, (int) nz))){
+    					worldObj.setBlockState(new BlockPos((int) nx, (int) posY+1, (int) nz), voidCraft.blocks.fireVoid.getDefaultState());
     				}
     			}
     		}
@@ -188,7 +191,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     		for(int xj=-1; xj<2; xj++){
     			for(int yj=-1; yj<1; yj++){
     				for(int zj=-1; yj<1; yj++){
-    					if(this.worldObj.isAirBlock(xj, yj, zj)) this.worldObj.setBlock(xj, yj, zj, Blocks.stone, 0, 3);
+    					if(this.worldObj.isAirBlock(new BlockPos(xj, yj, zj))) this.worldObj.setBlockState(new BlockPos(xj, yj, zj), Blocks.stone.getDefaultState(), 3);
     				}
     			}
     		}
@@ -230,14 +233,14 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     		double z = par1EntityLivingBase.posZ;
     	
     		EntityLightningBolt entitylightningbolt = new EntityLightningBolt(worldObj, x, y, z);
-    		entitylightningbolt.setLocationAndAngles(x, y + 1 +entitylightningbolt.yOffset, z, par1EntityLivingBase.rotationYaw, par1EntityLivingBase.rotationPitch);
+    		entitylightningbolt.setLocationAndAngles(x, y + 1 +entitylightningbolt.getYOffset(), z, par1EntityLivingBase.rotationYaw, par1EntityLivingBase.rotationPitch);
     		worldObj.addWeatherEffect(entitylightningbolt);
     	}
     			
     	if(randAttk == 1){ //EntityLargeFireball at Target
-    		this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+    		this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
     		double d5 = par1EntityLivingBase.posX - this.posX;
-    		double d6 = par1EntityLivingBase.boundingBox.minY + (double)(par1EntityLivingBase.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+    		double d6 = par1EntityLivingBase.getBoundingBox().minY + (double)(par1EntityLivingBase.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
     		double d7 = par1EntityLivingBase.posZ - this.posZ;
                 
     		EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.worldObj, this, d5, d6, d7);
