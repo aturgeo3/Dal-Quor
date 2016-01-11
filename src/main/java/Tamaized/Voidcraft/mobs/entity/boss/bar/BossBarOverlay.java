@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.profiler.Profiler;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BossBarOverlay {
 	

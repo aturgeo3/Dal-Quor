@@ -6,11 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
@@ -62,7 +60,7 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 		
 		if(currTick>=callTick){
 			for(Class c : watchedClass){
-				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.boundingBox.expand((double)maxDistanceForPlayer, (double)maxDistanceForPlayer, (double)maxDistanceForPlayer), theWatcher);
+				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getBoundingBox().expand((double)maxDistanceForPlayer, (double)maxDistanceForPlayer, (double)maxDistanceForPlayer), theWatcher);
 				if(e != null){
 					closestEntity = e;
 					break;
@@ -124,10 +122,10 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 				dy = 0;
 			}
 		
-			double ezMin = closestEntity.boundingBox.minZ;
-			double ezMax = closestEntity.boundingBox.maxZ;
-			double exMin = closestEntity.boundingBox.minX;
-			double exMax = closestEntity.boundingBox.maxX;
+			double ezMin = closestEntity.getBoundingBox().minZ;
+			double ezMax = closestEntity.getBoundingBox().maxZ;
+			double exMin = closestEntity.getBoundingBox().minX;
+			double exMax = closestEntity.getBoundingBox().maxX;
 			if(tick_Damage <= 0){
 				if(z >= ezMin && z <= ezMax && x >= exMin && x <= exMax){
 					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(entity), 45);
@@ -169,10 +167,10 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 		}
 		
 		if(!entity.worldObj.isRemote){
-			Block b = entity.worldObj.getBlock(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ));
+			Block b = entity.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ))).getBlock();
 			if(b instanceof AIBlock){
 				if(!inBlock){
-					TileEntity te = ((AIBlock) b).getMyTileEntity(entity.worldObj, MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ));
+					TileEntity te = ((AIBlock) b).getMyTileEntity(entity.worldObj, new BlockPos(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ)));
 					if(te instanceof TileEntityAIBlock){
 						((TileEntityAIBlock) te).boom();
 						inBlock = true;

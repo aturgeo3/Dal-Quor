@@ -90,9 +90,9 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobXia2.class, new RenderXia2(new ModelXia2(), shadowSize));
 	
 		//Projectiles
-		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain());
-		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook());
+		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(HerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
 	
 		//Blocks

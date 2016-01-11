@@ -61,8 +61,8 @@ public class VoidBlocks extends RegistryBase {
 		AIBlock = new AIBlock().setBlockUnbreakable();
 		xiaBlock = new XiaBlock().setBlockUnbreakable();
 
-		blockPortalVoid = new BlockPortalVoid("VoidCraft:blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		blockPortalXia = new BlockPortalXia("VoidCraft:blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockPortalVoid = new BlockPortalVoid().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockPortalXia = new BlockPortalXia().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		fireVoid = new FireVoid().setCreativeTab(voidCraft.tabs.tabVoid);
 
 		voidMacerator = new VoidMacerator().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);

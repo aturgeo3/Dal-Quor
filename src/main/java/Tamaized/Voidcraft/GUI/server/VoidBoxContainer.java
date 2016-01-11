@@ -5,12 +5,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import Tamaized.Voidcraft.GUI.SlotCantRemove;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.GUI.SlotCantPlace;
 import Tamaized.Voidcraft.GUI.SlotCantPlaceOrRemove;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class VoidBoxContainer extends Container {
 	

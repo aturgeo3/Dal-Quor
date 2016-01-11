@@ -2,22 +2,22 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BlockVoidTeleporter extends BlockBreakable {
 	
-	public BlockVoidTeleporter(String s) {
-		super(s, Material.portal, false);
+	public BlockVoidTeleporter() {
+		super(Material.portal, false);
 		this.setTickRandomly(true);
 		this.setLightLevel(0.75F);
 	}
@@ -25,14 +25,18 @@ public abstract class BlockVoidTeleporter extends BlockBreakable {
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+	@Override
+	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
+		super.updateTick(par1World, pos, state, par5Random);
 		if (par1World.provider.isSurfaceWorld()) {
 			int l;
-			for (l = par3; !par1World.doesBlockHaveSolidTopSurface(par1World, par2, l, par4) && l > 0; --l) {
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			for (l = y; !par1World.doesBlockHaveSolidTopSurface(par1World, new BlockPos(x, l, z)) && l > 0; --l) {
 				;
 			}
-			if (l > 0 && !par1World.isBlockNormalCubeDefault(par2, l + 1, par4, false)) { } //Prevent pigmen from spawning
+			if (l > 0 && !par1World.isBlockNormalCube(new BlockPos(x, l + 1, z), false)) { } //Prevent pigmen from spawning
 		}
 	}
 
@@ -56,15 +60,6 @@ public abstract class BlockVoidTeleporter extends BlockBreakable {
 	 * the player can attach torches, redstone wire, etc to this block.
 	 */
 	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	/**
-	 * If this block doesn't render as an ordinary block it will return False
-	 * (examples: signs, buttons, stairs, etc)
-	 */
-	@Override
-	public boolean renderAsNormalBlock() {
 		return false;
 	}
 

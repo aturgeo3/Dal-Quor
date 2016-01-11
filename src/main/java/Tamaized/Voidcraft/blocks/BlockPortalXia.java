@@ -13,8 +13,8 @@ import Tamaized.Voidcraft.common.voidCraft;
 
 public class BlockPortalXia extends BlockVoidTeleporter {
 
-	public BlockPortalXia(String s) {
-		super(s);
+	public BlockPortalXia() {
+		super();
 	}
 	/**
 	* Updates the blocks bounds based on its current state. Args: world, x, y, z

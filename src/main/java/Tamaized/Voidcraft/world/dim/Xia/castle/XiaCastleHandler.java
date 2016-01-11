@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.world.dim.Xia.castle;
 
 import java.util.ArrayList;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.XiaCastleMain;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.doors.XiaCastleDoorLogicHerobrine;
@@ -57,7 +58,7 @@ public class XiaCastleHandler {
 			for(int cx = x1; cx <= x2; cx++){
 				for(int cy = y1; cy <= y2; cy++){
 					for(int cz = z1; cz <= z2; cz++){
-						world.setBlockToAir(cx, cy, cz);
+						world.setBlockToAir(new BlockPos(cx, cy, cz));
 					}
 				}
 			}

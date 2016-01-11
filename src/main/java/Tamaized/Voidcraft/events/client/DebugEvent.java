@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.events.client;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class DebugEvent {
 	

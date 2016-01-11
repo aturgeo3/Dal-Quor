@@ -7,7 +7,7 @@ import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 public class XiaCastleDoorLogicTwins extends XiaCastleDoorLogicBase {
 
 	public XiaCastleDoorLogicTwins(XiaCastleHandler handler) {
-		super(handler, handler.locations[handler.door_Twins], AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0));
+		super(handler, handler.locations[handler.door_Twins], AxisAlignedBB.fromBounds(0, 0, 0, 0, 0, 0));
 	}
 
 }

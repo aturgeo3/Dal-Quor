@@ -12,8 +12,8 @@ import Tamaized.Voidcraft.common.voidCraft;
 
 public class BlockPortalVoid extends BlockVoidTeleporter {
 
-	public BlockPortalVoid(String s) {
-		super(s);
+	public BlockPortalVoid() {
+		super();
 	}
 
 	/**

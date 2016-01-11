@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.util.BlockPos;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.common.voidCraft;
@@ -20,15 +21,15 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 	private int maxSpawns = 6;
 	
 	private ArrayList<TileEntityAIBlock> aiBlocks = new ArrayList<TileEntityAIBlock>();
-	private Map<int[], TileEntityAIBlock> raw = new HashMap<int[], TileEntityAIBlock>();
+	private Map<BlockPos, TileEntityAIBlock> raw = new HashMap<BlockPos, TileEntityAIBlock>();
 
 	public HerobrineAIPhase1(EntityAIHandler entityAIHandler) {
 		parent = entityAIHandler;
 	}
 	
-	public void removeTileEntity(int[] i){
-		aiBlocks.remove(raw.get(i));
-		raw.remove(i);
+	public void removeTileEntity(BlockPos pos){
+		aiBlocks.remove(raw.get(pos));
+		raw.remove(pos);
 		spawns--;
 	}
 	
@@ -62,12 +63,12 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 		int nX = (parent.getX()-8)+randX;
 		int nY = parent.getY();
 		int nZ = (parent.getZ()-8)+randZ;
-		if(parent.getEntity().worldObj.getTileEntity(nX, nY, nZ) == null){
-			parent.getEntity().worldObj.setBlock(nX, nY, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(true));
-			parent.getEntity().worldObj.setBlock(nX, nY+1, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false));
-			parent.getEntity().worldObj.setBlock(nX, nY+2, nZ, ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false));
-			TileEntityAIBlock b = (TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(nX, nY, nZ);
-			raw.put(new int[]{nX, nY, nZ}, b);
+		if(parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ)) == null){
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(true).getDefaultState());
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false).getDefaultState());
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false).getDefaultState());
+			TileEntityAIBlock b = (TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ));
+			raw.put(new BlockPos(nX, nY, nZ), b);
 			b.aiHandler = parent;
 			b.ai = this;
 			aiBlocks.add(b);

@@ -31,7 +31,7 @@ public class ItemRenderNoBreak implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		if(type == IItemRenderer.ItemRenderType.ENTITY) GL11.glTranslatef(-0.5F,  0.0F,  -0.5F);
-		this.render.renderTileEntityAt(this.entity, 0.0d, 0.0d, 0.0d, 0.0f);
+		this.render.renderTileEntityAt(this.entity, 0.0d, 0.0d, 0.0d, 0.0f, 0);
 	}
 
 }

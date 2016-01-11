@@ -42,7 +42,7 @@ public class HerobrineFireball extends EntityFireball {
             }else if(p_70227_1_.typeOfHit == MovingObjectType.BLOCK){
             	Block b = worldObj.getBlockState(p_70227_1_.getBlockPos()).getBlock();
             	if(b instanceof AIBlock){
-            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.getBlockPos().getX(), p_70227_1_.getBlockPos().getY(), p_70227_1_.getBlockPos().getZ());
+            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.getBlockPos());
             		if(te instanceof TileEntityAIBlock){
             			((TileEntityAIBlock) te).boom();
             		}

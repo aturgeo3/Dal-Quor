@@ -20,7 +20,7 @@ import Tamaized.Voidcraft.items.entity.EntityHookShot;
 @SideOnly(Side.CLIENT)
 public class RenderHook extends Render {
 	
-	protected RenderHook(RenderManager renderManager) {
+	public RenderHook(RenderManager renderManager) {
 		super(renderManager);
 	}
 

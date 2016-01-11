@@ -1,12 +1,14 @@
 package Tamaized.Voidcraft.blocks.render;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -26,14 +28,15 @@ public class RenderHeimdall extends TileEntitySpecialRenderer{
 	}
 	
 	private void adjustRotatePivotViaMeta(World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
+		IBlockState bState =  world.getBlockState(new BlockPos(x, y, z));
+        int meta = bState.getBlock().getMetaFromState(bState);
         GL11.glPushMatrix();
         GL11.glRotatef(meta * (-90), 0.0F, 0.0F, 1.0F);
         GL11.glPopMatrix();
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity p_180535_1_, double x, double y, double z, float p_180535_8_, int p_180535_9_) {
 		//The PushMatrix tells the renderer to "start" doing something.
         GL11.glPushMatrix();
         //This is setting the initial location.
@@ -55,10 +58,10 @@ public class RenderHeimdall extends TileEntitySpecialRenderer{
         GL11.glPopMatrix();
         GL11.glPopMatrix();
 	}
-
+/*
 		//Set the lighting stuff, so it changes it's brightness properly.       
 	private void adjustLightFixture(World world, int i, int j, int k, Block block) {
-        Tessellator tess = Tessellator.instance;
+        Tessellator tess = Tessellator.getInstance();
         //float brightness = block.getBlockBrightness(world, i, j, k);
         //As of MC 1.7+ block.getBlockBrightness() has become block.getLightValue():
         float brightness = block.getLightValue(world, i, j, k);
@@ -67,5 +70,5 @@ public class RenderHeimdall extends TileEntitySpecialRenderer{
         int divModifier = skyLight / 65536;
         tess.setColorOpaque_F(brightness, brightness, brightness);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  (float) modulousModifier,  divModifier);
-		}
+	}*/
 }

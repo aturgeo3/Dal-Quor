@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderAcidBall extends Render
 {
-    protected RenderAcidBall(RenderManager renderManager) {
+    public RenderAcidBall(RenderManager renderManager) {
 		super(renderManager);
 	}
 

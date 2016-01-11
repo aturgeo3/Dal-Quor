@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderVoidChain extends Render
 {
-    protected RenderVoidChain(RenderManager renderManager) {
+    public RenderVoidChain(RenderManager renderManager) {
 		super(renderManager);
 	}
 

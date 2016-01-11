@@ -1,17 +1,14 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
 public class HeimdallContainer extends Container {
 	

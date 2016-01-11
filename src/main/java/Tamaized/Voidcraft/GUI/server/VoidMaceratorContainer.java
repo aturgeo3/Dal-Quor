@@ -1,16 +1,16 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
 public class VoidMaceratorContainer extends Container {
 	
@@ -25,7 +25,7 @@ public class VoidMaceratorContainer extends Container {
 		
 		this.addSlotToContainer(new Slot(tileEntity, 0, 168, 100));
 		this.addSlotToContainer(new Slot(tileEntity, 1, 130, 100));
-		this.addSlotToContainer(new SlotFurnace(inventory.player, tileEntity, 2, 225, 101));
+		this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 2, 225, 101));
 		
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 9; j++){
@@ -91,11 +91,7 @@ public class VoidMaceratorContainer extends Container {
 				
 				slot.onSlotChange(itemstack1, itemstack);
 			}else if(hoverSlot != 1 && hoverSlot != 0){
-				if(FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null){
-					if(!this.mergeItemStack(itemstack1, 0, 1, false)){
-						return null;
-					}
-				}else if(TileEntityVoidMacerator.isItemFuel(itemstack1)){
+				if(TileEntityVoidMacerator.isItemFuel(itemstack1)){
 					if(!this.mergeItemStack(itemstack1, 1, 2, false)){
 						return null;
 					}
