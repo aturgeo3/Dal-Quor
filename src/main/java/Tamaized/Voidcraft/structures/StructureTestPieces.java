@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.structures;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 
@@ -30,70 +31,70 @@ public class StructureTestPieces {
         MapGenStructureIO.registerStructureComponent(ComponentTestStartPiece.class, "VoidCraft:NeVStart");
     }
 
-    private static ComponentTestPiece createNextComponentRandom(StructureTestPieceWeight par0StructureNetherBridgePieceWeight, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
+    private static ComponentTestPiece createNextComponentRandom(StructureTestPieceWeight par0StructureNetherBridgePieceWeight, List par1List, Random par2Random, int x, int y, int z, EnumFacing face, int id)
     {
         Class oclass = par0StructureNetherBridgePieceWeight.weightClass;
         Object object = null;
 
         if (oclass == ComponentTestStraight.class)
         {
-            object = ComponentTestStraight.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestStraight.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCrossing3.class)
         {
-            object = ComponentTestCrossing3.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCrossing3.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCrossing.class)
         {
-            object = ComponentTestCrossing.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCrossing.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestStairs.class)
         {
-            object = ComponentTestStairs.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestStairs.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestThrone.class)
         {
-            object = ComponentTestThrone.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestThrone.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestEntrance.class)
         {
-            object = ComponentTestEntrance.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestEntrance.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCorridor5.class)
         {
-            object = ComponentTestCorridor5.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCorridor5.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCorridor2.class)
         {
-            object = ComponentTestCorridor2.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCorridor2.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCorridor.class)
         {
-            object = ComponentTestCorridor.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCorridor.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCorridor3.class)
         {
-            object = ComponentTestCorridor3.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCorridor3.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCorridor4.class)
         {
-            object = ComponentTestCorridor4.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCorridor4.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestCrossing2.class)
         {
-            object = ComponentTestCrossing2.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestCrossing2.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
         else if (oclass == ComponentTestNetherStalkRoom.class)
         {
-            object = ComponentTestNetherStalkRoom.createValidComponent(par1List, par2Random, par3, par4, par5, par6, par7);
+            object = ComponentTestNetherStalkRoom.createValidComponent(par1List, par2Random, x, y, z, face, id);
         }
 
         return (ComponentTestPiece)object;
     }
 
-    static ComponentTestPiece createNextComponent(StructureTestPieceWeight par0StructureNetherBridgePieceWeight, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
+    static ComponentTestPiece createNextComponent(StructureTestPieceWeight par0StructureNetherBridgePieceWeight, List par1List, Random par2Random, int x, int y, int z, EnumFacing face, int id)
     {
-        return createNextComponentRandom(par0StructureNetherBridgePieceWeight, par1List, par2Random, par3, par4, par5, par6, par7);
+        return createNextComponentRandom(par0StructureNetherBridgePieceWeight, par1List, par2Random, x, y, z, face, id);
     }
 
     static StructureTestPieceWeight[] getPrimaryComponents()

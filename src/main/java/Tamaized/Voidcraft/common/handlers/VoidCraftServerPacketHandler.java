@@ -1,33 +1,18 @@
 package Tamaized.Voidcraft.common.handlers;
 
-import ibxm.Player;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.NetworkManager;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.items.HookShot;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
-import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import Tamaized.Voidcraft.items.HookShot;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class VoidCraftServerPacketHandler {
 	
@@ -63,7 +48,7 @@ public class VoidCraftServerPacketHandler {
 			try {
 				pktType = bbis.readInt();
 				if(pktType == TYPE_VOIDBOX_PLAY){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
@@ -71,7 +56,7 @@ public class VoidCraftServerPacketHandler {
 					thisTileEntity.isPlaying = true;
 					thisTileEntity.doPlay = true;
 				}else if(pktType == TYPE_VOIDBOX_STOP){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
@@ -79,14 +64,14 @@ public class VoidCraftServerPacketHandler {
 					thisTileEntity.isPlaying = false;
 					thisTileEntity.loop = false;
 				}else if(pktType == TYPE_VOIDBOX_LOOP){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
 					}
 					thisTileEntity.loop = bbis.readBoolean();
 				}else if(pktType == TYPE_VOIDBOX_AUTO){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(bbis.readInt(), bbis.readInt(), bbis.readInt());
+					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 					if (thisTileEntity == null){
 						bbis.close();
 						return;
