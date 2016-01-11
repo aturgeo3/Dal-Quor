@@ -3,23 +3,17 @@ package Tamaized.Voidcraft.armor;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-
-import org.lwjgl.opengl.GL11;
-
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 //import net.minecraftforge.event.entity.player.PlayerEvent;
 import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class XiaArmor extends ItemArmor {
 
@@ -48,11 +42,6 @@ public class XiaArmor extends ItemArmor {
 			this.texturePath = voidCraft.modid + ":" + "textures/models/armor/" + type + "_layer_2.png";
 			}
 		
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register){
-		this.itemIcon = register.registerIcon(voidCraft.modid + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 	
 	@Override

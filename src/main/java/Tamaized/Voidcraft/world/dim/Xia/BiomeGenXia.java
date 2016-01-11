@@ -1,10 +1,8 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeGenXia extends BiomeGenBase {
 

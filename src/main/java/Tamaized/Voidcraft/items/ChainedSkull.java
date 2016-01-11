@@ -2,18 +2,17 @@ package Tamaized.Voidcraft.items;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Facing;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 
 public class ChainedSkull extends Item{
@@ -29,33 +28,37 @@ public class ChainedSkull extends Item{
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
 	
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10)
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (par3World.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
         else
         {
-            Block i1 = par3World.getBlock(x, y, z);
-            x += Facing.offsetsXForSide[par7];
-            y += Facing.offsetsYForSide[par7];
-            z += Facing.offsetsZForSide[par7];
+        	int x = pos.getX();
+        	int y = pos.getY();
+        	int z = pos.getZ();
+            Block i1 = world.getBlockState(pos).getBlock();
+            x += side.getFrontOffsetX();
+            y += side.getFrontOffsetY();
+            z += side.getFrontOffsetZ();
             double d0 = 0.0D;
 
-            if (par7 == 1)
+            if (side.getIndex() == 1)
             {
                 d0 = 0.5D;
             }
 
-            EntityMobVoidBoss entity = new EntityMobVoidBoss(par3World);
+            EntityMobVoidBoss entity = new EntityMobVoidBoss(world);
             
             if (entity != null)
             {
             	
             	entity.setCustomNameTag("Corrupted Pawn");
                 
-                int yaw = (int)par2EntityPlayer.rotationYaw;
+                int yaw = (int)player.rotationYaw;
 
                 if (yaw<0) yaw+=360;  //creates the full radial circle of the yaw
                        
@@ -68,36 +71,36 @@ public class ChainedSkull extends Item{
                 
                 
                 if(facing==0){
-                	entity.setPosition(par2EntityPlayer.posX, par2EntityPlayer.posY+4, par2EntityPlayer.posZ+2);
+                	entity.setPosition(player.posX, player.posY+4, player.posZ+2);
                 	}
                 if(facing==1){
-                    entity.setPosition(par2EntityPlayer.posX-2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ+2);
+                    entity.setPosition(player.posX-2, player.posY+4, player.posZ+2);
                     }
                 if(facing==2){
-                    entity.setPosition(par2EntityPlayer.posX-2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ);
+                    entity.setPosition(player.posX-2, player.posY+4, player.posZ);
                     }
                 if(facing==3){
-                    entity.setPosition(par2EntityPlayer.posX-2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ-2);
+                    entity.setPosition(player.posX-2, player.posY+4, player.posZ-2);
                     }
                 if(facing==4){
-                    entity.setPosition(par2EntityPlayer.posX, par2EntityPlayer.posY+4, par2EntityPlayer.posZ-2);
+                    entity.setPosition(player.posX, player.posY+4, player.posZ-2);
                     }
                 if(facing==5){
-                    entity.setPosition(par2EntityPlayer.posX+2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ-2);
+                    entity.setPosition(player.posX+2, player.posY+4, player.posZ-2);
                     }
                 if(facing==6){
-                    entity.setPosition(par2EntityPlayer.posX+2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ);
+                    entity.setPosition(player.posX+2, player.posY+4, player.posZ);
                     }
                 if(facing==7){
-                    entity.setPosition(par2EntityPlayer.posX+2, par2EntityPlayer.posY+4, par2EntityPlayer.posZ+2);
+                    entity.setPosition(player.posX+2, player.posY+4, player.posZ+2);
                     }
                 
                 
-                par3World.spawnEntityInWorld(entity);
+                world.spawnEntityInWorld(entity);
                 
-                		par2EntityPlayer.addChatMessage(new ChatComponentText("???: Go forth, my pawn.")); 
+                		player.addChatMessage(new ChatComponentText("???: Go forth, my pawn.")); 
                 	
-                    --par1ItemStack.stackSize;
+                    --stack.stackSize;
                 
             }
 

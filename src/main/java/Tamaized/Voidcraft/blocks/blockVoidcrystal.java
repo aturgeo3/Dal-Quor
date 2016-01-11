@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class blockVoidcrystal extends Block {
+public class BlockVoidcrystal extends Block {
 
-	public blockVoidcrystal(Material Material) {
+	public BlockVoidcrystal(Material Material) {
 		super(Material);
 	}
 	

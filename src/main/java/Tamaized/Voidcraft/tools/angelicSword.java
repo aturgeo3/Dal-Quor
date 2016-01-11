@@ -2,21 +2,20 @@ package Tamaized.Voidcraft.tools;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.mobs.EntityVoidMob;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.mobs.EntityVoidMob;
+import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 
-public class angelicSword extends ItemSword{
+public class AngelicSword extends ItemSword{
 
-	public angelicSword(ToolMaterial par2EnumToolMaterial) {
+	public AngelicSword(ToolMaterial par2EnumToolMaterial) {
 		super(par2EnumToolMaterial);
 	}
 	

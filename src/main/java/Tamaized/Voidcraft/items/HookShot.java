@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -23,11 +24,6 @@ import Tamaized.Voidcraft.items.entity.EntityHookShot;
 
 public class HookShot extends Item{
 	
-	@SideOnly(Side.CLIENT)
-	private IIcon cast;
-	@SideOnly(Side.CLIENT)
-	private IIcon uncast;
-	
 	public static Map<EntityPlayer, Boolean> handler = new HashMap<EntityPlayer, Boolean>(); //Keep this Server Side
 	
 	/**
@@ -36,27 +32,6 @@ public class HookShot extends Item{
     @SideOnly(Side.CLIENT)
     public boolean isFull3D(){
         return true;
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister){
-		cast = iconRegister.registerIcon("voidCraft:HookShot_cast");
-		uncast = iconRegister.registerIcon("voidCraft:HookShot_uncast");
-	}
-    
-    /**
-     * Player, Render pass, and item usage sensitive version of getIconIndex.
-     *
-     * @param stack The item stack to get the icon for. (Usually this, and usingItem will be the same if usingItem is not null)
-     * @param renderPass The pass to get the icon for, 0 is default.
-     * @param player The player holding the item
-     * @param usingItem The item the player is actively using. Can be null if not using anything.
-     * @param useRemaining The ticks remaining for the active item.
-     * @return The icon index
-     */
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-    {
-        return usingItem == null ? uncast : cast;
     }
 	
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
@@ -81,7 +56,7 @@ public class HookShot extends Item{
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
 			outputStream.writeInt(pktType);
-			FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			voidCraft.channel.sendToServer(packet);
 			outputStream.close();
 			bos.close();
@@ -100,7 +75,7 @@ public class HookShot extends Item{
     }
 	
 	public EnumAction getItemUseAction(ItemStack p_77661_1_){
-        return EnumAction.bow;
+        return EnumAction.BOW;
     }
 	
 	@SideOnly(Side.CLIENT)

@@ -1,12 +1,9 @@
 package Tamaized.Voidcraft.armor;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.common.voidCraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class DemonArmor extends ItemArmor {
 
@@ -29,11 +26,6 @@ public class DemonArmor extends ItemArmor {
 			this.texturePath += type + "_layer_2.png";
 			}
 		
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register){
-		this.itemIcon = register.registerIcon(voidCraft.modid + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
 	}
 	
 	@Override

@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 
-public class archSword extends ItemSword {
+public class ArchSword extends ItemSword {
 
-	public archSword(ToolMaterial par2EnumToolMaterial) {
+	public ArchSword(ToolMaterial par2EnumToolMaterial) {
 		super(par2EnumToolMaterial);
 	}
 	

@@ -5,10 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 
-public class demonSword extends ItemSword {
+public class DemonSword extends ItemSword {
 
 	
-	public demonSword(ToolMaterial par2EnumToolMaterial) {
+	public DemonSword(ToolMaterial par2EnumToolMaterial) {
 		super(par2EnumToolMaterial);
 	}
 

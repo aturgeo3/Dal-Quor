@@ -1,9 +1,8 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.biome.BiomeGenBase;
-import Tamaized.Voidcraft.common.voidCraft;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
 

@@ -1,12 +1,12 @@
 package Tamaized.Voidcraft.items;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidBurner extends Item{
 
@@ -17,31 +17,32 @@ public class VoidBurner extends Item{
 		this.setMaxDamage(26);
 	}
 	
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10){
-		if(side == 0){
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float x, float y, float z){
+		if(side.getIndex() == 0){
 		y--;
 		}
-		if(side == 1){
+		if(side.getIndex() == 1){
 		y++;
 		}
-		if(side == 2){
+		if(side.getIndex() == 2){
 		z--;
 		}
-		if(side == 3){
+		if(side.getIndex() == 3){
 		z++;
 		}
-		if(side == 4){
+		if(side.getIndex() == 4){
 		x--;
 		}
-		if(side == 5){
+		if(side.getIndex() == 5){
 		x++;
 		}
-		if(!player.canPlayerEdit(x, y, z, side, itemstack)){
+		if(!player.canPlayerEdit(new BlockPos(x, y, z), side, itemstack)){
 		return false;
 		}else{
-		if(world.isAirBlock(x, y, z)){
+		if(world.isAirBlock(new BlockPos(x, y, z))){
 		world.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "fire.ignite", 1F, itemRand.nextFloat()*0.4F + 0.8F);
-		world.setBlock(x, y, z, voidCraft.blocks.fireVoid);
+		world.setBlockState(new BlockPos(x, y, z), voidCraft.blocks.fireVoid.getDefaultState());
 		}
 
 		itemstack.damageItem(1, player);

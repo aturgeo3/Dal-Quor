@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 
-public class chainSword extends ItemSword {
+public class ChainSword extends ItemSword {
 
-	public chainSword(ToolMaterial par2EnumToolMaterial) {
+	public ChainSword(ToolMaterial par2EnumToolMaterial) {
 		super(par2EnumToolMaterial);
 		
 	}

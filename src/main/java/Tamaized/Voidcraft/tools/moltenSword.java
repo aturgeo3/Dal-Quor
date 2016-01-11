@@ -5,9 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 
-public class moltenSword extends ItemSword {
+public class MoltenSword extends ItemSword {
 
-	public moltenSword(ToolMaterial par2EnumToolMaterial) {
+	public MoltenSword(ToolMaterial par2EnumToolMaterial) {
 		super(par2EnumToolMaterial);
 	
 	}

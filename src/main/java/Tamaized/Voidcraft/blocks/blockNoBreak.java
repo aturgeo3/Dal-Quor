@@ -2,15 +2,12 @@ package Tamaized.Voidcraft.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class blockNoBreak extends BlockContainer{
+public class BlockNoBreak extends BlockContainer{
 
-	public blockNoBreak(Material arg0) {
+	public BlockNoBreak(Material arg0) {
 		super(arg0);
 	}
 	
@@ -28,12 +25,6 @@ public class blockNoBreak extends BlockContainer{
     
     public boolean renderAsNormalBlock(){
         return false;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
-    {
-        super.registerBlockIcons(p_149651_1_);
     }
 
 }

@@ -1,15 +1,16 @@
 package Tamaized.Voidcraft.items;
 
-import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.stats.AchievementList;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidStar extends Item{
 	
+	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem){
 		if(entityItem.onGround && entityItem.dimension != voidCraft.dimensionIdVoid && entityItem.dimension != voidCraft.dimensionIdXia){
 			boolean flag = true;
@@ -20,7 +21,7 @@ public class VoidStar extends Item{
 							int xCoord = MathHelper.floor_double(entityItem.posX+x);
 							int yCoord = MathHelper.floor_double(entityItem.posY+y);
 							int zCoord = MathHelper.floor_double(entityItem.posZ+z);
-							if(entityItem.worldObj.getBlock(xCoord, yCoord, zCoord) != voidCraft.blocks.blockFakeBedrock){
+							if(entityItem.worldObj.getBlockState(new BlockPos(xCoord, yCoord, zCoord)).getBlock() != voidCraft.blocks.blockFakeBedrock){
 								if(!(x==0 && z==0 && y==0)) flag = false;
 							}
 						//}
@@ -36,7 +37,7 @@ public class VoidStar extends Item{
 							int zCoord = MathHelper.floor_double(entityItem.posZ+z);
 							if(x!=0 || z!=0 || y!=0){
 								entityItem.worldObj.spawnEntityInWorld(new EntityLightningBolt(entityItem.worldObj, entityItem.posX+x, entityItem.posY, entityItem.posZ+z));
-								entityItem.worldObj.setBlock(xCoord, yCoord, zCoord, voidCraft.blocks.blockNoBreak);
+								entityItem.worldObj.setBlockState(new BlockPos(xCoord, yCoord, zCoord), voidCraft.blocks.blockNoBreak.getDefaultState());
 							}
 						}
 					}
@@ -44,9 +45,9 @@ public class VoidStar extends Item{
 				int xCoord = MathHelper.floor_double(entityItem.posX);
 				int yCoord = MathHelper.floor_double(entityItem.posY);
 				int zCoord = MathHelper.floor_double(entityItem.posZ);
-				entityItem.worldObj.setBlock(xCoord, yCoord, zCoord, voidCraft.blocks.blockPortalXia);
-				if(entityItem.func_145800_j() != null){
-					EntityPlayer entityplayer = entityItem.worldObj.getPlayerEntityByName(entityItem.func_145800_j());
+				entityItem.worldObj.setBlockState(new BlockPos(xCoord, yCoord, zCoord), voidCraft.blocks.blockPortalXia.getDefaultState());
+				if(entityItem.getOwner() != null){
+					EntityPlayer entityplayer = entityItem.worldObj.getPlayerEntityByName(entityItem.getOwner());
 					if(entityplayer != null) entityplayer.addStat(voidCraft.achievements.voidCraftAchMainLine_5, 1);
 				}
 				entityItem.setDead();

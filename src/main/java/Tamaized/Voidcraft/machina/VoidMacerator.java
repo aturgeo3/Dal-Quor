@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,94 +31,59 @@ public class VoidMacerator extends BlockContainer {
 	
 	public boolean isActive;
 	
-	@SideOnly(Side.CLIENT)
-	private IIcon iconFront_Acitve;
-	@SideOnly(Side.CLIENT)
-	private IIcon iconFront_Inacitve;
-	@SideOnly(Side.CLIENT)
-	private IIcon blockSide;
-	@SideOnly(Side.CLIENT)
-	private IIcon blockTop;
-	
 	public VoidMacerator(){
 		super(Material.rock);
 	}
-
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister){
-		blockSide = iconRegister.registerIcon("voidCraft:voidgrind_side");
-		blockTop = iconRegister.registerIcon("voidCraft:voidgrind_top");
-		iconFront_Acitve =  iconRegister.registerIcon("voidCraft:voidgrind_front_on");
-		iconFront_Inacitve =  iconRegister.registerIcon("voidCraft:voidgrind_front_off");
+	
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
+		super.onBlockAdded(world, pos, state);
+		this.setDefaultDirection(world, pos);
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata){
-		return metadata == 0 && side == 3 ? (isActive ? iconFront_Acitve : iconFront_Inacitve) : (side == 1 ? this.blockTop : (side == 0 ? this.blockTop : side != metadata ? this.blockSide : (isActive ? iconFront_Acitve : iconFront_Inacitve))); 
-	}
-	
-	public void onBlockAdded(World world, int x, int y, int z){
-		super.onBlockAdded(world, x, y, z);
-		this.setDefaultDirection(world, x, y, z);
-	}
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random random){
+	@Override
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand){
 		if(this.isActive){
-			int dir = world.getBlockMetadata(x, y, z);
+			int dir = getMetaFromState(state);
 			
-			float x1 = (float) x + 0.5F;
-			float y1 = (float) y + random.nextFloat(); 
-			float z1 = (float) z + 0.5F;
+			float x1 = (float) pos.getX() + 0.5F;
+			float y1 = (float) pos.getY() + rand.nextFloat(); 
+			float z1 = (float) pos.getZ() + 0.5F;
 			
 			float f = 0.52F;
-			float f1 = random.nextFloat() * 0.6F - 0.3F;
+			float f1 = rand.nextFloat() * 0.6F - 0.3F;
 			
 			if(dir == 4){
-				world.spawnParticle("portal", (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
-				world.spawnParticle("portal", (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
-				world.spawnParticle("portal", (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 - f), (double) (y1), (double) (z1 + f1), -1D, 0D, 0D);
 			}else if(dir == 5){
-				world.spawnParticle("portal", (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
-				world.spawnParticle("portal", (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
-				world.spawnParticle("portal", (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f), (double) (y1), (double) (z1 + f1), 1D, 0D, 0D);
 			}else if(dir == 2){
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
 			}else if(dir == 3){
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
-				world.spawnParticle("portal", (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
+				world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 + f), 0D, 0D, 1D);
 			}
 		}
 	}
 	
-	private void setDefaultDirection(World world, int x, int y, int z){
+	private void setDefaultDirection(World world, BlockPos pos){
 		if(!world.isRemote){
-			Block l = world.getBlock(x, y, z - 1);
-			Block il = world.getBlock(x, y, z + 1);
-			Block jl = world.getBlock(x - 1, y, z);
-			Block kl = world.getBlock(x + 1, y, z);
+			Block l = world.getBlockState(pos.add(0, 0, -1)).getBlock();
+			Block il = world.getBlockState(pos.add(0, 0, 1)).getBlock();
+			Block jl = world.getBlockState(pos.add(-1, 0, 0)).getBlock();
+			Block kl = world.getBlockState(pos.add(1, 0, 0)).getBlock();
 		
 			byte b0 = 3;
 			
-			/*if(Blocks.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[il]){
-				b0 = 3;
-			}
-			
-			if(Block.opaqueCubeLookup[il] && !Block.opaqueCubeLookup[l]){
-				b0 = 2;
-			}
-			
-			if(Block.opaqueCubeLookup[kl] && !Block.opaqueCubeLookup[jl]){
-				b0 = 5;
-			}
-			
-			if(Block.opaqueCubeLookup[jl] && !Block.opaqueCubeLookup[kl]){
-				b0 = 4;
-			}
-		*/
-			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+			world.setBlockState(pos, this.getStateFromMeta(b0), 2);
 		}
 	}
 	
@@ -130,28 +99,28 @@ public class VoidMacerator extends BlockContainer {
 		return new TileEntityVoidMacerator();
 	}
 	
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemstack){
-		int l = MathHelper.floor_double((double)(entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
+		int l = MathHelper.floor_double((double)(placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 		
 		if(l == 0){
-			world.setBlockMetadataWithNotify(x,  y,  z,  2, 2);
+			world.setBlockState(pos, this.getStateFromMeta(2), 2);
 		}
 		
 		if(l == 1){
-			world.setBlockMetadataWithNotify(x,  y,  z,  5, 2);
+			world.setBlockState(pos, this.getStateFromMeta(5), 2);
 		}
 		
 		if(l == 2){
-			world.setBlockMetadataWithNotify(x,  y,  z,  3, 2);
+			world.setBlockState(pos, this.getStateFromMeta(3), 2);
 		}
 		
 		if(l == 3){
-			world.setBlockMetadataWithNotify(x,  y,  z,  4, 2);
+			world.setBlockState(pos, this.getStateFromMeta(4), 2);
 		}
 		
-		if(itemstack.hasDisplayName()){
-			((TileEntityVoidMacerator) world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
+		if(stack.hasDisplayName()){
+			((TileEntityVoidMacerator) world.getTileEntity(pos)).setGuiDisplayName(stack.getDisplayName());
 		}
 	}
 	
@@ -159,16 +128,19 @@ public class VoidMacerator extends BlockContainer {
 		return true;
 	}
 	
-	public int getComparatorInputOverride(World world, int x, int y, int z, int i){
-		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(x, y, z));
+	@Override
+	public int getComparatorInputOverride(World world, BlockPos pos){
+		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
 	}
 	
-	public Block idPicked(World world, int x, int y, int z){
-		return voidCraft.blocks.voidMacerator;
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos, EntityPlayer player){
+		return new ItemStack(voidCraft.blocks.voidMacerator);
 	}
 	
-	public void breakBlock(World world, int x, int y, int z, Block oldBlockID, int oldMetadata){
-			TileEntityVoidMacerator tileentity = (TileEntityVoidMacerator) world.getTileEntity(x, y, z);
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state){
+			TileEntityVoidMacerator tileentity = (TileEntityVoidMacerator) world.getTileEntity(pos);
 			
 			if(tileentity != null){
 				for(int i = 0; i < tileentity.getSizeInventory(); i++){
@@ -188,7 +160,7 @@ public class VoidMacerator extends BlockContainer {
 							
 							itemstack.stackSize-=j;
 							
-							EntityItem item = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(itemstack.getItem()));
+							EntityItem item = new EntityItem(world, (double)((float)pos.getX() + f), (double)((float)pos.getY() + f1), (double)((float)pos.getZ() + f2), new ItemStack(itemstack.getItem()));
 							
 							if(itemstack.hasTagCompound()){
 								item.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
@@ -208,7 +180,7 @@ public class VoidMacerator extends BlockContainer {
 			}
 		
 		
-		super.breakBlock(world, x, y, z, oldBlockID, oldMetadata);
+		super.breakBlock(world, pos, state);
 	}
 
 	

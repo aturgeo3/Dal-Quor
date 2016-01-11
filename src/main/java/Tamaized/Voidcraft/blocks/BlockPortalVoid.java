@@ -3,19 +3,12 @@ package Tamaized.Voidcraft.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBreakable;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Direction;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.world.dim.TheVoid.TeleporterVoid;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPortalVoid extends BlockVoidTeleporter {
 
@@ -27,10 +20,11 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 	 * Updates the blocks bounds based on its current state. Args: world, x, y,
 	 * z
 	 */
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
 		float f;
 		float f1;
-		if (par1IBlockAccess.getBlock(par2 - 1, par3, par4) != this && par1IBlockAccess.getBlock(par2 + 1, par3, par4) != this) {
+		if (par1IBlockAccess.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() != this && par1IBlockAccess.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() != this) {
 			f = 0.125F;
 			f1 = 0.5F;
 			this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
@@ -41,22 +35,23 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 		}
 	}
 	
+	@Override
 	public boolean tryToCreatePortal(World par1World, int par2, int par3, int par4) {
 		byte b0 = 0;
 		byte b1 = 0;
 
-		if(par1World.getBlock(par2 - 1, par3, par4) == voidCraft.blocks.blockVoidcrystal || par1World.getBlock(par2 + 1, par3, par4) == voidCraft.blocks.blockVoidcrystal) {
+		if(par1World.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() == voidCraft.blocks.blockVoidcrystal || par1World.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() == voidCraft.blocks.blockVoidcrystal) {
 			b0 = 1;
 		}
 
-		if(par1World.getBlock(par2, par3, par4 - 1) == voidCraft.blocks.blockVoidcrystal || par1World.getBlock(par2, par3, par4 + 1) == voidCraft.blocks.blockVoidcrystal) {
+		if(par1World.getBlockState(new BlockPos(par2, par3, par4 - 1)).getBlock() == voidCraft.blocks.blockVoidcrystal || par1World.getBlockState(new BlockPos(par2, par3, par4 + 1)).getBlock() == voidCraft.blocks.blockVoidcrystal) {
 			b1 = 1;
 		}
 
 		if(b0 == b1) {
 			return false;
 		}else{
-			if(par1World.isAirBlock(par2 - b0, par3, par4 - b1)) {
+			if(par1World.isAirBlock(new BlockPos(par2 - b0, par3, par4 - b1))) {
 				par2 -= b0;
 				par4 -= b1;
 			}
@@ -69,8 +64,8 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 					boolean flag = l == -1 || l == 2 || i1 == -1 || i1 == 3;
 
 					if(l != -1 && l != 2 || i1 != -1 && i1 != 3) {
-						Block j1 = par1World.getBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l);
-						boolean isAirBlock = par1World.isAirBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l);
+						Block j1 = par1World.getBlockState(new BlockPos(par2 + b0 * l, par3 + i1, par4 + b1 * l)).getBlock();
+						boolean isAirBlock = par1World.isAirBlock(new BlockPos(par2 + b0 * l, par3 + i1, par4 + b1 * l));
 
 						if(flag) {
 							if(j1 != voidCraft.blocks.blockVoidcrystal) {
@@ -85,7 +80,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
 			for(l = 0; l < 2; ++l) {
 				for(i1 = 0; i1 < 3; ++i1) {
-					par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l, voidCraft.blocks.blockPortalVoid, 0, 2);
+					par1World.setBlockState(new BlockPos(par2 + b0 * l, par3 + i1, par4 + b1 * l), voidCraft.blocks.blockPortalVoid.getDefaultState(), 2);
 				}
 			}
 
@@ -93,43 +88,44 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 		}
 	}
 
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
 		byte b0 = 0;
 		byte b1 = 1;
 
-		if (par1World.getBlock(par2 - 1, par3, par4) == this || par1World.getBlock(par2 + 1, par3, par4) == this) {
+		if (par1World.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() == this || par1World.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() == this) {
 			b0 = 1;
 			b1 = 0;
 		}
 
 		int i1;
 
-		for (i1 = par3; par1World.getBlock(par2, i1 - 1, par4) == this; --i1) {
+		for (i1 = par3; par1World.getBlockState(new BlockPos(par2, i1 - 1, par4)).getBlock() == this; --i1) {
 			;
 		}
 
-		if (par1World.getBlock(par2, i1 - 1, par4) != voidCraft.blocks.blockVoidcrystal) {
-			par1World.setBlockToAir(par2, par3, par4);
+		if (par1World.getBlockState(new BlockPos(par2, i1 - 1, par4)).getBlock() != voidCraft.blocks.blockVoidcrystal) {
+			par1World.setBlockToAir(new BlockPos(par2, par3, par4));
 		} else {
 			int j1;
 
-			for (j1 = 1; j1 < 4 && par1World.getBlock(par2, i1 + j1, par4) == this; ++j1) {
+			for (j1 = 1; j1 < 4 && par1World.getBlockState(new BlockPos(par2, i1 + j1, par4)).getBlock() == this; ++j1) {
 				;
 			}
 
-			if (j1 == 3 && par1World.getBlock(par2, i1 + j1, par4) == voidCraft.blocks.blockVoidcrystal) {
-				boolean flag = par1World.getBlock(par2 - 1, par3, par4) == this || par1World.getBlock(par2 + 1, par3, par4) == this;
-				boolean flag1 = par1World.getBlock(par2, par3, par4 - 1) == this || par1World.getBlock(par2, par3, par4 + 1) == this;
+			if (j1 == 3 && par1World.getBlockState(new BlockPos(par2, i1 + j1, par4)).getBlock() == voidCraft.blocks.blockVoidcrystal) {
+				boolean flag = par1World.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() == this || par1World.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() == this;
+				boolean flag1 = par1World.getBlockState(new BlockPos(par2, par3, par4 - 1)).getBlock() == this || par1World.getBlockState(new BlockPos(par2, par3, par4 + 1)).getBlock() == this;
 
 				if (flag && flag1) {
-					par1World.setBlockToAir(par2, par3, par4);
+					par1World.setBlockToAir(new BlockPos(par2, par3, par4));
 				} else {
-					if ((par1World.getBlock(par2 + b0, par3, par4 + b1) != voidCraft.blocks.blockVoidcrystal || par1World .getBlock(par2 - b0, par3, par4 - b1) != this) && (par1World.getBlock(par2 - b0, par3, par4 - b1) != voidCraft.blocks.blockVoidcrystal || par1World.getBlock(par2 + b0, par3, par4 + b1) != this)){
-						par1World.setBlockToAir(par2, par3, par4);
+					if ((par1World.getBlockState(new BlockPos(par2 + b0, par3, par4 + b1)).getBlock() != voidCraft.blocks.blockVoidcrystal || par1World.getBlockState(new BlockPos(par2 - b0, par3, par4 - b1)).getBlock() != this) && (par1World.getBlockState(new BlockPos(par2 - b0, par3, par4 - b1)).getBlock() != voidCraft.blocks.blockVoidcrystal || par1World.getBlockState(new BlockPos(par2 + b0, par3, par4 + b1)).getBlock() != this)){
+						par1World.setBlockToAir(new BlockPos(par2, par3, par4));
 					}
 				}
 			}else{
-				par1World.setBlockToAir(par2, par3, par4);
+				par1World.setBlockToAir(new BlockPos(par2, par3, par4));
 			}
 		}
 	}
@@ -138,6 +134,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 	 * A randomly called display update to be able to add particles or other items for display
 	 */
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (par5Random.nextInt(100) == 0) {
 			par1World.playSound((double) par2 + 0.5D, (double) par3 + 0.5D, (double) par4 + 0.5D, "portal.portal", 0.5F, par5Random.nextFloat() * 0.4F + 0.8F, false);
@@ -155,7 +152,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 			d4 = ((double) par5Random.nextFloat() - 0.5D) * 0.5D;
 			d5 = ((double) par5Random.nextFloat() - 0.5D) * 0.5D;
 
-			if (par1World.getBlock(par2 - 1, par3, par4) != this && par1World.getBlock(par2 + 1, par3, par4) != this) {
+			if (par1World.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() != this && par1World.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() != this) {
 				d0 = (double) par2 + 0.5D + 0.25D * (double) i1;
 				d3 = (double) (par5Random.nextFloat() * 2.0F * (float) i1);
 			} else {
@@ -174,14 +171,15 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 	 * coordinates. Args: blockAccess, x, y, z, side
 	 */
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
-		if (par1IBlockAccess.getBlock(par2, par3, par4) == this) {
+		if (par1IBlockAccess.getBlockState(new BlockPos(par2, par3, par4)).getBlock() == this) {
 			return false;
 		} else {
-			boolean flag = par1IBlockAccess.getBlock(par2 - 1, par3, par4) == this && par1IBlockAccess.getBlock(par2 - 2, par3, par4) != this;
-			boolean flag1 = par1IBlockAccess.getBlock(par2 + 1, par3, par4) == this && par1IBlockAccess.getBlock(par2 + 2, par3, par4) != this;
-			boolean flag2 = par1IBlockAccess.getBlock(par2, par3, par4 - 1) == this && par1IBlockAccess.getBlock(par2, par3, par4 - 2) != this;
-			boolean flag3 = par1IBlockAccess.getBlock(par2, par3, par4 + 1) == this && par1IBlockAccess.getBlock(par2, par3, par4 + 2) != this;
+			boolean flag = par1IBlockAccess.getBlockState(new BlockPos(par2 - 1, par3, par4)).getBlock() == this && par1IBlockAccess.getBlockState(new BlockPos(par2 - 2, par3, par4)).getBlock() != this;
+			boolean flag1 = par1IBlockAccess.getBlockState(new BlockPos(par2 + 1, par3, par4)).getBlock() == this && par1IBlockAccess.getBlockState(new BlockPos(par2 + 2, par3, par4)).getBlock() != this;
+			boolean flag2 = par1IBlockAccess.getBlockState(new BlockPos(par2, par3, par4 - 1)).getBlock() == this && par1IBlockAccess.getBlockState(new BlockPos(par2, par3, par4 - 2)).getBlock() != this;
+			boolean flag3 = par1IBlockAccess.getBlockState(new BlockPos(par2, par3, par4 + 1)).getBlock() == this && par1IBlockAccess.getBlockState(new BlockPos(par2, par3, par4 + 2)).getBlock() != this;
 			boolean flag4 = flag || flag1;
 			boolean flag5 = flag2 || flag3;
 			return flag4 && par5 == 4 ? true : (flag4 && par5 == 5 ? true : (flag5 && par5 == 2 ? true : flag5 && par5 == 3));

@@ -33,9 +33,9 @@ public class VoidFluids extends RegistryBase {
 		// Fluid
 		fluidVoid = new Fluid("void");
 		materialFluidVoid = new MaterialLiquid(MapColor.purpleColor);
-		// -This has to be here for Fluids
+		// This has to be here for Fluids
 		FluidRegistry.registerFluid(fluidVoid);
-		// +This here must be last
+		// This must be last
 		blockVoidFluid = new BlockVoidFluid(fluidVoid, Material.water).setDensity(-400);
 		voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid);
 		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluidVoid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(voidBucket), new ItemStack(Items.bucket)));
