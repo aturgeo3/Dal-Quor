@@ -2,22 +2,28 @@ package Tamaized.Voidcraft.projectiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderHook extends Render {
 	
+	protected RenderHook(RenderManager renderManager) {
+		super(renderManager);
+	}
+
 	private static final ResourceLocation hookTexture = new ResourceLocation("VoidCraft:textures/entity/voidHook.png");
 	
 	public void renderArrow(EntityHookShot hook, double par2, double par4, double par6, float par8, float par9)
@@ -25,17 +31,18 @@ public class RenderHook extends Render {
         this.bindEntityTexture(hook);
         GL11.glPushMatrix();
 
-        Tessellator tessellator = Tessellator.instance;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrender = tessellator.getWorldRenderer();
         
         if (hook.shootingEntity != null)
         {
             float f9 = hook.shootingEntity.getSwingProgress(par9);
             float f10 = MathHelper.sin(MathHelper.sqrt_float(f9) * (float)Math.PI);
-            Vec3 vec3 = Vec3.createVectorHelper(-0.5D, 0.03D, 0.8D);
-            vec3.rotateAroundX(-(hook.shootingEntity.prevRotationPitch + (hook.shootingEntity.rotationPitch - hook.shootingEntity.prevRotationPitch) * par9) * (float)Math.PI / 180.0F);
-            vec3.rotateAroundY(-(hook.shootingEntity.prevRotationYaw + (hook.shootingEntity.rotationYaw - hook.shootingEntity.prevRotationYaw) * par9) * (float)Math.PI / 180.0F);
-            vec3.rotateAroundY(f10 * 0.5F);
-            vec3.rotateAroundX(-f10 * 0.7F);
+            Vec3 vec3 = new Vec3(-0.5D, 0.03D, 0.8D);
+            vec3.rotatePitch(-(hook.shootingEntity.prevRotationPitch + (hook.shootingEntity.rotationPitch - hook.shootingEntity.prevRotationPitch) * par9) * (float)Math.PI / 180.0F);
+            vec3.rotateYaw(-(hook.shootingEntity.prevRotationYaw + (hook.shootingEntity.rotationYaw - hook.shootingEntity.prevRotationYaw) * par9) * (float)Math.PI / 180.0F);
+            vec3.rotateYaw(f10 * 0.5F);
+            vec3.rotatePitch(-f10 * 0.7F);
             double d3 = hook.shootingEntity.prevPosX + (hook.shootingEntity.posX - hook.shootingEntity.prevPosX) * (double)par9 + vec3.xCoord;
             double d4 = hook.shootingEntity.prevPosY + (hook.shootingEntity.posY - hook.shootingEntity.prevPosY) * (double)par9 + vec3.yCoord;
             double d5 = hook.shootingEntity.prevPosZ + (hook.shootingEntity.posZ - hook.shootingEntity.prevPosZ) * (double)par9 + vec3.zCoord;
@@ -59,14 +66,14 @@ public class RenderHook extends Render {
             double d13 = (double)((float)(d5 - d10));
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glDisable(GL11.GL_LIGHTING);
-            tessellator.startDrawing(3);
-            tessellator.setColorOpaque_I(0);
+            worldrender.startDrawing(3);
+            worldrender.setColorOpaque_I(0);
             byte b2 = 16;
 
             for (int i = 0; i <= b2; ++i)
             {
                 float f12 = (float)i / (float)b2;
-                tessellator.addVertex(par2 + d11 * (double)f12, par4 + d12 * (double)(f12 * f12 + f12) * 0.5D + 0.25D, par6 + d13 * (double)f12);
+                worldrender.addVertex(par2 + d11 * (double)f12, par4 + d12 * (double)(f12 * f12 + f12) * 0.5D + 0.25D, par6 + d13 * (double)f12);
             }
 
             tessellator.draw();
@@ -117,29 +124,29 @@ public class RenderHook extends Render {
         GL11.glScalef(f10, f10, f10);
         GL11.glTranslatef(-4.0F, 0.0F, 0.0F);
         GL11.glNormal3f(f10, 0.0F, 0.0F);
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f8);
-        tessellator.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f8);
-        tessellator.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f9);
-        tessellator.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f9);
+        worldrender.startDrawingQuads();
+        worldrender.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f8);
+        worldrender.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f8);
+        worldrender.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f9);
+        worldrender.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f9);
         tessellator.draw();
         GL11.glNormal3f(-f10, 0.0F, 0.0F);
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f8);
-        tessellator.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f8);
-        tessellator.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f9);
-        tessellator.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f9);
+        worldrender.startDrawingQuads();
+        worldrender.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f8);
+        worldrender.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f8);
+        worldrender.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f9);
+        worldrender.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f9);
         tessellator.draw();
 
         for (int i = 0; i < 4; ++i)
         {
             GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
             GL11.glNormal3f(0.0F, 0.0F, f10);
-            tessellator.startDrawingQuads();
-            tessellator.addVertexWithUV(-8.0D, -2.0D, 0.0D, (double)f2, (double)f4);
-            tessellator.addVertexWithUV(8.0D, -2.0D, 0.0D, (double)f3, (double)f4);
-            tessellator.addVertexWithUV(8.0D, 2.0D, 0.0D, (double)f3, (double)f5);
-            tessellator.addVertexWithUV(-8.0D, 2.0D, 0.0D, (double)f2, (double)f5);
+            worldrender.startDrawingQuads();
+            worldrender.addVertexWithUV(-8.0D, -2.0D, 0.0D, (double)f2, (double)f4);
+            worldrender.addVertexWithUV(8.0D, -2.0D, 0.0D, (double)f3, (double)f4);
+            worldrender.addVertexWithUV(8.0D, 2.0D, 0.0D, (double)f3, (double)f5);
+            worldrender.addVertexWithUV(-8.0D, 2.0D, 0.0D, (double)f2, (double)f5);
             tessellator.draw();
         }
 

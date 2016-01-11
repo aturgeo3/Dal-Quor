@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.mobs;
 
-import java.util.ArrayList;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -10,6 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
@@ -52,7 +51,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
     {
         super.onUpdate();
 
-        if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+        if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL)
         {
             this.setDead();
         }
@@ -81,7 +80,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
      */
     protected Entity findPlayerToAttack()
     {
-        EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+        EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         return entityplayer != null && this.canEntityBeSeen(entityplayer) ? entityplayer : null;
     }
 
@@ -100,9 +99,9 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
 
             if (this.riddenByEntity != entity && this.ridingEntity != entity)
             {
-                if (entity != this)
+                if (entity != this && entity instanceof EntityLivingBase)
                 {
-                    this.entityToAttack = entity;
+                    this.setAttackTarget((EntityLivingBase) entity);
                 }
 
                 return true;
@@ -170,8 +169,8 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
 
         if (p_70652_1_ instanceof EntityLivingBase)
         {
-            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)p_70652_1_);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)p_70652_1_);
+        	f += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase)p_70652_1_).getCreatureAttribute());
+            i += EnchantmentHelper.getKnockbackModifier(this);
         }
 
         boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), f);
@@ -205,7 +204,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
 
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
-     */
+     *//*
     protected void attackEntity(Entity p_70785_1_, float p_70785_2_)
     {
         if (this.attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY)
@@ -214,15 +213,15 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
             if(!canAttack(p_70785_1_)) return;
             this.attackEntityAsMob(p_70785_1_);
         }
-    }
+    }*/
 
     /**
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int p_70783_1_, int p_70783_2_, int p_70783_3_)
+    public float getBlockPathWeight(BlockPos pos)
     {
-        return 0.5F - this.worldObj.getLightBrightness(p_70783_1_, p_70783_2_, p_70783_3_);
+        return 0.5F - this.worldObj.getLightBrightness(pos);
     }
 
     /**
@@ -239,7 +238,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
      */
     public boolean getCanSpawnHere()
     {
-        return this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
+        return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
     }
 
     protected void applyEntityAttributes()

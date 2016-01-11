@@ -7,7 +7,8 @@ import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -33,208 +34,200 @@ public class TeleporterVoid extends Teleporter {
 	/**
 	 * Place an entity in a nearby portal, creating one if necessary.
 	 */
-	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8){
-		if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
+	@Override
+	public void placeInPortal(Entity entity, float rotationYaw){
+		if(entity instanceof EntityPlayer) ((EntityPlayer) entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
 	
-		if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)){
-			this.makePortal(par1Entity);
-			this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
+		if (!this.placeInExistingPortal(entity, rotationYaw)){
+			this.makePortal(entity);
+			this.placeInExistingPortal(entity, rotationYaw);
 		}
 	}
 
-    /**
-	 * Place an entity in a nearby portal which already exists.
-	 */
-	public boolean placeInExistingPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
-	{
-	    short short1 = 128;
-	    double d3 = -1.0D;
-	    int i = 0;
-	    int j = 0;
-	    int k = 0;
-	    int l = MathHelper.floor_double(par1Entity.posX);
-	    int i1 = MathHelper.floor_double(par1Entity.posZ);
-	    long j1 = ChunkCoordIntPair.chunkXZ2Int(l, i1);
-	    boolean flag = true;
-	    double d4;
-	    int k1;
+	public boolean placeInExistingPortal(Entity entityIn, float p_180620_2_)
+    {
+        boolean flag = true;
+        double d0 = -1.0D;
+        int i = MathHelper.floor_double(entityIn.posX);
+        int j = MathHelper.floor_double(entityIn.posZ);
+        boolean flag1 = true;
+        Object object = BlockPos.ORIGIN;
+        long k = ChunkCoordIntPair.chunkXZ2Int(i, j);
+
+        if (this.destinationCoordinateCache.containsItem(k))
+        {
+            Teleporter.PortalPosition portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.getValueByKey(k);
+            d0 = 0.0D;
+            object = portalposition;
+            portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
+            flag1 = false;
+        }
+        else
+        {
+            BlockPos blockpos4 = new BlockPos(entityIn);
+
+            for (int l = -128; l <= 128; ++l)
+            {
+                BlockPos blockpos1;
+
+                for (int i1 = -128; i1 <= 128; ++i1)
+                {
+                    for (BlockPos blockpos = blockpos4.add(l, this.worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 0; blockpos = blockpos1)
+                    {
+                        blockpos1 = blockpos.down();
+
+                        if (this.worldServerInstance.getBlockState(blockpos).getBlock() == Blocks.portal)
+                        {
+                            while (this.worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == Blocks.portal)
+                            {
+                                blockpos = blockpos1;
+                            }
+
+                            double d1 = blockpos.distanceSq(blockpos4);
+
+                            if (d0 < 0.0D || d1 < d0)
+                            {
+                                d0 = d1;
+                                object = blockpos;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (d0 >= 0.0D)
+        {
+            if (flag1)
+            {
+                this.destinationCoordinateCache.add(k, new Teleporter.PortalPosition((BlockPos)object, this.worldServerInstance.getTotalWorldTime()));
+                this.destinationCoordinateKeys.add(Long.valueOf(k));
+            }
+
+            double d4 = (double)((BlockPos)object).getX() + 0.5D;
+            double d5 = (double)((BlockPos)object).getY() + 0.5D;
+            double d6 = (double)((BlockPos)object).getZ() + 0.5D;
+            EnumFacing enumfacing = null;
+
+            if (this.worldServerInstance.getBlockState(((BlockPos)object).west()).getBlock() == voidCraft.blocks.blockPortalVoid)
+            {
+                enumfacing = EnumFacing.NORTH;
+            }
+
+            if (this.worldServerInstance.getBlockState(((BlockPos)object).east()).getBlock() == voidCraft.blocks.blockPortalVoid)
+            {
+                enumfacing = EnumFacing.SOUTH;
+            }
+
+            if (this.worldServerInstance.getBlockState(((BlockPos)object).north()).getBlock() == voidCraft.blocks.blockPortalVoid)
+            {
+                enumfacing = EnumFacing.EAST;
+            }
+
+            if (this.worldServerInstance.getBlockState(((BlockPos)object).south()).getBlock() == voidCraft.blocks.blockPortalVoid)
+            {
+                enumfacing = EnumFacing.WEST;
+            }
+
+            EnumFacing enumfacing1 = EnumFacing.getHorizontal(entityIn.getTeleportDirection());
+
+            if (enumfacing != null)
+            {
+                EnumFacing enumfacing2 = enumfacing.rotateYCCW();
+                BlockPos blockpos2 = ((BlockPos)object).offset(enumfacing);
+                boolean flag2 = this.func_180265_a(blockpos2);
+                boolean flag3 = this.func_180265_a(blockpos2.offset(enumfacing2));
+
+                if (flag3 && flag2)
+                {
+                    object = ((BlockPos)object).offset(enumfacing2);
+                    enumfacing = enumfacing.getOpposite();
+                    enumfacing2 = enumfacing2.getOpposite();
+                    BlockPos blockpos3 = ((BlockPos)object).offset(enumfacing);
+                    flag2 = this.func_180265_a(blockpos3);
+                    flag3 = this.func_180265_a(blockpos3.offset(enumfacing2));
+                }
+
+                float f6 = 0.5F;
+                float f1 = 0.5F;
+
+                if (!flag3 && flag2)
+                {
+                    f6 = 1.0F;
+                }
+                else if (flag3 && !flag2)
+                {
+                    f6 = 0.0F;
+                }
+                else if (flag3)
+                {
+                    f1 = 0.0F;
+                }
+
+                d4 = (double)((BlockPos)object).getX() + 0.5D;
+                d5 = (double)((BlockPos)object).getY() + 0.5D;
+                d6 = (double)((BlockPos)object).getZ() + 0.5D;
+                d4 += (double)((float)enumfacing2.getFrontOffsetX() * f6 + (float)enumfacing.getFrontOffsetX() * f1);
+                d6 += (double)((float)enumfacing2.getFrontOffsetZ() * f6 + (float)enumfacing.getFrontOffsetZ() * f1);
+                float f2 = 0.0F;
+                float f3 = 0.0F;
+                float f4 = 0.0F;
+                float f5 = 0.0F;
+
+                if (enumfacing == enumfacing1)
+                {
+                    f2 = 1.0F;
+                    f3 = 1.0F;
+                }
+                else if (enumfacing == enumfacing1.getOpposite())
+                {
+                    f2 = -1.0F;
+                    f3 = -1.0F;
+                }
+                else if (enumfacing == enumfacing1.rotateY())
+                {
+                    f4 = 1.0F;
+                    f5 = -1.0F;
+                }
+                else
+                {
+                    f4 = -1.0F;
+                    f5 = 1.0F;
+                }
+
+                double d2 = entityIn.motionX;
+                double d3 = entityIn.motionZ;
+                entityIn.motionX = d2 * (double)f2 + d3 * (double)f5;
+                entityIn.motionZ = d2 * (double)f4 + d3 * (double)f3;
+                entityIn.rotationYaw = p_180620_2_ - (float)(enumfacing1.getHorizontalIndex() * 90) + (float)(enumfacing.getHorizontalIndex() * 90);
+            }
+            else
+            {
+                entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+            }
+
+            entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 	
-	    if (this.destinationCoordinateCache.containsItem(j1))
-	    {
-	        PortalPosition portalposition = (PortalPosition)this.destinationCoordinateCache.getValueByKey(j1);
-	        d3 = 0.0D;
-	        i = portalposition.posX;
-	        j = portalposition.posY;
-	        k = portalposition.posZ;
-	        portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
-	        flag = false;
-	    }
-	    else
-	    {
-	        for (k1 = l - short1; k1 <= l + short1; ++k1)
-	        {
-	            double d5 = (double)k1 + 0.5D - par1Entity.posX;
+	private boolean func_180265_a(BlockPos p_180265_1_)
+    {
+        return !this.worldServerInstance.isAirBlock(p_180265_1_) || !this.worldServerInstance.isAirBlock(p_180265_1_.up());
+    }
+
 	
-	            for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1)
-	            {
-	                double d6 = (double)l1 + 0.5D - par1Entity.posZ;
-	
-	                for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-	                {
-	                    if (this.worldServerInstance.getBlock(k1, i2, l1) == voidCraft.blocks.blockPortalVoid)
-	                    {
-	                        while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == voidCraft.blocks.blockPortalVoid)
-	                        {
-	                            --i2;
-	                        }
-	
-	                        d4 = (double)i2 + 0.5D - par1Entity.posY;
-	                        double d7 = d5 * d5 + d4 * d4 + d6 * d6;
-	
-	                        if (d3 < 0.0D || d7 < d3)
-	                        {
-	                            d3 = d7;
-	                            i = k1;
-	                            j = i2;
-	                            k = l1;
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    }
-	
-	    if (d3 >= 0.0D)
-	    {
-	        if (flag)
-	        {
-	            this.destinationCoordinateCache.add(j1, new PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
-	            this.destinationCoordinateKeys.add(Long.valueOf(j1));
-	        }
-	
-	        double d8 = (double)i + 0.5D;
-	        double d9 = (double)j + 0.5D;
-	        d4 = (double)k + 0.5D;
-	        int j2 = -1;
-	
-	        if (this.worldServerInstance.getBlock(i - 1, j, k) == voidCraft.blocks.blockPortalVoid)
-	        {
-	            j2 = 2;
-	        }
-	
-	        if (this.worldServerInstance.getBlock(i + 1, j, k) == voidCraft.blocks.blockPortalVoid)
-	        {
-	            j2 = 0;
-	        }
-	
-	        if (this.worldServerInstance.getBlock(i, j, k - 1) == voidCraft.blocks.blockPortalVoid)
-	        {
-	            j2 = 3;
-	        }
-	
-	        if (this.worldServerInstance.getBlock(i, j, k + 1) == voidCraft.blocks.blockPortalVoid)
-	        {
-	            j2 = 1;
-	        }
-	
-	        int k2 = par1Entity.getTeleportDirection();
-	
-	        if (j2 > -1)
-	        {
-	            int l2 = Direction.rotateLeft[j2];
-	            int i3 = Direction.offsetX[j2];
-	            int j3 = Direction.offsetZ[j2];
-	            int k3 = Direction.offsetX[l2];
-	            int l3 = Direction.offsetZ[l2];
-	            boolean flag1 = !this.worldServerInstance.isAirBlock(i + i3 + k3, j, k + j3 + l3) || !this.worldServerInstance.isAirBlock(i + i3 + k3, j + 1, k + j3 + l3);
-	            boolean flag2 = !this.worldServerInstance.isAirBlock(i + i3, j, k + j3) || !this.worldServerInstance.isAirBlock(i + i3, j + 1, k + j3);
-	
-	            if (flag1 && flag2)
-	            {
-	                j2 = Direction.rotateOpposite[j2];
-	                l2 = Direction.rotateOpposite[l2];
-	                i3 = Direction.offsetX[j2];
-	                j3 = Direction.offsetZ[j2];
-	                k3 = Direction.offsetX[l2];
-	                l3 = Direction.offsetZ[l2];
-	                k1 = i - k3;
-	                d8 -= (double)k3;
-	                int i4 = k - l3;
-	                d4 -= (double)l3;
-	                flag1 = !this.worldServerInstance.isAirBlock(k1 + i3 + k3, j, i4 + j3 + l3) || !this.worldServerInstance.isAirBlock(k1 + i3 + k3, j + 1, i4 + j3 + l3);
-	                flag2 = !this.worldServerInstance.isAirBlock(k1 + i3, j, i4 + j3) || !this.worldServerInstance.isAirBlock(k1 + i3, j + 1, i4 + j3);
-	            }
-	
-	            float f1 = 0.5F;
-	            float f2 = 0.5F;
-	
-	            if (!flag1 && flag2)
-	            {
-	                f1 = 1.0F;
-	            }
-	            else if (flag1 && !flag2)
-	            {
-	                f1 = 0.0F;
-	            }
-	            else if (flag1 && flag2)
-	            {
-	                f2 = 0.0F;
-	            }
-	
-	            d8 += (double)((float)k3 * f1 + f2 * (float)i3);
-	            d4 += (double)((float)l3 * f1 + f2 * (float)j3);
-	            float f3 = 0.0F;
-	            float f4 = 0.0F;
-	            float f5 = 0.0F;
-	            float f6 = 0.0F;
-	
-	            if (j2 == k2)
-	            {
-	                f3 = 1.0F;
-	                f4 = 1.0F;
-	            }
-	            else if (j2 == Direction.rotateOpposite[k2])
-	            {
-	                f3 = -1.0F;
-	                f4 = -1.0F;
-	            }
-	            else if (j2 == Direction.rotateRight[k2])
-	            {
-	                f5 = 1.0F;
-	                f6 = -1.0F;
-	            }
-	            else
-	            {
-	                f5 = -1.0F;
-	                f6 = 1.0F;
-	            }
-	
-	            double d10 = par1Entity.motionX;
-	            double d11 = par1Entity.motionZ;
-	            par1Entity.motionX = d10 * (double)f3 + d11 * (double)f6;
-	            par1Entity.motionZ = d10 * (double)f5 + d11 * (double)f4;
-	            par1Entity.rotationYaw = par8 - (float)(k2 * 90) + (float)(j2 * 90);
-	        }
-	        else
-	        {
-	            par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
-	        }
-	
-	        par1Entity.setLocationAndAngles(d8, d9, d4, par1Entity.rotationYaw, par1Entity.rotationPitch);
-	        return true;
-	    }
-	    else
-	    {
-	        return false;
-	    }
-	}
-	
-	public boolean makePortal(Entity par1Entity) {
+	@Override
+	public boolean makePortal(Entity entity) {
 		byte b0 = 16;
 		double d0 = -1.0D;
-		int i = MathHelper.floor_double(par1Entity.posX);
-		int j = MathHelper.floor_double(par1Entity.posY);
-		int k = MathHelper.floor_double(par1Entity.posZ);
+		int i = MathHelper.floor_double(entity.posX);
+		int j = MathHelper.floor_double(entity.posY);
+		int k = MathHelper.floor_double(entity.posZ);
 		int l = i;
 		int i1 = j;
 		int j1 = k;
@@ -257,15 +250,15 @@ public class TeleporterVoid extends Teleporter {
 		double d4;
 
 		for (i2 = i - b0; i2 <= i + b0; ++i2) {
-			d1 = (double) i2 + 0.5D - par1Entity.posX;
+			d1 = (double) i2 + 0.5D - entity.posX;
 
 			for (j2 = k - b0; j2 <= k + b0; ++j2) {
-				d2 = (double) j2 + 0.5D - par1Entity.posZ;
+				d2 = (double) j2 + 0.5D - entity.posZ;
 				label274:
 
 				for (k2 = this.worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2) {
-					if (this.worldServerInstance.isAirBlock(i2, k2, j2)) {
-						while (k2 > 0 && this.worldServerInstance.isAirBlock(i2, k2 - 1, j2)) {
+					if (this.worldServerInstance.isAirBlock(new BlockPos(i2, k2, j2))) {
+						while (k2 > 0 && this.worldServerInstance.isAirBlock(new BlockPos(i2, k2 - 1, j2))) {
 							--k2;
 						}
 
@@ -285,14 +278,14 @@ public class TeleporterVoid extends Teleporter {
 										j4 = k2 + l3;
 										int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
 
-										if (l3 < 0 && !this.worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !this.worldServerInstance.isAirBlock(k4, j4, l4)) {
+										if (l3 < 0 && !this.worldServerInstance.getBlockState(new BlockPos(k4, j4, l4)).getBlock().getMaterial().isSolid() || l3 >= 0 && !this.worldServerInstance.isAirBlock(new BlockPos(k4, j4, l4))) {
 											continue label274;
 										}
 									}
 								}
 							}
 
-							d4 = (double) k2 + 0.5D - par1Entity.posY;
+							d4 = (double) k2 + 0.5D - entity.posY;
 							d3 = d1 * d1 + d4 * d4 + d2 * d2;
 
 							if (d0 < 0.0D || d3 < d0) {
@@ -310,17 +303,16 @@ public class TeleporterVoid extends Teleporter {
 
 		if (d0 < 0.0D) {
 			for (i2 = i - b0; i2 <= i + b0; ++i2) {
-				d1 = (double) i2 + 0.5D - par1Entity.posX;
+				d1 = (double) i2 + 0.5D - entity.posX;
 
 				for (j2 = k - b0; j2 <= k + b0; ++j2) {
-					d2 = (double) j2 + 0.5D - par1Entity.posZ;
+					d2 = (double) j2 + 0.5D - entity.posZ;
 					label222:
 
 					for (k2 = this.worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2) {
-						if (this.worldServerInstance.isAirBlock(i2, k2, j2)) {
+						if (this.worldServerInstance.isAirBlock(new BlockPos(i2, k2, j2))) {
 							while (k2 > 0
-									&& this.worldServerInstance.isAirBlock(i2,
-											k2 - 1, j2)) {
+									&& this.worldServerInstance.isAirBlock(new BlockPos(i2, k2 - 1, j2))) {
 								--k2;
 							}
 
@@ -334,13 +326,13 @@ public class TeleporterVoid extends Teleporter {
 										k4 = k2 + i4;
 										j4 = j2 + (j3 - 1) * k3;
 
-										if (i4 < 0 && !this.worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !this.worldServerInstance.isAirBlock(l3, k4, j4)) {
+										if (i4 < 0 && !this.worldServerInstance.getBlockState(new BlockPos(l3, k4, j4)).getBlock().getMaterial().isSolid() || i4 >= 0 && !this.worldServerInstance.isAirBlock(new BlockPos(l3, k4, j4))) {
 											continue label222;
 										}
 									}
 								}
 
-								d4 = (double) k2 + 0.5D - par1Entity.posY;
+								d4 = (double) k2 + 0.5D - entity.posY;
 								d3 = d1 * d1 + d4 * d4 + d2 * d2;
 
 								if (d0 < 0.0D || d3 < d0) {
@@ -388,7 +380,7 @@ public class TeleporterVoid extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : Blocks.air);
+						this.worldServerInstance.setBlockState(new BlockPos(k3, j3, i4), flag ? voidCraft.blocks.blockVoidcrystal.getDefaultState() : Blocks.air.getDefaultState());
 					}
 				}
 			}
@@ -401,7 +393,7 @@ public class TeleporterVoid extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					this.worldServerInstance.setBlock(k3, j3, i4, flag ? voidCraft.blocks.blockVoidcrystal : voidCraft.blocks.blockPortalVoid, 0, 2);
+					this.worldServerInstance.setBlockState(new BlockPos(k3, j3, i4), flag ? voidCraft.blocks.blockVoidcrystal.getDefaultState() : voidCraft.blocks.blockPortalVoid.getDefaultState(), 2);
 				}
 			}
 
@@ -410,9 +402,7 @@ public class TeleporterVoid extends Teleporter {
 					k3 = i5 + (i3 - 1) * k5;
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
-					this.worldServerInstance.notifyBlocksOfNeighborChange(k3,
-							j3, i4,
-							this.worldServerInstance.getBlock(k3, j3, i4));
+					this.worldServerInstance.notifyBlockOfStateChange(new BlockPos(k3, j3, i4), this.worldServerInstance.getBlockState(new BlockPos(k3, j3, i4)).getBlock());
 				}
 			}
 		}
@@ -420,6 +410,7 @@ public class TeleporterVoid extends Teleporter {
 		return true;
 	}
 
+	@Override
 	public void removeStalePortalLocations(long par1) {
 
 	}

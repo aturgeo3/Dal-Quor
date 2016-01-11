@@ -1,24 +1,14 @@
 package Tamaized.Voidcraft.events.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import org.lwjgl.opengl.GL11;
-
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.handlers.PortalDataHandler;
 
 public class OverlayEvent {
 	
 	@SubscribeEvent
-	public void InGameOverlay(RenderGameOverlayEvent e){
+	public void InGameOverlay(RenderGameOverlayEvent e){/*
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityClientPlayerMP player = mc.thePlayer;
+		EntityPlayerSP player = mc.thePlayer;
 		
 		if(voidCraft.instance.VoidTickEvent.data.get(player.getGameProfile().getId()) != null){
 			if(e.type == e.type.PORTAL){
@@ -58,7 +48,7 @@ public class OverlayEvent {
 	        	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 			
-		}
+		}*/
 	}
 
 }

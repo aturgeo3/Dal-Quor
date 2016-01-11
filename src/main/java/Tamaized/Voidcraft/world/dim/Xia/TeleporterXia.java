@@ -1,22 +1,14 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Direction;
-import net.minecraft.util.LongHashMap;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.Teleporter.PortalPosition;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.world.SchematicLoader.Schematic;
@@ -46,35 +38,35 @@ public class TeleporterXia extends Teleporter {
 				for (int cx = 0; cx < spring.width; cx++) {
 					int id = spring.blocks[i];
 					int meta = spring.data[i];
-					world.setBlockToAir(cx+x+1, cy+y, cz+z+1);
+					world.setBlockToAir(new BlockPos(cx+x+1, cy+y, cz+z+1));
 					
 					switch (id){
 					case 727:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.fluids.blockVoidFluid, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.fluids.blockVoidFluid.getStateFromMeta(meta), 2);
 						break;
 					case 729:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockFakeBedrock, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockFakeBedrock.getStateFromMeta(meta), 2);
 						break;
 					case 730:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockNoBreak, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockNoBreak.getStateFromMeta(meta), 2);
 						break;
 					case 732:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidbrick, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidbrick.getStateFromMeta(meta), 2);
 						break;
 					case 731:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidcrystal, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidcrystal.getStateFromMeta(meta), 2);
 						break;
 					case 735:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidfence, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidfence.getStateFromMeta(meta), 2);
 						break;
 					case 734:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidBrickSlab, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidBrickSlab.getStateFromMeta(meta), 2);
 						break;
 					case 733:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, voidCraft.blocks.blockVoidstairs, meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidstairs.getStateFromMeta(meta), 2);
 						break;
 					default:
-						world.setBlock(cx+x+1, cy+y, cz+z+1, Block.getBlockById(id), meta, 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), Block.getBlockById(id).getStateFromMeta(meta), 2);
 						break;
 					}
 					
@@ -85,11 +77,9 @@ public class TeleporterXia extends Teleporter {
 	}
 	
 	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8){
-		//if(par1Entity instanceof EntityPlayer) ((EntityPlayer) par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
 		if(par1Entity.dimension == 0){
-			ChunkCoordinates chunkcoordinates = par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getBedLocation(0) != null ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
-            //chunkcoordinates.posY = par1Entity.worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
-            par1Entity.setLocationAndAngles((double)chunkcoordinates.posX, (double)chunkcoordinates.posY, (double)chunkcoordinates.posZ, par1Entity.rotationYaw, par1Entity.rotationPitch);
+			BlockPos bedPos = par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getBedLocation(0) != null ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
+            par1Entity.setLocationAndAngles((double)bedPos.getX(), (double)bedPos.getY(), (double)bedPos.getZ(), par1Entity.rotationYaw, par1Entity.rotationPitch);
 			return;
 		}
 		if(par1Entity instanceof EntityPlayer) ((EntityPlayer)par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_6, 1);
@@ -105,7 +95,7 @@ public class TeleporterXia extends Teleporter {
 	 * Place an entity in a nearby portal which already exists.
 	 */
 	public boolean placeInExistingPortal(Entity e, double x, double y, double z, float par8){
-		if(worldServerInstance.getBlock(0, 59, 0) == voidCraft.blocks.blockNoBreak) return true;
+		if(worldServerInstance.getBlockState(new BlockPos(0, 59, 0)).getBlock() == voidCraft.blocks.blockNoBreak) return true;
 		else return false;
 	}
 	
@@ -118,7 +108,7 @@ public class TeleporterXia extends Teleporter {
 		
 		if(e.dimension == voidCraft.dimensionIdXia){
 			doStructure(this.worldServerInstance, -11, 59, -4);
-			worldServerInstance.setBlock(0, 0, 58, voidCraft.blocks.xiaBlock);
+			worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 		}else{
 			
 		}

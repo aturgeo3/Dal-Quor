@@ -46,4 +46,9 @@ public class MapGenTestStart extends MapGenStructure {
         return new StructureTestStart(this.worldObj, this.rand, par1, par2);
     }
 
+	@Override
+	public String getStructureName() {
+		return null;
+	}
+
 }

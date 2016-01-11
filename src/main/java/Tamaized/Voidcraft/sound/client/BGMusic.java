@@ -4,16 +4,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.PlaySoundEvent17;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.sound.BossMusicManager;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 
 public class BGMusic {
 
@@ -23,10 +23,10 @@ public class BGMusic {
 	public static boolean pause = false;
 	
 	@SubscribeEvent
-	public void PlaySoundEvent(PlaySoundEvent17 e){
+	public void PlaySoundEvent(PlaySoundEvent e){
 		World world = Minecraft.getMinecraft().theWorld;
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		if(e.category == SoundCategory.MUSIC && world != null && world.provider != null && world.provider.dimensionId == voidCraft.dimensionIdXia){
+		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		if(e.category == SoundCategory.MUSIC && world != null && world.provider != null && world.provider.getDimensionId() == voidCraft.dimensionIdXia){
 			if(!e.name.equals("music.undertale")) e.result = null;
 		}
 	}
@@ -35,9 +35,9 @@ public class BGMusic {
 	public void tick(ClientTickEvent e){
 		if(e.phase == Phase.END){
 			World world = Minecraft.getMinecraft().theWorld;
-			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			pause = (Minecraft.getMinecraft().currentScreen instanceof GuiIngameMenu);
-			if(world != null && world.provider != null && world.provider.dimensionId == voidCraft.dimensionIdXia){
+			if(world != null && world.provider != null && world.provider.getDimensionId() == voidCraft.dimensionIdXia){
 				if(BossMusicManager.isPlaying){
 					if(isPlaying) StopMusic();
 					tick = 0;
@@ -58,7 +58,7 @@ public class BGMusic {
 		isPlaying = true;
 		tick = (142*20)-1;
 		ResourceLocation rl = new ResourceLocation(voidCraft.modid+":music.undertale");
-		sound = PositionedSoundRecord.func_147674_a(rl, 1.0F);
+		sound = PositionedSoundRecord.create(rl, 1.0F);
 		Minecraft.getMinecraft().getSoundHandler().playSound(sound);
 	}
 	

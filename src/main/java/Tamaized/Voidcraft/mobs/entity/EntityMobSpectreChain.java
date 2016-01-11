@@ -23,7 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.blocks.blockVoidbrick;
+import Tamaized.Voidcraft.blocks.BlockVoidbrick;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
 import Tamaized.Voidcraft.projectiles.VoidChain;
@@ -89,7 +89,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
  
     public void onUpdate(){
         super.onUpdate();
-        if(this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY-0.2D - (double)this.getYOffset()) + 1, MathHelper.floor_double(this.posZ))).getBlock() instanceof blockVoidbrick) this.setDead();
+        if(this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY-0.2D - (double)this.getYOffset()) + 1, MathHelper.floor_double(this.posZ))).getBlock() instanceof BlockVoidbrick) this.setDead();
     }
 
     @Override

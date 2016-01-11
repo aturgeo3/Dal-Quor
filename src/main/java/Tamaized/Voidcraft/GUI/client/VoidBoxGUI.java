@@ -12,7 +12,9 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 import org.lwjgl.opengl.GL11;
 
@@ -20,7 +22,6 @@ import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class VoidBoxGUI extends GuiContainer {
 	
@@ -71,9 +72,9 @@ public class VoidBoxGUI extends GuiContainer {
 	public void actionPerformed(GuiButton button) {
 		spam = false;
 		int pktType;
-		int xcoord = voidBox.xCoord;
-		int ycoord = voidBox.yCoord;
-		int zcoord = voidBox.zCoord;
+		int xcoord = voidBox.getPos().getX();
+		int ycoord = voidBox.getPos().getY();
+		int zcoord = voidBox.getPos().getZ();
 		switch (button.id) {
 		case BUTTON_PLAY:
 			if(spam) return;
@@ -86,7 +87,7 @@ public class VoidBoxGUI extends GuiContainer {
  				outputStream.writeInt(xcoord);
  				outputStream.writeInt(ycoord);
  				outputStream.writeInt(zcoord);
- 				FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+ 				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
  				voidCraft.channel.sendToServer(packet);
  				outputStream.close();
  				bos.close();
@@ -106,7 +107,7 @@ public class VoidBoxGUI extends GuiContainer {
  				outputStream.writeInt(xcoord);
  				outputStream.writeInt(ycoord);
  				outputStream.writeInt(zcoord);
- 				FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+ 				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
  				voidCraft.channel.sendToServer(packet);
  				outputStream.close();
  				bos.close();
@@ -125,7 +126,7 @@ public class VoidBoxGUI extends GuiContainer {
    				outputStream.writeInt(ycoord);
    				outputStream.writeInt(zcoord);
    				outputStream.writeBoolean(!voidBox.loop);
-   				FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+   				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
    				voidCraft.channel.sendToServer(packet);
    				outputStream.close();
    				bos.close();
@@ -144,7 +145,7 @@ public class VoidBoxGUI extends GuiContainer {
    				outputStream.writeInt(ycoord);
    				outputStream.writeInt(zcoord);
    				outputStream.writeBoolean(!voidBox.autoFill);
-   				FMLProxyPacket packet = new FMLProxyPacket(bos.buffer(), voidCraft.networkChannelName);
+   				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
    				voidCraft.channel.sendToServer(packet);
    				outputStream.close();
    				bos.close();
@@ -154,9 +155,9 @@ public class VoidBoxGUI extends GuiContainer {
   			}
   			break;
           case BUTTON_DEBUG:
-        	  System.out.println(voidBox.xCoord);
-        	  System.out.println(voidBox.yCoord);
-        	  System.out.println(voidBox.zCoord);
+        	  System.out.println(voidBox.getPos().getX());
+        	  System.out.println(voidBox.getPos().getY());
+        	  System.out.println(voidBox.getPos().getZ());
         	  System.out.println(voidBox.isPlaying);
         	  System.out.println(voidBox.oldRecord);
         	  System.out.println(voidBox.loop);

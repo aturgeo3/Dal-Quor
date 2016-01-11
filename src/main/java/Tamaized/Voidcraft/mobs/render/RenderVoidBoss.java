@@ -1,20 +1,16 @@
 package Tamaized.Voidcraft.mobs.render;
 
-import org.lwjgl.opengl.GL11;
-
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
-import Tamaized.Voidcraft.mobs.model.ModelVoidBoss;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelWither;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
+import Tamaized.Voidcraft.mobs.model.ModelVoidBoss;
 
 @SideOnly(Side.CLIENT)
 public class RenderVoidBoss extends RenderLiving
@@ -26,7 +22,7 @@ public class RenderVoidBoss extends RenderLiving
 
 	    public RenderVoidBoss()
 	    {
-	        super(new ModelVoidBoss(), 1.0F);
+	        super(Minecraft.getMinecraft().getRenderManager(), new ModelVoidBoss(), 1.0F);
 	        
 	    }
 	    
@@ -41,7 +37,7 @@ public class RenderVoidBoss extends RenderLiving
 	    
     public RenderVoidBoss(ModelBase par1ModelBase, float par2)
     {
-        super(par1ModelBase, par2);
+        super(Minecraft.getMinecraft().getRenderManager(), par1ModelBase, par2);
     }
 
     public void renderVoidBoss(EntityMobVoidBoss par1EntityMobSpectreChain, double par2, double par4, double par6, float par8, float par9)

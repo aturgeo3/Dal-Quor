@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -44,14 +45,14 @@ public class RenderBossHeathBar {
 		Minecraft mc = Minecraft.getMinecraft();
 		Rectangle bgRect = new Rectangle(0, 0, 185, 15);
 		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 7);
-		String name = voidBoss.func_145748_c_().getFormattedText();
+		String name = voidBoss.getDisplayName().getFormattedText();
 		int c = res.getScaledWidth() / 2;
 		int x = c - bgRect.width / 2;
 		int y = 20;
 		int xf = x + (bgRect.width - fgRect.width) / 2;
 		int yf = y + (bgRect.height - fgRect.height) / 2;
 		int bossHpPerc = (int) ((double) fgRect.width * voidBoss.getPercentHP());
-		int tx = c - mc.fontRenderer.getStringWidth(name) / 2;
+		int tx = c - mc.getRenderManager().getFontRenderer().getStringWidth(name) / 2;
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		
@@ -68,7 +69,7 @@ public class RenderBossHeathBar {
 		drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
 		
 		
-		mc.fontRenderer.drawStringWithShadow(name, tx, y - 10, 0xAA00FF);
+		mc.getRenderManager().getFontRenderer().drawStringWithShadow(name, tx, y - 10, 0xAA00FF);
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);//CleanUp
 		GL11.glEnable(GL11.GL_BLEND);
@@ -102,12 +103,13 @@ public class RenderBossHeathBar {
 	}
 	
 	public static void drawBar(int x, int y, int z, int w, int h) {
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertex(x+w, y, z);
-		tessellator.addVertex(x, y, z);
-		tessellator.addVertex(x, y+h, z);
-		tessellator.addVertex(x+w, y+h, z);
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldRender = tessellator.getWorldRenderer();
+		worldRender.startDrawingQuads();
+		worldRender.addVertex(x+w, y, z);
+		worldRender.addVertex(x, y, z);
+		worldRender.addVertex(x, y+h, z);
+		worldRender.addVertex(x+w, y+h, z);
 		tessellator.draw();
 	}
 

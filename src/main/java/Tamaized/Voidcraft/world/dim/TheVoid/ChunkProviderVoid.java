@@ -12,14 +12,16 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
-import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
@@ -35,12 +37,9 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
-import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
-import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
 import Tamaized.Voidcraft.structures.MapGenTestStart;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderVoid implements IChunkProvider
 {
@@ -69,7 +68,7 @@ public class ChunkProviderVoid implements IChunkProvider
     private World worldObj;
     private double[] noiseField;
     public MapGenNetherBridge genNetherBridge = new MapGenNetherBridge();
-    public MapGenTestStart genTest= new MapGenTestStart();
+    public MapGenTestStart genTest = new MapGenTestStart();
 
     /**
      * Holds the noise used to determine whether slowsand can be generated at a location
@@ -127,7 +126,7 @@ public class ChunkProviderVoid implements IChunkProvider
 	/**
      * Generates the shape of the terrain in the nether.
      */
-    public void generateTerrain(int p_147420_1_, int p_147420_2_, Block[] p_147420_3_)
+    public void generateTerrain(int p_147420_1_, int p_147420_2_, ChunkPrimer primer)
     {
     	
     	
@@ -198,8 +197,10 @@ public class ChunkProviderVoid implements IChunkProvider
                                 {
                                     l2 = voidCraft.blocks.blockFakeBedrock; //netherrack
                                 }
-                                
-                                p_147420_3_[j2] = (Block)l2;
+                                int k3 = i2 + i1 * 4;
+                                int l3 = l1 + k1 * 8;
+                                int i3 = j2 + j1 * 4;
+                                primer.setBlockState(k3, l3, i3, l2.getDefaultState());
                                 j2 += short1;
                                 d15 += d16;
                             }
@@ -224,9 +225,9 @@ public class ChunkProviderVoid implements IChunkProvider
     public void replaceBlocksForBiome(int p_147421_1_, int p_147421_2_, Block[] p_147421_3_, byte[] byteArray, BiomeGenBase[] biomesForGeneration2)//replaceBlocksForBiome(int par1, int par2, Block[] par3ArrayOfByte)
     {
     	
-    	ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147421_1_, p_147421_2_, p_147421_3_, byteArray, biomesForGeneration2, this.worldObj);
-    	MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == Result.DENY) return;
+    	//ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147421_1_, p_147421_2_, p_147421_3_, byteArray, biomesForGeneration2, this.worldObj);
+    	//MinecraftForge.EVENT_BUS.post(event);
+        //if (event.getResult() == Result.DENY) return;
 
         byte b0 = 64;
         double d0 = 0.03125D;
@@ -363,13 +364,14 @@ public class ChunkProviderVoid implements IChunkProvider
         chunk.generateSkylightMap();
         return chunk;
         */
+    	ChunkPrimer primer = new ChunkPrimer();
         Block[] ablock = new Block[32768];
         byte[] meta = new byte[ablock.length];
         BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
-        this.generateTerrain(par1, par2, ablock);
+        this.generateTerrain(par1, par2, primer);
         this.replaceBlocksForBiome(par1, par2, ablock, meta, abiomegenbase);
-        this.genTest.func_151539_a(this, this.worldObj, par1, par2, ablock);
-        Chunk chunk = new Chunk(this.worldObj, ablock, meta, par1, par2);
+        this.genTest.func_175792_a(this, this.worldObj, par1, par2, primer);
+        Chunk chunk = new Chunk(this.worldObj, par1, par2);
         byte[] abyte = chunk.getBiomeArray();
 
         for (int k = 0; k < abyte.length; ++k)
@@ -553,7 +555,7 @@ public class ChunkProviderVoid implements IChunkProvider
         int k = par2 * 16;
         int l = par3 * 16;
       //  this.genNetherBridge.generateStructuresInChunk(this.worldObj, this.hellRNG, par2, par3);
-        this.genTest.generateStructuresInChunk(this.worldObj, this.hellRNG, par2, par3);
+        this.genTest.func_175794_a(this.worldObj, this.hellRNG, new ChunkCoordIntPair(par2, par3));
         int i1;
         int j1;
         int k1;
@@ -565,7 +567,7 @@ public class ChunkProviderVoid implements IChunkProvider
             j1 = k + this.hellRNG.nextInt(16) + 8;
             k1 = this.hellRNG.nextInt(120) + 4;
             l1 = l + this.hellRNG.nextInt(16) + 8;
-            (new WorldGenHellLava(Blocks.lava, false)).generate(this.worldObj, this.hellRNG, j1, k1, l1);
+            (new WorldGenHellLava(Blocks.lava, false)).generate(this.worldObj, this.hellRNG, new BlockPos(j1, k1, l1));
         }
 
         i1 = this.hellRNG.nextInt(this.hellRNG.nextInt(10) + 1) + 1;
@@ -577,7 +579,7 @@ public class ChunkProviderVoid implements IChunkProvider
             k1 = k + this.hellRNG.nextInt(16) + 8;
             l1 = this.hellRNG.nextInt(120) + 4;
             i2 = l + this.hellRNG.nextInt(16) + 8;
-            (new WorldGenFire()).generate(this.worldObj, this.hellRNG, k1, l1, i2);
+            (new WorldGenFire()).generate(this.worldObj, this.hellRNG, new BlockPos(k1, l1, i2));
         }
 
         i1 = this.hellRNG.nextInt(this.hellRNG.nextInt(10) + 1);
@@ -588,7 +590,7 @@ public class ChunkProviderVoid implements IChunkProvider
             k1 = k + this.hellRNG.nextInt(16) + 8;
             l1 = this.hellRNG.nextInt(120) + 4;
             i2 = l + this.hellRNG.nextInt(16) + 8;
-            (new WorldGenGlowStone1()).generate(this.worldObj, this.hellRNG, k1, l1, i2);
+            (new WorldGenGlowStone1()).generate(this.worldObj, this.hellRNG, new BlockPos(k1, l1, i2));
         }
 
         for (j1 = 0; doGen && j1 < 10; ++j1)
@@ -596,10 +598,10 @@ public class ChunkProviderVoid implements IChunkProvider
             k1 = k + this.hellRNG.nextInt(16) + 8;
             l1 = this.hellRNG.nextInt(128);
             i2 = l + this.hellRNG.nextInt(16) + 8;
-            (new WorldGenGlowStone2()).generate(this.worldObj, this.hellRNG, k1, l1, i2);
+            (new WorldGenGlowStone2()).generate(this.worldObj, this.hellRNG, new BlockPos(k1, l1, i2));
         }
 
-        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldObj, hellRNG, k, l));
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldObj, hellRNG, new BlockPos(k, 0, l)));
         
        // doGen = TerrainGen.decorate(worldObj, hellRNG, k, l, SHROOM);
         if (doGen && this.hellRNG.nextInt(1) == 0)
@@ -618,7 +620,7 @@ public class ChunkProviderVoid implements IChunkProvider
       //      (new WorldGenFlowers(Block.mushroomRed.blockID)).generate(this.worldObj, this.hellRNG, j1, k1, l1);
         }
 
-        WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal, 5, voidCraft.blocks.blockFakeBedrock);
+        WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, BlockHelper.forBlock(voidCraft.blocks.blockFakeBedrock));
         int j2;
 
         for (k1 = 0; k1 < 16; ++k1)
@@ -626,7 +628,7 @@ public class ChunkProviderVoid implements IChunkProvider
             l1 = k + this.hellRNG.nextInt(16);
             i2 = this.hellRNG.nextInt(108) + 10;
             j2 = l + this.hellRNG.nextInt(16);
-            worldgenminable.generate(this.worldObj, this.hellRNG, l1, i2, j2);
+            worldgenminable.generate(this.worldObj, this.hellRNG, new BlockPos(l1, i2, j2));
         }
 
         for (k1 = 0; k1 < 16; ++k1)
@@ -634,10 +636,10 @@ public class ChunkProviderVoid implements IChunkProvider
             l1 = k + this.hellRNG.nextInt(16);
             i2 = this.hellRNG.nextInt(108) + 10;
             j2 = l + this.hellRNG.nextInt(16);
-            (new WorldGenHellLava(Blocks.lava, true)).generate(this.worldObj, this.hellRNG, l1, i2, j2);
+            (new WorldGenHellLava(Blocks.lava, true)).generate(this.worldObj, this.hellRNG, new BlockPos(l1, i2, j2));
         }
 
-        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldObj, hellRNG, k, l));
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldObj, hellRNG, new BlockPos(k, 0, l)));
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, hellRNG, par2, par3, false));
 
         BlockSand.fallInstantly = false;
@@ -685,29 +687,22 @@ public class ChunkProviderVoid implements IChunkProvider
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4){
+    @Override
+    public List func_177458_a(EnumCreatureType type, BlockPos pos){
     	
     	if(this.genTest != null){
-    		if (this.genTest.hasStructureAt(par2, par3, par4)){
+    		if (this.genTest.func_175795_b(pos)){
     			if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
     			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
             }
     	}
-    	if (this.genTest.func_142038_b(par2, par3, par4) && this.worldObj.getBlock(par2, par3 - 1, par4) == voidCraft.blocks.blockVoidbrick){
+    	if (this.genTest.func_175796_a(worldObj, pos) && this.worldObj.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick){
     		if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
 			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
     	}
     	
-    	return this.worldObj.getBiomeGenForCoords(par2, par4).getSpawnableList(par1EnumCreatureType);
+    	return this.worldObj.getBiomeGenForCoords(pos).getSpawnableList(type);
     	     
-    }
-
-    /**
-     * Returns the location of the closest structure of the specified type. If not found returns null.
-     */
-    public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5)
-    {
-        return null;
     }
 
     public int getLoadedChunkCount()
@@ -715,16 +710,31 @@ public class ChunkProviderVoid implements IChunkProvider
         return 0;
     }
 
-    public void recreateStructures(int par1, int par2)
+    @Override
+    public void recreateStructures(Chunk chunk, int par1, int par2)
     {
-        //this.genNetherBridge.generate(this, this.worldObj, par1, par2, (byte[])null);
-       this.genTest.func_151539_a(this, this.worldObj, par1, par2, (Block[])null);
+       this.genTest.func_175792_a(this, this.worldObj, par1, par2, (ChunkPrimer)null);
     }
 
 
 
 	@Override
-	public ChunkPosition func_147416_a(World arg0, String arg1, int arg2, int arg3, int arg4) {
+	public Chunk provideChunk(BlockPos blockPosIn) {
+		return provideChunk(blockPosIn.getX(), blockPosIn.getZ());
+	}
+
+
+
+	@Override
+	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
+		return false;
+	}
+
+
+
+	@Override
+	public BlockPos getStrongholdGen(World worldIn, String p_180513_2_, BlockPos p_180513_3_) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

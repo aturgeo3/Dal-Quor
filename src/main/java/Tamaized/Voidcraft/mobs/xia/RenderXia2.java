@@ -1,13 +1,14 @@
 package Tamaized.Voidcraft.mobs.xia;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderXia2 extends RenderLiving
@@ -17,7 +18,7 @@ public class RenderXia2 extends RenderLiving
 	 
     public RenderXia2(ModelBase par1ModelBase, float par2)
     {
-        super(par1ModelBase, par2);
+        super(Minecraft.getMinecraft().getRenderManager(), par1ModelBase, par2);
     }
 
     public void renderXia2(EntityMobXia2 par1EntityWraith, double par2, double par4, double par6, float par8, float par9)
@@ -49,11 +50,11 @@ public class RenderXia2 extends RenderLiving
 	protected void renderLabel(EntityMobXia2 yourentityLiving, double par2, double par4, double par6)
 	{
 	int distanceToEntity = 32;//if you're less then 32 blocks x-y-z away from this entity,it will display the entity's name.
-	this.func_147906_a(yourentityLiving, yourentityLiving.getDisplayName(), par2, par4, par6, distanceToEntity);
+	this.renderLivingLabel(yourentityLiving, yourentityLiving.getDisplayName().getFormattedText(), par2, par4, par6, distanceToEntity);
 	par4 += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par6);
 	}
 
-	protected void passSpecialRender(EntityLivingBase par1EntityLiving, double par2, double par4, double par6)
+	public void passSpecialRender(EntityLivingBase par1EntityLiving, double par2, double par4, double par6)
 	{
 	this.renderLabel((EntityMobXia2)par1EntityLiving, par2, par4, par6);
 	}
