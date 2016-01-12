@@ -24,7 +24,7 @@ public class FireVoid extends BlockFire{
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		if(world.getBlockState(pos).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos.getX(), pos.getY(), pos.getZ())){
+		if(world.getBlockState(pos).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)){
 			if(!world.doesBlockHaveSolidTopSurface(world, pos.add(0, -1, 0)) && !this.canNeighborBurn(world, pos.getX(), pos.getY(), pos.getZ())){
 				world.setBlockToAir(pos);
 			}else{

@@ -2,12 +2,13 @@ package Tamaized.Voidcraft.machina;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
@@ -18,11 +19,11 @@ public class Heimdall extends BlockContainer{
 		this.setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 0.6875F, .875F);
 	}
 
-	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
 		
 			if(!world.isRemote){
-				FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdHeimdall, world, x, y, z);	
+				FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdHeimdall, world, pos.getX(), pos.getY(), pos.getZ());	
 			}
 		
 			return true;

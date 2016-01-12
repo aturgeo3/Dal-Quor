@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -87,9 +88,10 @@ public class VoidMacerator extends BlockContainer {
 		}
 	}
 	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdMacerator, world, x, y, z);
+			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdMacerator, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
@@ -181,10 +183,5 @@ public class VoidMacerator extends BlockContainer {
 		
 		
 		super.breakBlock(world, pos, state);
-	}
-
-	
-	
-	
-	
-	}
+	}	
+}

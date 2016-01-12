@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
+        //classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -27,7 +27,7 @@ repositories {
 	}
 }
 
-version = "1.7.10-0.5.9h"
+version = "1.8-0.6.0a_DEV"
 group= "tk.tamaized.voidCraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "voidCraft"
 
@@ -53,9 +53,9 @@ dependencies {
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 	
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev"
-	compile files ("lib/Thaumcraft-deobf-1.7.10-4.2.3.5.jar")
+	//compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
+	//compile "codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev"
+	//compile files ("lib/Thaumcraft-deobf-1.7.10-4.2.3.5.jar")
 
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

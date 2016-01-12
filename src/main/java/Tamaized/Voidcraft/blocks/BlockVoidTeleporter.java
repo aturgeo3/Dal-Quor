@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,6 +45,7 @@ public abstract class BlockVoidTeleporter extends BlockBreakable {
 	 * Returns a bounding box from the pool of bounding boxes (this means this
 	 * box can change after the pool has been cleared to be reused)
 	 */
+	@Deprecated
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		return null;
 	}
@@ -52,46 +54,43 @@ public abstract class BlockVoidTeleporter extends BlockBreakable {
 	 * Updates the blocks bounds based on its current state. Args: world, x, y,
 	 * z
 	 */
-	public abstract void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
+	@Override
+	public abstract void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos);
 
 	/**
 	 * Is this block (a) opaque and (B) a full 1m cube? This determines whether
 	 * or not to render the shared face of two adjacent blocks and also whether
 	 * the player can attach torches, redstone wire, etc to this block.
 	 */
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+	@Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		//We handle this elsewhere
 	}
 	
-	public abstract boolean tryToCreatePortal(World par1World, int par2, int par3, int par4);
+	public abstract boolean tryToCreatePortal(World par1World, BlockPos pos);
 
-	public abstract void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5);
-
-	
-	/**
-	 * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-	 */
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass() {
-		return 1;
-	}
+	@Override
+	public abstract void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock);
 
 	/**
 	 * A randomly called display update to be able to add particles or other items for display
 	 */
 	@SideOnly(Side.CLIENT)
-	public abstract void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random);
+	@Override
+	public abstract void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand);
 
 	/**
 	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
 	 * coordinates. Args: blockAccess, x, y, z, side
 	 */
 	@SideOnly(Side.CLIENT)
-	public abstract boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5);
+	@Override
+	public abstract boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side);
 
 	/**
 	 * Returns the quantity of items to drop on block destruction.

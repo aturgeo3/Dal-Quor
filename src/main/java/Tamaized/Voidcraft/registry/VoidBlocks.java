@@ -50,26 +50,26 @@ public class VoidBlocks extends RegistryBase {
 	@Override
 	public void preInit() {
 
-		blockVoidcrystal = new BlockVoidcrystal(Material.glass).setHardness(7.0F).setStepSound(Blocks.glass.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		oreVoidcrystal = new OreVoidcrystal(Material.rock).setHardness(3.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockFakeBedrock = new BlockFakeBedrock(Blocks.bedrock.getMaterial()).setHardness(30.0F).setStepSound(Blocks.bedrock.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockNoBreak = new BlockNoBreak(Material.rock).setLightLevel(1.0F).setHardness(-1F).setStepSound(Blocks.wool.stepSound).setCreativeTab(voidCraft.tabs.tForge).setLightLevel(1.0F).setResistance(100);
-		blockVoidbrick = new BlockVoidbrick(Material.rock).setHardness(30.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidfence = new VoidFence(Material.rock).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidstairs = new VoidStairs(blockVoidbrick, 0).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidBrickSlab = new VoidSlab(Material.rock).setCreativeTab(voidCraft.tabs.tabVoid);
-		AIBlock = new AIBlock().setBlockUnbreakable();
-		xiaBlock = new XiaBlock().setBlockUnbreakable();
+		blockVoidcrystal = new BlockVoidcrystal(Material.glass).setUnlocalizedName("blockVoidcrystal").setHardness(7.0F).setStepSound(Blocks.glass.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		oreVoidcrystal = new OreVoidcrystal(Material.rock).setUnlocalizedName("oreVoidcrystal").setHardness(3.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockFakeBedrock = new BlockFakeBedrock(Blocks.bedrock.getMaterial()).setUnlocalizedName("blockFakeBedrock").setHardness(30.0F).setStepSound(Blocks.bedrock.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockNoBreak = new BlockNoBreak(Material.rock).setUnlocalizedName("blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setStepSound(Blocks.wool.stepSound).setCreativeTab(voidCraft.tabs.tForge).setLightLevel(1.0F).setResistance(100);
+		blockVoidbrick = new BlockVoidbrick(Material.rock).setUnlocalizedName("blockVoidbrick").setHardness(30.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockVoidfence = new VoidFence(Material.rock).setUnlocalizedName("blockVoidfence").setCreativeTab(voidCraft.tabs.tabVoid);
+		blockVoidstairs = new VoidStairs(blockVoidbrick, 0).setUnlocalizedName("blockVoidstairs").setCreativeTab(voidCraft.tabs.tabVoid);
+		blockVoidBrickSlab = new VoidSlab(Material.rock).setUnlocalizedName("blockVoidBrickSlab").setCreativeTab(voidCraft.tabs.tabVoid);
+		AIBlock = new AIBlock().setBlockUnbreakable().setUnlocalizedName("AIBlock");
+		xiaBlock = new XiaBlock().setBlockUnbreakable().setUnlocalizedName("xiaBlock");
 
-		blockPortalVoid = new BlockPortalVoid().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		blockPortalXia = new BlockPortalXia().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		fireVoid = new FireVoid().setCreativeTab(voidCraft.tabs.tabVoid);
+		blockPortalVoid = new BlockPortalVoid().setUnlocalizedName("blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		blockPortalXia = new BlockPortalXia().setUnlocalizedName("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
+		fireVoid = new FireVoid().setUnlocalizedName("fireVoid").setCreativeTab(voidCraft.tabs.tabVoid);
 
-		voidMacerator = new VoidMacerator().setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		Heimdall = new Heimdall(Material.iron).setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		voidBox = new VoidBox().setHardness(7.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuserInert = new BasicVoidBlock(Material.iron).setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuser = new VoidInfuser().setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidMacerator = new VoidMacerator().setUnlocalizedName("voidMacerator").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
+		Heimdall = new Heimdall(Material.iron).setUnlocalizedName("Heimdall").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
+		voidBox = new VoidBox().setUnlocalizedName("voidBox").setHardness(7.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidInfuserInert = new BasicVoidBlock(Material.iron).setUnlocalizedName("voidInfuserInert").setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidInfuser = new VoidInfuser().setUnlocalizedName("voidInfuser").setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
 		
 	}
 
