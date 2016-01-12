@@ -5,16 +5,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.ItemStack;
 
-public class VoidSlab extends BlockSlab{
+public class VoidSlab extends BasicVoidBlockSlab{
 
-	public VoidSlab(Material mat) {
-		super(mat);
-	}
-
-	@Override
-	public String getUnlocalizedName(int meta) {
-		// TODO Auto-generated method stub
-		return null;
+	public VoidSlab(Material mat, String string) {
+		super(mat, string);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
+import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -12,15 +13,26 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockVoidTeleporter extends BlockBreakable {
+public abstract class BlockVoidTeleporter extends BlockBreakable implements IBasicVoidBlock{
 	
-	public BlockVoidTeleporter() {
+	private final String name;
+	
+	public BlockVoidTeleporter(String n) {
 		super(Material.portal, false);
 		this.setTickRandomly(true);
 		this.setLightLevel(0.75F);
+		name = n;
+		setUnlocalizedName(voidCraft.modid+":"+name);
+		GameRegistry.registerBlock(this, getName());
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	/**

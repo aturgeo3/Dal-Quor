@@ -14,10 +14,10 @@ import net.minecraft.world.IBlockAccess;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
 
-public class OreVoidcrystal extends Block {
+public class OreVoidcrystal extends BasicVoidBlock {
 	
-	public OreVoidcrystal(Material Material) {
-		super(Material);
+	public OreVoidcrystal(Material Material, String s) {
+		super(Material, s);
 	}
 	
 	@Override

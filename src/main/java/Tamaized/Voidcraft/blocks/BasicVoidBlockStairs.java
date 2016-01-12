@@ -1,21 +1,21 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.Voidcraft.common.voidCraft;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BasicVoidBlock extends Block implements IBasicVoidBlock{
+public class BasicVoidBlockStairs extends BlockStairs implements IBasicVoidBlock{
 	
 	private final String name;
 
-	public BasicVoidBlock(Material p_i45394_1_, String n) {
-		super(p_i45394_1_);
+	protected BasicVoidBlockStairs(IBlockState modelState, String n) {
+		super(modelState);
 		name = n;
 		setUnlocalizedName(voidCraft.modid+":"+name);
 		GameRegistry.registerBlock(this, getName());
 	}
-
+	
 	@Override
 	public String getName() {
 		return name;

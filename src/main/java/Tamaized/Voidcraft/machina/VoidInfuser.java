@@ -3,8 +3,6 @@ package Tamaized.Voidcraft.machina;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -25,15 +23,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
-public class VoidInfuser extends BlockContainer {
+public class VoidInfuser extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 
-	public VoidInfuser() {
-		super(Material.iron);
+	public VoidInfuser(String string) {
+		super(Material.iron, string);
 	}
 
 	@Override

@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 
-public class XiaBlock extends BlockContainer {
+public class XiaBlock extends BasicVoidBlockContainer {
 
-	public XiaBlock() {
-		super(Material.cloth);
+	public XiaBlock(String string) {
+		super(Material.cloth, string);
 	}
 	
 	@Override

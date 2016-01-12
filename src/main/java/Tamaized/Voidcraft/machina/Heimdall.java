@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.machina;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,13 +8,14 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
-public class Heimdall extends BlockContainer{
+public class Heimdall extends BasicVoidBlockContainer{
 
-	public Heimdall(Material p_i45386_1_) {
-		super(p_i45386_1_);
+	public Heimdall(Material p_i45386_1_, String string) {
+		super(p_i45386_1_, string);
 		this.setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 0.6875F, .875F);
 	}
 

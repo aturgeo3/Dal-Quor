@@ -11,12 +11,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 
-public class AIBlock extends BlockContainer {
+public class AIBlock extends BasicVoidBlockContainer {
 	
 	private boolean createTE = false;
 
-	public AIBlock() {
-		super(Material.cloth);
+	public AIBlock(String string) {
+		super(Material.cloth, string);
 	}
 	
 	public Block allowTileEntityCreation(boolean b){
