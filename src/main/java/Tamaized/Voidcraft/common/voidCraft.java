@@ -261,6 +261,8 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
+		
+		proxy.registerBlockInventoryRender(blocks);
 	}
 
 	@EventHandler

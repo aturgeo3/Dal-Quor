@@ -12,8 +12,8 @@ public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid
 	public BasicVoidBlockSlab(Material materialIn, String n) {
 		super(materialIn);
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
-		GameRegistry.registerBlock(this, getName());
+		setUnlocalizedName(name);
+		GameRegistry.registerBlock(this, n);
 	}
 	
 	@Override

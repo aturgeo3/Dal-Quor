@@ -12,8 +12,8 @@ public class BasicVoidBlockFence extends BlockFence implements IBasicVoidBlock{
 	public BasicVoidBlockFence(Material materialIn, String n) {
 		super(materialIn);
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
-		GameRegistry.registerBlock(this, getName());
+		setUnlocalizedName(name);
+		GameRegistry.registerBlock(this, n);
 	}
 	
 	@Override

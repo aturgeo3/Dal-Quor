@@ -18,8 +18,8 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 
 	protected BasicVoidBlockFire(String n) {
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
-		GameRegistry.registerBlock(this, getName());
+		setUnlocalizedName(name);
+		GameRegistry.registerBlock(this, n);
 	}
 	
 	@Override

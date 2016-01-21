@@ -12,8 +12,8 @@ public class BasicVoidBlock extends Block implements IBasicVoidBlock{
 	public BasicVoidBlock(Material p_i45394_1_, String n) {
 		super(p_i45394_1_);
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
-		GameRegistry.registerBlock(this, getName());
+		setUnlocalizedName(name);
+		GameRegistry.registerBlock(this, n);
 	}
 
 	@Override

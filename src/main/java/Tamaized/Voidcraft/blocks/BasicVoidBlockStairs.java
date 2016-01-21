@@ -12,8 +12,8 @@ public class BasicVoidBlockStairs extends BlockStairs implements IBasicVoidBlock
 	protected BasicVoidBlockStairs(IBlockState modelState, String n) {
 		super(modelState);
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
-		GameRegistry.registerBlock(this, getName());
+		setUnlocalizedName(name);
+		GameRegistry.registerBlock(this, n);
 	}
 	
 	@Override

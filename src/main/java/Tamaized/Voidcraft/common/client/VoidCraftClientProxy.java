@@ -1,7 +1,10 @@
 package Tamaized.Voidcraft.common.client;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,6 +59,7 @@ import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
+import Tamaized.Voidcraft.registry.VoidBlocks;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 
 public class VoidCraftClientProxy extends VoidCraftCommonProxy {
@@ -105,6 +109,11 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
+	}
+	
+	@Override
+	public void registerBlockInventoryRender(VoidBlocks blocks) {
+		blocks.setupRender();
 	}
 
 	@Override

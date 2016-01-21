@@ -2,12 +2,19 @@ package Tamaized.Voidcraft.registry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.BasicVoidBlock;
+import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.blocks.BlockFakeBedrock;
 import Tamaized.Voidcraft.blocks.BlockNoBreak;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
@@ -89,8 +96,30 @@ public class VoidBlocks extends RegistryBase {
 
 	@Override
 	public void postInit() {
-		// TODO Auto-generated method stub
-
+		
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setupRender(){
+		ItemModelMesher modelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		modelMesher.register(Item.getItemFromBlock(blockVoidcrystal), 0, new ModelResourceLocation(voidCraft.modid+":blockVoidcrystal", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(oreVoidcrystal), 0, new ModelResourceLocation(voidCraft.modid+":oreVoidcrystal", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockFakeBedrock), 0, new ModelResourceLocation(voidCraft.modid+":blockFakeBedrock", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockNoBreak), 0, new ModelResourceLocation(voidCraft.modid+":blockNoBreak", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockVoidbrick), 0, new ModelResourceLocation(voidCraft.modid+":blockVoidbrick", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockVoidfence), 0, new ModelResourceLocation(voidCraft.modid+":blockVoidfence", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockVoidstairs), 0, new ModelResourceLocation(voidCraft.modid+":blockVoidstairs", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockVoidBrickSlab), 0, new ModelResourceLocation(voidCraft.modid+":blockVoidBrickSlab", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(AIBlock), 0, new ModelResourceLocation(voidCraft.modid+":AIBlock", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(xiaBlock), 0, new ModelResourceLocation(voidCraft.modid+":xiaBlock", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockPortalVoid), 0, new ModelResourceLocation(voidCraft.modid+":blockPortalVoid", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(blockPortalXia), 0, new ModelResourceLocation(voidCraft.modid+":blockPortalXia", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(fireVoid), 0, new ModelResourceLocation(voidCraft.modid+":fireVoid", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(voidMacerator), 0, new ModelResourceLocation(voidCraft.modid+":voidMacerator", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(Heimdall), 0, new ModelResourceLocation(voidCraft.modid+":Heimdall", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(voidBox), 0, new ModelResourceLocation(voidCraft.modid+":voidBox", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(voidInfuserInert), 0, new ModelResourceLocation(voidCraft.modid+":voidInfuserInert", "inventory"));
+		modelMesher.register(Item.getItemFromBlock(voidInfuser), 0, new ModelResourceLocation(voidCraft.modid+":voidInfuser", "inventory"));
 	}
 
 }

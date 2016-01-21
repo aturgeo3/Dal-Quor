@@ -26,7 +26,7 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 		this.setTickRandomly(true);
 		this.setLightLevel(0.75F);
 		name = n;
-		setUnlocalizedName(voidCraft.modid+":"+name);
+		setUnlocalizedName(name);
 		GameRegistry.registerBlock(this, getName());
 	}
 	

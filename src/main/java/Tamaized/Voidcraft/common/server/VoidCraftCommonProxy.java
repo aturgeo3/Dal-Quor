@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.common.server;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.VoidBlocks;
 
 public class VoidCraftCommonProxy {
 
@@ -24,5 +25,9 @@ public class VoidCraftCommonProxy {
 	public void registerNetwork() {}
 
 	public void registerAchievements() {}
+
+	public void registerBlockInventoryRender(VoidBlocks blocks) {
+		
+	}
 
 }
