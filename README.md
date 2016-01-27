@@ -21,7 +21,8 @@ DEV is an unstable version meant for testing purposes. It may sometimes be a lat
  
 ## Other Mod Integrations
  This mod currently has integrations with:
- * NEI
- * Thaumcraft
+ * As of Right now, none! Not while i'm switching from 1.7.10 over to 1.8.9!
+ * ~~NEI~~
+ * ~~Thaumcraft~~
  
  Note: These Mods are NOT required in order to use this mod.
