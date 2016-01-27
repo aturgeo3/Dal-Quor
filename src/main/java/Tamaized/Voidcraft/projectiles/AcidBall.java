@@ -231,7 +231,7 @@ public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditio
             }
 
             Entity entity = null;
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getCollisionBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int i;
             float f1;
@@ -243,7 +243,7 @@ public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditio
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5))
                 {
                     f1 = 0.3F;
-                    AxisAlignedBB axisalignedbb1 = entity1.getBoundingBox().expand((double)f1, (double)f1, (double)f1);
+                    AxisAlignedBB axisalignedbb1 = entity1.getCollisionBoundingBox().expand((double)f1, (double)f1, (double)f1);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
                     if (movingobjectposition1 != null)
@@ -328,8 +328,8 @@ public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditio
 
                             if (this.shootingEntity != null && this.shootingEntity instanceof EntityLivingBase)
                             {
-                                EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
-                                EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
+                                //EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
+                                //EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
                             }
 
                             if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)

@@ -76,7 +76,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 
 	        this.posY = par2EntityLivingBase.posY + (double)par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
 	        double d0 = par3EntityLivingBase.posX - par2EntityLivingBase.posX;
-	        double d1 = par3EntityLivingBase.getBoundingBox().minY + (double)(par3EntityLivingBase.height / 3.0F) - this.posY;
+	        double d1 = par3EntityLivingBase.getCollisionBoundingBox().minY + (double)(par3EntityLivingBase.height / 3.0F) - this.posY;
 	        double d2 = par3EntityLivingBase.posZ - par2EntityLivingBase.posZ;
 	        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
@@ -253,7 +253,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	            }
 
 	            Entity entity = null;
-	            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+	            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getCollisionBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 	            double d0 = 0.0D;
 	            int i;
 	            float f1;
@@ -265,7 +265,7 @@ public class VoidChain extends EntityArrow implements IProjectile{
 	                if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5))
 	                {
 	                    f1 = 0.3F;
-	                    AxisAlignedBB axisalignedbb1 = entity1.getBoundingBox().expand((double)f1, (double)f1, (double)f1);
+	                    AxisAlignedBB axisalignedbb1 = entity1.getCollisionBoundingBox().expand((double)f1, (double)f1, (double)f1);
 	                    MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
 	                    if (movingobjectposition1 != null)
@@ -350,8 +350,8 @@ public class VoidChain extends EntityArrow implements IProjectile{
 
 	                            if (this.shootingEntity != null && this.shootingEntity instanceof EntityLivingBase)
 	                            {
-	                                EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
-	                                EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
+	                                //EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
+	                                //EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
 	                            }
 
 	                            if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)

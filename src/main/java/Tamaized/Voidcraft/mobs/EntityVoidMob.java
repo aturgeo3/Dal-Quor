@@ -193,10 +193,10 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
 
             if (p_70652_1_ instanceof EntityLivingBase)
             {
-                EnchantmentHelper.func_151384_a((EntityLivingBase)p_70652_1_, this);
+                EnchantmentHelper.applyThornEnchantments((EntityLivingBase)p_70652_1_, this);
             }
 
-            EnchantmentHelper.func_151385_b(this, p_70652_1_);
+            EnchantmentHelper.applyThornEnchantments(this, p_70652_1_);
         }
 
         return flag;
