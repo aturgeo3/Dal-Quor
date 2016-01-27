@@ -18,17 +18,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.items.VoidRecord;
 
-public class TileEntityVoidBox extends TileEntity implements IUpdatePlayerListBox, ISidedInventory{
+public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedInventory{
 	
 	public static NBTTagCompound znbtc = new NBTTagCompound();
 	
@@ -159,7 +159,7 @@ public class TileEntityVoidBox extends TileEntity implements IUpdatePlayerListBo
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
+	public ItemStack removeStackFromSlot(int i) {
 		if(this.slots[i] != null){
 			ItemStack itemstack = this.slots[i];
 			this.slots[i] = null;

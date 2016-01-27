@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -78,10 +79,10 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
             GlStateManager.texGen(GlStateManager.TexGen.T, 9217);
             GlStateManager.texGen(GlStateManager.TexGen.R, 9217);
             GlStateManager.texGen(GlStateManager.TexGen.Q, 9216);
-            GlStateManager.func_179105_a(GlStateManager.TexGen.S, 9473, this.func_147525_a(1.0F, 0.0F, 0.0F, 0.0F));
-            GlStateManager.func_179105_a(GlStateManager.TexGen.T, 9473, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F));
-            GlStateManager.func_179105_a(GlStateManager.TexGen.R, 9473, this.func_147525_a(0.0F, 0.0F, 0.0F, 1.0F));
-            GlStateManager.func_179105_a(GlStateManager.TexGen.Q, 9474, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F));
+            GlStateManager.texGen(GlStateManager.TexGen.S, 9473, this.func_147525_a(1.0F, 0.0F, 0.0F, 0.0F));
+            GlStateManager.texGen(GlStateManager.TexGen.T, 9473, this.func_147525_a(0.0F, 0.0F, 1.0F, 0.0F));
+            GlStateManager.texGen(GlStateManager.TexGen.R, 9473, this.func_147525_a(0.0F, 0.0F, 0.0F, 1.0F));
+            GlStateManager.texGen(GlStateManager.TexGen.Q, 9474, this.func_147525_a(0.0F, 1.0F, 0.0F, 0.0F));
             GlStateManager.enableTexGenCoord(GlStateManager.TexGen.S);
             GlStateManager.enableTexGenCoord(GlStateManager.TexGen.T);
             GlStateManager.enableTexGenCoord(GlStateManager.TexGen.R);
@@ -100,7 +101,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
             GlStateManager.translate((float)ActiveRenderInfo.getPosition().xCoord * f5 / f9, (float)ActiveRenderInfo.getPosition().zCoord * f5 / f9, -f2);
             Tessellator tessellator = Tessellator.getInstance();
             WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-            worldrenderer.startDrawingQuads();
+            worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
             float f12 = field_147527_e.nextFloat() * 0.5F + 0.1F;
             float f13 = field_147527_e.nextFloat() * 0.5F + 0.4F;
             float f14 = field_147527_e.nextFloat() * 0.5F + 0.5F;
@@ -111,39 +112,37 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
                 f13 = 1.0F;
                 f12 = 1.0F;
             }
-
-            worldrenderer.setColorRGBA_F(f11 * f7, f12 * f7, f13 * f7, 1.0F);
             
             //Top
-            worldrenderer.addVertex(x + 0, y + 1, z + 0);
-            worldrenderer.addVertex(x + 0, y + 1, z + 1);
-            worldrenderer.addVertex(x + 1, y + 1, z + 1);
-            worldrenderer.addVertex(x + 1, y + 1, z + 0);
+            worldrenderer.pos(x + 0, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
             //East
-            worldrenderer.addVertex(x + 1, y + 1, z + 1);
-            worldrenderer.addVertex(x + 1, y + 0, z + 1);
-            worldrenderer.addVertex(x + 1, y + 0, z + 0);
-            worldrenderer.addVertex(x + 1, y + 1, z + 0);
+            worldrenderer.pos(x + 1, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
             //West
-            worldrenderer.addVertex(x + 0, y + 1, z + 0);
-            worldrenderer.addVertex(x + 0, y + 0, z + 0);
-            worldrenderer.addVertex(x + 0, y + 0, z + 1);
-            worldrenderer.addVertex(x + 0, y + 1, z + 1);
+            worldrenderer.pos(x + 0, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
             //South
-            worldrenderer.addVertex(x + 0, y + 1, z + 1);
-            worldrenderer.addVertex(x + 0, y + 0, z + 1);
-            worldrenderer.addVertex(x + 1, y + 0, z + 1);
-            worldrenderer.addVertex(x + 1, y + 1, z + 1);
+            worldrenderer.pos(x + 0, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 1, z + 1).color(f11, f12, f13, 1.0F).endVertex();
             //North
-            worldrenderer.addVertex(x + 1, y + 1, z + 0);
-            worldrenderer.addVertex(x + 1, y + 0, z + 0);
-            worldrenderer.addVertex(x + 0, y + 0, z + 0);
-            worldrenderer.addVertex(x + 0, y + 1, z + 0);
+            worldrenderer.pos(x + 1, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 1, z + 0).color(f11, f12, f13, 1.0F).endVertex();
             //Bottom
-            worldrenderer.addVertex(x + 0, y + 0, z + 0);
-            worldrenderer.addVertex(x + 1, y + 0, z + 0);
-            worldrenderer.addVertex(x + 1, y + 0, z + 1);
-            worldrenderer.addVertex(x + 0, y + 0, z + 1);
+            worldrenderer.pos(x + 0, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 0).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 1, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
+            worldrenderer.pos(x + 0, y + 0, z + 1).color(f11, f12, f13, 1.0F).endVertex();
             
             tessellator.draw();
             GlStateManager.popMatrix();

@@ -60,7 +60,7 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 		
 		if(currTick>=callTick){
 			for(Class c : watchedClass){
-				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getBoundingBox().expand((double)maxDistanceForPlayer, (double)maxDistanceForPlayer, (double)maxDistanceForPlayer), theWatcher);
+				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getEntityBoundingBox().expand((double)maxDistanceForPlayer, (double)maxDistanceForPlayer, (double)maxDistanceForPlayer), theWatcher);
 				if(e != null){
 					closestEntity = e;
 					break;
@@ -122,10 +122,10 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 				dy = 0;
 			}
 		
-			double ezMin = closestEntity.getBoundingBox().minZ;
-			double ezMax = closestEntity.getBoundingBox().maxZ;
-			double exMin = closestEntity.getBoundingBox().minX;
-			double exMax = closestEntity.getBoundingBox().maxX;
+			double ezMin = closestEntity.getCollisionBoundingBox().minZ;
+			double ezMax = closestEntity.getCollisionBoundingBox().maxZ;
+			double exMin = closestEntity.getCollisionBoundingBox().minX;
+			double exMax = closestEntity.getCollisionBoundingBox().maxX;
 			if(tick_Damage <= 0){
 				if(z >= ezMin && z <= ezMax && x >= exMin && x <= exMax){
 					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(entity), 45);

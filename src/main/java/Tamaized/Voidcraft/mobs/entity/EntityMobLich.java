@@ -240,7 +240,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     	if(randAttk == 1){ //EntityLargeFireball at Target
     		this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
     		double d5 = par1EntityLivingBase.posX - this.posX;
-    		double d6 = par1EntityLivingBase.getBoundingBox().minY + (double)(par1EntityLivingBase.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+    		double d6 = par1EntityLivingBase.getEntityBoundingBox().minY + (double)(par1EntityLivingBase.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
     		double d7 = par1EntityLivingBase.posZ - this.posZ;
                 
     		EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.worldObj, this, d5, d6, d7);

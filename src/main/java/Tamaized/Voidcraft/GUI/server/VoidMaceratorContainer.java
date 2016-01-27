@@ -38,13 +38,15 @@ public class VoidMaceratorContainer extends Container {
 		}
 	}
 	
-	public void addCraftingToCrafters(ICrafting icrafting){
-		super.addCraftingToCrafters(icrafting);
+	@Override
+	public void onCraftGuiOpened(ICrafting icrafting){
+		super.onCraftGuiOpened(icrafting);
 		icrafting.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
 		icrafting.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
 		icrafting.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
 	}
 
+	@Override
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
 		
@@ -69,6 +71,7 @@ public class VoidMaceratorContainer extends Container {
 		this.lastItemBurnTime = this.voidtilemacerator.currentItemBurnTime;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2){
 		if(slot == 0) this.voidtilemacerator.cookTime = par2;
@@ -76,6 +79,7 @@ public class VoidMaceratorContainer extends Container {
 		if(slot == 2) this.voidtilemacerator.currentItemBurnTime = par2;
 	}
 	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot){
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
@@ -124,6 +128,7 @@ public class VoidMaceratorContainer extends Container {
 		return itemstack;
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return this.voidtilemacerator.isUseableByPlayer(entityplayer);
 	}

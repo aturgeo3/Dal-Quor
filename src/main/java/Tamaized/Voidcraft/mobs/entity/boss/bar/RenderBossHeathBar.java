@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -105,11 +106,11 @@ public class RenderBossHeathBar {
 	public static void drawBar(int x, int y, int z, int w, int h) {
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldRender = tessellator.getWorldRenderer();
-		worldRender.startDrawingQuads();
-		worldRender.addVertex(x+w, y, z);
-		worldRender.addVertex(x, y, z);
-		worldRender.addVertex(x, y+h, z);
-		worldRender.addVertex(x+w, y+h, z);
+		worldRender.begin(8, DefaultVertexFormats.POSITION_COLOR);
+		worldRender.pos(x+w, y, z).color(1, 1, 1, 1.0F).endVertex();
+		worldRender.pos(x, y, z).color(1, 1, 1, 1.0F).endVertex();
+		worldRender.pos(x, y+h, z).color(1, 1, 1, 1.0F).endVertex();
+		worldRender.pos(x+w, y+h, z).color(1, 1, 1, 1.0F).endVertex();
 		tessellator.draw();
 	}
 

@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.mobs.entity;
 
-import com.google.common.base.Predicate;
-
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,6 +24,8 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
+
+import com.google.common.base.Predicate;
 
 public class EntityMobVoidWrath extends EntityVoidMob implements IMob{
 	

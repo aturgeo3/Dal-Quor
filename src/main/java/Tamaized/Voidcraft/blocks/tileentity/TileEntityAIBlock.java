@@ -12,8 +12,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
@@ -22,7 +22,7 @@ import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 
-public class TileEntityAIBlock extends TileEntity implements IUpdatePlayerListBox{
+public class TileEntityAIBlock extends TileEntity implements ITickable{
 	
 	public EntityAIHandler aiHandler;
 	public IHandlerAI ai;

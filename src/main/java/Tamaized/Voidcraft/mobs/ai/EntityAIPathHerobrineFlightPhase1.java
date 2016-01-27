@@ -93,7 +93,7 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 		
 		if(currTick==callTick){
 			for(Class c : watchedClass){
-				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getBoundingBox().expand((double)maxDistanceForPlayer, 30.0D, (double)maxDistanceForPlayer), theWatcher);
+				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getEntityBoundingBox().expand((double)maxDistanceForPlayer, 30.0D, (double)maxDistanceForPlayer), theWatcher);
 				if(e != null){
 					closestEntity = e;
 					break;
@@ -119,7 +119,7 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 			if(closestEntity != null){
 				theWatcher.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, new BlockPos((int)theWatcher.posX, (int)theWatcher.posY, (int)theWatcher.posZ), 0);
 	    		double d5 = closestEntity.posX - theWatcher.posX;
-	    		double d6 = closestEntity.getBoundingBox().minY + (double)(closestEntity.height / 2.0F) - (theWatcher.posY + (double)(theWatcher.height / 2.0F));
+	    		double d6 = closestEntity.getEntityBoundingBox().minY + (double)(closestEntity.height / 2.0F) - (theWatcher.posY + (double)(theWatcher.height / 2.0F));
 	    		double d7 = closestEntity.posZ - theWatcher.posZ;
 	                
 	    		HerobrineFireball entitylargefireball = new HerobrineFireball(theWatcher.worldObj, theWatcher, d5, d6, d7);

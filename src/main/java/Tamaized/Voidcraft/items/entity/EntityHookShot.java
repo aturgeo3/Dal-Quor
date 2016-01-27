@@ -165,7 +165,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 				//Do work here TODO
 				if (shootingEntity != null) {
 					int shootingEntityBlockX = MathHelper.floor_double(shootingEntity.posX);
-					int shootingEntityBlockY = MathHelper.floor_double(shootingEntity.getBoundingBox().minY)-1;
+					int shootingEntityBlockY = MathHelper.floor_double(shootingEntity.getEntityBoundingBox().minY)-1;
 					int shootingEntityBlockZ = MathHelper.floor_double(shootingEntity.posZ);
 			    
 					if(shootingEntityBlockX-this.blockX > -3 && shootingEntityBlockX-this.blockX < 3){

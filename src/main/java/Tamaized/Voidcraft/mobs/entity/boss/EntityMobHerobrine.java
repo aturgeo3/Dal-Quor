@@ -180,7 +180,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
         {
             int i;
 
-            if (!this.worldObj.isRemote && (this.recentlyHit > 0 || this.isPlayer()) && this.func_146066_aG() && this.worldObj.getGameRules().getGameRuleBooleanValue("doMobLoot"))
+            if (!this.worldObj.isRemote && (this.recentlyHit > 0 || this.isPlayer()) && this.func_146066_aG() && this.worldObj.getGameRules().getBoolean("doMobLoot"))
             {
                 i = this.getExperiencePoints(this.attackingPlayer);
 

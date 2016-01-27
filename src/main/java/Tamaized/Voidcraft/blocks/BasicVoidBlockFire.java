@@ -31,20 +31,14 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 	 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand){
-		if (world.getGameRules().getGameRuleBooleanValue("doFireTick")){
+		if (world.getGameRules().getBoolean("doFireTick")){
 			boolean flag = world.getBlockState(pos.add(0, -1, 0)).getBlock().isFireSource(world, pos.add(0, -1, 0), EnumFacing.UP);
 			
 			if (!this.canPlaceBlockAt(world, pos)){
 				world.setBlockToAir(pos);
 			}
 
-			if (!flag && world.isRaining() && (
-				world.canLightningStrike(pos) ||
-				world.canLightningStrike(pos.add(-1, 0, 0)) ||
-				world.canLightningStrike(pos.add(1, 0, 0)) ||
-				world.canLightningStrike(pos.add(0, 0, -1)) ||
-				world.canLightningStrike(pos.add(0, 0, 1)))
-			){
+			if (!flag && world.isRaining() && this.canDie(world, pos)){
 				world.setBlockToAir(pos);
 			}else{
 				IBlockState bState = world.getBlockState(pos);
@@ -99,13 +93,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 										if (
 												j2 > 0 &&
 												rand.nextInt(l1) <= j2 &&
-												(!world.isRaining() ||
-														!world.canLightningStrike(new BlockPos(i1, k1, j1))) &&
-														!world.canLightningStrike(new BlockPos(i1 - 1, k1, pos.getZ())) &&
-														!world.canLightningStrike(new BlockPos(i1 + 1, k1, j1)) &&
-														!world.canLightningStrike(new BlockPos(i1, k1, j1 - 1)) &&
-														!world.canLightningStrike(new BlockPos(i1, k1, j1 + 1)))
-										{
+												(!world.isRaining() || this.canDie(world, pos))){
 											int k2 = l + rand.nextInt(5) / 4;
 											
 											if (k2 > 15){
@@ -130,7 +118,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 		if (rand.nextInt(chance) < j1){
 			boolean flag = world.getBlockState(pos).getBlock() == Blocks.tnt;
 			
-			if (rand.nextInt(age + 10) < 5 && !world.canLightningStrike(pos)){
+			if (rand.nextInt(age + 10) < 5 && !this.canDie(world, pos)){
 				int k1 = age + rand.nextInt(5) / 4;
 				
 				if (k1 > 15){

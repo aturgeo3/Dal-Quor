@@ -33,15 +33,14 @@ public class VoidBoxContainer extends Container {
 			this.addSlotToContainer(new Slot(inventory, i, 86 + i*18, 208));
 		}
 	}
-
-	public void detectAndSendChanges(){
-		super.detectAndSendChanges();
-	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2){
+		
 	}
 	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot){
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
@@ -95,6 +94,7 @@ public class VoidBoxContainer extends Container {
 		return itemstack;
 	}
 
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return this.te.isUseableByPlayer(entityplayer);
 	}

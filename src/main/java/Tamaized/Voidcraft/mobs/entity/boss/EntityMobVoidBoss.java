@@ -121,7 +121,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IBossDisplay
     		
     		if(this.getHealth() >= this.getMaxHealth()){
     			this.hasExploded = true;
-    			this.worldObj.newExplosion(this, this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, 7.0F, false, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"));
+    			this.worldObj.newExplosion(this, this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, 7.0F, false, this.worldObj.getGameRules().getBoolean("mobGriefing"));
                 this.worldObj.playBroadcastSound(1013, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
                 this.BeginAI();
                 this.setInvul(false);

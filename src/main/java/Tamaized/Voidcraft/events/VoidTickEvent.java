@@ -120,7 +120,7 @@ public class VoidTickEvent {
 		worldserver.removePlayerEntityDangerously(p_72356_1_);
 		p_72356_1_.isDead = false;
 		transferEntityToWorld(p_72356_1_, j, worldserver, worldserver1, teleporter);
-		mcServer.getConfigurationManager().func_72375_a(p_72356_1_, worldserver);
+		mcServer.getConfigurationManager().preparePlayer(p_72356_1_, worldserver);
 		p_72356_1_.playerNetServerHandler.setPlayerLocation(p_72356_1_.posX, p_72356_1_.posY, p_72356_1_.posZ, p_72356_1_.rotationYaw, p_72356_1_.rotationPitch);
 		p_72356_1_.theItemInWorldManager.setWorld(worldserver1);
 		mcServer.getConfigurationManager().updateTimeAndWeatherForPlayer(p_72356_1_, worldserver1);

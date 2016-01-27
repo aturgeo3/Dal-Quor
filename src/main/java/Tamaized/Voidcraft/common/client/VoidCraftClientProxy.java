@@ -1,12 +1,7 @@
 package Tamaized.Voidcraft.common.client;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderFireball;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -14,7 +9,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
-import Tamaized.Voidcraft.blocks.render.ItemRenderHeimdall;
 import Tamaized.Voidcraft.blocks.render.RenderHeimdall;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.common.voidCraft;
@@ -104,11 +98,11 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	
 		RenderHeimdall renderHeimdall = new RenderHeimdall();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeimdall.class, renderHeimdall);
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.Heimdall), new ItemRenderHeimdall(renderHeimdall, new TileEntityHeimdall()));
+		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.Heimdall), new ItemRenderHeimdall(renderHeimdall, new TileEntityHeimdall()));
 	
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
+		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
 	}
 	
 	@Override
