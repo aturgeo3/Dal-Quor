@@ -37,10 +37,13 @@ abstract public class ComponentTestPiece extends StructureComponent{
         super(par1);
     }
 
-    protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {}
+    @Override
+    protected void writeStructureToNBT(NBTTagCompound par1NBTTagCompound) {}
 
-    protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {}
+    @Override
+    protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound) {}
 
+    
     private int getTotalWeight(List par1List)
     {
         boolean flag = false;

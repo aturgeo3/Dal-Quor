@@ -22,18 +22,17 @@ public class MapGenTestStart extends MapGenStructure {
     	this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 1, 0, 1));
     }
 
-    public String func_143025_a()
-    {
+    @Override
+    public String getStructureName(){
         return "VoidFortress";
     }
 
-    public List getSpawnList()
-    {
+    public List getSpawnList(){
         return this.spawnList;
     }
 
-    protected boolean canSpawnStructureAtCoords(int par1, int par2)
-    {
+    @Override
+    protected boolean canSpawnStructureAtCoords(int par1, int par2){
         int k = par1 >> 4;
         int l = par2 >> 4;
         this.rand.setSeed((long)(k ^ l << 4) ^ this.worldObj.getSeed());
@@ -41,14 +40,9 @@ public class MapGenTestStart extends MapGenStructure {
         return this.rand.nextInt(3) != 0 ? false : (par1 != (k << 4) + 4 + this.rand.nextInt(8) ? false : par2 == (l << 4) + 4 + this.rand.nextInt(8));
     }
 
-    protected StructureStart getStructureStart(int par1, int par2)
-    {
+    @Override
+    protected StructureStart getStructureStart(int par1, int par2){
         return new StructureTestStart(this.worldObj, this.rand, par1, par2);
     }
-
-	@Override
-	public String getStructureName() {
-		return null;
-	}
 
 }

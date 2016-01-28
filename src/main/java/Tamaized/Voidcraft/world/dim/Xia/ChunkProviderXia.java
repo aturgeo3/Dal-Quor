@@ -77,7 +77,7 @@ public class ChunkProviderXia implements IChunkProvider{
 	}
 
 	@Override
-	public List func_177458_a(EnumCreatureType p_177458_1_, BlockPos p_177458_2_) {
+	public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_) {
 		return new ArrayList();
 	}
 

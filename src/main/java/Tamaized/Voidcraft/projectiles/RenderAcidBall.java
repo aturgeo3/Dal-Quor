@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -54,29 +55,29 @@ public class RenderAcidBall extends Render
         GL11.glScalef(f10, f10, f10);
         GL11.glTranslatef(-4.0F, 0.0F, 0.0F);
         GL11.glNormal3f(f10, 0.0F, 0.0F);
-        worldRender.startDrawingQuads();
-        worldRender.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f8);
-        worldRender.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f8);
-        worldRender.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f9);
-        worldRender.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f9);
+        worldRender.begin(7, DefaultVertexFormats.ITEM);
+        worldRender.pos(-7.0D, -2.0D, -2.0D).tex((double)f6, (double)f8).endVertex();
+        worldRender.pos(-7.0D, -2.0D, 2.0D).tex((double)f7, (double)f8).endVertex();
+        worldRender.pos(-7.0D, 2.0D, 2.0D).tex((double)f7, (double)f9).endVertex();
+        worldRender.pos(-7.0D, 2.0D, -2.0D).tex((double)f6, (double)f9).endVertex();
         tessellator.draw();
         GL11.glNormal3f(-f10, 0.0F, 0.0F);
-        worldRender.startDrawingQuads();
-        worldRender.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f8);
-        worldRender.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f8);
-        worldRender.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f9);
-        worldRender.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f9);
+        worldRender.begin(7, DefaultVertexFormats.ITEM);
+        worldRender.pos(-7.0D, 2.0D, -2.0D).tex((double)f6, (double)f8).endVertex();
+        worldRender.pos(-7.0D, 2.0D, 2.0D).tex((double)f7, (double)f8).endVertex();
+        worldRender.pos(-7.0D, -2.0D, 2.0D).tex((double)f7, (double)f9).endVertex();
+        worldRender.pos(-7.0D, -2.0D, -2.0D).tex((double)f6, (double)f9).endVertex();
         tessellator.draw();
 
         for (int i = 0; i < 4; ++i)
         {
             GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
             GL11.glNormal3f(0.0F, 0.0F, f10);
-            worldRender.startDrawingQuads();
-            worldRender.addVertexWithUV(-8.0D, -2.0D, 0.0D, (double)f2, (double)f4);
-            worldRender.addVertexWithUV(8.0D, -2.0D, 0.0D, (double)f3, (double)f4);
-            worldRender.addVertexWithUV(8.0D, 2.0D, 0.0D, (double)f3, (double)f5);
-            worldRender.addVertexWithUV(-8.0D, 2.0D, 0.0D, (double)f2, (double)f5);
+            worldRender.begin(7, DefaultVertexFormats.ITEM);
+            worldRender.pos(-8.0D, -2.0D, 0.0D).tex((double)f2, (double)f4).endVertex();
+            worldRender.pos(8.0D, -2.0D, 0.0D).tex((double)f3, (double)f4).endVertex();
+            worldRender.pos(8.0D, 2.0D, 0.0D).tex((double)f3, (double)f5).endVertex();
+            worldRender.pos(-8.0D, 2.0D, 0.0D).tex((double)f2, (double)f5).endVertex();
             tessellator.draw();
         }
 

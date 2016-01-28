@@ -26,19 +26,21 @@ public class ComponentTestEnd extends ComponentTestPiece{
 
     public static ComponentTestEnd func_74971_a(List par0List, Random par1Random, int x, int y, int z, EnumFacing face, int id)
     {
-        StructureBoundingBox structureboundingbox = StructureBoundingBox.func_175897_a(x, y, z, -1, -3, 0, 5, 10, 8, face);
+        StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, -1, -3, 0, 5, 10, 8, face);
         return isAboveGround(structureboundingbox) && StructureComponent.findIntersecting(par0List, structureboundingbox) == null ? new ComponentTestEnd(id, par1Random, structureboundingbox, face) : null;
     }
 
-    protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
+    @Override
+    protected void writeStructureToNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.func_143011_b(par1NBTTagCompound);
+        super.writeStructureToNBT(par1NBTTagCompound);
         this.fillSeed = par1NBTTagCompound.getInteger("Seed");
     }
 
-    protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
+    @Override
+    protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.func_143012_a(par1NBTTagCompound);
+        super.readStructureFromNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("Seed", this.fillSeed);
     }
 
@@ -58,19 +60,19 @@ public class ComponentTestEnd extends ComponentTestPiece{
             for (j = 3; j <= 4; ++j)
             {
                 k = random1.nextInt(8);
-                this.func_175804_a(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
             }
         }
 
         i = random1.nextInt(8);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 5, 0, 0, 5, i, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 0, 5, i, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         i = random1.nextInt(8);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 4, 5, 0, 4, 5, i, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 5, 0, 4, 5, i, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
 
         for (i = 0; i <= 4; ++i)
         {
             j = random1.nextInt(5);
-            this.func_175804_a(par1World, par3StructureBoundingBox, i, 2, 0, i, 2, j, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+            this.fillWithBlocks(par1World, par3StructureBoundingBox, i, 2, 0, i, 2, j, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         }
 
         for (i = 0; i <= 4; ++i)
@@ -78,21 +80,11 @@ public class ComponentTestEnd extends ComponentTestPiece{
             for (j = 0; j <= 1; ++j)
             {
                 k = random1.nextInt(3);
-                this.func_175804_a(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+                this.fillWithBlocks(par1World, par3StructureBoundingBox, i, j, 0, i, j, k, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
             }
         }
 
         return true;
     }
-
-	@Override
-	protected void writeStructureToNBT(NBTTagCompound p_143012_1_) {
-		
-	}
-
-	@Override
-	protected void readStructureFromNBT(NBTTagCompound p_143011_1_) {
-		
-	}
 
 }

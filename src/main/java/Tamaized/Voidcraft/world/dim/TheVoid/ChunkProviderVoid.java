@@ -20,6 +20,7 @@ import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -370,7 +371,7 @@ public class ChunkProviderVoid implements IChunkProvider
         BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
         this.generateTerrain(par1, par2, primer);
         this.replaceBlocksForBiome(par1, par2, ablock, meta, abiomegenbase);
-        this.genTest.func_175792_a(this, this.worldObj, par1, par2, primer);
+        this.genTest.generate(this, this.worldObj, par1, par2, primer);
         Chunk chunk = new Chunk(this.worldObj, par1, par2);
         byte[] abyte = chunk.getBiomeArray();
 
@@ -555,7 +556,7 @@ public class ChunkProviderVoid implements IChunkProvider
         int k = par2 * 16;
         int l = par3 * 16;
       //  this.genNetherBridge.generateStructuresInChunk(this.worldObj, this.hellRNG, par2, par3);
-        this.genTest.func_175794_a(this.worldObj, this.hellRNG, new ChunkCoordIntPair(par2, par3));
+        this.genTest.generateStructure(this.worldObj, this.hellRNG, new ChunkCoordIntPair(par2, par3));
         int i1;
         int j1;
         int k1;
@@ -688,7 +689,7 @@ public class ChunkProviderVoid implements IChunkProvider
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
     @Override
-    public List func_177458_a(EnumCreatureType type, BlockPos pos){
+    public List getPossibleCreatures(EnumCreatureType type, BlockPos pos){
     	
     	if(this.genTest != null){
     		if (this.genTest.func_175795_b(pos)){
@@ -713,7 +714,7 @@ public class ChunkProviderVoid implements IChunkProvider
     @Override
     public void recreateStructures(Chunk chunk, int par1, int par2)
     {
-       this.genTest.func_175792_a(this, this.worldObj, par1, par2, (ChunkPrimer)null);
+       this.genTest.generate(this, this.worldObj, par1, par2, (ChunkPrimer)null);
     }
 
 

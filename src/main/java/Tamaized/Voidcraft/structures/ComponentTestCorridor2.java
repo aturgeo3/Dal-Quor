@@ -26,15 +26,17 @@ public class ComponentTestCorridor2 extends ComponentTestPiece{
 	        this.field_111020_b = par2Random.nextInt(3) == 0;
 	    }
 
-	    protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
+	    @Override
+	    protected void writeStructureToNBT(NBTTagCompound par1NBTTagCompound)
 	    {
-	        super.func_143011_b(par1NBTTagCompound);
+	        super.writeStructureToNBT(par1NBTTagCompound);
 	        this.field_111020_b = par1NBTTagCompound.getBoolean("Chest");
 	    }
 
-	    protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
+	    @Override
+	    protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
 	    {
-	        super.func_143012_a(par1NBTTagCompound);
+	        super.readStructureFromNBT(par1NBTTagCompound);
 	        par1NBTTagCompound.setBoolean("Chest", this.field_111020_b);
 	    }
 
@@ -51,7 +53,7 @@ public class ComponentTestCorridor2 extends ComponentTestPiece{
 	     */
 	    public static ComponentTestCorridor2 createValidComponent(List par0List, Random par1Random, int par2, int par3, int par4, EnumFacing par5, int par6)
 	    {
-	        StructureBoundingBox structureboundingbox = StructureBoundingBox.func_175897_a(par2, par3, par4, -1, 0, 0, 5, 7, 5, par5);
+	        StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par2, par3, par4, -1, 0, 0, 5, 7, 5, par5);
 	        return isAboveGround(structureboundingbox) && StructureComponent.findIntersecting(par0List, structureboundingbox) == null ? new ComponentTestCorridor2(par6, par1Random, structureboundingbox, par5) : null;
 	    }
 
@@ -61,15 +63,15 @@ public class ComponentTestCorridor2 extends ComponentTestPiece{
 	     */
 	    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 	    {
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 1, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 0, 4, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 5, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 3, 1, 0, 4, 1, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 3, 3, 0, 4, 3, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 4, 2, 0, 4, 5, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 1, 2, 4, 4, 5, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 1, 3, 4, 1, 4, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 3, 3, 4, 3, 4, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 4, 1, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 4, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 5, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 1, 0, 4, 1, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 3, 0, 4, 3, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 4, 2, 0, 4, 5, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 2, 4, 4, 5, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 4, 1, 4, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 3, 3, 4, 3, 4, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
 	        int i;
 	        int j;
 
@@ -79,14 +81,14 @@ public class ComponentTestCorridor2 extends ComponentTestPiece{
 	            j = this.getXWithOffset(1, 3);
 	            int k = this.getZWithOffset(1, 3);
 
-	            if (par3StructureBoundingBox.func_175898_b(new Vec3i(j, i, k)))
+	            if (par3StructureBoundingBox.isVecInside(new Vec3i(j, i, k)))
 	            {
 	                this.field_111020_b = false;
-	                this.func_180778_a(par1World, par3StructureBoundingBox, par2Random, 1, 2, 3, field_111019_a, 2 + par2Random.nextInt(4));
+	                this.generateChestContents(par1World, par3StructureBoundingBox, par2Random, 1, 2, 3, field_111019_a, 2 + par2Random.nextInt(4));
 	            }
 	        }
 
-	        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 6, 0, 4, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+	        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 0, 4, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
 
 	        for (i = 0; i <= 4; ++i)
 	        {
@@ -98,17 +100,5 @@ public class ComponentTestCorridor2 extends ComponentTestPiece{
 
 	        return true;
 	    }
-
-		@Override
-		protected void writeStructureToNBT(NBTTagCompound p_143012_1_) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		protected void readStructureFromNBT(NBTTagCompound p_143011_1_) {
-			// TODO Auto-generated method stub
-			
-		}
 
 }

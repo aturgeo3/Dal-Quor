@@ -9,8 +9,23 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 public class StructureTestPieces {
 	
-	private static final StructureTestPieceWeight[] primaryComponents = new StructureTestPieceWeight[] {new StructureTestPieceWeight(ComponentTestStraight.class, 30, 0, true), new StructureTestPieceWeight(ComponentTestCrossing3.class, 10, 4), new StructureTestPieceWeight(ComponentTestCrossing.class, 10, 4), new StructureTestPieceWeight(ComponentTestStairs.class, 10, 3), new StructureTestPieceWeight(ComponentTestThrone.class, 5, 2), new StructureTestPieceWeight(ComponentTestEntrance.class, 5, 1)};
-    private static final StructureTestPieceWeight[] secondaryComponents = new StructureTestPieceWeight[] {new StructureTestPieceWeight(ComponentTestCorridor5.class, 25, 0, true), new StructureTestPieceWeight(ComponentTestCrossing2.class, 15, 5), new StructureTestPieceWeight(ComponentTestCorridor2.class, 5, 10), new StructureTestPieceWeight(ComponentTestCorridor.class, 5, 10), new StructureTestPieceWeight(ComponentTestCorridor3.class, 10, 3, true), new StructureTestPieceWeight(ComponentTestCorridor4.class, 7, 2), new StructureTestPieceWeight(ComponentTestNetherStalkRoom.class, 5, 2)};
+	private static final StructureTestPieceWeight[] primaryComponents = new StructureTestPieceWeight[] {
+		new StructureTestPieceWeight(ComponentTestStraight.class, 30, 0, true),
+		new StructureTestPieceWeight(ComponentTestCrossing3.class, 10, 4),
+		new StructureTestPieceWeight(ComponentTestCrossing.class, 10, 4),
+		new StructureTestPieceWeight(ComponentTestStairs.class, 10, 3),
+		new StructureTestPieceWeight(ComponentTestThrone.class, 5, 2),
+		new StructureTestPieceWeight(ComponentTestEntrance.class, 5, 1)
+		};
+    private static final StructureTestPieceWeight[] secondaryComponents = new StructureTestPieceWeight[] {
+    	new StructureTestPieceWeight(ComponentTestCorridor5.class, 25, 0, true),
+    	new StructureTestPieceWeight(ComponentTestCrossing2.class, 15, 5),
+    	new StructureTestPieceWeight(ComponentTestCorridor2.class, 5, 10),
+    	new StructureTestPieceWeight(ComponentTestCorridor.class, 5, 10),
+    	new StructureTestPieceWeight(ComponentTestCorridor3.class, 10, 3, true),
+    	new StructureTestPieceWeight(ComponentTestCorridor4.class, 7, 2),
+    	new StructureTestPieceWeight(ComponentTestNetherStalkRoom.class, 5, 2)
+    	};
 
     public static void func_143049_a()
     {

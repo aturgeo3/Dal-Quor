@@ -54,14 +54,16 @@ public class ComponentTestStartPiece extends ComponentTestCrossing3{
         }
     }
 
-    protected void func_143011_b(NBTTagCompound par1NBTTagCompound)
+    @Override
+    protected void writeStructureToNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.func_143011_b(par1NBTTagCompound);
+        super.writeStructureToNBT(par1NBTTagCompound);
     }
 
-    protected void func_143012_a(NBTTagCompound par1NBTTagCompound)
+    @Override
+    protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.func_143012_a(par1NBTTagCompound);
+        super.readStructureFromNBT(par1NBTTagCompound);
     }
 
 }

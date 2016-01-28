@@ -37,7 +37,7 @@ public class ComponentTestCrossing extends ComponentTestPiece{
      */
     public static ComponentTestCrossing createValidComponent(List par0List, Random par1Random, int x, int y, int z, EnumFacing face, int id)
     {
-        StructureBoundingBox structureboundingbox = StructureBoundingBox.func_175897_a(x, y, z, -2, 0, 0, 7, 9, 7, face);
+        StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, -2, 0, 0, 7, 9, 7, face);
         return isAboveGround(structureboundingbox) && StructureComponent.findIntersecting(par0List, structureboundingbox) == null ? new ComponentTestCrossing(id, par1Random, structureboundingbox, face) : null;
     }
 
@@ -47,24 +47,24 @@ public class ComponentTestCrossing extends ComponentTestPiece{
      */
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 0, 0, 6, 1, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 0, 6, 7, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 0, 1, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 6, 1, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 5, 2, 0, 6, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 5, 2, 6, 6, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 6, 1, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 2, 5, 0, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 6, 2, 0, 6, 6, 1, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 6, 2, 5, 6, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 2, 6, 0, 4, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 2, 5, 0, 4, 5, 0, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 2, 6, 6, 4, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 2, 5, 6, 4, 5, 6, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 6, 2, 0, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 0, 5, 2, 0, 5, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 6, 6, 2, 6, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.func_175804_a(par1World, par3StructureBoundingBox, 6, 5, 2, 6, 5, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 6, 1, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 6, 7, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 1, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 6, 1, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 0, 6, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 6, 6, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 0, 6, 1, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 5, 0, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 2, 0, 6, 6, 1, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 2, 5, 6, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 6, 0, 4, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 5, 0, 4, 5, 0, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 6, 6, 4, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 5, 6, 4, 5, 6, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 2, 0, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 2, 0, 5, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 6, 2, 6, 6, 4, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 5, 2, 6, 5, 4, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
 
         for (int i = 0; i <= 6; ++i)
         {

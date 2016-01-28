@@ -7,6 +7,7 @@ import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -31,7 +32,7 @@ public class VoidFluids extends RegistryBase {
 	@Override
 	public void preInit() {
 		// Fluid
-		fluidVoid = new Fluid("void");
+		fluidVoid = new Fluid("void", new ResourceLocation("VoidCraft:textures/blocks/voidFluid_still.png"), new ResourceLocation("VoidCraft:textures/blocks/voidFluid_flow.png"));
 		materialFluidVoid = new MaterialLiquid(MapColor.purpleColor);
 		// This has to be here for Fluids
 		FluidRegistry.registerFluid(fluidVoid);
