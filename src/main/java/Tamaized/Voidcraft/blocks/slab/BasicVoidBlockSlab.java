@@ -25,12 +25,12 @@ public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid
 		name = n;
 		setUnlocalizedName(name);
 		IBlockState blockState = this.blockState.getBaseState();
-        blockState = blockState.withProperty(VARIANT_PROPERTY, false);
-        if(!isDouble()){
-        	blockState = blockState.withProperty(HALF, EnumBlockHalf.BOTTOM);
-        	setCreativeTab(voidCraft.tabs.tabVoid);
-        }
-        setDefaultState(blockState);
+		blockState = blockState.withProperty(VARIANT_PROPERTY, false);
+		if(!isDouble()){
+			blockState = blockState.withProperty(HALF, EnumBlockHalf.BOTTOM);
+			setCreativeTab(voidCraft.tabs.tabVoid);
+		}
+		setDefaultState(blockState);
         useNeighborBrightness = !isDouble();
 	}
 	
