@@ -60,7 +60,7 @@ public class TeleporterXia extends Teleporter {
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidfence.getStateFromMeta(meta), 2);
 						break;
 					case 734:
-						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidBrickSlab.getStateFromMeta(meta), 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidBrickHalfSlab.getStateFromMeta(meta), 2);
 						break;
 					case 733:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidstairs.getStateFromMeta(meta), 2);
