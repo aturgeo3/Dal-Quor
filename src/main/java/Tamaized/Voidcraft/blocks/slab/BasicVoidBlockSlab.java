@@ -31,7 +31,7 @@ public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid
 			setCreativeTab(voidCraft.tabs.tabVoid);
 		}
 		setDefaultState(blockState);
-        useNeighborBrightness = !isDouble();
+		useNeighborBrightness = !isDouble();
 	}
 	
 	@Override

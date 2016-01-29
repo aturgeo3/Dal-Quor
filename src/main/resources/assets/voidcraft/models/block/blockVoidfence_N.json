@@ -1,5 +1,5 @@
 {
-    "parent": "block/fence_post",
+    "parent": "block/fence_n",
     "textures": {
         "texture": "voidcraft:blocks/VoidBrick"
     }

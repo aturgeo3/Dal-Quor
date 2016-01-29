@@ -1,5 +1,20 @@
 {
     "variants": {
-        "normal": { "model": "voidcraft:blockVoidfence" }
+        "east=false,north=false,south=false,west=false": { "model": "voidcraft:blockVoidfence" },
+        "east=false,north=true,south=false,west=false": { "model": "voidcraft:blockVoidfence_N", "uvlock": true },
+        "east=true,north=false,south=false,west=false": { "model": "voidcraft:blockVoidfence_N", "y": 90, "uvlock": true },
+        "east=false,north=false,south=true,west=false": { "model": "voidcraft:blockVoidfence_N", "y": 180, "uvlock": true },
+        "east=false,north=false,south=false,west=true": { "model": "voidcraft:blockVoidfence_N", "y": 270, "uvlock": true },
+        "east=true,north=true,south=false,west=false": { "model": "voidcraft:blockVoidfence_NE", "uvlock": true },
+        "east=true,north=false,south=true,west=false": { "model": "voidcraft:blockVoidfence_NE", "y": 90, "uvlock": true },
+        "east=false,north=false,south=true,west=true": { "model": "voidcraft:blockVoidfence_NE", "y": 180, "uvlock": true },
+        "east=false,north=true,south=false,west=true": { "model": "voidcraft:blockVoidfence_NE", "y": 270, "uvlock": true },
+        "east=false,north=true,south=true,west=false": { "model": "voidcraft:blockVoidfence_NS", "uvlock": true },
+        "east=true,north=false,south=false,west=true": { "model": "voidcraft:blockVoidfence_NS", "y": 90, "uvlock": true },
+        "east=true,north=true,south=true,west=false": { "model": "voidcraft:blockVoidfence_NSE", "uvlock": true },
+        "east=true,north=false,south=true,west=true": { "model": "voidcraft:blockVoidfence_NSE", "y": 90, "uvlock": true },
+        "east=false,north=true,south=true,west=true": { "model": "voidcraft:blockVoidfence_NSE", "y": 180, "uvlock": true },
+        "east=true,north=true,south=false,west=true": { "model": "voidcraft:blockVoidfence_NSE", "y": 270, "uvlock": true },
+        "east=true,north=true,south=true,west=true": { "model": "voidcraft:blockVoidfence_NSEW", "uvlock": true }
     }
 }
