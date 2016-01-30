@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.registry;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Materials extends RegistryBase{
 	
@@ -40,6 +42,12 @@ public class Materials extends RegistryBase{
 	@Override
 	public void postInit() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
 		
 	}
 

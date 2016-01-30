@@ -53,6 +53,7 @@ import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
+import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.registry.VoidBlocks;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 
@@ -106,8 +107,8 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	}
 	
 	@Override
-	public void registerBlockInventoryRender(VoidBlocks blocks) {
-		blocks.setupRender();
+	public void registerInventoryRender() {
+		for(RegistryBase reg : voidCraft.registry) reg.setupRender();
 	}
 
 	@Override

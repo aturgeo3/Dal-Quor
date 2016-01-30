@@ -17,12 +17,12 @@ import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.world.SchematicLoader.Schematic;
 
-public class Debugger extends Item {
-	
+public class Debugger extends BasicVoidItems {
+
 	SchematicLoader sut = new SchematicLoader();
 	
-	public Debugger(){
-		
+	public Debugger(String n) {
+		super(n);
 	}
 	
 	@SideOnly(Side.CLIENT)

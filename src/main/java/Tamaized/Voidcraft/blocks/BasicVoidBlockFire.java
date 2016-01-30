@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.blocks;
 import java.util.Random;
 
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoidBlock{
+public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid{
 
 	private final String name;
 

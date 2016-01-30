@@ -14,6 +14,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.fluid.BlockVoidFluid;
 import Tamaized.Voidcraft.handlers.BucketHandler;
@@ -54,6 +56,12 @@ public class VoidFluids extends RegistryBase {
 	public void postInit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		
 	}
 
 }

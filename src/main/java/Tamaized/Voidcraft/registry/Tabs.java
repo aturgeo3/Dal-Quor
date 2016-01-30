@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.registry;
 import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Tabs extends RegistryBase{
 	
@@ -35,6 +37,12 @@ public class Tabs extends RegistryBase{
 	@Override
 	public void postInit() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
 		
 	}
 

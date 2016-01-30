@@ -1,11 +1,12 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BasicVoidBlockStairs extends BlockStairs implements IBasicVoidBlock{
+public class BasicVoidBlockStairs extends BlockStairs implements IBasicVoid{
 	
 	private final String name;
 

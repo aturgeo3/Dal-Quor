@@ -1,9 +1,16 @@
 package Tamaized.Voidcraft.registry;
 
+import java.util.ArrayList;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.items.BasicVoidItems;
@@ -11,9 +18,12 @@ import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
+import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
 
 public class VoidItems extends RegistryBase {
+	
+	public static ArrayList<Item> voidDiscs;
 
 	public static Item ectoplasm;
 	public static Item voidcrystal;
@@ -41,63 +51,56 @@ public class VoidItems extends RegistryBase {
 
 	@Override
 	public void preInit() {
-		voidBurner = new VoidBurner().setUnlocalizedName("voidBurner").setCreativeTab(voidCraft.tabs.tabVoid);
-		ectoplasm = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ectoplasm");
-		voidcrystal = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidcrystal");
-		voidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidChain");
-		MoltenvoidChain = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChain");
-		MoltenvoidChainPart = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("MoltenvoidChainPart");
-		burnBone = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("burnBone");
-		voidStar = new VoidStar().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidStar");
-		ChainedSkull = new ChainedSkull().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ChainedSkull");
-		voidCloth = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCloth");
-		voidCrystalBucket = new BasicVoidItems().setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidCrystalBucket");
+		voidBurner = new VoidBurner("voidBurner").setCreativeTab(voidCraft.tabs.tabVoid);
+		ectoplasm = new BasicVoidItems("ectoplasm").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidcrystal = new BasicVoidItems("voidcrystal").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidChain = new BasicVoidItems("voidChain").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		MoltenvoidChain = new BasicVoidItems("MoltenvoidChain").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		MoltenvoidChainPart = new BasicVoidItems("MoltenvoidChainPart").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		burnBone = new BasicVoidItems("burnBone").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidStar = new VoidStar("voidStar").setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid);
+		ChainedSkull = new ChainedSkull("ChainedSkull").setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidCloth = new BasicVoidItems("voidCloth").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidCrystalBucket = new BasicVoidItems("voidCrystalBucket").setMaxStackSize(1).setCreativeTab(voidCraft.tabs.tabVoid);
 	
 		// dust
-		ironDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("ironDust");
-		goldDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("goldDust");
-		diamondDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("diamondDust");
-		coalDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("coalDust");
-		copperDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("copperDust");
-		tinDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("tinDust");
-		leadDust = new BasicVoidItems().setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("leadDust");
-		quartzDust = new BasicVoidItems().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64).setUnlocalizedName("quartzDust");
+		ironDust = new BasicVoidItems("ironDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		goldDust = new BasicVoidItems("goldDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		diamondDust = new BasicVoidItems("diamondDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		coalDust = new BasicVoidItems("coalDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		copperDust = new BasicVoidItems("copperDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		tinDust = new BasicVoidItems("tinDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		leadDust = new BasicVoidItems("leadDust").setMaxStackSize(64).setCreativeTab(voidCraft.tabs.tabVoid);
+		quartzDust = new BasicVoidItems("quartzDust").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(64);
 
-		debugger = new Debugger().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("debugger");
-		hookShot = new HookShot().setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1).setUnlocalizedName("hookShot");
+		debugger = new Debugger("debugger").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
+		hookShot = new HookShot("hookShot").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
+		
+		voidDiscs = new ArrayList<Item>();
+		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271, "voidDisc1"));
+		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289, "voidDisc2"));
+		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173, "voidDisc3"));
+		voidDiscs.add(new VoidRecord("voidCraft:They Will Die", 250, "voidDisc4"));
+		voidDiscs.add(new VoidRecord("voidCraft:Warriors", 171, "voidDisc5"));
+		voidDiscs.add(new VoidRecord("voidCraft:Imagine Dragons - Shots (Broiler Remix)", 190, "voidDisc6"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Asgore", 154, "voidDisc7"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Core", 164, "voidDisc8"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Megalovania", 156, "voidDisc9"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100, "voidDisc10"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58, "voidDisc11"));
+		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156, "voidDisc12"));
 	}
 
 	@Override
 	public void init() {
-		GameRegistry.registerItem(voidCrystalBucket, voidCrystalBucket.getUnlocalizedName());
-		GameRegistry.registerItem(voidcrystal, voidcrystal.getUnlocalizedName());
-		GameRegistry.registerItem(ectoplasm, ectoplasm.getUnlocalizedName());
-		GameRegistry.registerItem(voidChain, voidChain.getUnlocalizedName());
-		GameRegistry.registerItem(MoltenvoidChainPart, MoltenvoidChainPart.getUnlocalizedName());
-		GameRegistry.registerItem(MoltenvoidChain, MoltenvoidChain.getUnlocalizedName());
-		GameRegistry.registerItem(burnBone, burnBone.getUnlocalizedName());
-		GameRegistry.registerItem(voidCloth, voidCloth.getUnlocalizedName());
-		GameRegistry.registerItem(voidStar, voidStar.getUnlocalizedName());
-		GameRegistry.registerItem(voidBurner, voidBurner.getUnlocalizedName());
-		GameRegistry.registerItem(ChainedSkull, ChainedSkull.getUnlocalizedName());
-		GameRegistry.registerItem(debugger, debugger.getUnlocalizedName());
-		GameRegistry.registerItem(hookShot, hookShot.getUnlocalizedName());
 
-		GameRegistry.registerItem(ironDust, ironDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustIron", ironDust);
-		GameRegistry.registerItem(goldDust, goldDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustGold", goldDust);
-		GameRegistry.registerItem(coalDust, coalDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustCoal", coalDust);
-		GameRegistry.registerItem(diamondDust, diamondDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustDiamond", diamondDust);
-		GameRegistry.registerItem(copperDust, copperDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustCopper", copperDust);
-		GameRegistry.registerItem(tinDust, tinDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustTin", tinDust);
-		GameRegistry.registerItem(leadDust, leadDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustLead", leadDust);
-		GameRegistry.registerItem(quartzDust, quartzDust.getUnlocalizedName());
 		OreDictionary.registerOre("dustQuartz", quartzDust);
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), voidCraft.blocks.blockVoidcrystal);
@@ -134,6 +137,14 @@ public class VoidItems extends RegistryBase {
 		voidCraft.maceratorList.addToOreDict("ingotLead", new ItemStack(leadDust, 1));
 		//--HardCode
 		voidCraft.maceratorList.addToHardCode(new ItemStack(Items.coal, 1), new ItemStack(coalDust, 4));
+		
+		//Discs
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ", "ZXZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
 	}
 
 	@Override
@@ -148,6 +159,16 @@ public class VoidItems extends RegistryBase {
 				GameRegistry.addSmelting(i, ore, ore.getItemDamage());
 			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+    	//renderItem.getItemModelMesher().register(ectoplasm, 0, new ModelResourceLocation(voidCraft.modid+":test/"+((IBasicVoid)ectoplasm).getName(), "inventory"));
+    	renderItem.getItemModelMesher().register(ectoplasm, 0, new ModelResourceLocation("voidcraft:test/ectoplasm", "inventory"));
+    	renderItem.getItemModelMesher().register(voidBurner, 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid)voidBurner).getName(), "inventory"));
+    	//renderItem.getItemModelMesher().register(burnBone, 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid)burnBone).getName(), "inventory"));
 	}
 
 }

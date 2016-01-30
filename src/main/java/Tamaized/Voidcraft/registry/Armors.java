@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.registry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.armor.DemonArmor;
 import Tamaized.Voidcraft.armor.VoidArmor;
 import Tamaized.Voidcraft.armor.XiaArmor;
@@ -57,6 +59,12 @@ public class Armors extends RegistryBase {
 	public void postInit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		
 	}
 
 }

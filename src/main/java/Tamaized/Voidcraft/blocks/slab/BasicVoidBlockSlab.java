@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.blocks.IBasicVoidBlock;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 
-public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoidBlock{
+public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid{
 	
 	private final String name;
 	private static final PropertyBool VARIANT_PROPERTY = PropertyBool.create("variant");

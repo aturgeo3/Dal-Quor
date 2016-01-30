@@ -8,8 +8,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class VoidStar extends Item{
+public class VoidStar extends BasicVoidItems{
 	
+	public VoidStar(String n) {
+		super(n);
+	}
+
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem){
 		if(entityItem.onGround && entityItem.dimension != voidCraft.dimensionIdVoid && entityItem.dimension != voidCraft.dimensionIdXia){

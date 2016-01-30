@@ -2,9 +2,6 @@ package Tamaized.Voidcraft.common;
 
 import java.util.ArrayList;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,7 +35,6 @@ import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
-import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.addons.MaceratorRecipeList;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
@@ -62,6 +58,7 @@ import Tamaized.Voidcraft.registry.Achievements;
 import Tamaized.Voidcraft.registry.Armors;
 import Tamaized.Voidcraft.registry.Biomes;
 import Tamaized.Voidcraft.registry.Materials;
+import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.registry.Tabs;
 import Tamaized.Voidcraft.registry.Tools;
 import Tamaized.Voidcraft.registry.VoidBlocks;
@@ -79,7 +76,6 @@ import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 public class voidCraft {
 	
 	protected final static String version = "0.6.0a_DEV";
-
 	public static final String modid = "voidcraft";
 	
 	public static String getVersion(){
@@ -119,8 +115,7 @@ public class voidCraft {
 	public static Biomes biomes = new Biomes();
 	public static Achievements achievements = new Achievements();
 	
-	//Discs
-	public static ArrayList<Item> voidDiscs;
+	public static ArrayList<RegistryBase> registry = new ArrayList<RegistryBase>();
 
 	public static final int dimensionIdVoid = -2;
 	public static final int dimensionIdXia = -3;
@@ -139,28 +134,17 @@ public class voidCraft {
 	
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 		
-		tabs.preInit();
-		materials.preInit();
-		tools.preInit();
-		armors.preInit();
-		items.preInit();
-		blocks.preInit();
-		fluids.preInit();
+		registry.add(materials);
+		registry.add(tabs);
+		registry.add(tools);
+		registry.add(items);
+		registry.add(armors);
+		registry.add(fluids);
+		registry.add(blocks);
+		registry.add(biomes);
+		registry.add(achievements);
 		
-		// disc
-		voidDiscs = new ArrayList<Item>();
-		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc1"));
-		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc2"));
-		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc3"));
-		voidDiscs.add(new VoidRecord("voidCraft:They Will Die", 250).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc4"));
-		voidDiscs.add(new VoidRecord("voidCraft:Warriors", 171).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc5"));
-		voidDiscs.add(new VoidRecord("voidCraft:Imagine Dragons - Shots (Broiler Remix)", 190).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc6"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Asgore", 154).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc7"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Core", 164).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc8"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Megalovania", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc9"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc10"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc11"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156).setMaxStackSize(1).setCreativeTab(tabs.tabVoid).setUnlocalizedName("voidDisc12"));
+		for(RegistryBase reg : registry) reg.preInit();
 		
 		//API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
@@ -208,17 +192,8 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
 		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		
-		fluids.init();
-		blocks.init();
-		items.init();
-		tools.init();
-		armors.init();
-		biomes.init();
-		achievements.init();
-		
-		for(Item disc : voidDiscs){
-			GameRegistry.registerItem(disc, disc.getUnlocalizedName());
-		}
+
+		for(RegistryBase reg : registry) reg.init();
 		
 		//Projectiles
 		EntityRegistry.registerModEntity(VoidChain.class, "VoidChain", 0, this, 128, 1, true);
@@ -232,20 +207,12 @@ public class voidCraft {
 		
 		DimensionManager.registerProviderType(dimensionIdXia, WorldProviderXia.class, false);
 		DimensionManager.registerDimension(dimensionIdXia, dimensionIdXia);
-		
-		//Discs
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ", "ZXZ", 'X', items.burnBone, 'Y', items.voidcrystal, 'Z', Items.coal);
 
 		// World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		
 		MapGenStructureIO.registerStructure(StructureTestStart.class, "VoidFortress");
-		StructureTestPieces.func_143049_a();
+		StructureTestPieces.register();
 		
 
 		// Mobs
@@ -262,14 +229,14 @@ public class voidCraft {
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 		
-		proxy.registerBlockInventoryRender(blocks);
+		proxy.registerInventoryRender();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e){ 
 		logger.info("Starting VoidCraft PostInit");
 		
-		achievements.postInit();
+		for(RegistryBase reg : registry) reg.postInit();
 		
 		channel.register(new VoidCraftServerPacketHandler());
 		proxy.registerNetwork();

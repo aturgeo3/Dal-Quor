@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.blocks;
 import java.util.Random;
 
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BlockVoidTeleporter extends BlockBreakable implements IBasicVoidBlock{
+public abstract class BlockVoidTeleporter extends BlockBreakable implements IBasicVoid{
 	
 	private final String name;
 	

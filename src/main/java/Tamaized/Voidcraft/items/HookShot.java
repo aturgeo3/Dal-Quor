@@ -22,8 +22,12 @@ import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 
-public class HookShot extends Item{
+public class HookShot extends BasicVoidItems{
 	
+	public HookShot(String n) {
+		super(n);
+	}
+
 	public static Map<EntityPlayer, Boolean> handler = new HashMap<EntityPlayer, Boolean>(); //Keep this Server Side
 	
 	/**

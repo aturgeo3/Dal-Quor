@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.registry;
 
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 
 public class Achievements extends RegistryBase {
@@ -97,6 +99,12 @@ public class Achievements extends RegistryBase {
 				voidCraftAchSideLine2_3
 		};
 		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		
 	}
 
 }

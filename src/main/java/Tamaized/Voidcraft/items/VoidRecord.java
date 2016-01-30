@@ -11,11 +11,14 @@ import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.VoidBox;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 
-public class VoidRecord extends ItemRecord {
+public class VoidRecord extends ItemRecord implements IBasicVoid{
 
 	public static VoidBox daBox;
 
@@ -26,17 +29,27 @@ public class VoidRecord extends ItemRecord {
 	public final String recordName;
 
 	private int time = 0;
+	
+	private final String name;
 
-	public VoidRecord(String par2Str, int t) {
+	public VoidRecord(String par2Str, int t, String n) {
 		super(par2Str);
 		time = t;
 		this.recordName = par2Str;
 		this.maxStackSize = 1;
 		this.setCreativeTab(CreativeTabs.tabMisc);
 		records.put(par2Str, this);
-		records.put("records." + par2Str, this); // Forge Bug Fix: RenderGlobal
-													// adds a "records." when
-													// looking up below.
+		records.put("records." + par2Str, this);
+		name = n;
+		setUnlocalizedName(name);
+		setMaxStackSize(1);
+		setCreativeTab(voidCraft.tabs.tabVoid);
+		GameRegistry.registerItem(this, n);
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 
 	public int getTime() {

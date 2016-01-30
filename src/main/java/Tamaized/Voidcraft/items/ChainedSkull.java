@@ -15,12 +15,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 
-public class ChainedSkull extends Item{
+public class ChainedSkull extends BasicVoidItems{
 
 	private World worldObj;
 
-	public ChainedSkull() {
-		super();
+	public ChainedSkull(String name) {
+		super(name);
 	}
 	
 	/**

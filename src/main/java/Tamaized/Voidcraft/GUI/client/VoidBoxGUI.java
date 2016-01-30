@@ -53,7 +53,7 @@ public class VoidBoxGUI extends GuiContainer {
 		
 		this.xSize = 347;
 		this.ySize = 320;
-		discs.addAll(voidCraft.voidDiscs);
+		discs.addAll(voidCraft.items.voidDiscs);
 	}
 	
 	public void updateScreen(){

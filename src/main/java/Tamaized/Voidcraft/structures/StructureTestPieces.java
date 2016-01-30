@@ -27,8 +27,7 @@ public class StructureTestPieces {
     	new StructureTestPieceWeight(ComponentTestNetherStalkRoom.class, 5, 2)
     	};
 
-    public static void func_143049_a()
-    {
+    public static void register(){
         MapGenStructureIO.registerStructureComponent(ComponentTestCrossing3.class, "VoidCraft:NeVBCr");
         MapGenStructureIO.registerStructureComponent(ComponentTestEnd.class, "VoidCraft:NeVBEF");
         MapGenStructureIO.registerStructureComponent(ComponentTestStraight.class, "VoidCraft:NeVBS");

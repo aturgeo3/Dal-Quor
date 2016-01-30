@@ -26,7 +26,7 @@ public class VoidCraftCommonProxy {
 
 	public void registerAchievements() {}
 
-	public void registerBlockInventoryRender(VoidBlocks blocks) {
+	public void registerInventoryRender() {
 		
 	}
 

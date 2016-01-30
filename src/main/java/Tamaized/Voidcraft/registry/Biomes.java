@@ -4,6 +4,8 @@ import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
 import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.Height;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Biomes extends RegistryBase {
 
@@ -28,6 +30,12 @@ public class Biomes extends RegistryBase {
 	public void postInit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		
 	}
 
 }

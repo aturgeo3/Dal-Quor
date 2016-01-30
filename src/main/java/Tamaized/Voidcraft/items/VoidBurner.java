@@ -8,10 +8,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class VoidBurner extends Item{
+public class VoidBurner extends BasicVoidItems{
 
-	public VoidBurner() {
-		super();
+	public VoidBurner(String name) {
+		super(name);
 
 		this.maxStackSize =1;
 		this.setMaxDamage(26);

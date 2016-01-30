@@ -4,6 +4,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.tools.AngelicSword;
 import Tamaized.Voidcraft.tools.ArchSword;
@@ -91,6 +93,12 @@ public class Tools extends RegistryBase {
 	public void postInit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void setupRender() {
+		
 	}
 
 }
