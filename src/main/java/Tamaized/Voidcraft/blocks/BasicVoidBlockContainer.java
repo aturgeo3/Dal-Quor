@@ -14,7 +14,7 @@ public abstract class BasicVoidBlockContainer extends BlockContainer implements 
 		super(materialIn);
 		name = n;
 		setUnlocalizedName(name);
-		GameRegistry.registerBlock(this, n);
+		GameRegistry.registerBlock(this, "blocks/"+n);
 	}
 	
 	@Override

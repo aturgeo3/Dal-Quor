@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,6 +23,7 @@ import Tamaized.Voidcraft.items.VoidStar;
 public class VoidItems extends RegistryBase {
 	
 	public static ArrayList<Item> voidDiscs;
+	private static ArrayList<Item> itemList;
 
 	public static Item ectoplasm;
 	public static Item voidcrystal;
@@ -48,7 +48,7 @@ public class VoidItems extends RegistryBase {
 
 	public static Item debugger;
 	public static Item hookShot;
-
+	
 	@Override
 	public void preInit() {
 		voidBurner = new VoidBurner("voidBurner").setCreativeTab(voidCraft.tabs.tabVoid);
@@ -89,6 +89,30 @@ public class VoidItems extends RegistryBase {
 		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100, "voidDisc10"));
 		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58, "voidDisc11"));
 		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156, "voidDisc12"));
+		
+		itemList = new ArrayList<Item>();
+		itemList.add(ectoplasm);
+		itemList.add(voidcrystal);
+		itemList.add(voidBurner);
+		itemList.add(voidChain);
+		itemList.add(MoltenvoidChain);
+		itemList.add(MoltenvoidChainPart);
+		itemList.add(burnBone);
+		itemList.add(voidStar);
+		itemList.add(ChainedSkull);
+		itemList.add(voidCloth);
+		itemList.add(voidCrystalBucket);
+		itemList.add(ironDust);
+		itemList.add(goldDust);
+		itemList.add(diamondDust);
+		itemList.add(ectoplasm);
+		itemList.add(copperDust);
+		itemList.add(tinDust);
+		itemList.add(leadDust);
+		itemList.add(coalDust);
+		itemList.add(quartzDust);
+		itemList.add(debugger);
+		itemList.add(hookShot);
 	}
 
 	@Override
@@ -149,8 +173,7 @@ public class VoidItems extends RegistryBase {
 
 	@Override
 	public void postInit() {
-		// TODO Auto-generated method stub
-
+		
 	}
 	
 	private void addPreSmelting(Item i, String s){
@@ -165,10 +188,9 @@ public class VoidItems extends RegistryBase {
 	@Override
 	public void setupRender() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-    	//renderItem.getItemModelMesher().register(ectoplasm, 0, new ModelResourceLocation(voidCraft.modid+":test/"+((IBasicVoid)ectoplasm).getName(), "inventory"));
-    	renderItem.getItemModelMesher().register(ectoplasm, 0, new ModelResourceLocation("voidcraft:test/ectoplasm", "inventory"));
-    	renderItem.getItemModelMesher().register(voidBurner, 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid)voidBurner).getName(), "inventory"));
-    	//renderItem.getItemModelMesher().register(burnBone, 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid)burnBone).getName(), "inventory"));
+		for(Item i : itemList){
+	    	renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("items/", ((IBasicVoid)i).getName(), "inventory"));
+		}
 	}
 
 }

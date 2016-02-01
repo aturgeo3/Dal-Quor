@@ -14,7 +14,7 @@ public class BasicVoidBlock extends Block implements IBasicVoid{
 		super(p_i45394_1_);
 		name = n;
 		setUnlocalizedName(name);
-		GameRegistry.registerBlock(this, n);
+		GameRegistry.registerBlock(this, "blocks/"+n);
 	}
 
 	@Override

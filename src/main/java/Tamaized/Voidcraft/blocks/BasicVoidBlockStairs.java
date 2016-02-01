@@ -14,7 +14,7 @@ public class BasicVoidBlockStairs extends BlockStairs implements IBasicVoid{
 		super(modelState);
 		name = n;
 		setUnlocalizedName(name);
-		GameRegistry.registerBlock(this, n);
+		GameRegistry.registerBlock(this, "blocks/"+n);
 	}
 	
 	@Override

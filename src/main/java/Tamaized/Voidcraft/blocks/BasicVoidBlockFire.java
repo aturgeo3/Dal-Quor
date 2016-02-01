@@ -20,7 +20,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 	protected BasicVoidBlockFire(String n) {
 		name = n;
 		setUnlocalizedName(name);
-		GameRegistry.registerBlock(this, n);
+		GameRegistry.registerBlock(this, "blocks/"+n);
 	}
 	
 	@Override
