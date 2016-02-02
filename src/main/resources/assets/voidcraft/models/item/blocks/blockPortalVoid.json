@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/blockPortalVoid",
+    "parent": "voidcraft:block/blockPortalVoid_NS",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

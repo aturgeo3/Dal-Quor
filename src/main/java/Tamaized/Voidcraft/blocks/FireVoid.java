@@ -24,7 +24,7 @@ public class FireVoid extends BasicVoidBlockFire{
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		if(world.getBlockState(pos).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)){
+		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos.add(0, -1, 0))){
 			if(!world.doesBlockHaveSolidTopSurface(world, pos.add(0, -1, 0)) && !this.canNeighborBurn(world, pos)){
 				world.setBlockToAir(pos);
 			}else{
@@ -42,9 +42,9 @@ public class FireVoid extends BasicVoidBlockFire{
 				if(Integer.valueOf(skelly.getDataWatcher().getWatchableObjectByte(13))==1) return;
 			}
 			EntityLivingBase e = ((EntityLivingBase) entity);
-			e.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 20, 1));
-			e.addPotionEffect(new PotionEffect(Potion.wither.getId(), 20, 1));
-			e.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 20, 1));
+			e.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 60, 1));
+			e.addPotionEffect(new PotionEffect(Potion.wither.getId(), 60, 1));
+			e.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 60, 1));
 		}
 	}
 

@@ -87,7 +87,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
     		for (l = 0; l < 2; ++l){
     			for (i1 = 0; i1 < 3; ++i1){
-    				par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), voidCraft.blocks.blockPortalXia.getDefaultState(), 2);
+    				par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), voidCraft.blocks.blockPortalVoid.getDefaultState(), 2);
     			}
     		}
 

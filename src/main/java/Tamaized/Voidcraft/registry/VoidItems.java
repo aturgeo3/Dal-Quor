@@ -189,7 +189,7 @@ public class VoidItems extends RegistryBase {
 	public void setupRender() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		for(Item i : itemList){
-	    	renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("items/", ((IBasicVoid)i).getName(), "inventory"));
+			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("items/", ((IBasicVoid)i).getName(), "inventory"));
 		}
 	}
 

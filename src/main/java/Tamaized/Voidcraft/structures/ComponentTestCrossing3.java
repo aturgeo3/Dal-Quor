@@ -27,19 +27,20 @@ public class ComponentTestCrossing3 extends ComponentTestPiece{
     protected ComponentTestCrossing3(Random par1Random, int par2, int par3)
     {
         super(0);
-        this.coordBaseMode = EnumFacing.random(par1Random);
+        this.coordBaseMode = EnumFacing.Plane.HORIZONTAL.random(par1Random);
 
-        switch (this.coordBaseMode.getIndex())
+        switch (this.coordBaseMode)
         {
-            case 0:
+            case NORTH:
             	break;
-            case 2:
+            case SOUTH:
                 this.boundingBox = new StructureBoundingBox(par2, 64, par3, par2 + 19 - 1, 73, par3 + 19 - 1);
                 break;
             default:
                 this.boundingBox = new StructureBoundingBox(par2, 64, par3, par2 + 19 - 1, 73, par3 + 19 - 1);
                 break;
         }
+        System.out.println(boundingBox+" : "+coordBaseMode.getIndex());
     }
 
     /**

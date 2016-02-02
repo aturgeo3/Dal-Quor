@@ -129,12 +129,14 @@ abstract public class ComponentTestPiece extends StructureComponent{
                 par2List.add(componentnetherbridgepiece);
                 par1ComponentNetherBridgeStartPiece.field_74967_d.add(componentnetherbridgepiece);
             }
-
+            System.out.println(componentnetherbridgepiece);
             return componentnetherbridgepiece;
         }
         else
         {
-            return ComponentTestEnd.func_74971_a(par2List, par3Random, x, y, z, face, id);
+        	StructureComponent sc = ComponentTestEnd.func_74971_a(par2List, par3Random, x, y, z, face, id);
+            System.out.println(sc);
+            return sc;
         }
     }
 
@@ -143,6 +145,7 @@ abstract public class ComponentTestPiece extends StructureComponent{
      */
     protected StructureComponent getNextComponentNormal(ComponentTestStartPiece par1ComponentNetherBridgeStartPiece, List par2List, Random par3Random, int par4, int par5, boolean par6)
     {
+    	System.out.println(boundingBox);
         switch (this.coordBaseMode.getIndex())
         {
             case 0:

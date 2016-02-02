@@ -12,6 +12,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -127,10 +128,7 @@ public class ChunkProviderVoid implements IChunkProvider
 	/**
      * Generates the shape of the terrain in the nether.
      */
-    public void generateTerrain(int p_147420_1_, int p_147420_2_, ChunkPrimer primer)
-    {
-    	
-    	
+    public void generateTerrain(int p_147420_1_, int p_147420_2_, ChunkPrimer primer){
         byte b0 = 4;
         byte b1 = 32;
         int k = b0 + 1;
@@ -173,14 +171,14 @@ public class ChunkProviderVoid implements IChunkProvider
 
                             for (int k2 = 0; k2 < 4; ++k2)
                             {
-                                Block l2 = Blocks.air;
+                            	IBlockState iblockstate = null;
 
                                 if (k1 * 8 + l1 < b1)
                                 {
                                 	double rand4Fluid = Math.round(Math.random()*600);
                                 	
                                 	if(rand4Fluid == 400){
-                                    l2 = voidCraft.fluids.blockVoidFluid; //lavaStill
+                                		iblockstate = voidCraft.fluids.blockVoidFluid.getDefaultState(); //lavaStill
                                 	//}else if(rand4Fluid > 200 && rand4Fluid < 400){
                                 	//	l2 = voidCraft.blocks.blockFakeBedrock;
                                 	}
@@ -190,18 +188,18 @@ public class ChunkProviderVoid implements IChunkProvider
                                 		//else if(randy == 2) l2 = Blocks.end_stone;
                                 		//else if(randy == 3) l2 = Blocks.skull;
                                 		//else l2 = voidCraft.blocks.blockFakeBedrock; //TODO not implementing this change yet cuz I wanna think on it some more.
-                                		l2 = voidCraft.blocks.blockFakeBedrock;
+                                		iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState();
                                 	}
                                 }
 
                                 if (d15 > 0.0D)
                                 {
-                                    l2 = voidCraft.blocks.blockFakeBedrock; //netherrack
+                                	iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState(); //netherrack
                                 }
                                 int k3 = i2 + i1 * 4;
                                 int l3 = l1 + k1 * 8;
-                                int i3 = j2 + j1 * 4;
-                                primer.setBlockState(k3, l3, i3, l2.getDefaultState());
+                                int i3 = k2 + j1 * 4;
+                                primer.setBlockState(k3, l3, i3, iblockstate);
                                 j2 += short1;
                                 d15 += d16;
                             }
@@ -223,7 +221,7 @@ public class ChunkProviderVoid implements IChunkProvider
     /**
      * name based on ChunkProviderGenerate
      */
-    public void replaceBlocksForBiome(int p_147421_1_, int p_147421_2_, Block[] p_147421_3_, byte[] byteArray, BiomeGenBase[] biomesForGeneration2)//replaceBlocksForBiome(int par1, int par2, Block[] par3ArrayOfByte)
+    public void replaceBlocksForBiome(int p_147421_1_, int p_147421_2_, ChunkPrimer p_180516_3_)//replaceBlocksForBiome(int par1, int par2, Block[] par3ArrayOfByte)
     {
     	
     	//ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147421_1_, p_147421_2_, p_147421_3_, byteArray, biomesForGeneration2, this.worldObj);
@@ -244,18 +242,21 @@ public class ChunkProviderVoid implements IChunkProvider
                 boolean flag1 = this.gravelNoise[k + l * 16] + this.hellRNG.nextDouble() * 0.2D > 0.0D;
                 int i1 = (int)(this.netherrackExclusivityNoise[k + l * 16] / 3.0D + 3.0D + this.hellRNG.nextDouble() * 0.25D);
                 int j1 = -1;
-                Block b1 = voidCraft.blocks.blockFakeBedrock; //netherrack
-                Block b2 = voidCraft.blocks.blockFakeBedrock; //netherrack
-
+                IBlockState iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState(); //netherrack
+                IBlockState iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); //netherrack
+                Block b1 = Blocks.air;
+                Block b2 = Blocks.air;
+                
                 for (int k1 = 127; k1 >= 0; --k1)
                 {
                     int l1 = (l * 16 + k) * 128 + k1;
 
                     if (k1 < 127 - this.hellRNG.nextInt(5) && k1 > 0 + this.hellRNG.nextInt(5))
                     {
-                        Block b3 = p_147421_3_[l1];
+                    	IBlockState iblockstate2 = p_180516_3_.getBlockState(l, k1, k);
+                    	Block b3 = iblockstate2.getBlock();
 
-                        if (b3 == Blocks.air || b3.getMaterial() == Material.air)
+                        if (b3 != null && b3.getMaterial() == Material.air)
                         {
                         	   j1 = -1;
                         }
@@ -300,26 +301,28 @@ public class ChunkProviderVoid implements IChunkProvider
                                 }
 
                                 j1 = i1;
+                                iblockstate = b1.getDefaultState();
+                                iblockstate1 = b2.getDefaultState();
 
                                 if (k1 >= b0 - 1)
                                 {
-                                	p_147421_3_[l1] = b1;
+                                	p_180516_3_.setBlockState(l, k1, k, iblockstate);
                                 }
                                 else
                                 {
-                                	p_147421_3_[l1] = b2;
+                                	p_180516_3_.setBlockState(l, k1, k, iblockstate1);
                                 }
                             }
                             else if (j1 > 0)
                             {
                                 --j1;
-                                p_147421_3_[l1] = b2;
+                                p_180516_3_.setBlockState(l, k1, k, iblockstate1);
                             }
                         }
                     }
                     else
                     {
-                    	p_147421_3_[l1] = voidCraft.blocks.blockFakeBedrock; //bedrock
+                    	p_180516_3_.setBlockState(l, k1, k, voidCraft.blocks.blockFakeBedrock.getDefaultState()); //bedrock
                     }
                 }
             }
@@ -340,7 +343,7 @@ public class ChunkProviderVoid implements IChunkProvider
      * specified chunk from the map seed and chunk seed
      */
     
-    public Chunk provideChunk(int par1, int par2)
+    public Chunk provideChunk(int x, int y)
     {
     	/*
         this.hellRNG.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
@@ -368,11 +371,11 @@ public class ChunkProviderVoid implements IChunkProvider
     	ChunkPrimer primer = new ChunkPrimer();
         Block[] ablock = new Block[32768];
         byte[] meta = new byte[ablock.length];
-        BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
-        this.generateTerrain(par1, par2, primer);
-        this.replaceBlocksForBiome(par1, par2, ablock, meta, abiomegenbase);
-        this.genTest.generate(this, this.worldObj, par1, par2, primer);
-        Chunk chunk = new Chunk(this.worldObj, par1, par2);
+        this.generateTerrain(x, y, primer);
+        this.replaceBlocksForBiome(x, y, primer);
+        this.genTest.generate(this, this.worldObj, x, y, primer);
+        Chunk chunk = new Chunk(this.worldObj, primer, x, y);
+        BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, x * 16, y * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
         byte[] abyte = chunk.getBiomeArray();
 
         for (int k = 0; k < abyte.length; ++k)
@@ -721,7 +724,7 @@ public class ChunkProviderVoid implements IChunkProvider
 
 	@Override
 	public Chunk provideChunk(BlockPos blockPosIn) {
-		return provideChunk(blockPosIn.getX(), blockPosIn.getZ());
+		return provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
 	}
 
 

@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -19,35 +20,18 @@ public class VoidBurner extends BasicVoidItems{
 	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float x, float y, float z){
-		if(side.getIndex() == 0){
-		y--;
-		}
-		if(side.getIndex() == 1){
-		y++;
-		}
-		if(side.getIndex() == 2){
-		z--;
-		}
-		if(side.getIndex() == 3){
-		z++;
-		}
-		if(side.getIndex() == 4){
-		x--;
-		}
-		if(side.getIndex() == 5){
-		x++;
-		}
-		if(!player.canPlayerEdit(new BlockPos(x, y, z), side, itemstack)){
-		return false;
-		}else{
-		if(world.isAirBlock(new BlockPos(x, y, z))){
-		world.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "fire.ignite", 1F, itemRand.nextFloat()*0.4F + 0.8F);
-		world.setBlockState(new BlockPos(x, y, z), voidCraft.blocks.fireVoid.getDefaultState());
-		}
+		pos = pos.offset(side);
 
-		itemstack.damageItem(1, player);
-		return true;
-		}
-		}
+        if (!player.canPlayerEdit(pos, side, itemstack)){
+            return false;
+        }else{
+        	if(world.isAirBlock(pos)){
+            	world.playSoundEffect((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+            	world.setBlockState(pos, voidCraft.blocks.fireVoid.getDefaultState());
+            }
 
+            itemstack.damageItem(1, player);
+            return true;
+        }
+	}
 }

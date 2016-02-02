@@ -1,6 +1,19 @@
 {
-    "parent": "block/cube_all",
     "textures": {
-        "all": "voidcraft:blocks/blockPortalXia"
-    }
+        "particle": "blocks/portal",
+        "portal": "voidcraft:blocks/blockPortalXia"
+    },
+    "elements": [
+        {   "from": [ 0, 4.8, 0 ],
+            "to": [ 16, 9.6, 16 ],
+            "faces": {
+                "down": { "texture": "#portal" },
+                "up": { "texture": "#portal" },
+                "north": { "texture": "#portal" },
+                "south": { "texture": "#portal" },
+                "west": { "texture": "#portal" },
+                "east": { "texture": "#portal" }
+            }
+        }
+    ]
 }

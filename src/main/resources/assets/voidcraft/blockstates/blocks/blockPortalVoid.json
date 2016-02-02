@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "voidcraft:blockPortalVoid" }
+        "axis=z": { "model": "voidcraft:blockPortalVoid_EW" },
+        "axis=x": { "model": "voidcraft:blockPortalVoid_NS" }
     }
 }
