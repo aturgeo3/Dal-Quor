@@ -15,7 +15,7 @@ import Tamaized.Voidcraft.common.voidCraft;
 public class BlockPortalVoid extends BlockVoidTeleporter {
 
 	public BlockPortalVoid(String string) {
-		super(string);
+		super(string, true);
 	}
 
 	/**
@@ -26,11 +26,12 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
 		float f;
 		float f1;
-		if(worldIn.getBlockState(pos.add(-1, 0, 0)).getBlock() != this && worldIn.getBlockState(pos.add(1, 0, 0)).getBlock() != this){
+		int meta = this.getMetaFromState(worldIn.getBlockState(pos));
+		if(meta == 0/*worldIn.getBlockState(pos.add(-1, 0, 0)).getBlock() != this && worldIn.getBlockState(pos.add(1, 0, 0)).getBlock() != this*/){
 			f = 0.125F;
 			f1 = 0.5F;
 			this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
-		}else{
+		}else if(meta == 1){
 			f = 0.5F;
 			f1 = 0.125F;
 			this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);

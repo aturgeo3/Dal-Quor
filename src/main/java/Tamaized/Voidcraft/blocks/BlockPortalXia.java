@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.blocks;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -17,8 +19,33 @@ import Tamaized.Voidcraft.common.voidCraft;
 public class BlockPortalXia extends BlockVoidTeleporter {
 
 	public BlockPortalXia(String string) {
-		super(string);
+		super(string, false);
 	}
+	
+	/**
+	 * Override this and return getDefaultState() if hasAxis is false
+	 */
+	@Override
+	public IBlockState getStateFromMeta(int meta){
+        return getDefaultState();
+    }
+	
+	/**
+     * Override this and return 0 if hasAxis is false
+     */
+	@Override
+    public int getMetaFromState(IBlockState state){
+        return 0;
+    }
+    
+    /**
+     * Override this and return 'new BlockState(this, new IProperty[0])' if hasAxis is false
+     */
+    @Override
+    protected BlockState createBlockState(){
+        return  new BlockState(this, new IProperty[0]);
+    }
+	
 	/**
 	* Updates the blocks bounds based on its current state. Args: world, x, y, z
 	*/
