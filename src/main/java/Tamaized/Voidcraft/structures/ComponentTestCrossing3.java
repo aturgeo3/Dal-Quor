@@ -31,8 +31,8 @@ public class ComponentTestCrossing3 extends ComponentTestPiece{
 
         switch (this.coordBaseMode)
         {
-            case NORTH:
-            	break;
+            //case NORTH:
+            //	break;
             case SOUTH:
                 this.boundingBox = new StructureBoundingBox(par2, 64, par3, par2 + 19 - 1, 73, par3 + 19 - 1);
                 break;
