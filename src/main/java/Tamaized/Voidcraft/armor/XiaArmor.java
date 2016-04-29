@@ -15,38 +15,15 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 //import net.minecraftforge.event.entity.player.PlayerEvent;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class XiaArmor extends ItemArmor {
+public class XiaArmor extends BasicVoidArmor {
 
-	private String texturePath = voidCraft.modid + ":textures/models/armor/";
 	public static List<String> playersWithFlight = new ArrayList();
 	
-	public XiaArmor(ArmorMaterial armorMaterial, int par3, int par4, String type) {
-		super(armorMaterial, par3, par4);
-		
-		this.setMaxStackSize(1);
-		this.setCreativeTab(voidCraft.tabs.tabVoid);
-		this.setTextureName(type, par4);
-		
+	public XiaArmor(ArmorMaterial armorMaterial, int par3, int par4, String type, String n) {
+		super(armorMaterial, par3, par4, type, n);
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(this);
 		setHasSubtypes(true);
-
-	}
-	
-	private void setTextureName(String type, int armorPart){
-		
-		if(armorType == 0 || armorType == 1 || armorType == 3){
-			this.texturePath = voidCraft.modid + ":" + "textures/models/armor/" + type + "_layer_1.png";
-		
-		}else{
-			this.texturePath = voidCraft.modid + ":" + "textures/models/armor/" + type + "_layer_2.png";
-			}
-		
-	}
-	
-	@Override
-	public String getArmorTexture(ItemStack armor, Entity entity, int slot, String type) {
-		return this.texturePath;
 	}
 	
 	//Thanks to Vazkii's Botania Mod Source for this part

@@ -1,16 +1,21 @@
 package Tamaized.Voidcraft.registry;
 
+import java.util.ArrayList;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.armor.DemonArmor;
-import Tamaized.Voidcraft.armor.VoidArmor;
+import Tamaized.Voidcraft.armor.BasicVoidArmor;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import Tamaized.Voidcraft.common.voidCraft;
 
 public class Armors extends RegistryBase {
+	
+	public static ArrayList<Item> list = new ArrayList<Item>();
 
 	public static Item voidHelmet;
 	public static Item voidChest;
@@ -24,31 +29,31 @@ public class Armors extends RegistryBase {
 
 	@Override
 	public void preInit() {
-		voidHelmet = new VoidArmor(voidCraft.materials.voidArmor, 0, 0, "void").setUnlocalizedName("voidHelmet");
-		voidChest = new VoidArmor(voidCraft.materials.voidArmor, 0, 1, "void").setUnlocalizedName("voidChest");
-		voidLegs = new VoidArmor(voidCraft.materials.voidArmor, 0, 2, "void").setUnlocalizedName("voidLegs");
-		voidBoots = new VoidArmor(voidCraft.materials.voidArmor, 0, 3, "void").setUnlocalizedName("voidBoots");
+		voidHelmet = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 0, "void", "voidHelmet");
+		voidChest = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 1, "void", "voidChest");
+		voidLegs = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 2, "void", "voidLegs");
+		voidBoots = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 3, "void", "voidBoots");
 
-		demonHelmet = new DemonArmor(voidCraft.materials.demonArmor, 0, 0, "demon").setUnlocalizedName("demonHelmet");
-		demonChest = new DemonArmor(voidCraft.materials.demonArmor, 0, 1, "demon").setUnlocalizedName("demonChest");
-		demonLegs = new DemonArmor(voidCraft.materials.demonArmor, 0, 2, "demon").setUnlocalizedName("demonLegs");
-		demonBoots = new DemonArmor(voidCraft.materials.demonArmor, 0, 3, "demon").setUnlocalizedName("demonBoots");
+		demonHelmet = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 0, "demon", "demonHelmet");
+		demonChest = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 1, "demon", "demonChest");
+		demonLegs = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 2, "demon", "demonLegs");
+		demonBoots = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 3, "demon", "demonBoots");
 
-		xiaChest = new XiaArmor(voidCraft.materials.xiaArmor, 0, 1, "xia").setUnlocalizedName("xiaChest");
+		xiaChest = new XiaArmor(voidCraft.materials.xiaArmor, 0, 1, "xia", "xiaChest");
+		
+		list.add(voidHelmet);
+		list.add(voidChest);
+		list.add(voidLegs);
+		list.add(voidBoots);
+		list.add(demonHelmet);
+		list.add(demonChest);
+		list.add(demonLegs);
+		list.add(demonBoots);
+		list.add(xiaChest);
 	}
 
 	@Override
 	public void init() {
-		GameRegistry.registerItem(voidHelmet, voidHelmet.getUnlocalizedName());
-		GameRegistry.registerItem(voidChest, voidChest.getUnlocalizedName());
-		GameRegistry.registerItem(voidLegs, voidLegs.getUnlocalizedName());
-		GameRegistry.registerItem(voidBoots, voidBoots.getUnlocalizedName());
-		GameRegistry.registerItem(demonHelmet, demonHelmet.getUnlocalizedName());
-		GameRegistry.registerItem(demonChest, demonChest.getUnlocalizedName());
-		GameRegistry.registerItem(demonLegs, demonLegs.getUnlocalizedName());
-		GameRegistry.registerItem(demonBoots, demonBoots.getUnlocalizedName());
-		GameRegistry.registerItem(xiaChest, xiaChest.getUnlocalizedName());
-
 		GameRegistry.addRecipe(new ItemStack(voidHelmet, 1), "XXX", "X X", 'X', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidChest, 1), "X X", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidLegs, 1), "XXX", "X X", "X X", 'X', voidCraft.items.voidcrystal);
@@ -64,7 +69,10 @@ public class Armors extends RegistryBase {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void setupRender() {
-		
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		for(Item i : list){
+			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("armors/", ((IBasicVoid)i).getName(), "inventory"));
+		}
 	}
 
 }
