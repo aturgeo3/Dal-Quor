@@ -40,16 +40,20 @@ public class VoidFluids extends RegistryBase {
 		FluidRegistry.registerFluid(fluidVoid);
 		// This must be last
 		blockVoidFluid = new BlockVoidFluid(fluidVoid, Material.water).setDensity(-400).setUnlocalizedName("blockVoidFluid");
-		voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid);
-		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluidVoid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(voidBucket), new ItemStack(Items.bucket)));
-		BucketHandler.INSTANCE.buckets.put(blockVoidFluid, voidBucket);
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		FluidRegistry.addBucketForFluid(fluidVoid);
+		//voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid);
+		//FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluidVoid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(voidBucket), new ItemStack(Items.bucket)));
+		//BucketHandler.INSTANCE.buckets.put(blockVoidFluid, voidBucket);
+		//MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		
+	
+	
 	}
 
 	@Override
 	public void init() {
 		GameRegistry.registerBlock(blockVoidFluid, "blockVoidFluid");
-		GameRegistry.registerItem(voidBucket, voidBucket.getUnlocalizedName());
+		//GameRegistry.registerItem(voidBucket, voidBucket.getUnlocalizedName());
 	}
 
 	@Override

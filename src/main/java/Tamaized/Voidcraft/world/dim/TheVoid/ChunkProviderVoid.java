@@ -700,7 +700,7 @@ public class ChunkProviderVoid implements IChunkProvider
     			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
             }
     	}
-    	if (this.genTest.func_175796_a(worldObj, pos) && this.worldObj.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick){
+    	if (this.genTest.isPositionInStructure(worldObj, pos) && this.worldObj.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick){
     		if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
 			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
     	}
@@ -730,7 +730,7 @@ public class ChunkProviderVoid implements IChunkProvider
 
 
 	@Override
-	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_) {
+	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunkIn, int x, int z) {
 		return false;
 	}
 

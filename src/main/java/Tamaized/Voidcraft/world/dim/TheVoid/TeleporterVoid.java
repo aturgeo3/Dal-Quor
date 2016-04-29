@@ -132,17 +132,17 @@ public class TeleporterVoid extends Teleporter {
             float f2 = 0.0F;
             float f3 = 0.0F;
 
-            if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.func_181012_aH())
+            if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection())
             {
                 f = 1.0F;
                 f1 = 1.0F;
             }
-            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.func_181012_aH().getOpposite())
+            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection().getOpposite())
             {
                 f = -1.0F;
                 f1 = -1.0F;
             }
-            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.func_181012_aH().rotateY())
+            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection().rotateY())
             {
                 f2 = 1.0F;
                 f3 = -1.0F;
@@ -157,7 +157,7 @@ public class TeleporterVoid extends Teleporter {
             double d4 = entityIn.motionZ;
             entityIn.motionX = d3 * (double)f + d4 * (double)f3;
             entityIn.motionZ = d3 * (double)f2 + d4 * (double)f1;
-            entityIn.rotationYaw = rotationYaw - (float)(entityIn.func_181012_aH().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getFinger().getHorizontalIndex() * 90);
+            entityIn.rotationYaw = rotationYaw - (float)(entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getFinger().getHorizontalIndex() * 90);
             entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
             return true;
         }

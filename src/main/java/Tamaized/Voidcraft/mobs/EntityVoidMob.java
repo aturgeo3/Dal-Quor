@@ -169,7 +169,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob
 
         if (p_70652_1_ instanceof EntityLivingBase)
         {
-        	f += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase)p_70652_1_).getCreatureAttribute());
+        	f += EnchantmentHelper.getModifierForCreature(this.getHeldItem(), ((EntityLivingBase)p_70652_1_).getCreatureAttribute());
             i += EnchantmentHelper.getKnockbackModifier(this);
         }
 
