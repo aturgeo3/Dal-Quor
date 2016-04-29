@@ -1,15 +1,14 @@
-package Tamaized.Voidcraft.tools;
+package Tamaized.Voidcraft.tools.demon;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
+import Tamaized.Voidcraft.tools.BasicVoidItemSword;
 
-public class DemonSword extends ItemSword {
+public class DemonSword extends BasicVoidItemSword {
 
-	
-	public DemonSword(ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
+	public DemonSword(ToolMaterial material, String n) {
+		super(material, n);
 	}
 
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){

@@ -1,17 +1,17 @@
-package Tamaized.Voidcraft.tools;
+package Tamaized.Voidcraft.tools.chain;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
+import Tamaized.Voidcraft.tools.BasicVoidItemSword;
 
-public class ChainSword extends ItemSword {
+public class ChainSword extends BasicVoidItemSword {
 
-	public ChainSword(ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
-		
+	public ChainSword(ToolMaterial material, String n) {
+		super(material, n);
 	}
-	
+
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
         par1ItemStack.damageItem(1, par3EntityLivingBase);
         par2EntityLivingBase.addPotionEffect(new PotionEffect(2, 5*20));

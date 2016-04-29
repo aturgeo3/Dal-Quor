@@ -191,6 +191,11 @@ public class VoidItems extends RegistryBase {
 		for(Item i : itemList){
 			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("items/", ((IBasicVoid)i).getName(), "inventory"));
 		}
+		
+		for(Item i : voidDiscs){
+			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("discs/", ((IBasicVoid)i).getName(), "inventory"));
+			System.out.println(i+":"+((IBasicVoid)i).getName());
+		}
 	}
 
 }

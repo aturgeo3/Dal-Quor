@@ -44,7 +44,7 @@ public class VoidRecord extends ItemRecord implements IBasicVoid{
 		setUnlocalizedName(name);
 		setMaxStackSize(1);
 		setCreativeTab(voidCraft.tabs.tabVoid);
-		GameRegistry.registerItem(this, n);
+		GameRegistry.registerItem(this, "discs/"+n);
 	}
 	
 	@Override

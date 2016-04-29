@@ -1,24 +1,25 @@
-package Tamaized.Voidcraft.tools;
+package Tamaized.Voidcraft.tools.spectre;
 
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
+import Tamaized.Voidcraft.tools.BasicVoidItemSword;
 
-public class AngelicSword extends ItemSword{
+public class AngelicSword extends BasicVoidItemSword{
 
-	public AngelicSword(ToolMaterial par2EnumToolMaterial) {
-		super(par2EnumToolMaterial);
+	public AngelicSword(ToolMaterial material, String n) {
+		super(material, n);
 	}
-	
+
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
         par1ItemStack.damageItem(1, par3EntityLivingBase);
         if(par2EntityLivingBase instanceof EntityVoidMob && !(par2EntityLivingBase instanceof EntityMobVoidBoss)){

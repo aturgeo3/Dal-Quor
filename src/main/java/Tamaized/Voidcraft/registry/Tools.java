@@ -1,5 +1,9 @@
 package Tamaized.Voidcraft.registry;
 
+import java.util.ArrayList;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,20 +11,22 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.tools.AngelicSword;
-import Tamaized.Voidcraft.tools.ArchSword;
-import Tamaized.Voidcraft.tools.ChainSword;
-import Tamaized.Voidcraft.tools.DemonSword;
-import Tamaized.Voidcraft.tools.MoltenSword;
-import Tamaized.Voidcraft.tools.SpectreAxe;
-import Tamaized.Voidcraft.tools.SpectrePickaxe;
-import Tamaized.Voidcraft.tools.VoidAxe;
-import Tamaized.Voidcraft.tools.VoidHoe;
-import Tamaized.Voidcraft.tools.VoidPickaxe;
-import Tamaized.Voidcraft.tools.VoidSpade;
-import Tamaized.Voidcraft.tools.VoidSword;
+import Tamaized.Voidcraft.tools.BasicVoidItemAxe;
+import Tamaized.Voidcraft.tools.BasicVoidItemHoe;
+import Tamaized.Voidcraft.tools.BasicVoidItemPickaxe;
+import Tamaized.Voidcraft.tools.BasicVoidItemSpade;
+import Tamaized.Voidcraft.tools.BasicVoidItemSword;
+import Tamaized.Voidcraft.tools.arch.ArchSword;
+import Tamaized.Voidcraft.tools.chain.ChainSword;
+import Tamaized.Voidcraft.tools.demon.DemonSword;
+import Tamaized.Voidcraft.tools.molten.MoltenSword;
+import Tamaized.Voidcraft.tools.spectre.AngelicSword;
+import Tamaized.Voidcraft.tools.spectre.SpectreAxe;
+import Tamaized.Voidcraft.tools.spectre.SpectrePickaxe;
 
 public class Tools extends RegistryBase {
+	
+	public static ArrayList<Item> list = new ArrayList<Item>();
 	
 	public static Item voidPickaxe;
 	public static Item voidSpade;
@@ -39,40 +45,41 @@ public class Tools extends RegistryBase {
 	public void preInit() {
 		// Tools
 		// void
-		voidPickaxe = new VoidPickaxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidPickaxe");
-		voidSpade = new VoidSpade(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidShovel");
-		voidAxe = new VoidAxe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidAxe");
-		voidSword = new VoidSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidSword");
-		voidHoe = new VoidHoe(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("voidHoe");
+		voidPickaxe = new BasicVoidItemPickaxe(voidCraft.materials.voidTools, "voidPickaxe").setCreativeTab(voidCraft.tabs.tabVoid);
+		voidSpade = new BasicVoidItemSpade(voidCraft.materials.voidTools, "voidShovel").setCreativeTab(voidCraft.tabs.tabVoid);
+		voidAxe = new BasicVoidItemAxe(voidCraft.materials.voidTools, "voidAxe").setCreativeTab(voidCraft.tabs.tabVoid);
+		voidSword = new BasicVoidItemSword(voidCraft.materials.voidTools, "voidSword").setCreativeTab(voidCraft.tabs.tabVoid);
+		voidHoe = new BasicVoidItemHoe(voidCraft.materials.voidTools, "voidHoe").setCreativeTab(voidCraft.tabs.tabVoid);
 
 		// spectre
-		angelicSword = new AngelicSword(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("angelicSword");
-		spectrePickaxe = new SpectrePickaxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectrePickaxe");
-		spectreAxe = new SpectreAxe(voidCraft.materials.spectreTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("spectreAxe");
+		angelicSword = new AngelicSword(voidCraft.materials.spectreTools, "angelicSword").setCreativeTab(voidCraft.tabs.tabVoid);
+		spectrePickaxe = new SpectrePickaxe(voidCraft.materials.spectreTools, "spectrePickaxe").setCreativeTab(voidCraft.tabs.tabVoid);
+		spectreAxe = new SpectreAxe(voidCraft.materials.spectreTools, "spectreAxe").setCreativeTab(voidCraft.tabs.tabVoid);
 		// chain
-		chainSword = new ChainSword(voidCraft.materials.chainTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("chainSword");
+		chainSword = new ChainSword(voidCraft.materials.chainTools, "chainSword").setCreativeTab(voidCraft.tabs.tabVoid);
 		// molten
-		moltenSword = new MoltenSword(voidCraft.materials.MoltenTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("moltenSword");
+		moltenSword = new MoltenSword(voidCraft.materials.MoltenTools, "moltenSword").setCreativeTab(voidCraft.tabs.tabVoid);
 		// arch
-		archSword = new ArchSword(voidCraft.materials.ArchTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("archSword");
+		archSword = new ArchSword(voidCraft.materials.ArchTools, "archSword").setCreativeTab(voidCraft.tabs.tabVoid);
 		// demon
-		demonSword = new DemonSword(voidCraft.materials.DemonTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("demonSword");
+		demonSword = new DemonSword(voidCraft.materials.DemonTools, "demonSword").setCreativeTab(voidCraft.tabs.tabVoid);
+
+		list.add(voidPickaxe);
+		list.add(voidSpade);
+		list.add(voidAxe);
+		list.add(voidSword);
+		list.add(voidHoe);
+		list.add(angelicSword);
+		list.add(spectrePickaxe);
+		list.add(spectreAxe);
+		list.add(chainSword);
+		list.add(moltenSword);
+		list.add(archSword);
+		list.add(demonSword);
 	}
 
 	@Override
 	public void init() {
-		GameRegistry.registerItem(voidSword, voidSword.getUnlocalizedName());
-		GameRegistry.registerItem(voidPickaxe, voidPickaxe.getUnlocalizedName());
-		GameRegistry.registerItem(voidAxe, voidAxe.getUnlocalizedName());
-		GameRegistry.registerItem(voidSpade, voidSpade.getUnlocalizedName());
-		GameRegistry.registerItem(voidHoe, voidHoe.getUnlocalizedName());
-		GameRegistry.registerItem(spectrePickaxe, spectrePickaxe.getUnlocalizedName());
-		GameRegistry.registerItem(spectreAxe, spectreAxe.getUnlocalizedName());
-		GameRegistry.registerItem(angelicSword, angelicSword.getUnlocalizedName());
-		GameRegistry.registerItem(chainSword, chainSword.getUnlocalizedName());
-		GameRegistry.registerItem(moltenSword, moltenSword.getUnlocalizedName());
-		GameRegistry.registerItem(archSword, archSword.getUnlocalizedName());
-		GameRegistry.registerItem(demonSword, demonSword.getUnlocalizedName());
 
 		GameRegistry.addRecipe(new ItemStack(voidPickaxe, 1), "XXX", " S ", " S ", 'X', voidCraft.items.voidcrystal, 'S', Items.stick);
 		GameRegistry.addRecipe(new ItemStack(voidAxe, 1), " XX", " SX", " S ", 'X', voidCraft.items.voidcrystal, 'S', Items.stick);
@@ -98,7 +105,10 @@ public class Tools extends RegistryBase {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void setupRender() {
-		
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		for(Item i : list){
+			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("tools/", ((IBasicVoid)i).getName(), "inventory"));
+		}
 	}
 
 }
