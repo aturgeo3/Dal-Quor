@@ -42,7 +42,7 @@ public class TeleporterXia extends Teleporter {
 					
 					switch (id){
 					case 727:
-						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.fluids.blockVoidFluid.getStateFromMeta(meta), 2);
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.fluids.voidFluidBlock.getStateFromMeta(meta), 2);
 						break;
 					case 729:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockFakeBedrock.getStateFromMeta(meta), 2);

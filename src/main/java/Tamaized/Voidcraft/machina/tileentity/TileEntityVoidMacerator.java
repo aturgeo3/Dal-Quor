@@ -163,7 +163,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	@Override
 	public void update(){
 		
-		//voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+		//voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
 		//burnTime = voidTank.getFluidAmount();
 		//if(burnTime > 0)System.out.println(burnTime +" : "+ voidTank.getFluidAmount());
 		
@@ -177,7 +177,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		
 		if(this.burnTime > 0 && this.cookTime > 0) {
 			this.burnTime --;
-			voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+			voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
 			//this.burnTime = doDrain(EnumFacing.NORTH, 1, true);
 		}
 		
@@ -188,7 +188,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 				if(getItemBurnTime(this.slots[1]) > 0){
 					flag1 = true;
 					
-					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, getItemBurnTime(this.slots[1])), true);
+					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.voidFluid, getItemBurnTime(this.slots[1])), true);
 					this.currentItemBurnTime = this.burnTime = voidTank.getFluidAmount();
 					
 					if(this.slots[1] != null){

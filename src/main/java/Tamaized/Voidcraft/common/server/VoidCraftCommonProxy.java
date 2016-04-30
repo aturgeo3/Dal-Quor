@@ -6,6 +6,8 @@ import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.registry.VoidBlocks;
 
 public class VoidCraftCommonProxy {
+	
+	public void preInit() {};
 
 	public void registerRenderInformation() {}
 

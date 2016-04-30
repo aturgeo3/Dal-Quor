@@ -63,6 +63,11 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	public static Minecraft mc = Minecraft.getMinecraft();
 	@SideOnly(Side.CLIENT)
 	public static int renderPass;
+	
+	@Override
+	public void preInit(){
+		voidCraft.fluids.preInitRender();
+	}
 
 	@Override
 	public void registerRenders(){

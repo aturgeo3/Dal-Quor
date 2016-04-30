@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -124,7 +125,10 @@ public class voidCraft {
 	
 	public static Logger logger;
 
-
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = LogManager.getLogger("VoidCraft");
@@ -160,6 +164,7 @@ public class voidCraft {
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
 		
+		proxy.preInit();
 	}
 
 

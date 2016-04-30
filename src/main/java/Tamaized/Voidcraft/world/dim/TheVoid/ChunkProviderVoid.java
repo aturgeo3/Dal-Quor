@@ -178,7 +178,7 @@ public class ChunkProviderVoid implements IChunkProvider
                                 	double rand4Fluid = Math.round(Math.random()*600);
                                 	
                                 	if(rand4Fluid == 400){
-                                		iblockstate = voidCraft.fluids.blockVoidFluid.getDefaultState(); //lavaStill
+                                		iblockstate = voidCraft.fluids.voidFluidBlock.getDefaultState(); //lavaStill
                                 	//}else if(rand4Fluid > 200 && rand4Fluid < 400){
                                 	//	l2 = voidCraft.blocks.blockFakeBedrock;
                                 	}

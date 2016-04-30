@@ -171,7 +171,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ITickable, ISid
 		
 		if(this.burnTime > 0 && this.cookTime > 0) {
 			this.burnTime --;
-			voidTank.setFluid(new FluidStack(voidCraft.fluids.fluidVoid, this.burnTime));
+			voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
 		}
 		
 		if(!this.worldObj.isRemote){
@@ -181,7 +181,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ITickable, ISid
 				if(getItemBurnTime(this.slots[1]) > 0){
 					flag1 = true;
 					
-					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.fluidVoid, getItemBurnTime(this.slots[1])), true);
+					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.voidFluid, getItemBurnTime(this.slots[1])), true);
 					this.currentItemBurnTime = this.burnTime = voidTank.getFluidAmount();
 					
 					if(this.slots[1] != null){
