@@ -37,8 +37,6 @@ public class VoidFluids extends RegistryBase {
 
 	@Override
 	public void preInit() {
-		//fluid -> fluid.setLuminosity(10).setDensity(800).setViscosity(1500),
-		//, BasicVoidFluidBlock.class, new MaterialLiquid(MapColor.purpleColor)
 		voidFluid = createFluid("void", "blocks/voidFluid", true);
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
 		voidMaterialLiquid = new MaterialLiquid(MapColor.purpleColor);
@@ -46,22 +44,6 @@ public class VoidFluids extends RegistryBase {
 		voidBucket = ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid).getItem();
 		
 		fluids.add(voidFluidBlock);
-	}
-	
-	@Deprecated
-	private void deprecated(){
-		// Fluid
-		//fluidVoid = new Fluid("void", new ResourceLocation("VoidCraft:textures/blocks/voidFluid_still.png"), new ResourceLocation("VoidCraft:textures/blocks/voidFluid_flow.png"));
-		//materialFluidVoid = new MaterialLiquid(MapColor.purpleColor);
-		// This has to be here for Fluids
-		//FluidRegistry.registerFluid(fluidVoid);
-		// This must be last
-		//blockVoidFluid = new BlockVoidFluid(fluidVoid, Material.water).setDensity(-400).setUnlocalizedName("blockVoidFluid");
-		//FluidRegistry.addBucketForFluid(fluidVoid);
-		//voidBucket = new ItemVoidCraftBucket(blockVoidFluid).setUnlocalizedName("voidBucket").setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(voidCraft.tabs.tabVoid);
-		//FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluidVoid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(voidBucket), new ItemStack(Items.bucket)));
-		//BucketHandler.INSTANCE.buckets.put(blockVoidFluid, voidBucket);
-		//MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 	}
 
 	@Override
@@ -85,20 +67,16 @@ public class VoidFluids extends RegistryBase {
 			Item fluid = Item.getItemFromBlock(f);
 			final ModelResourceLocation modelResourceLocation = new ModelResourceLocation(voidCraft.modid+":blocks/fluids", f.getFluid().getName());
 			ModelBakery.registerItemVariants(fluid);
-			ModelLoader.setCustomMeshDefinition(fluid, new ItemMeshDefinition()
-	        {
-	            public ModelResourceLocation getModelLocation(ItemStack stack)
-	            {
-	                return modelResourceLocation;
-	            }
-	        });
-			ModelLoader.setCustomStateMapper(f, new StateMapperBase()
-	        {
-	            protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-	            {
-	                return modelResourceLocation;
-	            }
-	        });
+			ModelLoader.setCustomMeshDefinition(fluid, new ItemMeshDefinition(){
+				public ModelResourceLocation getModelLocation(ItemStack stack){
+					return modelResourceLocation;
+				}
+			});
+			ModelLoader.setCustomStateMapper(f, new StateMapperBase(){
+				protected ModelResourceLocation getModelResourceLocation(IBlockState state){
+					return modelResourceLocation;
+				}
+			});
 		}
 	}
 	
