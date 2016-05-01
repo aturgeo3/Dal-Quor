@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/voidMacerator",
+    "parent": "voidcraft:block/voidMaceratorOff",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

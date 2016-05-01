@@ -55,6 +55,11 @@ public class VoidBox extends BasicVoidBlockContainer {
         }
     }
 	
+	@Override
+	public int getRenderType(){
+        return 3;
+    }
+	
 	private void setDefaultDirection(World world, BlockPos pos){
 		if(!world.isRemote){
 			Block l = world.getBlockState(pos.add(0, 0, -1)).getBlock();

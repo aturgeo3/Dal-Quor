@@ -152,6 +152,11 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 
 		super.breakBlock(world, pos, state);
 	}
+	
+	@Override
+	public int getRenderType(){
+        return 3;
+    }
 
 	@SideOnly(Side.CLIENT)
 	/**

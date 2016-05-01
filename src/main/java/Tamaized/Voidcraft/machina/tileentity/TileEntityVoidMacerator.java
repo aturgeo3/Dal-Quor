@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,9 +19,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -38,7 +41,6 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	private String localizedName;
 	
 	public VoidTank voidTank;
-	VoidMacerator theMacerator;
 	
 	private static final int[] slots_top = new int[]{0};
 	private static final int[] slots_bottom = new int[]{2, 1};
@@ -56,6 +58,11 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	public TileEntityVoidMacerator(){
 		super();
 		voidTank = new VoidTank(this, 3000);
+	}
+	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate){
+	    return (oldState.getBlock() != newSate.getBlock());
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt){
@@ -213,17 +220,15 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 				
 			}else if(slots[0] == null) this.cookTime = 0;
 			
-			
-			if(theMacerator != null){
-				if(theMacerator.isActive && !flag) theMacerator.isActive = false;
-				if(!theMacerator.isActive && flag) theMacerator.isActive = true;
-			}else{
-				try{
-					theMacerator = (VoidMacerator) worldObj.getBlockState(pos).getBlock();
-				}catch(NullPointerException e){
-					e.printStackTrace();
+			IBlockState state = worldObj.getBlockState(pos);
+			if(state.getBlock() instanceof VoidMacerator){
+				VoidMacerator theMacerator = (VoidMacerator) state.getBlock();
+				if(theMacerator != null){
+					if(theMacerator.getIsActive(state) && !flag) theMacerator.setState(false, worldObj, pos);
+					if(!theMacerator.getIsActive(state) && flag) theMacerator.setState(true, worldObj, pos);
 				}
 			}
+			
 			
 		}
 		
