@@ -2,9 +2,14 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
+import com.google.common.cache.LoadingCache;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -252,6 +257,60 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 			return flag4 && side == EnumFacing.WEST ? true : (flag4 && side == EnumFacing.EAST ? true : (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
 		}
 	}
+	
+	public BlockPattern.PatternHelper func_181089_f(World p_181089_1_, BlockPos p_181089_2_)
+    {
+        EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
+        BlockPortalVoid.Size blockportal$size = new BlockPortalVoid.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
+        LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.func_181627_a(p_181089_1_, true);
+
+        if (!blockportal$size.func_150860_b())
+        {
+            enumfacing$axis = EnumFacing.Axis.X;
+            blockportal$size = new BlockPortalVoid.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.Z);
+        }
+
+        if (!blockportal$size.func_150860_b())
+        {
+            return new BlockPattern.PatternHelper(p_181089_2_, EnumFacing.NORTH, EnumFacing.UP, loadingcache, 1, 1, 1);
+        }
+        else
+        {
+            int[] aint = new int[EnumFacing.AxisDirection.values().length];
+            EnumFacing enumfacing = blockportal$size.field_150866_c.rotateYCCW();
+            BlockPos blockpos = blockportal$size.field_150861_f.up(blockportal$size.func_181100_a() - 1);
+
+            for (EnumFacing.AxisDirection enumfacing$axisdirection : EnumFacing.AxisDirection.values())
+            {
+                BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
+
+                for (int i = 0; i < blockportal$size.func_181101_b(); ++i)
+                {
+                    for (int j = 0; j < blockportal$size.func_181100_a(); ++j)
+                    {
+                        BlockWorldState blockworldstate = blockpattern$patternhelper.translateOffset(i, j, 1);
+
+                        if (blockworldstate.getBlockState() != null && blockworldstate.getBlockState().getBlock().getMaterial() != Material.air)
+                        {
+                            ++aint[enumfacing$axisdirection.ordinal()];
+                        }
+                    }
+                }
+            }
+
+            EnumFacing.AxisDirection enumfacing$axisdirection1 = EnumFacing.AxisDirection.POSITIVE;
+
+            for (EnumFacing.AxisDirection enumfacing$axisdirection2 : EnumFacing.AxisDirection.values())
+            {
+                if (aint[enumfacing$axisdirection2.ordinal()] < aint[enumfacing$axisdirection1.ordinal()])
+                {
+                    enumfacing$axisdirection1 = enumfacing$axisdirection2;
+                }
+            }
+
+            return new BlockPattern.PatternHelper(enumfacing.getAxisDirection() == enumfacing$axisdirection1 ? blockpos : blockpos.offset(blockportal$size.field_150866_c, blockportal$size.func_181101_b() - 1), EnumFacing.getFacingFromAxis(enumfacing$axisdirection1, enumfacing$axis), EnumFacing.UP, loadingcache, blockportal$size.func_181101_b(), blockportal$size.func_181100_a(), 1);
+        }
+    }
 	
 	public static class Size
     {

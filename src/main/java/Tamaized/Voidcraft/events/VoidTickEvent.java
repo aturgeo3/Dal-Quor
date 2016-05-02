@@ -47,10 +47,13 @@ public class VoidTickEvent {
 			}
 		}
 		
+		if(e.player.worldObj.isRemote) return;
+		
 		if(data.get(e.player.getGameProfile().getId()) != null){
 			
 			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
-			Block block = e.player.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()) + 1, MathHelper.floor_double(e.player.posZ))).getBlock();
+			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()) + 1, MathHelper.floor_double(e.player.posZ));
+			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
 			float j = data.get(e.player.getGameProfile().getId()).tick;
 			if(j <= 0){
 				if(data.get(e.player.getGameProfile().getId()).type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid){
@@ -81,7 +84,7 @@ public class VoidTickEvent {
 		        }else if(e.player instanceof EntityOtherPlayerMP){
 		        	//Client Side do nothing
 		        }else{
-		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+e.player+"; "+e.player.getClass();
+		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+j+" : "+e.player+"; "+e.player.getClass();
 		        	voidCraft.logger.info(err);
 		        	//System.out.println(err);
 		        }
@@ -98,16 +101,41 @@ public class VoidTickEvent {
 	}
 	
 	private void teleport(EntityPlayerMP player){
-		if(player.dimension != data.get(player.getGameProfile().getId()).type && player.dimension != 1 && player.dimension != data.get(player.getGameProfile().getId()).PORTAL_VOID && player.dimension != data.get(player.getGameProfile().getId()).PORTAL_XIA) { //Teleport into void/xia
+		if(
+				player.dimension != data.get(player.getGameProfile().getId()).type &&
+				player.dimension != 1 &&
+				player.dimension != data.get(player.getGameProfile().getId()).PORTAL_VOID &&
+				player.dimension != data.get(player.getGameProfile().getId()).PORTAL_XIA
+				){ //Teleport into void/xia
         	data.get(player.getGameProfile().getId()).lastDim = player.dimension;
-        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
+        	transferPlayerToDimension(
+        			player.mcServer,
+        			player,
+        			data.get(player.getGameProfile().getId()).type,
+        			data.get(player.getGameProfile().getId()).getTeleporter(player)
+        			);
         }else if(player.dimension == 1){ //From end
         	data.get(player.getGameProfile().getId()).lastDim = player.dimension;
-        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
-        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).type, data.get(player.getGameProfile().getId()).getTeleporter(player));
+        	transferPlayerToDimension(
+        			player.mcServer,
+        			player,
+        			data.get(player.getGameProfile().getId()).type,
+        			data.get(player.getGameProfile().getId()).getTeleporter(player)
+        			);
+        	transferPlayerToDimension(
+        			player.mcServer,
+        			player,
+        			data.get(player.getGameProfile().getId()).type,
+        			data.get(player.getGameProfile().getId()).getTeleporter(player)
+        			);
         }else{ //Teleport out of void/xia
         	data.get(player.getGameProfile().getId()).lastDim = data.get(player.getGameProfile().getId()).lastDim == PortalDataHandler.PORTAL_VOID ? 0 : data.get(player.getGameProfile().getId()).lastDim == PortalDataHandler.PORTAL_XIA ? 0 : data.get(player.getGameProfile().getId()).lastDim; //Ensure lastDim never equals Void or Xia IDs
-        	transferPlayerToDimension(player.mcServer, player, data.get(player.getGameProfile().getId()).lastDim, data.get(player.getGameProfile().getId()).getTeleporter(player));
+        	transferPlayerToDimension(
+        			player.mcServer,
+        			player,
+        			data.get(player.getGameProfile().getId()).lastDim,
+        			data.get(player.getGameProfile().getId()).getTeleporter(player)
+        			);
         }
 	}
 	

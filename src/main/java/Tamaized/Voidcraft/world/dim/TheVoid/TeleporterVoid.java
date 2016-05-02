@@ -12,9 +12,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import Tamaized.Voidcraft.blocks.BlockPortalVoid;
 import Tamaized.Voidcraft.common.voidCraft;
 
 public class TeleporterVoid extends Teleporter {
@@ -108,10 +110,18 @@ public class TeleporterVoid extends Teleporter {
             double d5 = (double)blockpos.getX() + 0.5D;
             double d6 = (double)blockpos.getY() + 0.5D;
             double d7 = (double)blockpos.getZ() + 0.5D;
-            BlockPattern.PatternHelper blockpattern$patternhelper = Blocks.portal.func_181089_f(this.worldServerInstance, blockpos);
+            BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortalVoid)voidCraft.blocks.blockPortalVoid).func_181089_f(this.worldServerInstance, blockpos);
             boolean flag1 = blockpattern$patternhelper.getFinger().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
             double d2 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getPos().getZ() : (double)blockpattern$patternhelper.getPos().getX();
-            d6 = (double)(blockpattern$patternhelper.getPos().getY() + 1) - entityIn.func_181014_aG().yCoord * (double)blockpattern$patternhelper.func_181119_e();
+            
+            double aG0 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getPos().getZ() : (double)blockpattern$patternhelper.getPos().getX(); 
+            double aG1 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? entityIn.posZ : entityIn.posX;
+            aG1 = Math.abs(MathHelper.func_181160_c(aG1 - (double)(blockpattern$patternhelper.getFinger().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - (double)blockpattern$patternhelper.func_181118_d()));
+            double aG2 = MathHelper.func_181160_c(entityIn.posY - 1.0D, (double)blockpattern$patternhelper.getPos().getY(), (double)(blockpattern$patternhelper.getPos().getY() - blockpattern$patternhelper.func_181119_e()));
+            Vec3 aG = new Vec3(aG1, aG2, 0.0D);
+            EnumFacing eTD = blockpattern$patternhelper.getFinger();
+            
+            d6 = (double)(blockpattern$patternhelper.getPos().getY() + 1) - aG.yCoord * (double)blockpattern$patternhelper.func_181119_e();
 
             if (flag1)
             {
@@ -120,11 +130,11 @@ public class TeleporterVoid extends Teleporter {
 
             if (blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X)
             {
-                d7 = d2 + (1.0D - entityIn.func_181014_aG().xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
+                d7 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
             }
             else
             {
-                d5 = d2 + (1.0D - entityIn.func_181014_aG().xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
+                d5 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
             }
 
             float f = 0.0F;
@@ -132,17 +142,17 @@ public class TeleporterVoid extends Teleporter {
             float f2 = 0.0F;
             float f3 = 0.0F;
 
-            if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection())
+            if (blockpattern$patternhelper.getFinger().getOpposite() == eTD)
             {
                 f = 1.0F;
                 f1 = 1.0F;
             }
-            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection().getOpposite())
+            else if (blockpattern$patternhelper.getFinger().getOpposite() == eTD.getOpposite())
             {
                 f = -1.0F;
                 f1 = -1.0F;
             }
-            else if (blockpattern$patternhelper.getFinger().getOpposite() == entityIn.getTeleportDirection().rotateY())
+            else if (blockpattern$patternhelper.getFinger().getOpposite() == eTD.rotateY())
             {
                 f2 = 1.0F;
                 f3 = -1.0F;
@@ -157,7 +167,7 @@ public class TeleporterVoid extends Teleporter {
             double d4 = entityIn.motionZ;
             entityIn.motionX = d3 * (double)f + d4 * (double)f3;
             entityIn.motionZ = d3 * (double)f2 + d4 * (double)f1;
-            entityIn.rotationYaw = rotationYaw - (float)(entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getFinger().getHorizontalIndex() * 90);
+            entityIn.rotationYaw = rotationYaw - (float)(eTD.getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getFinger().getHorizontalIndex() * 90);
             entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
             return true;
         }
