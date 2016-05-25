@@ -166,9 +166,7 @@ public class voidCraft {
 		
 		proxy.preInit();
 	}
-
-
-
+	
 	@EventHandler
 	public void InitVoidCraft(FMLInitializationEvent event){ 
 		logger.info("Starting VoidCraft Init");
@@ -182,11 +180,11 @@ public class voidCraft {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 		//Register Events
-		FMLCommonHandler.instance().bus().register(VoidTickEvent);
+		MinecraftForge.EVENT_BUS.register(VoidTickEvent);
 		MinecraftForge.EVENT_BUS.register(new PickUpEvent());
 		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
-		FMLCommonHandler.instance().bus().register(new CraftingHandler()); 
-		FMLCommonHandler.instance().bus().register(BossMusicManager.instance); //We want to give this class a tick updater
+		MinecraftForge.EVENT_BUS.register(new CraftingHandler()); 
+		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); //We want to give this class a tick updater
 				
 		//Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
@@ -197,7 +195,6 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
 		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		
-
 		for(RegistryBase reg : registry) reg.init();
 		
 		//Projectiles
@@ -218,7 +215,6 @@ public class voidCraft {
 		
 		MapGenStructureIO.registerStructure(StructureTestStart.class, "VoidFortress");
 		StructureTestPieces.register();
-		
 
 		// Mobs
 		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", 4, this, 64, 1, true);

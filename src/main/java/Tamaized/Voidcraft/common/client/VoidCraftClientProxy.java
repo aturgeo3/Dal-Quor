@@ -76,7 +76,6 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
-		FMLCommonHandler.instance().bus().register(new BGMusic()); 
 		//MinecraftForge.EVENT_BUS.register(new DebugEvent());
 	
 		float shadowSize = 0.5F;
@@ -98,9 +97,6 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(HerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
-	
-		//Blocks
-		//RenderingRegistry.registerBlockHandler(new OreRenderer()); //TODO: Deal with this at a later time
 	
 		RenderHeimdall renderHeimdall = new RenderHeimdall();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeimdall.class, renderHeimdall);

@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "voidcraft:oreVoidcrystal" }
+        "void=true": { "model": "voidcraft:oreVoidcrystal_void" },
+		"void=false": { "model": "voidcraft:oreVoidcrystal_norm" }
     }
 }

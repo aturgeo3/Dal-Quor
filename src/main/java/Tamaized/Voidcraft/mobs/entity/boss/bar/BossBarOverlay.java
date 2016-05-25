@@ -10,7 +10,6 @@ public class BossBarOverlay {
 	
 	@SubscribeEvent
 	public void Render(RenderGameOverlayEvent.Post e){
-		
 		if(e.type != ElementType.BOSSHEALTH) return;
 		
 		Minecraft mc = Minecraft.getMinecraft();

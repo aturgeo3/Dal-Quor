@@ -2,62 +2,92 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
 
 public class OreVoidcrystal extends BasicVoidBlock {
 	
+	public static final PropertyBool VOID = PropertyBool.create("void");
+	
 	public OreVoidcrystal(Material Material, String s) {
 		super(Material, s);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VOID, true));
+	}
+	
+	public IBlockState getStateVoidFalse(){
+		return getDefaultState().withProperty(VOID, false);
 	}
 	
 	@Override
     public boolean isOpaqueCube(){
 		return false;
 	}
-	/*
-	@SideOnly(Side.CLIENT)
+	
 	@Override
-    public int getRenderType(){
-		return VoidCraftClientProxy.OreRenderType;
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
+		if(world.provider.getDimensionId() == voidCraft.dimensionIdVoid && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
+		else if(world.provider.getDimensionId() != voidCraft.dimensionIdVoid && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
 	}
-	*/
+	
+	@Override
+	protected BlockState createBlockState(){
+		return new BlockState(this, new IProperty[]{VOID});
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public IBlockState getStateForEntityRender(IBlockState state){
+		return this.getDefaultState().withProperty(VOID, false);
+	}
+	
+	/**
+	 * Convert the BlockState into the correct metadata value
+	 */
+	@Override
+	public int getMetaFromState(IBlockState state){
+		return state.getValue(VOID) ? 1 : 0;
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta){
+		return this.getDefaultState().withProperty(VOID, meta == 0 ? false : true);
+	}
+	
 	@Override
 	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side){
 		return true;
 	}
-	/*
-	@Override
-    public boolean canRenderInPass(int pass){
-		//Set the static var in the client proxy
-		VoidCraftClientProxy.renderPass = pass;
-		//the block can render in both passes, so return true always
-		return true;
-	}
 	
-	@Override
-    public int getRenderBlockPass(){
-        return 1;
-	}
-	*/
+	@SideOnly(Side.CLIENT)
+    public EnumWorldBlockLayer getBlockLayer()
+    {
+        return EnumWorldBlockLayer.CUTOUT;
+    }
+	
 	public Item getItemDropped(int par1, Random par2Random, int par3){
 		return voidCraft.items.voidcrystal;
 	}
 	
 	public int quantityDropped(Random random){
-		return 2;
+		return 1 + random.nextInt(3);
 	}
 	
-	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity){
+	@Override
+	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity){
 		if (entity instanceof EntityDragon) return false;        
 		return true;
 	}

@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/oreVoidcrystal",
+    "parent": "voidcraft:block/oreVoidcrystal_norm",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],
