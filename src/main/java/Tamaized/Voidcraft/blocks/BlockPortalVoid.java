@@ -47,62 +47,6 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 	
 	@Override
 	public boolean tryToCreatePortal(World par1World, BlockPos pos) {
-    /*
-    	int x = pos.getX();
-    	int y = pos.getY();
-    	int z = pos.getZ();
-
-    	byte b0 = 0;
-        byte b1 = 1;
-
-        if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == this)
-        {
-            b0 = 1;
-            b1 = 0;
-        }
-    	
-
-    	if (b0 == b1){
-    		return false;
-    	}else{
-    		if (par1World.isAirBlock(new BlockPos(x - b0, y, z - b1))){
-    			x -= b0;
-    			y -= b1;
-    		}
-
-    		int l;
-    		int i1;
-
-    		for (l = -1; l <= 2; ++l){
-    			for (i1 = -1; i1 <= 3; ++i1){
-    				boolean flag = l == -1 || l == 2 || i1 == -1 || i1 == 3;
-
-    				if (l != -1 && l != 2 || i1 != -1 && i1 != 3){
-    					Block j1 = par1World.getBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l)).getBlock();
-    					boolean isAirBlock = par1World.isAirBlock(new BlockPos(x + b0 * l, y + i1, z + b1 * l));
-    					
-
-
-    					if (flag){
-    						if (j1 != voidCraft.blocks.blockVoidcrystal){
-    							return false;
-    						}
-    					}
-    					else if (!isAirBlock && j1 != voidCraft.blocks.fireVoid){
-    						return false;
-    					}
-    				}
-    			}
-    		}
-
-    		for (l = 0; l < 2; ++l){
-    			for (i1 = 0; i1 < 3; ++i1){
-    				par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), getStateFromMeta(3), 2);
-    			}
-    		}
-
-    		return true;
-    	}*/
 		BlockPortalVoid.Size blockportal$size = new BlockPortalVoid.Size(par1World, pos, EnumFacing.Axis.X);
         if (blockportal$size.func_150860_b() && blockportal$size.field_150864_e == 0)
         {
@@ -127,57 +71,6 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock){
-        /*byte b0 = 0;
-        byte b1 = 1;
-
-        if (world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || world.getBlockState(pos.add(1, 0, 0)).getBlock() == this)
-        {
-            b0 = 1;
-            b1 = 0;
-        }
-
-        int i1;
-
-        for (i1 = pos.getY(); world.getBlockState(pos.add(0, i1-1, 0)).getBlock() == this; --i1)
-        {
-            ;
-        }
-
-        if (world.getBlockState(pos.add(0, i1-1, 0)).getBlock() != voidCraft.blocks.blockVoidcrystal)
-        {
-            world.setBlockToAir(pos);
-        }
-        else
-        {
-            int j1;
-
-            for (j1 = 1; j1 < 4 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == this; ++j1)
-            {
-                ;
-            }
-
-            if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == voidCraft.blocks.blockVoidcrystal)
-            {
-                boolean flag = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
-                boolean flag1 = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this || world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
-
-                if (flag && flag1)
-                {
-                    world.setBlockToAir(pos);
-                }
-                else
-                {
-                    if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != voidCraft.blocks.blockVoidcrystal || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != voidCraft.blocks.blockVoidcrystal || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this))
-                    {
-                        world.setBlockToAir(pos);
-                    }
-                }
-            }
-            else
-            {
-                world.setBlockToAir(pos);
-            }
-        }*/
 		EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis)state.getValue(AXIS);
 
         if (enumfacing$axis == EnumFacing.Axis.X)
@@ -186,7 +79,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
             if (!blockportal$size.func_150860_b() || blockportal$size.field_150864_e < blockportal$size.field_150868_h * blockportal$size.field_150862_g)
             {
-            	if(neighborBlock != this) world.setBlockState(pos, Blocks.air.getDefaultState());
+            	world.setBlockState(pos, Blocks.air.getDefaultState());
             }
         }
         else if (enumfacing$axis == EnumFacing.Axis.Z)
@@ -195,7 +88,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
             if (!blockportal$size1.func_150860_b() || blockportal$size1.field_150864_e < blockportal$size1.field_150868_h * blockportal$size1.field_150862_g)
             {
-            	if(neighborBlock != this) world.setBlockState(pos, Blocks.air.getDefaultState());
+            	world.setBlockState(pos, Blocks.air.getDefaultState());
             }
         }
     }
@@ -459,7 +352,7 @@ public class BlockPortalVoid extends BlockVoidTeleporter {
 
         protected boolean func_150857_a(Block p_150857_1_)
         {
-            return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == voidCraft.blocks.fireVoid || p_150857_1_ == voidCraft.blocks.blockPortalVoid.getDefaultState();
+            return p_150857_1_.getMaterial() == Material.air || p_150857_1_ == voidCraft.blocks.fireVoid || p_150857_1_ == voidCraft.blocks.blockPortalVoid;
         }
 
         public boolean func_150860_b()

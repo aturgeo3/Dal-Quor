@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import Tamaized.Voidcraft.common.voidCraft;
 
@@ -17,18 +18,16 @@ public class BlockVoidcrystal extends BasicVoidBlock {
 	* Is this block (a) opaque and (B) a full 1m cube? This determines whether or not to render the shared face of two
 	* adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	*/
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube(){
 	return false;
 	}
 	
-	public int getRenderBlockPass()
-    {
+	public int getRenderBlockPass(){
         return 1;
     }
 	
-	public Item getItemDropped(int par1, Random par2Random, int par3)
-    {
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune){
 		return voidCraft.items.voidcrystal;
     }
 	

@@ -78,7 +78,8 @@ public class OreVoidcrystal extends BasicVoidBlock {
         return EnumWorldBlockLayer.CUTOUT;
     }
 	
-	public Item getItemDropped(int par1, Random par2Random, int par3){
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune){
 		return voidCraft.items.voidcrystal;
 	}
 	

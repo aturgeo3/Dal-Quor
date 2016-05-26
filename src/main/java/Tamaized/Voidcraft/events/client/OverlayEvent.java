@@ -21,8 +21,8 @@ import Tamaized.Voidcraft.handlers.PortalDataHandler;
 
 public class OverlayEvent {
 	
-	private static final String texture_void = (voidCraft.modid+":blocks/blockPortalVoid.png");
-	private static final String texture_xia = (voidCraft.modid+":blocks/blockPortalXia.png");
+	private static final String texture_void = (voidCraft.modid+":blocks/blockPortalVoid");
+	private static final String texture_xia = (voidCraft.modid+":blocks/blockPortalXia");
 	
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e){
@@ -41,7 +41,9 @@ public class OverlayEvent {
 		        GlStateManager.color(1.0F, 1.0F, 1.0F, j);
 		        mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
 		        
-		        TextureAtlasSprite textureatlassprite = mc.getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getTextureMap().getAtlasSprite(type == PortalDataHandler.PORTAL_XIA ?  texture_xia : texture_void);
+		        TextureAtlasSprite textureatlassprite = mc.getBlockRendererDispatcher().getBlockModelShapes().getModelManager().getTextureMap().getAtlasSprite(
+		        		type == PortalDataHandler.PORTAL_XIA ?  texture_xia : texture_void
+		        		);
 		        float f = textureatlassprite.getMinU();
 		        float f1 = textureatlassprite.getMinV();
 		        float f2 = textureatlassprite.getMaxU();
