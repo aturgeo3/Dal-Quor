@@ -15,4 +15,10 @@ public class BasicVoidBlockHalfSlab extends BasicVoidBlockSlab {
 		return false;
 	}
 
+	@Override
+	public Comparable<?> getTypeForItem(ItemStack stack) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

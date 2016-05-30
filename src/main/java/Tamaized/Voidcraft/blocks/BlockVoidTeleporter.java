@@ -2,23 +2,24 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
+import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.registry.IBasicVoid;
 
 public abstract class BlockVoidTeleporter extends BlockBreakable implements IBasicVoid{
 	
@@ -26,7 +27,7 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
 	
 	public BlockVoidTeleporter(String n, boolean hasAxis) {
-		super(Material.PORTAL, false);
+		super(Material.portal, false);
         if(hasAxis) this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 		this.setTickRandomly(true);
 		this.setLightLevel(0.75F);
@@ -60,8 +61,8 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
      * Override this and return 'new BlockState(this, new IProperty[0])' if hasAxis is false
      */
     @Override
-    protected BlockStateContainer createBlockState(){
-        return  new BlockStateContainer(this, new IProperty[] {AXIS});
+    protected BlockState createBlockState(){
+        return  new BlockState(this, new IProperty[] {AXIS});
     }
     
     public static int getMetaForAxis(EnumFacing.Axis axis){
@@ -74,6 +75,16 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
 		super.updateTick(par1World, pos, state, par5Random);
+		if (par1World.provider.isSurfaceWorld()) {
+			int l;
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			for (l = y; !par1World.doesBlockHaveSolidTopSurface(par1World, new BlockPos(x, l, z)) && l > 0; --l) {
+				;
+			}
+			if (l > 0 && !par1World.isBlockNormalCube(new BlockPos(x, l + 1, z), false)) { } //Prevent pigmen from spawning
+		}
 	}
 
 	/**
@@ -81,9 +92,16 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 	 * box can change after the pool has been cleared to be reused)
 	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
-		return NULL_AABB;
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+		return null;
 	}
+
+	/**
+	 * Updates the blocks bounds based on its current state. Args: world, x, y,
+	 * z
+	 */
+	@Override
+	public abstract void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos);
 
 	/**
 	 * Is this block (a) opaque and (B) a full 1m cube? This determines whether
@@ -91,7 +109,7 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 	 * the player can attach torches, redstone wire, etc to this block.
 	 */
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
@@ -103,18 +121,14 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 	public abstract boolean tryToCreatePortal(World par1World, BlockPos pos);
 
 	@Override
-	public void func_189540_a(IBlockState p_189540_1_, World p_189540_2_, BlockPos p_189540_3_, Block p_189540_4_){
-		onNeighborBlockChange(p_189540_1_, p_189540_2_, p_189540_3_, p_189540_4_);
-	};
-
-	public abstract void onNeighborBlockChange(IBlockState p_189540_1_, World p_189540_2_, BlockPos p_189540_3_, Block p_189540_4_);
+	public abstract void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock);
 
 	/**
 	 * A randomly called display update to be able to add particles or other items for display
 	 */
 	@SideOnly(Side.CLIENT)
 	@Override
-	public abstract void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand);
+	public abstract void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand);
 
 	/**
 	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
@@ -122,7 +136,7 @@ public abstract class BlockVoidTeleporter extends BlockBreakable implements IBas
 	 */
 	@SideOnly(Side.CLIENT)
 	@Override
-	public abstract boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side);
+	public abstract boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side);
 
 	/**
 	 * Returns the quantity of items to drop on block destruction.

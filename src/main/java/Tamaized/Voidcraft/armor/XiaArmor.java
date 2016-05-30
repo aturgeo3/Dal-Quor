@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +20,7 @@ public class XiaArmor extends BasicVoidArmor {
 
 	public static List<String> playersWithFlight = new ArrayList();
 	
-	public XiaArmor(ArmorMaterial armorMaterial, int par3, int par4, String type, String n) {
+	public XiaArmor(ArmorMaterial armorMaterial, int par3, EntityEquipmentSlot par4, String type, String n) {
 		super(armorMaterial, par3, par4, type, n);
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(this);
@@ -29,8 +30,8 @@ public class XiaArmor extends BasicVoidArmor {
 	//Thanks to Vazkii's Botania Mod Source for this part
 	@SubscribeEvent
 	public void updatePlayerFlyStatus(LivingUpdateEvent event) {
-		if(event.entityLiving instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
+		if(event.getEntityLiving() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 
 			if(playersWithFlight.contains(playerStr(player))) {
 				if(shouldPlayerHaveFlight(player)) { //Keeps the Flight on
@@ -64,7 +65,7 @@ public class XiaArmor extends BasicVoidArmor {
 	}
 
 	private boolean shouldPlayerHaveFlight(EntityPlayer player) {
-		ItemStack armor = player.getEquipmentInSlot(3);
+		ItemStack armor = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 		return armor != null && armor.getItem() == this;
 	}
 

@@ -15,4 +15,9 @@ public class BasicVoidBlockDoubleSlab extends BasicVoidBlockSlab {
 		return true;
 	}
 
+	@Override
+	public Comparable<?> getTypeForItem(ItemStack stack) {
+		return null;
+	}
+
 }

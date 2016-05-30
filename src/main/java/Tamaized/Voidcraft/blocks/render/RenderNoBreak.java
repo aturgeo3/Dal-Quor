@@ -8,13 +8,11 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderNoBreak extends TileEntitySpecialRenderer {
 	
@@ -100,7 +98,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer {
             f9 = f8 + (float)ActiveRenderInfo.getPosition().yCoord;
             GlStateManager.translate((float)ActiveRenderInfo.getPosition().xCoord * f5 / f9, (float)ActiveRenderInfo.getPosition().zCoord * f5 / f9, -f2);
             Tessellator tessellator = Tessellator.getInstance();
-            WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+            VertexBuffer worldrenderer = tessellator.getBuffer();
             worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
             float f12 = field_147527_e.nextFloat() * 0.5F + 0.1F;
             float f13 = field_147527_e.nextFloat() * 0.5F + 0.4F;

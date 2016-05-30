@@ -4,10 +4,11 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,11 +54,6 @@ public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid
 	}
 
 	@Override
-	public Object getVariant(ItemStack stack) {
-		return false;
-	}
-	
-	@Override
     public final IBlockState getStateFromMeta(final int meta) {
         IBlockState blockState = this.getDefaultState();
         blockState = blockState.withProperty(VARIANT_PROPERTY, false);
@@ -87,17 +83,10 @@ public abstract class BasicVoidBlockSlab extends BlockSlab implements IBasicVoid
         return GameRegistry.findItem("voidcraft", blockId);
     }
 	
-	@SideOnly(Side.CLIENT)
-    @Override
-    public final net.minecraft.item.Item getItem(final net.minecraft.world.World world, final net.minecraft.util.BlockPos blockPos) {
-        String blockId = this.innerGetId(false);
-        return GameRegistry.findItem("voidcraft", blockId);
-    }
-	
 	@Override
-    protected final BlockState createBlockState() {
-		if(isDouble()) return new BlockState(this, new IProperty[] {VARIANT_PROPERTY});
-		else return new BlockState(this, new IProperty[] {VARIANT_PROPERTY, HALF});
+    protected final BlockStateContainer createBlockState() {
+		if(isDouble()) return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY});
+		else return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY, HALF});
 	}
 	
 	private String innerGetId(final boolean isDoubleStacked) {
