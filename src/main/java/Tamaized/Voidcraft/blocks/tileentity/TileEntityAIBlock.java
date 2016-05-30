@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -72,7 +72,7 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	
 	private void sendPacketToClients(){
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
+		this.func_189515_b(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -83,9 +83,9 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	        outputStream.writeInt(this.pos.getZ());
 	        outputStream.writeInt(this.state);
 	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 50.0D);
+		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 50.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.getDescriptionPacket();
+		    this.func_189518_D_();
 		    this.markDirty();
 		    bos.close();
 	    }catch (IOException e) {
@@ -95,26 +95,29 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	}
 	
 	@Override
-	public Packet getDescriptionPacket(){	
+	public SPacketUpdateTileEntity func_189518_D_(){	
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
+		this.func_189515_b(nbt);
 		nbt.setInteger("state", state);
-		return new S35PacketUpdateTileEntity(pos, 2, nbt);
+		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 	
 	@Override
-	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
+	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
 		readFromNBT(packet.getNbtCompound());
 	}
-	
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		state = nbt.getInteger("state");
 	}
 	
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+	@Override
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
 		nbt.setInteger("state", state);
+		return nbt;
 	}
 
 }

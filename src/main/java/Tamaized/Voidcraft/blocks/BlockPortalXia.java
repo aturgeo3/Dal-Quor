@@ -4,11 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,29 +41,9 @@ public class BlockPortalXia extends BlockVoidTeleporter {
      * Override this and return 'new BlockState(this, new IProperty[0])' if hasAxis is false
      */
     @Override
-    protected BlockState createBlockState(){
-        return  new BlockState(this, new IProperty[0]);
+    protected BlockStateContainer createBlockState(){
+        return  new BlockStateContainer(this, new IProperty[0]);
     }
-	
-	/**
-	* Updates the blocks bounds based on its current state. Args: world, x, y, z
-	*/
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos){
-		float f;
-		float f1;
-		if(worldIn.getBlockState(pos.add(-1, 0, 0)).getBlock() != this && worldIn.getBlockState(pos.add(1, 0, 0)).getBlock() != this){
-			f = 0.125F;
-			f1 = 0.5F;
-			//this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
-			this.setBlockBounds(0.0F, 0.3F, 0.0F, 1.0F, 0.6F, 1.0F);
-		}else{
-			f = 0.5F;
-			f1 = 0.125F;
-			//this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
-			this.setBlockBounds(0.0F, 0.3F, 0.0F, 1.0F, 0.6F, 1.0F);
-		}
-	}
-
 	
 	public boolean tryToCreatePortal(World par1World, BlockPos pos){
         byte b0 = 0;
@@ -124,7 +103,7 @@ public class BlockPortalXia extends BlockVoidTeleporter {
     }
 	
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock){
+	public void onNeighborBlockChange(IBlockState state, World world, BlockPos pos, Block neighborBlock){
         byte b0 = 0;
         byte b1 = 1;
 
@@ -184,7 +163,7 @@ public class BlockPortalXia extends BlockVoidTeleporter {
      */
 	@SideOnly(Side.CLIENT)
 	@Override
-    public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand){
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand){
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -200,7 +179,7 @@ public class BlockPortalXia extends BlockVoidTeleporter {
             d4 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
             d5 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
 
-            if (world.getBlockState(pos.add(-1, 0, 0)).getBlock() != this && world.getBlockState(pos.add(1, 0, 0)).getBlock() != this)
+            if (worldIn.getBlockState(pos.add(-1, 0, 0)).getBlock() != this && worldIn.getBlockState(pos.add(1, 0, 0)).getBlock() != this)
             {
                 d0 = (double)x + 0.5D + 0.25D * (double)i1;
                 d3 = (double)(rand.nextFloat() * 2.0F * (float)i1);
@@ -217,7 +196,7 @@ public class BlockPortalXia extends BlockVoidTeleporter {
     }
 
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side){
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side){
 		return true;
 	}
 	

@@ -1,17 +1,13 @@
 package Tamaized.Voidcraft.blocks;
 
-import java.util.Random;
-
-import net.minecraft.block.BlockFire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
@@ -25,7 +21,7 @@ public class FireVoid extends BasicVoidBlockFire{
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)){
-			if(!world.doesBlockHaveSolidTopSurface(world, pos.add(0, -1, 0)) && !this.canNeighborBurn(world, pos)){
+			if(!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborBurn(world, pos)){
 				world.setBlockToAir(pos);
 			}else{
 				world.scheduleUpdate(pos, this, this.tickRate(world) + world.rand.nextInt(10));

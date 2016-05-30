@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.mobs.ai.handler;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public interface IHandlerAI {
 	

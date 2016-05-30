@@ -2,16 +2,14 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.registry.IBasicVoid;
 import net.minecraft.block.BlockFire;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 
 public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid{
 
@@ -27,9 +25,16 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 	public String getName() {
 		return name;
 	}
+
+	private boolean canNeighborCatchFire(World worldIn, BlockPos pos){
+		for (EnumFacing enumfacing : EnumFacing.values()){
+			if (this.canCatchFire(worldIn, pos.offset(enumfacing), enumfacing.getOpposite())){
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	protected  abstract boolean canNeighborBurn(World par1World, BlockPos pos);
-	 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand){
 		if (world.getGameRules().getBoolean("doFireTick")){
@@ -51,8 +56,8 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 
 				world.scheduleUpdate(pos, this, this.tickRate(world) + rand.nextInt(10));
 
-				if (!flag && !this.canNeighborBurn(world, pos)){
-					if (!World.doesBlockHaveSolidTopSurface(world, pos.add(0, -1, 0)) || l > 3){
+				if (!flag && !this.canNeighborCatchFire(world, pos)){
+					if (!world.isSideSolid(pos.down(), EnumFacing.UP) || l > 3){
 						if(!(world.getBlockState(pos.add(0, -1, 0)).getBlock() instanceof BlockVoidcrystal)) world.setBlockToAir(pos);
 					}
 				}else if (!flag && !this.canCatchFire(world, pos.add(0, -1, 0), EnumFacing.UP) && l == 15 && rand.nextInt(4) == 0){
@@ -117,7 +122,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 		int j1 = world.getBlockState(pos).getBlock().getFlammability(world, pos, face);
 		
 		if (rand.nextInt(chance) < j1){
-			boolean flag = world.getBlockState(pos).getBlock() == Blocks.tnt;
+			boolean flag = world.getBlockState(pos).getBlock() == Blocks.TNT;
 			
 			if (rand.nextInt(age + 10) < 5 && !this.canDie(world, pos)){
 				int k1 = age + rand.nextInt(5) / 4;
@@ -132,7 +137,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 			}	
 
 			if (flag){
-				Blocks.tnt.onBlockDestroyedByPlayer(world, pos, Blocks.tnt.getStateFromMeta(1));
+				Blocks.TNT.onBlockDestroyedByPlayer(world, pos, Blocks.TNT.getStateFromMeta(1));
 			}
 		}
 	}
