@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.common;
 
 import java.util.ArrayList;
 
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -203,12 +204,9 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 3, this, 128, 1, true);
 
 		//Dimension
-		DimensionManager.registerProviderType(dimensionIdVoid, WorldProviderVoid.class, false);
-		DimensionManager.registerDimension(dimensionIdVoid, dimensionIdVoid);
+		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));
+		DimensionManager.registerDimension(dimensionIdXia, DimensionType.register("???", "_xia", dimensionIdXia, WorldProviderXia.class, false));
 		
-		DimensionManager.registerProviderType(dimensionIdXia, WorldProviderXia.class, false);
-		DimensionManager.registerDimension(dimensionIdXia, dimensionIdXia);
-
 		// World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		
