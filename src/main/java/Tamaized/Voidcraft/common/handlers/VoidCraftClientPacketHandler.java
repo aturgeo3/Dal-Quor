@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
@@ -32,8 +32,8 @@ public class VoidCraftClientPacketHandler{
 	public void onClientPacket(ClientCustomPacketEvent event) {
 		try {
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ByteBufInputStream bbis = new ByteBufInputStream(event.packet.payload());
-			processPacketOnClient(event.packet.payload(), Side.CLIENT);
+			ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
+			processPacketOnClient(event.getPacket().payload(), Side.CLIENT);
 			bbis.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class VoidCraftClientPacketHandler{
 		        	TileEntityVoidMacerator tet = (TileEntityVoidMacerator)te;
 		        	tet.burnTime = burnTime;
 		        	tet.cookTime = cookTime;
-		        	theWorld.markBlockForUpdate(te.getPos());
+		        	te.markDirty();
 		        }
 		        
 		        if(te instanceof TileEntityHeimdall){
@@ -71,7 +71,7 @@ public class VoidCraftClientPacketHandler{
 		    		TileEntityHeimdall tet = (TileEntityHeimdall)te;
 		        	tet.burnTime = burnTime;
 		        	tet.cookTime = cookTime;
-		        	theWorld.markBlockForUpdate(te.getPos());
+		        	te.markDirty();
 		        }
 		        
 		        if(te instanceof TileEntityVoidInfuser){
@@ -82,7 +82,7 @@ public class VoidCraftClientPacketHandler{
 		    		TileEntityVoidInfuser tet = (TileEntityVoidInfuser)te;
 		        	tet.burnTime = burnTime;
 		        	tet.cookTime = cookTime;
-		        	theWorld.markBlockForUpdate(te.getPos());
+		        	te.markDirty();
 		        }
 		        
 		        if(te instanceof TileEntityAIBlock){
@@ -90,7 +90,7 @@ public class VoidCraftClientPacketHandler{
 		        	int state = bbis.readInt();
 		        	TileEntityAIBlock tet = (TileEntityAIBlock)te;
 		        	tet.state = state;
-		        	theWorld.markBlockForUpdate(te.getPos());
+		        	te.markDirty();
 		        }
 			}
 			else if(pktType == TYPE_VOIDBOX_UPDATE){
@@ -107,7 +107,7 @@ public class VoidCraftClientPacketHandler{
 				vbox.maxLoopTime = bbis.readInt();
 				vbox.loop = bbis.readBoolean();
 				vbox.autoFill = bbis.readBoolean();
-				theWorld.markBlockForUpdate(vbox.getPos());
+				vbox.markDirty();
 			}
 			bbis.close();   
 		}

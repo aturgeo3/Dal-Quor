@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,10 +26,10 @@ public class VoidCraftServerPacketHandler {
 	public void onServerPacket(ServerCustomPacketEvent event) {
 		try {
 			
-		EntityPlayerMP player = ((NetHandlerPlayServer)event.handler).playerEntity;
-		ByteBufInputStream bbis = new ByteBufInputStream(event.packet.payload());
+		EntityPlayerMP player = ((NetHandlerPlayServer)event.getHandler()).playerEntity;
+		ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
 		
-		processPacketOnServer(event.packet.payload(), Side.SERVER, player);
+		processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
 		
 		bbis.close();
 			

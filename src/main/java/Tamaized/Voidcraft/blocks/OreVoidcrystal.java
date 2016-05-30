@@ -5,15 +5,15 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,24 +34,19 @@ public class OreVoidcrystal extends BasicVoidBlock {
 	}
 	
 	@Override
-    public boolean isOpaqueCube(){
+    public boolean isOpaqueCube(IBlockState state){
 		return false;
 	}
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		if(world.provider.getDimensionId() == voidCraft.dimensionIdVoid && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
-		else if(world.provider.getDimensionId() != voidCraft.dimensionIdVoid && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
+		if(world.provider.getDimension() == voidCraft.dimensionIdVoid && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
+		else if(world.provider.getDimension() != voidCraft.dimensionIdVoid && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
 	}
 	
 	@Override
-	protected BlockState createBlockState(){
-		return new BlockState(this, new IProperty[]{VOID});
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public IBlockState getStateForEntityRender(IBlockState state){
-		return this.getDefaultState().withProperty(VOID, false);
+	protected BlockStateContainer createBlockState(){
+		return new BlockStateContainer(this, new IProperty[]{VOID});
 	}
 	
 	/**
@@ -68,15 +63,14 @@ public class OreVoidcrystal extends BasicVoidBlock {
 	}
 	
 	@Override
-	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side){
+	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side){
 		return true;
 	}
 	
 	@SideOnly(Side.CLIENT)
-    public EnumWorldBlockLayer getBlockLayer()
-    {
-        return EnumWorldBlockLayer.CUTOUT;
-    }
+	public BlockRenderLayer getBlockLayer(){
+		return BlockRenderLayer.CUTOUT;
+	}
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune){
@@ -88,7 +82,7 @@ public class OreVoidcrystal extends BasicVoidBlock {
 	}
 	
 	@Override
-	public boolean canEntityDestroy(IBlockAccess world, BlockPos pos, Entity entity){
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity){
 		if (entity instanceof EntityDragon) return false;        
 		return true;
 	}

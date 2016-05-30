@@ -21,7 +21,7 @@ public class FireVoid extends BasicVoidBlockFire{
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() != voidCraft.blocks.blockVoidcrystal || !((BlockVoidTeleporter) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)){
-			if(!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborBurn(world, pos)){
+			if(!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(world, pos)){
 				world.setBlockToAir(pos);
 			}else{
 				world.scheduleUpdate(pos, this, this.tickRate(world) + world.rand.nextInt(10));
@@ -31,21 +31,22 @@ public class FireVoid extends BasicVoidBlockFire{
 		}
 	}
 	
-	public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity entity) {
-		if(entity instanceof EntityLivingBase && !(entity instanceof EntityVoidMob)){
-			if(entity instanceof EntitySkeleton){
-				EntitySkeleton skelly = (EntitySkeleton) entity;
-				if(Integer.valueOf(skelly.getDataWatcher().getWatchableObjectByte(13))==1) return;
+	@Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if(entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)){
+			if(entityIn instanceof EntitySkeleton){
+				EntitySkeleton skelly = (EntitySkeleton) entityIn;
+				if(skelly.getSkeletonType() == 1) return;
 			}
-			EntityLivingBase e = ((EntityLivingBase) entity);
-			e.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 60, 1));
-			e.addPotionEffect(new PotionEffect(Potion.wither.getId(), 60, 1));
-			e.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 60, 1));
+			EntityLivingBase e = ((EntityLivingBase) entityIn);
+			e.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 60, 1)); //nausea
+			e.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 60, 1)); //wither
+			e.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 60, 1)); //blind
 		}
 	}
 
 	@Override
-	protected boolean canNeighborBurn(World par1World, BlockPos pos) {
+	protected boolean canNeighborCatchFire(World worldIn, BlockPos pos){
 		return false;
 	}
 }

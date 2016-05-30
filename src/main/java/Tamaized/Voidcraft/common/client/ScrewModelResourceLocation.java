@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.common.client;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import Tamaized.Voidcraft.common.voidCraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 
 public class ScrewModelResourceLocation extends ModelResourceLocation {
 

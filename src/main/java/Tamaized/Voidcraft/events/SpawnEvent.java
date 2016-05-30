@@ -13,10 +13,10 @@ public class SpawnEvent {
 	
 	@SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event){
-		if(!event.world.isRemote && event.world.provider.getDimensionId() == voidCraft.dimensionIdVoid) {
-	    	if(event.entity instanceof EntityLivingBase && !(event.entity instanceof EntityPlayer || event.entity instanceof EntityVoidMob || event.entity instanceof EntityVoidBossMob || event.entity instanceof EntityVoidNPC)){
+		if(!event.getWorld().isRemote && event.getWorld().provider.getDimension() == voidCraft.dimensionIdVoid) {
+	    	if(event.getEntity() instanceof EntityLivingBase && !(event.getEntity() instanceof EntityPlayer || event.getEntity() instanceof EntityVoidMob || event.getEntity() instanceof EntityVoidBossMob || event.getEntity() instanceof EntityVoidNPC)){
 	    		event.setCanceled(true);
-	    		System.out.println(event.entity.getClass());
+	    		System.out.println(event.getEntity().getClass());
 	    	}
 	    }
 	}

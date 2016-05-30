@@ -26,7 +26,7 @@ public abstract class BasicVoidBlockFire extends BlockFire implements IBasicVoid
 		return name;
 	}
 
-	private boolean canNeighborCatchFire(World worldIn, BlockPos pos){
+	protected boolean canNeighborCatchFire(World worldIn, BlockPos pos){
 		for (EnumFacing enumfacing : EnumFacing.values()){
 			if (this.canCatchFire(worldIn, pos.offset(enumfacing), enumfacing.getOpposite())){
 				return true;

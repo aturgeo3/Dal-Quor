@@ -11,8 +11,8 @@ public class DebugEvent {
 	@SubscribeEvent
 	public void drawDebugText(RenderGameOverlayEvent.Text e){
 		
-		e.left.add(textL);
-		e.right.add(textR);
+		e.getLeft().add(textL);
+		e.getRight().add(textR);
 	}
 
 }

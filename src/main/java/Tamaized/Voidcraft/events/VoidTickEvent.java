@@ -9,14 +9,15 @@ import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.S07PacketRespawn;
-import net.minecraft.network.play.server.S1DPacketEntityEffect;
+import net.minecraft.network.play.server.SPacketEntityEffect;
+import net.minecraft.network.play.server.SPacketPlayerAbilities;
+import net.minecraft.network.play.server.SPacketRespawn;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
@@ -42,7 +43,7 @@ public class VoidTickEvent {
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;
 					player.sendPlayerAbilities();
-					player.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+					player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
 				}
 			}
 		}
@@ -139,26 +140,28 @@ public class VoidTickEvent {
         }
 	}
 	
-	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP p_72356_1_, int p_72356_2_, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
-		int j = p_72356_1_.dimension;
-		WorldServer worldserver = mcServer.worldServerForDimension(p_72356_1_.dimension);
-		p_72356_1_.dimension = p_72356_2_;
-		WorldServer worldserver1 = mcServer.worldServerForDimension(p_72356_1_.dimension);
-		p_72356_1_.playerNetServerHandler.sendPacket(new S07PacketRespawn(p_72356_1_.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), p_72356_1_.theItemInWorldManager.getGameType())); // Forge: Use new dimensions information
-		worldserver.removePlayerEntityDangerously(p_72356_1_);
-		p_72356_1_.isDead = false;
-		transferEntityToWorld(p_72356_1_, j, worldserver, worldserver1, teleporter);
-		mcServer.getConfigurationManager().preparePlayer(p_72356_1_, worldserver);
-		p_72356_1_.playerNetServerHandler.setPlayerLocation(p_72356_1_.posX, p_72356_1_.posY, p_72356_1_.posZ, p_72356_1_.rotationYaw, p_72356_1_.rotationPitch);
-		p_72356_1_.theItemInWorldManager.setWorld(worldserver1);
-		mcServer.getConfigurationManager().updateTimeAndWeatherForPlayer(p_72356_1_, worldserver1);
-		mcServer.getConfigurationManager().syncPlayerInventory(p_72356_1_);
-		Iterator iterator = p_72356_1_.getActivePotionEffects().iterator();
+	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
+		int j = player.dimension;
+		WorldServer worldserver = mcServer.worldServerForDimension(player.dimension);
+		player.dimension = dimId;
+		WorldServer worldserver1 = mcServer.worldServerForDimension(player.dimension);
+		player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType())); // Forge: Use new dimensions information
+		mcServer.getPlayerList().updatePermissionLevel(player);
+		worldserver.removeEntityDangerously(player);
+		player.isDead = false;
+		transferEntityToWorld(player, j, worldserver, worldserver1, teleporter);
+		mcServer.getPlayerList().preparePlayer(player, worldserver);
+		player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
+		player.interactionManager.setWorld(worldserver1);
+        player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
+		mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
+		mcServer.getPlayerList().syncPlayerInventory(player);
+		Iterator iterator = player.getActivePotionEffects().iterator();
 		while (iterator.hasNext()){
 			PotionEffect potioneffect = (PotionEffect)iterator.next();
-			p_72356_1_.playerNetServerHandler.sendPacket(new S1DPacketEntityEffect(p_72356_1_.getEntityId(), potioneffect));
+			player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
 		}
-		FMLCommonHandler.instance().firePlayerChangedDimensionEvent(p_72356_1_, j, p_72356_2_);
+		FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, j, dimId);
 	}
 	
 	private void transferEntityToWorld(Entity p_82448_1_, int p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
