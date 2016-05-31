@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.machina;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -14,11 +16,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,39 +36,39 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 
 	public VoidInfuser(String string) {
-		super(Material.iron, string);
+		super(Material.IRON, string);
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
-	@Override
-	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity) {
-		this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
-		super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
-		this.setBlockBoundsForItemRender();
-		super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
-	}
+	//@Override
+	//public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
+		//this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
+	//	super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+	//	this.setBlockBoundsForItemRender();
+	//	super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
+	//}
 
 	/**
 	 * Sets the block's bounds for rendering it as an item
 	 */
-	@Override
-	public void setBlockBoundsForItemRender() {
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	}
+	//@Override
+	//public void setBlockBoundsForItemRender() {
+	//	this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	//}
 
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(world.isRemote){
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if(worldIn.isRemote){
 			return true;
 		}else{
-			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdInfuser, world, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, voidCraft.guiIdInfuser, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}
@@ -154,8 +158,8 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 	}
 	
 	@Override
-	public int getRenderType(){
-        return 3;
+	public EnumBlockRenderType getRenderType(IBlockState state){
+        return EnumBlockRenderType.MODEL;
     }
 
 	@SideOnly(Side.CLIENT)
@@ -163,44 +167,24 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 	 * A randomly called display update to be able to add particles or other items for display
 	 */
 	@Override
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		double d0 = (double) ((float) pos.getX() + 0.4F + rand.nextFloat() * 0.2F);
 		double d1 = (double) ((float) pos.getY() + 0.0F + rand.nextFloat() * 0.3F);
 		double d2 = (double) ((float) pos.getZ() + 0.4F + rand.nextFloat() * 0.2F);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.0D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.0D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 1.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, -1.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.0D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.0D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 1.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, -1.0D);
 
 		d0 = (double) ((float) pos.getX() + 0.4F + rand.nextFloat() * 0.2F);
 		d1 = (double) ((float) pos.getY() + 0.0F + rand.nextFloat() * 0.3F);
 		d2 = (double) ((float) pos.getZ() + 0.4F + rand.nextFloat() * 0.2F);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.0D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.0D, 0.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 1.0D);
-		world.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, -1.0D);
-	}
-
-	/**
-	 * If this returns true, then comparators facing away from this block will
-	 * use the value from getComparatorInputOverride instead of the actual
-	 * redstone signal strength.
-	 */
-	@Override
-	public boolean hasComparatorInputOverride() {
-		return true;
-	}
-
-	/**
-	 * If hasComparatorInputOverride returns true, the return value from this is
-	 * used instead of the redstone signal strength when this block inputs to a
-	 * comparator.
-	 */
-	@Override
-	public int getComparatorInputOverride(World world, BlockPos pos) {
-		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.0D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.0D, 0.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 1.0D);
+		worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, -1.0D);
 	}
 
 	@Override

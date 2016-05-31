@@ -15,14 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -200,7 +199,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 					
 					if(this.slots[1] != null){
 						this.slots[1].stackSize--;
-						this.slots[1] = new ItemStack(Items.bucket);
+						this.slots[1] = new ItemStack(Items.BUCKET);
 						
 						if(this.slots[1].stackSize == 0){
 							this.slots[1] = this.slots[1].getItem().getContainerItem(this.slots[1]);
@@ -237,7 +236,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		}
 		
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
+		this.func_189515_b(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -254,10 +253,10 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	               
 	    FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 
-	    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
+	    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
 	    //if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-	    this.getDescriptionPacket();
+	    this.func_189518_D_();
 		 try {
 			bos.close();
 		} catch (IOException e) {
@@ -266,14 +265,11 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	}
 	
 	@Override
-	public Packet getDescriptionPacket()
-	{
+	public SPacketUpdateTileEntity func_189518_D_(){
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.func_189515_b(nbt);
 		
-
-	 NBTTagCompound nbt = new NBTTagCompound();
-	 this.writeToNBT(nbt);
-	 
-	 nbt.setInteger("burnTime",  this.burnTime);
+		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
 		
@@ -293,12 +289,11 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		if(this.isInvNameLocalized()){
 			nbt.setString("CustomName", this.localizedName);
 		}
-		
-	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
+		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
-	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
+	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
 	 readFromNBT(packet.getNbtCompound());
 	}
 
@@ -378,7 +373,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
-		return i == 2 || itemstack == new ItemStack(Items.bucket);
+		return i == 2 || itemstack == new ItemStack(Items.BUCKET);
 	}
 
 	public int getBurnTimeRemainingScaled(int i) {
@@ -394,8 +389,8 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	
 	
 	
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
 		
 		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
@@ -417,6 +412,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		if(this.isInvNameLocalized()){
 			nbt.setString("CustomName", this.localizedName);
 		}
+		return nbt;
 	}
 
 	@Override
@@ -541,12 +537,8 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
+	public ITextComponent getDisplayName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-
-	
 }

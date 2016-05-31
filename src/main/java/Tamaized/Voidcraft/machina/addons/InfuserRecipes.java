@@ -30,9 +30,9 @@ public class InfuserRecipes {
     }
 
     private InfuserRecipes(){
-    	this.addSmelting(new ItemStack(Blocks.furnace).getItem(), new ItemStack(voidCraft.blocks.voidMacerator), 0);
+    	this.addSmelting(new ItemStack(Blocks.FURNACE).getItem(), new ItemStack(voidCraft.blocks.voidMacerator), 0);
     	this.addSmelting(new ItemStack(voidCraft.tools.archSword).getItem(), new ItemStack(voidCraft.tools.demonSword), 0);
-    	this.addSmelting(new ItemStack(Blocks.beacon).getItem(), new ItemStack(voidCraft.blocks.Heimdall), 0);
+    	this.addSmelting(new ItemStack(Blocks.BEACON).getItem(), new ItemStack(voidCraft.blocks.Heimdall), 0);
     }
     
     private void addPreSmelting(String s, Item i){

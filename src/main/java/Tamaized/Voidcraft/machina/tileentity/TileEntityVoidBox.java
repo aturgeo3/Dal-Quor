@@ -17,11 +17,11 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
@@ -104,7 +104,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 		if(this.slots[i] != null){
 			return  this.slots[i].getItem();
 		}else{
-			return Items.snowball;
+			return Items.SNOWBALL;
 		}
 	}
 	
@@ -141,11 +141,11 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	 *   
      */
 	public void PlayTheSound(ItemStack itemStack){
-		if(itemStack != null){
-                //this.worldObj.setBlockMetadataWithNotify(pos.getX(), pos.getY(), pos.getZ(), 1, 2);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, pos, Item.getIdFromItem(itemStack.getItem()));
+		if(itemStack != null && itemStack.getItem() instanceof VoidRecord){
+			VoidRecord theRecord = (VoidRecord) itemStack.getItem();
+                this.worldObj.playRecord(getPos(), theRecord.getSound());
 		}else{
-			System.out.println("NULL SLOT DETECTED");
+			System.out.println("NULL/NON-VOID RECORD SLOT DETECTED");
 		}
 	}
 	
@@ -154,8 +154,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	 *   
      */
 	public void StopTheSound(){
-		//this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
-		this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1005, pos, 0);
+		this.worldObj.playRecord(getPos(), null);
 	}
 
 	@Override
@@ -259,7 +258,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	
 	private void sendPacketToClients(){
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
+		this.func_189515_b(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -279,9 +278,9 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	        outputStream.writeBoolean(this.loop);
 	        outputStream.writeBoolean(this.autoFill);
 	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
+		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.getDescriptionPacket();
+		    this.func_189518_D_();
 		    this.markDirty();
 		    bos.close();
 	    }catch (IOException e) {
@@ -290,14 +289,12 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 	
 	@Override
-	public Packet getDescriptionPacket(){
-		
-
-	 NBTTagCompound nbt = new NBTTagCompound();
-	 this.writeToNBT(nbt);
+	public SPacketUpdateTileEntity func_189518_D_(){
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.func_189515_b(nbt);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
 		
-	 NBTTagList list = new NBTTagList();
+		NBTTagList list = new NBTTagList();
 		
 		for(int i = 0; i < this.slots.length; i++){
 			if(this.slots[i] != null){
@@ -317,11 +314,11 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 			nbt.setString("CustomName", this.localizedName);
 		}
 		
-	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
+		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
-	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet){
+	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
 	 readFromNBT(packet.getNbtCompound());
 	}
 
@@ -351,8 +348,8 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
 		
 		NBTTagList list = new NBTTagList();
 		
@@ -373,6 +370,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 		if(this.isInvNameLocalized()){
 			nbt.setString("VoidBox", this.localizedName);
 		}
+		return nbt;
 	}
 
 	@Override
@@ -420,13 +418,8 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
+	public ITextComponent getDisplayName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-
-	
-
 }

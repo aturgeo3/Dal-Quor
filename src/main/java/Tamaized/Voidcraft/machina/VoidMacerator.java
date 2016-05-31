@@ -2,26 +2,28 @@ package Tamaized.Voidcraft.machina;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,7 +40,7 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 	
 	public VoidMacerator(String string){
-		super(Material.rock, string);
+		super(Material.ROCK, string);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, Boolean.valueOf(false)));
 	}
 	
@@ -52,8 +54,8 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	}
 	
 	@Override
-	protected BlockState createBlockState(){
-		return new BlockState(this, new IProperty[]{FACING, ACTIVE});
+	protected BlockStateContainer createBlockState(){
+		return new BlockStateContainer(this, new IProperty[]{FACING, ACTIVE});
 	}
 	
 	@Override
@@ -85,7 +87,7 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand){
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand){
 		if(state.getValue(ACTIVE)){
 			float x1 = (float) pos.getX() + 0.5F;
 			float y1 = (float) pos.getY() + rand.nextFloat(); 
@@ -129,13 +131,13 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 			Block block3 = world.getBlockState(pos.east()).getBlock();
 			EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
 			
-			if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock()){
+			if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state)){
 				enumfacing = EnumFacing.SOUTH;
-			}else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock()){
+			}else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state) && !block.isFullBlock(state)){
 				enumfacing = EnumFacing.NORTH;
-			}else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock()){
+			}else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state) && !block3.isFullBlock(state)){
 				enumfacing = EnumFacing.EAST;
-			}else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock()){
+			}else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state) && !block2.isFullBlock(state)){
 				enumfacing = EnumFacing.WEST;
 			}
 			
@@ -164,7 +166,7 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
 			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdMacerator, world, pos.getX(), pos.getY(), pos.getZ());
 		}
@@ -172,9 +174,9 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	}
 	
 	@Override
-	public int getRenderType(){
-		return 3;
-	}
+	public EnumBlockRenderType getRenderType(IBlockState state){
+        return EnumBlockRenderType.MODEL;
+    }
 	
 	@Override
 	public TileEntity createNewTileEntity(World arg0, int arg1) {
@@ -206,17 +208,8 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 		}
 	}
 	
-	public boolean hasComparatorInputOverride(){
-		return true;
-	}
-	
 	@Override
-	public int getComparatorInputOverride(World world, BlockPos pos){
-		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
-	}
-	
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos, EntityPlayer player){
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player){
 		return new ItemStack(voidCraft.blocks.voidMacerator);
 	}
 	

@@ -14,14 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -175,7 +174,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 		//Fill A Bucket
 		if(!this.worldObj.isRemote){
 			if(this.burnTime > 999){
-				if(this.slots[0] != null && this.slots[0].getItem() == Items.bucket){
+				if(this.slots[0] != null && this.slots[0].getItem() == Items.BUCKET){
 					this.burnTime-=1000; //Drain TileEntity Value of Fluid Amount
 					voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime)); //Drains Fluid Amount
 					this.slots[0].stackSize--;
@@ -329,7 +328,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 		//this.markDirty();
 		
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
+		this.func_189515_b(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -346,10 +345,10 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	               
 	    FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 
-	    TargetPoint point = new TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
+	    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
 	    //if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-	    this.getDescriptionPacket();
+	    this.func_189518_D_();
 		 try {
 			bos.close();
 		} catch (IOException e) {
@@ -358,14 +357,10 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	}
 	
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		
-
-	 NBTTagCompound nbt = new NBTTagCompound();
-	 this.writeToNBT(nbt);
-	 
-	 nbt.setInteger("burnTime",  this.burnTime);
+	public SPacketUpdateTileEntity func_189518_D_(){
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.func_189515_b(nbt);
+		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
 		
@@ -379,39 +374,31 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 				list.appendTag(nbtc);
 			}
 		}
-		
 		nbt.setTag("Items", list);
-		
 		if(this.isInvNameLocalized()){
 			nbt.setString("CustomName", this.localizedName);
 		}
-		
-	 return new S35PacketUpdateTileEntity(pos, 2, nbt);
+		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
 	@Override
-	public void onDataPacket(NetworkManager netManager, S35PacketUpdateTileEntity packet)
-	{
-	 readFromNBT(packet.getNbtCompound());
+	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
+		readFromNBT(packet.getNbtCompound());
 	}
-
-
-
-
-
+	
 	public boolean isBurning() {
 		return this.burnTime > 0;
 	}
-
+	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
 	}
-
+	
 	public static boolean isItemFuel(ItemStack itemstack) {
 		return getItemBurnTime(itemstack) > 0;
 	}
-
+	
 	public static int getItemBurnTime(ItemStack itemstack) {
 		if(itemstack == null){
 			return 0;
@@ -421,24 +408,23 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 			
 			if(item == voidCraft.fluids.voidBucket) return 1000;
 			
-			
 			return 0;
 		}
 	}
-
+	
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		return side.getIndex() == 0 ? slot : (side.getIndex() == 1 ? slot : slot);
 	}
-
+	
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, EnumFacing j) {
 		return this.isItemValidForSlot(i, itemstack);
 	}
-
+	
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
-		return j.getIndex() != 0 || i != 1 || itemstack == new ItemStack(Items.bucket);
+		return j.getIndex() != 0 || i != 1 || itemstack == new ItemStack(Items.BUCKET);
 	}
 
 	public int getBurnTimeRemainingScaled(int i) {
@@ -452,10 +438,9 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 		return this.cookTime * i / this.furnaceSpeed;
 	}
 	
-	
-	
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+	@Override
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
 		
 		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
@@ -477,6 +462,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 		if(this.isInvNameLocalized()){
 			nbt.setString("CustomName", this.localizedName);
 		}
+		return nbt;
 	}
 
 	@Override
@@ -588,10 +574,9 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
+	public ITextComponent getDisplayName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
 }

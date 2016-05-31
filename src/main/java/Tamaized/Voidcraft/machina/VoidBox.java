@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.machina;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,9 +13,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
@@ -26,38 +30,20 @@ public class VoidBox extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 
 	public VoidBox(String string) {
-		super(Material.iron, string);
+		super(Material.IRON, string);
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdBox, world, pos.getX(), pos.getY(), pos.getZ());
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
+		if(!worldIn.isRemote){
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, voidCraft.guiIdBox, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
 	
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock){
-		TileEntity te = world.getTileEntity(pos);
-		TileEntityVoidBox tileEntity;
-		if(te instanceof TileEntityVoidBox) tileEntity = (TileEntityVoidBox) te;
-		else return;
-		
-        if (!world.isRemote){
-        	if(tileEntity != null){
-        		if(world.isBlockIndirectlyGettingPowered(pos) > 0){
-        			tileEntity.isPowered = true;
-        		}else{
-        			tileEntity.isPowered = false;
-        		}
-        	}
-        }
-    }
-	
-	@Override
-	public int getRenderType(){
-        return 3;
+	public EnumBlockRenderType getRenderType(IBlockState state){
+        return EnumBlockRenderType.MODEL;
     }
 	
 	private void setDefaultDirection(World world, BlockPos pos){
