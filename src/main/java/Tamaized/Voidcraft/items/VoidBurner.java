@@ -1,11 +1,13 @@
 package Tamaized.Voidcraft.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 
@@ -19,19 +21,19 @@ public class VoidBurner extends BasicVoidItems{
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float x, float y, float z){
-		pos = pos.offset(side);
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
+		pos = pos.offset(facing);
 
-        if (!player.canPlayerEdit(pos, side, itemstack)){
-            return false;
+        if (!playerIn.canPlayerEdit(pos, facing, stack)){
+            return EnumActionResult.FAIL;
         }else{
-        	if(world.isAirBlock(pos)){
-            	world.playSoundEffect((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-            	world.setBlockState(pos, voidCraft.blocks.fireVoid.getDefaultState());
+        	if(worldIn.isAirBlock(pos)){
+        		worldIn.playSound(playerIn, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+            	worldIn.setBlockState(pos, voidCraft.blocks.fireVoid.getDefaultState());
             }
 
-            itemstack.damageItem(1, player);
-            return true;
+            stack.damageItem(1, playerIn);
+            return EnumActionResult.SUCCESS;
         }
 	}
 }

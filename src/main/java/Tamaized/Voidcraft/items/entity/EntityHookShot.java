@@ -9,12 +9,10 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,13 +39,11 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 	
 	public EntityHookShot(World p_i1753_1_){
 		super(p_i1753_1_);
-		this.renderDistanceWeight = 10.0D;
         this.setSize(0.5F, 0.5F);
     }
 	
     public EntityHookShot(World world, EntityPlayer player, float p_i1756_3_){
         super(world);
-        this.renderDistanceWeight = 10.0D;
         this.ignoreFrustumCheck = true;
         shootingEntity = player;
         lastItem = shootingEntity.inventory.currentItem;
@@ -108,13 +104,12 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 
 	@Override
 	protected void entityInit() {
-		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
 	}
 
 	/**
 	 * Called to update the entity's position/logic.
 	 */
-	public void onUpdate() {
+	public void onUpdate() {/*
 		ticksExisted++;
 		
 		if(shootingEntity == null){
@@ -286,7 +281,7 @@ public class EntityHookShot extends EntityFishHook implements IProjectile, IEnti
 			this.setPosition(this.posX, this.posY, this.posZ);
             this.doBlockCollisions();
 		}
-	}
+	*/}
 	
 	/**
      * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,

@@ -3,10 +3,7 @@ package Tamaized.Voidcraft.GUI.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.opengl.GL11;
 

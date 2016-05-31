@@ -10,17 +10,15 @@ import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
-import Tamaized.Voidcraft.items.entity.EntityHookShot;
 
 public class HookShot extends BasicVoidItems{
 	
@@ -38,7 +36,7 @@ public class HookShot extends BasicVoidItems{
         return true;
     }
 	
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){/*
 		player.setItemInUse(itemstack, 20*4);
 		if(world.isRemote) return itemstack;
 
@@ -52,7 +50,7 @@ public class HookShot extends BasicVoidItems{
 		world.spawnEntityInWorld(hook);
 		HookShot.handler.put(player, true);
 		return itemstack;	
-	}
+	*/return null;}
 	
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int count) { //Doesnt seem to be called server side so send a packet
 		int pktType = VoidCraftServerPacketHandler.TYPE_HOOKSHOT_STOP;
@@ -84,7 +82,7 @@ public class HookShot extends BasicVoidItems{
 	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_) {
-		p_77624_3_.add(EnumChatFormatting.AQUA + "Hold down right click in the Air to fire!");
+		p_77624_3_.add(TextFormatting.AQUA + "Hold down right click in the Air to fire!");
 	}
 
 }

@@ -10,6 +10,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,12 +33,12 @@ public class VoidRecord extends ItemRecord implements IBasicVoid{
 	
 	private final String name;
 
-	public VoidRecord(String par2Str, int t, String n) {
-		super(par2Str);
+	public VoidRecord(String par2Str, SoundEvent soundEvent, int t, String n) {
+		super(par2Str, soundEvent);
 		time = t;
 		this.recordName = par2Str;
 		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.MISC);
 		records.put(par2Str, this);
 		records.put("records." + par2Str, this);
 		name = n;

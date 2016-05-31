@@ -3,9 +3,8 @@ package Tamaized.Voidcraft.items;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidStar extends BasicVoidItems{
@@ -46,7 +45,7 @@ public class VoidStar extends BasicVoidItems{
 						int yCoord = MathHelper.floor_double(entityItem.posY+y);
 						int zCoord = MathHelper.floor_double(entityItem.posZ+z);
 						if(x!=0 || z!=0 || y!=0){
-							entityItem.worldObj.spawnEntityInWorld(new EntityLightningBolt(entityItem.worldObj, entityItem.posX+x, entityItem.posY, entityItem.posZ+z));
+							entityItem.worldObj.spawnEntityInWorld(new EntityLightningBolt(entityItem.worldObj, entityItem.posX+x, entityItem.posY, entityItem.posZ+z, false));
 							entityItem.worldObj.setBlockState(new BlockPos(xCoord, yCoord, zCoord), voidCraft.blocks.blockNoBreak.getDefaultState());
 						}
 					}

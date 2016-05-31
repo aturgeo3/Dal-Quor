@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.GUI.server;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,30 +35,22 @@ public class HeimdallContainer extends Container {
 	}
 	
 	@Override
-	public void onCraftGuiOpened(ICrafting icrafting){
-		super.onCraftGuiOpened(icrafting);
-		icrafting.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
-		icrafting.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
-		icrafting.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
-	}
-
-	@Override
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
-		
-		for(int i = 0; i < this.crafters.size(); i++){
-			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+
+		for (int i = 0; i < this.listeners.size(); ++i){
+			IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
 			
 			if(this.lastCookTime != this.voidtilemacerator.cookTime){
-				icrafting.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
+				icontainerlistener.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
 			}
 			
 			if(this.lastBurnTime != this.voidtilemacerator.burnTime){
-				icrafting.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
+				icontainerlistener.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
 			}
 			
 			if(this.lastItemBurnTime != this.voidtilemacerator.currentItemBurnTime){
-				icrafting.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
+				icontainerlistener.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
 			}
 		}
 		
