@@ -2,12 +2,15 @@ package Tamaized.Voidcraft.common;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeSwamp;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -224,6 +227,8 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", 11, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
+		
+		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 		
