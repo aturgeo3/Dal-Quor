@@ -12,19 +12,13 @@ import java.awt.Rectangle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GLContext;
 
 import Tamaized.Voidcraft.common.voidCraft;
 
@@ -105,7 +99,7 @@ public class RenderBossHeathBar {
 	
 	public static void drawBar(int x, int y, int z, int w, int h) {
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldRender = tessellator.getWorldRenderer();
+		VertexBuffer worldRender = tessellator.getBuffer();
 		worldRender.begin(8, DefaultVertexFormats.POSITION_COLOR);
 		worldRender.pos(x+w, y, z).color(1, 1, 1, 1.0F).endVertex();
 		worldRender.pos(x, y, z).color(1, 1, 1, 1.0F).endVertex();

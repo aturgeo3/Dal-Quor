@@ -10,13 +10,13 @@ public class BossBarOverlay {
 	
 	@SubscribeEvent
 	public void Render(RenderGameOverlayEvent.Post e){
-		if(e.type != ElementType.BOSSHEALTH) return;
+		if(e.getType() != ElementType.BOSSHEALTH) return;
 		
 		Minecraft mc = Minecraft.getMinecraft();
 		Profiler profiler = mc.mcProfiler;
 		
 		profiler.endStartSection("bossBar");
-		RenderBossHeathBar.render(e.resolution);
+		RenderBossHeathBar.render(e.getResolution());
 		profiler.endSection();
 	}
 

@@ -6,10 +6,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class EntityMobDol extends EntityVoidNPC{
 	
@@ -19,12 +22,8 @@ public class EntityMobDol extends EntityVoidNPC{
     public EntityMobDol(World par1World) {
     	super(par1World);
     	
-    	
-    	 
     	this.isImmuneToFire = true;
-    	 
     	this.hurtResistantTime = 10;
-    	 
         this.setSize(0.6F, 1.8F);
          
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -34,14 +33,9 @@ public class EntityMobDol extends EntityVoidNPC{
          
        
 	}
-    
-    public boolean isAIEnabled() {
-        return true;
-}
-    
+
     @Override
-    public boolean canBePushed()
-    {
+    public boolean canBePushed(){
         return false;
     }
     
@@ -56,27 +50,21 @@ public class EntityMobDol extends EntityVoidNPC{
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(999.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(999.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(999.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
     }
 
     @Override
-    protected String getLivingSound()
+    protected SoundEvent getHurtSound()
     {
-        return "";
+    	return VoidSoundEvents.EntityMobDolSoundEvents.hurtSound;
     }
 
     @Override
-    protected String getHurtSound()
+    protected SoundEvent getDeathSound()
     {
-    	return "";
-    }
-
-    @Override
-    protected String getDeathSound()
-    {
-    	return "";
+    	return VoidSoundEvents.EntityMobDolSoundEvents.deathSound;
     }
 
     @Override
@@ -84,17 +72,15 @@ public class EntityMobDol extends EntityVoidNPC{
     {
         return 0.0F;
     }
-    
-    protected int getDropItemId() {
-        return -1;
-}
-    
-    public EntityAgeable createChild(EntityAgeable var1) {
-        return null;
-}
 
-	public IChatComponent getDisplayName() {
-		return new ChatComponentText("Dol");
+    @Override
+    protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
+    	
+    }
+
+    @Override
+	public ITextComponent getDisplayName() {
+		return new TextComponentString("Dol");
 	}
 
     

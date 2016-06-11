@@ -7,9 +7,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
@@ -80,7 +80,7 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
             double d2 = closestEntity.posZ - theWatcher.posZ;
 			float f = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
 			
-			float f3 = MathHelper.wrapAngleTo180_float(f - theWatcher.rotationYaw);
+			float f3 = MathHelper.wrapDegrees(f - theWatcher.rotationYaw);
 	        
 			theWatcher.rotationYaw = theWatcher.rotationYaw + f3;
 		
@@ -103,17 +103,17 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 			if(pz > z) zPos = true;
 			else zPos = false;
 		
-			if(x < px) dx = entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+			if(x < px) dx = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
 			else if(x == px) dx = 0;
-			else if(!xPos && (x-px) < entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()){
+			else if(!xPos && (x-px) < entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()){
 				dx = 0;
 				entity.posX = px;
 			}
-			else if(xPos && (px-x) < entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()){
+			else if(xPos && (px-x) < entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()){
 				dx = 0;
 				entity.posX = px;
 			}
-			else if(px < x) dx = -(entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+			else if(px < x) dx = -(entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 		
 			if(y < py) dy = 0.2;
 			else if(y == py) dy = 0.0;
@@ -147,17 +147,17 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 			}
 		 	*/
 		
-			if(z < pz) dz = entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+			if(z < pz) dz = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
 			else if(z == pz) dz = 0;
-			else if(!zPos && (z-pz) < entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()){
+			else if(!zPos && (z-pz) < entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()){
 				dz = 0;
 				entity.posZ = pz;
 			}
-			else if(zPos && (pz-z) < entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()){
+			else if(zPos && (pz-z) < entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()){
 				dz = 0;
 				entity.posZ = pz;
 			}
-			else if(pz < z) dz = -(entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+			else if(pz < z) dz = -(entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
 			//entity.setVelocity(0, dy, 0);
 			//entity.velocityChanged = true;

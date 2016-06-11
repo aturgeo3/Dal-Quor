@@ -11,10 +11,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
@@ -48,26 +46,31 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     	//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
     	this.setInvul(true);
     }
-    
+
+    @Override
     public boolean displayBossMode(){
     	return (PHASE_03 >= phase && phase > 0);
     }
-    
+
+    @Override
     public void doDamage(int a){
     	this.setHealth(this.getHealth() - a);
-    	if(phase == PHASE_02) getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()+0.05D);
+    	if(phase == PHASE_02) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()+0.05D);
     }
-    
+
+    @Override
     public boolean isAIEnabled() {
         return true; //return true to tick AI
     }
-    
+
+    @Override
     public boolean interact(EntityPlayer p_70085_1_){
     	if(phase == 0) ready = true;
     	else doDamage((int) this.getMaxHealth());
     	return super.interact(p_70085_1_);
     }
-    
+
+    @Override
     public boolean hasStartedFight(){
     	return phase > 0 ? true : false;
     }
@@ -76,7 +79,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
 	public float getPercentHP() {
 		return this.getHealth() / this.getMaxHealth();
 	}
-    
+
+    @Override
     protected void updateAITick(){
     	if(ready){
     		phase++;
@@ -99,7 +103,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
             }
     	}
     }
-    
+
+    @Override
     private void InitPhase(int p){
 		Iterator iter = ai.iterator();
 		while(iter.hasNext()){
@@ -124,7 +129,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		 */
     		isFlying = true;
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
             this.setHealth(this.getMaxHealth());
             
             EntityVoidNPCAIBase newAI = new EntityAIPathHerobrineFlightPhase1(this, filter);
@@ -143,7 +148,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		 *  - Increase his speed everytime he is hurt
     		 */
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-    		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D);
+    		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
     		this.setHealth(this.getMaxHealth());
              
     		EntityVoidNPCAIBase newAI = new EntityAIPathHerobrineFlightPhase2(this, filter);
@@ -161,6 +166,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     /**
      * Called when the mob's health reaches 0.
      */
+    @Override
     public void onDeath(DamageSource p_70645_1_){ //Switch phases when we fake death
     	if(phase > PHASE_03){
     		this.setHealth(0);
@@ -172,7 +178,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		updateAITick();
     	}
     }
-    
+
+    @Override
     private void trueDeathUpdate(){
     	++this.deathTime;
 
@@ -203,13 +210,15 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
             }
         }
     }
-    
+
+    @Override
     protected void onDeathUpdate(){ //Intercept deathUpdate to keep entity alive
     	if(ready) return;
 		this.isDead = false;
     	onDeath(DamageSource.generic);
     }
-    
+
+    @Override
     public void setDead(){ //True death
 		BossMusicManager.StopTheSound();
     	Iterator iter = ai.iterator();
@@ -229,11 +238,13 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     /**
      * Checks whether target entity is alive.
      */
+    @Override
     public boolean isEntityAlive()
     {
         return phase > PHASE_03;
     }
-    
+
+    @Override
     protected void despawnEntity(){}
     
     @Override
@@ -247,19 +258,21 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     protected void applyEntityAttributes(){
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(999.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(999.0D);
     }
     
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float p_70069_1_) {}
 
     /**
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
+    @Override
     protected void updateFallState(double p_70064_1_, boolean p_70064_3_) {}
 
     @Override
@@ -282,6 +295,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
         return 0.0F;
     }
 
+    @Override
 	public IChatComponent getDisplayName() {
 		
 		return new ChatComponentText("Avatar of Herobrine");
