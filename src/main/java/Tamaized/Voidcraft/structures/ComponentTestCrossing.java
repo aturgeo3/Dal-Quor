@@ -18,7 +18,7 @@ public class ComponentTestCrossing extends ComponentTestPiece{
     public ComponentTestCrossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
     {
         super(par1);
-        this.coordBaseMode = par4;
+        this.setCoordBaseMode(par4);
         this.boundingBox = par3StructureBoundingBox;
     }
 
@@ -48,7 +48,7 @@ public class ComponentTestCrossing extends ComponentTestPiece{
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 6, 1, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 6, 7, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 6, 7, 6, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 1, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 6, 1, 6, 6, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 2, 0, 6, 6, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);

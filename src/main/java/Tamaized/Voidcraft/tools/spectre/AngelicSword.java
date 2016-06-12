@@ -4,10 +4,9 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
@@ -30,6 +29,6 @@ public class AngelicSword extends BasicVoidItemSword{
 	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_) {
-		p_77624_3_.add(EnumChatFormatting.DARK_RED + "This weapon insta-kills most Void creatures.");
+		p_77624_3_.add(TextFormatting.DARK_RED + "This weapon insta-kills most Void creatures.");
 	}
 }

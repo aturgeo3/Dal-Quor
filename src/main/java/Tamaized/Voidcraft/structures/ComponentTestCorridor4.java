@@ -17,7 +17,7 @@ public class ComponentTestCorridor4 extends ComponentTestPiece{
 
     public ComponentTestCorridor4(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4){
         super(par1);
-        this.coordBaseMode = par4;
+        this.setCoordBaseMode(par4);
         this.boundingBox = par3StructureBoundingBox;
     }
 
@@ -28,7 +28,7 @@ public class ComponentTestCorridor4 extends ComponentTestPiece{
     {
         byte b0 = 1;
 
-        if (this.coordBaseMode.getIndex() == 1 || this.coordBaseMode.getIndex() == 2)
+        if (this.getCoordBaseMode().getIndex() == 1 || this.getCoordBaseMode().getIndex() == 2)
         {
             b0 = 5;
         }
@@ -53,15 +53,15 @@ public class ComponentTestCorridor4 extends ComponentTestPiece{
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 8, 1, 8, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 8, 5, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 8, 5, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 6, 0, 8, 6, 5, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 0, 2, 5, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 2, 0, 8, 5, 0, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 3, 0, 1, 4, 0, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 7, 3, 0, 7, 4, 0, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, 4, 8, 2, 8, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 4, 2, 2, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 1, 4, 7, 2, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 1, 4, 2, 2, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 1, 4, 7, 2, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 8, 8, 3, 8, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 6, 0, 3, 7, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 8, 3, 6, 8, 3, 7, voidCraft.blocks.blockVoidfence.getDefaultState(), voidCraft.blocks.blockVoidfence.getDefaultState(), false);

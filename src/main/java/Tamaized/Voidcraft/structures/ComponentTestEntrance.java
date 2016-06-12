@@ -18,13 +18,14 @@ public class ComponentTestEntrance extends ComponentTestPiece{
     public ComponentTestEntrance(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
     {
         super(par1);
-        this.coordBaseMode = par4;
+        this.setCoordBaseMode(par4);
         this.boundingBox = par3StructureBoundingBox;
     }
 
     /**
      * Initiates construction of the Structure Component picked, at the current Location of StructGen
      */
+    @Override
     public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
     {
         this.getNextComponentNormal((ComponentTestStartPiece)par1StructureComponent, par2List, par3Random, 5, 3, true);
@@ -43,10 +44,11 @@ public class ComponentTestEntrance extends ComponentTestPiece{
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
     {
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 0, 12, 4, 12, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 12, 13, 12, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 12, 13, 12, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 0, 1, 12, 12, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 11, 5, 0, 12, 12, 12, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 2, 5, 11, 4, 12, 12, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
@@ -113,7 +115,7 @@ public class ComponentTestEntrance extends ComponentTestPiece{
         }
 
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 5, 5, 5, 7, 5, 7, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 1, 6, 6, 4, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(par1World, par3StructureBoundingBox, 6, 1, 6, 6, 4, 6, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.setBlockState(par1World, voidCraft.blocks.blockVoidbrick.getDefaultState(), 6, 0, 6, par3StructureBoundingBox);
         //this.setBlockState(par1World, Block.lavaMoving, 0, 6, 5, 6, par3StructureBoundingBox);
         i = this.getXWithOffset(6, 6);

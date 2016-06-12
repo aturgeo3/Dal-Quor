@@ -2,16 +2,11 @@ package Tamaized.Voidcraft.structures;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
 import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
-import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
-import Tamaized.Voidcraft.world.dim.TheVoid.ChunkProviderVoid;
 
 public class MapGenTestStart extends MapGenStructure {
 	

@@ -5,31 +5,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.storage.loot.LootTable;
+import Tamaized.Voidcraft.common.voidCraft;
 
 abstract public class ComponentTestPiece extends StructureComponent{
 	
-	public static final ArrayList<WeightedRandomChestContent> field_111019_a = new ArrayList<WeightedRandomChestContent>();
-	static{
-		field_111019_a.add(new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 5));
-		field_111019_a.add(new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 5));
-		field_111019_a.add(new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 15));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.items.voidCloth, 0, 1, 3, 5));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.items.voidcrystal, 0, 2, 5, 15));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.items.ectoplasm, 0, 1, 3, 5));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.items.MoltenvoidChain, 0, 1, 1, 2));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.armors.demonBoots, 0, 1, 1, 1));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.armors.demonLegs, 0, 1, 1, 1));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.armors.demonHelmet, 0, 1, 1, 1));
-		field_111019_a.add(new WeightedRandomChestContent(voidCraft.armors.demonChest, 0, 1, 1, 1));
-	};
-
     public ComponentTestPiece() {}
 
     protected ComponentTestPiece(int par1)
@@ -146,16 +131,16 @@ abstract public class ComponentTestPiece extends StructureComponent{
     protected StructureComponent getNextComponentNormal(ComponentTestStartPiece par1ComponentNetherBridgeStartPiece, List par2List, Random par3Random, int par4, int par5, boolean par6)
     {
     	System.out.println(boundingBox);
-        switch (this.coordBaseMode.getIndex())
+        switch (this.getCoordBaseMode().getIndex())
         {
             case 0:
-                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.maxZ + 1, this.coordBaseMode, this.getComponentType(), par6);
+                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.maxZ + 1, this.getCoordBaseMode(), this.getComponentType(), par6);
             case 1:
-                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.coordBaseMode, this.getComponentType(), par6);
+                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.getCoordBaseMode(), this.getComponentType(), par6);
             case 2:
-                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.minZ - 1, this.coordBaseMode, this.getComponentType(), par6);
+                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.minZ - 1, this.getCoordBaseMode(), this.getComponentType(), par6);
             case 3:
-                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.coordBaseMode, this.getComponentType(), par6);
+                return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par5, this.boundingBox.minZ + par4, this.getCoordBaseMode(), this.getComponentType(), par6);
             default:
                 return null;
         }
@@ -166,7 +151,7 @@ abstract public class ComponentTestPiece extends StructureComponent{
      */
     protected StructureComponent getNextComponentX(ComponentTestStartPiece par1ComponentNetherBridgeStartPiece, List par2List, Random par3Random, int par4, int par5, boolean par6)
     {
-        switch (this.coordBaseMode.getIndex())
+        switch (this.getCoordBaseMode().getIndex())
         {
             case 0:
                 return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, EnumFacing.UP, this.getComponentType(), par6);
@@ -186,7 +171,7 @@ abstract public class ComponentTestPiece extends StructureComponent{
      */
     protected StructureComponent getNextComponentZ(ComponentTestStartPiece par1ComponentNetherBridgeStartPiece, List par2List, Random par3Random, int par4, int par5, boolean par6)
     {
-        switch (this.coordBaseMode.getIndex())
+        switch (this.getCoordBaseMode().getIndex())
         {
             case 0:
                 return this.getNextComponent(par1ComponentNetherBridgeStartPiece, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, EnumFacing.SOUTH, this.getComponentType(), par6);

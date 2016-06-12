@@ -19,6 +19,28 @@ public class VoidSoundEvents {
 		public static final SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
 	}
 	
+	public static class MusicDiscSoundEvents{
+		public static final SoundTrack testDisc = new SoundTrack(new SoundEvent(new ResourceLocation(voidCraft.modid+":")), 0);
+		
+		public static class SoundTrack{
+			private final int length;
+			private final SoundEvent track;
+			
+			public SoundTrack(SoundEvent t, int l){
+				length = l;
+				track = t;
+			}
+			
+			public SoundEvent getTrack(){
+				return track;
+			}
+			
+			public int getLength(){
+				return length;
+			}
+		}
+	}
+	
 	public static class EntityMobDolSoundEvents{
 		public static final SoundEvent hurtSound = null;
 		public static final SoundEvent deathSound = null;

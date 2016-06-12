@@ -19,7 +19,7 @@ public class ComponentTestEnd extends ComponentTestPiece{
     public ComponentTestEnd(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing face)
     {
         super(par1);
-        this.coordBaseMode = face;
+        this.setCoordBaseMode(face);
         this.boundingBox = par3StructureBoundingBox;
         this.fillSeed = par2Random.nextInt();
     }

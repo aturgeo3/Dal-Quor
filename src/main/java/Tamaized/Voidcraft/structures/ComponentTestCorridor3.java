@@ -19,7 +19,7 @@ public class ComponentTestCorridor3 extends ComponentTestPiece{
 	    public ComponentTestCorridor3(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)
 	    {
 	        super(par1);
-	        this.coordBaseMode = par4;
+	        this.setCoordBaseMode(par4);
 	        this.boundingBox = par3StructureBoundingBox;
 	    }
 
@@ -46,7 +46,7 @@ public class ComponentTestCorridor3 extends ComponentTestPiece{
 	     */
 	    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
 	    {
-	        int i = this.getMetadataWithOffset(voidCraft.blocks.blockVoidstairs, 2);
+	        int i = 2;//this.getMetadataWithOffset(voidCraft.blocks.blockVoidstairs, 2);
 
 	        for (int j = 0; j <= 9; ++j)
 	        {
@@ -54,7 +54,7 @@ public class ComponentTestCorridor3 extends ComponentTestPiece{
 	            int l = Math.min(Math.max(k + 5, 14 - j), 13);
 	            int i1 = j;
 	            this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, j, 4, k, j, voidCraft.blocks.blockVoidbrick.getDefaultState(), voidCraft.blocks.blockVoidbrick.getDefaultState(), false);
-	            this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, k + 1, j, 3, l - 1, j, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+	            this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, k + 1, j, 3, l - 1, j, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 	            if (j <= 6)
 	            {

@@ -3,11 +3,12 @@ package Tamaized.Voidcraft.common;
 import java.util.ArrayList;
 
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeSwamp;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -62,6 +63,7 @@ import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.Achievements;
 import Tamaized.Voidcraft.registry.Armors;
 import Tamaized.Voidcraft.registry.Biomes;
+import Tamaized.Voidcraft.registry.LootTables;
 import Tamaized.Voidcraft.registry.Materials;
 import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.registry.Tabs;
@@ -118,6 +120,7 @@ public class voidCraft {
 	public static VoidBlocks blocks = new VoidBlocks();
 	public static Biomes biomes = new Biomes();
 	public static Achievements achievements = new Achievements();
+	public static LootTables lootTables = new LootTables();
 	
 	public static ArrayList<RegistryBase> registry = new ArrayList<RegistryBase>();
 
@@ -150,6 +153,7 @@ public class voidCraft {
 		registry.add(blocks);
 		registry.add(biomes);
 		registry.add(achievements);
+		registry.add(lootTables);
 		
 		for(RegistryBase reg : registry) reg.preInit();
 		

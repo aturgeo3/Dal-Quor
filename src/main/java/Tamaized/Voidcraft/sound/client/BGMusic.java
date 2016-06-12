@@ -3,10 +3,10 @@ package Tamaized.Voidcraft.sound.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,8 +26,8 @@ public class BGMusic {
 	public void PlaySoundEvent(PlaySoundEvent e){
 		World world = Minecraft.getMinecraft().theWorld;
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-		if(e.category == SoundCategory.MUSIC && world != null && world.provider != null && world.provider.getDimensionId() == voidCraft.dimensionIdXia){
-			if(!e.name.equals("music.undertale")) e.result = null;
+		if(e.getSound().getCategory() == SoundCategory.MUSIC && world != null && world.provider != null && world.provider.getDimension() == voidCraft.dimensionIdXia){
+			if(!e.getName().equals("music.undertale")) e.setResult(null);
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class BGMusic {
 			World world = Minecraft.getMinecraft().theWorld;
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			pause = (Minecraft.getMinecraft().currentScreen instanceof GuiIngameMenu);
-			if(world != null && world.provider != null && world.provider.getDimensionId() == voidCraft.dimensionIdXia){
+			if(world != null && world.provider != null && world.provider.getDimension() == voidCraft.dimensionIdXia){
 				if(BossMusicManager.isPlaying){
 					if(isPlaying) StopMusic();
 					tick = 0;
@@ -58,8 +58,8 @@ public class BGMusic {
 		isPlaying = true;
 		tick = (142*20)-1;
 		ResourceLocation rl = new ResourceLocation(voidCraft.modid+":music.undertale");
-		sound = PositionedSoundRecord.create(rl, 1.0F);
-		Minecraft.getMinecraft().getSoundHandler().playSound(sound);
+		//sound = PositionedSoundRecord.create(rl, 1.0F);
+		//Minecraft.getMinecraft().getSoundHandler().playSound(sound);
 	}
 	
 	private void StopMusic(){

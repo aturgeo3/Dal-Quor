@@ -139,7 +139,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
             ai.add(newAI);
             newAI.Init();
             this.tasks.addTask(1, newAI);
-            BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
+            //BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
     	}else if(p == PHASE_02){
     		/**
     		 * Cycle:

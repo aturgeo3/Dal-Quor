@@ -19,6 +19,7 @@ import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class VoidItems extends RegistryBase {
 	
@@ -77,18 +78,7 @@ public class VoidItems extends RegistryBase {
 		hookShot = new HookShot("hookShot").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
 		
 		voidDiscs = new ArrayList<Item>();
-		voidDiscs.add(new VoidRecord("voidCraft:Lavender Town", 271, "voidDisc1"));
-		voidDiscs.add(new VoidRecord("voidCraft:Lensko - Cetus", 289, "voidDisc2"));
-		voidDiscs.add(new VoidRecord("voidCraft:Starfox- Assault-Starwolf theme", 173, "voidDisc3"));
-		voidDiscs.add(new VoidRecord("voidCraft:They Will Die", 250, "voidDisc4"));
-		voidDiscs.add(new VoidRecord("voidCraft:Warriors", 171, "voidDisc5"));
-		voidDiscs.add(new VoidRecord("voidCraft:Imagine Dragons - Shots (Broiler Remix)", 190, "voidDisc6"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Asgore", 154, "voidDisc7"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Core", 164, "voidDisc8"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Megalovania", 156, "voidDisc9"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Muffet", 100, "voidDisc10"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Papyrus", 58, "voidDisc11"));
-		voidDiscs.add(new VoidRecord("voidCraft:Undertale - Undyne", 156, "voidDisc12"));
+		voidDiscs.add(new VoidRecord("Test Disc", VoidSoundEvents.MusicDiscSoundEvents.testDisc, "voidDisc1"));
 		
 		itemList = new ArrayList<Item>();
 		itemList.add(ectoplasm);
@@ -128,19 +118,19 @@ public class VoidItems extends RegistryBase {
 		OreDictionary.registerOre("dustQuartz", quartzDust);
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), voidCraft.blocks.blockVoidcrystal);
-		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.bucket);
-		GameRegistry.addShapelessRecipe(new ItemStack(voidBurner), voidcrystal, new ItemStack(Items.flint_and_steel, 1, voidCraft.WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
+		GameRegistry.addShapelessRecipe(new ItemStack(voidBurner), voidcrystal, new ItemStack(Items.FLINT_AND_STEEL, 1, voidCraft.WILDCARD_VALUE));
 		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
-		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.skull, 1, 1));
-		GameRegistry.addRecipe(new ItemStack(Items.skull, 1, 1), "XX", "XX", 'X', burnBone);
+		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
+		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
 
 		GameRegistry.addSmelting(voidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
 		GameRegistry.addSmelting(voidCrystalBucket, new ItemStack(voidCraft.fluids.voidBucket), 0.1F);
 		// dust
-		GameRegistry.addSmelting(ironDust, new ItemStack(Items.iron_ingot), 0);
-		GameRegistry.addSmelting(goldDust, new ItemStack(Items.gold_ingot), 0);
-		GameRegistry.addSmelting(diamondDust, new ItemStack(Items.diamond), 0);
+		GameRegistry.addSmelting(ironDust, new ItemStack(Items.IRON_INGOT), 0);
+		GameRegistry.addSmelting(goldDust, new ItemStack(Items.GOLD_INGOT), 0);
+		GameRegistry.addSmelting(diamondDust, new ItemStack(Items.DIAMOND), 0);
 		this.addPreSmelting(copperDust, "ingotCopper");
 		this.addPreSmelting(tinDust, "ingotTin");
 		this.addPreSmelting(leadDust, "ingotLead");
@@ -160,15 +150,15 @@ public class VoidItems extends RegistryBase {
 		voidCraft.maceratorList.addToOreDict("ingotTin", new ItemStack(tinDust, 1));
 		voidCraft.maceratorList.addToOreDict("ingotLead", new ItemStack(leadDust, 1));
 		//--HardCode
-		voidCraft.maceratorList.addToHardCode(new ItemStack(Items.coal, 1), new ItemStack(coalDust, 4));
+		voidCraft.maceratorList.addToHardCode(new ItemStack(Items.COAL, 1), new ItemStack(coalDust, 4));
 		
 		//Discs
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
-		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ", "ZXZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.coal);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ", "ZXZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 	}
 
 	@Override
