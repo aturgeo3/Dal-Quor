@@ -5,14 +5,9 @@ import java.util.ArrayList;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -61,18 +56,19 @@ public class VoidFluids extends RegistryBase {
 		
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void preInitRender(){
 		for(BlockFluidBase f : fluids){
 			Item fluid = Item.getItemFromBlock(f);
-			final ModelResourceLocation modelResourceLocation = new ModelResourceLocation(voidCraft.modid+":blocks/fluids", f.getFluid().getName());
-			ModelBakery.registerItemVariants(fluid);
-			ModelLoader.setCustomMeshDefinition(fluid, new ItemMeshDefinition(){
-				public ModelResourceLocation getModelLocation(ItemStack stack){
+			final net.minecraft.client.renderer.block.model.ModelResourceLocation modelResourceLocation = new net.minecraft.client.renderer.block.model.ModelResourceLocation(voidCraft.modid+":blocks/fluids", f.getFluid().getName());
+			net.minecraft.client.renderer.block.model.ModelBakery.registerItemVariants(fluid);
+			net.minecraftforge.client.model.ModelLoader.setCustomMeshDefinition(fluid, new net.minecraft.client.renderer.ItemMeshDefinition(){
+				public net.minecraft.client.renderer.block.model.ModelResourceLocation getModelLocation(ItemStack stack){
 					return modelResourceLocation;
 				}
 			});
-			ModelLoader.setCustomStateMapper(f, new StateMapperBase(){
-				protected ModelResourceLocation getModelResourceLocation(IBlockState state){
+			net.minecraftforge.client.model.ModelLoader.setCustomStateMapper(f, new net.minecraft.client.renderer.block.statemap.StateMapperBase(){
+				protected net.minecraft.client.renderer.block.model.ModelResourceLocation getModelResourceLocation(IBlockState state){
 					return modelResourceLocation;
 				}
 			});
