@@ -15,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
@@ -48,11 +49,11 @@ public class TeleporterVoid extends Teleporter {
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw){
+	public boolean placeInExistingPortal(Entity entity, float rotationYaw){ //TODO simulate entity vectors, use code from 1.8.9
 		int i = 128;
 		double d0 = -1.0D;
-        int j = MathHelper.floor_double(entityIn.posX);
-        int k = MathHelper.floor_double(entityIn.posZ);
+        int j = MathHelper.floor_double(entity.posX);
+        int k = MathHelper.floor_double(entity.posZ);
 		boolean flag = true;
         BlockPos blockpos = BlockPos.ORIGIN;
         long l = ChunkPos.chunkXZ2Int(j, k);
@@ -64,7 +65,7 @@ public class TeleporterVoid extends Teleporter {
             teleporter$portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
             flag = false;
         }else{
-        	BlockPos blockpos3 = new BlockPos(entityIn);
+        	BlockPos blockpos3 = new BlockPos(entity);
             for (int i1 = -128; i1 <= 128; ++i1){
             	BlockPos blockpos2;
                 
@@ -97,19 +98,28 @@ public class TeleporterVoid extends Teleporter {
         	double d5 = (double)blockpos.getX() + 0.5D;
         	double d6 = (double)blockpos.getY() + 0.5D;
         	double d7 = (double)blockpos.getZ() + 0.5D;
+            double origYd6 = d6;
         	BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortalVoid)voidCraft.blocks.blockPortalVoid).createPatternHelper(this.worldServerInstance, blockpos);
             boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
             double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getFrontTopLeft().getZ() : (double)blockpattern$patternhelper.getFrontTopLeft().getX();
-            d6 = (double)(blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().yCoord * (double)blockpattern$patternhelper.getHeight();
+        	
+        	double aG0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getFrontTopLeft().getZ() : (double)blockpattern$patternhelper.getFrontTopLeft().getX(); 
+        	double aG1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? entity.posZ : entity.posX;
+        	aG1 = Math.abs(MathHelper.pct(aG1 - (double)(blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - (double)blockpattern$patternhelper.getWidth()));
+        	double aG2 = MathHelper.pct(entity.posY - 1.0D, (double)blockpattern$patternhelper.getFrontTopLeft().getY(), (double)(blockpattern$patternhelper.getFrontTopLeft().getY() - blockpattern$patternhelper.getHeight()));
+        	Vec3d aG = new Vec3d(aG1, aG2, 0.0D);
+        	EnumFacing eTD = blockpattern$patternhelper.getForwards();
+        	
+        	d6 = (double)(blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - aG.yCoord * (double)blockpattern$patternhelper.getHeight();
             
         	if (flag1){
         		++d2;
         	}
         	
         	if (blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X){
-        		d7 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+        		d7 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
         	}else{
-        		d5 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+        		d5 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
         	}
         	
         	float f = 0.0F;
@@ -117,13 +127,13 @@ public class TeleporterVoid extends Teleporter {
         	float f2 = 0.0F;
         	float f3 = 0.0F;
         	
-        	if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()){
+        	if (blockpattern$patternhelper.getForwards().getOpposite() == eTD){
         		f = 1.0F;
         		f1 = 1.0F;
-        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()){
+        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.getOpposite()){
         		f = -1.0F;
         		f1 = -1.0F;
-        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()){
+        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == eTD.rotateY()){
         		f2 = 1.0F;
         		f3 = -1.0F;
             }else{
@@ -131,12 +141,13 @@ public class TeleporterVoid extends Teleporter {
             	f3 = 1.0F;
             }
         	
-        	double d3 = entityIn.motionX;
-        	double d4 = entityIn.motionZ;
-        	entityIn.motionX = d3 * (double)f + d4 * (double)f3;
-        	entityIn.motionZ = d3 * (double)f2 + d4 * (double)f1;
-        	entityIn.rotationYaw = rotationYaw - (float)(entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
-        	entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
+        	double d3 = entity.motionX;
+        	double d4 = entity.motionZ;
+        	entity.motionX = d3 * (double)f + d4 * (double)f3;
+        	entity.motionZ = d3 * (double)f2 + d4 * (double)f1;
+        	entity.rotationYaw = rotationYaw - (float)(eTD.getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
+        	d6 = d6 < origYd6 ? origYd6+1 : d6;
+        	entity.setLocationAndAngles(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
         	return true;
         }else{
         	return false;
