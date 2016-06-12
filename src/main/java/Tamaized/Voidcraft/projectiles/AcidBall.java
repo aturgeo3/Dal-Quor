@@ -44,7 +44,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.DamageSources.DamageSourceAcid;
 
 public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditionalSpawnData{
-	
 
 	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(
 			new Predicate[] {
@@ -347,7 +346,7 @@ public class AcidBall extends EntityArrow implements IProjectile, IEntityAdditio
     
     @SideOnly(Side.CLIENT)
     private void particles(){
-    	Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.AcidFX(this.worldObj, this.posX, this.posY, this.posZ));
+    	//Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.AcidFX(this.worldObj, this.posX, this.posY, this.posZ));
     }
 
     /**

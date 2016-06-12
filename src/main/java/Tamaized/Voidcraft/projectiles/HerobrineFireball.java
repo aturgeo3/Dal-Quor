@@ -7,8 +7,7 @@ import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,11 +34,12 @@ public class HerobrineFireball extends EntityFireball {
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition p_70227_1_){
+    @Override
+    protected void onImpact(RayTraceResult p_70227_1_){
         if (!this.worldObj.isRemote){
             if (p_70227_1_.entityHit != null){
                 p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
-            }else if(p_70227_1_.typeOfHit == MovingObjectType.BLOCK){
+            }else if(p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK){
             	Block b = worldObj.getBlockState(p_70227_1_.getBlockPos()).getBlock();
             	if(b instanceof AIBlock){
             		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.getBlockPos());
@@ -57,6 +57,7 @@ public class HerobrineFireball extends EntityFireball {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound p_70014_1_){
         super.writeEntityToNBT(p_70014_1_);
         p_70014_1_.setInteger("ExplosionPower", this.field_92057_e);
@@ -65,6 +66,7 @@ public class HerobrineFireball extends EntityFireball {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound p_70037_1_){
         super.readEntityFromNBT(p_70037_1_);
 

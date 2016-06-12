@@ -1,13 +1,13 @@
 package Tamaized.Voidcraft.projectiles;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,7 +31,7 @@ public class RenderAcidBall extends Render
         GL11.glRotatef(par1AcidBall.prevRotationYaw + (par1AcidBall.rotationYaw - par1AcidBall.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(par1AcidBall.prevRotationPitch + (par1AcidBall.rotationPitch - par1AcidBall.prevRotationPitch) * par9, 0.0F, 0.0F, 1.0F);
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldRender = tessellator.getWorldRenderer();
+        VertexBuffer worldRender = tessellator.getBuffer();
         byte b0 = 0;
         float f2 = 0.0F;
         float f3 = 0.5F;

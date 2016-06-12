@@ -2,14 +2,14 @@ package Tamaized.Voidcraft.projectiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,13 +33,13 @@ public class RenderHook extends Render {
         GL11.glPushMatrix();
 
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrender = tessellator.getWorldRenderer();
+        VertexBuffer worldrender = tessellator.getBuffer();
         
         if (hook.shootingEntity != null)
         {
             float f9 = hook.shootingEntity.getSwingProgress(par9);
             float f10 = MathHelper.sin(MathHelper.sqrt_float(f9) * (float)Math.PI);
-            Vec3 vec3 = new Vec3(-0.5D, 0.03D, 0.8D);
+            Vec3d vec3 = new Vec3d(-0.5D, 0.03D, 0.8D);
             vec3.rotatePitch(-(hook.shootingEntity.prevRotationPitch + (hook.shootingEntity.rotationPitch - hook.shootingEntity.prevRotationPitch) * par9) * (float)Math.PI / 180.0F);
             vec3.rotateYaw(-(hook.shootingEntity.prevRotationYaw + (hook.shootingEntity.rotationYaw - hook.shootingEntity.prevRotationYaw) * par9) * (float)Math.PI / 180.0F);
             vec3.rotateYaw(f10 * 0.5F);

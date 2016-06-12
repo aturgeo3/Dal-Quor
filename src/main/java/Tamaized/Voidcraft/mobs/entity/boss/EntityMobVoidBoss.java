@@ -53,7 +53,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IVoidBossDat
 		super.writeEntityToNBT(p_70014_1_);
 		p_70014_1_.setFloat("Health", this.getHealth());
 		p_70014_1_.setBoolean("HasExploded", this.hasExploded);
-		p_70014_1_.setBoolean("Invul", this.getInvul());
+		p_70014_1_.setBoolean("Invul", this.isEntityInvulnerable());
 	}
 	
 	/**

@@ -1,22 +1,7 @@
 package Tamaized.Voidcraft.particles;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_GREATER;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.glAlphaFunc;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glDepthMask;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
-public class AcidFX extends Particle {
+public class AcidFX{/* extends Particle {
 
 	private static final ResourceLocation texture = new ResourceLocation("VoidCraft:textures/particle/AcidFX.png");
 	/*
@@ -32,7 +17,7 @@ public class AcidFX extends Particle {
 	        this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D)) + 4;
 	        this.noClip = true;
 	    }
-	*/
+	*//*
 	
 	public AcidFX(World par1World, double x, double y, double z) {
 		super(par1World, x, y, z);
@@ -48,8 +33,9 @@ public class AcidFX extends Particle {
 		setMaxAge(50);
 	}
 
+    @Override
 	public void renderParticle(Tessellator tess, float partialTicks, float par3, float par4, float par5, float par6, float par7){
-		WorldRenderer worldRenderer = tess.getWorldRenderer();
+		VertexBuffer worldRenderer = tess.getBuffer();
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		glDepthMask(false);
 		glEnable(GL_BLEND);
@@ -71,7 +57,8 @@ public class AcidFX extends Particle {
 		glAlphaFunc(GL_GREATER, 0.1F);
 	}
 
-	    public int getBrightnessForRender(float p_70070_1_)
+	@Override
+	public int getBrightnessForRender(float p_70070_1_)
 	    {
 	        float f1 = ((float)this.particleAge + p_70070_1_) / (float)this.particleMaxAge;
 
@@ -100,7 +87,8 @@ public class AcidFX extends Particle {
 
 	    /**
 	     * Gets how bright this entity is.
-	     */
+	     *//*
+	    @Override
 	    public float getBrightness(float p_70013_1_)
 	    {
 	        float f1 = ((float)this.particleAge + p_70013_1_) / (float)this.particleMaxAge;
@@ -115,13 +103,14 @@ public class AcidFX extends Particle {
 	            f1 = 1.0F;
 	        }
 
-	        float f2 = super.getBrightness(p_70013_1_);
+	        float f2 = super.getBrightnessForRender(p_70013_1_);
 	        return f2 * f1 + (1.0F - f1);
 	    }
 
 	    /**
 	     * Called to update the entity's position/logic.
-	     */
+	     *//*
+	    @Override
 	    public void onUpdate()
 	    {
 	    	this.particleScale+=this.particleScale/15;
@@ -129,26 +118,29 @@ public class AcidFX extends Particle {
 	    	
 	        if (this.particleAge++ >= 15)//this.particleMaxAge)
 	        {
-	            this.setDead();
+	            this.setExpired();
 	        }
 	    }
 	    
+	    @Override
 	    public int getFXLayer(){
 			return 3;
 		}
-		
-		public AcidFX setMaxAge(int maxAge){
+
+	    @Override
+		public void setMaxAge(int maxAge){
 			particleMaxAge = maxAge;
-			return this;
 		}
-		
+
+	    @Override
 		public AcidFX setGravity(float gravity){
 			particleGravity = gravity;
 			return this;
 		}
-		
+
+	    @Override
 		public AcidFX setScale(float scale){
 			particleScale = scale;
 			return this;
-		}
+		}*/
 }
