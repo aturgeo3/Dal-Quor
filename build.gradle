@@ -26,7 +26,7 @@ repositories {
 	}
 }
 
-version = "1.8.9-0.6.0_DEV"
+version = "1.9.4-0.7.0_DEV"
 group= "tamaized.voidCraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "voidCraft"
 
