@@ -114,6 +114,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     
     //TODO: overhaul this
     //TODO Potion like attacks using a new throwable entity.
+    @Override
     public void attackEntityWithRangedAttack(EntityLivingBase target, float par2){	
     	if(!canAttack(target)) return;
     	

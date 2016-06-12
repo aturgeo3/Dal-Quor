@@ -1,15 +1,9 @@
 package Tamaized.Voidcraft.mobs.model;
 
-import java.util.Random;
-
-import Tamaized.Voidcraft.events.client.DebugEvent;
-import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.util.MathHelper;
 
 public class ModelLich extends ModelBase{
 	//fields
