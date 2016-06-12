@@ -5,76 +5,47 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 
-public class ChunkProviderXia implements IChunkProvider{
+public class ChunkProviderXia implements IChunkGenerator {
 	
 	private World worldObj;
 
-	public ChunkProviderXia(World worldObj, long seed) {
-		this.worldObj = worldObj;
+	public ChunkProviderXia(World worldIn, boolean p_i45637_2_, long seed) {
+		this.worldObj = worldIn;
 	}
+
+    @Override
+    public Chunk provideChunk(int x, int z){
+    	ChunkPrimer chunkprimer = new ChunkPrimer();
+    	Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
+    	Biome[] abiome = this.worldObj.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
+    	byte[] abyte = chunk.getBiomeArray();
+    	
+    	for (int i = 0; i < abyte.length; ++i){
+    		abyte[i] = (byte)Biome.getIdForBiome(abiome[i]);
+    	}
+    	
+    	chunk.resetRelightChecks();
+    	return chunk;
+    }
 
 	@Override
-	public boolean chunkExists(int x, int z) {
-		return true;
-	}
-
-	@Override
-	public Chunk provideChunk(int par1, int par2) {
-		ChunkPrimer primer = new ChunkPrimer();
-		Block[] ablock = new Block[32768];
-        byte[] meta = new byte[ablock.length];
-        BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16); //Forge Move up to allow for passing to replaceBiomeBlocks
-        //this.generateTerrain(par1, par2, ablock);
-        //this.replaceBlocksForBiome(par1, par2, ablock, meta, abiomegenbase);
-        //this.genTest.func_151539_a(this, this.worldObj, par1, par2, ablock);
-        Chunk chunk = new Chunk(this.worldObj, par1, par2);
-        byte[] abyte = chunk.getBiomeArray();
-
-        for (int k = 0; k < abyte.length; ++k)
-        {
-            abyte[k] = (byte)abiomegenbase[k].biomeID;
-        }
-        
-        chunk.resetRelightChecks();
-        return chunk;
-	}
-
-	public Chunk loadChunk(int par1, int par2) {
-		return this.provideChunk(par1, par2);
-	}
-
-	@Override
-	public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_) {
+	public void populate(int x, int z) {
 		
 	}
-
-	@Override
-	public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
-		return true;
-	}
-
-	@Override
-	public boolean unloadQueuedChunks() {
-		return false;
-	}
-
-	@Override
-	public boolean canSave() {
-		return true;
-	}
-
-	@Override
-	public String makeString() {
-		return "Xia";
-	}
+    
+    @Override
+    public boolean generateStructures(Chunk chunkIn, int x, int z){
+    	return false;
+    }
 
 	@Override
 	public List getPossibleCreatures(EnumCreatureType p_177458_1_, BlockPos p_177458_2_) {
@@ -82,29 +53,8 @@ public class ChunkProviderXia implements IChunkProvider{
 	}
 
 	@Override
-	public int getLoadedChunkCount() {
-		return 0;
-	}
-
-	@Override
 	public void recreateStructures(Chunk chunk, int par1, int par2) {
 		
-	}
-
-	@Override
-	public void saveExtraData() {
-		
-	}
-
-	@Override
-	public Chunk provideChunk(BlockPos blockPosIn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunkIn, int x, int z) {
-		return false;
 	}
 
 	@Override

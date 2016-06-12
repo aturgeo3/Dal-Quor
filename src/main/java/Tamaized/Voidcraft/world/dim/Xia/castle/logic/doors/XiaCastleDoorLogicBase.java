@@ -2,8 +2,8 @@ package Tamaized.Voidcraft.world.dim.Xia.castle.logic.doors;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleBase;
 import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 
@@ -37,7 +37,7 @@ public class XiaCastleDoorLogicBase extends XiaCastleBase{
 		for(int cx = x1; cx <= x2; cx++){
 			for(int cy = y1; cy <= y2; cy++){
 				for(int cz = z1; cz <= z2; cz++){
-					if(b)handler.getWorld().setBlockState(new BlockPos(cx, cy, cz), Blocks.bedrock.getDefaultState());
+					if(b)handler.getWorld().setBlockState(new BlockPos(cx, cy, cz), Blocks.BEDROCK.getDefaultState());
 					else handler.getWorld().setBlockToAir(new BlockPos(cx, cy, cz));
 				}
 			}

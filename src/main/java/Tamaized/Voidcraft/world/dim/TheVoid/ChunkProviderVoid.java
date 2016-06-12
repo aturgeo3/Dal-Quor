@@ -32,8 +32,7 @@ import Tamaized.Voidcraft.structures.MapGenTestStart;
 
 import com.google.common.base.Predicate;
 
-public class ChunkProviderVoid implements IChunkGenerator
-{
+public class ChunkProviderVoid implements IChunkGenerator {
     private Random hellRNG;
     
     private boolean hasXiaGen = false;

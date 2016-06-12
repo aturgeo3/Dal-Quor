@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.world.dim.Xia.castle;
 
 import java.util.ArrayList;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.XiaCastleMain;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.doors.XiaCastleDoorLogicHerobrine;
