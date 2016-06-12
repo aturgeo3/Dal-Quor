@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.registry;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -63,15 +64,15 @@ public class VoidBlocks extends RegistryBase {
 	@Override
 	public void preInit() {
 
-		blockVoidcrystal = new BlockVoidcrystal(Material.glass, "blockVoidcrystal").setHardness(7.0F).setStepSound(Blocks.glass.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		oreVoidcrystal = new OreVoidcrystal(Material.rock, "oreVoidcrystal").setHardness(3.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockFakeBedrock = new BlockFakeBedrock(Blocks.bedrock.getMaterial(), "blockFakeBedrock").setHardness(30.0F).setStepSound(Blocks.bedrock.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockNoBreak = new BlockNoBreak(Material.rock, "blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setStepSound(Blocks.wool.stepSound).setCreativeTab(voidCraft.tabs.tForge).setLightLevel(1.0F).setResistance(100);
-		blockVoidbrick = new BlockVoidbrick(Material.rock, "blockVoidbrick").setHardness(30.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidfence = new VoidBrickFence(Material.rock, "blockVoidfence").setCreativeTab(voidCraft.tabs.tabVoid);
+		blockVoidcrystal = new BlockVoidcrystal(Material.GLASS, "blockVoidcrystal").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		oreVoidcrystal = new OreVoidcrystal(Material.ROCK, "oreVoidcrystal").setHardness(3.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockFakeBedrock = new BlockFakeBedrock(Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockNoBreak = new BlockNoBreak(Material.ROCK, "blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tForge).setLightLevel(1.0F).setResistance(100);
+		blockVoidbrick = new BlockVoidbrick(Material.ROCK, "blockVoidbrick").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		blockVoidfence = new VoidBrickFence(Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence").setCreativeTab(voidCraft.tabs.tabVoid);
 		blockVoidstairs = new VoidBrickStairs(blockVoidbrick, 0, "blockVoidstairs").setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidBrickDoubleSlab = new BasicVoidBlockDoubleSlab(Material.rock, "blockVoidBrickDoubleSlab");
-		blockVoidBrickHalfSlab = new BasicVoidBlockHalfSlab(Material.rock, "blockVoidBrickHalfSlab");
+		blockVoidBrickDoubleSlab = new BasicVoidBlockDoubleSlab(Material.ROCK, "blockVoidBrickDoubleSlab");
+		blockVoidBrickHalfSlab = new BasicVoidBlockHalfSlab(Material.ROCK, "blockVoidBrickHalfSlab");
 		AIBlock = new AIBlock("AIBlock").setBlockUnbreakable();
 		xiaBlock = new XiaBlock("xiaBlock").setBlockUnbreakable();
 
@@ -80,10 +81,10 @@ public class VoidBlocks extends RegistryBase {
 		fireVoid = new FireVoid("fireVoid").setCreativeTab(voidCraft.tabs.tabVoid);
 
 		voidMacerator = new VoidMacerator("voidMacerator").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		Heimdall = new Heimdall(Material.iron, "Heimdall").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		voidBox = new VoidBox("voidBox").setHardness(7.0F).setStepSound(Blocks.stone.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuserInert = new BasicVoidBlock(Material.iron, "voidInfuserInert").setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F).setStepSound(Blocks.iron_block.stepSound).setCreativeTab(voidCraft.tabs.tabVoid);
+		Heimdall = new Heimdall(Material.IRON, "Heimdall").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
+		voidBox = new VoidBox("voidBox").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidInfuserInert = new BasicVoidBlock(Material.IRON, "voidInfuserInert").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
 		
 		//Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
@@ -115,9 +116,9 @@ public class VoidBlocks extends RegistryBase {
 	@Override
 	public void init() {
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
-		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', voidCraft.items.voidCloth, 'Z', Items.cauldron);
+		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', voidCraft.items.voidCloth, 'Z', Items.CAULDRON);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidInfuser), voidInfuserInert, voidCraft.items.voidStar);
-		GameRegistry.addRecipe(new ItemStack(voidBox), "XXX", "XYX", "XZX", 'X', voidCraft.items.voidCloth, 'Y', Blocks.jukebox, 'Z', voidCraft.items.voidStar);
+		GameRegistry.addRecipe(new ItemStack(voidBox), "XXX", "XYX", "XZX", 'X', voidCraft.items.voidCloth, 'Y', Blocks.JUKEBOX, 'Z', voidCraft.items.voidStar);
 		GameRegistry.addRecipe(new ItemStack(blockVoidbrick), "XX", "XX", 'X', blockVoidcrystal);
 		GameRegistry.addRecipe(new ItemStack(blockVoidstairs, 6), "X  ", "XX ", "XXX", 'X', blockVoidbrick);
 		GameRegistry.addRecipe(new ItemStack(blockVoidstairs, 6), "  X", " XX", "XXX", 'X', blockVoidbrick);

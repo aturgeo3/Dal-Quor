@@ -13,6 +13,12 @@ public class VoidSoundEvents {
 		public static final SoundEvent chain = new SoundEvent(new ResourceLocation(voidCraft.modid+":random.chain"));
 	}
 	
+	public static class ArmorSoundEvents{
+		public static final SoundEvent voidcrystal = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+		public static final SoundEvent demon = SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
+		public static final SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
+	}
+	
 	public static class EntityMobDolSoundEvents{
 		public static final SoundEvent hurtSound = null;
 		public static final SoundEvent deathSound = null;

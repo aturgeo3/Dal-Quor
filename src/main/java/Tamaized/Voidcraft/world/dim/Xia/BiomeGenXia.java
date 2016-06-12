@@ -1,13 +1,13 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenXia extends BiomeGenBase {
+public class BiomeGenXia extends Biome {
 
-	public BiomeGenXia(int id) {
-		super(id);
+	public BiomeGenXia(BiomeProperties prop) {
+		super(prop);
 		
 		this.spawnableMonsterList.clear();
         this.spawnableCreatureList.clear();

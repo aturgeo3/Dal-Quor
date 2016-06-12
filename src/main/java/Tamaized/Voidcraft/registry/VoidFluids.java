@@ -2,14 +2,13 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -39,7 +38,7 @@ public class VoidFluids extends RegistryBase {
 	public void preInit() {
 		voidFluid = createFluid("void", "blocks/voidFluid", true);
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
-		voidMaterialLiquid = new MaterialLiquid(MapColor.purpleColor);
+		voidMaterialLiquid = new MaterialLiquid(MapColor.PURPLE);
 		voidFluidBlock = new BasicVoidFluidBlock(voidFluid, voidMaterialLiquid, "blockVoidFluid");
 		voidBucket = ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid).getItem();
 		

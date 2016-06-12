@@ -33,14 +33,14 @@ public class Armors extends RegistryBase {
 		voidHelmet = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.HEAD, "void", "voidHelmet");
 		voidChest = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidChest");
 		voidLegs = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.LEGS, "void", "voidLegs");
-		voidBoots = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 3, "void", "voidBoots");
+		voidBoots = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.FEET, "void", "voidBoots");
 
-		demonHelmet = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 0, "demon", "demonHelmet");
-		demonChest = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 1, "demon", "demonChest");
-		demonLegs = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 2, "demon", "demonLegs");
-		demonBoots = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 3, "demon", "demonBoots");
+		demonHelmet = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.HEAD, "demon", "demonHelmet");
+		demonChest = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.CHEST, "demon", "demonChest");
+		demonLegs = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.LEGS, "demon", "demonLegs");
+		demonBoots = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.FEET, "demon", "demonBoots");
 
-		xiaChest = new XiaArmor(voidCraft.materials.xiaArmor, 0, 1, "xia", "xiaChest");
+		xiaChest = new XiaArmor(voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.CHEST, "xia", "xiaChest");
 		
 		list.add(voidHelmet);
 		list.add(voidChest);

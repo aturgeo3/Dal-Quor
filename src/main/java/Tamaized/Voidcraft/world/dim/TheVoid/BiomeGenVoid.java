@@ -1,15 +1,16 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
 
-public class BiomeGenVoid extends BiomeGenBase {
+public class BiomeGenVoid extends Biome {
 
-	public BiomeGenVoid(int id) {
-		super(id);
+	public BiomeGenVoid(BiomeProperties prop) {
+		super(prop);
 		
 		this.spawnableMonsterList.clear();
         this.spawnableCreatureList.clear();

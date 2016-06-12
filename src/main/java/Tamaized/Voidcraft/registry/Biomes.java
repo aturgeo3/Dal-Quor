@@ -1,16 +1,16 @@
 package Tamaized.Voidcraft.registry;
 
-import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
-import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenBase.Height;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
+import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;
 
 public class Biomes extends RegistryBase {
 
-	public static BiomeGenBase biomeVoid;
-	public static BiomeGenBase biomeXia;
+	public static Biome biomeVoid;
+	public static Biome biomeXia;
 
 	@Override
 	public void preInit() {
@@ -20,15 +20,17 @@ public class Biomes extends RegistryBase {
 
 	@Override
 	public void init() {
-		Height bvoidmm = new Height(-1F, 0.1F);
-		biomeVoid = new BiomeGenVoid(251).setBiomeName("The Void").setHeight(bvoidmm).setTemperatureRainfall(0.21F, 0.0F).setDisableRain();
-		biomeXia = new BiomeGenXia(252).setBiomeName("???").setHeight(bvoidmm).setTemperatureRainfall(0.21F, 0.0F).setDisableRain();
-		//BiomeManager.coolBiomes.add(new BiomeEntry(biomeVoid, 100));
+		float baseHeight = -1F;
+		float heightVariation = 0.1F;
+		BiomeProperties biomeVoidProp = new BiomeProperties("The Void").setBaseBiome("voidcraft_biome_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeXiaProp = new BiomeProperties("???").setBaseBiome("voidcraft_biome_xia").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		
+		biomeVoid = new BiomeGenVoid(biomeVoidProp);
+		biomeXia = new BiomeGenXia(biomeXiaProp);
 	}
 
 	@Override
 	public void postInit() {
-		// TODO Auto-generated method stub
 
 	}
 	
