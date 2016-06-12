@@ -16,8 +16,7 @@ public class BiomeGenVoid extends Biome {
         this.spawnableCreatureList.clear();
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
-        //this.topBlock = voidCraft.blockFakeBedrock;
-		//this.fillerBlock = voidCraft.blockFakeBedrock;
+        
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobWraith.class, 1, 0, 1));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobSpectreChain.class, 1, 0, 1));
 		}

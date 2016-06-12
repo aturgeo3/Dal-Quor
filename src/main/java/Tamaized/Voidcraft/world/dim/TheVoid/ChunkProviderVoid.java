@@ -380,8 +380,10 @@ public class ChunkProviderVoid implements IChunkGenerator {
     		if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
     		//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
     	}
-    	
-    	return new ArrayList();//this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
+    	//System.out.println(world.getBiomeForCoordsBody(pos));
+    	//System.out.println(creatureType);
+    	//System.out.println(world.getBiomeForCoordsBody(pos).getSpawnableList(creatureType));
+    	return this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);//voidCraft.biomes.biomeVoid.getSpawnableList(creatureType);//new ArrayList();//this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
     }
 
     @Override
