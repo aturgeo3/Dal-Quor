@@ -43,6 +43,8 @@ public class Tools extends RegistryBase {
 
 	@Override
 	public void preInit() {
+		//Swords: 3+dmg; Axe: dmg; Pick: 1+dmg; Spade: 1.5+dmg;
+		//Axe: -3; Pick: -2.8; Spade: -3;
 		// Tools
 		// void
 		voidPickaxe = new BasicVoidItemPickaxe(voidCraft.materials.voidTools, "voidPickaxe").setCreativeTab(voidCraft.tabs.tabVoid);

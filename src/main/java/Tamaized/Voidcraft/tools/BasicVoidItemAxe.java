@@ -9,7 +9,7 @@ public class BasicVoidItemAxe extends ItemAxe implements IBasicVoid{
 	private final String name;
 
 	public BasicVoidItemAxe(ToolMaterial material, String n) {
-		super(material);
+		super(material, material.getDamageVsEntity(), -3.0f);
 		name = n;
 		setUnlocalizedName(name);
 		GameRegistry.registerItem(this, "tools/"+n);
