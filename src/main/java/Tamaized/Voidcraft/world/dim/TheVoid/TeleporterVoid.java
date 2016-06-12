@@ -1,7 +1,8 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import java.util.ArrayList;
-import java.util.List;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+
 import java.util.Random;
 
 import net.minecraft.block.BlockPortal;
@@ -10,12 +11,10 @@ import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.LongHashMap;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
@@ -26,8 +25,7 @@ public class TeleporterVoid extends Teleporter {
 	private final WorldServer worldServerInstance;
 	private final Random random;
 
-	private final LongHashMap destinationCoordinateCache = new LongHashMap();
-	private final List destinationCoordinateKeys = new ArrayList();
+	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 
 	public TeleporterVoid(WorldServer par1WorldServer) {
 		super(par1WorldServer);
@@ -49,6 +47,7 @@ public class TeleporterVoid extends Teleporter {
 		}
 	}
 
+	@Override
 	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw){
 		int i = 128;
 		double d0 = -1.0D;
@@ -56,10 +55,10 @@ public class TeleporterVoid extends Teleporter {
         int k = MathHelper.floor_double(entityIn.posZ);
 		boolean flag = true;
         BlockPos blockpos = BlockPos.ORIGIN;
-        long l = ChunkCoordIntPair.chunkXZ2Int(j, k);
+        long l = ChunkPos.chunkXZ2Int(j, k);
         
-        if (this.destinationCoordinateCache.containsItem(l)){
-    		Teleporter.PortalPosition teleporter$portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.getValueByKey(l);
+        if (this.destinationCoordinateCache.containsKey(l)){
+    		Teleporter.PortalPosition teleporter$portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.get(l);
             d0 = 0.0D;
             blockpos = teleporter$portalposition;
             teleporter$portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
@@ -92,35 +91,25 @@ public class TeleporterVoid extends Teleporter {
         
         if(d0 >= 0.0D){
         	if (flag){
-        		this.destinationCoordinateCache.add(l, new Teleporter.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
-        		this.destinationCoordinateKeys.add(Long.valueOf(l));
+        		this.destinationCoordinateCache.put(l, new Teleporter.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
         	}
 
         	double d5 = (double)blockpos.getX() + 0.5D;
         	double d6 = (double)blockpos.getY() + 0.5D;
         	double d7 = (double)blockpos.getZ() + 0.5D;
-            double origYd6 = d6;
-        	BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortalVoid)voidCraft.blocks.blockPortalVoid).func_181089_f(this.worldServerInstance, blockpos);
-        	boolean flag1 = blockpattern$patternhelper.getFinger().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
-        	double d2 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getPos().getZ() : (double)blockpattern$patternhelper.getPos().getX();
-        	
-        	double aG0 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getPos().getZ() : (double)blockpattern$patternhelper.getPos().getX(); 
-        	double aG1 = blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X ? entityIn.posZ : entityIn.posX;
-        	aG1 = Math.abs(MathHelper.func_181160_c(aG1 - (double)(blockpattern$patternhelper.getFinger().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), aG0, aG0 - (double)blockpattern$patternhelper.func_181118_d()));
-        	double aG2 = MathHelper.func_181160_c(entityIn.posY - 1.0D, (double)blockpattern$patternhelper.getPos().getY(), (double)(blockpattern$patternhelper.getPos().getY() - blockpattern$patternhelper.func_181119_e()));
-        	Vec3 aG = new Vec3(aG1, aG2, 0.0D);
-        	EnumFacing eTD = blockpattern$patternhelper.getFinger();
-        	
-        	d6 = (double)(blockpattern$patternhelper.getPos().getY() + 1) - aG.yCoord * (double)blockpattern$patternhelper.func_181119_e();
-        	
+        	BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortalVoid)voidCraft.blocks.blockPortalVoid).createPatternHelper(this.worldServerInstance, blockpos);
+            boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE;
+            double d2 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getFrontTopLeft().getZ() : (double)blockpattern$patternhelper.getFrontTopLeft().getX();
+            d6 = (double)(blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().yCoord * (double)blockpattern$patternhelper.getHeight();
+            
         	if (flag1){
         		++d2;
         	}
         	
-        	if (blockpattern$patternhelper.getFinger().getAxis() == EnumFacing.Axis.X){
-        		d7 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
+        	if (blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X){
+        		d7 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
         	}else{
-        		d5 = d2 + (1.0D - aG.xCoord) * (double)blockpattern$patternhelper.func_181118_d() * (double)blockpattern$patternhelper.getFinger().rotateY().getAxisDirection().getOffset();
+        		d5 = d2 + (1.0D - entityIn.getLastPortalVec().xCoord) * (double)blockpattern$patternhelper.getWidth() * (double)blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
         	}
         	
         	float f = 0.0F;
@@ -128,13 +117,13 @@ public class TeleporterVoid extends Teleporter {
         	float f2 = 0.0F;
         	float f3 = 0.0F;
         	
-        	if (blockpattern$patternhelper.getFinger().getOpposite() == eTD){
+        	if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()){
         		f = 1.0F;
         		f1 = 1.0F;
-        	}else if (blockpattern$patternhelper.getFinger().getOpposite() == eTD.getOpposite()){
+        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()){
         		f = -1.0F;
         		f1 = -1.0F;
-        	}else if (blockpattern$patternhelper.getFinger().getOpposite() == eTD.rotateY()){
+        	}else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()){
         		f2 = 1.0F;
         		f3 = -1.0F;
             }else{
@@ -146,8 +135,7 @@ public class TeleporterVoid extends Teleporter {
         	double d4 = entityIn.motionZ;
         	entityIn.motionX = d3 * (double)f + d4 * (double)f3;
         	entityIn.motionZ = d3 * (double)f2 + d4 * (double)f1;
-        	entityIn.rotationYaw = rotationYaw - (float)(eTD.getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getFinger().getHorizontalIndex() * 90);
-        	d6 = d6 < origYd6 ? origYd6+1 : d6;
+        	entityIn.rotationYaw = rotationYaw - (float)(entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
         	entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
         	return true;
         }else{
@@ -206,7 +194,7 @@ public class TeleporterVoid extends Teleporter {
 	                            			int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
 	                            			blockpos$mutableblockpos.set(i5, j5, k5);
 	                            			
-	                            			if(l4 < 0 && !this.worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || l4 >= 0 && !this.worldServerInstance.isAirBlock(blockpos$mutableblockpos)){
+	                            			if(l4 < 0 && !this.worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || l4 >= 0 && !this.worldServerInstance.isAirBlock(blockpos$mutableblockpos)){
 	                            				continue label142;
 	                            			}
 	                            		}
@@ -253,7 +241,7 @@ public class TeleporterVoid extends Teleporter {
 	                                		int j13 = j6 + (j10 - 1) * j9;
 	                                		blockpos$mutableblockpos.set(j12, i13, j13);
 	                                		
-	                                		if (j11 < 0 && !this.worldServerInstance.getBlockState(blockpos$mutableblockpos).getBlock().getMaterial().isSolid() || j11 >= 0 && !this.worldServerInstance.isAirBlock(blockpos$mutableblockpos)){
+	                                		if (j11 < 0 && !this.worldServerInstance.getBlockState(blockpos$mutableblockpos).getMaterial().isSolid() || j11 >= 0 && !this.worldServerInstance.isAirBlock(blockpos$mutableblockpos)){
 	                                			continue label562;
 	                                        }
 										}
@@ -301,7 +289,7 @@ public class TeleporterVoid extends Teleporter {
                         int k10 = k2 + k8;
                         int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
                         boolean flag = k8 < 0;
-                        this.worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? voidCraft.blocks.blockVoidcrystal.getDefaultState() : Blocks.air.getDefaultState());
+                        this.worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? voidCraft.blocks.blockVoidcrystal.getDefaultState() : Blocks.AIR.getDefaultState());
                     }
                 }
             }
