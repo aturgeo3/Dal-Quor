@@ -3,7 +3,8 @@ package Tamaized.Voidcraft.registry;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -29,9 +30,9 @@ public class Armors extends RegistryBase {
 
 	@Override
 	public void preInit() {
-		voidHelmet = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 0, "void", "voidHelmet");
-		voidChest = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 1, "void", "voidChest");
-		voidLegs = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 2, "void", "voidLegs");
+		voidHelmet = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.HEAD, "void", "voidHelmet");
+		voidChest = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidChest");
+		voidLegs = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.LEGS, "void", "voidLegs");
 		voidBoots = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, 3, "void", "voidBoots");
 
 		demonHelmet = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, 0, "demon", "demonHelmet");
