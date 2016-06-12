@@ -54,23 +54,25 @@ public class EntityMobDol extends EntityVoidNPC{
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
     }
-
+    
     @Override
-    protected SoundEvent getHurtSound()
-    {
+    protected SoundEvent getAmbientSound(){
+    	return VoidSoundEvents.EntityMobDolSoundEvents.ambientSound;
+    }
+    
+    @Override
+    protected SoundEvent getHurtSound(){
     	return VoidSoundEvents.EntityMobDolSoundEvents.hurtSound;
     }
-
+    
     @Override
-    protected SoundEvent getDeathSound()
-    {
+    protected SoundEvent getDeathSound(){
     	return VoidSoundEvents.EntityMobDolSoundEvents.deathSound;
     }
-
+    
     @Override
-    protected float getSoundVolume()
-    {
-        return 0.0F;
+    protected float getSoundVolume(){
+    	return 0.5F;
     }
 
     @Override

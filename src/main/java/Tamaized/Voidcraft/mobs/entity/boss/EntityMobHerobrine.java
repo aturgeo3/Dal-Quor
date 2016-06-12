@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.mobs.entity.boss;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -12,7 +14,11 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
@@ -21,6 +27,7 @@ import Tamaized.Voidcraft.mobs.ai.EntityAIPathHerobrineFlightPhase2;
 import Tamaized.Voidcraft.mobs.ai.EntityVoidNPCAIBase;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.IVoidBossData;
 import Tamaized.Voidcraft.sound.BossMusicManager;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
 	
@@ -47,30 +54,22 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     	this.setInvul(true);
     }
 
-    @Override
     public boolean displayBossMode(){
     	return (PHASE_03 >= phase && phase > 0);
     }
 
-    @Override
     public void doDamage(int a){
     	this.setHealth(this.getHealth() - a);
     	if(phase == PHASE_02) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()+0.05D);
     }
 
     @Override
-    public boolean isAIEnabled() {
-        return true; //return true to tick AI
-    }
-
-    @Override
-    public boolean interact(EntityPlayer p_70085_1_){
+    public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack){
     	if(phase == 0) ready = true;
     	else doDamage((int) this.getMaxHealth());
-    	return super.interact(p_70085_1_);
+    	return super.processInteract(player, hand, stack);
     }
 
-    @Override
     public boolean hasStartedFight(){
     	return phase > 0 ? true : false;
     }
@@ -81,7 +80,12 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
 	}
 
     @Override
-    protected void updateAITick(){
+	public void onLivingUpdate(){
+    	super.onLivingUpdate();
+    	updateAI();
+    }
+    
+    private void updateAI(){
     	if(ready){
     		phase++;
     		System.out.println("Starting Phase Init: "+phase);
@@ -104,7 +108,6 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     	}
     }
 
-    @Override
     private void InitPhase(int p){
 		Iterator iter = ai.iterator();
 		while(iter.hasNext()){
@@ -128,7 +131,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		 *  - Max of 6 Pillars at a time
     		 */
     		isFlying = true;
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
             this.setHealth(this.getMaxHealth());
             
@@ -147,7 +150,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		 *  - Max of 6 Pillars at a time
     		 *  - Increase his speed everytime he is hurt
     		 */
-    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+    		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
     		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
     		this.setHealth(this.getMaxHealth());
              
@@ -175,42 +178,37 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     		setDead();
     	}else{
     		ready = true;
-    		updateAITick();
+        	updateAI();
     	}
     }
 
-    @Override
     private void trueDeathUpdate(){
     	++this.deathTime;
-
-        if (this.deathTime >= 20)
-        {
-            int i;
-
-            if (!this.worldObj.isRemote && (this.recentlyHit > 0 || this.isPlayer()) && this.func_146066_aG() && this.worldObj.getGameRules().getBoolean("doMobLoot"))
-            {
-                i = this.getExperiencePoints(this.attackingPlayer);
-
-                while (i > 0)
-                {
-                    int j = EntityXPOrb.getXPSplit(i);
-                    i -= j;
-                    this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
-                }
-            }
-
-            this.isDead = true;
-
-            for (i = 0; i < 20; ++i)
-            {
-                double d2 = this.rand.nextGaussian() * 0.02D;
-                double d0 = this.rand.nextGaussian() * 0.02D;
-                double d1 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1);
-            }
-        }
+    	
+    	if (this.deathTime >= 20){
+    		int i;
+    		
+    		if (!this.worldObj.isRemote && (this.recentlyHit > 0 || this.isPlayer()) && this.canDropLoot() && this.worldObj.getGameRules().getBoolean("doMobLoot")){
+    			i = this.getExperiencePoints(this.attackingPlayer);
+    			
+    			while (i > 0){
+    				int j = EntityXPOrb.getXPSplit(i);
+    				i -= j;
+    				this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+    			}
+    		}
+    		
+    		this.isDead = true;
+    		
+    		for(i = 0; i < 20; ++i){
+    			double d2 = this.rand.nextGaussian() * 0.02D;
+    			double d0 = this.rand.nextGaussian() * 0.02D;
+    			double d1 = this.rand.nextGaussian() * 0.02D;
+    			this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d2, d0, d1);
+    		}
+    	}
     }
-
+    
     @Override
     protected void onDeathUpdate(){ //Intercept deathUpdate to keep entity alive
     	if(ready) return;
@@ -220,30 +218,29 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
 
     @Override
     public void setDead(){ //True death
-		BossMusicManager.StopTheSound();
+    	BossMusicManager.StopTheSound();
     	Iterator iter = ai.iterator();
-		while(iter.hasNext()){
-			Object o = iter.next();
-			if(o instanceof EntityVoidNPCAIBase){
-				EntityVoidNPCAIBase ai = (EntityVoidNPCAIBase) o;
-				ai.kill();
-			}
-			if(o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
-			iter.remove();
-		}
-        phase = 100;
-        this.isDead = true;
+    	while(iter.hasNext()){
+    		Object o = iter.next();
+    		if(o instanceof EntityVoidNPCAIBase){
+    			EntityVoidNPCAIBase ai = (EntityVoidNPCAIBase) o;
+    			ai.kill();
+    		}
+    		if(o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
+    		iter.remove();
+    	}
+    	phase = 100;
+    	this.isDead = true;
     }
     
     /**
      * Checks whether target entity is alive.
      */
     @Override
-    public boolean isEntityAlive()
-    {
-        return phase > PHASE_03;
+    public boolean isEntityAlive(){
+    	return phase > PHASE_03;
     }
-
+    
     @Override
     protected void despawnEntity(){}
     
@@ -252,52 +249,42 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData{
     
     @Override
     public void applyEntityCollision(Entity par1Entity){}
-
-	
+    
     @Override
     protected void applyEntityAttributes(){
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(999.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(999.0D);
+    	super.applyEntityAttributes();
+    	this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(999.0D);
+    	this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+    	this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
     }
     
-    /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
     @Override
-    protected void fall(float p_70069_1_) {}
-
-    /**
-     * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
-     * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-     */
-    @Override
-    protected void updateFallState(double p_70064_1_, boolean p_70064_3_) {}
-
-    @Override
-    protected String getLivingSound(){
-        return null;
+    protected SoundEvent getAmbientSound(){
+    	return VoidSoundEvents.EntityMobHerobrineSoundEvents.ambientSound;
     }
-
+    
     @Override
-    protected String getHurtSound(){
-    	return null;
+    protected SoundEvent getHurtSound(){
+    	return VoidSoundEvents.EntityMobHerobrineSoundEvents.hurtSound;
     }
-
+    
     @Override
-    protected String getDeathSound(){
-    	return null;
+    protected SoundEvent getDeathSound(){
+    	return VoidSoundEvents.EntityMobHerobrineSoundEvents.deathSound;
     }
 
     @Override
     protected float getSoundVolume(){
-        return 0.0F;
+        return 0.5F;
     }
 
     @Override
-	public IChatComponent getDisplayName() {
-		
-		return new ChatComponentText("Avatar of Herobrine");
+    protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
+    	
+    }
+
+    @Override
+	public ITextComponent getDisplayName() {
+		return new TextComponentString("Avatar of Herobrine");
 	}
 }

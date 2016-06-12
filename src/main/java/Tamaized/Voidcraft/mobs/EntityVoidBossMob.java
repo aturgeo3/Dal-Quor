@@ -7,9 +7,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -30,6 +32,7 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
         this.updateArmSwingProgress();
@@ -46,6 +49,7 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         super.onUpdate();
@@ -56,11 +60,13 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
         }
     }
 
+    @Override
     protected String getSwimSound()
     {
         return "game.hostile.swim";
     }
 
+    @Override
     protected String getSplashSound()
     {
         return "game.hostile.swim.splash";
@@ -133,24 +139,28 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
+    @Override
+    protected SoundEvent getHurtSound()
     {
-        return "game.hostile.hurt";
+        return SoundEvents.ENTITY_HOSTILE_HURT;
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
+    @Override
+    protected SoundEvent getDeathSound()
     {
-        return "game.hostile.die";
+        return SoundEvents.ENTITY_HOSTILE_DEATH;
     }
 
-    protected String func_146067_o(int p_146067_1_)
+    @Override
+    protected SoundEvent getFallSound(int p_146067_1_)
     {
         return p_146067_1_ > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity p_70652_1_)
     {
     	//if(p_70652_1_ instanceof VoidChain) return false;
@@ -209,6 +219,7 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
+    @Override
     public float getBlockPathWeight(BlockPos pos)
     {
         return 0.5F - this.worldObj.getLightBrightness(pos);
@@ -226,17 +237,20 @@ public abstract class EntityVoidBossMob extends EntityCreature implements IMob
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere()
     {
         return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
     }
 
+    @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
     }
 
+    @Override
     protected boolean func_146066_aG()
     {
         return true;
