@@ -143,7 +143,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	public void PlayTheSound(ItemStack itemStack){
 		if(itemStack != null && itemStack.getItem() instanceof VoidRecord){
 			VoidRecord theRecord = (VoidRecord) itemStack.getItem();
-                this.worldObj.playRecord(getPos(), theRecord.getSound());
+                this.worldObj.playEvent((EntityPlayer)null, 1010, getPos(), Item.getIdFromItem(theRecord));
 		}else{
 			System.out.println("NULL/NON-VOID RECORD SLOT DETECTED");
 		}
@@ -154,7 +154,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	 *   
      */
 	public void StopTheSound(){
-		this.worldObj.playRecord(getPos(), null);
+		this.worldObj.playEvent((EntityPlayer)null, 1010, getPos(), 0);
 	}
 
 	@Override

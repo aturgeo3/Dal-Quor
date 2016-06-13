@@ -72,6 +72,7 @@ import Tamaized.Voidcraft.registry.VoidBlocks;
 import Tamaized.Voidcraft.registry.VoidFluids;
 import Tamaized.Voidcraft.registry.VoidItems;
 import Tamaized.Voidcraft.sound.BossMusicManager;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.StructureTestPieces;
 import Tamaized.Voidcraft.structures.StructureTestStart;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
@@ -154,7 +155,8 @@ public class voidCraft {
 		registry.add(biomes);
 		registry.add(achievements);
 		registry.add(lootTables);
-		
+
+		VoidSoundEvents.register(); //Do this first in case the other registers need to grab a sound
 		for(RegistryBase reg : registry) reg.preInit();
 		
 		//API Loader

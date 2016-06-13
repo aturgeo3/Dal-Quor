@@ -1,19 +1,19 @@
 {
-  "lich.lichLive": {"category": "hostile","sounds": [{"name": "mobs/lich/lichLive","stream": false}]},
-  "lich.lichDeath": {"category": "hostile","sounds": [{"name": "mobs/lich/lichDeath","stream": false}]},
-  "lich.lichActive": {"category": "hostile","sounds": [{"name": "mobs/lich/lichActive","stream": false}]},
-  "chain.chainLive": {"category": "hostile","sounds": [{"name": "mobs/spectrechain/chainLive","stream": false}]},
-  "wraith.wraithLive": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithLive","stream": false}]},
-  "wraith.wraithHurt": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithHurt","stream": false}]},
-  "wraith.wraithDeath": {"category": "hostile","sounds": [{"name": "mobs/wraith/wraithDeath","stream": false}]},
-  "wrath.breathe1": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/breathe1","stream": false}]},
-  "wrath.breathe2": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/breathe2","stream": false}]},
-  "wrath.death": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/death","stream": false}]},
-  "wrath.hit": {"category": "hostile","sounds": [{"name": "mobs/voidwrath/hit","stream": false}]},
+  "lich.lichLive": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/lich/lichLive","stream": false}]},
+  "lich.lichDeath": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/lich/lichDeath","stream": false}]},
+  "lich.lichActive": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/lich/lichActive","stream": false}]},
+  "chain.chainLive": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/spectrechain/chainLive","stream": false}]},
+  "wraith.wraithLive": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/wraith/wraithLive","stream": false}]},
+  "wraith.wraithHurt": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/wraith/wraithHurt","stream": false}]},
+  "wraith.wraithDeath": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/wraith/wraithDeath","stream": false}]},
+  "wrath.breathe": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/voidwrath/breathe","stream": false}]},
+  "wrath.death": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/voidwrath/death","stream": false}]},
+  "wrath.hit": {"category": "hostile","sounds": [{"name": "voidcraft:mobs/voidwrath/hit","stream": false}]},
   
-  "portal.Xia": {"category": "ambient","sounds": [{"name": "portal/Xia","stream": true}]},
+  "portal.Xia": {"category": "ambient","sounds": [{"name": "voidcraft:portal/Xia","stream": true}]},
   
-  "music.undertale": {"category": "music","sounds": [{"name": "music/Undertale - Another Medium","stream": true}]},
+  "music.undertale": {"category": "music","sounds": [{"name": "voidcraft:music/Undertale - Another Medium","stream": true}]},
+  "record.undertale": {"category": "record","sounds": [{"name": "voidcraft:music/Undertale - Another Medium","stream": true}]},
   
-  "random.chain": {"category": "ambient","sounds": [{"name": "random/chain","stream": true}]}
+  "random.chain": {"category": "ambient","sounds": [{"name": "voidcraft:random/chain","stream": true}]}
 }

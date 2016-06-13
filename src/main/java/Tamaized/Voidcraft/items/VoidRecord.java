@@ -37,7 +37,6 @@ public class VoidRecord extends ItemRecord implements IBasicVoid{
 		super(displayName, track.getTrack());
 		time = track.getLength();
 		this.recordName = displayName;
-		this.setCreativeTab(CreativeTabs.MISC);
 		name = n;
 		setUnlocalizedName(name);
 		setMaxStackSize(1);

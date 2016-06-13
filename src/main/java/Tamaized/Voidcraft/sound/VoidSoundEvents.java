@@ -4,27 +4,28 @@ import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class VoidSoundEvents {
 	
 	//new SoundEvent(new ResourceLocation(voidCraft.modid+":"))
 	
 	public static class MiscSoundEvents{
-		public static final SoundEvent chain = new SoundEvent(new ResourceLocation(voidCraft.modid+":random.chain"));
+		public static SoundEvent chain = null;
 	}
 	
 	public static class ArmorSoundEvents{
-		public static final SoundEvent voidcrystal = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
-		public static final SoundEvent demon = SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
-		public static final SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
+		public static SoundEvent voidcrystal = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+		public static SoundEvent demon = SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
+		public static SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
 	}
 	
 	public static class MusicDiscSoundEvents{
-		public static final SoundTrack testDisc = new SoundTrack(new SoundEvent(new ResourceLocation(voidCraft.modid+":")), 0);
+		public static SoundTrack testDisc = null;
 		
 		public static class SoundTrack{
-			private final int length;
-			private final SoundEvent track;
+			private int length;
+			private SoundEvent track;
 			
 			public SoundTrack(SoundEvent t, int l){
 				length = l;
@@ -42,63 +43,90 @@ public class VoidSoundEvents {
 	}
 	
 	public static class EntityMobDolSoundEvents{
-		public static final SoundEvent hurtSound = null;
-		public static final SoundEvent deathSound = null;
-		public static final SoundEvent ambientSound = null;
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobZolSoundEvents{
-		public static final SoundEvent hurtSound = null;
-		public static final SoundEvent deathSound = null;
-		public static final SoundEvent ambientSound = null;
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobHerobrineSoundEvents{
-		public static final SoundEvent hurtSound = null;
-		public static final SoundEvent deathSound = null;
-		public static final SoundEvent ambientSound = null;
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobVoidBossSoundEvents{
-		public static final SoundEvent hurtSound = SoundEvents.ENTITY_WITHER_HURT;
-		public static final SoundEvent deathSound = SoundEvents.ENTITY_WITHER_DEATH;
-		public static final SoundEvent ambientSound = SoundEvents.ENTITY_WITHER_AMBIENT;
+		public static SoundEvent hurtSound = SoundEvents.ENTITY_WITHER_HURT;
+		public static SoundEvent deathSound = SoundEvents.ENTITY_WITHER_DEATH;
+		public static SoundEvent ambientSound = SoundEvents.ENTITY_WITHER_AMBIENT;
 	}
 	
 	public static class EntityMobWraithSoundEvents{
-		public static final SoundEvent hurtSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithHurt"));
-		public static final SoundEvent deathSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithDeath"));
-		public static final SoundEvent ambientSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithLive"));
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobLichSoundEvents{
-		public static final SoundEvent hurtSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithHurt"));
-		public static final SoundEvent deathSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":lich.lichDeath"));
-		public static final SoundEvent ambientSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":lich.lichLive"));
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobSpectreChainSoundEvents{
-		public static final SoundEvent hurtSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithHurt"));
-		public static final SoundEvent deathSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":wraith.wraithDeath"));
-		public static final SoundEvent ambientSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":spectrechain.chainLive"));
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobWrathSoundEvents{
-		public static final SoundEvent hurtSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":voidwrath.hit"));
-		public static final SoundEvent deathSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":voidwrath.death"));
-		public static final SoundEvent ambientSound = new SoundEvent(new ResourceLocation(voidCraft.modid+":voidwrath.breathe1"));
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobXiaSoundEvents{
-		public static final SoundEvent hurtSound = null;
-		public static final SoundEvent deathSound = null;
-		public static final SoundEvent ambientSound = null;
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
 	
 	public static class EntityMobXia2SoundEvents{
-		public static final SoundEvent hurtSound = null;
-		public static final SoundEvent deathSound = null;
-		public static final SoundEvent ambientSound = null;
+		public static SoundEvent hurtSound = null;
+		public static SoundEvent deathSound = null;
+		public static SoundEvent ambientSound = null;
 	}
+	
+	public static void register(){
+		EntityMobWraithSoundEvents.hurtSound = registerSound("wraith.wraithHurt");
+		EntityMobWraithSoundEvents.deathSound = registerSound("wraith.wraithDeath");
+		EntityMobWraithSoundEvents.ambientSound = registerSound("wraith.wraithLive");
+		
+		EntityMobLichSoundEvents.hurtSound = EntityMobWraithSoundEvents.hurtSound;
+		EntityMobLichSoundEvents.deathSound = registerSound("lich.lichDeath");
+		EntityMobLichSoundEvents.ambientSound = registerSound("lich.lichLive");
+		
+		EntityMobSpectreChainSoundEvents.hurtSound = EntityMobWraithSoundEvents.hurtSound;
+		EntityMobSpectreChainSoundEvents.deathSound = EntityMobWraithSoundEvents.deathSound;
+		EntityMobSpectreChainSoundEvents.ambientSound = registerSound("spectrechain.chainLive");
 
+		EntityMobWrathSoundEvents.hurtSound = registerSound("wrath.hit");
+		EntityMobWrathSoundEvents.deathSound = registerSound("wrath.death");
+		EntityMobWrathSoundEvents.ambientSound = registerSound("wrath.breathe");
+		
+		MiscSoundEvents.chain = registerSound("random.chain");
+		
+		MusicDiscSoundEvents.testDisc = new MusicDiscSoundEvents.SoundTrack(registerSound("record.undertale"), 142);
+	}
+	
+	private static SoundEvent registerSound(String soundName) {
+		ResourceLocation soundID = new ResourceLocation(voidCraft.modid, soundName);
+		return GameRegistry.register(new SoundEvent(soundID).setRegistryName(soundID));
+	}
+	
 }
