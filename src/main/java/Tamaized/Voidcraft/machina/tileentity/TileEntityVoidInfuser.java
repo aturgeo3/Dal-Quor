@@ -220,6 +220,11 @@ public class TileEntityVoidInfuser extends TileEntity implements ITickable, ISid
 			this.markDirty();
 		}
 		
+		if(!this.worldObj.isRemote) sendPacketToClients();
+	}
+	
+	private void sendPacketToClients(){
+
 		NBTTagCompound znbt = new NBTTagCompound();
 		this.func_189515_b(znbt);
 		
@@ -240,7 +245,7 @@ public class TileEntityVoidInfuser extends TileEntity implements ITickable, ISid
 
 	    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
-	    //if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
+	    if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
 	    this.func_189518_D_();
 		 try {
 			bos.close();
