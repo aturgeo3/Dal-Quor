@@ -191,11 +191,11 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
                 this.onHit(raytraceresult);
             }
 
-			if (this.getIsCritical()){
-				for (int k = 0; k < 4; ++k){
-					this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
-				}
-			}
+			//if (this.getIsCritical()){
+			//	for (int k = 0; k < 4; ++k){
+			//		this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
+			//	}
+			//}
 
 			this.posX += this.motionX * speed;
             this.posY += this.motionY * speed;
@@ -255,9 +255,9 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 			float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 			int i = MathHelper.ceiling_double_int((double)f * this.damage);
 			
-			if (this.getIsCritical()){
-				i += this.rand.nextInt(i / 2 + 2);
-			}
+			//if (this.getIsCritical()){
+			//	i += this.rand.nextInt(i / 2 + 2);
+			//}
 
             DamageSource damagesource = DamageSource.causeArrowDamage(this, shootingEntity);
 			

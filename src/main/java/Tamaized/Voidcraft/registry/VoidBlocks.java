@@ -20,6 +20,7 @@ import Tamaized.Voidcraft.blocks.BlockFakeBedrock;
 import Tamaized.Voidcraft.blocks.BlockNoBreak;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
 import Tamaized.Voidcraft.blocks.BlockPortalXia;
+import Tamaized.Voidcraft.blocks.BlockRealityHole;
 import Tamaized.Voidcraft.blocks.BlockVoidbrick;
 import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
@@ -60,6 +61,7 @@ public class VoidBlocks extends RegistryBase {
 	public static Block Heimdall;
 	public static Block AIBlock;
 	public static Block xiaBlock;
+	public static Block realityHole;
 
 	@Override
 	public void preInit() {
@@ -67,7 +69,7 @@ public class VoidBlocks extends RegistryBase {
 		blockVoidcrystal = new BlockVoidcrystal(Material.GLASS, "blockVoidcrystal").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
 		oreVoidcrystal = new OreVoidcrystal(Material.ROCK, "oreVoidcrystal").setHardness(3.0F).setCreativeTab(voidCraft.tabs.tabVoid);
 		blockFakeBedrock = new BlockFakeBedrock(Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockNoBreak = new BlockNoBreak(Material.ROCK, "blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tForge).setLightLevel(1.0F).setResistance(100);
+		blockNoBreak = new BlockNoBreak(Material.ROCK, "blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tForge).setResistance(100);
 		blockVoidbrick = new BlockVoidbrick(Material.ROCK, "blockVoidbrick").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
 		blockVoidfence = new VoidBrickFence(Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence").setCreativeTab(voidCraft.tabs.tabVoid);
 		blockVoidstairs = new VoidBrickStairs(blockVoidbrick, 0, "blockVoidstairs").setCreativeTab(voidCraft.tabs.tabVoid);
@@ -75,6 +77,7 @@ public class VoidBlocks extends RegistryBase {
 		blockVoidBrickHalfSlab = new BasicVoidBlockHalfSlab(Material.ROCK, "blockVoidBrickHalfSlab");
 		AIBlock = new AIBlock("AIBlock").setBlockUnbreakable();
 		xiaBlock = new XiaBlock("xiaBlock").setBlockUnbreakable();
+		realityHole = new BlockRealityHole(Material.CLOTH, "blockRealityHole").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tabVoid).setResistance(100);;
 
 		blockPortalVoid = new BlockPortalVoid("blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		blockPortalXia = new BlockPortalXia("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
@@ -102,6 +105,7 @@ public class VoidBlocks extends RegistryBase {
 		blockList.add(blockVoidBrickHalfSlab);
 		blockList.add(AIBlock);
 		blockList.add(xiaBlock);
+		blockList.add(realityHole);
 		blockList.add(blockPortalVoid);
 		blockList.add(blockPortalXia);
 		blockList.add(fireVoid);

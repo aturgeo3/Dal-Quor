@@ -199,13 +199,13 @@ public class ChunkProviderVoid implements IChunkGenerator {
     									iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); //netherrack
     									
     									if (flag1){
-    										iblockstate = Blocks.IRON_BLOCK.getDefaultState();//voidCraft.blocks.blockFakeBedrock.getDefaultState(); //gravel
+    										iblockstate = voidCraft.blocks.realityHole.getDefaultState(); //gravel
     										iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); //netherrack
     									}
     									
     									if (flag){
-    										iblockstate = Blocks.DIAMOND_BLOCK.getDefaultState();//voidCraft.blocks.blockFakeBedrock.getDefaultState(); //soulsand
-    										iblockstate1 = Blocks.GOLD_BLOCK.getDefaultState();//voidCraft.blocks.blockFakeBedrock.getDefaultState(); //soulsand
+    										iblockstate = voidCraft.blocks.realityHole.getDefaultState(); //soulsand
+    										iblockstate1 = voidCraft.blocks.realityHole.getDefaultState(); //soulsand
     									}
     								}
     								
