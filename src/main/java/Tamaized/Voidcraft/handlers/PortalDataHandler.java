@@ -1,10 +1,18 @@
 package Tamaized.Voidcraft.handlers;
 
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
+import java.io.DataOutputStream;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.Teleporter;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.world.dim.TheVoid.TeleporterVoid;
 import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 
@@ -18,6 +26,7 @@ public class PortalDataHandler {
 	public float tick;
 	public boolean hasTeleported;
 	public int lastDim;
+	public boolean active = false;
 	
 	public PortalDataHandler(UUID uuid, int dim){
 		id = uuid;
@@ -44,5 +53,4 @@ public class PortalDataHandler {
 			return new TeleporterVoid(player.mcServer.worldServerForDimension(0)); //Shouldnt happen
 		}
 	}
-
 }

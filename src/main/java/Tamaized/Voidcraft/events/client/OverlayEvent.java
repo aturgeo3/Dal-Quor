@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 
 public class OverlayEvent {
@@ -24,10 +25,16 @@ public class OverlayEvent {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayerSP player = mc.thePlayer;
 		
-		if(voidCraft.instance.VoidTickEvent.data.get(player.getGameProfile().getId()) != null){
 			if(e.getType() == e.getType().PORTAL){
-				float j = voidCraft.instance.VoidTickEvent.data.get(player.getGameProfile().getId()).tick;
-				int type = voidCraft.instance.VoidTickEvent.data.get(player.getGameProfile().getId()).type;
+				if(ClientPortalDataHandler.active){
+					if(ClientPortalDataHandler.tick < 0.8F) ClientPortalDataHandler.tick += 0.004F;
+					else ClientPortalDataHandler.tick = 0.8F;
+				}else{
+					if(ClientPortalDataHandler.tick > 0) ClientPortalDataHandler.tick -= 0.005F;
+					else ClientPortalDataHandler.tick = 0;
+				}
+				float j = ClientPortalDataHandler.tick;
+				int type = ClientPortalDataHandler.type;
 				ScaledResolution scaledRes = new ScaledResolution(mc);
 				GlStateManager.disableAlpha();
 		        GlStateManager.disableDepth();
@@ -57,6 +64,5 @@ public class OverlayEvent {
 		        GlStateManager.enableAlpha();
 		        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-		}
 	}
 }

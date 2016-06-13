@@ -332,7 +332,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 			this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 			this.inGround = true;
 			this.arrowShake = 7;
-			this.setIsCritical(false);
+			//this.setIsCritical(false);
 			
 			if (iblockstate.getMaterial() != Material.AIR){
 				this.inTile.onEntityCollidedWithBlock(this.worldObj, blockpos, iblockstate, this);
