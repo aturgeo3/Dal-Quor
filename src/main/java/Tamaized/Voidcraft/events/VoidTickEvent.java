@@ -74,7 +74,7 @@ public class VoidTickEvent {
 		
 		if(data.get(e.player.getGameProfile().getId()) != null){
 			
-			//Calculate and Modify Overlay Alpha Float Value - Also used to Determine when to Teleport
+			//Determine when to Teleport
 			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
 			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
 			PortalDataHandler j = data.get(e.player.getGameProfile().getId());
@@ -95,10 +95,10 @@ public class VoidTickEvent {
 					}
 				}
 			if(j.active){
-				if(j.tick < 0.8F) j.tick = j.tick + 0.004F;
+				if(j.tick < 0.8F) j.tick = j.tick + 0.012F;
 				else j.tick = 0.8F;
 			}else{
-				if(j.tick > 0.0F) j.tick = j.tick - 0.005F;
+				if(j.tick > 0.0F) j.tick = j.tick - 0.030F;
 				else j.tick = 0.0F;
 			}
 			
