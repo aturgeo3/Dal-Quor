@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.registry;
 
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -29,9 +30,9 @@ public class Materials extends RegistryBase{
 		ArchTools = EnumHelper.addToolMaterial("burnBone", 7, 10000, 45.0F, 12.0F, 30);
 		DemonTools = EnumHelper.addToolMaterial("voidStar", 8, 12000, 50.0F, 13.0F, 30);
 		
-		voidArmor = EnumHelper.addArmorMaterial("Void", "", 120, new int[] {4, 8, 6, 4}, 30, VoidSoundEvents.ArmorSoundEvents.voidcrystal, 0.0f); //22
-		demonArmor = EnumHelper.addArmorMaterial("Demon", "", 240, new int[] {4, 10, 6, 4}, 30, VoidSoundEvents.ArmorSoundEvents.demon, 0.0f); //24
-		xiaArmor = EnumHelper.addArmorMaterial("Xia", "", 480, new int[] {1, 10, 1, 1}, 30, VoidSoundEvents.ArmorSoundEvents.xia, 0.0f);
+		voidArmor = EnumHelper.addArmorMaterial("Void", voidCraft.modid+":void", 120, new int[] {4, 8, 6, 4}, 30, VoidSoundEvents.ArmorSoundEvents.voidcrystal, 0.0f); //22
+		demonArmor = EnumHelper.addArmorMaterial("Demon", voidCraft.modid+":demon", 240, new int[] {4, 10, 6, 4}, 30, VoidSoundEvents.ArmorSoundEvents.demon, 0.0f); //24
+		xiaArmor = EnumHelper.addArmorMaterial("Xia", voidCraft.modid+":Xia", 480, new int[] {1, 10, 1, 1}, 30, VoidSoundEvents.ArmorSoundEvents.xia, 0.0f);
 	}
 
 	@Override

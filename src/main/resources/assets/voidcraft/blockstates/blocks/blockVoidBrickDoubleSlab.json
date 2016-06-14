@@ -1,6 +1,5 @@
 {
     "variants": {
-        "variant=false": { "model": "voidcraft:blockVoidBrickDoubleSlab" },
-        "variant=true":    { "model": "voidcraft:blockVoidBrickDoubleSlab" }
+        "variant=default": { "model": "voidcraft:blockVoidbrick" }
     }
 }

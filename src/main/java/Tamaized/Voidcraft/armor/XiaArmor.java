@@ -8,11 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 //import net.minecraftforge.event.entity.player.PlayerEvent;
 import Tamaized.Voidcraft.common.voidCraft;
 
@@ -23,7 +25,6 @@ public class XiaArmor extends BasicVoidArmor {
 	public XiaArmor(ArmorMaterial armorMaterial, int par3, EntityEquipmentSlot par4, String type, String n) {
 		super(armorMaterial, par3, par4, type, n);
 		MinecraftForge.EVENT_BUS.register(this);
-		FMLCommonHandler.instance().bus().register(this);
 		setHasSubtypes(true);
 	}
 	

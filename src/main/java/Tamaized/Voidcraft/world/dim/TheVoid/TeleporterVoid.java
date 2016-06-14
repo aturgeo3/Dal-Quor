@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -147,7 +148,12 @@ public class TeleporterVoid extends Teleporter {
         	entity.motionZ = d3 * (double)f2 + d4 * (double)f1;
         	entity.rotationYaw = rotationYaw - (float)(eTD.getOpposite().getHorizontalIndex() * 90) + (float)(blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
         	d6 = d6 < origYd6 ? origYd6+1 : d6;
-        	entity.setLocationAndAngles(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
+        	//entity.setLocationAndAngles(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
+        	if (entity instanceof EntityPlayerMP){
+        		((EntityPlayerMP)entity).connection.setPlayerLocation(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
+        	}else{
+        		entity.setLocationAndAngles(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
+        	}
         	return true;
         }else{
         	return false;
@@ -335,7 +341,7 @@ public class TeleporterVoid extends Teleporter {
 
 	@Override
 	public void removeStalePortalLocations(long par1) {
-
+		super.removeStalePortalLocations(par1);
 	}
 
 }
