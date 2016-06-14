@@ -31,7 +31,7 @@ group= "tamaized.voidCraft" // http://maven.apache.org/guides/mini/guide-naming-
 archivesBaseName = "voidCraft"
 
 minecraft {
-    version = "1.9.4-12.17.0.1922-1.9.4"
+    version = "1.9.4-12.17.0.1963-1.9.4"
     runDir = "run"
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
