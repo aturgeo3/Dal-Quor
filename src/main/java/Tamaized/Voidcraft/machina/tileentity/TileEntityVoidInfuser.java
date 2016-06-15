@@ -343,9 +343,8 @@ public class TileEntityVoidInfuser extends TileEntity implements ITickable, ISid
 			return 0;
 		}else{
 			ItemStack i = itemstack;
-			Item item  = itemstack.getItem();
 			
-			if(item == voidCraft.fluids.voidBucket) return 1000;
+			if(i == voidCraft.fluids.voidBucket) return 1000;
 			
 			
 			return 0;

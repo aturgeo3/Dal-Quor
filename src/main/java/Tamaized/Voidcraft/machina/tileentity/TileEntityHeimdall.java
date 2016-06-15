@@ -178,7 +178,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 					this.burnTime-=1000; //Drain TileEntity Value of Fluid Amount
 					voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime)); //Drains Fluid Amount
 					this.slots[0].stackSize--;
-					this.slots[0] = new ItemStack(voidCraft.fluids.voidBucket);
+					this.slots[0] = voidCraft.fluids.voidBucket;
 				}
 			}
 		}
@@ -409,9 +409,8 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 			return 0;
 		}else{
 			ItemStack i = itemstack;
-			Item item  = itemstack.getItem();
 			
-			if(item == voidCraft.fluids.voidBucket) return 1000;
+			if(i == voidCraft.fluids.voidBucket) return 1000;
 			
 			return 0;
 		}

@@ -44,7 +44,7 @@ public class VoidCraftClientPacketHandler{
 	@SideOnly(Side.CLIENT)
 	public static void processPacketOnClient(ByteBuf parBB, Side parSide) throws IOException{
 		World theWorld = Minecraft.getMinecraft().theWorld;
-		if (parSide == Side.CLIENT){
+		if (parSide == Side.CLIENT && theWorld != null){
 			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 			int pktType = bbis.readInt();
 			if(pktType == TYPE_TE_UPDATE){

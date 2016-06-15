@@ -356,9 +356,8 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 			return 0;
 		}else{
 			ItemStack i = itemstack;
-			Item item  = itemstack.getItem();
 			
-			if(item == voidCraft.fluids.voidBucket) return 1000;
+			if(i == voidCraft.fluids.voidBucket) return 1000;
 			
 			
 			return 0;

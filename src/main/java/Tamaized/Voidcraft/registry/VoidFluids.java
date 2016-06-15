@@ -28,7 +28,7 @@ public class VoidFluids extends RegistryBase {
 	
 	public static BlockFluidBase voidFluidBlock;
 	
-	public static Item voidBucket;
+	public static ItemStack voidBucket;
 
 	@Override
 	public void preInit() {
@@ -36,7 +36,7 @@ public class VoidFluids extends RegistryBase {
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
 		voidMaterialLiquid = new MaterialLiquid(MapColor.PURPLE);
 		voidFluidBlock = new BasicVoidFluidBlock(voidFluid, Material.WATER, "blockVoidFluid");
-		voidBucket = ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid).getItem();
+		voidBucket = ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid);
 		
 		fluids.add(voidFluidBlock);
 	}

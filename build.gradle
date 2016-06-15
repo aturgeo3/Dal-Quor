@@ -21,8 +21,7 @@ plugins {
 */
 repositories {
 	maven {
-		name = "chickenbones"
-		url = "http://chickenbones.net/maven"
+		url = "http://dvs1.progwml6.com/files/maven"
 	}
 }
 
@@ -40,26 +39,11 @@ minecraft {
     // simply re-run your setup task after changing the mappings to update your workspace.
     mappings = "stable_24"
     makeObfSourceJar = false
+	useDepAts = true
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-	
-	//compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
-	//compile "codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev"
-	//compile files ("lib/Thaumcraft-deobf-1.7.10-4.2.3.5.jar")
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+	deobfCompile "mezz.jei:jei_1.9.4:3.6.3.212"
 }
 
 processResources

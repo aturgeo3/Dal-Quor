@@ -17,7 +17,7 @@ public class InfuserRecipes {
 	private static final InfuserRecipes smeltingBase = new InfuserRecipes();
 
     /** The list of Macerator results. */
-    private Map smeltingList = new HashMap();
+    private Map<Item, ItemStack> smeltingList = new HashMap<Item, ItemStack>();
     private Map experienceList = new HashMap();
     private HashMap<List<ItemStack>, ItemStack> metaSmeltingList = new HashMap<List<ItemStack>, ItemStack>();
     private HashMap<List<Integer>, Float> metaExperience = new HashMap<List<Integer>, Float>();
@@ -55,7 +55,7 @@ public class InfuserRecipes {
         this.experienceList.put(par2ItemStack, Float.valueOf(par3));
     }
 
-    public Map getSmeltingList(){
+    public Map<Item, ItemStack> getSmeltingList(){
         return this.smeltingList;
     }
 
