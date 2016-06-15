@@ -67,8 +67,8 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 	/** The amount of knockback an arrow applies when it hits a mob. */
 	private int knockbackStrength;
 	
-    private double speed = 0.3D;
-    private float range = 0.4F;
+    private double speed = 1.0D;
+    private float range = 0.05F;
 
 	public VoidChain(World worldIn) {
 	    	super(worldIn);
@@ -79,20 +79,21 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 	    	this.damage = 2.0D;
 	    	this.setSize(0.5F, 0.5F);
 	}
+
+    public VoidChain(World worldIn, double x, double y, double z){
+        this(worldIn);
+        this.setPosition(x, y, z);
+    }
     
-    public VoidChain(World worldIn, EntityLivingBase shooter, float p_i1756_3_){
-    	super(worldIn);
-    	this.shootingEntity = shooter;	
-    	
-    	this.setLocationAndAngles(shooter.posX, shooter.posY + (double)shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
-    	this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-    	this.posY -= 0.10000000149011612D;
-    	this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-    	this.setPosition(this.posX, this.posY, this.posZ);
-    	this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-    	this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-    	this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
-    	this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, p_i1756_3_ * 1.5F, 1.0F);
+    public VoidChain(World worldIn, EntityLivingBase shooter, EntityLivingBase target, float dmg){
+    	this(worldIn, shooter.posX, shooter.posY + (double)shooter.getEyeHeight() - 0.10000000149011612D, shooter.posZ);
+        this.shootingEntity = shooter;
+        this.damage = dmg;
+        double d0 = target.posX - this.posX;
+        double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - posY;
+        double d2 = target.posZ - this.posZ;
+        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+        setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float)(14 - this.worldObj.getDifficulty().getDifficultyId() * 4));
     }
     
     @Override
@@ -118,12 +119,13 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
     @Override
 	public void onUpdate(){
 		//super.onUpdate();
+        this.onEntityUpdate();
 		
 		
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F){
 			float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0D / Math.PI);
+			this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * (180.0D / Math.PI));
+			this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * (180.0D / Math.PI));
 		}
 		
 		BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
@@ -159,7 +161,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 				this.ticksInAir = 0;
 			}
 			++this.timeInGround;
-			this.setDead();
+			//this.setDead();
 		}else{ //Traveling
 			this.timeInGround = 0;
 			++this.ticksInAir;
@@ -201,7 +203,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
             this.posY += this.motionY * speed;
             this.posZ += this.motionZ * speed;
             float f4 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
+            this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * (180.0D / Math.PI));
 
             for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F){
                 ;
@@ -229,7 +231,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
             		f4 = 0.25F;
             		this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * (double)f4, this.posY - this.motionY * (double)f4, this.posZ - this.motionZ * (double)f4, this.motionX, this.motionY, this.motionZ);
             	}
-            	f1 = 0.8F;
+            	f1 = 0.6F;
             }
             
             if (this.isWet()){
@@ -252,6 +254,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 		Entity entity = raytraceResultIn.entityHit;
 		
 		if (entity != null){
+			if(entity == shootingEntity) return;
 			float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 			int i = MathHelper.ceiling_double_int((double)f * this.damage);
 			
@@ -259,7 +262,13 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 			//	i += this.rand.nextInt(i / 2 + 2);
 			//}
 
-            DamageSource damagesource = DamageSource.causeArrowDamage(this, shootingEntity);
+			DamageSource damagesource;
+			
+			if (this.shootingEntity == null){
+				damagesource = DamageSource.causeArrowDamage(this, this);
+			}else{
+				damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+			}
 			
 			if (this.isBurning() && !(entity instanceof EntityEnderman)){
 				entity.setFire(5);
@@ -270,7 +279,7 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 					EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
 					
 					if (!this.worldObj.isRemote){
-						entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
+						//entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
 					}
 					
 					if (this.knockbackStrength > 0){

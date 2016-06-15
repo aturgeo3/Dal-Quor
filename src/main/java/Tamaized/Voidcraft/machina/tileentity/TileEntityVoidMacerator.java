@@ -69,13 +69,14 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		this.slots = new ItemStack[this.getSizeInventory()];
-		
-		for(int i = 0; i < list.tagCount(); i++){
-			NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
-			byte b = nbtc.getByte("Slot");
-			
-			if(b >= 0 && b < this.slots.length){
-				this.slots[b] = ItemStack.loadItemStackFromNBT(nbtc);
+		if(list != null){
+			for(int i = 0; i < list.tagCount(); i++){
+				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
+				byte b = nbtc.getByte("Slot");
+				
+				if(b >= 0 && b < this.slots.length){
+					this.slots[b] = ItemStack.loadItemStackFromNBT(nbtc);
+				}
 			}
 		}
 		

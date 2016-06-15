@@ -104,10 +104,9 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
     }
     
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2){
-    	if(!canAttack(par1EntityLivingBase)) return;
-    	VoidChain entityarrow = new VoidChain(this.worldObj, this, (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-    	//EntityArrow entityarrow = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+    public void attackEntityWithRangedAttack(EntityLivingBase target, float par2){
+    	if(!canAttack(target)) return;
+    	VoidChain entityarrow = new VoidChain(this.worldObj, this, target, (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
     	this.playSound(VoidSoundEvents.MiscSoundEvents.chain, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
     	this.worldObj.spawnEntityInWorld(entityarrow);
     }
