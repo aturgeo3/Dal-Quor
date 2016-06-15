@@ -372,7 +372,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
     public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos){
     	if(this.genTest != null){
     		if (this.genTest.isInsideStructure(pos)){
-    			if(Math.floor(Math.random()*40) == 0) return this.genTest.getSpawnList();
+    			if(Math.floor(Math.random()*10) == 0) return this.genTest.getSpawnList();
     			//if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
     		}
     	}
