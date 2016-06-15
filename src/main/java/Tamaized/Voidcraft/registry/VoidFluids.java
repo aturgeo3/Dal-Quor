@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.registry;
 import java.util.ArrayList;
 
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -34,7 +35,7 @@ public class VoidFluids extends RegistryBase {
 		voidFluid = createFluid("void", "blocks/voidFluid", true);
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
 		voidMaterialLiquid = new MaterialLiquid(MapColor.PURPLE);
-		voidFluidBlock = new BasicVoidFluidBlock(voidFluid, voidMaterialLiquid, "blockVoidFluid");
+		voidFluidBlock = new BasicVoidFluidBlock(voidFluid, Material.WATER, "blockVoidFluid");
 		voidBucket = ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid).getItem();
 		
 		fluids.add(voidFluidBlock);
