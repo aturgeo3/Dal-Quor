@@ -38,8 +38,8 @@ public class RenderBossHeathBar {
 		if(voidBoss == null) return;
 		
 		Minecraft mc = Minecraft.getMinecraft();
-		Rectangle bgRect = new Rectangle(0, 0, 185, 15);
-		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 7);
+		Rectangle bgRect = new Rectangle(0, 0, 185, 16);
+		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 10);
 		String name = voidBoss.getDisplayName().getFormattedText();
 		int c = res.getScaledWidth() / 2;
 		int x = c - bgRect.width / 2;
@@ -62,7 +62,7 @@ public class RenderBossHeathBar {
 		drawBar(xf, yf, 0, fgRect.width, fgRect.height);
 		GL11.glColor4f(0F, 1F, 0F, 1F);
 		drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
-		
+		mc.getRenderManager().getFontRenderer().drawString((int)voidBoss.getHealth()+"/"+(int)voidBoss.getMaxHealth(), xf+1, y + 5, 0x000000);
 		
 		mc.getRenderManager().getFontRenderer().drawStringWithShadow(name, tx, y - 10, 0xAA00FF);
 		
@@ -100,11 +100,11 @@ public class RenderBossHeathBar {
 	public static void drawBar(int x, int y, int z, int w, int h) {
 		Tessellator tessellator = Tessellator.getInstance();
 		VertexBuffer worldRender = tessellator.getBuffer();
-		worldRender.begin(8, DefaultVertexFormats.POSITION_COLOR);
-		worldRender.pos(x+w, y, z).color(1, 1, 1, 1.0F).endVertex();
-		worldRender.pos(x, y, z).color(1, 1, 1, 1.0F).endVertex();
-		worldRender.pos(x, y+h, z).color(1, 1, 1, 1.0F).endVertex();
-		worldRender.pos(x+w, y+h, z).color(1, 1, 1, 1.0F).endVertex();
+		worldRender.begin(7, DefaultVertexFormats.POSITION);
+		worldRender.pos(x+w, y, z).endVertex();
+		worldRender.pos(x, y, z).endVertex();
+		worldRender.pos(x, y+h, z).endVertex();
+		worldRender.pos(x+w, y+h, z).endVertex();
 		tessellator.draw();
 	}
 

@@ -164,8 +164,7 @@ public class EntityMobVoidBoss extends EntityVoidBossMob implements IVoidBossDat
     
 	@Override
 	public float getPercentHP() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getHealth()/this.getMaxHealth();
 	}
 	
 	
