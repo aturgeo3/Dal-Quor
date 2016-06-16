@@ -66,7 +66,7 @@ public class VoidTickEvent {
 			}else{
 				if(ClientPortalDataHandler.active && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)){
 					ClientPortalDataHandler.active = false;
-					ClientPortalDataHandler.type = 0;
+					//ClientPortalDataHandler.type = 0;
 				}
 			}
 			return;
