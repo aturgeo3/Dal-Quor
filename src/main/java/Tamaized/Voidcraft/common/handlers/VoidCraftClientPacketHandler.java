@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketE
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -27,6 +28,7 @@ public class VoidCraftClientPacketHandler{
 	
 	public static final int TYPE_TE_UPDATE = 0;
 	public static final int TYPE_VOIDBOX_UPDATE = 1;
+	public static final int TYPE_INFUSION_UPDATE = 2;
 	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -109,6 +111,10 @@ public class VoidCraftClientPacketHandler{
 				vbox.loop = bbis.readBoolean();
 				vbox.autoFill = bbis.readBoolean();
 				vbox.markDirty();
+			}
+			else if(pktType == TYPE_INFUSION_UPDATE){
+				VoidCraftClientProxy.infusionHandler.amount = bbis.readInt();
+				VoidCraftClientProxy.infusionHandler.maxAmount = bbis.readInt();
 			}
 			bbis.close();   
 		}

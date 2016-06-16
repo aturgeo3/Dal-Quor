@@ -54,8 +54,6 @@ public class BGMusic {
 	public void tick(ClientTickEvent e){
 		if(e.phase == Phase.END){
 			World world = Minecraft.getMinecraft().theWorld;
-			DebugEvent.textR = sound+"";
-			//DebugEvent.textL = "";
 			if(world != null && world.provider != null){
 				if(world.provider.getDimension() != voidCraft.dimensionIdXia){
 					if(world.provider.getDimension() != voidCraft.dimensionIdVoid){

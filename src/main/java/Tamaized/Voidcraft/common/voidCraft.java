@@ -10,6 +10,7 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -74,6 +75,7 @@ import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.StructureTestPieces;
 import Tamaized.Voidcraft.structures.StructureTestStart;
+import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
@@ -106,6 +108,8 @@ public class voidCraft {
 	public static final int guiIdHeimdall = 3;
 
 	public VoidTickEvent VoidTickEvent;
+	
+	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
 
 	//Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
@@ -194,6 +198,8 @@ public class voidCraft {
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler()); 
 		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); //We want to give this class a tick updater
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
+		MinecraftForge.EVENT_BUS.register(infusionHandler);
+		//FMLCommonHandler.instance().bus().register(infusionHandler);
 				
 		//Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");

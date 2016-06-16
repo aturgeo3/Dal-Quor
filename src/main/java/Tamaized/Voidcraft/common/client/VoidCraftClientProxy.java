@@ -55,6 +55,7 @@ import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.sound.client.BGMusic;
+import Tamaized.Voidcraft.voidicInfusion.ClientInfusionHandler;
 
 public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	
@@ -62,6 +63,8 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	public static Minecraft mc = Minecraft.getMinecraft();
 	@SideOnly(Side.CLIENT)
 	public static int renderPass;
+	
+	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
 	
 	@Override
 	public void preInit(){
@@ -76,6 +79,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
+		MinecraftForge.EVENT_BUS.register(infusionHandler);
 	
 		float shadowSize = 0.5F;
 		//MOBS

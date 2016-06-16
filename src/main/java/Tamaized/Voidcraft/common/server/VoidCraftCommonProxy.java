@@ -1,9 +1,12 @@
 package Tamaized.Voidcraft.common.server;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.registry.VoidBlocks;
+import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 
 public class VoidCraftCommonProxy {
 	
@@ -24,7 +27,8 @@ public class VoidCraftCommonProxy {
 		NetworkRegistry.INSTANCE.registerGuiHandler(voidCraft.instance, new GuiHandler());
 	}
 
-	public void registerNetwork() {}
+	public void registerNetwork() {
+	}
 
 	public void registerAchievements() {}
 
