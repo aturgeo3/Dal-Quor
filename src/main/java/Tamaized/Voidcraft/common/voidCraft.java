@@ -3,12 +3,10 @@ package Tamaized.Voidcraft.common;
 import java.util.ArrayList;
 
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -37,6 +35,7 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
+import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
@@ -161,10 +160,10 @@ public class voidCraft {
 		
 		//API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
-			logger.info("Thaumcraft Detected. Attempting to load API");
+			//logger.info("Thaumcraft Detected. Attempting to load API");
 			try {
 				//thaumcraftIntegration = new VoidCraftThaum();
-				logger.info("Loaded ThaumcraftAPI into VoidCraft");
+				//logger.info("Loaded ThaumcraftAPI into VoidCraft");
 			}catch (Exception e1) {
 				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
 				e1.printStackTrace(System.err);
@@ -194,6 +193,7 @@ public class voidCraft {
 		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler()); 
 		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); //We want to give this class a tick updater
+		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
 				
 		//Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");

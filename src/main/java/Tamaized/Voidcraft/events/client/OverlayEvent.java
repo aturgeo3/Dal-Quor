@@ -31,7 +31,10 @@ public class OverlayEvent {
 					else ClientPortalDataHandler.tick = 0.8F;
 				}else{
 					if(ClientPortalDataHandler.tick > 0) ClientPortalDataHandler.tick -= 0.005F;
-					else ClientPortalDataHandler.tick = 0;
+					else{
+						ClientPortalDataHandler.tick = 0;
+						ClientPortalDataHandler.type = 0;
+					}
 				}
 				float j = ClientPortalDataHandler.tick;
 				int type = ClientPortalDataHandler.type;

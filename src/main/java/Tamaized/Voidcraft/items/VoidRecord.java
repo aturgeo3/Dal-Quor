@@ -1,10 +1,7 @@
 package Tamaized.Voidcraft.items;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemRecord;
@@ -13,16 +10,14 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.registry.IBasicVoid;
-import Tamaized.Voidcraft.sound.VoidSoundEvents.MusicDiscSoundEvents.SoundTrack;
+import Tamaized.Voidcraft.sound.VoidSoundEvents.SoundTrack;
 
 public class VoidRecord extends ItemRecord implements IBasicVoid{
 

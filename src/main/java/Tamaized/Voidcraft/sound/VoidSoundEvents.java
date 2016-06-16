@@ -10,6 +10,24 @@ public class VoidSoundEvents {
 	
 	//new SoundEvent(new ResourceLocation(voidCraft.modid+":"))
 	
+	public static class SoundTrack{
+		private int length;
+		private SoundEvent track;
+		
+		public SoundTrack(SoundEvent t, int l){
+			length = l;
+			track = t;
+		}
+		
+		public SoundEvent getTrack(){
+			return track;
+		}
+		
+		public int getLength(){
+			return length;
+		}
+	}
+	
 	public static class MiscSoundEvents{
 		public static SoundEvent chain = null;
 	}
@@ -22,24 +40,13 @@ public class VoidSoundEvents {
 	
 	public static class MusicDiscSoundEvents{
 		public static SoundTrack testDisc = null;
-		
-		public static class SoundTrack{
-			private int length;
-			private SoundEvent track;
-			
-			public SoundTrack(SoundEvent t, int l){
-				length = l;
-				track = t;
-			}
-			
-			public SoundEvent getTrack(){
-				return track;
-			}
-			
-			public int getLength(){
-				return length;
-			}
-		}
+	}
+	
+	public static class BGMusicSoundEvents{
+		public static SoundTrack undertale_core = null;
+		public static SoundTrack emile_wish = null;
+		public static SoundTrack emile_nether = null;
+		public static SoundTrack mcMusic_end = new SoundTrack(SoundEvents.MUSIC_END, 10);
 	}
 	
 	public static class EntityMobDolSoundEvents{
@@ -121,7 +128,11 @@ public class VoidSoundEvents {
 		
 		MiscSoundEvents.chain = registerSound("random.chain");
 		
-		MusicDiscSoundEvents.testDisc = new MusicDiscSoundEvents.SoundTrack(registerSound("record.undertale"), 142);
+		MusicDiscSoundEvents.testDisc = new SoundTrack(registerSound("record.undertale"), 142);
+		
+		BGMusicSoundEvents.undertale_core = new SoundTrack(registerSound("music.undertale"), 142);
+		BGMusicSoundEvents.emile_wish = new SoundTrack(registerSound("music.emile.wish"), 142);
+		BGMusicSoundEvents.emile_nether = new SoundTrack(registerSound("music.emile.nether"), 142);
 	}
 	
 	private static SoundEvent registerSound(String soundName) {

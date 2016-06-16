@@ -76,29 +76,31 @@ public class TeleporterXia extends Teleporter {
 		}
 	}
 	
-	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8){
-		if(par1Entity.dimension == 0){
-			BlockPos bedPos = par1Entity instanceof EntityPlayer && ((EntityPlayer)par1Entity).getBedLocation(0) != null ? ((EntityPlayer)par1Entity).getBedLocation(0) : worldServerInstance.getSpawnPoint();
-            par1Entity.setLocationAndAngles((double)bedPos.getX(), (double)bedPos.getY(), (double)bedPos.getZ(), par1Entity.rotationYaw, par1Entity.rotationPitch);
+	@Override
+	public void placeInPortal(Entity entityIn, float rotationYaw){
+		if(entityIn.dimension == 0){
+			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer)entityIn).getBedLocation(0) != null ? ((EntityPlayer)entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
+            entityIn.setLocationAndAngles((double)bedPos.getX(), (double)bedPos.getY(), (double)bedPos.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
 			return;
 		}
-		if(par1Entity instanceof EntityPlayer) ((EntityPlayer)par1Entity).addStat(voidCraft.achievements.voidCraftAchMainLine_6, 1);
-		par1Entity.setPosition(0.5, 60, 0.5);
-		if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)){
-			this.makePortal(par1Entity);
-			this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
+		if(entityIn instanceof EntityPlayer) ((EntityPlayer)entityIn).addStat(voidCraft.achievements.voidCraftAchMainLine_6, 1);
+		entityIn.setPosition(0.5, 60, 0.5);
+		if (!this.placeInExistingPortal(entityIn)){
+			this.makePortal(entityIn);
+			this.placeInExistingPortal(entityIn);
 		}
-		par1Entity.setLocationAndAngles(0.5, 60, 0.5, 0, 0);
+		entityIn.setLocationAndAngles(47.5, 61, 4.5, 0, 0);
 	}
 
     /**
 	 * Place an entity in a nearby portal which already exists.
 	 */
-	public boolean placeInExistingPortal(Entity e, double x, double y, double z, float par8){
+	public boolean placeInExistingPortal(Entity e){
 		if(worldServerInstance.getBlockState(new BlockPos(0, 59, 0)).getBlock() == voidCraft.blocks.blockNoBreak) return true;
 		else return false;
 	}
 	
+	@Override
 	public boolean makePortal(Entity e) {
 		byte b0 = 16;
 		double d0 = -1.0D;
@@ -116,6 +118,7 @@ public class TeleporterXia extends Teleporter {
 		return true;
 	}
 
+	@Override
 	public void removeStalePortalLocations(long par1) {
 		
 	}

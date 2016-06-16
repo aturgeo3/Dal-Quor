@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -14,6 +13,7 @@ import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
@@ -54,7 +54,6 @@ import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.RegistryBase;
-import Tamaized.Voidcraft.registry.VoidBlocks;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 
 public class VoidCraftClientProxy extends VoidCraftCommonProxy {
@@ -76,7 +75,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
-		//MinecraftForge.EVENT_BUS.register(new DebugEvent());
+		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 	
 		float shadowSize = 0.5F;
 		//MOBS
