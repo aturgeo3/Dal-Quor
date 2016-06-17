@@ -26,8 +26,8 @@ public class EntityMobDol extends EntityVoidNPC{
     	this.hurtResistantTime = 10;
         this.setSize(0.6F, 1.8F);
          
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F));
+        //this.tasks.addTask(6, new EntityAILookIdle(this));
         //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.setInvul(true);
          
