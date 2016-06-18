@@ -8,6 +8,9 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import Tamaized.Voidcraft.DamageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.mobs.EntityVoidBossMob;
+import Tamaized.Voidcraft.mobs.EntityVoidMob;
+import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 
 public class DamageEvent {
 	
@@ -28,6 +31,13 @@ public class DamageEvent {
 		if(Math.floor(Math.random()*5) == 0 && isWhiteListed(e.getSource())){ //0-4; 25%
 			e.setCanceled(true);
 			player.addChatMessage(new TextComponentString("Attack Dodged"));
+			return;
+		}
+		if(isWhiteListed(e.getSource()) && !e.getSource().damageType.equals("arrow")){
+			if(e.getSource().getEntity() != null && !(e.getSource().getEntity() instanceof EntityVoidMob || e.getSource().getEntity() instanceof EntityVoidNPC || e.getSource().getEntity() instanceof EntityVoidBossMob)){
+				int a = (int) Math.floor(player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc()*10);
+				if(a > 0) e.getEntity().attackEntityFrom(new DamageSourceVoidicInfusion(), a);
+			}
 		}
 	}
 	
