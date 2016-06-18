@@ -9,6 +9,7 @@ import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
@@ -34,6 +35,9 @@ import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
+import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
+import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityStorage;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
@@ -175,6 +179,10 @@ public class voidCraft {
 		}
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
+		
+		System.out.println("registering Capabilities");
+        CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
+        MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 		
 		proxy.preInit();
 	}

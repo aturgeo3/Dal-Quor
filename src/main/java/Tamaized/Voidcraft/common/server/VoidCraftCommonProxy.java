@@ -1,16 +1,13 @@
 package Tamaized.Voidcraft.common.server;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.registry.VoidBlocks;
-import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 
 public class VoidCraftCommonProxy {
 	
-	public void preInit() {};
+	public void preInit() {
+	}
 
 	public void registerRenderInformation() {}
 

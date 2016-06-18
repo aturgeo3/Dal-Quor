@@ -6,13 +6,14 @@ import io.netty.buffer.Unpooled;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.DamageSources.DamageSourceVoidicInfusion;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 
@@ -71,7 +72,7 @@ public class PlayerInfusionHandler {
 	}
 	
 	private void handleEffects(){
-		if(player.capabilities.isCreativeMode) return;
+		if(player.capabilities.isCreativeMode || !player.hasCapability(CapabilityList.VOIDICINFUSION, null) || !player.getCapability(CapabilityList.VOIDICINFUSION, null).hasLoaded()) return;
 		if(voidicInfusionAmount >= maxAmount){
 			player.attackEntityFrom(new DamageSourceVoidicInfusion(), player.getMaxHealth());
 			return;
@@ -91,7 +92,28 @@ public class PlayerInfusionHandler {
 			}
 		}
 		if(perc >= 0.90f){
-			player.setHealth(1);
+			if(!player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused90()){
+				player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused90(true);
+				player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0f);
+			}
+		}else{
+			if(player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused90()){
+				player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused90(false);
+				player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth()-2);
+			}else{
+				if(perc >= 0.10f){
+					if(!player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused10()){
+						player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused10(true);
+						player.getCapability(CapabilityList.VOIDICINFUSION, null).setPreMaxHealth(player.getMaxHealth());
+						player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth()-2);
+					}
+				}else{
+					if(player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused10()){
+						player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused10(false);
+						player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth());
+					}
+				}
+			}
 		}
 	}
 	
