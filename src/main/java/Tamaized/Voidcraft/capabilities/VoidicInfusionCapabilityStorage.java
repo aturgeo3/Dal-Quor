@@ -18,8 +18,10 @@ public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusion
 		System.out.println("writeNBT");
 		NBTTagCompound compound = new NBTTagCompound();
 		compound.setFloat("preMaxHealth", instance.preMaxHealth());
-		compound.setBoolean("isInfused10", instance.isInfused10());
-		compound.setBoolean("isInfused90", instance.isInfused90());
+		compound.setFloat("checkMaxHealth", instance.checkMaxHealth());
+		compound.setInteger("infusion", instance.getInfusion());
+		compound.setInteger("maxInfusion", instance.getMaxInfusion());
+		System.out.println(compound);
 		return compound;
 	}
 
@@ -28,8 +30,9 @@ public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusion
 		System.out.println("readNBT");
 		NBTTagCompound compound = (NBTTagCompound) nbt;
 		instance.setPreMaxHealth(compound.getFloat("preMaxHealth"));
-		instance.setInfused10(compound.getBoolean("isInfused10"));
-		instance.setInfused90(compound.getBoolean("isInfused90"));
+		instance.setCheckMaxHealth(compound.getFloat("checkMaxHealth"));
+		instance.setInfusion(compound.getInteger("infusion"));
+		instance.setMaxInfusion(compound.getInteger("maxInfusion"));
 		instance.setLoaded();
 	}
 

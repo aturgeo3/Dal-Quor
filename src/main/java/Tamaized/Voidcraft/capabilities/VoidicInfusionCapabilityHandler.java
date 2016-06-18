@@ -8,8 +8,9 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	public static final ResourceLocation ID = new ResourceLocation(voidCraft.modid, "VoidicInfusionCapabilityHandler");
 	
 	private float preMaxHealth = 20.0f;
-	private boolean infused10 = false;
-	private boolean infused90 = false;
+	private float checkMaxHealth = 0.0f;
+	private int infusion = 0;
+	private int maxInfusion = 300;
 	
 	private boolean hasLoaded = false;
 	
@@ -26,25 +27,40 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	public void setPreMaxHealth(float f) {
 		preMaxHealth = f;
 	}
-	
+
 	@Override
-	public boolean isInfused10() {
-		return infused10;
+	public float checkMaxHealth() {
+		return checkMaxHealth;
+	}
+
+	@Override
+	public void setCheckMaxHealth(float f) {
+		checkMaxHealth = f;
+	}
+
+	@Override
+	public int getInfusion() {
+		return infusion;
+	}
+
+	@Override
+	public void setInfusion(int i) {
+		infusion = i;
+	}
+
+	@Override
+	public int getMaxInfusion() {
+		return maxInfusion;
+	}
+
+	@Override
+	public void setMaxInfusion(int i) {
+		maxInfusion = i;
 	}
 	
 	@Override
-	public void setInfused10(boolean b) {
-		infused10 = b;
-	}
-	
-	@Override
-	public boolean isInfused90() {
-		return infused90;
-	}
-	
-	@Override
-	public void setInfused90(boolean b) {
-		infused90 = b;
+	public float getInfusionPerc(){
+		return (float)infusion/(float)maxInfusion;
 	}
 	
 	@Override

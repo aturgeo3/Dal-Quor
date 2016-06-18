@@ -39,11 +39,8 @@ public class PlayerInfusionHandler {
 	
 	public PlayerInfusionHandler(EntityPlayerMP p, int a, int m){
 		this(p, a);
+		System.out.println(a+" : "+m);
 		maxAmount = m;
-	}
-	
-	public int getAmount(){
-		return voidicInfusionAmount;
 	}
 	
 	public void update(){
@@ -64,56 +61,57 @@ public class PlayerInfusionHandler {
 				if(voidicInfusionAmount < 0) voidicInfusionAmount = 0;
 			}
 		}
-		if(player != null) handleEffects();
-		if(tick % (5*20) == 0){ //Send packet every 5 seconds to stay synchronized
-			sendPacketUpdates();
-			tick = 1;
-		}else tick++;
+		//voidicInfusionAmount = (int)((float)maxAmount*0.30f);
+		handleEffects();
+		if(tick % 20 == 0) sendPacketUpdates();
+		//if(tick % 60 == 0) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0f);
+		tick++;
 	}
 	
 	private void handleEffects(){
 		if(player.capabilities.isCreativeMode || !player.hasCapability(CapabilityList.VOIDICINFUSION, null) || !player.getCapability(CapabilityList.VOIDICINFUSION, null).hasLoaded()) return;
 		if(voidicInfusionAmount >= maxAmount){
 			player.attackEntityFrom(new DamageSourceVoidicInfusion(), player.getMaxHealth());
+			voidicInfusionAmount = 0;
 			return;
 		}
 		float perc = ((float)voidicInfusionAmount/(float)maxAmount);
 		if(perc >= 0.75f){ //Flight
 			player.capabilities.allowFlying = true;
 			canFly = true;
-			player.sendPlayerAbilities();
 		}else{
 			if(canFly){
 				player.capabilities.allowFlying = false;
 				player.capabilities.isFlying = false;
 				player.capabilities.disableDamage = false;
 				canFly = false;
-				player.sendPlayerAbilities();
 			}
 		}
-		if(perc >= 0.90f){
-			if(!player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused90()){
-				player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused90(true);
-				player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0f);
-			}
-		}else{
-			if(player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused90()){
-				player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused90(false);
-				player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth()-2);
-			}else{
-				if(perc >= 0.10f){
-					if(!player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused10()){
-						player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused10(true);
-						player.getCapability(CapabilityList.VOIDICINFUSION, null).setPreMaxHealth(player.getMaxHealth());
-						player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth()-2);
-					}
-				}else{
-					if(player.getCapability(CapabilityList.VOIDICINFUSION, null).isInfused10()){
-						player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfused10(false);
-						player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth());
-					}
-				}
-			}
+		
+		player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfusion(voidicInfusionAmount);
+
+		float preHp = player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth();
+		float hpPerc = (perc*10.0f) % preHp;
+		float hpCheck = player.getCapability(CapabilityList.VOIDICINFUSION, null).checkMaxHealth();
+		//System.out.println(preHp+" : "+hpPerc);
+
+		boolean flag = false;
+		//System.out.println(player.getMaxHealth()+(preHp*(hpCheck/10.0f))+" : "+preHp);
+		if((player.getMaxHealth()+Math.floor(preHp*(hpCheck/10.0f))) != preHp){
+			preHp = player.getMaxHealth();
+			player.getCapability(CapabilityList.VOIDICINFUSION, null).setPreMaxHealth(preHp);
+			flag = true;
+		}
+		if(hpPerc > 0 && player.getMaxHealth() == preHp){
+			flag = true;
+		}
+		
+		if(hpCheck != hpPerc || flag){
+			float temp = (float) (preHp - (Math.floor(preHp*(hpPerc/10.0f))));
+			temp = (float) (temp < 1.0f ? 1.0f : Math.floor(temp));
+			player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(temp);
+			player.getCapability(CapabilityList.VOIDICINFUSION, null).setCheckMaxHealth(hpPerc);
+			if(player.getHealth() > player.getMaxHealth()) player.setHealth(player.getMaxHealth());
 		}
 	}
 	
@@ -134,6 +132,7 @@ public class PlayerInfusionHandler {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		player.sendPlayerAbilities();
 		return this;
 	}
 

@@ -8,10 +8,15 @@ public interface IVoidicInfusionCapability {
 	public float preMaxHealth();
 	public void setPreMaxHealth(float f);
 	
-	public boolean isInfused10();
-	public void setInfused10(boolean b);
+	public float checkMaxHealth();
+	public void setCheckMaxHealth(float f);
 	
-	public boolean isInfused90();
-	public void setInfused90(boolean b);
+	public int getInfusion();
+	public void setInfusion(int i);
+	
+	public int getMaxInfusion();
+	public void setMaxInfusion(int i);
+	
+	public float getInfusionPerc();
 
 }

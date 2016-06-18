@@ -1,11 +1,14 @@
 package Tamaized.Voidcraft.capabilities;
 
+import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandler {
@@ -16,7 +19,7 @@ public class EventHandler {
 	
 	@SubscribeEvent
     public void attachCapabilityEntity(AttachCapabilitiesEvent.Entity e) {
-        if (e.getEntity() instanceof EntityPlayer) {
+        if (e.getEntity() instanceof EntityPlayerMP) {
     		System.out.println("addCapability "+e);
             e.addCapability(VoidicInfusionCapabilityHandler.ID, new ICapabilitySerializable<NBTTagCompound>(){
             	
@@ -47,5 +50,19 @@ public class EventHandler {
             });
         }
     }
+	
+	@SubscribeEvent
+	public void updateClone(PlayerEvent.Clone e){
+		System.out.println("Clone");
+		EntityPlayer oldPlayer = e.getOriginal();
+		EntityPlayer newPlayer = e.getEntityPlayer();
+		IVoidicInfusionCapability oldCap = oldPlayer.getCapability(CapabilityList.VOIDICINFUSION, null);
+		IVoidicInfusionCapability newCap = newPlayer.getCapability(CapabilityList.VOIDICINFUSION, null);
+		newCap.setCheckMaxHealth(oldCap.checkMaxHealth());
+		newCap.setInfusion(oldCap.getInfusion());
+		newCap.setMaxInfusion(oldCap.getMaxInfusion());
+		newCap.setPreMaxHealth(oldCap.preMaxHealth());
+		newCap.setLoaded();
+	}
 
 }

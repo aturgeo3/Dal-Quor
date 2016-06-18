@@ -41,6 +41,7 @@ import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityStorage;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
+import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
@@ -207,7 +208,7 @@ public class voidCraft {
 		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); //We want to give this class a tick updater
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
-		//FMLCommonHandler.instance().bus().register(infusionHandler);
+		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 				
 		//Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
@@ -247,6 +248,17 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", 11, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
+		
+		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);
+		EntityRegistry.registerEgg(EntityMobSpectreChain.class, 0xFFFFFF, 0xAA0077);
+		EntityRegistry.registerEgg(EntityMobVoidWrath.class, 0xFF0000, 0x000000);
+		EntityRegistry.registerEgg(EntityMobLich.class, 0xAA00FF, 0x000000);
+		EntityRegistry.registerEgg(EntityMobVoidBoss.class, 0x000000, 0xFF0000);
+		EntityRegistry.registerEgg(EntityMobHerobrine.class, 0xFF0000, 0xFFAA00);
+		EntityRegistry.registerEgg(EntityMobDol.class, 0xAAFF00, 0x000000);
+		EntityRegistry.registerEgg(EntityMobZol.class, 0x00AAFF, 0x000000);
+		EntityRegistry.registerEgg(EntityMobXia.class, 0xAA00FF, 0xFFFF00);
+		EntityRegistry.registerEgg(EntityMobXia2.class, 0xAA00FF, 0xFFFF00);
 		
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 		

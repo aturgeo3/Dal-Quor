@@ -122,10 +122,10 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 				dy = 0;
 			}
 		
-			double ezMin = closestEntity.getCollisionBoundingBox().minZ;
-			double ezMax = closestEntity.getCollisionBoundingBox().maxZ;
-			double exMin = closestEntity.getCollisionBoundingBox().minX;
-			double exMax = closestEntity.getCollisionBoundingBox().maxX;
+			double ezMin = closestEntity.getEntityBoundingBox().minZ;
+			double ezMax = closestEntity.getEntityBoundingBox().maxZ;
+			double exMin = closestEntity.getEntityBoundingBox().minX;
+			double exMax = closestEntity.getEntityBoundingBox().maxX;
 			if(tick_Damage <= 0){
 				if(z >= ezMin && z <= ezMax && x >= exMin && x <= exMax){
 					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(entity), 45);

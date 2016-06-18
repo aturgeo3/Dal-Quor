@@ -14,6 +14,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 
@@ -28,11 +29,16 @@ public class ClientInfusionHandler {
 	@SubscribeEvent
 	public void update(ClientTickEvent e){
 		if(e.phase == Phase.END && !Minecraft.getMinecraft().isGamePaused()){
-			DebugEvent.textR = tick+" "+amount;
+			World world = Minecraft.getMinecraft().theWorld;
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			if(world == null || player == null) return;
+			//if(player.hasCapability(CapabilityList.VOIDICINFUSION, null)){
+			//	amount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusion();
+			//	maxAmount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getMaxInfusion();
+			//}
+			DebugEvent.textR = tick+" "+amount+" "+maxAmount;
 			tick++;
 			if(tick % 20 == 0){
-				World world = Minecraft.getMinecraft().theWorld;
-				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 				if(world != null && world.provider != null){
 					if(world.provider.getDimension() == voidCraft.dimensionIdVoid){
 						amount++;

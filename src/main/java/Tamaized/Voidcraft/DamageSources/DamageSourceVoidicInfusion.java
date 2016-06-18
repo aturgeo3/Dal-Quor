@@ -8,6 +8,7 @@ public class DamageSourceVoidicInfusion extends DamageSource {
 		super("VoidicInfusion");
 		this.setDamageBypassesArmor();
 		this.setDamageIsAbsolute();
+		this.setDamageAllowedInCreativeMode();
 	}
 
 }
