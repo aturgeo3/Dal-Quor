@@ -358,6 +358,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
     		i2 = this.rand.nextInt(108) + 10;
     		j2 = z + this.rand.nextInt(16);
     		worldgenminable.generate(this.world, this.rand, new BlockPos(l1, i2, j2));
+    		//System.out.println(l1+":"+i2+":"+j2);
     	}
     	
     	BlockFalling.fallInstantly = false;

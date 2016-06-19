@@ -73,7 +73,7 @@ public class PlayerInfusionHandler {
 				if(voidicInfusionAmount < 0) voidicInfusionAmount = 0;
 			}
 		}
-		//voidicInfusionAmount = (int)((float)maxAmount*0.90f);
+		//voidicInfusionAmount = (int)((float)maxAmount*0.00f);
 		handleEffects();
 		if(tick % 20 == 0) sendPacketUpdates();
 		//if(tick % 60 == 0) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0f);

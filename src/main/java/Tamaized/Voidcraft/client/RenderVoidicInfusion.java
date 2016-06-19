@@ -1,13 +1,12 @@
 package Tamaized.Voidcraft.client;
 
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.entity.Entity;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
 
 public class RenderVoidicInfusion {
 	
@@ -15,7 +14,15 @@ public class RenderVoidicInfusion {
 	public void renderPlayer(RenderPlayerEvent.Pre e){
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
-		GlStateManager.color(100f/100f, 100f/100f, 100f/100f, 1.0f);
+		Entity newEntity = Minecraft.getMinecraft().theWorld.getEntityByID(e.getEntityPlayer().getEntityId());
+		float f1 = 1.0f;
+		if(newEntity.hasCapability(CapabilityList.VOIDICINFUSION, null)){
+			IVoidicInfusionCapability cap = newEntity.getCapability(CapabilityList.VOIDICINFUSION, null);
+			float f2 = 1.65f - cap.getInfusionPerc();
+			f1 = f2 < 0.65f ? 0.65f : f2;
+			f1 = f1 > 1.0f ? 1.0f : f1;
+		}
+		GlStateManager.color(f1, f1, f1, f1);
 	}
 	
 	@SubscribeEvent

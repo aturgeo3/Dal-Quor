@@ -65,7 +65,7 @@ public class VoidicInfusionHandler {
 				}
 			}
 			for(PlayerInfusionHandler data : playerData.values()) data.update();
-			if(tick % (20*10) == 0){
+			if(tick % (20*2) == 0){
 				for(PlayerInfusionHandler handler : playerData.values()){
 					if(handler.getPlayer() == null) continue;
 					ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
