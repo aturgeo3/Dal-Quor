@@ -43,6 +43,18 @@ public class PlayerInfusionHandler {
 		maxAmount = m;
 	}
 	
+	public EntityPlayer getPlayer(){
+		return player;
+	}
+	
+	public int getInfusion(){
+		return voidicInfusionAmount;
+	}
+	
+	public int getMaxInfusion(){
+		return maxAmount;
+	}
+	
 	public void update(){
 		if(player == null || player.isDead){
 			for(WorldServer world : playerMP.getServer().worldServers){
@@ -61,7 +73,7 @@ public class PlayerInfusionHandler {
 				if(voidicInfusionAmount < 0) voidicInfusionAmount = 0;
 			}
 		}
-		//voidicInfusionAmount = (int)((float)maxAmount*0.30f);
+		//voidicInfusionAmount = (int)((float)maxAmount*0.90f);
 		handleEffects();
 		if(tick % 20 == 0) sendPacketUpdates();
 		//if(tick % 60 == 0) player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0f);

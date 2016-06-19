@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.common.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -10,6 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderHeimdall;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
+import Tamaized.Voidcraft.client.LayerVoidSpikes;
+import Tamaized.Voidcraft.client.RenderVoidicInfusion;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
@@ -80,6 +83,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
+		MinecraftForge.EVENT_BUS.register(new RenderVoidicInfusion());
 	
 		float shadowSize = 0.5F;
 		//MOBS
@@ -108,6 +112,12 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
 		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), new ItemRenderNoBreak(renderNoBreak, new TileEntityNoBreak()));
+		
+		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
+		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));
+		
+		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
+		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
 	}
 	
 	@Override

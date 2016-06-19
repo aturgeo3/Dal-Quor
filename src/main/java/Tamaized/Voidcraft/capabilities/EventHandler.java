@@ -1,8 +1,6 @@
 package Tamaized.Voidcraft.capabilities;
 
-import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -19,8 +17,7 @@ public class EventHandler {
 	
 	@SubscribeEvent
     public void attachCapabilityEntity(AttachCapabilitiesEvent.Entity e) {
-        if (e.getEntity() instanceof EntityPlayerMP) {
-    		System.out.println("addCapability "+e);
+        if (e.getEntity() instanceof EntityPlayer) {
             e.addCapability(VoidicInfusionCapabilityHandler.ID, new ICapabilitySerializable<NBTTagCompound>(){
             	
             	IVoidicInfusionCapability inst = CapabilityList.VOIDICINFUSION.getDefaultInstance();
@@ -37,13 +34,11 @@ public class EventHandler {
 
 				@Override
 				public NBTTagCompound serializeNBT() {
-					System.out.println("serializeNBT");
 					return (NBTTagCompound)CapabilityList.VOIDICINFUSION.getStorage().writeNBT(CapabilityList.VOIDICINFUSION, inst, null);
 				}
 
 				@Override
 				public void deserializeNBT(NBTTagCompound nbt) {
-					System.out.println("deserializeNBT");
 					CapabilityList.VOIDICINFUSION.getStorage().readNBT(CapabilityList.VOIDICINFUSION, inst, null, nbt);
 				}
             	

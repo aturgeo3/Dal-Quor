@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -16,8 +17,9 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketE
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.common.client.VoidCraftClientProxy;
-import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
@@ -29,6 +31,7 @@ public class VoidCraftClientPacketHandler{
 	public static final int TYPE_TE_UPDATE = 0;
 	public static final int TYPE_VOIDBOX_UPDATE = 1;
 	public static final int TYPE_INFUSION_UPDATE = 2;
+	public static final int TYPE_INFUSION_UPDATE_ALL = 3;
 	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
@@ -115,6 +118,17 @@ public class VoidCraftClientPacketHandler{
 			else if(pktType == TYPE_INFUSION_UPDATE){
 				VoidCraftClientProxy.infusionHandler.amount = bbis.readInt();
 				VoidCraftClientProxy.infusionHandler.maxAmount = bbis.readInt();
+			}
+			else if(pktType == TYPE_INFUSION_UPDATE_ALL){
+				int id = bbis.readInt();
+				int amount = bbis.readInt();
+				int maxAmount = bbis.readInt();
+				Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(id);
+				if(e.hasCapability(CapabilityList.VOIDICINFUSION, null)){
+					IVoidicInfusionCapability cap = e.getCapability(CapabilityList.VOIDICINFUSION, null);
+					cap.setInfusion(amount);
+					cap.setMaxInfusion(maxAmount);
+				}
 			}
 			bbis.close();   
 		}

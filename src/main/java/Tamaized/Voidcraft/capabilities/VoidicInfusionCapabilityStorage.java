@@ -10,24 +10,21 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusionCapability> {
 	
 	public VoidicInfusionCapabilityStorage(){
-		System.out.println("Registered");
+		voidCraft.logger.info("VoidicInfusionCapabilityStorage Registered");
 	}
 
 	@Override
 	public NBTBase writeNBT(Capability<IVoidicInfusionCapability> capability, IVoidicInfusionCapability instance, EnumFacing side) {
-		System.out.println("writeNBT");
 		NBTTagCompound compound = new NBTTagCompound();
 		compound.setFloat("preMaxHealth", instance.preMaxHealth());
 		compound.setFloat("checkMaxHealth", instance.checkMaxHealth());
 		compound.setInteger("infusion", instance.getInfusion());
 		compound.setInteger("maxInfusion", instance.getMaxInfusion());
-		System.out.println(compound);
 		return compound;
 	}
 
 	@Override
 	public void readNBT(Capability<IVoidicInfusionCapability> capability, IVoidicInfusionCapability instance, EnumFacing side, NBTBase nbt) {
-		System.out.println("readNBT");
 		NBTTagCompound compound = (NBTTagCompound) nbt;
 		instance.setPreMaxHealth(compound.getFloat("preMaxHealth"));
 		instance.setCheckMaxHealth(compound.getFloat("checkMaxHealth"));
