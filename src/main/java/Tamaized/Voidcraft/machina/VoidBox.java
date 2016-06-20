@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -36,15 +37,10 @@ public class VoidBox extends BasicVoidBlockContainer {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!worldIn.isRemote){
-			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, voidCraft.guiIdBox, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.guiIdBox, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
-	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state){
-        return EnumBlockRenderType.MODEL;
-    }
 	
 	private void setDefaultDirection(World world, BlockPos pos){
 		if(!world.isRemote){

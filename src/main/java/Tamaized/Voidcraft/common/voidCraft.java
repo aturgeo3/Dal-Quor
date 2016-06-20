@@ -52,6 +52,7 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
@@ -106,11 +107,6 @@ public class voidCraft {
 	public static VoidCraftCommonProxy proxy;
 
 	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
-
-	public static final int guiIdMacerator = 0;
-	public static final int guiIdBox = 1;
-	public static final int guiIdInfuser = 2;
-	public static final int guiIdHeimdall = 3;
 
 	public VoidTickEvent VoidTickEvent;
 	
@@ -218,6 +214,7 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
 		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
 		
 		for(RegistryBase reg : registry) reg.init();
 		
