@@ -1,18 +1,14 @@
 package Tamaized.Voidcraft.machina;
 
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,13 +16,13 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
@@ -68,7 +64,7 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 		if(worldIn.isRemote){
 			return true;
 		}else{
-			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, voidCraft.guiIdInfuser, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.guiIdInfuser, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}
@@ -156,11 +152,6 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 
 		super.breakBlock(world, pos, state);
 	}
-	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state){
-        return EnumBlockRenderType.MODEL;
-    }
 
 	@SideOnly(Side.CLIENT)
 	/**

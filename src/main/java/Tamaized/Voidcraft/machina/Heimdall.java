@@ -12,6 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
@@ -26,7 +27,7 @@ public class Heimdall extends BasicVoidBlockContainer{
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!worldIn.isRemote){
-			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, voidCraft.guiIdHeimdall, worldIn, pos.getX(), pos.getY(), pos.getZ());	
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.guiIdHeimdall, worldIn, pos.getX(), pos.getY(), pos.getZ());	
 		}
 		return true;
 	}

@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
@@ -168,15 +169,10 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, voidCraft.instance, voidCraft.guiIdMacerator, world, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.guiIdMacerator, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
-	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state){
-        return EnumBlockRenderType.MODEL;
-    }
 	
 	@Override
 	public TileEntity createNewTileEntity(World arg0, int arg1) {

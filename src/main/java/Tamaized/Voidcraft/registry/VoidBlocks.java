@@ -37,6 +37,7 @@ import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
+import Tamaized.Voidcraft.machina.VoidicPowerGen;
 
 public class VoidBlocks extends RegistryBase {
 	
@@ -59,6 +60,7 @@ public class VoidBlocks extends RegistryBase {
 	public static Block voidInfuserInert;
 	public static Block voidInfuser;
 	public static Block Heimdall;
+	public static Block voidicGen;
 	public static Block AIBlock;
 	public static Block xiaBlock;
 	public static Block realityHole;
@@ -83,11 +85,12 @@ public class VoidBlocks extends RegistryBase {
 		blockPortalXia = new BlockPortalXia("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
 		fireVoid = new FireVoid("fireVoid").setCreativeTab(voidCraft.tabs.tabVoid);
 
-		voidMacerator = new VoidMacerator("voidMacerator").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		Heimdall = new Heimdall(Material.IRON, "Heimdall").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(3.5F);
-		voidBox = new VoidBox("voidBox").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuserInert = new BasicVoidBlock(Material.IRON, "voidInfuserInert").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
+		voidMacerator = new VoidMacerator("voidMacerator").setHardness(3.5F);
+		Heimdall = new Heimdall(Material.IRON, "Heimdall").setHardness(3.5F);
+		voidBox = new VoidBox("voidBox").setHardness(7.0F);
+		voidInfuserInert = new BasicVoidBlock(Material.IRON, "voidInfuserInert").setHardness(7.0F);
+		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F);
+		voidicGen = new VoidicPowerGen(Material.IRON, "voidicGen").setHardness(3.5f);
 		
 		//Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
@@ -114,6 +117,7 @@ public class VoidBlocks extends RegistryBase {
 		blockList.add(voidBox);
 		blockList.add(voidInfuserInert);
 		blockList.add(voidInfuser);
+		blockList.add(voidicGen);
 		
 	}
 
