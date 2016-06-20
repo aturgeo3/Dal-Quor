@@ -188,21 +188,12 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 			if(this.burnTime > 0){
 				for(int i=0;i<6;i++){
 					TileEntity te;
-					TileEntityVoidMacerator tevm = null;
 					TileEntityVoidInfuser tevi = null;
 					if(this.burnTime > 0){
 						if(i==0){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ()));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
-						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
@@ -215,16 +206,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 						if(i==1){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ()));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
-						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
-						
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
@@ -237,16 +219,8 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 						if(i==2){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
 						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
-							
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
 								tevi.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevi.burnTime));
@@ -258,15 +232,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 						if(i==3){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ()));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
-						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
@@ -279,16 +245,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 						if(i==4){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
-						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
-						
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;
@@ -301,15 +258,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 						if(i==5){
 							te = this.worldObj.getTileEntity(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1));
 						
-							if(te != null && te.getClass() == TileEntityVoidMacerator.class) tevm = (TileEntityVoidMacerator) te;
 							if(te != null && te.getClass() == TileEntityVoidInfuser.class) tevi = (TileEntityVoidInfuser) te;
-						
-							if(tevm != null && tevm.burnTime < tevm.voidTank.getCapacity()){
-								tevm.burnTime++;
-								tevm.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, tevm.burnTime));
-								this.burnTime-=2;
-								this.voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-							}
 						
 							if(tevi != null && tevi.burnTime < tevi.voidTank.getCapacity()){
 								tevi.burnTime++;

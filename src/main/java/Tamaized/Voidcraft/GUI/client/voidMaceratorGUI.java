@@ -34,7 +34,7 @@ public class voidMaceratorGUI extends GuiContainer {
 		this.fontRendererObj.drawString("Void Infused Macerator", this.xSize/2 - this.fontRendererObj.getStringWidth(name) / 2, this.ySize-260, 4210752);//this.xSize/2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
 		//this.fontRendererObj.drawString("container.inventory", 8, this.ySize-96 + 2, 4210752);
 		
-		this.fontRendererObj.drawString(this.voidMacerator.burnTime+"/3000mB", (this.xSize/12 - this.fontRendererObj.getStringWidth(name) / 12)-5, this.ySize-220, 4210752);
+		this.fontRendererObj.drawString(this.voidMacerator.getPowerAmount()+"/"+voidMacerator.getMaxPower(), (this.xSize/12 - this.fontRendererObj.getStringWidth(name) / 12)-5, this.ySize-220, 4210752);
 		}
 
 	@Override
@@ -44,13 +44,11 @@ public class voidMaceratorGUI extends GuiContainer {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(daTexture);
 		drawTexturedModalRect(guiLeft+78, guiTop+66, 0, 0, xSize/2, ySize/2);
 		
-		if(this.voidMacerator.isBurning()){
-			int k = this.voidMacerator.getBurnTimeRemainingScaled(50); //Use this as height
-			drawTexturedModalRect(guiLeft+93, guiTop+134 - k, 0, 500-(k), 20, k+1); //PosX, PosY, Texture Real PosX, Texture Real PosY, width, height (Width/Height: if has 'k+1' or 'k' = do not touch! [Leave it as K+1 or K!!!])
-		}
+		int k = (int) (((float)voidMacerator.getPowerAmount()/(float)voidMacerator.getMaxPower())*50); //Use this as height
+		drawTexturedModalRect(guiLeft+93, guiTop+134 - k, 0, 500-(k), 20, k+1); //PosX, PosY, Texture Real PosX, Texture Real PosY, width, height (Width/Height: if has 'k+1' or 'k' = do not touch! [Leave it as K+1 or K!!!])
 		
-		int k = this.voidMacerator.getCookProgressScaled(26);
-		drawTexturedModalRect(guiLeft+188, guiTop+99, 0, 434, k+1, 16);
+		int k1 = (int) (((float)this.voidMacerator.cookTime/(float)voidMacerator.furnaceSpeed)*(26));
+		drawTexturedModalRect(guiLeft+188, guiTop+99, 0, 434, k1+1, 16);
 		
 		
 	}

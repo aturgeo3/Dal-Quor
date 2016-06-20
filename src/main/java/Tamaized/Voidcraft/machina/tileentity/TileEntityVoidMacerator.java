@@ -10,53 +10,39 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.addons.MaceratorRecipes;
-import Tamaized.Voidcraft.machina.addons.VoidTank;
+import Tamaized.Voidcraft.power.IVoidicPower;
+import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 
-public class TileEntityVoidMacerator extends TileEntity implements ITickable, ISidedInventory, IFluidHandler{
+public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ITickable, ISidedInventory, IVoidicPower{
 	
-	private String localizedName;
-	
-	public VoidTank voidTank;
-	
-	private static final int[] slots_top = new int[]{0};
-	private static final int[] slots_bottom = new int[]{2, 1};
-	private static final int[] slots_sides = new int[]{1};
-	private static final int[] slots_all = new int[]{0, 1, 2};
-	
-	private ItemStack[] slots  = new ItemStack[3];//Amount of Slots
+	private static final int[] slots_all = new int[]{0, 1};
+	private ItemStack[] slots  = new ItemStack[2];//Amount of Slots
 	
 	public int furnaceSpeed = 101;
-	public int burnTime;
+	public int voidicPower;
 	public int currentItemBurnTime;
 	public int cookTime;
 
 	
 	public TileEntityVoidMacerator(){
 		super();
-		voidTank = new VoidTank(this, 3000);
 	}
 	
 	@Override
@@ -80,32 +66,40 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 			}
 		}
 		
-		this.burnTime = nbt.getInteger("burnTime");
-		if(voidTank.getFluid() != null) this.voidTank.getFluid().amount = this.burnTime;
+		this.voidicPower = nbt.getInteger("voidicPower");
 		this.cookTime = nbt.getInteger("cookTime");
 		this.currentItemBurnTime = getItemBurnTime(this.slots[1]);
+	}
+
+	@Override
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
 		
-		if(nbt.hasKey("CustomName")){
-			this.localizedName = nbt.getString("CustomName");
+		nbt.setInteger("voidicPower",  this.voidicPower);
+		nbt.setInteger("cookTime",  this.cookTime);
+		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
+		
+		NBTTagList list = new NBTTagList();
+		
+		for(int i = 0; i < this.slots.length; i++){
+			if(this.slots[i] != null){
+				NBTTagCompound nbtc = new NBTTagCompound();
+				nbtc.setByte("Slot", (byte) i);
+				this.slots[i].writeToNBT(nbtc);
+				list.appendTag(nbtc);
+			}
 		}
+		
+		nbt.setTag("Items", list);
+		
+		return nbt;
 	}
 	
+	@Override
 	public int getSizeInventory(){
 		return this.slots.length;
 	}
 	
-	public String getInvName(){
-		return this.isInvNameLocalized() ? this.localizedName : "container.voidMacerator";
-	}
-	
-	public boolean isInvNameLocalized() {
-		return this.localizedName != null && this.localizedName.length() > 0;
-	}
-	
-	public void setGuiDisplayName(String displayName) {
-		this.localizedName = displayName;
-	}
-
 	@Override
 	public ItemStack getStackInSlot(int i) {
 		return this.slots[i];
@@ -174,42 +168,21 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		//burnTime = voidTank.getFluidAmount();
 		//if(burnTime > 0)System.out.println(burnTime +" : "+ voidTank.getFluidAmount());
 		
-		if(this.burnTime > 3000) this.currentItemBurnTime = this.burnTime = 3000;
-		if(this.burnTime < 0) this.currentItemBurnTime = this.burnTime = 0;
+		//if(this.burnTime > 3000) this.currentItemBurnTime = this.burnTime = 3000;
+		//if(this.burnTime < 0) this.currentItemBurnTime = this.burnTime = 0;
 		//if(voidTank.getFluid() != null) voidTank.getFluid().amount = this.burnTime;
 		
 		
-		boolean flag = (this.cookTime>0 && burnTime>0);
+		boolean flag = (this.cookTime>0 && voidicPower>0);
 		boolean flag1 = false;
 		
-		if(this.burnTime > 0 && this.cookTime > 0) {
-			this.burnTime --;
-			voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
+		if(this.voidicPower > 0 && this.cookTime > 0) {
+			this.voidicPower --;
 			//this.burnTime = doDrain(EnumFacing.NORTH, 1, true);
 		}
 		
 		if(!this.worldObj.isRemote){
-			if(this.burnTime < 2001 /*&& this.canSmelt()*/){
-				
-				if(this.burnTime > 3000) this.currentItemBurnTime = this.burnTime = 3000;
-				if(getItemBurnTime(this.slots[1]) > 0){
-					flag1 = true;
-					
-					fill(EnumFacing.NORTH, new FluidStack(voidCraft.fluids.voidFluid, getItemBurnTime(this.slots[1])), true);
-					this.currentItemBurnTime = this.burnTime = voidTank.getFluidAmount();
-					
-					if(this.slots[1] != null){
-						this.slots[1].stackSize--;
-						this.slots[1] = new ItemStack(Items.BUCKET);
-						
-						if(this.slots[1].stackSize == 0){
-							this.slots[1] = this.slots[1].getItem().getContainerItem(this.slots[1]);
-						}
-					}
-				}
-			}
-			
-			if(this.isBurning() && this.canSmelt()){
+			if(voidicPower>0 && this.canSmelt()){
 				this.cookTime++;
 				
 				if(this.cookTime == this.furnaceSpeed){
@@ -236,7 +209,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 			this.markDirty();
 		}
 		
-		if(!this.worldObj.isRemote) sendPacketToClients();
+		//if(!this.worldObj.isRemote) sendPacketToClients();
 	}
 	
 	private void sendPacketToClients(){
@@ -251,7 +224,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	        outputStream.writeInt(this.pos.getX());
 	        outputStream.writeInt(this.pos.getY());
 	        outputStream.writeInt(this.pos.getZ());
-	        outputStream.writeInt(this.burnTime);
+	        //outputStream.writeInt(this.burnTime);
 	        outputStream.writeInt(this.cookTime);
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
@@ -275,7 +248,7 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.func_189515_b(nbt);
 		
-		nbt.setInteger("burnTime",  this.burnTime);
+		//nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
 		
@@ -292,9 +265,6 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		
 		nbt.setTag("Items", list);
 		
-		if(this.isInvNameLocalized()){
-			nbt.setString("CustomName", this.localizedName);
-		}
 		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 		
@@ -339,10 +309,6 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 		
 	}
 
-	public boolean isBurning() {
-		return this.burnTime > 0;
-	}
-
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
@@ -379,118 +345,6 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
 		return i == 2 || itemstack == new ItemStack(Items.BUCKET);
-	}
-
-	public int getBurnTimeRemainingScaled(int i) {
-		if(this.currentItemBurnTime == 0){
-			this.currentItemBurnTime = this.furnaceSpeed;
-		}
-		return this.burnTime * i / 3000;
-	}
-
-	public int getCookProgressScaled(int i) {
-		return this.cookTime * i / this.furnaceSpeed;
-	}
-	
-	
-	
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
-		
-		nbt.setInteger("burnTime",  this.burnTime);
-		nbt.setInteger("cookTime",  this.cookTime);
-		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
-		
-		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.slots.length; i++){
-			if(this.slots[i] != null){
-				NBTTagCompound nbtc = new NBTTagCompound();
-				nbtc.setByte("Slot", (byte) i);
-				this.slots[i].writeToNBT(nbtc);
-				list.appendTag(nbtc);
-			}
-		}
-		
-		nbt.setTag("Items", list);
-		
-		if(this.isInvNameLocalized()){
-			nbt.setString("CustomName", this.localizedName);
-		}
-		return nbt;
-	}
-
-	@Override
-	public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
-		return voidTank.fill(resource, doFill);
-	}
-
-	@Override
-	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
-		
-		
-		
-		
-		if (resource.isFluidEqual(voidTank.getFluid()))
-		{
-			return voidTank.drain(resource.amount, doDrain);
-		}
-		else
-		{
-			return voidTank.drain(0, doDrain);
-		}
-	}
-
-	@Override
-	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
-		
-		//if(this.burnTime > 0 && voidTank.getFluidAmount() > 0){
-		//	this.burnTime-=maxDrain;
-		//}
-		
-		FluidStack ret = voidTank.drain(maxDrain, doDrain);
-		
-		if(ret != null){
-			return ret;
-		}else{
-			return null;
-		}
-	}
-	
-	public int doDrain(EnumFacing from, int maxDrain, boolean doDrain){
-		FluidStack retF = drain(from, maxDrain, doDrain);
-		
-		int retI = 0;
-		if(retF != null){
-			retI = retF.amount;
-		}
-		
-		return retI;
-	}
-
-	@Override
-	public boolean canFill(EnumFacing from, Fluid fluid) {
-		if (voidTank.getFluid() == null)
-		{
-			return true;
-		}
-
-		return this.burnTime < 3000 && voidTank.getFluid().getFluid() == fluid;
-	}
-
-	@Override
-	public boolean canDrain(EnumFacing from, Fluid fluid) {
-		if (voidTank.getFluid() == null)
-		{
-			return false;
-		}
-
-		return this.burnTime > 0 && voidTank.getFluid().getFluid() == fluid;
-	}
-
-	@Override
-	public FluidTankInfo[] getTankInfo(EnumFacing from) {
-		return new FluidTankInfo[] {new FluidTankInfo(voidTank.getFluid(), voidTank.getCapacity())};
 	}
 
 	@Override
@@ -545,5 +399,25 @@ public class TileEntityVoidMacerator extends TileEntity implements ITickable, IS
 	public ITextComponent getDisplayName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int getMaxPower() {
+		return 50000;
+	}
+
+	@Override
+	public int maxPowerTransfer() {
+		return 160;
+	}
+
+	@Override
+	public boolean canOutputPower(EnumFacing face) {
+		return false;
+	}
+
+	@Override
+	public boolean canInputPower(EnumFacing face) {
+		return true;
 	}
 }

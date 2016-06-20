@@ -89,9 +89,6 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 			world.setBlockState(pos, this.getStateFromMeta(4), 2);
 		}
 		
-		if(stack.hasDisplayName()){
-			((TileEntityVoidMacerator) world.getTileEntity(pos)).setGuiDisplayName(stack.getDisplayName());
-		}
 	}
 
 	/**

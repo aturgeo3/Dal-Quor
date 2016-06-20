@@ -64,7 +64,6 @@ public class VoidCraftClientPacketHandler{
 		    		int cookTime = bbis.readInt();
 		    		
 		        	TileEntityVoidMacerator tet = (TileEntityVoidMacerator)te;
-		        	tet.burnTime = burnTime;
 		        	tet.cookTime = cookTime;
 		        	te.markDirty();
 		        }

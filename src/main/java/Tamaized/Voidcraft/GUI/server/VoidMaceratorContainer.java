@@ -48,8 +48,8 @@ public class VoidMaceratorContainer extends Container {
 				icontainerlistener.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
 			}
 			
-			if(this.lastBurnTime != this.voidtilemacerator.burnTime){
-				icontainerlistener.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
+			if(this.lastBurnTime != this.voidtilemacerator.getPowerAmount()){
+				icontainerlistener.sendProgressBarUpdate(this, 1, this.voidtilemacerator.getPowerAmount());
 			}
 			
 			if(this.lastItemBurnTime != this.voidtilemacerator.currentItemBurnTime){
@@ -58,7 +58,7 @@ public class VoidMaceratorContainer extends Container {
 		}
 		
 		this.lastCookTime = this.voidtilemacerator.cookTime;
-		this.lastBurnTime = this.voidtilemacerator.burnTime;
+		this.lastBurnTime = this.voidtilemacerator.getPowerAmount();
 		this.lastItemBurnTime = this.voidtilemacerator.currentItemBurnTime;
 	}
 	
@@ -66,7 +66,7 @@ public class VoidMaceratorContainer extends Container {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2){
 		if(slot == 0) this.voidtilemacerator.cookTime = par2;
-		if(slot == 1) this.voidtilemacerator.burnTime = par2;
+		if(slot == 1) this.voidtilemacerator.setPowerAmount(par2);
 		if(slot == 2) this.voidtilemacerator.currentItemBurnTime = par2;
 	}
 	

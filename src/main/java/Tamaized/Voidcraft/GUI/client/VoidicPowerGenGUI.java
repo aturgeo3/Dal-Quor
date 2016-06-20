@@ -26,7 +26,7 @@ public class VoidicPowerGenGUI extends GuiContainer {
 	public void updateScreen(){
 		
 		{
-			float scale = 47;
+			float scale = 50;
 			int k = (int) (((float)te.getFluidAmount()/(float)te.getMaxFluidAmount())*scale);
 			drawTexturedModalRect(guiLeft+93, guiTop+134 - k, 0, 470-(k), 12, k+1); 
 		}

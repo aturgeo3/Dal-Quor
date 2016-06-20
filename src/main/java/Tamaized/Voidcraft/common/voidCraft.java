@@ -52,6 +52,7 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
@@ -215,6 +216,7 @@ public class voidCraft {
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
 		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
 		
 		for(RegistryBase reg : registry) reg.init();
 		

@@ -17,8 +17,10 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
 import Tamaized.Voidcraft.power.IVoidicPower;
+import Tamaized.Voidcraft.power.TileEntityVoidicPower;
+import Tamaized.Voidcraft.power.VoidicPowerHandler;
 
-public class TileEntityVoidicPowerGen extends TileEntity implements ITickable, ISidedInventory, IFluidHandler, IVoidicPower{
+public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ITickable, ISidedInventory, IFluidHandler{
 	
 	public static final int SLOT_DEFAULT = 0;
 	private ItemStack[] slots = new ItemStack[1];
@@ -78,6 +80,7 @@ public class TileEntityVoidicPowerGen extends TileEntity implements ITickable, I
 
 	@Override
 	public void update() {
+		rate = 10;
 		int gen = genAmount*rate;
 		int use = useAmount*rate;
 		if(getFluidAmount() <= getMaxFluidAmount() - 1000){
@@ -86,10 +89,11 @@ public class TileEntityVoidicPowerGen extends TileEntity implements ITickable, I
 				slots[SLOT_DEFAULT] = new ItemStack(Items.BUCKET);
 			}
 		}
-		if(getFluidAmount() > use && voidicPower < getMaxPower()-gen){
+		if(getFluidAmount() >= use && voidicPower <= getMaxPower()-gen){
 			drain(new FluidStack(voidCraft.fluids.voidFluid, use), true);
 			voidicPower+=gen;
 		}
+		VoidicPowerHandler.sendToSurrounding(this, worldObj, pos);
 	}
 
 	@Override
@@ -263,11 +267,6 @@ public class TileEntityVoidicPowerGen extends TileEntity implements ITickable, I
 	}
 
 	@Override
-	public int getPowerAmount() {
-		return voidicPower;
-	}
-
-	@Override
 	public int getMaxPower() {
 		return 100000;
 	}
@@ -278,30 +277,13 @@ public class TileEntityVoidicPowerGen extends TileEntity implements ITickable, I
 	}
 
 	@Override
-	public int recievePower(int a) {
-		int sendBack = 0;
-		if(a > maxPowerTransfer()){
-			a = sendBack = a - maxPowerTransfer();
-		}
-		if(voidicPower + a > getMaxPower()){
-			sendBack += a = getMaxPower() - voidicPower;
-		}
-		voidicPower += a;
-		return sendBack;
+	public boolean canOutputPower(EnumFacing face) {
+		return true;
 	}
 
 	@Override
-	public int sendPower(int limit) {
-		int amount = maxPowerTransfer();
-		if(limit != -1 && maxPowerTransfer() > limit) amount = limit;
-		if(voidicPower - amount < 0) amount = voidicPower;
-		voidicPower -= amount;
-		return amount;
-	}
-	
-	@Override
-	public void setPowerAmount(int amount){
-		voidicPower = amount > getMaxPower() ? getMaxPower() : amount < 0 ? 0 : amount;
+	public boolean canInputPower(EnumFacing face) {
+		return false;
 	}
 
 }

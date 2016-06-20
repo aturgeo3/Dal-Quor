@@ -37,6 +37,7 @@ import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
+import Tamaized.Voidcraft.machina.VoidicPowerCable;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
 
 public class VoidBlocks extends RegistryBase {
@@ -55,15 +56,19 @@ public class VoidBlocks extends RegistryBase {
 	public static Block blockPortalVoid;
 	public static Block blockPortalXia;
 	public static Block fireVoid;
+	public static Block realityHole;
+	
 	public static Block voidBox;
 	public static Block voidMacerator;
 	public static Block voidInfuserInert;
 	public static Block voidInfuser;
 	public static Block Heimdall;
+	
 	public static Block voidicGen;
+	public static Block voidicCable;
+	
 	public static Block AIBlock;
 	public static Block xiaBlock;
-	public static Block realityHole;
 
 	@Override
 	public void preInit() {
@@ -91,6 +96,7 @@ public class VoidBlocks extends RegistryBase {
 		voidInfuserInert = new BasicVoidBlock(Material.IRON, "voidInfuserInert").setHardness(7.0F);
 		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F);
 		voidicGen = new VoidicPowerGen(Material.IRON, "voidicGen").setHardness(3.5f);
+		voidicCable = new VoidicPowerCable(Material.CIRCUITS, "voidicCable").setHardness(1.5f);
 		
 		//Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
@@ -118,6 +124,7 @@ public class VoidBlocks extends RegistryBase {
 		blockList.add(voidInfuserInert);
 		blockList.add(voidInfuser);
 		blockList.add(voidicGen);
+		blockList.add(voidicCable);
 		
 	}
 
