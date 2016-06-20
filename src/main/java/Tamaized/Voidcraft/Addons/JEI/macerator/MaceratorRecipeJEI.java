@@ -27,7 +27,6 @@ public class MaceratorRecipeJEI extends BlankRecipeWrapper {
 	public List getInputs() {
 		ArrayList<Collection> ret = new ArrayList<Collection>();
 		ret.add(Collections.singletonList(input));
-		ret.add(Collections.singletonList(voidCraft.fluids.voidBucket));
 		return ret;
 	}
 	

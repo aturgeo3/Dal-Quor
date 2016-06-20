@@ -13,13 +13,10 @@ public class TileEntityVoidicPowerCable extends TileEntityVoidicPower implements
 	
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
-		NBTTagList list = (NBTTagList) nbt.getTag("Items");
-		voidicPower = nbt.getInteger("voidicPower");
 	}
 	
 	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
 		super.func_189515_b(nbt);
-		nbt.setInteger("voidicPower",  voidicPower);
 		return nbt;
 	}
 	

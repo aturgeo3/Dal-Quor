@@ -58,15 +58,6 @@ public class VoidCraftClientPacketHandler{
 					bbis.close();
 					return;
 				}
-				if(te instanceof TileEntityVoidMacerator){
-		        	
-		        	int burnTime = bbis.readInt();
-		    		int cookTime = bbis.readInt();
-		    		
-		        	TileEntityVoidMacerator tet = (TileEntityVoidMacerator)te;
-		        	tet.cookTime = cookTime;
-		        	te.markDirty();
-		        }
 		        
 		        if(te instanceof TileEntityHeimdall){
 		        	

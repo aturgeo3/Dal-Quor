@@ -9,22 +9,21 @@ import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
 public class VoidMaceratorContainer extends Container {
 	
-	private TileEntityVoidMacerator voidtilemacerator;
+	private TileEntityVoidMacerator te;
 	
-	public int lastBurnTime;
-	public int lastItemBurnTime;
-	public int lastCookTime;
-
+	private int powerAmount = 0;
+	private int cookAmount = 0;
+	
 	public VoidMaceratorContainer(InventoryPlayer inventory, TileEntityVoidMacerator tileEntity) {
-		this.voidtilemacerator = tileEntity;
+		this.te = tileEntity;
 		
 		this.addSlotToContainer(new Slot(tileEntity, 0, 168, 100));
-		this.addSlotToContainer(new Slot(tileEntity, 1, 130, 100));
-		this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 2, 225, 101));
+		this.addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 1, 225, 101));
 		
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 9; j++){
@@ -40,34 +39,26 @@ public class VoidMaceratorContainer extends Container {
 	@Override
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
-
 		for (int i = 0; i < this.listeners.size(); ++i){
 			IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
 			
-			if(this.lastCookTime != this.voidtilemacerator.cookTime){
-				icontainerlistener.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
+			if(this.cookAmount != te.cookingTick){
+				cookAmount = te.cookingTick;
+				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
 			}
 			
-			if(this.lastBurnTime != this.voidtilemacerator.getPowerAmount()){
-				icontainerlistener.sendProgressBarUpdate(this, 1, this.voidtilemacerator.getPowerAmount());
-			}
-			
-			if(this.lastItemBurnTime != this.voidtilemacerator.currentItemBurnTime){
-				icontainerlistener.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
+			if(this.powerAmount != te.getPowerAmount()){
+				powerAmount = te.getPowerAmount();
+				icontainerlistener.sendProgressBarUpdate(this, 1, powerAmount);
 			}
 		}
-		
-		this.lastCookTime = this.voidtilemacerator.cookTime;
-		this.lastBurnTime = this.voidtilemacerator.getPowerAmount();
-		this.lastItemBurnTime = this.voidtilemacerator.currentItemBurnTime;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2){
-		if(slot == 0) this.voidtilemacerator.cookTime = par2;
-		if(slot == 1) this.voidtilemacerator.setPowerAmount(par2);
-		if(slot == 2) this.voidtilemacerator.currentItemBurnTime = par2;
+		if(slot == 0) te.cookingTick = par2;
+		if(slot == 1) te.setPowerAmount(par2);
 	}
 	
 	@Override
@@ -79,28 +70,29 @@ public class VoidMaceratorContainer extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			
-			if(hoverSlot == 2){
-				if(!this.mergeItemStack(itemstack1, 3, 39, true)){
+			if(hoverSlot == 0){
+				if(!this.mergeItemStack(itemstack1, 2, 38, true)){
 					return null;
 				}
-				
 				slot.onSlotChange(itemstack1, itemstack);
-			}else if(hoverSlot != 1 && hoverSlot != 0){
-				if(TileEntityVoidMacerator.isItemFuel(itemstack1)){
-					if(!this.mergeItemStack(itemstack1, 1, 2, false)){
+			}else{
+				if(!this.getSlot(0).getHasStack() && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)){
+					if(!this.mergeItemStack(itemstack1, 0, 1, false)){
 						return null;
 					}
-				}else if(hoverSlot >= 3 && hoverSlot < 30){
-					if(!this.mergeItemStack(itemstack1, 30, 39, false)){
+				}else if(hoverSlot == 1){
+					if(!this.mergeItemStack(itemstack1, 2, 38, false)){
 						return null;
 					}
-				}else if(hoverSlot >= 30 && hoverSlot <= 38){
-					if(!this.mergeItemStack(itemstack1, 3, 30, false)){
+				}else if(hoverSlot >= 2 && hoverSlot < 29){
+					if(!this.mergeItemStack(itemstack1, 29, 38, false)){
+						return null;
+					}
+				}else if(hoverSlot >= 29 && hoverSlot < 38){
+					if(!this.mergeItemStack(itemstack1, 2, 29, false)){
 						return null;
 					}
 				}
-			}else if(!this.mergeItemStack(itemstack1, 3, 39, false)){
-				return null;
 			}
 			
 			if(itemstack1.stackSize == 0){
@@ -115,26 +107,11 @@ public class VoidMaceratorContainer extends Container {
 			
 			slot.onPickupFromSlot(player, itemstack1);
 		}
-		
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return this.voidtilemacerator.isUseableByPlayer(entityplayer);
+		return te.isUseableByPlayer(entityplayer);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

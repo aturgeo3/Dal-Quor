@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -32,18 +33,15 @@ import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 
 public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ITickable, ISidedInventory, IVoidicPower{
 	
-	private static final int[] slots_all = new int[]{0, 1};
-	private ItemStack[] slots  = new ItemStack[2];//Amount of Slots
+	public static final int SLOT_INPUT = 0;
+	public static final int SLOT_OUTPUT = 1;
+	public static final int[] SLOTS_ALL = new int[]{0, 1};
+	private ItemStack[] slots  = new ItemStack[2];
 	
-	public int furnaceSpeed = 101;
-	public int voidicPower;
-	public int currentItemBurnTime;
-	public int cookTime;
-
+	public int finishTick = 101;
+	public int cookingTick = 0;
 	
-	public TileEntityVoidMacerator(){
-		super();
-	}
+	private Item lastCookingItem = null;
 	
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate){
@@ -65,19 +63,14 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IT
 				}
 			}
 		}
-		
-		this.voidicPower = nbt.getInteger("voidicPower");
-		this.cookTime = nbt.getInteger("cookTime");
-		this.currentItemBurnTime = getItemBurnTime(this.slots[1]);
+		this.cookingTick = nbt.getInteger("cookingTick");
 	}
 
 	@Override
 	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
 		super.func_189515_b(nbt);
 		
-		nbt.setInteger("voidicPower",  this.voidicPower);
-		nbt.setInteger("cookTime",  this.cookTime);
-		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
+		nbt.setInteger("cookingTick",  this.cookingTick);
 		
 		NBTTagList list = new NBTTagList();
 		
@@ -159,182 +152,79 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IT
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return this.worldObj.getTileEntity(this.pos) != this ? false: entityplayer.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 	}
-
 	
 	@Override
 	public void update(){
-		
-		//voidTank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, this.burnTime));
-		//burnTime = voidTank.getFluidAmount();
-		//if(burnTime > 0)System.out.println(burnTime +" : "+ voidTank.getFluidAmount());
-		
-		//if(this.burnTime > 3000) this.currentItemBurnTime = this.burnTime = 3000;
-		//if(this.burnTime < 0) this.currentItemBurnTime = this.burnTime = 0;
-		//if(voidTank.getFluid() != null) voidTank.getFluid().amount = this.burnTime;
-		
-		
-		boolean flag = (this.cookTime>0 && voidicPower>0);
-		boolean flag1 = false;
-		
-		if(this.voidicPower > 0 && this.cookTime > 0) {
-			this.voidicPower --;
-			//this.burnTime = doDrain(EnumFacing.NORTH, 1, true);
+		boolean cooking = false;
+		if(lastCookingItem == null || slots[SLOT_INPUT] == null || lastCookingItem != slots[SLOT_INPUT].getItem()){
+			cookingTick = 0;
+			lastCookingItem = (slots[SLOT_INPUT] != null) ? slots[SLOT_INPUT].getItem() : null;
 		}
 		
-		if(!this.worldObj.isRemote){
-			if(voidicPower>0 && this.canSmelt()){
-				this.cookTime++;
-				
-				if(this.cookTime == this.furnaceSpeed){
-					this.cookTime = 0;
-					this.smeltItem();
-					flag1 = true;
+		if(voidicPower > 0 && canCook()) {
+			cooking = true;
+			voidicPower--;
+		}
+		
+		if(!worldObj.isRemote){
+			if(cooking){
+				cookingTick++;
+				if(cookingTick >= finishTick){
+					cookingTick = 0;
+					bakeItem();
+					this.markDirty();
 				}
-				
-			}else if(slots[0] == null) this.cookTime = 0;
+			}
 			
 			IBlockState state = worldObj.getBlockState(pos);
 			if(state.getBlock() instanceof VoidMacerator){
 				VoidMacerator theMacerator = (VoidMacerator) state.getBlock();
 				if(theMacerator != null){
-					if(theMacerator.getIsActive(state) && !flag) theMacerator.setState(false, worldObj, pos);
-					if(!theMacerator.getIsActive(state) && flag) theMacerator.setState(true, worldObj, pos);
+					if(theMacerator.getIsActive(state) && !cooking) theMacerator.setState(false, worldObj, pos);
+					if(!theMacerator.getIsActive(state) && cooking) theMacerator.setState(true, worldObj, pos);
 				}
 			}
-			
-			
-		}
-		
-		if(flag1){
-			this.markDirty();
-		}
-		
-		//if(!this.worldObj.isRemote) sendPacketToClients();
-	}
-	
-	private void sendPacketToClients(){
-
-		NBTTagCompound znbt = new NBTTagCompound();
-		this.func_189515_b(znbt);
-		
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
-	    try {
-	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_TE_UPDATE);
-	        outputStream.writeInt(this.pos.getX());
-	        outputStream.writeInt(this.pos.getY());
-	        outputStream.writeInt(this.pos.getZ());
-	        //outputStream.writeInt(this.burnTime);
-	        outputStream.writeInt(this.cookTime);
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    }
-	               
-	    FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-
-	    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
-	    
-	    if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-	    this.func_189518_D_();
-		 try {
-			bos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
-	@Override
-	public SPacketUpdateTileEntity func_189518_D_(){
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.func_189515_b(nbt);
-		
-		//nbt.setInteger("burnTime",  this.burnTime);
-		nbt.setInteger("cookTime",  this.cookTime);
-		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
-		
-		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.slots.length; i++){
-			if(this.slots[i] != null){
-				NBTTagCompound nbtc = new NBTTagCompound();
-				nbtc.setByte("Slot", (byte) i);
-				this.slots[i].writeToNBT(nbtc);
-				list.appendTag(nbtc);
-			}
-		}
-		
-		nbt.setTag("Items", list);
-		
-		return new SPacketUpdateTileEntity(pos, 2, nbt);
-	}
-		
-	@Override
-	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
-	 readFromNBT(packet.getNbtCompound());
-	}
-
-	private void smeltItem() {
-		if(this.canSmelt()){
-			ItemStack itemstack = MaceratorRecipes.smelting().getSmeltingResult(this.slots[0]);
-		
-			if(this.slots[2] == null){
-				this.slots[2] = itemstack.copy();
-			}else if(this.slots[2].isItemEqual(itemstack)){
-				this.slots[2].stackSize += itemstack.stackSize;
+	private void bakeItem() {
+		if(canCook()){
+			ItemStack itemstack = MaceratorRecipes.smelting().getSmeltingResult(this.slots[SLOT_INPUT]);
+			if(this.slots[SLOT_OUTPUT] == null){
+				this.slots[SLOT_OUTPUT] = itemstack.copy();
+			}else if(this.slots[SLOT_OUTPUT].isItemEqual(itemstack)){
+				this.slots[SLOT_OUTPUT].stackSize += itemstack.stackSize;
 			}
 			
-			this.slots[0].stackSize--;
+			this.slots[SLOT_INPUT].stackSize--;
 			
-			if(this.slots[0].stackSize <= 0){
-				this.slots[0] = null;
+			if(this.slots[SLOT_INPUT].stackSize <= 0){
+				this.slots[SLOT_INPUT] = null;
 			}
 		}
 	}
 
-	private boolean canSmelt() {
-		if(this.slots[0] == null){
+	private boolean canCook() {
+		if(this.slots[SLOT_INPUT] == null){
 			return false;
 		}else{
-				ItemStack itemstack = MaceratorRecipes.smelting().getSmeltingResult(this.slots[0]);
-						
-				if(itemstack == null) return false;
-				if(this.slots[2] == null) return true;
-				if(!this.slots[2].isItemEqual(itemstack)) return false;
-				
-				int result = this.slots[2].stackSize + itemstack.stackSize;
-				
-				return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-				
+			ItemStack itemstack = MaceratorRecipes.smelting().getSmeltingResult(this.slots[SLOT_INPUT]);
+			if(itemstack == null) return false;
+			if(this.slots[SLOT_OUTPUT] == null) return true;
+			if(!this.slots[SLOT_OUTPUT].isItemEqual(itemstack)) return false;
+			int result = this.slots[SLOT_OUTPUT].stackSize + itemstack.stackSize;
+			return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
 		}
-		
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
-	}
-
-	public static boolean isItemFuel(ItemStack itemstack) {
-		return getItemBurnTime(itemstack) > 0;
-	}
-
-	public static int getItemBurnTime(ItemStack itemstack) {
-		if(itemstack == null){
-			return 0;
-		}else{
-			ItemStack i = itemstack;
-			
-			if(i.getItem() == voidCraft.fluids.voidBucket.getItem()) return 1000;
-			//System.out.println(i+" : "+voidCraft.fluids.voidBucket);
-			
-			return 0;
-		}
+		return i == SLOT_OUTPUT ? false : true;
 	}
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		//return var1 == 0 ? slots_bottom : (var1 == 1 ? slots_top : slots_sides);
-		return slots_all;
+		return SLOTS_ALL;
 	}
 
 	@Override
@@ -344,60 +234,51 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IT
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
-		return i == 2 || itemstack == new ItemStack(Items.BUCKET);
+		return i == SLOT_OUTPUT;
 	}
 
 	@Override
 	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "teVoidMacerator";
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

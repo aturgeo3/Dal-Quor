@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.power;
 
 import java.util.ArrayList;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -9,6 +11,19 @@ public abstract class TileEntityVoidicPower extends TileEntity implements IVoidi
 	
 	protected int voidicPower = 0;
 	protected ArrayList<EnumFacing> blockFace = new ArrayList<EnumFacing>();
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt){
+		super.readFromNBT(nbt);
+		this.voidicPower = nbt.getInteger("voidicPower");
+	}
+
+	@Override
+	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
+		super.func_189515_b(nbt);
+		nbt.setInteger("voidicPower",  this.voidicPower);
+		return nbt;
+	}
 
 	@Override
 	public int getPowerAmount() {

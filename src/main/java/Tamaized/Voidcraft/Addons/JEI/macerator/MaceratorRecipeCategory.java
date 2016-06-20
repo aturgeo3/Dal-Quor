@@ -24,19 +24,18 @@ public class MaceratorRecipeCategory implements IRecipeCategory {
 	private IDrawableAnimated progressAnimation;
 	
 	private static final int OUTPUT_SLOT = 0;
-    private static final int FLUID_SLOT = 1;
     private static final int INPUT_SLOT = 2;
     
     private final ICraftingGridHelper craftingGridHelper;
     
     public MaceratorRecipeCategory(){
     	craftingGridHelper = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createCraftingGridHelper(INPUT_SLOT, OUTPUT_SLOT);
-    	
-    	IDrawableStatic fluidRender = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 452, 20, 46, 20, 0, 15, 0);
-    	fluidAnimation = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createAnimatedDrawable(fluidRender, 200, IDrawableAnimated.StartDirection.TOP, true);
-    	
-    	IDrawableStatic progressRender = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 434, 80, 16, 33, 0, 110, 0);
-    	progressAnimation = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createAnimatedDrawable(progressRender, 80, IDrawableAnimated.StartDirection.LEFT, false);
+
+    	IDrawableStatic powerRender = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 12, 448, 20, 48, 20-20, 0, 36, 0);
+    	fluidAnimation = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createAnimatedDrawable(powerRender, 200, IDrawableAnimated.StartDirection.TOP, true);
+
+    	IDrawableStatic progressRender = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 00, 434, 26, 16, 33-20, 0, 110, 0);
+    	progressAnimation = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createAnimatedDrawable(progressRender, 100, IDrawableAnimated.StartDirection.LEFT, false);
     }
     
 	@Override
@@ -51,7 +50,7 @@ public class MaceratorRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public IDrawable getBackground() {
-		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 180, 70, 0, 0, 0, 0);
+		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 180, 75, -20, 0, 0, 0);
 	}
 
 	@Override
@@ -68,12 +67,10 @@ public class MaceratorRecipeCategory implements IRecipeCategory {
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-		guiItemStacks.init(OUTPUT_SLOT, false, 146, 34);
-        guiItemStacks.init(FLUID_SLOT, true, 51, 33);
-        guiItemStacks.init(INPUT_SLOT, true, 89, 33);
+		guiItemStacks.init(OUTPUT_SLOT, false, 146, 34-20);
+        guiItemStacks.init(INPUT_SLOT, true, 89, 33-20);
         if (recipeWrapper instanceof MaceratorRecipeJEI){
         	MaceratorRecipeJEI recipe = (MaceratorRecipeJEI) recipeWrapper;
-            guiItemStacks.set(FLUID_SLOT, (List) recipe.getInputs().get(1));
             craftingGridHelper.setOutput(guiItemStacks, recipe.getOutputs());
             craftingGridHelper.setInput(guiItemStacks, (List) recipe.getInputs().get(0), 2, 3);
         }

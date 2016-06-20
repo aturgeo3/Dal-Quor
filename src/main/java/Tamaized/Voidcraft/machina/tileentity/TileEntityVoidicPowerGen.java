@@ -27,7 +27,6 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 	private int[] slots_all = {SLOT_DEFAULT};
 	
 	private VoidTank tank;
-	private int voidicPower = 0;
 	private int useAmount = 1;
 	private int genAmount = 2;
 	private int rate = 1;
@@ -53,14 +52,12 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 		}
 		
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
-		voidicPower = nbt.getInteger("voidicPower");
 	}
 	
 	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
 		super.func_189515_b(nbt);
 		
 		nbt.setInteger("fluidAmount",  tank.getFluidAmount());
-		nbt.setInteger("voidicPower",  voidicPower);
 		
 		NBTTagList list = new NBTTagList();
 		
