@@ -38,6 +38,7 @@ import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.VoidicPowerCable;
+import Tamaized.Voidcraft.machina.VoidicPowerCharger;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
 
 public class VoidBlocks extends RegistryBase {
@@ -66,6 +67,7 @@ public class VoidBlocks extends RegistryBase {
 	
 	public static Block voidicGen;
 	public static Block voidicCable;
+	public static Block voidicCharger;
 	
 	public static Block AIBlock;
 	public static Block xiaBlock;
@@ -97,6 +99,7 @@ public class VoidBlocks extends RegistryBase {
 		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F);
 		voidicGen = new VoidicPowerGen(Material.IRON, "voidicGen").setHardness(3.5f);
 		voidicCable = new VoidicPowerCable(Material.CIRCUITS, "voidicCable").setHardness(1.5f);
+		voidicCharger = new VoidicPowerCharger(Material.IRON, "voidicCharger").setHardness(3.5f);
 		
 		//Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
@@ -125,6 +128,7 @@ public class VoidBlocks extends RegistryBase {
 		blockList.add(voidInfuser);
 		blockList.add(voidicGen);
 		blockList.add(voidicCable);
+		blockList.add(voidicCharger);
 		
 	}
 

@@ -19,6 +19,7 @@ import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.VoidBurner;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
+import Tamaized.Voidcraft.items.VoidicSuppressor;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class VoidItems extends RegistryBase {
@@ -49,6 +50,8 @@ public class VoidItems extends RegistryBase {
 
 	public static Item debugger;
 	public static Item hookShot;
+
+	public static Item voidicSuppressor;
 	
 	@Override
 	public void preInit() {
@@ -77,6 +80,8 @@ public class VoidItems extends RegistryBase {
 		debugger = new Debugger("debugger").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
 		hookShot = new HookShot("hookShot").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
 		
+		voidicSuppressor = new VoidicSuppressor("voidicSuppressor").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
+		
 		voidDiscs = new ArrayList<Item>();
 		voidDiscs.add(new VoidRecord("Test Disc", VoidSoundEvents.MusicDiscSoundEvents.testDisc, "voidDisc1"));
 		
@@ -103,6 +108,7 @@ public class VoidItems extends RegistryBase {
 		itemList.add(quartzDust);
 		itemList.add(debugger);
 		itemList.add(hookShot);
+		itemList.add(voidicSuppressor);
 	}
 
 	@Override
@@ -120,6 +126,7 @@ public class VoidItems extends RegistryBase {
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), voidCraft.blocks.blockVoidcrystal);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidBurner), voidcrystal, new ItemStack(Items.FLINT_AND_STEEL, 1, voidCraft.WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
 		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
 		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);

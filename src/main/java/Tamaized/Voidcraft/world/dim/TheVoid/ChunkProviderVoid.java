@@ -339,7 +339,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
     	ChunkPos chunkpos = new ChunkPos(x, z);
     	this.genTest.generateStructure(this.world, this.rand, chunkpos);
     	
-    	WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>(){
+    	WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 6, new Predicate<IBlockState>(){
     		
     		@Override
     		public boolean apply(IBlockState input) {

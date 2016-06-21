@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import Tamaized.Voidcraft.GUI.client.HeimdallGUI;
 import Tamaized.Voidcraft.GUI.client.VoidBoxGUI;
+import Tamaized.Voidcraft.GUI.client.VoidicChargerGUI;
 import Tamaized.Voidcraft.GUI.client.VoidicPowerGenGUI;
 import Tamaized.Voidcraft.GUI.client.voidInfuserGUI;
 import Tamaized.Voidcraft.GUI.client.voidMaceratorGUI;
@@ -14,11 +15,13 @@ import Tamaized.Voidcraft.GUI.server.HeimdallContainer;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.GUI.server.VoidInfuserContainer;
 import Tamaized.Voidcraft.GUI.server.VoidMaceratorContainer;
+import Tamaized.Voidcraft.GUI.server.VoidicChargerContainer;
 import Tamaized.Voidcraft.GUI.server.VoidicPowerGenContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 
 public class GuiHandler implements IGuiHandler {
@@ -28,6 +31,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int guiIdInfuser = 2;
 	public static final int guiIdHeimdall = 3;
 	public static final int guiIdGen = 4;
+	public static final int guiIdCharger = 5;
 	
 	public GuiHandler(){}
 	
@@ -55,6 +59,10 @@ public class GuiHandler implements IGuiHandler {
 				case guiIdGen:
 					if(tileEntity instanceof TileEntityVoidicPowerGen){
 						return new VoidicPowerGenContainer(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
+					}
+				case guiIdCharger:
+					if(tileEntity instanceof TileEntityVoidicCharger){
+						return new VoidicChargerContainer(player.inventory, (TileEntityVoidicCharger) tileEntity);
 					}
 			}
 		}
@@ -85,6 +93,10 @@ public class GuiHandler implements IGuiHandler {
 				case guiIdGen:
 					if(tileEntity instanceof TileEntityVoidicPowerGen){
 						return new VoidicPowerGenGUI(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
+					}
+				case guiIdCharger:
+					if(tileEntity instanceof TileEntityVoidicCharger){
+						return new VoidicChargerGUI(player.inventory, (TileEntityVoidicCharger) tileEntity);
 					}
 			}
 		}

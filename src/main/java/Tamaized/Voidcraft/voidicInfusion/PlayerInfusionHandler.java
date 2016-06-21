@@ -16,6 +16,7 @@ import Tamaized.Voidcraft.DamageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
+import Tamaized.Voidcraft.power.VoidicPowerItemHandler;
 
 public class PlayerInfusionHandler {
 	
@@ -65,7 +66,19 @@ public class PlayerInfusionHandler {
 		if(player == null) return;
 		if(player instanceof EntityPlayerMP) playerMP = (EntityPlayerMP) player;
 		if(tick % 20 == 0){
-			if(player.worldObj.provider.getDimension() == voidCraft.dimensionIdVoid){
+			boolean flag = true;
+			if(player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor){
+				if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) > 0){
+					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemMainhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) - 1);
+					flag = false;
+				}
+			} else if(player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor){
+				if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) > 0){
+					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
+					flag = false;
+				}
+			}
+			if(player.worldObj.provider.getDimension() == voidCraft.dimensionIdVoid && flag){
 				voidicInfusionAmount++;
 				if(voidicInfusionAmount > maxAmount) voidicInfusionAmount = maxAmount;
 			}else{
