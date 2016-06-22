@@ -29,6 +29,9 @@ version = "1.9.4-0.7.4"
 group= "tamaized.voidCraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "voidCraft"
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 minecraft {
     version = "1.9.4-12.17.0.1963"
     runDir = "run"
