@@ -92,7 +92,7 @@ import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 
 public class voidCraft {
 	
-	protected final static String version = "0.7.3_DEV";
+	protected final static String version = "0.7.4";
 	public static final String modid = "voidcraft";
 	
 	public static String getVersion(){
