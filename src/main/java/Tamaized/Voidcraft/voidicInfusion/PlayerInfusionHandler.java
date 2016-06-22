@@ -67,12 +67,12 @@ public class PlayerInfusionHandler {
 		if(player instanceof EntityPlayerMP) playerMP = (EntityPlayerMP) player;
 		if(tick % 20 == 0){
 			boolean flag = true;
-			if(player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor){
+			if(player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor){
 				if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) > 0){
 					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemMainhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) - 1);
 					flag = false;
 				}
-			} else if(player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor){
+			}else if(player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor){
 				if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) > 0){
 					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
 					flag = false;
