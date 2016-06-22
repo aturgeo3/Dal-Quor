@@ -15,7 +15,7 @@ public class VoidicSuppressor extends VoidicPowerItem {
 
 	@Override
 	protected int getDefaultMaxVoidicPower() {
-		return 50000;
+		return 2000;
 	}
 
 }
