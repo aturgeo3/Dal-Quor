@@ -335,11 +335,11 @@ public class ChunkProviderVoid implements IChunkGenerator {
     @Override
     public void populate(int x, int z){
     	BlockFalling.fallInstantly = true;
-    	BlockPos blockpos = new BlockPos(x * 16, 0, z * 16);
+        BlockPos blockpos = new BlockPos(x * 16, 0, z * 16);
     	ChunkPos chunkpos = new ChunkPos(x, z);
     	this.genTest.generateStructure(this.world, this.rand, chunkpos);
     	
-    	WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 6, new Predicate<IBlockState>(){
+    	WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>(){
     		
     		@Override
     		public boolean apply(IBlockState input) {
@@ -347,18 +347,9 @@ public class ChunkProviderVoid implements IChunkGenerator {
     		}
     		
     	});
-    	int j2;
-    	int i1;
-    	int j1;
     	int k1;
-    	int l1;
-    	int i2;
     	for (k1 = 0; k1 < 16; ++k1){
-    		l1 = x + this.rand.nextInt(16);
-    		i2 = this.rand.nextInt(108) + 10;
-    		j2 = z + this.rand.nextInt(16);
-    		worldgenminable.generate(this.world, this.rand, new BlockPos(l1, i2, j2));
-    		//System.out.println(l1+":"+i2+":"+j2);
+    		worldgenminable.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
     	}
     	
     	BlockFalling.fallInstantly = false;
