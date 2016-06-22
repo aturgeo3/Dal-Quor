@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import java.util.Arrays;
 
+import com.google.common.util.concurrent.RateLimiter;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -17,12 +19,13 @@ import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 import Tamaized.Voidcraft.power.VoidicPowerItem;
 import Tamaized.Voidcraft.power.VoidicPowerItemHandler;
 
-public class TileEntityVoidicCharger extends TileEntityVoidicPower implements ITickable, ISidedInventory{
+public class TileEntityVoidicCharger extends TileEntityVoidicPower implements ISidedInventory{
 	
 	public static final int SLOT_DEFAULT = 0;
 	private ItemStack[] slots = new ItemStack[1];
 	private int[] slots_all = {SLOT_DEFAULT};
 	
+	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
@@ -37,7 +40,8 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IT
 			}
 		}
 	}
-	
+
+	@Override
 	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
 		super.func_189515_b(nbt);
 		NBTTagList list = new NBTTagList();
@@ -206,9 +210,11 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IT
 
 	@Override
 	public void update() {
+		super.update();
 		if(voidicPower > 0 && slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].getItem() instanceof VoidicPowerItem && VoidicPowerItemHandler.getItemVoidicPowerPerc(slots[SLOT_DEFAULT]) < 1.0f){
-			VoidicPowerItemHandler.setItemVoidicPower(slots[SLOT_DEFAULT], VoidicPowerItemHandler.getItemVoidicPower(slots[SLOT_DEFAULT]) + 1);
-			voidicPower--;
+			int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
+			int overflow = VoidicPowerItemHandler.fillItemVoidicPower(slots[SLOT_DEFAULT], amount);
+			voidicPower-=(amount-overflow);
 		}
 	}
 

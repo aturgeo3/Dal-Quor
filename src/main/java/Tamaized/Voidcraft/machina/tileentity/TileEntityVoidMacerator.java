@@ -155,6 +155,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IT
 	
 	@Override
 	public void update(){
+		super.update();
 		boolean cooking = false;
 		if(lastCookingItem == null || slots[SLOT_INPUT] == null || lastCookingItem != slots[SLOT_INPUT].getItem()){
 			cookingTick = 0;

@@ -22,6 +22,7 @@ public class TileEntityVoidicPowerCable extends TileEntityVoidicPower implements
 	
 	@Override
 	public void update() {
+		super.update();
 		VoidicPowerHandler.sendToSurrounding(this, worldObj, pos);
 	}
 

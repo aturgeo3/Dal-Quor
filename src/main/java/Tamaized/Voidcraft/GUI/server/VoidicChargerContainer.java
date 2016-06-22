@@ -43,7 +43,7 @@ public class VoidicChargerContainer extends Container {
 			
 			if(this.powerAmount != te.getPowerAmount()){
 				powerAmount = te.getPowerAmount();
-				icontainerlistener.sendProgressBarUpdate(this, 1, powerAmount);
+				icontainerlistener.sendProgressBarUpdate(this, 0, powerAmount);
 			}
 		}
 	}

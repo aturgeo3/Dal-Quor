@@ -36,7 +36,8 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 	public TileEntityVoidicPowerGen(){
 		tank = new VoidTank(this, 5000);
 	}
-	
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		
@@ -55,7 +56,8 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 		
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
-	
+
+	@Override
 	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
 		super.func_189515_b(nbt);
 		
@@ -79,6 +81,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public void update() {
+		super.update();
 		rate = 10;
 		int gen = genAmount*rate;
 		int use = useAmount*rate;

@@ -13,6 +13,16 @@ public class VoidicPowerItemHandler {
 		ct.setInteger("maxVoidicPower", maxPower);
 	}
 	
+	public static int fillItemVoidicPower(ItemStack stack, int amount){
+		if(getItemVoidicPower(stack)+amount > getItemMaxVoidicPower(stack)){
+			setItemVoidicPower(stack, getItemMaxVoidicPower(stack));
+			return (getItemVoidicPower(stack)+amount) - getItemMaxVoidicPower(stack);
+		}else{
+			setItemVoidicPower(stack, getItemVoidicPower(stack)+amount);
+			return 0;
+		}
+	}
+	
 	public static void setItemVoidicPower(ItemStack stack, int power){
 		stack.getSubCompound(voidCraft.modid, true).setInteger("voidicPower", power);
 	}

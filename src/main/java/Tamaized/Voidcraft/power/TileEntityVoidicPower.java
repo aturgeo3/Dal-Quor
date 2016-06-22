@@ -3,11 +3,13 @@ package Tamaized.Voidcraft.power;
 import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
-public abstract class TileEntityVoidicPower extends TileEntity implements IVoidicPower {
+public abstract class TileEntityVoidicPower extends TileEntity implements IVoidicPower, ITickable {
 	
 	protected int voidicPower = 0;
 	protected ArrayList<EnumFacing> blockFace = new ArrayList<EnumFacing>();
@@ -23,6 +25,23 @@ public abstract class TileEntityVoidicPower extends TileEntity implements IVoidi
 		super.func_189515_b(nbt);
 		nbt.setInteger("voidicPower",  this.voidicPower);
 		return nbt;
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity func_189518_D_() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.func_189515_b(nbt);
+		return new SPacketUpdateTileEntity(pos, 2, nbt);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.getNbtCompound());
+	}
+	
+	@Override
+	public void update() {
+		markDirty();
 	}
 
 	@Override

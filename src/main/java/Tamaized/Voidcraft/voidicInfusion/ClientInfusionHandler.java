@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.events.client.DebugEvent;
+import Tamaized.Voidcraft.power.VoidicPowerItemHandler;
 
 public class ClientInfusionHandler {
 	
@@ -40,7 +41,19 @@ public class ClientInfusionHandler {
 			tick++;
 			if(tick % 20 == 0){
 				if(world != null && world.provider != null){
-					if(world.provider.getDimension() == voidCraft.dimensionIdVoid){
+					boolean flag = true;
+					if(player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor){
+						if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) > 0){
+							VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemMainhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) - 1);
+							flag = false;
+						}
+					}else if(player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor){
+						if(VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) > 0){
+							VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
+							flag = false;
+						}
+					}
+					if(world.provider.getDimension() == voidCraft.dimensionIdVoid && flag){
 						amount++;
 						if(amount > maxAmount) amount = maxAmount;
 					}else{
