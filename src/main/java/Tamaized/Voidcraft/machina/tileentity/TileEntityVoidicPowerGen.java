@@ -1,14 +1,11 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.util.Arrays;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
@@ -18,7 +15,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
-import Tamaized.Voidcraft.power.IVoidicPower;
 import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 import Tamaized.Voidcraft.power.VoidicPowerHandler;
 

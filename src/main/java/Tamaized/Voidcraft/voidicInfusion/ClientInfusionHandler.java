@@ -37,7 +37,7 @@ public class ClientInfusionHandler {
 			//	amount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusion();
 			//	maxAmount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getMaxInfusion();
 			//}
-			DebugEvent.textR = tick+" "+amount+" "+maxAmount;
+			//DebugEvent.textR = tick+" "+amount+" "+maxAmount;
 			tick++;
 			if(tick % 20 == 0){
 				if(world != null && world.provider != null){
@@ -62,7 +62,7 @@ public class ClientInfusionHandler {
 					}
 					float perc = ((float)amount/(float)maxAmount);
 					//if(perc>=0.75f) player.capabilities.allowFlying = true;
-					DebugEvent.textL = perc+"";
+					//DebugEvent.textL = perc+"";
 				}
 				tick = 0;
 			}
