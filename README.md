@@ -22,7 +22,7 @@ DEV is an unstable version meant for testing purposes. It may sometimes be a lat
  * Note: These Mods are NOT required in order to use this mod.
  * 1.10
   * None; Planned:
-   * JEI
+    * JEI
  * 1.9.4
   * JEI
  * 1.8.9
