@@ -21,16 +21,16 @@ public abstract class TileEntityVoidicPower extends TileEntity implements IVoidi
 	}
 
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		nbt.setInteger("voidicPower",  this.voidicPower);
 		return nbt;
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity func_189518_D_() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.func_189515_b(nbt);
+		this.writeToNBT(nbt);
 		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 	

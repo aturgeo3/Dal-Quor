@@ -67,8 +67,8 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IT
 	}
 
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		
 		nbt.setInteger("cookingTick",  this.cookingTick);
 		

@@ -1,8 +1,6 @@
 package Tamaized.Voidcraft.machina;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -23,6 +21,7 @@ import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import Tamaized.Voidcraft.power.IVoidicPower;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 

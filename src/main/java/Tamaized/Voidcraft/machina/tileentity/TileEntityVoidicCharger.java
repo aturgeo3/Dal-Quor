@@ -42,8 +42,8 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 	}
 
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		NBTTagList list = new NBTTagList();
 		for(int i = 0; i < this.slots.length; i++){
 			if(this.slots[i] != null){

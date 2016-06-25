@@ -259,7 +259,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	
 	private void sendPacketToClients(){
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.func_189515_b(znbt);
+		this.writeToNBT(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -281,7 +281,7 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.func_189518_D_();
+		    this.getUpdatePacket();
 		    this.markDirty();
 		    bos.close();
 	    }catch (IOException e) {
@@ -290,9 +290,9 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity func_189518_D_(){
+	public SPacketUpdateTileEntity getUpdatePacket(){
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.func_189515_b(nbt);
+		this.writeToNBT(nbt);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
 		
 		NBTTagList list = new NBTTagList();
@@ -349,8 +349,8 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		
 		NBTTagList list = new NBTTagList();
 		

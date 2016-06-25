@@ -15,8 +15,8 @@ public class TileEntityVoidicPowerCable extends TileEntityVoidicPower implements
 		super.readFromNBT(nbt);
 	}
 	
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		return nbt;
 	}
 	

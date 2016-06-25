@@ -282,7 +282,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	private void sendPacketToClients(){
 
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.func_189515_b(znbt);
+		this.writeToNBT(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -302,7 +302,7 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
 	    
 	    if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-	    this.func_189518_D_();
+	    this.getUpdatePacket();
 		 try {
 			bos.close();
 		} catch (IOException e) {
@@ -311,9 +311,9 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity func_189518_D_(){
+	public SPacketUpdateTileEntity getUpdatePacket(){
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.func_189515_b(nbt);
+		this.writeToNBT(nbt);
 		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);
 		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
@@ -392,8 +392,8 @@ public class TileEntityHeimdall extends TileEntity implements ITickable, ISidedI
 	}
 	
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		
 		nbt.setInteger("burnTime",  this.burnTime);
 		nbt.setInteger("cookTime",  this.cookTime);

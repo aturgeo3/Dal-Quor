@@ -56,9 +56,9 @@ public class TileEntityXiaCastle extends TileEntity implements ITickable{
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity func_189518_D_(){	
+	public SPacketUpdateTileEntity getUpdatePacket(){	
 		NBTTagCompound nbt = new NBTTagCompound();
-		func_189515_b(nbt);
+		writeToNBT(nbt);
 		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
 	
@@ -75,8 +75,8 @@ public class TileEntityXiaCastle extends TileEntity implements ITickable{
 	}
 	
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		nbt.setBoolean("running", running);
 		return nbt;
 	}

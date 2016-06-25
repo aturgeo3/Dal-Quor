@@ -54,8 +54,8 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 	}
 
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		
 		nbt.setInteger("fluidAmount",  tank.getFluidAmount());
 		

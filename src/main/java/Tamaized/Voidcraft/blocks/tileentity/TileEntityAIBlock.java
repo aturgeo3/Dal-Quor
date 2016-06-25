@@ -9,7 +9,6 @@ import java.io.IOException;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -72,7 +71,7 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	
 	private void sendPacketToClients(){
 		NBTTagCompound znbt = new NBTTagCompound();
-		this.func_189515_b(znbt);
+		this.writeToNBT(znbt);
 		
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -85,7 +84,7 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 50.0D);
 			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.func_189518_D_();
+		    this.getUpdatePacket();
 		    this.markDirty();
 		    bos.close();
 	    }catch (IOException e) {
@@ -95,9 +94,9 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity func_189518_D_(){	
+	public SPacketUpdateTileEntity getUpdatePacket(){	
 		NBTTagCompound nbt = new NBTTagCompound();
-		this.func_189515_b(nbt);
+		this.writeToNBT(nbt);
 		nbt.setInteger("state", state);
 		return new SPacketUpdateTileEntity(pos, 2, nbt);
 	}
@@ -114,8 +113,8 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	}
 	
 	@Override
-	public NBTTagCompound func_189515_b(NBTTagCompound nbt){
-		super.func_189515_b(nbt);
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
 		nbt.setInteger("state", state);
 		return nbt;
 	}
