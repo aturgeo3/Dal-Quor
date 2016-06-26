@@ -1,7 +1,6 @@
 package Tamaized.Voidcraft.mobs.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
@@ -18,6 +17,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -53,7 +53,7 @@ public class EntityMobVoidWrath extends EntityVoidMob implements IMob{
 			 * Return whether the specified entity is applicable to this filter.
 			 */
 			public boolean apply(Entity p_82704_1_){
-				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).getSkeletonType()==1) return false;
+				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).func_189771_df() == SkeletonType.WITHER) return false;
 				else return true;
 			}
 			public boolean apply(Object p_apply_1_){

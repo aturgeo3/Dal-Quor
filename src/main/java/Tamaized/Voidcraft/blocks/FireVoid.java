@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
@@ -36,7 +37,7 @@ public class FireVoid extends BasicVoidBlockFire{
 		if(entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)){
 			if(entityIn instanceof EntitySkeleton){
 				EntitySkeleton skelly = (EntitySkeleton) entityIn;
-				if(skelly.getSkeletonType() == 1) return;
+				if(skelly.func_189771_df() == SkeletonType.WITHER) return;
 			}
 			EntityLivingBase e = ((EntityLivingBase) entityIn);
 			e.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 60, 1)); //nausea
