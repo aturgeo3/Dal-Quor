@@ -81,7 +81,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
-		MinecraftForge.EVENT_BUS.register(new DebugEvent());
+		//MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new RenderVoidicInfusion());
 	
