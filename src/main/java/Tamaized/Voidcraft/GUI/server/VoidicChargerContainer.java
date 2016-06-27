@@ -12,7 +12,7 @@ import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 
-public class VoidicChargerContainer extends Container {
+public class VoidicChargerContainer extends ContainerBase {
 	
 	private final TileEntityVoidicCharger te;
 	

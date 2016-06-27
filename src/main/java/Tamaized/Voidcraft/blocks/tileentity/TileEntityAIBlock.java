@@ -1,27 +1,14 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityBase;
 import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 
-public class TileEntityAIBlock extends TileEntity implements ITickable{
+public class TileEntityAIBlock extends TileEntityBase implements ITickable{
 	
 	public EntityAIHandler aiHandler;
 	public IHandlerAI ai;
@@ -51,6 +38,7 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 	
 	@Override
 	public void update(){
+		super.update();
 		if(!this.worldObj.isRemote){
 			if(aiHandler == null || ai == null || !keep){
 				this.worldObj.setBlockToAir(pos.add(0, 2, 0));
@@ -65,47 +53,9 @@ public class TileEntityAIBlock extends TileEntity implements ITickable{
 					}
 				}
 			}
-			sendPacketToClients();
 		}
 	}
 	
-	private void sendPacketToClients(){
-		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
-		
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
-	    try {
-	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_TE_UPDATE);
-	        outputStream.writeInt(this.pos.getX());
-	        outputStream.writeInt(this.pos.getY());
-	        outputStream.writeInt(this.pos.getZ());
-	        outputStream.writeInt(this.state);
-	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 50.0D);
-			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.getUpdatePacket();
-		    this.markDirty();
-		    bos.close();
-	    }catch (IOException e) {
-			e.printStackTrace();
-		}
-		this.markDirty();
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket(){	
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		nbt.setInteger("state", state);
-		return new SPacketUpdateTileEntity(pos, 2, nbt);
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
-		readFromNBT(packet.getNbtCompound());
-	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);

@@ -5,6 +5,7 @@ import io.netty.buffer.Unpooled;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -22,132 +23,77 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.items.VoidRecord;
+import Tamaized.Voidcraft.power.VoidicPowerItem;
 
-public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedInventory{
+public class TileEntityVoidBox extends TileEntityInventoryBase {
 	
-	public static NBTTagCompound znbtc = new NBTTagCompound();
+	public static final int SLOT_CURRENT = 0;
+	public static final int SLOT_NEXT = 1;
+	public static final int SLOT_FINISH = 2;
+	public static final int[] SLOTS_ACCESSABLE = new int[]{1, 2};
+	public static final int[] SLOTS_ALL = new int[]{0, 1, 2};
 	
-	
-	private String localizedName;
-	
-	public static final int[] slots_curr = new int[]{0};
-	public static final int[] slots_next = new int[]{1};
-	public static final int[] slots_done = new int[]{2};
-	public static final int[] slots_accessable = new int[]{1, 2};
-	public static final int[] slots_all = new int[]{0, 1, 2};
-
 	public boolean isPlaying;
 	public boolean doPlay;
 	public boolean loop;
 	public boolean autoFill;
-	public Item oldRecord;
+	public ItemStack oldRecord;
 	public int loopTime;
 	public int maxLoopTime;
-	public boolean isPowered = false;
+	private boolean isPowered = false;
 	private boolean pulsed = false;
 	
-	public ItemStack[] slots  = new ItemStack[3]; //Amount of Slots cuz length is a thing in arrays duh
-	
-	public int getSizeInventory(){
-		return this.slots.length;
-	}
-	
-	public String getInvName(){
-		return this.isInvNameLocalized() ? this.localizedName : "container.voidBox";
-	}
-	
-	public boolean isInvNameLocalized() {
-		return this.localizedName != null && this.localizedName.length() > 0;
-	}
-	
-	public void setGuiDisplayName(String displayName) {
-		this.localizedName = displayName;
+	public TileEntityVoidBox() {
+		super(3);
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
-		
-		if(nbt.getTag("loop") != null){
-			NBTTagString nbtLoop = (NBTTagString) nbt.getTag("loop");
-			loop = nbtLoop.getString().equals("true");
-		}
-		
-		NBTTagList list = (NBTTagList) nbt.getTag("Items");
-		this.slots = new ItemStack[this.getSizeInventory()];
-		if(list != null){
-			for(int i = 0; i < list.tagCount(); i++){
-				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
-				byte b = nbtc.getByte("Slot");
-				
-				if(b >= 0 && b < this.slots.length){
-					this.slots[b] = ItemStack.loadItemStackFromNBT(nbtc);
-				}
-			}
-		}
-		
-		
-		if(nbt.hasKey("CustomName")){
-			this.localizedName = nbt.getString("CustomName");
-		}
+		loop = nbt.getBoolean("loop");
+		autoFill = nbt.getBoolean("autoFill");
+		isPlaying = nbt.getBoolean("isPlaying");
+		doPlay = nbt.getBoolean("doPlay");
+		int temp = nbt.getInteger("oldRecord");
+		oldRecord = temp > -1 ? new ItemStack(Item.getItemById(temp)) : null;
+		loopTime = nbt.getInteger("loopTime");
+		maxLoopTime = nbt.getInteger("maxLoopTime");
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
+		nbt.setBoolean("loop", loop);
+		nbt.setBoolean("autoFill", autoFill);
+		nbt.setBoolean("isPlaying", isPlaying);
+		nbt.setBoolean("doPlay", doPlay);
+		nbt.setInteger("oldRecord", oldRecord != null ? Item.getIdFromItem(oldRecord.getItem()) : -1);
+		nbt.setInteger("loopTime", loopTime);
+		nbt.setInteger("maxLoopTime", maxLoopTime);
+		return nbt;
 	}
 
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return this.slots[i];
-	}
-	
-	public Item getItemInSlot(int i){
-		if(this.slots[i] != null){
-			return  this.slots[i].getItem();
-		}else{
-			return Items.SNOWBALL;
-		}
-	}
-	
-	
-
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		if(this.slots[i] != null){
-			ItemStack itemstack;
-				
-			if(this.slots[i].stackSize <= j){
-				
-				itemstack = this.slots[i];
-				this.slots[i] = null;
-				
-				return itemstack;
-				
-			}else{
-				itemstack = this.slots[i].splitStack(j);
-				
-				if(this.slots[i].stackSize == 0) {
-					this.slots[i] = null;
-				}
-				
-				return itemstack;
-			}
-		}
-		
-		return null;
-	}
-	
 	/**
 	 *  Play the Record
 	 *   
      */
-	public void PlayTheSound(ItemStack itemStack){
+	private void PlayTheSound(ItemStack itemStack){
 		if(itemStack != null && itemStack.getItem() instanceof VoidRecord){
 			VoidRecord theRecord = (VoidRecord) itemStack.getItem();
-                this.worldObj.playEvent((EntityPlayer)null, 1010, getPos(), Item.getIdFromItem(theRecord));
+                worldObj.playEvent((EntityPlayer)null, 1010, getPos(), Item.getIdFromItem(theRecord));
 		}else{
-			System.out.println("NULL/NON-VOID RECORD SLOT DETECTED");
+			voidCraft.logger.warn("NULL/NON-VOIDRECORD SLOT DETECTED");
 		}
+	}
+	
+	public void PlayCurrentRecord(){
+		ItemStack record = slots[SLOT_CURRENT];
+		if(record != null) PlayTheSound(record);
 	}
 	
 	/**
@@ -155,41 +101,17 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	 *   
      */
 	public void StopTheSound(){
-		this.worldObj.playEvent((EntityPlayer)null, 1010, getPos(), 0);
+		worldObj.playEvent((EntityPlayer)null, 1010, getPos(), 0);
 	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int i) {
-		if(this.slots[i] != null){
-			ItemStack itemstack = this.slots[i];
-			this.slots[i] = null;
-			return itemstack;
-		}
-		return null;
-	}
-
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		this.slots[i] = itemstack;
-		
-		if(itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()){
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.worldObj.getTileEntity(pos) != this ? false: entityplayer.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+	
+	public void setHasRedstoneSignal(boolean b){
+		isPowered = b;
 	}
 
 	@Override
 	public void update(){
-		if(!this.worldObj.isRemote){
+		super.update();
+		if(!worldObj.isRemote){
 			if(!pulsed && isPowered){
 				pulsed = true;
 				doPlay = isPlaying = !isPlaying;
@@ -197,23 +119,23 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 				pulsed = false;
 			}
 			
-			if(this.isPlaying){
-				if(this.doPlay){
-					if(slots[slots_curr[0]] == null){
-						if(slots[slots_next[0]] == null){
+			if(isPlaying){
+				if(doPlay){
+					if(slots[SLOT_CURRENT] == null){
+						if(slots[SLOT_NEXT] == null){
 							isPlaying = doPlay = false;
 						}else{
-							Item item = slots[slots_next[0]].getItem();
-							slots[slots_next[0]] = null;
-							slots[slots_curr[0]] = new ItemStack(item);
+							slots[SLOT_CURRENT] = slots[SLOT_NEXT];
+							slots[SLOT_NEXT] = null;
 						}
 					}
-					this.PlayTheSound(this.getStackInSlot(0));
-					this.doPlay = false;
+					PlayCurrentRecord();
+					doPlay = false;
 					int thytime=0;
-					this.oldRecord = this.getItemInSlot(0);
-					if(getItemInSlot(0) instanceof VoidRecord) thytime = ((VoidRecord) getItemInSlot(0)).getTime();
+					oldRecord = slots[SLOT_CURRENT];
+					if(slots[SLOT_CURRENT].getItem() instanceof VoidRecord) thytime = ((VoidRecord) slots[SLOT_CURRENT].getItem()).getTime();
 					else{
+						StopTheSound();
 						isPlaying = doPlay = false;
 						return;
 					}
@@ -222,166 +144,44 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 					loopTime--;
 				}
 				
-				if(this.loopTime < 0){
+				if(loopTime <= 0){
 					if(loop){
-			 			this.oldRecord = this.getItemInSlot(0);
-			 			this.isPlaying = true;
-			 			this.doPlay = true;
+			 			oldRecord = slots[SLOT_CURRENT];
+			 			isPlaying = true;
+			 			doPlay = true;
 					}else{
-						this.StopTheSound();
-						this.isPlaying = false;
+						StopTheSound();
+						isPlaying = false;
 					}
 				}
 				
-				if(this.getItemInSlot(0) != this.oldRecord) {
-					this.StopTheSound();
-					this.isPlaying = false;
+				if(slots[SLOT_CURRENT] != oldRecord) {
+					StopTheSound();
+					isPlaying = false;
 				}
 			}else{
-				this.StopTheSound();
-				if(!loop && slots[slots_curr[0]] != null && slots[slots_done[0]] == null){
-					Item item = slots[slots_curr[0]].getItem();
-					slots[slots_curr[0]] = null;
-					slots[slots_done[0]] = new ItemStack(item);
+				StopTheSound();
+				if(!loop && slots[SLOT_CURRENT] != null && slots[SLOT_FINISH] == null){
+					slots[SLOT_FINISH] = slots[SLOT_CURRENT];
+					slots[SLOT_CURRENT] = null;
 				}
-				if(autoFill && slots[slots_curr[0]] == null && slots[slots_next[0]] != null){
-					Item item = slots[slots_next[0]].getItem();
-					slots[slots_next[0]] = null;
-					slots[slots_curr[0]] = new ItemStack(item);
+				if(autoFill && slots[SLOT_CURRENT] == null && slots[SLOT_NEXT] != null){
+					slots[SLOT_CURRENT] = slots[SLOT_NEXT];
+					slots[SLOT_NEXT] = null;
 					doPlay = isPlaying = true;
 				}
 			}
 		}
-		
-		if(!this.worldObj.isRemote) sendPacketToClients();
-		
-	}
-	
-	private void sendPacketToClients(){
-		NBTTagCompound znbt = new NBTTagCompound();
-		this.writeToNBT(znbt);
-		
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
-	    try {
-	    	outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_VOIDBOX_UPDATE);
-	        outputStream.writeInt(pos.getX());
-	        outputStream.writeInt(pos.getY());
-	        outputStream.writeInt(pos.getZ());
-	        outputStream.writeBoolean(this.isPlaying);
-	        if(this.oldRecord == null) outputStream.writeBoolean(false);
-	        else{
-	        	outputStream.writeBoolean(true);
-	        	outputStream.writeInt(Item.getIdFromItem(this.oldRecord));
-	        }
-	        outputStream.writeInt(this.loopTime);
-	        outputStream.writeInt(this.maxLoopTime);
-	        outputStream.writeBoolean(this.loop);
-	        outputStream.writeBoolean(this.autoFill);
-	        FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-		    TargetPoint point = new TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 10.0D);
-			if(voidCraft.channel != null && packet != null && point != null) voidCraft.channel.sendToAllAround(packet, point);
-		    this.getUpdatePacket();
-		    this.markDirty();
-		    bos.close();
-	    }catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket(){
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		//nbt.setShort("currentItemBurnTime", (short) this.currentItemBurnTime);
-		
-		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.slots.length; i++){
-			if(this.slots[i] != null){
-				NBTTagCompound nbtc = new NBTTagCompound();
-				nbtc.setByte("Slot", (byte) i);
-				this.slots[i].writeToNBT(nbtc);
-				list.appendTag(nbtc);
-			}
-		}
-		
-		NBTTagString nbtLoop = new NBTTagString(loop ? "true" : "false");
-		
-		nbt.setTag("Items", list);
-		nbt.setTag("loop", nbtLoop);
-		
-		if(this.isInvNameLocalized()){
-			nbt.setString("CustomName", this.localizedName);
-		}
-		
-		return new SPacketUpdateTileEntity(pos, 2, nbt);
-	}
-		
-	@Override
-	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet){
-	 readFromNBT(packet.getNbtCompound());
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 1 ? (slots[slots_next[0]] == null && (itemstack.getItem() instanceof VoidRecord)) : false;
-	}
-
-	/**
-	 * 0 = down
-	 * 1 = up
-	 * rest = sides
-	 */
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return slots_accessable;
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack itemstack, EnumFacing i) {
-		return isItemValidForSlot(i.getIndex(), itemstack);
-	}
-
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, EnumFacing j) {
-		return i==2 ? true : false;
-	}
-
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
-		
-		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.slots.length; i++){
-			if(this.slots[i] != null){
-				NBTTagCompound nbtc = new NBTTagCompound();
-				nbtc.setByte("Slot", (byte) i);
-				this.slots[i].writeToNBT(nbtc);
-				list.appendTag(nbtc);
-			}
-		}
-		
-		NBTTagString nbtLoop = new NBTTagString(loop ? "true" : "false");
-		
-		nbt.setTag("Items", list);
-		nbt.setTag("loop", nbtLoop);
-		
-		if(this.isInvNameLocalized()){
-			nbt.setString("VoidBox", this.localizedName);
-		}
-		return nbt;
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player) {
-		
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return i == SLOT_NEXT ? stack.getItem() instanceof VoidRecord : false;
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		return "voidicMusicBox";
 	}
 
 	@Override
@@ -390,37 +190,22 @@ public class TileEntityVoidBox extends TileEntity implements ITickable, ISidedIn
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
-		
+	public int[] getSlotsForFace(EnumFacing side) {
+		return SLOTS_ACCESSABLE;
 	}
 
 	@Override
-	public int getField(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getInventoryStackLimit() {
+		return 1;
 	}
 
 	@Override
-	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-		
+	protected boolean canExtractSlot(int i) {
+		return i == SLOT_FINISH;
 	}
 
 	@Override
-	public int getFieldCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+	protected boolean canInsertSlot(int i) {
+		return i == SLOT_NEXT;
 	}
 }

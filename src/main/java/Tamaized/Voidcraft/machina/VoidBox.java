@@ -85,7 +85,7 @@ public class VoidBox extends BasicVoidBlockContainer {
 			if(tileentity != null){
 				tileentity.StopTheSound();
 				
-				for(int i = 0; i < tileentity.slots.length; i++){
+				for(int i = 0; i < tileentity.SLOTS_ALL.length; i++){
 					ItemStack itemstack = tileentity.getStackInSlot(i);
 					
 					if(itemstack != null){
@@ -106,8 +106,6 @@ public class VoidBox extends BasicVoidBlockContainer {
 						world.spawnEntityInWorld(item);
 					}
 				}
-			}else{
-				System.out.println("Issue");
 			}
 		}
 		super.breakBlock(world, pos, state);

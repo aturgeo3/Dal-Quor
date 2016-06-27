@@ -7,11 +7,17 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
@@ -21,7 +27,17 @@ public class Heimdall extends BasicVoidBlockContainer{
 
 	public Heimdall(Material p_i45386_1_, String string) {
 		super(p_i45386_1_, string);
-		//this.setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 0.6875F, .875F);
+		this.useNeighborBrightness = true;
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source,BlockPos pos) {
+		return new AxisAlignedBB(0.125F, 0F, 0.125F, 0.875F, 0.6875F, .875F);
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
 	}
 
 	@Override
@@ -37,26 +53,9 @@ public class Heimdall extends BasicVoidBlockContainer{
 		return new TileEntityHeimdall();
 	}
 	
-	/**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
-    public boolean isOpaqueCube(){
-    	return false;
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state){
+        return EnumBlockRenderType.INVISIBLE;
     }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
-    public boolean renderAsNormalBlock(){
-    	return false;
-    }
-
-    /**
-     * The type of render function that is called for this block
-     */
-    public int getRenderType(){
-    	return -1;
-    }
-
+	
 }

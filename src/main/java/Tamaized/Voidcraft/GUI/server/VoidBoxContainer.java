@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.GUI.server;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -11,7 +12,7 @@ import Tamaized.Voidcraft.GUI.SlotCantPlace;
 import Tamaized.Voidcraft.GUI.SlotCantPlaceOrRemove;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
-public class VoidBoxContainer extends Container {
+public class VoidBoxContainer extends ContainerBase {
 	
 	private TileEntityVoidBox te;
 

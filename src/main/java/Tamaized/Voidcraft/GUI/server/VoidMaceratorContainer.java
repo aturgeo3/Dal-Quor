@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
-public class VoidMaceratorContainer extends Container {
+public class VoidMaceratorContainer extends ContainerBase {
 	
 	private TileEntityVoidMacerator te;
 	
@@ -39,17 +39,18 @@ public class VoidMaceratorContainer extends Container {
 	@Override
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
+		
 		for (int i = 0; i < this.listeners.size(); ++i){
 			IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
 			
 			if(this.cookAmount != te.cookingTick){
-				cookAmount = te.cookingTick;
 				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
+				cookAmount = te.cookingTick;
 			}
 			
 			if(this.powerAmount != te.getPowerAmount()){
-				powerAmount = te.getPowerAmount();
 				icontainerlistener.sendProgressBarUpdate(this, 1, powerAmount);
+				powerAmount = te.getPowerAmount();
 			}
 		}
 	}
@@ -76,7 +77,7 @@ public class VoidMaceratorContainer extends Container {
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			}else{
-				if(!this.getSlot(0).getHasStack() && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)){
+				if(te.canInsertItem(te.SLOT_INPUT, itemstack1, null)){
 					if(!this.mergeItemStack(itemstack1, 0, 1, false)){
 						return null;
 					}

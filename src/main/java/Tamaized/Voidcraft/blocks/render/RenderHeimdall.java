@@ -1,12 +1,16 @@
 package Tamaized.Voidcraft.blocks.render;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -49,23 +53,24 @@ public class RenderHeimdall extends TileEntitySpecialRenderer{
         //This rotation part is very important! Without it, your model will render upside-down! And for some reason you DO need PushMatrix again!                       
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        adjustLightFixture(p_180535_1_.getWorld(), x, y, z);
         //A reference to your Model file. Again, very important.
         this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         //Tell it to stop rendering for both the PushMatrix's
         GL11.glPopMatrix();
         GL11.glPopMatrix();
 	}
-/*
+
 		//Set the lighting stuff, so it changes it's brightness properly.       
-	private void adjustLightFixture(World world, int i, int j, int k, Block block) {
+	private void adjustLightFixture(World world, double x, double y, double z) {
         Tessellator tess = Tessellator.getInstance();
         //float brightness = block.getBlockBrightness(world, i, j, k);
         //As of MC 1.7+ block.getBlockBrightness() has become block.getLightValue():
-        float brightness = block.getLightValue(world, i, j, k);
-        int skyLight = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
+        float brightness = world.getLightBrightness(new BlockPos(x, y, z));
+        int skyLight = world.getLightFor(EnumSkyBlock.BLOCK, new BlockPos(x, y, z));
         int modulousModifier = skyLight % 65536;
         int divModifier = skyLight / 65536;
-        tess.setColorOpaque_F(brightness, brightness, brightness);
+        //tess.setColorOpaque_F(brightness, brightness, brightness);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  (float) modulousModifier,  divModifier);
-	}*/
+	}
 }

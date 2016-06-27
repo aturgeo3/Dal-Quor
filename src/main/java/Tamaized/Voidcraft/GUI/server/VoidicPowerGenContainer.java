@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 
-public class VoidicPowerGenContainer extends Container {
+public class VoidicPowerGenContainer extends ContainerBase {
 	
 	private final TileEntityVoidicPowerGen te;
 	
@@ -83,7 +83,7 @@ public class VoidicPowerGenContainer extends Container {
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			}else{
-				if(!this.getSlot(0).getHasStack() && itemstack1.getItem() == voidCraft.fluids.voidBucket.getItem()){
+				if(!this.getSlot(0).getHasStack() && itemstack1.getItem() == voidCraft.fluids.getBucket().getItem()){
 					if(!this.mergeItemStack(itemstack1, 0, 1, false)){
 						return null;
 					}

@@ -9,7 +9,7 @@ import Tamaized.Voidcraft.power.IVoidicPower;
 import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 import Tamaized.Voidcraft.power.VoidicPowerHandler;
 
-public class TileEntityVoidicPowerCable extends TileEntityVoidicPower implements ITickable{
+public class TileEntityVoidicPowerCable extends TileEntityVoidicPower{
 	
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);

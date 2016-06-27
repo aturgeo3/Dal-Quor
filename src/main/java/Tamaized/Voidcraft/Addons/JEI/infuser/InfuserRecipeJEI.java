@@ -27,7 +27,7 @@ public class InfuserRecipeJEI extends BlankRecipeWrapper {
 	public List getInputs() {
 		ArrayList<Collection> ret = new ArrayList<Collection>();
 		ret.add(Collections.singletonList(new ItemStack(input)));
-		ret.add(Collections.singletonList(voidCraft.fluids.voidBucket));
+		ret.add(Collections.singletonList(voidCraft.fluids.getBucket()));
 		return ret;
 	}
 	

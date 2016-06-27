@@ -18,7 +18,7 @@ import Tamaized.Voidcraft.machina.addons.VoidTank;
 import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 import Tamaized.Voidcraft.power.VoidicPowerHandler;
 
-public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ITickable, ISidedInventory, IFluidHandler{
+public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ISidedInventory, IFluidHandler{
 	
 	public static final int SLOT_DEFAULT = 0;
 	private ItemStack[] slots = new ItemStack[1];
@@ -82,7 +82,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 		int gen = genAmount*rate;
 		int use = useAmount*rate;
 		if(getFluidAmount() <= getMaxFluidAmount() - 1000){
-			if(slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].isItemEqual(voidCraft.fluids.voidBucket)){
+			if(slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].isItemEqual(voidCraft.fluids.getBucket())){
 				fill(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
 				slots[SLOT_DEFAULT] = new ItemStack(Items.BUCKET);
 			}
@@ -163,7 +163,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ?  stack.getItem() == voidCraft.fluids.voidBucket.getItem() : false;
+		return i == SLOT_DEFAULT ?  stack.getItem() == voidCraft.fluids.getBucket().getItem() : false;
 	}
 
 	@Override

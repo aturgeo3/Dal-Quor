@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
+import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class VoidBoxGUI extends GuiContainer {
@@ -55,13 +56,14 @@ public class VoidBoxGUI extends GuiContainer {
 		this.ySize = 320;
 		discs.addAll(voidCraft.items.voidDiscs);
 	}
-	
+
+	@Override
 	public void updateScreen(){
 		super.updateScreen();
 		
 		if(BtnPlay == null || BtnStop == null) return;
 		
-		BtnPlay.enabled = (discs.contains(voidBox.getItemInSlot(1)) && voidBox.slots[0] == null);
+		BtnPlay.enabled = voidBox.getStackInSlot(voidBox.SLOT_NEXT) != null && (discs.contains(voidBox.getStackInSlot(voidBox.SLOT_NEXT).getItem()) && voidBox.getStackInSlot(voidBox.SLOT_CURRENT) == null);
 		BtnStop.enabled = voidBox.isPlaying;
 		
 		if(CurrColor > 102) CurrColor = 15;
@@ -282,7 +284,7 @@ public class VoidBoxGUI extends GuiContainer {
 			else if(CurrColor == 102) hexacolor = 0xFF0022;
 			else if(CurrColor == 103) hexacolor = 0xFF0011;
 			
-			fontRendererObj.drawString(voidBox.getStackInSlot(0).getDisplayName(), (xSize/12)-13-(fontRendererObj.getStringWidth(name)/12)+102, (ySize/12)+54, hexacolor);
+			fontRendererObj.drawString(voidBox.getStackInSlot(0) != null ? ((VoidRecord)voidBox.getStackInSlot(0).getItem()).recordName : "", (xSize/12)-13-(fontRendererObj.getStringWidth(name)/12)+102, (ySize/12)+54, hexacolor);
 		}
 		
 		if(voidBox.loop) fontRendererObj.drawString("Loop: On", (xSize/12)-(fontRendererObj.getStringWidth(name)/12)+220, ySize-220, 0x00FF00);

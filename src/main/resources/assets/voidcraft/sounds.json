@@ -16,7 +16,8 @@
   "music.emile.wish": {"category": "music","sounds": [{"name": "voidcraft:music/Emile van Krieken - A morning wish","stream": true}]},
   "music.emile.nether": {"category": "music","sounds": [{"name": "voidcraft:music/Emile van Krieken - Nether menu _Unreleased_","stream": true}]},
   
-  "record.undertale": {"category": "record","sounds": [{"name": "voidcraft:music/Undertale - Another Medium","stream": true}]},
+  "record.Haven_Bleeding_Through": {"category": "record","sounds": [{"name": "voidcraft:discs/Haven - Bleeding Through","stream": true}]},
+  "record.No_Strings_Attached": {"category": "record","sounds": [{"name": "voidcraft:discs/No Strings Attached (Original Mix)","stream": true}]},
   
   "random.chain": {"category": "ambient","sounds": [{"name": "voidcraft:random/chain","stream": true}]}
 }

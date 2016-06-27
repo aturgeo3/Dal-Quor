@@ -31,7 +31,7 @@ import Tamaized.Voidcraft.machina.addons.MaceratorRecipes;
 import Tamaized.Voidcraft.power.IVoidicPower;
 import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 
-public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ITickable, ISidedInventory, IVoidicPower{
+public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ISidedInventory{
 	
 	public static final int SLOT_INPUT = 0;
 	public static final int SLOT_OUTPUT = 1;

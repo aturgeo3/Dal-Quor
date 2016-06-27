@@ -28,7 +28,11 @@ public class VoidFluids extends RegistryBase {
 	
 	public static BlockFluidBase voidFluidBlock;
 	
-	public static ItemStack voidBucket;
+	private static ItemStack voidBucket;
+	
+	public static ItemStack getBucket(){
+		return voidBucket.copy();
+	}
 
 	@Override
 	public void preInit() {

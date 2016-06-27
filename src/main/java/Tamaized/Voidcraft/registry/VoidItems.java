@@ -83,7 +83,8 @@ public class VoidItems extends RegistryBase {
 		voidicSuppressor = new VoidicSuppressor("voidicSuppressor").setCreativeTab(voidCraft.tabs.tabVoid).setMaxStackSize(1);
 		
 		voidDiscs = new ArrayList<Item>();
-		voidDiscs.add(new VoidRecord("Test Disc", VoidSoundEvents.MusicDiscSoundEvents.testDisc, "voidDisc1"));
+		voidDiscs.add(new VoidRecord("No Strings Attached (Original Mix)", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
+		voidDiscs.add(new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
 		
 		itemList = new ArrayList<Item>();
 		itemList.add(ectoplasm);
@@ -133,7 +134,7 @@ public class VoidItems extends RegistryBase {
 
 		GameRegistry.addSmelting(voidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
-		GameRegistry.addSmelting(voidCrystalBucket, voidCraft.fluids.voidBucket, 0.1F);
+		GameRegistry.addSmelting(voidCrystalBucket, voidCraft.fluids.getBucket(), 0.1F);
 		// dust
 		GameRegistry.addSmelting(ironDust, new ItemStack(Items.IRON_INGOT), 0);
 		GameRegistry.addSmelting(goldDust, new ItemStack(Items.GOLD_INGOT), 0);
@@ -161,7 +162,7 @@ public class VoidItems extends RegistryBase {
 		
 		//Discs
 		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		//GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		//GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		//GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		//GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ", "XZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);

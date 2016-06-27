@@ -18,11 +18,12 @@ public class VoidicPowerGenGUI extends GuiContainer {
 	
 	public VoidicPowerGenGUI (InventoryPlayer inventoryPlayer, TileEntityVoidicPowerGen tileEntity) {
 		super(new VoidicPowerGenContainer(inventoryPlayer, tileEntity));
-		this.te = tileEntity;
-		this.xSize = 347;
-		this.ySize = 320;
+		te = tileEntity;
+		xSize = 347;
+		ySize = 320;
 	}
-	
+
+	@Override
 	public void updateScreen(){
 		
 		{
@@ -47,19 +48,19 @@ public class VoidicPowerGenGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = "Voidic Power Generator";
-		this.fontRendererObj.drawString(text, this.xSize/2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize-260, 0xAAAAAA);
+		fontRendererObj.drawString(text, xSize/2 - fontRendererObj.getStringWidth(text) / 2, ySize-260, 0xAAAAAA);
 		text = "Fluid:";
-		this.fontRendererObj.drawString(text, (this.xSize/2 - this.fontRendererObj.getStringWidth(text) / 2) - 100, this.ySize/2 - 65, 0x7700FF);
+		fontRendererObj.drawString(text, (xSize/2 - fontRendererObj.getStringWidth(text) / 2) - 100, ySize/2 - 65, 0x7700FF);
 		text = te.getFluidAmount()+"/";
-		this.fontRendererObj.drawString(text, (this.xSize/2 - this.fontRendererObj.getStringWidth(text) / 1) - 85, this.ySize/2 - 55, 0x7700FF);
+		fontRendererObj.drawString(text, (xSize/2 - fontRendererObj.getStringWidth(text) / 1) - 85, ySize/2 - 55, 0x7700FF);
 		text = ""+te.getMaxFluidAmount();
-		this.fontRendererObj.drawString(text, (this.xSize/2 - this.fontRendererObj.getStringWidth(text) / 1) - 85, this.ySize/2 - 45, 0x7700FF);
+		fontRendererObj.drawString(text, (xSize/2 - fontRendererObj.getStringWidth(text) / 1) - 85, ySize/2 - 45, 0x7700FF);
 		text = "Voidic Power:";
-		this.fontRendererObj.drawString(text, (this.xSize/2 - this.fontRendererObj.getStringWidth(text) / 2) + 70, this.ySize/2 - 65, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize/2 - fontRendererObj.getStringWidth(text) / 2) + 70, ySize/2 - 65, 0xFF0000);
 		text = te.getPowerAmount()+"/";
-		this.fontRendererObj.drawString(text, (this.xSize/2) + 38, this.ySize/2 - 55, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize/2) + 38, ySize/2 - 55, 0xFF0000);
 		text = ""+te.getMaxPower();
-		this.fontRendererObj.drawString(text, (this.xSize/2) + 38, this.ySize/2 - 45, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize/2) + 38, ySize/2 - 45, 0xFF0000);
 	}
 	
 	@Override
@@ -69,7 +70,7 @@ public class VoidicPowerGenGUI extends GuiContainer {
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(daTexture);
 			drawTexturedModalRect(guiLeft+78, guiTop+66, 0, 0, xSize/2, ySize/2);
-			this.updateScreen();
+			updateScreen();
 		}
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();

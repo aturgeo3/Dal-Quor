@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityBase;
 
-public abstract class TileEntityVoidicPower extends TileEntity implements IVoidicPower, ITickable {
+public abstract class TileEntityVoidicPower extends TileEntityBase implements IVoidicPower {
 	
 	protected int voidicPower = 0;
 	protected ArrayList<EnumFacing> blockFace = new ArrayList<EnumFacing>();
@@ -27,23 +26,6 @@ public abstract class TileEntityVoidicPower extends TileEntity implements IVoidi
 		return nbt;
 	}
 	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return new SPacketUpdateTileEntity(pos, 2, nbt);
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.getNbtCompound());
-	}
-	
-	@Override
-	public void update() {
-		markDirty();
-	}
-
 	@Override
 	public int getPowerAmount() {
 		return voidicPower;

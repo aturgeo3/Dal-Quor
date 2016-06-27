@@ -1,22 +1,15 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityBase;
 import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.twins.TwinsBattleHandler;
 
-public class TileEntityXiaCastle extends TileEntity implements ITickable{
+public class TileEntityXiaCastle extends TileEntityBase implements ITickable{
 	
 	private boolean running = false;
 	private XiaCastleHandler handler;

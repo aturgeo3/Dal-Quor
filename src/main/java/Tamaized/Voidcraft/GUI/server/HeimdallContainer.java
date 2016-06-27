@@ -10,27 +10,24 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
-public class HeimdallContainer extends Container {
+public class HeimdallContainer extends ContainerBase {
 	
-	private TileEntityHeimdall voidtilemacerator;
-	
-	public int lastBurnTime;
-	public int lastItemBurnTime;
-	public int lastCookTime;
+	private TileEntityHeimdall te;
+	private int amount;
 
 	public HeimdallContainer(InventoryPlayer inventory, TileEntityHeimdall tileEntity) {
-		this.voidtilemacerator = tileEntity;
+		te = tileEntity;
 		
-		this.addSlotToContainer(new Slot(tileEntity, 0, 158, 100));
+		addSlotToContainer(new Slot(tileEntity, 0, 158, 100));
 		
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 9; j++){
-				this.addSlotToContainer(new Slot(inventory, j + i*9 + 9, 86 + j*18, 150 + i*18));
+				addSlotToContainer(new Slot(inventory, j + i*9 + 9, 86 + j*18, 150 + i*18));
 			}
 		}
 		
 		for(int i = 0; i < 9; i++){
-			this.addSlotToContainer(new Slot(inventory, i, 86 + i*18, 208));
+			addSlotToContainer(new Slot(inventory, i, 86 + i*18, 208));
 		}
 	}
 	
@@ -38,70 +35,49 @@ public class HeimdallContainer extends Container {
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.listeners.size(); ++i){
-			IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
-			
-			if(this.lastCookTime != this.voidtilemacerator.cookTime){
-				icontainerlistener.sendProgressBarUpdate(this, 0, this.voidtilemacerator.cookTime);
-			}
-			
-			if(this.lastBurnTime != this.voidtilemacerator.burnTime){
-				icontainerlistener.sendProgressBarUpdate(this, 1, this.voidtilemacerator.burnTime);
-			}
-			
-			if(this.lastItemBurnTime != this.voidtilemacerator.currentItemBurnTime){
-				icontainerlistener.sendProgressBarUpdate(this, 2, this.voidtilemacerator.currentItemBurnTime);
+		for (int i = 0; i < listeners.size(); ++i){
+			IContainerListener icontainerlistener = (IContainerListener)listeners.get(i);
+			if(amount != te.getFluidAmount()){
+				icontainerlistener.sendProgressBarUpdate(this, 0, te.getFluidAmount());
 			}
 		}
-		
-		this.lastCookTime = this.voidtilemacerator.cookTime;
-		this.lastBurnTime = this.voidtilemacerator.burnTime;
-		this.lastItemBurnTime = this.voidtilemacerator.currentItemBurnTime;
+		amount = te.getFluidAmount();
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2){
-		if(slot == 0) this.voidtilemacerator.cookTime = par2;
-		if(slot == 1) this.voidtilemacerator.burnTime = par2;
-		if(slot == 2) this.voidtilemacerator.currentItemBurnTime = par2;
+		if(slot == 0) te.setFluidAmount(par2);
 	}
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot){
-		/*ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
+		ItemStack itemstack = null;
+		Slot slot = (Slot) inventorySlots.get(hoverSlot);
 		
 		if(slot != null && slot.getHasStack()){
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			
-			if(hoverSlot == 2){
-				if(!this.mergeItemStack(itemstack1, 3, 39, true)){
+			if(hoverSlot == 0){
+				if(!mergeItemStack(itemstack1, 1, 37, true)){
 					return null;
 				}
-				
 				slot.onSlotChange(itemstack1, itemstack);
-			}else if(hoverSlot != 1 && hoverSlot != 0){
-				if(FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null){
-					if(!this.mergeItemStack(itemstack1, 0, 1, false)){
+			}else{
+				if(!getSlot(0).getHasStack() && te.canInsertItem(0, itemstack1, null)){
+					if(!mergeItemStack(itemstack1, 0, 1, false)){
 						return null;
 					}
-				}else if(TileEntityVoidInfuser.isItemFuel(itemstack1)){
-					if(!this.mergeItemStack(itemstack1, 1, 2, false)){
+				}else if(hoverSlot >= 1 && hoverSlot < 28){
+					if(!mergeItemStack(itemstack1, 28, 37, false)){
 						return null;
 					}
-				}else if(hoverSlot >= 3 && hoverSlot < 30){
-					if(!this.mergeItemStack(itemstack1, 30, 39, false)){
-						return null;
-					}
-				}else if(hoverSlot >= 30 && hoverSlot <= 38){
-					if(!this.mergeItemStack(itemstack1, 3, 30, false)){
+				}else if(hoverSlot >= 28 && hoverSlot < 37){
+					if(!mergeItemStack(itemstack1, 1, 28, false)){
 						return null;
 					}
 				}
-			}else if(!this.mergeItemStack(itemstack1, 3, 39, false)){
-				return null;
 			}
 			
 			if(itemstack1.stackSize == 0){
@@ -116,26 +92,11 @@ public class HeimdallContainer extends Container {
 			
 			slot.onPickupFromSlot(player, itemstack1);
 		}
-		*/
-		return null;//itemstack;
+		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return this.voidtilemacerator.isUseableByPlayer(entityplayer);
+		return te.isUseableByPlayer(entityplayer);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
