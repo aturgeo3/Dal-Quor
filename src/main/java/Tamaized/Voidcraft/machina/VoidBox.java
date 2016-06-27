@@ -31,7 +31,7 @@ public class VoidBox extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 
 	public VoidBox(String string) {
-		super(Material.IRON, string);
+		super(Material.IRON, string, true);
 	}
 	
 	@Override

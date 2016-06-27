@@ -12,11 +12,11 @@ public abstract class BasicVoidBlockContainer extends BlockContainer implements 
 	
 	private final String name;
 
-	protected BasicVoidBlockContainer(Material materialIn, String n) {
+	protected BasicVoidBlockContainer(Material materialIn, String n, boolean register) {
 		super(materialIn);
 		name = n;
 		setUnlocalizedName(name);
-		GameRegistry.registerBlock(this, "blocks/"+n);
+		if(register) GameRegistry.registerBlock(this, "blocks/"+n);
 		this.setCreativeTab(voidCraft.tabs.tabVoid);
 	}
 	

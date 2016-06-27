@@ -71,6 +71,7 @@ import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.Achievements;
 import Tamaized.Voidcraft.registry.Armors;
 import Tamaized.Voidcraft.registry.Biomes;
+import Tamaized.Voidcraft.registry.IBasicVoid;
 import Tamaized.Voidcraft.registry.LootTables;
 import Tamaized.Voidcraft.registry.Materials;
 import Tamaized.Voidcraft.registry.RegistryBase;
@@ -165,6 +166,18 @@ public class voidCraft {
 		VoidSoundEvents.register(); //Do this first in case the other registers need to grab a sound
 		for(RegistryBase reg : registry) reg.preInit();
 		
+		//Tile Entities
+		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
+		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
+		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
+		GameRegistry.registerTileEntity(TileEntityHeimdall.class, ((IBasicVoid) blocks.Heimdall).getName());
+		GameRegistry.registerTileEntity(TileEntityNoBreak.class, ((IBasicVoid) blocks.blockNoBreak).getName());
+		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
+		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
+		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, ((IBasicVoid) blocks.voidicCharger).getName());
+		
 		//API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
 			//logger.info("Thaumcraft Detected. Attempting to load API");
@@ -207,18 +220,6 @@ public class voidCraft {
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
-				
-		//Tile Entities
-		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
-		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
-		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
-		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
-		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
-		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
-		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
-		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, "tileEntityVoidicCharger");
 		
 		for(RegistryBase reg : registry) reg.init();
 		
@@ -265,6 +266,7 @@ public class voidCraft {
 		
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
 		
+		proxy.init();
 		proxy.registerInventoryRender();
 	}
 
@@ -277,11 +279,6 @@ public class voidCraft {
 		channel.register(new VoidCraftServerPacketHandler());
 		proxy.registerNetwork();
 		proxy.registerRenders();
-		proxy.registerBlocks();
-		proxy.registerRenderInformation();
-		proxy.registerItems();
-		proxy.registerMISC();
-		proxy.registerAchievements();
 
 		//if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 	}

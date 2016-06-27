@@ -20,7 +20,7 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 public class VoidicPowerGen extends BasicVoidBlockContainer {
 
 	public VoidicPowerGen(Material materialIn, String n) {
-		super(materialIn, n);
+		super(materialIn, n, true);
 	}
 
 	@Override

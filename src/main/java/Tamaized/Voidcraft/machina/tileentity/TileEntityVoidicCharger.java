@@ -74,7 +74,7 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 
 	@Override
 	public boolean canInputPower(EnumFacing face) {
-		return true;
+		return face == EnumFacing.DOWN;
 	}
 
 	@Override
@@ -177,17 +177,12 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 
 	@Override
 	public String getName() {
-		return "voidicPowerCharger";
+		return null;
 	}
 
 	@Override
 	public boolean hasCustomName() {
 		return false;
-	}
-
-	@Override
-	public ITextComponent getDisplayName() {
-		return new TextComponentString(getName());
 	}
 
 	@Override

@@ -10,7 +10,9 @@ import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -104,7 +106,19 @@ public class VoidBlocks extends RegistryBase {
 		//Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
 		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		/*
+		Heimdall.setRegistryName(new ResourceLocation(voidCraft.modid, ((IBasicVoid) Heimdall).getName()));
+		GameRegistry.register(Heimdall);
+		GameRegistry.register(new ItemBlock(Heimdall).setRegistryName(Heimdall.getRegistryName()));
 
+		blockNoBreak.setRegistryName(new ResourceLocation(voidCraft.modid, ((IBasicVoid) blockNoBreak).getName()));
+		GameRegistry.register(blockNoBreak);
+		GameRegistry.register(new ItemBlock(blockNoBreak).setRegistryName(blockNoBreak.getRegistryName()));
+
+		voidicCharger.setRegistryName(new ResourceLocation(voidCraft.modid, ((IBasicVoid) voidicCharger).getName()));
+		GameRegistry.register(voidicCharger);
+		GameRegistry.register(new ItemBlock(voidicCharger).setRegistryName(voidicCharger.getRegistryName()));
+		*/
 		blockList = new ArrayList<Block>();
 		blockList.add(blockVoidcrystal);
 		blockList.add(oreVoidcrystal);

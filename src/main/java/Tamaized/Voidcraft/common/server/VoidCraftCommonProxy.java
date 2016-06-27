@@ -6,31 +6,17 @@ import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidCraftCommonProxy {
 	
-	public void preInit() {
-	}
+	public void preInit() {}
+	
+	public void init() {}
 
-	public void registerRenderInformation() {}
-
-	public void registerTiles() {}
-
-	public void registerBlocks() {}
-
-	public void registerItems() {}
-
-	public void registerRenders() {}
-
-	public void registerMISC() {
+	public void registerRenders() {
 		System.out.println("Registering GUI Handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(voidCraft.instance, new GuiHandler());
 	}
 
-	public void registerNetwork() {
-	}
+	public void registerNetwork() {}
 
-	public void registerAchievements() {}
-
-	public void registerInventoryRender() {
-		
-	}
+	public void registerInventoryRender() {}
 
 }

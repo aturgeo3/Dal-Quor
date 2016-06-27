@@ -26,18 +26,13 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 public class Heimdall extends BasicVoidBlockContainer{
 
 	public Heimdall(Material p_i45386_1_, String string) {
-		super(p_i45386_1_, string);
+		super(p_i45386_1_, string, true);
 		this.useNeighborBrightness = true;
 	}
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source,BlockPos pos) {
 		return new AxisAlignedBB(0.125F, 0F, 0.125F, 0.875F, 0.6875F, .875F);
-	}
-
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
 	}
 
 	@Override
@@ -56,6 +51,21 @@ public class Heimdall extends BasicVoidBlockContainer{
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state){
         return EnumBlockRenderType.INVISIBLE;
+    }
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+    public boolean isFullCube(IBlockState state) {
+    	return false;
+    }
+    
+    @Override
+    public boolean isVisuallyOpaque() {
+    	return false;
     }
 	
 }

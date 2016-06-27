@@ -41,7 +41,7 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 	
 	public VoidMacerator(String string){
-		super(Material.ROCK, string);
+		super(Material.ROCK, string, true);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, Boolean.valueOf(false)));
 	}
 	

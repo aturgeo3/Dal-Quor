@@ -61,7 +61,7 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 	}
 
 	public VoidicPowerCable(Material materialIn, String n) {
-		super(materialIn, n);
+		super(materialIn, n, true);
 	}
 	
 	@Override
@@ -95,7 +95,9 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 	 * @return Is the neighbouring pipe a valid connection?
 	 */
 	protected boolean isValidPipe(IBlockState ownState, IBlockState neighbourState, IBlockAccess world, BlockPos ownPos, EnumFacing neighbourDirection) {
-		return neighbourState.getBlock() instanceof VoidicPowerCable || world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower;
+		return neighbourState.getBlock() instanceof VoidicPowerCable ||
+				world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower &&
+				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canInputPower(neighbourDirection.getOpposite());
 	}
 
 	/**

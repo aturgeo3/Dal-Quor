@@ -15,7 +15,7 @@ public class AIBlock extends BasicVoidBlockContainer {
 	private boolean createTE = false;
 
 	public AIBlock(String string) {
-		super(Material.CLOTH, string);
+		super(Material.CLOTH, string, true);
 	}
 	
 	public Block allowTileEntityCreation(boolean b){

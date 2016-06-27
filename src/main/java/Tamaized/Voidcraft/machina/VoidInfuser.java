@@ -32,7 +32,7 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 	private Random rand = new Random();
 
 	public VoidInfuser(String string) {
-		super(Material.IRON, string);
+		super(Material.IRON, string, true);
 	}
 
 	@Override

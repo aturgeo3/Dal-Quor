@@ -19,7 +19,7 @@ import Tamaized.Voidcraft.common.voidCraft;
 public class XiaBlock extends BasicVoidBlockContainer {
 
 	public XiaBlock(String string) {
-		super(Material.CLOTH, string);
+		super(Material.CLOTH, string, true);
 	}
 	
 	@Override
