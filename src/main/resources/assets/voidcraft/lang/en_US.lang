@@ -20,25 +20,33 @@ item.debugger.name=Debug Tool
 item.voidChain.name=Void Chain
 item.MoltenvoidChain.name=Molten Void Chain
 item.MoltenvoidChainPart.name=Molten Void Chain Part
+item.voidicSuppressor.name=Voidic Suppressor
 
 # Blocks
-tile.fluidVoid.name=Liquid Void
+tile.voidcraft:blockVoidFluid.name=Liquid Void
 tile.blockVoidcrystal.name=Void Crystal Block
 tile.blockFakeBedrock.name=Soft Bedrock
 tile.blockNoBreak.name=§kLimbo
 tile.blockVoidbrick.name=Void Brick
 tile.blockVoidfence.name=Void Brick Fence
 tile.blockVoidstairs.name=Void Brick Stairs
-tile.blockVoidslab.name=Void Brick Slab
-tile.voidfire.name=Void Fire
+tile.blockVoidBrickHalfSlab.name=Void Brick Slab
+tile.fireVoid.name=Void Fire
 tile.oreVoidcrystal.name=Void Crystal Ore
 tile.voidBox.name=Void Music Box
 tile.voidInfuserInert.name=Inert Void Infusion Altar
 tile.voidInfuser.name=Void Infusion Altar
 tile.Heimdall.name=Heimdall
-tile.voidMaceratorOff.name=Void Infused Macerator
-tile.blockTeleporterVoid.name=Portal to the Void
-tile.blockTeleporterXia.name=Portal to Xia
+tile.voidMacerator.name=Void Infused Macerator
+tile.blockPortalVoid.name=Portal to the Void
+tile.blockPortalXia.name=Portal to Xia
+tile.voidicCharger.name=Voidic Charger
+tile.voidicGen.name=Voidic Power Generator
+tile.blockRealityHole.name=Hole in Reality
+tile.voidicCable.name=Voidic Cable
+
+# Fluid
+fluid.void=Liquid Void
 
 # Armor
 # -- Void
@@ -73,18 +81,18 @@ item.archSword.name=Arch-Angelic Sword
 item.demonSword.name=Demonic Sword
 
 # Records
-item.voidDisc1.name=Lavender Town
-item.voidDisc2.name=Lensko - Cetus
-item.voidDisc3.name=Starfox- Assault-Starwolf theme
-item.voidDisc4.name=They Will Die
-item.voidDisc5.name=Warriors
-item.voidDisc6.name=Imagine Dragons - Shots (Broiler Remix)
-item.voidDisc7.name=Undertale - Asgore
-item.voidDisc8.name=Undertale - Core
-item.voidDisc9.name=Undertale - Megalovania
-item.voidDisc10.name=Undertale - Muffet
-item.voidDisc11.name=Undertale - Papyrus
-item.voidDisc12.name=Undertale - Undyne
+item.voidDisc1.name=Void Record
+item.voidDisc2.name=Void Record
+item.voidDisc3.name=Void Record
+item.voidDisc4.name=Void Record
+item.voidDisc5.name=Void Record
+item.voidDisc6.name=Void Record
+item.voidDisc7.name=Void Record
+item.voidDisc8.name=Void Record
+item.voidDisc9.name=Void Record
+item.voidDisc10.name=Void Record
+item.voidDisc11.name=Void Record
+item.voidDisc12.name=Void Record
 
 # Projectiles
 entity.voidChain.name=Void Chain
