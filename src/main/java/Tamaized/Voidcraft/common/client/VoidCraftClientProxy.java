@@ -1,21 +1,16 @@
 package Tamaized.Voidcraft.common.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
-import Tamaized.Voidcraft.blocks.render.RenderHeimdall;
-import Tamaized.Voidcraft.blocks.render.RenderItemStack;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
 import Tamaized.Voidcraft.client.ClientRenderTicker;
@@ -24,11 +19,9 @@ import Tamaized.Voidcraft.client.RenderVoidicInfusion;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
 import Tamaized.Voidcraft.common.server.VoidCraftCommonProxy;
-import Tamaized.Voidcraft.events.client.BakeEventHandler;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
@@ -66,7 +59,6 @@ import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
-import Tamaized.Voidcraft.registry.IBasicVoid;
 import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 import Tamaized.Voidcraft.voidicInfusion.ClientInfusionHandler;
@@ -83,49 +75,19 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	@Override
 	public void preInit(){
 		voidCraft.fluids.preInitRender();
-		
-		//ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.Heimdall), 0, TileEntityHeimdall.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.Heimdall), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.Heimdall).getName(), "normal"));
-	
-		//ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, TileEntityNoBreak.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.blockNoBreak).getName(), "normal"));
-		
-		//ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, TileEntityVoidicCharger.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.voidicCharger).getName(), "normal"));
-
-        MinecraftForge.EVENT_BUS.register(BakeEventHandler.instance);
 	}
 	
 	@Override
 	public void init() {
         
-        TileEntityItemStackRenderer.instance = new RenderItemStack();
-
-        //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(voidCraft.blocks.Heimdall), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.Heimdall).getName(), "inventory"));
-        //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.blockNoBreak).getName(), "inventory"));
-        //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.voidicCharger).getName(), "inventory"));
-        
-		RenderHeimdall renderHeimdall = new RenderHeimdall();
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		RenderVoidicCharger renderCharger = new RenderVoidicCharger();
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHeimdall.class, renderHeimdall);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoidicCharger.class, renderCharger);
 		
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.Heimdall), 0, TileEntityHeimdall.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.Heimdall), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.Heimdall).getName(), "inventory"));
-	
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, TileEntityNoBreak.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.blockNoBreak).getName(), "inventory"));
-		
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, TileEntityVoidicCharger.class);
-		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, new ModelResourceLocation(voidCraft.modid+":"+((IBasicVoid) voidCraft.blocks.voidicCharger).getName(), "inventory"));
-
-        //MinecraftForge.EVENT_BUS.register(BakeEventHandler.instance);
-
-        //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().registerBuiltInBlocks(voidCraft.blocks.Heimdall);
-        //System.out.println( Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().getModelForState(voidCraft.blocks.Heimdall.getDefaultState()).isBuiltInRenderer());
 	}
 	
 	@Override

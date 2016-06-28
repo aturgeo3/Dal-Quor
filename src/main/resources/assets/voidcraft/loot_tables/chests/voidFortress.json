@@ -1,6 +1,7 @@
 {
     "pools": [
         {
+			"name": "voidFortress",
             "rolls": {
                 "min": 2,
                 "max": 8
@@ -50,7 +51,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:voidCloth",
+                    "name": "voidcraft:items/voidCloth",
                     "weight": 15,
                     "functions": [
                         {
@@ -64,7 +65,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:voidcrystal",
+                    "name": "voidcraft:items/voidcrystal",
                     "weight": 15,
                     "functions": [
                         {
@@ -78,7 +79,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:ectoplasm",
+                    "name": "voidcraft:items/ectoplasm",
                     "weight": 15,
                     "functions": [
                         {
@@ -92,7 +93,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:MoltenvoidChain",
+                    "name": "voidcraft:items/MoltenvoidChain",
                     "weight": 5,
                     "functions": [
                         {
@@ -106,22 +107,22 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:demonBoots",
+                    "name": "voidcraft:armors/demonBoots",
                     "weight": 5
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:demonLegs",
+                    "name": "voidcraft:armors/demonLegs",
                     "weight": 5
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:demonChest",
+                    "name": "voidcraft:armors/demonChest",
                     "weight": 5
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:demonHelmet",
+                    "name": "voidcraft:armors/demonHelmet",
                     "weight": 5
                 }
             ]
