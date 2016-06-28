@@ -31,6 +31,10 @@ public class Achievements extends RegistryBase {
 	public static Achievement voidCraftAchSideLine2_1;
 	public static Achievement voidCraftAchSideLine2_2;
 	public static Achievement voidCraftAchSideLine2_3;
+	
+	public static Achievement voidCraftAchSideLine2_1_1;
+	public static Achievement voidCraftAchSideLine2_1_2;
+	public static Achievement voidCraftAchSideLine2_1_3;
 
 	@Override
 	public void preInit() {
@@ -74,6 +78,13 @@ public class Achievements extends RegistryBase {
 		voidCraftAchSideLine2_2.registerStat();
 		voidCraftAchSideLine2_3 = new Achievement("achievement.achS2_3", "achS2_3", -2, 3, voidCraft.blocks.Heimdall, voidCraftAchSideLine2_2);
 		voidCraftAchSideLine2_3.registerStat();
+		
+		voidCraftAchSideLine2_1_1 = new Achievement("achievement.achS2_1_1", "achS2_1_1", -4, 9, voidCraft.blocks.voidicGen, voidCraftAchSideLine2_1);
+		voidCraftAchSideLine2_1_1.registerStat();
+		voidCraftAchSideLine2_1_2 = new Achievement("achievement.achS2_1_2", "achS2_1_2", -4, 6, voidCraft.blocks.voidicCharger, voidCraftAchSideLine2_1_1);
+		voidCraftAchSideLine2_1_2.setSpecial().registerStat();
+		voidCraftAchSideLine2_1_3 = new Achievement("achievement.achS2_1_3", "achS2_1_3", -4, 3, voidCraft.items.voidicSuppressor, voidCraftAchSideLine2_1_2);
+		voidCraftAchSideLine2_1_3.registerStat();
 	}
 
 	@Override
@@ -96,7 +107,11 @@ public class Achievements extends RegistryBase {
 
 				voidCraftAchSideLine2_1,
 				voidCraftAchSideLine2_2,
-				voidCraftAchSideLine2_3
+				voidCraftAchSideLine2_3,
+
+				voidCraftAchSideLine2_1_1,
+				voidCraftAchSideLine2_1_2,
+				voidCraftAchSideLine2_1_3
 		};
 		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));
 	}

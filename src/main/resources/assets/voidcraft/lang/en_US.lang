@@ -145,6 +145,13 @@ achievement.achS2_2.desc=Infuse a furnace with the power of the Void
 achievement.achS2_3=The Gate
 achievement.achS2_3.desc=Craft a Heimdall
 
+achievement.achS2_1_1=Voidic Energetics
+achievement.achS2_1_1.desc=Craft a Voidic Power Generator
+achievement.achS2_1_2=Voidic Charge
+achievement.achS2_1_2.desc=Craft a Voidic Charger
+achievement.achS2_1_3=Material Anchor
+achievement.achS2_1_3.desc=Craft a Voidic Suppressor
+
 # Thaumcraft
 # -- Research
 tc.research_category.VoidCraft=VoidCraft
