@@ -96,8 +96,10 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 	 */
 	protected boolean isValidPipe(IBlockState ownState, IBlockState neighbourState, IBlockAccess world, BlockPos ownPos, EnumFacing neighbourDirection) {
 		return neighbourState.getBlock() instanceof VoidicPowerCable ||
-				world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower &&
-				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canInputPower(neighbourDirection.getOpposite());
+				world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower && (
+				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canInputPower(neighbourDirection.getOpposite()) ||
+				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canOutputPower(neighbourDirection.getOpposite())
+				);
 	}
 
 	/**
