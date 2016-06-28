@@ -55,8 +55,8 @@ public class VoidStar extends BasicVoidItems{
 			int yCoord = MathHelper.floor_double(entityItem.posY);
 			int zCoord = MathHelper.floor_double(entityItem.posZ);
 			entityItem.worldObj.setBlockState(new BlockPos(xCoord, yCoord, zCoord), voidCraft.blocks.blockPortalXia.getDefaultState());
-			if(entityItem.getOwner() != null){
-				EntityPlayer entityplayer = entityItem.worldObj.getPlayerEntityByName(entityItem.getOwner());
+			if(entityItem.getThrower() != null){
+				EntityPlayer entityplayer = entityItem.worldObj.getPlayerEntityByName(entityItem.getThrower());
 				if(entityplayer != null) entityplayer.addStat(voidCraft.achievements.voidCraftAchMainLine_5, 1);
 			}
 			entityItem.setDead();
