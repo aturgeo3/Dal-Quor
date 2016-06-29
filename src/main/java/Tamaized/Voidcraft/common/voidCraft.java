@@ -11,7 +11,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -82,8 +81,8 @@ import Tamaized.Voidcraft.registry.VoidFluids;
 import Tamaized.Voidcraft.registry.VoidItems;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.structures.StructureTestPieces;
-import Tamaized.Voidcraft.structures.StructureTestStart;
+import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
+import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
 import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
@@ -236,8 +235,8 @@ public class voidCraft {
 		// World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		
-		MapGenStructureIO.registerStructure(StructureTestStart.class, "VoidFortress");
-		StructureTestPieces.register();
+		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
+        StructureVoidFortressPieces.registerNetherFortressPieces();
 
 		// Mobs
 		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", 4, this, 64, 1, true);

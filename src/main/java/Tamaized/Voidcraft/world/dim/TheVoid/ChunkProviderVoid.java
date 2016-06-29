@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -20,7 +19,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -28,7 +26,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.structures.MapGenTestStart;
+import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 
 import com.google.common.base.Predicate;
 
@@ -39,7 +37,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
     private final World world;
     private final boolean generateStructures;
     private final Random rand;
-    public MapGenTestStart genTest = new MapGenTestStart();
+    public MapGenVoidFortress genTest = new MapGenVoidFortress();
     
     private double[] buffer;
     private NoiseGeneratorOctaves lperlinNoise1;
