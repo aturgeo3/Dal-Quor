@@ -1,6 +1,8 @@
 package Tamaized.Voidcraft.machina;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -10,6 +12,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,39 +21,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
+import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import Tamaized.Voidcraft.power.IVoidicPower;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.google.common.collect.ImmutableList;
 
-public class VoidicPowerCable extends BasicVoidBlockContainer {
+public class VoidicPowerCable extends TamBlockContainer {
 
 	public static final float PIPE_MIN_POS = 0.25f;
 	public static final float PIPE_MAX_POS = 0.75f;
-	
+
 	private static AxisAlignedBB bounds = new AxisAlignedBB(PIPE_MIN_POS, PIPE_MIN_POS, PIPE_MIN_POS, PIPE_MAX_POS, PIPE_MAX_POS, PIPE_MAX_POS);
 
-	public static final ImmutableList<IProperty> CONNECTED_PROPERTIES = ImmutableList.copyOf(
-			Stream.of(EnumFacing.VALUES)
-					.map(facing -> PropertyBool.create(facing.getName()))
-					.collect(Collectors.toList())
-	);
+	public static final ImmutableList<IProperty> CONNECTED_PROPERTIES = ImmutableList.copyOf(Stream.of(EnumFacing.VALUES).map(facing -> PropertyBool.create(facing.getName())).collect(Collectors.toList()));
 
-	public static final ImmutableList<AxisAlignedBB> CONNECTED_BOUNDING_BOXES = ImmutableList.copyOf(
-			Stream.of(EnumFacing.VALUES)
-					.map(facing -> {
-						Vec3i directionVec = facing.getDirectionVec();
-						return new AxisAlignedBB(
-								getMinBound(directionVec.getX()), getMinBound(directionVec.getY()), getMinBound(directionVec.getZ()),
-								getMaxBound(directionVec.getX()), getMaxBound(directionVec.getY()), getMaxBound(directionVec.getZ())
-						);
-					})
-					.collect(Collectors.toList())
-	);
+	public static final ImmutableList<AxisAlignedBB> CONNECTED_BOUNDING_BOXES = ImmutableList.copyOf(Stream.of(EnumFacing.VALUES).map(facing -> {
+		Vec3i directionVec = facing.getDirectionVec();
+		return new AxisAlignedBB(getMinBound(directionVec.getX()), getMinBound(directionVec.getY()), getMinBound(directionVec.getZ()), getMaxBound(directionVec.getX()), getMaxBound(directionVec.getY()), getMaxBound(directionVec.getZ()));
+	}).collect(Collectors.toList()));
 
 	private static float getMinBound(int dir) {
 		return dir == -1 ? 0 : PIPE_MIN_POS;
@@ -60,10 +50,10 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 		return dir == 1 ? 1 : PIPE_MAX_POS;
 	}
 
-	public VoidicPowerCable(Material materialIn, String n) {
-		super(materialIn, n, true);
+	public VoidicPowerCable(CreativeTabs tab, Material material, String n, float hardness) {
+		super(tab, material, n, hardness);
 	}
-	
+
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, CONNECTED_PROPERTIES.toArray(new IProperty[CONNECTED_PROPERTIES.size()]));
@@ -87,28 +77,33 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 	/**
 	 * Is the neighbouring pipe a valid connection for this pipe?
 	 *
-	 * @param ownState           This pipe's state
-	 * @param neighbourState     The neighbouring pipe's state
-	 * @param world              The world
-	 * @param ownPos             This pipe's position
-	 * @param neighbourDirection The direction of the neighbouring pipe
+	 * @param ownState
+	 *            This pipe's state
+	 * @param neighbourState
+	 *            The neighbouring pipe's state
+	 * @param world
+	 *            The world
+	 * @param ownPos
+	 *            This pipe's position
+	 * @param neighbourDirection
+	 *            The direction of the neighbouring pipe
 	 * @return Is the neighbouring pipe a valid connection?
 	 */
 	protected boolean isValidPipe(IBlockState ownState, IBlockState neighbourState, IBlockAccess world, BlockPos ownPos, EnumFacing neighbourDirection) {
-		return neighbourState.getBlock() instanceof VoidicPowerCable ||
-				world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower && (
-				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canInputPower(neighbourDirection.getOpposite()) ||
-				((IVoidicPower)world.getTileEntity(ownPos.offset(neighbourDirection))).canOutputPower(neighbourDirection.getOpposite())
-				);
+		return neighbourState.getBlock() instanceof VoidicPowerCable || world.getTileEntity(ownPos.offset(neighbourDirection)) instanceof IVoidicPower && (((IVoidicPower) world.getTileEntity(ownPos.offset(neighbourDirection))).canInputPower(neighbourDirection.getOpposite()) || ((IVoidicPower) world.getTileEntity(ownPos.offset(neighbourDirection))).canOutputPower(neighbourDirection.getOpposite()));
 	}
 
 	/**
 	 * Can this pipe connect to the neighbouring block?
 	 *
-	 * @param ownState           This pipe's state
-	 * @param worldIn            The world
-	 * @param ownPos             This pipe's position
-	 * @param neighbourDirection The direction of the neighbouring block
+	 * @param ownState
+	 *            This pipe's state
+	 * @param worldIn
+	 *            The world
+	 * @param ownPos
+	 *            This pipe's position
+	 * @param neighbourDirection
+	 *            The direction of the neighbouring block
 	 * @return Can this pipe connect?
 	 */
 	private boolean canConnectTo(IBlockState ownState, IBlockAccess worldIn, BlockPos ownPos, EnumFacing neighbourDirection) {
@@ -138,14 +133,14 @@ public class VoidicPowerCable extends BasicVoidBlockContainer {
 	public void setBlockBounds(AxisAlignedBB bb) {
 		bounds = bb;
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos){
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return bounds;
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn){
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
 		setBlockBounds(new AxisAlignedBB(PIPE_MIN_POS, PIPE_MIN_POS, PIPE_MIN_POS, PIPE_MAX_POS, PIPE_MAX_POS, PIPE_MAX_POS));
 		super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn);
 

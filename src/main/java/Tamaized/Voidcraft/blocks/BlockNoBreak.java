@@ -1,16 +1,21 @@
 package Tamaized.Voidcraft.blocks;
 
+import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.common.voidCraft;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 
-public class BlockNoBreak extends BasicVoidBlockContainer{
+public class BlockNoBreak extends TamBlockContainer{
 
-	public BlockNoBreak(Material arg0, String string) {
-		super(arg0, string, true);
+	public BlockNoBreak(CreativeTabs tab, Material material, String n, float hardness) {
+		super(tab, material, n, hardness);
+		setLightLevel(1.0F);
+		setResistance(100);
 	}
 
 	@Override

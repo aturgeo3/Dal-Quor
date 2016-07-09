@@ -13,13 +13,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class XiaBlock extends BasicVoidBlockContainer {
+public class XiaBlock extends TamBlockContainer {
 
 	public XiaBlock(String string) {
-		super(Material.CLOTH, string, true);
+		super(null, Material.CLOTH, string, -1);
+		setBlockUnbreakable();
 	}
 	
 	@Override

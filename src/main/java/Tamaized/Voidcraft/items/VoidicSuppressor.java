@@ -1,11 +1,12 @@
 package Tamaized.Voidcraft.items;
 
+import net.minecraft.creativetab.CreativeTabs;
 import Tamaized.Voidcraft.power.VoidicPowerItem;
 
 public class VoidicSuppressor extends VoidicPowerItem {
 
-	public VoidicSuppressor(String n) {
-		super(n);
+	public VoidicSuppressor(CreativeTabs tab, String n, int maxStackSize) {
+		super(tab, n, maxStackSize);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.armor;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,15 +16,16 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import Tamaized.TamModized.armors.TamArmor;
 //import net.minecraftforge.event.entity.player.PlayerEvent;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class XiaArmor extends BasicVoidArmor {
+public class XiaArmor extends TamArmor {
 
 	public static List<String> playersWithFlight = new ArrayList();
 	
-	public XiaArmor(ArmorMaterial armorMaterial, int par3, EntityEquipmentSlot par4, String type, String n) {
-		super(armorMaterial, par3, par4, type, n);
+	public XiaArmor(CreativeTabs tab, ArmorMaterial armorMaterial, int par3, EntityEquipmentSlot par4, String type, String n) {
+		super(tab, armorMaterial, par3, par4, type, n);
 		MinecraftForge.EVENT_BUS.register(this);
 		setHasSubtypes(true);
 	}

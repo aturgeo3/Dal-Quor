@@ -6,13 +6,13 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -22,17 +22,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
-public class VoidInfuser extends BasicVoidBlockContainer {
+public class VoidInfuser extends TamBlockContainer {
 	private Random rand = new Random();
 
-	public VoidInfuser(String string) {
-		super(Material.IRON, string, true);
+	public VoidInfuser(CreativeTabs tab, Material material, String n, float hardness) {
+		super(tab, material, n, hardness);
 	}
 
 	@Override
@@ -40,55 +39,59 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 		return false;
 	}
 
-	//@Override
-	//public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
-		//this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
-	//	super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
-	//	this.setBlockBoundsForItemRender();
-	//	super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
-	//}
+	// @Override
+	// public void addCollisionBoxToList(IBlockState state, World worldIn,
+	// BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB>
+	// collidingBoxes, @Nullable Entity entityIn) {
+	// this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
+	// super.addCollisionBoxesToList(worldIn, pos, state, mask, list,
+	// collidingEntity);
+	// this.setBlockBoundsForItemRender();
+	// super.addCollisionBoxesToList(worldIn, pos, state, mask, list,
+	// collidingEntity);
+	// }
 
 	/**
 	 * Sets the block's bounds for rendering it as an item
 	 */
-	//@Override
-	//public void setBlockBoundsForItemRender() {
-	//	this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	//}
+	// @Override
+	// public void setBlockBoundsForItemRender() {
+	// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	// }
 
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(worldIn.isRemote){
+		if (worldIn.isRemote) {
 			return true;
-		}else{
+		} else {
 			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.guiIdInfuser, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
-		int l = MathHelper.floor_double((double)(placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		
-		if(l == 0){
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+		if (l == 0) {
 			world.setBlockState(pos, this.getStateFromMeta(2), 2);
 		}
-		
-		if(l == 1){
+
+		if (l == 1) {
 			world.setBlockState(pos, this.getStateFromMeta(5), 2);
 		}
-		
-		if(l == 2){
+
+		if (l == 2) {
 			world.setBlockState(pos, this.getStateFromMeta(3), 2);
 		}
-		
-		if(l == 3){
+
+		if (l == 3) {
 			world.setBlockState(pos, this.getStateFromMeta(4), 2);
 		}
-		
+
 	}
 
 	/**
@@ -120,24 +123,16 @@ public class VoidInfuser extends BasicVoidBlockContainer {
 
 						itemstack.stackSize -= j;
 
-						EntityItem item = new EntityItem(world,
-								(double) ((float) pos.getX() + f),
-								(double) ((float) pos.getY() + f1),
-								(double) ((float) pos.getZ() + f2), itemstack);
+						EntityItem item = new EntityItem(world, (double) ((float) pos.getX() + f), (double) ((float) pos.getY() + f1), (double) ((float) pos.getZ() + f2), itemstack);
 
 						if (itemstack.hasTagCompound()) {
-							item.getEntityItem().setTagCompound(
-									(NBTTagCompound) itemstack.getTagCompound()
-											.copy());
+							item.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 						}
 
 						float f3 = 0.05F;
-						item.motionX = (double) ((float) this.rand
-								.nextGaussian() * f3);
-						item.motionY = (double) ((float) this.rand
-								.nextGaussian() * f3 + 0.2F);
-						item.motionZ = (double) ((float) this.rand
-								.nextGaussian() * f3);
+						item.motionX = (double) ((float) this.rand.nextGaussian() * f3);
+						item.motionY = (double) ((float) this.rand.nextGaussian() * f3 + 0.2F);
+						item.motionZ = (double) ((float) this.rand.nextGaussian() * f3);
 
 						world.spawnEntityInWorld(item);
 					}

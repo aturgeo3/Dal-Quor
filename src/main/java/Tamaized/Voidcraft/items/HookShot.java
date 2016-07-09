@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -17,13 +18,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 
-public class HookShot extends BasicVoidItems{
-	
-	public HookShot(String n) {
-		super(n);
+public class HookShot extends TamItem{
+
+	public HookShot(CreativeTabs tab, String n, int maxStackSize) {
+		super(tab, n, maxStackSize);
 	}
 
 	public static Map<EntityPlayer, Boolean> handler = new HashMap<EntityPlayer, Boolean>(); //Keep this Server Side

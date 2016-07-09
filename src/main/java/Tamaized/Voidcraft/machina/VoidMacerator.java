@@ -11,13 +11,13 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -28,76 +28,76 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.blocks.BasicVoidBlockContainer;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
-public class VoidMacerator extends BasicVoidBlockContainer {
+public class VoidMacerator extends TamBlockContainer {
 
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    public static final PropertyBool ACTIVE = PropertyBool.create("active");
-	
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyBool ACTIVE = PropertyBool.create("active");
+
 	private Random rand = new Random();
-	
-	public VoidMacerator(String string){
-		super(Material.ROCK, string, true);
+
+	public VoidMacerator(CreativeTabs tab, Material material, String n, float hardness) {
+		super(tab, material, n, hardness);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, Boolean.valueOf(false)));
 	}
-	
+
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		this.setDefaultFacing(world, pos, state);
 	}
-	
-	public boolean getIsActive(IBlockState state){
+
+	public boolean getIsActive(IBlockState state) {
 		return state.getValue(ACTIVE);
 	}
-	
+
 	@Override
-	protected BlockStateContainer createBlockState(){
-		return new BlockStateContainer(this, new IProperty[]{FACING, ACTIVE});
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { FACING, ACTIVE });
 	}
-	
+
 	@Override
-	public IBlockState getStateFromMeta(int meta){
-		int val = meta > 5 ? meta-6 : meta;
+	public IBlockState getStateFromMeta(int meta) {
+		int val = meta > 5 ? meta - 6 : meta;
 		EnumFacing enumfacing = EnumFacing.getFront(val);
-		
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y){
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;
 		}
-		
+
 		return this.getDefaultState().withProperty(FACING, enumfacing).withProperty(ACTIVE, meta > 5);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public IBlockState getStateForEntityRender(IBlockState state){
+	public IBlockState getStateForEntityRender(IBlockState state) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH).withProperty(ACTIVE, false);
 	}
-	
+
 	/**
 	 * Convert the BlockState into the correct metadata value
 	 */
 	@Override
-	public int getMetaFromState(IBlockState state){
-		int meta = ((EnumFacing)state.getValue(FACING)).getIndex();
-		if(state.getValue(ACTIVE)) meta = meta + 6;
+	public int getMetaFromState(IBlockState state) {
+		int meta = ((EnumFacing) state.getValue(FACING)).getIndex();
+		if (state.getValue(ACTIVE)) meta = meta + 6;
 		return meta;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand){
-		if(state.getValue(ACTIVE)){
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (state.getValue(ACTIVE)) {
 			float x1 = (float) pos.getX() + 0.5F;
-			float y1 = (float) pos.getY() + rand.nextFloat(); 
+			float y1 = (float) pos.getY() + rand.nextFloat();
 			float z1 = (float) pos.getZ() + 0.5F;
-			
+
 			float f = 0.52F;
 			float f1 = rand.nextFloat() * 0.6F - 0.3F;
-			
-			switch(state.getValue(FACING)){
+
+			switch (state.getValue(FACING)) {
 				case NORTH:
 					world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
 					world.spawnParticle(EnumParticleTypes.PORTAL, (double) (x1 + f1), (double) (y1), (double) (z1 - f), 0D, 0D, -1D);
@@ -123,127 +123,126 @@ public class VoidMacerator extends BasicVoidBlockContainer {
 			}
 		}
 	}
-	
-	private void setDefaultFacing(World world, BlockPos pos, IBlockState state){
-		if (!world.isRemote){
+
+	private void setDefaultFacing(World world, BlockPos pos, IBlockState state) {
+		if (!world.isRemote) {
 			Block block = world.getBlockState(pos.north()).getBlock();
 			Block block1 = world.getBlockState(pos.south()).getBlock();
 			Block block2 = world.getBlockState(pos.west()).getBlock();
 			Block block3 = world.getBlockState(pos.east()).getBlock();
-			EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-			
-			if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state)){
+			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+
+			if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state)) {
 				enumfacing = EnumFacing.SOUTH;
-			}else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state) && !block.isFullBlock(state)){
+			} else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state) && !block.isFullBlock(state)) {
 				enumfacing = EnumFacing.NORTH;
-			}else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state) && !block3.isFullBlock(state)){
+			} else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state) && !block3.isFullBlock(state)) {
 				enumfacing = EnumFacing.EAST;
-			}else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state) && !block2.isFullBlock(state)){
+			} else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state) && !block2.isFullBlock(state)) {
 				enumfacing = EnumFacing.WEST;
 			}
-			
+
 			world.setBlockState(pos, state.withProperty(FACING, enumfacing).withProperty(ACTIVE, state.getValue(ACTIVE)), 2);
 		}
 	}
-	
-	public static void setState(boolean active, World worldIn, BlockPos pos){
+
+	public static void setState(boolean active, World worldIn, BlockPos pos) {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		TileEntityVoidMacerator te = (TileEntityVoidMacerator) tileentity;
-		
-		if (active){
+
+		if (active) {
 			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
 			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-		}else{
+		} else {
 			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
 			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
 		}
-		
-		
-		if (tileentity != null){
+
+		if (tileentity != null) {
 			tileentity.validate();
 			worldIn.setTileEntity(pos, tileentity);
 		}
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(!world.isRemote){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote) {
 			FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.guiIdMacerator, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World arg0, int arg1) {
 		return new TileEntityVoidMacerator();
 	}
-	
+
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
-		int l = MathHelper.floor_double((double)(placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		
-		if(l == 0){
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+		if (l == 0) {
 			world.setBlockState(pos, this.getStateFromMeta(2), 2);
 		}
-		
-		if(l == 1){
+
+		if (l == 1) {
 			world.setBlockState(pos, this.getStateFromMeta(5), 2);
 		}
-		
-		if(l == 2){
+
+		if (l == 2) {
 			world.setBlockState(pos, this.getStateFromMeta(3), 2);
 		}
-		
-		if(l == 3){
+
+		if (l == 3) {
 			world.setBlockState(pos, this.getStateFromMeta(4), 2);
 		}
-		
+
 	}
-	
+
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player){
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(voidCraft.blocks.voidMacerator);
 	}
-	
+
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state){
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		TileEntityVoidMacerator tileentity = (TileEntityVoidMacerator) world.getTileEntity(pos);
-		
-		if(tileentity != null){
-			for(int i = 0; i < tileentity.getSizeInventory(); i++){
+
+		if (tileentity != null) {
+			for (int i = 0; i < tileentity.getSizeInventory(); i++) {
 				ItemStack itemstack = tileentity.getStackInSlot(i);
-				
-				if(itemstack != null){
+
+				if (itemstack != null) {
 					float f = this.rand.nextFloat() * 0.8F + 0.1F;
 					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-					
-					while(itemstack.stackSize > 0){
+
+					while (itemstack.stackSize > 0) {
 						int j = this.rand.nextInt(21);
-						
-						if(j > itemstack.stackSize){
+
+						if (j > itemstack.stackSize) {
 							j = itemstack.stackSize;
 						}
-						
-						itemstack.stackSize-=j;
-						
-						EntityItem item = new EntityItem(world, (double)((float)pos.getX() + f), (double)((float)pos.getY() + f1), (double)((float)pos.getZ() + f2), new ItemStack(itemstack.getItem()));
-						
-						if(itemstack.hasTagCompound()){
-							item.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+
+						itemstack.stackSize -= j;
+
+						EntityItem item = new EntityItem(world, (double) ((float) pos.getX() + f), (double) ((float) pos.getY() + f1), (double) ((float) pos.getZ() + f2), new ItemStack(itemstack.getItem()));
+
+						if (itemstack.hasTagCompound()) {
+							item.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
 						}
-						
+
 						float f3 = 0.05F;
-						item.motionX = (double)((float)this.rand.nextGaussian() * f3);
-						item.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-						item.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-						
+						item.motionX = (double) ((float) this.rand.nextGaussian() * f3);
+						item.motionY = (double) ((float) this.rand.nextGaussian() * f3 + 0.2F);
+						item.motionZ = (double) ((float) this.rand.nextGaussian() * f3);
+
 						world.spawnEntityInWorld(item);
 					}
 				}
 			}
 		}
 		super.breakBlock(world, pos, state);
-	}	
+	}
 }

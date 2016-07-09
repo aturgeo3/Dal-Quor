@@ -1,25 +1,27 @@
 package Tamaized.Voidcraft.tools.demon;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import Tamaized.Voidcraft.tools.BasicVoidItemSword;
+import Tamaized.TamModized.tools.TamSword;
+import Tamaized.Voidcraft.common.voidCraft;
 
-public class DemonSword extends BasicVoidItemSword {
+public class DemonSword extends TamSword {
 
-	public DemonSword(ToolMaterial material, String n) {
-		super(material, n);
+	public DemonSword(CreativeTabs tab, ToolMaterial material, String n) {
+		super(tab, material, n);
 	}
 
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
-        par1ItemStack.damageItem(1, par3EntityLivingBase);
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("nausea"), 20*20)); //Confuse
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"), 20*20)); //Weakness
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("blindness"), 20*20)); //Blind
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 20*20)); //Poison
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 20*20)); //Wither
-        par2EntityLivingBase.setFire(100); //Fire
-        return true;
-    }
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase) {
+		par1ItemStack.damageItem(1, par3EntityLivingBase);
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("nausea"), 20 * 20)); // Confuse
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"), 20 * 20)); // Weakness
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("blindness"), 20 * 20)); // Blind
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 20 * 20)); // Poison
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 20 * 20)); // Wither
+		par2EntityLivingBase.setFire(100); // Fire
+		return true;
+	}
 }

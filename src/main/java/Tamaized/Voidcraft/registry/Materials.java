@@ -1,5 +1,9 @@
 package Tamaized.Voidcraft.registry;
 
+import java.util.ArrayList;
+
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
@@ -8,7 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class Materials extends RegistryBase{
+public class Materials implements ITamRegistry {
 	
 	public static ToolMaterial voidTools;
 	public static ToolMaterial spectreTools;
@@ -44,11 +48,15 @@ public class Materials extends RegistryBase{
 	public void postInit() {
 		
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void setupRender() {
-		
+	public ArrayList<ITamModel> getModelList() {
+		return new ArrayList<ITamModel>();
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

@@ -2,55 +2,46 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.armor.BasicVoidArmor;
+import Tamaized.TamModized.armors.TamArmor;
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class Armors extends RegistryBase {
+public class Armors implements ITamRegistry {
 	
-	public static ArrayList<Item> list = new ArrayList<Item>();
+	public ArrayList<ITamModel> modelList;
 
-	public static Item voidHelmet;
-	public static Item voidChest;
-	public static Item voidLegs;
-	public static Item voidBoots;
-	public static Item demonHelmet;
-	public static Item demonChest;
-	public static Item demonLegs;
-	public static Item demonBoots;
-	public static Item xiaChest;
+	public static TamArmor voidHelmet;
+	public static TamArmor voidChest;
+	public static TamArmor voidLegs;
+	public static TamArmor voidBoots;
+	public static TamArmor demonHelmet;
+	public static TamArmor demonChest;
+	public static TamArmor demonLegs;
+	public static TamArmor demonBoots;
+	public static XiaArmor xiaChest;
 
 	@Override
 	public void preInit() {
-		voidHelmet = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.HEAD, "void", "voidHelmet");
-		voidChest = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidChest");
-		voidLegs = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.LEGS, "void", "voidLegs");
-		voidBoots = new BasicVoidArmor(voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.FEET, "void", "voidBoots");
-
-		demonHelmet = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.HEAD, "demon", "demonHelmet");
-		demonChest = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.CHEST, "demon", "demonChest");
-		demonLegs = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.LEGS, "demon", "demonLegs");
-		demonBoots = new BasicVoidArmor(voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.FEET, "demon", "demonBoots");
-
-		xiaChest = new XiaArmor(voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.CHEST, "xia", "xiaChest");
+		modelList = new ArrayList<ITamModel>();
 		
-		list.add(voidHelmet);
-		list.add(voidChest);
-		list.add(voidLegs);
-		list.add(voidBoots);
-		list.add(demonHelmet);
-		list.add(demonChest);
-		list.add(demonLegs);
-		list.add(demonBoots);
-		list.add(xiaChest);
+		modelList.add(voidHelmet = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.HEAD, "void", "voidHelmet"));
+		modelList.add(voidChest = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidChest"));
+		modelList.add(voidLegs = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.LEGS, "void", "voidLegs"));
+		modelList.add(voidBoots = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.FEET, "void", "voidBoots"));
+
+		modelList.add(demonHelmet = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.HEAD, "demon", "demonHelmet"));
+		modelList.add(demonChest = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.CHEST, "demon", "demonChest"));
+		modelList.add(demonLegs = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.LEGS, "demon", "demonLegs"));
+		modelList.add(demonBoots = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.FEET, "demon", "demonBoots"));
+
+		modelList.add(xiaChest = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.CHEST, "xia", "xiaChest"));
 	}
 
 	@Override
@@ -66,14 +57,15 @@ public class Armors extends RegistryBase {
 		// TODO Auto-generated method stub
 
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void setupRender() {
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		for(Item i : list){
-			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("armors/", ((IBasicVoid)i).getName(), "inventory"));
-		}
+	public ArrayList<ITamModel> getModelList() {
+		return modelList;
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

@@ -2,20 +2,20 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.TamModized.tools.TamAxe;
+import Tamaized.TamModized.tools.TamHoe;
+import Tamaized.TamModized.tools.TamPickaxe;
+import Tamaized.TamModized.tools.TamSpade;
+import Tamaized.TamModized.tools.TamSword;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.tools.BasicVoidItemAxe;
-import Tamaized.Voidcraft.tools.BasicVoidItemHoe;
-import Tamaized.Voidcraft.tools.BasicVoidItemPickaxe;
-import Tamaized.Voidcraft.tools.BasicVoidItemSpade;
-import Tamaized.Voidcraft.tools.BasicVoidItemSword;
 import Tamaized.Voidcraft.tools.arch.ArchSword;
 import Tamaized.Voidcraft.tools.chain.ChainSword;
 import Tamaized.Voidcraft.tools.demon.DemonSword;
@@ -24,60 +24,49 @@ import Tamaized.Voidcraft.tools.spectre.AngelicSword;
 import Tamaized.Voidcraft.tools.spectre.SpectreAxe;
 import Tamaized.Voidcraft.tools.spectre.SpectrePickaxe;
 
-public class Tools extends RegistryBase {
-	
-	public static ArrayList<Item> list = new ArrayList<Item>();
-	
-	public static Item voidPickaxe;
-	public static Item voidSpade;
-	public static Item voidAxe;
-	public static Item voidSword;
-	public static Item voidHoe;
-	public static Item angelicSword;
-	public static Item chainSword;
-	public static Item moltenSword;
-	public static Item archSword;
-	public static Item demonSword;
-	public static Item spectrePickaxe;
-	public static Item spectreAxe;
+public class Tools implements ITamRegistry {
+
+	public static ArrayList<ITamModel> modelList;
+
+	public static TamPickaxe voidPickaxe;
+	public static TamSpade voidSpade;
+	public static TamAxe voidAxe;
+	public static TamSword voidSword;
+	public static TamHoe voidHoe;
+	public static AngelicSword angelicSword;
+	public static ChainSword chainSword;
+	public static MoltenSword moltenSword;
+	public static ArchSword archSword;
+	public static DemonSword demonSword;
+	public static SpectrePickaxe spectrePickaxe;
+	public static SpectreAxe spectreAxe;
 
 	@Override
 	public void preInit() {
-		//Swords: 3+dmg; Axe: dmg; Pick: 1+dmg; Spade: 1.5+dmg;
-		//Axe: -3; Pick: -2.8; Spade: -3;
+		modelList = new ArrayList<ITamModel>();
+		
+		// Swords: 3+dmg; Axe: dmg; Pick: 1+dmg; Spade: 1.5+dmg;
+		// Axe: -3; Pick: -2.8; Spade: -3;
 		// Tools
 		// void
-		voidPickaxe = new BasicVoidItemPickaxe(voidCraft.materials.voidTools, "voidPickaxe").setCreativeTab(voidCraft.tabs.tabVoid);
-		voidSpade = new BasicVoidItemSpade(voidCraft.materials.voidTools, "voidShovel").setCreativeTab(voidCraft.tabs.tabVoid);
-		voidAxe = new BasicVoidItemAxe(voidCraft.materials.voidTools, "voidAxe").setCreativeTab(voidCraft.tabs.tabVoid);
-		voidSword = new BasicVoidItemSword(voidCraft.materials.voidTools, "voidSword").setCreativeTab(voidCraft.tabs.tabVoid);
-		voidHoe = new BasicVoidItemHoe(voidCraft.materials.voidTools, "voidHoe").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(voidPickaxe = new TamPickaxe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidPickaxe"));
+		modelList.add(voidSpade = new TamSpade(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidShovel"));
+		modelList.add(voidAxe = new TamAxe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidAxe"));
+		modelList.add(voidSword = new TamSword(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidSword"));
+		modelList.add(voidHoe = new TamHoe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidHoe"));
 
 		// spectre
-		angelicSword = new AngelicSword(voidCraft.materials.spectreTools, "angelicSword").setCreativeTab(voidCraft.tabs.tabVoid);
-		spectrePickaxe = new SpectrePickaxe(voidCraft.materials.spectreTools, "spectrePickaxe").setCreativeTab(voidCraft.tabs.tabVoid);
-		spectreAxe = new SpectreAxe(voidCraft.materials.spectreTools, "spectreAxe").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(angelicSword = new AngelicSword(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "angelicSword"));
+		modelList.add(spectrePickaxe = new SpectrePickaxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectrePickaxe"));
+		modelList.add(spectreAxe = new SpectreAxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectreAxe"));
 		// chain
-		chainSword = new ChainSword(voidCraft.materials.chainTools, "chainSword").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(chainSword = new ChainSword(voidCraft.tabs.tabVoid, voidCraft.materials.chainTools, "chainSword"));
 		// molten
-		moltenSword = new MoltenSword(voidCraft.materials.MoltenTools, "moltenSword").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(moltenSword = new MoltenSword(voidCraft.tabs.tabVoid, voidCraft.materials.MoltenTools, "moltenSword"));
 		// arch
-		archSword = new ArchSword(voidCraft.materials.ArchTools, "archSword").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(archSword = new ArchSword(voidCraft.tabs.tabVoid, voidCraft.materials.ArchTools, "archSword"));
 		// demon
-		demonSword = new DemonSword(voidCraft.materials.DemonTools, "demonSword").setCreativeTab(voidCraft.tabs.tabVoid);
-
-		list.add(voidPickaxe);
-		list.add(voidSpade);
-		list.add(voidAxe);
-		list.add(voidSword);
-		list.add(voidHoe);
-		list.add(angelicSword);
-		list.add(spectrePickaxe);
-		list.add(spectreAxe);
-		list.add(chainSword);
-		list.add(moltenSword);
-		list.add(archSword);
-		list.add(demonSword);
+		modelList.add(demonSword = new DemonSword(voidCraft.tabs.tabVoid, voidCraft.materials.DemonTools, "demonSword"));
 	}
 
 	@Override
@@ -103,14 +92,15 @@ public class Tools extends RegistryBase {
 		// TODO Auto-generated method stub
 
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void setupRender() {
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		for(Item i : list){
-			renderItem.getItemModelMesher().register(i, 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("tools/", ((IBasicVoid)i).getName(), "inventory"));
-		}
+	public ArrayList<ITamModel> getModelList() {
+		return modelList;
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

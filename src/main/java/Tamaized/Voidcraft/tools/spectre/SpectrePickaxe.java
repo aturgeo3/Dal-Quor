@@ -1,12 +1,13 @@
 package Tamaized.Voidcraft.tools.spectre;
 
-import net.minecraft.item.Item.ToolMaterial;
-import Tamaized.Voidcraft.tools.BasicVoidItemPickaxe;
+import net.minecraft.creativetab.CreativeTabs;
+import Tamaized.TamModized.tools.TamPickaxe;
+import Tamaized.Voidcraft.common.voidCraft;
 
-public class SpectrePickaxe extends BasicVoidItemPickaxe{
+public class SpectrePickaxe extends TamPickaxe{
 
-	public SpectrePickaxe(ToolMaterial material, String n) {
-		super(material, n);
+	public SpectrePickaxe(CreativeTabs tab, ToolMaterial material, String n) {
+		super(tab, material, n);
 	}
 
 

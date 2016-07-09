@@ -8,9 +8,9 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["Tamaized"],
-  "credits": "Tamaized for being awesome?",
+  "credits": "Tamaized",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["tammodized"]
 }
 ]

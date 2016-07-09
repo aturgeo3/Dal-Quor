@@ -6,21 +6,23 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.blocks.TamBlockPortal;
 import Tamaized.Voidcraft.common.voidCraft;
 
 
-public class BlockPortalXia extends BlockVoidTeleporter {
-
-	public BlockPortalXia(String string) {
-		super(string, false);
-	}
+public class BlockPortalXia extends TamBlockPortal {
 	
+	public BlockPortalXia(CreativeTabs tab, String n) {
+		super(tab, n, false);
+	}
+
 	/**
 	 * Override this and return getDefaultState() if hasAxis is false
 	 */

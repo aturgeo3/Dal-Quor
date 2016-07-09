@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.common;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
@@ -10,7 +8,6 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -23,11 +20,12 @@ import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import Tamaized.TamModized.TamModBase;
+import Tamaized.TamModized.TamModized;
+import Tamaized.TamModized.registry.TamRegistryHandler;
 import Tamaized.Voidcraft.Addons.AE2.voidCraftAE;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
@@ -70,10 +68,8 @@ import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.Achievements;
 import Tamaized.Voidcraft.registry.Armors;
 import Tamaized.Voidcraft.registry.Biomes;
-import Tamaized.Voidcraft.registry.IBasicVoid;
 import Tamaized.Voidcraft.registry.LootTables;
 import Tamaized.Voidcraft.registry.Materials;
-import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.registry.Tabs;
 import Tamaized.Voidcraft.registry.Tools;
 import Tamaized.Voidcraft.registry.VoidBlocks;
@@ -88,18 +84,17 @@ import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 
-@Mod(modid=voidCraft.modid, name="VoidCraft", version=voidCraft.version)
+@Mod(modid = voidCraft.modid, name = "VoidCraft", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
+public class voidCraft extends TamModBase {
 
-public class voidCraft {
-	
-	protected final static String version = "0.8.3";
+	public final static String version = "0.8.3";
 	public static final String modid = "voidcraft";
-	
-	public static String getVersion(){
+
+	public static String getVersion() {
 		return version;
 	}
-	
-	@Instance(modid) 
+
+	@Instance(modid)
 	public static voidCraft instance = new voidCraft();
 
 	public static FMLEventChannel channel;
@@ -108,135 +103,128 @@ public class voidCraft {
 	@SidedProxy(clientSide = "Tamaized.Voidcraft.common.client.VoidCraftClientProxy", serverSide = "Tamaized.Voidcraft.common.server.VoidCraftCommonProxy")
 	public static VoidCraftCommonProxy proxy;
 
-	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
-
 	public VoidTickEvent VoidTickEvent;
-	
+
 	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
 
-	//Public API Integrations
+	// Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
 	public static voidCraftAE aeIntegration;
 
-	public static Materials materials = new Materials();
-	public static Tabs tabs = new Tabs();
-	public static Tools tools = new Tools();
-	public static VoidItems items = new VoidItems();
-	public static Armors armors = new Armors();
-	public static VoidFluids fluids = new VoidFluids();
-	public static VoidBlocks blocks = new VoidBlocks();
-	public static Biomes biomes = new Biomes();
-	public static Achievements achievements = new Achievements();
-	public static LootTables lootTables = new LootTables();
-	
-	public static ArrayList<RegistryBase> registry = new ArrayList<RegistryBase>();
+	public static Materials materials;
+	public static Tabs tabs;
+	public static Tools tools;
+	public static VoidItems items;
+	public static Armors armors;
+	public static VoidFluids fluids;
+	public static VoidBlocks blocks;
+	public static Biomes biomes;
+	public static Achievements achievements;
+	public static LootTables lootTables;
 
 	public static final int dimensionIdVoid = -2;
 	public static final int dimensionIdXia = -3;
 
 	public static MaceratorRecipeList maceratorList = new MaceratorRecipeList();
-	
-	public static Logger logger;
 
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
-	
+	@Override
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = LogManager.getLogger("VoidCraft");
-		
+
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
-	
-		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
-		
-		registry.add(materials);
-		registry.add(tabs);
-		registry.add(tools);
-		registry.add(items);
-		registry.add(armors);
-		registry.add(fluids);
-		registry.add(blocks);
-		registry.add(biomes);
-		registry.add(achievements);
-		registry.add(lootTables);
 
-		VoidSoundEvents.register(); //Do this first in case the other registers need to grab a sound
-		for(RegistryBase reg : registry) reg.preInit();
+		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
+
+		register(materials = new Materials());
+		register(tabs = new Tabs());
+		register(tools = new Tools());
+		register(items = new VoidItems());
+		register(armors = new Armors());
+		register(fluids = new VoidFluids());
+		register(blocks = new VoidBlocks());
+		register(biomes = new Biomes());
+		register(achievements = new Achievements());
+		register(lootTables = new LootTables());
+
+		VoidSoundEvents.register();
 		
-		//Tile Entities
-		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
-		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
-		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
-		GameRegistry.registerTileEntity(TileEntityHeimdall.class, ((IBasicVoid) blocks.Heimdall).getName());
-		GameRegistry.registerTileEntity(TileEntityNoBreak.class, ((IBasicVoid) blocks.blockNoBreak).getName());
-		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
-		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
-		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, ((IBasicVoid) blocks.voidicCharger).getName());
-		
-		//API Loader
+		super.preInit(event);
+
+		// API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
-			//logger.info("Thaumcraft Detected. Attempting to load API");
+			// logger.info("Thaumcraft Detected. Attempting to load API");
 			try {
-				//thaumcraftIntegration = new VoidCraftThaum();
-				//logger.info("Loaded ThaumcraftAPI into VoidCraft");
-			}catch (Exception e1) {
+				// thaumcraftIntegration = new VoidCraftThaum();
+				// logger.info("Loaded ThaumcraftAPI into VoidCraft");
+			} catch (Exception e1) {
 				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
 				e1.printStackTrace(System.err);
 			}
 		}
-		
-		//if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
-		
-		System.out.println("registering Capabilities");
-        CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
-        MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
+
+		// if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
+
+		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
+
 		
 		proxy.preInit();
 	}
-	
+
+	@Override
 	@EventHandler
-	public void InitVoidCraft(FMLInitializationEvent event){ 
+	public void init(FMLInitializationEvent event) {
 		logger.info("Starting VoidCraft Init");
 		
-		//Register Handlers into the Instance
+		super.init(event);
+
+		// Tile Entities
+		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
+		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
+		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
+		GameRegistry.registerTileEntity(TileEntityHeimdall.class, blocks.Heimdall.getName());
+		GameRegistry.registerTileEntity(TileEntityNoBreak.class, blocks.blockNoBreak.getName());
+		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
+		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
+		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
+		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, blocks.voidicCharger.getName());
+
+		// Register Handlers into the Instance
 		VoidTickEvent = new VoidTickEvent();
-					
-		//register GUI Handler
-		//NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
-		//GuiHandler guiHandler = new GuiHandler();
+
+		// register GUI Handler
+		// NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
+		// GuiHandler guiHandler = new GuiHandler();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
-		//Register Events
+
+		// Register Events
 		MinecraftForge.EVENT_BUS.register(VoidTickEvent);
 		MinecraftForge.EVENT_BUS.register(new PickUpEvent());
 		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
-		MinecraftForge.EVENT_BUS.register(new CraftingHandler()); 
-		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); //We want to give this class a tick updater
+		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
+		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); // We want to give this class a tick updater
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
-		
-		for(RegistryBase reg : registry) reg.init();
-		
-		//Projectiles
+
+		// Projectiles
 		EntityRegistry.registerModEntity(VoidChain.class, "VoidChain", 0, this, 128, 1, true);
 		EntityRegistry.registerModEntity(AcidBall.class, "AcidBall", 1, this, 128, 1, true);
 		EntityRegistry.registerModEntity(EntityHookShot.class, "HookShot", 2, this, 128, 1, true);
 		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 3, this, 128, 1, true);
 
-		//Dimension
+		// Dimension
 		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));
 		DimensionManager.registerDimension(dimensionIdXia, DimensionType.register("???", "_xia", dimensionIdXia, WorldProviderXia.class, false));
-		
+
 		// World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
-		
+
 		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
-        StructureVoidFortressPieces.registerNetherFortressPieces();
+		StructureVoidFortressPieces.registerNetherFortressPieces();
 
 		// Mobs
 		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", 4, this, 64, 1, true);
@@ -249,7 +237,7 @@ public class voidCraft {
 		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", 11, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
 		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
-		
+
 		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);
 		EntityRegistry.registerEgg(EntityMobSpectreChain.class, 0xFFFFFF, 0xAA0077);
 		EntityRegistry.registerEgg(EntityMobVoidWrath.class, 0xFF0000, 0x000000);
@@ -260,25 +248,27 @@ public class voidCraft {
 		EntityRegistry.registerEgg(EntityMobZol.class, 0x00AAFF, 0x000000);
 		EntityRegistry.registerEgg(EntityMobXia.class, 0xAA00FF, 0xFFFF00);
 		EntityRegistry.registerEgg(EntityMobXia2.class, 0xAA00FF, 0xFFFF00);
-		
+
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
-		
-		//if(thaumcraftIntegration != null) thaumcraftIntegration.init();
-		
+
+		// if(thaumcraftIntegration != null) thaumcraftIntegration.init();
+
 		proxy.init();
 		proxy.registerInventoryRender();
+		
 	}
 
+	@Override
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent e){ 
+	public void postInit(FMLPostInitializationEvent e) {
 		logger.info("Starting VoidCraft PostInit");
-		
-		for(RegistryBase reg : registry) reg.postInit();
-		
+
+		super.postInit(e);
 		channel.register(new VoidCraftServerPacketHandler());
 		proxy.registerNetwork();
 		proxy.registerRenders();
 
-		//if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
+		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
+		
 	}
 }

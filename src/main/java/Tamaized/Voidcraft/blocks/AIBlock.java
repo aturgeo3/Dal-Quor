@@ -8,14 +8,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.common.voidCraft;
 
-public class AIBlock extends BasicVoidBlockContainer {
+public class AIBlock extends TamBlockContainer {
 	
 	private boolean createTE = false;
 
 	public AIBlock(String string) {
-		super(Material.CLOTH, string, true);
+		super(null, Material.CLOTH, string, -1);
+		setBlockUnbreakable();
 	}
 	
 	public Block allowTileEntityCreation(boolean b){

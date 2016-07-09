@@ -1,12 +1,16 @@
 package Tamaized.Voidcraft.registry;
 
+import java.util.ArrayList;
+
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class Achievements extends RegistryBase {
+public class Achievements implements ITamRegistry {
 	
 	public static Achievement voidCraftAchMainLine_1;
 	public static Achievement voidCraftAchMainLine_2;
@@ -115,11 +119,15 @@ public class Achievements extends RegistryBase {
 		};
 		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void setupRender() {
-		
+	public ArrayList<ITamModel> getModelList() {
+		return new ArrayList<ITamModel>();
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

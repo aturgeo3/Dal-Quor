@@ -1,16 +1,19 @@
 package Tamaized.Voidcraft.items;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import Tamaized.TamModized.items.TamItem;
+import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.Voidcraft.common.voidCraft;
 
-public class VoidStar extends BasicVoidItems{
-	
-	public VoidStar(String n) {
-		super(n);
+public class VoidStar extends TamItem{
+
+	public VoidStar(CreativeTabs tab, String n, int maxStackSize) {
+		super(tab, n, maxStackSize);
 	}
 
 	@Override

@@ -2,36 +2,35 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.blocks.TamBlock;
+import Tamaized.TamModized.blocks.TamBlockFence;
+import Tamaized.TamModized.blocks.TamBlockStairs;
+import Tamaized.TamModized.blocks.slab.TamBlockSlab;
+import Tamaized.TamModized.blocks.slab.TamBlockSlabDouble;
+import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
+import Tamaized.TamModized.blocks.slab.TamItemBlockSlab;
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.blocks.AIBlock;
-import Tamaized.Voidcraft.blocks.BasicVoidBlock;
 import Tamaized.Voidcraft.blocks.BlockFakeBedrock;
 import Tamaized.Voidcraft.blocks.BlockNoBreak;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
 import Tamaized.Voidcraft.blocks.BlockPortalXia;
 import Tamaized.Voidcraft.blocks.BlockRealityHole;
-import Tamaized.Voidcraft.blocks.BlockVoidbrick;
 import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
-import Tamaized.Voidcraft.blocks.VoidBrickFence;
-import Tamaized.Voidcraft.blocks.VoidBrickStairs;
 import Tamaized.Voidcraft.blocks.XiaBlock;
-import Tamaized.Voidcraft.blocks.slab.BasicVoidBlockSlab;
-import Tamaized.Voidcraft.blocks.slab.BasicVoidBlockSlabDouble;
-import Tamaized.Voidcraft.blocks.slab.BasicVoidBlockSlabHalf;
-import Tamaized.Voidcraft.blocks.slab.BasicVoidItemBlockSlab;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.VoidBox;
@@ -41,97 +40,73 @@ import Tamaized.Voidcraft.machina.VoidicPowerCable;
 import Tamaized.Voidcraft.machina.VoidicPowerCharger;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
 
-public class VoidBlocks extends RegistryBase {
-	
-	private static ArrayList<Block> blockList;
+public class VoidBlocks implements ITamRegistry {
 
-	public static Block blockVoidcrystal;
-	public static Block oreVoidcrystal;
-	public static Block blockFakeBedrock;
-	public static Block blockNoBreak;
-	public static Block blockVoidbrick;
-	public static Block blockVoidfence;
-	public static Block blockVoidstairs;
-	public static Block blockVoidBrickDoubleSlab;
-	public static Block blockVoidBrickHalfSlab;
-	public static Block blockPortalVoid;
-	public static Block blockPortalXia;
-	public static Block fireVoid;
-	public static Block realityHole;
-	
-	public static Block voidBox;
-	public static Block voidMacerator;
-	public static Block voidInfuserInert;
-	public static Block voidInfuser;
-	public static Block Heimdall;
-	
-	public static Block voidicGen;
-	public static Block voidicCable;
-	public static Block voidicCharger;
-	
-	public static Block AIBlock;
-	public static Block xiaBlock;
+	private static ArrayList<ITamModel> modelList;
+
+	public static BlockVoidcrystal blockVoidcrystal;
+	public static OreVoidcrystal oreVoidcrystal;
+	public static BlockFakeBedrock blockFakeBedrock;
+	public static BlockNoBreak blockNoBreak;
+	public static TamBlock blockVoidbrick;
+	public static TamBlockFence blockVoidfence;
+	public static TamBlockStairs blockVoidstairs;
+	public static TamBlockSlabDouble blockVoidBrickDoubleSlab;
+	public static TamBlockSlabHalf blockVoidBrickHalfSlab;
+	public static BlockPortalVoid blockPortalVoid;
+	public static BlockPortalXia blockPortalXia;
+	public static FireVoid fireVoid;
+	public static BlockRealityHole realityHole;
+
+	public static VoidBox voidBox;
+	public static VoidMacerator voidMacerator;
+	public static TamBlock voidInfuserInert;
+	public static VoidInfuser voidInfuser;
+	public static Heimdall Heimdall;
+
+	public static VoidicPowerGen voidicGen;
+	public static VoidicPowerCable voidicCable;
+	public static VoidicPowerCharger voidicCharger;
+
+	public static AIBlock AIBlock;
+	public static XiaBlock xiaBlock;
 
 	@Override
 	public void preInit() {
+		modelList = new ArrayList<ITamModel>();
 
-		blockVoidcrystal = new BlockVoidcrystal(Material.GLASS, "blockVoidcrystal").setHardness(7.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		oreVoidcrystal = new OreVoidcrystal(Material.ROCK, "oreVoidcrystal").setHardness(3.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockFakeBedrock = new BlockFakeBedrock(Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockNoBreak = new BlockNoBreak(Material.ROCK, "blockNoBreak").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tForge).setResistance(100);
-		blockVoidbrick = new BlockVoidbrick(Material.ROCK, "blockVoidbrick").setHardness(30.0F).setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidfence = new VoidBrickFence(Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence").setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidstairs = new VoidBrickStairs(blockVoidbrick, 0, "blockVoidstairs").setCreativeTab(voidCraft.tabs.tabVoid);
-		blockVoidBrickDoubleSlab = new BasicVoidBlockSlabDouble(Material.ROCK, "blockVoidBrickDoubleSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab));
-		blockVoidBrickHalfSlab = new BasicVoidBlockSlabHalf(Material.ROCK, "blockVoidBrickHalfSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab));
-		AIBlock = new AIBlock("AIBlock").setBlockUnbreakable();
-		xiaBlock = new XiaBlock("xiaBlock").setBlockUnbreakable();
-		realityHole = new BlockRealityHole(Material.CLOTH, "blockRealityHole").setLightLevel(1.0F).setHardness(-1F).setCreativeTab(voidCraft.tabs.tabVoid).setResistance(100);;
+		modelList.add(blockVoidcrystal = new BlockVoidcrystal(voidCraft.tabs.tabVoid, Material.GLASS, "blockVoidcrystal", 7.0F));
+		modelList.add(oreVoidcrystal = new OreVoidcrystal(voidCraft.tabs.tabVoid, Material.ROCK, "oreVoidcrystal", 3.0F));
+		modelList.add(blockFakeBedrock = new BlockFakeBedrock(voidCraft.tabs.tabVoid, Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock", 30.0F));
+		modelList.add(blockNoBreak = new BlockNoBreak(voidCraft.tabs.tForge, Material.ROCK, "blockNoBreak", -1F));
+		modelList.add(blockVoidbrick = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidbrick", 30.0F));
+		modelList.add(blockVoidfence = new TamBlockFence(voidCraft.tabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence"));
+		modelList.add(blockVoidstairs = new TamBlockStairs(voidCraft.tabs.tabVoid, blockVoidbrick.getDefaultState(), "blockVoidstairs"));
+		modelList.add(blockVoidBrickDoubleSlab = new TamBlockSlabDouble(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidBrickDoubleSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
+		modelList.add(blockVoidBrickHalfSlab = new TamBlockSlabHalf(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidBrickHalfSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
+		modelList.add(AIBlock = new AIBlock("AIBlock"));
+		modelList.add(xiaBlock = new XiaBlock("xiaBlock"));
+		modelList.add(realityHole = new BlockRealityHole(voidCraft.tabs.tabVoid, Material.CLOTH, "blockRealityHole", -1F));
 
-		blockPortalVoid = new BlockPortalVoid("blockPortalVoid").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		blockPortalXia = new BlockPortalXia("blockPortalXia").setCreativeTab(voidCraft.tabs.tabVoid).setHardness(-1F);
-		fireVoid = new FireVoid("fireVoid").setCreativeTab(voidCraft.tabs.tabVoid);
+		modelList.add(blockPortalVoid = new BlockPortalVoid(voidCraft.tabs.tabVoid, "blockPortalVoid"));
+		modelList.add(blockPortalXia = new BlockPortalXia(voidCraft.tabs.tabVoid, "blockPortalXia"));
+		modelList.add(fireVoid = new FireVoid(voidCraft.tabs.tabVoid, "fireVoid"));
 
-		voidMacerator = new VoidMacerator("voidMacerator").setHardness(3.5F);
-		Heimdall = new Heimdall(Material.IRON, "Heimdall").setHardness(3.5F);
-		voidBox = new VoidBox("voidBox").setHardness(7.0F);
-		voidInfuserInert = new BasicVoidBlock(Material.IRON, "voidInfuserInert").setHardness(7.0F);
-		voidInfuser = new VoidInfuser("voidInfuser").setHardness(7.0F);
-		voidicGen = new VoidicPowerGen(Material.IRON, "voidicGen").setHardness(3.5f);
-		voidicCable = new VoidicPowerCable(Material.CIRCUITS, "voidicCable").setHardness(1.5f);
-		voidicCharger = new VoidicPowerCharger(Material.IRON, "voidicCharger").setHardness(3.5f);
-		
-		//Slabs have to be registered outside of their class
-		GameRegistry.registerBlock(blockVoidBrickHalfSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
-		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, BasicVoidItemBlockSlab.class, "blocks/"+((BasicVoidBlockSlab)blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		modelList.add(voidMacerator = new VoidMacerator(voidCraft.tabs.tabVoid, Material.ROCK, "voidMacerator", 3.5F));
+		modelList.add(Heimdall = new Heimdall(voidCraft.tabs.tabVoid, Material.IRON, "Heimdall", 3.5F));
+		modelList.add(voidBox = new VoidBox(voidCraft.tabs.tabVoid, Material.IRON, "voidBox", 7.0F));
+		modelList.add(voidInfuserInert = new TamBlock(voidCraft.tabs.tabVoid, Material.IRON, "voidInfuserInert", 7.0F));
+		modelList.add(voidInfuser = new VoidInfuser(voidCraft.tabs.tabVoid, Material.IRON, "voidInfuser", 7.0F));
+		modelList.add(voidicGen = new VoidicPowerGen(voidCraft.tabs.tabVoid, Material.IRON, "voidicGen", 3.5f));
+		modelList.add(voidicCable = new VoidicPowerCable(voidCraft.tabs.tabVoid, Material.CIRCUITS, "voidicCable", 1.5f));
+		modelList.add(voidicCharger = new VoidicPowerCharger(voidCraft.tabs.tabVoid, Material.IRON, "voidicCharger", 3.5f));
 
-		blockList = new ArrayList<Block>();
-		blockList.add(blockVoidcrystal);
-		blockList.add(oreVoidcrystal);
-		blockList.add(blockFakeBedrock);
-		blockList.add(blockNoBreak);
-		blockList.add(blockVoidbrick);
-		blockList.add(blockVoidfence);
-		blockList.add(blockVoidstairs);
-		blockList.add(blockVoidBrickDoubleSlab);
-		blockList.add(blockVoidBrickHalfSlab);
-		blockList.add(AIBlock);
-		blockList.add(xiaBlock);
-		blockList.add(realityHole);
-		blockList.add(blockPortalVoid);
-		blockList.add(blockPortalXia);
-		blockList.add(fireVoid);
-		blockList.add(voidMacerator);
-		blockList.add(Heimdall);
-		blockList.add(voidBox);
-		blockList.add(voidInfuserInert);
-		blockList.add(voidInfuser);
-		blockList.add(voidicGen);
-		blockList.add(voidicCable);
-		blockList.add(voidicCharger);
+		// Slabs have to be registered outside of their class
+		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid+":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid+":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
 		
 	}
-
+	
 	@Override
 	public void init() {
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
@@ -150,15 +125,32 @@ public class VoidBlocks extends RegistryBase {
 
 	@Override
 	public void postInit() {
-		
+
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public void setupRender(){
-		ItemModelMesher modelMesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		for(Block b : blockList){
-			modelMesher.register(Item.getItemFromBlock(b), 0, new Tamaized.Voidcraft.common.client.ScrewModelResourceLocation("blocks/", ((IBasicVoid) b).getName(), "inventory"));
-		}
+	public void setupRender() {/*
+								 * ItemModelMesher modelMesher =
+								 * Minecraft.getMinecraft
+								 * ().getRenderItem().getItemModelMesher(); for
+								 * (Block b : blockList) {
+								 * modelMesher.register(Item
+								 * .getItemFromBlock(b), 0, new
+								 * Tamaized.Voidcraft
+								 * .common.client.ScrewModelResourceLocation
+								 * ("blocks/", ((IBasicVoid) b).getName(),
+								 * "inventory")); }
+								 */
+	}
+
+	@Override
+	public ArrayList<ITamModel> getModelList() {
+		return modelList;
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

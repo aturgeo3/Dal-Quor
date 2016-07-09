@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -14,15 +15,17 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 
-public class ChainedSkull extends BasicVoidItems{
+public class ChainedSkull extends TamItem{
 	
-	private World worldObj;
-	
-	public ChainedSkull(String name) {
-		super(name);
+	public ChainedSkull(CreativeTabs tab, String n, int maxStackSize) {
+		super(tab, n, maxStackSize);
 	}
+
+	private World worldObj;
 	
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return

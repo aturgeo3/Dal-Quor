@@ -59,7 +59,6 @@ import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
-import Tamaized.Voidcraft.registry.RegistryBase;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 import Tamaized.Voidcraft.voidicInfusion.ClientInfusionHandler;
 
@@ -74,12 +73,12 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	
 	@Override
 	public void preInit(){
-		voidCraft.fluids.preInitRender();
+		voidCraft.instance.clientPreInit();
 	}
 	
 	@Override
 	public void init() {
-        
+		voidCraft.instance.clientInit();
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		RenderVoidicCharger renderCharger = new RenderVoidicCharger();
 		
@@ -92,7 +91,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	
 	@Override
 	public void registerRenders(){
-	
+		voidCraft.instance.clientPostInit();
 		//Events
 		MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
@@ -131,7 +130,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 	
 	@Override
 	public void registerInventoryRender() {
-		for(RegistryBase reg : voidCraft.registry) reg.setupRender();
+		
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -15,11 +16,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.registry.IBasicVoid;
 import Tamaized.Voidcraft.sound.VoidSoundEvents.SoundTrack;
 
-public class VoidRecord extends ItemRecord implements IBasicVoid{
+public class VoidRecord extends ItemRecord implements ITamModel{
 
 	/** The name of the record. */
 	public final String recordName;
@@ -36,7 +37,7 @@ public class VoidRecord extends ItemRecord implements IBasicVoid{
 		setUnlocalizedName(name);
 		setMaxStackSize(1);
 		setCreativeTab(voidCraft.tabs.tabVoid);
-		GameRegistry.registerItem(this, "discs/"+n);
+		GameRegistry.register(this.setRegistryName(getModelDir() + "/" + getName()));
 	}
 	
 	@Override
@@ -46,6 +47,16 @@ public class VoidRecord extends ItemRecord implements IBasicVoid{
 
 	public int getTime() {
 		return time;
+	}
+
+	@Override
+	public String getModelDir() {
+		return "discs";
+	}
+
+	@Override
+	public Item getAsItem() {
+		return this;
 	}
 
 	/**

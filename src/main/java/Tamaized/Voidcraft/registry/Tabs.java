@@ -1,13 +1,17 @@
 package Tamaized.Voidcraft.registry;
 
-import Tamaized.Voidcraft.common.voidCraft;
+import java.util.ArrayList;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.registry.ITamModel;
+import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.Voidcraft.common.voidCraft;
 
-public class Tabs extends RegistryBase{
-	
+public class Tabs implements ITamRegistry {
+
 	public static CreativeTabs tabVoid;
 	public static CreativeTabs tForge;
 
@@ -19,7 +23,7 @@ public class Tabs extends RegistryBase{
 				return Item.getItemFromBlock(voidCraft.blocks.blockPortalVoid);
 			}
 		};
-	
+
 		tForge = new CreativeTabs("tForge") {
 			@Override
 			public Item getTabIconItem() {
@@ -31,19 +35,23 @@ public class Tabs extends RegistryBase{
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void postInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void setupRender() {
-		
+	public ArrayList<ITamModel> getModelList() {
+		return new ArrayList<ITamModel>();
+	}
+
+	@Override
+	public String getModID() {
+		return voidCraft.modid;
 	}
 
 }

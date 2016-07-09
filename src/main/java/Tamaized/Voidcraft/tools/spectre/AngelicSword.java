@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.tools.spectre;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,14 +10,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.tools.TamSword;
+import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
-import Tamaized.Voidcraft.tools.BasicVoidItemSword;
 
-public class AngelicSword extends BasicVoidItemSword{
+public class AngelicSword extends TamSword{
 
-	public AngelicSword(ToolMaterial material, String n) {
-		super(material, n);
+	public AngelicSword(CreativeTabs tab, ToolMaterial material, String n) {
+		super(tab, material, n);
 	}
 
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){

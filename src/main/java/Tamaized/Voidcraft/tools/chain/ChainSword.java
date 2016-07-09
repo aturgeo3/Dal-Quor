@@ -1,22 +1,23 @@
 package Tamaized.Voidcraft.tools.chain;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import Tamaized.Voidcraft.tools.BasicVoidItemSword;
+import Tamaized.TamModized.tools.TamSword;
+import Tamaized.Voidcraft.common.voidCraft;
 
-public class ChainSword extends BasicVoidItemSword {
+public class ChainSword extends TamSword {
 
-	public ChainSword(ToolMaterial material, String n) {
-		super(material, n);
+	public ChainSword(CreativeTabs tab, ToolMaterial material, String n) {
+		super(tab, material, n);
 	}
 
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
-        par1ItemStack.damageItem(1, par3EntityLivingBase);
-        par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"), 5*20)); //slow
-        return true;
-    }
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase) {
+		par1ItemStack.damageItem(1, par3EntityLivingBase);
+		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"), 5 * 20)); // slow
+		return true;
+	}
 
 }
