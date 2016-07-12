@@ -5,8 +5,8 @@
 !/gradle/**
 !/src/
 !/src/**
-!/lib/
-!/lib/**
+!/libs/
+!/libs/**
 !build.gradle
 !LICENSE
 !README.md
