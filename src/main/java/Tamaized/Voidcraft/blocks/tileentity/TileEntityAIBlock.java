@@ -2,13 +2,12 @@ package Tamaized.Voidcraft.blocks.tileentity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 
-public class TileEntityAIBlock extends TamTileEntity implements ITickable{
+public class TileEntityAIBlock extends TamTileEntity {
 	
 	public EntityAIHandler aiHandler;
 	public IHandlerAI ai;

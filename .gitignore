@@ -5,8 +5,8 @@
 !/gradle/**
 !/src/
 !/src/**
-/src/main/resources/assets/records.voidcraft/
-/src/main/resources/assets/records.voidcraft/**
+!/lib/
+!/lib/**
 !build.gradle
 !LICENSE
 !README.md
