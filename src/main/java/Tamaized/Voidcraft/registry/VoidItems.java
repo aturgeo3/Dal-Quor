@@ -2,14 +2,10 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.registry.ITamModel;
@@ -22,6 +18,8 @@ import Tamaized.Voidcraft.items.VoidBurner;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
+import Tamaized.Voidcraft.machina.addons.TERecipesMacerator;
+import Tamaized.Voidcraft.machina.addons.TERecipesMacerator.MaceratorRecipe;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class VoidItems implements ITamRegistry {
@@ -121,23 +119,6 @@ public class VoidItems implements ITamRegistry {
 		this.addPreSmelting(copperDust, "ingotCopper");
 		this.addPreSmelting(tinDust, "ingotTin");
 		this.addPreSmelting(leadDust, "ingotLead");
-
-		voidCraft.maceratorList.addToOreDict("oreIron", new ItemStack(ironDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreGold", new ItemStack(goldDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreDiamond", new ItemStack(diamondDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreCopper", new ItemStack(copperDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreTin", new ItemStack(tinDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreLead", new ItemStack(leadDust, 4));
-		voidCraft.maceratorList.addToOreDict("oreQuartz", new ItemStack(quartzDust, 4));
-		voidCraft.maceratorList.addToOreDict("ingotIron", new ItemStack(ironDust, 1));
-		voidCraft.maceratorList.addToOreDict("ingotGold", new ItemStack(goldDust, 1));
-		voidCraft.maceratorList.addToOreDict("gemQuartz", new ItemStack(quartzDust, 1));
-		voidCraft.maceratorList.addToOreDict("gemDiamond", new ItemStack(diamondDust, 1));
-		voidCraft.maceratorList.addToOreDict("ingotCopper", new ItemStack(copperDust, 1));
-		voidCraft.maceratorList.addToOreDict("ingotTin", new ItemStack(tinDust, 1));
-		voidCraft.maceratorList.addToOreDict("ingotLead", new ItemStack(leadDust, 1));
-		// --HardCode
-		voidCraft.maceratorList.addToHardCode(new ItemStack(Items.COAL, 1), new ItemStack(coalDust, 4));
 
 		// Discs
 		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);

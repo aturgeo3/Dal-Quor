@@ -156,11 +156,9 @@ public class TeleporterVoid extends Teleporter {
         	if (entity instanceof EntityPlayerMP){
         		//((EntityPlayerMP)entity).connection.setPlayerLocation(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
         		((EntityPlayerMP)entity).connection.setPlayerLocation(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entity.rotationYaw, entity.rotationPitch);
-            	System.out.println(blockpos+" : "+worldServerInstance.getBlockState(blockpos).getBlock());
         	}else{
         		//entity.setLocationAndAngles(d5, d6, d7, entity.rotationYaw, entity.rotationPitch);
         		entity.setLocationAndAngles(blockpos.getX() + 0.5D + xP, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D + zP, entity.rotationYaw, entity.rotationPitch);
-            	System.out.println(blockpos+" : "+worldServerInstance.getBlockState(blockpos).getBlock());
         	}
         	return true;
         }else{

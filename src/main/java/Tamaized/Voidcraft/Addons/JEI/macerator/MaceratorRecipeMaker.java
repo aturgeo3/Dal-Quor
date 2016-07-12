@@ -7,17 +7,17 @@ import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import Tamaized.Voidcraft.machina.addons.MaceratorRecipes;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class MaceratorRecipeMaker {
-	
+
 	@Nonnull
-	public static List<MaceratorRecipeJEI> getRecipes(){
-		Map<ItemStack, ItemStack> recipeList = MaceratorRecipes.smelting().getSmeltingList();
+	public static List<MaceratorRecipeJEI> getRecipes() {
+		Map<ItemStack, ItemStack> recipeList = voidCraft.teRecipes.macerator.getRawMap();
 		ArrayList<MaceratorRecipeJEI> recipes = new ArrayList<MaceratorRecipeJEI>();
-		for(Entry<ItemStack, ItemStack> recipe : recipeList.entrySet()) recipes.add(new MaceratorRecipeJEI(recipe.getKey(), recipe.getValue()));
+		for (Entry<ItemStack, ItemStack> recipe : recipeList.entrySet())
+			recipes.add(new MaceratorRecipeJEI(recipe.getKey(), recipe.getValue()));
 		return recipes;
 	}
 }

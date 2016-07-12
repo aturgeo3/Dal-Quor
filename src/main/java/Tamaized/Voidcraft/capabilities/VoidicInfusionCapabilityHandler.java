@@ -14,10 +14,6 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	
 	private boolean hasLoaded = false;
 	
-	public VoidicInfusionCapabilityHandler(){
-		System.out.println("Registered");
-	}
-
 	@Override
 	public float preMaxHealth() {
 		return preMaxHealth;

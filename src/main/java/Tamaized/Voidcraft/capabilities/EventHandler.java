@@ -11,10 +11,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandler {
 	
-	public EventHandler(){
-		System.out.println("Registered");
-	}
-	
 	@SubscribeEvent
     public void attachCapabilityEntity(AttachCapabilitiesEvent.Entity e) {
         if (e.getEntity() instanceof EntityPlayer) {

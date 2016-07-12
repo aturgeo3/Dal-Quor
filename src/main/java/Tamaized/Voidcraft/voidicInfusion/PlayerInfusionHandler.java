@@ -40,7 +40,6 @@ public class PlayerInfusionHandler {
 	
 	public PlayerInfusionHandler(EntityPlayerMP p, int a, int m){
 		this(p, a);
-		System.out.println(a+" : "+m);
 		maxAmount = m;
 	}
 	

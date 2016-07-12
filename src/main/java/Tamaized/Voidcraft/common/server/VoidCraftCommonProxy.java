@@ -11,7 +11,6 @@ public class VoidCraftCommonProxy {
 	public void init() {}
 
 	public void registerRenders() {
-		System.out.println("Registering GUI Handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(voidCraft.instance, new GuiHandler());
 	}
 

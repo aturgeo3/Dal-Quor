@@ -14,10 +14,10 @@ import net.minecraft.item.ItemStack;
 
 public class InfuserRecipeJEI extends BlankRecipeWrapper {
 	
-	private final Item input;
+	private final ItemStack input;
 	private final ItemStack output;
 
-	public InfuserRecipeJEI(Item i, ItemStack o) {
+	public InfuserRecipeJEI(ItemStack i, ItemStack o) {
 		input = i;
 		output = o;
 	}
@@ -26,7 +26,7 @@ public class InfuserRecipeJEI extends BlankRecipeWrapper {
 	@Nonnull
 	public List getInputs() {
 		ArrayList<Collection> ret = new ArrayList<Collection>();
-		ret.add(Collections.singletonList(new ItemStack(input)));
+		ret.add(Collections.singletonList(input));
 		ret.add(Collections.singletonList(voidCraft.fluids.getBucket()));
 		return ret;
 	}

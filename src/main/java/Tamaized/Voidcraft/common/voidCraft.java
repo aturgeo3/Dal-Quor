@@ -25,7 +25,6 @@ import org.apache.logging.log4j.LogManager;
 
 import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
-import Tamaized.TamModized.registry.TamRegistryHandler;
 import Tamaized.Voidcraft.Addons.AE2.voidCraftAE;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
@@ -44,7 +43,6 @@ import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
-import Tamaized.Voidcraft.machina.addons.MaceratorRecipeList;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
@@ -70,6 +68,7 @@ import Tamaized.Voidcraft.registry.Armors;
 import Tamaized.Voidcraft.registry.Biomes;
 import Tamaized.Voidcraft.registry.LootTables;
 import Tamaized.Voidcraft.registry.Materials;
+import Tamaized.Voidcraft.registry.TERecipes;
 import Tamaized.Voidcraft.registry.Tabs;
 import Tamaized.Voidcraft.registry.Tools;
 import Tamaized.Voidcraft.registry.VoidBlocks;
@@ -121,11 +120,10 @@ public class voidCraft extends TamModBase {
 	public static Biomes biomes;
 	public static Achievements achievements;
 	public static LootTables lootTables;
+	public static TERecipes teRecipes; 
 
 	public static final int dimensionIdVoid = -2;
 	public static final int dimensionIdXia = -3;
-
-	public static MaceratorRecipeList maceratorList = new MaceratorRecipeList();
 
 	@Override
 	@EventHandler
@@ -147,6 +145,7 @@ public class voidCraft extends TamModBase {
 		register(biomes = new Biomes());
 		register(achievements = new Achievements());
 		register(lootTables = new LootTables());
+		register(teRecipes = new TERecipes());
 
 		VoidSoundEvents.register();
 		

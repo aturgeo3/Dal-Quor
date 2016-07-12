@@ -7,17 +7,16 @@ import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import Tamaized.Voidcraft.machina.addons.InfuserRecipes;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class InfuserRecipeMaker {
 	
 	@Nonnull
 	public static List<InfuserRecipeJEI> getRecipes(){
-		Map<Item, ItemStack> recipeList = InfuserRecipes.smelting().getSmeltingList();
+		Map<ItemStack, ItemStack> recipeList = voidCraft.teRecipes.infuser.getRawMap();
 		ArrayList<InfuserRecipeJEI> recipes = new ArrayList<InfuserRecipeJEI>();
-		for(Entry<Item, ItemStack> recipe : recipeList.entrySet()) recipes.add(new InfuserRecipeJEI(recipe.getKey(), recipe.getValue()));
+		for(Entry<ItemStack, ItemStack> recipe : recipeList.entrySet()) recipes.add(new InfuserRecipeJEI(recipe.getKey(), recipe.getValue()));
 		return recipes;
 	}
 }
