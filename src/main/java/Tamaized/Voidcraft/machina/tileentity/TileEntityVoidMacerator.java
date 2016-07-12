@@ -11,9 +11,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import Tamaized.TamModized.api.voidcraft.power.TileEntityVoidicPower;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.VoidMacerator;
-import Tamaized.Voidcraft.power.TileEntityVoidicPower;
 
 public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ISidedInventory {
 

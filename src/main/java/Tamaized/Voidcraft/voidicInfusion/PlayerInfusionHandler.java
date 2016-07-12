@@ -12,11 +12,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.DamageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
-import Tamaized.Voidcraft.power.VoidicPowerItemHandler;
 
 public class PlayerInfusionHandler {
 	

@@ -7,16 +7,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import Tamaized.TamModized.api.voidcraft.power.TileEntityVoidicPower;
+import Tamaized.TamModized.api.voidcraft.power.VoidicPowerHandler;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
-import Tamaized.Voidcraft.power.TileEntityVoidicPower;
-import Tamaized.Voidcraft.power.VoidicPowerHandler;
 
 public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ISidedInventory, IFluidHandler{
 	

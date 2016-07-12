@@ -2,22 +2,15 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import java.util.Arrays;
 
-import com.google.common.util.concurrent.RateLimiter;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fluids.FluidStack;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.power.TileEntityVoidicPower;
-import Tamaized.Voidcraft.power.VoidicPowerItem;
-import Tamaized.Voidcraft.power.VoidicPowerItemHandler;
+import Tamaized.TamModized.api.voidcraft.power.TileEntityVoidicPower;
+import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
+import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 
 public class TileEntityVoidicCharger extends TileEntityVoidicPower implements ISidedInventory{
 	

@@ -4,12 +4,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityBase;
+import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.twins.TwinsBattleHandler;
 
-public class TileEntityXiaCastle extends TileEntityBase implements ITickable{
+public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
 	
 	private boolean running = false;
 	private XiaCastleHandler handler;

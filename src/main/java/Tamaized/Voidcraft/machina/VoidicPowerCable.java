@@ -21,10 +21,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import Tamaized.TamModized.api.voidcraft.power.IVoidicPower;
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
-import Tamaized.Voidcraft.power.IVoidicPower;
 
 import com.google.common.collect.ImmutableList;
 

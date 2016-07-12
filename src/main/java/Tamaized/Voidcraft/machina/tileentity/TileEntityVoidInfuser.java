@@ -8,10 +8,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
 
-public class TileEntityVoidInfuser extends TileEntityInventoryBase implements IFluidHandler {
+public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFluidHandler {
 
 	public VoidTank tank;
 
