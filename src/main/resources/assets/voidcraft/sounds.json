@@ -18,6 +18,8 @@
   
   "record.Haven_Bleeding_Through": {"category": "record","sounds": [{"name": "voidcraft:discs/Haven - Bleeding Through","stream": true}]},
   "record.No_Strings_Attached": {"category": "record","sounds": [{"name": "voidcraft:discs/No Strings Attached (Original Mix)","stream": true}]},
+  "record.Strings_Attached": {"category": "record","sounds": [{"name": "voidcraft:discs/Strings Attached","stream": true}]},
+  "record.Running": {"category": "record","sounds": [{"name": "voidcraft:discs/Running","stream": true}]},
   
   "random.chain": {"category": "ambient","sounds": [{"name": "voidcraft:random/chain","stream": true}]}
 }

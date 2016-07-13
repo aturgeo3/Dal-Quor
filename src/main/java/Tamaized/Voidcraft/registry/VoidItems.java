@@ -52,6 +52,11 @@ public class VoidItems implements ITamRegistry {
 	public static HookShot hookShot;
 
 	public static VoidicSuppressor voidicSuppressor;
+	
+	public static VoidRecord record_noStrings;
+	public static VoidRecord record_bleedingThrough;
+	public static VoidRecord record_stringsAttached;
+	public static VoidRecord record_running;
 
 	@Override
 	public void preInit() {
@@ -83,10 +88,17 @@ public class VoidItems implements ITamRegistry {
 		modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
 
 		modelList.add(voidicSuppressor = new VoidicSuppressor(voidCraft.tabs.tabVoid, "voidicSuppressor", 1));
+		
+		modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
+		modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
+		modelList.add(record_stringsAttached = new VoidRecord("Approaching Nirvana - Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.Strings_Attached, "voidDisc3"));
+		modelList.add(record_running = new VoidRecord("Approaching Nirvana - Running", VoidSoundEvents.MusicDiscSoundEvents.Running, "voidDisc4"));
 
 		voidDiscs = new ArrayList<Item>();
-		voidDiscs.add(new VoidRecord("No Strings Attached (Original Mix)", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
-		voidDiscs.add(new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
+		voidDiscs.add(record_noStrings);
+		voidDiscs.add(record_bleedingThrough);
+		voidDiscs.add(record_stringsAttached);
+		voidDiscs.add(record_running);
 	}
 
 	@Override
@@ -123,6 +135,8 @@ public class VoidItems implements ITamRegistry {
 		// Discs
 		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZX", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
+		GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ",
 		// "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX",
