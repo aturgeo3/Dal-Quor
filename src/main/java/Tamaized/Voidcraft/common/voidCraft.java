@@ -25,7 +25,6 @@ import org.apache.logging.log4j.LogManager;
 
 import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
-import Tamaized.Voidcraft.Addons.AE2.voidCraftAE;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -108,7 +107,6 @@ public class voidCraft extends TamModBase {
 
 	// Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
-	public static voidCraftAE aeIntegration;
 
 	public static Materials materials;
 	public static Tabs tabs;
