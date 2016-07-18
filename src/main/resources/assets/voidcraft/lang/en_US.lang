@@ -21,6 +21,8 @@ item.voidChain.name=Void Chain
 item.MoltenvoidChain.name=Molten Void Chain
 item.MoltenvoidChainPart.name=Molten Void Chain Part
 item.voidicSuppressor.name=Voidic Suppressor
+item.emptyObsidianFlask.name=Empty Obsidian Flask
+item.obsidianFlask.name=Filled Obsidian Flask
 
 # Blocks
 tile.voidcraft:blockVoidFluid.name=Liquid Void

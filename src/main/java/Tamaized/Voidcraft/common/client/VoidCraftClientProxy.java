@@ -54,9 +54,11 @@ import Tamaized.Voidcraft.mobs.xia.ModelXia2;
 import Tamaized.Voidcraft.mobs.xia.RenderXia;
 import Tamaized.Voidcraft.mobs.xia.RenderXia2;
 import Tamaized.Voidcraft.projectiles.AcidBall;
+import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.RenderHook;
+import Tamaized.Voidcraft.projectiles.RenderObsidianFlask;
 import Tamaized.Voidcraft.projectiles.RenderVoidChain;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.sound.client.BGMusic;
@@ -120,6 +122,7 @@ public class VoidCraftClientProxy extends VoidCraftCommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(HerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new RenderObsidianFlask(Minecraft.getMinecraft().getRenderManager(), voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem()));
 	
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));

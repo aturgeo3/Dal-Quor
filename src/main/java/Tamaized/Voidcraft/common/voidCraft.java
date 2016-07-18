@@ -60,6 +60,7 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia2;
 import Tamaized.Voidcraft.projectiles.AcidBall;
+import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.Achievements;
@@ -212,6 +213,7 @@ public class voidCraft extends TamModBase {
 		EntityRegistry.registerModEntity(AcidBall.class, "AcidBall", 1, this, 128, 1, true);
 		EntityRegistry.registerModEntity(EntityHookShot.class, "HookShot", 2, this, 128, 1, true);
 		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 3, this, 128, 1, true);
+		EntityRegistry.registerModEntity(EntityObsidianFlask.class, "EntityObsidianFlask", 4, this, 128, 1, true);
 
 		// Dimension
 		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));

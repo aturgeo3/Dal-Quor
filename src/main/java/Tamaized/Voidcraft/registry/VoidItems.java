@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,13 +14,12 @@ import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.Debugger;
+import Tamaized.Voidcraft.items.EmptyObsidianFlask;
 import Tamaized.Voidcraft.items.HookShot;
-import Tamaized.Voidcraft.items.VoidBurner;
+import Tamaized.Voidcraft.items.ObsidianFlask;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
-import Tamaized.Voidcraft.machina.addons.TERecipesMacerator;
-import Tamaized.Voidcraft.machina.addons.TERecipesMacerator.MaceratorRecipe;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 public class VoidItems implements ITamRegistry {
@@ -29,7 +29,8 @@ public class VoidItems implements ITamRegistry {
 
 	public static TamItem ectoplasm;
 	public static TamItem voidcrystal;
-	public static VoidBurner voidBurner;
+	public static EmptyObsidianFlask emptyObsidianFlask;
+	public static ObsidianFlask obsidianFlask;
 	public static TamItem voidChain;
 	public static TamItem MoltenvoidChain;
 	public static TamItem MoltenvoidChainPart;
@@ -61,8 +62,9 @@ public class VoidItems implements ITamRegistry {
 	@Override
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
-		
-		modelList.add(voidBurner = new VoidBurner(voidCraft.tabs.tabVoid, "voidBurner", 1));
+
+		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(voidCraft.tabs.tabVoid, "emptyObsidianFlask", 16));
+		modelList.add(obsidianFlask = new ObsidianFlask(voidCraft.tabs.tabVoid, "obsidianFlask", 16));
 		modelList.add(ectoplasm = new TamItem(voidCraft.tabs.tabVoid, "ectoplasm", 64));
 		modelList.add(voidcrystal = new TamItem(voidCraft.tabs.tabVoid, "voidcrystal", 64));
 		modelList.add(voidChain = new TamItem(voidCraft.tabs.tabVoid, "voidChain", 64));
@@ -115,7 +117,7 @@ public class VoidItems implements ITamRegistry {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), voidCraft.blocks.blockVoidcrystal);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
-		GameRegistry.addShapelessRecipe(new ItemStack(voidBurner), voidcrystal, new ItemStack(Items.FLINT_AND_STEEL, 1, voidCraft.WILDCARD_VALUE));
+		GameRegistry.addRecipe(new ItemStack(emptyObsidianFlask, 4), "OGO", " O ", 'O', Blocks.OBSIDIAN, 'G', Blocks.GLASS);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
 		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
 		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
