@@ -14,6 +14,7 @@ import net.minecraft.network.play.server.SPacketPlayerAbilities;
 import net.minecraft.network.play.server.SPacketRespawn;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -29,144 +30,128 @@ import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 
 public class VoidTickEvent {
-	
+
 	public Map<UUID, PortalDataHandler> data = new HashMap<UUID, PortalDataHandler>();
-	
+
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
-		if(e.phase == e.phase.END) return;
-		
-		//Prevent players from flying in Xia DIM
-		if(e.player instanceof EntityPlayerMP){
+		if (e.phase == e.phase.END) return;
+
+		if (e.player.worldObj.provider.getDimension() == voidCraft.dimensionIdVoid) {
+			if (e.player.getPosition().getY() >= 127) e.player.attackEntityFrom(DamageSource.outOfWorld, 4.0F);
+		} else if (e.player.worldObj.provider.getDimension() != voidCraft.dimensionIdXia) {
+			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256) {
+				EntityPlayerMP player = (EntityPlayerMP) e.player;
+				transferPlayerToDimension(player.mcServer, player, voidCraft.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256, 0)));
+			}
+		}
+
+		// Prevent players from flying in Xia DIM
+		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
-			if(e.player.dimension == voidCraft.dimensionIdXia){
-				if(!player.capabilities.isCreativeMode && player.capabilities.isFlying){
+			if (e.player.dimension == voidCraft.dimensionIdXia) {
+				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;
 					player.sendPlayerAbilities();
-					player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY+"You feel heavy, you can not sustain flight"));
+					player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY + "You feel heavy, you can not sustain flight"));
 				}
 			}
 		}
-		
-		if(e.player.worldObj.isRemote || e.side == e.side.CLIENT){
-			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
+
+		if (e.player.worldObj.isRemote || e.side == e.side.CLIENT) {
+			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
 			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
-			if(ClientPortalDataHandler.type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid){
-				if(!ClientPortalDataHandler.active){
+			if (ClientPortalDataHandler.type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) {
+				if (!ClientPortalDataHandler.active) {
 					ClientPortalDataHandler.type = PortalDataHandler.PORTAL_VOID;
 					ClientPortalDataHandler.active = true;
 				}
-			}else if(ClientPortalDataHandler.type != PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia){
-				if(!ClientPortalDataHandler.active){
+			} else if (ClientPortalDataHandler.type != PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia) {
+				if (!ClientPortalDataHandler.active) {
 					ClientPortalDataHandler.type = PortalDataHandler.PORTAL_XIA;
 					ClientPortalDataHandler.active = true;
 				}
-			}else{
-				if(ClientPortalDataHandler.active && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)){
+			} else {
+				if (ClientPortalDataHandler.active && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) && !(ClientPortalDataHandler.type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)) {
 					ClientPortalDataHandler.active = false;
-					//ClientPortalDataHandler.type = 0;
+					// ClientPortalDataHandler.type = 0;
 				}
 			}
 			return;
 		}
-		
-		if(data.get(e.player.getGameProfile().getId()) != null){
-			
-			//Determine when to Teleport
-			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY-0.2D - (double)e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
+
+		if (data.get(e.player.getGameProfile().getId()) != null) {
+
+			// Determine when to Teleport
+			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
 			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
 			PortalDataHandler j = data.get(e.player.getGameProfile().getId());
-				if(j.type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid){
-					if(!j.active){
-						j.type = PortalDataHandler.PORTAL_VOID;
-						j.active = true;
-					}
-				}else if(j.type != PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia){
-					if(!j.active){
-						j.type = PortalDataHandler.PORTAL_XIA;
-						j.active = true;
-					}
-				}else{
-					if(j.active && !(j.type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) && !(j.type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)){
-						j.active = false;
-						j.type = 0;
-					}
+			if (j.type != PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) {
+				if (!j.active) {
+					j.type = PortalDataHandler.PORTAL_VOID;
+					j.active = true;
 				}
-			if(j.active){
-				if(j.tick < 0.8F) j.tick = j.tick + 0.012F;
+			} else if (j.type != PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia) {
+				if (!j.active) {
+					j.type = PortalDataHandler.PORTAL_XIA;
+					j.active = true;
+				}
+			} else {
+				if (j.active && !(j.type == PortalDataHandler.PORTAL_VOID && block == voidCraft.blocks.blockPortalVoid) && !(j.type == PortalDataHandler.PORTAL_XIA && block == voidCraft.blocks.blockPortalXia)) {
+					j.active = false;
+					j.type = 0;
+				}
+			}
+			if (j.active) {
+				if (j.tick < 0.8F) j.tick = j.tick + 0.012F;
 				else j.tick = 0.8F;
-			}else{
-				if(j.tick > 0.0F) j.tick = j.tick - 0.030F;
+			} else {
+				if (j.tick > 0.0F) j.tick = j.tick - 0.030F;
 				else j.tick = 0.0F;
 			}
-			
-			//Teleport Player to Dimension when Ready
-			if(!j.hasTeleported && j.tick >= 0.8F){
-				//System.out.println(e.player);
-				if (e.player instanceof EntityPlayerMP){
-		            teleport((EntityPlayerMP) e.player);
-		        }else if(e.player instanceof EntityOtherPlayerMP){
-		        	//Client Side do nothing
-		        }else{
-		        	String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: "+j+" : "+e.player+"; "+e.player.getClass();
-		        	voidCraft.logger.info(err);
-		        	//System.out.println(err);
-		        }
+
+			// Teleport Player to Dimension when Ready
+			if (!j.hasTeleported && j.tick >= 0.8F) {
+				// System.out.println(e.player);
+				if (e.player instanceof EntityPlayerMP) {
+					teleport((EntityPlayerMP) e.player);
+				} else if (e.player instanceof EntityOtherPlayerMP) {
+					// Client Side do nothing
+				} else {
+					String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: " + j + " : " + e.player + "; " + e.player.getClass();
+					voidCraft.logger.info(err);
+					// System.out.println(err);
+				}
 				j.hasTeleported = true;
 			}
-			
-			if(j.tick <= 0.0F){
+
+			if (j.tick <= 0.0F) {
 				j.hasTeleported = false;
 			}
-		}else{
-			voidCraft.logger.info("Adding UUID: '"+e.player.getGameProfile().getId()+"' ("+e.player.getGameProfile().getName()+") to Portal Overlay Handler");
+		} else {
+			voidCraft.logger.info("Adding UUID: '" + e.player.getGameProfile().getId() + "' (" + e.player.getGameProfile().getName() + ") to Portal Overlay Handler");
 			data.put(e.player.getGameProfile().getId(), new PortalDataHandler(e.player.getGameProfile().getId(), e.player.dimension == PortalDataHandler.PORTAL_VOID ? 0 : e.player.dimension == PortalDataHandler.PORTAL_XIA ? 0 : e.player.dimension));
-		}	
+		}
 	}
-	
-	private void teleport(EntityPlayerMP player){
+
+	private void teleport(EntityPlayerMP player) {
 		PortalDataHandler j = data.get(player.getGameProfile().getId());
-		if(
-				player.dimension != j.type &&
-				player.dimension != 1 &&
-				player.dimension != j.PORTAL_VOID &&
-				player.dimension != j.PORTAL_XIA
-				){ //Teleport into void/xia
-        	j.lastDim = player.dimension;
-        	transferPlayerToDimension(
-        			player.mcServer,
-        			player,
-        			j.type,
-        			j.getTeleporter(player)
-        			);
-        }else if(player.dimension == 1){ //From end
-        	j.lastDim = player.dimension;
-        	transferPlayerToDimension(
-        			player.mcServer,
-        			player,
-        			j.type,
-        			j.getTeleporter(player)
-        			);
-        	transferPlayerToDimension(
-        			player.mcServer,
-        			player,
-        			j.type,
-        			j.getTeleporter(player)
-        			);
-        }else{ //Teleport out of void/xia
-        	j.lastDim = j.lastDim == PortalDataHandler.PORTAL_VOID ? 0 : j.lastDim == PortalDataHandler.PORTAL_XIA ? 0 : j.lastDim; //Ensure lastDim never equals Void or Xia IDs
-        	transferPlayerToDimension(
-        			player.mcServer,
-        			player,
-        			j.lastDim,
-        			j.getTeleporter(player)
-        			);
-        }
+		if (player.dimension != j.type && player.dimension != 1 && player.dimension != j.PORTAL_VOID && player.dimension != j.PORTAL_XIA) { // Teleport into void/xia
+			j.lastDim = player.dimension;
+			transferPlayerToDimension(player.mcServer, player, j.type, new TeleportLoc(j.getTeleporter(player)));
+		} else if (player.dimension == 1) { // From end
+			j.lastDim = player.dimension;
+			transferPlayerToDimension(player.mcServer, player, j.type, new TeleportLoc(j.getTeleporter(player)));
+			transferPlayerToDimension(player.mcServer, player, j.type, new TeleportLoc(j.getTeleporter(player)));
+		} else { // Teleport out of void/xia
+			j.lastDim = j.lastDim == PortalDataHandler.PORTAL_VOID ? 0 : j.lastDim == PortalDataHandler.PORTAL_XIA ? 0 : j.lastDim; // Ensure lastDim never equals Void or Xia IDs
+			transferPlayerToDimension(player.mcServer, player, j.lastDim, new TeleportLoc(j.getTeleporter(player)));
+		}
 	}
-	
-	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
+
+	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
 		int j = player.dimension;
 		WorldServer worldserver = mcServer.worldServerForDimension(player.dimension);
 		player.dimension = dimId;
@@ -179,43 +164,60 @@ public class VoidTickEvent {
 		mcServer.getPlayerList().preparePlayer(player, worldserver);
 		player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		player.interactionManager.setWorld(worldserver1);
-        player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
+		player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
 		mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
 		mcServer.getPlayerList().syncPlayerInventory(player);
 		Iterator iterator = player.getActivePotionEffects().iterator();
-		while (iterator.hasNext()){
-			PotionEffect potioneffect = (PotionEffect)iterator.next();
+		while (iterator.hasNext()) {
+			PotionEffect potioneffect = (PotionEffect) iterator.next();
 			player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
 		}
 		FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, j, dimId);
 	}
-	
-	private void transferEntityToWorld(Entity p_82448_1_, int p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_, Teleporter teleporter){ //Custom Made to handle teleporting to and from The End (DIM 1)
+
+	private void transferEntityToWorld(Entity p_82448_1_, int p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
 		WorldProvider pOld = p_82448_3_.provider;
 		WorldProvider pNew = p_82448_4_.provider;
-        double moveFactor = pOld.getMovementFactor() / pNew.getMovementFactor();
-        double d0 = p_82448_1_.posX * moveFactor;
-        double d1 = p_82448_1_.posZ * moveFactor;
-        double d3 = p_82448_1_.posX;
-        double d4 = p_82448_1_.posY;
-        double d5 = p_82448_1_.posZ;
-        float f = p_82448_1_.rotationYaw;
-        p_82448_3_.theProfiler.startSection("moving");
-        p_82448_3_.theProfiler.endSection();
-        
-        p_82448_3_.theProfiler.startSection("placing");
-        d0 = (double)MathHelper.clamp_int((int)d0, -29999872, 29999872);
-        d1 = (double)MathHelper.clamp_int((int)d1, -29999872, 29999872);
+		double moveFactor = pOld.getMovementFactor() / pNew.getMovementFactor();
+		double d0 = p_82448_1_.posX * moveFactor;
+		double d1 = p_82448_1_.posZ * moveFactor;
+		double d3 = p_82448_1_.posX;
+		double d4 = p_82448_1_.posY;
+		double d5 = p_82448_1_.posZ;
+		float f = p_82448_1_.rotationYaw;
+		p_82448_3_.theProfiler.startSection("moving");
+		p_82448_3_.theProfiler.endSection();
 
-        if (p_82448_1_.isEntityAlive()){
-        	p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-        	teleporter.placeInPortal(p_82448_1_, f);
-        	p_82448_4_.spawnEntityInWorld(p_82448_1_);
-        	p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
-        }
-        p_82448_3_.theProfiler.endSection();
-        p_82448_1_.setWorld(p_82448_4_);
+		p_82448_3_.theProfiler.startSection("placing");
+		d0 = (double) MathHelper.clamp_int((int) d0, -29999872, 29999872);
+		d1 = (double) MathHelper.clamp_int((int) d1, -29999872, 29999872);
+
+		if (p_82448_1_.isEntityAlive()) {
+			p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
+			if (teleporter.teleporter != null) teleporter.teleporter.placeInPortal(p_82448_1_, f);
+			else p_82448_1_.setPositionAndUpdate(teleporter.pos.getX(), teleporter.pos.getY(), teleporter.pos.getZ());
+			p_82448_4_.spawnEntityInWorld(p_82448_1_);
+			p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
+		}
+		p_82448_3_.theProfiler.endSection();
+		p_82448_1_.setWorld(p_82448_4_);
 	}
-	
-	
+
+	private class TeleportLoc {
+
+		public final Teleporter teleporter;
+		public final BlockPos pos;
+
+		public TeleportLoc(Teleporter tele) {
+			pos = null;
+			teleporter = tele;
+		}
+
+		public TeleportLoc(BlockPos p) {
+			teleporter = null;
+			pos = p;
+		}
+
+	}
+
 }
