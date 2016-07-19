@@ -86,7 +86,7 @@ import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 @Mod(modid = voidCraft.modid, name = "VoidCraft", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
 public class voidCraft extends TamModBase {
 
-	public final static String version = "0.8.5";
+	public final static String version = "0.8.6";
 	public static final String modid = "voidcraft";
 
 	public static String getVersion() {
