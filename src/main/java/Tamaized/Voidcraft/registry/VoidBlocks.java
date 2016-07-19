@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,6 +32,7 @@ import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import Tamaized.Voidcraft.blocks.XiaBlock;
 import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.Heimdall;
+import Tamaized.Voidcraft.machina.RealityStabilizer;
 import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
@@ -67,6 +67,7 @@ public class VoidBlocks implements ITamRegistry {
 	public static VoidicPowerGen voidicGen;
 	public static VoidicPowerCable voidicCable;
 	public static VoidicPowerCharger voidicCharger;
+	public static RealityStabilizer realityStabilizer;
 
 	public static AIBlock AIBlock;
 	public static XiaBlock xiaBlock;
@@ -100,6 +101,7 @@ public class VoidBlocks implements ITamRegistry {
 		modelList.add(voidicGen = new VoidicPowerGen(voidCraft.tabs.tabVoid, Material.IRON, "voidicGen", 3.5f));
 		modelList.add(voidicCable = new VoidicPowerCable(voidCraft.tabs.tabVoid, Material.CIRCUITS, "voidicCable", 1.5f));
 		modelList.add(voidicCharger = new VoidicPowerCharger(voidCraft.tabs.tabVoid, Material.IRON, "voidicCharger", 3.5f));
+		modelList.add(realityStabilizer = new RealityStabilizer(voidCraft.tabs.tabVoid, Material.IRON, "realityStabilizer", 3.5f));
 
 		// Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid+":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);

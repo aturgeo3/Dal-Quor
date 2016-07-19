@@ -19,6 +19,7 @@ import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.ObsidianFlask;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
+import Tamaized.Voidcraft.items.VoidicDrill;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
@@ -53,6 +54,7 @@ public class VoidItems implements ITamRegistry {
 	public static HookShot hookShot;
 
 	public static VoidicSuppressor voidicSuppressor;
+	public static VoidicDrill voidicDrill;
 	
 	public static VoidRecord record_noStrings;
 	public static VoidRecord record_bleedingThrough;
@@ -90,6 +92,7 @@ public class VoidItems implements ITamRegistry {
 		modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
 
 		modelList.add(voidicSuppressor = new VoidicSuppressor(voidCraft.tabs.tabVoid, "voidicSuppressor", 1));
+		modelList.add(voidicDrill = new VoidicDrill(voidCraft.tabs.tabVoid, "voidicDrill", 1));
 		
 		modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
 		modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
@@ -119,6 +122,7 @@ public class VoidItems implements ITamRegistry {
 		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
 		GameRegistry.addRecipe(new ItemStack(emptyObsidianFlask, 4), "OGO", " O ", 'O', Blocks.OBSIDIAN, 'G', Blocks.GLASS);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
+		GameRegistry.addRecipe(new ItemStack(voidicDrill), "BHB", "CZC", "ESE", 'B', voidCraft.blocks.blockVoidcrystal, 'H', voidCraft.blocks.realityHole, 'C', voidCloth, 'Z', voidCraft.blocks.voidicCharger, 'E', ectoplasm, 'S', voidStar);
 		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
 		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
