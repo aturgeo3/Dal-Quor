@@ -42,7 +42,7 @@ public class VoidTickEvent {
 		} else if (e.player.worldObj.provider.getDimension() != voidCraft.dimensionIdXia) {
 			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256) {
 				EntityPlayerMP player = (EntityPlayerMP) e.player;
-				transferPlayerToDimension(player.mcServer, player, voidCraft.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256, 0)));
+				transferPlayerToDimension(player.mcServer, player, voidCraft.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256*2, 0)));
 			}
 		}
 
