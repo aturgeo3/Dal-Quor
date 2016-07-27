@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.items.VoidRecord;
 
 public class TileEntityVoidBox extends TamTileEntityInventory {

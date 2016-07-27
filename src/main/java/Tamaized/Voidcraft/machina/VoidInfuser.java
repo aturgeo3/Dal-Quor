@@ -23,8 +23,8 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 
 public class VoidInfuser extends TamBlockContainer {

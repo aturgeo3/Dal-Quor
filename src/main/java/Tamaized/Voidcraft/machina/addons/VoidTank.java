@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.machina.addons;
 
 import javax.annotation.Nullable;
 
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.item.ItemStack;

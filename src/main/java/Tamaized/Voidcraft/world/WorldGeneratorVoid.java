@@ -10,8 +10,8 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
-import Tamaized.Voidcraft.common.voidCraft;
 
 import com.google.common.base.Predicate;
 

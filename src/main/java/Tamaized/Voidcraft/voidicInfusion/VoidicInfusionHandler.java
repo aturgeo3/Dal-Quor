@@ -17,9 +17,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 
 public class VoidicInfusionHandler {
 	
@@ -71,7 +71,7 @@ public class VoidicInfusionHandler {
 					ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 					DataOutputStream outputStream = new DataOutputStream(bos);
 					try {
-						outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_INFUSION_UPDATE_ALL);
+						outputStream.writeInt(ClientPacketHandler.TYPE_INFUSION_UPDATE_ALL);
 						outputStream.writeInt(handler.getPlayer().getEntityId());
 						outputStream.writeInt(handler.getInfusion());
 						outputStream.writeInt(handler.getMaxInfusion());

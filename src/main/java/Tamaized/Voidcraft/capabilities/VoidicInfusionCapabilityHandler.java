@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.capabilities;
 
 import net.minecraft.util.ResourceLocation;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapability {
 	

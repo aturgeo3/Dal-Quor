@@ -12,7 +12,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
 
 public class ObsidianFlask extends TamItem {

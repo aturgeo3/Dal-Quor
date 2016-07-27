@@ -11,8 +11,8 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.Teleporter;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.world.dim.TheVoid.TeleporterVoid;
 import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 

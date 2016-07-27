@@ -15,8 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 
 public class RealityStabilizer extends TamBlockContainer {

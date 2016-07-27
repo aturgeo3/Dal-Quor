@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class MaceratorRecipeMaker {
 

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 
 public class ChainedSkull extends TamItem{

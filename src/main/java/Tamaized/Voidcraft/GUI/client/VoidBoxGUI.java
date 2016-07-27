@@ -18,11 +18,11 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 import org.lwjgl.opengl.GL11;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
 import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
+import Tamaized.Voidcraft.network.ServerPacketHandler;
 
 public class VoidBoxGUI extends GuiContainer {
 	
@@ -81,7 +81,7 @@ public class VoidBoxGUI extends GuiContainer {
 		case BUTTON_PLAY:
 			if(spam) return;
 			else spam = true;
-			pktType = VoidCraftServerPacketHandler.TYPE_VOIDBOX_PLAY;
+			pktType = ServerPacketHandler.TYPE_VOIDBOX_PLAY;
 			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
@@ -101,7 +101,7 @@ public class VoidBoxGUI extends GuiContainer {
 		case BUTTON_STOP:
 			if(spam) return;
 			else spam = true;
-			pktType = VoidCraftServerPacketHandler.TYPE_VOIDBOX_STOP;
+			pktType = ServerPacketHandler.TYPE_VOIDBOX_STOP;
 			bos = new ByteBufOutputStream(Unpooled.buffer());
 			outputStream = new DataOutputStream(bos);
 			try {
@@ -119,7 +119,7 @@ public class VoidBoxGUI extends GuiContainer {
 			}
 			break;
           case BUTTON_LOOP:
-        	  pktType = VoidCraftServerPacketHandler.TYPE_VOIDBOX_LOOP;
+        	  pktType = ServerPacketHandler.TYPE_VOIDBOX_LOOP;
         	  bos = new ByteBufOutputStream(Unpooled.buffer());
         	  outputStream = new DataOutputStream(bos);
         	  try {
@@ -138,7 +138,7 @@ public class VoidBoxGUI extends GuiContainer {
   			}
   			break;
           case BUTTON_AUTO:
-        	  pktType = VoidCraftServerPacketHandler.TYPE_VOIDBOX_AUTO;
+        	  pktType = ServerPacketHandler.TYPE_VOIDBOX_AUTO;
         	  bos = new ByteBufOutputStream(Unpooled.buffer());
         	  outputStream = new DataOutputStream(bos);
         	  try {

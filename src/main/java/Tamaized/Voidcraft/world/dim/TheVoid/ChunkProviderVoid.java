@@ -25,7 +25,7 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 
 import com.google.common.base.Predicate;

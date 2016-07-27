@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidMaceratorContainer;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
 public class voidMaceratorGUI extends GuiContainer {

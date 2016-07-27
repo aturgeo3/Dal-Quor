@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.DamageSources.DamageSourceAcid;
+import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;

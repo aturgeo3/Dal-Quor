@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class BlockVoidcrystal extends TamBlock {
 

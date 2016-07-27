@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.events.client;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class BakeEventHandler {
 	

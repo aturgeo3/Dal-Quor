@@ -8,7 +8,7 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class WorldProviderVoid extends WorldProvider {
     /**

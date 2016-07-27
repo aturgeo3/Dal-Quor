@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

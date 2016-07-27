@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

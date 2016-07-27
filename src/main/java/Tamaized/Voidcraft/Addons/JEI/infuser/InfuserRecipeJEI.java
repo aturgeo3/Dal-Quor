@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.HeimdallContainer;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
 @SideOnly(Side.CLIENT)

@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks.render;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;

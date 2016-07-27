@@ -6,8 +6,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidicChargerContainer;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 
 public class VoidicChargerGUI extends GuiContainer {

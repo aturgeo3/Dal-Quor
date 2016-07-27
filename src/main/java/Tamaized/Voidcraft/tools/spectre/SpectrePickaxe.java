@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.tools.spectre;
 
 import net.minecraft.creativetab.CreativeTabs;
 import Tamaized.TamModized.tools.TamPickaxe;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class SpectrePickaxe extends TamPickaxe{
 

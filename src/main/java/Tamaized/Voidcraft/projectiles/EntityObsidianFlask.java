@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.projectiles;
 
 import javax.annotation.Nullable;
 
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;

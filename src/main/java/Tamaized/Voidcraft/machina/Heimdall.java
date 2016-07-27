@@ -17,8 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
 public class Heimdall extends TamBlockContainer {

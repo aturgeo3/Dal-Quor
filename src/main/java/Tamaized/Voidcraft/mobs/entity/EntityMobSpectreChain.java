@@ -22,7 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidMob;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;

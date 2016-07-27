@@ -14,8 +14,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
-import Tamaized.Voidcraft.common.voidCraft;
 
 public class MaceratorRecipeCategory implements IRecipeCategory {
 	

@@ -8,8 +8,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.GUI.SlotCantPlace;
-import Tamaized.Voidcraft.GUI.SlotCantPlaceOrRemove;
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlaceOrRemove;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class VoidBoxContainer extends ContainerBase {

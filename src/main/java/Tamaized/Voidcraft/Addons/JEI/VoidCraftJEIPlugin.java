@@ -8,13 +8,13 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import net.minecraft.item.ItemStack;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeCategory;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeHandler;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeMaker;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeCategory;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeHandler;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeMaker;
-import Tamaized.Voidcraft.common.voidCraft;
 
 @JEIPlugin
 public class VoidCraftJEIPlugin extends BlankModPlugin{

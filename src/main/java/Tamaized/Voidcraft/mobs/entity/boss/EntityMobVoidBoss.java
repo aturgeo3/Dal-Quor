@@ -23,7 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidBossMob;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.IVoidBossData;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;

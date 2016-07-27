@@ -7,8 +7,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.RealityStabilizerContainer;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 
 @SideOnly(Side.CLIENT)

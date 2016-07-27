@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.sound.VoidSoundEvents.SoundTrack;
 
 public class VoidRecord extends ItemRecord implements ITamModel{

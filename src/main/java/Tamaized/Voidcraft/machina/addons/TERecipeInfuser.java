@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList.TamTERecipe;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class TERecipeInfuser extends TamTileEntityRecipeList {
 

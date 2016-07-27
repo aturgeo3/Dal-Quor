@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 

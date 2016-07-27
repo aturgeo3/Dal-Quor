@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import Tamaized.TamModized.armors.TamArmor;
 //import net.minecraftforge.event.entity.player.PlayerEvent;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class XiaArmor extends TamArmor {
 

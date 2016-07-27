@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class VoidStar extends TamItem{
 

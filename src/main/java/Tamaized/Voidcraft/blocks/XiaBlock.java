@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
-import Tamaized.Voidcraft.common.voidCraft;
 
 public class XiaBlock extends TamBlockContainer {
 

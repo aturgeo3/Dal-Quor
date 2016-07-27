@@ -11,7 +11,7 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class BlockRealityHole extends TamBlock {
 

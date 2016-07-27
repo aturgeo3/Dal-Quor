@@ -20,7 +20,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.ai.EntityAIPathHerobrineFlightPhase1;
 import Tamaized.Voidcraft.mobs.ai.EntityAIPathHerobrineFlightPhase2;

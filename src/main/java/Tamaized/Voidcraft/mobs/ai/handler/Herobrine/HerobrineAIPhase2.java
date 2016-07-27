@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.util.math.BlockPos;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.common.voidCraft;
 import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 

@@ -8,7 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 

@@ -13,10 +13,10 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
-import Tamaized.Voidcraft.DamageSources.DamageSourceVoidicInfusion;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftClientPacketHandler;
+import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 
 public class PlayerInfusionHandler {
 	
@@ -143,7 +143,7 @@ public class PlayerInfusionHandler {
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(VoidCraftClientPacketHandler.TYPE_INFUSION_UPDATE);
+			outputStream.writeInt(ClientPacketHandler.TYPE_INFUSION_UPDATE);
 			outputStream.writeInt(voidicInfusionAmount);
 			outputStream.writeInt(maxAmount);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);

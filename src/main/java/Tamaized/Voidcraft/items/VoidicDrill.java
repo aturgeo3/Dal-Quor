@@ -22,7 +22,7 @@ import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.ParticleContructor;
 import Tamaized.TamModized.particles.ParticleRegistry;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 
 public class VoidicDrill extends VoidicPowerItem {
 

@@ -19,8 +19,8 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.voidCraft;
-import Tamaized.Voidcraft.common.handlers.VoidCraftServerPacketHandler;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.network.ServerPacketHandler;
 
 public class HookShot extends TamItem{
 
@@ -55,7 +55,7 @@ public class HookShot extends TamItem{
 	*/return null;}
 	
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int count) { //Doesnt seem to be called server side so send a packet
-		int pktType = VoidCraftServerPacketHandler.TYPE_HOOKSHOT_STOP;
+		int pktType = ServerPacketHandler.TYPE_HOOKSHOT_STOP;
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {

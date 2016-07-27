@@ -19,8 +19,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
-import Tamaized.Voidcraft.common.voidCraft;
 
 public class TeleporterVoid extends Teleporter {
 

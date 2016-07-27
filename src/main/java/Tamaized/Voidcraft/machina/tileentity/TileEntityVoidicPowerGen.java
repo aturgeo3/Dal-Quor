@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import Tamaized.TamModized.api.voidcraft.power.TileEntityVoidicPower;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerHandler;
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
 
 public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ISidedInventory, IFluidHandler{

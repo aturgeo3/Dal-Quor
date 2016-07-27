@@ -9,8 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.common.voidCraft;
 
 public class AIBlock extends TamBlockContainer {
 	

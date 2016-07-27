@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.events;
 
-import Tamaized.Voidcraft.common.voidCraft;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
