@@ -5,17 +5,14 @@ import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidCraftCommonProxy {
-	
-	public void preInit() {}
-	
-	public void init() {}
 
-	public void registerRenders() {
-		NetworkRegistry.INSTANCE.registerGuiHandler(voidCraft.instance, new GuiHandler());
+	public void preInit() {
 	}
 
-	public void registerNetwork() {}
+	public void init() {
+	}
 
-	public void registerInventoryRender() {}
+	public void postInit() {
+	}
 
 }
