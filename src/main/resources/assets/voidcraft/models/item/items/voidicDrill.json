@@ -1,0 +1,20 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "voidcraft:items/Laser_Drill"
+    },
+    "display": {
+		"thirdperson_righthand": {
+            "rotation": [ 0, 90, -45 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, 45 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ -90, 180, 0 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 90, 180, 0 ]
+        }
+    }
+}

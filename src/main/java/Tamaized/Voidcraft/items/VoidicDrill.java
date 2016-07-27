@@ -9,14 +9,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
+import Tamaized.TamModized.particles.ParticleHelper;
+import Tamaized.TamModized.particles.ParticleHelper.ParticleContructor;
+import Tamaized.TamModized.particles.ParticleRegistry;
+import Tamaized.Voidcraft.common.voidCraft;
 
 public class VoidicDrill extends VoidicPowerItem {
 
@@ -25,33 +31,39 @@ public class VoidicDrill extends VoidicPowerItem {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player, EnumHand hand) {
 		if (VoidicPowerItemHandler.getItemVoidicPower(stack) > 1) {
-			VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
-			RayTraceResult result = playerIn.rayTrace(10, 1F);
+			if(!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
+			RayTraceResult result = player.rayTrace(10, 1F);
 			switch (result.sideHit) {
 				case UP: // Y
-					caseY(playerIn, worldIn, stack, result.getBlockPos());
+					caseY(player, worldIn, stack, result.getBlockPos());
 					break;
 				case DOWN: // Y
-					caseY(playerIn, worldIn, stack, result.getBlockPos());
+					caseY(player, worldIn, stack, result.getBlockPos());
 					break;
 				case EAST: // X
-					caseX(playerIn, worldIn, stack, result.getBlockPos());
+					caseX(player, worldIn, stack, result.getBlockPos());
 					break;
 				case WEST: // X
-					caseX(playerIn, worldIn, stack, result.getBlockPos());
+					caseX(player, worldIn, stack, result.getBlockPos());
 					break;
 				case NORTH: // Z
-					caseZ(playerIn, worldIn, stack, result.getBlockPos());
+					caseZ(player, worldIn, stack, result.getBlockPos());
 					break;
 				case SOUTH: // Z
-					caseZ(playerIn, worldIn, stack, result.getBlockPos());
+					caseZ(player, worldIn, stack, result.getBlockPos());
 					break;
 				default:
 					break;
 			}
-
+			//worldIn.spawnParticle(EnumParticleTypes.PORTAL, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 0, 0, new int[0]);
+			Vec3d ray = player.rayTrace(10, 1.0f).hitVec;
+			if(worldIn.isRemote){
+				ParticleHelper.spawnParticle(new ParticleContructor(ParticleRegistry.getParticle(voidCraft.particles.drillRay), worldIn, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), ray == null ? player.getLook(1.0F).scale(10) : ray));
+			}else{
+				//ParticleHelper.sendPacketToClients(worldIn, voidCraft.particles.drillRay, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), player.rayTrace(10, 1.0f).hitVec, 64);
+			}
 			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
 		return ActionResult.newResult(EnumActionResult.FAIL, stack);

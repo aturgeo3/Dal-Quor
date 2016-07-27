@@ -75,6 +75,7 @@ import Tamaized.Voidcraft.registry.Tools;
 import Tamaized.Voidcraft.registry.VoidBlocks;
 import Tamaized.Voidcraft.registry.VoidFluids;
 import Tamaized.Voidcraft.registry.VoidItems;
+import Tamaized.Voidcraft.registry.VoidParticles;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
@@ -120,7 +121,8 @@ public class voidCraft extends TamModBase {
 	public static Biomes biomes;
 	public static Achievements achievements;
 	public static LootTables lootTables;
-	public static TERecipes teRecipes; 
+	public static TERecipes teRecipes;
+	public static VoidParticles particles;
 
 	public static final int dimensionIdVoid = -2;
 	public static final int dimensionIdXia = -3;
@@ -146,9 +148,10 @@ public class voidCraft extends TamModBase {
 		register(achievements = new Achievements());
 		register(lootTables = new LootTables());
 		register(teRecipes = new TERecipes());
+		register(particles = new VoidParticles());
 
 		VoidSoundEvents.register();
-		
+
 		super.preInit(event);
 
 		// API Loader
@@ -168,7 +171,6 @@ public class voidCraft extends TamModBase {
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 
-		
 		proxy.preInit();
 	}
 
@@ -176,7 +178,7 @@ public class voidCraft extends TamModBase {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		logger.info("Starting VoidCraft Init");
-		
+
 		super.init(event);
 
 		// Tile Entities
@@ -256,7 +258,7 @@ public class voidCraft extends TamModBase {
 
 		proxy.init();
 		proxy.registerInventoryRender();
-		
+
 	}
 
 	@Override
@@ -270,6 +272,6 @@ public class voidCraft extends TamModBase {
 		proxy.registerRenders();
 
 		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
-		
+
 	}
 }
