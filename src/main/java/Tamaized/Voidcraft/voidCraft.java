@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 
 import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
+import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -63,19 +64,18 @@ import Tamaized.Voidcraft.projectiles.AcidBall;
 import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.VoidChain;
-import Tamaized.Voidcraft.proxy.ServerProxy;
 import Tamaized.Voidcraft.registry.VoidCraftAchievements;
 import Tamaized.Voidcraft.registry.VoidCraftArmors;
 import Tamaized.Voidcraft.registry.VoidCraftBiomes;
-import Tamaized.Voidcraft.registry.VoidCraftLootTables;
-import Tamaized.Voidcraft.registry.VoidCraftMaterials;
-import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
-import Tamaized.Voidcraft.registry.VoidCraftCreativeTabs;
-import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import Tamaized.Voidcraft.registry.VoidCraftCreativeTabs;
 import Tamaized.Voidcraft.registry.VoidCraftFluids;
 import Tamaized.Voidcraft.registry.VoidCraftItems;
+import Tamaized.Voidcraft.registry.VoidCraftLootTables;
+import Tamaized.Voidcraft.registry.VoidCraftMaterials;
 import Tamaized.Voidcraft.registry.VoidCraftParticles;
+import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
+import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
@@ -101,8 +101,8 @@ public class voidCraft extends TamModBase {
 	public static FMLEventChannel channel;
 	public static final String networkChannelName = "VoidCraft";
 
-	@SidedProxy(clientSide = "Tamaized.Voidcraft.common.client.VoidCraftClientProxy", serverSide = "Tamaized.Voidcraft.common.server.VoidCraftCommonProxy")
-	public static ServerProxy proxy;
+	@SidedProxy(clientSide = "Tamaized.Voidcraft.proxy.ClientProxy", serverSide = "Tamaized.Voidcraft.proxy.CommonProxy")
+	public static AbstractProxy proxy;
 
 	public VoidTickEvent VoidTickEvent;
 
