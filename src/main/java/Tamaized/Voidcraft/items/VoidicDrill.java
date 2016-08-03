@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.items;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -20,6 +21,7 @@ import net.minecraftforge.fluids.IFluidBlock;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.TamModized.particles.ParticleHelper;
+import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.TamModized.particles.ParticleHelper.ParticleContructor;
 import Tamaized.TamModized.particles.ParticleRegistry;
 import Tamaized.Voidcraft.voidCraft;
@@ -33,7 +35,7 @@ public class VoidicDrill extends VoidicPowerItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player, EnumHand hand) {
 		if (VoidicPowerItemHandler.getItemVoidicPower(stack) > 1) {
-			if(!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
+			if (!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
 			RayTraceResult result = player.rayTrace(10, 1F);
 			switch (result.sideHit) {
 				case UP: // Y
@@ -57,14 +59,25 @@ public class VoidicDrill extends VoidicPowerItem {
 				default:
 					break;
 			}
-			//worldIn.spawnParticle(EnumParticleTypes.PORTAL, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 0, 0, new int[0]);
+			// worldIn.spawnParticle(EnumParticleTypes.PORTAL, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 0, 0, new int[0]);
 			Vec3d ray = player.rayTrace(10, 1.0f).hitVec;
-			if(worldIn.isRemote){
-				ParticleHelper.spawnParticle(new ParticleContructor(ParticleRegistry.getParticle(voidCraft.particles.drillRay), worldIn, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), ray == null ? player.getLook(1.0F).scale(10) : ray));
-			}else{
-				//ParticleHelper.sendPacketToClients(worldIn, voidCraft.particles.drillRay, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), player.rayTrace(10, 1.0f).hitVec, 64);
+			if (worldIn.isRemote) {
+				/*ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+				classes.add(World.class);
+				classes.add(Vec3d.class);
+				classes.add(Vec3d.class);
+				classes.add(boolean.class);
+				ArrayList<Object> instances = new ArrayList<Object>();
+				instances.add(worldIn);
+				instances.add(new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()));
+				instances.add(ray == null ? player.getLook(1.0F).scale(10) : ray);
+				instances.add(hand == EnumHand.OFF_HAND);
+				ParticleHelper.spawnParticle(new ParticleContructor(ParticleRegistry.getParticle(voidCraft.particles.drillRay), classes, instances));*/
+			} else {
+				VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND);
+				ParticleHelper.sendPacketToClients(worldIn, voidCraft.particles.drillRay, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
 			}
-			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+			return ActionResult.newResult(EnumActionResult.PASS, stack);
 		}
 		return ActionResult.newResult(EnumActionResult.FAIL, stack);
 	}
@@ -124,6 +137,18 @@ public class VoidicDrill extends VoidicPowerItem {
 	@Override
 	protected int getDefaultMaxVoidicPower() {
 		return 5000;
+	}
+
+	public class VoidDrillParticleData implements IParticlePacketData {
+
+		public final Vec3d target;
+		public final boolean offhand;
+
+		public VoidDrillParticleData(Vec3d t, boolean o) {
+			target = t;
+			offhand = o;
+		}
+
 	}
 
 }

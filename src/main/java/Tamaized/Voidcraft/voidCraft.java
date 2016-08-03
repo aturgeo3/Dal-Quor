@@ -215,11 +215,11 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 
 		// Register Projectiles
-		EntityRegistry.registerModEntity(VoidChain.class, "VoidChain", 0, this, 128, 1, true);
-		EntityRegistry.registerModEntity(AcidBall.class, "AcidBall", 1, this, 128, 1, true);
-		EntityRegistry.registerModEntity(EntityHookShot.class, "HookShot", 2, this, 128, 1, true);
-		EntityRegistry.registerModEntity(HerobrineFireball.class, "HerobrineFireball", 3, this, 128, 1, true);
-		EntityRegistry.registerModEntity(EntityObsidianFlask.class, "EntityObsidianFlask", 4, this, 128, 1, true);
+		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
+		registerEntity(AcidBall.class, "AcidBall", this, 128, 1, true);
+		registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
+		registerEntity(HerobrineFireball.class, "HerobrineFireball", this, 128, 1, true);
+		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, 128, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));
@@ -232,16 +232,16 @@ public class voidCraft extends TamModBase {
 		StructureVoidFortressPieces.registerNetherFortressPieces();
 
 		// Register Mobs
-		EntityRegistry.registerModEntity(EntityMobWraith.class, "Wraith", 4, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobSpectreChain.class, "SpectreChain", 5, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobVoidWrath.class, "VoidWrath", 6, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobLich.class, "Lich", 7, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobVoidBoss.class, "VoidBoss", 8, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobHerobrine.class, "Herobrine", 9, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobDol.class, "Dol", 10, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobZol.class, "Zol", 11, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobXia.class, "Xia", 12, this, 64, 1, true);
-		EntityRegistry.registerModEntity(EntityMobXia2.class, "Xia2", 13, this, 64, 1, true);
+		registerEntity(EntityMobWraith.class, "Wraith", this, 64, 1, true);
+		registerEntity(EntityMobSpectreChain.class, "SpectreChain", this, 64, 1, true);
+		registerEntity(EntityMobVoidWrath.class, "VoidWrath", this, 64, 1, true);
+		registerEntity(EntityMobLich.class, "Lich", this, 64, 1, true);
+		registerEntity(EntityMobVoidBoss.class, "VoidBoss", this, 64, 1, true);
+		registerEntity(EntityMobHerobrine.class, "Herobrine", this, 64, 1, true);
+		registerEntity(EntityMobDol.class, "Dol", this, 64, 1, true);
+		registerEntity(EntityMobZol.class, "Zol", this, 64, 1, true);
+		registerEntity(EntityMobXia.class, "Xia", this, 64, 1, true);
+		registerEntity(EntityMobXia2.class, "Xia2", this, 64, 1, true);
 
 		// ... and their eggs
 		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);

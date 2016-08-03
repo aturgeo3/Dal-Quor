@@ -2,25 +2,25 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.TamModized.particles.ParticleRegistry;
-import Tamaized.TamModized.particles.TamParticle;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.particles.AcidFX;
 import Tamaized.Voidcraft.particles.VoidicDrillLaser;
+import Tamaized.Voidcraft.particles.network.VoidicDrillLaserPacketHandler;
 
 public class VoidCraftParticles implements ITamRegistry {
 
 	public static int drillRay;
+	
+	public static int drillRayHandler;
 
 	@Override
 	public void preInit() {
 		drillRay = ParticleRegistry.registerParticle(VoidicDrillLaser.class);
+		
+		drillRayHandler = ParticlePacketHandlerRegistry.register(new VoidicDrillLaserPacketHandler());
 	}
 
 	@Override

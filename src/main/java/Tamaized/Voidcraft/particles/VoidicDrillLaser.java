@@ -7,34 +7,30 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Quaternion;
-
 import Tamaized.TamModized.particles.TamParticle;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 
 public class VoidicDrillLaser extends TamParticle {
 
-	public VoidicDrillLaser(World world, Vec3d pos, Vec3d target) {
+	private final boolean isOffhand;
+
+	public VoidicDrillLaser(World world, Vec3d pos, Vec3d target, boolean offhand) {
 		super(world, pos, target);
+		isOffhand = offhand;
 	}
 
 	@Override
 	public void renderParticle(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+		System.out.println("Beep Beep I'm a Jeep ^.^");
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.disableFog();
 		Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityBeaconRenderer.TEXTURE_BEACON_BEAM);
-		float rotate = (float) Math.atan2(posZ - getLocation().zCoord, posX - getLocation().xCoord);
-		// GlStateManager.rotate(90F, 1.0F, 0.0F, 0.0F);
-		// GlStateManager.rotate(rotate, 0.0F, 1.0F, 0.0F);
-		DebugEvent.textL = posX + ":" + posY + ":" + posZ;
-		for (int i = 0; i < 10; i++) {
-			renderBeamSegment(entity.rotationYaw, entity.rotationPitch, 1, 0, -0.5, partialTicks, 1, entity.worldObj.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D);
+		int dist = (int) Math.ceil(getLocation().distanceTo(new Vec3d(posX, posY, posZ)));
+		dist = dist > 10 ? 10 : dist;
+		for (int i = 0; i < dist; i++) {
+			renderBeamSegment(isOffhand, entity.rotationYaw, entity.rotationPitch, 1, 0, -0.5, partialTicks, 1, entity.worldObj.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D);
 		}
 		GlStateManager.enableFog();
 	}
@@ -113,7 +109,7 @@ public class VoidicDrillLaser extends TamParticle {
 	 * @param p_188205_17_
 	 *            (= 0.25D)
 	 */
-	public static void renderBeamSegment(float yaw, float pitch, double x, double y, double z, double partialTicks, double shouldBeamRender, double worldTime, int segment, int height, float[] colors, double p_188205_15_, double p_188205_17_) {
+	public static void renderBeamSegment(boolean offhand, float yaw, float pitch, double x, double y, double z, double partialTicks, double shouldBeamRender, double worldTime, int segment, int height, float[] colors, double p_188205_15_, double p_188205_17_) {
 		GlStateManager.pushMatrix();
 		{
 			// System.out.println(rotate+" : "+x+" : "+y+" : "+z);
@@ -122,7 +118,8 @@ public class VoidicDrillLaser extends TamParticle {
 			GlStateManager.rotate(-yaw + 90F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate(pitch + 90F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.rotate(1F, 1.0F, 0.0F, 1.0F);
-			GlStateManager.translate(-1.7, 0, -.1);
+			int multi = offhand ? 1 : -1;
+			GlStateManager.translate(-1.7, 0, .11 * multi);
 			int i = segment + height;
 			GlStateManager.glTexParameteri(3553, 10242, 10497);
 			GlStateManager.glTexParameteri(3553, 10243, 10497);

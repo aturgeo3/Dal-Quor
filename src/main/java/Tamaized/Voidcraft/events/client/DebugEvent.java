@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class DebugEvent {
 	
-	private final static boolean debugMode = true;
+	private final static boolean debugMode = false;
 	
 	public static String textL = "";
 	public static String textR = "";

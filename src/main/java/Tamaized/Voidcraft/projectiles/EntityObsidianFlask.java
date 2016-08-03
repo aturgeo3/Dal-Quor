@@ -45,7 +45,8 @@ public class EntityObsidianFlask extends EntityThrowable {
 		}
 
 		for (int j = 0; j < 8; ++j) {
-			this.worldObj.spawnParticle(EnumParticleTypes.DRAGON_BREATH, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D, new int[0]);
+			boolean flag = (j % 2 == 0);
+			this.worldObj.spawnParticle(EnumParticleTypes.DRAGON_BREATH, this.posX, this.posY, this.posZ, flag ? 0.0D : 1.0D, 0.0D, flag ? 1.0D : 0.0D, new int[0]);
 		}
 
 		implosion(result.getBlockPos());
