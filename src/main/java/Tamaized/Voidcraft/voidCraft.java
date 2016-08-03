@@ -101,7 +101,7 @@ public class voidCraft extends TamModBase {
 	public static FMLEventChannel channel;
 	public static final String networkChannelName = "VoidCraft";
 
-	@SidedProxy(clientSide = "Tamaized.Voidcraft.proxy.ClientProxy", serverSide = "Tamaized.Voidcraft.proxy.CommonProxy")
+	@SidedProxy(clientSide = "Tamaized.Voidcraft.proxy.ClientProxy", serverSide = "Tamaized.Voidcraft.proxy.ServerProxy")
 	public static AbstractProxy proxy;
 
 	public VoidTickEvent VoidTickEvent;
