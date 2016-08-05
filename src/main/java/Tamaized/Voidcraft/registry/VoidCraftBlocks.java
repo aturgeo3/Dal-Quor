@@ -130,21 +130,6 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void setupRender() {/*
-								 * ItemModelMesher modelMesher =
-								 * Minecraft.getMinecraft
-								 * ().getRenderItem().getItemModelMesher(); for
-								 * (Block b : blockList) {
-								 * modelMesher.register(Item
-								 * .getItemFromBlock(b), 0, new
-								 * Tamaized.Voidcraft
-								 * .common.client.ScrewModelResourceLocation
-								 * ("blocks/", ((IBasicVoid) b).getName(),
-								 * "inventory")); }
-								 */
-	}
-
 	@Override
 	public ArrayList<ITamModel> getModelList() {
 		return modelList;
@@ -153,6 +138,24 @@ public class VoidCraftBlocks implements ITamRegistry {
 	@Override
 	public String getModID() {
 		return voidCraft.modid;
+	}
+
+	@Override
+	public void clientPreInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientPostInit() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -59,4 +59,16 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 		return voidCraft.modid;
 	}
 
+	@Override
+	public void clientInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientPostInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

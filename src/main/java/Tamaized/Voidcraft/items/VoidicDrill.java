@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.items;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -22,8 +20,6 @@ import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
-import Tamaized.TamModized.particles.ParticleHelper.ParticleContructor;
-import Tamaized.TamModized.particles.ParticleRegistry;
 import Tamaized.Voidcraft.voidCraft;
 
 public class VoidicDrill extends VoidicPowerItem {
@@ -62,20 +58,12 @@ public class VoidicDrill extends VoidicPowerItem {
 			// worldIn.spawnParticle(EnumParticleTypes.PORTAL, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 0, 0, new int[0]);
 			Vec3d ray = player.rayTrace(10, 1.0f).hitVec;
 			if (worldIn.isRemote) {
-				/*ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
-				classes.add(World.class);
-				classes.add(Vec3d.class);
-				classes.add(Vec3d.class);
-				classes.add(boolean.class);
-				ArrayList<Object> instances = new ArrayList<Object>();
-				instances.add(worldIn);
-				instances.add(new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()));
-				instances.add(ray == null ? player.getLook(1.0F).scale(10) : ray);
-				instances.add(hand == EnumHand.OFF_HAND);
-				ParticleHelper.spawnParticle(new ParticleContructor(ParticleRegistry.getParticle(voidCraft.particles.drillRay), classes, instances));*/
+				/*
+				 * ArrayList<Class<?>> classes = new ArrayList<Class<?>>(); classes.add(World.class); classes.add(Vec3d.class); classes.add(Vec3d.class); classes.add(boolean.class); ArrayList<Object> instances = new ArrayList<Object>(); instances.add(worldIn); instances.add(new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ())); instances.add(ray == null ? player.getLook(1.0F).scale(10) : ray); instances.add(hand == EnumHand.OFF_HAND); ParticleHelper.spawnParticle(new ParticleContructor(ParticleRegistry.getParticle(voidCraft.particles.drillRay), classes, instances));
+				 */
 			} else {
 				VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND);
-				ParticleHelper.sendPacketToClients(worldIn, voidCraft.particles.drillRay, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
+				ParticleHelper.sendPacketToClients(worldIn, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
 			}
 			return ActionResult.newResult(EnumActionResult.PASS, stack);
 		}

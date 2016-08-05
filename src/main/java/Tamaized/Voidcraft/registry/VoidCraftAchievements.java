@@ -130,4 +130,22 @@ public class VoidCraftAchievements implements ITamRegistry {
 		return voidCraft.modid;
 	}
 
+	@Override
+	public void clientPreInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clientPostInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

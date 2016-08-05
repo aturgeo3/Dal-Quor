@@ -49,6 +49,7 @@ import Tamaized.Voidcraft.mobs.xia.ModelXia;
 import Tamaized.Voidcraft.mobs.xia.ModelXia2;
 import Tamaized.Voidcraft.mobs.xia.RenderXia;
 import Tamaized.Voidcraft.mobs.xia.RenderXia2;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.projectiles.AcidBall;
 import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
@@ -128,6 +129,8 @@ public class ClientProxy extends AbstractProxy {
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
+		
+		voidCraft.channel.register(new ClientPacketHandler());
 	}
 
 }

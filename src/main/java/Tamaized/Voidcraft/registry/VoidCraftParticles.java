@@ -3,7 +3,6 @@ package Tamaized.Voidcraft.registry;
 import java.util.ArrayList;
 
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
-import Tamaized.TamModized.particles.ParticleRegistry;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
@@ -12,14 +11,10 @@ import Tamaized.Voidcraft.particles.network.VoidicDrillLaserPacketHandler;
 
 public class VoidCraftParticles implements ITamRegistry {
 
-	public static int drillRay;
-	
 	public static int drillRayHandler;
 
 	@Override
 	public void preInit() {
-		drillRay = ParticleRegistry.registerParticle(VoidicDrillLaser.class);
-		
 		drillRayHandler = ParticlePacketHandlerRegistry.register(new VoidicDrillLaserPacketHandler());
 	}
 
@@ -41,6 +36,23 @@ public class VoidCraftParticles implements ITamRegistry {
 	@Override
 	public String getModID() {
 		return voidCraft.modid;
+	}
+
+	@Override
+	public void clientPreInit() {
+
+	}
+
+	@Override
+	public void clientInit() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void clientPostInit() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

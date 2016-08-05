@@ -27,50 +27,46 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 
 @SideOnly(Side.CLIENT)
-public class ClientPacketHandler{
-	
+public class ClientPacketHandler {
+
 	public static final int TYPE_UNUSED1 = 0;
 	public static final int TYPE_UNUSED2 = 1;
 	public static final int TYPE_INFUSION_UPDATE = 2;
 	public static final int TYPE_INFUSION_UPDATE_ALL = 3;
-	
+
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onClientPacket(ClientCustomPacketEvent event) {
-		try {
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
-			processPacketOnClient(event.getPacket().payload(), Side.CLIENT);
-			bbis.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public static void processPacketOnClient(ByteBuf parBB, Side parSide) throws IOException{
-		World theWorld = Minecraft.getMinecraft().theWorld;
-		if (parSide == Side.CLIENT && theWorld != null){
-			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
-			int pktType = bbis.readInt();
-			if(pktType == TYPE_INFUSION_UPDATE){
-				ClientProxy.infusionHandler.amount = bbis.readInt();
-				ClientProxy.infusionHandler.maxAmount = bbis.readInt();
-			}
-			else if(pktType == TYPE_INFUSION_UPDATE_ALL){
-				int id = bbis.readInt();
-				int amount = bbis.readInt();
-				int maxAmount = bbis.readInt();
-				Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(id);
-				if(e.hasCapability(CapabilityList.VOIDICINFUSION, null)){
-					IVoidicInfusionCapability cap = e.getCapability(CapabilityList.VOIDICINFUSION, null);
-					cap.setInfusion(amount);
-					cap.setMaxInfusion(maxAmount);
+		Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+			public void run() {
+				try {
+					processPacket(event.getPacket().payload());
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
-			bbis.close();   
+		});
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static void processPacket(ByteBuf parBB) throws IOException {
+		World theWorld = Minecraft.getMinecraft().theWorld;
+		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
+		int pktType = bbis.readInt();
+		if (pktType == TYPE_INFUSION_UPDATE) {
+			ClientProxy.infusionHandler.amount = bbis.readInt();
+			ClientProxy.infusionHandler.maxAmount = bbis.readInt();
+		} else if (pktType == TYPE_INFUSION_UPDATE_ALL) {
+			int id = bbis.readInt();
+			int amount = bbis.readInt();
+			int maxAmount = bbis.readInt();
+			Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(id);
+			if (e.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
+				IVoidicInfusionCapability cap = e.getCapability(CapabilityList.VOIDICINFUSION, null);
+				cap.setInfusion(amount);
+				cap.setMaxInfusion(maxAmount);
+			}
 		}
+		bbis.close();
 	}
 }
-
-

@@ -23,7 +23,6 @@ public class VoidicDrillLaser extends TamParticle {
 
 	@Override
 	public void renderParticle(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-		System.out.println("Beep Beep I'm a Jeep ^.^");
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.disableFog();
 		Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityBeaconRenderer.TEXTURE_BEACON_BEAM);

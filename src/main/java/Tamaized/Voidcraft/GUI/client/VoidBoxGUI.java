@@ -93,7 +93,6 @@ public class VoidBoxGUI extends GuiContainer {
  				voidCraft.channel.sendToServer(packet);
  				outputStream.close();
  				bos.close();
- 				System.out.println("Sent Server Packet");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -113,7 +112,6 @@ public class VoidBoxGUI extends GuiContainer {
  				voidCraft.channel.sendToServer(packet);
  				outputStream.close();
  				bos.close();
- 				System.out.println("Sent Server Packet");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -132,7 +130,6 @@ public class VoidBoxGUI extends GuiContainer {
    				voidCraft.channel.sendToServer(packet);
    				outputStream.close();
    				bos.close();
-   				System.out.println("Sent Server Packet");
   			} catch (Exception ex) {
   				ex.printStackTrace();
   			}
@@ -151,7 +148,6 @@ public class VoidBoxGUI extends GuiContainer {
    				voidCraft.channel.sendToServer(packet);
    				outputStream.close();
    				bos.close();
-   				System.out.println("Sent Server Packet");
   			} catch (Exception ex) {
   				ex.printStackTrace();
   			}
