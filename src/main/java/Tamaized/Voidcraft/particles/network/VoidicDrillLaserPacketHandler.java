@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.TamModized.particles.ParticlePacketBase;
 import Tamaized.TamModized.particles.TamParticle;
@@ -29,6 +31,7 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 		packet.writeBoolean(dat.offhand);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public TamParticle decode(ByteBufInputStream packet, WorldClient world, Vec3d pos) {
 		try {
