@@ -118,7 +118,7 @@ public class VoidicDrillLaser extends TamParticle {
 			GlStateManager.rotate(pitch + 90F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.rotate(1F, 1.0F, 0.0F, 1.0F);
 			int multi = offhand ? 1 : -1;
-			GlStateManager.translate(-1.7, 0, .11 * multi);
+			GlStateManager.translate(-1.6, 0.0, 0.12 * multi);
 			int i = segment + height;
 			GlStateManager.glTexParameteri(3553, 10242, 10497);
 			GlStateManager.glTexParameteri(3553, 10243, 10497);
