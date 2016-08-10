@@ -1,21 +1,15 @@
 package Tamaized.Voidcraft.projectiles;
 
-import javax.annotation.Nullable;
-
-import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import Tamaized.Voidcraft.voidCraft;
 
 public class EntityObsidianFlask extends EntityThrowable {
 
@@ -32,7 +26,7 @@ public class EntityObsidianFlask extends EntityThrowable {
 	}
 
 	public static void func_189662_a(DataFixer p_189662_0_) {
-		//EntityThrowable.func_189661_a(p_189662_0_, "Snowball");
+		// EntityThrowable.func_189661_a(p_189662_0_, "Snowball");
 	}
 
 	/**
@@ -40,16 +34,17 @@ public class EntityObsidianFlask extends EntityThrowable {
 	 */
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (result.entityHit != null) {
-			result.entityHit.attackEntityFrom(DamageSource.outOfWorld, 5);
-		}
 
 		for (int j = 0; j < 8; ++j) {
 			boolean flag = (j % 2 == 0);
 			this.worldObj.spawnParticle(EnumParticleTypes.DRAGON_BREATH, this.posX, this.posY, this.posZ, flag ? 0.0D : 1.0D, 0.0D, flag ? 1.0D : 0.0D, new int[0]);
 		}
 
-		implosion(result.getBlockPos());
+		if (result.entityHit != null) {
+			result.entityHit.attackEntityFrom(DamageSource.outOfWorld, 5);
+		} else {
+			implosion(result.getBlockPos());
+		}
 
 		if (!this.worldObj.isRemote) {
 			this.setDead();
