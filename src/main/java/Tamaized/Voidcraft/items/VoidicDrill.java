@@ -8,6 +8,7 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -38,55 +39,73 @@ public class VoidicDrill extends VoidicPowerItem {
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
+	}
+
+	/**
+	 * How long it takes to use or consume an item
+	 */
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return 72000;
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		if (VoidicPowerItemHandler.getItemVoidicPower(stack) > 1) {
-			if (!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
-			if (!world.isRemote) {
-				HashSet<Entity> exclude = new HashSet<Entity>();
-				exclude.add(player);
-				int maxDistance = 10;
-				RayTraceResult result = tracePath(world, player, maxDistance, 1, exclude);
-				Vec3d ray = getPlayerTraceVec(player, maxDistance)[1];
-				if (result != null) {
-					ray = result.hitVec;
-					if (result.entityHit != null) {
-						result.entityHit.attackEntityFrom(new DamageSourceVoidicInfusion(), 5.0f);
-					} else {
-						switch (result.sideHit) {
-							case UP: // Y
-								caseY(player, world, stack, result.getBlockPos());
-								break;
-							case DOWN: // Y
-								caseY(player, world, stack, result.getBlockPos());
-								break;
-							case EAST: // X
-								caseX(player, world, stack, result.getBlockPos());
-								break;
-							case WEST: // X
-								caseX(player, world, stack, result.getBlockPos());
-								break;
-							case NORTH: // Z
-								caseZ(player, world, stack, result.getBlockPos());
-								break;
-							case SOUTH: // Z
-								caseZ(player, world, stack, result.getBlockPos());
-								break;
-							default:
-								break;
-						}
-					}
-				}
-				VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND);
-				ParticleHelper.sendPacketToClients(world, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
-			}
-			return ActionResult.newResult(EnumActionResult.PASS, stack);
+			player.setActiveHand(hand);
+			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
 		return ActionResult.newResult(EnumActionResult.FAIL, stack);
+	}
+
+	public void onUsingTick(ItemStack stack, EntityLivingBase entity, int tick) {
+		if(!((tick % 5) == 0)) return;
+		if(!(entity instanceof EntityPlayer)) return;
+		EntityPlayer player = (EntityPlayer) entity;
+		World world = player.worldObj;
+		EnumHand hand = player.getActiveHand();
+		if (!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
+		if (!world.isRemote) {
+			HashSet<Entity> exclude = new HashSet<Entity>();
+			exclude.add(player);
+			int maxDistance = 10;
+			RayTraceResult result = tracePath(world, player, maxDistance, 1, exclude);
+			Vec3d ray = getPlayerTraceVec(player, maxDistance)[1];
+			if (result != null) {
+				ray = result.hitVec;
+				if (result.entityHit != null) {
+					result.entityHit.attackEntityFrom(new DamageSourceVoidicInfusion(), 5.0f);
+				} else {
+					switch (result.sideHit) {
+						case UP: // Y
+							caseY(player, world, stack, result.getBlockPos());
+							break;
+						case DOWN: // Y
+							caseY(player, world, stack, result.getBlockPos());
+							break;
+						case EAST: // X
+							caseX(player, world, stack, result.getBlockPos());
+							break;
+						case WEST: // X
+							caseX(player, world, stack, result.getBlockPos());
+							break;
+						case NORTH: // Z
+							caseZ(player, world, stack, result.getBlockPos());
+							break;
+						case SOUTH: // Z
+							caseZ(player, world, stack, result.getBlockPos());
+							break;
+						default:
+							break;
+					}
+				}
+			}
+			VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND);
+			ParticleHelper.sendPacketToClients(world, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
+		}
 	}
 
 	private void caseY(EntityPlayer player, World world, ItemStack tool, BlockPos pos) {
