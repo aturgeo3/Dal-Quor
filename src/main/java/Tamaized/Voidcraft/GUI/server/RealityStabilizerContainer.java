@@ -28,6 +28,15 @@ public class RealityStabilizerContainer extends ContainerBase {
 		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventory, i, 86 + i * 18, 208));
 		}
+
+		addSlotToContainer(new Slot(inventory, inventory.getSizeInventory() - 1, 230, 127) {
+
+			@SideOnly(Side.CLIENT)
+			@Override
+			public String getSlotTexture() {
+				return "minecraft:items/empty_armor_slot_shield";
+			}
+		});
 	}
 
 	@Override

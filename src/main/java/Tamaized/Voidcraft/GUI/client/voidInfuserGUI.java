@@ -55,8 +55,10 @@ public class voidInfuserGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = "Void Infuser";
 		fontRendererObj.drawString(text, xSize/2 - fontRendererObj.getStringWidth(text) / 2, ySize-260, 4210752);
-		text = te.getFluidAmount()+"/3000mB";
-		fontRendererObj.drawString(text, (xSize/12 - fontRendererObj.getStringWidth(text) / 12)-5, ySize-220, 4210752);
+		text = te.getFluidAmount()+"";
+		fontRendererObj.drawString(text, (xSize/12 - fontRendererObj.getStringWidth(text) / 12)-1, ySize-220, 4210752);
+		text = "/3000mB";
+		fontRendererObj.drawString(text, (xSize/12 - fontRendererObj.getStringWidth(text) / 12)-5, ySize-210, 4210752);
 	}
 
 	@Override

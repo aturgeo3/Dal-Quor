@@ -11,112 +11,112 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 
 public class VoidInfuserContainer extends ContainerBase {
-	
+
 	private TileEntityVoidInfuser te;
 	private int amount;
 	private int cookAmount = 0;
-	
+
 	public VoidInfuserContainer(InventoryPlayer inventory, TileEntityVoidInfuser tileEntity) {
 		te = tileEntity;
-		
+
 		addSlotToContainer(new Slot(tileEntity, 0, 130, 100));
 		addSlotToContainer(new Slot(tileEntity, 1, 168, 100));
 		addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 2, 225, 101));
-		
-		for(int i = 0; i < 3; i++){
-			for(int j = 0; j < 9; j++){
-				addSlotToContainer(new Slot(inventory, j + i*9 + 9, 86 + j*18, 150 + i*18));
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 9; j++) {
+				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 86 + j * 18, 150 + i * 18));
 			}
 		}
-		
-		for(int i = 0; i < 9; i++){
-			addSlotToContainer(new Slot(inventory, i, 86 + i*18, 208));
+
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventory, i, 86 + i * 18, 208));
 		}
+
+		addSlotToContainer(new Slot(inventory, inventory.getSizeInventory() - 1, 230, 127) {
+
+			@SideOnly(Side.CLIENT)
+			@Override
+			public String getSlotTexture() {
+				return "minecraft:items/empty_armor_slot_shield";
+			}
+		});
 	}
-	
+
 	@Override
-	public void detectAndSendChanges(){
+	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < listeners.size(); ++i){
-			IContainerListener icontainerlistener = (IContainerListener)listeners.get(i);
-			
-			if(this.cookAmount != te.cookingTick){
+		for (int i = 0; i < listeners.size(); ++i) {
+			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
+
+			if (this.cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
 				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
 				cookAmount = te.cookingTick;
 			}
-			
-			if(amount != te.getFluidAmount()){
+
+			if (amount != te.getFluidAmount()) {
 				icontainerlistener.sendProgressBarUpdate(this, 1, te.getFluidAmount());
 				amount = te.getFluidAmount();
 			}
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int slot, int par2){
-		if(slot == 0) te.cookingTick = par2;
-		if(slot == 1) te.setFluidAmount(par2);
+	public void updateProgressBar(int slot, int par2) {
+		if (slot == 0) te.cookingTick = par2;
+		if (slot == 1) te.setFluidAmount(par2);
 	}
-	
+
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot){
+	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
 		/*
-		 * array[] = {a, b, c}
-		 * array[].length = 3
-		 * mergeItemStack 3rd param needs to be 1 higher than our actual length, so we do 1+length
-		 * because array[].length returns AMOUNT we must subtract 1 to get to index 0
-		 * main inv = 9*3 = 27; subtract 1 for index 0 we get 26. Translation : min:(array[].length-1)+1; max:(array[].length-1)+27; This gets us 3-30
-		 * hot bar: 9 slots; -1 for index 0 so 0-8; after Translation: min(array[].length-1)+1+mainInvMaxNoShift(27)+1; max:min(array[].length-1)+1+mainInvMaxNoShift(27)+8+1;
-		 * this gets us 3+27+1 to 3+27+8+1 or 31-39
-		 * So, we can shorten all this nicely
-		 * 	+Main (arrayLength) to (arrayLength+27)
-		 *  +Hotbar (Main.max+1) to (Main.max+9)
+		 * array[] = {a, b, c} array[].length = 3 mergeItemStack 3rd param needs to be 1 higher than our actual length, so we do 1+length because array[].length returns AMOUNT we must subtract 1 to get to index 0 main inv = 9*3 = 27; subtract 1 for index 0 we get 26. Translation : min:(array[].length-1)+1; max:(array[].length-1)+27; This gets us 3-30 hot bar: 9 slots; -1 for index 0 so 0-8; after Translation: min(array[].length-1)+1+mainInvMaxNoShift(27)+1; max:min(array[].length-1)+1+mainInvMaxNoShift(27)+8+1; this gets us 3+27+1 to 3+27+8+1 or 31-39 So, we can shorten all this nicely +Main (arrayLength) to (arrayLength+27) +Hotbar (Main.max+1) to (Main.max+9)
 		 */
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
-		
-		if(slot != null && slot.getHasStack()){
+
+		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			
-			if(hoverSlot < te.SLOTS_ALL.length){
-				if(!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length+27+9, true)){
+
+			if (hoverSlot < te.SLOTS_ALL.length) {
+				if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length + 27 + 9, true)) {
 					return null;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
-			}else{
-				if(te.getStackInSlot(te.SLOT_BUCKET) == null && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)){
-					if(!this.mergeItemStack(itemstack1, te.SLOT_BUCKET, te.SLOT_BUCKET+1, false)){
+			} else {
+				if (te.getStackInSlot(te.SLOT_BUCKET) == null && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)) {
+					if (!this.mergeItemStack(itemstack1, te.SLOT_BUCKET, te.SLOT_BUCKET + 1, false)) {
 						return null;
 					}
-				}else if(te.canInsertItem(te.SLOT_INPUT, itemstack1, null)){
-					if(!this.mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT+1, false)){
+				} else if (te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
+					if (!this.mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
 						return null;
 					}
-				}else if(hoverSlot > te.SLOTS_ALL.length-1 && hoverSlot < 27+te.SLOTS_ALL.length-1){
-					if(!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length+27, te.SLOTS_ALL.length+27+9, false)){
+				} else if (hoverSlot > te.SLOTS_ALL.length - 1 && hoverSlot < 27 + te.SLOTS_ALL.length - 1) {
+					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length + 27, te.SLOTS_ALL.length + 27 + 9, false)) {
 						return null;
 					}
-				}else if(hoverSlot >= te.SLOTS_ALL.length+27 && hoverSlot < te.SLOTS_ALL.length+27+9){
-					if(!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length+27, false)){
+				} else if (hoverSlot >= te.SLOTS_ALL.length + 27 && hoverSlot < te.SLOTS_ALL.length + 27 + 9) {
+					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length + 27, false)) {
 						return null;
 					}
 				}
 			}
-			
-			if(itemstack1.stackSize == 0){
+
+			if (itemstack1.stackSize == 0) {
 				slot.putStack((ItemStack) null);
-			}else{
+			} else {
 				slot.onSlotChanged();
 			}
-			
-			if(itemstack1.stackSize == itemstack.stackSize){
+
+			if (itemstack1.stackSize == itemstack.stackSize) {
 				return null;
 			}
-			
+
 			slot.onPickupFromSlot(player, itemstack1);
 		}
 		return itemstack;
