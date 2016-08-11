@@ -25,6 +25,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
 import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
+import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.Voidcraft.voidCraft;
@@ -62,8 +63,8 @@ public class VoidicDrill extends VoidicPowerItem {
 	}
 
 	public void onUsingTick(ItemStack stack, EntityLivingBase entity, int tick) {
-		if(!((tick % 5) == 0)) return;
-		if(!(entity instanceof EntityPlayer)) return;
+		if (!((tick % 5) == 0)) return;
+		if (!(entity instanceof EntityPlayer)) return;
 		EntityPlayer player = (EntityPlayer) entity;
 		World world = player.worldObj;
 		EnumHand hand = player.getActiveHand();
@@ -72,8 +73,8 @@ public class VoidicDrill extends VoidicPowerItem {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			exclude.add(player);
 			int maxDistance = 10;
-			RayTraceResult result = tracePath(world, player, maxDistance, 1, exclude);
-			Vec3d ray = getPlayerTraceVec(player, maxDistance)[1];
+			RayTraceResult result = RayTraceHelper.tracePath(world, player, maxDistance, 1, exclude);
+			Vec3d ray = RayTraceHelper.getPlayerTraceVec(player, maxDistance)[1];
 			if (result != null) {
 				ray = result.hitVec;
 				if (result.entityHit != null) {
@@ -175,69 +176,6 @@ public class VoidicDrill extends VoidicPowerItem {
 			offhand = o;
 		}
 
-	}
-
-	public static Vec3d[] getPlayerTraceVec(EntityPlayer player, int distance) {
-		Vec3d vec3d = player.getPositionEyes(1.0f);
-		Vec3d vec3d1 = player.getLook(1.0f);
-		Vec3d vec3d2 = vec3d.addVector(vec3d1.xCoord * distance, vec3d1.yCoord * distance, vec3d1.zCoord * distance);
-		return new Vec3d[] { vec3d, vec3d2 };
-	}
-
-	public static RayTraceResult tracePath(World world, EntityPlayer player, int distance, float borderSize, HashSet<Entity> excluded) {
-		Vec3d[] vecs = getPlayerTraceVec(player, distance);
-		return tracePath(world, vecs[0], vecs[1], borderSize, excluded);
-	}
-
-	public static RayTraceResult tracePath(World world, Vec3d vec1, Vec3d vec2, float borderSize, HashSet<Entity> excluded) {
-		return tracePath(world, (float) vec1.xCoord, (float) vec1.yCoord, (float) vec1.zCoord, (float) vec2.xCoord, (float) vec2.yCoord, (float) vec2.zCoord, borderSize, excluded);
-	}
-
-	private static RayTraceResult tracePath(World world, float x, float y, float z, float tx, float ty, float tz, float borderSize, HashSet<Entity> excluded) {
-		Vec3d startVec = new Vec3d(x, y, z);
-		Vec3d lookVec = new Vec3d(tx - x, ty - y, tz - z);
-		Vec3d endVec = new Vec3d(tx, ty, tz);
-		float minX = x < tx ? x : tx;
-		float minY = y < ty ? y : ty;
-		float minZ = z < tz ? z : tz;
-		float maxX = x > tx ? x : tx;
-		float maxY = y > ty ? y : ty;
-		float maxZ = z > tz ? z : tz;
-		AxisAlignedBB bb = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ).expand(borderSize, borderSize, borderSize);
-		List<Entity> allEntities = world.getEntitiesWithinAABBExcludingEntity(null, bb);
-		RayTraceResult blockHit = world.rayTraceBlocks(startVec, endVec);
-		startVec = new Vec3d(x, y, z);
-		endVec = new Vec3d(tx, ty, tz);
-		float maxDistance = (float) endVec.distanceTo(startVec);
-		if (blockHit != null) {
-			maxDistance = (float) blockHit.hitVec.distanceTo(startVec);
-		}
-		Entity closestHitEntity = null;
-		float closestHit = Float.POSITIVE_INFINITY;
-		float currentHit = 0.f;
-		AxisAlignedBB entityBb;// = ent.getBoundingBox();
-		RayTraceResult intercept;
-		for (Entity ent : allEntities) {
-			if (ent.canBeCollidedWith() && !excluded.contains(ent)) {
-				float entBorder = ent.getCollisionBorderSize();
-				entityBb = ent.getEntityBoundingBox();
-				if (entityBb != null) {
-					entityBb = entityBb.expand(entBorder, entBorder, entBorder);
-					intercept = entityBb.calculateIntercept(startVec, endVec);
-					if (intercept != null) {
-						currentHit = (float) intercept.hitVec.distanceTo(startVec);
-						if (currentHit < closestHit || currentHit == 0) {
-							closestHit = currentHit;
-							closestHitEntity = ent;
-						}
-					}
-				}
-			}
-		}
-		if (closestHitEntity != null) {
-			blockHit = new RayTraceResult(closestHitEntity);
-		}
-		return blockHit;
 	}
 
 }
