@@ -18,7 +18,7 @@ repositories {
 	}
 }
 
-version = "1.10.2-0.8.9_DEV2"
+version = "1.10.2-0.8.9"
 group= "tamaized.voidCraft"
 archivesBaseName = "voidCraft"
 
