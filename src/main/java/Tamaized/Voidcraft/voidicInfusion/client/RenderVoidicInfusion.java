@@ -16,7 +16,7 @@ public class RenderVoidicInfusion {
 		GlStateManager.pushAttrib();
 		Entity newEntity = Minecraft.getMinecraft().theWorld.getEntityByID(e.getEntityPlayer().getEntityId());
 		float f1 = 1.0f;
-		if(newEntity.hasCapability(CapabilityList.VOIDICINFUSION, null)){
+		if(newEntity != null && newEntity.hasCapability(CapabilityList.VOIDICINFUSION, null)){
 			IVoidicInfusionCapability cap = newEntity.getCapability(CapabilityList.VOIDICINFUSION, null);
 			float f2 = 1.65f - cap.getInfusionPerc();
 			f1 = f2 < 0.65f ? 0.65f : f2;
