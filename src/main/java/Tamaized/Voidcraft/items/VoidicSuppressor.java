@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.items;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.api.VoidicPowerItem;
 
 public class VoidicSuppressor extends VoidicPowerItem {
@@ -17,6 +18,11 @@ public class VoidicSuppressor extends VoidicPowerItem {
 	@Override
 	protected int getDefaultMaxVoidicPower() {
 		return 2000;
+	}
+
+	@Override
+	protected boolean canBeUsed() {
+		return false;
 	}
 
 }

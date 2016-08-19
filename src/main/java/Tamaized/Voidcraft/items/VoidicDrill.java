@@ -1,7 +1,9 @@
 package Tamaized.Voidcraft.items;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -15,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -23,13 +24,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
-import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
-import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.VoidicPowerItem;
+import Tamaized.Voidcraft.api.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
+
+import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class VoidicDrill extends VoidicPowerItem {
 
@@ -52,23 +55,27 @@ public class VoidicDrill extends VoidicPowerItem {
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return 72000;
 	}
-
+	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		if (VoidicPowerItemHandler.getItemVoidicPower(stack) > 1) {
-			player.setActiveHand(hand);
-			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-		}
-		return ActionResult.newResult(EnumActionResult.FAIL, stack);
+	protected boolean canBeUsed() {
+		return true;
 	}
 
+	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase entity, int tick) {
 		if (!((tick % 5) == 0)) return;
 		if (!(entity instanceof EntityPlayer)) return;
 		EntityPlayer player = (EntityPlayer) entity;
 		World world = player.worldObj;
 		EnumHand hand = player.getActiveHand();
-		if (!player.capabilities.isCreativeMode) VoidicPowerItemHandler.setItemVoidicPower(stack, VoidicPowerItemHandler.getItemVoidicPower(stack) - 1);
+		if (!player.capabilities.isCreativeMode){
+			if(!powerStackInUse.containsKey(stack)) powerStackInUse.put(stack, VoidicPowerItemHandler.getItemVoidicPower(stack));
+			if(powerStackInUse.get(stack) > 0) powerStackInUse.put(stack, powerStackInUse.get(stack)-1);
+			else{
+				stopUsing(stack);
+				return;
+			}
+		}
 		if (!world.isRemote) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			exclude.add(player);
