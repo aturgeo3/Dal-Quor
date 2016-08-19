@@ -123,6 +123,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(voidicCable, 8), "XXX", "XYX", "XXX", 'Y', blockVoidcrystal, 'X', Items.REDSTONE);
 		GameRegistry.addRecipe(new ItemStack(voidicGen), "XXX", "XYX", "XXX", 'Y', voidInfuser, 'X', Items.REDSTONE);
 		GameRegistry.addRecipe(new ItemStack(voidicCharger), "DSD", "CZC", "DPD", 'D', voidCraft.items.diamondDust, 'S', voidCraft.items.voidStar, 'C', voidCraft.items.voidCloth, 'Z', Items.END_CRYSTAL, 'P', voidicCable);
+		GameRegistry.addRecipe(new ItemStack(realityStabilizer), "IDI", "DSD", "ICI", 'I', voidInfuserInert, 'C', voidicCharger, 'S', voidCraft.items.voidStar, 'D', voidCraft.items.diamondDust);
 	}
 
 	@Override

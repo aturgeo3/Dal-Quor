@@ -39,26 +39,6 @@ public class VoidInfuser extends TamBlockContainer {
 		return false;
 	}
 
-	// @Override
-	// public void addCollisionBoxToList(IBlockState state, World worldIn,
-	// BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB>
-	// collidingBoxes, @Nullable Entity entityIn) {
-	// this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
-	// super.addCollisionBoxesToList(worldIn, pos, state, mask, list,
-	// collidingEntity);
-	// this.setBlockBoundsForItemRender();
-	// super.addCollisionBoxesToList(worldIn, pos, state, mask, list,
-	// collidingEntity);
-	// }
-
-	/**
-	 * Sets the block's bounds for rendering it as an item
-	 */
-	// @Override
-	// public void setBlockBoundsForItemRender() {
-	// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	// }
-
 	/**
 	 * Called upon block activation (right click on the block.)
 	 */

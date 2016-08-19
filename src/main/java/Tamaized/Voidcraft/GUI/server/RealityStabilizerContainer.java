@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 
 public class RealityStabilizerContainer extends ContainerBase {
@@ -17,7 +18,7 @@ public class RealityStabilizerContainer extends ContainerBase {
 	public RealityStabilizerContainer(InventoryPlayer inventory, TileEntityRealityStabilizer tileEntity) {
 		te = tileEntity;
 
-		addSlotToContainer(new Slot(tileEntity, 0, 158, 100));
+		addSlotToContainer(new SlotCantPlace(tileEntity, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {

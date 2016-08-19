@@ -14,29 +14,24 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 @SideOnly(Side.CLIENT)
 public class RealityStabilizerGUI extends GuiContainer {
 
-	public static int gleft;
-	public static int gtop;
-
 	public TileEntityRealityStabilizer te;
 
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/heimdall.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidCharger.png");
 
 	public RealityStabilizerGUI(InventoryPlayer inventoryPlayer, TileEntityRealityStabilizer tileEntity) {
 		super(new RealityStabilizerContainer(inventoryPlayer, tileEntity));
 		te = tileEntity;
 		xSize = 347;
 		ySize = 320;
-		gleft = guiLeft;
-		gtop = guiTop;
 	}
 
 	@Override
 	public void updateScreen() {
 
 		{
-			float scale = 46;
+			float scale = 47;
 			int k = (int) (((float) te.getPowerAmount() / (float) te.getMaxPower()) * scale);
-			drawTexturedModalRect(guiLeft + 93, guiTop + 131 - k, 0, 497 - (k), 12, k + 1);
+			drawTexturedModalRect(guiLeft + 124, guiTop + 128 - k, 12, 470 - (k), 12, k + 1);
 		}
 
 		super.updateScreen();
@@ -44,12 +39,14 @@ public class RealityStabilizerGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = "TODO";
-		fontRendererObj.drawString(text, xSize / 2 - fontRendererObj.getStringWidth(text) / 2, ySize - 260, 4210752);
-		text = te.getPowerAmount() + "/" + te.getMaxPower();
-		fontRendererObj.drawString(text, (xSize / 12 - fontRendererObj.getStringWidth(text) / 12) - 5, ySize - 220, 4210752);
-		text = "Power";
-		fontRendererObj.drawString(text, (xSize / 12 - fontRendererObj.getStringWidth(text) / 12) - 5, ySize - 200, 4210752);
+		String text = "Reality Stabilizer";
+		this.fontRendererObj.drawString(text, this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
+		text = "Voidic Power:";
+		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 70, 0xFF0000);
+		text = te.getPowerAmount() + "/";
+		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 60, 0xFF0000);
+		text = "" + te.getMaxPower();
+		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 50, 0xFF0000);
 	}
 
 	@Override
