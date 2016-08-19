@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.items;
 
 import net.minecraft.creativetab.CreativeTabs;
-import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItem;
+import Tamaized.Voidcraft.api.VoidicPowerItem;
 
 public class VoidicSuppressor extends VoidicPowerItem {
 

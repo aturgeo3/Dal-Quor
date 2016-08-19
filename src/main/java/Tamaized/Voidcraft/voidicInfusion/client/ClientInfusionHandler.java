@@ -14,8 +14,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
-import Tamaized.TamModized.api.voidcraft.power.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.VoidicPowerItemHandler;
 
 public class ClientInfusionHandler {
 	
