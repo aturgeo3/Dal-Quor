@@ -19,7 +19,7 @@ import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
 
 public class MaceratorRecipeCategory implements IRecipeCategory {
 	
-	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/voidMacerator.png");
+	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/JEI/voidMacerator.png");
 	private IDrawableAnimated fluidAnimation;
 	private IDrawableAnimated progressAnimation;
 	

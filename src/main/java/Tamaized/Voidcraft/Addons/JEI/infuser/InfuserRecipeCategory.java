@@ -19,7 +19,7 @@ import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
 
 public class InfuserRecipeCategory implements IRecipeCategory {
 	
-	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/voidInfuser.png");
+	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/JEI/voidInfuser.png");
 	private IDrawableAnimated fluidAnimation;
 	private IDrawableAnimated progressAnimation;
 	
