@@ -2,13 +2,5 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "voidcraft:items/voidcrystal_Shovel"
-    },
-    "display": {
-		"thirdperson_righthand": {
-            "rotation": [ 0, -90, 0 ]
-        },
-        "thirdperson_lefthand": {
-            "rotation": [ 0, 90, 0 ]
-        }
     }
 }

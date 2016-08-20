@@ -23,6 +23,7 @@ item.MoltenvoidChainPart.name=Molten Void Chain Part
 item.voidicSuppressor.name=Voidic Suppressor
 item.emptyObsidianFlask.name=Empty Obsidian Flask
 item.obsidianFlask.name=Filled Obsidian Flask
+item.voidicDrill.name=Voidic Drill
 
 # Blocks
 tile.voidcraft:blockVoidFluid.name=Liquid Void
@@ -46,9 +47,11 @@ tile.voidicCharger.name=Voidic Charger
 tile.voidicGen.name=Voidic Power Generator
 tile.blockRealityHole.name=Hole in Reality
 tile.voidicCable.name=Voidic Cable
+tile.realityStabilizer.name=Reality Stabilizer
 
 # Fluid
 fluid.void=Liquid Void
+tile.blockVoidFluid.name=Liquid Void
 
 # Armor
 # -- Void
