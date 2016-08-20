@@ -28,8 +28,8 @@ import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.VoidicPowerItem;
-import Tamaized.Voidcraft.api.VoidicPowerItemHandler;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 
 import com.mojang.realmsclient.gui.ChatFormatting;

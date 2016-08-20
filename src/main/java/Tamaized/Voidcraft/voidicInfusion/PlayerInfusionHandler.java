@@ -13,7 +13,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.VoidicPowerItemHandler;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.network.ClientPacketHandler;

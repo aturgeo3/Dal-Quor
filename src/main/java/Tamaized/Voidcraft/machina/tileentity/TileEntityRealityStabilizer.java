@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 
 public class TileEntityRealityStabilizer extends TileEntityVoidicPower implements ISidedInventory {
 

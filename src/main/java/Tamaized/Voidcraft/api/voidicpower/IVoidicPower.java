@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.api;
+package Tamaized.Voidcraft.api.voidicpower;
 
 import net.minecraft.util.EnumFacing;
 

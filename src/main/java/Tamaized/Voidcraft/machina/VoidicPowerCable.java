@@ -22,7 +22,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.api.IVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.IVoidicPower;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 
 import com.google.common.collect.ImmutableList;

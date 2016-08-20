@@ -2,8 +2,8 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import Tamaized.Voidcraft.api.TileEntityVoidicPower;
-import Tamaized.Voidcraft.api.VoidicPowerHandler;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerHandler;
 
 public class TileEntityVoidicPowerCable extends TileEntityVoidicPower{
 	

@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 
 public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ISidedInventory {

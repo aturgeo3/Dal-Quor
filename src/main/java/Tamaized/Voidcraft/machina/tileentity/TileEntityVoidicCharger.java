@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import Tamaized.Voidcraft.api.TileEntityVoidicPower;
-import Tamaized.Voidcraft.api.VoidicPowerItem;
-import Tamaized.Voidcraft.api.VoidicPowerItemHandler;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 
 public class TileEntityVoidicCharger extends TileEntityVoidicPower implements ISidedInventory {
 
