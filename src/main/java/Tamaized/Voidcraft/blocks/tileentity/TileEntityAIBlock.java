@@ -1,71 +1,115 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
+import akka.actor.Kill;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 
 public class TileEntityAIBlock extends TamTileEntity {
-	
-	public EntityAIHandler aiHandler;
-	public IHandlerAI ai;
-	public int state = 0;
-	private boolean keep = false;
-	
-	public TileEntityAIBlock(){
+
+	private TileEntityAIBlock parent;
+	private EntityAIHandler aiHandler;
+	private IHandlerAI ai;
+	private int state = 0;
+	private int oldState = state;
+	private boolean dead = false;
+
+	public TileEntityAIBlock() {
 		super();
-		keep = true;
 	}
-	
-	public int getState(){
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setParent(TileEntityAIBlock parent) {
+		this.parent = parent;
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		return (oldState.getBlock() != newSate.getBlock());
+	}
+
+	public int getState() {
 		return state;
 	}
-	
-	public void boom(){
-		if(aiHandler != null && aiHandler.getEntity() instanceof EntityMobHerobrine && state < 3) state++;
-		if(state > 2){
-			((EntityMobHerobrine) aiHandler.getEntity()).doDamage(20);
-			ai.removeTileEntity(pos);
-			this.worldObj.setBlockToAir(pos.add(0, 2, 0));
-			this.worldObj.setBlockToAir(pos.add(0, 1, 0));
-			this.worldObj.setBlockToAir(pos);
-			this.worldObj.removeTileEntity(pos);
+
+	public void boom() {
+		if (getAiHandler() != null && getAiHandler().getEntity() instanceof EntityMobHerobrine) {
+			if (state < 3) state++;
+			if (state > 2) {
+				((EntityMobHerobrine) getAiHandler().getEntity()).doDamage(20);
+				getAi().removeTileEntity(pos);
+				setDead();
+			}
 		}
 	}
-	
+
+	private void setDead() {
+		this.worldObj.setBlockToAir(pos);
+		this.worldObj.removeTileEntity(pos);
+		dead = true;
+	}
+
 	@Override
-	public void update(){
+	public void update() {
 		super.update();
-		if(!this.worldObj.isRemote){
-			if(aiHandler == null || ai == null || !keep){
-				this.worldObj.setBlockToAir(pos.add(0, 2, 0));
-				this.worldObj.setBlockToAir(pos.add(0, 1, 0));
-				this.worldObj.setBlockToAir(pos);
-				this.worldObj.removeTileEntity(pos);
-			}else{
-				for(int i=0; i<3; i++){
-					IBlockState Bstate = this.worldObj.getBlockState(pos.add(0, i, 0));
-					if(Bstate.getBlock().getMetaFromState(Bstate) != state){
-						worldObj.setBlockState(pos.add(0, i, 0), Bstate.getBlock().getStateFromMeta(state), 2);
+		if (!this.worldObj.isRemote) {
+			if ((getAiHandler() == null || getAi() == null) && (parent == null)) {
+				setDead();
+			} else {
+				if (parent != null) {
+					state = parent.getState();
+					if (parent.isDead()) {
+						parent = null;
+						setDead();
+						return;
+					}
+				}
+				if (oldState != state) {
+					oldState = state;
+					IBlockState Bstate = this.worldObj.getBlockState(pos);
+					if (Bstate.getBlock().getMetaFromState(Bstate) != state) {
+						worldObj.setBlockState(pos, Bstate.getBlock().getStateFromMeta(state), 2);
 					}
 				}
 			}
 		}
 	}
-	
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		state = nbt.getInteger("state");
 	}
-	
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("state", state);
 		return nbt;
+	}
+
+	public EntityAIHandler getAiHandler() {
+		return aiHandler;
+	}
+
+	public void setAiHandler(EntityAIHandler aiHandler) {
+		this.aiHandler = aiHandler;
+	}
+
+	public IHandlerAI getAi() {
+		return ai;
+	}
+
+	public void setAi(IHandlerAI ai) {
+		this.ai = ai;
 	}
 
 }

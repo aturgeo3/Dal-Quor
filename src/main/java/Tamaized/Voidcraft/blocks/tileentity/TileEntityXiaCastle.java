@@ -7,6 +7,7 @@ import net.minecraft.util.ITickable;
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.herobrine.HerobrineBattleHandler;
 import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.twins.TwinsBattleHandler;
 
 public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
@@ -16,6 +17,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
 	
 	//Temp stuff
 	private final IBattleHandler twins = new TwinsBattleHandler();
+	private final IBattleHandler herobrine = new HerobrineBattleHandler();
 	private IBattleHandler activeHandler;
 	
 	@Override
@@ -35,7 +37,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
 	
 	public void start(){
 		if(running) stop();
-		activeHandler = twins;
+		activeHandler = herobrine;
 		activeHandler.start(worldObj, getPos());
 		running = true;
 	}

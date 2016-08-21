@@ -1,5 +1,9 @@
 {
     "variants": {
-        "normal": { "model": "voidcraft:nullBlock" }
+        "state=0": { "model": "green_wool" },
+        "state=1": { "model": "yellow_wool" },
+        "state=2": { "model": "red_wool" },
+        "state=3": { "model": "black_wool" },
+        "state=4": { "model": "black_wool" }
     }
 }

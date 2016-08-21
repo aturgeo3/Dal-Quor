@@ -43,7 +43,7 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 	public void update() {
 		if(parent.getEntity() == null){
 			for(TileEntityAIBlock te : aiBlocks){
-				te.aiHandler = null;
+				te.setAiHandler(null);
 			}
 		}
 		
@@ -64,13 +64,15 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 		int nY = parent.getY();
 		int nZ = (parent.getZ()-8)+randZ;
 		if(parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ)) == null){
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(true).getDefaultState());
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false).getDefaultState());
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).allowTileEntityCreation(false).getDefaultState());
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ));
+			((TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY+1, nZ))).setParent(b);
+			((TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY+2, nZ))).setParent(b);
 			raw.put(new BlockPos(nX, nY, nZ), b);
-			b.aiHandler = parent;
-			b.ai = this;
+			b.setAiHandler(parent);
+			b.setAi(this);
 			aiBlocks.add(b);
 			spawns++;
 		}else{
@@ -81,7 +83,7 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 	@Override
 	public void kill() {
 		for(TileEntityAIBlock te : aiBlocks){
-			te.aiHandler = null;
+			te.setAiHandler(null);
 		}
 	}
 
