@@ -61,7 +61,7 @@ public class ClientPacketHandler {
 			int amount = bbis.readInt();
 			int maxAmount = bbis.readInt();
 			Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(id);
-			if (e.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
+			if (e != null && e.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 				IVoidicInfusionCapability cap = e.getCapability(CapabilityList.VOIDICINFUSION, null);
 				cap.setInfusion(amount);
 				cap.setMaxInfusion(maxAmount);
