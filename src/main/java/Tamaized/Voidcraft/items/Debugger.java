@@ -3,8 +3,11 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -38,9 +41,12 @@ public class Debugger extends TamItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		Vec3d vec = playerIn.getLook(1.0f);
-		HerobrineFireball fireball = new HerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
-		worldIn.spawnEntityInWorld(fireball);
+		//Vec3d vec = playerIn.getLook(1.0f);
+		//HerobrineFireball fireball = new HerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+		//worldIn.spawnEntityInWorld(fireball);
+		//playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
+		playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
+		//playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-1);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 

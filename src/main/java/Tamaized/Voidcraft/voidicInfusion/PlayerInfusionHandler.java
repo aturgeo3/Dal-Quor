@@ -5,11 +5,15 @@ import io.netty.buffer.Unpooled;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.voidCraft;
@@ -113,8 +117,16 @@ public class PlayerInfusionHandler {
 		}
 		
 		player.getCapability(CapabilityList.VOIDICINFUSION, null).setInfusion(voidicInfusionAmount);
-
-		float preHp = player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth();
+		
+		double i=0;
+		for(PotionEffect pot : player.getActivePotionEffects()){
+			for(Entry<IAttribute, AttributeModifier> e : pot.getPotion().getAttributeModifierMap().entrySet()){
+				if(e.getKey() == SharedMonsterAttributes.MAX_HEALTH){
+					i+=e.getValue().getAmount();
+				}
+			}
+		}
+		float preHp = player.getCapability(CapabilityList.VOIDICINFUSION, null).preMaxHealth()+(float)i;
 		float hpPerc = (perc*10.0f) % preHp;
 		float hpCheck = player.getCapability(CapabilityList.VOIDICINFUSION, null).checkMaxHealth();
 		//System.out.println(preHp+" : "+hpPerc);
@@ -123,7 +135,7 @@ public class PlayerInfusionHandler {
 		//System.out.println(player.getMaxHealth()+(preHp*(hpCheck/10.0f))+" : "+preHp);
 		if((player.getMaxHealth()+Math.floor(preHp*(hpCheck/10.0f))) != preHp){
 			preHp = player.getMaxHealth();
-			player.getCapability(CapabilityList.VOIDICINFUSION, null).setPreMaxHealth(preHp);
+			player.getCapability(CapabilityList.VOIDICINFUSION, null).setPreMaxHealth(preHp-(float)i);
 			flag = true;
 		}
 		if(hpPerc > 0 && player.getMaxHealth() == preHp){
