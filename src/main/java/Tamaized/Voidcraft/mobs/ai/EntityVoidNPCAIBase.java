@@ -1,7 +1,9 @@
 package Tamaized.Voidcraft.mobs.ai;
 
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 
 public class EntityVoidNPCAIBase extends EntityAIBase{
 	

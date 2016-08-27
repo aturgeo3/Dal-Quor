@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.mobs.ai;
 
+import net.minecraft.util.math.BlockPos;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.ai.handler.Herobrine.HerobrineAIPhase1;
@@ -11,15 +12,11 @@ public class EntityAIHandler {
 	private EntityVoidNPC entity;
 	private IHandlerAI ai;
 	
-	private int x;
-	private int y;
-	private int z;
+	private BlockPos pos;
 	
-	public EntityAIHandler(EntityVoidNPC e, int par1, int par2, int par3){
+	public EntityAIHandler(EntityVoidNPC e, int x, int y, int z){
 		entity = e;
-		x = par1;
-		y = par2;
-		z = par3;
+		pos = new BlockPos(x, y, z);
 	}
 	
 	public void Init(int phase){
@@ -41,16 +38,20 @@ public class EntityAIHandler {
 		return entity;
 	}
 	
+	public BlockPos getPos(){
+		return pos;
+	}
+	
 	public int getX(){
-		return x;
+		return pos.getX();
 	}
 	
 	public int getY(){
-		return y;
+		return pos.getY();
 	}
 	
 	public int getZ(){
-		return z;
+		return pos.getZ();
 	}
 
 }

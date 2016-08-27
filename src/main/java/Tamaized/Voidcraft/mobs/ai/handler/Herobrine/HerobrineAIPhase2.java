@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
@@ -14,6 +15,7 @@ import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 public class HerobrineAIPhase2 implements IHandlerAI {
 
 	private EntityAIHandler parent;
+	protected World world;
 	
 	private int tick_Spawn = 0;
 	private int tick_Spawn_Call = 5*20;
@@ -29,7 +31,12 @@ public class HerobrineAIPhase2 implements IHandlerAI {
 
 	@Override
 	public void Init() {
-		// TODO Auto-generated method stub	
+		world = parent.getEntity().worldObj;
+		for(int x=-10; x<10; x++){
+			for(int z=-10; z<10; z++){
+				world.setBlockState(parent.getPos().add(x, -1, z), voidCraft.blocks.blockNoBreak.getDefaultState());
+			}
+		}
 	}
 
 	@Override
@@ -40,7 +47,7 @@ public class HerobrineAIPhase2 implements IHandlerAI {
 			}
 		}
 		
-		if(tick_Spawn >= tick_Spawn_Call && !parent.getEntity().worldObj.isRemote){
+		if(tick_Spawn >= tick_Spawn_Call && !world.isRemote){
 			if(spawns < maxSpawns){
 				setRandomTileEntity();
 			}
@@ -56,13 +63,13 @@ public class HerobrineAIPhase2 implements IHandlerAI {
 		int nX = (parent.getX()-8)+randX;
 		int nY = parent.getY();
 		int nZ = (parent.getZ()-8)+randZ;
-		if(parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ)) == null){
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			parent.getEntity().worldObj.setBlockState(new BlockPos(nX, nY+2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			TileEntityAIBlock b = (TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY, nZ));
-			((TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY+1, nZ))).setParent(b);
-			((TileEntityAIBlock) parent.getEntity().worldObj.getTileEntity(new BlockPos(nX, nY+2, nZ))).setParent(b);
+		if(world.getTileEntity(new BlockPos(nX, nY, nZ)) == null){
+			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY+1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY+2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
+			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY+1, nZ))).setParent(b);
+			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY+2, nZ))).setParent(b);
 			raw.put(new BlockPos(nX, nY, nZ), b);
 			b.setAiHandler(parent);
 			b.setAi(this);

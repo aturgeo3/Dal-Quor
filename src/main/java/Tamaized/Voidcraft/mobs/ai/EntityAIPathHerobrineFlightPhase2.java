@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
@@ -43,18 +44,21 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 		theWatcher = entity;
 		ai = new EntityAIHandler(entityMobHerobrine, (int) entityMobHerobrine.posX, (int) entityMobHerobrine.posY, (int) entityMobHerobrine.posZ);
 	}
-	
+
+	@Override
 	public void kill() {
 		ai.kill();
 		super.kill();
 	}
 	
+	@Override
 	public void Init(){
 		super.Init();
 		ai.Init(2);
 		execute = true;
 	}
-	
+
+	@Override
 	public void updateTask(){
 		ai.update();
 		

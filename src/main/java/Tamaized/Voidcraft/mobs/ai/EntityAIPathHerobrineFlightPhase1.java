@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 
@@ -41,12 +41,14 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 		theWatcher = entity;
 		ai = new EntityAIHandler(entityMobHerobrine, (int) entityMobHerobrine.posX, (int) entityMobHerobrine.posY, (int) entityMobHerobrine.posZ);
 	}
-	
+
+	@Override
 	public void kill() {
 		ai.kill();
 		super.kill();
 	}
-	
+
+	@Override
 	public void Init(){
 		super.Init();
 		
@@ -86,7 +88,8 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 	
 		execute = true;
 	}
-	
+
+	@Override
 	public void updateTask(){
 		if(!execute) return;
 		ai.update();
