@@ -46,7 +46,7 @@ public class Debugger extends TamItem {
 		//worldIn.spawnEntityInWorld(fireball);
 		//playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
-		//playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-1);
+		//playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 
