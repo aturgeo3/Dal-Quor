@@ -73,10 +73,10 @@ public class RealityStabilizer extends TamBlockContainer {
 			double d2 = (double) ((float) pos.getZ() + 0.4F + rand.nextFloat() * 0.2F);
 			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 0.0D);
 			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, -1.5D, 0.0D);
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.0D, 0.0D);
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.0D, 0.0D);
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, 1.0D);
-			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.0D, -1.0D);
+			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 1.0D, 0.5D, 0.0D);
+			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, -1.0D, 0.5D, 0.0D);
+			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, 1.0D);
+			worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, 0.0D, 0.5D, -1.0D);
 		}
 	}
 

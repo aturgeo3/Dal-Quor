@@ -6,9 +6,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.mobs.ai.EntityAIHandler;
-import Tamaized.Voidcraft.mobs.ai.handler.IHandlerAI;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.handler.IHandlerAI;
 
 public class TileEntityAIBlock extends TamTileEntity {
 

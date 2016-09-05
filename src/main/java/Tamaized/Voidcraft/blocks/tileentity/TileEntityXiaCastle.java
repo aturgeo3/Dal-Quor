@@ -5,10 +5,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.world.dim.Xia.castle.XiaCastleHandler;
-import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.IBattleHandler;
-import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.herobrine.HerobrineBattleHandler;
-import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.twins.TwinsBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.XiaCastleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 
 public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
 	

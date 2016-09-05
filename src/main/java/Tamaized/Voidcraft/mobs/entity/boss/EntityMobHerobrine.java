@@ -21,13 +21,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
-import Tamaized.Voidcraft.mobs.ai.EntityAIPathHerobrineFlightPhase1;
-import Tamaized.Voidcraft.mobs.ai.EntityAIPathHerobrineFlightPhase2;
-import Tamaized.Voidcraft.mobs.ai.EntityVoidNPCAIBase;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.IVoidBossData;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.world.dim.Xia.castle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityVoidNPCAIBase;
 
 public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 
@@ -55,13 +55,13 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		this.setInvul(true);
 	}
-	
-	public EntityMobHerobrine(World world, IBattleHandler handler){
+
+	public EntityMobHerobrine(World world, IBattleHandler handler) {
 		this(world);
 		this.handler = handler;
 	}
-	
-	public boolean isActive(){
+
+	public boolean isActive() {
 		return active;
 	}
 
@@ -82,7 +82,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
-		//start();
+		// start();
 		return super.processInteract(player, hand, stack);
 	}
 
@@ -98,8 +98,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(!worldObj.isRemote){
-			if(handler == null){
+		if (!worldObj.isRemote) {
+			if (handler == null) {
 				setDead();
 				return;
 			}
@@ -108,6 +108,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 	}
 
 	private void updateAI() {
+		if(worldObj.isRemote) return;
 		if (ready) {
 			phase++;
 			System.out.println("Starting Phase Init: " + phase);
@@ -121,7 +122,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 		} else if (phase == PHASE_02) {
 
 		} else if (phase == PHASE_03) {
-			active = false;
+			
 		} else {
 			if (this.getHealth() <= 0.0F) {
 				this.trueDeathUpdate();
@@ -194,6 +195,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 	}
 
 	private void trueDeathUpdate() {
+		active = false;
 		++this.deathTime;
 
 		if (this.deathTime >= 20) {
