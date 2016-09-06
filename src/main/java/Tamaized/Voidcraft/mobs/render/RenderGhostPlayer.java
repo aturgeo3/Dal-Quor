@@ -34,6 +34,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.5f);
 		ModelBiped model = (ModelBiped) getMainModel();
 		super.doRender(entity, x, y, z, yaw, partialTicks);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
 		GlStateManager.disableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);

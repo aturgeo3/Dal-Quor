@@ -31,7 +31,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 					case 0:
 						if (readyForInput) {
 							herobrine = new EntityMobHerobrine(worldObj, this);
-							herobrine.setPositionAndUpdate(pos.getX(), pos.getY()+1, pos.getZ());
+							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5);
 							worldObj.spawnEntityInWorld(herobrine);
 							herobrine.start();
 							phase++;

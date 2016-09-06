@@ -64,22 +64,22 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 
 		if (currGhost == null) tick_Spawn++;
 		else {
-			if(currGhost.hasInteracted()){
+			if (currGhost.hasInteracted()) {
 				currGhost.setDead();
 				currGhost = null;
-				parent.getEntity().setHealth(parent.getEntity().getHealth()-25);
+				parent.getEntity().setHealth(parent.getEntity().getHealth() - 25);
 			}
 		}
 	}
 
 	private void setRandomGhost(int j) {
 		int i = 0;
-		if(j == 0) i = (int) Math.floor(Math.random() * 3);
+		if (j == 0) i = (int) Math.floor(Math.random() * 3);
 		else i = j;
-		if(i > 3) i = 0;
+		if (i > 3) i = 0;
 		voidCraft.logger.info(i);
 		if (usedLocs.contains(i)) {
-			setRandomGhost(i+1);
+			setRandomGhost(i + 1);
 			return;
 		}
 		PlayerNameAlias alias = getRandomUnusedAlias(0);
@@ -90,19 +90,19 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 		BlockPos pos = parent.getPos();
 		switch (i) {
 			case 0:
-				entity.setLocationAndAngles(pos.getX() + 10, pos.getY(), pos.getZ(), 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 9.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
 				world.spawnEntityInWorld(entity);
 				break;
 			case 1:
-				entity.setLocationAndAngles(pos.getX() - 10, pos.getY(), pos.getZ(), 0, 0);
+				entity.setLocationAndAngles(pos.getX() - 9.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
 				world.spawnEntityInWorld(entity);
 				break;
 			case 2:
-				entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ() + 10, 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 9.5, 0, 0);
 				world.spawnEntityInWorld(entity);
 				break;
 			case 3:
-				entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ() - 10, 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() - 9.5, 0, 0);
 				world.spawnEntityInWorld(entity);
 				break;
 			default:
@@ -112,10 +112,10 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 
 	private PlayerNameAlias getRandomUnusedAlias(int j) {
 		int i = 0;
-		if(j == 0) i = (int) Math.floor(Math.random() * PlayerNameAlias.values().length);
+		if (j == 0) i = (int) Math.floor(Math.random() * PlayerNameAlias.values().length);
 		else i = j;
-		if(i >= PlayerNameAlias.values().length) i = 0;
-		return alreadyUsed.contains(SkinHandler.getUUID(PlayerNameAlias.values()[i])) ? getRandomUnusedAlias(i+1) : PlayerNameAlias.values()[i];
+		if (i >= PlayerNameAlias.values().length) i = 0;
+		return alreadyUsed.contains(SkinHandler.getUUID(PlayerNameAlias.values()[i])) ? getRandomUnusedAlias(i + 1) : PlayerNameAlias.values()[i];
 	}
 
 	@Override

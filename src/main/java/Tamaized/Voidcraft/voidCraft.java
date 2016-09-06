@@ -60,6 +60,7 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia2;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
@@ -251,6 +252,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityMobXia2.class, "Xia2", this, 64, 1, true);
 		registerEntity(EntityGhostPlayer.class, "GhostPlayer", this, 64, 1, true);
 		registerEntity(EntityGhostBiped.class, "GhostBiped", this, 64, 1, true);
+		registerEntity(EntityHerobrineCreeper.class, "HerobrineCreeper", this, 64, 1, true);
 
 		// ... and their eggs
 		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);

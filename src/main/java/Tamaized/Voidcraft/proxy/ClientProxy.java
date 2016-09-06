@@ -32,6 +32,8 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.BossBarOverlay;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineCreeper;
 import Tamaized.Voidcraft.mobs.model.ModelHerobrine;
 import Tamaized.Voidcraft.mobs.model.ModelLich;
 import Tamaized.Voidcraft.mobs.model.ModelSpectreChain;
@@ -123,6 +125,7 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobXia2.class, new RenderXia2(new ModelXia2(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, new RenderGhostPlayer(new ModelPlayer(0.0F, false)));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new RenderGhostPlayer(new ModelBiped(0.0F)));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new RenderHerobrineCreeper());
 
 		// Projectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
