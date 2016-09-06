@@ -61,9 +61,10 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineShadow;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia2;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
@@ -232,6 +233,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, 128, 1, true);
 		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, 128, 1, true);
 		registerEntity(EntityHerobrineTNTPrimed.class, "HerobrineTNTPrimed", this, 128, 1, true);
+		registerEntity(EntityHerobrineShadow.class, "HerobrineShadow", this, 128, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));

@@ -34,10 +34,12 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.BossBarOverlay;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineShadow;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineShadow;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.model.ModelHerobrine;
 import Tamaized.Voidcraft.mobs.model.ModelLich;
@@ -132,6 +134,7 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new RenderHerobrineCreeper());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new RenderWitherSkull(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new RenderHerobrineShadow(new ModelHerobrine()));
 
 		// Projectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));

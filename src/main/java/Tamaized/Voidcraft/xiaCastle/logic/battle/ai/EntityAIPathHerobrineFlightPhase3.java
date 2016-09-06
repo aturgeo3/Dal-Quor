@@ -12,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineShadow;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
@@ -129,7 +130,22 @@ public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 							theWatcher.worldObj.spawnEntityInWorld(tnt);
 						}
 						break;
-					case 3: // Shadow Charge
+					case 3: // Shadow Clone
+						double d52 = closestEntity.posX - theWatcher.posX;
+						double d62 = closestEntity.getEntityBoundingBox().minY + (double) (closestEntity.height / 2.0F) - (theWatcher.posY + (double) (theWatcher.height / 2.0F));
+						double d72 = closestEntity.posZ - theWatcher.posZ;
+
+						EntityHerobrineShadow entityHerobrineShadow = new EntityHerobrineShadow(theWatcher.worldObj, theWatcher, d52, d62, d72);
+						double d82 = 4.0D;
+						Vec3d vec32 = theWatcher.getLook(1.0F);
+						entityHerobrineShadow.posX = theWatcher.posX;// + vec3.xCoord * d8;
+						entityHerobrineShadow.posY = theWatcher.posY + (double) (theWatcher.height / 2.0F) + 0.5D;
+						entityHerobrineShadow.posZ = theWatcher.posZ;// + vec3.zCoord * d8;
+						entityHerobrineShadow.prevRotationYaw = theWatcher.prevRotationYaw - 180;
+						entityHerobrineShadow.rotationYaw = theWatcher.rotationYaw - 180;
+						entityHerobrineShadow.prevRotationYawHead = theWatcher.prevRotationYawHead - 180;
+						entityHerobrineShadow.rotationYawHead = theWatcher.rotationYawHead - 180;
+						theWatcher.worldObj.spawnEntityInWorld(entityHerobrineShadow);
 						break;
 					case 4: // Wither Skeleton Spawns with EntityWitherSkulls from the walls
 						for (int i = 0; i < 4; i++) {
