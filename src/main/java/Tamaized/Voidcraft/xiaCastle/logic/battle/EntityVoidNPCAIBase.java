@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.xiaCastle.logic.battle.ai;
+package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;

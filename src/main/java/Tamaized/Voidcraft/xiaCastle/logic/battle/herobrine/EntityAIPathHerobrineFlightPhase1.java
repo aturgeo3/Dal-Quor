@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.xiaCastle.logic.battle.ai;
+package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 	

@@ -7,8 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.handler.IHandlerAI;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IHandlerAI;
 
 public class TileEntityAIBlock extends TamTileEntity {
 

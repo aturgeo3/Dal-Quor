@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.xiaCastle.logic.battle.ai;
+package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,6 +16,8 @@ import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineShadow;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 

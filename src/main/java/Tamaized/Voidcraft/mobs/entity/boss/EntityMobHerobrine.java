@@ -24,11 +24,11 @@ import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.IVoidBossData;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase1;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase2;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase3;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityVoidNPCAIBase;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.EntityAIPathHerobrineFlightPhase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.EntityAIPathHerobrineFlightPhase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.EntityAIPathHerobrineFlightPhase3;
 
 public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 

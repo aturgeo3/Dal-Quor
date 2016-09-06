@@ -12,8 +12,8 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.mobs.entity.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.handler.IHandlerAI;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IHandlerAI;
 
 public class HerobrineAIPhase3 implements IHandlerAI {
 

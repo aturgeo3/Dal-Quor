@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.handler.IHandlerAI;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IHandlerAI;
 
 public class HerobrineAIPhase2 implements IHandlerAI {
 

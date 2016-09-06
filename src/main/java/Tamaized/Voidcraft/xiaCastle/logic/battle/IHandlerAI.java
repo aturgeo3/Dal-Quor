@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.xiaCastle.logic.battle.ai.handler;
+package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import net.minecraft.util.math.BlockPos;
 
