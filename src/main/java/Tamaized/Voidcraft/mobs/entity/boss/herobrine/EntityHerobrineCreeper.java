@@ -50,7 +50,7 @@ public class EntityHerobrineCreeper extends EntityMob {
 	private int timeSinceIgnited;
 	private int fuseTime = 30;
 	/** Explosion radius for this creeper. */
-	private int explosionRadius = 10;
+	private int explosionRadius = 7;
 	private int droppedSkulls;
 
 	public EntityHerobrineCreeper(World worldIn) {

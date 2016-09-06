@@ -36,7 +36,7 @@ public class LayerHerobrineCreeperCharge implements LayerRenderer<EntityHerobrin
             float f1 = 0.5F;
             GlStateManager.color(1.0F, 0.1F, 0.1F, 1.0F);
             GlStateManager.disableLighting();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_DST_ALPHA);
+            //GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             this.creeperModel.setModelAttributes(this.creeperRenderer.getMainModel());
             this.creeperModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             GlStateManager.matrixMode(5890);
@@ -44,7 +44,7 @@ public class LayerHerobrineCreeperCharge implements LayerRenderer<EntityHerobrin
             GlStateManager.matrixMode(5888);
             GlStateManager.enableLighting();
             GlStateManager.disableBlend();
-            GlStateManager.depthMask(flag);
+            GlStateManager.depthMask(!flag);
         	GlStateManager.popMatrix();
         	GlStateManager.popAttrib();
         }

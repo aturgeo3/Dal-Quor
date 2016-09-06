@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,6 +34,7 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.BossBarOverlay;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineCreeper;
 import Tamaized.Voidcraft.mobs.model.ModelHerobrine;
 import Tamaized.Voidcraft.mobs.model.ModelLich;
@@ -126,6 +128,7 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, new RenderGhostPlayer(new ModelPlayer(0.0F, false)));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new RenderGhostPlayer(new ModelBiped(0.0F)));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new RenderHerobrineCreeper());
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new RenderWitherSkull(Minecraft.getMinecraft().getRenderManager()));
 
 		// Projectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
