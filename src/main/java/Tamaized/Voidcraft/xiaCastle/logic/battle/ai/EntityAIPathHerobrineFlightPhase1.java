@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
-import Tamaized.Voidcraft.projectiles.HerobrineFireball;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 
 public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 	
@@ -125,7 +125,7 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 	    		double d6 = closestEntity.getEntityBoundingBox().minY + (double)(closestEntity.height / 2.0F) - (theWatcher.posY + (double)(theWatcher.height / 2.0F));
 	    		double d7 = closestEntity.posZ - theWatcher.posZ;
 	                
-	    		HerobrineFireball entitylargefireball = new HerobrineFireball(theWatcher.worldObj, theWatcher, d5, d6, d7);
+	    		EntityHerobrineFireball entitylargefireball = new EntityHerobrineFireball(theWatcher.worldObj, theWatcher, d5, d6, d7);
 	    		double d8 = 4.0D;
 	    		Vec3d vec3 = theWatcher.getLook(1.0F);
 	    		entitylargefireball.posX = theWatcher.posX;// + vec3.xCoord * d8;

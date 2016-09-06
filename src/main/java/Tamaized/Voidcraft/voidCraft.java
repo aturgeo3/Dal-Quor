@@ -61,13 +61,14 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia;
 import Tamaized.Voidcraft.mobs.xia.EntityMobXia2;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.projectiles.AcidBall;
 import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
-import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.registry.VoidCraftAchievements;
 import Tamaized.Voidcraft.registry.VoidCraftArmors;
@@ -223,12 +224,14 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 
-		// Register Projectiles
+		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
 		registerEntity(AcidBall.class, "AcidBall", this, 128, 1, true);
 		registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
-		registerEntity(HerobrineFireball.class, "HerobrineFireball", this, 128, 1, true);
+		registerEntity(EntityHerobrineFireball.class, "HerobrineFireball", this, 128, 1, true);
 		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, 128, 1, true);
+		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, 128, 1, true);
+		registerEntity(EntityHerobrineTNTPrimed.class, "HerobrineTNTPrimed", this, 128, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));
@@ -254,7 +257,6 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityGhostPlayer.class, "GhostPlayer", this, 64, 1, true);
 		registerEntity(EntityGhostBiped.class, "GhostBiped", this, 64, 1, true);
 		registerEntity(EntityHerobrineCreeper.class, "HerobrineCreeper", this, 64, 1, true);
-		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, 64, 1, true);
 
 		// ... and their eggs
 		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);

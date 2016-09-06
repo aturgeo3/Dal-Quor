@@ -5,17 +5,16 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.projectiles.HerobrineFireball;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 
 public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 
@@ -108,7 +107,7 @@ public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 						double d6 = closestEntity.getEntityBoundingBox().minY + (double) (closestEntity.height / 2.0F) - (theWatcher.posY + (double) (theWatcher.height / 2.0F));
 						double d7 = closestEntity.posZ - theWatcher.posZ;
 
-						HerobrineFireball entitylargefireball = new HerobrineFireball(theWatcher.worldObj, theWatcher, d5, d6, d7);
+						EntityHerobrineFireball entitylargefireball = new EntityHerobrineFireball(theWatcher.worldObj, theWatcher, d5, d6, d7);
 						double d8 = 4.0D;
 						Vec3d vec3 = theWatcher.getLook(1.0F);
 						entitylargefireball.posX = theWatcher.posX;// + vec3.xCoord * d8;
@@ -124,6 +123,11 @@ public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 						}
 						break;
 					case 2: // Primed TNT
+						for (int i = 0; i < 2; i++) {
+							EntityHerobrineTNTPrimed tnt = new EntityHerobrineTNTPrimed(theWatcher.worldObj);
+							tnt.setPosition(theWatcher.getPosition().getX() + rand.nextInt(18) - 8, theWatcher.getPosition().getY() - 6, theWatcher.getPosition().getZ() + rand.nextInt(18) - 8);
+							theWatcher.worldObj.spawnEntityInWorld(tnt);
+						}
 						break;
 					case 3: // Shadow Charge
 						break;

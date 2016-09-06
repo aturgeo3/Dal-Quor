@@ -34,8 +34,11 @@ import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
 import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
 import Tamaized.Voidcraft.mobs.entity.boss.bar.BossBarOverlay;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineCreeper;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.render.RenderHerobrineTNTPrimed;
 import Tamaized.Voidcraft.mobs.model.ModelHerobrine;
 import Tamaized.Voidcraft.mobs.model.ModelLich;
 import Tamaized.Voidcraft.mobs.model.ModelSpectreChain;
@@ -61,7 +64,6 @@ import Tamaized.Voidcraft.mobs.xia.RenderXia2;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.projectiles.AcidBall;
 import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
-import Tamaized.Voidcraft.projectiles.HerobrineFireball;
 import Tamaized.Voidcraft.projectiles.VoidChain;
 import Tamaized.Voidcraft.projectiles.client.RenderAcidBall;
 import Tamaized.Voidcraft.projectiles.client.RenderHook;
@@ -129,12 +131,13 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new RenderGhostPlayer(new ModelBiped(0.0F)));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new RenderHerobrineCreeper());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new RenderWitherSkull(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
 
 		// Projectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(HerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new RenderObsidianFlask(Minecraft.getMinecraft().getRenderManager(), voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem()));
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));

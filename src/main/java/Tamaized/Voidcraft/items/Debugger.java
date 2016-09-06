@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.projectiles.HerobrineFireball;
+import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
 import Tamaized.Voidcraft.world.SchematicLoader;
 
 public class Debugger extends TamItem {
@@ -44,7 +44,7 @@ public class Debugger extends TamItem {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if(worldIn.isRemote) return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 		Vec3d vec = playerIn.getLook(1.0f);
-		HerobrineFireball entity = new HerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+		EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
 		//entity.setPositionAndRotation(x, y, z, yaw, pitch);
 		worldIn.spawnEntityInWorld(entity);

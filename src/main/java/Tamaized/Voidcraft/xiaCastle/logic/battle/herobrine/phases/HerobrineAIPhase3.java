@@ -78,7 +78,9 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 		else i = j;
 		if (i > 3) i = 0;
 		voidCraft.logger.info(i);
-		if (usedLocs.contains(i)) {
+		if(usedLocs.contains(0) && usedLocs.contains(1) && usedLocs.contains(2) && usedLocs.contains(3)){
+			i = 0;
+		}else if (usedLocs.contains(i)) {
 			setRandomGhost(i + 1);
 			return;
 		}

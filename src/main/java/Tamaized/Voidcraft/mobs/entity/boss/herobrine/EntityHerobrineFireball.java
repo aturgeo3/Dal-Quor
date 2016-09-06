@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.projectiles;
+package Tamaized.Voidcraft.mobs.entity.boss.herobrine;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -14,20 +14,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 
-public class HerobrineFireball extends EntityFireball {
+public class EntityHerobrineFireball extends EntityFireball {
 
 	public int field_92057_e = 1;
 
-    public HerobrineFireball(World p_i1767_1_){
+    public EntityHerobrineFireball(World p_i1767_1_){
         super(p_i1767_1_);
     }
 
     @SideOnly(Side.CLIENT)
-    public HerobrineFireball(World p_i1768_1_, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_){
+    public EntityHerobrineFireball(World p_i1768_1_, double p_i1768_2_, double p_i1768_4_, double p_i1768_6_, double p_i1768_8_, double p_i1768_10_, double p_i1768_12_){
         super(p_i1768_1_, p_i1768_2_, p_i1768_4_, p_i1768_6_, p_i1768_8_, p_i1768_10_, p_i1768_12_);
     }
 
-    public HerobrineFireball(World p_i1769_1_, EntityLivingBase p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_){
+    public EntityHerobrineFireball(World p_i1769_1_, EntityLivingBase p_i1769_2_, double p_i1769_3_, double p_i1769_5_, double p_i1769_7_){
         super(p_i1769_1_, p_i1769_2_, p_i1769_3_, p_i1769_5_, p_i1769_7_);
     }
 
