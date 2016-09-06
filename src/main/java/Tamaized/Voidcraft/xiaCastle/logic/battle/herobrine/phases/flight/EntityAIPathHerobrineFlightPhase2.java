@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine;
+package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight;
 
 import java.util.ArrayList;
 
