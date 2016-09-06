@@ -27,6 +27,7 @@ import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityAIPathHerobrineFlightPhase3;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.ai.EntityVoidNPCAIBase;
 
 public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
@@ -66,7 +67,7 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 	}
 
 	public boolean displayBossMode() {
-		return (PHASE_03 >= phase && phase > 0);
+		return (PHASE_03 > phase && phase > 0);
 	}
 
 	public void doDamage(int a) {
@@ -171,6 +172,18 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 			newAI.Init();
 			this.tasks.addTask(1, newAI);
 		} else if (p == PHASE_03) {
+			/**
+			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
+			 */
+			isFlying = true;
+			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+			this.setHealth(this.getMaxHealth());
+
+			EntityVoidNPCAIBase newAI = new EntityAIPathHerobrineFlightPhase3(this, filter);
+			ai.add(newAI);
+			newAI.Init();
+			this.tasks.addTask(1, newAI);
 
 		} else {
 			canDie = true;

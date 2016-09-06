@@ -29,6 +29,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	private GameProfile profile;
 	private PlayerNameAlias alias;
+	
+	private boolean hasInteracted = false;
 
 	public EntityGhostPlayerBase(World par1World) {
 		super(par1World);
@@ -64,6 +66,10 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public PlayerNameAlias getAlias() {
 		return alias;
 	}
+	
+	public boolean hasInteracted(){
+		return hasInteracted;
+	}
 
 	@Override
 	public void onLivingUpdate() {
@@ -78,6 +84,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
+		hasInteracted = true;
 		return true;
 	}
 
