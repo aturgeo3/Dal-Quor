@@ -40,6 +40,7 @@ import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
+import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
@@ -105,7 +106,8 @@ public class voidCraft extends TamModBase {
 	public static AbstractProxy proxy;
 
 	public VoidTickEvent VoidTickEvent;
-
+	
+	public static final SkinHandler skinHandler = new SkinHandler();
 	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
 
 	// Public API Integrations
@@ -134,7 +136,10 @@ public class voidCraft extends TamModBase {
 
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
-
+		
+		// Run Skin Handler
+		skinHandler.run();
+		
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 

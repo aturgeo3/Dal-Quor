@@ -17,6 +17,7 @@ import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
+import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
