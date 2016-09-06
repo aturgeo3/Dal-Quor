@@ -3,13 +3,13 @@ package Tamaized.Voidcraft.mobs.entity;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 
-public class EntityGhostPlayer extends EntityGhostPlayerBase {
+public class EntityGhostBiped extends EntityGhostPlayerBase {
 	
-	public EntityGhostPlayer(World world){
+	public EntityGhostBiped(World world){
 		super(world);
 	}
 
-	protected EntityGhostPlayer(World world, PlayerNameAlias alias) {
+	protected EntityGhostBiped(World world, PlayerNameAlias alias) {
 		super(world, alias);
 	}
 

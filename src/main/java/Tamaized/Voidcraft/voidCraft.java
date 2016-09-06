@@ -50,6 +50,8 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
+import Tamaized.Voidcraft.mobs.entity.EntityGhostBiped;
+import Tamaized.Voidcraft.mobs.entity.EntityGhostPlayer;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
@@ -247,6 +249,8 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityMobZol.class, "Zol", this, 64, 1, true);
 		registerEntity(EntityMobXia.class, "Xia", this, 64, 1, true);
 		registerEntity(EntityMobXia2.class, "Xia2", this, 64, 1, true);
+		registerEntity(EntityGhostPlayer.class, "GhostPlayer", this, 64, 1, true);
+		registerEntity(EntityGhostBiped.class, "GhostBiped", this, 64, 1, true);
 
 		// ... and their eggs
 		EntityRegistry.registerEgg(EntityMobWraith.class, 0xFFFFFF, 0x000000);

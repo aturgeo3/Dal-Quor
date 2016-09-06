@@ -1,6 +1,8 @@
 package Tamaized.Voidcraft.proxy;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.Item;
@@ -17,9 +19,10 @@ import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
-import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.items.entity.EntityHookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
+import Tamaized.Voidcraft.mobs.entity.EntityGhostBiped;
+import Tamaized.Voidcraft.mobs.entity.EntityGhostPlayer;
 import Tamaized.Voidcraft.mobs.entity.EntityMobLich;
 import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
 import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
@@ -37,6 +40,7 @@ import Tamaized.Voidcraft.mobs.model.ModelVoidBoss;
 import Tamaized.Voidcraft.mobs.model.ModelVoidWrath;
 import Tamaized.Voidcraft.mobs.model.ModelWraith;
 import Tamaized.Voidcraft.mobs.render.RenderDol;
+import Tamaized.Voidcraft.mobs.render.RenderGhostPlayer;
 import Tamaized.Voidcraft.mobs.render.RenderHerobrine;
 import Tamaized.Voidcraft.mobs.render.RenderLich;
 import Tamaized.Voidcraft.mobs.render.RenderSpectreChain;
@@ -117,6 +121,8 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobZol.class, new RenderZol(new ModelTwins(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobXia.class, new RenderXia(new ModelXia(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobXia2.class, new RenderXia2(new ModelXia2(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, new RenderGhostPlayer(new ModelPlayer(0.0F, false)));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new RenderGhostPlayer(new ModelBiped(0.0F)));
 
 		// Projectiles
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
@@ -130,7 +136,7 @@ public class ClientProxy extends AbstractProxy {
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
-		
+
 		voidCraft.channel.register(new ClientPacketHandler());
 	}
 
