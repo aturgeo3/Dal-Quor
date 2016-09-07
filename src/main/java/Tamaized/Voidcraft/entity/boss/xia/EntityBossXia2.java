@@ -10,10 +10,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.entity.EntityVoidBossMob;
+import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawnBase;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
-public class EntityBossXia2 extends EntityVoidBossMob{
+public class EntityBossXia2 extends EntityBossCorruptedPawnBase{
 	
 	double xAdd = 0;
 	double zAdd = 0;

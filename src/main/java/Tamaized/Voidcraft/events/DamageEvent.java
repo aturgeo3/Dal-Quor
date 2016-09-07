@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.entity.EntityVoidBossMob;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawnBase;
 
 public class DamageEvent {
 	
@@ -34,7 +34,7 @@ public class DamageEvent {
 			return;
 		}
 		if(isWhiteListed(e.getSource()) && !e.getSource().damageType.equals("arrow")){
-			if(e.getSource().getEntity() != null && !(e.getSource().getEntity() instanceof EntityVoidMob || e.getSource().getEntity() instanceof EntityVoidNPC || e.getSource().getEntity() instanceof EntityVoidBossMob)){
+			if(e.getSource().getEntity() != null && !(e.getSource().getEntity() instanceof EntityVoidMob || e.getSource().getEntity() instanceof EntityVoidNPC || e.getSource().getEntity() instanceof EntityBossCorruptedPawnBase)){
 				int a = (int) Math.floor(player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc()*10);
 				if(a > 0) e.getEntity().attackEntityFrom(new DamageSourceVoidicInfusion(), a);
 			}

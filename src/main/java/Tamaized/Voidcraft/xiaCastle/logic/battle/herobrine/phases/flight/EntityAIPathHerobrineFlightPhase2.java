@@ -14,20 +14,12 @@ import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
-	
-	private EntityLiving theWatcher;
-    /** The closest entity which is being watched by this one. */
-    protected Entity closestEntity;
-    /** This is the Maximum distance that the AI will look for the Entity */
-    private float maxDistanceForPlayer = 30;
-    private ArrayList<Class> watchedClass = new ArrayList<Class>();
-    
-    private EntityAIHandler ai;
-    
+
 	private boolean xPos = true;
 	private boolean zPos = true;
 	
@@ -39,31 +31,13 @@ public class EntityAIPathHerobrineFlightPhase2 extends EntityVoidNPCAIBase{
 	private boolean inBlock = false;
 	private int blockTick = 0;
 	
-	public EntityAIPathHerobrineFlightPhase2(EntityVoidNPC entityMobHerobrine, ArrayList<Class> c) {
-		watchedClass = new ArrayList<Class>();
-		watchedClass.addAll(c);
-		entity = entityMobHerobrine;
-		theWatcher = entity;
-		ai = new EntityAIHandler(entityMobHerobrine, (int) entityMobHerobrine.posX, (int) entityMobHerobrine.posY, (int) entityMobHerobrine.posZ);
-	}
-
-	@Override
-	public void kill() {
-		ai.kill();
-		super.kill();
+	public EntityAIPathHerobrineFlightPhase2(EntityVoidBoss entityBoss, ArrayList<Class> c) {
+		super(entityBoss, c);
 	}
 	
 	@Override
-	public void Init(){
-		super.Init();
-		ai.Init(2);
-		execute = true;
-	}
-
-	@Override
 	public void updateTask(){
-		ai.update();
-		
+		super.updateTask();
 		if(currTick>=callTick){
 			for(Class c : watchedClass){
 				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getEntityBoundingBox().expand((double)maxDistanceForPlayer, (double)maxDistanceForPlayer, (double)maxDistanceForPlayer), theWatcher);

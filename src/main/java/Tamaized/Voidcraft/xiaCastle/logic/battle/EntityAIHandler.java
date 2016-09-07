@@ -1,20 +1,20 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import net.minecraft.util.math.BlockPos;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
+import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase3;
 
 public class EntityAIHandler {
 
-	private EntityVoidNPC entity;
+	private EntityVoidBoss entity;
 	private IHandlerAI ai;
 
 	private BlockPos pos;
 
-	public EntityAIHandler(EntityVoidNPC e, int x, int y, int z) {
+	public EntityAIHandler(EntityVoidBoss e, int x, int y, int z) {
 		entity = e;
 		pos = new BlockPos(x, y, z);
 	}
@@ -34,7 +34,7 @@ public class EntityAIHandler {
 		ai.update();
 	}
 
-	public EntityVoidNPC getEntity() {
+	public EntityVoidBoss getEntity() {
 		return entity;
 	}
 

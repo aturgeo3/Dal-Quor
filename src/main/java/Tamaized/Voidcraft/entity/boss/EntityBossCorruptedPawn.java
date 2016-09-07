@@ -24,12 +24,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidBossMob;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
 
-public class EntityBossCorruptedPawn extends EntityVoidBossMob implements IVoidBossData{
+public class EntityBossCorruptedPawn extends EntityBossCorruptedPawnBase implements IVoidBossData{
 	
 	private boolean hasExploded = false;
 	

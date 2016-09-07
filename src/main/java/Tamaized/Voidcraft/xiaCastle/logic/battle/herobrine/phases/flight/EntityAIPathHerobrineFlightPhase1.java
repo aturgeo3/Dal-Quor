@@ -3,28 +3,16 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
+import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
-	
-	private EntityLiving theWatcher;
-    /** The closest entity which is being watched by this one. */
-    protected Entity closestEntity;
-    /** This is the Maximum distance that the AI will look for the Entity */
-    private float maxDistanceForPlayer = 30;
-    private ArrayList<Class> watchedClass = new ArrayList<Class>();
-    
-    private EntityAIHandler ai;
-	
+
 	private double[][] loc = new double[8][3];
 	private int currPath = 0;
 	private boolean xPos = true;
@@ -35,26 +23,14 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 	
 	private int callTick = 2*20;
 	private int callTick_Fireball = 3*20;
-
-	public EntityAIPathHerobrineFlightPhase1(EntityVoidNPC entityMobHerobrine, ArrayList<Class> c) {
-		watchedClass = new ArrayList<Class>();
-		watchedClass.addAll(c);
-		entity = entityMobHerobrine;
-		theWatcher = entity;
-		ai = new EntityAIHandler(entityMobHerobrine, (int) entityMobHerobrine.posX, (int) entityMobHerobrine.posY, (int) entityMobHerobrine.posZ);
-	}
-
-	@Override
-	public void kill() {
-		ai.kill();
-		super.kill();
+	
+	public EntityAIPathHerobrineFlightPhase1(EntityVoidBoss entityMobHerobrine, ArrayList<Class> c) {
+		super(entityMobHerobrine, c);
 	}
 
 	@Override
 	public void Init(){
 		super.Init();
-		
-		ai.Init(1);
 		
 		loc[0][0] = entity.posX+10;
 		loc[0][1] = entity.posY+10;
@@ -87,15 +63,11 @@ public class EntityAIPathHerobrineFlightPhase1 extends EntityVoidNPCAIBase{
 		loc[7][0] = entity.posX+5;
 		loc[7][1] = entity.posY+10;
 		loc[7][2] = entity.posZ-5;
-	
-		execute = true;
 	}
 
 	@Override
 	public void updateTask(){
-		if(!execute) return;
-		ai.update();
-		
+		super.updateTask();
 		if(currTick==callTick){
 			for(Class c : watchedClass){
 				Entity e = theWatcher.worldObj.findNearestEntityWithinAABB(c, theWatcher.getEntityBoundingBox().expand((double)maxDistanceForPlayer, 30.0D, (double)maxDistanceForPlayer), theWatcher);

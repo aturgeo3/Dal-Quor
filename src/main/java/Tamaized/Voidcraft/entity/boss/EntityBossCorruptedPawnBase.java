@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.entity;
+package Tamaized.Voidcraft.entity.boss;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -20,11 +20,11 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 //CLASS WAS MADE FOR TARGETTING PURPOSES (and less use of nbt)
-public abstract class EntityVoidBossMob extends EntityCreature implements IMob {
+public abstract class EntityBossCorruptedPawnBase extends EntityCreature implements IMob {
 	
 	private boolean invulnerable = false;
 	
-	public EntityVoidBossMob(World p_i1738_1_){
+	public EntityBossCorruptedPawnBase(World p_i1738_1_){
 		super(p_i1738_1_);
 		this.experienceValue = 10;
 	}

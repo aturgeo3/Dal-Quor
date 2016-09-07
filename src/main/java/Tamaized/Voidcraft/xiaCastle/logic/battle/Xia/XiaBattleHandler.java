@@ -28,10 +28,10 @@ public class XiaBattleHandler implements IBattleHandler {
 		if (!worldObj.isRemote) {
 			if (running) {
 				switch (phase) {
-					case 0:
+					case 0: // Form 1
 						if (readyForInput) {
 							herobrine = new EntityBossHerobrine(worldObj, this);
-							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5);
+							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 							worldObj.spawnEntityInWorld(herobrine);
 							herobrine.start();
 							phase++;
@@ -41,9 +41,9 @@ public class XiaBattleHandler implements IBattleHandler {
 						}
 						break;
 					case 1:
-						if(readyForInput){
-							
-						}else{
+						if (readyForInput) {
+
+						} else {
 							readyForInput = !herobrine.isActive();
 						}
 						break;
