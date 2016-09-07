@@ -1,55 +1,86 @@
 package Tamaized.Voidcraft.entity.boss.xia;
 
+import java.util.ArrayList;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase3;
 
-public class EntityBossXia extends EntityVoidNPC {
-	
-	double xAdd = 0;
-	double zAdd = 0;
-	
+public class EntityBossXia extends EntityVoidBoss {
+
 	public EntityBossXia(World par1World) {
 		super(par1World);
-		
-		this.isImmuneToFire = true;
-		this.hurtResistantTime = 10;
-		this.setSize(0.6F, 1.8F);
-		
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		this.setInvul(true);
 	}
-	
+
+	public EntityBossXia(World world, IBattleHandler handler) {
+		super(world, handler);
+		this.setInvul(true);
+	}
+
 	@Override
-	public boolean canBePushed(){
-		return false;
+	protected void triggerOnDamage(int phase) {
+		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.05D);
+	}
+
+	@Override
+	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
+		// start();
+		return super.processInteract(player, hand, stack);
+	}
+
+	@Override
+	protected void initPhase(int phase) {
+		if (phase == 1) {
+			/**
+			 * Cycle: - Herobrine shoots fireballs. - Pillars need to get hit with fireball, cycle through textures of green wool, yellow, red. 4th hit will damage herobrine. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time
+			 */
+			isFlying = true;
+			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+			this.setHealth(this.getMaxHealth());
+			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
+
+			addAI(EntityAIPathHerobrineFlightPhase1.class);
+		} else if (phase == 2) {
+			/**
+			 * Cycle: - Herobrine chases the player. - On touching a player, deal damage. - Herobrine must run through a pillar to be dealt damage. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time - Increase his speed everytime he is hurt
+			 */
+			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+			this.setHealth(this.getMaxHealth());
+
+			addAI(EntityAIPathHerobrineFlightPhase2.class);
+		} else if (phase == 3) {
+			/**
+			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
+			 */
+			isFlying = true;
+			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+			this.setHealth(this.getMaxHealth());
+
+			addAI(EntityAIPathHerobrineFlightPhase3.class);
+
+		}
 	}
 	
-	@Override
-	protected void collideWithEntity(Entity par1Entity){}
-	
-	@Override
-	public void applyEntityCollision(Entity par1Entity){}
-	
-	@Override
-	protected void applyEntityAttributes(){
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(999.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
-	}
-    
     @Override
     protected SoundEvent getAmbientSound(){
     	return VoidSoundEvents.EntityMobXiaSoundEvents.ambientSound;
@@ -73,5 +104,37 @@ public class EntityBossXia extends EntityVoidNPC {
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TextComponentString("Xia");
+	}
+
+	@Override
+	protected void updatePhase(int phase) {
+
+	}
+
+	@Override
+	protected ArrayList<Class> getFilters() {
+		ArrayList<Class> filter = new ArrayList<Class>();
+		filter.add(EntityPlayer.class);
+		return filter;
+	}
+
+	@Override
+	protected boolean immuneToFire() {
+		return true;
+	}
+
+	@Override
+	protected float sizeWidth() {
+		return 0.6F;
+	}
+
+	@Override
+	protected float sizeHeight() {
+		return 1.8F;
+	}
+
+	@Override
+	protected int maxPhases() {
+		return 3;
 	}
 }
