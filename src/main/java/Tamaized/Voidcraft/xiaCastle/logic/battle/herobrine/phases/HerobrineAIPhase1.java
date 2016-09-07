@@ -39,8 +39,8 @@ public class HerobrineAIPhase1 implements IHandlerAI {
 	@Override
 	public void Init() {
 		world = parent.getEntity().worldObj;
-		for (int x = -10; x < 10; x++) {
-			for (int z = -10; z < 10; z++) {
+		for (int x = -10; x <= 10; x++) {
+			for (int z = -10; z <= 10; z++) {
 				if(x==0 && z==0) continue;
 				world.setBlockState(parent.getPos().add(x, -1, z), Blocks.NETHER_BRICK.getDefaultState());
 			}

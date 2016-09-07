@@ -37,8 +37,8 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 	@Override
 	public void Init() {
 		world = parent.getEntity().worldObj;
-		for (int x = -10; x < 10; x++) {
-			for (int z = -10; z < 10; z++) {
+		for (int x = -10; x <= 10; x++) {
+			for (int z = -10; z <= 10; z++) {
 				if ((x == 0 && z == 0) || Math.floor(Math.random() * 10) != 0) continue;
 				world.setBlockState(parent.getPos().add(x, -1, z), Blocks.LAVA.getDefaultState());
 			}
@@ -92,19 +92,23 @@ public class HerobrineAIPhase3 implements IHandlerAI {
 		BlockPos pos = parent.getPos();
 		switch (i) {
 			case 0:
-				entity.setLocationAndAngles(pos.getX() + 9.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 8.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 1:
-				entity.setLocationAndAngles(pos.getX() - 9.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+				entity.setLocationAndAngles(pos.getX() - 7.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 270;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 2:
-				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 9.5, 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 8.5, 0, 0);
+				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 180;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 3:
-				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() - 9.5, 0, 0);
+				entity.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() - 7.5, 0, 0);
+				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 0;
 				world.spawnEntityInWorld(entity);
 				break;
 			default:

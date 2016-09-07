@@ -112,9 +112,8 @@ public class EntityMobHerobrine extends EntityVoidNPC implements IVoidBossData {
 		if(worldObj.isRemote) return;
 		if (ready) {
 			phase++;
-			System.out.println("Starting Phase Init: " + phase);
+			//phase = 3;
 			InitPhase(phase);
-			System.out.println("Phase (" + phase + ") Init finished");
 			ready = false;
 		}
 

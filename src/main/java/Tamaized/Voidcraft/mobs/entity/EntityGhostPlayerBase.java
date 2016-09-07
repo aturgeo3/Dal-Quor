@@ -31,6 +31,9 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	private PlayerNameAlias alias;
 	
 	private boolean hasInteracted = false;
+	private boolean running = false;
+	private int tick = 0;
+	private int finalTick = 20*6;
 
 	public EntityGhostPlayerBase(World par1World) {
 		super(par1World);
@@ -70,6 +73,10 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public boolean hasInteracted(){
 		return hasInteracted;
 	}
+	
+	public boolean isRunning(){
+		return running;
+	}
 
 	@Override
 	public void onLivingUpdate() {
@@ -79,12 +86,15 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 				this.setDead();
 				return;
 			}
+			if(running) tick++;
+			if(tick >= finalTick) hasInteracted = true;
 		}
 	}
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
-		hasInteracted = true;
+		if(running) return false;
+		running = true;
 		return true;
 	}
 

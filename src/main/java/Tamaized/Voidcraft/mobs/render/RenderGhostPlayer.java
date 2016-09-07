@@ -2,10 +2,12 @@ package Tamaized.Voidcraft.mobs.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBiped.ArmPose;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -13,9 +15,13 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.mobs.entity.EntityGhostPlayerBase;
 
 @SideOnly(Side.CLIENT)
-public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLivingBase<T> {
+public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
 
 	private final boolean playerModel;
+
+	private enum DirectionState {
+		POS, NEG, STILL
+	}
 
 	public RenderGhostPlayer(ModelBiped model) {
 		super(Minecraft.getMinecraft().getRenderManager(), model, 0.5F);
@@ -31,9 +37,32 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.5f);
 		ModelBiped model = (ModelBiped) getMainModel();
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.5f);
+		if (entity.isRunning()) {
+			model.leftArmPose = ArmPose.BOW_AND_ARROW;
+			DirectionState stateX = DirectionState.STILL;
+			DirectionState stateZ = DirectionState.STILL;
+			switch ((int) entity.renderYawOffset+180) {
+				case 0:
+					stateZ = DirectionState.NEG;
+					break;
+				case 90:
+					stateX = DirectionState.POS;
+					break;
+				case 180:
+					stateZ = DirectionState.POS;
+					break;
+				case 270:
+					stateX = DirectionState.NEG;
+					break;
+				default:
+					break;
+			}
+			entity.worldObj.spawnParticle(EnumParticleTypes.PORTAL, entity.getPosition().getX()+0.5, entity.getPosition().getY()+0.5, entity.getPosition().getZ()+0.5, stateX == DirectionState.NEG ? -7.5D : stateX == DirectionState.POS ? 7.5D : 0.0D, 9.5D, stateZ == DirectionState.NEG ? -7.5D : stateZ == DirectionState.POS ? 7.5D : 0.0D);
+		}
 		super.doRender(entity, x, y, z, yaw, partialTicks);
+		model.leftArmPose = ArmPose.EMPTY;
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();
