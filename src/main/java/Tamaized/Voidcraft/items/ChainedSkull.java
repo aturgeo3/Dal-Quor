@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
+import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 
 public class ChainedSkull extends TamItem{
 	
@@ -49,7 +49,7 @@ public class ChainedSkull extends TamItem{
 				d0 = 0.5D;
 			}
 			
-			EntityMobVoidBoss entity = new EntityMobVoidBoss(world);
+			EntityBossCorruptedPawn entity = new EntityBossCorruptedPawn(world);
 			
 			if (entity != null){
 				entity.setCustomNameTag("Corrupted Pawn");

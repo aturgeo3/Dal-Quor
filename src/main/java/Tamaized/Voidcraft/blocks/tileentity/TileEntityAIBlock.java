@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IHandlerAI;
 
@@ -41,10 +41,10 @@ public class TileEntityAIBlock extends TamTileEntity {
 	}
 
 	public void boom() {
-		if (getAiHandler() != null && getAiHandler().getEntity() instanceof EntityMobHerobrine) {
+		if (getAiHandler() != null && getAiHandler().getEntity() instanceof EntityBossHerobrine) {
 			if (state < 3) state++;
 			if (state > 2) {
-				((EntityMobHerobrine) getAiHandler().getEntity()).doDamage(20);
+				((EntityBossHerobrine) getAiHandler().getEntity()).doDamage(20);
 				getAi().removeTileEntity(pos);
 				setDead();
 			}

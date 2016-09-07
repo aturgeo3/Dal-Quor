@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 
 public class HerobrineBattleHandler implements IBattleHandler {
@@ -21,7 +21,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	private World worldObj;
 	private BlockPos pos;
 
-	private EntityMobHerobrine herobrine;
+	private EntityBossHerobrine herobrine;
 
 	@Override
 	public void update() {
@@ -30,7 +30,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 				switch (phase) {
 					case 0:
 						if (readyForInput) {
-							herobrine = new EntityMobHerobrine(worldObj, this);
+							herobrine = new EntityBossHerobrine(worldObj, this);
 							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5);
 							worldObj.spawnEntityInWorld(herobrine);
 							herobrine.start();
@@ -68,7 +68,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	@Override
 	public void stop() {
 		readyForInput = false;
-		for (Entity e : worldObj.getEntitiesWithinAABB(EntityMobHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
+		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			worldObj.removeEntity(e);
 	}
 

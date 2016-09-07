@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.mobs.EntityVoidBossMob;
-import Tamaized.Voidcraft.mobs.EntityVoidMob;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.EntityVoidBossMob;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
 
 public class DamageEvent {
 	

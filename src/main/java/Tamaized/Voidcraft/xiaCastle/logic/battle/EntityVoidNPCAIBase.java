@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
 
 public class EntityVoidNPCAIBase extends EntityAIBase{
 	

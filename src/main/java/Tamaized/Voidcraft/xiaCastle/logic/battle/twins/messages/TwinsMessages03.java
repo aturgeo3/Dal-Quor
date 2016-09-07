@@ -14,8 +14,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
 
 public class TwinsMessages03 {
 	

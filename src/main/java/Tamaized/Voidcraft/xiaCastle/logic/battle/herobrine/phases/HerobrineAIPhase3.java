@@ -9,9 +9,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
-import Tamaized.Voidcraft.mobs.entity.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IHandlerAI;
 

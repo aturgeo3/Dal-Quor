@@ -4,8 +4,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.mobs.entity.EntityMobSpectreChain;
-import Tamaized.Voidcraft.mobs.entity.EntityMobWraith;
+import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
+import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 
 public class BiomeGenVoid extends Biome {
 

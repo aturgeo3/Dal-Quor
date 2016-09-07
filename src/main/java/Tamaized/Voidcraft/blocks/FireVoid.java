@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import Tamaized.TamModized.blocks.TamBlockFire;
 import Tamaized.TamModized.blocks.TamBlockPortal;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.mobs.EntityVoidMob;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
 
 public class FireVoid extends TamBlockFire {
 

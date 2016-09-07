@@ -10,8 +10,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages.TwinsMessages01;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages.TwinsMessages02;
@@ -211,8 +211,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 	
 	public void stop(){
 		readyForInput = false;
-		for(Entity e : worldObj.getEntitiesWithinAABB(EntityMobZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) worldObj.removeEntity(e);
-		for(Entity e : worldObj.getEntitiesWithinAABB(EntityMobDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) worldObj.removeEntity(e);
+		for(Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) worldObj.removeEntity(e);
+		for(Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) worldObj.removeEntity(e);
 		for(int x = pos.getX()-1; x<=pos.getX()+1; x++){
 			for(int y = pos.getY(); y<=pos.getY()+2; y++){
 				int z = pos.getZ()+12;

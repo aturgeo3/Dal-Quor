@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import net.minecraft.util.math.BlockPos;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobHerobrine;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase3;
@@ -20,7 +20,7 @@ public class EntityAIHandler {
 	}
 
 	public void Init(int phase) {
-		if (entity instanceof EntityMobHerobrine) {
+		if (entity instanceof EntityBossHerobrine) {
 			ai = phase == 1 ? new HerobrineAIPhase1(this) : phase == 2 ? new HerobrineAIPhase2(this) : phase == 3 ? new HerobrineAIPhase3(this) : null;
 		}
 		if (ai != null) ai.Init();

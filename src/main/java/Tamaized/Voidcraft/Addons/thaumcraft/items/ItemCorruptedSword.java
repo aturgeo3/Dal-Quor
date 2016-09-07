@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.Addons.thaumcraft.items;
 
-import Tamaized.Voidcraft.mobs.EntityVoidMob;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobVoidBoss;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
+import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;

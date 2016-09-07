@@ -14,8 +14,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobDol;
-import Tamaized.Voidcraft.mobs.entity.boss.EntityMobZol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
+import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
 
 public class TwinsMessages01 {
 	
@@ -57,8 +57,8 @@ public class TwinsMessages01 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"I agree."));
 						break;
 					case 10:
-						EntityMobZol zol = new EntityMobZol(worldObj);
-						EntityMobDol dol = new EntityMobDol(worldObj);
+						EntityBossZol zol = new EntityBossZol(worldObj);
+						EntityBossDol dol = new EntityBossDol(worldObj);
 						zol.setPosition(pos.getX()+3+.5, pos.getY()+4, pos.getZ()-5+.5);
 						dol.setPosition(pos.getX()-3+.5, pos.getY()+4, pos.getZ()-5+.5);
 						worldObj.spawnEntityInWorld(zol);

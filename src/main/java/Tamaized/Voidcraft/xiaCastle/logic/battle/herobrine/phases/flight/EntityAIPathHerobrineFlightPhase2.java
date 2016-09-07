@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 

@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.items.VoidRecord;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
 
 public class BossMusicManager {
 	

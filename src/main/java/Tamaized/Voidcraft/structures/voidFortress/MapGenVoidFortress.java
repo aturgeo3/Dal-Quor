@@ -15,7 +15,7 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureNetherBridgePieces;
 import net.minecraft.world.gen.structure.StructureStart;
-import Tamaized.Voidcraft.mobs.entity.EntityMobVoidWrath;
+import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
 
 import com.google.common.collect.Lists;
 

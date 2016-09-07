@@ -10,12 +10,12 @@ import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import Tamaized.Voidcraft.mobs.EntityVoidNPC;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineShadow;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineTNTPrimed;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.mobs.entity.boss.herobrine.EntityHerobrineFireball;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineShadow;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityAIHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 

@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.projectiles.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 
 public class ObsidianFlask extends TamItem {
 
