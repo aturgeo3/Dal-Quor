@@ -28,6 +28,7 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 			packet.writeDouble(dat.target.yCoord);
 			packet.writeDouble(dat.target.zCoord);
 		}
+		packet.writeInt(dat.id);
 		packet.writeBoolean(dat.offhand);
 	}
 
@@ -35,7 +36,7 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 	@Override
 	public TamParticle decode(ByteBufInputStream packet, WorldClient world, Vec3d pos) {
 		try {
-			return new VoidicDrillLaser(world, pos, packet.readBoolean() ? new Vec3d(packet.readDouble(), packet.readDouble(), packet.readDouble()) : null, packet.readBoolean());
+			return new VoidicDrillLaser(world, pos, packet.readBoolean() ? new Vec3d(packet.readDouble(), packet.readDouble(), packet.readDouble()) : null, packet.readInt(), packet.readBoolean());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

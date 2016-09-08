@@ -111,7 +111,7 @@ public class VoidicDrill extends VoidicPowerItem {
 					}
 				}
 			}
-			VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND);
+			VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND, player.getEntityId());
 			ParticleHelper.sendPacketToClients(world, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
 		}
 	}
@@ -177,10 +177,12 @@ public class VoidicDrill extends VoidicPowerItem {
 
 		public final Vec3d target;
 		public final boolean offhand;
+		public final int id;
 
-		public VoidDrillParticleData(Vec3d t, boolean o) {
+		public VoidDrillParticleData(Vec3d t, boolean o, int entityID) {
 			target = t;
 			offhand = o;
+			id = entityID;
 		}
 
 	}

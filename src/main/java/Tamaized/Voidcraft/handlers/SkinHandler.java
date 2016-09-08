@@ -248,7 +248,6 @@ public class SkinHandler {
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 				net.minecraft.client.renderer.texture.DynamicTexture dt = new net.minecraft.client.renderer.texture.DynamicTexture(bimg);
 				net.minecraft.client.renderer.texture.TextureManager tm = net.minecraft.client.Minecraft.getMinecraft().getTextureManager();
-				System.out.println(tm);
 				ResourceLocation resource = tm.getDynamicTextureLocation(voidCraft.modid + ":skin_" + alias.toString(), dt);
 				aliasSkin.put(alias, resource);
 			}

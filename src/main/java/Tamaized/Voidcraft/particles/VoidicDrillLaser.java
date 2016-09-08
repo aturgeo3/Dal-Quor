@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -15,22 +16,32 @@ import Tamaized.TamModized.particles.TamParticle;
 public class VoidicDrillLaser extends TamParticle {
 
 	private final boolean isOffhand;
+	private final int entityID;
 
-	public VoidicDrillLaser(World world, Vec3d pos, Vec3d target, boolean offhand) {
+	public VoidicDrillLaser(World world, Vec3d pos, Vec3d target, int id, boolean offhand) {
 		super(world, pos, target);
 		isOffhand = offhand;
+		entityID = id;
 	}
 
 	@Override
 	public void renderParticle(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+		Entity e = entity.worldObj.getEntityByID(entityID);
+		if(e == null) return;
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.disableFog();
 		Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityBeaconRenderer.TEXTURE_BEACON_BEAM);
 		int dist = (int) Math.ceil(getLocation().distanceTo(new Vec3d(posX, posY, posZ)));
 		dist = dist > 10 ? 10 : dist;
+		double distX = entity.posX - e.posX;
+		double distY = entity.posY - e.posY;
+		double distZ = entity.posZ - e.posZ;
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-distX, -distY, -distZ);
 		for (int i = 0; i < dist; i++) {
-			renderBeamSegment(isOffhand, entity.rotationYaw, entity.rotationPitch, 1, 0, -0.5, partialTicks, 1, entity.worldObj.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D);
+			renderBeamSegment(isOffhand, e.getRotationYawHead(), e.rotationPitch, 1, 0, -0.5, partialTicks, 1, entity.worldObj.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D); 
 		}
+		GlStateManager.popMatrix();
 		GlStateManager.enableFog();
 	}
 
