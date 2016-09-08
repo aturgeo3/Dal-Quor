@@ -40,7 +40,6 @@ public class SkinHandler {
 
 	private Map<PlayerNameAlias, GameProfile> aliasProfile = new HashMap<PlayerNameAlias, GameProfile>();
 
-	@SideOnly(Side.CLIENT)
 	private Map<PlayerNameAlias, ResourceLocation> aliasSkin = new HashMap<PlayerNameAlias, ResourceLocation>();
 
 	private Map<PlayerNameAlias, Boolean> aliasBiped = new HashMap<PlayerNameAlias, Boolean>();
