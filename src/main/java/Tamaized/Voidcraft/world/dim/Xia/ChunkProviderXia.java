@@ -26,7 +26,7 @@ public class ChunkProviderXia implements IChunkGenerator {
     public Chunk provideChunk(int x, int z){
     	ChunkPrimer chunkprimer = new ChunkPrimer();
     	Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
-    	Biome[] abiome = this.worldObj.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
+    	Biome[] abiome = this.worldObj.getBiomeProvider().getBiomesForGeneration((Biome[])null, x * 16, z * 16, 16, 16);
     	byte[] abyte = chunk.getBiomeArray();
     	
     	for (int i = 0; i < abyte.length; ++i){

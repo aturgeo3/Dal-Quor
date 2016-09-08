@@ -42,7 +42,7 @@ public class FireVoid extends TamBlockFire {
 		if (entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)) {
 			if (entityIn instanceof EntitySkeleton) {
 				EntitySkeleton skelly = (EntitySkeleton) entityIn;
-				if (skelly.func_189771_df() == SkeletonType.WITHER) return;
+				if (skelly.getSkeletonType() == SkeletonType.WITHER) return;
 			}
 			EntityLivingBase e = ((EntityLivingBase) entityIn);
 			e.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 60, 1)); // nausea

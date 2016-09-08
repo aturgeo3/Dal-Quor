@@ -99,8 +99,8 @@ public class EntityHerobrineCreeper extends EntityMob {
 		this.dataManager.register(IGNITED, Boolean.valueOf(false));
 	}
 
-	public static void func_189762_b(DataFixer p_189762_0_) {
-		EntityLiving.func_189752_a(p_189762_0_, "Creeper");
+	public static void registerFixesCreeper(DataFixer fixer) {
+		EntityLiving.registerFixesMob(fixer, "Creeper");
 	}
 
 	/**

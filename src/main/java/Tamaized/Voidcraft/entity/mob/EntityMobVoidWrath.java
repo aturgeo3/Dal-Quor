@@ -53,7 +53,7 @@ public class EntityMobVoidWrath extends EntityVoidMob implements IMob{
 			 * Return whether the specified entity is applicable to this filter.
 			 */
 			public boolean apply(Entity p_82704_1_){
-				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).func_189771_df() == SkeletonType.WITHER) return false;
+				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).getSkeletonType() == SkeletonType.WITHER) return false;
 				else return true;
 			}
 			public boolean apply(Object p_apply_1_){

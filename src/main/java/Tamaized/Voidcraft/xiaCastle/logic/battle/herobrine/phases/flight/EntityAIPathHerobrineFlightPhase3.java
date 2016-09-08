@@ -121,7 +121,7 @@ public class EntityAIPathHerobrineFlightPhase3 extends EntityVoidNPCAIBase {
 					case 4: // Wither Skeleton Spawns with EntityWitherSkulls from the walls
 						for (int i = 0; i < 4; i++) {
 							EntitySkeleton skele = new EntitySkeleton(theWatcher.worldObj);
-							skele.func_189768_a(SkeletonType.WITHER);
+							skele.setSkeletonType(SkeletonType.WITHER);
 							skele.setPosition(theWatcher.getPosition().getX() + rand.nextInt(18) - 8, theWatcher.getPosition().getY() - 6, theWatcher.getPosition().getZ() + rand.nextInt(18) - 8);
 							theWatcher.worldObj.spawnEntityInWorld(skele);
 						}

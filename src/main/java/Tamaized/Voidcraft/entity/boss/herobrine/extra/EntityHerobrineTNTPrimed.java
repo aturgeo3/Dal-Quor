@@ -63,7 +63,7 @@ public class EntityHerobrineTNTPrimed extends Entity {
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		if (!this.func_189652_ae()) {
+		if (!this.hasNoGravity()) {
 			this.motionY -= 0.03999999910593033D;
 		}
 

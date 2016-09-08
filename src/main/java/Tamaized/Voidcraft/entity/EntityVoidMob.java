@@ -57,7 +57,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob{
     }
 	
 	protected boolean canAttack(Entity entity){
-		if(entity instanceof EntitySkeleton && ((EntitySkeleton)entity).func_189771_df() == SkeletonType.WITHER) return false;
+		if(entity instanceof EntitySkeleton && ((EntitySkeleton)entity).getSkeletonType() == SkeletonType.WITHER) return false;
 		return true;
 	}
     

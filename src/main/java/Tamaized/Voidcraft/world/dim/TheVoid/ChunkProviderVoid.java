@@ -245,7 +245,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
         this.genTest.generate(this.world, x, z, chunkprimer);
     	
     	Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
-    	Biome[] abiome = this.world.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
+    	Biome[] abiome = this.world.getBiomeProvider().getBiomesForGeneration((Biome[])null, x * 16, z * 16, 16, 16);
     	byte[] abyte = chunk.getBiomeArray();
     	
     	for (int i = 0; i < abyte.length; ++i){
@@ -373,7 +373,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
     	//System.out.println(world.getBiomeForCoordsBody(pos));
     	//System.out.println(creatureType);
     	//System.out.println(world.getBiomeForCoordsBody(pos).getSpawnableList(creatureType));
-    	return this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);//voidCraft.biomes.biomeVoid.getSpawnableList(creatureType);//new ArrayList();//this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
+    	return this.world.getBiomeForCoordsBody(pos).getSpawnableList(creatureType);//voidCraft.biomes.biomeVoid.getSpawnableList(creatureType);//new ArrayList();//this.world.getBiomeGenForCoords(pos).getSpawnableList(creatureType);
     }
 
     @Override

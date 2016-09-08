@@ -63,7 +63,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
 			 * Return whether the specified entity is applicable to this filter.
 			 */
 			public boolean apply(Entity p_82704_1_){
-				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).func_189771_df() == SkeletonType.WITHER) return false;
+				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).getSkeletonType() == SkeletonType.WITHER) return false;
 				else return true;
 			}
 			public boolean apply(Object p_apply_1_){
@@ -158,7 +158,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob{
     		wrath.setAttackTarget(target);
 
     		skelly.setPosition(this.posX+2, this.posY, this.posZ+2);
-    		skelly.func_189768_a(SkeletonType.WITHER);
+    		skelly.setSkeletonType(SkeletonType.WITHER);
     		skelly.setAttackTarget(target);
     		
     		this.worldObj.spawnEntityInWorld(wraith);
