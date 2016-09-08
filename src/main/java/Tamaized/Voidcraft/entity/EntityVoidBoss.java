@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.entity.nonliving;
+package Tamaized.Voidcraft.entity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,7 +16,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;

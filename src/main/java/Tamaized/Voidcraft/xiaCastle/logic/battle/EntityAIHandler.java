@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import net.minecraft.util.math.BlockPos;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase3;

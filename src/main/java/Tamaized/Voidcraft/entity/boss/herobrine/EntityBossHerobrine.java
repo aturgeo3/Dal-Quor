@@ -13,7 +13,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase1;

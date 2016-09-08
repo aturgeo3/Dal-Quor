@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.entity.nonliving.EntityVoidBoss;
 
 public class EntityVoidNPCAIBase extends EntityAIBase{
 	
