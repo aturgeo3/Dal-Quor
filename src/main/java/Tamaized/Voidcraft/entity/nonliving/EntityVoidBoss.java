@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
@@ -258,5 +259,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected abstract int maxPhases();
 
 	protected abstract void triggerOnDamage(int phase);
+	
+	public abstract ITextComponent getDisplayName();
 
 }
