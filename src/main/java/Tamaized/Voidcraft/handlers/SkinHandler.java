@@ -17,7 +17,6 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -249,7 +248,7 @@ public class SkinHandler {
 			BufferedImage bimg = ImageIO.read(new File(loc + alias.toString() + ".png"));
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 				net.minecraft.client.renderer.texture.DynamicTexture dt = new net.minecraft.client.renderer.texture.DynamicTexture(bimg);
-				TextureManager tm = net.minecraft.client.Minecraft.getMinecraft().getTextureManager();
+				net.minecraft.client.renderer.texture.TextureManager tm = net.minecraft.client.Minecraft.getMinecraft().getTextureManager();
 				System.out.println(tm);
 				ResourceLocation resource = tm.getDynamicTextureLocation(voidCraft.modid + ":skin_" + alias.toString(), dt);
 				aliasSkin.put(alias, resource);
