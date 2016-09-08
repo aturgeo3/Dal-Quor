@@ -143,9 +143,6 @@ public class voidCraft extends TamModBase {
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
 		
-		// Run Skin Handler
-		skinHandler.run();
-		
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 
@@ -197,6 +194,9 @@ public class voidCraft extends TamModBase {
 		logger.info("Starting VoidCraft Init");
 
 		super.init(event);
+		
+		// Run Skin Handler
+		skinHandler.run();
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");

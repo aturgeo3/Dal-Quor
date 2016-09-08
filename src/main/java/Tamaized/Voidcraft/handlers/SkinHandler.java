@@ -7,19 +7,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -95,7 +93,7 @@ public class SkinHandler {
 
 	public void run() {
 		voidCraft.logger.info("Running SkinHandler");
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) handleResources();
+		handleResources();
 		if (isOnline()) {
 			voidCraft.logger.info("Able to Connect to Mojang Servers, updating skins");
 			updateSkins();
@@ -105,18 +103,8 @@ public class SkinHandler {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	private void handleResources() {
 		new File(loc).mkdirs();
-		net.minecraft.client.resources.FolderResourcePack pack = new net.minecraft.client.resources.FolderResourcePack(new File(baseLoc));
-		try {
-			Field f = net.minecraft.client.Minecraft.getMinecraft().getClass().getDeclaredField("defaultResourcePacks");
-			f.setAccessible(true);
-			List<IResourcePack> defaultResourcePacks = (List<IResourcePack>) f.get(net.minecraft.client.Minecraft.getMinecraft());
-			defaultResourcePacks.add(pack);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void updateSkins() {
@@ -158,7 +146,7 @@ public class SkinHandler {
 									json.endArray();
 									break;
 								case "error":
-									useCachedAliasResource(alias);
+									loadCachedAlias(alias);
 									continue aliasList;
 								default:
 									json.skipValue();
@@ -172,7 +160,7 @@ public class SkinHandler {
 				json.close();
 
 				if (encodedString == null) {
-					useCachedAliasResource(alias);
+					loadCachedAlias(alias);
 					continue;
 				}
 
@@ -228,51 +216,47 @@ public class SkinHandler {
 					json.endObject();
 				}
 				json.close();
-				ResourceLocation resource = null;
 				voidCraft.logger.info("Downloading skin: " + skinUrl);
 				FileUtils.copyURLToFile(new URL(skinUrl), new File(loc + alias.toString() + ".png"));
-				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-					resource = new ResourceLocation(voidCraft.modid + ":skins/" + alias.toString() + ".png");
-				}
-				updateAlias(alias, profileName, resource);
+				loadAlias(alias, profileName);
 			} catch (IOException e) {
 				voidCraft.logger.info("Request was sent too often or there was an issue with the Mojang servers, using cache for " + alias);
-				useCachedAliasResource(alias);
+				loadCachedAlias(alias);
 			}
 		}
 	}
 
 	private void cacheSkins() {
 		for (PlayerNameAlias alias : PlayerNameAlias.values()) {
-			useCachedAliasResource(alias);
+			loadCachedAlias(alias);
 		}
 	}
 
-	private void useCachedAliasResource(PlayerNameAlias alias) {
-		voidCraft.logger.info("Using alias cache: " + alias);
+	private void loadCachedAlias(PlayerNameAlias alias) {
+		voidCraft.logger.info("Loading alias cache: " + alias);
 		aliasProfile.put(alias, new GameProfile(getUUID(alias), alias.toString()));
-		try {
-			BufferedImage bimg = ImageIO.read(new File(loc + alias.toString() + ".png"));
-			aliasBiped.put(alias, bimg.getHeight() == 32);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			aliasSkin.put(alias, new ResourceLocation(voidCraft.modid + ":skins/" + alias.toString() + ".png"));
-		}
+		loadAliasResource(alias);
 	}
 
-	private void updateAlias(PlayerNameAlias alias, String name, ResourceLocation skin) {
-		voidCraft.logger.info("Using updated alias: " + alias);
+	private void loadAlias(PlayerNameAlias alias, String name) {
+		voidCraft.logger.info("Loading updated alias: " + alias);
 		aliasProfile.put(alias, new GameProfile(getUUID(alias), name));
+		loadAliasResource(alias);
+	}
+
+	private void loadAliasResource(PlayerNameAlias alias) {
 		try {
 			BufferedImage bimg = ImageIO.read(new File(loc + alias.toString() + ".png"));
+			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+				net.minecraft.client.renderer.texture.DynamicTexture dt = new net.minecraft.client.renderer.texture.DynamicTexture(bimg);
+				TextureManager tm = net.minecraft.client.Minecraft.getMinecraft().getTextureManager();
+				System.out.println(tm);
+				ResourceLocation resource = tm.getDynamicTextureLocation(voidCraft.modid + ":skin_" + alias.toString(), dt);
+				aliasSkin.put(alias, resource);
+			}
 			aliasBiped.put(alias, bimg.getHeight() == 32);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			aliasSkin.put(alias, skin);
 		}
 	}
 

@@ -34,11 +34,11 @@ public class Debugger extends TamItem {
 	 */
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
+			EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
-			// entity.setPositionAndRotation(pos.getX()+0.5, pos.getY() + 1, pos.getZ()+0.5, 0, 0);
-			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 0;
-			// worldIn.spawnEntityInWorld(entity);
+			entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
+			entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 0;
+			worldIn.spawnEntityInWorld(entity);
 		}
 		return EnumActionResult.PASS;
 	}
