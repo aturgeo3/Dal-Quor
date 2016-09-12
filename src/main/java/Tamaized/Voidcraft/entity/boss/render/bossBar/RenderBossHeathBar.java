@@ -46,7 +46,7 @@ public class RenderBossHeathBar {
 		int y = 20;
 		int xf = x + (bgRect.width - fgRect.width) / 2;
 		int yf = y + (bgRect.height - fgRect.height) / 2;
-		int bossHpPerc = (int) ((double) fgRect.width * voidBoss.getPercentHP());
+		int bossHpPerc = (int) ((double) fgRect.width * voidBoss.getPercentHPForBossBar());
 		int tx = c - mc.getRenderManager().getFontRenderer().getStringWidth(name) / 2;
 		
 		GL11.glColor4f(1F, 1F, 1F, 1F);
@@ -62,7 +62,7 @@ public class RenderBossHeathBar {
 		drawBar(xf, yf, 0, fgRect.width, fgRect.height);
 		GL11.glColor4f(0F, 1F, 0F, 1F);
 		drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
-		mc.getRenderManager().getFontRenderer().drawString((int)voidBoss.getHealth()+"/"+(int)voidBoss.getMaxHealth(), xf+1, y + 5, 0x000000);
+		mc.getRenderManager().getFontRenderer().drawString((int)voidBoss.getHealthForBossBar()+"/"+(int)voidBoss.getMaxHealthForBossBar(), xf+1, y + 5, 0x000000);
 		
 		mc.getRenderManager().getFontRenderer().drawStringWithShadow(name, tx, y - 10, 0xAA00FF);
 		

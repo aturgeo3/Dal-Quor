@@ -164,13 +164,23 @@ public class EntityBossCorruptedPawn extends EntityBossCorruptedPawnBase impleme
     }
     
 	@Override
-	public float getPercentHP() {
+	public float getPercentHPForBossBar() {
 		return this.getHealth()/this.getMaxHealth();
 	}
 
 	@Override
 	public ITextComponent getNameForBossBar() {
 		return new TextComponentString("Corrupted Pawn");
+	}
+
+	@Override
+	public float getMaxHealthForBossBar() {
+		return getMaxHealth();
+	}
+
+	@Override
+	public float getHealthForBossBar() {
+		return getHealth();
 	}
 	
 	

@@ -75,8 +75,18 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	}
 
 	@Override
-	public float getPercentHP() {
+	public float getPercentHPForBossBar() {
 		return this.getHealth() / this.getMaxHealth();
+	}
+	
+	@Override
+	public float getHealthForBossBar() {
+		return getHealth();
+	}
+	
+	@Override
+	public float getMaxHealthForBossBar() {
+		return getMaxHealth();
 	}
 
 	@Override

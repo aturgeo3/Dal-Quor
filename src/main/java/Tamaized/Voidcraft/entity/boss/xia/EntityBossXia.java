@@ -49,11 +49,11 @@ public class EntityBossXia extends EntityVoidBoss {
 	protected void initPhase(int phase) {
 		if (phase == 1) {
 			/**
-			 * Cycle: - Herobrine shoots fireballs. - Pillars need to get hit with fireball, cycle through textures of green wool, yellow, red. 4th hit will damage herobrine. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time
+			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
 			 */
 			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
 			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 
