@@ -40,7 +40,7 @@ public class RenderBossHeathBar {
 		Minecraft mc = Minecraft.getMinecraft();
 		Rectangle bgRect = new Rectangle(0, 0, 185, 16);
 		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 10);
-		String name = voidBoss.getDisplayName().getFormattedText();
+		String name = voidBoss.getNameForBossBar().getFormattedText();
 		int c = res.getScaledWidth() / 2;
 		int x = c - bgRect.width / 2;
 		int y = 20;

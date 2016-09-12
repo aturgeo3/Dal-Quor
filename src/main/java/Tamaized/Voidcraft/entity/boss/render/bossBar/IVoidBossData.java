@@ -13,7 +13,7 @@ public interface IVoidBossData {
     /**
      * Get the formatted ChatComponent that will be used for the sender's username in chat
      */
-    public ITextComponent getDisplayName();
+    public ITextComponent getNameForBossBar();
 
 
 }

@@ -13,7 +13,7 @@ import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 
 @SideOnly(Side.CLIENT)
-public class RenderHerobrine<T extends EntityLiving> extends RenderLiving<T>{
+public class RenderHerobrine<T extends EntityBossHerobrine> extends RenderLiving<T>{
 	
 	private static final ResourceLocation Herobrine_Texture = new ResourceLocation("VoidCraft:textures/entity/Herobrine.png");  //refers to:assets/yourmod/textures/entity/yourtexture.png
 	 
@@ -31,7 +31,7 @@ public class RenderHerobrine<T extends EntityLiving> extends RenderLiving<T>{
     public void doRender(T entity, double x, double y, double z, float yaw, float ticks){
     	super.doRender(entity, x, y, z, yaw, ticks);
 		this.renderLabel(entity, x, y, z);
-        RenderBossHeathBar.setCurrentBoss((EntityBossHerobrine)entity);
+        RenderBossHeathBar.setCurrentBoss(entity);
     }
 
 	@Override

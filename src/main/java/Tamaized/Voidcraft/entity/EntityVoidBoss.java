@@ -260,5 +260,9 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected abstract void triggerOnDamage(int phase);
 	
 	public abstract ITextComponent getDisplayName();
+	
+	public ITextComponent getNameForBossBar(){
+		return getDisplayName();
+	}
 
 }

@@ -140,4 +140,5 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 	protected int maxPhases() {
 		return 3;
 	}
+
 }
