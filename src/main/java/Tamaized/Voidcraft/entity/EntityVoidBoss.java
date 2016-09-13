@@ -51,6 +51,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		if (phase == 0) ready = true;
 		else doDamage((int) this.getMaxHealth());
 		active = true;
+		phase = 2;
 	}
 
 	public boolean hasStartedFight() {
