@@ -45,27 +45,28 @@ public class EntityLichInferno extends Entity {
 		if (tick % actionTick == 0) {
 			killFire();
 			calcIndex();
-			if(!isDead) spreadFire();
+			if (!isDead) spreadFire();
 			tick = 0;
 		}
 		tick++;
 	}
-	
-	private void calcIndex(){
-		if(headBack){
+
+	private void calcIndex() {
+		if (headBack) {
 			currIndex--;
-			if(currIndex <= 0) setDead();
-		}else{
+			if (currIndex <= 0) setDead();
+		} else {
 			currIndex++;
-			if(currIndex >= range) headBack = true;
+			if (currIndex >= range) setDead();// headBack = true;
 		}
 	}
-	
-	private void killFire(){
+
+	private void killFire() {
 		for (int x = -currIndex; x <= currIndex; x++) {
 			for (int z = -currIndex; z <= currIndex; z++) {
 				if (Math.abs(x) == currIndex || Math.abs(z) == currIndex) {
-					BlockPos pos = getPosition().add(x, getLowY(getPosition().add(x, 0, z))-1, z);
+					int y = getLowY(getPosition().add(x, 0, z), 4);
+					BlockPos pos = getPosition().add(x, y < 4 ? y - 1 : 3, z);
 					IBlockState state = worldObj.getBlockState(pos);
 					if (state != null && state.getBlock() instanceof FireVoid) {
 						worldObj.setBlockToAir(pos);
@@ -79,15 +80,17 @@ public class EntityLichInferno extends Entity {
 		for (int x = -currIndex; x <= currIndex; x++) {
 			for (int z = -currIndex; z <= currIndex; z++) {
 				if (Math.abs(x) == currIndex || Math.abs(z) == currIndex) {
-					placeFireAt(getPosition().add(x, getLowY(getPosition().add(x, 0, z)), z));
+					int y = getLowY(getPosition().add(x, 0, z), 4);
+					if (y < 4) placeFireAt(getPosition().add(x, y, z));
 				}
 			}
 		}
 	}
-	
-	private int getLowY(BlockPos pos){
-		if(worldObj.isAirBlock(pos)) return getLowY(pos.add(0, -1, 0));
-		else return pos.getY()+1;
+
+	private int getLowY(BlockPos pos, int y) {
+		if (y < -4) return 4;
+		if (worldObj.isAirBlock(pos.add(0, y, 0))) return getLowY(pos, y - 1);
+		else return y + 1;
 	}
 
 	private void placeFireAt(BlockPos pos) {
