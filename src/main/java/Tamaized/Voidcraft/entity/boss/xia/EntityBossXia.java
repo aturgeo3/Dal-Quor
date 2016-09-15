@@ -54,7 +54,7 @@ public class EntityBossXia extends EntityVoidBoss {
 	protected void initPhase(int phase) {
 		if (phase == 1) {
 			/**
-			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
+			 * Cycle: - Teleports around, does various attacks, can be hit directly
 			 */
 			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
@@ -65,7 +65,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			addAI(EntityAIXiaPhase1.class);
 		} else if (phase == 2) {
 			/**
-			 * Cycle: - ??
+			 * Cycle: - Teleports a short distance from a targetted player, walks towards them with a giant sword. do some sword mechanic stuff that can be dodged
 			 */
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
@@ -74,7 +74,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			// addAI(EntityAIPathHerobrineFlightPhase2.class); TODO
 		} else if (phase == 3) {
 			/**
-			 * Cycle: - Same as phase 1, teleports around or perhaps have phase 1 be teleporting around, phase 3 he can stay at the throne
+			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
 			 */
 			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
