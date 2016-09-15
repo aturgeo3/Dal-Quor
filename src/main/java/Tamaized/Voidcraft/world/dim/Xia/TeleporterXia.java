@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
@@ -29,9 +30,12 @@ public class TeleporterXia extends Teleporter {
 		this.random = new Random(par1WorldServer.getSeed());
 	}
 	
-	private void doStructure(WorldServer world, int x, int y, int z){
+	public static void doStructure(SchematicLoader loader, World world, BlockPos pos){
 		if(world == null) return;
-		Schematic spring = sut.get("XiaCastle.schematic");
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		Schematic spring = loader.get("XiaCastle_new.schematic");
 		int i = 0;
 		for (int cy = 0; cy < spring.height; cy++){
 			for (int cz = 0; cz < spring.length; cz++){
@@ -41,29 +45,32 @@ public class TeleporterXia extends Teleporter {
 					world.setBlockToAir(new BlockPos(cx+x+1, cy+y, cz+z+1));
 					
 					switch (id){
-					case 727:
+					case 243:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.fluids.voidFluidBlock.getStateFromMeta(meta), 2);
 						break;
-					case 729:
+					case 221:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockFakeBedrock.getStateFromMeta(meta), 2);
 						break;
-					case 730:
+					case 222:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockNoBreak.getStateFromMeta(meta), 2);
 						break;
-					case 732:
+					case 223:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidbrick.getStateFromMeta(meta), 2);
 						break;
-					case 731:
+					case 219:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidcrystal.getStateFromMeta(meta), 2);
 						break;
-					case 735:
+					case 224:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidfence.getStateFromMeta(meta), 2);
 						break;
-					case 734:
+					case 240:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidBrickHalfSlab.getStateFromMeta(meta), 2);
 						break;
-					case 733:
+					case 242:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.blockVoidstairs.getStateFromMeta(meta), 2);
+						break;
+					case 227:
+						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), voidCraft.blocks.xiaBlock.getStateFromMeta(meta), 2);
 						break;
 					default:
 						world.setBlockState(new BlockPos(cx+x+1, cy+y, cz+z+1), Block.getBlockById(id).getStateFromMeta(meta), 2);
@@ -109,7 +116,7 @@ public class TeleporterXia extends Teleporter {
 		int k = MathHelper.floor_double(e.posZ);
 		
 		if(e.dimension == voidCraft.dimensionIdXia){
-			doStructure(this.worldServerInstance, -11, 59, -4);
+			doStructure(sut, this.worldServerInstance, new BlockPos(-11, 59, -4));
 			worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 		}else{
 			

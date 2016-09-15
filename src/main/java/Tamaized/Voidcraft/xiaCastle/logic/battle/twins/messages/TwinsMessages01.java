@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages;
 
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,6 +29,7 @@ public class TwinsMessages01 {
 				switch(childPhase){
 					case 0:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+p.getGameProfile().getName()+" is approaching."));
+						childPhaseModulate = 20*5;
 						break;
 					case 1:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"I know."));
@@ -49,9 +51,11 @@ public class TwinsMessages01 {
 						break;
 					case 7:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"I don't think so. We are the greatest mystery of all to humans. While this one is strong enough to understand our thoughts, it does not mean it will understand us in all our entirety."));
+						childPhaseModulate = 20*7;
 						break;
 					case 8:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"Let us take a form that is familiar to them, then."));
+						childPhaseModulate = 20*5;
 						break;
 					case 9:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"I agree."));
@@ -59,8 +63,8 @@ public class TwinsMessages01 {
 					case 10:
 						EntityBossZol zol = new EntityBossZol(worldObj);
 						EntityBossDol dol = new EntityBossDol(worldObj);
-						zol.setPosition(pos.getX()+3+.5, pos.getY()+4, pos.getZ()-5+.5);
-						dol.setPosition(pos.getX()-3+.5, pos.getY()+4, pos.getZ()-5+.5);
+						zol.setPositionAndRotation(pos.getX()+5+.5, pos.getY()+4, pos.getZ()+3+.5, 180, 0);
+						dol.setPositionAndRotation(pos.getX()+5+.5, pos.getY()+4, pos.getZ()-3+.5, 180, 0);
 						worldObj.spawnEntityInWorld(zol);
 						worldObj.spawnEntityInWorld(dol);
 						break;
@@ -84,12 +88,12 @@ public class TwinsMessages01 {
 						break;
 					case 17:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] Now then, shall we begin?"));
-						worldObj.setBlockState(pos.add(0, 0, -3), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.SOUTH));
-						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
+						worldObj.setBlockState(pos.add(3, 0, 0), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.WEST));
+						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
 						te.setInventorySlotContents(0, new ItemStack(Items.SIGN));
-						worldObj.setBlockState(pos.add(1, 0, -3), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
-						worldObj.setBlockState(pos.add(0, 1, -3), Blocks.STANDING_SIGN.getDefaultState());
-						TileEntitySign s = (TileEntitySign) worldObj.getTileEntity(pos.add(0, 1, -3));
+						worldObj.setBlockState(pos.add(3, 0, 1), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
+						worldObj.setBlockState(pos.add(3, 1, 0), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
+						TileEntitySign s = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, 0));
 						s.signText[0] = new TextComponentString("Material");
 						s.signText[1] = new TextComponentString("Elemental");
 						s.signText[2] = new TextComponentString("Lawful Neutral");
@@ -101,8 +105,8 @@ public class TwinsMessages01 {
 					default:
 						break;
 				}
-				childPhase++;
 			}
+			childPhase++;
 		}
 		return false;
 	}

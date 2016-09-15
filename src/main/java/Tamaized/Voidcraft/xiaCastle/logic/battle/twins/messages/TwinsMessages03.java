@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages;
 
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,22 +34,22 @@ public class TwinsMessages03 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] We're not done yet though."));
 						break;
 					case 2:
-						worldObj.setBlockState(pos.add(0, 0, -3), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.SOUTH));
-						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
+						worldObj.setBlockState(pos.add(3, 0, 0), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.WEST));
+						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
 						te.setInventorySlotContents(0, new ItemStack(Items.SIGN));
-						worldObj.setBlockState(pos.add(1, 0, -3), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
-						worldObj.setBlockState(pos.add(0, 1, -3), Blocks.STANDING_SIGN.getDefaultState());
-						TileEntitySign s = (TileEntitySign) worldObj.getTileEntity(pos.add(0, 1, -3));
+						worldObj.setBlockState(pos.add(3, 0, 1), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
+						worldObj.setBlockState(pos.add(3, 1, 0), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
+						TileEntitySign s = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, 0));
 						s.signText[0] = new TextComponentString("Destruction");
-						s.signText[1] = new TextComponentString("unexposed");
+						s.signText[1] = new TextComponentString("Unexposed");
 						s.signText[2] = new TextComponentString("Chaotic Evil");
 						s.signText[3] = new TextComponentString("Who am I");
 						return true;
 					default:
 						break;
 				}
-				childPhase++;
 			}
+			childPhase++;
 		}
 		return false;
 	}

@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages;
 
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,7 +22,7 @@ import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
 public class TwinsMessages04 {
 	
 	public static int childPhase = 0;
-	public static int childPhaseModulate = 20*5;
+	public static int childPhaseModulate = 20*3;
 	
 	public static boolean run(World worldObj, BlockPos pos, int tick){
 		if(tick % childPhaseModulate == 0){
@@ -34,18 +35,18 @@ public class TwinsMessages04 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"[Dol] How about this one?"));
 						break;
 					case 2:
-						worldObj.setBlockState(pos.add(0, 0, -3), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.SOUTH));
-						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
+						worldObj.setBlockState(pos.add(3, 0, 0), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.WEST));
+						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
 						te.setInventorySlotContents(0, new ItemStack(Items.SIGN));
-						worldObj.setBlockState(pos.add(1, 0, -2), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
-						worldObj.setBlockState(pos.add(1, 0, -3), voidCraft.blocks.blockNoBreak.getDefaultState());
-						worldObj.setBlockState(pos.add(-1, 0, -3), voidCraft.blocks.blockNoBreak.getDefaultState());
-						worldObj.setBlockState(pos.add(0, 1, -3), Blocks.STANDING_SIGN.getDefaultState());
-						worldObj.setBlockState(pos.add(1, 1, -3), Blocks.STANDING_SIGN.getDefaultState());
-						worldObj.setBlockState(pos.add(-1, 1, -3), Blocks.STANDING_SIGN.getDefaultState());
-						TileEntitySign s1 = (TileEntitySign) worldObj.getTileEntity(pos.add(-1, 1, -3));
-						TileEntitySign s2 = (TileEntitySign) worldObj.getTileEntity(pos.add(0, 1, -3));
-						TileEntitySign s3 = (TileEntitySign) worldObj.getTileEntity(pos.add(1, 1, -3));
+						worldObj.setBlockState(pos.add(2, 0, 1), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
+						worldObj.setBlockState(pos.add(3, 0, 1), voidCraft.blocks.blockNoBreak.getDefaultState());
+						worldObj.setBlockState(pos.add(3, 0, -1), voidCraft.blocks.blockNoBreak.getDefaultState());
+						worldObj.setBlockState(pos.add(3, 1, 0), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
+						worldObj.setBlockState(pos.add(3, 1, 1), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
+						worldObj.setBlockState(pos.add(3, 1, -1), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
+						TileEntitySign s1 = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, -1));
+						TileEntitySign s2 = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, 0));
+						TileEntitySign s3 = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, 1));
 						s1.signText[0] = new TextComponentString("In your future");
 						s1.signText[1] = new TextComponentString("and in your past");
 						s1.signText[2] = new TextComponentString("I come and go");
@@ -62,8 +63,8 @@ public class TwinsMessages04 {
 					default:
 						break;
 				}
-				childPhase++;
 			}
+			childPhase++;
 		}
 		return false;
 	}

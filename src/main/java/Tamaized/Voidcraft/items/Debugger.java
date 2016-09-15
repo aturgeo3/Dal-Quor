@@ -15,9 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 
 public class Debugger extends TamItem {
 
@@ -32,11 +31,11 @@ public class Debugger extends TamItem {
 	 */
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
+			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
-			entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
-			entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
-			worldIn.spawnEntityInWorld(entity);
+			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
+			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
+			// worldIn.spawnEntityInWorld(entity);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -52,6 +51,8 @@ public class Debugger extends TamItem {
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
+		SchematicLoader loader = new SchematicLoader();
+		SchematicLoader.buildSchematic("twinsRoom.schematic", loader, worldIn, playerIn.getPosition());
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 
