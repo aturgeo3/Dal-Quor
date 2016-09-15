@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.util.math.BlockPos;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
+import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
@@ -46,11 +47,12 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	public void updateTask() {
 		super.updateTask();
 		if (tick % actionTick == 0) {
-			switch (rand.nextInt(4)) { // TODO: figure out what kind of attacks we want for phase 1
+			switch (rand.nextInt(1)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
 				case 0:
 					actionTeleport();
 					break;
 				case 1: // Voidic Fire (Same as Lich)
+					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
 					break;
 				case 2: // Use the force luke :P some sort of choke mechanic idk
 					break;
