@@ -7,6 +7,7 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPha
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.HerobrineAIPhase3;
 
+@Deprecated
 public class EntityAIHandler {
 
 	private EntityVoidBoss entity;

@@ -4,23 +4,20 @@ import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase1;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase2;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.flight.EntityAIPathHerobrineFlightPhase3;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
 
 public class EntityBossXia extends EntityVoidBoss {
 
@@ -35,8 +32,16 @@ public class EntityBossXia extends EntityVoidBoss {
 	}
 
 	@Override
-	protected void triggerOnDamage(int phase) {
-		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.05D);
+	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
+		bus.sendPacket(new XiaTookDamagePacket());
+	}
+
+	public class XiaTookDamagePacket extends Packet {
+
+		public XiaTookDamagePacket() {
+			bus.super();
+		}
+
 	}
 
 	@Override
@@ -56,51 +61,51 @@ public class EntityBossXia extends EntityVoidBoss {
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
 			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
-
-			addAI(EntityAIPathHerobrineFlightPhase1.class);
+			setInvul(false);
+			addAI(EntityAIXiaPhase1.class);
 		} else if (phase == 2) {
 			/**
-			 * Cycle: - Herobrine chases the player. - On touching a player, deal damage. - Herobrine must run through a pillar to be dealt damage. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time - Increase his speed everytime he is hurt
+			 * Cycle: - ??
 			 */
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
 
-			addAI(EntityAIPathHerobrineFlightPhase2.class);
+			// addAI(EntityAIPathHerobrineFlightPhase2.class); TODO
 		} else if (phase == 3) {
 			/**
-			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
+			 * Cycle: - Same as phase 1, teleports around or perhaps have phase 1 be teleporting around, phase 3 he can stay at the throne
 			 */
 			isFlying = true;
-			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
 
-			addAI(EntityAIPathHerobrineFlightPhase3.class);
+			// addAI(EntityAIPathHerobrineFlightPhase3.class); TODO
 
 		}
 	}
-	
-    @Override
-    protected SoundEvent getAmbientSound(){
-    	return VoidSoundEvents.EntityMobXiaSoundEvents.ambientSound;
-    }
-    
-    @Override
-    protected SoundEvent getHurtSound(){
-    	return VoidSoundEvents.EntityMobXiaSoundEvents.hurtSound;
-    }
-    
-    @Override
-    protected SoundEvent getDeathSound(){
-    	return VoidSoundEvents.EntityMobXiaSoundEvents.deathSound;
-    }
-	
+
 	@Override
-	protected float getSoundVolume(){
+	protected SoundEvent getAmbientSound() {
+		return VoidSoundEvents.EntityMobXiaSoundEvents.ambientSound;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound() {
+		return VoidSoundEvents.EntityMobXiaSoundEvents.hurtSound;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return VoidSoundEvents.EntityMobXiaSoundEvents.deathSound;
+	}
+
+	@Override
+	protected float getSoundVolume() {
 		return 0.0F;
 	}
-	
+
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TextComponentString("Xia");

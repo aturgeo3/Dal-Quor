@@ -3,7 +3,6 @@ package Tamaized.Voidcraft.entity;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Iterator;
 
 import net.minecraft.entity.Entity;
@@ -17,6 +16,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
+import Tamaized.Voidcraft.network.VoidBossAIBus;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
@@ -24,6 +24,8 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossData {
 
 	private IBattleHandler handler;
+	protected VoidBossAIBus bus;
+
 	private int phase = 0;
 	private boolean ready = false;
 	private boolean active = false;
@@ -45,20 +47,20 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	public EntityVoidBoss(World world, IBattleHandler handler) {
 		this(world);
 		this.handler = handler;
+		bus = new VoidBossAIBus();
 	}
 
 	public void start() {
-		if (phase == 0) ready = true;
+		if (phase == 0 && bus != null) ready = true;
 		else doDamage((int) this.getMaxHealth());
 		active = true;
-		phase = 2;
 	}
 
 	public boolean hasStartedFight() {
 		return phase > 0;
 	}
-	
-	public int getCurrentPhase(){
+
+	public int getCurrentPhase() {
 		return phase;
 	}
 
@@ -72,19 +74,26 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	public void doDamage(int a) {
 		this.setHealth(this.getHealth() - a);
-		triggerOnDamage(phase);
+		triggerOnDamage(phase, null, a);
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		boolean flag = super.attackEntityFrom(source, amount);
+		if (flag) triggerOnDamage(phase, source, amount);
+		return flag;
 	}
 
 	@Override
 	public float getPercentHPForBossBar() {
 		return this.getHealth() / this.getMaxHealth();
 	}
-	
+
 	@Override
 	public float getHealthForBossBar() {
 		return getHealth();
 	}
-	
+
 	@Override
 	public float getMaxHealthForBossBar() {
 		return getMaxHealth();
@@ -102,6 +111,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 				setDead();
 				return;
 			}
+
 			updateAI();
 		}
 	}
@@ -136,23 +146,25 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		}
 		tasks.taskEntries.clear();
 		targetTasks.taskEntries.clear();
+		bus.clearListeners();
 		canDie = false;
 		if (p > maxPhases()) {
 			canDie = true;
 			onDeathUpdate();
-		}else{
+		} else {
 			initPhase(p);
 		}
 	}
-	
-	protected void addAI(Class<? extends EntityVoidNPCAIBase> c){
-		try{
-		Constructor<? extends EntityVoidNPCAIBase> ctor = c.getConstructor(EntityVoidBoss.class, ArrayList.class);
-		EntityVoidNPCAIBase newAI = ctor.newInstance(this, filter);
-		ai.add(newAI);
-		newAI.Init();
-		this.tasks.addTask(1, newAI);
-		}catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e){
+
+	protected void addAI(Class<? extends EntityVoidNPCAIBase> c) {
+		try {
+			Constructor<? extends EntityVoidNPCAIBase> ctor = c.getConstructor(EntityVoidBoss.class, ArrayList.class);
+			EntityVoidNPCAIBase newAI = ctor.newInstance(this, filter);
+			ai.add(newAI);
+			newAI.Init();
+			this.tasks.addTask(1, newAI);
+			bus.addListener(newAI);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -221,6 +233,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 			if (o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
 			iter.remove();
 		}
+		bus.clearListeners();
 		phase = 100;
 		setHealth(0);
 		this.isDead = true;
@@ -268,11 +281,11 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	protected abstract int maxPhases();
 
-	protected abstract void triggerOnDamage(int phase);
-	
+	protected abstract void triggerOnDamage(int phase, DamageSource source, float amount);
+
 	public abstract ITextComponent getDisplayName();
-	
-	public ITextComponent getNameForBossBar(){
+
+	public ITextComponent getNameForBossBar() {
 		return getDisplayName();
 	}
 

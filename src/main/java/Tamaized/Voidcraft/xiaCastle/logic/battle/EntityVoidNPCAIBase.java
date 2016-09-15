@@ -3,17 +3,16 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
 
-public class EntityVoidNPCAIBase extends EntityAIBase{
+
+public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 	
-	public EntityVoidBoss entity;
-	public boolean execute = false;
+	private EntityVoidBoss entity;
+	private boolean execute = false;
 	
-	protected EntityLiving theWatcher;
     /** The closest entity which is being watched by this one. */
     protected Entity closestEntity;
     /** This is the Maximum distance that the AI will look for the Entity */
@@ -28,7 +27,6 @@ public class EntityVoidNPCAIBase extends EntityAIBase{
 		watchedClass = new ArrayList<Class>();
 		watchedClass.addAll(c);
 		entity = entityBoss;
-		theWatcher = entity;
 		ai = new EntityAIHandler(entityBoss, (int) entityBoss.posX, (int) entityBoss.posY, (int) entityBoss.posZ);
 	}
 
@@ -62,5 +60,11 @@ public class EntityVoidNPCAIBase extends EntityAIBase{
 		if(!execute) return;
 		ai.update();
 	}
+	
+	public EntityVoidBoss getEntity(){
+		return entity;
+	}
+	
+	public abstract void readPacket(Packet packet);
 
 }

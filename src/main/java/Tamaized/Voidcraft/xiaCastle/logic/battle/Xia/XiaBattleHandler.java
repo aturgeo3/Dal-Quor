@@ -5,6 +5,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 
 public class XiaBattleHandler implements IBattleHandler {
@@ -21,7 +22,7 @@ public class XiaBattleHandler implements IBattleHandler {
 	private World worldObj;
 	private BlockPos pos;
 
-	private EntityBossHerobrine herobrine;
+	private EntityBossXia xia;
 
 	@Override
 	public void update() {
@@ -30,10 +31,10 @@ public class XiaBattleHandler implements IBattleHandler {
 				switch (phase) {
 					case 0: // Form 1
 						if (readyForInput) {
-							herobrine = new EntityBossHerobrine(worldObj, this);
-							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-							worldObj.spawnEntityInWorld(herobrine);
-							herobrine.start();
+							xia = new EntityBossXia(worldObj, this);
+							xia.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5); //TODO: figure out the location of the throne relative to this point
+							worldObj.spawnEntityInWorld(xia);
+							xia.start();
 							phase++;
 							readyForInput = false;
 						} else {
@@ -44,7 +45,7 @@ public class XiaBattleHandler implements IBattleHandler {
 						if (readyForInput) {
 
 						} else {
-							readyForInput = !herobrine.isActive();
+							readyForInput = !xia.isActive();
 						}
 						break;
 					default:

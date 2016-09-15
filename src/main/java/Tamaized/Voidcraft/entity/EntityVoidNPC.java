@@ -135,11 +135,11 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob{
      * Called when the entity is attacked.
      */
     @Override
-    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_){
+    public boolean attackEntityFrom(DamageSource source, float amount){
     	if(this.isEntityInvulnerable()){
     		return false;
-    	}else if(super.attackEntityFrom(p_70097_1_, p_70097_2_)){
-    		Entity entity = p_70097_1_.getEntity();
+    	}else if(super.attackEntityFrom(source, amount)){
+    		Entity entity = source.getEntity();
     		if(entity != this && entity instanceof EntityLivingBase){
     			this.setAttackTarget((EntityLivingBase) entity);
     		}
