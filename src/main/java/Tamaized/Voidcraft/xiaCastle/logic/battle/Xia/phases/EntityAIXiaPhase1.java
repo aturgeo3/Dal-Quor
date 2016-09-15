@@ -27,14 +27,19 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	public void Init() {
 		super.Init();
 		teleportLocations = new ArrayList<BlockPos>();
-		// TODO fill with the set location positions
+		// TODO validate these
+		teleportLocations.add(new BlockPos(0, 12, 32));
+		teleportLocations.add(new BlockPos(0, 10, 7));
+		teleportLocations.add(new BlockPos(17, 6, 35));
+		teleportLocations.add(new BlockPos(-12, 6, 35));
+		teleportLocations.add(new BlockPos(0, 5, 19));
 		teleportLocations.add(getEntity().getPosition());
 		currPos = getEntity().getPosition();
 	}
 
 	@Override
 	public void readPacket(Packet packet) {
-		if(packet instanceof XiaTookDamagePacket) actionTeleport();
+		if (packet instanceof XiaTookDamagePacket) actionTeleport();
 	}
 
 	@Override
@@ -45,13 +50,13 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 				case 0:
 					actionTeleport();
 					break;
-				case 1:
+				case 1: // Voidic Fire (Same as Lich)
 					break;
-				case 2:
+				case 2: // Use the force luke :P some sort of choke mechanic idk
 					break;
-				case 3:
+				case 3: // zues bolt
 					break;
-				case 4:
+				case 4: // random knockback I guess
 					break;
 				default:
 					actionTeleport();
@@ -63,7 +68,7 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 
 	private void actionTeleport() {
 		BlockPos nextLoc = getNextTeleportLocation();
-		// TODO: do some fancy particles and sounds here for the prev location and new location
+		// TODO: do some fancy particles and sounds here for the previous location and new location
 		getEntity().setPositionAndUpdate(nextLoc.getX(), nextLoc.getY(), nextLoc.getZ());
 	}
 

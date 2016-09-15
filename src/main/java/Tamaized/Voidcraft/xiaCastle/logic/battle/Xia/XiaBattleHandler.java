@@ -32,7 +32,7 @@ public class XiaBattleHandler implements IBattleHandler {
 					case 0: // Form 1
 						if (readyForInput) {
 							xia = new EntityBossXia(worldObj, this);
-							xia.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5); //TODO: figure out the location of the throne relative to this point
+							xia.setPositionAndUpdate(pos.getX() + 0.5 + 0, pos.getY() + 1 + 19, pos.getZ() + 0.5 + 43); //TODO: validate this
 							worldObj.spawnEntityInWorld(xia);
 							xia.start();
 							phase++;
