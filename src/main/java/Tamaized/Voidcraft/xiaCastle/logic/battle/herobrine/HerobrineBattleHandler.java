@@ -1,8 +1,6 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
@@ -17,7 +15,6 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	private boolean readyForInput = false;
 
 	private boolean running;
-	private boolean isDone = false;
 
 	private World worldObj;
 	private BlockPos pos;
@@ -69,11 +66,6 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	@Override
 	public boolean isRunning() {
 		return running;
-	}
-
-	@Override
-	public boolean isDone() {
-		return isDone;
 	}
 
 }

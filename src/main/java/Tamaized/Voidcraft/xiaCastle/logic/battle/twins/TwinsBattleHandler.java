@@ -22,9 +22,6 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.messages.TwinsMessages05;
 public class TwinsBattleHandler implements IBattleHandler {
 
 	private int phase = 0;
-	private int tick = 0;
-	private int childPhase = 0;
-	private int childPhaseModulate = 20;
 	private boolean readyForInput = false;
 
 	private boolean running;
@@ -69,8 +66,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								}
 							}
 						} else {
-							tick++;
-							readyForInput = TwinsMessages01.run(worldObj, pos, tick);
+							readyForInput = TwinsMessages01.run(worldObj, pos);
 						}
 						break;
 					case 1:
@@ -104,8 +100,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								}
 							}
 						} else {
-							tick++;
-							readyForInput = TwinsMessages02.run(worldObj, pos, tick);
+							readyForInput = TwinsMessages02.run(worldObj, pos);
 						}
 						break;
 					case 2:
@@ -139,8 +134,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								}
 							}
 						} else {
-							tick++;
-							readyForInput = TwinsMessages03.run(worldObj, pos, tick);
+							readyForInput = TwinsMessages03.run(worldObj, pos);
 						}
 						break;
 					case 3:
@@ -178,16 +172,14 @@ public class TwinsBattleHandler implements IBattleHandler {
 								}
 							}
 						} else {
-							tick++;
-							readyForInput = TwinsMessages04.run(worldObj, pos, tick);
+							readyForInput = TwinsMessages04.run(worldObj, pos);
 						}
 						break;
 					case 4:
-						boolean flag = TwinsMessages05.run(worldObj, pos, tick);
+						boolean flag = TwinsMessages05.run(worldObj, pos);
 						if (flag) {
 							stop();
 						}
-						tick++;
 						break;
 					default:
 						break;
@@ -245,11 +237,6 @@ public class TwinsBattleHandler implements IBattleHandler {
 	@Override
 	public boolean isRunning() {
 		return running;
-	}
-
-	@Override
-	public boolean isDone() {
-		return isDone;
 	}
 
 }

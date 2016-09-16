@@ -8,11 +8,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class TwinsMessages05 {
-	
+
+	public static int tick = 1;
 	public static int childPhase = 0;
 	public static int childPhaseModulate = 20*5;
 	
-	public static boolean run(World worldObj, BlockPos pos, int tick){
+	public static boolean run(World worldObj, BlockPos pos){
 		if(tick % childPhaseModulate == 0){
 			for(EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))){
 				switch(childPhase){
@@ -55,6 +56,7 @@ public class TwinsMessages05 {
 			}
 			childPhase++;
 		}
+		tick++;
 		return false;
 	}
 

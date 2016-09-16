@@ -20,11 +20,12 @@ import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
 import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
 
 public class TwinsMessages04 {
-	
+
+	public static int tick = 1;
 	public static int childPhase = 0;
 	public static int childPhaseModulate = 20*3;
 	
-	public static boolean run(World worldObj, BlockPos pos, int tick){
+	public static boolean run(World worldObj, BlockPos pos){
 		if(tick % childPhaseModulate == 0){
 			for(EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))){
 				switch(childPhase){
@@ -66,6 +67,7 @@ public class TwinsMessages04 {
 			}
 			childPhase++;
 		}
+		tick++;
 		return false;
 	}
 

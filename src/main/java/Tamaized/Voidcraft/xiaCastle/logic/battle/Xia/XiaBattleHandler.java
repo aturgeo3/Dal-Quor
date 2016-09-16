@@ -17,7 +17,6 @@ public class XiaBattleHandler implements IBattleHandler {
 	private boolean readyForInput = false;
 
 	private boolean running;
-	private boolean isDone = false;
 
 	private World worldObj;
 	private BlockPos pos;
@@ -32,7 +31,7 @@ public class XiaBattleHandler implements IBattleHandler {
 					case 0: // Form 1
 						if (readyForInput) {
 							xia = new EntityBossXia(worldObj, this);
-							xia.setPositionAndUpdate(pos.getX() + 0.5 + 0, pos.getY() + 1 + 19, pos.getZ() + 0.5 + 43); //TODO: validate this
+							xia.setPositionAndUpdate(pos.getX() + 0.5 + 0, pos.getY() + 1 + 19, pos.getZ() + 0.5 + 43); // TODO: validate this
 							worldObj.spawnEntityInWorld(xia);
 							xia.start();
 							phase++;
@@ -76,11 +75,6 @@ public class XiaBattleHandler implements IBattleHandler {
 	@Override
 	public boolean isRunning() {
 		return running;
-	}
-
-	@Override
-	public boolean isDone() {
-		return isDone;
 	}
 
 }
