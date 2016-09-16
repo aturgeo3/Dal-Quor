@@ -233,10 +233,11 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 			if (o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
 			iter.remove();
 		}
-		bus.clearListeners();
+		if (bus != null) bus.clearListeners();
 		phase = 100;
 		setHealth(0);
 		this.isDead = true;
+		active = false;
 	}
 
 	/**

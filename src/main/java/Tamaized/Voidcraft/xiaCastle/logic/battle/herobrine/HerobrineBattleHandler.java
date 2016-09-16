@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,32 +26,10 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote) {
-			if (running) {
-				switch (phase) {
-					case 0:
-						if (readyForInput) {
-							herobrine = new EntityBossHerobrine(worldObj, this);
-							herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY()+1, pos.getZ() + 0.5);
-							worldObj.spawnEntityInWorld(herobrine);
-							herobrine.start();
-							phase++;
-							readyForInput = false;
-						} else {
-							readyForInput = true;
-						}
-						break;
-					case 1:
-						if(readyForInput){
-							
-						}else{
-							readyForInput = !herobrine.isActive();
-						}
-						break;
-					default:
-						break;
-				}
-				if (!readyForInput) tick++;
+		if (!worldObj.isRemote && running) {
+			if (herobrine == null || !herobrine.isActive()) {
+				stop();
+				return;
 			}
 		}
 	}
@@ -62,14 +41,29 @@ public class HerobrineBattleHandler implements IBattleHandler {
 		stop();
 		phase = 0;
 		readyForInput = false;
+		for (int z = -2; z <= 2; z++) {
+			for (int y = 5; y > 0; y--) {
+				world.setBlockState(p.add(11, y, z), Blocks.NETHER_BRICK.getDefaultState());
+			}
+		}
+		herobrine = new EntityBossHerobrine(worldObj, this);
+		herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+		worldObj.spawnEntityInWorld(herobrine);
+		herobrine.start();
 		running = true;
 	}
 
 	@Override
 	public void stop() {
 		readyForInput = false;
-		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-			worldObj.removeEntity(e);
+		if (herobrine != null) worldObj.removeEntity(herobrine);
+		herobrine = null;
+		for (int z = -2; z <= 2; z++) {
+			for (int y = 5; y > 0; y--) {
+				worldObj.setBlockToAir(pos.add(11, y, z));
+			}
+		}
+		running = false;
 	}
 
 	@Override

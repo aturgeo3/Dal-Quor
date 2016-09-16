@@ -40,7 +40,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable{
 	
 	public void start(){
 		if(running) stop();
-		activeHandler = xia;
+		activeHandler = twins;
 		activeHandler.start(worldObj, getPos());
 		running = true;
 	}

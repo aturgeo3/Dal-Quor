@@ -41,7 +41,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 
 	public void boom() {
 		if (ai != null) {
-			if (state < 3) state++;
+			if (state < 2) state++;
 			else {
 				ai.doAction(getPos());
 				setDead();
