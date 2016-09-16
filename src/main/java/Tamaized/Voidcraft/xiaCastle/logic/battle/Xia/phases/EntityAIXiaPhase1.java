@@ -44,8 +44,7 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	}
 
 	@Override
-	public void updateTask() {
-		super.updateTask();
+	public void update() {
 		if (tick % actionTick == 0) {
 			switch (rand.nextInt(1)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
 				case 0:
@@ -79,6 +78,11 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 		BlockPos loc = teleportLocations.get(i > 0 ? i : 0);
 		if (currPos.equals(loc)) return getNextTeleportLocation();
 		return loc;
+	}
+
+	@Override
+	public void doAction(BlockPos pos) {
+
 	}
 
 }

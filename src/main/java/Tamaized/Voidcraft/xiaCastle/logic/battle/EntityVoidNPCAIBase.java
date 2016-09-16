@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
 
 
 public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 	
-	private EntityVoidBoss entity;
 	private boolean execute = false;
+
+	private EntityVoidBoss entity;
+	protected World world;
 	
     /** The closest entity which is being watched by this one. */
     protected Entity closestEntity;
@@ -19,15 +24,17 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
     protected float maxDistanceForPlayer = 30;
     protected ArrayList<Class> watchedClass = new ArrayList<Class>();
     
-    private EntityAIHandler ai;
-	
 	private double[] spawnLoc = new double[3];
+	private BlockPos pos;
+
+	protected int tick = 1;
 
 	public EntityVoidNPCAIBase(EntityVoidBoss entityBoss, ArrayList<Class> c) {
 		watchedClass = new ArrayList<Class>();
 		watchedClass.addAll(c);
 		entity = entityBoss;
-		ai = new EntityAIHandler(entityBoss, (int) entityBoss.posX, (int) entityBoss.posY, (int) entityBoss.posZ);
+		pos = entity.getPosition();
+		world = entityBoss.worldObj;
 	}
 
 	@Override
@@ -41,8 +48,6 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 		entity.posY = spawnLoc[1];
 		entity.posZ = spawnLoc[2];
 		entity = null;
-		
-		ai.kill();
 	}
 
 	public void Init() {
@@ -50,19 +55,32 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 		spawnLoc[1] = entity.posY;
 		spawnLoc[2] = entity.posZ;
 		
-		ai.Init(entity.getCurrentPhase());
-	
 		execute = true;
 	}
 
+	/**
+	 * DO NOT OVERRIDE THIS METHOD, use update() instead
+	 */
 	@Override
 	public void updateTask(){
-		if(!execute) return;
-		ai.update();
+		if(!shouldExecute() || world.isRemote) return;
+		update();
+		tick++;
 	}
+	
+	/**
+	 * Use this method to deal with logic updates
+	 */
+	protected abstract void update();
+	
+	public abstract void doAction(BlockPos pos);
 	
 	public EntityVoidBoss getEntity(){
 		return entity;
+	}
+	
+	public BlockPos getPosition(){
+		return pos;
 	}
 	
 	public abstract void readPacket(Packet packet);
