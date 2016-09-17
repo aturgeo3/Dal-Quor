@@ -55,6 +55,7 @@ public class TwinsMessages05 {
 				}
 			}
 			childPhase++;
+			tick = 1;
 		}
 		tick++;
 		return false;

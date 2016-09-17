@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases;
 import java.util.ArrayList;
 import java.util.Random;
 
+import scala.languageFeature.postfixOps;
 import net.minecraft.util.math.BlockPos;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
@@ -15,7 +16,6 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	private final Random rand = new Random();
 
 	private ArrayList<BlockPos> teleportLocations;
-	private BlockPos currPos;
 
 	private int tick;
 	private int actionTick = 20 * 10;
@@ -29,13 +29,12 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 		super.Init();
 		teleportLocations = new ArrayList<BlockPos>();
 		// TODO validate these
-		teleportLocations.add(new BlockPos(0, 12, 32));
-		teleportLocations.add(new BlockPos(0, 10, 7));
-		teleportLocations.add(new BlockPos(17, 6, 35));
-		teleportLocations.add(new BlockPos(-12, 6, 35));
-		teleportLocations.add(new BlockPos(0, 5, 19));
+		teleportLocations.add(getPosition().add(0, 12, 32));
+		teleportLocations.add(getPosition().add(0, 10, 7));
+		teleportLocations.add(getPosition().add(17, 6, 35));
+		teleportLocations.add(getPosition().add(-12, 6, 35));
+		teleportLocations.add(getPosition().add(0, 5, 19));
 		teleportLocations.add(getEntity().getPosition());
-		currPos = getEntity().getPosition();
 	}
 
 	@Override
@@ -46,9 +45,9 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	@Override
 	public void update() {
 		if (tick % actionTick == 0) {
-			switch (rand.nextInt(1)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
+			switch (rand.nextInt(4)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
 				case 0:
-					actionTeleport();
+					//actionTeleport();
 					break;
 				case 1: // Voidic Fire (Same as Lich)
 					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
@@ -76,7 +75,7 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	private BlockPos getNextTeleportLocation() {
 		int i = rand.nextInt(teleportLocations.size());
 		BlockPos loc = teleportLocations.get(i > 0 ? i : 0);
-		if (currPos.equals(loc)) return getNextTeleportLocation();
+		if (getEntity().getPosition().equals(loc)) return getNextTeleportLocation();
 		return loc;
 	}
 

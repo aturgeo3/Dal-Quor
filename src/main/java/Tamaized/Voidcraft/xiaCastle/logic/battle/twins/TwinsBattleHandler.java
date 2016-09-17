@@ -30,10 +30,17 @@ public class TwinsBattleHandler implements IBattleHandler {
 	private World worldObj;
 	private BlockPos pos;
 
+	private EntityBossDol dol;
+	private EntityBossZol zol;
+
 	@Override
 	public void update() {
 		if (!worldObj.isRemote) {
 			if (running) {
+				if (zol == null || dol == null || !zol.isActive() || !dol.isActive()) {
+					stop();
+					return;
+				}
 				switch (phase) {
 					case 0:
 						if (readyForInput) {
@@ -66,7 +73,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								}
 							}
 						} else {
-							readyForInput = TwinsMessages01.run(worldObj, pos);
+							readyForInput = TwinsMessages01.run(worldObj, pos, dol, zol);
 						}
 						break;
 					case 1:
@@ -194,23 +201,36 @@ public class TwinsBattleHandler implements IBattleHandler {
 		stop();
 		phase = 0;
 		readyForInput = false;
+
 		for (int z = pos.getZ() - 2; z <= pos.getZ() + 2; z++) {
 			for (int y = pos.getY(); y <= pos.getY() + 4; y++) {
 				int x = pos.getX() - 12;
 				worldObj.setBlockState(new BlockPos(x, y, z), Blocks.MOSSY_COBBLESTONE.getDefaultState());
 			}
 		}
+
 		TwinsMessages01.childPhase = 0;
 		TwinsMessages02.childPhase = 0;
 		TwinsMessages03.childPhase = 0;
 		TwinsMessages04.childPhase = 0;
 		TwinsMessages05.childPhase = 0;
+
+		dol = new EntityBossDol(worldObj, this);
+		zol = new EntityBossZol(worldObj, this);
+		dol.setPosition(pos.getX() + 5 + .5, pos.getY() + 4, pos.getZ() - 3 + .5);
+		zol.setPosition(pos.getX() + 5 + .5, pos.getY() + 4, pos.getZ() + 3 + .5);
+		dol.start();
+		zol.start();
 		// phase = 3;
 		running = true;
 	}
 
 	public void stop() {
 		readyForInput = false;
+		if (dol != null) worldObj.removeEntity(dol);
+		dol = null;
+		if (zol != null) worldObj.removeEntity(zol);
+		zol = null;
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			worldObj.removeEntity(e);
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))

@@ -25,32 +25,10 @@ public class XiaBattleHandler implements IBattleHandler {
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote) {
-			if (running) {
-				switch (phase) {
-					case 0: // Form 1
-						if (readyForInput) {
-							xia = new EntityBossXia(worldObj, this);
-							xia.setPositionAndUpdate(pos.getX() + 0.5 + 0, pos.getY() + 1 + 19, pos.getZ() + 0.5 + 43); // TODO: validate this
-							worldObj.spawnEntityInWorld(xia);
-							xia.start();
-							phase++;
-							readyForInput = false;
-						} else {
-							readyForInput = true;
-						}
-						break;
-					case 1:
-						if (readyForInput) {
-
-						} else {
-							readyForInput = !xia.isActive();
-						}
-						break;
-					default:
-						break;
-				}
-				if (!readyForInput) tick++;
+		if (!worldObj.isRemote && running) {
+			if (xia == null || !xia.isActive()) {
+				stop();
+				return;
 			}
 		}
 	}
@@ -62,14 +40,18 @@ public class XiaBattleHandler implements IBattleHandler {
 		stop();
 		phase = 0;
 		readyForInput = false;
+		xia = new EntityBossXia(worldObj, this);
+		xia.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+		worldObj.spawnEntityInWorld(xia);
+		xia.start();
 		running = true;
 	}
 
 	@Override
 	public void stop() {
 		readyForInput = false;
-		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-			worldObj.removeEntity(e);
+		if (xia != null) worldObj.removeEntity(xia);
+		xia = null;
 	}
 
 	@Override

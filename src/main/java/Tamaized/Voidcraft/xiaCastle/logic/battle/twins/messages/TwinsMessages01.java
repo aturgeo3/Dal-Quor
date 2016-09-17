@@ -24,7 +24,7 @@ public class TwinsMessages01 {
 	public static int childPhase = 0;
 	public static int childPhaseModulate = 20*5;
 	
-	public static boolean run(World worldObj, BlockPos pos){
+	public static boolean run(World worldObj, BlockPos pos,EntityBossDol dol, EntityBossZol zol){
 		if(tick % childPhaseModulate == 0){
 			for(EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))){
 				switch(childPhase){
@@ -45,7 +45,7 @@ public class TwinsMessages01 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"I don't blame them. There isn't much information out there about us... yet."));
 						break;
 					case 5:
-						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"True. But to think... we're going to play a bigger part of this one's dream. "+p.getGameProfile().getName()+" will get to meet us."));
+						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"True, but to think... we're going to play a bigger part of this one's dream. "+p.getGameProfile().getName()+" will get to meet us."));
 						break;
 					case 6:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"Will "+p.getGameProfile().getName()+" understand what we are?"));
@@ -62,10 +62,8 @@ public class TwinsMessages01 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"I agree."));
 						break;
 					case 10:
-						EntityBossZol zol = new EntityBossZol(worldObj);
-						EntityBossDol dol = new EntityBossDol(worldObj);
-						zol.setPositionAndRotation(pos.getX()+5+.5, pos.getY()+4, pos.getZ()+3+.5, 180, 0);
-						dol.setPositionAndRotation(pos.getX()+5+.5, pos.getY()+4, pos.getZ()-3+.5, 180, 0);
+						zol.rotationYawHead = zol.rotationYaw = zol.prevRotationYaw = zol.prevRotationYawHead = zol.prevRenderYawOffset = zol.renderYawOffset = 90;
+						dol.rotationYawHead = dol.rotationYaw = dol.prevRotationYaw = dol.prevRotationYawHead = dol.prevRenderYawOffset = dol.renderYawOffset = 90;
 						worldObj.spawnEntityInWorld(zol);
 						worldObj.spawnEntityInWorld(dol);
 						break;
@@ -108,6 +106,7 @@ public class TwinsMessages01 {
 				}
 			}
 			childPhase++;
+			tick = 1;
 		}
 		tick++;
 		return false;

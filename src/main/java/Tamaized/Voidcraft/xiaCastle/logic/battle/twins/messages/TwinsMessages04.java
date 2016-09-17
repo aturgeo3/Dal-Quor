@@ -66,6 +66,7 @@ public class TwinsMessages04 {
 				}
 			}
 			childPhase++;
+			tick = 1;
 		}
 		tick++;
 		return false;

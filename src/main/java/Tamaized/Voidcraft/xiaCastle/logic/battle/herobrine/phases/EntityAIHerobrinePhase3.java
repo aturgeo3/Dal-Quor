@@ -97,6 +97,7 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 				currGhost.setDead();
 				currGhost = null;
 				getEntity().doDamage(25);
+				spawns--;
 			}
 		}
 	}
@@ -112,6 +113,7 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 			setRandomGhost(i + 1);
 			return;
 		}
+		spawns++;
 		PlayerNameAlias alias = getRandomUnusedAlias(0);
 		alreadyUsed.add(SkinHandler.getUUID(alias));
 		usedLocs.add(i);

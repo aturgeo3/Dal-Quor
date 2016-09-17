@@ -31,23 +31,25 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	private boolean active = false;
 
 	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
-	private ArrayList<Class> filter = new ArrayList<Class>();
 
 	public EntityVoidBoss(World world) {
 		super(world);
-		filter.addAll(getFilters());
 		this.isImmuneToFire = immuneToFire();
 		this.hurtResistantTime = 10;
 		this.setSize(sizeWidth(), sizeHeight());
-		for (Class c : filter)
-			this.tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
+		addDefaultTasks();
 	}
 
 	public EntityVoidBoss(World world, IBattleHandler handler) {
 		this(world);
 		this.handler = handler;
 		bus = new VoidBossAIBus();
+	}
+
+	protected void addDefaultTasks() {
+		for (Class c : getFilters())
+			this.tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
+		this.tasks.addTask(6, new EntityAILookIdle(this));
 	}
 
 	public void start() {
@@ -111,7 +113,6 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 				setDead();
 				return;
 			}
-
 			updateAI();
 		}
 	}
@@ -146,6 +147,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		}
 		tasks.taskEntries.clear();
 		targetTasks.taskEntries.clear();
+		addDefaultTasks();
 		bus.clearListeners();
 		canDie = false;
 		if (p > maxPhases()) {
@@ -159,7 +161,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected void addAI(Class<? extends EntityVoidNPCAIBase> c) {
 		try {
 			Constructor<? extends EntityVoidNPCAIBase> ctor = c.getConstructor(EntityVoidBoss.class, ArrayList.class);
-			EntityVoidNPCAIBase newAI = ctor.newInstance(this, filter);
+			EntityVoidNPCAIBase newAI = ctor.newInstance(this, getFilters());
 			ai.add(newAI);
 			newAI.Init();
 			this.tasks.addTask(1, newAI);
@@ -273,7 +275,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected abstract void updatePhase(int phase);
 
 	protected abstract ArrayList<Class> getFilters();
-
+	
 	protected abstract boolean immuneToFire();
 
 	protected abstract float sizeWidth();
