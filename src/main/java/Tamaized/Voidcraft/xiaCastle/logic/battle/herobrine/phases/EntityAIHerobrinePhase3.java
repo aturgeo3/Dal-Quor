@@ -13,7 +13,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -23,7 +22,7 @@ import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
-import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
@@ -60,7 +59,7 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 			alreadyUsed.add(player.getGameProfile().getId());
 		}
 	}
-	
+
 	@Override
 	public void kill() {
 		super.kill();
@@ -74,7 +73,7 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 	}
 
 	@Override
-	public void readPacket(Packet packet) {
+	public void readPacket(IVoidBossAIPacket packet) {
 
 	}
 
@@ -107,9 +106,9 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 		if (j == 0) i = (int) Math.floor(Math.random() * 3);
 		else i = j;
 		if (i > 3) i = 0;
-		if(usedLocs.contains(0) && usedLocs.contains(1) && usedLocs.contains(2) && usedLocs.contains(3)){
+		if (usedLocs.contains(0) && usedLocs.contains(1) && usedLocs.contains(2) && usedLocs.contains(3)) {
 			i = 0;
-		}else if (usedLocs.contains(i)) {
+		} else if (usedLocs.contains(i)) {
 			setRandomGhost(i + 1);
 			return;
 		}

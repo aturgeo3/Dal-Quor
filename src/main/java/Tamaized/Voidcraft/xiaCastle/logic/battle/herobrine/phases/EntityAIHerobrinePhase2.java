@@ -16,7 +16,7 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIHerobrinePhase2 extends EntityVoidNPCAIBase {
@@ -50,7 +50,7 @@ public class EntityAIHerobrinePhase2 extends EntityVoidNPCAIBase {
 	}
 
 	@Override
-	public void readPacket(Packet packet) {
+	public void readPacket(IVoidBossAIPacket packet) {
 
 	}
 

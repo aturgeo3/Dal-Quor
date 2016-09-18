@@ -6,9 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 
 
 public abstract class EntityVoidNPCAIBase extends EntityAIBase {
@@ -83,6 +82,6 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 		return pos;
 	}
 	
-	public abstract void readPacket(Packet packet);
+	public abstract void readPacket(IVoidBossAIPacket packet);
 
 }
