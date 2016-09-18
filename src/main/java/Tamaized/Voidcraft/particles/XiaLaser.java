@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -20,15 +19,13 @@ public class XiaLaser extends TamParticle {
 	private final int pitch;
 	private final float[] colors;
 
-	private int tick = 20 * 3;
-
 	public XiaLaser(World world, Vec3d pos, int id, int yaw, int pitch, float[] colors) {
 		super(world, pos, null);
 		entityID = id;
 		this.yaw = yaw;
 		this.pitch = pitch;
 		this.colors = colors;
-		isExpired = false;
+		particleMaxAge = 20*3;
 	}
 
 	@Override
@@ -49,8 +46,6 @@ public class XiaLaser extends TamParticle {
 		}
 		GlStateManager.popMatrix();
 		GlStateManager.enableFog();
-		tick--;
-		if (tick <= 0) isExpired = true;
 	}
 
 	@Override
