@@ -16,6 +16,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.network.VoidBossAIBus;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
@@ -24,7 +25,7 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossData {
 
 	private IBattleHandler handler;
-	protected VoidBossAIBus bus;
+	private VoidBossAIBus bus;
 
 	private int phase = 0;
 	private boolean ready = false;
@@ -114,7 +115,12 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 				return;
 			}
 			updateAI();
+			bus.readNextPacket();
 		}
+	}
+
+	protected void sendPacketToBus(IVoidBossAIPacket packet) {
+		bus.sendPacket(packet);
 	}
 
 	private void updateAI() {
@@ -275,7 +281,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected abstract void updatePhase(int phase);
 
 	protected abstract ArrayList<Class> getFilters();
-	
+
 	protected abstract boolean immuneToFire();
 
 	protected abstract float sizeWidth();

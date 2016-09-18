@@ -8,14 +8,17 @@ import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.particles.VoidicDrillLaser;
 import Tamaized.Voidcraft.particles.network.VoidicDrillLaserPacketHandler;
+import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler;
 
 public class VoidCraftParticles implements ITamRegistry {
 
 	public static int drillRayHandler;
+	public static int xiaTeleportHandler;
 
 	@Override
 	public void preInit() {
 		drillRayHandler = ParticlePacketHandlerRegistry.register(new VoidicDrillLaserPacketHandler());
+		xiaTeleportHandler = ParticlePacketHandlerRegistry.register(new XiaLaserPacketHandler());
 	}
 
 	@Override

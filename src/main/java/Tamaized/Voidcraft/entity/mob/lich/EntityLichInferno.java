@@ -26,7 +26,7 @@ public class EntityLichInferno extends Entity {
 
 	public EntityLichInferno(World world, BlockPos pos) {
 		this(world);
-		setPosition(pos.getX(), pos.getY(), pos.getZ());
+		setPosition(pos.getX()+0.5, pos.getY(), pos.getZ()+0.5);
 	}
 
 	public EntityLichInferno(World world, BlockPos pos, int range) {

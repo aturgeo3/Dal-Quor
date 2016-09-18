@@ -14,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.VoidBossAIBus.Packet;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
@@ -33,14 +33,10 @@ public class EntityBossXia extends EntityVoidBoss {
 
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
-		bus.sendPacket(new XiaTookDamagePacket());
+		sendPacketToBus(new XiaTookDamagePacket());
 	}
 
-	public class XiaTookDamagePacket extends Packet {
-
-		public XiaTookDamagePacket() {
-			bus.super();
-		}
+	public class XiaTookDamagePacket implements IVoidBossAIPacket {
 
 	}
 

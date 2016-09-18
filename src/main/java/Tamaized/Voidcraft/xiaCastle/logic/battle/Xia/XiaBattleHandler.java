@@ -41,7 +41,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		phase = 0;
 		readyForInput = false;
 		xia = new EntityBossXia(worldObj, this);
-		xia.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+		xia.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 17.5, pos.getZ() + 43.5);
 		worldObj.spawnEntityInWorld(xia);
 		xia.start();
 		running = true;
