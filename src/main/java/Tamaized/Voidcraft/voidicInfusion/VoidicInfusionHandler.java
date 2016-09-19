@@ -22,63 +22,64 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 
 public class VoidicInfusionHandler {
-	
+
 	private Map<UUID, PlayerInfusionHandler> playerData;
 	private ArrayList<EntityPlayerMP> spooler = new ArrayList<EntityPlayerMP>();
-	
+
 	private int tick = 0;
-	
-	public VoidicInfusionHandler(){
+
+	public VoidicInfusionHandler() {
 		construct();
 	}
-	
-	public void construct(){
+
+	public void construct() {
 		playerData = new HashMap<UUID, PlayerInfusionHandler>();
 	}
-	
-	public void addPlayer(EntityPlayerMP player){
+
+	public void addPlayer(EntityPlayerMP player) {
 		UUID id = player.getGameProfile().getId();
-		voidCraft.logger.info("Adding Player "+player.getGameProfile().getName()+"("+id+") to VoidicInfusionHandler");
+		voidCraft.logger.info("Adding Player " + player.getGameProfile().getName() + "(" + id + ") to VoidicInfusionHandler");
 		playerData.put(id, new PlayerInfusionHandler(player, player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusion(), player.getCapability(CapabilityList.VOIDICINFUSION, null).getMaxInfusion()));
 	}
-	
-	public void unloadPlayer(EntityPlayerMP player){
+
+	public void unloadPlayer(EntityPlayerMP player) {
 		UUID id = player.getGameProfile().getId();
-		voidCraft.logger.info("Unloading Player "+player.getGameProfile().getName()+"("+id+") from VoidicInfusionHandler");
+		voidCraft.logger.info("Unloading Player " + player.getGameProfile().getName() + "(" + id + ") from VoidicInfusionHandler");
 		playerData.remove(id);
 	}
-	
+
 	@SubscribeEvent
-	public void update(ServerTickEvent e){
-		if(e.phase == e.phase.END){
+	public void update(ServerTickEvent e) {
+		if (e.phase == e.phase.END) {
 			Iterator<EntityPlayerMP> iter = spooler.iterator();
-			while(iter.hasNext()){
+			while (iter.hasNext()) {
 				EntityPlayerMP player = iter.next();
-				if(playerData.containsKey(player.getGameProfile().getId())){
+				if (playerData.containsKey(player.getGameProfile().getId())) {
 					iter.remove();
 					break;
 				}
-				if(player.hasCapability(CapabilityList.VOIDICINFUSION, null)){
+				if (player.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 					addPlayer(player);
 					iter.remove();
 					break;
 				}
 			}
-			for(PlayerInfusionHandler data : playerData.values()) data.update();
-			if(tick % (20*2) == 0){
-				for(PlayerInfusionHandler handler : playerData.values()){
-					if(handler.getPlayer() == null) continue;
+			for (PlayerInfusionHandler data : playerData.values())
+				data.update();
+			if (tick % (20 * 2) == 0) {
+				for (PlayerInfusionHandler handler : playerData.values()) {
+					if (handler.getPlayer() == null) continue;
 					ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 					DataOutputStream outputStream = new DataOutputStream(bos);
 					try {
-						outputStream.writeInt(ClientPacketHandler.TYPE_INFUSION_UPDATE_ALL);
+						outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE_ALL));
 						outputStream.writeInt(handler.getPlayer().getEntityId());
 						outputStream.writeInt(handler.getInfusion());
 						outputStream.writeInt(handler.getMaxInfusion());
 						FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-						if(voidCraft.channel != null && packet != null) voidCraft.channel.sendToAll(packet);
+						if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAll(packet);
 						bos.close();
-					}catch (IOException e1) {
+					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
@@ -87,14 +88,14 @@ public class VoidicInfusionHandler {
 			tick++;
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerEvent(PlayerEvent.PlayerLoggedInEvent e) {
-		if(e.player instanceof EntityPlayerMP) spooler.add((EntityPlayerMP) e.player);
+		if (e.player instanceof EntityPlayerMP) spooler.add((EntityPlayerMP) e.player);
 	}
-	
+
 	@SubscribeEvent
 	public void onPlayerEvent(PlayerEvent.PlayerLoggedOutEvent e) {
-		if(e.player instanceof EntityPlayerMP) if(playerData.containsKey(e.player.getGameProfile().getId())) unloadPlayer((EntityPlayerMP) e.player);
+		if (e.player instanceof EntityPlayerMP) if (playerData.containsKey(e.player.getGameProfile().getId())) unloadPlayer((EntityPlayerMP) e.player);
 	}
 }

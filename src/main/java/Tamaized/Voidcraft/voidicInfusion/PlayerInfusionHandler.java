@@ -158,7 +158,7 @@ public class PlayerInfusionHandler {
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(ClientPacketHandler.TYPE_INFUSION_UPDATE);
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
 			outputStream.writeInt(voidicInfusionAmount);
 			outputStream.writeInt(maxAmount);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);

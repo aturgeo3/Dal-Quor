@@ -15,91 +15,93 @@ import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class ServerPacketHandler {
-	
-	public static final int TYPE_VOIDBOX_PLAY = 0;
-	public static final int TYPE_VOIDBOX_STOP = 1;
-	public static final int TYPE_VOIDBOX_LOOP = 2;
-	public static final int TYPE_VOIDBOX_AUTO = 3;
-	public static final int TYPE_HOOKSHOT_STOP = 4;
-	
+
+	public static enum PacketType {
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP
+	}
+
+	public static int getPacketTypeID(PacketType type) {
+		return type.ordinal();
+	}
+
+	public static PacketType getPacketTypeFromID(int id) {
+		return PacketType.values()[id];
+	}
+
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
 		try {
-			
-		EntityPlayerMP player = ((NetHandlerPlayServer)event.getHandler()).playerEntity;
-		ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
-		
-		processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
-		
-		bbis.close();
-			
-			
+
+			EntityPlayerMP player = ((NetHandlerPlayServer) event.getHandler()).playerEntity;
+			ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
+
+			processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
+
+			bbis.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP player){
-		TileEntityVoidBox thisTileEntity; 
-	  
-		if(parSide == Side.SERVER){
+
+	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP player) {
+
+		if (parSide == Side.SERVER) {
 			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 			int pktType;
 			try {
+				TileEntityVoidBox voidBox;
 				pktType = bbis.readInt();
-				if(pktType == TYPE_VOIDBOX_PLAY){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
-					if (thisTileEntity == null){
-						bbis.close();
-						return;
-					}
-					thisTileEntity.isPlaying = true;
-					thisTileEntity.doPlay = true;
-				}else if(pktType == TYPE_VOIDBOX_STOP){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
-					if (thisTileEntity == null){
-						bbis.close();
-						return;
-					}
-					thisTileEntity.isPlaying = false;
-					thisTileEntity.loop = false;
-				}else if(pktType == TYPE_VOIDBOX_LOOP){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
-					if (thisTileEntity == null){
-						bbis.close();
-						return;
-					}
-					thisTileEntity.loop = bbis.readBoolean();
-				}else if(pktType == TYPE_VOIDBOX_AUTO){
-					thisTileEntity = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
-					if (thisTileEntity == null){
-						bbis.close();
-						return;
-					}
-					thisTileEntity.autoFill = bbis.readBoolean();
-				}else if(pktType == TYPE_HOOKSHOT_STOP){
-					HookShot.handler.put(player, false);
+				switch (getPacketTypeFromID(pktType)) {
+					case VOIDBOX_PLAY:
+						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						if (voidBox == null) {
+							bbis.close();
+							return;
+						}
+						voidBox.isPlaying = true;
+						voidBox.doPlay = true;
+						break;
+					case VOIDBOX_STOP:
+						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						if (voidBox == null) {
+							bbis.close();
+							return;
+						}
+						voidBox.isPlaying = false;
+						voidBox.loop = false;
+						break;
+					case VOIDBOX_LOOP:
+						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						if (voidBox == null) {
+							bbis.close();
+							return;
+						}
+						voidBox.loop = bbis.readBoolean();
+						break;
+					case VOIDBOX_AUTO:
+						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						if (voidBox == null) {
+							bbis.close();
+							return;
+						}
+						voidBox.autoFill = bbis.readBoolean();
+						break;
+					case HOOKSHOT_STOP:
+						HookShot.handler.put(player, false);
+						break;
+					default:
+						break;
 				}
-			 }catch(Exception e){
-				 try {
+			} catch (Exception e) {
+				try {
 					bbis.close();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				 e.printStackTrace();
-			 }
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

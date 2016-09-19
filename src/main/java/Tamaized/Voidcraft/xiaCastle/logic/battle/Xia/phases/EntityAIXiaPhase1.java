@@ -10,6 +10,8 @@ import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.Action;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
@@ -26,6 +28,8 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 
 	private int actionTick = 20 * 10;
 	private int teleportTick = 20 * 3;
+
+	private int resetAnimationTick = 0;
 
 	private boolean isTeleporting = false;
 
@@ -49,20 +53,42 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 	}
 
 	@Override
+	public EntityBossXia getEntity() {
+		return (EntityBossXia) super.getEntity();
+	}
+
+	@Override
 	public void update() {
+		if (resetAnimationTick == 0) {
+			resetAnimationTick--;
+			getEntity().setAction(Action.IDLE);
+		} else if (resetAnimationTick >= 0) {
+			resetAnimationTick--;
+		}
+
 		if (tick % actionTick == 0) {
-			switch (rand.nextInt(1)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
+			switch (rand.nextInt(4)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
 				case 0:
+					getEntity().setAction(Action.BOTHARMSUP180);
+					resetAnimationTick = 20 * 4;
 					actionTeleport();
 					break;
 				case 1: // Voidic Fire (Same as Lich)
+					getEntity().setAction(Action.LEFTARMUP180);
+					resetAnimationTick = 20 * 4;
 					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
 					break;
 				case 2: // Use the force luke :P some sort of choke mechanic idk
+					resetAnimationTick = 20 * 4;
+					getEntity().setAction(Action.BOTHARMSUP90);
 					break;
 				case 3: // zues bolt
+					getEntity().setAction(Action.LEFTARMUP90);
+					resetAnimationTick = 20 * 2;
 					break;
 				case 4: // random knockback I guess
+					getEntity().setAction(Action.RIGHTARMUP90);
+					resetAnimationTick = 20 * 2;
 					break;
 				default:
 					actionTeleport();

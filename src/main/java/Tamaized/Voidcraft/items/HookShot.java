@@ -55,7 +55,7 @@ public class HookShot extends TamItem{
 	*/return null;}
 	
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int count) { //Doesnt seem to be called server side so send a packet
-		int pktType = ServerPacketHandler.TYPE_HOOKSHOT_STOP;
+		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.HOOKSHOT_STOP);
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
