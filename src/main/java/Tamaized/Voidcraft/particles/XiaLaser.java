@@ -26,6 +26,7 @@ public class XiaLaser extends TamParticle {
 		this.pitch = pitch;
 		this.colors = colors;
 		particleMaxAge = 20*3;
+		isExpired = false;
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class XiaLaser extends TamParticle {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(-distX, -distY, -distZ);
 		GlStateManager.translate(-0.5, 0, 0.5);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			renderBeamSegment(yaw, pitch, 0, 0, 0, partialTicks, 1, entity.worldObj.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D);
 		}
 		GlStateManager.popMatrix();

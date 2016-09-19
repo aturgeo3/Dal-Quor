@@ -40,8 +40,7 @@ public class RenderHerobrine<T extends EntityBossHerobrine> extends RenderLiving
 	}
 	
 	protected void renderLabel(T yourentityLiving, double par2, double par4, double par6){
-		int distanceToEntity = 32;//if you're less then 32 blocks x-y-z away from this entity,it will display the entity's name.
-		this.renderLivingLabel(yourentityLiving, yourentityLiving.getDisplayName().getFormattedText(), par2, par4, par6, distanceToEntity);
 		par4 += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par6);
+		this.renderLivingLabel(yourentityLiving, yourentityLiving.getDisplayName().getFormattedText(), par2, par4, par6, 32);
 	}
 }

@@ -1,5 +1,8 @@
 package Tamaized.Voidcraft.entity.boss.xia.render;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -12,51 +15,29 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderXia extends RenderLiving
-{
+public class RenderXia<T extends EntityBossXia> extends RenderLiving<T>{
 	
-	 private static final ResourceLocation Herobrine_Texture = new ResourceLocation("VoidCraft:textures/entity/Xia.png");  //refers to:assets/yourmod/textures/entity/yourtexture.png
+	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid+":textures/entity/Xia.png");
 	 
-    public RenderXia(ModelBase par1ModelBase, float par2)
-    {
+    public RenderXia(ModelBase par1ModelBase, float par2){
         super(Minecraft.getMinecraft().getRenderManager(), par1ModelBase, par2);
     }
 
-    public void renderXia(EntityBossXia par1EntityWraith, double par2, double par4, double par6, float par8, float par9)
-    {
-        super.doRender(par1EntityWraith, par2, par4, par6, par8, par9);
-    }
-
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.renderXia((EntityBossXia)par1EntityLiving, par2, par4, par6, par8, par9);
-    }
-
-    /**
-     * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
-     * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
-     * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
-     * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
-     */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.renderXia((EntityBossXia)par1Entity, par2, par4, par6, par8, par9);
+    @Override
+    public void doRender(T entity, double x, double y, double z, float yaw, float ticks){
+    	super.doRender(entity, x, y, z, yaw, ticks);
+		this.renderLabel(entity, x, y, z);
+        RenderBossHeathBar.setCurrentBoss(entity);
     }
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return Herobrine_Texture;
+	protected ResourceLocation getEntityTexture(T entity) {
+		return TEXTURE;
 	}
 	
-	protected void renderLabel(EntityBossXia yourentityLiving, double par2, double par4, double par6)
-	{
-	int distanceToEntity = 32;//if you're less then 32 blocks x-y-z away from this entity,it will display the entity's name.
-	this.renderLivingLabel(yourentityLiving, yourentityLiving.getDisplayName().getFormattedText(), par2, par4, par6, distanceToEntity);
-	par4 += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par6);
-	}
-
-	public void passSpecialRender(EntityLivingBase par1EntityLiving, double par2, double par4, double par6)
-	{
-	this.renderLabel((EntityBossXia)par1EntityLiving, par2, par4, par6);
+	protected void renderLabel(T entity, double x, double y, double z){
+		y += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * z);
+		this.renderLivingLabel(entity, entity.getDisplayName().getFormattedText(), x, y, z, 32);
 	}
 }
+
