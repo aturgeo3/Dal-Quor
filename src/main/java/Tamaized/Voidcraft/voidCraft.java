@@ -63,6 +63,7 @@ import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
+import Tamaized.Voidcraft.handlers.XiaFlightHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -113,7 +114,7 @@ public class voidCraft extends TamModBase {
 	public static AbstractProxy proxy;
 
 	public VoidTickEvent VoidTickEvent;
-	
+
 	public static final SkinHandler skinHandler = new SkinHandler();
 	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
 
@@ -143,7 +144,7 @@ public class voidCraft extends TamModBase {
 
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
-		
+
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 
@@ -195,7 +196,7 @@ public class voidCraft extends TamModBase {
 		logger.info("Starting VoidCraft Init");
 
 		super.init(event);
-		
+
 		// Run Skin Handler
 		skinHandler.run();
 
@@ -225,6 +226,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
+		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);

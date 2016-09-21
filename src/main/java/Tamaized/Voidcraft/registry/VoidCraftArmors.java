@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.armors.TamArmor;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
@@ -14,34 +12,31 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.armor.XiaArmor;
 
 public class VoidCraftArmors implements ITamRegistry {
-	
+
 	public ArrayList<ITamModel> modelList;
 
 	public static TamArmor voidHelmet;
 	public static TamArmor voidChest;
 	public static TamArmor voidLegs;
 	public static TamArmor voidBoots;
-	public static TamArmor demonHelmet;
-	public static TamArmor demonChest;
-	public static TamArmor demonLegs;
-	public static TamArmor demonBoots;
+	public static XiaArmor xiaHelmet;
 	public static XiaArmor xiaChest;
+	public static XiaArmor xiaLegs;
+	public static XiaArmor xiaBoots;
 
 	@Override
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
-		
+
 		modelList.add(voidHelmet = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.HEAD, "void", "voidHelmet"));
 		modelList.add(voidChest = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidChest"));
 		modelList.add(voidLegs = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.LEGS, "void", "voidLegs"));
 		modelList.add(voidBoots = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.FEET, "void", "voidBoots"));
 
-		modelList.add(demonHelmet = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.HEAD, "demon", "demonHelmet"));
-		modelList.add(demonChest = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.CHEST, "demon", "demonChest"));
-		modelList.add(demonLegs = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.LEGS, "demon", "demonLegs"));
-		modelList.add(demonBoots = new TamArmor(voidCraft.tabs.tabVoid, voidCraft.materials.demonArmor, 0, EntityEquipmentSlot.FEET, "demon", "demonBoots"));
-
+		modelList.add(xiaHelmet = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.HEAD, "xia", "xiaHelmet"));
 		modelList.add(xiaChest = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.CHEST, "xia", "xiaChest"));
+		modelList.add(xiaLegs = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.LEGS, "xia", "xiaLegs"));
+		modelList.add(xiaBoots = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.FEET, "xia", "xiaBoots"));
 	}
 
 	@Override
@@ -71,19 +66,19 @@ public class VoidCraftArmors implements ITamRegistry {
 	@Override
 	public void clientPreInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientPostInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

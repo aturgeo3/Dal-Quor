@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.Action;
@@ -17,6 +20,7 @@ import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler;
 import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
+import Tamaized.Voidcraft.voidicInfusion.PlayerInfusionHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
@@ -67,7 +71,7 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 		}
 
 		if (tick % actionTick == 0) {
-			switch (rand.nextInt(4)) { // TODO: figure out what kind of attacks we want for phase 1 (set this back to 4)
+			switch (rand.nextInt(5)) {
 				case 0:
 					getEntity().setAction(Action.BOTHARMSUP180);
 					resetAnimationTick = 20 * 4;
@@ -79,16 +83,28 @@ public class EntityAIXiaPhase1 extends EntityVoidNPCAIBase {
 					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
 					break;
 				case 2: // Use the force luke :P some sort of choke mechanic idk
+					if (closestEntity == null) break;
 					resetAnimationTick = 20 * 4;
 					getEntity().setAction(Action.BOTHARMSUP90);
+					closestEntity.attackEntityFrom(new DamageSourceVoidicInfusion(), 8.0f);
 					break;
-				case 3: // zues bolt
+				case 3: // litBolt
+					if (closestEntity == null) break;
 					getEntity().setAction(Action.LEFTARMUP90);
 					resetAnimationTick = 20 * 2;
+					EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, closestEntity.posX, closestEntity.posY, closestEntity.posZ, false);
+					entitylightningbolt.setLocationAndAngles(closestEntity.posX, closestEntity.posY + 1 + entitylightningbolt.getYOffset(), closestEntity.posZ, closestEntity.rotationYaw, closestEntity.rotationPitch);
+					world.addWeatherEffect(entitylightningbolt);
 					break;
-				case 4: // random knockback I guess
+				case 4: // Give less than 1 of the max voidic infusion to the player
+					if (closestEntity == null) break;
 					getEntity().setAction(Action.RIGHTARMUP90);
 					resetAnimationTick = 20 * 2;
+					if(closestEntity instanceof EntityPlayer){
+						EntityPlayer player = (EntityPlayer) closestEntity;
+						PlayerInfusionHandler handler = voidCraft.infusionHandler.getPlayerInfusionHandler(player.getGameProfile().getId());
+						handler.addInfusion(handler.getMaxInfusion() - (1+handler.getInfusion()));
+					}
 					break;
 				default:
 					actionTeleport();

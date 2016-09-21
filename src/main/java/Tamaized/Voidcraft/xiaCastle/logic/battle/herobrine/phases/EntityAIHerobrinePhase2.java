@@ -25,7 +25,6 @@ public class EntityAIHerobrinePhase2 extends EntityVoidNPCAIBase {
 	private boolean zPos = true;
 	private boolean inBlock = false;
 
-	private int tick_updateClosestEntity = 2 * 20;
 	private int tick_spawnPillar = 5 * 20;
 	private int tick_damage = 0;
 	private int tick_block = 0;
@@ -76,7 +75,6 @@ public class EntityAIHerobrinePhase2 extends EntityVoidNPCAIBase {
 
 	@Override
 	protected void update() {
-		if (tick % tick_updateClosestEntity == 0) updateClosest();
 		updateLook();
 		if (closestEntity != null) updateMotion();
 		updateInPillarState();
@@ -200,17 +198,6 @@ public class EntityAIHerobrinePhase2 extends EntityVoidNPCAIBase {
 		getEntity().posX += dx;
 		getEntity().posZ += dz;
 		getEntity().posY += dy;
-	}
-
-	private void updateClosest() {
-		for (Class c : watchedClass) {
-			Entity e = getEntity().worldObj.findNearestEntityWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer), getEntity());
-			if (e != null) {
-				closestEntity = e;
-				break;
-			}
-			closestEntity = null;
-		}
 	}
 
 	private void updateLook() {

@@ -15,13 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, PLAYER_MOTION
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -74,6 +75,9 @@ public class ClientPacketHandler {
 					cap.setInfusion(amount);
 					cap.setMaxInfusion(maxAmount);
 				}
+				break;
+			case PLAYER_MOTION:
+				EntityMotionHelper.updatePlayerMotion(bbis.readDouble(), bbis.readDouble(), bbis.readDouble());
 				break;
 			default:
 				break;

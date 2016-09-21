@@ -58,6 +58,10 @@ public class PlayerInfusionHandler {
 		return voidicInfusionAmount;
 	}
 
+	public void addInfusion(int amount) {
+		voidicInfusionAmount = voidicInfusionAmount + amount > maxAmount ? maxAmount : voidicInfusionAmount + amount;
+	}
+
 	public int getMaxInfusion() {
 		return maxAmount;
 	}
@@ -88,7 +92,7 @@ public class PlayerInfusionHandler {
 				voidicInfusionAmount++;
 				if (voidicInfusionAmount > maxAmount) voidicInfusionAmount = maxAmount;
 			} else {
-				voidicInfusionAmount -= 10;
+				voidicInfusionAmount -= 5;
 				if (voidicInfusionAmount < 0) voidicInfusionAmount = 0;
 			}
 		}
@@ -123,8 +127,8 @@ public class PlayerInfusionHandler {
 
 		double i = 0;
 		for (IAttributeInstance att : player.getAttributeMap().getAllAttributes()) {
-			if(att.getAttribute() == SharedMonsterAttributes.MAX_HEALTH){
-				for(AttributeModifier mod : att.getModifiers()){
+			if (att.getAttribute() == SharedMonsterAttributes.MAX_HEALTH) {
+				for (AttributeModifier mod : att.getModifiers()) {
 					i += mod.getAmount();
 				}
 			}

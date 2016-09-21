@@ -48,6 +48,10 @@ public class VoidicInfusionHandler {
 		playerData.remove(id);
 	}
 
+	public PlayerInfusionHandler getPlayerInfusionHandler(UUID id) {
+		return playerData.get(id);
+	}
+
 	@SubscribeEvent
 	public void update(ServerTickEvent e) {
 		if (e.phase == e.phase.END) {

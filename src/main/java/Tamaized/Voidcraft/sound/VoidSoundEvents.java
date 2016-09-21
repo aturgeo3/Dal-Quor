@@ -34,8 +34,7 @@ public class VoidSoundEvents {
 	
 	public static class ArmorSoundEvents{
 		public static SoundEvent voidcrystal = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
-		public static SoundEvent demon = SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
-		public static SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
+		public static SoundEvent xia = SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
 	}
 	
 	public static class MusicDiscSoundEvents{

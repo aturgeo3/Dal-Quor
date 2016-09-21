@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +40,10 @@ public class SkinHandler {
 	private static final String loc = baseLoc + "assets/" + voidCraft.modid + "/skins/";
 
 	private Map<PlayerNameAlias, GameProfile> aliasProfile = new HashMap<PlayerNameAlias, GameProfile>();
-
 	private Map<PlayerNameAlias, ResourceLocation> aliasSkin = new HashMap<PlayerNameAlias, ResourceLocation>();
-
 	private Map<PlayerNameAlias, Boolean> aliasBiped = new HashMap<PlayerNameAlias, Boolean>();
-
 	private static final Map<PlayerNameAlias, UUID> aliasUUID = new HashMap<PlayerNameAlias, UUID>();
+	private ArrayList<String> preCacheList = new ArrayList<String>();
 
 	public static enum PlayerNameAlias {
 		Tamaized, DireWolf20, Cpw11, Soaryn, Vazkii, Tlovetech, Boni, Azanor, Rorax, Slowpoke101, XCompWiz, Pahimar, iChun, RWTema, FireBall1725, TTFTCUTS
@@ -93,7 +92,7 @@ public class SkinHandler {
 		voidCraft.logger.info("Running SkinHandler");
 		handleResources();
 		if (isOnline()) {
-			voidCraft.logger.info("Able to Connect to Mojang Servers, updating skins");
+			voidCraft.logger.info("Able to Connect to Mojang Servers, validating skins");
 			updateSkins();
 		} else {
 			voidCraft.logger.info("Unable to Connect to Mojang Servers, using cache");
@@ -103,6 +102,10 @@ public class SkinHandler {
 
 	private void handleResources() {
 		new File(loc).mkdirs();
+		preCacheList = new ArrayList<String>();
+		for(File file : new File(loc).listFiles()){
+			preCacheList.add(file.getName());
+		}
 	}
 
 	private void updateSkins() {

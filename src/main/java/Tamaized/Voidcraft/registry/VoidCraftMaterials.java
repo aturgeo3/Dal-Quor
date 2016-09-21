@@ -20,7 +20,6 @@ public class VoidCraftMaterials implements ITamRegistry {
 	public static ToolMaterial DemonTools;
 
 	public static ArmorMaterial voidArmor;
-	public static ArmorMaterial demonArmor;
 	public static ArmorMaterial xiaArmor;
 
 	@Override
@@ -34,8 +33,7 @@ public class VoidCraftMaterials implements ITamRegistry {
 
 		// 25 = invul
 		voidArmor = EnumHelper.addArmorMaterial("Void", voidCraft.modid + ":void", 120, new int[] { 4, 6, 8, 4 }, 30, VoidSoundEvents.ArmorSoundEvents.voidcrystal, 0.0f); // 22
-		demonArmor = EnumHelper.addArmorMaterial("Demon", voidCraft.modid + ":demon", 240, new int[] { 4, 6, 10, 4 }, 30, VoidSoundEvents.ArmorSoundEvents.demon, 0.0f); // 24
-		xiaArmor = EnumHelper.addArmorMaterial("Xia", voidCraft.modid + ":Xia", 480, new int[] { 1, 1, 10, 1 }, 30, VoidSoundEvents.ArmorSoundEvents.xia, 0.0f);
+		xiaArmor = EnumHelper.addArmorMaterial("Xia", voidCraft.modid + ":xia", 240, new int[] { 4, 6, 10, 4 }, 30, VoidSoundEvents.ArmorSoundEvents.xia, 0.0f); // 24
 	}
 
 	@Override

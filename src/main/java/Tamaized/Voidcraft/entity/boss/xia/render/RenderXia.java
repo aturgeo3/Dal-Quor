@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.entity.boss.xia.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,6 +19,7 @@ public class RenderXia<T extends EntityBossXia> extends RenderLiving<T>{
 	 
     public RenderXia(ModelBase par1ModelBase, float par2){
         super(Minecraft.getMinecraft().getRenderManager(), par1ModelBase, par2);
+        this.addLayer(new LayerBipedArmor(this));
     }
 
     @Override

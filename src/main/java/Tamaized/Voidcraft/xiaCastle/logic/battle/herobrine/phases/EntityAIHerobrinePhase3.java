@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +28,6 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 
 	private BlockPos loc;
 
-	private int tick_updateClosestEntity = 2 * 20;
 	private int tick_doAction = 3 * 20;
 	private int tick_Spawn = 30 * 20;
 
@@ -79,7 +77,6 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 
 	@Override
 	public void update() {
-		if (tick % tick_updateClosestEntity == 0) updateClosest();
 		updateLook();
 		if (tick % tick_doAction == 0) updateAction();
 		updateMotion();
@@ -239,17 +236,6 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 				default:
 					break;
 			}
-		}
-	}
-
-	private void updateClosest() {
-		for (Class c : watchedClass) {
-			Entity e = getEntity().worldObj.findNearestEntityWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer), getEntity());
-			if (e != null) {
-				closestEntity = e;
-				break;
-			}
-			closestEntity = null;
 		}
 	}
 

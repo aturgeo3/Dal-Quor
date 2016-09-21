@@ -13,6 +13,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -28,6 +29,7 @@ import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
 
 public class EntityBossXia extends EntityVoidBoss {
 
@@ -89,6 +91,11 @@ public class EntityBossXia extends EntityVoidBoss {
 	}
 
 	@Override
+	public void addPotionEffect(PotionEffect potioneffectIn) {
+
+	}
+
+	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
 		// start();
 		return super.processInteract(player, hand, stack);
@@ -114,8 +121,8 @@ public class EntityBossXia extends EntityVoidBoss {
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
-
-			// addAI(EntityAIPathHerobrineFlightPhase2.class); TODO
+			setInvul(false);
+			addAI(EntityAIXiaPhase2.class);
 		} else if (phase == 3) {
 			/**
 			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
@@ -128,6 +135,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			// addAI(EntityAIPathHerobrineFlightPhase3.class); TODO
 
 		}
+		setAction(Action.IDLE);
 	}
 
 	@Override

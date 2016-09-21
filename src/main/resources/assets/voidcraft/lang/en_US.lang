@@ -59,13 +59,11 @@ item.voidHelmet.name=Void Helmet
 item.voidChest.name=Void Chestplate
 item.voidLegs.name=Void Leggings
 item.voidBoots.name=Void Boots
-# -- Demon
-item.demonHelmet.name=Demon Helmet
-item.demonChest.name=Demon Chestplate
-item.demonLegs.name=Demon Leggings
-item.demonBoots.name=Demon Boots
 # -- Xia
+item.xiaHelmet.name=Xia's Helmet
 item.xiaChest.name=Xia's Chestplate
+item.xiaLegs.name=Xia's Leggings
+item.xiaBoots.name=Xia's Boots
 
 # Tools
 # -- Void
