@@ -35,15 +35,23 @@ import com.mojang.authlib.GameProfile;
 public class SkinHandler {
 
 	private static final String SESSION_SERVER = "https://sessionserver.mojang.com";
-	private static final String url = SESSION_SERVER + "/session/minecraft/profile/";
+	private static final String profileUrl = SESSION_SERVER + "/session/minecraft/profile/";
+	private static final String nameUrl = "https://api.mojang.com/user/profiles/";
+	private static final String skinUrl = "http://skins.minecraft.net/MinecraftSkins/";
+	private static final String idUrl = "https://api.mojang.com/profiles/";
 	private static final String baseLoc = (System.getenv("APPDATA") == null || System.getenv("APPDATA").contains("null")) ? "./.minecraft/" : (System.getenv("APPDATA")) + "/.minecraft/" + voidCraft.modid + "/";
 	private static final String loc = baseLoc + "assets/" + voidCraft.modid + "/skins/";
 
+	// Perm
 	private Map<PlayerNameAlias, GameProfile> aliasProfile = new HashMap<PlayerNameAlias, GameProfile>();
 	private Map<PlayerNameAlias, ResourceLocation> aliasSkin = new HashMap<PlayerNameAlias, ResourceLocation>();
 	private Map<PlayerNameAlias, Boolean> aliasBiped = new HashMap<PlayerNameAlias, Boolean>();
 	private static final Map<PlayerNameAlias, UUID> aliasUUID = new HashMap<PlayerNameAlias, UUID>();
-	private ArrayList<String> preCacheList = new ArrayList<String>();
+
+	// Temp
+	private Map<String, UUID> uuidNames = new HashMap<String, UUID>();
+	private Map<UUID, String> uuidNamesFlip = new HashMap<UUID, String>();
+	private ArrayList<UUID> blacklist = new ArrayList<UUID>();
 
 	public static enum PlayerNameAlias {
 		Tamaized, DireWolf20, Cpw11, Soaryn, Vazkii, Tlovetech, Boni, Azanor, Rorax, Slowpoke101, XCompWiz, Pahimar, iChun, RWTema, FireBall1725, TTFTCUTS
@@ -93,26 +101,110 @@ public class SkinHandler {
 		handleResources();
 		if (isOnline()) {
 			voidCraft.logger.info("Able to Connect to Mojang Servers, validating skins");
+			validateNames();
+			validateSkins();
 			updateSkins();
 		} else {
 			voidCraft.logger.info("Unable to Connect to Mojang Servers, using cache");
 			cacheSkins();
 		}
+		freeMemory();
+	}
+
+	private void freeMemory() {
+		uuidNames.clear();
+		uuidNamesFlip.clear();
+		blacklist.clear();
+		uuidNames = null;
+		uuidNamesFlip = null;
+		blacklist = null;
 	}
 
 	private void handleResources() {
 		new File(loc).mkdirs();
-		preCacheList = new ArrayList<String>();
-		for(File file : new File(loc).listFiles()){
-			preCacheList.add(file.getName());
+	}
+
+	private void validateNames() {
+		voidCraft.logger.info("Mapping UUIDs to Names");
+		for (UUID id : aliasUUID.values()) {
+			try {
+				String theName = id.toString().replace("-", "");
+				URL url = new URL(nameUrl + id.toString().replace("-", "") + "/names");
+				BufferedReader reader = Resources.asCharSource(url, StandardCharsets.UTF_8).openBufferedStream();
+				JsonReader json = new JsonReader(reader);
+				{
+					json.beginArray();
+					{
+						while (json.hasNext()) {
+							json.beginObject();
+							{
+								while (json.hasNext()) {
+									switch (json.nextName()) {
+										case "name":
+											theName = json.nextString();
+											break;
+										default:
+											json.skipValue();
+											break;
+									}
+								}
+							}
+							json.endObject();
+						}
+					}
+				}
+				json.close();
+				uuidNames.put(theName, id);
+				uuidNamesFlip.put(id, theName);
+				voidCraft.logger.info("Mapped " + theName + " -> " + id);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void validateSkins() {
+		for (File file : new File(loc).listFiles()) {
+			String name = file.getName().split("\\.")[0];
+			if (!uuidNames.containsKey(name)) {
+				file.delete();
+			}
+			try {
+				long size = getFileSize(new URL(skinUrl.concat(file.getName())));
+				if (file.length() != size) {
+					file.delete();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				file.delete();
+			}
+			if (file.exists()) {
+				blacklist.add(uuidNames.get(name));
+				voidCraft.logger.info(name + " was validated");
+			}
+		}
+	}
+
+	private int getFileSize(URL url) {
+		HttpURLConnection conn = null;
+		try {
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("HEAD");
+			conn.getInputStream();
+			return conn.getContentLength();
+		} catch (IOException e) {
+			return -1;
+		} finally {
+			conn.disconnect();
 		}
 	}
 
 	private void updateSkins() {
 		aliasList: for (PlayerNameAlias alias : PlayerNameAlias.values()) {
+			if (blacklist.contains(getUUID(alias))) continue;
 			voidCraft.logger.info("Updating alias: " + alias);
 			try {
-				BufferedReader reader = Resources.asCharSource(new URL(url + ("" + getUUID(alias)).replace("-", "")), StandardCharsets.UTF_8).openBufferedStream();
+				BufferedReader reader = Resources.asCharSource(new URL(profileUrl + ("" + getUUID(alias)).replace("-", "")), StandardCharsets.UTF_8).openBufferedStream();
 
 				String encodedString = null;
 				String profileName = null;
@@ -218,7 +310,7 @@ public class SkinHandler {
 				}
 				json.close();
 				voidCraft.logger.info("Downloading skin: " + skinUrl);
-				FileUtils.copyURLToFile(new URL(skinUrl), new File(loc + alias.toString() + ".png"));
+				FileUtils.copyURLToFile(new URL(skinUrl), new File(loc + uuidNamesFlip.get(getUUID(alias)) + ".png"));
 				loadAlias(alias, profileName);
 			} catch (IOException e) {
 				voidCraft.logger.info("Request was sent too often or there was an issue with the Mojang servers, using cache for " + alias);
@@ -235,7 +327,7 @@ public class SkinHandler {
 
 	private void loadCachedAlias(PlayerNameAlias alias) {
 		voidCraft.logger.info("Loading alias cache: " + alias);
-		aliasProfile.put(alias, new GameProfile(getUUID(alias), alias.toString()));
+		aliasProfile.put(alias, new GameProfile(getUUID(alias), uuidNamesFlip.get(getUUID(alias))));
 		loadAliasResource(alias);
 	}
 
