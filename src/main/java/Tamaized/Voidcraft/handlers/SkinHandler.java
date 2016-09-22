@@ -125,7 +125,7 @@ public class SkinHandler {
 	}
 
 	private void validateNames() {
-		voidCraft.logger.info("Mapping UUIDs to Names");
+		voidCraft.logger.info("Mapping Names to UUIDs");
 		for (UUID id : aliasUUID.values()) {
 			try {
 				String theName = id.toString().replace("-", "");
@@ -201,7 +201,10 @@ public class SkinHandler {
 
 	private void updateSkins() {
 		aliasList: for (PlayerNameAlias alias : PlayerNameAlias.values()) {
-			if (blacklist.contains(getUUID(alias))) continue;
+			if (blacklist.contains(getUUID(alias))) {
+				loadCachedAlias(alias);
+				continue;
+			}
 			voidCraft.logger.info("Updating alias: " + alias);
 			try {
 				BufferedReader reader = Resources.asCharSource(new URL(profileUrl + ("" + getUUID(alias)).replace("-", "")), StandardCharsets.UTF_8).openBufferedStream();
