@@ -12,7 +12,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineShadow;
@@ -24,7 +24,7 @@ import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
-public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
+public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends EntityVoidNPCAIBase<T> {
 
 	private BlockPos loc;
 
@@ -39,7 +39,7 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 	private ArrayList<UUID> alreadyUsed = new ArrayList<UUID>();
 	private ArrayList<Integer> usedLocs = new ArrayList<Integer>();
 
-	public EntityAIHerobrinePhase3(EntityVoidBoss entityBoss, ArrayList<Class> c) {
+	public EntityAIHerobrinePhase3(T entityBoss, ArrayList<Class> c) {
 		super(entityBoss, c);
 	}
 
@@ -50,10 +50,10 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
 				if ((x == 0 && z == 0) || Math.floor(Math.random() * 10) != 0) continue;
-				world.setBlockState(getPosition().add(x, -1, z), Blocks.LAVA.getDefaultState());
+				world.setBlockState(getBlockPosition().add(x, -1, z), Blocks.LAVA.getDefaultState());
 			}
 		}
-		for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(getPosition().add(-10, -10, -10), getPosition().add(10, 10, 10)))) {
+		for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(getBlockPosition().add(-10, -10, -10), getBlockPosition().add(10, 10, 10)))) {
 			alreadyUsed.add(player.getGameProfile().getId());
 		}
 	}
@@ -117,22 +117,22 @@ public class EntityAIHerobrinePhase3 extends EntityVoidNPCAIBase {
 		currGhost = entity;
 		switch (i) {
 			case 0:
-				entity.setLocationAndAngles(getPosition().getX() + 8.5, getPosition().getY(), getPosition().getZ() + 0.5, 0, 0);
+				entity.setLocationAndAngles(getBlockPosition().getX() + 8.5, getBlockPosition().getY(), getBlockPosition().getZ() + 0.5, 0, 0);
 				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 1:
-				entity.setLocationAndAngles(getPosition().getX() - 7.5, getPosition().getY(), getPosition().getZ() + 0.5, 0, 0);
+				entity.setLocationAndAngles(getBlockPosition().getX() - 7.5, getBlockPosition().getY(), getBlockPosition().getZ() + 0.5, 0, 0);
 				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 270;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 2:
-				entity.setLocationAndAngles(getPosition().getX() + 0.5, getPosition().getY(), getPosition().getZ() + 8.5, 0, 0);
+				entity.setLocationAndAngles(getBlockPosition().getX() + 0.5, getBlockPosition().getY(), getBlockPosition().getZ() + 8.5, 0, 0);
 				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 180;
 				world.spawnEntityInWorld(entity);
 				break;
 			case 3:
-				entity.setLocationAndAngles(getPosition().getX() + 0.5, getPosition().getY(), getPosition().getZ() - 7.5, 0, 0);
+				entity.setLocationAndAngles(getBlockPosition().getX() + 0.5, getBlockPosition().getY(), getBlockPosition().getZ() - 7.5, 0, 0);
 				entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 0;
 				world.spawnEntityInWorld(entity);
 				break;

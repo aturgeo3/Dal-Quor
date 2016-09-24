@@ -33,8 +33,30 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
 
 public class EntityBossXia extends EntityVoidBoss {
 
+	/**
+	 * Degrees
+	 */
+	public float leftArmYaw = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	public float leftArmPitch = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	public float rightArmYaw = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	public float rightArmPitch = 0.0f;
+
+	private Action currAction = Action.IDLE;
+
 	public static enum Action {
-		IDLE, LEFTARMUP90, LEFTARMUP180, RIGHTARMUP90, RIGHTARMUP180, BOTHARMSUP90, BOTHARMSUP180
+		IDLE, SWORD_PROJECTION_RIGHT
 	}
 
 	public static int getActionID(Action action) {
@@ -44,8 +66,6 @@ public class EntityBossXia extends EntityVoidBoss {
 	public static Action getActionFromID(int id) {
 		return Action.values()[id];
 	}
-
-	private Action currAction = Action.IDLE;
 
 	public EntityBossXia(World par1World) {
 		super(par1World);
@@ -57,13 +77,20 @@ public class EntityBossXia extends EntityVoidBoss {
 		this.setInvul(true);
 	}
 
-	public void setAction(Action action) {
-		currAction = action;
-		sendPacketUpdates();
-	}
-
 	public Action getAction() {
 		return currAction;
+	}
+
+	public void setAction(Action action) {
+		currAction = action;
+	}
+
+	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw) {
+		this.leftArmYaw = leftArmYaw;
+		this.leftArmPitch = leftArmPitch;
+		this.rightArmYaw = rightArmYaw;
+		this.rightArmPitch = rightArmPitch;
+		sendPacketUpdates();
 	}
 
 	private void sendPacketUpdates() {
@@ -72,6 +99,10 @@ public class EntityBossXia extends EntityVoidBoss {
 		try {
 			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ARMSTATE));
 			outputStream.writeInt(getEntityId());
+			outputStream.writeFloat(leftArmPitch);
+			outputStream.writeFloat(rightArmPitch);
+			outputStream.writeFloat(leftArmYaw);
+			outputStream.writeFloat(rightArmYaw);
 			outputStream.writeInt(getActionID(getAction()));
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(worldObj.provider.getDimension(), posX, posY, posZ, 64));
@@ -103,6 +134,7 @@ public class EntityBossXia extends EntityVoidBoss {
 
 	@Override
 	protected void initPhase(int phase) {
+		setAction(Action.IDLE);
 		if (phase == 1) {
 			/**
 			 * Cycle: - Teleports around, does various attacks, can be hit directly
@@ -113,7 +145,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			this.setHealth(this.getMaxHealth());
 			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 			setInvul(false);
-			addAI(EntityAIXiaPhase1.class);
+			addAI(new EntityAIXiaPhase1(this, getFilters()));
 		} else if (phase == 2) {
 			/**
 			 * Cycle: - Teleports a short distance from a targetted player, walks towards them with a giant sword. do some sword mechanic stuff that can be dodged
@@ -122,7 +154,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
 			setInvul(false);
-			addAI(EntityAIXiaPhase2.class);
+			addAI(new EntityAIXiaPhase2(this, getFilters()));
 		} else if (phase == 3) {
 			/**
 			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
@@ -135,7 +167,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			// addAI(EntityAIPathHerobrineFlightPhase3.class); TODO
 
 		}
-		setAction(Action.IDLE);
+		setArmRotations(0, 0, 0, 0);
 	}
 
 	@Override

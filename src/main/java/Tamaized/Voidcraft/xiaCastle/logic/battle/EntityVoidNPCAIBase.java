@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 
-public abstract class EntityVoidNPCAIBase extends EntityAIBase {
+public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends EntityAIBase {
 
 	private boolean execute = false;
 
-	private EntityVoidBoss entity;
+	private T entity;
 	protected World world;
 
 	/** The closest entity which is being watched by this one. */
@@ -23,16 +25,16 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 	protected ArrayList<Class> watchedClass = new ArrayList<Class>();
 
 	private double[] spawnLoc = new double[3];
-	private BlockPos pos;
+	private Vec3d pos;
 
 	protected int tick = 1;
 	private int tick_updateClosestEntity = 2 * 20;
 
-	public EntityVoidNPCAIBase(EntityVoidBoss entityBoss, ArrayList<Class> c) {
+	public EntityVoidNPCAIBase(T entityBoss, ArrayList<Class> c) {
 		watchedClass = new ArrayList<Class>();
 		watchedClass.addAll(c);
 		entity = entityBoss;
-		pos = entity.getPosition();
+		pos = new Vec3d(entity.posX, entity.posY, entity.posZ);
 		world = entityBoss.worldObj;
 	}
 
@@ -68,7 +70,7 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 		tick++;
 	}
 
-	private void updateClosest() {
+	protected void updateClosest() {
 		for (Class c : watchedClass) {
 			Entity e = getEntity().worldObj.findNearestEntityWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer), getEntity());
 			if (e != null) {
@@ -84,14 +86,21 @@ public abstract class EntityVoidNPCAIBase extends EntityAIBase {
 	 */
 	protected abstract void update();
 
+	/**
+	 * Called from {@link TileEntityAIBlock#boom()}
+	 */
 	public abstract void doAction(BlockPos pos);
 
-	public EntityVoidBoss getEntity() {
+	public T getEntity() {
 		return entity;
 	}
 
-	public BlockPos getPosition() {
+	public Vec3d getPosition() {
 		return pos;
+	}
+
+	public BlockPos getBlockPosition() {
+		return new BlockPos(pos.xCoord, Math.ceil(pos.yCoord), pos.zCoord);
 	}
 
 	public abstract void readPacket(IVoidBossAIPacket packet);

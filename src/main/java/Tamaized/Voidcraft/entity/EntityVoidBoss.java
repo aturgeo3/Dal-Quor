@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.entity;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -164,17 +162,11 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		}
 	}
 
-	protected void addAI(Class<? extends EntityVoidNPCAIBase> c) {
-		try {
-			Constructor<? extends EntityVoidNPCAIBase> ctor = c.getConstructor(EntityVoidBoss.class, ArrayList.class);
-			EntityVoidNPCAIBase newAI = ctor.newInstance(this, getFilters());
-			ai.add(newAI);
-			newAI.Init();
-			this.tasks.addTask(1, newAI);
-			bus.addListener(newAI);
-		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+	protected void addAI(EntityVoidNPCAIBase<? extends EntityVoidBoss> newAi) {
+		ai.add(newAi);
+		newAi.Init();
+		this.tasks.addTask(1, newAi);
+		bus.addListener(newAi);
 	}
 
 	/**

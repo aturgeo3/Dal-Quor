@@ -58,7 +58,8 @@ public class ClientPacketHandler {
 				entity = theWorld.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
-					xia.setAction(EntityBossXia.getActionFromID(bbis.readInt()));
+					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat());
+					xia.setAction(xia.getActionFromID(bbis.readInt()));
 				}
 				break;
 			case INFUSION_UPDATE:

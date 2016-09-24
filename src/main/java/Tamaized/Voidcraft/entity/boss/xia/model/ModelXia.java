@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 
@@ -125,67 +124,20 @@ public class ModelXia extends ModelBase {
 
 	@Override
 	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float f1, float f2, float partialTickTime) {
-		//setAnimations((EntityBossXia) entitylivingbaseIn, partialTickTime);
+		// setAnimations((EntityBossXia) entitylivingbaseIn, partialTickTime);
 	}
 
 	private void setAnimations(EntityBossXia entity, float partialTickTime) {
-		switch (entity.getAction()) {
-			case IDLE:
-				setDefaultRotations();
-				break;
-			case LEFTARMUP90:
-				setRotation(leftarm, 4.5F, 0F, 0F);
-				setRotation(overlay_leftarm, 4.5F, 0F, 0F);
-				break;
-			case LEFTARMUP180:
-				setRotation(leftarm, 3.5F, 0F, 0F);
-				setRotation(overlay_leftarm, 3.5F, 0F, 0F);
-				break;
-			case RIGHTARMUP90:
-				setRotation(rightarm, 4.5F, 0F, 0F);
-				setRotation(overlay_rightarm, 4.5F, 0F, 0F);
-				break;
-			case RIGHTARMUP180:
-				setRotation(rightarm, 3.5F, 0F, 0F);
-				setRotation(overlay_rightarm, 3.5F, 0F, 0F);
-				break;
-			case BOTHARMSUP90:
-				setRotation(leftarm, 4.5F, 0F, 0F);
-				setRotation(rightarm, 4.5F, 0F, 0F);
-				setRotation(overlay_leftarm, 4.5F, 0F, 0F);
-				setRotation(overlay_rightarm, 4.5F, 0F, 0F);
-				break;
-			case BOTHARMSUP180:
-				setRotation(leftarm, 3.5F, 0F, 0F);
-				setRotation(rightarm, 3.5F, 0F, 0F);
-				setRotation(overlay_leftarm, 3.5F, 0F, 0F);
-				setRotation(overlay_rightarm, 3.5F, 0F, 0F);
-				break;
-			default:
-				setDefaultRotations();
-				break;
-		}
+		setRotation(leftarm, Math.toRadians(entity.leftArmPitch), Math.toRadians(entity.leftArmYaw), 0.0F);
+		setRotation(rightarm, Math.toRadians(entity.rightArmPitch), Math.toRadians(entity.rightArmYaw), 0.0F);
+		setRotation(overlay_leftarm, Math.toRadians(entity.leftArmPitch), Math.toRadians(entity.leftArmYaw), 0.0F);
+		setRotation(overlay_rightarm, Math.toRadians(entity.rightArmPitch), Math.toRadians(entity.rightArmYaw), 0.0F);
 	}
 
-	private void setDefaultRotations() {
-		setRotation(head, 0F, 0F, 0F);
-		setRotation(body, 0F, 0F, 0F);
-		setRotation(rightarm, 0F, 0F, 0F);
-		setRotation(leftarm, 0F, 0F, 0F);
-		setRotation(rightleg, 0F, 0F, 0F);
-		setRotation(leftleg, 0F, 0F, 0F);
-		setRotation(overlay_head, 0F, 0F, 0F);
-		setRotation(overlay_body, 0F, 0F, 0F);
-		setRotation(overlay_rightarm, 0F, 0F, 0F);
-		setRotation(overlay_leftarm, 0F, 0F, 0F);
-		setRotation(overlay_rightleg, 0F, 0F, 0F);
-		setRotation(overlay_leftleg, 0F, 0F, 0F);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX += x;
-		model.rotateAngleY += y;
-		model.rotateAngleZ += z;
+	private void setRotation(ModelRenderer model, double x, double y, double z) {
+		model.rotateAngleX -= x;
+		model.rotateAngleY -= y;
+		model.rotateAngleZ -= z;
 	}
 
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
@@ -196,64 +148,64 @@ public class ModelXia extends ModelBase {
 		this.overlay_head.rotateAngleX = headPitch / (180F / (float) Math.PI);
 		this.overlay_head.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
 
-        this.body.rotateAngleY = 0.0F;
-        this.rightarm.rotationPointZ = 0.0F;
-        this.rightarm.rotationPointX = -5.0F;
-        this.leftarm.rotationPointZ = 0.0F;
-        this.leftarm.rotationPointX = 5.0F;
-        this.overlay_body.rotateAngleY = 0.0F;
-        this.overlay_rightarm.rotationPointZ = 0.0F;
-        this.overlay_rightarm.rotationPointX = -5.0F;
-        this.overlay_leftarm.rotationPointZ = 0.0F;
-        this.overlay_leftarm.rotationPointX = 5.0F;
-        float f = 1.0F;
+		this.body.rotateAngleY = 0.0F;
+		this.rightarm.rotationPointZ = 0.0F;
+		this.rightarm.rotationPointX = -5.0F;
+		this.leftarm.rotationPointZ = 0.0F;
+		this.leftarm.rotationPointX = 5.0F;
+		this.overlay_body.rotateAngleY = 0.0F;
+		this.overlay_rightarm.rotationPointZ = 0.0F;
+		this.overlay_rightarm.rotationPointX = -5.0F;
+		this.overlay_leftarm.rotationPointZ = 0.0F;
+		this.overlay_leftarm.rotationPointX = 5.0F;
+		float f = 1.0F;
 
-        this.rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
-        this.leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
-        this.rightarm.rotateAngleZ = 0.0F;
-        this.leftarm.rotateAngleZ = 0.0F;
-        this.rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
-        this.leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / f;
-        this.rightleg.rotateAngleY = 0.0F;
-        this.leftleg.rotateAngleY = 0.0F;
-        this.rightleg.rotateAngleZ = 0.0F;
-        this.leftleg.rotateAngleZ = 0.0F;
-        this.overlay_rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
-        this.overlay_leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
-        this.overlay_rightarm.rotateAngleZ = 0.0F;
-        this.overlay_leftarm.rotateAngleZ = 0.0F;
-        this.overlay_rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
-        this.overlay_leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / f;
-        this.overlay_rightleg.rotateAngleY = 0.0F;
-        this.overlay_leftleg.rotateAngleY = 0.0F;
-        this.overlay_rightleg.rotateAngleZ = 0.0F;
-        this.overlay_leftleg.rotateAngleZ = 0.0F;
+		this.rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
+		this.leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
+		this.rightarm.rotateAngleZ = 0.0F;
+		this.leftarm.rotateAngleZ = 0.0F;
+		this.rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
+		this.leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount / f;
+		this.rightleg.rotateAngleY = 0.0F;
+		this.leftleg.rotateAngleY = 0.0F;
+		this.rightleg.rotateAngleZ = 0.0F;
+		this.leftleg.rotateAngleZ = 0.0F;
+		this.overlay_rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
+		this.overlay_leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
+		this.overlay_rightarm.rotateAngleZ = 0.0F;
+		this.overlay_leftarm.rotateAngleZ = 0.0F;
+		this.overlay_rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
+		this.overlay_leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount / f;
+		this.overlay_rightleg.rotateAngleY = 0.0F;
+		this.overlay_leftleg.rotateAngleY = 0.0F;
+		this.overlay_rightleg.rotateAngleZ = 0.0F;
+		this.overlay_leftleg.rotateAngleZ = 0.0F;
 
-        this.rightarm.rotateAngleY = 0.0F;
-        this.rightarm.rotateAngleZ = 0.0F;
-        this.overlay_rightarm.rotateAngleY = 0.0F;
-        this.overlay_rightarm.rotateAngleZ = 0.0F;
-        
-        this.body.rotateAngleX = 0.0F;
-        this.rightleg.rotationPointZ = 0.1F;
-        this.leftleg.rotationPointZ = 0.1F;
-        this.rightleg.rotationPointY = 12.0F;
-        this.leftleg.rotationPointY = 12.0F;
-        this.head.rotationPointY = 0.0F;
-        this.overlay_body.rotateAngleX = 0.0F;
-        this.overlay_rightleg.rotationPointZ = 0.1F;
-        this.overlay_leftleg.rotationPointZ = 0.1F;
-        this.overlay_rightleg.rotationPointY = 12.0F;
-        this.overlay_leftleg.rotationPointY = 12.0F;
-        this.overlay_head.rotationPointY = 0.0F;
+		this.rightarm.rotateAngleY = 0.0F;
+		this.rightarm.rotateAngleZ = 0.0F;
+		this.overlay_rightarm.rotateAngleY = 0.0F;
+		this.overlay_rightarm.rotateAngleZ = 0.0F;
 
-        this.rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-        this.leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-        this.rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-        this.leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-        this.overlay_rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-        this.overlay_leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-        this.overlay_rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-        this.overlay_leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		this.body.rotateAngleX = 0.0F;
+		this.rightleg.rotationPointZ = 0.1F;
+		this.leftleg.rotationPointZ = 0.1F;
+		this.rightleg.rotationPointY = 12.0F;
+		this.leftleg.rotationPointY = 12.0F;
+		this.head.rotationPointY = 0.0F;
+		this.overlay_body.rotateAngleX = 0.0F;
+		this.overlay_rightleg.rotationPointZ = 0.1F;
+		this.overlay_leftleg.rotationPointZ = 0.1F;
+		this.overlay_rightleg.rotationPointY = 12.0F;
+		this.overlay_leftleg.rotationPointY = 12.0F;
+		this.overlay_head.rotationPointY = 0.0F;
+
+		this.rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		this.leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		this.rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		this.leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		this.overlay_rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		this.overlay_leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		this.overlay_rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		this.overlay_leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 	}
 }

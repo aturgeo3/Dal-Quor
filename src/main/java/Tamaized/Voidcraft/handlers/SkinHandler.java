@@ -11,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -23,6 +22,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.FileUtils;
 
@@ -260,7 +260,7 @@ public class SkinHandler {
 					continue;
 				}
 
-				InputStream is = new ByteArrayInputStream(StringUtils.newStringUtf8(Base64.getDecoder().decode(encodedString)).getBytes());
+				InputStream is = new ByteArrayInputStream(StringUtils.newStringUtf8(Base64.decodeBase64(encodedString)).getBytes());
 				reader = new BufferedReader(new InputStreamReader(is));
 				json = new JsonReader(reader);
 				{

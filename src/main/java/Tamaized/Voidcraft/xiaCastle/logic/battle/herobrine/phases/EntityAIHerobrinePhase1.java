@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -13,12 +12,12 @@ import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
-public class EntityAIHerobrinePhase1 extends EntityVoidNPCAIBase {
+public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends EntityVoidNPCAIBase<T> {
 
 	private double[][] loc = new double[8][3];
 	private int currPath = 0;
@@ -32,7 +31,7 @@ public class EntityAIHerobrinePhase1 extends EntityVoidNPCAIBase {
 	private int maxPillars = 6;
 	private Map<BlockPos, TileEntityAIBlock> pillars = new HashMap<BlockPos, TileEntityAIBlock>();
 
-	public EntityAIHerobrinePhase1(EntityVoidBoss entityMobHerobrine, ArrayList<Class> c) {
+	public EntityAIHerobrinePhase1(T entityMobHerobrine, ArrayList<Class> c) {
 		super(entityMobHerobrine, c);
 	}
 
@@ -75,7 +74,7 @@ public class EntityAIHerobrinePhase1 extends EntityVoidNPCAIBase {
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
 				if (x == 0 && z == 0) continue;
-				world.setBlockState(getPosition().add(x, -1, z), Blocks.NETHER_BRICK.getDefaultState());
+				world.setBlockState(getBlockPosition().add(x, -1, z), Blocks.NETHER_BRICK.getDefaultState());
 			}
 		}
 	}
@@ -126,9 +125,9 @@ public class EntityAIHerobrinePhase1 extends EntityVoidNPCAIBase {
 	private void addRandomPillar() {
 		int randX = (int) Math.floor(Math.random() * 16);
 		int randZ = (int) Math.floor(Math.random() * 16);
-		int nX = (getPosition().getX() - 8) + randX;
-		int nY = getPosition().getY();
-		int nZ = (getPosition().getZ() - 8) + randZ;
+		int nX = (getBlockPosition().getX() - 8) + randX;
+		int nY = getBlockPosition().getY();
+		int nZ = (getBlockPosition().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
 			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
 			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());

@@ -60,7 +60,7 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 			this.setHealth(this.getMaxHealth());
 			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 
-			addAI(EntityAIHerobrinePhase1.class);
+			addAI(new EntityAIHerobrinePhase1(this, getFilters()));
 		} else if (phase == 2) {
 			/**
 			 * Cycle: - Herobrine chases the player. - On touching a player, deal damage. - Herobrine must run through a pillar to be dealt damage. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time - Increase his speed everytime he is hurt
@@ -69,7 +69,7 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
 			this.setHealth(this.getMaxHealth());
 
-			addAI(EntityAIHerobrinePhase2.class);
+			addAI(new EntityAIHerobrinePhase2(this, getFilters()));
 		} else if (phase == 3) {
 			/**
 			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
@@ -79,7 +79,7 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
 			this.setHealth(this.getMaxHealth());
 
-			addAI(EntityAIHerobrinePhase3.class);
+			addAI(new EntityAIHerobrinePhase3(this, getFilters()));
 
 		}
 	}
