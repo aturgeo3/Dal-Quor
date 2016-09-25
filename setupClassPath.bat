@@ -1,1 +1,3 @@
-gradlew --refresh-dependencies eclipse
+@echo off
+call gradlew --refresh-dependencies eclipse
+call pause

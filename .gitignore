@@ -8,6 +8,8 @@
 !/libs/
 !/libs/**
 !build.gradle
+!Build.jar
+!gradle.properties
 !LICENSE
 !README.md
 !build.bat

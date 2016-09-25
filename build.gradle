@@ -18,35 +18,37 @@ repositories {
 	}
 }
 
-version = "1.10.2-0.9.0_DEV04"
+version = "${project.minecraftVersion}-${modVersion}${modVersionValue}"
 group= "tamaized.voidCraft"
-archivesBaseName = "voidCraft"
+archivesBaseName = "VoidCraft"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = "1.10.2-12.18.1.2076"
+    version = "${project.minecraftVersion}-${project.forgeVersion}"
     runDir = "run"
-    mappings = "snapshot_20160707"
+    mappings = "${project.forgeMapping}"
     makeObfSourceJar = false
 	useDepAts = true
+	replaceIn 'voidCraft.java'
+	replace '${version}', "${modVersion}${modVersionValue}"
 }
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.10.2:3.9.0.245:api"
-	runtime "mezz.jei:jei_1.10.2:3.9.0.245"
-	compile files('libs/TamModized-1.10.2-0.1.7.jar')
+	deobfCompile "mezz.jei:${project.jeiVersion}:api"
+	runtime "mezz.jei:${project.jeiVersion}"
+	compile files('libs/${project.tammodizedVersion}.jar')
 }
 
 processResources
 {
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property "mcversion", project.minecraftVersion
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.modVersion+""+project.modVersionValue, 'mcversion':project.minecraftVersion
     }
         
     from(sourceSets.main.resources.srcDirs) {
