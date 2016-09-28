@@ -102,7 +102,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 			list.addAll(getEntity().worldObj.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
 		Random rand = world.rand;
-		closestEntity = list.get(rand.nextInt(list.size()));
+		closestEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;
 	}
 
 }

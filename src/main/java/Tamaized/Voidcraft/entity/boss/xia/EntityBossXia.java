@@ -85,12 +85,12 @@ public class EntityBossXia extends EntityVoidBoss {
 		currAction = action;
 	}
 
-	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw) {
+	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
 		this.leftArmYaw = leftArmYaw;
 		this.leftArmPitch = leftArmPitch;
 		this.rightArmYaw = rightArmYaw;
 		this.rightArmPitch = rightArmPitch;
-		sendPacketUpdates();
+		if(sendUpdates) sendPacketUpdates();
 	}
 
 	private void sendPacketUpdates() {
@@ -167,7 +167,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			// addAI(EntityAIPathHerobrineFlightPhase3.class); TODO
 
 		}
-		setArmRotations(0, 0, 0, 0);
+		setArmRotations(0, 0, 0, 0, true);
 	}
 
 	@Override

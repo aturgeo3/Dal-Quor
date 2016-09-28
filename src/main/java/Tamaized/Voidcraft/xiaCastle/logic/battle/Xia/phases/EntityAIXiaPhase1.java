@@ -58,7 +58,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 	public void update() {
 		if (resetAnimationTick == 0) {
 			resetAnimationTick--;
-			getEntity().setArmRotations(0, 0, 0, 0);
+			getEntity().setArmRotations(0, 0, 0, 0, true);
 		} else if (resetAnimationTick >= 0) {
 			resetAnimationTick--;
 		}
@@ -66,24 +66,24 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 		if (tick % actionTick == 0) {
 			switch (rand.nextInt(5)) {
 				case 0:
-					getEntity().setArmRotations(180, 180, 0, 0);
+					getEntity().setArmRotations(180, 180, 0, 0, true);
 					resetAnimationTick = 20 * 4;
 					actionTeleport();
 					break;
 				case 1: // Voidic Fire (Same as Lich)
-					getEntity().setArmRotations(180, 0, 0, 0);
+					getEntity().setArmRotations(180, 0, 0, 0, true);
 					resetAnimationTick = 20 * 4;
 					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
 					break;
 				case 2: // Use the force luke :P some sort of choke mechanic idk
 					if (closestEntity == null) break;
 					resetAnimationTick = 20 * 4;
-					getEntity().setArmRotations(90, 90, 0, 0);
+					getEntity().setArmRotations(90, 90, 0, 0, true);
 					closestEntity.attackEntityFrom(new DamageSourceVoidicInfusion(), 8.0f);
 					break;
 				case 3: // litBolt
 					if (closestEntity == null) break;
-					getEntity().setArmRotations(90, 0.0f, 0, 0);
+					getEntity().setArmRotations(90, 0.0f, 0, 0, true);
 					resetAnimationTick = 20 * 2;
 					EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, closestEntity.posX, closestEntity.posY, closestEntity.posZ, false);
 					entitylightningbolt.setLocationAndAngles(closestEntity.posX, closestEntity.posY + 1 + entitylightningbolt.getYOffset(), closestEntity.posZ, closestEntity.rotationYaw, closestEntity.rotationPitch);
@@ -91,7 +91,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 					break;
 				case 4: // Give less than 1 of the max voidic infusion to the player
 					if (closestEntity == null) break;
-					getEntity().setArmRotations(0, 90, 0, 0);
+					getEntity().setArmRotations(0, 90, 0, 0, true);
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) closestEntity;

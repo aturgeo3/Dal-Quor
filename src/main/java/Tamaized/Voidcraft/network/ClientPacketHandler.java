@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 
@@ -22,7 +23,7 @@ import Tamaized.Voidcraft.proxy.ClientProxy;
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, PLAYER_MOTION
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, PLAYER_MOTION
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -54,11 +55,18 @@ public class ClientPacketHandler {
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
+			case XIA_ANIMATIONS:
+				entity = theWorld.getEntityByID(bbis.readInt());
+				if (entity instanceof EntityBossXia) {
+					EntityBossXia xia = (EntityBossXia) entity;
+					xia.addAnimation(new EntityAnimationsXia(xia, EntityAnimationsXia.getAnimationFromID(bbis.readInt())));
+				}
+				break;
 			case XIA_ARMSTATE:
 				entity = theWorld.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
-					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat());
+					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
 					xia.setAction(xia.getActionFromID(bbis.readInt()));
 				}
 				break;

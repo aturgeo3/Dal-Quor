@@ -13,7 +13,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
+import Tamaized.Voidcraft.entity.client.animation.IAnimatable;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.network.VoidBossAIBus;
 import Tamaized.Voidcraft.sound.BossMusicManager;
@@ -30,6 +33,9 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	private boolean active = false;
 
 	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
+	
+	@SideOnly(Side.CLIENT)
+	private ArrayList<IAnimatable> animations = new ArrayList<IAnimatable>();
 
 	public EntityVoidBoss(World world) {
 		super(world);
@@ -44,7 +50,12 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		this.handler = handler;
 		bus = new VoidBossAIBus();
 	}
-
+	
+	@SideOnly(Side.CLIENT)
+	public void addAnimation(IAnimatable animation){
+		animations.add(animation);
+	}
+	
 	protected void addDefaultTasks() {
 		for (Class c : getFilters())
 			this.tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
@@ -114,6 +125,12 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 			}
 			updateAI();
 			bus.readNextPacket();
+		}else{
+			Iterator<IAnimatable> iter = animations.iterator();
+			while(iter.hasNext()){
+				IAnimatable animation = iter.next();
+				if(animation.update()) iter.remove();
+			}
 		}
 	}
 

@@ -1,8 +1,22 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.actions;
 
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.Action;
+import Tamaized.Voidcraft.entity.boss.xia.animations.AnimationXiaSwordSwing;
+import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
+import Tamaized.Voidcraft.entity.client.animation.IAnimation;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 
 public class XiaPhase2ActionSword {
 
@@ -13,12 +27,8 @@ public class XiaPhase2ActionSword {
 	private int actionTick = (int) (20f * 1.5f);
 	private boolean isActing = false;
 	private boolean done = true;
-	private int phase = 0;
-
-	private Vec3d vecResult;
-	private Vec3d vecOriginal;
-	private float currRotation = 90;
-	private double swordLength = 30;
+	private EntityAnimationsXia.Animation animation;
+	private IAnimation<EntityBossXia> currAnimation;
 
 	public XiaPhase2ActionSword(EntityBossXia entity, Vec3d pos) {
 		xia = entity;
@@ -26,58 +36,57 @@ public class XiaPhase2ActionSword {
 	}
 
 	public void init() {
-		System.out.println("debug: init");
 		xia.setPosition(throne.xCoord, throne.yCoord, throne.zCoord);
-		currRotation = 90;
-		xia.setArmRotations(0, 90, 0, currRotation);
+		xia.setArmRotations(0, 90, 0, 90, true);
 		tick = 1;
-		phase = 0;
+		animation = null;
 		isActing = false;
 		done = false;
-		vecOriginal = new Vec3d(throne.xCoord, throne.yCoord, throne.zCoord);
-		vecResult = new Vec3d(0, 0, 0);
 	}
 
 	public void update() {
 		if (done) return;
 		if (!isActing) {
-			xia.setArmRotations(0, 0, 0, 0); //TODO: dont send this all the time instead send a packet for clients to update this themselves
+			xia.setArmRotations(0, 0, 0, 0, true);
 			if (tick % actionTick == 0) {
-				phase++;
+				animation = EntityAnimationsXia.Animation.SWORD_SWING;
+				sendPacketToClients();
+				currAnimation = new AnimationXiaSwordSwing();
+				currAnimation.init(throne);
 				isActing = true;
 				tick = 1;
 			}
 		} else {
-			switch (phase) {
-				case 1:
-					currRotation--;
-					xia.setArmRotations(0, 90, 0, currRotation);
-					if (currRotation <= -90) {
-						finish();
-						isActing = false;
-						tick = 1;
-					}
-					break;
-				default:
-					break;
+			if (currAnimation != null && currAnimation.update(xia)) {
+				finish();
+				isActing = false;
+				tick = 1;
 			}
 		}
-		double xCoord = vecOriginal.xCoord + swordLength * -Math.cos(Math.toRadians(currRotation)) * Math.sin(Math.toRadians(90));
-		double zCoord = vecOriginal.zCoord + swordLength * -Math.sin(Math.toRadians(currRotation)) * Math.sin(Math.toRadians(90));
-		double yCoord = vecOriginal.yCoord + swordLength * Math.cos(Math.toRadians(90));
-		vecResult = new Vec3d(xCoord, yCoord, zCoord);
 		xia.setAction(Action.SWORD_PROJECTION_RIGHT);
 		tick++;
 	}
-	
-	private void finish(){
-		xia.setAction(Action.IDLE);
-		xia.setArmRotations(0, 0, 0, 0);
-		done = true;
+
+	private void sendPacketToClients() {
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ANIMATIONS));
+			outputStream.writeInt(xia.getEntityId());
+			outputStream.writeInt(EntityAnimationsXia.getAnimationID(animation));
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(xia.worldObj.provider.getDimension(), xia.posX, xia.posY, xia.posZ, 64));
+			bos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public Vec3d getVector() {
-		return vecResult;
+	private void finish() {
+		currAnimation = null;
+		xia.setAction(Action.IDLE);
+		xia.setArmRotations(0, 0, 0, 0, true);
+		done = true;
 	}
 
 	public boolean isDone() {
