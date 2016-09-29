@@ -20,9 +20,7 @@ DEV is an unstable version meant for testing purposes. It may sometimes be a lat
 ## Other Mod Integrations
  This mod currently has integrations with:
  * Note: These Mods are NOT required in order to use this mod.
- * 1.10
-  * JEI
- * 1.9.4
+ * 1.9.4 - 1.10.2
   * JEI
  * 1.8.9
   * None
