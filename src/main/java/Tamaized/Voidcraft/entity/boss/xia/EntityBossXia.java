@@ -53,20 +53,6 @@ public class EntityBossXia extends EntityVoidBoss {
 	 */
 	public float rightArmPitch = 0.0f;
 
-	private Action currAction = Action.IDLE;
-
-	public static enum Action {
-		IDLE, SWORD_PROJECTION_RIGHT
-	}
-
-	public static int getActionID(Action action) {
-		return action.ordinal();
-	}
-
-	public static Action getActionFromID(int id) {
-		return Action.values()[id];
-	}
-
 	public EntityBossXia(World par1World) {
 		super(par1World);
 		this.setInvul(true);
@@ -75,14 +61,6 @@ public class EntityBossXia extends EntityVoidBoss {
 	public EntityBossXia(World world, IBattleHandler handler) {
 		super(world, handler);
 		this.setInvul(true);
-	}
-
-	public Action getAction() {
-		return currAction;
-	}
-
-	public void setAction(Action action) {
-		currAction = action;
 	}
 
 	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
@@ -103,7 +81,6 @@ public class EntityBossXia extends EntityVoidBoss {
 			outputStream.writeFloat(rightArmPitch);
 			outputStream.writeFloat(leftArmYaw);
 			outputStream.writeFloat(rightArmYaw);
-			outputStream.writeInt(getActionID(getAction()));
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(worldObj.provider.getDimension(), posX, posY, posZ, 64));
 			bos.close();
@@ -134,7 +111,6 @@ public class EntityBossXia extends EntityVoidBoss {
 
 	@Override
 	protected void initPhase(int phase) {
-		setAction(Action.IDLE);
 		if (phase == 1) {
 			/**
 			 * Cycle: - Teleports around, does various attacks, can be hit directly

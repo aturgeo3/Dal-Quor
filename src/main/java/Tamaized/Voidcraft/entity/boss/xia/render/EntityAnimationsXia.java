@@ -1,10 +1,12 @@
 package Tamaized.Voidcraft.entity.boss.xia.render;
 
-import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.animations.AnimationXiaSwordSwing;
 import Tamaized.Voidcraft.entity.client.animation.IAnimatable;
 import Tamaized.Voidcraft.entity.client.animation.IAnimation;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityAnimationsXia implements IAnimatable {
 
@@ -42,6 +44,12 @@ public class EntityAnimationsXia implements IAnimatable {
 	@Override
 	public boolean update() {
 		return currAnimation == null ? true : currAnimation.update(xia);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void render() {
+		currAnimation.render(xia);
 	}
 
 }

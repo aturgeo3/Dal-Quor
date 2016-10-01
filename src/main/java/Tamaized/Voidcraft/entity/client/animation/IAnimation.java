@@ -1,7 +1,10 @@
 package Tamaized.Voidcraft.entity.client.animation;
 
-import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface IAnimation<T extends EntityVoidBoss> {
 
@@ -15,5 +18,10 @@ public interface IAnimation<T extends EntityVoidBoss> {
 	public Vec3d originalVector();
 
 	public Vec3d resultVector();
+	
+	public AxisAlignedBB getBounds(int range);
+
+	@SideOnly(Side.CLIENT)
+	public void render(T e);
 
 }

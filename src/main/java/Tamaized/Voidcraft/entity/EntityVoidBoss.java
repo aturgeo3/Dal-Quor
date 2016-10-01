@@ -284,6 +284,13 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public void renderSpecials(){
+		for(IAnimatable animation : animations){
+			animation.render();
+		}
+	}
 
 	protected abstract void initPhase(int phase);
 

@@ -1,8 +1,15 @@
 package Tamaized.Voidcraft.entity.boss.xia.animations;
 
-import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.client.animation.IAnimation;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AnimationXiaSwordSwing implements IAnimation<EntityBossXia> {
 
@@ -45,6 +52,66 @@ public class AnimationXiaSwordSwing implements IAnimation<EntityBossXia> {
 	@Override
 	public Vec3d resultVector() {
 		return vecResult;
+	}
+
+	@Override
+	public AxisAlignedBB getBounds(int range) {
+		return new AxisAlignedBB(vecOriginal.addVector(-range, 0, -range), vecResult.addVector(range, 0, range));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void render(EntityBossXia xia) {
+
+		double xAngle = -Math.cos(Math.toRadians(90.0D + xia.rightArmYaw)) * Math.sin(xia.rightArmPitch);
+		double yAngle = 1;// Math.sin(xia.rightArmPitch);
+		double zAngle = -Math.sin(Math.toRadians(90.0D + xia.rightArmYaw)) * Math.sin(xia.rightArmPitch);
+
+		GlStateManager.pushAttrib();
+		{
+			GlStateManager.pushMatrix();
+			{
+				GlStateManager.color(0.0f, 0.0f, 1.0f, 1.0f);
+				Tessellator tessellator = Tessellator.getInstance();
+				VertexBuffer vertexbuffer = tessellator.getBuffer();
+				vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+				{
+					drawBoundingBox(vertexbuffer, getBounds(1));
+
+				}
+				tessellator.draw();
+			}
+			GlStateManager.popMatrix();
+		}
+		GlStateManager.popAttrib();
+
+	}
+
+	private static void drawBoundingBox(VertexBuffer vertexbuffer, AxisAlignedBB axisAlignedBB) {
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(0.0F, 0.0F, -1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(0.0F, 0.0F, -1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(0.0F, 0.0F, -1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(0.0F, 0.0F, -1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(0.0F, 0.0F, 1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(0.0F, 0.0F, 1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(0.0F, 0.0F, 1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(0.0F, 0.0F, 1.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(0.0F, -1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(0.0F, -1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(0.0F, -1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(0.0F, -1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(0.0F, 1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(0.0F, 1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(0.0F, 1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(0.0F, 1.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(-1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(-1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(-1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(-1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.minZ).normal(1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.minZ).normal(1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ).normal(1.0F, 0.0F, 0.0F).endVertex();
+		vertexbuffer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.maxZ).normal(1.0F, 0.0F, 0.0F).endVertex();
 	}
 
 }

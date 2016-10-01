@@ -1,22 +1,20 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.actions;
 
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.Action;
 import Tamaized.Voidcraft.entity.boss.xia.animations.AnimationXiaSwordSwing;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.entity.client.animation.IAnimation;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class XiaPhase2ActionSword {
 
@@ -63,7 +61,6 @@ public class XiaPhase2ActionSword {
 				tick = 1;
 			}
 		}
-		xia.setAction(Action.SWORD_PROJECTION_RIGHT);
 		tick++;
 	}
 
@@ -84,7 +81,6 @@ public class XiaPhase2ActionSword {
 
 	private void finish() {
 		currAnimation = null;
-		xia.setAction(Action.IDLE);
 		xia.setArmRotations(0, 0, 0, 0, true);
 		done = true;
 	}

@@ -67,7 +67,6 @@ public class ClientPacketHandler {
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
 					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
-					xia.setAction(xia.getActionFromID(bbis.readInt()));
 				}
 				break;
 			case INFUSION_UPDATE:
