@@ -38,17 +38,17 @@ public class VoidSoundEvents {
 	}
 	
 	public static class MusicDiscSoundEvents{
-		public static SoundTrack testDisc = null;
-		public static SoundTrack No_Strings_Attached = null;
-		public static SoundTrack Haven_Bleeding_Through = null;
-		public static SoundTrack Strings_Attached = null;
-		public static SoundTrack Running = null;
+		//public static SoundTrack testDisc = null;
+		//public static SoundTrack No_Strings_Attached = null;
+		//public static SoundTrack Haven_Bleeding_Through = null;
+		//public static SoundTrack Strings_Attached = null;
+		//public static SoundTrack Running = null;
 	}
 	
 	public static class BGMusicSoundEvents{
-		public static SoundTrack undertale_core = null;
-		public static SoundTrack emile_wish = null;
-		public static SoundTrack emile_nether = null;
+		//public static SoundTrack undertale_core = null;
+		//public static SoundTrack emile_wish = null;
+		//public static SoundTrack emile_nether = null;
 		public static SoundTrack mcMusic_end = new SoundTrack(SoundEvents.MUSIC_END, 10);
 	}
 	
@@ -131,15 +131,15 @@ public class VoidSoundEvents {
 		
 		MiscSoundEvents.chain = registerSound("random.chain");
 		
-		MusicDiscSoundEvents.testDisc = new SoundTrack(registerSound("record.undertale"), 142);
-		MusicDiscSoundEvents.No_Strings_Attached = new SoundTrack(registerSound("record.No_Strings_Attached"), 459);
-		MusicDiscSoundEvents.Haven_Bleeding_Through = new SoundTrack(registerSound("record.Haven_Bleeding_Through"), 322);
-		MusicDiscSoundEvents.Strings_Attached = new SoundTrack(registerSound("record.Strings_Attached"), 199);
-		MusicDiscSoundEvents.Running = new SoundTrack(registerSound("record.Running"), 348);
+		//MusicDiscSoundEvents.testDisc = new SoundTrack(registerSound("record.undertale"), 142);
+		//MusicDiscSoundEvents.No_Strings_Attached = new SoundTrack(registerSound("record.No_Strings_Attached"), 459);
+		//MusicDiscSoundEvents.Haven_Bleeding_Through = new SoundTrack(registerSound("record.Haven_Bleeding_Through"), 322);
+		//MusicDiscSoundEvents.Strings_Attached = new SoundTrack(registerSound("record.Strings_Attached"), 199);
+		//MusicDiscSoundEvents.Running = new SoundTrack(registerSound("record.Running"), 348);
 		
-		BGMusicSoundEvents.undertale_core = new SoundTrack(registerSound("music.undertale"), 142);
-		BGMusicSoundEvents.emile_wish = new SoundTrack(registerSound("music.emile.wish"), 142);
-		BGMusicSoundEvents.emile_nether = new SoundTrack(registerSound("music.emile.nether"), 142);
+		//BGMusicSoundEvents.undertale_core = new SoundTrack(registerSound("music.undertale"), 142);
+		//BGMusicSoundEvents.emile_wish = new SoundTrack(registerSound("music.emile.wish"), 142);
+		//BGMusicSoundEvents.emile_nether = new SoundTrack(registerSound("music.emile.nether"), 142);
 	}
 	
 	private static SoundEvent registerSound(String soundName) {

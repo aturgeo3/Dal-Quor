@@ -1,94 +1,104 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import java.io.File;
+
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.items.VoidRecord;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityVoidBox extends TamTileEntityInventory {
-	
+
 	public static final int SLOT_CURRENT = 0;
 	public static final int SLOT_NEXT = 1;
 	public static final int SLOT_FINISH = 2;
-	public static final int[] SLOTS_ACCESSABLE = new int[]{1, 2};
-	public static final int[] SLOTS_ALL = new int[]{0, 1, 2};
-	
-	public boolean isPlaying;
-	public boolean doPlay;
-	public boolean loop;
-	public boolean autoFill;
-	public ItemStack oldRecord;
-	public int loopTime;
-	public int maxLoopTime;
+	public static final int[] SLOTS_ACCESSABLE = new int[] { 1, 2 };
+	public static final int[] SLOTS_ALL = new int[] { 0, 1, 2 };
+
+	private boolean loop;
+	private boolean autoFill;
+	private ItemStack oldRecord;
 	private boolean isPowered = false;
 	private boolean pulsed = false;
-	
+
+	// These should only be handled on the client
+	@SideOnly(Side.CLIENT)
+	public boolean isPlaying;
+	@SideOnly(Side.CLIENT)
+	private int loopTime;
+	@SideOnly(Side.CLIENT)
+	private int maxLoopTime;
+
 	public TileEntityVoidBox() {
 		super(3);
 	}
-	
-	public void readFromNBT(NBTTagCompound nbt){
+
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		loop = nbt.getBoolean("loop");
 		autoFill = nbt.getBoolean("autoFill");
-		isPlaying = nbt.getBoolean("isPlaying");
-		doPlay = nbt.getBoolean("doPlay");
 		int temp = nbt.getInteger("oldRecord");
 		oldRecord = temp > -1 ? new ItemStack(Item.getItemById(temp)) : null;
-		loopTime = nbt.getInteger("loopTime");
-		maxLoopTime = nbt.getInteger("maxLoopTime");
 	}
-	
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setBoolean("loop", loop);
 		nbt.setBoolean("autoFill", autoFill);
-		nbt.setBoolean("isPlaying", isPlaying);
-		nbt.setBoolean("doPlay", doPlay);
 		nbt.setInteger("oldRecord", oldRecord != null ? Item.getIdFromItem(oldRecord.getItem()) : -1);
-		nbt.setInteger("loopTime", loopTime);
-		nbt.setInteger("maxLoopTime", maxLoopTime);
 		return nbt;
 	}
 
 	/**
-	 *  Play the Record
-	 *   
-     */
-	private void PlayTheSound(ItemStack itemStack){
-		if(itemStack != null && itemStack.getItem() instanceof VoidRecord){
-			VoidRecord theRecord = (VoidRecord) itemStack.getItem();
-                worldObj.playEvent((EntityPlayer)null, 1010, getPos(), Item.getIdFromItem(theRecord));
-		}else{
-			voidCraft.logger.warn("NULL/NON-VOIDRECORD SLOT DETECTED");
+	 * Play the Record
+	 */
+	@SideOnly(Side.CLIENT)
+	private void PlayTheSound(ItemStack itemStack) {
+		if (itemStack != null && itemStack.getItem() instanceof ItemRecord) {
+			ItemRecord theRecord = (ItemRecord) itemStack.getItem();
+			worldObj.playEvent((EntityPlayer) null, 1010, getPos(), Item.getIdFromItem(theRecord));
+		} else {
+			voidCraft.logger.warn("NULL/NON-ITEMRECORD IN SLOT DETECTED");
 		}
 	}
-	
-	public void PlayCurrentRecord(){
+
+	public void PlayCurrentRecord() { // TODO: Send a packet to all around, only clients will be able to play the actual record
 		ItemStack record = slots[SLOT_CURRENT];
-		if(record != null) PlayTheSound(record);
+		if (record != null) {
+			// Send the packet
+		}
 	}
-	
+
 	/**
-	 *  Stop the Record
-	 *   
-     */
-	public void StopTheSound(){
-		worldObj.playEvent((EntityPlayer)null, 1010, getPos(), 0);
+	 * Stop the Record
+	 */
+	public void StopTheSound() {
+		worldObj.playEvent((EntityPlayer) null, 1010, getPos(), 0);
 	}
-	
-	public void setHasRedstoneSignal(boolean b){
+
+	public void setHasRedstoneSignal(boolean b) {
 		isPowered = b;
 	}
 
 	@Override
-	public void update(){
+	public void update() {
 		super.update();
+		if (!worldObj.isRemote) {
+
+		} else {
+
+		}
+	}
+
+	public void updatez(){
 		if(!worldObj.isRemote){
 			if(!pulsed && isPowered){
 				pulsed = true;
@@ -111,7 +121,14 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 					doPlay = false;
 					int thytime=0;
 					oldRecord = slots[SLOT_CURRENT];
-					if(slots[SLOT_CURRENT].getItem() instanceof VoidRecord) thytime = ((VoidRecord) slots[SLOT_CURRENT].getItem()).getTime();
+					if(slots[SLOT_CURRENT].getItem() instanceof ItemRecord){
+						ItemRecord theRecord = ((ItemRecord) slots[SLOT_CURRENT].getItem());
+						ResourceLocation theResource = theRecord.getSound().getRegistryName();
+						
+						File soundFile = new File("resourcepacks/moreMusic/assets/minecraft/" + theResource.getResourcePath());
+						thytime = 
+						
+					}
 					else{
 						StopTheSound();
 						isPlaying = doPlay = false;
@@ -151,10 +168,10 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_NEXT ? stack.getItem() instanceof VoidRecord : false;
+		return i == SLOT_NEXT ? stack.getItem() instanceof ItemRecord : false;
 	}
 
 	@Override
