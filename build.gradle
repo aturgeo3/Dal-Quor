@@ -38,7 +38,7 @@ minecraft {
 dependencies {
 	deobfCompile "mezz.jei:${project.jeiVersion}:api"
 	runtime "mezz.jei:${project.jeiVersion}"
-	compile files('libs/${project.tammodizedVersion}.jar')
+	compile files("libs/${project.tammodizedVersion}.jar")
 }
 
 processResources
