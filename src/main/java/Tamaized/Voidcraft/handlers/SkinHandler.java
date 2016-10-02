@@ -41,6 +41,7 @@ public class SkinHandler {
 	private static final String idUrl = "https://api.mojang.com/profiles/";
 	private static final String baseLoc = (System.getenv("APPDATA") == null || System.getenv("APPDATA").contains("null")) ? "./.minecraft/" : (System.getenv("APPDATA")) + "/.minecraft/" + voidCraft.modid + "/";
 	private static final String loc = baseLoc + "assets/" + voidCraft.modid + "/skins/";
+	private static final String backup = "/assets/"+voidCraft.modid+"/skinHandler/";
 
 	// Perm
 	private Map<PlayerNameAlias, GameProfile> aliasProfile = new HashMap<PlayerNameAlias, GameProfile>();
@@ -106,6 +107,7 @@ public class SkinHandler {
 			updateSkins();
 		} else {
 			voidCraft.logger.info("Unable to Connect to Mojang Servers, using cache");
+			useCacheNames();
 			cacheSkins();
 		}
 		freeMemory();
@@ -121,9 +123,37 @@ public class SkinHandler {
 	}
 
 	private void handleResources() {
-		new File(loc).mkdirs();
+		File dir = new File(loc);
+		dir.mkdirs();
+		if (dir.list().length < 16) {
+			voidCraft.logger.info("Populating: "+loc);
+			try {
+				FileUtils.copyDirectory(FileUtils.toFile(getClass().getResource(backup)), dir);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-
+	
+	private void useCacheNames(){
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Azanor), "azanor");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Boni), "boni");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Cpw11), "cpw11");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.DireWolf20), "direwolf20");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.FireBall1725), "FireBall1725");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.iChun), "iChun");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Pahimar), "Pahimar");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Rorax), "Rorax");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.RWTema), "RWTema");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Slowpoke101), "slowpoke101");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Soaryn), "Soaryn");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Tamaized), "Tamaized");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Tlovetech), "tlovetech");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.TTFTCUTS), "TTFTCUTS");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.Vazkii), "Vazkii");
+		uuidNamesFlip.put(getUUID(PlayerNameAlias.XCompWiz), "XCompWiz");
+	}
+	
 	private void validateNames() {
 		voidCraft.logger.info("Mapping Names to UUIDs");
 		for (UUID id : aliasUUID.values()) {
@@ -222,23 +252,23 @@ public class SkinHandler {
 							switch (key) {
 								case "properties":
 									json.beginArray(); // properties
+								{
+									json.beginObject(); // 0
 									{
-										json.beginObject(); // 0
-										{
-											while (json.hasNext()) {
-												String key2 = json.nextName();
-												switch (key2) {
-													case "value":
-														encodedString = json.nextString();
-														break;
-													default:
-														json.skipValue();
-														break;
-												}
+										while (json.hasNext()) {
+											String key2 = json.nextName();
+											switch (key2) {
+												case "value":
+													encodedString = json.nextString();
+													break;
+												default:
+													json.skipValue();
+													break;
 											}
 										}
-										json.endObject();
 									}
+									json.endObject();
+								}
 									json.endArray();
 									break;
 								case "error":
@@ -274,33 +304,33 @@ public class SkinHandler {
 									break;
 								case "textures":
 									json.beginObject(); // textures
-									{
-										while (json.hasNext()) {
-											String key2 = json.nextName();
-											switch (key2) {
-												case "SKIN":
-													json.beginObject(); // SKIN
-													{
-														while (json.hasNext()) {
-															String key3 = json.nextName();
-															switch (key3) {
-																case "url":
-																	skinUrl = json.nextString();
-																	break;
-																default:
-																	json.skipValue();
-																	break;
-															}
-														}
+								{
+									while (json.hasNext()) {
+										String key2 = json.nextName();
+										switch (key2) {
+											case "SKIN":
+												json.beginObject(); // SKIN
+											{
+												while (json.hasNext()) {
+													String key3 = json.nextName();
+													switch (key3) {
+														case "url":
+															skinUrl = json.nextString();
+															break;
+														default:
+															json.skipValue();
+															break;
 													}
-													json.endObject();
-													break;
-												default:
-													json.skipValue();
-													break;
+												}
 											}
+												json.endObject();
+												break;
+											default:
+												json.skipValue();
+												break;
 										}
 									}
+								}
 									json.endObject();
 									break;
 								default:
