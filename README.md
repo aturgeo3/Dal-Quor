@@ -10,12 +10,10 @@ The easiest way to enter the void is to harvest Void Crystals from the Dimension
 After stepping through the portal, you'll be in the Void, a black abyss where only powerful ethereal spirits can survive. All other creatures will slowly die in the hostile environment, including you. However, if you can brave the Void and infuse it's ethereal essence with your tools, it could yield powerful results... 
 
 ## Downloads
-[Can be found here](http://voidcraft.tamaized.tk/mod.php)
-
-DEV is an unstable version meant for testing purposes. It may sometimes be a later build than the stable, it may not.
+[Can be found here](https://minecraft.curseforge.com/projects/voidcraft)
 
 ## Modpacks
-* Sure, provide a link to this github or [here](http://voidcraft.tamaized.tk).
+* Sure, provide a link to this github or [here](https://minecraft.curseforge.com/projects/voidcraft).
  
 ## Other Mod Integrations
  This mod currently has integrations with:
