@@ -6,7 +6,6 @@ import org.lwjgl.opengl.GL11;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
-import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import io.netty.buffer.ByteBufOutputStream;
@@ -37,7 +36,6 @@ public class VoidBoxGUI extends GuiContainer {
 	private static final int BUTTON_DEBUG = 4;
 
 	private int CurrColor = 0;
-	private boolean spam = false;
 
 	private ItemStack oldRecord;
 
@@ -59,103 +57,54 @@ public class VoidBoxGUI extends GuiContainer {
 		if (BtnPlay == null || BtnStop == null) return;
 
 		BtnPlay.enabled = voidBox.getStackInSlot(voidBox.SLOT_NEXT) != null && ((voidBox.getStackInSlot(voidBox.SLOT_NEXT).getItem() instanceof ItemRecord) && voidBox.getStackInSlot(voidBox.SLOT_CURRENT) == null);
-		BtnStop.enabled = voidBox.isPlaying;
+		BtnStop.enabled = voidBox.isPlaying();
 
 		if (CurrColor > 102) CurrColor = 15;
 
-		if (voidBox.isPlaying) CurrColor++;
+		if (voidBox.isPlaying()) CurrColor++;
 	}
 
 	public void actionPerformed(GuiButton button) {
-		spam = false;
 		int pktType;
 		int xcoord = voidBox.getPos().getX();
 		int ycoord = voidBox.getPos().getY();
 		int zcoord = voidBox.getPos().getZ();
 		switch (button.id) {
 			case BUTTON_PLAY:
-				if (spam) return;
-				else spam = true;
-				pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VOIDBOX_PLAY);
-				ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-				DataOutputStream outputStream = new DataOutputStream(bos);
-				try {
-					outputStream.writeInt(pktType);
-					outputStream.writeInt(xcoord);
-					outputStream.writeInt(ycoord);
-					outputStream.writeInt(zcoord);
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					voidCraft.channel.sendToServer(packet);
-					outputStream.close();
-					bos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_PLAY);
 				break;
 			case BUTTON_STOP:
-				if (spam) return;
-				else spam = true;
-				pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VOIDBOX_STOP);
-				bos = new ByteBufOutputStream(Unpooled.buffer());
-				outputStream = new DataOutputStream(bos);
-				try {
-					outputStream.writeInt(pktType);
-					outputStream.writeInt(xcoord);
-					outputStream.writeInt(ycoord);
-					outputStream.writeInt(zcoord);
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					voidCraft.channel.sendToServer(packet);
-					outputStream.close();
-					bos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_STOP);
 				break;
 			case BUTTON_LOOP:
-				pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VOIDBOX_LOOP);;
-				bos = new ByteBufOutputStream(Unpooled.buffer());
-				outputStream = new DataOutputStream(bos);
-				try {
-					outputStream.writeInt(pktType);
-					outputStream.writeInt(xcoord);
-					outputStream.writeInt(ycoord);
-					outputStream.writeInt(zcoord);
-					outputStream.writeBoolean(!voidBox.loop);
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					voidCraft.channel.sendToServer(packet);
-					outputStream.close();
-					bos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_LOOP);
 				break;
 			case BUTTON_AUTO:
-				pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VOIDBOX_AUTO);
-				bos = new ByteBufOutputStream(Unpooled.buffer());
-				outputStream = new DataOutputStream(bos);
-				try {
-					outputStream.writeInt(pktType);
-					outputStream.writeInt(xcoord);
-					outputStream.writeInt(ycoord);
-					outputStream.writeInt(zcoord);
-					outputStream.writeBoolean(!voidBox.autoFill);
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					voidCraft.channel.sendToServer(packet);
-					outputStream.close();
-					bos.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_AUTO);
 				break;
-			case BUTTON_DEBUG:
-				System.out.println(voidBox.getPos().getX());
-				System.out.println(voidBox.getPos().getY());
-				System.out.println(voidBox.getPos().getZ());
-				System.out.println(voidBox.isPlaying);
-				System.out.println(voidBox.oldRecord);
-				System.out.println(voidBox.loop);
-				System.out.println(voidBox.loopTime);
+			default:
 				break;
+		}
+	}
+
+	private void sendPacket(ServerPacketHandler.PacketType type) {
+		int pktType = ServerPacketHandler.getPacketTypeID(type);
+		int xcoord = voidBox.getPos().getX();
+		int ycoord = voidBox.getPos().getY();
+		int zcoord = voidBox.getPos().getZ();
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(pktType);
+			outputStream.writeInt(xcoord);
+			outputStream.writeInt(ycoord);
+			outputStream.writeInt(zcoord);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			voidCraft.channel.sendToServer(packet);
+			outputStream.close();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -167,7 +116,7 @@ public class VoidBoxGUI extends GuiContainer {
 		this.fontRendererObj.drawString("Void Music Box", this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, this.ySize - 260, 0x7700FF);
 		this.fontRendererObj.drawString("Currently Playing:", (this.xSize / 12 - this.fontRendererObj.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
 
-		if (voidBox.isPlaying && voidBox.getStackInSlot(0) != null) {
+		if (voidBox.isPlaying() && voidBox.getStackInSlot(0) != null) {
 			int hexacolor = 0x000000;
 
 			if (CurrColor == 0) hexacolor = 0x000000;
@@ -278,13 +227,13 @@ public class VoidBoxGUI extends GuiContainer {
 			fontRendererObj.drawString(voidBox.getStackInSlot(0) != null ? ((ItemRecord) voidBox.getStackInSlot(0).getItem()).getRecordNameLocal() : "", (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, hexacolor);
 		}
 
-		if (voidBox.loop) fontRendererObj.drawString("Loop: On", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, 0x00FF00);
+		if (voidBox.getLoopState()) fontRendererObj.drawString("Loop: On", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, 0x00FF00);
 		else fontRendererObj.drawString("Loop: Off", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, 0xFF0000);
 
-		if (voidBox.autoFill) fontRendererObj.drawString("Auto: On", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 7, ySize - 180, 0x00FF00);
+		if (voidBox.getAutoState()) fontRendererObj.drawString("Auto: On", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 7, ySize - 180, 0x00FF00);
 		else fontRendererObj.drawString("Auto: Off", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 7, ySize - 180, 0xFF0000);
 
-		if (voidBox.isPlaying) fontRendererObj.drawString(getTimeInMinutes(voidBox.maxLoopTime - voidBox.loopTime) + "/" + getTimeInMinutes(voidBox.maxLoopTime), (xSize / 12) + (fontRendererObj.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
+		if (voidBox.isPlaying()) fontRendererObj.drawString(getTimeInMinutes(voidBox.getSongLength() - voidBox.getSongTimeLeft()) + "/" + getTimeInMinutes(voidBox.getSongLength()), (xSize / 12) + (fontRendererObj.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
 	}
 
 	private String getTimeInMinutes(int t) {

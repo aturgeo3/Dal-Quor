@@ -1,18 +1,17 @@
 package Tamaized.Voidcraft.network;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-
 import java.io.IOException;
 
+import Tamaized.Voidcraft.items.HookShot;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import Tamaized.Voidcraft.items.HookShot;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class ServerPacketHandler {
 
@@ -30,22 +29,15 @@ public class ServerPacketHandler {
 
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
-		try {
-
-			EntityPlayerMP player = ((NetHandlerPlayServer) event.getHandler()).playerEntity;
-			ByteBufInputStream bbis = new ByteBufInputStream(event.getPacket().payload());
-
-			processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
-
-			bbis.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		EntityPlayerMP player = ((NetHandlerPlayServer) event.getHandler()).playerEntity;
+		player.getServer().addScheduledTask(new Runnable() {
+			public void run() {
+				processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
+			}
+		});
 	}
 
 	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP player) {
-
 		if (parSide == Side.SERVER) {
 			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 			int pktType;
@@ -59,8 +51,7 @@ public class ServerPacketHandler {
 							bbis.close();
 							return;
 						}
-						voidBox.isPlaying = true;
-						voidBox.doPlay = true;
+						voidBox.PlayNextSound();
 						break;
 					case VOIDBOX_STOP:
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
@@ -68,8 +59,7 @@ public class ServerPacketHandler {
 							bbis.close();
 							return;
 						}
-						voidBox.isPlaying = false;
-						voidBox.loop = false;
+						voidBox.StopTheSoundAndDeposit();
 						break;
 					case VOIDBOX_LOOP:
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
@@ -77,7 +67,7 @@ public class ServerPacketHandler {
 							bbis.close();
 							return;
 						}
-						voidBox.loop = bbis.readBoolean();
+						voidBox.setLoopState();
 						break;
 					case VOIDBOX_AUTO:
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
@@ -85,7 +75,7 @@ public class ServerPacketHandler {
 							bbis.close();
 							return;
 						}
-						voidBox.autoFill = bbis.readBoolean();
+						voidBox.setAutoState();
 						break;
 					case HOOKSHOT_STOP:
 						HookShot.handler.put(player, false);

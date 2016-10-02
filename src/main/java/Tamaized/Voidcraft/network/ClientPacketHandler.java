@@ -19,7 +19,6 @@ import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 
-@SideOnly(Side.CLIENT)
 public class ClientPacketHandler {
 
 	public static enum PacketType {

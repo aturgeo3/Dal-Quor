@@ -23,15 +23,15 @@ public class VoidBoxContainer extends ContainerBase {
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 86 + j * 18, 150 + i * 18));
+				this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 86 + j * 18, 160 + i * 18));
 			}
 		}
 
 		for (int i = 0; i < 9; i++) {
-			this.addSlotToContainer(new Slot(inventory, i, 86 + i * 18, 208));
+			this.addSlotToContainer(new Slot(inventory, i, 86 + i * 18, 218));
 		}
 
-		addSlotToContainer(new Slot(inventory, inventory.getSizeInventory() - 1, 230, 127) {
+		addSlotToContainer(new Slot(inventory, inventory.getSizeInventory() - 1, 230, 137) {
 
 			@SideOnly(Side.CLIENT)
 			@Override

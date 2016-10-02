@@ -11,19 +11,22 @@ import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.EmptyObsidianFlask;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.ObsidianFlask;
+import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicDrill;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class VoidCraftItems implements ITamRegistry {
 
-	// public static ArrayList<Item> voidDiscs;
+	public static ArrayList<ItemRecord> voidDiscs;
 	private ArrayList<ITamModel> modelList;
 
 	public static TamItem ectoplasm;
@@ -54,7 +57,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public static VoidicSuppressor voidicSuppressor;
 	public static VoidicDrill voidicDrill;
 
-	// public static VoidRecord record_noStrings;
+	//public static VoidRecord record_noStrings;
 	// public static VoidRecord record_bleedingThrough;
 	// public static VoidRecord record_stringsAttached;
 	// public static VoidRecord record_running;
@@ -92,13 +95,13 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(voidicSuppressor = new VoidicSuppressor(voidCraft.tabs.tabVoid, "voidicSuppressor", 1));
 		modelList.add(voidicDrill = new VoidicDrill(voidCraft.tabs.tabVoid, "voidicDrill", 1));
 
-		// modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
+		//modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
 		// modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
 		// modelList.add(record_stringsAttached = new VoidRecord("Approaching Nirvana - Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.Strings_Attached, "voidDisc3"));
 		// modelList.add(record_running = new VoidRecord("Approaching Nirvana - Running", VoidSoundEvents.MusicDiscSoundEvents.Running, "voidDisc4"));
 
-		// voidDiscs = new ArrayList<Item>();
-		// voidDiscs.add(record_noStrings);
+		voidDiscs = new ArrayList<ItemRecord>();
+		//voidDiscs.add(record_noStrings);
 		// voidDiscs.add(record_bleedingThrough);
 		// voidDiscs.add(record_stringsAttached);
 		// voidDiscs.add(record_running);
