@@ -13,7 +13,7 @@ After stepping through the portal, you'll be in the Void, a black abyss where on
 [Can be found here](https://minecraft.curseforge.com/projects/voidcraft)
 
 ## Modpacks
-* Sure, provide a link to this github or [here](https://minecraft.curseforge.com/projects/voidcraft).
+* Sure, provide a link to this github or [here](https://minecraft.curseforge.com/projects/voidcraft) or [here](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2746403-voidcraft) up to you.
  
 ## Other Mod Integrations
  This mod currently has integrations with:
