@@ -71,9 +71,9 @@ item.voidPickaxe.name=Void Pickaxe
 item.voidShovel.name=Void Shovel
 item.voidAxe.name=Void Axe
 item.voidHoe.name=Void Hoe
-# -- Spectre
-item.spectrePickaxe.name=Spectre Pickaxe
-item.spectreAxe.name=Spectre Axe
+# -- Specter
+item.spectrePickaxe.name=Specter Pickaxe
+item.spectreAxe.name=Specter Axe
 
 # Swords
 item.voidSword.name=Void Sword
@@ -106,7 +106,7 @@ itemGroup.tForge=Star Forge
 
 # Entity
 entity.Wraith.name=Void Wraith
-entity.SpectreChain.name=Chained Spectre
+entity.SpectreChain.name=Chained Specter
 entity.VoidWrath.name=Void's Wrath
 entity.Lich.name=Void Lich
 entity.VoidBoss.name=Corrupted Pawn
