@@ -25,6 +25,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import paulscode.sound.codecs.CodecJOrbis;
 
 public class TileEntityVoidBox extends TamTileEntityInventory {
@@ -107,7 +108,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 			try {
 				ItemRecord theRecord = (ItemRecord) itemStack.getItem();
 				Class<? extends ItemRecord> c = ItemRecord.class;
-				Field field = c.getDeclaredField("RECORDS");
+				Field field = ReflectionHelper.findField(c, new String[]{"field_150928_b", "RECORDS"});
 				field.setAccessible(true);
 				Map<SoundEvent, ItemRecord> RECORDS = (Map<SoundEvent, ItemRecord>) field.get(theRecord);
 				SoundEvent soundEvent = null;
@@ -119,7 +120,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 				}
 				if (soundEvent == null) throw new IOException("null soundEvent");
 				Class<? extends SoundEvent> cS = soundEvent.getClass();
-				field = cS.getDeclaredField("soundName");
+				field = ReflectionHelper.findField(cS, new String[]{"field_187506_b", "field_149219_a", "soundName"});
 				field.setAccessible(true);
 				ResourceLocation resourceLocation = (ResourceLocation) field.get(soundEvent);
 				String modid = resourceLocation.getResourceDomain();
