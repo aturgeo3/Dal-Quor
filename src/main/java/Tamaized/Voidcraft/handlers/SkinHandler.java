@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
 
@@ -41,7 +45,7 @@ public class SkinHandler {
 	private static final String idUrl = "https://api.mojang.com/profiles/";
 	private static final String baseLoc = (System.getenv("APPDATA") == null || System.getenv("APPDATA").contains("null")) ? "./.minecraft/" : (System.getenv("APPDATA")) + "/.minecraft/" + voidCraft.modid + "/";
 	private static final String loc = baseLoc + "assets/" + voidCraft.modid + "/skins/";
-	private static final String backup = "/assets/"+voidCraft.modid+"/skinHandler/";
+	private static final String skinZip = "/assets/" + voidCraft.modid + "/skinHandler/skins.zip";
 
 	// Perm
 	private Map<PlayerNameAlias, GameProfile> aliasProfile = new HashMap<PlayerNameAlias, GameProfile>();
@@ -126,16 +130,51 @@ public class SkinHandler {
 		File dir = new File(loc);
 		dir.mkdirs();
 		if (dir.list().length < 16) {
-			voidCraft.logger.info("Populating: "+loc);
-			try {
-				FileUtils.copyDirectory(FileUtils.toFile(getClass().getResource(backup)), dir);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			voidCraft.logger.info("Populating: " + loc);
+			extractZip(getClass().getResourceAsStream(skinZip), loc);
 		}
 	}
-	
-	private void useCacheNames(){
+
+	public static void extractZip(InputStream loc, String dest) {
+		try {
+			// Open the zip file
+			ZipInputStream zipFile = new ZipInputStream(loc);
+			ZipEntry zipEntry;
+			while ((zipEntry = zipFile.getNextEntry()) != null) {
+				String name = zipEntry.getName();
+				long size = zipEntry.getSize();
+				long compressedSize = zipEntry.getCompressedSize();
+				System.out.printf("name: %-20s | size: %6d | compressed size: %6d\n", name, size, compressedSize);
+
+				// Do we need to create a directory ?
+				File file = new File(dest + name);
+				if (name.endsWith("/")) {
+					file.mkdirs();
+					continue;
+				}
+
+				File parent = file.getParentFile();
+				if (parent != null) {
+					parent.mkdirs();
+				}
+
+				// Extract the file
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] bytes = new byte[1024];
+				int length;
+				while ((length = zipFile.read(bytes)) >= 0) {
+					fos.write(bytes, 0, length);
+				}
+				fos.close();
+
+			}
+			zipFile.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void useCacheNames() {
 		uuidNamesFlip.put(getUUID(PlayerNameAlias.Azanor), "azanor");
 		uuidNamesFlip.put(getUUID(PlayerNameAlias.Boni), "boni");
 		uuidNamesFlip.put(getUUID(PlayerNameAlias.Cpw11), "cpw11");
@@ -153,7 +192,7 @@ public class SkinHandler {
 		uuidNamesFlip.put(getUUID(PlayerNameAlias.Vazkii), "Vazkii");
 		uuidNamesFlip.put(getUUID(PlayerNameAlias.XCompWiz), "XCompWiz");
 	}
-	
+
 	private void validateNames() {
 		voidCraft.logger.info("Mapping Names to UUIDs");
 		for (UUID id : aliasUUID.values()) {
