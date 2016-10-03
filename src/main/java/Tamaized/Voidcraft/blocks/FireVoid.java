@@ -39,7 +39,7 @@ public class FireVoid extends TamBlockFire {
 
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if (entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)) {
+		if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)) {
 			if (entityIn instanceof EntitySkeleton) {
 				EntitySkeleton skelly = (EntitySkeleton) entityIn;
 				if (skelly.getSkeletonType() == SkeletonType.WITHER) return;
