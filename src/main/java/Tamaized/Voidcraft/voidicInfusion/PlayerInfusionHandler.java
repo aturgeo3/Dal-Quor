@@ -1,29 +1,23 @@
 package Tamaized.Voidcraft.voidicInfusion;
 
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class PlayerInfusionHandler {
 
@@ -167,6 +161,12 @@ public class PlayerInfusionHandler {
 			outputStream.writeInt(maxAmount);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			if (voidCraft.channel != null && packet != null && playerMP != null) voidCraft.channel.sendTo(packet, playerMP);
+			else {
+				voidCraft.logger.warn("Something went wrong! Report this to Tamaized");
+				voidCraft.logger.warn("channel: " + voidCraft.channel);
+				voidCraft.logger.warn("packet: " + packet);
+				voidCraft.logger.warn("playerMP: " + playerMP);
+			}
 			if (player != null) {
 				if (canFly) player.capabilities.allowFlying = true;
 				player.sendPlayerAbilities();
