@@ -2,15 +2,6 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.TamModized.blocks.TamBlockFence;
 import Tamaized.TamModized.blocks.TamBlockStairs;
@@ -39,6 +30,13 @@ import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.VoidicPowerCable;
 import Tamaized.Voidcraft.machina.VoidicPowerCharger;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class VoidCraftBlocks implements ITamRegistry {
 
@@ -47,6 +45,10 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static BlockVoidcrystal blockVoidcrystal;
 	public static OreVoidcrystal oreVoidcrystal;
 	public static BlockFakeBedrock blockFakeBedrock;
+	public static TamBlockFence blockFakeBedrockFence;
+	public static TamBlockStairs blockFakeBedrockStairs;
+	public static TamBlockSlabDouble blockFakeBedrockDoubleSlab;
+	public static TamBlockSlabHalf blockFakeBedrockHalfSlab;
 	public static BlockNoBreak blockNoBreak;
 	public static TamBlock blockVoidbrick;
 	public static TamBlockFence blockVoidfence;
@@ -79,6 +81,10 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(blockVoidcrystal = new BlockVoidcrystal(voidCraft.tabs.tabVoid, Material.GLASS, "blockVoidcrystal", 7.0F));
 		modelList.add(oreVoidcrystal = new OreVoidcrystal(voidCraft.tabs.tabVoid, Material.ROCK, "oreVoidcrystal", 3.0F));
 		modelList.add(blockFakeBedrock = new BlockFakeBedrock(voidCraft.tabs.tabVoid, Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock", 30.0F));
+		modelList.add(blockFakeBedrockFence = new TamBlockFence(voidCraft.tabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockFakeBedrockFence"));
+		modelList.add(blockFakeBedrockStairs = new TamBlockStairs(voidCraft.tabs.tabVoid, blockFakeBedrock.getDefaultState(), "blockFakeBedrockStairs"));
+		modelList.add(blockFakeBedrockDoubleSlab = new TamBlockSlabDouble(voidCraft.tabs.tabVoid, Material.ROCK, "blockFakeBedrockDoubleSlab", Item.getItemFromBlock(blockFakeBedrockHalfSlab)));
+		modelList.add(blockFakeBedrockHalfSlab = new TamBlockSlabHalf(voidCraft.tabs.tabVoid, Material.ROCK, "blockFakeBedrockHalfSlab", Item.getItemFromBlock(blockFakeBedrockHalfSlab)));
 		modelList.add(blockNoBreak = new BlockNoBreak(voidCraft.tabs.tForge, Material.ROCK, "blockNoBreak", -1F));
 		modelList.add(blockVoidbrick = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidbrick", 30.0F));
 		modelList.add(blockVoidfence = new TamBlockFence(voidCraft.tabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence"));
@@ -104,11 +110,13 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(realityStabilizer = new RealityStabilizer(voidCraft.tabs.tabVoid, Material.IRON, "realityStabilizer", 3.5f));
 
 		// Slabs have to be registered outside of their class
-		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid+":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
-		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid+":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
-		
+		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		GameRegistry.registerBlock(blockFakeBedrockHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockHalfSlab).getName(), blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab, false);
+		GameRegistry.registerBlock(blockFakeBedrockDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockDoubleSlab).getName(), blockVoidBrickHalfSlab, blockFakeBedrockDoubleSlab, false);
+
 	}
-	
+
 	@Override
 	public void init() {
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
@@ -120,6 +128,10 @@ public class VoidCraftBlocks implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(blockVoidstairs, 6), "  X", " XX", "XXX", 'X', blockVoidbrick);
 		GameRegistry.addRecipe(new ItemStack(blockVoidBrickHalfSlab, 6), "XXX", 'X', blockVoidbrick);
 		GameRegistry.addRecipe(new ItemStack(blockVoidfence), "X X", "XXX", "X X", 'X', voidCraft.items.voidcrystal);
+		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockStairs, 6), "X  ", "XX ", "XXX", 'X', blockFakeBedrock);
+		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockStairs, 6), "  X", " XX", "XXX", 'X', blockFakeBedrock);
+		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockHalfSlab, 6), "XXX", 'X', blockFakeBedrock);
+		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockFence, 6), "   ", "XXX", "XXX", 'X', blockFakeBedrock);
 		GameRegistry.addRecipe(new ItemStack(voidicCable, 8), "XXX", "XYX", "XXX", 'Y', blockVoidcrystal, 'X', Items.REDSTONE);
 		GameRegistry.addRecipe(new ItemStack(voidicGen), "XXX", "XYX", "XXX", 'Y', voidInfuser, 'X', Items.REDSTONE);
 		GameRegistry.addRecipe(new ItemStack(voidicCharger), "DSD", "CZC", "DPD", 'D', voidCraft.items.diamondDust, 'S', voidCraft.items.voidStar, 'C', voidCraft.items.voidCloth, 'Z', Items.END_CRYSTAL, 'P', voidicCable);
@@ -144,19 +156,19 @@ public class VoidCraftBlocks implements ITamRegistry {
 	@Override
 	public void clientPreInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientPostInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
