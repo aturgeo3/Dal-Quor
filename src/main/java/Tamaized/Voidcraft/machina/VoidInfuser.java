@@ -47,7 +47,7 @@ public class VoidInfuser extends TamBlockContainer {
 		if (worldIn.isRemote) {
 			return true;
 		} else {
-			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.guiIdInfuser, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Infuser), worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}

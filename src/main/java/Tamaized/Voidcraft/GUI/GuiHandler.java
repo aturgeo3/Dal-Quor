@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.GUI;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
 import Tamaized.Voidcraft.GUI.client.HeimdallGUI;
 import Tamaized.Voidcraft.GUI.client.RealityStabilizerGUI;
 import Tamaized.Voidcraft.GUI.client.VoidBoxGUI;
@@ -26,53 +21,47 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
-	public static final int guiIdMacerator = 0;
-	public static final int guiIdBox = 1;
-	public static final int guiIdInfuser = 2;
-	public static final int guiIdHeimdall = 3;
-	public static final int guiIdGen = 4;
-	public static final int guiIdCharger = 5;
-	public static final int guiIdStabilizer = 6;
+	public static enum Type {
+		NULL, Macerator, MusicBox, Infuser, Heimdall, VoidicGenerator, VoidicCharger, RealityStabilizer, BookOfLore
+	}
 
-	public GuiHandler() {
+	public static int getTypeID(Type type) {
+		return type.ordinal();
+	}
+
+	public static Type getTypeFromID(int id) {
+		return id > Type.values().length ? Type.NULL : Type.values()[id];
 	}
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if (tileEntity != null) {
-			switch (id) {
-				case guiIdMacerator:
-					if (tileEntity instanceof TileEntityVoidMacerator) {
-						return new VoidMaceratorContainer(player.inventory, (TileEntityVoidMacerator) tileEntity);
-					}
-				case guiIdBox:
-					if (tileEntity instanceof TileEntityVoidBox) {
-						return new VoidBoxContainer(player.inventory, (TileEntityVoidBox) tileEntity);
-					}
-				case guiIdInfuser:
-					if (tileEntity instanceof TileEntityVoidInfuser) {
-						return new VoidInfuserContainer(player.inventory, (TileEntityVoidInfuser) tileEntity);
-					}
-				case guiIdHeimdall:
-					if (tileEntity instanceof TileEntityHeimdall) {
-						return new HeimdallContainer(player.inventory, (TileEntityHeimdall) tileEntity);
-					}
-				case guiIdGen:
-					if (tileEntity instanceof TileEntityVoidicPowerGen) {
-						return new VoidicPowerGenContainer(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
-					}
-				case guiIdCharger:
-					if (tileEntity instanceof TileEntityVoidicCharger) {
-						return new VoidicChargerContainer(player.inventory, (TileEntityVoidicCharger) tileEntity);
-					}
-				case guiIdStabilizer:
-					if (tileEntity instanceof TileEntityRealityStabilizer) {
-						return new RealityStabilizerContainer(player.inventory, (TileEntityRealityStabilizer) tileEntity);
-					}
+			switch (getTypeFromID(id)) {
+				case Macerator:
+					if (tileEntity instanceof TileEntityVoidMacerator) return new VoidMaceratorContainer(player.inventory, (TileEntityVoidMacerator) tileEntity);
+				case MusicBox:
+					if (tileEntity instanceof TileEntityVoidBox) return new VoidBoxContainer(player.inventory, (TileEntityVoidBox) tileEntity);
+				case Infuser:
+					if (tileEntity instanceof TileEntityVoidInfuser) return new VoidInfuserContainer(player.inventory, (TileEntityVoidInfuser) tileEntity);
+				case Heimdall:
+					if (tileEntity instanceof TileEntityHeimdall) return new HeimdallContainer(player.inventory, (TileEntityHeimdall) tileEntity);
+				case VoidicGenerator:
+					if (tileEntity instanceof TileEntityVoidicPowerGen) return new VoidicPowerGenContainer(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
+				case VoidicCharger:
+					if (tileEntity instanceof TileEntityVoidicCharger) return new VoidicChargerContainer(player.inventory, (TileEntityVoidicCharger) tileEntity);
+				case RealityStabilizer:
+					if (tileEntity instanceof TileEntityRealityStabilizer) return new RealityStabilizerContainer(player.inventory, (TileEntityRealityStabilizer) tileEntity);
+				default:
+					return null;
 			}
 		}
 		return null;
@@ -82,35 +71,23 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if (tileEntity != null) {
-			switch (id) {
-				case guiIdMacerator:
-					if (tileEntity instanceof TileEntityVoidMacerator) {
-						return new voidMaceratorGUI(player.inventory, (TileEntityVoidMacerator) tileEntity);
-					}
-				case guiIdBox:
-					if (tileEntity instanceof TileEntityVoidBox) {
-						return new VoidBoxGUI(player.inventory, (TileEntityVoidBox) tileEntity);
-					}
-				case guiIdInfuser:
-					if (tileEntity instanceof TileEntityVoidInfuser) {
-						return new voidInfuserGUI(player.inventory, (TileEntityVoidInfuser) tileEntity);
-					}
-				case guiIdHeimdall:
-					if (tileEntity instanceof TileEntityHeimdall) {
-						return new HeimdallGUI(player.inventory, (TileEntityHeimdall) tileEntity);
-					}
-				case guiIdGen:
-					if (tileEntity instanceof TileEntityVoidicPowerGen) {
-						return new VoidicPowerGenGUI(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
-					}
-				case guiIdCharger:
-					if (tileEntity instanceof TileEntityVoidicCharger) {
-						return new VoidicChargerGUI(player.inventory, (TileEntityVoidicCharger) tileEntity);
-					}
-				case guiIdStabilizer:
-					if (tileEntity instanceof TileEntityRealityStabilizer) {
-						return new RealityStabilizerGUI(player.inventory, (TileEntityRealityStabilizer) tileEntity);
-					}
+			switch (getTypeFromID(id)) {
+				case Macerator:
+					if (tileEntity instanceof TileEntityVoidMacerator) return new voidMaceratorGUI(player.inventory, (TileEntityVoidMacerator) tileEntity);
+				case MusicBox:
+					if (tileEntity instanceof TileEntityVoidBox) return new VoidBoxGUI(player.inventory, (TileEntityVoidBox) tileEntity);
+				case Infuser:
+					if (tileEntity instanceof TileEntityVoidInfuser) return new voidInfuserGUI(player.inventory, (TileEntityVoidInfuser) tileEntity);
+				case Heimdall:
+					if (tileEntity instanceof TileEntityHeimdall) return new HeimdallGUI(player.inventory, (TileEntityHeimdall) tileEntity);
+				case VoidicGenerator:
+					if (tileEntity instanceof TileEntityVoidicPowerGen) return new VoidicPowerGenGUI(player.inventory, (TileEntityVoidicPowerGen) tileEntity);
+				case VoidicCharger:
+					if (tileEntity instanceof TileEntityVoidicCharger) return new VoidicChargerGUI(player.inventory, (TileEntityVoidicCharger) tileEntity);
+				case RealityStabilizer:
+					if (tileEntity instanceof TileEntityRealityStabilizer) return new RealityStabilizerGUI(player.inventory, (TileEntityRealityStabilizer) tileEntity);
+				default:
+					return null;
 			}
 		}
 		return null;
