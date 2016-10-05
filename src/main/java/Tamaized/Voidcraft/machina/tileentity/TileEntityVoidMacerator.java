@@ -1,5 +1,8 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
+import Tamaized.Voidcraft.machina.VoidMacerator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,9 +14,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
-import Tamaized.Voidcraft.machina.VoidMacerator;
 
 public class TileEntityVoidMacerator extends TileEntityVoidicPower implements ISidedInventory {
 
@@ -32,9 +32,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IS
 		return (oldState.getBlock() != newSate.getBlock());
 	}
 
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-
+	public void readNBT(NBTTagCompound nbt) {
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		this.slots = new ItemStack[this.getSizeInventory()];
 		if (list != null) {
@@ -51,9 +49,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IS
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("cookingTick", this.cookingTick);
 
 		NBTTagList list = new NBTTagList();
@@ -138,8 +134,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPower implements IS
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		boolean cooking = false;
 		if (lastCookingItem == null || slots[SLOT_INPUT] == null || lastCookingItem != slots[SLOT_INPUT].getItem()) {
 			cookingTick = 0;

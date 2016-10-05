@@ -1,24 +1,22 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerHandler;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 
-public class TileEntityVoidicPowerCable extends TileEntityVoidicPower{
-	
-	public void readFromNBT(NBTTagCompound nbt){
-		super.readFromNBT(nbt);
+public class TileEntityVoidicPowerCable extends TileEntityVoidicPower {
+
+	public void readNBT(NBTTagCompound nbt) {
+
 	}
-	
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		return nbt;
 	}
-	
+
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		VoidicPowerHandler.sendToSurrounding(this, worldObj, pos);
 	}
 

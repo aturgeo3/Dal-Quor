@@ -1,5 +1,8 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.machina.addons.VoidTank;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,9 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.VoidTank;
 
 public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFluidHandler {
 
@@ -32,23 +32,20 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
+	public void readNBT(NBTTagCompound nbt) {
 		if (tank.getFluid() != null) this.tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
 		this.cookingTick = nbt.getInteger("cookingTick");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fluidAmount", tank.getFluidAmount());
 		nbt.setInteger("cookingTick", this.cookingTick);
 		return nbt;
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		boolean cooking = false;
 		if (lastCookingItem == null || slots[SLOT_INPUT] == null || lastCookingItem != slots[SLOT_INPUT].getItem()) {
 			cookingTick = 0;

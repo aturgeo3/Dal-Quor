@@ -55,6 +55,11 @@ public class PlayerInfusionHandler {
 	public void addInfusion(int amount) {
 		voidicInfusionAmount = voidicInfusionAmount + amount > maxAmount ? maxAmount : voidicInfusionAmount + amount;
 	}
+	
+	public void removeInfusion(int amount){
+		voidicInfusionAmount-=amount;
+		if(voidicInfusionAmount < 0) voidicInfusionAmount = 0;
+	}
 
 	public int getMaxInfusion() {
 		return maxAmount;
@@ -81,6 +86,8 @@ public class PlayerInfusionHandler {
 					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
 					flag = false;
 				}
+			}else if(player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null){
+				flag = false;
 			}
 			if (player.worldObj.provider.getDimension() == voidCraft.dimensionIdVoid && flag) {
 				voidicInfusionAmount++;

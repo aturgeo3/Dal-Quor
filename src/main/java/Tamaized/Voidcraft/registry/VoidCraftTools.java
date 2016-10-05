@@ -2,13 +2,6 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.TamModized.tools.TamAxe;
@@ -17,6 +10,7 @@ import Tamaized.TamModized.tools.TamPickaxe;
 import Tamaized.TamModized.tools.TamSpade;
 import Tamaized.TamModized.tools.TamSword;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.tools.VoidHoe;
 import Tamaized.Voidcraft.tools.arch.ArchSword;
 import Tamaized.Voidcraft.tools.chain.ChainSword;
 import Tamaized.Voidcraft.tools.demon.DemonSword;
@@ -24,6 +18,10 @@ import Tamaized.Voidcraft.tools.molten.MoltenSword;
 import Tamaized.Voidcraft.tools.spectre.AngelicSword;
 import Tamaized.Voidcraft.tools.spectre.SpectreAxe;
 import Tamaized.Voidcraft.tools.spectre.SpectrePickaxe;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class VoidCraftTools implements ITamRegistry {
 
@@ -54,7 +52,7 @@ public class VoidCraftTools implements ITamRegistry {
 		modelList.add(voidSpade = new TamSpade(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidShovel"));
 		modelList.add(voidAxe = new TamAxe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidAxe"));
 		modelList.add(voidSword = new TamSword(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidSword"));
-		modelList.add(voidHoe = new TamHoe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidHoe"));
+		modelList.add(voidHoe = new VoidHoe(voidCraft.tabs.tabVoid, voidCraft.materials.voidTools, "voidHoe"));
 
 		// spectre
 		modelList.add(angelicSword = new AngelicSword(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "angelicSword"));

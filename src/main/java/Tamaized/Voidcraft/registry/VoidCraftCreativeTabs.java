@@ -23,14 +23,14 @@ public class VoidCraftCreativeTabs implements ITamRegistry {
 				return Item.getItemFromBlock(voidCraft.blocks.blockPortalVoid);
 			}
 		};
-
+/*
 		tForge = new CreativeTabs("tForge") {
 			@Override
 			public Item getTabIconItem() {
 				return Item.getItemFromBlock(voidCraft.blocks.blockNoBreak);
 			}
 		};
-	}
+	*/}
 
 	@Override
 	public void init() {

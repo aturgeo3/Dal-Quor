@@ -4,12 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 
 import com.google.gson.stream.JsonReader;
 
@@ -26,7 +22,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import paulscode.sound.codecs.CodecJOrbis;
 
 public class TileEntityVoidBox extends TamTileEntityInventory {
 
@@ -51,8 +46,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 		super(3);
 	}
 
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
+	public void readNBT(NBTTagCompound nbt) {
 		playing = nbt.getBoolean("playing");
 		songTimeLeft = nbt.getInteger("songTimeLeft");
 		songTime = nbt.getInteger("songTime");
@@ -63,8 +57,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("playing", playing);
 		nbt.setInteger("songTimeLeft", songTimeLeft);
 		nbt.setInteger("songTime", songTime);
@@ -108,7 +101,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 			try {
 				ItemRecord theRecord = (ItemRecord) itemStack.getItem();
 				Class<? extends ItemRecord> c = ItemRecord.class;
-				Field field = ReflectionHelper.findField(c, new String[]{"field_150928_b", "RECORDS"});
+				Field field = ReflectionHelper.findField(c, new String[] { "field_150928_b", "RECORDS" });
 				field.setAccessible(true);
 				Map<SoundEvent, ItemRecord> RECORDS = (Map<SoundEvent, ItemRecord>) field.get(theRecord);
 				SoundEvent soundEvent = null;
@@ -120,7 +113,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 				}
 				if (soundEvent == null) throw new IOException("null soundEvent");
 				Class<? extends SoundEvent> cS = soundEvent.getClass();
-				field = ReflectionHelper.findField(cS, new String[]{"field_187506_b", "field_149219_a", "soundName"});
+				field = ReflectionHelper.findField(cS, new String[] { "field_187506_b", "field_149219_a", "soundName" });
 				field.setAccessible(true);
 				ResourceLocation resourceLocation = (ResourceLocation) field.get(soundEvent);
 				String modid = resourceLocation.getResourceDomain();
@@ -180,9 +173,9 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 						decodedValue[1] = encodedValue;
 					}
 					String path = "/assets/" + decodedValue[0] + "/sounds/" + decodedValue[1] + ".ogg";
-					songTime = songTimeLeft = OggLength.getLengthInSeconds(path)*20;
+					songTime = songTimeLeft = OggLength.getLengthInSeconds(path) * 20;
 				} else {
-					songTime = songTimeLeft = 20*VanillaRecordLengths.getLength(soundID.split("\\.")[soundID.split("\\.").length-1]);
+					songTime = songTimeLeft = 20 * VanillaRecordLengths.getLength(soundID.split("\\.")[soundID.split("\\.").length - 1]);
 				}
 				worldObj.playEvent((EntityPlayer) null, 1010, getPos(), Item.getIdFromItem(theRecord));
 				oldRecord = slots[SLOT_CURRENT];
@@ -224,8 +217,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		if (!worldObj.isRemote) {
 			if (playing) {
 				if (songTimeLeft > 0) songTimeLeft--;

@@ -24,6 +24,8 @@ item.voidicSuppressor.name=Voidic Suppressor
 item.emptyObsidianFlask.name=Empty Obsidian Flask
 item.obsidianFlask.name=Filled Obsidian Flask
 item.voidicDrill.name=Voidic Drill
+item.etherealFruit.name=Ethereal Fruit
+item.etherealSeed.name=Ethereal Seeds
 
 # Blocks
 tile.voidcraft:blockVoidFluid.name=Liquid Void
@@ -51,6 +53,11 @@ tile.voidicGen.name=Voidic Power Generator
 tile.blockRealityHole.name=Hole in Reality
 tile.voidicCable.name=Voidic Cable
 tile.realityStabilizer.name=Reality Stabilizer
+tile.blockFakeBedrockFarmland.name=Soft Bedrock Farmland
+tile.etherealPlant.name=Ethereal Plant
+
+# Potion
+effect.voidcraft:voidicInfusionImmunity=Voidic Immunity
 
 # Fluid
 fluid.void=Liquid Void

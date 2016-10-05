@@ -1,0 +1,7 @@
+{
+    "parent": "block/stem_fruit",
+    "textures": {
+        "stem": "voidcraft:blocks/etherealPlant",
+        "upperstem": "voidcraft:blocks/etherealPlantReady"
+    }
+}

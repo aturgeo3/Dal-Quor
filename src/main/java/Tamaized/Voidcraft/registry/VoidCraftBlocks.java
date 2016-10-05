@@ -11,9 +11,12 @@ import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
 import Tamaized.TamModized.blocks.slab.TamItemBlockSlab;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.TamModized.registry.TamColorRegistry;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
+import Tamaized.Voidcraft.blocks.BlockEtherealPlant;
 import Tamaized.Voidcraft.blocks.BlockFakeBedrock;
+import Tamaized.Voidcraft.blocks.BlockFakeBedrockFarmland;
 import Tamaized.Voidcraft.blocks.BlockNoBreak;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
 import Tamaized.Voidcraft.blocks.BlockPortalXia;
@@ -22,6 +25,7 @@ import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import Tamaized.Voidcraft.blocks.XiaBlock;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.RealityStabilizer;
 import Tamaized.Voidcraft.machina.VoidBox;
@@ -45,6 +49,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static BlockVoidcrystal blockVoidcrystal;
 	public static OreVoidcrystal oreVoidcrystal;
 	public static BlockFakeBedrock blockFakeBedrock;
+	public static BlockFakeBedrockFarmland blockFakeBedrockFarmland;
 	public static TamBlockFence blockFakeBedrockFence;
 	public static TamBlockStairs blockFakeBedrockStairs;
 	public static TamBlockSlabDouble blockFakeBedrockDoubleSlab;
@@ -71,6 +76,8 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static VoidicPowerCharger voidicCharger;
 	public static RealityStabilizer realityStabilizer;
 
+	public static BlockEtherealPlant etherealPlant;
+
 	public static AIBlock AIBlock;
 	public static XiaBlock xiaBlock;
 
@@ -81,11 +88,12 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(blockVoidcrystal = new BlockVoidcrystal(voidCraft.tabs.tabVoid, Material.GLASS, "blockVoidcrystal", 7.0F));
 		modelList.add(oreVoidcrystal = new OreVoidcrystal(voidCraft.tabs.tabVoid, Material.ROCK, "oreVoidcrystal", 3.0F));
 		modelList.add(blockFakeBedrock = new BlockFakeBedrock(voidCraft.tabs.tabVoid, Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrock", 30.0F));
+		modelList.add(blockFakeBedrockFarmland = new BlockFakeBedrockFarmland(voidCraft.tabs.tabVoid, Blocks.BEDROCK.getMaterial(Blocks.BEDROCK.getDefaultState()), "blockFakeBedrockFarmland", 30.0F));
 		modelList.add(blockFakeBedrockFence = new TamBlockFence(voidCraft.tabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockFakeBedrockFence"));
 		modelList.add(blockFakeBedrockStairs = new TamBlockStairs(voidCraft.tabs.tabVoid, blockFakeBedrock.getDefaultState(), "blockFakeBedrockStairs"));
 		modelList.add(blockFakeBedrockDoubleSlab = new TamBlockSlabDouble(voidCraft.tabs.tabVoid, Material.ROCK, "blockFakeBedrockDoubleSlab", Item.getItemFromBlock(blockFakeBedrockHalfSlab)));
 		modelList.add(blockFakeBedrockHalfSlab = new TamBlockSlabHalf(voidCraft.tabs.tabVoid, Material.ROCK, "blockFakeBedrockHalfSlab", Item.getItemFromBlock(blockFakeBedrockHalfSlab)));
-		modelList.add(blockNoBreak = new BlockNoBreak(voidCraft.tabs.tForge, Material.ROCK, "blockNoBreak", -1F));
+		modelList.add(blockNoBreak = new BlockNoBreak(voidCraft.tabs.tabVoid, Material.ROCK, "blockNoBreak", -1F));
 		modelList.add(blockVoidbrick = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidbrick", 30.0F));
 		modelList.add(blockVoidfence = new TamBlockFence(voidCraft.tabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockVoidfence"));
 		modelList.add(blockVoidstairs = new TamBlockStairs(voidCraft.tabs.tabVoid, blockVoidbrick.getDefaultState(), "blockVoidstairs"));
@@ -108,6 +116,8 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(voidicCable = new VoidicPowerCable(voidCraft.tabs.tabVoid, Material.CIRCUITS, "voidicCable", 1.5f));
 		modelList.add(voidicCharger = new VoidicPowerCharger(voidCraft.tabs.tabVoid, Material.IRON, "voidicCharger", 3.5f));
 		modelList.add(realityStabilizer = new RealityStabilizer(voidCraft.tabs.tabVoid, Material.IRON, "realityStabilizer", 3.5f));
+
+		modelList.add(etherealPlant = new BlockEtherealPlant(voidCraft.tabs.tabVoid, "etherealPlant", 1.0f));
 
 		// Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
@@ -160,9 +170,24 @@ public class VoidCraftBlocks implements ITamRegistry {
 	}
 
 	@Override
-	public void clientInit() {
-		// TODO Auto-generated method stub
+	public void clientInit() { // TODO: move this into TamModized
 
+		final net.minecraft.client.renderer.color.IBlockColor fakeBedrockFarmlandColorHandler = (state, blockAccess, pos, tintIndex) -> {
+			if (blockAccess != null && pos != null && blockAccess.getTileEntity(pos) != null) {
+				return TileEntityFakeBedrockFarmland.getColor(((TileEntityFakeBedrockFarmland) blockAccess.getTileEntity(pos)).getAlteration());
+			}
+			return 0xFFFFFF;
+		};
+
+		final net.minecraft.client.renderer.color.IBlockColor etherealPlantColorHandler = (state, blockAccess, pos, tintIndex) -> {
+			if (blockAccess != null && pos != null && blockAccess.getTileEntity(pos.down()) != null) {
+				return TileEntityFakeBedrockFarmland.getColor(((TileEntityFakeBedrockFarmland) blockAccess.getTileEntity(pos.down())).getAlteration());
+			}
+			return 0xFFFFFF;
+		};
+
+		TamColorRegistry.registerBlockColors(blockFakeBedrockFarmland, fakeBedrockFarmlandColorHandler);
+		TamColorRegistry.registerBlockColors(etherealPlant, etherealPlantColorHandler);
 	}
 
 	@Override

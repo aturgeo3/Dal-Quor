@@ -129,19 +129,19 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
                             	if (d15 > 0.0D){
                                 	double rand4Fluid = Math.round(Math.random()*600);
-                                	if(rand4Fluid == 400){
-                                		iblockstate = voidCraft.fluids.voidFluidBlock.getDefaultState(); //lavaStill
+                                	//if(rand4Fluid == 400){
+                                	//	iblockstate = voidCraft.fluids.voidFluidBlock.getDefaultState(); //lavaStill
                                 	//}else if(rand4Fluid > 200 && rand4Fluid < 400){
                                 	//	l2 = voidCraft.blocks.blockFakeBedrock;
-                                	}
-                                	else{
+                                	//}
+                                	//else{
                                 		//double randy = Math.round(Math.random()*4);
                                 		//if(randy == 1) l2 = Blocks.air;
                                 		//else if(randy == 2) l2 = Blocks.end_stone;
                                 		//else if(randy == 3) l2 = Blocks.skull;
                                 		//else l2 = voidCraft.blocks.blockFakeBedrock; //TODO not implementing this change yet cuz I wanna think on it some more.
                                 		iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState();
-                                	}
+                                	//}
                             	}
                             	// iblockstate = Blocks.NETHERRACK.getDefaultState();//voidCraft.blocks.blockFakeBedrock.getDefaultState();
     							int l2 = j2 + j1 * 4;
@@ -345,9 +345,14 @@ public class ChunkProviderVoid implements IChunkGenerator {
     		}
     		
     	});
+    	WorldGenEtherealPlants worldGenEtherealPlants = new WorldGenEtherealPlants();
     	int k1;
     	for (k1 = 0; k1 < 16; ++k1){
     		worldgenminable.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
+    	}
+
+    	for (k1 = 0; k1 < 16; ++k1){
+    		worldGenEtherealPlants.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
     	}
     	
     	BlockFalling.fallInstantly = false;

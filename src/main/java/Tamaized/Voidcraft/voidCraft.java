@@ -9,6 +9,7 @@ import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityHandler;
@@ -62,6 +63,7 @@ import Tamaized.Voidcraft.registry.VoidCraftItems;
 import Tamaized.Voidcraft.registry.VoidCraftLootTables;
 import Tamaized.Voidcraft.registry.VoidCraftMaterials;
 import Tamaized.Voidcraft.registry.VoidCraftParticles;
+import Tamaized.Voidcraft.registry.VoidCraftPotions;
 import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
 import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.sound.BossMusicManager;
@@ -124,6 +126,7 @@ public class voidCraft extends TamModBase {
 	public static VoidCraftCreativeTabs tabs;
 	public static VoidCraftTools tools;
 	public static VoidCraftItems items;
+	public static VoidCraftPotions potions;
 	public static VoidCraftArmors armors;
 	public static VoidCraftFluids fluids;
 	public static VoidCraftBlocks blocks;
@@ -150,11 +153,12 @@ public class voidCraft extends TamModBase {
 		// yo dawg, Register the Registers... i'm sorry
 		register(materials = new VoidCraftMaterials());
 		register(tabs = new VoidCraftCreativeTabs());
-		register(tools = new VoidCraftTools());
-		register(items = new VoidCraftItems());
-		register(armors = new VoidCraftArmors());
-		register(fluids = new VoidCraftFluids());
 		register(blocks = new VoidCraftBlocks());
+		register(fluids = new VoidCraftFluids());
+		register(items = new VoidCraftItems());
+		register(potions = new VoidCraftPotions());
+		register(tools = new VoidCraftTools());
+		register(armors = new VoidCraftArmors());
 		register(biomes = new VoidCraftBiomes());
 		register(achievements = new VoidCraftAchievements());
 		register(lootTables = new VoidCraftLootTables());
@@ -211,6 +215,7 @@ public class voidCraft extends TamModBase {
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
 		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, blocks.voidicCharger.getName());
 		GameRegistry.registerTileEntity(TileEntityRealityStabilizer.class, "tileEntityRealityStabilizer");
+		GameRegistry.registerTileEntity(TileEntityFakeBedrockFarmland.class, "tileEntityFakeBedrockFarmland");
 
 		// GUI Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -268,6 +273,7 @@ public class voidCraft extends TamModBase {
 		EntityRegistry.registerEgg(EntityMobSpectreChain.class, 0xFFFFFF, 0xAA0077);
 		EntityRegistry.registerEgg(EntityMobVoidWrath.class, 0xFF0000, 0x000000);
 		EntityRegistry.registerEgg(EntityMobLich.class, 0xAA00FF, 0x000000);
+		EntityRegistry.registerEgg(EntityHerobrineCreeper.class, 0xFF0000, 0x000000);
 		EntityRegistry.registerEgg(EntityBossCorruptedPawn.class, 0x000000, 0xFF0000);
 		EntityRegistry.registerEgg(EntityBossHerobrine.class, 0xFF0000, 0xFFAA00);
 		EntityRegistry.registerEgg(EntityBossDol.class, 0xAAFF00, 0x000000);

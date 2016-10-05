@@ -1,5 +1,8 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.machina.addons.VoidTank;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,61 +11,56 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.VoidTank;
 
-public class TileEntityHeimdall extends TamTileEntityInventory implements IFluidHandler{
-	
+public class TileEntityHeimdall extends TamTileEntityInventory implements IFluidHandler {
+
 	public VoidTank tank;
-	
+
 	private boolean isDraining = false;
-	
-	public TileEntityHeimdall(){
+
+	public TileEntityHeimdall() {
 		super(1);
 		tank = new VoidTank(this, 10000);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
-		super.readFromNBT(nbt);
-		if(tank.getFluid() != null) tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+	public void readNBT(NBTTagCompound nbt) {
+		if (tank.getFluid() != null) tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fluidAmount", tank.getFluidAmount());
 		return nbt;
 	}
-	
+
 	@Override
-	public void update(){
-		//Generate Fluid
-		if(tank.getFluidAmount() < tank.getCapacity()){
-			float perc = (float)(worldObj.getActualHeight()-getPos().getY())/(float)worldObj.getActualHeight();
-			int fillAmount = (int) Math.ceil(20.0f*perc);
-			fill(new FluidStack(voidCraft.fluids.voidFluid, (int) Math.floor(Math.random()*(fillAmount))),true);
+	public void onUpdate() {
+		// Generate Fluid
+		if (tank.getFluidAmount() < tank.getCapacity()) {
+			float perc = (float) (worldObj.getActualHeight() - getPos().getY()) / (float) worldObj.getActualHeight();
+			int fillAmount = (int) Math.ceil(20.0f * perc);
+			fill(new FluidStack(voidCraft.fluids.voidFluid, (int) Math.floor(Math.random() * (fillAmount))), true);
 		}
-		
-		//Fill A Bucket
-		if(!worldObj.isRemote){
-			if(tank.getFluidAmount() >= 1000){
-				if(slots[0] != null && slots[0].getItem() == Items.BUCKET){
+
+		// Fill A Bucket
+		if (!worldObj.isRemote) {
+			if (tank.getFluidAmount() >= 1000) {
+				if (slots[0] != null && slots[0].getItem() == Items.BUCKET) {
 					tank.drain(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
 					slots[0] = voidCraft.fluids.getBucket();
 				}
 			}
 		}
-		
-		//Check if Void Machina is nearby; if so give it fluid
-		if(!worldObj.isRemote){
-			if(tank.getFluidAmount() > 0){
-				for(EnumFacing face : EnumFacing.VALUES){
+
+		// Check if Void Machina is nearby; if so give it fluid
+		if (!worldObj.isRemote) {
+			if (tank.getFluidAmount() > 0) {
+				for (EnumFacing face : EnumFacing.VALUES) {
 					TileEntity te = worldObj.getTileEntity(getPos().offset(face));
-					if(te instanceof IFluidHandler){
-						IFluidHandler fte =  ((IFluidHandler) te);
-						if(fte.fill(new FluidStack(voidCraft.fluids.voidFluid, 1), true) > 0){
+					if (te instanceof IFluidHandler) {
+						IFluidHandler fte = ((IFluidHandler) te);
+						if (fte.fill(new FluidStack(voidCraft.fluids.voidFluid, 1), true) > 0) {
 							drain(new FluidStack(voidCraft.fluids.voidFluid, 1), true);
 						}
 					}
@@ -70,7 +68,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return i == 0 ? itemstack.isItemEqual(new ItemStack(Items.BUCKET)) : false;
@@ -78,7 +76,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing var1) {
-		return new int[]{0};
+		return new int[] { 0 };
 	}
 
 	@Override
@@ -125,16 +123,16 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 		return tank.drain(maxDrain, doDrain);
 	}
-	
-	public int getFluidAmount(){
+
+	public int getFluidAmount() {
 		return tank.getFluidAmount();
 	}
-	
-	public int getMaxFluidAmount(){
+
+	public int getMaxFluidAmount() {
 		return tank.getCapacity();
 	}
-	
-	public void setFluidAmount(int amount){
+
+	public void setFluidAmount(int amount) {
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 }

@@ -2,15 +2,15 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import java.util.Arrays;
 
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 
 public class TileEntityVoidicCharger extends TileEntityVoidicPower implements ISidedInventory {
 
@@ -19,8 +19,7 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 	private int[] slots_all = { SLOT_DEFAULT };
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
+	public void readNBT(NBTTagCompound nbt) {
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		this.slots = new ItemStack[this.getSizeInventory()];
 		if (list != null) {
@@ -35,8 +34,7 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
 		for (int i = 0; i < this.slots.length; i++) {
 			if (this.slots[i] != null) {
@@ -198,8 +196,7 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		if (voidicPower > 0 && slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].getItem() instanceof VoidicPowerItem && VoidicPowerItemHandler.getItemVoidicPowerPerc(slots[SLOT_DEFAULT]) < 1.0f) {
 			int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
 			int overflow = VoidicPowerItemHandler.fillItemVoidicPower(slots[SLOT_DEFAULT], amount);

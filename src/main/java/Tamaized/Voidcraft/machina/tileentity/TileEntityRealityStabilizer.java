@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +13,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 
 public class TileEntityRealityStabilizer extends TileEntityVoidicPower implements ISidedInventory {
 
@@ -21,9 +21,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 	private ItemStack[] slots = new ItemStack[1];
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-
+	public void readNBT(NBTTagCompound nbt) {
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		this.slots = new ItemStack[this.getSizeInventory()];
 		if (list != null) {
@@ -39,9 +37,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
 
 		for (int i = 0; i < this.slots.length; i++) {
@@ -124,8 +120,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		if (!worldObj.isRemote) {
 			if (slots[SLOT_OUTPUT] == null || slots[SLOT_OUTPUT].stackSize < slots[SLOT_OUTPUT].getMaxStackSize()) pickupNextBlock();
 		}
@@ -146,7 +141,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 	private void pickupNextBlock() {
 		if (hasEnoughPower() && (slots[SLOT_OUTPUT] == null || (slots[SLOT_OUTPUT].getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole) && slots[SLOT_OUTPUT].stackSize < slots[SLOT_OUTPUT].getMaxStackSize()))) {
 			BlockPosWrapper wrapper = searchState(voidCraft.blocks.realityHole, getPos(), 4);
-			if(wrapper.state == null) return;
+			if (wrapper.state == null) return;
 			worldObj.setBlockToAir(wrapper.pos);
 			usePower();
 			if (slots[SLOT_OUTPUT] == null) {
@@ -156,8 +151,8 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 			}
 		}
 	}
-	
-	private BlockPosWrapper searchState(Block type, BlockPos origin, int radius){
+
+	private BlockPosWrapper searchState(Block type, BlockPos origin, int radius) {
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = -radius; z <= radius; z++) {
 				for (int y = radius; y >= -radius; y--) {
@@ -170,13 +165,13 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPower implement
 		}
 		return new BlockPosWrapper(origin, null);
 	}
-	
+
 	private class BlockPosWrapper {
-		
+
 		public final BlockPos pos;
 		public final IBlockState state;
-		
-		public BlockPosWrapper(BlockPos p, IBlockState s){
+
+		public BlockPosWrapper(BlockPos p, IBlockState s) {
 			pos = p;
 			state = s;
 		}

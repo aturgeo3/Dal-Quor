@@ -1,5 +1,9 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerHandler;
+import Tamaized.Voidcraft.machina.addons.VoidTank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -12,83 +16,74 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerHandler;
-import Tamaized.Voidcraft.machina.addons.VoidTank;
 
-public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ISidedInventory, IFluidHandler{
-	
+public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements ISidedInventory, IFluidHandler {
+
 	public static final int SLOT_DEFAULT = 0;
 	private ItemStack[] slots = new ItemStack[1];
-	private int[] slots_all = {SLOT_DEFAULT};
-	
+	private int[] slots_all = { SLOT_DEFAULT };
+
 	private VoidTank tank;
 	private int useAmount = 1;
 	private int genAmount = 2;
 	private int rate = 1;
-	
-	public TileEntityVoidicPowerGen(){
+
+	public TileEntityVoidicPowerGen() {
 		tank = new VoidTank(this, 5000);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
-		super.readFromNBT(nbt);
-		
+	public void readNBT(NBTTagCompound nbt) {
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		this.slots = new ItemStack[this.getSizeInventory()];
-		if(list != null){
-			for(int i = 0; i < list.tagCount(); i++){
+		if (list != null) {
+			for (int i = 0; i < list.tagCount(); i++) {
 				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
 				byte b = nbtc.getByte("Slot");
-				
-				if(b >= 0 && b < this.slots.length){
+
+				if (b >= 0 && b < this.slots.length) {
 					this.slots[b] = ItemStack.loadItemStackFromNBT(nbtc);
 				}
 			}
 		}
-		
+
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
-		
-		nbt.setInteger("fluidAmount",  tank.getFluidAmount());
-		
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
+		nbt.setInteger("fluidAmount", tank.getFluidAmount());
+
 		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.slots.length; i++){
-			if(this.slots[i] != null){
+
+		for (int i = 0; i < this.slots.length; i++) {
+			if (this.slots[i] != null) {
 				NBTTagCompound nbtc = new NBTTagCompound();
 				nbtc.setByte("Slot", (byte) i);
 				this.slots[i].writeToNBT(nbtc);
 				list.appendTag(nbtc);
 			}
 		}
-		
+
 		nbt.setTag("Items", list);
-		
+
 		return nbt;
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		rate = 10;
-		int gen = genAmount*rate;
-		int use = useAmount*rate;
-		if(getFluidAmount() <= getMaxFluidAmount() - 1000){
-			if(slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].isItemEqual(voidCraft.fluids.getBucket())){
+		int gen = genAmount * rate;
+		int use = useAmount * rate;
+		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
+			if (slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].isItemEqual(voidCraft.fluids.getBucket())) {
 				fill(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
 				slots[SLOT_DEFAULT] = new ItemStack(Items.BUCKET);
 			}
 		}
-		if(getFluidAmount() >= use && voidicPower <= getMaxPower()-gen){
+		if (getFluidAmount() >= use && voidicPower <= getMaxPower() - gen) {
 			drain(new FluidStack(voidCraft.fluids.voidFluid, use), true);
-			voidicPower+=gen;
+			voidicPower += gen;
 		}
 		VoidicPowerHandler.sendToSurrounding(this, worldObj, pos);
 	}
@@ -105,15 +100,15 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
-		if(this.slots[i] != null){
+		if (this.slots[i] != null) {
 			ItemStack itemstack;
-			if(this.slots[i].stackSize <= j){
+			if (this.slots[i].stackSize <= j) {
 				itemstack = this.slots[i];
 				this.slots[i] = null;
 				return itemstack;
-			}else{
+			} else {
 				itemstack = this.slots[i].splitStack(j);
-				if(this.slots[i].stackSize == 0) {
+				if (this.slots[i].stackSize == 0) {
 					this.slots[i] = null;
 				}
 				return itemstack;
@@ -124,7 +119,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public ItemStack removeStackFromSlot(int i) {
-		if(this.slots[i] != null){
+		if (this.slots[i] != null) {
 			ItemStack itemstack = this.slots[i];
 			this.slots[i] = null;
 			return itemstack;
@@ -135,7 +130,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
 		this.slots[i] = stack;
-		if(stack != null && stack.stackSize > this.getInventoryStackLimit()){
+		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
 		}
 	}
@@ -147,27 +142,27 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(pos) != this ? false: player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
 	public void openInventory(EntityPlayer player) {
-		
+
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
-		
+
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ?  stack.getItem() == voidCraft.fluids.getBucket().getItem() : false;
+		return i == SLOT_DEFAULT ? stack.getItem() == voidCraft.fluids.getBucket().getItem() : false;
 	}
 
 	@Override
 	public int getField(int id) {
-		switch(id){
+		switch (id) {
 			default:
 				return 0;
 		}
@@ -175,7 +170,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public void setField(int id, int value) {
-		switch(id){
+		switch (id) {
 			default:
 				break;
 		}
@@ -188,7 +183,8 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public void clear() {
-		for(int i=0; i<slots.length; i++) slots[i] = null;
+		for (int i = 0; i < slots.length; i++)
+			slots[i] = null;
 	}
 
 	@Override
@@ -218,7 +214,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		switch(index){
+		switch (index) {
 			case SLOT_DEFAULT:
 				return stack.getItem() == Items.BUCKET;
 			default:
@@ -245,16 +241,16 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPower implements I
 	public FluidStack drain(int maxDrain, boolean doDrain) {
 		return tank.drain(maxDrain, doDrain);
 	}
-	
-	public int getFluidAmount(){
+
+	public int getFluidAmount() {
 		return tank.getFluidAmount();
 	}
-	
-	public int getMaxFluidAmount(){
+
+	public int getMaxFluidAmount() {
 		return tank.getCapacity();
 	}
-	
-	public void setFluidAmount(int amount){
+
+	public void setFluidAmount(int amount) {
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 

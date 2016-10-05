@@ -1,12 +1,11 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
+import Tamaized.TamModized.tileentity.TamTileEntity;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 
 public class TileEntityAIBlock extends TamTileEntity {
 
@@ -56,8 +55,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void onUpdate() {
 		if (!this.worldObj.isRemote) {
 			if (ai == null && parent == null) {
 				setDead();
@@ -82,14 +80,12 @@ public class TileEntityAIBlock extends TamTileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
+	protected void readNBT(NBTTagCompound nbt) {
 		state = nbt.getInteger("state");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	protected NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("state", state);
 		return nbt;
 	}

@@ -2,20 +2,22 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
+import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.TamModized.registry.TamColorRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.items.ChainedSkull;
 import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.EmptyObsidianFlask;
-import Tamaized.Voidcraft.items.HookShot;
+import Tamaized.Voidcraft.items.EtherealFruit;
 import Tamaized.Voidcraft.items.ObsidianFlask;
-import Tamaized.Voidcraft.items.VoidRecord;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicDrill;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
-import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -52,12 +54,15 @@ public class VoidCraftItems implements ITamRegistry {
 	public static TamItem quartzDust;
 
 	public static Debugger debugger;
-	public static HookShot hookShot;
+	// public static HookShot hookShot;
 
 	public static VoidicSuppressor voidicSuppressor;
 	public static VoidicDrill voidicDrill;
 
-	//public static VoidRecord record_noStrings;
+	public static TamItemSeed etherealSeed;
+	public static EtherealFruit etherealFruit;
+
+	// public static VoidRecord record_noStrings;
 	// public static VoidRecord record_bleedingThrough;
 	// public static VoidRecord record_stringsAttached;
 	// public static VoidRecord record_running;
@@ -90,18 +95,23 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(quartzDust = new TamItem(voidCraft.tabs.tabVoid, "quartzDust", 64));
 
 		modelList.add(debugger = new Debugger(voidCraft.tabs.tabVoid, "debugger", 1));
-		modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
+		// modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
 
 		modelList.add(voidicSuppressor = new VoidicSuppressor(voidCraft.tabs.tabVoid, "voidicSuppressor", 1));
 		modelList.add(voidicDrill = new VoidicDrill(voidCraft.tabs.tabVoid, "voidicDrill", 1));
 
-		//modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
+		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
+		soilList.add(voidCraft.blocks.blockFakeBedrockFarmland);
+		modelList.add(etherealSeed = new TamItemSeed(voidCraft.tabs.tabVoid, "etherealSeed", 64, voidCraft.blocks.etherealPlant, soilList));
+		modelList.add(etherealFruit = new EtherealFruit(voidCraft.tabs.tabVoid, "etherealFruit", 64, 2, false));
+
+		// modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
 		// modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
 		// modelList.add(record_stringsAttached = new VoidRecord("Approaching Nirvana - Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.Strings_Attached, "voidDisc3"));
 		// modelList.add(record_running = new VoidRecord("Approaching Nirvana - Running", VoidSoundEvents.MusicDiscSoundEvents.Running, "voidDisc4"));
 
 		voidDiscs = new ArrayList<ItemRecord>();
-		//voidDiscs.add(record_noStrings);
+		// voidDiscs.add(record_noStrings);
 		// voidDiscs.add(record_bleedingThrough);
 		// voidDiscs.add(record_stringsAttached);
 		// voidDiscs.add(record_running);
@@ -185,7 +195,11 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void clientInit() {
-		// TODO Auto-generated method stub
+
+		final net.minecraft.client.renderer.color.IItemColor itemEtherealFruitColourHandler = (stack, tintIndex) -> {
+			return TileEntityFakeBedrockFarmland.getColor(TileEntityFakeBedrockFarmland.getAlterationFromValue(stack.getSubCompound(voidCraft.modid, true).getInteger("alteration")));
+		};
+		TamColorRegistry.registerItemColors(etherealFruit, itemEtherealFruitColourHandler);
 
 	}
 
