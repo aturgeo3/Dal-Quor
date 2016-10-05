@@ -57,7 +57,7 @@ public class TeleporterVoid extends Teleporter {
         int k = MathHelper.floor_double(entity.posZ);
 		boolean flag = true;
         BlockPos blockpos = BlockPos.ORIGIN;
-        long l = ChunkPos.chunkXZ2Int(j, k);
+        long l = ChunkPos.asLong(j, k);
         
         if (this.destinationCoordinateCache.containsKey(l)){
     		Teleporter.PortalPosition teleporter$portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.get(l);

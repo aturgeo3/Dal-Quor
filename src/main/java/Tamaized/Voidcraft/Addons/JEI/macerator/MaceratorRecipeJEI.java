@@ -7,13 +7,12 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.voidCraft;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class MaceratorRecipeJEI extends BlankRecipeWrapper {
-	
+
 	private final ItemStack input;
 	private final ItemStack output;
 
@@ -21,7 +20,7 @@ public class MaceratorRecipeJEI extends BlankRecipeWrapper {
 		input = i;
 		output = o;
 	}
-	
+
 	@Override
 	@Nonnull
 	public List getInputs() {
@@ -29,11 +28,16 @@ public class MaceratorRecipeJEI extends BlankRecipeWrapper {
 		ret.add(Collections.singletonList(input));
 		return ret;
 	}
-	
+
 	@Override
 	@Nonnull
-	public List<ItemStack> getOutputs(){
+	public List<ItemStack> getOutputs() {
 		return Collections.singletonList(output);
 	}
-	
+
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+
+	}
+
 }
