@@ -45,6 +45,7 @@ import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
@@ -86,6 +87,7 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -99,7 +101,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = voidCraft.modid, name = "VoidCraft", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
+@Mod(modid = voidCraft.modid, name = "VoidCraft", guiFactory = "Tamaized.Voidcraft.GUI.client.GUIConfigFactory", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
 public class voidCraft extends TamModBase {
 
 	public static final String version = "${version}";
@@ -111,6 +113,8 @@ public class voidCraft extends TamModBase {
 
 	@Instance(modid)
 	public static voidCraft instance = new voidCraft();
+
+	public static ConfigHandler config;
 
 	public static FMLEventChannel channel;
 	public static final String networkChannelName = "VoidCraft";
@@ -140,9 +144,6 @@ public class voidCraft extends TamModBase {
 	public static VoidCraftTERecipes teRecipes;
 	public static VoidCraftParticles particles;
 
-	public static final int dimensionIdVoid = -2;
-	public static final int dimensionIdXia = -3;
-
 	@Override
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -150,6 +151,8 @@ public class voidCraft extends TamModBase {
 
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
+
+		config = new ConfigHandler(new Configuration(event.getSuggestedConfigurationFile()));
 
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
@@ -237,6 +240,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
 		MinecraftForge.EVENT_BUS.register(new CapabilitySyncEvent());
+		MinecraftForge.EVENT_BUS.register(config);
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
@@ -250,8 +254,8 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityLichInferno.class, "LichInferno", this, 128, 1, true);
 
 		// Register Dimensions
-		DimensionManager.registerDimension(dimensionIdVoid, DimensionType.register("The Void", "_void", dimensionIdVoid, WorldProviderVoid.class, false));
-		DimensionManager.registerDimension(dimensionIdXia, DimensionType.register("???", "_xia", dimensionIdXia, WorldProviderXia.class, false));
+		DimensionManager.registerDimension(config.getDimensionIDvoid(), DimensionType.register("The Void", "_void", config.getDimensionIDvoid(), WorldProviderVoid.class, false));
+		DimensionManager.registerDimension(config.getDimensionIDxia(), DimensionType.register("???", "_xia", config.getDimensionIDxia(), WorldProviderXia.class, false));
 
 		// Register World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);

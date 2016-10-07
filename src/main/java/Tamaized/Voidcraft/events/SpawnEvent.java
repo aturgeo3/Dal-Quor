@@ -13,7 +13,7 @@ public class SpawnEvent {
 	
 	@SubscribeEvent
 	public void onEntitySpawn(EntityJoinWorldEvent event){
-		if(!event.getWorld().isRemote && event.getWorld().provider.getDimension() == voidCraft.dimensionIdVoid) {
+		if(!event.getWorld().isRemote && event.getWorld().provider.getDimension() == voidCraft.config.getDimensionIDvoid()) {
 	    	if(event.getEntity() instanceof EntityLivingBase && !(event.getEntity() instanceof EntityPlayer || event.getEntity() instanceof EntityVoidMob || event.getEntity() instanceof EntityBossCorruptedPawnBase || event.getEntity() instanceof EntityVoidNPC)){
 	    		event.setCanceled(true);
 	    		System.out.println(event.getEntity().getClass());

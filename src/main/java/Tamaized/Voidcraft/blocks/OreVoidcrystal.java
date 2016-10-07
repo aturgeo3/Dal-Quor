@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
+import Tamaized.TamModized.blocks.TamBlock;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -19,8 +21,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.voidCraft;
 
 public class OreVoidcrystal extends TamBlock {
 
@@ -42,8 +42,8 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.provider.getDimension() == voidCraft.dimensionIdVoid && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
-		else if (world.provider.getDimension() != voidCraft.dimensionIdVoid && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
+		if (world.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
+		else if (world.provider.getDimension() != voidCraft.config.getDimensionIDvoid() && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
 	}
 
 	@Override

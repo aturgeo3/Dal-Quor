@@ -89,7 +89,7 @@ public class PlayerInfusionHandler {
 			}else if(player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null){
 				flag = false;
 			}
-			if (player.worldObj.provider.getDimension() == voidCraft.dimensionIdVoid && flag) {
+			if (player.worldObj.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
 				voidicInfusionAmount++;
 				if (voidicInfusionAmount > maxAmount) voidicInfusionAmount = maxAmount;
 			} else {
