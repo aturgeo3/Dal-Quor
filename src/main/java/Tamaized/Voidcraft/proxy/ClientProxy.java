@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
@@ -72,6 +73,7 @@ import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumEntryList;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
@@ -85,10 +87,13 @@ public class ClientProxy extends AbstractProxy {
 	public static int renderPass;
 
 	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
+	public static VadeMecumGUI vadeMecum;
+	public static VadeMecumEntryList vadeMecumEntryList;
 
 	@Override
 	public void preInit() {
 		voidCraft.instance.clientPreInit();
+		vadeMecumEntryList = new VadeMecumEntryList();
 	}
 
 	@Override

@@ -1,10 +1,16 @@
 package Tamaized.Voidcraft.network;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-
 import java.io.IOException;
 
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
+import Tamaized.Voidcraft.helper.EntityMotionHelper;
+import Tamaized.Voidcraft.proxy.ClientProxy;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -12,17 +18,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
-import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
-import Tamaized.Voidcraft.helper.EntityMotionHelper;
-import Tamaized.Voidcraft.proxy.ClientProxy;
 
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, PLAYER_MOTION
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, PLAYER_MOTION, VADEMECUM_UPDATE
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -54,6 +54,10 @@ public class ClientPacketHandler {
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
+			case VADEMECUM_UPDATE:
+				IVadeMecumCapability vadeMecumCap = Minecraft.getMinecraft().thePlayer.getCapability(CapabilityList.VADEMECUM, null);
+				if (vadeMecumCap != null) vadeMecumCap.decodePacket(bbis);
+				break;
 			case XIA_ANIMATIONS:
 				entity = theWorld.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {

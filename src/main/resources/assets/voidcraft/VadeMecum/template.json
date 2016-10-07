@@ -1,0 +1,26 @@
+{
+	[
+		"title": "Example Title",
+		"body":{
+			"text": "Some text",
+			"craft": {
+				"top": "ABC",
+				"center": "CBA",
+				"bottom": "ABA",
+				"define":{
+					"A": "minecraft:apple",
+					"B": "voidcraft:voidcrystal",
+					"C": "minecraft:stick"
+				}
+			},
+			"text": "some more text in the body below the crafting render"
+		}
+	],
+	[
+		"title": "Example Title Page 2",
+		"body":{
+			"text": "Some more text",
+			"text": "text another line down"
+		}
+	]
+}

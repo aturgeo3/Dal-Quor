@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.capabilities;
+package Tamaized.Voidcraft.capabilities.voidicInfusion;
 
 import net.minecraft.util.ResourceLocation;
 import Tamaized.Voidcraft.voidCraft;
@@ -67,6 +67,15 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	@Override
 	public void setLoaded(){
 		hasLoaded = true;
+	}
+
+	@Override
+	public void copyFrom(IVoidicInfusionCapability cap) {
+		setCheckMaxHealth(cap.checkMaxHealth());
+		setInfusion(cap.getInfusion());
+		setMaxInfusion(cap.getMaxInfusion());
+		setPreMaxHealth(cap.preMaxHealth());
+		setLoaded();
 	}
 	
 }

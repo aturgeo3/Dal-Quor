@@ -11,9 +11,12 @@ import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
-import Tamaized.Voidcraft.capabilities.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityHandler;
-import Tamaized.Voidcraft.capabilities.VoidicInfusionCapabilityStorage;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityStorage;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityStorage;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
@@ -37,6 +40,7 @@ import Tamaized.Voidcraft.entity.nonliving.EntityHookShot;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
+import Tamaized.Voidcraft.events.CapabilitySyncEvent;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
@@ -187,6 +191,7 @@ public class voidCraft extends TamModBase {
 
 		// Register Capabilities
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 
 		// Proxy Stuff
@@ -231,6 +236,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
+		MinecraftForge.EVENT_BUS.register(new CapabilitySyncEvent());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);

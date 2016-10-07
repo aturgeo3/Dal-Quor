@@ -13,9 +13,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
-public class BookOfLore extends TamItem {
+public class VadeMecum extends TamItem {
 
-	public BookOfLore(CreativeTabs tab, String n, int maxStackSize) {
+	public VadeMecum(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
 	}
 
@@ -32,7 +32,7 @@ public class BookOfLore extends TamItem {
 	}
 
 	private void openBook(EntityPlayer player, World world, BlockPos pos) {
-		FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.BookOfLore), world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecum), world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 }

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.capabilities;
+package Tamaized.Voidcraft.capabilities.voidicInfusion;
 
 import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.nbt.NBTBase;

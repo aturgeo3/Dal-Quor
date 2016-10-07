@@ -8,6 +8,7 @@ import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.TamModized.registry.TamColorRegistry;
+import Tamaized.Voidcraft.VadeMecum;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.items.ChainedSkull;
@@ -31,6 +32,8 @@ public class VoidCraftItems implements ITamRegistry {
 	public static ArrayList<ItemRecord> voidDiscs;
 	private ArrayList<ITamModel> modelList;
 
+	public static VadeMecum vadeMecum;
+	
 	public static TamItem ectoplasm;
 	public static TamItem voidcrystal;
 	public static EmptyObsidianFlask emptyObsidianFlask;
@@ -71,6 +74,8 @@ public class VoidCraftItems implements ITamRegistry {
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
 
+		modelList.add(vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1));
+		
 		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(voidCraft.tabs.tabVoid, "emptyObsidianFlask", 16));
 		modelList.add(obsidianFlask = new ObsidianFlask(voidCraft.tabs.tabVoid, "obsidianFlask", 16));
 		modelList.add(ectoplasm = new TamItem(voidCraft.tabs.tabVoid, "ectoplasm", 64));

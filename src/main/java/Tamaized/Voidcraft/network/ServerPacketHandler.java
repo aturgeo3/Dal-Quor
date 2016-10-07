@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.network;
 
 import java.io.IOException;
 
+import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import io.netty.buffer.ByteBuf;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ServerPacketHandler {
 
 	public static enum PacketType {
-		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -45,6 +46,9 @@ public class ServerPacketHandler {
 				TileEntityVoidBox voidBox;
 				pktType = bbis.readInt();
 				switch (getPacketTypeFromID(pktType)) {
+					case VADEMECUM:
+						VadeMecumPacketHandler.DecodeRequestServer(bbis, player);
+						break;
 					case VOIDBOX_PLAY:
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
