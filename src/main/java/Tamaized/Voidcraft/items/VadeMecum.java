@@ -1,6 +1,7 @@
-package Tamaized.Voidcraft;
+package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
