@@ -8,19 +8,63 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-public class TileEntityHeimdall extends TamTileEntityInventory implements IFluidHandler {
+public class TileEntityHeimdall extends TamTileEntityInventory implements IFluidHandler, IEnergyStorage {
+
+	public static final int SLOT_INPUT = 0;
+	public static final int SLOT_BUCKET = 1;
 
 	public VoidTank tank;
+	private int forgeEnergy = 0;
+	private int maxForgeEnergy = 20000;
+
+	private static final int quartzAmount = 144 * 5;
 
 	private boolean isDraining = false;
 
 	public TileEntityHeimdall() {
-		super(1);
+		super(2);
 		tank = new VoidTank(this, 10000);
+	}
+
+	@Override
+	public int receiveEnergy(int power, boolean simulate) {
+		int consumed = forgeEnergy + power > maxForgeEnergy ? power - ((forgeEnergy + power) - maxForgeEnergy) : power;
+		if (!simulate) forgeEnergy += consumed;
+		return consumed;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public boolean canExtract() {
+		return false;
+	}
+
+	@Override
+	public boolean canReceive() {
+		return true;
+	}
+
+	@Override
+	public int getEnergyStored() {
+		return forgeEnergy;
+	}
+
+	@Override
+	public int getMaxEnergyStored() {
+		return maxForgeEnergy;
+	}
+	
+	public void setEnergyAmount(int a){
+		forgeEnergy = a;
 	}
 
 	@Override
@@ -36,25 +80,30 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	@Override
 	public void onUpdate() {
-		// Generate Fluid
-		if (tank.getFluidAmount() < tank.getCapacity()) {
-			float perc = (float) (worldObj.getActualHeight() - getPos().getY()) / (float) worldObj.getActualHeight();
-			int fillAmount = (int) Math.ceil(20.0f * perc);
-			fill(new FluidStack(voidCraft.fluids.voidFluid, (int) Math.floor(Math.random() * (fillAmount))), true);
-		}
-
-		// Fill A Bucket
 		if (!worldObj.isRemote) {
+
+			// Fill A Bucket
 			if (tank.getFluidAmount() >= 1000) {
-				if (slots[0] != null && slots[0].getItem() == Items.BUCKET) {
+				if (slots[SLOT_BUCKET] != null && slots[SLOT_BUCKET].getItem() == Items.BUCKET) {
 					tank.drain(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
-					slots[0] = voidCraft.fluids.getBucket();
+					slots[SLOT_BUCKET] = voidCraft.fluids.getBucket();
 				}
 			}
-		}
 
-		// Check if Void Machina is nearby; if so give it fluid
-		if (!worldObj.isRemote) {
+			// Check for quartz dust and handle
+			if (forgeEnergy + quartzAmount < maxForgeEnergy && slots[SLOT_INPUT] != null && slots[SLOT_INPUT].getItem() == voidCraft.items.quartzDust) {
+				if (slots[SLOT_INPUT].stackSize > 1) slots[SLOT_INPUT].stackSize--;
+				else slots[SLOT_INPUT] = null;
+				forgeEnergy += quartzAmount;
+			}
+
+			// Convert Power to Fluid
+			if (forgeEnergy >= 5 && getFluidAmount() < getMaxFluidAmount()) {
+				forgeEnergy -= 5;
+				fill(new FluidStack(voidCraft.fluids.voidFluid, 5), true);
+			}
+
+			// Check if Void Machina is nearby; if so give it fluid
 			if (tank.getFluidAmount() > 0) {
 				for (EnumFacing face : EnumFacing.VALUES) {
 					TileEntity te = worldObj.getTileEntity(getPos().offset(face));
@@ -66,32 +115,33 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 					}
 				}
 			}
+
 		}
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i == 0 ? itemstack.isItemEqual(new ItemStack(Items.BUCKET)) : false;
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+		return slot == SLOT_INPUT ? itemstack.getItem() == Items.BUCKET : slot == SLOT_BUCKET ? itemstack.getItem() == voidCraft.items.quartzDust : false;
 	}
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing var1) {
-		return new int[] { 0 };
+		return new int[] { SLOT_BUCKET, SLOT_INPUT };
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i) {
-		return i == 0 ? slots[0] != null ? slots[0].isItemEqual(voidCraft.fluids.getBucket()) : false : false;
+	protected boolean canExtractSlot(int slot) {
+		return slot == SLOT_BUCKET ? slots[SLOT_BUCKET] != null ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : false;
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i) {
-		return i == 0;
+	protected boolean canInsertSlot(int slot) {
+		return true;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 
 	@Override
