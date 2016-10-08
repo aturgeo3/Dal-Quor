@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -15,6 +16,7 @@ import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureNetherBridgePieces;
 import net.minecraft.world.gen.structure.StructureStart;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
 
 import com.google.common.collect.Lists;
@@ -24,7 +26,9 @@ public class MapGenVoidFortress extends MapGenStructure{
 	private final List<Biome.SpawnListEntry> spawnList = Lists.<Biome.SpawnListEntry>newArrayList();
 	
 	public MapGenVoidFortress(){
-		this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 1, 0, 1));
+		this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 3, 0, 1));
+		this.spawnList.add(new SpawnListEntry(EntityShulker.class, 1, 0, 1));
+		this.spawnList.add(new SpawnListEntry(EntityHerobrineCreeper.class, 1, 0, 1));
 	}
 	
 	public String getStructureName(){

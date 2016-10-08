@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.SkeletonType;
@@ -24,6 +25,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 
@@ -52,6 +54,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
 			 */
 			public boolean apply(Entity p_82704_1_){
 				if(p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton)p_82704_1_).getSkeletonType() == SkeletonType.WITHER) return false;
+				else if(p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker) return false;
 				else return true;
 			}
 			public boolean apply(Object p_apply_1_){

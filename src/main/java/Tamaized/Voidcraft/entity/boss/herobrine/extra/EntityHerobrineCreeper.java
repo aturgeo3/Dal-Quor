@@ -251,9 +251,8 @@ public class EntityHerobrineCreeper extends EntityMob {
 	 */
 	private void explode() {
 		if (!this.worldObj.isRemote) {
-			float f = this.getPowered() ? 2.0F : 1.0F;
 			this.dead = true;
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) this.explosionRadius * f, false);
+			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) this.explosionRadius, false);
 			this.setDead();
 		}
 	}
