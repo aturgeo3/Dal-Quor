@@ -60,7 +60,7 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.REDSTONE, heldItem);
 				return true;
 			}
-			if (item == Items.DYE && heldItem.getMetadata() == 4) {
+			if (item == voidCraft.items.lapisDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.LAPIS, heldItem);
 				return true;
 			}
@@ -68,7 +68,7 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.DIAMOND, heldItem);
 				return true;
 			}
-			if (item == Items.EMERALD) {
+			if (item == voidCraft.items.emeraldDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.EMERALD, heldItem);
 				return true;
 			}

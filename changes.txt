@@ -5,3 +5,4 @@
   * Quartz dust is converted into Forge Energy in the block, the amount is 144*5 or 720
   * The ratio between Forge Energy and Liquid Void is 5:1 which means 1 Quartz Dust is equal to 144mb
  - Tamaized: Added Herobrine Creepers and Shulkers to Void Fortresses
+ - Tamaized: Added Void Infused Lapis and Emerald Dusts.

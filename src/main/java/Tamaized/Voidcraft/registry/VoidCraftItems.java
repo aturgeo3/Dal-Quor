@@ -47,14 +47,16 @@ public class VoidCraftItems implements ITamRegistry {
 	public static TamItem voidCloth;
 	public static TamItem voidCrystalBucket;
 
+	public static TamItem quartzDust;
+	public static TamItem coalDust;
 	public static TamItem ironDust;
 	public static TamItem goldDust;
-	public static TamItem diamondDust;
 	public static TamItem copperDust;
 	public static TamItem tinDust;
 	public static TamItem leadDust;
-	public static TamItem coalDust;
-	public static TamItem quartzDust;
+	public static TamItem lapisDust;
+	public static TamItem emeraldDust;
+	public static TamItem diamondDust;
 
 	public static Debugger debugger;
 	// public static HookShot hookShot;
@@ -90,14 +92,16 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(voidCrystalBucket = new TamItem(voidCraft.tabs.tabVoid, "voidCrystalBucket", 1));
 
 		// dust
+		modelList.add(quartzDust = new TamItem(voidCraft.tabs.tabVoid, "quartzDust", 64));
+		modelList.add(coalDust = new TamItem(voidCraft.tabs.tabVoid, "coalDust", 64));
 		modelList.add(ironDust = new TamItem(voidCraft.tabs.tabVoid, "ironDust", 64));
 		modelList.add(goldDust = new TamItem(voidCraft.tabs.tabVoid, "goldDust", 64));
-		modelList.add(diamondDust = new TamItem(voidCraft.tabs.tabVoid, "diamondDust", 64));
-		modelList.add(coalDust = new TamItem(voidCraft.tabs.tabVoid, "coalDust", 64));
 		modelList.add(copperDust = new TamItem(voidCraft.tabs.tabVoid, "copperDust", 64));
 		modelList.add(tinDust = new TamItem(voidCraft.tabs.tabVoid, "tinDust", 64));
 		modelList.add(leadDust = new TamItem(voidCraft.tabs.tabVoid, "leadDust", 64));
-		modelList.add(quartzDust = new TamItem(voidCraft.tabs.tabVoid, "quartzDust", 64));
+		modelList.add(lapisDust = new TamItem(voidCraft.tabs.tabVoid, "lapisDust", 64));
+		modelList.add(emeraldDust = new TamItem(voidCraft.tabs.tabVoid, "emeraldDust", 64));
+		modelList.add(diamondDust = new TamItem(voidCraft.tabs.tabVoid, "diamondDust", 64));
 
 		modelList.add(debugger = new Debugger(voidCraft.tabs.tabVoid, "debugger", 1));
 		// modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
@@ -125,14 +129,16 @@ public class VoidCraftItems implements ITamRegistry {
 	@Override
 	public void init() {
 
+		OreDictionary.registerOre("dustQuartz", quartzDust);
+		OreDictionary.registerOre("dustCoal", coalDust);
 		OreDictionary.registerOre("dustIron", ironDust);
 		OreDictionary.registerOre("dustGold", goldDust);
-		OreDictionary.registerOre("dustCoal", coalDust);
-		OreDictionary.registerOre("dustDiamond", diamondDust);
 		OreDictionary.registerOre("dustCopper", copperDust);
 		OreDictionary.registerOre("dustTin", tinDust);
 		OreDictionary.registerOre("dustLead", leadDust);
-		OreDictionary.registerOre("dustQuartz", quartzDust);
+		OreDictionary.registerOre("dustLapis", lapisDust);
+		OreDictionary.registerOre("dustEmerald", emeraldDust);
+		OreDictionary.registerOre("dustDiamond", diamondDust);
 
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), voidCraft.blocks.blockVoidcrystal);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
