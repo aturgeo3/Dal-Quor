@@ -19,6 +19,7 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
+import Tamaized.Voidcraft.client.LayerCustomElytra;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
@@ -150,9 +151,11 @@ public class ClientProxy extends AbstractProxy {
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));
+		playerRenderer.addLayer(new LayerCustomElytra(playerRenderer));
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
+		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
 
 		voidCraft.channel.register(new ClientPacketHandler());
 	}

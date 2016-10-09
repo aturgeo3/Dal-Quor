@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.capabilities;
 
+import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.elytraFlying.IElytraFlyingCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
@@ -68,6 +70,31 @@ public class EventHandler {
 				}
 
 			});
+			e.addCapability(ElytraFlyingCapabilityHandler.ID, new ICapabilitySerializable<NBTTagCompound>() {
+
+				IElytraFlyingCapability inst = CapabilityList.ELYTRAFLYING.getDefaultInstance();
+
+				@Override
+				public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+					return capability == CapabilityList.ELYTRAFLYING;
+				}
+
+				@Override
+				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+					return capability == CapabilityList.ELYTRAFLYING ? CapabilityList.ELYTRAFLYING.<T> cast(inst) : null;
+				}
+
+				@Override
+				public NBTTagCompound serializeNBT() {
+					return (NBTTagCompound) CapabilityList.ELYTRAFLYING.getStorage().writeNBT(CapabilityList.ELYTRAFLYING, inst, null);
+				}
+
+				@Override
+				public void deserializeNBT(NBTTagCompound nbt) {
+					CapabilityList.ELYTRAFLYING.getStorage().readNBT(CapabilityList.ELYTRAFLYING, inst, null, nbt);
+				}
+
+			});
 		}
 	}
 
@@ -77,6 +104,7 @@ public class EventHandler {
 		EntityPlayer newPlayer = e.getEntityPlayer();
 		newPlayer.getCapability(CapabilityList.VOIDICINFUSION, null).copyFrom(oldPlayer.getCapability(CapabilityList.VOIDICINFUSION, null));
 		newPlayer.getCapability(CapabilityList.VADEMECUM, null).copyFrom(oldPlayer.getCapability(CapabilityList.VADEMECUM, null));
+		newPlayer.getCapability(CapabilityList.ELYTRAFLYING, null).copyFrom(oldPlayer.getCapability(CapabilityList.ELYTRAFLYING, null));
 	}
 
 }

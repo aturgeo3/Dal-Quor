@@ -2,12 +2,16 @@ package Tamaized.Voidcraft.network;
 
 import java.io.IOException;
 
+import Tamaized.Voidcraft.armor.ArmorCustomElytra;
+import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ServerPacketHandler {
 
 	public static enum PacketType {
-		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, CUSTOM_ELYTRA
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -46,6 +50,16 @@ public class ServerPacketHandler {
 				TileEntityVoidBox voidBox;
 				pktType = bbis.readInt();
 				switch (getPacketTypeFromID(pktType)) {
+					case CUSTOM_ELYTRA:
+						if (!player.onGround && player.motionY < 0.0D && !CustomElytraHandler.isElytraFlying(player) && !player.isInWater()) {
+							ItemStack itemstack = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+							if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
+								CustomElytraHandler.setFlying(player, true);
+							}
+						} else {
+							CustomElytraHandler.setFlying(player, false);
+						}
+						break;
 					case VADEMECUM:
 						VadeMecumPacketHandler.DecodeRequestServer(bbis, player);
 						break;

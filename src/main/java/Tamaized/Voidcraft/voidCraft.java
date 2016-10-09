@@ -11,6 +11,9 @@ import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
+import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityStorage;
+import Tamaized.Voidcraft.capabilities.elytraFlying.IElytraFlyingCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityStorage;
@@ -47,6 +50,7 @@ import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
+import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
@@ -148,7 +152,7 @@ public class voidCraft extends TamModBase {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = LogManager.getLogger("VoidCraft");
-		
+
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
 
@@ -195,6 +199,7 @@ public class voidCraft extends TamModBase {
 		// Register Capabilities
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 
 		// Proxy Stuff
@@ -240,6 +245,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
 		MinecraftForge.EVENT_BUS.register(new CapabilitySyncEvent());
+		MinecraftForge.EVENT_BUS.register(new CustomElytraHandler());
 		MinecraftForge.EVENT_BUS.register(config);
 
 		// Register Projectiles and other misc entities

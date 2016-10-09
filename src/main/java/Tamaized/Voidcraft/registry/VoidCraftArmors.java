@@ -2,14 +2,16 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import Tamaized.TamModized.armors.TamArmor;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.armor.ArmorCustomElytra;
 import Tamaized.Voidcraft.armor.XiaArmor;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class VoidCraftArmors implements ITamRegistry {
 
@@ -23,6 +25,7 @@ public class VoidCraftArmors implements ITamRegistry {
 	public static XiaArmor xiaChest;
 	public static XiaArmor xiaLegs;
 	public static XiaArmor xiaBoots;
+	public static ArmorCustomElytra elytra;
 
 	@Override
 	public void preInit() {
@@ -37,6 +40,8 @@ public class VoidCraftArmors implements ITamRegistry {
 		modelList.add(xiaChest = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.CHEST, "xia", "xiaChest"));
 		modelList.add(xiaLegs = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.LEGS, "xia", "xiaLegs"));
 		modelList.add(xiaBoots = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.FEET, "xia", "xiaBoots"));
+
+		modelList.add(elytra = new ArmorCustomElytra(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidElytra"));
 	}
 
 	@Override
@@ -45,6 +50,7 @@ public class VoidCraftArmors implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(voidChest, 1), "X X", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidLegs, 1), "XXX", "X X", "X X", 'X', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidBoots, 1), "X X", "X X", 'X', voidCraft.items.voidcrystal);
+		GameRegistry.addShapelessRecipe(new ItemStack(elytra, 1), voidChest, Items.ELYTRA);
 	}
 
 	@Override
