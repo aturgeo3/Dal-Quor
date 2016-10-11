@@ -1,3 +1,4 @@
+ - Tamaized: Updated TamModized to 0.2.4
  - Tamaized: Added config file with options to change dimension IDs
  - Tamaized: Nerfed Heimdall
   * Heimdall now requires either Void Infused Quartz Dust or Forge Energy
@@ -6,3 +7,6 @@
   * The ratio between Forge Energy and Liquid Void is 5:1 which means 1 Quartz Dust is equal to 144mb
  - Tamaized: Added Herobrine Creepers and Shulkers to Void Fortresses
  - Tamaized: Added Void Infused Lapis and Emerald Dusts.
+ - Tamaized: Added new Machine, the Voidic Alchemy Table
+  * Combine all six Ethereal Fruits and power the machine with Voidic Power to get a new potion.
+  * New potion is called Plenum, it gives immunity to vanilla void
