@@ -4,29 +4,28 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
+import Tamaized.Voidcraft.machina.addons.TERecipesMacerator.MaceratorRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerator.MaceratorRecipe> {
+public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.AlchemyRecipe> {
 
 	@Override
-	public boolean registerRecipe(MaceratorRecipe recipe) {
-		if (recipe instanceof MaceratorRecipe) {
+	public boolean registerRecipe(AlchemyRecipe recipe) {
+		if (recipe instanceof AlchemyRecipe) {
 			return super.registerRecipe(recipe);
 		} else {
-			voidCraft.logger.error("Tried to register a non-Macerator recipe in the Macerator Recipe List");
+			voidCraft.logger.error("Tried to register a non-Alchemy recipe in the Alchemy Recipe List");
 			return false;
 		}
 	}
 	
-	public ArrayList<MaceratorRecipe> getList(){ // TODO: move this into TamModized
+	public ArrayList<AlchemyRecipe> getList(){ // TODO: move this into TamModized
 		return recipes;
 	}
 
 	public boolean isInput(ItemStack[] stacks) { // TODO: move this into TamModized
-		loop: for (MaceratorRecipe recipe : recipes) {
+		loop: for (AlchemyRecipe recipe : recipes) {
 			if (recipe.getInput().length != stacks.length) continue;
 			for (ItemStack stack : stacks) {
 				boolean flag2 = false;
@@ -44,7 +43,7 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 	}
 
 	public ItemStack getOutput(ItemStack[] stacks) {// TODO: move this into TamModized
-		loop: for (MaceratorRecipe recipe : recipes) {
+		loop: for (AlchemyRecipe recipe : recipes) {
 			if (recipe.getInput().length != stacks.length) continue;
 			for (ItemStack stack : stacks) {
 				boolean flag2 = false;
@@ -61,13 +60,13 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 		return null;
 	}
 
-	public MaceratorRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized
-		loop: for (MaceratorRecipe recipe : recipes) {
+	public AlchemyRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized
+		loop: for (AlchemyRecipe recipe : recipes) {
 			if (recipe.getInput().length != stacks.length) continue;
 			for (ItemStack stack : stacks) {
 				boolean flag2 = false;
 				for (ItemStack checkStack : recipe.getInput()) {
-					if (stack.getItem() == checkStack.getItem()) {
+					if (stack != null && checkStack != null && stack.getItem() == checkStack.getItem()) {
 						flag2 = true;
 						break;
 					}
@@ -79,9 +78,8 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 		return null;
 	}
 
-	@Override
 	protected String getName() {
-		return "Macerator";
+		return "Alchemy";
 	}
 
 	@Override
@@ -89,11 +87,11 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 		return voidCraft.modid;
 	}
 
-	public class MaceratorRecipe extends TamTileEntityRecipeList.TamTERecipe {
+	public class AlchemyRecipe extends TamTileEntityRecipeList.TamTERecipe {
 
 		private final int powerAmount;
 
-		public MaceratorRecipe(ItemStack[] input, ItemStack output, int requiredPower) {
+		public AlchemyRecipe(ItemStack[] input, ItemStack output, int requiredPower) {
 			super(input, output);
 			powerAmount = requiredPower;
 		}

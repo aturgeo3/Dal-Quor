@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/voidicGen",
+    "parent": "voidcraft:block/voidicAlchemy",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

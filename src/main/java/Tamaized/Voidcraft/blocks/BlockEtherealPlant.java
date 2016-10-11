@@ -6,6 +6,7 @@ import java.util.Random;
 import Tamaized.TamModized.blocks.TamBlockCrops;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import Tamaized.Voidcraft.items.EtherealFruit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -72,17 +73,37 @@ public class BlockEtherealPlant extends TamBlockCrops {
 		if (getAge(state) >= getMaxAge()) {
 			if (worldIn.isRemote) return true;
 			TileEntity tileEntity = worldIn.getTileEntity(pos.down());
-			int meta = 0;
+			TileEntityFakeBedrockFarmland.Alteration alteration = TileEntityFakeBedrockFarmland.Alteration.NORMAL;
 			if (tileEntity instanceof TileEntityFakeBedrockFarmland) {
 				TileEntityFakeBedrockFarmland soil = (TileEntityFakeBedrockFarmland) tileEntity;
-				meta = soil.getAlterationValue(soil.getAlteration());
+				alteration = soil.getAlteration();
 				soil.setAlteration(TileEntityFakeBedrockFarmland.Alteration.NORMAL);
 			}
 			Random rand = worldIn.rand;
 			int a = rand.nextInt(3);
 			if (a > 0) {
-				ItemStack newStack = new ItemStack(voidCraft.items.etherealFruit, a);
-				newStack.getSubCompound(voidCraft.modid, true).setInteger("alteration", meta);
+				EtherealFruit fruit;
+				switch(alteration){
+					case REDSTONE:
+						fruit = voidCraft.items.etherealFruit_redstone;
+						break;
+					case LAPIS:
+						fruit = voidCraft.items.etherealFruit_lapis;
+						break;
+					case GOLD:
+						fruit = voidCraft.items.etherealFruit_gold;
+						break;
+					case EMERALD:
+						fruit = voidCraft.items.etherealFruit_emerald;
+						break;
+					case DIAMOND:
+						fruit = voidCraft.items.etherealFruit_diamond;
+						break;
+					default:
+						fruit = voidCraft.items.etherealFruit;
+						break;
+				}
+				ItemStack newStack = new ItemStack(fruit, a);
 				ItemHandlerHelper.giveItemToPlayer(player, newStack);
 			}
 			int amount = rand.nextInt(3);

@@ -14,7 +14,9 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,21 +25,27 @@ import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 
-public class RealityStabilizer extends TamBlockContainer {
+public class VoidicAlchemyTable extends TamBlockContainer {
 
-	public RealityStabilizer(CreativeTabs tab, Material material, String n, float hardness) {
+	public VoidicAlchemyTable(CreativeTabs tab, Material material, String n, float hardness) {
 		super(tab, material, n, hardness);
 	}
 
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return new AxisAlignedBB(0F, 0F, 0F, 1F, 0.75F, 1F);
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityRealityStabilizer();
+		return new TileEntityVoidicAlchemy();
 	}
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.RealityStabilizer), worldIn, pos.getX(), pos.getY(), pos.getZ());
+		if (!worldIn.isRemote) FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VoidicAlchemy), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 

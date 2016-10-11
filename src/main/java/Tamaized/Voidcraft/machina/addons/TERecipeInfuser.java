@@ -1,42 +1,80 @@
 package Tamaized.Voidcraft.machina.addons;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import java.util.ArrayList;
+
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
-import Tamaized.TamModized.tileentity.TamTileEntityRecipeList.TamTERecipe;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
+import net.minecraft.item.ItemStack;
 
-public class TERecipeInfuser extends TamTileEntityRecipeList {
+public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.InfuserRecipe> {
 
 	@Override
-	public boolean registerRecipe(ItemStack stack, TamTERecipe recipe) {
+	public boolean registerRecipe(InfuserRecipe recipe) {
 		if (recipe instanceof InfuserRecipe) {
-			return super.registerRecipe(stack, recipe);
+			return super.registerRecipe(recipe);
 		} else {
 			voidCraft.logger.error("Tried to register a non-Infuser recipe in the Infuser Recipe List");
 			return false;
 		}
 	}
+	
+	public ArrayList<InfuserRecipe> getList(){ // TODO: move this into TamModized
+		return recipes;
+	}
 
-	@Override
-	public boolean registerRecipe(String item, TamTERecipe recipe) {
-		if (recipe instanceof InfuserRecipe) {
-			return super.registerRecipe(item, recipe);
-		} else {
-			voidCraft.logger.error("Tried to register a non-Infuser recipe in the Infuser Recipe List");
-			return false;
+	public boolean isInput(ItemStack[] stacks) { // TODO: move this into TamModized
+		loop: for (InfuserRecipe recipe : recipes) {
+			if (recipe.getInput().length != stacks.length) continue;
+			for (ItemStack stack : stacks) {
+				boolean flag2 = false;
+				for (ItemStack checkStack : recipe.getInput()) {
+					if (stack.getItem() == checkStack.getItem()) {
+						flag2 = true;
+						break;
+					}
+				}
+				if (!flag2) continue loop;
+			}
+			return true;
 		}
+		return false;
 	}
 
-	@Override
-	public InfuserRecipe getOutput(Item item) {
-		if (!isInput(item)) return null;
-		else return (InfuserRecipe) super.getOutput(item);
+	public ItemStack getOutput(ItemStack[] stacks) {// TODO: move this into TamModized
+		loop: for (InfuserRecipe recipe : recipes) {
+			if (recipe.getInput().length != stacks.length) continue;
+			for (ItemStack stack : stacks) {
+				boolean flag2 = false;
+				for (ItemStack checkStack : recipe.getInput()) {
+					if (stack.getItem() == checkStack.getItem()) {
+						flag2 = true;
+						break;
+					}
+				}
+				if (!flag2) continue loop;
+			}
+			return recipe.getOutput();
+		}
+		return null;
 	}
 
-	@Override
-	public InfuserRecipe getOutput(ItemStack stack){
-		return stack == null ? null : getOutput(stack.getItem());
+	public InfuserRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized
+		loop: for (InfuserRecipe recipe : recipes) {
+			if (recipe.getInput().length != stacks.length) continue;
+			for (ItemStack stack : stacks) {
+				boolean flag2 = false;
+				for (ItemStack checkStack : recipe.getInput()) {
+					if (stack.getItem() == checkStack.getItem()) {
+						flag2 = true;
+						break;
+					}
+				}
+				if (!flag2) continue loop;
+			}
+			return recipe;
+		}
+		return null;
 	}
 
 	@Override
@@ -49,12 +87,12 @@ public class TERecipeInfuser extends TamTileEntityRecipeList {
 		return voidCraft.modid;
 	}
 
-	public class InfuserRecipe extends TamTERecipe {
+	public class InfuserRecipe extends TamTileEntityRecipeList.TamTERecipe {
 
 		private final int fluidAmount;
 
-		public InfuserRecipe(ItemStack output, int requiredFluid) {
-			super(output);
+		public InfuserRecipe(ItemStack[] input, ItemStack output, int requiredFluid) {
+			super(input, output);
 			fluidAmount = requiredFluid;
 		}
 

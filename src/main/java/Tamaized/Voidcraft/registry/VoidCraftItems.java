@@ -33,7 +33,7 @@ public class VoidCraftItems implements ITamRegistry {
 	private ArrayList<ITamModel> modelList;
 
 	public static VadeMecum vadeMecum;
-	
+
 	public static TamItem ectoplasm;
 	public static TamItem voidcrystal;
 	public static EmptyObsidianFlask emptyObsidianFlask;
@@ -66,6 +66,11 @@ public class VoidCraftItems implements ITamRegistry {
 
 	public static TamItemSeed etherealSeed;
 	public static EtherealFruit etherealFruit;
+	public static EtherealFruit etherealFruit_redstone;
+	public static EtherealFruit etherealFruit_lapis;
+	public static EtherealFruit etherealFruit_gold;
+	public static EtherealFruit etherealFruit_emerald;
+	public static EtherealFruit etherealFruit_diamond;
 
 	// public static VoidRecord record_noStrings;
 	// public static VoidRecord record_bleedingThrough;
@@ -77,7 +82,7 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList = new ArrayList<ITamModel>();
 
 		modelList.add(vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1));
-		
+
 		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(voidCraft.tabs.tabVoid, "emptyObsidianFlask", 16));
 		modelList.add(obsidianFlask = new ObsidianFlask(voidCraft.tabs.tabVoid, "obsidianFlask", 16));
 		modelList.add(ectoplasm = new TamItem(voidCraft.tabs.tabVoid, "ectoplasm", 64));
@@ -112,7 +117,12 @@ public class VoidCraftItems implements ITamRegistry {
 		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
 		soilList.add(voidCraft.blocks.blockFakeBedrockFarmland);
 		modelList.add(etherealSeed = new TamItemSeed(voidCraft.tabs.tabVoid, "etherealSeed", 64, voidCraft.blocks.etherealPlant, soilList));
-		modelList.add(etherealFruit = new EtherealFruit(voidCraft.tabs.tabVoid, "etherealFruit", 64, 2, false));
+		modelList.add(etherealFruit = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.NORMAL, voidCraft.tabs.tabVoid, "etherealFruit", 64, 2, false));
+		modelList.add(etherealFruit_redstone = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.REDSTONE, voidCraft.tabs.tabVoid, "etherealFruit_redstone", 64, 2, false));
+		modelList.add(etherealFruit_lapis = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.LAPIS, voidCraft.tabs.tabVoid, "etherealFruit_lapis", 64, 2, false));
+		modelList.add(etherealFruit_gold = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.GOLD, voidCraft.tabs.tabVoid, "etherealFruit_gold", 64, 2, false));
+		modelList.add(etherealFruit_emerald = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.EMERALD, voidCraft.tabs.tabVoid, "etherealFruit_emerald", 64, 2, false));
+		modelList.add(etherealFruit_diamond = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.DIAMOND, voidCraft.tabs.tabVoid, "etherealFruit_diamond", 64, 2, false));
 
 		// modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
 		// modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
@@ -206,11 +216,6 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void clientInit() {
-
-		final net.minecraft.client.renderer.color.IItemColor itemEtherealFruitColourHandler = (stack, tintIndex) -> {
-			return TileEntityFakeBedrockFarmland.getColor(TileEntityFakeBedrockFarmland.getAlterationFromValue(stack.getSubCompound(voidCraft.modid, true).getInteger("alteration")));
-		};
-		TamColorRegistry.registerItemColors(etherealFruit, itemEtherealFruitColourHandler);
 
 	}
 

@@ -4,6 +4,7 @@ import Tamaized.Voidcraft.GUI.client.HeimdallGUI;
 import Tamaized.Voidcraft.GUI.client.RealityStabilizerGUI;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.GUI.client.VoidBoxGUI;
+import Tamaized.Voidcraft.GUI.client.VoidicAlchemyGUI;
 import Tamaized.Voidcraft.GUI.client.VoidicChargerGUI;
 import Tamaized.Voidcraft.GUI.client.VoidicPowerGenGUI;
 import Tamaized.Voidcraft.GUI.client.voidInfuserGUI;
@@ -14,6 +15,7 @@ import Tamaized.Voidcraft.GUI.server.VadeMecumContainer;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.GUI.server.VoidInfuserContainer;
 import Tamaized.Voidcraft.GUI.server.VoidMaceratorContainer;
+import Tamaized.Voidcraft.GUI.server.VoidicAlchemyContainer;
 import Tamaized.Voidcraft.GUI.server.VoidicChargerContainer;
 import Tamaized.Voidcraft.GUI.server.VoidicPowerGenContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
@@ -21,6 +23,7 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +35,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class GuiHandler implements IGuiHandler {
 
 	public static enum Type {
-		NULL, Macerator, MusicBox, Infuser, Heimdall, VoidicGenerator, VoidicCharger, RealityStabilizer, VadeMecum
+		NULL, Macerator, MusicBox, Infuser, Heimdall, VoidicGenerator, VoidicCharger, RealityStabilizer, VoidicAlchemy, VadeMecum
 	}
 
 	public static int getTypeID(Type type) {
@@ -63,6 +66,8 @@ public class GuiHandler implements IGuiHandler {
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidicCharger) return new VoidicChargerContainer(player.inventory, (TileEntityVoidicCharger) tileEntity);
 			case RealityStabilizer:
 				if (tileEntity != null && tileEntity instanceof TileEntityRealityStabilizer) return new RealityStabilizerContainer(player.inventory, (TileEntityRealityStabilizer) tileEntity);
+			case VoidicAlchemy:
+				if (tileEntity != null && tileEntity instanceof TileEntityVoidicAlchemy) return new VoidicAlchemyContainer(player.inventory, (TileEntityVoidicAlchemy) tileEntity);
 			default:
 				return null;
 		}
@@ -88,6 +93,8 @@ public class GuiHandler implements IGuiHandler {
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidicCharger) return new VoidicChargerGUI(player.inventory, (TileEntityVoidicCharger) tileEntity);
 			case RealityStabilizer:
 				if (tileEntity != null && tileEntity instanceof TileEntityRealityStabilizer) return new RealityStabilizerGUI(player.inventory, (TileEntityRealityStabilizer) tileEntity);
+			case VoidicAlchemy:
+				if (tileEntity != null && tileEntity instanceof TileEntityVoidicAlchemy) return new VoidicAlchemyGUI(player.inventory, (TileEntityVoidicAlchemy) tileEntity);
 			default:
 				return null;
 		}

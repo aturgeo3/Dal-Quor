@@ -27,7 +27,7 @@ public class MaceratorRecipeHandler implements IRecipeHandler<MaceratorRecipeJEI
 
 	@Override
 	public boolean isRecipeValid(MaceratorRecipeJEI recipe) {
-		return recipe.getInputs().get(0) != null && recipe.getOutputs().size() > 0;
+		return recipe.getOutputs().size() > 0 && recipe.getInputs().size() > 0;
 	}
 
 }

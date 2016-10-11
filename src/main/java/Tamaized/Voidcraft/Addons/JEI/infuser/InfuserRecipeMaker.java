@@ -9,14 +9,14 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 
 public class InfuserRecipeMaker {
 	
 	@Nonnull
 	public static List<InfuserRecipeJEI> getRecipes(){
-		Map<ItemStack, ItemStack> recipeList = voidCraft.teRecipes.infuser.getRawMap();
 		ArrayList<InfuserRecipeJEI> recipes = new ArrayList<InfuserRecipeJEI>();
-		for(Entry<ItemStack, ItemStack> recipe : recipeList.entrySet()) recipes.add(new InfuserRecipeJEI(recipe.getKey(), recipe.getValue()));
+		for(InfuserRecipe recipe : voidCraft.teRecipes.infuser.getList()) recipes.add(new InfuserRecipeJEI(recipe));
 		return recipes;
 	}
 }

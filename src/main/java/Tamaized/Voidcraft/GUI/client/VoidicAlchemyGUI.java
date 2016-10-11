@@ -1,25 +1,22 @@
 package Tamaized.Voidcraft.GUI.client;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.GUI.server.VoidicAlchemyContainer;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
+public class VoidicAlchemyGUI extends GuiContainer {
 
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.GUI.server.VoidMaceratorContainer;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+	public TileEntityVoidicAlchemy te;
 
-public class voidMaceratorGUI extends GuiContainer {
+	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/voidicAlchemy.png");
 
-	public TileEntityVoidMacerator te;
-
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidMacerator.png");
-
-	public voidMaceratorGUI(InventoryPlayer inventoryPlayer, TileEntityVoidMacerator tileEntity) {
-		super(new VoidMaceratorContainer(inventoryPlayer, tileEntity));
+	public VoidicAlchemyGUI(InventoryPlayer inventoryPlayer, TileEntityVoidicAlchemy tileEntity) {
+		super(new VoidicAlchemyContainer(inventoryPlayer, tileEntity));
 
 		this.te = tileEntity;
 
@@ -31,15 +28,15 @@ public class voidMaceratorGUI extends GuiContainer {
 	public void updateScreen() {
 
 		{
-			float scale = 45;
+			float scale = 47;
 			int k = (int) (((float) te.getPowerAmount() / (float) te.getMaxPower()) * scale);
-			drawTexturedModalRect(guiLeft + 114, guiTop + 134 - k, 12, 497 - (k), 12, k);
+			drawTexturedModalRect(guiLeft + 124, guiTop + 130 - k, 12, 470 - (k), 12, k + 1);
 		}
 
 		{
-			float scale = 26;
+			float scale = 11;
 			int k = (int) (((float) te.cookingTick / (float) te.finishTick) * scale);
-			drawTexturedModalRect(guiLeft + 188, guiTop + 100, 0, 435, k, 15);
+			drawTexturedModalRect(guiLeft + 182, guiTop + 88 - k, 24, 432-k, 4, k);
 		}
 
 		super.updateScreen();
@@ -47,7 +44,7 @@ public class voidMaceratorGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = "Void Infused Macerator";
+		String text = "Voidic Alchemy Table";
 		this.fontRendererObj.drawString(text, this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 		text = "Voidic Power:";
 		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 60, this.ySize / 2 - 65, 0xFF0000);
@@ -63,7 +60,7 @@ public class voidMaceratorGUI extends GuiContainer {
 		GlStateManager.pushAttrib();
 		{
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(daTexture);
+			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 			drawTexturedModalRect(guiLeft + 78, guiTop + 66, 0, 0, xSize / 2, ySize / 2);
 			this.updateScreen();
 		}

@@ -2,41 +2,46 @@ package Tamaized.Voidcraft.Addons.JEI;
 
 import javax.annotation.Nonnull;
 
-import mezz.jei.api.BlankModPlugin;
-import mezz.jei.api.IItemRegistry;
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
-import net.minecraft.item.ItemStack;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.Addons.JEI.alchemy.AlchemyRecipeCategory;
+import Tamaized.Voidcraft.Addons.JEI.alchemy.AlchemyRecipeHandler;
+import Tamaized.Voidcraft.Addons.JEI.alchemy.AlchemyRecipeMaker;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeCategory;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeHandler;
 import Tamaized.Voidcraft.Addons.JEI.infuser.InfuserRecipeMaker;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeCategory;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeHandler;
 import Tamaized.Voidcraft.Addons.JEI.macerator.MaceratorRecipeMaker;
+import mezz.jei.api.BlankModPlugin;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientRegistry;
+import net.minecraft.item.ItemStack;
 
 @JEIPlugin
-public class VoidCraftJEIPlugin extends BlankModPlugin{
-	
+public class VoidCraftJEIPlugin extends BlankModPlugin {
+
 	public static IJeiHelpers jeiHelpers;
-	
+
 	@Override
 	public void register(@Nonnull IModRegistry registry) {
 		voidCraft.logger.info("JEI detected, loading VoidCraft JEI Plugin");
-		IItemRegistry itemRegistry = registry.getItemRegistry();
+		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
 		jeiHelpers = registry.getJeiHelpers();
-		
-		registry.addRecipeCategories(new InfuserRecipeCategory(), new MaceratorRecipeCategory());
-		
+
+		registry.addRecipeCategories(new InfuserRecipeCategory(), new MaceratorRecipeCategory(), new AlchemyRecipeCategory());
+
 		registry.addRecipes(InfuserRecipeMaker.getRecipes());
 		registry.addRecipes(MaceratorRecipeMaker.getRecipes());
-		
-		registry.addRecipeHandlers(new InfuserRecipeHandler(), new MaceratorRecipeHandler());
-		
+		registry.addRecipes(AlchemyRecipeMaker.getRecipes());
+
+		registry.addRecipeHandlers(new InfuserRecipeHandler(), new MaceratorRecipeHandler(), new AlchemyRecipeHandler());
+
 		registry.addRecipeCategoryCraftingItem(new ItemStack(voidCraft.blocks.voidInfuser), "voidcraft_JEI_recipeCategory_Infuser");
 		registry.addRecipeCategoryCraftingItem(new ItemStack(voidCraft.blocks.voidMacerator), "voidcraft_JEI_recipeCategory_Macerator");
-		
+		registry.addRecipeCategoryCraftingItem(new ItemStack(voidCraft.blocks.voidicAlchemyTable), "voidcraft_JEI_recipeCategory_Alchemy");
+
 	}
-	
+
 }

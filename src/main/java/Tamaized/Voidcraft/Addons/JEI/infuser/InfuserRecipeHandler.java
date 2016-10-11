@@ -27,7 +27,7 @@ public class InfuserRecipeHandler implements IRecipeHandler<InfuserRecipeJEI> {
 
 	@Override
 	public boolean isRecipeValid(InfuserRecipeJEI recipe) {
-		return recipe.getInputs().get(0) != null && recipe.getOutputs().size() > 0;
+		return recipe.getOutputs().size() > 0 && recipe.getInputs().size() > 0;
 	}
 
 }

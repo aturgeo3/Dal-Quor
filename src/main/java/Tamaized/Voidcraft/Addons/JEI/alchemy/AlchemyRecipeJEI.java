@@ -1,35 +1,36 @@
-package Tamaized.Voidcraft.Addons.JEI.infuser;
+package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
+import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.item.ItemStack;
 
-public class InfuserRecipeJEI extends BlankRecipeWrapper {
+public class AlchemyRecipeJEI extends BlankRecipeWrapper {
 
-	private final InfuserRecipe recipe;
+	private final AlchemyRecipe recipe;
 
-	public InfuserRecipeJEI(InfuserRecipe r) {
+	public AlchemyRecipeJEI(AlchemyRecipe r) {
 		recipe = r;
 	}
 
 	@Override
 	@Nonnull
-	public List getInputs() {
-		ArrayList<Collection> ret = new ArrayList<Collection>();
-		ret.add(Collections.singletonList(voidCraft.fluids.getBucket()));
+	public List<List<ItemStack>> getInputs() {
+		List<List<ItemStack>> list = new ArrayList<List<ItemStack>>();
 		for(ItemStack stack : recipe.getInput()){
-			ret.add(Collections.singletonList(stack));
+			list.add(Arrays.asList(stack));
 		}
-		return ret;
+		return list;
 	}
 
 	@Override

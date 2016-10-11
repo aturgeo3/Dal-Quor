@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,6 +24,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	public int finishTick = 0;
 	public int cookingTick = 0;
+	private InfuserRecipe recipe;
 
 	private Item lastCookingItem = null;
 
@@ -66,7 +68,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 		if (cooking) {
 			cookingTick++;
-			if (cookingTick >= (finishTick = voidCraft.teRecipes.infuser.getOutput(slots[SLOT_INPUT]).getRequiredFluid())) {
+			if (cookingTick >= (finishTick = recipe.getRequiredFluid())) {
 				cookingTick = 0;
 				bakeItem();
 				this.markDirty();
@@ -76,11 +78,10 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	private void bakeItem() {
 		if (canCook()) {
-			ItemStack itemstack = voidCraft.teRecipes.infuser.getResultItem(this.slots[SLOT_INPUT]);
 			if (this.slots[SLOT_OUTPUT] == null) {
-				this.slots[SLOT_OUTPUT] = itemstack.copy();
-			} else if (this.slots[SLOT_OUTPUT].isItemEqual(itemstack)) {
-				this.slots[SLOT_OUTPUT].stackSize += itemstack.stackSize;
+				this.slots[SLOT_OUTPUT] = recipe.getOutput().copy();
+			} else if (this.slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) {
+				this.slots[SLOT_OUTPUT].stackSize += recipe.getOutput().stackSize;
 			}
 
 			this.slots[SLOT_INPUT].stackSize--;
@@ -92,16 +93,13 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	private boolean canCook() {
-		if (this.slots[SLOT_INPUT] == null) {
-			return false;
-		} else {
-			ItemStack itemstack = voidCraft.teRecipes.infuser.getResultItem(this.slots[SLOT_INPUT]);
-			if (itemstack == null) return false;
-			if (this.slots[SLOT_OUTPUT] == null) return true;
-			if (!this.slots[SLOT_OUTPUT].isItemEqual(itemstack)) return false;
-			int result = this.slots[SLOT_OUTPUT].stackSize + itemstack.stackSize;
-			return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-		}
+		if (this.slots[SLOT_INPUT] == null) return false;
+		recipe = voidCraft.teRecipes.infuser.getRecipe(new ItemStack[] { slots[SLOT_INPUT] });
+		if (recipe == null) return false;
+		if (this.slots[SLOT_OUTPUT] == null) return true;
+		if (!this.slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) return false;
+		int result = this.slots[SLOT_OUTPUT].stackSize + recipe.getOutput().stackSize;
+		return (result <= getInventoryStackLimit() && result <= recipe.getOutput().getMaxStackSize());
 	}
 
 	public static boolean isItemFuel(ItemStack stack) {

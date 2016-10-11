@@ -1,26 +1,32 @@
 package Tamaized.Voidcraft.items;
 
+import java.util.List;
+
 import Tamaized.TamModized.items.TamItemFood;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class EtherealFruit extends TamItemFood {
+	
+	private final TileEntityFakeBedrockFarmland.Alteration alteration;
 
-	public EtherealFruit(CreativeTabs tab, String n, int maxStackSize, int hungerAmount, boolean isWolfFood) {
+	public EtherealFruit(TileEntityFakeBedrockFarmland.Alteration alter, CreativeTabs tab, String n, int maxStackSize, int hungerAmount, boolean isWolfFood) {
 		super(tab, n, maxStackSize, hungerAmount, isWolfFood);
 		setAlwaysEdible();
+		alteration = alter;
 	}
 
 	@Override
 	protected void doneEating(ItemStack stack, World worldIn, EntityLivingBase e) {
 		if (!worldIn.isRemote) {
-			switch (TileEntityFakeBedrockFarmland.getAlterationFromValue(stack.getSubCompound(voidCraft.modid, true).getInteger("alteration"))) {
+			switch (alteration) {
 				case NORMAL:
 					e.addPotionEffect(new PotionEffect(voidCraft.potions.voidicInfusionImmunity, 20 * 90));
 					break;
@@ -45,5 +51,5 @@ public class EtherealFruit extends TamItemFood {
 			}
 		}
 	}
-
+	
 }
