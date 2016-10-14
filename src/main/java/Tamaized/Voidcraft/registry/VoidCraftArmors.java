@@ -25,7 +25,7 @@ public class VoidCraftArmors implements ITamRegistry {
 	public static XiaArmor xiaChest;
 	public static XiaArmor xiaLegs;
 	public static XiaArmor xiaBoots;
-	public static ArmorCustomElytra elytra;
+	//public static ArmorCustomElytra elytra;
 
 	@Override
 	public void preInit() {
@@ -41,7 +41,7 @@ public class VoidCraftArmors implements ITamRegistry {
 		modelList.add(xiaLegs = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.LEGS, "xia", "xiaLegs"));
 		modelList.add(xiaBoots = new XiaArmor(voidCraft.tabs.tabVoid, voidCraft.materials.xiaArmor, 0, EntityEquipmentSlot.FEET, "xia", "xiaBoots"));
 
-		modelList.add(elytra = new ArmorCustomElytra(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidElytra"));
+		//modelList.add(elytra = new ArmorCustomElytra(voidCraft.tabs.tabVoid, voidCraft.materials.voidArmor, 0, EntityEquipmentSlot.CHEST, "void", "voidElytra"));
 	}
 
 	@Override
