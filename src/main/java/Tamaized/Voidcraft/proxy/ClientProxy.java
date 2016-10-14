@@ -1,18 +1,5 @@
 package Tamaized.Voidcraft.proxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.entity.RenderFireball;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
@@ -20,6 +7,7 @@ import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
 import Tamaized.Voidcraft.client.LayerCustomElytra;
+import Tamaized.Voidcraft.client.RenderNull;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
@@ -53,6 +41,7 @@ import Tamaized.Voidcraft.entity.mob.EntityMobLich;
 import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
 import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
 import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
+import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.entity.mob.model.ModelLich;
 import Tamaized.Voidcraft.entity.mob.model.ModelSpectreChain;
 import Tamaized.Voidcraft.entity.mob.model.ModelVoidWrath;
@@ -79,6 +68,19 @@ import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
 import Tamaized.Voidcraft.voidicInfusion.client.RenderVoidicInfusion;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends AbstractProxy {
 
@@ -96,8 +98,8 @@ public class ClientProxy extends AbstractProxy {
 		voidCraft.instance.clientPreInit();
 		reloadVadeMecum();
 	}
-	
-	public static void reloadVadeMecum(){
+
+	public static void reloadVadeMecum() {
 		vadeMecumEntryList = new VadeMecumEntryList();
 	}
 
@@ -146,11 +148,12 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new RenderHerobrineShadow(new ModelHerobrine()));
 
-		// Projectiles
+		// Projectiles and MISC.
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLichInferno.class, new RenderNull());
 		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new RenderObsidianFlask(Minecraft.getMinecraft().getRenderManager(), voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem()));
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
