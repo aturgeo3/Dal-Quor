@@ -94,6 +94,10 @@ public class ClientProxy extends AbstractProxy {
 	@Override
 	public void preInit() {
 		voidCraft.instance.clientPreInit();
+		reloadVadeMecum();
+	}
+	
+	public static void reloadVadeMecum(){
 		vadeMecumEntryList = new VadeMecumEntryList();
 	}
 

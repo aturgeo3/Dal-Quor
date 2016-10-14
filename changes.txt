@@ -1,4 +1,5 @@
  - Tamaized: Updated TamModized to 0.2.4
+ - Tamaized: Added Void Vade Mecum
  - Tamaized: Added config file with options to change dimension IDs
  - Tamaized: Nerfed Heimdall
   * Heimdall now requires either Void Infused Quartz Dust or Forge Energy

@@ -40,7 +40,7 @@ public class DamageEvent {
 			if (!player.hasCapability(CapabilityList.VOIDICINFUSION, null) || player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.50f) {
 				if (Math.floor(Math.random() * 5) == 0 && isWhiteListed(e.getSource())) { // 0-4; 25%
 					e.setCanceled(true);
-					player.addChatMessage(new TextComponentString("*Dodged"));
+					player.addChatMessage(new TextComponentString("*Incorporeal"));
 					if (isWhiteListed(e.getSource()) && !e.getSource().damageType.equals("arrow")) {
 						if (e.getSource().getEntity() != null && !(e.getSource().getEntity() instanceof EntityVoidMob || e.getSource().getEntity() instanceof EntityVoidNPC || e.getSource().getEntity() instanceof EntityBossCorruptedPawnBase)) {
 							int a = (int) Math.floor(player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() * 10);
