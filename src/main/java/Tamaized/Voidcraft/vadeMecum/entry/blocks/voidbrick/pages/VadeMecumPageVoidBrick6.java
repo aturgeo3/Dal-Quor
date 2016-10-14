@@ -8,18 +8,18 @@ import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingNormal;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 
-public class VadeMecumPageVoidBrick3 implements IVadeMecumPage {
+public class VadeMecumPageVoidBrick6 implements IVadeMecumPage {
 
-	private IVadeMecumCrafting crafting = new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
-			new ItemStack(voidCraft.blocks.blockVoidcrystal),
-			new ItemStack(voidCraft.blocks.blockVoidcrystal),
-			null,
-			new ItemStack(voidCraft.blocks.blockVoidcrystal),
-			new ItemStack(voidCraft.blocks.blockVoidcrystal),
+	private IVadeMecumCrafting crafting = new VadeMecumCraftingNormal("Void Brick Slab", new ItemStack[] {
 			null,
 			null,
 			null,
-			null }, new ItemStack(voidCraft.blocks.blockVoidbrick, 1));
+			null,
+			null,
+			null,
+			new ItemStack(voidCraft.blocks.blockVoidbrick),
+			new ItemStack(voidCraft.blocks.blockVoidbrick),
+			new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidBrickHalfSlab, 6));
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {

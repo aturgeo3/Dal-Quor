@@ -7,6 +7,7 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
@@ -55,10 +56,10 @@ public class PlayerInfusionHandler {
 	public void addInfusion(int amount) {
 		voidicInfusionAmount = voidicInfusionAmount + amount > maxAmount ? maxAmount : voidicInfusionAmount + amount;
 	}
-	
-	public void removeInfusion(int amount){
-		voidicInfusionAmount-=amount;
-		if(voidicInfusionAmount < 0) voidicInfusionAmount = 0;
+
+	public void removeInfusion(int amount) {
+		voidicInfusionAmount -= amount;
+		if (voidicInfusionAmount < 0) voidicInfusionAmount = 0;
 	}
 
 	public int getMaxInfusion() {
@@ -86,11 +87,15 @@ public class PlayerInfusionHandler {
 					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
 					flag = false;
 				}
-			}else if(player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null){
+			} else if (player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null) {
 				flag = false;
 			}
 			if (player.worldObj.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
-				voidicInfusionAmount++;
+				if (player.onGround && (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidbrick || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickHalfSlab || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidstairs || player.worldObj.getBlockState(player.getPosition().down(2)).getBlock() == voidCraft.blocks.blockVoidfence || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickDoubleSlab)) {
+					
+				} else {
+					voidicInfusionAmount++;
+				}
 				if (voidicInfusionAmount > maxAmount) voidicInfusionAmount = maxAmount;
 			} else {
 				voidicInfusionAmount -= 5;

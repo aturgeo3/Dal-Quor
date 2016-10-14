@@ -6,6 +6,7 @@ import Tamaized.Voidcraft.vadeMecum.entry.blocks.voidbrick.pages.VadeMecumPageVo
 import Tamaized.Voidcraft.vadeMecum.entry.blocks.voidbrick.pages.VadeMecumPageVoidBrick3;
 import Tamaized.Voidcraft.vadeMecum.entry.blocks.voidbrick.pages.VadeMecumPageVoidBrick4;
 import Tamaized.Voidcraft.vadeMecum.entry.blocks.voidbrick.pages.VadeMecumPageVoidBrick5;
+import Tamaized.Voidcraft.vadeMecum.entry.blocks.voidbrick.pages.VadeMecumPageVoidBrick6;
 
 public class VadeMecumPageListVoidBrick {
 
@@ -15,7 +16,8 @@ public class VadeMecumPageListVoidBrick {
 				new VadeMecumPageVoidBrick2(),
 				new VadeMecumPageVoidBrick3(),
 				new VadeMecumPageVoidBrick4(),
-				new VadeMecumPageVoidBrick5() };
+				new VadeMecumPageVoidBrick5(),
+				new VadeMecumPageVoidBrick6() };
 	}
 
 }

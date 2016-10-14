@@ -10,16 +10,16 @@ import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageVoidBrick4 implements IVadeMecumPage {
 
-	private IVadeMecumCrafting crafting = new VadeMecumCraftingNormal("Void Brick Fence", new ItemStack[] {
+	private IVadeMecumCrafting crafting = new VadeMecumCraftingNormal("Void Brick Stairs", new ItemStack[] {
+			new ItemStack(voidCraft.blocks.blockVoidbrick),
 			null,
 			null,
+			new ItemStack(voidCraft.blocks.blockVoidbrick),
+			new ItemStack(voidCraft.blocks.blockVoidbrick),
 			null,
 			new ItemStack(voidCraft.blocks.blockVoidbrick),
 			new ItemStack(voidCraft.blocks.blockVoidbrick),
-			new ItemStack(voidCraft.blocks.blockVoidbrick),
-			new ItemStack(voidCraft.blocks.blockVoidbrick),
-			new ItemStack(voidCraft.blocks.blockVoidbrick),
-			new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidfence, 6));
+			new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidstairs, 6));
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
