@@ -1,5 +1,13 @@
 package Tamaized.Voidcraft.handlers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import Tamaized.Voidcraft.voidCraft;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -11,26 +19,65 @@ public class ConfigHandler {
 
 	private int dimensionIdVoid = -2;
 	private int dimensionIdXia = -3;
+	private List<Integer> realityWhitelist = new ArrayList<Integer>();
+
+	private int default_dimensionIdVoid = -2;
+	private int default_dimensionIdXia = -3;
+	private int[] default_realityWhitelist = new int[] {
+			0,
+			-1 };
+	
+	// Use these to store values that wont be updated during runtime but need to be stored to the config from in-game gui
+	private int temp_dimensionIdVoid = -2;
+	private int temp_dimensionIdXia = -3;
 
 	public ConfigHandler(Configuration c) {
 		config = c;
 		config.load();
-		sync();
+		sync(true);
 	}
-	
-	public Configuration getConfig(){
+
+	public Configuration getConfig() {
 		return config;
 	}
 
-	public void sync() {
-		dimensionIdVoid = config.get(Configuration.CATEGORY_GENERAL, "dimension_id_void", -2).getInt();
-		dimensionIdXia = config.get(Configuration.CATEGORY_GENERAL, "dimension_id_xia", -3).getInt();
-		if (config.hasChanged()) config.save();
+	public void sync(boolean firstLoad) {
+		try {
+			if (voidCraft.isAetherLoaded) default_realityWhitelist = new int[] {
+					0,
+					-1,
+					3 };
+			loadData(firstLoad);
+			cleanupFile();
+			config.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadData(boolean firstLoad) {
+		if(firstLoad){
+			temp_dimensionIdVoid = dimensionIdVoid = config.get(Configuration.CATEGORY_GENERAL, "Void Dimension ID", default_dimensionIdVoid).getInt();
+			temp_dimensionIdXia = dimensionIdXia = config.get(Configuration.CATEGORY_GENERAL, "Xia Dimension ID", dimensionIdXia).getInt();
+		}else{
+			temp_dimensionIdVoid = config.get(Configuration.CATEGORY_GENERAL, "Void Dimension ID", default_dimensionIdVoid).getInt();
+			temp_dimensionIdXia = config.get(Configuration.CATEGORY_GENERAL, "Xia Dimension ID", dimensionIdXia).getInt();
+		}
+		realityWhitelist = IntStream.of(config.get(Configuration.CATEGORY_GENERAL, "Reality Hole Dimension Whitelist", default_realityWhitelist, "List of Dimension IDs the Reality Hole will attempt to send you to").getIntList()).boxed().collect(Collectors.toList());
+	}
+
+	private void cleanupFile() throws IOException {
+		voidCraft.configFile.delete();
+		voidCraft.configFile.createNewFile();
+		config = new Configuration(voidCraft.configFile);
+		config.get(Configuration.CATEGORY_GENERAL, "Void Dimension ID", default_dimensionIdVoid).set(temp_dimensionIdVoid);
+		config.get(Configuration.CATEGORY_GENERAL, "Xia Dimension ID", dimensionIdXia).set(temp_dimensionIdXia);
+		config.get(Configuration.CATEGORY_GENERAL, "Reality Hole Dimension Whitelist", default_realityWhitelist, "List of Dimension IDs the Reality Hole will attempt to send you to").set(ArrayUtils.toPrimitive(realityWhitelist.toArray(new Integer[realityWhitelist.size()])));
 	}
 
 	@SubscribeEvent
 	public void configChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (event.getModID().equals(voidCraft.modid)) sync();
+		if (event.getModID().equals(voidCraft.modid)) sync(false);
 	}
 
 	public int getDimensionIDvoid() {
@@ -39,6 +86,10 @@ public class ConfigHandler {
 
 	public int getDimensionIDxia() {
 		return dimensionIdXia;
+	}
+
+	public List<Integer> getRealityWhiteList() {
+		return realityWhitelist;
 	}
 
 }

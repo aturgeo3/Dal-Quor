@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft;
 
+import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 
 import Tamaized.TamModized.TamModBase;
@@ -119,6 +121,7 @@ public class voidCraft extends TamModBase {
 	@Instance(modid)
 	public static voidCraft instance = new voidCraft();
 
+	public static File configFile;
 	public static ConfigHandler config;
 
 	public static FMLEventChannel channel;
@@ -134,6 +137,7 @@ public class voidCraft extends TamModBase {
 
 	// Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
+	public static boolean isAetherLoaded = false;
 
 	public static VoidCraftMaterials materials;
 	public static VoidCraftCreativeTabs tabs;
@@ -157,7 +161,8 @@ public class voidCraft extends TamModBase {
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
 
-		config = new ConfigHandler(new Configuration(event.getSuggestedConfigurationFile()));
+		configFile = event.getSuggestedConfigurationFile();
+		config = new ConfigHandler(new Configuration(configFile));
 
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
