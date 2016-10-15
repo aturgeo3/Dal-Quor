@@ -19,6 +19,9 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	private ArrayList<IVadeMecumCapability.ActivePower> activeList = new ArrayList<IVadeMecumCapability.ActivePower>();
 	private ArrayList<IVadeMecumCapability.PassivePower> passiveList = new ArrayList<IVadeMecumCapability.PassivePower>();
 
+	private ActivePower currActivePower;
+	private boolean bookstate = false;
+
 	public void markDirty() {
 		markDirty = true;
 	}
@@ -57,7 +60,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addCategory(Category category) {
-		if(categoryList.contains(category)) return;
+		if (categoryList.contains(category)) return;
 		categoryList.add(category);
 		markDirty();
 	}
@@ -93,7 +96,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addActivePower(ActivePower power) {
-		if(activeList.contains(power)) return;
+		if (activeList.contains(power)) return;
 		activeList.add(power);
 		markDirty();
 	}
@@ -129,7 +132,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addPassivePower(PassivePower power) {
-		if(passiveList.contains(power)) return;
+		if (passiveList.contains(power)) return;
 		passiveList.add(power);
 		markDirty();
 	}
@@ -152,35 +155,66 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
+	public void setCurrentActive(ActivePower power) {
+		currActivePower = power;
+		markDirty();
+	}
+
+	@Override
+	public ActivePower getCurrentActive() {
+		return currActivePower;
+	}
+
+	@Override
+	public void setBookState(boolean b) {
+		bookstate = b;
+	}
+
+	@Override
+	public boolean getBookState() {
+		return bookstate;
+	}
+	
+	@Override
+	public void toggleBookState() {
+		bookstate ^= true;
+	}
+
+	@Override
 	public void copyFrom(IVadeMecumCapability cap) {
 		setObtainedCategories(cap.getObtainedCategories());
 		setActivePowers(cap.getActivePowers());
 		setPassivePowers(cap.getPassivePowers());
+		setCurrentActive(cap.getCurrentActive());
 		setLoaded();
 		markDirty();
 	}
 
 	@Override
 	public void decodePacket(ByteBufInputStream stream) throws IOException {
+		setCurrentActive(IVadeMecumCapability.getActivePowerFromID(stream.readInt()));
+		// Do Arrays last
 		int category = stream.readInt();
 		int active = stream.readInt();
 		int passive = stream.readInt();
 		clearCategories();
-		for (int i = 0; i <= category-1; i++) {
+		for (int i = 0; i <= category - 1; i++) {
 			addCategory(IVadeMecumCapability.getCategoryFromID(stream.readInt()));
 		}
 		clearActivePowers();
-		for (int i = 0; i <= active-1; i++) {
+		for (int i = 0; i <= active - 1; i++) {
 			addActivePower(IVadeMecumCapability.getActivePowerFromID(stream.readInt()));
 		}
 		clearPassivePowers();
-		for (int i = 0; i <= passive-1; i++) {
+		for (int i = 0; i <= passive - 1; i++) {
 			addPassivePower(IVadeMecumCapability.getPassivePowerFromID(stream.readInt()));
 		}
 	}
 
 	@Override
 	public void encodePacket(DataOutputStream stream) throws IOException {
+		stream.writeInt(IVadeMecumCapability.getActivePowerID(getCurrentActive()));
+		// Do Arrays last
 		stream.writeInt(getObtainedCategories().size());
 		stream.writeInt(getActivePowers().size());
 		stream.writeInt(getPassivePowers().size());

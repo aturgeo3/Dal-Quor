@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.ActivePower;
 import io.netty.buffer.ByteBufInputStream;
 
 public interface IVadeMecumCapability {
@@ -17,7 +18,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static Category getCategoryFromID(int id) {
-		return id > Category.values().length ? null : Category.values()[id];
+		return (id > Category.values().length || id < 0) ? null : Category.values()[id];
 	}
 
 	public static enum ActivePower {
@@ -29,7 +30,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static ActivePower getActivePowerFromID(int id) {
-		return id > ActivePower.values().length ? null : ActivePower.values()[id];
+		return (id > ActivePower.values().length || id < 0) ? null : ActivePower.values()[id];
 	}
 
 	public static enum PassivePower {
@@ -41,7 +42,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static PassivePower getPassivePowerFromID(int id) {
-		return id > PassivePower.values().length ? null : PassivePower.values()[id];
+		return (id > PassivePower.values().length || id < 0) ? null : PassivePower.values()[id];
 	}
 
 	public boolean isDirty();
@@ -83,6 +84,16 @@ public interface IVadeMecumCapability {
 	public void clearPassivePowers();
 
 	public boolean hasPassivePower(PassivePower power);
+
+	public void setCurrentActive(ActivePower power);
+
+	public ActivePower getCurrentActive();
+
+	public void setBookState(boolean state);
+	
+	public void toggleBookState();
+
+	public boolean getBookState();
 
 	public boolean hasLoaded();
 
