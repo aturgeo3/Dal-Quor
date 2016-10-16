@@ -4,7 +4,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.ActivePower;
 import io.netty.buffer.ByteBufInputStream;
 
 public interface IVadeMecumCapability {
@@ -14,7 +13,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static int getCategoryID(Category c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static Category getCategoryFromID(int id) {
@@ -26,7 +25,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static int getActivePowerID(ActivePower c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static ActivePower getActivePowerFromID(int id) {
@@ -38,7 +37,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static int getPassivePowerID(PassivePower c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static PassivePower getPassivePowerFromID(int id) {
@@ -88,12 +87,6 @@ public interface IVadeMecumCapability {
 	public void setCurrentActive(ActivePower power);
 
 	public ActivePower getCurrentActive();
-
-	public void setBookState(boolean state);
-	
-	public void toggleBookState();
-
-	public boolean getBookState();
 
 	public boolean hasLoaded();
 

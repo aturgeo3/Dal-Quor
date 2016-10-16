@@ -13,7 +13,7 @@ public class DebugEvent {
 	@SubscribeEvent
 	public void drawDebugText(RenderGameOverlayEvent.Text e){
 		if(!debugMode) return;
-		e.getLeft().add(textL);
+		for(String t : textL.split("\n")) e.getLeft().add(t);
 		e.getRight().add(textR);
 	}
 

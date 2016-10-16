@@ -39,7 +39,6 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 			}
 			compound.setIntArray("passivePower", array.stream().mapToInt(i -> i).toArray());
 		}
-		compound.setBoolean("bookstate", instance.getBookState());
 		compound.setInteger("currentActive", IVadeMecumCapability.getActivePowerID(instance.getCurrentActive()));
 		return compound;
 	}
@@ -73,7 +72,6 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 			instance.setPassivePowers(list);
 		}
 		instance.setCurrentActive(IVadeMecumCapability.getActivePowerFromID(compound.getInteger("currentActive")));
-		instance.setBookState(compound.getBoolean("bookstate"));
 		instance.setLoaded();
 	}
 

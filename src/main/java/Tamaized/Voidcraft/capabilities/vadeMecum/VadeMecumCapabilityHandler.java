@@ -20,7 +20,6 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	private ArrayList<IVadeMecumCapability.PassivePower> passiveList = new ArrayList<IVadeMecumCapability.PassivePower>();
 
 	private ActivePower currActivePower;
-	private boolean bookstate = false;
 
 	public void markDirty() {
 		markDirty = true;
@@ -163,21 +162,6 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	@Override
 	public ActivePower getCurrentActive() {
 		return currActivePower;
-	}
-
-	@Override
-	public void setBookState(boolean b) {
-		bookstate = b;
-	}
-
-	@Override
-	public boolean getBookState() {
-		return bookstate;
-	}
-	
-	@Override
-	public void toggleBookState() {
-		bookstate ^= true;
 	}
 
 	@Override

@@ -19,6 +19,9 @@ import Tamaized.Voidcraft.capabilities.elytraFlying.IElytraFlyingCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityStorage;
+import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import Tamaized.Voidcraft.capabilities.vadeMecumItem.VadeMecumItemCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.vadeMecumItem.VadeMecumItemCapabilityStorage;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityStorage;
@@ -205,6 +208,7 @@ public class voidCraft extends TamModBase {
 		// Register Capabilities
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 

@@ -198,8 +198,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + 12, 0xFFFF00);
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
 		if(playerStats.getCurrentActive() != null){
-			DebugEvent.debugMode = true;
-			DebugEvent.textL = "Beep Beep";
+			
 		}
 	}
 
