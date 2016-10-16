@@ -2,14 +2,30 @@ package Tamaized.Voidcraft.vadeMecum;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumEntry {
+	
+	private static Map<String, VadeMecumEntry> map = new HashMap<String, VadeMecumEntry>();
+	
+	public static VadeMecumEntry getEntry(String entry){
+		return map.get(entry);
+	}
+	
+	public static String getEntry(VadeMecumEntry entry){
+		for(Entry<String, VadeMecumEntry> e : map.entrySet()){
+			if(e.getValue() == entry) return e.getKey();
+		}
+		return null;
+	}
 
 	private final String title;
 	private final IVadeMecumPage[] pages;
@@ -17,7 +33,8 @@ public class VadeMecumEntry {
 	private List<VadeMecumButton> buttons_2 = new ArrayList<VadeMecumButton>();
 	private final VadeMecumEntry backPage;
 
-	public VadeMecumEntry(String title, VadeMecumEntry back, IVadeMecumPage[] pageList) {
+	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPage[] pageList) {
+		map.put(registryName, this);
 		this.title = title;
 		pages = pageList;
 		backPage = back;

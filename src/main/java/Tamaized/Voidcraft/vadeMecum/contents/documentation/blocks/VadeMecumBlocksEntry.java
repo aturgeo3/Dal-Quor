@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.realityhole.VadeMecumPageListRealityHole;
@@ -32,16 +33,16 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 	public VadeMecumEntry holeInReality;
 
 	public VadeMecumBlocksEntry(VadeMecumEntry back) {
-		super("Blocks", back, null);
+		super("docs_Blocks", "Blocks", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		voidCrystalBlock = new VadeMecumEntry("", this, VadeMecumPageListVoidCrystalBlock.getPageList());
-		voidCrystalOre = new VadeMecumEntry("", this, VadeMecumPageListVoidCrystalOre.getPageList());
-		softBedrock = new VadeMecumEntry("", this, VadeMecumPageListSoftBedrock.getPageList());
-		voidBrick = new VadeMecumEntry("", this, VadeMecumPageListVoidBrick.getPageList());
-		holeInReality = new VadeMecumEntry("", this, VadeMecumPageListRealityHole.getPageList());
+		voidCrystalBlock = new VadeMecumEntry("docs_Blocks_voidCrystalBlock", "", this, VadeMecumPageListVoidCrystalBlock.getPageList());
+		voidCrystalOre = new VadeMecumEntry("docs_Blocks_voidCrystalOre", "", this, VadeMecumPageListVoidCrystalOre.getPageList());
+		softBedrock = new VadeMecumEntry("docs_Blocks_softBedrock", "", this, VadeMecumPageListSoftBedrock.getPageList());
+		voidBrick = new VadeMecumEntry("docs_Blocks_voidBrick", "", this, VadeMecumPageListVoidBrick.getPageList());
+		holeInReality = new VadeMecumEntry("docs_Blocks_holeInReality", "", this, VadeMecumPageListRealityHole.getPageList());
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 				gui.changeEntry(holeInReality);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

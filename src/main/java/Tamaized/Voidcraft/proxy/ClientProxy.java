@@ -63,6 +63,8 @@ import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
+import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
@@ -90,10 +92,13 @@ public class ClientProxy extends AbstractProxy {
 
 	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
 	public static VadeMecumGUI vadeMecum;
+	public static VadeMecumMainEntry vadeMecumEntryList;
 
 	@Override
 	public void preInit() {
 		voidCraft.instance.clientPreInit();
+		vadeMecumEntryList = new VadeMecumMainEntry();
+		vadeMecumEntryList.preLoadObject();
 	}
 
 	@Override

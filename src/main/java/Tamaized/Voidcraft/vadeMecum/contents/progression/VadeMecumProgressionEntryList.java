@@ -33,4 +33,8 @@ public class VadeMecumProgressionEntryList {
 		MAIN = new VadeMecumProgressionEntry();
 	}
 
+	public void preLoadObjects() {
+		MAIN.initObjects();
+	}
+
 }

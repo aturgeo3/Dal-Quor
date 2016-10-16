@@ -4,6 +4,7 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import net.minecraft.item.Item;
@@ -24,7 +25,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	}
 
 	public VadeMecumProgressionEntry() {
-		super("Void Vade Mecum - Progression", null, null);
+		super("progressionMainEntry", "Void Vade Mecum - Progression", null, null);
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 				gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, -1);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList);
 				break;
 		}
 	}

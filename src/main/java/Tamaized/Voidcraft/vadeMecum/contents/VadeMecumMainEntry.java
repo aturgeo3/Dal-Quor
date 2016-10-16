@@ -26,7 +26,7 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	public final VadeMecumProgressionEntryList Progression;
 
 	public VadeMecumMainEntry() {
-		super("Void Vade Mecum", null, null);
+		super("mainEntry", "Void Vade Mecum", null, null);
 		Docs = new VadeMecumDocumentationEntryList();
 		Progression = new VadeMecumProgressionEntryList();
 	}
@@ -54,6 +54,12 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 
 	public int getPageLength() {
 		return 1;
+	}
+
+	public void preLoadObject() {
+		voidCraft.logger.info("Preloading Vade Mecum Entry Objects");
+		Docs.preLoadObjects();
+		Progression.preLoadObjects();
 	}
 
 }

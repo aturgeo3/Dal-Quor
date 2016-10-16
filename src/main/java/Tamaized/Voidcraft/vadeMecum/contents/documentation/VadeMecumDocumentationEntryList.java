@@ -49,12 +49,28 @@ public class VadeMecumDocumentationEntryList {
 		ITEMS = new VadeMecumItemsEntry(MAIN);
 		TOOLS = new VadeMecumToolsEntry(MAIN);
 		WEAPONS = new VadeMecumWeaponsEntry(MAIN);
-		ARMOR = new VadeMecumEntry("", MAIN, VadeMecumPageListVoidArmor.getPageList());
-		ETHEREALFRUIT = new VadeMecumEntry("", MAIN, VadeMecumPageListFruit.getPageList());
+		ARMOR = new VadeMecumEntry("docs_ARMOR", "", MAIN, VadeMecumPageListVoidArmor.getPageList());
+		ETHEREALFRUIT = new VadeMecumEntry("docs_ETHEREALFRUIT", "", MAIN, VadeMecumPageListFruit.getPageList());
 		MOBS = new VadeMecumMobsEntry(MAIN);
 		BOSSES = new VadeMecumBossesEntry(MAIN);
-		VOID = new VadeMecumEntry("", MAIN, VadeMecumPageListVoid.getPageList());
-		VOIDICINFUSION = new VadeMecumEntry("", MAIN, VadeMecumPageListVoidicInfusion.getPageList());
+		VOID = new VadeMecumEntry("docs_VOID", "", MAIN, VadeMecumPageListVoid.getPageList());
+		VOIDICINFUSION = new VadeMecumEntry("docs_VOIDICINFUSION", "", MAIN, VadeMecumPageListVoidicInfusion.getPageList());
+	}
+
+	public void preLoadObjects() {
+		CREDITS.initObjects();
+		MAIN.initObjects();
+		BLOCKS.initObjects();
+		MACHINES.initObjects();
+		ITEMS.initObjects();
+		TOOLS.initObjects();
+		WEAPONS.initObjects();
+		ARMOR.initObjects();
+		ETHEREALFRUIT.initObjects();
+		MOBS.initObjects();
+		BOSSES.initObjects();
+		VOID.initObjects();
+		VOIDICINFUSION.initObjects();
 	}
 
 }

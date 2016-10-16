@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.network;
 import java.io.IOException;
 
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.items.HookShot;
@@ -21,7 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ServerPacketHandler {
 
 	public static enum PacketType {
-		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, CUSTOM_ELYTRA
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, VADEMECUM_LASTENTRY, CUSTOM_ELYTRA
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -62,6 +64,10 @@ public class ServerPacketHandler {
 						break;
 					case VADEMECUM:
 						VadeMecumPacketHandler.DecodeRequestServer(bbis, player);
+						break;
+					case VADEMECUM_LASTENTRY:
+						IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
+						if(cap != null) cap.setLastEntry(bbis.readUTF());
 						break;
 					case VOIDBOX_PLAY:
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));

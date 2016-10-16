@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
@@ -33,16 +34,16 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public VadeMecumEntry herobrineCreeper;
 
 	public VadeMecumMobsEntry(VadeMecumEntry back) {
-		super("Machines", back, null);
+		super("docs_Mobs", "Mobs", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		voidWraith = new VadeMecumEntry("", this, VadeMecumPageListVoidWraith.getPageList());
-		chainedSpecter = new VadeMecumEntry("", this, VadeMecumPageListSpecterChain.getPageList());
-		voidWrath = new VadeMecumEntry("", this, VadeMecumPageListVoidWrath.getPageList());
-		voidLich = new VadeMecumEntry("", this, VadeMecumPageListLich.getPageList());
-		herobrineCreeper = new VadeMecumEntry("", this, VadeMecumPageListHerobrineCreeper.getPageList());
+		voidWraith = new VadeMecumEntry("docs_Mobs_voidWraith", "", this, VadeMecumPageListVoidWraith.getPageList());
+		chainedSpecter = new VadeMecumEntry("docs_Mobs_chainedSpecter", "", this, VadeMecumPageListSpecterChain.getPageList());
+		voidWrath = new VadeMecumEntry("docs_Mobs_voidWrath", "", this, VadeMecumPageListVoidWrath.getPageList());
+		voidLich = new VadeMecumEntry("docs_Mobs_voidLich", "", this, VadeMecumPageListLich.getPageList());
+		herobrineCreeper = new VadeMecumEntry("docs_Mobs_herobrineCreeper", "", this, VadeMecumPageListHerobrineCreeper.getPageList());
 	}
 
 	@Override
@@ -75,7 +76,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 				gui.changeEntry(herobrineCreeper);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import net.minecraft.init.Items;
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 
 	public VadeMecumDocumentationEntry() {
-		super("Void Vade Mecum - Documentation", null, null);
+		super("docsMainEntry", "Void Vade Mecum - Documentation", null, null);
 	}
 
 	@Override
@@ -34,40 +35,40 @@ public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 	protected void actionPerformed(VadeMecumGUI gui, int id, int mouseButton) {
 		switch (VadeMecumDocumentationEntryList.getEntryFromID(id)) {
 			case BLOCKS:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.BLOCKS);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.BLOCKS);
 				break;
 			case MACHINES:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MACHINES);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MACHINES);
 				break;
 			case ITEMS:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.ITEMS);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.ITEMS);
 				break;
 			case TOOLS:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.TOOLS);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.TOOLS);
 				break;
 			case WEAPONS:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.WEAPONS);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.WEAPONS);
 				break;
 			case ARMOR:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.ARMOR);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.ARMOR);
 				break;
 			case ETHEREALFRUIT:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.ETHEREALFRUIT);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.ETHEREALFRUIT);
 				break;
 			case MOBS:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MOBS);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MOBS);
 				break;
 			case BOSSES:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.BOSSES);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.BOSSES);
 				break;
 			case VOID:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.VOID);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.VOID);
 				break;
 			case VOIDICINFUSION:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.VOIDICINFUSION);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.VOIDICINFUSION);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

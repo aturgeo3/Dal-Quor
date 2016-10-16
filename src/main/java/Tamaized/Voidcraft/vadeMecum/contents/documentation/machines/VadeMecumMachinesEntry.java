@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.machines;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.alchemy.VadeMecumPageListAlchemy;
@@ -40,20 +41,20 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 	public VadeMecumEntry alchemyTable;
 
 	public VadeMecumMachinesEntry(VadeMecumEntry back) {
-		super("Machines", back, null);
+		super("docs_Machines", "Machines", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		voidInfusionAltar = new VadeMecumEntry("", this, VadeMecumPageListInfusionAltar.getPageList());
-		voidInfusedMacerator = new VadeMecumEntry("", this, VadeMecumPageListMacerator.getPageList());
-		heimdall = new VadeMecumEntry("", this, VadeMecumPageListHeimdall.getPageList());
-		voidicGenerator = new VadeMecumEntry("", this, VadeMecumPageListGenerator.getPageList());
-		voidicCable = new VadeMecumEntry("", this, VadeMecumPageListCable.getPageList());
-		voidMusicBox = new VadeMecumEntry("", this, VadeMecumPageListMusicBox.getPageList());
-		voidicCharger = new VadeMecumEntry("", this, VadeMecumPageListCharger.getPageList());
-		realityStabilizer = new VadeMecumEntry("", this, VadeMecumPageListStabilizer.getPageList());
-		alchemyTable = new VadeMecumEntry("", this, VadeMecumPageListAlchemy.getPageList());
+		voidInfusionAltar = new VadeMecumEntry("docs_Machines_voidInfusionAltar", "", this, VadeMecumPageListInfusionAltar.getPageList());
+		voidInfusedMacerator = new VadeMecumEntry("docs_Machines_voidInfusedMacerator", "", this, VadeMecumPageListMacerator.getPageList());
+		heimdall = new VadeMecumEntry("docs_Machines_heimdall", "", this, VadeMecumPageListHeimdall.getPageList());
+		voidicGenerator = new VadeMecumEntry("docs_Machines_voidicGenerator", "", this, VadeMecumPageListGenerator.getPageList());
+		voidicCable = new VadeMecumEntry("docs_Machines_voidicCable", "", this, VadeMecumPageListCable.getPageList());
+		voidMusicBox = new VadeMecumEntry("docs_Machines_voidMusicBox", "", this, VadeMecumPageListMusicBox.getPageList());
+		voidicCharger = new VadeMecumEntry("docs_Machines_voidicCharger", "", this, VadeMecumPageListCharger.getPageList());
+		realityStabilizer = new VadeMecumEntry("docs_Machines_realityStabilizer", "", this, VadeMecumPageListStabilizer.getPageList());
+		alchemyTable = new VadeMecumEntry("docs_Machines_alchemyTable", "", this, VadeMecumPageListAlchemy.getPageList());
 	}
 
 	@Override
@@ -102,7 +103,7 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 				gui.changeEntry(alchemyTable);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

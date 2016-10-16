@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.util.ResourceLocation;
 

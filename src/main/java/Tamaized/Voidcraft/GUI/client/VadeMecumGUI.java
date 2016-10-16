@@ -6,12 +6,10 @@ import java.io.IOException;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
@@ -41,7 +39,6 @@ public class VadeMecumGUI extends GuiScreen {
 
 	private final EntityPlayer player;
 	private IVadeMecumCapability playerStats;
-	public VadeMecumMainEntry vadeMecumEntryList;
 	private VadeMecumEntry entry;
 	private VadeMecumEntry nextEntry;
 	private int pageNumber = 0;
@@ -103,8 +100,8 @@ public class VadeMecumGUI extends GuiScreen {
 		initPosSize();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
-		vadeMecumEntryList = new VadeMecumMainEntry();
-		setEntry(vadeMecumEntryList);
+		if(playerStats != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
+		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
 		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, 195, false));
@@ -120,9 +117,9 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 	}
 
-	private void setEntry(VadeMecumEntry e) {
-		entry = e;
-		pageNumber = 0;
+	private void setEntry(VadeMecumEntry e, int page) {
+		entry = e == null ? ClientProxy.vadeMecumEntryList : e;
+		pageNumber = page > entry.getPageLength() ? entry.getPageLength() : page;
 		e.init(this);
 		this.updateButtons();
 	}
@@ -134,12 +131,15 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	public void onGuiClosed() {
 		ClientProxy.vadeMecum = null;
+		String e = VadeMecumEntry.getEntry(entry);
+		System.out.println(e);
+		if(e != null) sendLastEntryPacket(e+":"+pageNumber);
 	}
 
 	@Override
 	public void updateScreen() {
 		if (nextEntry != null) {
-			setEntry(nextEntry);
+			setEntry(nextEntry, 0);
 			nextEntry = null;
 		}
 	}
@@ -147,7 +147,7 @@ public class VadeMecumGUI extends GuiScreen {
 	private void updateButtons() {
 		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength() : false;
 		if (button_back != null) button_back.visible = canDrawPage() ? pageNumber > 0 : false;
-		if (button_entryBack != null) button_entryBack.visible = entry != vadeMecumEntryList;
+		if (button_entryBack != null) button_entryBack.visible = entry != ClientProxy.vadeMecumEntryList;
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
 	}
 
@@ -165,7 +165,7 @@ public class VadeMecumGUI extends GuiScreen {
 					pageNumber -= 2;
 					break;
 				case EntryBack:
-					setEntry(vadeMecumEntryList);
+					setEntry(ClientProxy.vadeMecumEntryList, 0);
 					break;
 				case Credits:
 					break;
@@ -197,8 +197,8 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + 12, 0xFFFF00);
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
-		if(playerStats.getCurrentActive() != null){
-			
+		if (playerStats.getCurrentActive() != null) {
+
 		}
 	}
 
@@ -305,6 +305,23 @@ public class VadeMecumGUI extends GuiScreen {
 		try {
 			outputStream.writeInt(pktType);
 			VadeMecumPacketHandler.ClientToServerRequest(outputStream, player, request, objectID);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			voidCraft.channel.sendToServer(packet);
+			outputStream.close();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	private void sendLastEntryPacket(String entry){
+		if(entry.equals("")) return;
+		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY);
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(pktType);
+			outputStream.writeUTF(entry);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			voidCraft.channel.sendToServer(packet);
 			outputStream.close();

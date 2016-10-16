@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses.pawn.VadeMecumPageListCorruptedPawn;
@@ -24,12 +25,12 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 	public VadeMecumEntry corruptedPawn;
 
 	public VadeMecumBossesEntry(VadeMecumEntry back) {
-		super("Machines", back, null);
+		super("docs_Bosses", "Bosses", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		corruptedPawn = new VadeMecumEntry("", this, VadeMecumPageListCorruptedPawn.getPageList());
+		corruptedPawn = new VadeMecumEntry("docs_Bosses_corruptedPawn", "", this, VadeMecumPageListCorruptedPawn.getPageList());
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 				gui.changeEntry(corruptedPawn);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

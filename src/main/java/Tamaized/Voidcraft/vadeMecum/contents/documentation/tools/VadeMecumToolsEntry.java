@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.specteraxe.VadeMecumPageListSpecterAxe;
@@ -37,19 +38,19 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public VadeMecumEntry voidicDrill;
 
 	public VadeMecumToolsEntry(VadeMecumEntry back) {
-		super("Tools", back, null);
+		super("docs_Tools", "Tools", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		voidPick = new VadeMecumEntry("", this, VadeMecumPageListVoidPick.getPageList());
-		voidAxe = new VadeMecumEntry("", this, VadeMecumPageListVoidAxe.getPageList());
-		voidShovel = new VadeMecumEntry("", this, VadeMecumPageListVoidSpade.getPageList());
-		voidHoe = new VadeMecumEntry("", this, VadeMecumPageListVoidHoe.getPageList());
-		specterPick = new VadeMecumEntry("", this, VadeMecumPageListSpecterPick.getPageList());
-		specterAxe = new VadeMecumEntry("", this, VadeMecumPageListSpecterAxe.getPageList());
+		voidPick = new VadeMecumEntry("docs_Tools_voidPick", "", this, VadeMecumPageListVoidPick.getPageList());
+		voidAxe = new VadeMecumEntry("docs_Tools_voidAxe", "", this, VadeMecumPageListVoidAxe.getPageList());
+		voidShovel = new VadeMecumEntry("docs_Tools_voidShovel", "", this, VadeMecumPageListVoidSpade.getPageList());
+		voidHoe = new VadeMecumEntry("docs_Tools_voidHoe", "", this, VadeMecumPageListVoidHoe.getPageList());
+		specterPick = new VadeMecumEntry("docs_Tools_specterPick", "", this, VadeMecumPageListSpecterPick.getPageList());
+		specterAxe = new VadeMecumEntry("docs_Tools_specterAxe", "", this, VadeMecumPageListSpecterAxe.getPageList());
 
-		voidicDrill = new VadeMecumEntry("", this, VadeMecumPageListVoidicDrill.getPageList());
+		voidicDrill = new VadeMecumEntry("docs_Tools_voidicDrill", "", this, VadeMecumPageListVoidicDrill.getPageList());
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 				gui.changeEntry(voidicDrill);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

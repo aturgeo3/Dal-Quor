@@ -82,8 +82,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
 
-		//modelList.add(vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1));
-		vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1);
+		vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1); // Don't add this to the model list as it uses an ItemMeshDefinition
 
 		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(voidCraft.tabs.tabVoid, "emptyObsidianFlask", 16));
 		modelList.add(obsidianFlask = new ObsidianFlask(voidCraft.tabs.tabVoid, "obsidianFlask", 16));

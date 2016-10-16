@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.angelicsword.VadeMecumPageListAngelicSword;
@@ -34,17 +35,17 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 	public VadeMecumEntry demonSword;
 
 	public VadeMecumWeaponsEntry(VadeMecumEntry back) {
-		super("Weapons", back, null);
+		super("docs_Weapons", "Weapons", back, null);
 	}
 
 	@Override
 	public void initObjects() {
-		voidSword = new VadeMecumEntry("", this, VadeMecumPageListVoidSword.getPageList());
-		angelicSword = new VadeMecumEntry("", this, VadeMecumPageListAngelicSword.getPageList());
-		bindSword = new VadeMecumEntry("", this, VadeMecumPageListBindSword.getPageList());
-		moltenSword = new VadeMecumEntry("", this, VadeMecumPageListMoltenSword.getPageList());
-		archAngelicSword = new VadeMecumEntry("", this, VadeMecumPageListArchSword.getPageList());
-		demonSword = new VadeMecumEntry("", this, VadeMecumPageListDemonSword.getPageList());
+		voidSword = new VadeMecumEntry("docs_Weapons_voidSword", "", this, VadeMecumPageListVoidSword.getPageList());
+		angelicSword = new VadeMecumEntry("docs_Weapons_angelicSword", "", this, VadeMecumPageListAngelicSword.getPageList());
+		bindSword = new VadeMecumEntry("docs_Weapons_bindSword", "", this, VadeMecumPageListBindSword.getPageList());
+		moltenSword = new VadeMecumEntry("docs_Weapons_moltenSword", "", this, VadeMecumPageListMoltenSword.getPageList());
+		archAngelicSword = new VadeMecumEntry("docs_Weapons_archAngelicSword", "", this, VadeMecumPageListArchSword.getPageList());
+		demonSword = new VadeMecumEntry("docs_Weapons_demonSword", "", this, VadeMecumPageListDemonSword.getPageList());
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 				gui.changeEntry(demonSword);
 				break;
 			default:
-				gui.changeEntry(gui.vadeMecumEntryList.Docs.MAIN);
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}

@@ -20,6 +20,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	private ArrayList<IVadeMecumCapability.PassivePower> passiveList = new ArrayList<IVadeMecumCapability.PassivePower>();
 
 	private ActivePower currActivePower;
+	private String lastEntry;
 
 	public void markDirty() {
 		markDirty = true;
@@ -163,6 +164,17 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	public ActivePower getCurrentActive() {
 		return currActivePower;
 	}
+	
+	@Override
+	public void setLastEntry(String e) {
+		lastEntry = e;
+		markDirty();
+	}
+	
+	@Override
+	public String getLastEntry() {
+		return lastEntry;
+	}
 
 	@Override
 	public void copyFrom(IVadeMecumCapability cap) {
@@ -170,6 +182,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 		setActivePowers(cap.getActivePowers());
 		setPassivePowers(cap.getPassivePowers());
 		setCurrentActive(cap.getCurrentActive());
+		setLastEntry(cap.getLastEntry());
 		setLoaded();
 		markDirty();
 	}
@@ -177,6 +190,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	@Override
 	public void decodePacket(ByteBufInputStream stream) throws IOException {
 		setCurrentActive(IVadeMecumCapability.getActivePowerFromID(stream.readInt()));
+		setLastEntry(stream.readUTF());
 		// Do Arrays last
 		int category = stream.readInt();
 		int active = stream.readInt();
@@ -198,6 +212,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	@Override
 	public void encodePacket(DataOutputStream stream) throws IOException {
 		stream.writeInt(IVadeMecumCapability.getActivePowerID(getCurrentActive()));
+		stream.writeUTF(getLastEntry());
 		// Do Arrays last
 		stream.writeInt(getObtainedCategories().size());
 		stream.writeInt(getActivePowers().size());

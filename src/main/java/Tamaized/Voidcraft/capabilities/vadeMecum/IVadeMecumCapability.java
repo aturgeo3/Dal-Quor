@@ -87,6 +87,10 @@ public interface IVadeMecumCapability {
 	public void setCurrentActive(ActivePower power);
 
 	public ActivePower getCurrentActive();
+	
+	public void setLastEntry(String e);
+	
+	public String getLastEntry();
 
 	public boolean hasLoaded();
 
