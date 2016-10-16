@@ -22,8 +22,8 @@ public class VadeMecumPageVoidBrick5 implements IVadeMecumPage {
 			new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidfence, 6));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int craftXoffset) {
+		crafting.render(gui, render, x + craftXoffset, y, mx, my);
 	}
 
 }

@@ -22,8 +22,8 @@ public class VadeMecumPageSpecterPick1 implements IVadeMecumPage {
 			new ItemStack(voidCraft.items.ectoplasm) }, new ItemStack(voidCraft.tools.spectrePickaxe));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }

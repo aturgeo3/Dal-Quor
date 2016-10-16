@@ -105,8 +105,8 @@ public class VadeMecumEntry {
 	protected void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		if (pages != null) {
 			int l = pages.length;
-			pages[page].render(gui, render, x + 50, y + 20, 0);
-			if (page + 1 < l) pages[page + 1].render(gui, render, x + 285, y + 20, -70);
+			pages[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
+			if (page + 1 < l) pages[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}
 	}
 

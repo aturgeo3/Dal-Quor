@@ -24,8 +24,8 @@ public class VadeMecumPageVoidArmor2 implements IVadeMecumPage {
 			new ItemStack(voidCraft.items.voidcrystal) }, new ItemStack(voidCraft.armors.voidChest));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int craftXoffset) {
+		crafting.render(gui, render, x + craftXoffset, y, mx, my);
 	}
 
 }

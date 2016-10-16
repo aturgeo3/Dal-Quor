@@ -11,7 +11,7 @@ public class VadeMecumPageVoid3 implements IVadeMecumPage {
 	private final String text = "One final thing to note is that while in the Void without proper items and/or effects, you will take Voidic Infusion which both slowly kills and buffs you.";
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int offset) {
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
 		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x+65+offset, y, 0x000000);
 		render.drawSplitString(text, x+offset, y + 20, 140, 0x000000);//One final thing to note is that while in the Void without proper items and/or effects, you will take Voidic Infusion which both slowly kills and buffs you.
 	}

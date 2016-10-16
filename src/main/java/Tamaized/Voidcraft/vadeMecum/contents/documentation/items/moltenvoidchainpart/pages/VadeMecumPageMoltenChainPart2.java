@@ -14,8 +14,8 @@ public class VadeMecumPageMoltenChainPart2 implements IVadeMecumPage {
 	private IVadeMecumCrafting crafting = new VadeMecumCraftingFurnace("Furnace Recipe", new ItemStack(voidCraft.items.voidChain), new ItemStack(voidCraft.items.MoltenvoidChainPart));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }

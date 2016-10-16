@@ -11,7 +11,7 @@ public class VadeMecumPageVoidBrick2 implements IVadeMecumPage {
 	private final String text = "Voidic Infusion from being gained as if the bricks are trying to consume it from you at the same rate you gain it. Their firm frame could be used for making other objects, or simply for building and decoration.";
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int offset) {
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
 		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x+65+offset, y, 0x000000);
 		render.drawSplitString(text, x+offset, y + 20, 140, 0x000000);
 	}

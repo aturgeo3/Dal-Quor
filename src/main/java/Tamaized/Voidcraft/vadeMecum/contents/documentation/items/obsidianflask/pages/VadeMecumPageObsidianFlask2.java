@@ -11,7 +11,7 @@ public class VadeMecumPageObsidianFlask2 implements IVadeMecumPage {
 	private final String text = "yields interesting effects such as blindness and wither.";
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int offset) {
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
 		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65 + offset, y, 0x000000);
 		render.drawSplitString(text, x + offset, y + 20, 140, 0x000000);
 	}

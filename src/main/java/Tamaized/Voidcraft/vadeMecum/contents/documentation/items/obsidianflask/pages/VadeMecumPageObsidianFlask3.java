@@ -20,11 +20,11 @@ public class VadeMecumPageObsidianFlask3 implements IVadeMecumPage {
 			new ItemStack(Blocks.OBSIDIAN),
 			null,
 			new ItemStack(Blocks.OBSIDIAN),
-			null }, new ItemStack(voidCraft.items.emptyObsidianFlask));
+			null }, new ItemStack(voidCraft.items.emptyObsidianFlask, 4));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }

@@ -11,7 +11,7 @@ public class VadeMecumPageCharger2 implements IVadeMecumPage {
 	private final String text = "Charger. A device capable of charging certain items with Voidic Power. However, it should be noted that, due to its shape, it can only take in power from the Bottom. So plan accordingly when making your network of Voidic Generators and Void Cables.";
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int offset) {
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
 		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65 + offset, y, 0x000000);
 		render.drawSplitString(text, x + offset, y + 20, 140, 0x000000);
 	}

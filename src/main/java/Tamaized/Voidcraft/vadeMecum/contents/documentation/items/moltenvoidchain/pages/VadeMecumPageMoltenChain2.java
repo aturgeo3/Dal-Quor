@@ -23,8 +23,8 @@ public class VadeMecumPageMoltenChain2 implements IVadeMecumPage {
 			new ItemStack(voidCraft.items.burnBone) }, new ItemStack(voidCraft.items.MoltenvoidChain));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }

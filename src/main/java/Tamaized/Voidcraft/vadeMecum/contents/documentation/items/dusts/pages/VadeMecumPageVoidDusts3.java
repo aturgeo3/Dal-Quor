@@ -10,9 +10,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class VadeMecumPageVoidDusts2 implements IVadeMecumPage {
+public class VadeMecumPageVoidDusts3 implements IVadeMecumPage {
 
-	private IVadeMecumCrafting crafting = new VadeMecumCraftingMacerator("Macerator Recipe", new ItemStack(Items.DIAMOND), new ItemStack(voidCraft.items.diamondDust));
+	private IVadeMecumCrafting crafting = new VadeMecumCraftingMacerator("Macerator Recipe", new ItemStack(Blocks.IRON_ORE), new ItemStack(voidCraft.items.ironDust, 4));
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int craftXoffset) {

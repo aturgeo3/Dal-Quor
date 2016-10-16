@@ -21,8 +21,8 @@ public class VadeMecumPageFruit5 implements IVadeMecumPage {
 			new ItemStack(voidCraft.items.etherealFruit_diamond) }, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), voidCraft.potions.type_voidImmunity));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }

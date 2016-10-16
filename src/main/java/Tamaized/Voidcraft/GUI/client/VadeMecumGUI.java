@@ -17,6 +17,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -42,6 +43,7 @@ public class VadeMecumGUI extends GuiScreen {
 	private VadeMecumEntry entry;
 	private VadeMecumEntry nextEntry;
 	private int pageNumber = 0;
+	private ItemStack renderStackHover;
 
 	private VadeMecumGUI.ArrowButton button_back;
 	private VadeMecumGUI.ArrowButton button_forward;
@@ -132,7 +134,6 @@ public class VadeMecumGUI extends GuiScreen {
 	public void onGuiClosed() {
 		ClientProxy.vadeMecum = null;
 		String e = VadeMecumEntry.getEntry(entry);
-		System.out.println(e);
 		if(e != null) sendLastEntryPacket(e+":"+pageNumber);
 	}
 
@@ -199,6 +200,10 @@ public class VadeMecumGUI extends GuiScreen {
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (playerStats.getCurrentActive() != null) {
 
+		}
+		if(renderStackHover != null){
+			renderToolTip(renderStackHover, mouseX, mouseY);
+			renderStackHover = null;
 		}
 	}
 
@@ -279,8 +284,17 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 	}
 
-	public void renderItemStack(ItemStack stack, int x, int y) {
-		if (itemRender != null) itemRender.renderItemIntoGUI(stack, x, y);
+	public void renderItemStack(ItemStack stack, int x, int y, int mx, int my) {
+		if (itemRender != null){
+            RenderHelper.enableGUIStandardItemLighting();
+			itemRender.renderItemIntoGUI(stack, x, y);
+			//drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
+			GlStateManager.disableDepth();
+			if(stack.stackSize > 1) drawString(fontRendererObj, ""+stack.stackSize, x+11, y+9, 0xFFFFFF);
+			GlStateManager.enableDepth();
+			if(mx >= x && mx <= x+16 && my >= y && my <= y+16) renderStackHover = stack;
+			RenderHelper.disableStandardItemLighting();
+		}
 	}
 
 	public void drawTexturedModalRect(int x, int y, int width, int height, int textureX, int textureY, int textureW, int textureH) {

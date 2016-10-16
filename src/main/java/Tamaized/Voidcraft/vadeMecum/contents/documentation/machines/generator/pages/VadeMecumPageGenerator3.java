@@ -23,8 +23,8 @@ public class VadeMecumPageGenerator3 implements IVadeMecumPage {
 			new ItemStack(Items.REDSTONE) }, new ItemStack(voidCraft.blocks.voidicGen, 1));
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int craftXoffset) {
-		crafting.render(gui, render, x + craftXoffset, y);
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
+		crafting.render(gui, render, x + offset, y, mx, my);
 	}
 
 }
