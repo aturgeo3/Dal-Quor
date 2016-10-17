@@ -34,7 +34,7 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Progression), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Progression", new ItemStack(voidCraft.items.ectoplasm)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.Progression), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Mysteries of the Void", new ItemStack(voidCraft.blocks.ritualBlock)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.Docs), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Documentation", new ItemStack(voidCraft.items.voidcrystal)));
 	}
 

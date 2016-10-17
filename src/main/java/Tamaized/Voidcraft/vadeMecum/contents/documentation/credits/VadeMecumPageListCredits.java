@@ -1,15 +1,13 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.credits;
 
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.voidicinfusion.pages.VadeMecumPageVoidicInfusion1;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.voidicinfusion.pages.VadeMecumPageVoidicInfusion2;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
 
 public class VadeMecumPageListCredits {
 
 	public static final IVadeMecumPage[] getPageList() {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageVoidicInfusion1(),
-				new VadeMecumPageVoidicInfusion2() };
+				new VadeMecumPage("", "Credits, Contributors, Misc.") };
 	}
 
 }

@@ -96,13 +96,17 @@ public class VadeMecumGUI extends GuiScreen {
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
+	
+	public IVadeMecumCapability getPlayerStats(){
+		return playerStats;
+	}
 
 	@Override
 	public void initGui() {
 		initPosSize();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
-		if(playerStats != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
+		if(playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
 		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));

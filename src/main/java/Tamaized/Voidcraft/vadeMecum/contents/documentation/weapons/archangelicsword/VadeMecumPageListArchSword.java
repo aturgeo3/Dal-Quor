@@ -1,15 +1,27 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.archangelicsword;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.archangelicsword.pages.VadeMecumPageArchSword1;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.archangelicsword.pages.VadeMecumPageArchSword2;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingNormal;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPageCrafting;
+import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageListArchSword {
 
 	public static final IVadeMecumPage[] getPageList() {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageArchSword1(),
-				new VadeMecumPageArchSword2() };
+				new VadeMecumPage("Arch-Angelic Sword", "Foes struck by this sword are dealt with nausea, blindness, poison, wither, weakness and are lit on fire. These effects last for about 10 seconds."),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+						new ItemStack(voidCraft.items.MoltenvoidChain),
+						new ItemStack(voidCraft.items.MoltenvoidChain),
+						new ItemStack(voidCraft.items.MoltenvoidChain),
+						new ItemStack(voidCraft.tools.chainSword),
+						new ItemStack(voidCraft.tools.angelicSword),
+						new ItemStack(voidCraft.tools.moltenSword),
+						new ItemStack(voidCraft.items.MoltenvoidChain),
+						new ItemStack(voidCraft.items.MoltenvoidChain),
+						new ItemStack(voidCraft.items.MoltenvoidChain) }, new ItemStack(voidCraft.tools.archSword))) };
 	}
 
 }

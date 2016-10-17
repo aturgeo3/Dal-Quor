@@ -1,15 +1,19 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.macerator;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.macerator.pages.VadeMecumPageMacerator1;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.macerator.pages.VadeMecumPageMacerator2;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingInfuser;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPageCrafting;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageListMacerator {
 
 	public static final IVadeMecumPage[] getPageList() {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageMacerator1(),
-				new VadeMecumPageMacerator2() };
+				new VadeMecumPage("Void Infused Macerator", "This Machine is the product of infusing a standard Furnace with Liquid Void. It takes Voidic Power to grind an input ore into four Void Infused dusts. You can process these dusts into a regular ingot using mundane machines."),
+				new VadeMecumPageCrafting(new VadeMecumCraftingInfuser("Infusion Recipe", new ItemStack(Blocks.FURNACE), new ItemStack(voidCraft.blocks.voidMacerator, 1))) };
 	}
 
 }

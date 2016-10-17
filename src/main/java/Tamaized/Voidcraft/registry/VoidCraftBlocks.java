@@ -65,6 +65,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static BlockPortalXia blockPortalXia;
 	public static FireVoid fireVoid;
 	public static BlockRealityHole realityHole;
+	public static TamBlock ritualBlock;
 
 	public static VoidBox voidBox;
 	public static VoidMacerator voidMacerator;
@@ -103,6 +104,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(AIBlock = new AIBlock("AIBlock"));
 		modelList.add(xiaBlock = new XiaBlock("xiaBlock"));
 		modelList.add(realityHole = new BlockRealityHole(voidCraft.tabs.tabVoid, Material.CLOTH, "blockRealityHole", -1F));
+		modelList.add(ritualBlock = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "ritualBlock", 3.0F));
 
 		modelList.add(blockPortalVoid = new BlockPortalVoid(voidCraft.tabs.tabVoid, "blockPortalVoid"));
 		modelList.add(blockPortalXia = new BlockPortalXia(voidCraft.tabs.tabVoid, "blockPortalXia"));
@@ -132,6 +134,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	@Override
 	public void init() {
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
+		GameRegistry.addRecipe(new ItemStack(ritualBlock, 8), "XXX", "XYX", "XXX", 'X', Blocks.STONEBRICK, 'Y', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', voidCraft.items.voidCloth, 'Z', Items.CAULDRON);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidInfuser), voidInfuserInert, voidCraft.items.voidStar);
 		GameRegistry.addRecipe(new ItemStack(voidBox), "XXX", "XYX", "XZX", 'X', voidCraft.items.voidCloth, 'Y', Blocks.JUKEBOX, 'Z', voidCraft.items.voidStar);

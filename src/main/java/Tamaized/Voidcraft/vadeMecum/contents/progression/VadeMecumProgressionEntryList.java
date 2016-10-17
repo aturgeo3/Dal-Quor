@@ -12,11 +12,12 @@ import Tamaized.Voidcraft.vadeMecum.contents.documentation.thevoid.VadeMecumPage
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.VadeMecumToolsEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.voidicinfusion.VadeMecumPageListVoidicInfusion;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.VadeMecumWeaponsEntry;
+import Tamaized.Voidcraft.vadeMecum.contents.progression.ritualBlock.VadeMecumPageListRitualBlock;
 
 public class VadeMecumProgressionEntryList {
 
 	public static enum Entry {
-		MAIN
+		RitualBlocks
 	}
 
 	public static int getEntryID(Entry e) {
@@ -28,13 +29,16 @@ public class VadeMecumProgressionEntryList {
 	}
 
 	public final VadeMecumEntry MAIN;
+	public final VadeMecumEntry RITUALBLOCKS;
 
 	public VadeMecumProgressionEntryList() {
 		MAIN = new VadeMecumProgressionEntry();
+		RITUALBLOCKS = new VadeMecumEntry("progression_RITUALBLOCKS", "", MAIN, VadeMecumPageListRitualBlock.getPageList());
 	}
 
 	public void preLoadObjects() {
 		MAIN.initObjects();
+		RITUALBLOCKS.initObjects();
 	}
 
 }

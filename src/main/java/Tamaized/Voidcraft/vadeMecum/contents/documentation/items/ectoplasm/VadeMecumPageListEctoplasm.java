@@ -1,13 +1,13 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.items.ectoplasm;
 
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.ectoplasm.pages.VadeMecumPageEctoplasm1;
+import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
 
 public class VadeMecumPageListEctoplasm {
 
 	public static final IVadeMecumPage[] getPageList() {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageEctoplasm1() };
+				new VadeMecumPage("Ectoplasm", "This ghastly material drops from Void Wraiths located inside the Void.") };
 	}
 
 }

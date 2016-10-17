@@ -9,6 +9,8 @@ import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import Tamaized.Voidcraft.handlers.VadeMecumRitualHandler;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -66,7 +68,11 @@ public class VadeMecum extends TamItem {
 	
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		dorightClick(world, player, stack);
+		IBlockState state = world.getBlockState(pos);
+		if(state != null && state.getBlock() == voidCraft.blocks.ritualBlock){
+			VadeMecumRitualHandler.invokeRitual(player, world, pos);
+			return EnumActionResult.SUCCESS;
+		}
 		return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
@@ -76,12 +82,11 @@ public class VadeMecum extends TamItem {
 		return super.onItemRightClick(stack, world, player, hand);
 	}
 
-	private void dorightClick(World world, EntityPlayer player, ItemStack stack) {
+	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
-		if (cap == null || world.isRemote) return;
+		if (cap == null || world.isRemote) return false;
 		if (player.isSneaking()) {
 			cap.toggleBookState();
-			return;
 		} else {
 			if (cap.getBookState()) {
 				HashSet<Entity> exclude = new HashSet<Entity>();
@@ -103,6 +108,7 @@ public class VadeMecum extends TamItem {
 				openBook(player, world, player.getPosition());
 			}
 		}
+		return true;
 	}
 
 	private void openBook(EntityPlayer player, World world, BlockPos pos) {

@@ -9,7 +9,7 @@ import io.netty.buffer.ByteBufInputStream;
 public interface IVadeMecumCapability {
 
 	public static enum Category {
-		TEST, TESTTWO
+		INTRO
 	}
 
 	public static int getCategoryID(Category c) {
