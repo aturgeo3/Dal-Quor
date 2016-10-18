@@ -85,11 +85,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends AbstractProxy {
 
-	@SideOnly(Side.CLIENT)
-	public static Minecraft mc = Minecraft.getMinecraft();
-	@SideOnly(Side.CLIENT)
-	public static int renderPass;
-
 	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;

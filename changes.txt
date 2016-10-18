@@ -1,1 +1,2 @@
  - Standing on Void Bricks will stall Voidic Infusion
+ - Fixed issue #53

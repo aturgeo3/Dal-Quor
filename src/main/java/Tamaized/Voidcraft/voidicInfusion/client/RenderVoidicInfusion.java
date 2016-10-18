@@ -20,6 +20,7 @@ public class RenderVoidicInfusion {
 	public void renderPlayer(RenderPlayerEvent.Pre e) {
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
+		if (Minecraft.getMinecraft().theWorld == null) return;
 		Entity newEntity = Minecraft.getMinecraft().theWorld.getEntityByID(e.getEntityPlayer().getEntityId());
 		float f1 = 1.0f;
 		if (newEntity != null && newEntity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
@@ -29,7 +30,7 @@ public class RenderVoidicInfusion {
 			f1 = f1 > 1.0f ? 1.0f : f1;
 		}
 		if (CustomElytraHandler.isElytraFlying(e.getEntityPlayer())) {
-			//rotateCorpse(e.getEntityPlayer(), e.getEntityPlayer().ticksExisted + e.getPartialRenderTick(), interpolateRotation(e.getEntityPlayer().prevRenderYawOffset, e.getEntityPlayer().renderYawOffset, e.getPartialRenderTick()), e.getPartialRenderTick());
+			// rotateCorpse(e.getEntityPlayer(), e.getEntityPlayer().ticksExisted + e.getPartialRenderTick(), interpolateRotation(e.getEntityPlayer().prevRenderYawOffset, e.getEntityPlayer().renderYawOffset, e.getPartialRenderTick()), e.getPartialRenderTick());
 			float f = (float) e.getEntityPlayer().getCapability(CapabilityList.ELYTRAFLYING, null).getElytraTime() + e.getPartialRenderTick();
 			float zf1 = MathHelper.clamp_float(f * f / 100.0F, 0.0F, 1.0F);
 			GlStateManager.rotate(zf1 * (-90.0F - e.getEntityPlayer().rotationPitch), 1.0F, 0.0F, 0.0F);
