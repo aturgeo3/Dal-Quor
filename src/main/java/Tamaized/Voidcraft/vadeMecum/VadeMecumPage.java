@@ -6,8 +6,8 @@ import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumPage implements IVadeMecumPage {
 
-	private final String title;
-	private final String text;
+	protected final String title;
+	protected final String text;
 
 	public VadeMecumPage(String title, String text) {
 		this.title = title;

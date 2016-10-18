@@ -43,14 +43,14 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidPick = new VadeMecumEntry("docs_Tools_voidPick", "", this, VadeMecumPageListVoidPick.getPageList());
-		voidAxe = new VadeMecumEntry("docs_Tools_voidAxe", "", this, VadeMecumPageListVoidAxe.getPageList());
-		voidShovel = new VadeMecumEntry("docs_Tools_voidShovel", "", this, VadeMecumPageListVoidSpade.getPageList());
-		voidHoe = new VadeMecumEntry("docs_Tools_voidHoe", "", this, VadeMecumPageListVoidHoe.getPageList());
-		specterPick = new VadeMecumEntry("docs_Tools_specterPick", "", this, VadeMecumPageListSpecterPick.getPageList());
-		specterAxe = new VadeMecumEntry("docs_Tools_specterAxe", "", this, VadeMecumPageListSpecterAxe.getPageList());
+		voidPick = new VadeMecumEntry("docs_Tools_voidPick", "", this, new VadeMecumPageListVoidPick());
+		voidAxe = new VadeMecumEntry("docs_Tools_voidAxe", "", this, new VadeMecumPageListVoidAxe());
+		voidShovel = new VadeMecumEntry("docs_Tools_voidShovel", "", this, new VadeMecumPageListVoidSpade());
+		voidHoe = new VadeMecumEntry("docs_Tools_voidHoe", "", this, new VadeMecumPageListVoidHoe());
+		specterPick = new VadeMecumEntry("docs_Tools_specterPick", "", this, new VadeMecumPageListSpecterPick());
+		specterAxe = new VadeMecumEntry("docs_Tools_specterAxe", "", this, new VadeMecumPageListSpecterAxe());
 
-		voidicDrill = new VadeMecumEntry("docs_Tools_voidicDrill", "", this, VadeMecumPageListVoidicDrill.getPageList());
+		voidicDrill = new VadeMecumEntry("docs_Tools_voidicDrill", "", this, new VadeMecumPageListVoidicDrill());
 	}
 
 	@Override

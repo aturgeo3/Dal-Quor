@@ -52,18 +52,18 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidCrystal = new VadeMecumEntry("docs_Items_voidCrystal", "", this, VadeMecumPageListVoidCrystal.getPageList());
-		ectoplasm = new VadeMecumEntry("docs_Items_ectoplasm", "", this, VadeMecumPageListEctoplasm.getPageList());
-		voidChain = new VadeMecumEntry("docs_Items_voidChain", "", this, VadeMecumPageListVoidChain.getPageList());
-		moltenVoidChainPart = new VadeMecumEntry("docs_Items_moltenVoidChainPart", "", this, VadeMecumPageListMoltenChainPart.getPageList());
-		moltenVoidChain = new VadeMecumEntry("docs_Items_moltenVoidChain", "", this, VadeMecumPageListMoltenChain.getPageList());
-		charredBone = new VadeMecumEntry("docs_Items_charredBone", "", this, VadeMecumPageListCharredBone.getPageList());
-		voidStar = new VadeMecumEntry("docs_Items_voidStar", "", this, VadeMecumPageListVoidStar.getPageList());
-		obsidianFlask = new VadeMecumEntry("docs_Items_obsidianFlask", "", this, VadeMecumPageListObsidianFlask.getPageList());
-		voidInfusedCloth = new VadeMecumEntry("docs_Items_voidInfusedCloth", "", this, VadeMecumPageListVoidCloth.getPageList());
-		voidDusts = new VadeMecumEntry("docs_Items_voidDusts", "", this, VadeMecumPageListVoidDusts.getPageList());
-		chainedSkull = new VadeMecumEntry("docs_Items_chainedSkull", "", this, VadeMecumPageListChainedSkull.getPageList());
-		voidicSupressor = new VadeMecumEntry("docs_Items_voidicSupressor", "", this, VadeMecumPageListSuppressor.getPageList());
+		voidCrystal = new VadeMecumEntry("docs_Items_voidCrystal", "", this, new VadeMecumPageListVoidCrystal());
+		ectoplasm = new VadeMecumEntry("docs_Items_ectoplasm", "", this, new VadeMecumPageListEctoplasm());
+		voidChain = new VadeMecumEntry("docs_Items_voidChain", "", this, new VadeMecumPageListVoidChain());
+		moltenVoidChainPart = new VadeMecumEntry("docs_Items_moltenVoidChainPart", "", this, new VadeMecumPageListMoltenChainPart());
+		moltenVoidChain = new VadeMecumEntry("docs_Items_moltenVoidChain", "", this, new VadeMecumPageListMoltenChain());
+		charredBone = new VadeMecumEntry("docs_Items_charredBone", "", this, new VadeMecumPageListCharredBone());
+		voidStar = new VadeMecumEntry("docs_Items_voidStar", "", this, new VadeMecumPageListVoidStar());
+		obsidianFlask = new VadeMecumEntry("docs_Items_obsidianFlask", "", this, new VadeMecumPageListObsidianFlask());
+		voidInfusedCloth = new VadeMecumEntry("docs_Items_voidInfusedCloth", "", this, new VadeMecumPageListVoidCloth());
+		voidDusts = new VadeMecumEntry("docs_Items_voidDusts", "", this, new VadeMecumPageListVoidDusts());
+		chainedSkull = new VadeMecumEntry("docs_Items_chainedSkull", "", this, new VadeMecumPageListChainedSkull());
+		voidicSupressor = new VadeMecumEntry("docs_Items_voidicSupressor", "", this, new VadeMecumPageListSuppressor());
 	}
 
 	@Override

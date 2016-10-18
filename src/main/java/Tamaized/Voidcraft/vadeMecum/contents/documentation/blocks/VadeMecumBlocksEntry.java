@@ -40,12 +40,12 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidCrystalBlock = new VadeMecumEntry("docs_Blocks_voidCrystalBlock", "", this, VadeMecumPageListVoidCrystalBlock.getPageList());
-		voidCrystalOre = new VadeMecumEntry("docs_Blocks_voidCrystalOre", "", this, VadeMecumPageListVoidCrystalOre.getPageList());
-		softBedrock = new VadeMecumEntry("docs_Blocks_softBedrock", "", this, VadeMecumPageListSoftBedrock.getPageList());
-		voidBrick = new VadeMecumEntry("docs_Blocks_voidBrick", "", this, VadeMecumPageListVoidBrick.getPageList());
-		holeInReality = new VadeMecumEntry("docs_Blocks_holeInReality", "", this, VadeMecumPageListRealityHole.getPageList());
-		ritualBlock = new VadeMecumEntry("docs_Blocks_ritualBlock", "", this, VadeMecumPageListRitualBlock.getPageList());
+		voidCrystalBlock = new VadeMecumEntry("docs_Blocks_voidCrystalBlock", "", this, new VadeMecumPageListVoidCrystalBlock());
+		voidCrystalOre = new VadeMecumEntry("docs_Blocks_voidCrystalOre", "", this, new VadeMecumPageListVoidCrystalOre());
+		softBedrock = new VadeMecumEntry("docs_Blocks_softBedrock", "", this, new VadeMecumPageListSoftBedrock());
+		voidBrick = new VadeMecumEntry("docs_Blocks_voidBrick", "", this, new VadeMecumPageListVoidBrick());
+		holeInReality = new VadeMecumEntry("docs_Blocks_holeInReality", "", this, new VadeMecumPageListRealityHole());
+		ritualBlock = new VadeMecumEntry("docs_Blocks_ritualBlock", "", this, new VadeMecumPageListRitualBlock());
 	}
 
 	@Override

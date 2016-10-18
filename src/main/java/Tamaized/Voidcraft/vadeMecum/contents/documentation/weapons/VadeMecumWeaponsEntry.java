@@ -40,12 +40,12 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidSword = new VadeMecumEntry("docs_Weapons_voidSword", "", this, VadeMecumPageListVoidSword.getPageList());
-		angelicSword = new VadeMecumEntry("docs_Weapons_angelicSword", "", this, VadeMecumPageListAngelicSword.getPageList());
-		bindSword = new VadeMecumEntry("docs_Weapons_bindSword", "", this, VadeMecumPageListBindSword.getPageList());
-		moltenSword = new VadeMecumEntry("docs_Weapons_moltenSword", "", this, VadeMecumPageListMoltenSword.getPageList());
-		archAngelicSword = new VadeMecumEntry("docs_Weapons_archAngelicSword", "", this, VadeMecumPageListArchSword.getPageList());
-		demonSword = new VadeMecumEntry("docs_Weapons_demonSword", "", this, VadeMecumPageListDemonSword.getPageList());
+		voidSword = new VadeMecumEntry("docs_Weapons_voidSword", "", this, new VadeMecumPageListVoidSword());
+		angelicSword = new VadeMecumEntry("docs_Weapons_angelicSword", "", this, new VadeMecumPageListAngelicSword());
+		bindSword = new VadeMecumEntry("docs_Weapons_bindSword", "", this, new VadeMecumPageListBindSword());
+		moltenSword = new VadeMecumEntry("docs_Weapons_moltenSword", "", this, new VadeMecumPageListMoltenSword());
+		archAngelicSword = new VadeMecumEntry("docs_Weapons_archAngelicSword", "", this, new VadeMecumPageListArchSword());
+		demonSword = new VadeMecumEntry("docs_Weapons_demonSword", "", this, new VadeMecumPageListDemonSword());
 	}
 
 	@Override

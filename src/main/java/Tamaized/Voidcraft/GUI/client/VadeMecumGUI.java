@@ -96,8 +96,8 @@ public class VadeMecumGUI extends GuiScreen {
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
-	
-	public IVadeMecumCapability getPlayerStats(){
+
+	public IVadeMecumCapability getPlayerStats() {
 		return playerStats;
 	}
 
@@ -106,7 +106,7 @@ public class VadeMecumGUI extends GuiScreen {
 		initPosSize();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
-		if(playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
+		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
 		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
@@ -126,7 +126,7 @@ public class VadeMecumGUI extends GuiScreen {
 	private void setEntry(VadeMecumEntry e, int page) {
 		entry = e == null ? ClientProxy.vadeMecumEntryList : e;
 		pageNumber = page > entry.getPageLength() ? entry.getPageLength() : page;
-		e.init(this);
+		entry.init(this);
 		this.updateButtons();
 	}
 
@@ -138,7 +138,7 @@ public class VadeMecumGUI extends GuiScreen {
 	public void onGuiClosed() {
 		ClientProxy.vadeMecum = null;
 		String e = VadeMecumEntry.getEntry(entry);
-		if(e != null) sendLastEntryPacket(e+":"+pageNumber);
+		if (e != null) sendLastEntryPacket(e + ":" + pageNumber);
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (playerStats.getCurrentActive() != null) {
 
 		}
-		if(renderStackHover != null){
+		if (renderStackHover != null) {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = null;
 		}
@@ -289,14 +289,15 @@ public class VadeMecumGUI extends GuiScreen {
 	}
 
 	public void renderItemStack(ItemStack stack, int x, int y, int mx, int my) {
-		if (itemRender != null){
-            RenderHelper.enableGUIStandardItemLighting();
-			itemRender.renderItemIntoGUI(stack, x, y);
-			//drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
-			GlStateManager.disableDepth();
-			if(stack.stackSize > 1) drawString(fontRendererObj, ""+stack.stackSize, x+11, y+9, 0xFFFFFF);
+		if (itemRender != null) {
+			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
-			if(mx >= x && mx <= x+16 && my >= y && my <= y+16) renderStackHover = stack;
+			itemRender.renderItemIntoGUI(stack, x, y);
+			// drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
+			GlStateManager.disableDepth();
+			if (stack.stackSize > 1) drawString(fontRendererObj, "" + stack.stackSize, x + 11, y + 9, 0xFFFFFF);
+			GlStateManager.enableDepth();
+			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();
 		}
 	}
@@ -331,9 +332,9 @@ public class VadeMecumGUI extends GuiScreen {
 			ex.printStackTrace();
 		}
 	}
-	
-	private void sendLastEntryPacket(String entry){
-		if(entry.equals("")) return;
+
+	private void sendLastEntryPacket(String entry) {
+		if (entry.equals("")) return;
 		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY);
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);

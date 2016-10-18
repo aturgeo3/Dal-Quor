@@ -49,12 +49,12 @@ public class VadeMecumDocumentationEntryList {
 		ITEMS = new VadeMecumItemsEntry(MAIN);
 		TOOLS = new VadeMecumToolsEntry(MAIN);
 		WEAPONS = new VadeMecumWeaponsEntry(MAIN);
-		ARMOR = new VadeMecumEntry("docs_ARMOR", "", MAIN, VadeMecumPageListVoidArmor.getPageList());
-		ETHEREALFRUIT = new VadeMecumEntry("docs_ETHEREALFRUIT", "", MAIN, VadeMecumPageListFruit.getPageList());
+		ARMOR = new VadeMecumEntry("docs_ARMOR", "", MAIN, new VadeMecumPageListVoidArmor());
+		ETHEREALFRUIT = new VadeMecumEntry("docs_ETHEREALFRUIT", "", MAIN, new VadeMecumPageListFruit());
 		MOBS = new VadeMecumMobsEntry(MAIN);
 		BOSSES = new VadeMecumBossesEntry(MAIN);
-		VOID = new VadeMecumEntry("docs_VOID", "", MAIN, VadeMecumPageListVoid.getPageList());
-		VOIDICINFUSION = new VadeMecumEntry("docs_VOIDICINFUSION", "", MAIN, VadeMecumPageListVoidicInfusion.getPageList());
+		VOID = new VadeMecumEntry("docs_VOID", "", MAIN, new VadeMecumPageListVoid());
+		VOIDICINFUSION = new VadeMecumEntry("docs_VOIDICINFUSION", "", MAIN, new VadeMecumPageListVoidicInfusion());
 	}
 
 	public void preLoadObjects() {

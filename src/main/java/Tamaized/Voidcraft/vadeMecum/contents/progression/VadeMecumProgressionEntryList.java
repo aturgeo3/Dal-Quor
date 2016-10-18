@@ -1,18 +1,8 @@
 package Tamaized.Voidcraft.vadeMecum.contents.progression;
 
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.armor.voidarmor.VadeMecumPageListVoidArmor;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.VadeMecumBlocksEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses.VadeMecumBossesEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.fruit.VadeMecumPageListFruit;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.VadeMecumItemsEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.VadeMecumMachinesEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.VadeMecumMobsEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.thevoid.VadeMecumPageListVoid;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.VadeMecumToolsEntry;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.voidicinfusion.VadeMecumPageListVoidicInfusion;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons.VadeMecumWeaponsEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.progression.ritualBlock.VadeMecumPageListRitualBlock;
+import Tamaized.Voidcraft.vadeMecum.contents.progression.ritualList.VadeMecumPageListRitualList;
 
 public class VadeMecumProgressionEntryList {
 
@@ -30,15 +20,18 @@ public class VadeMecumProgressionEntryList {
 
 	public final VadeMecumEntry MAIN;
 	public final VadeMecumEntry RITUALBLOCKS;
+	public VadeMecumEntry RITUALLIST;
 
 	public VadeMecumProgressionEntryList() {
 		MAIN = new VadeMecumProgressionEntry();
-		RITUALBLOCKS = new VadeMecumEntry("progression_RITUALBLOCKS", "", MAIN, VadeMecumPageListRitualBlock.getPageList());
+		RITUALBLOCKS = new VadeMecumEntry("progression_RITUALBLOCKS", "", MAIN, new VadeMecumPageListRitualBlock());
+		RITUALLIST = new VadeMecumEntry("progression_RITUALLIST", "", MAIN, new VadeMecumPageListRitualList());
 	}
 
 	public void preLoadObjects() {
 		MAIN.initObjects();
 		RITUALBLOCKS.initObjects();
+		RITUALLIST.initObjects();
 	}
 
 }

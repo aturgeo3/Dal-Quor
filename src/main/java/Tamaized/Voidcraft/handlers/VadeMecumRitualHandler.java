@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.handlers;
 
+import java.util.ArrayList;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -13,7 +15,7 @@ import net.minecraft.world.World;
 public class VadeMecumRitualHandler {
 	
 	public static enum Ritual {
-		INTRO
+		INTRO, TEST
 	}
 
 	public static void invokeRitual(EntityPlayer player, World world, BlockPos pos) {
@@ -31,6 +33,20 @@ public class VadeMecumRitualHandler {
 	
 	public static Ritual getRitual(World world, BlockPos pos){
 		return Ritual.INTRO;
+	}
+	
+	public static ArrayList<Ritual> getAvailiableRituals(IVadeMecumCapability cap){
+		ArrayList<Ritual> list = new ArrayList<Ritual>();
+		if(cap.getObtainedCategories().isEmpty()){
+			list.add(Ritual.INTRO);
+		}else{
+			if(cap.getObtainedCategories().contains(Ritual.TEST)){
+				
+			}else{
+				list.add(Ritual.TEST);
+			}
+		}
+		return list;
 	}
 
 }

@@ -1,16 +1,18 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.machines.alchemy;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
+import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingNormal;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPageCrafting;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class VadeMecumPageListAlchemy {
+public class VadeMecumPageListAlchemy implements IVadeMecumPageProvider {
 
-	public static final IVadeMecumPage[] getPageList() {
+	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
 				new VadeMecumPage("Voidic Alchemy Table", "Consuming Ethereal Fruit and their fertilized variants provide many great benefits. However, if brewing and farming in the Overworld has taught you anything, it would be that some of the most potent potions are created from enhanced crops. This holds true for the Voidic Plants as well. By encasing a Brewing Stand in Void Bricks and creating an interface of Void Cables and an Inert Void Infusion Altar, one creates a special workspace"),
 				new VadeMecumPage("", "specifically for brewing with these strange plants."),

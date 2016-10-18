@@ -39,11 +39,11 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidWraith = new VadeMecumEntry("docs_Mobs_voidWraith", "", this, VadeMecumPageListVoidWraith.getPageList());
-		chainedSpecter = new VadeMecumEntry("docs_Mobs_chainedSpecter", "", this, VadeMecumPageListSpecterChain.getPageList());
-		voidWrath = new VadeMecumEntry("docs_Mobs_voidWrath", "", this, VadeMecumPageListVoidWrath.getPageList());
-		voidLich = new VadeMecumEntry("docs_Mobs_voidLich", "", this, VadeMecumPageListLich.getPageList());
-		herobrineCreeper = new VadeMecumEntry("docs_Mobs_herobrineCreeper", "", this, VadeMecumPageListHerobrineCreeper.getPageList());
+		voidWraith = new VadeMecumEntry("docs_Mobs_voidWraith", "", this, new VadeMecumPageListVoidWraith());
+		chainedSpecter = new VadeMecumEntry("docs_Mobs_chainedSpecter", "", this, new VadeMecumPageListSpecterChain());
+		voidWrath = new VadeMecumEntry("docs_Mobs_voidWrath", "", this, new VadeMecumPageListVoidWrath());
+		voidLich = new VadeMecumEntry("docs_Mobs_voidLich", "", this, new VadeMecumPageListLich());
+		herobrineCreeper = new VadeMecumEntry("docs_Mobs_herobrineCreeper", "", this, new VadeMecumPageListHerobrineCreeper());
 	}
 
 	@Override

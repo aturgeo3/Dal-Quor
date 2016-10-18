@@ -30,7 +30,7 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		corruptedPawn = new VadeMecumEntry("docs_Bosses_corruptedPawn", "", this, VadeMecumPageListCorruptedPawn.getPageList());
+		corruptedPawn = new VadeMecumEntry("docs_Bosses_corruptedPawn", "", this, new VadeMecumPageListCorruptedPawn());
 	}
 
 	@Override

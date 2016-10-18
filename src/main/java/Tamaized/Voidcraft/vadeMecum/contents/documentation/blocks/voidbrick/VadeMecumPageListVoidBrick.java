@@ -1,15 +1,17 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.voidbrick;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
+import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingNormal;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPageCrafting;
 import net.minecraft.item.ItemStack;
 
-public class VadeMecumPageListVoidBrick {
+public class VadeMecumPageListVoidBrick implements IVadeMecumPageProvider {
 
-	public static final IVadeMecumPage[] getPageList() {
+	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
 				new VadeMecumPage("Void Brick", "These bricks are made from cut Void Crystal Blocks. They appear to be much more sturdy than any other block found in this dimension, but the crystal that makes them up seems to have lost their conductivity for Voidic Power as a result of being cut. While their function as a material for building Void Portals has been lost, that doesn't mean that they're useless. Standing on one of these bricks will actually stall"),
 				new VadeMecumPage("", "Voidic Infusion from being gained as if the bricks are trying to consume it from you at the same rate you gain it. Their firm frame could be used for making other objects, or simply for building and decoration."),

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumProgressionEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		RitualBlocks, Test2
+		RitualBlocks, RitualList
 	}
 
 	public static int getEntryID(Entry e) {
@@ -23,7 +23,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	public static Entry getEntryFromID(int id) {
 		return id >= Entry.values().length ? null : Entry.values()[id];
 	}
-	
+
 	public VadeMecumProgressionEntry() {
 		super("progressionMainEntry", "Void Vade Mecum - Progression", null, null);
 	}
@@ -31,8 +31,11 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlocks), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock))));
-		if(gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) addButton(new VadeMecumButton(gui, getEntryID(Entry.Test2), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 4), 100, 20, "Test Entry", new ItemStack(voidCraft.items.voidicSuppressor)));
+		if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) {
+			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualList), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Rituals", new ItemStack(voidCraft.items.voidicSuppressor)));
+		} else {
+			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlocks), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock))));
+		}
 	}
 
 	@Override
@@ -41,14 +44,15 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 			case RitualBlocks:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Progression.RITUALBLOCKS);
 				break;
-			case Test2:
-				gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, IVadeMecumCapability.getActivePowerID(IVadeMecumCapability.ActivePower.TEST));
-				gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, -1);
+			case RitualList:
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Progression.RITUALLIST);
 				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList);
 				break;
 		}
+		// gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, IVadeMecumCapability.getActivePowerID(IVadeMecumCapability.ActivePower.TEST));
+		// gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, -1);
 	}
 
 	public int getPageLength() {

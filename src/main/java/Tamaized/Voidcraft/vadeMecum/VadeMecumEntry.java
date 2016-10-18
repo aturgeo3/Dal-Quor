@@ -28,12 +28,13 @@ public class VadeMecumEntry {
 	}
 
 	private final String title;
-	private final IVadeMecumPage[] pages;
+	private final IVadeMecumPageProvider pages;
 	private List<VadeMecumButton> buttons = new ArrayList<VadeMecumButton>();
 	private List<VadeMecumButton> buttons_2 = new ArrayList<VadeMecumButton>();
 	private final VadeMecumEntry backPage;
+	private int pageAmount = 0;
 
-	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPage[] pageList) {
+	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPageProvider pageList) {
 		map.put(registryName, this);
 		this.title = title;
 		pages = pageList;
@@ -103,10 +104,11 @@ public class VadeMecumEntry {
 	}
 
 	protected void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
-		if (pages != null) {
-			int l = pages.length;
-			pages[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
-			if (page + 1 < l) pages[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
+		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
+		if (pageList != null) {
+			pageAmount = pageList.length;
+			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
+			if (page + 1 < pageAmount) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}
 	}
 
@@ -123,7 +125,7 @@ public class VadeMecumEntry {
 	}
 
 	public int getPageLength() {
-		return pages.length;
+		return pageAmount;
 	}
 
 }

@@ -46,15 +46,15 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 
 	@Override
 	public void initObjects() {
-		voidInfusionAltar = new VadeMecumEntry("docs_Machines_voidInfusionAltar", "", this, VadeMecumPageListInfusionAltar.getPageList());
-		voidInfusedMacerator = new VadeMecumEntry("docs_Machines_voidInfusedMacerator", "", this, VadeMecumPageListMacerator.getPageList());
-		heimdall = new VadeMecumEntry("docs_Machines_heimdall", "", this, VadeMecumPageListHeimdall.getPageList());
-		voidicGenerator = new VadeMecumEntry("docs_Machines_voidicGenerator", "", this, VadeMecumPageListGenerator.getPageList());
-		voidicCable = new VadeMecumEntry("docs_Machines_voidicCable", "", this, VadeMecumPageListCable.getPageList());
-		voidMusicBox = new VadeMecumEntry("docs_Machines_voidMusicBox", "", this, VadeMecumPageListMusicBox.getPageList());
-		voidicCharger = new VadeMecumEntry("docs_Machines_voidicCharger", "", this, VadeMecumPageListCharger.getPageList());
-		realityStabilizer = new VadeMecumEntry("docs_Machines_realityStabilizer", "", this, VadeMecumPageListStabilizer.getPageList());
-		alchemyTable = new VadeMecumEntry("docs_Machines_alchemyTable", "", this, VadeMecumPageListAlchemy.getPageList());
+		voidInfusionAltar = new VadeMecumEntry("docs_Machines_voidInfusionAltar", "", this, new VadeMecumPageListInfusionAltar());
+		voidInfusedMacerator = new VadeMecumEntry("docs_Machines_voidInfusedMacerator", "", this, new VadeMecumPageListMacerator());
+		heimdall = new VadeMecumEntry("docs_Machines_heimdall", "", this, new VadeMecumPageListHeimdall());
+		voidicGenerator = new VadeMecumEntry("docs_Machines_voidicGenerator", "", this, new VadeMecumPageListGenerator());
+		voidicCable = new VadeMecumEntry("docs_Machines_voidicCable", "", this, new VadeMecumPageListCable());
+		voidMusicBox = new VadeMecumEntry("docs_Machines_voidMusicBox", "", this, new VadeMecumPageListMusicBox());
+		voidicCharger = new VadeMecumEntry("docs_Machines_voidicCharger", "", this, new VadeMecumPageListCharger());
+		realityStabilizer = new VadeMecumEntry("docs_Machines_realityStabilizer", "", this, new VadeMecumPageListStabilizer());
+		alchemyTable = new VadeMecumEntry("docs_Machines_alchemyTable", "", this, new VadeMecumPageListAlchemy());
 	}
 
 	@Override
