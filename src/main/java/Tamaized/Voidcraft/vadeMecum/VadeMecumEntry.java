@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextFormatting;
 
@@ -32,7 +33,6 @@ public class VadeMecumEntry {
 	private List<VadeMecumButton> buttons = new ArrayList<VadeMecumButton>();
 	private List<VadeMecumButton> buttons_2 = new ArrayList<VadeMecumButton>();
 	private final VadeMecumEntry backPage;
-	private int pageAmount = 0;
 
 	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPageProvider pageList) {
 		map.put(registryName, this);
@@ -89,7 +89,7 @@ public class VadeMecumEntry {
 		}
 	}
 
-	protected void goBack(VadeMecumGUI gui) {
+	public void goBack(VadeMecumGUI gui) {
 		if (backPage != null) gui.changeEntry(backPage);
 	}
 
@@ -106,9 +106,8 @@ public class VadeMecumEntry {
 	protected void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
 		if (pageList != null) {
-			pageAmount = pageList.length;
 			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
-			if (page + 1 < pageAmount) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
+			if (page + 1 < getPageLength(gui)) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}
 	}
 
@@ -124,8 +123,8 @@ public class VadeMecumEntry {
 		}
 	}
 
-	public int getPageLength() {
-		return pageAmount;
+	public int getPageLength(VadeMecumGUI gui) {
+		return pages == null ? 0 : pages.getPageList(gui.getPlayerStats()).length;
 	}
 
 }

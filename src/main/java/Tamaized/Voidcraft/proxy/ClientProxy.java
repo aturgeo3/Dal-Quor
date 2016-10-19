@@ -63,7 +63,6 @@ import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
-import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
@@ -80,8 +79,6 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends AbstractProxy {
 

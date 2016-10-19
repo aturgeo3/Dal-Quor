@@ -65,12 +65,12 @@ public class VadeMecum extends TamItem {
 
 		};
 	}
-	
+
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
-		if(state != null && state.getBlock() == voidCraft.blocks.ritualBlock){
-			VadeMecumRitualHandler.invokeRitual(player, world, pos);
+		if (state != null && state.getBlock() == voidCraft.blocks.ritualBlock) {
+			if (!world.isRemote) VadeMecumRitualHandler.invokeRitual(player, world, pos);
 			return EnumActionResult.SUCCESS;
 		}
 		return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
@@ -99,7 +99,7 @@ public class VadeMecum extends TamItem {
 					} else {
 						BlockPos bp = result.getBlockPos();
 						if (bp != null) {
-							EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, bp.getX(), bp.getY(), bp.getZ(), false);
+							EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, bp.getX(), bp.getY()+1, bp.getZ(), false);
 							world.addWeatherEffect(entitylightningbolt);
 						}
 					}

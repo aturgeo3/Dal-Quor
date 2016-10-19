@@ -6,6 +6,7 @@ import java.io.IOException;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.proxy.ClientProxy;
@@ -47,11 +48,12 @@ public class VadeMecumGUI extends GuiScreen {
 
 	private VadeMecumGUI.ArrowButton button_back;
 	private VadeMecumGUI.ArrowButton button_forward;
+	private VadeMecumGUI.LargeArrowButton button_largeBack;
 	private VadeMecumGUI.OverlayButton button_entryBack;
 	private VadeMecumGUI.OverlayButton button_credits;
 
 	private static enum Button {
-		NULL, Back, Forward, EntryBack, Credits
+		NULL, Back, Forward, LargeBack, EntryBack, Credits
 	}
 
 	private static int getButtonID(Button b) {
@@ -104,6 +106,7 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	public void initGui() {
 		initPosSize();
+		voidCraft.reloadRitualList();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
@@ -113,6 +116,7 @@ public class VadeMecumGUI extends GuiScreen {
 		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, 195, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
+		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), i - 58, vadeY + 10));
 		this.updateButtons();
 	}
 
@@ -125,7 +129,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	private void setEntry(VadeMecumEntry e, int page) {
 		entry = e == null ? ClientProxy.vadeMecumEntryList : e;
-		pageNumber = page > entry.getPageLength() ? entry.getPageLength() : page;
+		pageNumber = page > entry.getPageLength(this) ? entry.getPageLength(this) : page;
 		entry.init(this);
 		this.updateButtons();
 	}
@@ -150,10 +154,11 @@ public class VadeMecumGUI extends GuiScreen {
 	}
 
 	private void updateButtons() {
-		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength() : false;
+		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength(this) : false;
 		if (button_back != null) button_back.visible = canDrawPage() ? pageNumber > 0 : false;
 		if (button_entryBack != null) button_entryBack.visible = entry != ClientProxy.vadeMecumEntryList;
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
+		if (button_largeBack != null) button_largeBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN);
 	}
 
 	/**
@@ -168,6 +173,9 @@ public class VadeMecumGUI extends GuiScreen {
 					break;
 				case Back:
 					pageNumber -= 2;
+					break;
+				case LargeBack:
+					entry.goBack(this);
 					break;
 				case EntryBack:
 					setEntry(ClientProxy.vadeMecumEntryList, 0);
@@ -248,6 +256,34 @@ public class VadeMecumGUI extends GuiScreen {
 					j += 13;
 				}
 				this.drawTexturedModalRect(this.xPosition, this.yPosition, i, j, 23, 13);
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	static class LargeArrowButton extends GuiButton {
+
+		public LargeArrowButton(int id, int x, int y) {
+			super(id, x, y, 23, 13, "");
+		}
+
+		/**
+		 * Draws this button to the screen.
+		 */
+		@Override
+		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+			if (this.visible) {
+				boolean flag = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.getTextureManager().bindTexture(TEXTURES);
+				int i = 50;
+				int j = 195;
+
+				if (flag) {
+					j += 11;
+				}
+
+				this.drawTexturedModalRect(this.xPosition, this.yPosition, i, j, 23, 11);
 			}
 		}
 	}

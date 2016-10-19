@@ -85,6 +85,7 @@ import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
+import Tamaized.Voidcraft.vadeMecum.RitualList;
 import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
@@ -137,6 +138,7 @@ public class voidCraft extends TamModBase {
 
 	public static final SkinHandler skinHandler = new SkinHandler();
 	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
+	public static RitualList ritualList;
 
 	// Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
@@ -256,7 +258,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
 		MinecraftForge.EVENT_BUS.register(new CapabilitySyncEvent());
-		//MinecraftForge.EVENT_BUS.register(new CustomElytraHandler());
+		// MinecraftForge.EVENT_BUS.register(new CustomElytraHandler());
 		MinecraftForge.EVENT_BUS.register(config);
 		MinecraftForge.EVENT_BUS.register(new ItemEntityEvent());
 
@@ -326,6 +328,9 @@ public class voidCraft extends TamModBase {
 
 		super.postInit(e);
 
+		// Load Rituals
+		reloadRitualList();
+
 		// Register Network
 		channel.register(new ServerPacketHandler());
 
@@ -333,5 +338,9 @@ public class voidCraft extends TamModBase {
 		proxy.postInit();
 		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 
+	}
+
+	public static void reloadRitualList() {
+		ritualList = new RitualList();
 	}
 }

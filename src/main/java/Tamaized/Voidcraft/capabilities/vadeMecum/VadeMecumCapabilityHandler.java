@@ -60,8 +60,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addCategory(Category category) {
-		if (categoryList.contains(category)) return;
-		categoryList.add(category);
+		if (!categoryList.contains(category)) categoryList.add(category);
 		markDirty();
 	}
 
@@ -96,8 +95,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addActivePower(ActivePower power) {
-		if (activeList.contains(power)) return;
-		activeList.add(power);
+		if (!activeList.contains(power)) activeList.add(power);
 		markDirty();
 	}
 
@@ -132,8 +130,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void addPassivePower(PassivePower power) {
-		if (passiveList.contains(power)) return;
-		passiveList.add(power);
+		if (!passiveList.contains(power)) passiveList.add(power);
 		markDirty();
 	}
 
@@ -164,13 +161,13 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	public ActivePower getCurrentActive() {
 		return currActivePower;
 	}
-	
+
 	@Override
 	public void setLastEntry(String e) {
 		lastEntry = e;
 		markDirty();
 	}
-	
+
 	@Override
 	public String getLastEntry() {
 		return lastEntry;
@@ -196,16 +193,20 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 		int active = stream.readInt();
 		int passive = stream.readInt();
 		clearCategories();
-		for (int i = 0; i <= category - 1; i++) {
-			addCategory(IVadeMecumCapability.getCategoryFromID(stream.readInt()));
+		int id;
+		for (int i = 0; i < category; i++) {
+			id = stream.readInt();
+			addCategory(IVadeMecumCapability.getCategoryFromID(id));
 		}
 		clearActivePowers();
-		for (int i = 0; i <= active - 1; i++) {
-			addActivePower(IVadeMecumCapability.getActivePowerFromID(stream.readInt()));
+		for (int i = 0; i < active; i++) {
+			id = stream.readInt();
+			addActivePower(IVadeMecumCapability.getActivePowerFromID(id));
 		}
 		clearPassivePowers();
-		for (int i = 0; i <= passive - 1; i++) {
-			addPassivePower(IVadeMecumCapability.getPassivePowerFromID(stream.readInt()));
+		for (int i = 0; i < passive; i++) {
+			id = stream.readInt();
+			addPassivePower(IVadeMecumCapability.getPassivePowerFromID(id));
 		}
 	}
 
