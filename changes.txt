@@ -1,1 +1,1 @@
-
+ - Tamaized: a minimum Forge version and TamModized version are now required
