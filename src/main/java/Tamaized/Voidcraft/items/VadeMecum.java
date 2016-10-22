@@ -10,6 +10,7 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import Tamaized.Voidcraft.handlers.VadeMecumRitualHandler;
+import Tamaized.Voidcraft.handlers.VadeMecumWordsOfPower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
@@ -89,21 +90,7 @@ public class VadeMecum extends TamItem {
 			cap.toggleBookState();
 		} else {
 			if (cap.getBookState()) {
-				HashSet<Entity> exclude = new HashSet<Entity>();
-				exclude.add(player);
-				RayTraceResult result = RayTraceHelper.tracePath(world, player, 32, 1, exclude);
-				if (result != null) {
-					if (result.entityHit != null) {
-						EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ, false);
-						world.addWeatherEffect(entitylightningbolt);
-					} else {
-						BlockPos bp = result.getBlockPos();
-						if (bp != null) {
-							EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, bp.getX(), bp.getY()+1, bp.getZ(), false);
-							world.addWeatherEffect(entitylightningbolt);
-						}
-					}
-				}
+				VadeMecumWordsOfPower.invoke(world, player);
 			} else {
 				openBook(player, world, player.getPosition());
 			}

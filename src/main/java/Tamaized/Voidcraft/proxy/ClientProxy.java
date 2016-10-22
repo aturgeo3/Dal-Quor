@@ -67,7 +67,6 @@ import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
-import Tamaized.Voidcraft.voidicInfusion.client.RenderVoidicInfusion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
@@ -115,7 +114,7 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
-		MinecraftForge.EVENT_BUS.register(new RenderVoidicInfusion());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.voidicInfusion.client.RenderPlayer());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 
 		float shadowSize = 0.5F;
@@ -149,10 +148,12 @@ public class ClientProxy extends AbstractProxy {
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));
 		playerRenderer.addLayer(new LayerCustomElytra(playerRenderer));
+		// playerRenderer.addLayer(new LayerSheath(playerRenderer));
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
 		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
+		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
 		voidCraft.channel.register(new ClientPacketHandler());
 	}

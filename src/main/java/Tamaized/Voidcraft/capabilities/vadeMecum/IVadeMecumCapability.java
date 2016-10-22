@@ -9,7 +9,17 @@ import io.netty.buffer.ByteBufInputStream;
 public interface IVadeMecumCapability {
 
 	public static enum Category {
-		INTRO, TOME
+		INTRO, TOME,
+
+		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+
+		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+
+		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+
+		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+
+		VoidicTouch, VoidicSheath, Implosion
 	}
 
 	public static int getCategoryID(Category c) {
@@ -21,7 +31,15 @@ public interface IVadeMecumCapability {
 	}
 
 	public static enum ActivePower {
-		TEST, TESTTWO
+		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+
+		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+
+		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+
+		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+
+		VoidicTouch, VoidicSheath, Implosion
 	}
 
 	public static int getActivePowerID(ActivePower c) {
@@ -87,9 +105,9 @@ public interface IVadeMecumCapability {
 	public void setCurrentActive(ActivePower power);
 
 	public ActivePower getCurrentActive();
-	
+
 	public void setLastEntry(String e);
-	
+
 	public String getLastEntry();
 
 	public boolean hasLoaded();
