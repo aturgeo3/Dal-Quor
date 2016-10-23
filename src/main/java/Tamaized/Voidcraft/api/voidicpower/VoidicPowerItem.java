@@ -70,7 +70,6 @@ public abstract class VoidicPowerItem extends TamItem {
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
-		stack.getSubCompound(key, create)
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
 		if (cap != null) {
 			if (cap.isDefault()) {
