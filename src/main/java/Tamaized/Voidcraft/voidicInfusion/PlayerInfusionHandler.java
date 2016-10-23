@@ -4,10 +4,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
@@ -77,14 +76,17 @@ public class PlayerInfusionHandler {
 		if (player instanceof EntityPlayerMP) playerMP = (EntityPlayerMP) player;
 		if (tick % 20 == 0) {
 			boolean flag = true;
+
 			if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor) {
-				if (VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) > 0) {
-					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemMainhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) - 1);
+				IVoidicPowerCapability cap = player.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
+				if (cap != null && cap.getCurrentPower() > 0) {
+					cap.drain(1);
 					flag = false;
 				}
 			} else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
-				if (VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) > 0) {
-					VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
+				IVoidicPowerCapability cap = player.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
+				if (cap != null && cap.getCurrentPower() > 0) {
+					cap.drain(1);
 					flag = false;
 				}
 			} else if (player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null) {
@@ -92,7 +94,7 @@ public class PlayerInfusionHandler {
 			}
 			if (player.worldObj.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
 				if (player.onGround && (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidbrick || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickHalfSlab || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidstairs || player.worldObj.getBlockState(player.getPosition().down(2)).getBlock() == voidCraft.blocks.blockVoidfence || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickDoubleSlab)) {
-					
+
 				} else {
 					voidicInfusionAmount++;
 				}

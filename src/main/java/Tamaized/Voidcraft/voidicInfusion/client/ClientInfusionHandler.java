@@ -1,7 +1,8 @@
 package Tamaized.Voidcraft.voidicInfusion.client;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -41,13 +42,15 @@ public class ClientInfusionHandler {
 				if (world != null && world.provider != null) {
 					boolean flag = true;
 					if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor) {
-						if (VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) > 0) {
-							VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemMainhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemMainhand()) - 1);
+						IVoidicPowerCapability cap = player.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
+						if (cap != null && cap.getCurrentPower() > 0) {
+							//cap.drain(1);
 							flag = false;
 						}
 					} else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
-						if (VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) > 0) {
-							VoidicPowerItemHandler.setItemVoidicPower(player.getHeldItemOffhand(), VoidicPowerItemHandler.getItemVoidicPower(player.getHeldItemOffhand()) - 1);
+						IVoidicPowerCapability cap = player.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
+						if (cap != null && cap.getCurrentPower() > 0) {
+							//cap.drain(1);
 							flag = false;
 						}
 					}
