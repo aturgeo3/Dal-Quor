@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class GuiHandler implements IGuiHandler {
 
 	public static enum Type {
-		NULL, Macerator, MusicBox, Infuser, Heimdall, VoidicGenerator, VoidicCharger, RealityStabilizer, VoidicAlchemy, VadeMecum
+		NULL, Macerator, MusicBox, Infuser, Heimdall, VoidicGenerator, VoidicCharger, RealityStabilizer, VoidicAlchemy// , VadeMecum
 	}
 
 	public static int getTypeID(Type type) {
@@ -50,8 +50,8 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		switch (getTypeFromID(id)) {
-			case VadeMecum:
-				return new VadeMecumContainer(player);
+			// case VadeMecum:
+			// return new VadeMecumContainer(player);
 			case Macerator:
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidMacerator) return new VoidMaceratorContainer(player.inventory, (TileEntityVoidMacerator) tileEntity);
 			case MusicBox:
@@ -77,8 +77,8 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		switch (getTypeFromID(id)) {
-			case VadeMecum:
-				return new VadeMecumGUI(player);
+			// case VadeMecum:
+			// return new VadeMecumGUI(player);
 			case Macerator:
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidMacerator) return new voidMaceratorGUI(player.inventory, (TileEntityVoidMacerator) tileEntity);
 			case MusicBox:
