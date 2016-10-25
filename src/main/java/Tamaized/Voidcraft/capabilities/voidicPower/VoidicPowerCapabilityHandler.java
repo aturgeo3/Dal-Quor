@@ -1,8 +1,20 @@
 package Tamaized.Voidcraft.capabilities.voidicPower;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.network.ItemStackNetworkHelper;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
@@ -126,9 +138,37 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 	}
 
 	@Override
-	public void sendUpdates(ItemStack stack) {
-		//stack.serializeNBT();
+	public void sendUpdates(EntityPlayer player, int slot, ItemStack stack) {
+		if (player instanceof EntityPlayerMP) sendPacketUpdates((EntityPlayerMP) player, slot, stack, this);
 		dirty = false;
+	}
+
+	@Override
+	public void decodePacket(ByteBufInputStream stream) throws IOException {
+		currPower = stream.readInt();
+		maxPower = stream.readInt();
+	}
+
+	@Override
+	public void encodePacket(DataOutputStream stream) throws IOException {
+		stream.writeInt(currPower);
+		stream.writeInt(maxPower);
+	}
+
+	private void sendPacketUpdates(EntityPlayerMP player, int slot, ItemStack stack, IVoidicPowerCapability cap) {
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.VOIDICPOWERITEM));
+			outputStream.writeInt(slot);
+			ItemStackNetworkHelper.encodeStack(stack, outputStream);
+			cap.encodePacket(outputStream);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendTo(packet, player);
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }

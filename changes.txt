@@ -1,2 +1,3 @@
  - Tamaized: a minimum Forge version and TamModized version are now required
  - Tamaized: a platform now generates with the void portal if there is either air or a hole in reality in the area where the platform would be
+ - Tamaized: Voidic Power Items now use Capabilities to update their values instead of direct NBT

@@ -13,7 +13,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -26,6 +25,12 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public abstract class VoidicPowerItem extends TamItem {
+
+	public static final int PLAYER_INV_SLOT_ARMOR_HELM = -5;
+	public static final int PLAYER_INV_SLOT_ARMOR_CHEST = -4;
+	public static final int PLAYER_INV_SLOT_ARMOR_LEGS = -3;
+	public static final int PLAYER_INV_SLOT_ARMOR_BOOTS = -2;
+	public static final int PLAYER_INV_SLOT_OFFHAND = -1;
 
 	private static final Map<IVoidicPowerCapability, Integer> map = new HashMap<IVoidicPowerCapability, Integer>();
 
@@ -72,13 +77,43 @@ public abstract class VoidicPowerItem extends TamItem {
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
 		if (cap != null) {
-			if (cap.isDefault()) {
-				cap.setValues(getDefaultVoidicPower(), getDefaultMaxVoidicPower());
-				cap.setDefault(false);
+			if (!world.isRemote) {
+				if (cap.isDefault()) {
+					cap.setValues(getDefaultVoidicPower(), getDefaultMaxVoidicPower());
+					cap.setDefault(false);
+				}
+				if (cap.isDirty() && entity instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) entity;
+					switch (itemSlot) {
+						case 0:
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[0])) {
+								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_HELM, stack);
+								break;
+							} else if (ItemStack.areItemStacksEqual(stack, player.inventory.offHandInventory[0])) {
+								cap.sendUpdates(player, PLAYER_INV_SLOT_OFFHAND, stack);
+								break;
+							}
+						case 1:
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[1])) {
+								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_CHEST, stack);
+								break;
+							}
+						case 2:
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[2])) {
+								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_LEGS, stack);
+								break;
+							}
+						case 3:
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[3])) {
+								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_BOOTS, stack);
+								break;
+							}
+						default:
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory[itemSlot])) cap.sendUpdates(player, itemSlot, stack);
+							break;
+					}
+				}
 			}
-			//if (cap.isDirty()) {
-			//	if (entity instanceof EntityPlayerMP) ((EntityPlayerMP) entity).sendContainerToPlayer(((EntityPlayerMP) entity).inventoryContainer);
-			//}
 			if (cap.isInUse()) {
 				if (map.containsKey(cap)) {
 					map.put(cap, map.get(cap) + useAmount());

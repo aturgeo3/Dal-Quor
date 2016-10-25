@@ -1,5 +1,10 @@
 package Tamaized.Voidcraft.capabilities.voidicPower;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import io.netty.buffer.ByteBufInputStream;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public interface IVoidicPowerCapability {
@@ -38,6 +43,10 @@ public interface IVoidicPowerCapability {
 
 	public void copyFrom(IVoidicPowerCapability cap);
 
-	public void sendUpdates(ItemStack stack);
+	public void sendUpdates(EntityPlayer player, int slot, ItemStack stack);
+
+	public void decodePacket(ByteBufInputStream stream) throws IOException;
+
+	public void encodePacket(DataOutputStream stream) throws IOException;
 
 }
