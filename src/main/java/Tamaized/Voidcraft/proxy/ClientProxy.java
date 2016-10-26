@@ -63,11 +63,10 @@ import Tamaized.Voidcraft.events.client.OverlayEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
-import Tamaized.Voidcraft.vadeMecum.VadeMecumEntryList;
+import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
 import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
-import Tamaized.Voidcraft.voidicInfusion.client.RenderVoidicInfusion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
@@ -79,23 +78,18 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends AbstractProxy {
 
 	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
 	public static VadeMecumGUI vadeMecum;
-	public static VadeMecumEntryList vadeMecumEntryList;
+	public static VadeMecumMainEntry vadeMecumEntryList;
 
 	@Override
 	public void preInit() {
 		voidCraft.instance.clientPreInit();
-		reloadVadeMecum();
-	}
-
-	public static void reloadVadeMecum() {
-		vadeMecumEntryList = new VadeMecumEntryList();
+		vadeMecumEntryList = new VadeMecumMainEntry();
+		vadeMecumEntryList.preLoadObject();
 	}
 
 	@Override
@@ -120,7 +114,7 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
-		MinecraftForge.EVENT_BUS.register(new RenderVoidicInfusion());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.voidicInfusion.client.RenderPlayer());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 
 		float shadowSize = 0.5F;
@@ -154,10 +148,12 @@ public class ClientProxy extends AbstractProxy {
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));
 		playerRenderer.addLayer(new LayerCustomElytra(playerRenderer));
+		// playerRenderer.addLayer(new LayerSheath(playerRenderer));
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
 		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
+		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
 		voidCraft.channel.register(new ClientPacketHandler());
 	}

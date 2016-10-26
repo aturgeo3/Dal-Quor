@@ -24,6 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -81,7 +82,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
 
-		modelList.add(vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1));
+		vadeMecum = new VadeMecum(voidCraft.tabs.tabVoid, "vadeMecum", 1); // Don't add this to the model list as it uses an ItemMeshDefinition
 
 		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(voidCraft.tabs.tabVoid, "emptyObsidianFlask", 16));
 		modelList.add(obsidianFlask = new ObsidianFlask(voidCraft.tabs.tabVoid, "obsidianFlask", 16));
@@ -210,13 +211,13 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void clientPreInit() {
-		// TODO Auto-generated method stub
-
+		VadeMecumMeshDefinition.preRegister();
+		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
 	}
 
 	@Override
 	public void clientInit() {
-
+		//VadeMecumMeshDefinition.register();
 	}
 
 	@Override

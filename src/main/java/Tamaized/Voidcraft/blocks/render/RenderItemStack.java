@@ -19,8 +19,6 @@ public class RenderItemStack extends TileEntityItemStackRenderer {
 	@Override
 	public void renderByItem(ItemStack itemStack) {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
-		DebugEvent.textL = block+"";
-		//System.out.println(block);
 		if(block == voidCraft.blocks.Heimdall) {
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(heimdallInstance, 0.0D, 0.0D, 0.0D, 0.0F);
 		}else if(block == voidCraft.blocks.blockNoBreak) {

@@ -6,6 +6,7 @@ import java.io.IOException;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.proxy.ClientProxy;
@@ -17,6 +18,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -42,14 +44,16 @@ public class VadeMecumGUI extends GuiScreen {
 	private VadeMecumEntry entry;
 	private VadeMecumEntry nextEntry;
 	private int pageNumber = 0;
+	private ItemStack renderStackHover;
 
 	private VadeMecumGUI.ArrowButton button_back;
 	private VadeMecumGUI.ArrowButton button_forward;
+	private VadeMecumGUI.LargeArrowButton button_largeBack;
 	private VadeMecumGUI.OverlayButton button_entryBack;
 	private VadeMecumGUI.OverlayButton button_credits;
 
 	private static enum Button {
-		NULL, Back, Forward, EntryBack, Credits
+		NULL, Back, Forward, LargeBack, EntryBack, Credits
 	}
 
 	private static int getButtonID(Button b) {
@@ -73,20 +77,20 @@ public class VadeMecumGUI extends GuiScreen {
 		vadeX = (width - vadeW) / 2;
 		vadeY = 5;
 	}
-	
-	public int getX(){
+
+	public int getX() {
 		return vadeX;
 	}
-	
-	public int getY(){
+
+	public int getY() {
 		return vadeY;
 	}
-	
-	public int getW(){
+
+	public int getW() {
 		return vadeW;
 	}
-	
-	public int getH(){
+
+	public int getH() {
 		return vadeH;
 	}
 
@@ -95,18 +99,24 @@ public class VadeMecumGUI extends GuiScreen {
 		return false;
 	}
 
+	public IVadeMecumCapability getPlayerStats() {
+		return playerStats;
+	}
+
 	@Override
 	public void initGui() {
 		initPosSize();
+		voidCraft.reloadRitualList();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
-		ClientProxy.reloadVadeMecum();
-		setEntry(ClientProxy.vadeMecumEntryList.MAIN);
+		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
+		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
 		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, 195, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
+		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), i - 58, vadeY + 10));
 		this.updateButtons();
 	}
 
@@ -117,10 +127,10 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 	}
 
-	private void setEntry(VadeMecumEntry e) {
-		entry = e;
-		pageNumber = 0;
-		e.init(this);
+	private void setEntry(VadeMecumEntry e, int page) {
+		entry = e == null ? ClientProxy.vadeMecumEntryList : e;
+		pageNumber = page > entry.getPageLength(this) ? entry.getPageLength(this) : page;
+		entry.init(this);
 		this.updateButtons();
 	}
 
@@ -131,21 +141,24 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	public void onGuiClosed() {
 		ClientProxy.vadeMecum = null;
+		String e = VadeMecumEntry.getEntry(entry);
+		if (e != null) sendLastEntryPacket(e + ":" + pageNumber);
 	}
 
 	@Override
 	public void updateScreen() {
 		if (nextEntry != null) {
-			setEntry(nextEntry);
+			setEntry(nextEntry, 0);
 			nextEntry = null;
 		}
 	}
 
 	private void updateButtons() {
-		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength() : false;
+		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength(this) : false;
 		if (button_back != null) button_back.visible = canDrawPage() ? pageNumber > 0 : false;
-		if (button_entryBack != null) button_entryBack.visible = entry != ClientProxy.vadeMecumEntryList.MAIN;
-		if (button_credits != null) button_credits.visible = false;//entry == ClientProxy.vadeMecumEntryList.MAIN;
+		if (button_entryBack != null) button_entryBack.visible = entry != ClientProxy.vadeMecumEntryList;
+		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
+		if (button_largeBack != null) button_largeBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN);
 	}
 
 	/**
@@ -161,8 +174,11 @@ public class VadeMecumGUI extends GuiScreen {
 				case Back:
 					pageNumber -= 2;
 					break;
+				case LargeBack:
+					entry.goBack(this);
+					break;
 				case EntryBack:
-					setEntry(ClientProxy.vadeMecumEntryList.MAIN);
+					setEntry(ClientProxy.vadeMecumEntryList, 0);
 					break;
 				case Credits:
 					break;
@@ -194,6 +210,13 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + 12, 0xFFFF00);
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
+		if (playerStats.getCurrentActive() != null) {
+
+		}
+		if (renderStackHover != null) {
+			renderToolTip(renderStackHover, mouseX, mouseY);
+			renderStackHover = null;
+		}
 	}
 
 	private boolean canDrawPage() {
@@ -238,6 +261,34 @@ public class VadeMecumGUI extends GuiScreen {
 	}
 
 	@SideOnly(Side.CLIENT)
+	static class LargeArrowButton extends GuiButton {
+
+		public LargeArrowButton(int id, int x, int y) {
+			super(id, x, y, 23, 13, "");
+		}
+
+		/**
+		 * Draws this button to the screen.
+		 */
+		@Override
+		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+			if (this.visible) {
+				boolean flag = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.getTextureManager().bindTexture(TEXTURES);
+				int i = 50;
+				int j = 195;
+
+				if (flag) {
+					j += 11;
+				}
+
+				this.drawTexturedModalRect(this.xPosition, this.yPosition, i, j, 23, 11);
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
 	static class OverlayButton extends GuiButton {
 		public static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/edgeButton.png");
 		private final boolean isForward;
@@ -273,8 +324,18 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 	}
 
-	public void renderItemStack(ItemStack stack, int x, int y) {
-		if (itemRender != null) itemRender.renderItemIntoGUI(stack, x, y);
+	public void renderItemStack(ItemStack stack, int x, int y, int mx, int my) {
+		if (itemRender != null) {
+			RenderHelper.enableGUIStandardItemLighting();
+			GlStateManager.enableDepth();
+			itemRender.renderItemIntoGUI(stack, x, y);
+			// drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
+			GlStateManager.disableDepth();
+			if (stack.stackSize > 1) drawString(fontRendererObj, "" + stack.stackSize, x + 11, y + 9, 0xFFFFFF);
+			GlStateManager.enableDepth();
+			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
+			RenderHelper.disableStandardItemLighting();
+		}
 	}
 
 	public void drawTexturedModalRect(int x, int y, int width, int height, int textureX, int textureY, int textureW, int textureH) {
@@ -292,13 +353,30 @@ public class VadeMecumGUI extends GuiScreen {
 		GlStateManager.disableBlend();
 	}
 
-	private void sendPacketUpdates(VadeMecumPacketHandler.RequestType request, int objectID) {
+	public void sendPacketUpdates(VadeMecumPacketHandler.RequestType request, int objectID) {
 		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM);
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
 			outputStream.writeInt(pktType);
 			VadeMecumPacketHandler.ClientToServerRequest(outputStream, player, request, objectID);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			voidCraft.channel.sendToServer(packet);
+			outputStream.close();
+			bos.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void sendLastEntryPacket(String entry) {
+		if (entry.equals("")) return;
+		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY);
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(pktType);
+			outputStream.writeUTF(entry);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			voidCraft.channel.sendToServer(packet);
 			outputStream.close();

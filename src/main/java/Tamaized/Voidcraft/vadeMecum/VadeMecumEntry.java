@@ -2,22 +2,40 @@ package Tamaized.Voidcraft.vadeMecum;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.events.client.DebugEvent;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumEntry {
+	
+	private static Map<String, VadeMecumEntry> map = new HashMap<String, VadeMecumEntry>();
+	
+	public static VadeMecumEntry getEntry(String entry){
+		return map.get(entry);
+	}
+	
+	public static String getEntry(VadeMecumEntry entry){
+		for(Entry<String, VadeMecumEntry> e : map.entrySet()){
+			if(e.getValue() == entry) return e.getKey();
+		}
+		return null;
+	}
 
 	private final String title;
-	private final IVadeMecumPage[] pages;
+	private final IVadeMecumPageProvider pages;
 	private List<VadeMecumButton> buttons = new ArrayList<VadeMecumButton>();
 	private List<VadeMecumButton> buttons_2 = new ArrayList<VadeMecumButton>();
 	private final VadeMecumEntry backPage;
 
-	public VadeMecumEntry(String title, VadeMecumEntry back, IVadeMecumPage[] pageList) {
+	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPageProvider pageList) {
+		map.put(registryName, this);
 		this.title = title;
 		pages = pageList;
 		backPage = back;
@@ -71,7 +89,7 @@ public class VadeMecumEntry {
 		}
 	}
 
-	protected void goBack(VadeMecumGUI gui) {
+	public void goBack(VadeMecumGUI gui) {
 		if (backPage != null) gui.changeEntry(backPage);
 	}
 
@@ -86,10 +104,10 @@ public class VadeMecumEntry {
 	}
 
 	protected void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
-		if (pages != null) {
-			int l = pages.length;
-			pages[page].render(gui, render, x + 50, y + 20, 0);
-			if (page + 1 < l) pages[page + 1].render(gui, render, x + 285, y + 20, -70);
+		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
+		if (pageList != null) {
+			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
+			if (page + 1 < getPageLength(gui)) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}
 	}
 
@@ -105,8 +123,8 @@ public class VadeMecumEntry {
 		}
 	}
 
-	public int getPageLength() {
-		return pages.length;
+	public int getPageLength(VadeMecumGUI gui) {
+		return pages == null ? 0 : pages.getPageList(gui.getPlayerStats()).length;
 	}
 
 }

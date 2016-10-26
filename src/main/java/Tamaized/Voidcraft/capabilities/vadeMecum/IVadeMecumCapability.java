@@ -9,27 +9,45 @@ import io.netty.buffer.ByteBufInputStream;
 public interface IVadeMecumCapability {
 
 	public static enum Category {
-		TEST, TESTTWO
+		INTRO, TOME,
+
+		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+
+		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+
+		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+
+		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+
+		VoidicTouch, VoidicSheath, Implosion
 	}
 
 	public static int getCategoryID(Category c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static Category getCategoryFromID(int id) {
-		return id > Category.values().length ? null : Category.values()[id];
+		return (id > Category.values().length || id < 0) ? null : Category.values()[id];
 	}
 
 	public static enum ActivePower {
-		TEST, TESTTWO
+		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+
+		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+
+		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+
+		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+
+		VoidicTouch, VoidicSheath, Implosion
 	}
 
 	public static int getActivePowerID(ActivePower c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static ActivePower getActivePowerFromID(int id) {
-		return id > ActivePower.values().length ? null : ActivePower.values()[id];
+		return (id > ActivePower.values().length || id < 0) ? null : ActivePower.values()[id];
 	}
 
 	public static enum PassivePower {
@@ -37,11 +55,11 @@ public interface IVadeMecumCapability {
 	}
 
 	public static int getPassivePowerID(PassivePower c) {
-		return c.ordinal();
+		return c == null ? -1 : c.ordinal();
 	}
 
 	public static PassivePower getPassivePowerFromID(int id) {
-		return id > PassivePower.values().length ? null : PassivePower.values()[id];
+		return (id > PassivePower.values().length || id < 0) ? null : PassivePower.values()[id];
 	}
 
 	public boolean isDirty();
@@ -83,6 +101,14 @@ public interface IVadeMecumCapability {
 	public void clearPassivePowers();
 
 	public boolean hasPassivePower(PassivePower power);
+
+	public void setCurrentActive(ActivePower power);
+
+	public ActivePower getCurrentActive();
+
+	public void setLastEntry(String e);
+
+	public String getLastEntry();
 
 	public boolean hasLoaded();
 

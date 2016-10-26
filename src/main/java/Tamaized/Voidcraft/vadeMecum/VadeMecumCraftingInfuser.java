@@ -24,17 +24,15 @@ public class VadeMecumCraftingInfuser implements IVadeMecumCrafting {
 	}
 
 	@Override
-	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y) {
+	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my) {
 		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65, y, 0x000000);
 		GlStateManager.color(1, 1, 1, 1);
 		gui.mc.getTextureManager().bindTexture(TEXTURE);
-		RenderHelper.enableGUIStandardItemLighting();
 		gui.drawTexturedModalRect(x, y + 35, 128, 128, 0, 0, 256, 256);
 
-		gui.renderItemStack(input, x + 55, y + 90);
+		gui.renderItemStack(input, x + 55, y + 90, mx, my);
 
-		gui.renderItemStack(output, x + 55, y + 15);
-		RenderHelper.disableStandardItemLighting();
+		gui.renderItemStack(output, x + 55, y + 15, mx, my);
 	}
 
 }

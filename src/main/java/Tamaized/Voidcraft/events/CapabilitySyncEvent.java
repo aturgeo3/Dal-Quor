@@ -27,7 +27,7 @@ public class CapabilitySyncEvent {
 			}
 		}
 	}
-
+	
 	private void sendPacketUpdates(EntityPlayerMP player, IVadeMecumCapability cap) {
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
