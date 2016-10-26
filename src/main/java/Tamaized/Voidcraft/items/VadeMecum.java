@@ -89,7 +89,7 @@ public class VadeMecum extends TamItem {
 			if (cap.getBookState() && tempFlag) {
 				VadeMecumWordsOfPower.invoke(world, player);
 			} else {
-				openBook(player, world, player.getPosition());
+				if (world.isRemote) openBook(player, world, player.getPosition());
 			}
 		}
 		return true;

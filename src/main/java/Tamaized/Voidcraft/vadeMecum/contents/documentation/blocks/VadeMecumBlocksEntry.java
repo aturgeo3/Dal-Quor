@@ -57,7 +57,7 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.SoftBedrock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Soft Bedrock", new ItemStack(voidCraft.blocks.blockFakeBedrock)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidBrick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Void Brick", new ItemStack(voidCraft.blocks.blockVoidbrick)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.HoleinReality), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Hole in Reality", new ItemStack(voidCraft.blocks.realityHole)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Voidic Ritual Block", new ItemStack(voidCraft.blocks.ritualBlock)));
+		//addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Voidic Ritual Block", new ItemStack(voidCraft.blocks.ritualBlock)));
 	}
 
 	@Override

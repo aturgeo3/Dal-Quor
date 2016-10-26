@@ -7,7 +7,6 @@ import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.TamModized.registry.TamColorRegistry;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.items.ChainedSkull;
@@ -26,6 +25,8 @@ import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class VoidCraftItems implements ITamRegistry {
@@ -208,19 +209,22 @@ public class VoidCraftItems implements ITamRegistry {
 	public String getModID() {
 		return voidCraft.modid;
 	}
-
+	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientPreInit() {
 		VadeMecumMeshDefinition.preRegister();
 		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientInit() {
 		//VadeMecumMeshDefinition.register();
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void clientPostInit() {
 		// TODO Auto-generated method stub
 
