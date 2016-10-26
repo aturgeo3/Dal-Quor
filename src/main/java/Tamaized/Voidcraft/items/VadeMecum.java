@@ -1,11 +1,7 @@
 package Tamaized.Voidcraft.items;
 
-import java.util.HashSet;
-
-import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
@@ -16,7 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,11 +21,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VadeMecum extends TamItem {
 
@@ -85,11 +81,12 @@ public class VadeMecum extends TamItem {
 
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
-		if (cap == null || world.isRemote) return false;
-		if (player.isSneaking()) {
+		if (cap == null) return false;
+		boolean tempFlag = false;
+		if (player.isSneaking() && tempFlag) {
 			cap.toggleBookState();
 		} else {
-			if (cap.getBookState()) {
+			if (cap.getBookState() && tempFlag) {
 				VadeMecumWordsOfPower.invoke(world, player);
 			} else {
 				openBook(player, world, player.getPosition());
@@ -98,8 +95,10 @@ public class VadeMecum extends TamItem {
 		return true;
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void openBook(EntityPlayer player, World world, BlockPos pos) {
-		player.openGui(voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecum), world, pos.getX(), pos.getY(), pos.getZ());
+		// player.openGui(voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecum), world, pos.getX(), pos.getY(), pos.getZ());
+		net.minecraft.client.Minecraft.getMinecraft().displayGuiScreen(new Tamaized.Voidcraft.GUI.client.VadeMecumGUI(player));
 	}
 
 	@Override

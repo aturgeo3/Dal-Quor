@@ -1,10 +1,13 @@
 package Tamaized.Voidcraft.items;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
+import Tamaized.TamModized.helper.RayTraceHelper;
+import Tamaized.TamModized.particles.ParticleHelper;
+import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
+import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +17,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -24,15 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
-import Tamaized.TamModized.helper.RayTraceHelper;
-import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
-import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
-
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class VoidicDrill extends VoidicPowerItem {
 
@@ -68,14 +60,6 @@ public class VoidicDrill extends VoidicPowerItem {
 		EntityPlayer player = (EntityPlayer) entity;
 		World world = player.worldObj;
 		EnumHand hand = player.getActiveHand();
-		if (!player.capabilities.isCreativeMode){
-			if(!powerStackInUse.containsKey(stack)) powerStackInUse.put(stack, VoidicPowerItemHandler.getItemVoidicPower(stack));
-			if(powerStackInUse.get(stack) > 0) powerStackInUse.put(stack, powerStackInUse.get(stack)-1);
-			else{
-				stopUsing(stack);
-				return;
-			}
-		}
 		if (!world.isRemote) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			exclude.add(player);
@@ -185,6 +169,11 @@ public class VoidicDrill extends VoidicPowerItem {
 			id = entityID;
 		}
 
+	}
+
+	@Override
+	protected int useAmount() {
+		return 1;
 	}
 
 }

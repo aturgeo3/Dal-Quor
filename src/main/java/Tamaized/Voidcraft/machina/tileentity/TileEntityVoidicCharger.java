@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPower;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItemHandler;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -197,10 +198,13 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 
 	@Override
 	public void onUpdate() {
-		if (voidicPower > 0 && slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].getItem() instanceof VoidicPowerItem && VoidicPowerItemHandler.getItemVoidicPowerPerc(slots[SLOT_DEFAULT]) < 1.0f) {
-			int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
-			int overflow = VoidicPowerItemHandler.fillItemVoidicPower(slots[SLOT_DEFAULT], amount);
-			voidicPower -= (amount - overflow);
+		if (voidicPower > 0 && slots[SLOT_DEFAULT] != null && slots[SLOT_DEFAULT].getItem() instanceof VoidicPowerItem) {
+			IVoidicPowerCapability cap = slots[SLOT_DEFAULT].getCapability(CapabilityList.VOIDICPOWER, null);
+			if (cap != null && cap.getAmountPerc() < 1.0f) {
+				int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
+				int overflow = cap.fill(amount);
+				voidicPower -= (amount - overflow);
+			}
 		}
 	}
 

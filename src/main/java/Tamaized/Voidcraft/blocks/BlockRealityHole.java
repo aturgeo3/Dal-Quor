@@ -77,9 +77,9 @@ public class BlockRealityHole extends TamBlock {
 			World w = entityIn.worldObj;
 			x += (w.rand.nextInt(400) - 200);
 			z += (w.rand.nextInt(400) - 200);
-			while (!w.isAirBlock(new BlockPos(x, y, z)) && !w.isAirBlock(new BlockPos(x, y + 1, z))){
+			while (!w.isAirBlock(new BlockPos(x, y, z)) && !w.isAirBlock(new BlockPos(x, y + 1, z))) { // TODO: fix this later
 				y++;
-				System.out.println(x+":"+y+":"+z);
+				// System.out.println(x+":"+y+":"+z);
 			}
 			entityIn.setPosition(x, y, z);
 		}

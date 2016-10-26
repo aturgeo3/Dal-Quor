@@ -25,4 +25,9 @@ public class VoidicSuppressor extends VoidicPowerItem {
 		return false;
 	}
 
+	@Override
+	protected int useAmount() {
+		return 1;
+	}
+
 }

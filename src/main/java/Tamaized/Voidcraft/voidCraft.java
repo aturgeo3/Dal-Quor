@@ -25,6 +25,9 @@ import Tamaized.Voidcraft.capabilities.vadeMecumItem.VadeMecumItemCapabilityStor
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.VoidicInfusionCapabilityStorage;
+import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
+import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityStorage;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
@@ -212,6 +215,7 @@ public class voidCraft extends TamModBase {
 		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IVoidicPowerCapability.class, new VoidicPowerCapabilityStorage(), VoidicPowerCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 
 		// Proxy Stuff
