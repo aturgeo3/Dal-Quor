@@ -1,5 +1,4 @@
- - Tamaized: A minimum Forge version and TamModized version are now required
+ - Tamaized: A minimum Forge version and TamModized version are now required and Forge will give a warning if either one is missing, this is to prevent crashes
  - Tamaized: A platform now generates with the void portal if there is either air or a hole in reality in the area where the platform would be
- - Tamaized: Voidic Power Items now use Capabilities to update their values instead of direct NBT
  - Tamaized: The Vade Mecum will remember the last page you were on
  - Tamaized: The Vade Mecum now has item tooltips and itemstack amounts
