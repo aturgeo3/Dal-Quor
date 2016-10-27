@@ -6,10 +6,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapability> {
-	
-	public VoidicPowerCapabilityStorage(){
+
+	public VoidicPowerCapabilityStorage() {
 		voidCraft.logger.info("VoidicPowerCapabilityStorage Registered");
 	}
 
@@ -29,5 +31,5 @@ public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapabi
 		instance.setDefault(compound.getBoolean("isDefault"));
 		instance.setLoaded();
 	}
-
+	
 }

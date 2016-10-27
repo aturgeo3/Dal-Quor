@@ -7,6 +7,7 @@ import java.util.Map;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.creativetab.CreativeTabs;
@@ -61,7 +62,6 @@ public abstract class VoidicPowerItem extends TamItem {
 
 			@Override
 			public void deserializeNBT(NBTTagCompound nbt) {
-				inst.setValues(getDefaultVoidicPower(), getDefaultMaxVoidicPower());
 				CapabilityList.VOIDICPOWER.getStorage().readNBT(CapabilityList.VOIDICPOWER, inst, null, nbt);
 			}
 
@@ -113,6 +113,9 @@ public abstract class VoidicPowerItem extends TamItem {
 							break;
 					}
 				}
+			} else {
+				NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid, true);
+				cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 			}
 			if (cap.isInUse()) {
 				if (map.containsKey(cap)) {
@@ -140,6 +143,8 @@ public abstract class VoidicPowerItem extends TamItem {
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
+		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid, true);
+		cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;
 	}
 

@@ -81,12 +81,14 @@ public class PlayerInfusionHandler {
 				IVoidicPowerCapability cap = player.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
 				if (cap != null && cap.getCurrentPower() > 0) {
 					cap.drain(1);
+					cap.sendUpdates(null, 0, player.getHeldItemMainhand());
 					flag = false;
 				}
 			} else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
 				IVoidicPowerCapability cap = player.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
 				if (cap != null && cap.getCurrentPower() > 0) {
 					cap.drain(1);
+					cap.sendUpdates(null, 0, player.getHeldItemOffhand());
 					flag = false;
 				}
 			} else if (player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null) {

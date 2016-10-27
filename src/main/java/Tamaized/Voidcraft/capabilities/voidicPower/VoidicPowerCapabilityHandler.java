@@ -12,6 +12,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -62,8 +63,8 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
 	@Override
 	public void setValues(int curr, int max) {
-		currPower = curr;
-		maxPower = max;
+		setCurrentPower(curr);
+		setMaxPower(max);
 		markDirty();
 	}
 
@@ -139,7 +140,8 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
 	@Override
 	public void sendUpdates(EntityPlayer player, int slot, ItemStack stack) {
-		if (player instanceof EntityPlayerMP) sendPacketUpdates((EntityPlayerMP) player, slot, stack, this);
+		//if (player instanceof EntityPlayerMP) sendPacketUpdates((EntityPlayerMP) player, slot, stack, this);
+		sendPacketUpdates(null, 0, stack, this);
 		dirty = false;
 	}
 
@@ -156,6 +158,10 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 	}
 
 	private void sendPacketUpdates(EntityPlayerMP player, int slot, ItemStack stack, IVoidicPowerCapability cap) {
+		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid, true);
+		nbt.setInteger("currPower", cap.getCurrentPower());
+		nbt.setInteger("maxPower", cap.getMaxPower());
+		/*
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
@@ -169,6 +175,7 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		*/
 	}
 
 }

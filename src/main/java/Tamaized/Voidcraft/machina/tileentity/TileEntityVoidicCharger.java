@@ -204,6 +204,7 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPower implements IS
 				int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
 				int overflow = cap.fill(amount);
 				voidicPower -= (amount - overflow);
+				cap.sendUpdates(null, 0, slots[SLOT_DEFAULT]);
 			}
 		}
 	}
