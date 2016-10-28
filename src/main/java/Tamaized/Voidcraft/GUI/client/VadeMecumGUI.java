@@ -109,7 +109,7 @@ public class VadeMecumGUI extends GuiScreen {
 		voidCraft.reloadRitualList();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
-		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
+		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry() != "null" && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
 		//else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		else setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 		int i = (this.width - 192) / 2;

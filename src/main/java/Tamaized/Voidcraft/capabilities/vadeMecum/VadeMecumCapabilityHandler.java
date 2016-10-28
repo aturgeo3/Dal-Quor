@@ -20,7 +20,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	private ArrayList<IVadeMecumCapability.PassivePower> passiveList = new ArrayList<IVadeMecumCapability.PassivePower>();
 
 	private ActivePower currActivePower;
-	private String lastEntry;
+	private String lastEntry = "null";
 
 	public void markDirty() {
 		markDirty = true;
