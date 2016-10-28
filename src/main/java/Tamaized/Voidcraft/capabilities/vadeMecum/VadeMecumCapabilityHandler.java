@@ -164,7 +164,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void setLastEntry(String e) {
-		lastEntry = e;
+		lastEntry = (e == null || e.isEmpty()) ? "null" : e;
 		markDirty();
 	}
 
