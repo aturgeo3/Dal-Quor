@@ -41,8 +41,7 @@ dependencies {
 	compile files("libs/TamModized-1.10.2-${project.tammodizedVersion}.jar")
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraftVersion
 
