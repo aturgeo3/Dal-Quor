@@ -398,20 +398,20 @@ public class SkinHandler {
 	}
 
 	private void loadCachedAlias(PlayerNameAlias alias) {
-		voidCraft.logger.info("Loading alias cache: " + alias);
+		voidCraft.logger.info("Loading alias cache: " + uuidNamesFlip.get(getUUID(alias)));
 		aliasProfile.put(alias, new GameProfile(getUUID(alias), uuidNamesFlip.get(getUUID(alias))));
 		loadAliasResource(alias);
 	}
 
 	private void loadAlias(PlayerNameAlias alias, String name) {
-		voidCraft.logger.info("Loading updated alias: " + alias);
+		voidCraft.logger.info("Loading updated alias: " + uuidNamesFlip.get(getUUID(alias)));
 		aliasProfile.put(alias, new GameProfile(getUUID(alias), name));
 		loadAliasResource(alias);
 	}
 
 	private void loadAliasResource(PlayerNameAlias alias) {
 		try {
-			BufferedImage bimg = ImageIO.read(new File(loc + alias.toString() + ".png"));
+			BufferedImage bimg = ImageIO.read(new File(loc + uuidNamesFlip.get(getUUID(alias)) + ".png"));
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 				net.minecraft.client.renderer.texture.DynamicTexture dt = new net.minecraft.client.renderer.texture.DynamicTexture(bimg);
 				net.minecraft.client.renderer.texture.TextureManager tm = net.minecraft.client.Minecraft.getMinecraft().getTextureManager();
