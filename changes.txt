@@ -1,0 +1,2 @@
+ - Tamaized: Hole in Reality entry in the Vade Mecum is a little bit more clear
+ - Tamaized: Fixed an issue with loading resources on a Linux OS
