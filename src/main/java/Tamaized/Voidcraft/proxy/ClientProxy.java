@@ -60,6 +60,7 @@ import Tamaized.Voidcraft.entity.nonliving.render.RenderObsidianFlask;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderVoidChain;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
+import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
@@ -116,6 +117,7 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderPlayer());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
+		MinecraftForge.EVENT_BUS.register(new TextureStitch());
 
 		float shadowSize = 0.5F;
 		// MOBS
