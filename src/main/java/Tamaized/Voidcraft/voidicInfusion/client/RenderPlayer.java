@@ -83,9 +83,9 @@ public class RenderPlayer {
 		} else if (living.getActivePotionEffect(voidCraft.potions.frostSheath) != null) {
 			colors = new float[] { 0.0f, 1.0f, 1.0f, 1.0f };
 		} else if (living.getActivePotionEffect(voidCraft.potions.litSheath) != null) {
-			colors = new float[] { 1.0f, 1.0f, 1.0f, 0.85f };
+			colors = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
 		} else if (living.getActivePotionEffect(voidCraft.potions.acidSheath) != null) {
-			colors = new float[] { 0.0f, 1.0f, 0.0f, 0.85f };
+			colors = new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
 		}
 		if (colors == null) return;
 		GlStateManager.disableLighting();
