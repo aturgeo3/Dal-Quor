@@ -7,7 +7,7 @@ import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.lich.VadeMecumPageListLich;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.specter.VadeMecumPageListSpecterChain;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.spectre.VadeMecumPageListSpectreChain;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.wraith.VadeMecumPageListVoidWraith;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.wrath.VadeMecumPageListVoidWrath;
 import net.minecraft.init.Items;
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumMobsEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		VoidWraith, ChainedSpecter, VoidWrath, VoidLich, HerobrineCreeper
+		VoidWraith, ChainedSpectre, VoidWrath, VoidLich, HerobrineCreeper
 	}
 
 	public static int getEntryID(Entry e) {
@@ -28,7 +28,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	}
 
 	public VadeMecumEntry voidWraith;
-	public VadeMecumEntry chainedSpecter;
+	public VadeMecumEntry chainedSpectre;
 	public VadeMecumEntry voidWrath;
 	public VadeMecumEntry voidLich;
 	public VadeMecumEntry herobrineCreeper;
@@ -40,7 +40,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	@Override
 	public void initObjects() {
 		voidWraith = new VadeMecumEntry("docs_Mobs_voidWraith", "", this, new VadeMecumPageListVoidWraith());
-		chainedSpecter = new VadeMecumEntry("docs_Mobs_chainedSpecter", "", this, new VadeMecumPageListSpecterChain());
+		chainedSpectre = new VadeMecumEntry("docs_Mobs_chainedSpectre", "", this, new VadeMecumPageListSpectreChain());
 		voidWrath = new VadeMecumEntry("docs_Mobs_voidWrath", "", this, new VadeMecumPageListVoidWrath());
 		voidLich = new VadeMecumEntry("docs_Mobs_voidLich", "", this, new VadeMecumPageListLich());
 		herobrineCreeper = new VadeMecumEntry("docs_Mobs_herobrineCreeper", "", this, new VadeMecumPageListHerobrineCreeper());
@@ -51,7 +51,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 		initObjects();
 		clearButtons();
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWraith), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Wraith", new ItemStack(voidCraft.items.ectoplasm)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSpecter), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Chained Specter", new ItemStack(voidCraft.items.voidChain)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSpectre), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Chained Spectre", new ItemStack(voidCraft.items.voidChain)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWrath), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Void's Wrath", new ItemStack(voidCraft.items.burnBone)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidLich), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Void Lich", new ItemStack(voidCraft.items.voidCloth)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.HerobrineCreeper), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Herobrine Creeper", new ItemStack(Items.GUNPOWDER)));
@@ -63,8 +63,8 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 			case VoidWraith:
 				gui.changeEntry(voidWraith);
 				break;
-			case ChainedSpecter:
-				gui.changeEntry(chainedSpecter);
+			case ChainedSpectre:
+				gui.changeEntry(chainedSpectre);
 				break;
 			case VoidWrath:
 				gui.changeEntry(voidWrath);
