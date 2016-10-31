@@ -57,6 +57,7 @@ import Tamaized.Voidcraft.events.ItemEntityEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
+import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
@@ -265,6 +266,7 @@ public class voidCraft extends TamModBase {
 		// MinecraftForge.EVENT_BUS.register(new CustomElytraHandler());
 		MinecraftForge.EVENT_BUS.register(config);
 		MinecraftForge.EVENT_BUS.register(new ItemEntityEvent());
+		MinecraftForge.EVENT_BUS.register(new TextureStitch());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
