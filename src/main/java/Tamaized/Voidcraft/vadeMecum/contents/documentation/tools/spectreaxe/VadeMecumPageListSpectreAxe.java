@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.specterpick;
+package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.spectreaxe;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -8,20 +8,20 @@ import Tamaized.Voidcraft.vadeMecum.VadeMecumCraftingNormal;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPageCrafting;
 import net.minecraft.item.ItemStack;
 
-public class VadeMecumPageListSpecterPick implements IVadeMecumPageProvider {
+public class VadeMecumPageListSpectreAxe implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Specter Pickaxe", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Spectre Axe", new ItemStack[] {
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.tools.voidPickaxe),
+						new ItemStack(voidCraft.tools.voidAxe),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm) }, new ItemStack(voidCraft.tools.spectrePickaxe))) };
+						new ItemStack(voidCraft.items.ectoplasm) }, new ItemStack(voidCraft.tools.spectreAxe))) };
 	}
 
 }
