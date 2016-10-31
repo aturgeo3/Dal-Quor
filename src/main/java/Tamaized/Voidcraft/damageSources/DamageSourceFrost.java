@@ -2,10 +2,10 @@ package Tamaized.Voidcraft.damageSources;
 
 import net.minecraft.util.DamageSource;
 
-public class DamageSourceAcid extends DamageSource {
+public class DamageSourceFrost extends DamageSource {
 
-	public DamageSourceAcid() {
-		super("Acid");
+	public DamageSourceFrost() {
+		super("Frost");
 		this.setDamageBypassesArmor();
 		this.setMagicDamage();
 	}

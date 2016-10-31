@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.voidicInfusion.client;
+package Tamaized.Voidcraft.client;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;

@@ -114,7 +114,7 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
-		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.voidicInfusion.client.RenderPlayer());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderPlayer());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 
 		float shadowSize = 0.5F;
