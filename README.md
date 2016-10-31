@@ -18,6 +18,8 @@ After stepping through the portal, you'll be in the Void, a black abyss where on
 ## Other Mod Integrations
  This mod currently has integrations with:
  * Note: These Mods are NOT required in order to use this mod.
+ * Planned:
+  * Aether II
  * 1.9.4 - 1.10.2
   * JEI
  * 1.8.9
