@@ -53,6 +53,7 @@ import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
 import Tamaized.Voidcraft.events.CapabilitySyncEvent;
 import Tamaized.Voidcraft.events.DamageEvent;
+import Tamaized.Voidcraft.events.DeathEvent;
 import Tamaized.Voidcraft.events.ItemEntityEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
@@ -266,6 +267,7 @@ public class voidCraft extends TamModBase {
 		// MinecraftForge.EVENT_BUS.register(new CustomElytraHandler());
 		MinecraftForge.EVENT_BUS.register(config);
 		MinecraftForge.EVENT_BUS.register(new ItemEntityEvent());
+		MinecraftForge.EVENT_BUS.register(new DeathEvent());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
