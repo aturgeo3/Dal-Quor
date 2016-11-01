@@ -40,7 +40,7 @@ public class DamageEvent {
 			EntityLivingBase living = (EntityLivingBase) e.getEntity();
 
 			// Dodge Mechanic
-			if (!living.hasCapability(CapabilityList.VOIDICINFUSION, null) || living.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.50f) {
+			if (living.hasCapability(CapabilityList.VOIDICINFUSION, null) && living.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.50f) {
 				if (Math.floor(Math.random() * 5) == 0 && isWhiteListed(e.getSource())) { // 0-4; 25%
 					e.setCanceled(true);
 					living.addChatMessage(new TextComponentString("*Incorporeal"));
