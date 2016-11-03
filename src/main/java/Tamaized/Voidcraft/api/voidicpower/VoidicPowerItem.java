@@ -175,7 +175,7 @@ public abstract class VoidicPowerItem extends TamItem {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		if (!canBeUsed()) return ActionResult.newResult(EnumActionResult.PASS, stack);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (cap != null && cap.getCurrentPower() > useAmount()) {
+		if (cap != null && cap.getCurrentPower() >= useAmount()) {
 			player.setActiveHand(hand);
 			cap.setInUse(true);
 			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);

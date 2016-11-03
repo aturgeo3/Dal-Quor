@@ -67,7 +67,8 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 		// gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, -1);
 	}
 
-	public int getPageLength() {
+	@Override
+	public int getPageLength(VadeMecumGUI gui) {
 		return 1;
 	}
 

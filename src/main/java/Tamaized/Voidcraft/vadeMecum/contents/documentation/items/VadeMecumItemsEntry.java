@@ -12,6 +12,7 @@ import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.ectoplasm.VadeM
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.moltenvoidchain.VadeMecumPageListMoltenChain;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.moltenvoidchainpart.VadeMecumPageListMoltenChainPart;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.obsidianflask.VadeMecumPageListObsidianFlask;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.realityTeleporter.VadeMecumPageListRealityTeleporter;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidchain.VadeMecumPageListVoidChain;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidcloth.VadeMecumPageListVoidCloth;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidcrystal.VadeMecumPageListVoidCrystal;
@@ -22,7 +23,11 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumItemsEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		VoidCrystal, Ectoplasm, VoidChain, MoltenVoidChainPart, MoltenVoidChain, CharredBone, VoidStar, ObsidianFlask, VoidInfusedCloth, VoidDusts, ChainedSkull, VoidicSupressor, VoidicDrill
+		VoidCrystal, Ectoplasm, VoidChain, MoltenVoidChainPart, MoltenVoidChain, CharredBone,
+
+		VoidStar, ObsidianFlask, VoidInfusedCloth, VoidDusts, ChainedSkull, VoidicSupressor, VoidicDrill,
+
+		RealityTeleporter
 	}
 
 	public static int getEntryID(Entry e) {
@@ -39,12 +44,15 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 	public VadeMecumEntry moltenVoidChainPart;
 	public VadeMecumEntry moltenVoidChain;
 	public VadeMecumEntry charredBone;
+
 	public VadeMecumEntry voidStar;
 	public VadeMecumEntry obsidianFlask;
 	public VadeMecumEntry voidInfusedCloth;
 	public VadeMecumEntry voidDusts;
 	public VadeMecumEntry chainedSkull;
 	public VadeMecumEntry voidicSupressor;
+
+	public VadeMecumEntry realityTeleporter;
 
 	public VadeMecumItemsEntry(VadeMecumEntry back) {
 		super("docs_Items", "Items", back, null);
@@ -58,12 +66,15 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		moltenVoidChainPart = new VadeMecumEntry("docs_Items_moltenVoidChainPart", "", this, new VadeMecumPageListMoltenChainPart());
 		moltenVoidChain = new VadeMecumEntry("docs_Items_moltenVoidChain", "", this, new VadeMecumPageListMoltenChain());
 		charredBone = new VadeMecumEntry("docs_Items_charredBone", "", this, new VadeMecumPageListCharredBone());
+
 		voidStar = new VadeMecumEntry("docs_Items_voidStar", "", this, new VadeMecumPageListVoidStar());
 		obsidianFlask = new VadeMecumEntry("docs_Items_obsidianFlask", "", this, new VadeMecumPageListObsidianFlask());
 		voidInfusedCloth = new VadeMecumEntry("docs_Items_voidInfusedCloth", "", this, new VadeMecumPageListVoidCloth());
 		voidDusts = new VadeMecumEntry("docs_Items_voidDusts", "", this, new VadeMecumPageListVoidDusts());
 		chainedSkull = new VadeMecumEntry("docs_Items_chainedSkull", "", this, new VadeMecumPageListChainedSkull());
 		voidicSupressor = new VadeMecumEntry("docs_Items_voidicSupressor", "", this, new VadeMecumPageListSuppressor());
+
+		realityTeleporter = new VadeMecumEntry("docs_Items_realityTeleporter", "", this, new VadeMecumPageListRealityTeleporter());
 	}
 
 	@Override
@@ -83,6 +94,8 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidDusts), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, "Void Dusts", new ItemStack(voidCraft.items.diamondDust)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSkull), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 4), 100, 20, "Chained Skull", new ItemStack(voidCraft.items.ChainedSkull)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicSupressor), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 5), 100, 20, "Voidic Supressor", new ItemStack(voidCraft.items.voidicSuppressor)));
+
+		addButton2(new VadeMecumButton(gui, getEntryID(Entry.RealityTeleporter), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Reality Teleporter", new ItemStack(voidCraft.items.realityTeleporter)));
 	}
 
 	@Override
@@ -124,14 +137,18 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 			case VoidicSupressor:
 				gui.changeEntry(voidicSupressor);
 				break;
+			case RealityTeleporter:
+				gui.changeEntry(realityTeleporter);
+				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
 	}
 
-	public int getPageLength() {
-		return 1;
+	@Override
+	public int getPageLength(VadeMecumGUI gui) {
+		return 3;
 	}
 
 }

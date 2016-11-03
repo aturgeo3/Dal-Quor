@@ -160,6 +160,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (button_entryBack != null) button_entryBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN);
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
 		if (button_largeBack != null) button_largeBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN);
+		System.out.println(entry);
 	}
 
 	/**

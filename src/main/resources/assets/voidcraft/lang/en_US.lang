@@ -34,6 +34,7 @@ item.etherealFruit_emerald.name=Ethereal Fruit
 item.etherealFruit_diamond.name=Ethereal Fruit
 item.etherealSeed.name=Ethereal Seeds
 item.vadeMecum.name=Void Vade Mecum
+item.realityTeleporter.name=Reality Teleporter
 
 # Blocks
 tile.voidcraft:blockVoidFluid.name=Liquid Void

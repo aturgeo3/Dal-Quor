@@ -14,6 +14,7 @@ import Tamaized.Voidcraft.items.Debugger;
 import Tamaized.Voidcraft.items.EmptyObsidianFlask;
 import Tamaized.Voidcraft.items.EtherealFruit;
 import Tamaized.Voidcraft.items.ObsidianFlask;
+import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.items.VadeMecum;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicDrill;
@@ -65,6 +66,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 	public static VoidicSuppressor voidicSuppressor;
 	public static VoidicDrill voidicDrill;
+	public static RealityTeleporter realityTeleporter;
 
 	public static TamItemSeed etherealSeed;
 	public static EtherealFruit etherealFruit;
@@ -115,6 +117,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 		modelList.add(voidicSuppressor = new VoidicSuppressor(voidCraft.tabs.tabVoid, "voidicSuppressor", 1));
 		modelList.add(voidicDrill = new VoidicDrill(voidCraft.tabs.tabVoid, "voidicDrill", 1));
+		modelList.add(realityTeleporter = new RealityTeleporter(voidCraft.tabs.tabVoid, "realityTeleporter", 1));
 
 		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
 		soilList.add(voidCraft.blocks.blockFakeBedrockFarmland);
@@ -160,6 +163,7 @@ public class VoidCraftItems implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
 		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
+		GameRegistry.addRecipe(new ItemStack(realityTeleporter), "BEZ", "CHC", "BCB", 'B', burnBone, 'E', emeraldDust, 'Z', voidCraft.blocks.voidicCharger, 'C', MoltenvoidChain, 'H', voidCraft.blocks.realityHole);
 
 		GameRegistry.addSmelting(voidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);

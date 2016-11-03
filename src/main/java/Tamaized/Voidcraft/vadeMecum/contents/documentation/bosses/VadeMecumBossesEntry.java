@@ -52,7 +52,8 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 		}
 	}
 
-	public int getPageLength() {
+	@Override
+	public int getPageLength(VadeMecumGUI gui) {
 		return 1;
 	}
 
