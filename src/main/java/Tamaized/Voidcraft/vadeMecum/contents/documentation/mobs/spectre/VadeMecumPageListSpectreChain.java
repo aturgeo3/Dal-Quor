@@ -9,7 +9,7 @@ public class VadeMecumPageListSpectreChain implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Chained Spectre", "A common entity found within the Void. Its attacks are ranged based. Upon death it'll drop Void Chains.") };
+				new VadeMecumPage("Chained Spectre", "A common entity found within the Void. Its attacks are ranged based. Upon death it'll drop Void Chains. If something is slain by a Chained Spectre, another one will rise in place of the dead enemy.") };
 	}
 
 }
