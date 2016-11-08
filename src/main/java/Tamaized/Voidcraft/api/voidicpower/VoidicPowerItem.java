@@ -109,7 +109,7 @@ public abstract class VoidicPowerItem extends TamItem {
 								break;
 							}
 						default:
-							if (ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory[itemSlot])) cap.sendUpdates(player, itemSlot, stack);
+							if (itemSlot < player.inventory.mainInventory.length && ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory[itemSlot])) cap.sendUpdates(player, itemSlot, stack);
 							break;
 					}
 				}

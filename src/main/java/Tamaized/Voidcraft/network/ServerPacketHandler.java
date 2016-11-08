@@ -2,12 +2,14 @@ package Tamaized.Voidcraft.network;
 
 import java.io.IOException;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.items.HookShot;
+import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
@@ -23,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ServerPacketHandler {
 
 	public static enum PacketType {
-		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, VADEMECUM_LASTENTRY, CUSTOM_ELYTRA
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, VADEMECUM_LASTENTRY, CUSTOM_ELYTRA, LINK_CLEAR
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -52,7 +54,17 @@ public class ServerPacketHandler {
 				TileEntityVoidBox voidBox;
 				pktType = bbis.readInt();
 				switch (getPacketTypeFromID(pktType)) {
-					case CUSTOM_ELYTRA:
+					case LINK_CLEAR: {
+						int slot = bbis.readInt();
+						ItemStack stack = null;
+						if (slot >= 0 && slot < player.inventory.mainInventory.length) stack = player.inventory.mainInventory[slot];
+						else if (slot == -1) stack = player.inventory.offHandInventory[0];
+						if (stack != null && stack.getItem() == voidCraft.items.realityTeleporter) {
+							RealityTeleporter.clearLink(stack);
+						}
+					}
+						break;
+					case CUSTOM_ELYTRA: {
 						if (!player.onGround && player.motionY < 0.0D && !CustomElytraHandler.isElytraFlying(player) && !player.isInWater()) {
 							ItemStack itemstack = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 							if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
@@ -61,50 +73,59 @@ public class ServerPacketHandler {
 						} else {
 							CustomElytraHandler.setFlying(player, false);
 						}
+					}
 						break;
-					case VADEMECUM:
+					case VADEMECUM: {
 						VadeMecumPacketHandler.DecodeRequestServer(bbis, player);
+					}
 						break;
 					case VADEMECUM_LASTENTRY:
 						IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-						if(cap != null) cap.setLastEntry(bbis.readUTF());
+						if (cap != null) cap.setLastEntry(bbis.readUTF());
 						break;
-					case VOIDBOX_PLAY:
+					case VOIDBOX_PLAY: {
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
 						}
 						voidBox.PlayNextSound();
+					}
 						break;
-					case VOIDBOX_STOP:
+					case VOIDBOX_STOP: {
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
 						}
 						voidBox.StopTheSoundAndDeposit();
+					}
 						break;
-					case VOIDBOX_LOOP:
+					case VOIDBOX_LOOP: {
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
 						}
 						voidBox.setLoopState();
+					}
 						break;
-					case VOIDBOX_AUTO:
+					case VOIDBOX_AUTO: {
 						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
 						}
 						voidBox.setAutoState();
+					}
 						break;
-					case HOOKSHOT_STOP:
+					case HOOKSHOT_STOP: {
 						HookShot.handler.put(player, false);
+					}
 						break;
-					default:
+					default: {
+
+					}
 						break;
 				}
 			} catch (Exception e) {

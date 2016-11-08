@@ -5,6 +5,8 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.VadeMecumItemsEntry.Entry;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.realityTeleporter.VadeMecumPageListRealityTeleporter;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.spectreaxe.VadeMecumPageListSpectreAxe;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.spectrepick.VadeMecumPageListSpectrePick;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.voidaxe.VadeMecumPageListVoidAxe;
@@ -17,7 +19,9 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumToolsEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		VoidPick, VoidAxe, VoidShovel, VoidHoe, SpectrePick, SpectreAxe, VoidicDrill
+		VoidPick, VoidAxe, VoidShovel, VoidHoe, SpectrePick, SpectreAxe,
+
+		VoidicDrill, RealityTeleporter
 	}
 
 	public static int getEntryID(Entry e) {
@@ -36,6 +40,7 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public VadeMecumEntry spectreAxe;
 
 	public VadeMecumEntry voidicDrill;
+	public VadeMecumEntry realityTeleporter;
 
 	public VadeMecumToolsEntry(VadeMecumEntry back) {
 		super("docs_Tools", "Tools", back, null);
@@ -51,6 +56,7 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 		spectreAxe = new VadeMecumEntry("docs_Tools_spectreAxe", "", this, new VadeMecumPageListSpectreAxe());
 
 		voidicDrill = new VadeMecumEntry("docs_Tools_voidicDrill", "", this, new VadeMecumPageListVoidicDrill());
+		realityTeleporter = new VadeMecumEntry("docs_Items_realityTeleporter", "", this, new VadeMecumPageListRealityTeleporter());
 	}
 
 	@Override
@@ -65,6 +71,8 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.SpectreAxe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Spectre Axe", new ItemStack(voidCraft.tools.spectreAxe)));
 
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicDrill), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, "Voidic Drill", new ItemStack(voidCraft.items.voidicDrill)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.RealityTeleporter), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, "Reality Teleporter", new ItemStack(voidCraft.items.realityTeleporter)));
+
 	}
 
 	@Override
@@ -90,6 +98,9 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 				break;
 			case VoidicDrill:
 				gui.changeEntry(voidicDrill);
+				break;
+			case RealityTeleporter:
+				gui.changeEntry(realityTeleporter);
 				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);

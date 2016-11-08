@@ -20,7 +20,6 @@ public abstract class InventoryItem implements IInventory {
 	}
 
 	public void saveData() {
-		System.out.println("saving");
 		writeToNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem", true));
 	}
 

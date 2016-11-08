@@ -28,6 +28,7 @@ import Tamaized.Voidcraft.blocks.XiaBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.RealityStabilizer;
+import Tamaized.Voidcraft.machina.RealityTeleporterBlock;
 import Tamaized.Voidcraft.machina.VoidBox;
 import Tamaized.Voidcraft.machina.VoidInfuser;
 import Tamaized.Voidcraft.machina.VoidMacerator;
@@ -77,6 +78,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static VoidicPowerCharger voidicCharger;
 	public static RealityStabilizer realityStabilizer;
 	public static VoidicAlchemyTable voidicAlchemyTable;
+	public static RealityTeleporterBlock realityTeleporterBlock;
 
 	public static BlockEtherealPlant etherealPlant;
 
@@ -120,6 +122,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(voidicCharger = new VoidicPowerCharger(voidCraft.tabs.tabVoid, Material.IRON, "voidicCharger", 3.5f));
 		modelList.add(realityStabilizer = new RealityStabilizer(voidCraft.tabs.tabVoid, Material.IRON, "realityStabilizer", 3.5f));
 		modelList.add(voidicAlchemyTable = new VoidicAlchemyTable(voidCraft.tabs.tabVoid, Material.IRON, "voidicAlchemyTable", 3.5f));
+		modelList.add(realityTeleporterBlock = new RealityTeleporterBlock(voidCraft.tabs.tabVoid, Material.IRON, "realityTeleporterBlock", 3.5f));
 
 		modelList.add(etherealPlant = new BlockEtherealPlant(voidCraft.tabs.tabVoid, "etherealPlant", 1.0f));
 
@@ -152,6 +155,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(voidicCharger), "DSD", "CZC", "DPD", 'D', voidCraft.items.diamondDust, 'S', voidCraft.items.voidStar, 'C', voidCraft.items.voidCloth, 'Z', Items.END_CRYSTAL, 'P', voidicCable);
 		GameRegistry.addRecipe(new ItemStack(realityStabilizer), "IDI", "DSD", "ICI", 'I', voidInfuserInert, 'C', voidicCharger, 'S', voidCraft.items.voidStar, 'D', voidCraft.items.diamondDust);
 		GameRegistry.addRecipe(new ItemStack(voidicAlchemyTable), "BCB", "CSC", "BIB", 'B', blockVoidbrick, 'C', voidicCable, 'S', Items.BREWING_STAND, 'I', voidInfuserInert);
+		GameRegistry.addRecipe(new ItemStack(realityTeleporterBlock), "BEB", "LHL", "BCB", 'B', blockVoidbrick, 'E', voidCraft.items.emeraldDust, 'L', voidCraft.items.voidCloth, 'H', realityHole, 'C', voidicCharger);
 	}
 
 	@Override

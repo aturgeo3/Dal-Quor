@@ -33,6 +33,11 @@ public abstract class TileEntityVoidicPower extends TamTileEntity implements IVo
 	public abstract int getMaxPower();
 
 	@Override
+	public float getAmountPerc() {
+		return (float) getPowerAmount() / (float) getMaxPower();
+	}
+
+	@Override
 	public abstract int maxPowerTransfer();
 
 	@Override
@@ -48,6 +53,11 @@ public abstract class TileEntityVoidicPower extends TamTileEntity implements IVo
 	@Override
 	public void setPowerAmount(int amount) {
 		voidicPower = amount > getMaxPower() ? getMaxPower() : amount < 0 ? 0 : amount;
+	}
+
+	@Override
+	public void drainPower(int amount) {
+		setPowerAmount(voidicPower - amount);
 	}
 
 	@Override

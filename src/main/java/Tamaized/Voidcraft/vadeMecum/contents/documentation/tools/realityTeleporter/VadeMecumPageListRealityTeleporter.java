@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.vadeMecum.contents.documentation.items.realityTeleporter;
+package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.realityTeleporter;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -13,7 +13,7 @@ public class VadeMecumPageListRealityTeleporter implements IVadeMecumPageProvide
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Reality Teleporter", "The Reality Teleporter is a device which when powered with Voidic Power and contains at least one Hole In Reality, it will teleport the user up to a maximum distance of 64 blocks away. If the user is looking at a block they will be sent in front of that block instead. The 64 range limit is still true for looking at blocks."),
+				new VadeMecumPage("Reality Teleporter", "The Reality Teleporter is a device which when powered with Voidic Power and contains at least one Hole in Reality, it will teleport the user up to a maximum distance of 64 blocks away. If the user is looking at a block they will be sent in front of that block instead. The 64 range limit is still true for looking at blocks. More information on how this device can be used to link Reality Teleportation Blocks can be found in that entry under Machines."),
 				new VadeMecumPage("", "Like all Voidic Powered items, this can be charged using a Voidic Charger. To access the GUI you can Shift Right click at any time, if the device lacks enough resources the GUI will open on its own upon right clicking. This uses 200 power and 1 Hole in Reality per use."),
 				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
 						new ItemStack(voidCraft.items.burnBone),

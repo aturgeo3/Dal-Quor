@@ -49,12 +49,21 @@ public class VoidBoxGUI extends GuiContainer {
 		this.xSize = 347;
 		this.ySize = 320;
 	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+
+		buttonList.clear();
+		buttonList.add(BtnPlay = new GuiButton(BUTTON_PLAY, guiLeft + 200, guiTop + 113, 33, 20, "Play"));
+		buttonList.add(BtnStop = new GuiButton(BUTTON_STOP, guiLeft + 100, guiTop + 113, 33, 20, "Stop"));
+		buttonList.add(BtnLoop = new GuiButton(BUTTON_LOOP, guiLeft + 240, guiTop + 113, 33, 20, "Loop"));
+		buttonList.add(BtnLoop = new GuiButton(BUTTON_AUTO, guiLeft + 25, guiTop + 113, 66, 20, "Auto Insert"));
+	}
 
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-
-		if (BtnPlay == null || BtnStop == null) return;
 
 		BtnPlay.enabled = voidBox.getStackInSlot(voidBox.SLOT_NEXT) != null && ((voidBox.getStackInSlot(voidBox.SLOT_NEXT).getItem() instanceof ItemRecord) && voidBox.getStackInSlot(voidBox.SLOT_CURRENT) == null);
 		BtnStop.enabled = voidBox.isPlaying();
@@ -64,6 +73,7 @@ public class VoidBoxGUI extends GuiContainer {
 		if (voidBox.isPlaying()) CurrColor++;
 	}
 
+	@Override
 	public void actionPerformed(GuiButton button) {
 		int pktType;
 		int xcoord = voidBox.getPos().getX();
@@ -249,12 +259,6 @@ public class VoidBoxGUI extends GuiContainer {
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(daTexture);
 		drawTexturedModalRect(guiLeft + 78, guiTop + 99, 0, 0, xSize / 2, ySize / 2);
-
-		buttonList.clear();
-		buttonList.add(BtnPlay = new GuiButton(BUTTON_PLAY, guiLeft + 200, guiTop + 113, 33, 20, "Play"));
-		buttonList.add(BtnStop = new GuiButton(BUTTON_STOP, guiLeft + 100, guiTop + 113, 33, 20, "Stop"));
-		buttonList.add(BtnLoop = new GuiButton(BUTTON_LOOP, guiLeft + 240, guiTop + 113, 33, 20, "Loop"));
-		buttonList.add(BtnLoop = new GuiButton(BUTTON_AUTO, guiLeft + 25, guiTop + 113, 66, 20, "Auto Insert"));
 		// buttonList.add(BtnDebug = new GuiButton(BUTTON_DEBUG, guiLeft + 240, guiTop + 136, 33, 20, "DEBUG"));
 
 		this.updateScreen();

@@ -7,17 +7,22 @@ import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.items.inventory.InventoryItem;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class RealityTeleporter extends VoidicPowerItem {
@@ -58,8 +63,8 @@ public class RealityTeleporter extends VoidicPowerItem {
 			player.setPositionAndUpdate(vecs[1].xCoord, vecs[1].yCoord, vecs[1].zCoord);
 		}
 	}
-	
-	public static InventoryItem createInventory(ItemStack stack){
+
+	public static InventoryItem createInventory(ItemStack stack) {
 		return new InventoryItem(stack, 1) {
 
 			@Override
@@ -89,9 +94,51 @@ public class RealityTeleporter extends VoidicPowerItem {
 		};
 	}
 
+	public static void clearLink(ItemStack stack) {
+		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc", true);
+		ct.removeTag("link");
+	}
+
+	public static boolean hasLink(ItemStack stack) {
+		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc", true);
+		int[] loc = ct.getIntArray("link");
+		return loc.length == 3;
+	}
+
+	public static BlockPos getLink(ItemStack stack) {
+		if (!hasLink(stack)) return null;
+		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc", true);
+		int[] loc = ct.getIntArray("link");
+		return new BlockPos(loc[0], loc[1], loc[2]);
+	}
+
+	@Override
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntity te = worldIn.getTileEntity(pos);
+		if (te != null && te instanceof TileEntityRealityTeleporter) {
+			TileEntityRealityTeleporter teleporter = (TileEntityRealityTeleporter) te;
+			NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc", true);
+			int[] loc = ct.getIntArray("link");
+			if (loc.length == 3) {
+				BlockPos newPos = new BlockPos(loc[0], loc[1], loc[2]);
+				if(teleporter.getPos().equals(newPos)){
+					if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Cannot link to the same block"));
+				}else{
+					teleporter.setLink(newPos);
+					if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Linked: { x:" + loc[0] + ", y:" + loc[1] + ", z:" + loc[2] + " }"));
+				}
+			} else {
+				ct.setIntArray("link", new int[] { pos.getX(), pos.getY(), pos.getZ() });
+				if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Saved Link: { x:" + pos.getX() + ", y:" + pos.getY() + ", z:" + pos.getZ() + " }"));
+			}
+			return EnumActionResult.SUCCESS;
+		}
+		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		if(world.isRemote) return ActionResult.newResult(EnumActionResult.PASS, stack);
+		if (world.isRemote) return ActionResult.newResult(EnumActionResult.PASS, stack);
 		InventoryItem inv = createInventory(stack);
 		ItemStack holes = inv.getStackInSlot(0);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
