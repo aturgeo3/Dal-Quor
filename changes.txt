@@ -1,3 +1,0 @@
- - Tamaized: Spectres will now spawn another one of themselves upon killing another entity that isn't a Spectre
- - Tamaized: Added Reality Teleporter
- - Tamaized: Added Reality Teleportation Block
