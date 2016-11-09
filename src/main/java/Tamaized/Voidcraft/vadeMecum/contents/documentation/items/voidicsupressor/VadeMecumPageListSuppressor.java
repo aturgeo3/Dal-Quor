@@ -14,8 +14,8 @@ public class VadeMecumPageListSuppressor implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Voidic Suppressor", "One of the few items that requires Voidic Power to function. To charge this device place it in a Voidic Charger. If this device contains power, it'll use that power to anchor the holder to the material plane. This means while in your hand or offhand the Voidic Suppressor will remove any Voidic Infusion on you and prevent more from being gained."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.items.voidicSuppressor).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicSuppressor"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(Items.COMPASS),
 						null,

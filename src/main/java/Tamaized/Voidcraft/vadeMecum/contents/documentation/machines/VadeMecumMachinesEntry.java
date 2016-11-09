@@ -44,7 +44,7 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 	public VadeMecumEntry teleporter;
 
 	public VadeMecumMachinesEntry(VadeMecumEntry back) {
-		super("docs_Machines", "Machines", back, null);
+		super("docs_Machines", voidCraft.modid+".VadeMecum.docs.title.machines", back, null);
 	}
 
 	@Override
@@ -66,17 +66,17 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusionAltar), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Infusion Altar", new ItemStack(voidCraft.blocks.voidInfuser)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusedMacerator), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Void Infused Macerator", new ItemStack(voidCraft.blocks.voidMacerator)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Heimdall), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Heimdall", new ItemStack(voidCraft.blocks.Heimdall)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicGenerator), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Voidic Generator", new ItemStack(voidCraft.blocks.voidicGen)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicCable), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Voidic Cable", new ItemStack(voidCraft.blocks.voidicCable)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidMusicBox), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Void Music Box", new ItemStack(voidCraft.blocks.voidBox)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusionAltar), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.blocks.voidInfuser).getDisplayName(), new ItemStack(voidCraft.blocks.voidInfuser)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusedMacerator), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.blocks.voidMacerator).getDisplayName(), new ItemStack(voidCraft.blocks.voidMacerator)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.Heimdall), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.blocks.Heimdall).getDisplayName(), new ItemStack(voidCraft.blocks.Heimdall)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicGenerator), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.blocks.voidicGen).getDisplayName(), new ItemStack(voidCraft.blocks.voidicGen)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicCable), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.blocks.voidicCable).getDisplayName(), new ItemStack(voidCraft.blocks.voidicCable)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidMusicBox), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.blocks.voidBox).getDisplayName(), new ItemStack(voidCraft.blocks.voidBox)));
 		
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicCharger), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, "Voidic Charger", new ItemStack(voidCraft.blocks.voidicCharger)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.RealityStabilizer), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, "Reality Stabilizer", new ItemStack(voidCraft.blocks.realityStabilizer)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.AlchemyTable), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 2), 100, 20, "Alchemy Table", new ItemStack(voidCraft.blocks.voidicAlchemyTable)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Teleporter), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, "Reality Teleportation", new ItemStack(voidCraft.blocks.realityTeleporterBlock)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicCharger), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.blocks.voidicCharger).getDisplayName(), new ItemStack(voidCraft.blocks.voidicCharger)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.RealityStabilizer), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.blocks.realityStabilizer).getDisplayName(), new ItemStack(voidCraft.blocks.realityStabilizer)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.AlchemyTable), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.blocks.voidicAlchemyTable).getDisplayName(), new ItemStack(voidCraft.blocks.voidicAlchemyTable)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.Teleporter), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.blocks.realityTeleporterBlock).getDisplayName(), new ItemStack(voidCraft.blocks.realityTeleporterBlock)));
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class VadeMecumPageListSpectrePick implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Spectre Pickaxe", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.tools.spectrePickaxe).getDisplayName(), new ItemStack[] {
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),

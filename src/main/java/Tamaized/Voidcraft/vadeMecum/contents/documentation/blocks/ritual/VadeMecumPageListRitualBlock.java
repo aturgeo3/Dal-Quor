@@ -14,8 +14,8 @@ public class VadeMecumPageListRitualBlock implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Voidic Ritual Block", "This block is used to invoke rituals to empower the Void Vade Mecum"),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.ritualBlock).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.ritualBlock"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("recipe.normal", new ItemStack[] {
 						new ItemStack(Blocks.STONEBRICK),
 						new ItemStack(Blocks.STONEBRICK),
 						new ItemStack(Blocks.STONEBRICK),

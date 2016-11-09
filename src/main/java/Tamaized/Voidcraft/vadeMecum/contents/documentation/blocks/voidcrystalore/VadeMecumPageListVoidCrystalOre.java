@@ -1,15 +1,17 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.voidcrystalore;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
+import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageListVoidCrystalOre implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Crystal Ore", "An ore found only in The End and Void. Its look depends on the dimension as well. If the ore is found in the Void, it will have a Soft Bedrock look. If it is found elsewhere, it will have an End Stone look. This ore will always drop one to three Void Crystals regardless of one's fortune."), };
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.oreVoidcrystal).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidCrystalOre"), };
 	}
 
 }

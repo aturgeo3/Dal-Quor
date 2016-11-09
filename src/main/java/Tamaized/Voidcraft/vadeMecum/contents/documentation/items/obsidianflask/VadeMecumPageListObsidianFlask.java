@@ -14,9 +14,9 @@ public class VadeMecumPageListObsidianFlask implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Obsidian Flask", "It is actually possible to collect 'Void' from within the Overworld. You need a special type of flask to do so. Simply get yourself some Empty Obsidian Flasks, head down near bedrock, and Right Click. What do these Flasks do you may ask? Well if you toss one (via right click) they explode on contact. They do not seem to damage the world at all but they cast a purple flame that does not seem to burn. It is a cold flame. Though coming in contact with such a flame"),
-				new VadeMecumPage("", "yields interesting effects such as blindness and wither."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.items.emptyObsidianFlask).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.emptyObsidianFlask.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.emptyObsidianFlask.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						null,
 						null,
 						null,

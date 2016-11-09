@@ -13,8 +13,8 @@ public class VadeMecumPageListDemonSword implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Demonic Sword", "Foes struck by this sword are dealt the same effects as the Arch-Angelic sword though the durations are now 20 seconds each."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingInfuser("Infusion Recipe", new ItemStack(voidCraft.tools.archSword), new ItemStack(voidCraft.tools.demonSword))) };
+				new VadeMecumPage(new ItemStack(voidCraft.tools.demonSword).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.demonSword"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingInfuser(voidCraft.modid+".VadeMecum.recipe.infusion", new ItemStack(voidCraft.tools.archSword), new ItemStack(voidCraft.tools.demonSword))) };
 	}
 
 }

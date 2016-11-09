@@ -5,6 +5,7 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -18,7 +19,7 @@ public class VadeMecumCraftingMacerator implements IVadeMecumCrafting {
 	private final ItemStack output;
 
 	public VadeMecumCraftingMacerator(String title, ItemStack input, ItemStack output) {
-		this.title = title;
+		this.title = ("" + I18n.format(title, new Object[0])).trim();
 		this.input = input;
 		this.output = output;
 	}

@@ -34,7 +34,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public VadeMecumEntry herobrineCreeper;
 
 	public VadeMecumMobsEntry(VadeMecumEntry back) {
-		super("docs_Mobs", "Mobs", back, null);
+		super("docs_Mobs", voidCraft.modid+".VadeMecum.docs.title.mobs", back, null);
 	}
 
 	@Override
@@ -50,11 +50,11 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWraith), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Wraith", new ItemStack(voidCraft.items.ectoplasm)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSpectre), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Chained Spectre", new ItemStack(voidCraft.items.voidChain)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWrath), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Void's Wrath", new ItemStack(voidCraft.items.burnBone)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidLich), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Void Lich", new ItemStack(voidCraft.items.voidCloth)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.HerobrineCreeper), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Herobrine Creeper", new ItemStack(Items.GUNPOWDER)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWraith), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, voidCraft.modid+".VadeMecum.docs.title.voidWraith", new ItemStack(voidCraft.items.ectoplasm)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSpectre), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid+".VadeMecum.docs.title.chainedSpectre", new ItemStack(voidCraft.items.voidChain)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWrath), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, voidCraft.modid+".VadeMecum.docs.title.voidWrath", new ItemStack(voidCraft.items.burnBone)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidLich), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid+".VadeMecum.docs.title.lich", new ItemStack(voidCraft.items.voidCloth)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.HerobrineCreeper), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, voidCraft.modid+".VadeMecum.docs.title.herobrindCreeper", new ItemStack(Items.GUNPOWDER)));
 	}
 
 	@Override

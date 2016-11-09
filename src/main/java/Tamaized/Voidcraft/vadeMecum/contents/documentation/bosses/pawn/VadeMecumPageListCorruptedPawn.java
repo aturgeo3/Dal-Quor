@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses.pawn;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
@@ -9,7 +10,7 @@ public class VadeMecumPageListCorruptedPawn implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Corrupted Pawn", "Spawned into the world with a Chained Skull followed by an explosion. These deadly entities are very quick, deal massive damage and have a very large health pool. They attack most other creatures in sight. One must be very prepared before taking one on. Upon death, they drop their inner core, the Void Star.") };
+				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.corruptedPawn", voidCraft.modid+".VadeMecum.docs.desc.corruptedPawn") };
 	}
 
 }

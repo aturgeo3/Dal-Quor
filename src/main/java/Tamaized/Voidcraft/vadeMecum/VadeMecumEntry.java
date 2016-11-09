@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumEntry {
@@ -36,7 +38,7 @@ public class VadeMecumEntry {
 
 	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPageProvider pageList) {
 		map.put(registryName, this);
-		this.title = title;
+		this.title = ("" + I18n.format(title, new Object[0])).trim();
 		pages = pageList;
 		backPage = back;
 		initObjects();

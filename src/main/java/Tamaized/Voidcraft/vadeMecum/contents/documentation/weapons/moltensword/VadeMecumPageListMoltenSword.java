@@ -13,8 +13,8 @@ public class VadeMecumPageListMoltenSword implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Molten Sword", "Foes struck by this sword are lit on fire and are inflicted with a weakness and nausea debuff for 5 seconds."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.tools.moltenSword).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.moltenSword"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.MoltenvoidChain),
 						new ItemStack(voidCraft.items.MoltenvoidChain),
 						new ItemStack(voidCraft.items.MoltenvoidChain),

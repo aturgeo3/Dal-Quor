@@ -12,7 +12,7 @@ public class VadeMecumPageListSpectreAxe implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Spectre Axe", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.tools.spectreAxe).getDisplayName(), new ItemStack[] {
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),

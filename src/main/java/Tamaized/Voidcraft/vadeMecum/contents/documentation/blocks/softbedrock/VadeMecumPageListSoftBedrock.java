@@ -13,9 +13,9 @@ public class VadeMecumPageListSoftBedrock implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Soft Bedrock", "Upon entering the Void, you notice that the vast majority of your surroundings is comprised of Bedrock. But unlike the flat, rigid, and unyielding layer found in the overworld, this \"Soft\" Bedrock makes a clearly defined landscape and feels plush beneath your feet. It has the firmness of stone, so it could be used as a solid building block. Yet it also has the consistency of fertile soil and can be tilled with a strong enough tool."),
-				new VadeMecumPage("", "Which presents the question could something actually grow in this dimension? Time to find out..."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Soft Bedrock Stairs", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.blockFakeBedrock).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.blockFakeBedrock.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.blockFakeBedrock.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockFakeBedrockStairs).getDisplayName(), new ItemStack[] {
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						null,
 						null,
@@ -25,7 +25,7 @@ public class VadeMecumPageListSoftBedrock implements IVadeMecumPageProvider {
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						new ItemStack(voidCraft.blocks.blockFakeBedrock) }, new ItemStack(voidCraft.blocks.blockFakeBedrockStairs, 6))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Soft Bedrock Fence", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockFakeBedrockFence).getDisplayName(), new ItemStack[] {
 						null,
 						null,
 						null,
@@ -35,7 +35,7 @@ public class VadeMecumPageListSoftBedrock implements IVadeMecumPageProvider {
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						new ItemStack(voidCraft.blocks.blockFakeBedrock) }, new ItemStack(voidCraft.blocks.blockFakeBedrockFence, 6))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Soft Bedrock Slab", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockFakeBedrockHalfSlab).getDisplayName(), new ItemStack[] {
 						null,
 						null,
 						null,

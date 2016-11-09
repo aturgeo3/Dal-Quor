@@ -15,9 +15,11 @@ public class VadeMecumPageListVoidDusts implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Dusts", "Void Dusts are the result of using a Void Infused Macerator. Using the device with ores provides four dust. Using it with Ingots or Gems results in one. The types of dusts that can be obtained are Iron, Gold, Copper, Tin, Lead, Quartz, Emerald, Lapis, and Diamond. The non-gem based dusts can then be smelted into ingot form. This effectively allows, to an extent, quadruple ore processing."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator("Macerator Recipe", new ItemStack(Blocks.IRON_ORE), new ItemStack(voidCraft.items.ironDust, 4))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator("Macerator Recipe", new ItemStack(Items.DIAMOND), new ItemStack(voidCraft.items.diamondDust))) };
+				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.voidDusts", voidCraft.modid+".VadeMecum.docs.desc.voidDusts"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator(voidCraft.modid+".VadeMecum.recipe.macerator", new ItemStack(Blocks.IRON_ORE), new ItemStack(voidCraft.items.ironDust, 4))),
+				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator(voidCraft.modid+".VadeMecum.recipe.macerator", new ItemStack(Items.DIAMOND), new ItemStack(voidCraft.items.diamondDust))),
+				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator(voidCraft.modid+".VadeMecum.recipe.macerator", new ItemStack(Blocks.COAL_ORE), new ItemStack(voidCraft.items.coalDust, 8))),
+				new VadeMecumPageCrafting(new VadeMecumCraftingMacerator(voidCraft.modid+".VadeMecum.recipe.macerator", new ItemStack(Items.COAL), new ItemStack(voidCraft.items.coalDust, 4))) };
 	}
 
 }

@@ -14,8 +14,8 @@ public class VadeMecumPageListMacerator implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Infused Macerator", "This Machine is the product of infusing a standard Furnace with Liquid Void. It takes Voidic Power to grind an input ore into four Void Infused dusts. You can process these dusts into a regular ingot using mundane machines."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingInfuser("Infusion Recipe", new ItemStack(Blocks.FURNACE), new ItemStack(voidCraft.blocks.voidMacerator, 1))) };
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.voidMacerator).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidMacerator"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingInfuser(voidCraft.modid+".VadeMecum.recipe.infusion", new ItemStack(Blocks.FURNACE), new ItemStack(voidCraft.blocks.voidMacerator, 1))) };
 	}
 
 }

@@ -13,9 +13,9 @@ public class VadeMecumPageListVoidBrick implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Brick", "These bricks are made from cut Void Crystal Blocks. They appear to be much more sturdy than any other block found in this dimension, but the crystal that makes them up seems to have lost their conductivity for Voidic Power as a result of being cut. While their function as a material for building Void Portals has been lost, that doesn't mean that they're useless. Standing on one of these bricks will actually stall"),
-				new VadeMecumPage("", "Voidic Infusion from being gained as if the bricks are trying to consume it from you at the same rate you gain it. Their firm frame could be used for making other objects, or simply for building and decoration."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.blockVoidbrick).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.blockVoidbrick.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.blockVoidbrick.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.blocks.blockVoidcrystal),
 						new ItemStack(voidCraft.blocks.blockVoidcrystal),
 						null,
@@ -25,7 +25,7 @@ public class VadeMecumPageListVoidBrick implements IVadeMecumPageProvider {
 						null,
 						null,
 						null }, new ItemStack(voidCraft.blocks.blockVoidbrick, 1))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Void Brick Stairs", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockVoidstairs).getDisplayName(), new ItemStack[] {
 						new ItemStack(voidCraft.blocks.blockVoidbrick),
 						null,
 						null,
@@ -35,7 +35,7 @@ public class VadeMecumPageListVoidBrick implements IVadeMecumPageProvider {
 						new ItemStack(voidCraft.blocks.blockVoidbrick),
 						new ItemStack(voidCraft.blocks.blockVoidbrick),
 						new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidstairs, 6))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Void Brick Fence", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockVoidfence).getDisplayName(), new ItemStack[] {
 						null,
 						null,
 						null,
@@ -45,7 +45,7 @@ public class VadeMecumPageListVoidBrick implements IVadeMecumPageProvider {
 						new ItemStack(voidCraft.blocks.blockVoidbrick),
 						new ItemStack(voidCraft.blocks.blockVoidbrick),
 						new ItemStack(voidCraft.blocks.blockVoidbrick) }, new ItemStack(voidCraft.blocks.blockVoidfence, 6))),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Void Brick Slab", new ItemStack[] {
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.blocks.blockVoidBrickHalfSlab).getDisplayName(), new ItemStack[] {
 						null,
 						null,
 						null,

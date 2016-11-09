@@ -13,8 +13,8 @@ public class VadeMecumPageListAngelicSword implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Angelic Sword", "This unique sword does lower damage than the rest of the voidic sword but in turn it'll one-shot most of the voidic mobs."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.tools.angelicSword).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.angelicSword"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),
 						new ItemStack(voidCraft.items.ectoplasm),

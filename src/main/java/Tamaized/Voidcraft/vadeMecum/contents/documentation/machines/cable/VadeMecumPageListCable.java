@@ -14,9 +14,9 @@ public class VadeMecumPageListCable implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Voidic Cable", "The Voidic Generator is certainly able to supply power, however, it may not be able to reach all the machines you would like it to. However, by combining Redstone, which naturally transmits power, with a Void Crystal Block, which in and of itself is a conduit for the Void's energies, one creates Void Cable. These cables will automatically connect to machines and each other when placed in the world. When connected to a something storing Voidic Power, they will relay"),
-				new VadeMecumPage("", "it to all other machines they are connected to."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.voidicCable).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicCable.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.voidicCable.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(Items.REDSTONE),
 						new ItemStack(Items.REDSTONE),
 						new ItemStack(Items.REDSTONE),

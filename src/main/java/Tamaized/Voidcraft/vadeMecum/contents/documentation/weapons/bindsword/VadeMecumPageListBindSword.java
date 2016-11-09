@@ -13,8 +13,8 @@ public class VadeMecumPageListBindSword implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Sword of Binding", "Foes struck with this sword are inflicted with a 5 second slowness effect."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.tools.chainSword).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.chainSword"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.voidChain),
 						new ItemStack(voidCraft.items.voidChain),
 						new ItemStack(voidCraft.items.voidChain),

@@ -1,15 +1,17 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.items.charredbone;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
+import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageListCharredBone implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Charred Bone", "Taken from your fallen enemies, the Void Wraths. These very sturdy creatures are nothing but bone, so it only makes sense for these bones to also be sturdy right?")};
+				new VadeMecumPage(new ItemStack(voidCraft.items.burnBone).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.burnBone")};
 	}
 
 }

@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.wrath;
 
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
@@ -9,7 +10,7 @@ public class VadeMecumPageListVoidWrath implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void's Wrath", "Only found within a Void Fortress. These entities are very sturdy and deal quite a bit of damage. They are melee based. They drop Charred bones upon death.") };
+				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.voidWrath", voidCraft.modid+".VadeMecum.docs.desc.voidWrath") };
 	}
 
 }

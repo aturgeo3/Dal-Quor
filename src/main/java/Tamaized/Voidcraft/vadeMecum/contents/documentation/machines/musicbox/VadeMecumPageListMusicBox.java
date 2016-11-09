@@ -14,8 +14,8 @@ public class VadeMecumPageListMusicBox implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Music Box", "A special jukebox which was first designed by Void Liches. It is special in the sense that it can read any fully functional music disk. This music box can take input disks and be extracted from using other machines, such as a hopper. It also has an auto-insert function and will auto-play the next pending disc. This, paired with its loop functionality, can be used to easily create a space which always has music playing in the background."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.voidBox).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidBox"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.voidCloth),
 						new ItemStack(voidCraft.items.voidCloth),
 						new ItemStack(voidCraft.items.voidCloth),

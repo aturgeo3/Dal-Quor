@@ -37,7 +37,7 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.CorruptedPawn), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Corrupted Pawn", new ItemStack(voidCraft.items.ChainedSkull)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.CorruptedPawn), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, voidCraft.modid+".VadeMecum.docs.title.corruptedPawn", new ItemStack(voidCraft.items.ChainedSkull)));
 	}
 
 	@Override

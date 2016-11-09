@@ -13,8 +13,8 @@ public class VadeMecumPageListMoltenChainPart implements IVadeMecumPageProvider 
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Molten Void Chain Part", "When one smelts a Void Chain the result is interesting. It is a ball of molten chain in which one would think would burn as you touch it, but in fact it is cool to the touch. The only explanation for this would be the voidic properties."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingFurnace("Furnace Recipe", new ItemStack(voidCraft.items.voidChain), new ItemStack(voidCraft.items.MoltenvoidChainPart)))};
+				new VadeMecumPage(new ItemStack(voidCraft.items.MoltenvoidChainPart).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.MoltenvoidChainPart"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingFurnace(voidCraft.modid+".VadeMecum.recipe.furnace", new ItemStack(voidCraft.items.voidChain), new ItemStack(voidCraft.items.MoltenvoidChainPart)))};
 	}
 
 }

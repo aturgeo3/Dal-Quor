@@ -13,9 +13,9 @@ public class VadeMecumPageListVoidCrystalBlock implements IVadeMecumPageProvider
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Void Crystal Block", "This block is the product of bringing together nine Void Crystals. These blocks cannot do much on their own, but holding them gives the same sensation felt when close to the bottom layer of bedrock in the Overworld. Could bringing these blocks close to the void have an effect?"),
-				new VadeMecumPage("", "This block is used to construct a portal to the Void. Create a formation in the same way as you would to construct a nether portal frame. After doing so, collect an Obsidian Flask and toss it onto the top face of the bottom layer frame. If done correctly a portal will be open, leading to the Void."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.blockVoidcrystal).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidCrystalBlock.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.voidCrystalBlock.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(voidCraft.items.voidcrystal),

@@ -43,7 +43,7 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public VadeMecumEntry realityTeleporter;
 
 	public VadeMecumToolsEntry(VadeMecumEntry back) {
-		super("docs_Tools", "Tools", back, null);
+		super("docs_Tools", voidCraft.modid+".VadeMecum.docs.title.tools", back, null);
 	}
 
 	@Override
@@ -63,15 +63,15 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidPick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Pickaxe", new ItemStack(voidCraft.tools.voidPickaxe)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidAxe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Void Axe", new ItemStack(voidCraft.tools.voidAxe)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidShovel), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Void Shovel", new ItemStack(voidCraft.tools.voidSpade)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidHoe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Void Hoe", new ItemStack(voidCraft.tools.voidHoe)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.SpectrePick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Spectre Pickaxe", new ItemStack(voidCraft.tools.spectrePickaxe)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.SpectreAxe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Spectre Axe", new ItemStack(voidCraft.tools.spectreAxe)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidPick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.tools.voidPickaxe).getDisplayName(), new ItemStack(voidCraft.tools.voidPickaxe)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidAxe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.tools.voidAxe).getDisplayName(), new ItemStack(voidCraft.tools.voidAxe)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidShovel), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.tools.voidSpade).getDisplayName(), new ItemStack(voidCraft.tools.voidSpade)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidHoe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.tools.voidHoe).getDisplayName(), new ItemStack(voidCraft.tools.voidHoe)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.SpectrePick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.tools.spectrePickaxe).getDisplayName(), new ItemStack(voidCraft.tools.spectrePickaxe)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.SpectreAxe), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.tools.spectreAxe).getDisplayName(), new ItemStack(voidCraft.tools.spectreAxe)));
 
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicDrill), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, "Voidic Drill", new ItemStack(voidCraft.items.voidicDrill)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.RealityTeleporter), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, "Reality Teleporter", new ItemStack(voidCraft.items.realityTeleporter)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicDrill), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidicDrill).getDisplayName(), new ItemStack(voidCraft.items.voidicDrill)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.RealityTeleporter), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.items.realityTeleporter).getDisplayName(), new ItemStack(voidCraft.items.realityTeleporter)));
 
 	}
 

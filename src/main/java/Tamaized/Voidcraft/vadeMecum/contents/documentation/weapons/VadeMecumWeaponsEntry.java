@@ -35,7 +35,7 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 	public VadeMecumEntry demonSword;
 
 	public VadeMecumWeaponsEntry(VadeMecumEntry back) {
-		super("docs_Weapons", "Weapons", back, null);
+		super("docs_Weapons", voidCraft.modid+".VadeMecum.docs.title.weps", back, null);
 	}
 
 	@Override
@@ -52,12 +52,12 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Sword", new ItemStack(voidCraft.tools.voidSword)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.AngelicSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Angelic Sword", new ItemStack(voidCraft.tools.angelicSword)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.BindSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Sword of Binding", new ItemStack(voidCraft.tools.chainSword)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.MoltenSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Molten Sword", new ItemStack(voidCraft.tools.moltenSword)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ArchAngelicSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "ArchAngelic Sword", new ItemStack(voidCraft.tools.archSword)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.DemonSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Demonic Sword", new ItemStack(voidCraft.tools.demonSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.tools.voidSword).getDisplayName(), new ItemStack(voidCraft.tools.voidSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.AngelicSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.tools.angelicSword).getDisplayName(), new ItemStack(voidCraft.tools.angelicSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.BindSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.tools.chainSword).getDisplayName(), new ItemStack(voidCraft.tools.chainSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.MoltenSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.tools.moltenSword).getDisplayName(), new ItemStack(voidCraft.tools.moltenSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.ArchAngelicSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.tools.archSword).getDisplayName(), new ItemStack(voidCraft.tools.archSword)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.DemonSword), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.tools.demonSword).getDisplayName(), new ItemStack(voidCraft.tools.demonSword)));
 	}
 
 	@Override

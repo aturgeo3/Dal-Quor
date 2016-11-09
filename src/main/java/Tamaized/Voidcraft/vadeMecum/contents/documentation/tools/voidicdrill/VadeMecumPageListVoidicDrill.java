@@ -13,8 +13,8 @@ public class VadeMecumPageListVoidicDrill implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Voidic Drill", "One of the few items that requires Voidic Power to function. Charge this device using a Voidic Charger. If this device contains power and it is being used via holding down right click, it will emit a beacon like laser that mines in a 3x3 area and has a range of up to 10 blocks. This laser will also deal damage to entites."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.items.voidicDrill).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicDrill"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.blocks.blockVoidcrystal),
 						new ItemStack(voidCraft.blocks.realityHole),
 						new ItemStack(voidCraft.blocks.blockVoidcrystal),

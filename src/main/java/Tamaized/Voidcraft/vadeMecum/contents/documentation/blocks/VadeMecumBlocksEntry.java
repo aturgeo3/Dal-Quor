@@ -52,12 +52,12 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystalBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Void Crystal Block", new ItemStack(voidCraft.blocks.blockVoidcrystal)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystalOre), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Void Crystal Ore", new ItemStack(voidCraft.blocks.oreVoidcrystal)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.SoftBedrock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Soft Bedrock", new ItemStack(voidCraft.blocks.blockFakeBedrock)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidBrick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, "Void Brick", new ItemStack(voidCraft.blocks.blockVoidbrick)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.HoleinReality), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, "Hole in Reality", new ItemStack(voidCraft.blocks.realityHole)));
-		//addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, "Voidic Ritual Block", new ItemStack(voidCraft.blocks.ritualBlock)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystalBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.blocks.blockVoidcrystal).getDisplayName(), new ItemStack(voidCraft.blocks.blockVoidcrystal)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystalOre), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.blocks.oreVoidcrystal).getDisplayName(), new ItemStack(voidCraft.blocks.oreVoidcrystal)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.SoftBedrock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.blocks.blockFakeBedrock).getDisplayName(), new ItemStack(voidCraft.blocks.blockFakeBedrock)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidBrick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.blocks.blockVoidbrick).getDisplayName(), new ItemStack(voidCraft.blocks.blockVoidbrick)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.HoleinReality), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.blocks.realityHole).getDisplayName(), new ItemStack(voidCraft.blocks.realityHole)));
+		//addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.blocks.ritualBlock).getDisplayName(), new ItemStack(voidCraft.blocks.ritualBlock)));
 	}
 
 	@Override

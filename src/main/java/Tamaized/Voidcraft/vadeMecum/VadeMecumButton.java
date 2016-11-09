@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,7 +17,7 @@ public class VadeMecumButton extends GuiButton {
 	private final VadeMecumGUI gui;
 
 	public VadeMecumButton(VadeMecumGUI gui, int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, ItemStack stack) {
-		super(buttonId, x, y, widthIn, heightIn, buttonText);
+		super(buttonId, x, y, widthIn, heightIn, ("" + I18n.format(buttonText, new Object[0])).trim());
 		stackToRender = stack;
 		this.gui = gui;
 	}
@@ -34,7 +35,9 @@ public class VadeMecumButton extends GuiButton {
 				j += 128;
 			}
 			gui.drawTexturedModalRect(this.xPosition + 10, this.yPosition, width+60, height, i, j, 256, 128);
-			mc.getRenderManager().getFontRenderer().drawString(displayString, xPosition + 20, yPosition + (height / 2) - (mc.getRenderManager().getFontRenderer().FONT_HEIGHT / 2), 0x000000);
+			GlStateManager.enableBlend();
+			mc.getRenderManager().getFontRenderer().drawSplitString(displayString, xPosition + 20, yPosition + (height / 2) - (mc.getRenderManager().getFontRenderer().FONT_HEIGHT / 2*((int)Math.ceil((float)mc.getRenderManager().getFontRenderer().getStringWidth(displayString)/120F))), 120, 0x000000);
+			GlStateManager.disableBlend();
 			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderHelper.enableGUIStandardItemLighting();
 			if (stackToRender != null) mc.getRenderItem().renderItemIntoGUI(stackToRender, xPosition, yPosition + (height / 2) - 8);

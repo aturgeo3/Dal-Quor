@@ -14,9 +14,9 @@ public class VadeMecumPageListCharger implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage("Voidic Charger", "End Crystals are perhaps the most mysterious devices in the known universe. Aside from the fact that they are fragile and easily broken, all that is known of them is that they feed some sort of energy to the Ender Dragon to heal it. However, that is all you need to know to use them for your own purposes. By placing a Void Star in the center of an End Crystal, wrapping it in Void Cloth, and fortifying it with Void Infused Diamond Dust, one creates a Voidic"),
-				new VadeMecumPage("", "Charger. A device capable of charging certain items with Voidic Power. However, it should be noted that, due to its shape, it can only take in power from the Bottom. So plan accordingly when making your network of Voidic Generators and Void Cables."),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("Recipe", new ItemStack[] {
+				new VadeMecumPage(new ItemStack(voidCraft.blocks.voidicCharger).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicCharger.pg1"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.voidicCharger.pg2"),
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.diamondDust),
 						new ItemStack(voidCraft.items.voidStar),
 						new ItemStack(voidCraft.items.diamondDust),
