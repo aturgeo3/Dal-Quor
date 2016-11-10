@@ -12,5 +12,7 @@ public interface IBattleHandler {
 	public void stop();
 	
 	public boolean isRunning();
+	
+	public boolean isDone();
 
 }

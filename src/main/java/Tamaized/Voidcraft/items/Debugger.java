@@ -51,13 +51,13 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
-		playerIn.clearActivePotions();
-		playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
-		//Vec3d vec = playerIn.getLook(1.0f);
-		//EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+		//playerIn.clearActivePotions();
+		//playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
+		Vec3d vec = playerIn.getLook(1.0f);
+		EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
 		// entity.setPositionAndRotation(x, y, z, yaw, pitch);
-		//worldIn.spawnEntityInWorld(entity);
+		worldIn.spawnEntityInWorld(entity);
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);

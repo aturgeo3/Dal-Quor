@@ -35,7 +35,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote) {
+		if (worldObj != null && !worldObj.isRemote) {
 			if (running) {
 				if (zol == null || dol == null || !zol.isActive() || !dol.isActive()) {
 					stop();
@@ -186,6 +186,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 						boolean flag = TwinsMessages05.run(worldObj, pos);
 						if (flag) {
 							stop();
+							isDone = true;
 						}
 						break;
 					default:
@@ -199,6 +200,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 		worldObj = world;
 		pos = p.add(0, 1, 0);
 		stop();
+		isDone = false;
 		phase = 0;
 		readyForInput = false;
 
@@ -226,7 +228,9 @@ public class TwinsBattleHandler implements IBattleHandler {
 	}
 
 	public void stop() {
+		if (pos == null) return;
 		readyForInput = false;
+		isDone = false;
 		if (dol != null) worldObj.removeEntity(dol);
 		dol = null;
 		if (zol != null) worldObj.removeEntity(zol);
@@ -257,6 +261,11 @@ public class TwinsBattleHandler implements IBattleHandler {
 	@Override
 	public boolean isRunning() {
 		return running;
+	}
+
+	@Override
+	public boolean isDone() {
+		return isDone;
 	}
 
 }

@@ -85,7 +85,7 @@ public class SchematicLoader {
 					int meta = spring.data[i];
 					Block b = spring.getBlock(id);
 					if (id != 0 && b != null) {
-						System.out.println(id+" : "+b+" : "+meta+" : "+(cx + x + 1)+":"+(cy + y)+":"+(cz + z + 1));
+						//System.out.println(id+" : "+b+" : "+meta+" : "+(cx + x + 1)+":"+(cy + y)+":"+(cz + z + 1));
 						world.setBlockState(new BlockPos(cx + x + 1, cy + y, cz + z + 1), b.getStateFromMeta(meta), 2);
 					} else {
 						world.setBlockToAir(new BlockPos(cx + x + 1, cy + y, cz + z + 1));

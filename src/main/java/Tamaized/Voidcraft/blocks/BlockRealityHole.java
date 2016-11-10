@@ -39,14 +39,18 @@ public class BlockRealityHole extends TamBlock {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
-				if (voidCraft.config.getRealityWhiteList().size() > 0) {
-					Random rand = worldIn.rand;
-					int i = rand.nextInt(voidCraft.config.getRealityWhiteList().size());
-					int dim = voidCraft.config.getRealityWhiteList().get(i);
-					if (player.mcServer.worldServerForDimension(dim) != null) {
-						player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.worldServerForDimension(dim), player.getPosition()));
+				if(entityIn.dimension == voidCraft.config.getDimensionIDxia()){
+					entityIn.setPositionAndUpdate(52.5, 61, 4.5);
+				}else{
+					if (voidCraft.config.getRealityWhiteList().size() > 0) {
+						Random rand = worldIn.rand;
+						int i = rand.nextInt(voidCraft.config.getRealityWhiteList().size());
+						int dim = voidCraft.config.getRealityWhiteList().get(i);
+						if (player.mcServer.worldServerForDimension(dim) != null) {
+							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.worldServerForDimension(dim), player.getPosition()));
+						}
+						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}
-					// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 				}
 			} else entityIn.setDead();
 		}

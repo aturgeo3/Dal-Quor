@@ -83,7 +83,7 @@ public class TwinsMessages01 {
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] A battle of wits."));
 						break;
 					case 16:
-						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"[Dol] If you pass our little challenge, we'll let you free along with one of the two keys to Xia."));
+						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"[Dol] If you pass our little challenge, we'll let you free. If Herobrine is also defeated, Xia's door will be open for you to proceed."));
 						break;
 					case 17:
 						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] Now then, shall we begin?"));

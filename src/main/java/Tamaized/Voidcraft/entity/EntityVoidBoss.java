@@ -31,6 +31,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	private int phase = 0;
 	private boolean ready = false;
 	private boolean active = false;
+	private boolean isDone = false;
 
 	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
 	
@@ -63,6 +64,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	}
 
 	public void start() {
+		isDone = false;
 		if (phase == 0 && bus != null) ready = true;
 		else doDamage((int) this.getMaxHealth());
 		active = true;
@@ -78,6 +80,10 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	public boolean isActive() {
 		return active;
+	}
+	
+	public boolean isDone(){
+		return isDone;
 	}
 
 	public boolean displayBossMode() {
@@ -147,6 +153,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		}
 
 		if (phase > maxPhases()) {
+			isDone = true;
 			if (this.getHealth() <= 0.0F) {
 				this.trueDeathUpdate();
 			}

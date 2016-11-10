@@ -15,6 +15,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	private boolean readyForInput = false;
 
 	private boolean running;
+	private boolean isDone = false;
 
 	private World worldObj;
 	private BlockPos pos;
@@ -23,7 +24,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void update() {
-		if (!worldObj.isRemote && running) {
+		if (worldObj != null && !worldObj.isRemote && running) {
 			if (herobrine == null || !herobrine.isActive()) {
 				stop();
 				return;
@@ -37,6 +38,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 		pos = p;
 		stop();
 		phase = 0;
+		isDone = false;
 		readyForInput = false;
 		for (int z = -2; z <= 2; z++) {
 			for (int y = 5; y > 0; y--) {
@@ -52,8 +54,13 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
+		if (pos == null) return;
 		readyForInput = false;
-		if (herobrine != null) worldObj.removeEntity(herobrine);
+		isDone = false;
+		if (herobrine != null){
+			if(herobrine.isDone()) isDone = true;
+			worldObj.removeEntity(herobrine);
+		}
 		herobrine = null;
 		for (int z = -2; z <= 2; z++) {
 			for (int y = 5; y > 0; y--) {
@@ -66,6 +73,11 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	@Override
 	public boolean isRunning() {
 		return running;
+	}
+	
+	@Override
+	public boolean isDone() {
+		return isDone;
 	}
 
 }
