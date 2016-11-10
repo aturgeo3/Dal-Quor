@@ -11,8 +11,10 @@ import java.awt.Rectangle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,22 +25,25 @@ import org.lwjgl.opengl.GL11;
 import Tamaized.Voidcraft.voidCraft;
 
 public class RenderBossHeathBar {
-	
+
+	public static final ResourceLocation whitespace = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/WhiteSpace.png");
+	public static final ResourceLocation bg = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/bg.png");
+
 	private static IVoidBossData voidBoss;
-	
+
 	private static float flashTick = 0;
 	private static boolean flashTickFlag = false;
 	private static int flashTickWait = 0;
-	
-	public static void setCurrentBoss(IVoidBossData b){
+
+	public static void setCurrentBoss(IVoidBossData b) {
 		voidBoss = b;
 	}
-	
+
 	public static void render(ScaledResolution res) {
-		if(voidBoss == null) return;
-		
+		if (voidBoss == null) return;
+
 		Minecraft mc = Minecraft.getMinecraft();
-		Rectangle bgRect = new Rectangle(0, 0, 185, 16);
+		Rectangle bgRect = new Rectangle(0, 0, 205, 16);
 		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 10);
 		String name = voidBoss.getNameForBossBar().getFormattedText();
 		int c = res.getScaledWidth() / 2;
@@ -46,65 +51,102 @@ public class RenderBossHeathBar {
 		int y = 20;
 		int xf = x + (bgRect.width - fgRect.width) / 2;
 		int yf = y + (bgRect.height - fgRect.height) / 2;
-		int bossHpPerc = (int) ((double) fgRect.width * voidBoss.getPercentHPForBossBar());
+		float bossHpPerc = (float) ((float) fgRect.width * (float) voidBoss.getPercentHPForBossBar());
 		int tx = c - mc.getRenderManager().getFontRenderer().getStringWidth(name) / 2;
-		
+
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		ResourceLocation rl = new ResourceLocation(voidCraft.modid+":textures/gui/WhiteSpace.png");
-		if(rl != null) mc.renderEngine.bindTexture(rl);
-		
-		GL11.glColor4f(0F, 0F, 1F, flashTick);
+
+		// GL11.glEnable(GL11.GL_BLEND);
+		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		GlStateManager.enableBlend();
+
+		mc.renderEngine.bindTexture(bg);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		// drawBar(x, y, 0, bgRect.width, bgRect.height);
+
+		GlStateManager.pushMatrix();
+		{
+			int xOff = 25;
+			int yOff = -10;
+			GlStateManager.scale(0.75, 0.35, 1.0);
+			Tessellator tessellator = Tessellator.getInstance();
+			VertexBuffer worldRender = tessellator.getBuffer();
+			worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
+			worldRender.pos(xOff + x + 322, yOff + y, 0).tex(1, 0).endVertex();
+			worldRender.pos(xOff + x, yOff + y, 0).tex(0, 0).endVertex();
+			worldRender.pos(xOff + x, yOff + y + 141, 0).tex(0, 1).endVertex();
+			worldRender.pos(xOff + x + 322, yOff + y + 141, 0).tex(1, 1).endVertex();
+			tessellator.draw();
+		}
+		GlStateManager.popMatrix();
+		ResourceLocation temp = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/temp2.png");
+		mc.renderEngine.bindTexture(temp);
+		GL11.glColor4f(0.3F, 0.0F, 0.8F, flashTick);
 		drawBar(x, y, 0, bgRect.width, bgRect.height);
+
+		mc.renderEngine.bindTexture(temp);
 		GL11.glColor4f(1F, 0F, 0F, 1F);
 		drawBar(xf, yf, 0, fgRect.width, fgRect.height);
 		GL11.glColor4f(0F, 1F, 0F, 1F);
-		drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
-		mc.getRenderManager().getFontRenderer().drawString((int)voidBoss.getHealthForBossBar()+"/"+(int)voidBoss.getMaxHealthForBossBar(), xf+1, y + 5, 0x000000);
-		
-		mc.getRenderManager().getFontRenderer().drawStringWithShadow(name, tx, y - 10, 0xAA00FF);
-		
-		GL11.glColor4f(1F, 1F, 1F, 1F);//CleanUp
-		GL11.glEnable(GL11.GL_BLEND);
+
+		// drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
+		Tessellator tessellator = Tessellator.getInstance();
+		VertexBuffer worldRender = tessellator.getBuffer();
+		worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldRender.pos(xf + bossHpPerc, yf, 0).tex((float) voidBoss.getPercentHPForBossBar(), 0).endVertex();
+		worldRender.pos(xf, yf, 0).tex(0, 0).endVertex();
+		worldRender.pos(xf, yf + fgRect.height, 0).tex(0, 0.1).endVertex();
+		worldRender.pos(xf + bossHpPerc, yf + fgRect.height, 0).tex((float) voidBoss.getPercentHPForBossBar(), 0.1).endVertex();
+		tessellator.draw();
+
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		String hpText = (int) voidBoss.getHealthForBossBar() + "/" + (int) voidBoss.getMaxHealthForBossBar();
+		mc.getRenderManager().getFontRenderer().drawString(hpText, xf + (115 - (mc.getRenderManager().getFontRenderer().getStringWidth(hpText))) + 1, y + 5, 0x000000);
+		mc.getRenderManager().getFontRenderer().drawString(hpText, xf + (115 - (mc.getRenderManager().getFontRenderer().getStringWidth(hpText))), y + 4, 0xFF0000);
+
+		mc.getRenderManager().getFontRenderer().drawStringWithShadow(name, tx, y - 10, 0xFF0000);
+
+		GL11.glColor4f(1F, 1F, 1F, 1F);// CleanUp
+		GlStateManager.disableBlend();
+		// GL11.glEnable(GL11.GL_BLEND);
 
 		Entity e = (Entity) voidBoss;
 		EntityPlayer p = mc.thePlayer;
-		if(e.isDead || !p.worldObj.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32) voidBoss = null;
-		
-		if(flashTickWait <= 0){
-			if(flashTickFlag){
-				if(flashTick > 0.15){
-					flashTick-=0.1;
-				}else{
+		if (e.isDead || !p.worldObj.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32) voidBoss = null;
+
+		if (flashTickWait <= 0) {
+			if (flashTickFlag) {
+				if (flashTick > 0.25) {
+					flashTick -= 0.1;
+				} else {
 					flashTickFlag = !flashTickFlag;
 				}
-			}else{
-				if(flashTick < 1){
-					flashTick+=0.1;
-				}else{
+			} else {
+				if (flashTick < 1) {
+					flashTick += 0.1;
+				} else {
 					flashTickFlag = !flashTickFlag;
 				}
 			}
 			flashTickWait = 1;
-		}else{
+		} else {
 			flashTickWait--;
 		}
 	}
-	
+
 	public static float pointDistanceSpace(double x1, double y1, double z1, double x2, double y2, double z2) {
 		return (float) Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2));
 	}
-	
+
 	public static void drawBar(int x, int y, int z, int w, int h) {
 		Tessellator tessellator = Tessellator.getInstance();
 		VertexBuffer worldRender = tessellator.getBuffer();
-		worldRender.begin(7, DefaultVertexFormats.POSITION);
-		worldRender.pos(x+w, y, z).endVertex();
-		worldRender.pos(x, y, z).endVertex();
-		worldRender.pos(x, y+h, z).endVertex();
-		worldRender.pos(x+w, y+h, z).endVertex();
+		worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
+		worldRender.pos(x + w, y, z).tex(1, 0).endVertex();
+		worldRender.pos(x, y, z).tex(0, 0).endVertex();
+		worldRender.pos(x, y + h, z).tex(0, 0.1).endVertex();
+		worldRender.pos(x + w, y + h, z).tex(1, 0.1).endVertex();
 		tessellator.draw();
 	}
 

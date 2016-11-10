@@ -8,19 +8,18 @@ public class BiomeGenXia extends Biome {
 
 	public BiomeGenXia(BiomeProperties prop) {
 		super(prop);
-		
+
 		this.spawnableMonsterList.clear();
-        this.spawnableCreatureList.clear();
-        this.spawnableWaterCreatureList.clear();
-        this.spawnableCaveCreatureList.clear();
-        //this.topBlock = voidCraft.blockFakeBedrock;
-		//this.fillerBlock = voidCraft.blockFakeBedrock;
-		}
-	
+		this.spawnableCreatureList.clear();
+		this.spawnableWaterCreatureList.clear();
+		this.spawnableCaveCreatureList.clear();
+		// this.topBlock = voidCraft.blockFakeBedrock;
+		// this.fillerBlock = voidCraft.blockFakeBedrock;
+	}
+
 	@SideOnly(Side.CLIENT)
-	public int getSkyColorByTemp(float par1)
-	{
-		 return 0;
+	public int getSkyColorByTemp(float par1) {
+		return 0;
 	}
 
 }
