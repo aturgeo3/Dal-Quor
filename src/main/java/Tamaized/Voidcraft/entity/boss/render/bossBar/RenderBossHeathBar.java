@@ -27,6 +27,7 @@ import Tamaized.Voidcraft.voidCraft;
 public class RenderBossHeathBar {
 
 	public static final ResourceLocation whitespace = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/WhiteSpace.png");
+	public static final ResourceLocation bar = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/bar.png");
 	public static final ResourceLocation bg = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/bg.png");
 
 	private static IVoidBossData voidBoss;
@@ -34,6 +35,9 @@ public class RenderBossHeathBar {
 	private static float flashTick = 0;
 	private static boolean flashTickFlag = false;
 	private static int flashTickWait = 0;
+
+	private static final Rectangle bgRect = new Rectangle(0, 0, 205, 16);
+	private static final Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 10);
 
 	public static void setCurrentBoss(IVoidBossData b) {
 		voidBoss = b;
@@ -43,8 +47,6 @@ public class RenderBossHeathBar {
 		if (voidBoss == null) return;
 
 		Minecraft mc = Minecraft.getMinecraft();
-		Rectangle bgRect = new Rectangle(0, 0, 205, 16);
-		Rectangle fgRect = new Rectangle(0, bgRect.y + bgRect.height, 181, 10);
 		String name = voidBoss.getNameForBossBar().getFormattedText();
 		int c = res.getScaledWidth() / 2;
 		int x = c - bgRect.width / 2;
@@ -62,7 +64,7 @@ public class RenderBossHeathBar {
 		GlStateManager.enableBlend();
 
 		mc.renderEngine.bindTexture(bg);
-		GL11.glColor4f(1F, 1F, 1F, 1F);
+		GL11.glColor4f(1F, 1F, 1F, flashTick);
 		// drawBar(x, y, 0, bgRect.width, bgRect.height);
 
 		GlStateManager.pushMatrix();
@@ -80,13 +82,12 @@ public class RenderBossHeathBar {
 			tessellator.draw();
 		}
 		GlStateManager.popMatrix();
-		ResourceLocation temp = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/temp2.png");
-		mc.renderEngine.bindTexture(temp);
-		GL11.glColor4f(0.3F, 0.0F, 0.8F, flashTick);
+		mc.renderEngine.bindTexture(bar);
+		GL11.glColor4f(0.3F, 0.0F, 0.8F, 0.5F);
 		drawBar(x, y, 0, bgRect.width, bgRect.height);
 
-		mc.renderEngine.bindTexture(temp);
-		GL11.glColor4f(1F, 0F, 0F, 1F);
+		mc.renderEngine.bindTexture(bar);
+		GL11.glColor4f(0.1F, 0F, 0.1F, 1F);
 		drawBar(xf, yf, 0, fgRect.width, fgRect.height);
 		GL11.glColor4f(0F, 1F, 0F, 1F);
 
@@ -117,7 +118,7 @@ public class RenderBossHeathBar {
 
 		if (flashTickWait <= 0) {
 			if (flashTickFlag) {
-				if (flashTick > 0.25) {
+				if (flashTick > 0.0) {
 					flashTick -= 0.1;
 				} else {
 					flashTickFlag = !flashTickFlag;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,9 +40,9 @@ public class BlockRealityHole extends TamBlock {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
-				if(entityIn.dimension == voidCraft.config.getDimensionIDxia()){
+				if (entityIn.dimension == voidCraft.config.getDimensionIDxia()) {
 					entityIn.setPositionAndUpdate(52.5, 61, 4.5);
-				}else{
+				} else {
 					if (voidCraft.config.getRealityWhiteList().size() > 0) {
 						Random rand = worldIn.rand;
 						int i = rand.nextInt(voidCraft.config.getRealityWhiteList().size());
@@ -52,7 +53,7 @@ public class BlockRealityHole extends TamBlock {
 						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}
 				}
-			} else entityIn.setDead();
+			} else if (!(entityIn instanceof EntityVoidBoss)) entityIn.setDead();
 		}
 	}
 

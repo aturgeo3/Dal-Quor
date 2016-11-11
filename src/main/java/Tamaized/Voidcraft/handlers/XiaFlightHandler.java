@@ -51,7 +51,7 @@ public class XiaFlightHandler { // Thanks to Vazkii's Botania Mod Source for thi
 		return player.getGameProfile().getName() + ":" + player.worldObj.isRemote;
 	}
 
-	private boolean shouldPlayerHaveFlight(EntityPlayer player) {
+	public static boolean shouldPlayerHaveFlight(EntityPlayer player) {
 		ItemStack helm = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 		ItemStack chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 		ItemStack leg = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);

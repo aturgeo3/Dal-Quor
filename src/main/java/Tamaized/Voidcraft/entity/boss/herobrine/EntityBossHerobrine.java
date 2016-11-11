@@ -28,7 +28,7 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 	}
 
 	public EntityBossHerobrine(World world, IBattleHandler handler) {
-		super(world, handler);
+		super(world, handler, false);
 		this.setInvul(true);
 	}
 

@@ -8,6 +8,7 @@ import java.util.UUID;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
+import Tamaized.Voidcraft.handlers.XiaFlightHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
@@ -50,7 +51,7 @@ public class VoidTickEvent {
 		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
 			if (e.player.dimension == voidCraft.config.getDimensionIDxia()) {
-				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying) {
+				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && !XiaFlightHandler.shouldPlayerHaveFlight(player)) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;

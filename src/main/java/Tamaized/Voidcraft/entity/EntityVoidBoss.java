@@ -34,39 +34,39 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	private boolean isDone = false;
 
 	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
-	
+
 	@SideOnly(Side.CLIENT)
 	private ArrayList<IAnimatable> animations = new ArrayList<IAnimatable>();
 
 	public EntityVoidBoss(World world) {
 		super(world);
-		this.isImmuneToFire = immuneToFire();
-		this.hurtResistantTime = 10;
-		this.setSize(sizeWidth(), sizeHeight());
+		isImmuneToFire = immuneToFire();
+		hurtResistantTime = 10;
+		setSize(sizeWidth(), sizeHeight());
 		addDefaultTasks();
 	}
 
-	public EntityVoidBoss(World world, IBattleHandler handler) {
+	public EntityVoidBoss(World world, IBattleHandler handler, boolean hasIdleTask) {
 		this(world);
 		this.handler = handler;
 		bus = new VoidBossAIBus();
+		if (hasIdleTask) tasks.addTask(6, new EntityAILookIdle(this));
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public void addAnimation(IAnimatable animation){
+	public void addAnimation(IAnimatable animation) {
 		animations.add(animation);
 	}
-	
+
 	protected void addDefaultTasks() {
 		for (Class c : getFilters())
-			this.tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
+			tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
 	}
 
 	public void start() {
 		isDone = false;
 		if (phase == 0 && bus != null) ready = true;
-		else doDamage((int) this.getMaxHealth());
+		else doDamage((int) getMaxHealth());
 		active = true;
 	}
 
@@ -81,8 +81,8 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	public boolean isActive() {
 		return active;
 	}
-	
-	public boolean isDone(){
+
+	public boolean isDone() {
 		return isDone;
 	}
 
@@ -91,7 +91,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	}
 
 	public void doDamage(int a) {
-		this.setHealth(this.getHealth() - a);
+		setHealth(getHealth() - a);
 		triggerOnDamage(phase, null, a);
 	}
 
@@ -104,7 +104,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	@Override
 	public float getPercentHPForBossBar() {
-		return this.getHealth() / this.getMaxHealth();
+		return getHealth() / getMaxHealth();
 	}
 
 	@Override
@@ -131,11 +131,11 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 			}
 			updateAI();
 			bus.readNextPacket();
-		}else{
+		} else {
 			Iterator<IAnimatable> iter = animations.iterator();
-			while(iter.hasNext()){
+			while (iter.hasNext()) {
 				IAnimatable animation = iter.next();
-				if(animation.update()) iter.remove();
+				if (animation.update()) iter.remove();
 			}
 		}
 	}
@@ -154,8 +154,8 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 		if (phase > maxPhases()) {
 			isDone = true;
-			if (this.getHealth() <= 0.0F) {
-				this.trueDeathUpdate();
+			if (getHealth() <= 0.0F) {
+				trueDeathUpdate();
 			}
 		} else {
 			updatePhase(phase);
@@ -189,7 +189,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected void addAI(EntityVoidNPCAIBase<? extends EntityVoidBoss> newAi) {
 		ai.add(newAi);
 		newAi.Init();
-		this.tasks.addTask(1, newAi);
+		tasks.addTask(1, newAi);
 		bus.addListener(newAi);
 	}
 
@@ -199,8 +199,8 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	@Override
 	public void onDeath(DamageSource p_70645_1_) { // Switch phases when we fake death
 		if (phase > maxPhases()) {
-			this.setHealth(0);
-			this.isDead = true;
+			setHealth(0);
+			isDead = true;
 			super.onDeath(p_70645_1_);
 			setDead();
 		} else {
@@ -211,28 +211,28 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	private void trueDeathUpdate() {
 		active = false;
-		++this.deathTime;
+		++deathTime;
 
-		if (this.deathTime >= 20) {
+		if (deathTime >= 20) {
 			int i;
 
-			if (!this.worldObj.isRemote && (this.recentlyHit > 0 || this.isPlayer()) && this.canDropLoot() && this.worldObj.getGameRules().getBoolean("doMobLoot")) {
-				i = this.getExperiencePoints(this.attackingPlayer);
+			if (!worldObj.isRemote && (recentlyHit > 0 || isPlayer()) && canDropLoot() && worldObj.getGameRules().getBoolean("doMobLoot")) {
+				i = getExperiencePoints(attackingPlayer);
 
 				while (i > 0) {
 					int j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 				}
 			}
 
-			this.isDead = true;
+			isDead = true;
 
 			for (i = 0; i < 20; ++i) {
-				double d2 = this.rand.nextGaussian() * 0.02D;
-				double d0 = this.rand.nextGaussian() * 0.02D;
-				double d1 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d2, d0, d1);
+				double d2 = rand.nextGaussian() * 0.02D;
+				double d0 = rand.nextGaussian() * 0.02D;
+				double d1 = rand.nextGaussian() * 0.02D;
+				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (double) (rand.nextFloat() * width * 2.0F) - (double) width, posY + (double) (rand.nextFloat() * height), posZ + (double) (rand.nextFloat() * width * 2.0F) - (double) width, d2, d0, d1);
 			}
 		}
 	}
@@ -240,7 +240,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	@Override
 	protected void onDeathUpdate() { // Intercept deathUpdate to keep entity alive
 		if (ready) return;
-		this.isDead = false;
+		isDead = false;
 		onDeath(DamageSource.generic);
 	}
 
@@ -260,7 +260,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		if (bus != null) bus.clearListeners();
 		phase = 100;
 		setHealth(0);
-		this.isDead = true;
+		isDead = true;
 		active = false;
 	}
 
@@ -287,14 +287,14 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(999.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(999.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public void renderSpecials(){
-		for(IAnimatable animation : animations){
+	public void renderSpecials() {
+		for (IAnimatable animation : animations) {
 			animation.render();
 		}
 	}

@@ -59,7 +59,7 @@ public class EntityBossXia extends EntityVoidBoss {
 	}
 
 	public EntityBossXia(World world, IBattleHandler handler) {
-		super(world, handler);
+		super(world, handler, false);
 		this.setInvul(true);
 	}
 
@@ -124,16 +124,17 @@ public class EntityBossXia extends EntityVoidBoss {
 			addAI(new EntityAIXiaPhase1(this, getFilters()));
 		} else if (phase == 2) {
 			/**
-			 * Cycle: - Teleports a short distance from a targetted player, walks towards them with a giant sword. do some sword mechanic stuff that can be dodged
+			 * Cycle: - Teleports a short distance from a target player, walks towards them with a demonic sword.
 			 */
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 			this.setHealth(this.getMaxHealth());
 			setInvul(false);
 			addAI(new EntityAIXiaPhase2(this, getFilters()));
 		} else if (phase == 3) {
 			/**
 			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
+			 * His attacks may involve the Vade Mecum spells
 			 */
 			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);

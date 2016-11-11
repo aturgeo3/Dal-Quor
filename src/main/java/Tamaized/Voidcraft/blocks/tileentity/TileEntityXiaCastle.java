@@ -37,6 +37,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 			if (running) {
 				doHandlerStartChecks();
 				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) {
+				//if (!xiaDoorOpen) {
 					BlockPos doorPos = new BlockPos(54, 76, 82);
 					for (int x = 0; x > -5; x--) {
 						for (int y = 0; y < 4; y++) {
@@ -84,7 +85,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	public void start() {
-		if (running) stop();
+		stop();
 		twinsLoc = getPos().add(93 - 52, 71 - 55, 70 - 4);
 		herobrineLoc = getPos().add(12 - 52, 71 - 55, 70 - 4);
 		xiaLoc = getPos().add(52 - 52, 75 - 55, 85 - 4);

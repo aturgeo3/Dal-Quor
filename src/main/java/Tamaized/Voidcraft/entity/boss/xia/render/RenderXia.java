@@ -6,12 +6,19 @@ import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,10 +36,66 @@ public class RenderXia<T extends EntityBossXia> extends RenderLiving<T> {
 
 	@Override
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
-		super.doRender(entity, x, y, z, yaw, ticks);
-		entity.renderSpecials();
-		this.renderLabel(entity, x, y, z);
-		RenderBossHeathBar.setCurrentBoss(entity);
+		GlStateManager.pushMatrix();
+		{
+			ItemStack itemstack = entity.getHeldItemMainhand();
+			ItemStack itemstack1 = entity.getHeldItemOffhand();
+			ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
+			ModelBiped.ArmPose modelbiped$armpose1 = ModelBiped.ArmPose.EMPTY;
+			if (itemstack != null) modelbiped$armpose = ModelBiped.ArmPose.ITEM;
+			if (itemstack1 != null) modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
+			if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
+				getMainModel().rightArmPose = modelbiped$armpose;
+				getMainModel().leftArmPose = modelbiped$armpose1;
+			} else {
+				getMainModel().rightArmPose = modelbiped$armpose1;
+				getMainModel().leftArmPose = modelbiped$armpose;
+			}
+			super.doRender(entity, x, y, z, yaw, ticks);
+			boolean flag = entity.getPrimaryHand() == EnumHandSide.RIGHT;
+
+			if (itemstack != null || itemstack1 != null) {
+				GlStateManager.pushMatrix();
+
+				if (getMainModel().isChild) {
+					float f = 0.5F;
+					GlStateManager.translate(0.0F, 0.625F, 0.0F);
+					GlStateManager.rotate(-20.0F, -1.0F, 0.0F, 0.0F);
+					GlStateManager.scale(0.5F, 0.5F, 0.5F);
+				}
+				// EntityPlayer client = Minecraft.getMinecraft().thePlayer;
+				// GlStateManager.translate(entity.posX-client.posX, entity.posY-client.posY, entity.posZ-client.posZ);
+				GlStateManager.translate(x, y+1.5, z);
+				GlStateManager.rotate(-entity.renderYawOffset, 0, 1, 0);
+				GlStateManager.rotate(180, 1, 0, 0);
+				this.renderHeldItem(entity, itemstack, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, EnumHandSide.RIGHT);
+				this.renderHeldItem(entity, itemstack1, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, EnumHandSide.LEFT);
+				GlStateManager.popMatrix();
+			}
+			entity.renderSpecials();
+			this.renderLabel(entity, x, y, z);
+			RenderBossHeathBar.setCurrentBoss(entity);
+		}
+		GlStateManager.popMatrix();
+	}
+
+	private void renderHeldItem(EntityLivingBase entity, ItemStack stack, ItemCameraTransforms.TransformType transform, EnumHandSide hand) {
+		if (stack != null) {
+			GlStateManager.pushMatrix();
+
+			if (entity.isSneaking()) {
+				GlStateManager.translate(0.0F, 0.2F, 0.0F);
+			}
+			// Forge: moved this call down, fixes incorrect offset while sneaking.
+			getMainModel().postRenderArm(0.0625F, hand);
+			GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+			boolean flag = hand == EnumHandSide.LEFT;
+			GlStateManager.translate((float) (flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
+			// GlStateManager.translate(entity.posX-Minecraft.getMinecraft().thePlayer.posX, entity.posY-Minecraft.getMinecraft().thePlayer.posY, entity.posZ-Minecraft.getMinecraft().thePlayer.posZ);
+			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, flag);
+			GlStateManager.popMatrix();
+		}
 	}
 
 	@Override

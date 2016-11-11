@@ -26,7 +26,7 @@ public class EntityBossDol extends EntityVoidBoss {
 	}
 
 	public EntityBossDol(World world, IBattleHandler handler) {
-		super(world, handler);
+		super(world, handler, true);
 		this.setInvul(true);
 	}
 
