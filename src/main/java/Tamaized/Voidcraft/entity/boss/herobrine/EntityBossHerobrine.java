@@ -39,7 +39,7 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
-		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.05D);
+		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
 	}
 
 	@Override

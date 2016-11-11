@@ -2,8 +2,11 @@ package Tamaized.Voidcraft.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -39,6 +42,8 @@ public class TileEntityAIBlock extends TamTileEntity {
 	}
 
 	public void boom() {
+		SoundType soundType = SoundType.GLASS;
+		worldObj.playSound(null, getPos().getX(), getPos().getY(), getPos().getZ(), soundType.getBreakSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 		if (ai != null) {
 			if (state < 2) state++;
 			else {
