@@ -20,6 +20,7 @@ After stepping through the portal, you'll be in the Void, a black abyss where on
  * Note: These Mods are NOT required in order to use this mod.
  * Planned:
   * Aether II
+  * Thaumcraft
  * 1.9.4 - 1.10.2
   * JEI
  * 1.8.9
