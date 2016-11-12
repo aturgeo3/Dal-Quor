@@ -10,6 +10,7 @@ import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
+import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
@@ -74,6 +75,7 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
+import Tamaized.Voidcraft.proxy.AbstractVoidCraftProxy;
 import Tamaized.Voidcraft.registry.VoidCraftAchievements;
 import Tamaized.Voidcraft.registry.VoidCraftArmors;
 import Tamaized.Voidcraft.registry.VoidCraftBiomes;
@@ -101,6 +103,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -138,7 +141,7 @@ public class voidCraft extends TamModBase {
 	public static final String networkChannelName = "VoidCraft";
 
 	@SidedProxy(clientSide = "Tamaized.Voidcraft.proxy.ClientProxy", serverSide = "Tamaized.Voidcraft.proxy.ServerProxy")
-	public static AbstractProxy proxy;
+	public static AbstractVoidCraftProxy proxy;
 
 	public VoidTickEvent VoidTickEvent;
 
@@ -177,6 +180,8 @@ public class voidCraft extends TamModBase {
 
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
+		
+		proxy.preRegisters();
 
 		// yo dawg, Register the Registers... i'm sorry
 		register(materials = new VoidCraftMaterials());
@@ -239,17 +244,18 @@ public class voidCraft extends TamModBase {
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
 		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
 		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
-		GameRegistry.registerTileEntity(TileEntityHeimdall.class, blocks.Heimdall.getName());
-		GameRegistry.registerTileEntity(TileEntityNoBreak.class, blocks.blockNoBreak.getName());
+		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
+		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
 		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
-		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, blocks.voidicCharger.getName());
+		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, "tileEntityVoidicCharger");
 		GameRegistry.registerTileEntity(TileEntityRealityStabilizer.class, "tileEntityRealityStabilizer");
 		GameRegistry.registerTileEntity(TileEntityFakeBedrockFarmland.class, "tileEntityFakeBedrockFarmland");
 		GameRegistry.registerTileEntity(TileEntityVoidicAlchemy.class, "tileEntityVoidicAlchemy");
 		GameRegistry.registerTileEntity(TileEntityRealityTeleporter.class, "tileEntityRealityTeleporter");
+		GameRegistry.registerTileEntity(TileEntitySpellIceSpike.class, "tileEntitySpellIceSpike");
 
 		// GUI Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());

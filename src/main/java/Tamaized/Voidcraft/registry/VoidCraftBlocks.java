@@ -25,6 +25,7 @@ import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import Tamaized.Voidcraft.blocks.XiaBlock;
+import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.machina.Heimdall;
 import Tamaized.Voidcraft.machina.RealityStabilizer;
@@ -81,6 +82,8 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static RealityTeleporterBlock realityTeleporterBlock;
 
 	public static BlockEtherealPlant etherealPlant;
+	
+	public static BlockSpellIceSpike iceSpike;
 
 	public static AIBlock AIBlock;
 	public static XiaBlock xiaBlock;
@@ -125,6 +128,8 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(realityTeleporterBlock = new RealityTeleporterBlock(voidCraft.tabs.tabVoid, Material.IRON, "realityTeleporterBlock", 3.5f));
 
 		modelList.add(etherealPlant = new BlockEtherealPlant(voidCraft.tabs.tabVoid, "etherealPlant", 1.0f));
+		
+		modelList.add(iceSpike = new BlockSpellIceSpike(voidCraft.tabs.tabVoid, Material.ICE, "blockSpellIceSpike", -1F));
 
 		// Slabs have to be registered outside of their class
 		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);

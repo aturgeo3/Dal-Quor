@@ -76,15 +76,21 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-public class ClientProxy extends AbstractProxy {
+public class ClientProxy extends AbstractVoidCraftProxy {
 
 	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
+
+	@Override
+	public void preRegisters() {
+		OBJLoader.INSTANCE.addDomain(voidCraft.modid);
+	}
 
 	@Override
 	public void preInit() {
