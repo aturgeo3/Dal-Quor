@@ -23,6 +23,7 @@ import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
+import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.world.SchematicLoader;
 
 public class Debugger extends TamItem {
@@ -53,8 +54,9 @@ public class Debugger extends TamItem {
 		if (worldIn.isRemote) return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 		//playerIn.clearActivePotions();
 		//playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
-		Vec3d vec = playerIn.getLook(1.0f);
-		EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+		//Vec3d vec = playerIn.getLook(1.0f);
+		//EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+		ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
 		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
 		// entity.setPositionAndRotation(x, y, z, yaw, pitch);
 		worldIn.spawnEntityInWorld(entity);

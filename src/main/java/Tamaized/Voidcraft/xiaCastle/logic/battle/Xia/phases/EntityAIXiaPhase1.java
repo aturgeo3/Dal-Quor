@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.Voidcraft.voidCraft;
@@ -20,6 +16,10 @@ import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler;
 import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
 import Tamaized.Voidcraft.voidicInfusion.PlayerInfusionHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
 

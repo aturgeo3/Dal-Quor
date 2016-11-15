@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.proxy;
 
-import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -53,6 +52,7 @@ import Tamaized.Voidcraft.entity.mob.render.RenderWraith;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
 import Tamaized.Voidcraft.entity.nonliving.EntityHookShot;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderAcidBall;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderHook;
@@ -148,6 +148,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		// Projectiles and MISC.
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(ProjectileDisintegration.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLichInferno.class, new RenderNull());

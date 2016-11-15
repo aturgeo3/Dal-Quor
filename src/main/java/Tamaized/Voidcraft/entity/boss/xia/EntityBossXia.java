@@ -1,14 +1,22 @@
 package Tamaized.Voidcraft.entity.boss.xia;
 
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase3;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,14 +30,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.ClientPacketHandler;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
 
 public class EntityBossXia extends EntityVoidBoss {
 
@@ -68,7 +68,7 @@ public class EntityBossXia extends EntityVoidBoss {
 		this.leftArmPitch = leftArmPitch;
 		this.rightArmYaw = rightArmYaw;
 		this.rightArmPitch = rightArmPitch;
-		if(sendUpdates) sendPacketUpdates();
+		if (sendUpdates) sendPacketUpdates();
 	}
 
 	private void sendPacketUpdates() {
@@ -133,15 +133,14 @@ public class EntityBossXia extends EntityVoidBoss {
 			addAI(new EntityAIXiaPhase2(this, getFilters()));
 		} else if (phase == 3) {
 			/**
-			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back
-			 * His attacks may involve the Vade Mecum spells
+			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back His attacks may involve the Vade Mecum spells
 			 */
 			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
-
-			// addAI(EntityAIPathHerobrineFlightPhase3.class); TODO
+			setInvul(false);
+			addAI(new EntityAIXiaPhase3(this, getFilters()));
 
 		}
 		setArmRotations(0, 0, 0, 0, true);

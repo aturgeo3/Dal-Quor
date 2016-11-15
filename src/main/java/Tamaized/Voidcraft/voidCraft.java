@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 
 import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
-import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -50,6 +49,7 @@ import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
 import Tamaized.Voidcraft.entity.nonliving.EntityHookShot;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
 import Tamaized.Voidcraft.events.CapabilitySyncEvent;
@@ -59,7 +59,6 @@ import Tamaized.Voidcraft.events.ItemEntityEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
-import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
@@ -103,7 +102,6 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -180,7 +178,7 @@ public class voidCraft extends TamModBase {
 
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
-		
+
 		proxy.preRegisters();
 
 		// yo dawg, Register the Registers... i'm sorry
@@ -287,6 +285,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityHerobrineTNTPrimed.class, "HerobrineTNTPrimed", this, 128, 1, true);
 		registerEntity(EntityHerobrineShadow.class, "HerobrineShadow", this, 128, 1, true);
 		registerEntity(EntityLichInferno.class, "LichInferno", this, 128, 1, true);
+		registerEntity(ProjectileDisintegration.class, "ProjectileDisintegration", this, 128, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(config.getDimensionIDvoid(), DimensionType.register("The Void", "_void", config.getDimensionIDvoid(), WorldProviderVoid.class, false));

@@ -103,10 +103,10 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 	protected void entityInit() {
 
 	}
-	
+
 	@Override
 	public void setIsCritical(boolean critical) {
-		
+
 	}
 
 	@Override
