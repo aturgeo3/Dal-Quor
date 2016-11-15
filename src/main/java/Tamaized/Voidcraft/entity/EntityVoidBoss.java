@@ -146,6 +146,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 
 	private void updateAI() {
 		if (worldObj.isRemote) return;
+		
 		if (ready) {
 			phase++;
 			preInitPhase(phase);

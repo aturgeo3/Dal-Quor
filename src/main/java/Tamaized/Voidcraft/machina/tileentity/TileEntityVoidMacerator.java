@@ -33,6 +33,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPowerInventory {
 		return (oldState.getBlock() != newSate.getBlock());
 	}
 
+	@Override
 	public void readNBT(NBTTagCompound nbt) {
 		cookingTick = nbt.getInteger("cookingTick");
 	}

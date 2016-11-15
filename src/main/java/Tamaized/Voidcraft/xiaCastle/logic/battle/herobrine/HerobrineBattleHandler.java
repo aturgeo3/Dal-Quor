@@ -79,5 +79,11 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	public boolean isDone() {
 		return isDone;
 	}
+	
+	@Override
+	public void setDone() {
+		stop();
+		isDone = true;
+	}
 
 }

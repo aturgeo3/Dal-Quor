@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -32,24 +33,19 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 
 	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote) {
+		if (worldObj != null && !worldObj.isRemote) {
 			validateInstance();
 			if (running) {
 				doHandlerStartChecks();
 				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) {
-				//if (!xiaDoorOpen) {
-					BlockPos doorPos = new BlockPos(54, 76, 82);
-					for (int x = 0; x > -5; x--) {
-						for (int y = 0; y < 4; y++) {
-							worldObj.setBlockToAir(doorPos.add(x, y, 0));
-						}
-					}
-					xiaDoorOpen = true;
+					// if (!xiaDoorOpen) {
+					openDoor();
 				}
 				if (twins.isRunning()) twins.update();
 				if (herobrine.isRunning()) herobrine.update();
 				if (xia.isRunning()) xia.update();
 			}
+			handleProgressVisual();
 		}
 	}
 
@@ -80,22 +76,60 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	public void validateInstance() {
-		if (worldObj == null || worldObj.playerEntities.isEmpty() || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
+		if (worldObj != null) if ((worldObj.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone()))) || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
 		if (!running && worldObj != null && !worldObj.playerEntities.isEmpty()) start();
+	}
+
+	private void handleProgressVisual() {
+		BlockPos pos1 = new BlockPos(48, 79, 82);
+		BlockPos pos2 = new BlockPos(56, 79, 82);
+		TileEntity te1 = worldObj.getTileEntity(pos1);
+		TileEntity te2 = worldObj.getTileEntity(pos2);
+		TileEntityAIBlock ai1 = null;
+		TileEntityAIBlock ai2 = null;
+		if (!(te1 instanceof TileEntityAIBlock)) {
+			worldObj.setBlockState(pos1, voidCraft.blocks.AIBlock.getDefaultState());
+			ai1 = (TileEntityAIBlock) worldObj.getTileEntity(pos1);
+			ai1.setFake();
+		} else {
+			ai1 = (TileEntityAIBlock) worldObj.getTileEntity(pos1);
+		}
+		if (!(te2 instanceof TileEntityAIBlock)) {
+			worldObj.setBlockState(pos2, voidCraft.blocks.AIBlock.getDefaultState());
+			ai2 = (TileEntityAIBlock) worldObj.getTileEntity(pos2);
+			ai2.setFake();
+		} else {
+			ai2 = (TileEntityAIBlock) worldObj.getTileEntity(pos2);
+		}
+		if (running) {
+			int state1 = herobrine.isDone() ? 1 : 0;
+			int state2 = twins.isDone() ? 1 : 0;
+			if (ai1 != null && ai1.getState() != state1) ai1.setState(state1);
+			if (ai2 != null && ai2.getState() != state2) ai2.setState(state2);
+		}
 	}
 
 	public void start() {
 		stop();
+		setupPos();
+		running = true;
+	}
+
+	private void setupPos() {
 		twinsLoc = getPos().add(93 - 52, 71 - 55, 70 - 4);
 		herobrineLoc = getPos().add(12 - 52, 71 - 55, 70 - 4);
 		xiaLoc = getPos().add(52 - 52, 75 - 55, 85 - 4);
-		running = true;
 	}
 
 	public void stop() {
 		twins.stop();
 		herobrine.stop();
 		xia.stop();
+		closeDoor();
+		running = false;
+	}
+
+	private void closeDoor() {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
@@ -103,29 +137,24 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 			}
 		}
 		xiaDoorOpen = false;
-		running = false;
 	}
 
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
-		return new SPacketUpdateTileEntity(pos, 2, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet) {
-		readFromNBT(packet.getNbtCompound());
+	private void openDoor() {
+		BlockPos doorPos = new BlockPos(54, 76, 82);
+		for (int x = 0; x > -5; x--) {
+			for (int y = 0; y < 4; y++) {
+				worldObj.setBlockToAir(doorPos.add(x, y, 0));
+			}
+		}
+		xiaDoorOpen = true;
 	}
 
 	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		running = nbt.hasKey("running") ? nbt.getBoolean("running") : false;
 	}
 
 	@Override
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
-		nbt.setBoolean("running", running);
 		return nbt;
 	}
 

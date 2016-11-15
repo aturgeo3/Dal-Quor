@@ -1,6 +1,8 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +20,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 	private int state = 0;
 	private int oldState = state;
 	private boolean dead = false;
+	private boolean fake = false;
 
 	public TileEntityAIBlock() {
 		super();
@@ -26,6 +29,10 @@ public class TileEntityAIBlock extends TamTileEntity {
 	public void setup(EntityVoidNPCAIBase ai, TileEntityAIBlock parent) {
 		this.parent = parent;
 		this.ai = ai;
+	}
+
+	public void setFake() {
+		fake = true;
 	}
 
 	public boolean isDead() {
@@ -39,6 +46,10 @@ public class TileEntityAIBlock extends TamTileEntity {
 
 	public int getState() {
 		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 
 	public void boom() {
@@ -62,24 +73,23 @@ public class TileEntityAIBlock extends TamTileEntity {
 	@Override
 	public void onUpdate() {
 		if (!this.worldObj.isRemote) {
-			if (ai == null && parent == null) {
-				setDead();
-			} else {
-				if (parent != null) {
-					state = parent.getState();
-					if (parent.isDead()) {
-						parent = null;
-						setDead();
-						return;
+			if (!fake) {
+				if (ai == null && parent == null) {
+					setDead();
+				} else {
+					if (parent != null) {
+						state = parent.getState();
+						if (parent.isDead()) {
+							parent = null;
+							setDead();
+							return;
+						}
 					}
 				}
-				if (oldState != state) {
-					oldState = state;
-					IBlockState Bstate = this.worldObj.getBlockState(pos);
-					if (Bstate.getBlock().getMetaFromState(Bstate) != state) {
-						worldObj.setBlockState(pos, Bstate.getBlock().getStateFromMeta(state), 2);
-					}
-				}
+			}
+			if (oldState != state) {
+				oldState = state;
+				worldObj.setBlockState(pos, voidCraft.blocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
 			}
 		}
 	}
