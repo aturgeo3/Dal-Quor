@@ -47,7 +47,6 @@ import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
 import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
-import Tamaized.Voidcraft.entity.nonliving.EntityHookShot;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
@@ -278,7 +277,7 @@ public class voidCraft extends TamModBase {
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, 128, 1, true);
 		registerEntity(AcidBall.class, "AcidBall", this, 128, 1, true);
-		registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
+		//registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
 		registerEntity(EntityHerobrineFireball.class, "HerobrineFireball", this, 128, 1, true);
 		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, 128, 1, true);
 		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, 128, 1, true);

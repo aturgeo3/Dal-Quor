@@ -57,8 +57,8 @@ public class ServerPacketHandler {
 					case LINK_CLEAR: {
 						int slot = bbis.readInt();
 						ItemStack stack = null;
-						if (slot >= 0 && slot < player.inventory.mainInventory.length) stack = player.inventory.mainInventory[slot];
-						else if (slot == -1) stack = player.inventory.offHandInventory[0];
+						if (slot >= 0 && slot < player.inventory.mainInventory.size()) stack = player.inventory.mainInventory.get(slot);
+						else if (slot == -1) stack = player.inventory.offHandInventory.get(0);
 						if (stack != null && stack.getItem() == voidCraft.items.realityTeleporter) {
 							RealityTeleporter.clearLink(stack);
 						}

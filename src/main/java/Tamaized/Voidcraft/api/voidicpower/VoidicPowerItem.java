@@ -86,35 +86,35 @@ public abstract class VoidicPowerItem extends TamItem {
 					EntityPlayer player = (EntityPlayer) entity;
 					switch (itemSlot) {
 						case 0:
-							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[0])) {
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(0))) {
 								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_HELM, stack);
 								break;
-							} else if (ItemStack.areItemStacksEqual(stack, player.inventory.offHandInventory[0])) {
+							} else if (ItemStack.areItemStacksEqual(stack, player.inventory.offHandInventory.get(0))) {
 								cap.sendUpdates(player, PLAYER_INV_SLOT_OFFHAND, stack);
 								break;
 							}
 						case 1:
-							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[1])) {
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(1))) {
 								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_CHEST, stack);
 								break;
 							}
 						case 2:
-							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[2])) {
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(2))) {
 								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_LEGS, stack);
 								break;
 							}
 						case 3:
-							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory[3])) {
+							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(3))) {
 								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_BOOTS, stack);
 								break;
 							}
 						default:
-							if (itemSlot < player.inventory.mainInventory.length && ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory[itemSlot])) cap.sendUpdates(player, itemSlot, stack);
+							if (itemSlot < player.inventory.mainInventory.size() && ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory.get(itemSlot))) cap.sendUpdates(player, itemSlot, stack);
 							break;
 					}
 				}
 			} else {
-				NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid, true);
+				NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
 				cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 			}
 			if (cap.isInUse()) {
@@ -143,7 +143,7 @@ public abstract class VoidicPowerItem extends TamItem {
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid, true);
+		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
 		cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;
 	}
@@ -172,7 +172,8 @@ public abstract class VoidicPowerItem extends TamItem {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (!canBeUsed()) return ActionResult.newResult(EnumActionResult.PASS, stack);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
 		if (cap != null && cap.getCurrentPower() >= useAmount()) {

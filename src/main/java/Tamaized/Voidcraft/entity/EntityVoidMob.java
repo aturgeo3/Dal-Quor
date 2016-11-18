@@ -5,9 +5,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -57,7 +56,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob{
     }
 	
 	protected boolean canAttack(Entity entity){
-		if(entity instanceof EntitySkeleton && ((EntitySkeleton)entity).getSkeletonType() == SkeletonType.WITHER) return false;
+		if(entity instanceof EntityWitherSkeleton) return false;
 		return true;
 	}
     

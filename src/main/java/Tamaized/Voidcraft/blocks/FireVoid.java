@@ -1,22 +1,20 @@
 package Tamaized.Voidcraft.blocks;
 
+import Tamaized.TamModized.blocks.TamBlockFire;
+import Tamaized.TamModized.blocks.TamBlockPortal;
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.SkeletonType;
-import net.minecraft.item.Item;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import Tamaized.TamModized.blocks.TamBlockFire;
-import Tamaized.TamModized.blocks.TamBlockPortal;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidMob;
 
 public class FireVoid extends TamBlockFire {
 
@@ -39,11 +37,7 @@ public class FireVoid extends TamBlockFire {
 
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob)) {
-			if (entityIn instanceof EntitySkeleton) {
-				EntitySkeleton skelly = (EntitySkeleton) entityIn;
-				if (skelly.getSkeletonType() == SkeletonType.WITHER) return;
-			}
+		if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob || entityIn instanceof EntityWitherSkeleton)) {
 			EntityLivingBase e = ((EntityLivingBase) entityIn);
 			e.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 60, 1)); // nausea
 			e.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 60, 1)); // wither

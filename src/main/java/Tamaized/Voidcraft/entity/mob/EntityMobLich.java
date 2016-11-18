@@ -1,5 +1,11 @@
 package Tamaized.Voidcraft.entity.mob;
 
+import com.google.common.base.Predicate;
+
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
+import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -20,7 +26,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.monster.SkeletonType;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -29,14 +35,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidMob;
-import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
-import Tamaized.Voidcraft.sound.VoidSoundEvents;
-
-import com.google.common.base.Predicate;
 
 public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob {
 
@@ -61,7 +60,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob {
 			 * Return whether the specified entity is applicable to this filter.
 			 */
 			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntitySkeleton && ((EntitySkeleton) p_82704_1_).getSkeletonType() == SkeletonType.WITHER) return false;
+				if (p_82704_1_ instanceof EntityWitherSkeleton) return false;
 				else return true;
 			}
 
@@ -134,12 +133,12 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob {
 			EntityMobWraith wraith;
 			EntityMobSpectreChain chain;
 			EntityMobVoidWrath wrath;
-			EntitySkeleton skelly;
+			EntityWitherSkeleton skelly;
 
 			wraith = new EntityMobWraith(worldObj);
 			chain = new EntityMobSpectreChain(worldObj);
 			wrath = new EntityMobVoidWrath(worldObj);
-			skelly = new EntitySkeleton(worldObj);
+			skelly = new EntityWitherSkeleton(worldObj);
 
 			wraith.setPosition(this.posX - 2, this.posY, this.posZ - 2);
 			wraith.setAttackTarget(target);
@@ -151,7 +150,6 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob {
 			wrath.setAttackTarget(target);
 
 			skelly.setPosition(this.posX + 2, this.posY, this.posZ + 2);
-			skelly.setSkeletonType(SkeletonType.WITHER);
 			skelly.setAttackTarget(target);
 
 			this.worldObj.spawnEntityInWorld(wraith);

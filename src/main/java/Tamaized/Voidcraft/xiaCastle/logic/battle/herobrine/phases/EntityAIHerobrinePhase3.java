@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.SkeletonType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -23,6 +15,13 @@ import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends EntityVoidNPCAIBase<T> {
 
@@ -219,8 +218,7 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 					break;
 				case 4: // Wither Skeleton Spawns with EntityWitherSkulls from the walls
 					for (int i = 0; i < 4; i++) {
-						EntitySkeleton skele = new EntitySkeleton(getEntity().worldObj);
-						skele.setSkeletonType(SkeletonType.WITHER);
+						EntityWitherSkeleton skele = new EntityWitherSkeleton(getEntity().worldObj);
 						skele.setPosition(getEntity().getPosition().getX() + rand.nextInt(18) - 8, getEntity().getPosition().getY() - 6, getEntity().getPosition().getZ() + rand.nextInt(18) - 8);
 						getEntity().worldObj.spawnEntityInWorld(skele);
 					}

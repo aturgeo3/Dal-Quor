@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.blocks;
 
-import jdk.nashorn.internal.ir.WhileNode;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
