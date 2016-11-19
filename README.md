@@ -21,7 +21,7 @@ After stepping through the portal, you'll be in the Void, a black abyss where on
  * Planned:
   * Aether II
   * Thaumcraft
- * 1.9.4 - 1.10.2
+ * 1.9.4 - 1.11
   * JEI
  * 1.8.9
   * None
