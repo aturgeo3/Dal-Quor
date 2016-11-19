@@ -40,40 +40,41 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityFakeBedrockFarmland();
 	}
-	
+
 	@Override
 	protected void updateTiles(TileEntity oldTile, TileEntity newTile) {
-		if(oldTile != null && newTile != null && oldTile instanceof TileEntityFakeBedrockFarmland && newTile instanceof TileEntityFakeBedrockFarmland){
-			((TileEntityFakeBedrockFarmland)newTile).setAlteration(((TileEntityFakeBedrockFarmland)oldTile).getAlteration());
+		if (oldTile != null && newTile != null && oldTile instanceof TileEntityFakeBedrockFarmland && newTile instanceof TileEntityFakeBedrockFarmland) {
+			((TileEntityFakeBedrockFarmland) newTile).setAlteration(((TileEntityFakeBedrockFarmland) oldTile).getAlteration());
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (heldItem != null && worldIn.isAirBlock(pos.up())) {
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack stack = playerIn.getHeldItem(hand);
+		if (stack != null && worldIn.isAirBlock(pos.up())) {
 			TileEntity t = worldIn.getTileEntity(pos);
 			if (!(t instanceof TileEntityFakeBedrockFarmland)) return false;
 			TileEntityFakeBedrockFarmland te = (TileEntityFakeBedrockFarmland) t;
-			if(te.getAlteration() != TileEntityFakeBedrockFarmland.Alteration.NORMAL) return false;
-			Item item = heldItem.getItem();
+			if (te.getAlteration() != TileEntityFakeBedrockFarmland.Alteration.NORMAL) return false;
+			Item item = stack.getItem();
 			if (item == Items.REDSTONE) {
-				setColor(te, TileEntityFakeBedrockFarmland.Alteration.REDSTONE, heldItem);
+				setColor(te, TileEntityFakeBedrockFarmland.Alteration.REDSTONE, stack);
 				return true;
 			}
 			if (item == voidCraft.items.lapisDust) {
-				setColor(te, TileEntityFakeBedrockFarmland.Alteration.LAPIS, heldItem);
+				setColor(te, TileEntityFakeBedrockFarmland.Alteration.LAPIS, stack);
 				return true;
 			}
 			if (item == voidCraft.items.diamondDust) {
-				setColor(te, TileEntityFakeBedrockFarmland.Alteration.DIAMOND, heldItem);
+				setColor(te, TileEntityFakeBedrockFarmland.Alteration.DIAMOND, stack);
 				return true;
 			}
 			if (item == voidCraft.items.emeraldDust) {
-				setColor(te, TileEntityFakeBedrockFarmland.Alteration.EMERALD, heldItem);
+				setColor(te, TileEntityFakeBedrockFarmland.Alteration.EMERALD, stack);
 				return true;
 			}
 			if (item == voidCraft.items.goldDust) {
-				setColor(te, TileEntityFakeBedrockFarmland.Alteration.GOLD, heldItem);
+				setColor(te, TileEntityFakeBedrockFarmland.Alteration.GOLD, stack);
 				return true;
 			}
 		}
@@ -82,7 +83,7 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 
 	private static void setColor(TileEntityFakeBedrockFarmland tile, TileEntityFakeBedrockFarmland.Alteration alter, ItemStack stack) {
 		tile.setAlteration(alter);
-		stack.stackSize--;
+		stack.func_190918_g(1);
 	}
 
 	@Override

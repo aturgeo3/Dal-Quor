@@ -92,7 +92,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 			// Check for quartz dust and handle
 			if (forgeEnergy + quartzAmount < maxForgeEnergy && slots[SLOT_INPUT] != null && slots[SLOT_INPUT].getItem() == voidCraft.items.quartzDust) {
-				if (slots[SLOT_INPUT].stackSize > 1) slots[SLOT_INPUT].stackSize--;
+				if (slots[SLOT_INPUT].func_190916_E() > 1) slots[SLOT_INPUT].func_190918_g(1);
 				else slots[SLOT_INPUT] = null;
 				forgeEnergy += quartzAmount;
 			}

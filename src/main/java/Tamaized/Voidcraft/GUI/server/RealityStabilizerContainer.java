@@ -61,7 +61,7 @@ public class RealityStabilizerContainer extends ContainerBase {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.field_190927_a;
 		Slot slot = (Slot) inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -70,36 +70,36 @@ public class RealityStabilizerContainer extends ContainerBase {
 
 			if (hoverSlot == 0) {
 				if (!mergeItemStack(itemstack1, 1, 37, true)) {
-					return null;
+					return ItemStack.field_190927_a;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
 				if (!getSlot(0).getHasStack() && te.canInsertItem(0, itemstack1, null)) {
 					if (!mergeItemStack(itemstack1, 0, 1, false)) {
-						return null;
+						return ItemStack.field_190927_a;
 					}
 				} else if (hoverSlot >= 1 && hoverSlot < 28) {
 					if (!mergeItemStack(itemstack1, 28, 37, false)) {
-						return null;
+						return ItemStack.field_190927_a;
 					}
 				} else if (hoverSlot >= 28 && hoverSlot < 37) {
 					if (!mergeItemStack(itemstack1, 1, 28, false)) {
-						return null;
+						return ItemStack.field_190927_a;
 					}
 				}
 			}
 
-			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+			if (itemstack1.func_190916_E() == 0) {
+				slot.putStack(ItemStack.field_190927_a);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
-				return null;
+			if (itemstack1.func_190916_E() == itemstack.func_190916_E()) {
+				return ItemStack.field_190927_a;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.func_190901_a(player, itemstack1);
 		}
 		return itemstack;
 	}

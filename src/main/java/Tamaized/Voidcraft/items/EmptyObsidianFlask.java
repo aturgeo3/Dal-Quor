@@ -18,9 +18,10 @@ public class EmptyObsidianFlask extends TamItem {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (worldIn.provider.getDimension() != voidCraft.config.getDimensionIDvoid() && player.getPosition().getY() > 6) return ActionResult.newResult(EnumActionResult.FAIL, stack);
-		--stack.stackSize;
+		stack.func_190918_g(1);
 		ItemStack newStack = new ItemStack(voidCraft.items.obsidianFlask, 1);
 		ItemHandlerHelper.giveItemToPlayer(player, newStack);
 		return ActionResult.newResult(EnumActionResult.PASS, stack);

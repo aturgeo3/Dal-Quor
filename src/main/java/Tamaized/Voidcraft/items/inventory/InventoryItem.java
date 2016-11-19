@@ -16,11 +16,11 @@ public abstract class InventoryItem implements IInventory {
 	public InventoryItem(ItemStack stack, int slots) {
 		parent = stack;
 		inventory = new ItemStack[slots];
-		readFromNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem", true));
+		readFromNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem"));
 	}
 
 	public void saveData() {
-		writeToNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem", true));
+		writeToNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem"));
 	}
 
 	protected void readFromNBT(NBTTagCompound nbt) {
@@ -31,7 +31,7 @@ public abstract class InventoryItem implements IInventory {
 				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
 				byte b = nbtc.getByte("Slot");
 				if (b >= 0 && b < inventory.length) {
-					inventory[b] = ItemStack.loadItemStackFromNBT(nbtc);
+					inventory[b] = new ItemStack(nbtc);
 				}
 			}
 		}
@@ -40,7 +40,7 @@ public abstract class InventoryItem implements IInventory {
 	protected NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
 		for (int i = 0; i < inventory.length; i++) {
-			if (inventory[i] != null) {
+			if (inventory[i].func_190926_b()) {
 				NBTTagCompound nbtc = new NBTTagCompound();
 				nbtc.setByte("Slot", (byte) i);
 				inventory[i].writeToNBT(nbtc);
@@ -72,29 +72,29 @@ public abstract class InventoryItem implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int i, int count) {
-		if (inventory[i] != null) {
+		if (inventory[i].func_190926_b()) {
 			ItemStack itemstack;
-			if (inventory[i].stackSize <= count) {
+			if (inventory[i].func_190916_E() <= count) {
 				itemstack = inventory[i];
-				inventory[i] = null;
+				inventory[i] = ItemStack.field_190927_a;
 				return itemstack;
 			} else {
 				itemstack = inventory[i].splitStack(count);
-				if (inventory[i].stackSize == 0) inventory[i] = null;
+				if (inventory[i].func_190916_E() == 0) inventory[i] = ItemStack.field_190927_a;
 				return itemstack;
 			}
 		}
-		return null;
+		return ItemStack.field_190927_a;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int i) {
-		if (inventory[i] != null) {
+		if (inventory[i].func_190926_b()) {
 			ItemStack itemstack = inventory[i];
-			inventory[i] = null;
+			inventory[i] = ItemStack.field_190927_a;
 			return itemstack;
 		}
-		return null;
+		return ItemStack.field_190927_a;
 	}
 
 	@Override
