@@ -2,29 +2,21 @@ package Tamaized.Voidcraft.items;
 
 import java.util.List;
 
+import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
+import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.ItemHandlerHelper;
-import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
-import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
-import Tamaized.Voidcraft.world.SchematicLoader;
 
 public class Debugger extends TamItem {
 
@@ -37,9 +29,10 @@ public class Debugger extends TamItem {
 	/**
 	 * Called when a Block is right-clicked with this Item
 	 */
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			//worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
+			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
 			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
@@ -50,22 +43,22 @@ public class Debugger extends TamItem {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (worldIn.isRemote) return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
-		//playerIn.clearActivePotions();
-		//playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
-		//Vec3d vec = playerIn.getLook(1.0f);
-		//EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
+		// playerIn.clearActivePotions();
+		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
+		// Vec3d vec = playerIn.getLook(1.0f);
+		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
 		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
 		// entity.setPositionAndRotation(x, y, z, yaw, pitch);
-		worldIn.spawnEntityInWorld(entity);
+		worldIn.spawnEntity(entity);
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
 		// SchematicLoader loader = new SchematicLoader();
 		// SchematicLoader.buildSchematic("twinsRoom.schematic", loader, worldIn, playerIn.getPosition());
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 
 	@SideOnly(Side.CLIENT)

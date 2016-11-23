@@ -2,14 +2,14 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
 import java.util.ArrayList;
 
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 
 public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends EntityAIBase {
 
@@ -35,7 +35,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 		watchedClass.addAll(c);
 		entity = entityBoss;
 		pos = new Vec3d(entity.posX, entity.posY, entity.posZ);
-		world = entityBoss.worldObj;
+		world = entityBoss.world;
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 
 	protected void updateClosest() {
 		for (Class c : watchedClass) {
-			Entity e = getEntity().worldObj.findNearestEntityWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer), getEntity());
+			Entity e = getEntity().world.findNearestEntityWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer), getEntity());
 			if (e != null) {
 				closestEntity = e;
 				break;

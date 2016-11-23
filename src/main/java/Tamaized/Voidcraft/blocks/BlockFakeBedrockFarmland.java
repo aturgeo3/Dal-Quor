@@ -83,7 +83,7 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 
 	private static void setColor(TileEntityFakeBedrockFarmland tile, TileEntityFakeBedrockFarmland.Alteration alter, ItemStack stack) {
 		tile.setAlteration(alter);
-		stack.func_190918_g(1);
+		stack.shrink(1);
 	}
 
 	@Override

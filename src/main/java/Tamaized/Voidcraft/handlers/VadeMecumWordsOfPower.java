@@ -73,7 +73,7 @@ public class VadeMecumWordsOfPower {
 					Vec3d vec = player.getLookVec();
 					EntityFireball entity = new EntityLargeFireball(world, player.posX, player.posY + player.eyeHeight, player.posZ, vec.xCoord, vec.yCoord, vec.zCoord);
 					entity.shootingEntity = player;
-					world.spawnEntityInWorld(entity);
+					world.spawnEntity(entity);
 				case FireTrap:
 
 					break;

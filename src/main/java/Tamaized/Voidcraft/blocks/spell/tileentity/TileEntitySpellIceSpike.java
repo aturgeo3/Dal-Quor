@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.blocks.spell.tileentity;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -27,15 +25,15 @@ public class TileEntitySpellIceSpike extends TileEntitySpell {
 
 	@Override
 	protected void onUpdate() {
-		if (!worldObj.isRemote) {
-			for (Entity e : worldObj.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(getPos().add(-3, -3, -3), getPos().add(3, 3, 3)))) {
+		if (!world.isRemote) {
+			for (Entity e : world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(getPos().add(-3, -3, -3), getPos().add(3, 3, 3)))) {
 				if (!(e instanceof EntityLivingBase)) continue;
 				EntityLivingBase living = ((EntityLivingBase) e);
 				living.attackEntityFrom(DamageSource.magic, 2.0f);
 				living.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 3));
 			}
 			if (tick > 0 && tick % life == 0) {
-				worldObj.setBlockToAir(getPos());
+				world.setBlockToAir(getPos());
 			}
 		}
 		tick++;

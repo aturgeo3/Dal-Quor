@@ -83,7 +83,7 @@ public class VoidicAlchemyContainer extends ContainerBase {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -92,43 +92,43 @@ public class VoidicAlchemyContainer extends ContainerBase {
 
 			if (hoverSlot <= te.SLOTS_ALL.length) {
 				if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length + 1, te.SLOTS_ALL.length + 37, true)) {
-					return null;
+					return ItemStack.EMPTY;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
 				if (te.canInsertItem(te.SLOT_INPUT_1, itemstack1, null)) {
 					if (!this.mergeItemStack(itemstack1, te.SLOT_INPUT_1, te.SLOT_INPUT_6+1, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= te.SLOTS_ALL.length + 1 && hoverSlot < te.SLOTS_ALL.length + 28) {
 					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length + 28, te.SLOTS_ALL.length + 37, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= te.SLOTS_ALL.length + 28 && hoverSlot < te.SLOTS_ALL.length + 37) {
 					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length + 1, te.SLOTS_ALL.length + 28, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 
-			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+			if (itemstack1.getCount() == 0) {
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
-				return null;
+			if (itemstack1.getCount() == itemstack.getCount()) {
+				return ItemStack.EMPTY;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onTake(player, itemstack1);
 		}
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUseableByPlayer(entityplayer);
+		return te.isUsableByPlayer(entityplayer);
 	}
 
 }

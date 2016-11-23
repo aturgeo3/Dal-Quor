@@ -84,7 +84,7 @@ public class ServerPacketHandler {
 						if (cap != null) cap.setLastEntry(bbis.readUTF());
 						break;
 					case VOIDBOX_PLAY: {
-						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -93,7 +93,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_STOP: {
-						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -102,7 +102,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_LOOP: {
-						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -111,7 +111,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_AUTO: {
-						voidBox = (TileEntityVoidBox) player.worldObj.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;

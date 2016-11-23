@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -57,11 +58,8 @@ public class BlockRealityHole extends TamBlock {
 		}
 	}
 
-	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been cleared to be reused)
-	 */
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return null;
 	}
 
@@ -79,7 +77,7 @@ public class BlockRealityHole extends TamBlock {
 		}
 
 		public void placeInPortal(Entity entityIn, float rotationYaw) {
-			World w = entityIn.worldObj;
+			World w = entityIn.world;
 			x += (w.rand.nextInt(400) - 200);
 			z += (w.rand.nextInt(400) - 200);
 			while (!w.isAirBlock(new BlockPos(x, y, z)) && !w.isAirBlock(new BlockPos(x, y + 1, z))) { // TODO: fix this later

@@ -111,10 +111,10 @@ public class EntityAIHerobrinePhase2<T extends EntityBossHerobrine> extends Enti
 	}
 
 	private void updateInPillarState() {
-		Block b = getEntity().worldObj.getBlockState(new BlockPos(MathHelper.floor_double(getEntity().posX), MathHelper.floor_double(getEntity().posY), MathHelper.floor_double(getEntity().posZ))).getBlock();
+		Block b = getEntity().world.getBlockState(new BlockPos(MathHelper.floor(getEntity().posX), MathHelper.floor(getEntity().posY), MathHelper.floor(getEntity().posZ))).getBlock();
 		if (b instanceof AIBlock) {
 			if (!inBlock) {
-				TileEntity te = ((AIBlock) b).getMyTileEntity(getEntity().worldObj, new BlockPos(MathHelper.floor_double(getEntity().posX), MathHelper.floor_double(getEntity().posY), MathHelper.floor_double(getEntity().posZ)));
+				TileEntity te = ((AIBlock) b).getMyTileEntity(getEntity().world, new BlockPos(MathHelper.floor(getEntity().posX), MathHelper.floor(getEntity().posY), MathHelper.floor(getEntity().posZ)));
 				if (te instanceof TileEntityAIBlock) {
 					((TileEntityAIBlock) te).boom();
 					inBlock = true;

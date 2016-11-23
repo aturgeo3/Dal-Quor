@@ -52,7 +52,7 @@ public class ClientPacketHandler {
 
 	@SideOnly(Side.CLIENT)
 	public static void processPacket(ByteBuf parBB) throws IOException {
-		World theWorld = Minecraft.getMinecraft().theWorld;
+		World theWorld = Minecraft.getMinecraft().world;
 		Entity entity;
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
@@ -63,22 +63,22 @@ public class ClientPacketHandler {
 				ItemStack checkStack = null;
 				switch (slot) {
 					case VoidicPowerItem.PLAYER_INV_SLOT_OFFHAND:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.offHandInventory[0];
+						checkStack = Minecraft.getMinecraft().player.inventory.offHandInventory.get(0);
 						break;
 					case VoidicPowerItem.PLAYER_INV_SLOT_ARMOR_HELM:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.armorInventory[0];
+						checkStack = Minecraft.getMinecraft().player.inventory.armorInventory.get(0);
 						break;
 					case VoidicPowerItem.PLAYER_INV_SLOT_ARMOR_CHEST:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.armorInventory[1];
+						checkStack = Minecraft.getMinecraft().player.inventory.armorInventory.get(1);
 						break;
 					case VoidicPowerItem.PLAYER_INV_SLOT_ARMOR_LEGS:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.armorInventory[2];
+						checkStack = Minecraft.getMinecraft().player.inventory.armorInventory.get(2);
 						break;
 					case VoidicPowerItem.PLAYER_INV_SLOT_ARMOR_BOOTS:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.armorInventory[3];
+						checkStack = Minecraft.getMinecraft().player.inventory.armorInventory.get(3);
 						break;
 					default:
-						checkStack = Minecraft.getMinecraft().thePlayer.inventory.mainInventory[slot];
+						checkStack = Minecraft.getMinecraft().player.inventory.mainInventory.get(slot);
 						break;
 				}
 				if (checkStack == null || stack == null || !ItemStack.areItemStacksEqual(checkStack, stack)) break;
@@ -89,7 +89,7 @@ public class ClientPacketHandler {
 			}
 				break;
 			case VADEMECUM_UPDATE: {
-				IVadeMecumCapability vadeMecumCap = Minecraft.getMinecraft().thePlayer.getCapability(CapabilityList.VADEMECUM, null);
+				IVadeMecumCapability vadeMecumCap = Minecraft.getMinecraft().player.getCapability(CapabilityList.VADEMECUM, null);
 				if (vadeMecumCap != null) vadeMecumCap.decodePacket(bbis);
 			}
 				break;
@@ -118,7 +118,7 @@ public class ClientPacketHandler {
 				int id = bbis.readInt();
 				int amount = bbis.readInt();
 				int maxAmount = bbis.readInt();
-				entity = Minecraft.getMinecraft().theWorld.getEntityByID(id);
+				entity = Minecraft.getMinecraft().world.getEntityByID(id);
 				if (entity != null && entity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 					IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
 					cap.setInfusion(amount);

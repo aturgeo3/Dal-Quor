@@ -76,7 +76,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		ItemStack vade = new ItemStack(voidCraft.items.vadeMecum);
 		if(vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.OFF_HAND, vade);
-		worldObj.spawnEntityInWorld(xia);
+		worldObj.spawnEntity(xia);
 		checkBB = new AxisAlignedBB(pos.add(-19, -1, -3), pos.add(19, 26, 51));
 		players.addAll(worldObj.getEntitiesWithinAABB(EntityPlayer.class, checkBB));
 		xia.start();

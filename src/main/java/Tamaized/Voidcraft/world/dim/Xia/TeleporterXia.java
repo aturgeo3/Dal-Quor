@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import java.awt.Dimension;
 import java.util.Random;
 
 import Tamaized.Voidcraft.voidCraft;
@@ -8,14 +7,11 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 
 public class TeleporterXia extends Teleporter {
 
@@ -47,7 +43,7 @@ public class TeleporterXia extends Teleporter {
 	}
 
 	public boolean isActive(Entity e) {
-		TileEntity te = /*DimensionManager.getWorld(voidCraft.config.getDimensionIDxia())*/worldServerInstance.getTileEntity(tePos);
+		TileEntity te = /* DimensionManager.getWorld(voidCraft.config.getDimensionIDxia()) */worldServerInstance.getTileEntity(tePos);
 		if (te instanceof TileEntityXiaCastle) {
 			TileEntityXiaCastle castleLogic = ((TileEntityXiaCastle) te);
 			castleLogic.validateInstance();
@@ -61,9 +57,9 @@ public class TeleporterXia extends Teleporter {
 	public boolean makePortal(Entity e) {
 		byte b0 = 16;
 		double d0 = -1.0D;
-		int i = MathHelper.floor_double(e.posX);
-		int j = MathHelper.floor_double(e.posY);
-		int k = MathHelper.floor_double(e.posZ);
+		int i = MathHelper.floor(e.posX);
+		int j = MathHelper.floor(e.posY);
+		int k = MathHelper.floor(e.posZ);
 
 		if (e.dimension == voidCraft.config.getDimensionIDxia()) {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));

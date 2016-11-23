@@ -1,9 +1,10 @@
 package Tamaized.Voidcraft.Addons.JEI.macerator;
 
-import java.util.List;
+import java.util.Arrays;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
+import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import mezz.jei.api.gui.ICraftingGridHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -54,30 +55,25 @@ public class MaceratorRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-
-	}
-
-	@Override
-	public void drawAnimations(Minecraft minecraft) {
 		fluidAnimation.draw(minecraft);
 		progressAnimation.draw(minecraft);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-		guiItemStacks.init(OUTPUT_SLOT, false, 146, 34 - 20);
-		guiItemStacks.init(INPUT_SLOT, true, 89, 33 - 20);
-		if (recipeWrapper instanceof MaceratorRecipeJEI) {
-			MaceratorRecipeJEI recipe = (MaceratorRecipeJEI) recipeWrapper;
-			craftingGridHelper.setOutput(guiItemStacks, recipe.getOutputs());
-			craftingGridHelper.setInput(guiItemStacks, (List) recipe.getInputs().get(0), 2, 3);
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
+		IGuiItemStackGroup stackGroup = recipeLayout.getItemStacks();
+		stackGroup.init(OUTPUT_SLOT, false, 146, 34 - 20);
+		stackGroup.init(INPUT_SLOT, true, 89, 33 - 20);
+		if (recipeWrapper instanceof VoidCraftRecipeWrapperJEI) {
+			VoidCraftRecipeWrapperJEI recipe = (VoidCraftRecipeWrapperJEI) recipeWrapper;
+			craftingGridHelper.setOutput(stackGroup, Arrays.asList(recipe.getOutput()));
+			craftingGridHelper.setInputStacks(stackGroup, Arrays.asList(recipe.getInputs()));
 		}
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		setRecipe(recipeLayout, recipeWrapper);
+	public IDrawable getIcon() {
+		return null;
 	}
 
 }

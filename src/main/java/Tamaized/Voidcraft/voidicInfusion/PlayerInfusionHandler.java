@@ -67,7 +67,7 @@ public class PlayerInfusionHandler {
 
 	public void update() {
 		if (player == null || player.isDead) {
-			for (WorldServer world : playerMP.getServer().worldServers) {
+			for (WorldServer world : playerMP.getServer().worlds) {
 				player = world.getPlayerEntityByUUID(playerMP.getGameProfile().getId());
 				if (player != null) break;
 			}
@@ -94,8 +94,8 @@ public class PlayerInfusionHandler {
 			} else if (player.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null) {
 				flag = false;
 			}
-			if (player.worldObj.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
-				if (player.onGround && (player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidbrick || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickHalfSlab || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidstairs || player.worldObj.getBlockState(player.getPosition().down(2)).getBlock() == voidCraft.blocks.blockVoidfence || player.worldObj.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickDoubleSlab)) {
+			if (player.world.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
+				if (player.onGround && (player.world.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidbrick || player.world.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickHalfSlab || player.world.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidstairs || player.world.getBlockState(player.getPosition().down(2)).getBlock() == voidCraft.blocks.blockVoidfence || player.world.getBlockState(player.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickDoubleSlab)) {
 
 				} else {
 					voidicInfusionAmount++;

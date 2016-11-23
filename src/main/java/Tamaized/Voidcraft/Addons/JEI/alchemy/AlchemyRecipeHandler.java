@@ -1,33 +1,29 @@
 package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
+import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
-public class AlchemyRecipeHandler implements IRecipeHandler<AlchemyRecipeJEI> {
+public class AlchemyRecipeHandler implements IRecipeHandler<VoidCraftRecipeWrapperJEI> {
 
 	@Override
-	public Class<AlchemyRecipeJEI> getRecipeClass() {
-		return AlchemyRecipeJEI.class;
+	public Class<VoidCraftRecipeWrapperJEI> getRecipeClass() {
+		return VoidCraftRecipeWrapperJEI.class;
 	}
 
 	@Override
-	public String getRecipeCategoryUid() {
+	public String getRecipeCategoryUid(VoidCraftRecipeWrapperJEI recipe) {
 		return "voidcraft_JEI_recipeCategory_Alchemy";
 	}
 
 	@Override
-	public String getRecipeCategoryUid(AlchemyRecipeJEI recipe) {
-		return "voidcraft_JEI_recipeCategory_Alchemy";
-	}
-
-	@Override
-	public IRecipeWrapper getRecipeWrapper(AlchemyRecipeJEI recipe) {
+	public IRecipeWrapper getRecipeWrapper(VoidCraftRecipeWrapperJEI recipe) {
 		return recipe;
 	}
 
 	@Override
-	public boolean isRecipeValid(AlchemyRecipeJEI recipe) {
-		return recipe.getOutputs().size() > 0 && recipe.getInputs().size() > 0;
+	public boolean isRecipeValid(VoidCraftRecipeWrapperJEI recipe) {
+		return recipe.isValid();
 	}
 
 }

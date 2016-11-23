@@ -177,7 +177,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 				} else {
 					songTime = songTimeLeft = 20 * VanillaRecordLengths.getLength(soundID.split("\\.")[soundID.split("\\.").length - 1]);
 				}
-				worldObj.playEvent((EntityPlayer) null, 1010, getPos(), Item.getIdFromItem(theRecord));
+				world.playEvent((EntityPlayer) null, 1010, getPos(), Item.getIdFromItem(theRecord));
 				oldRecord = slots[SLOT_CURRENT];
 				playing = true;
 				// IF YOU GOT THIS FAR, CONGRATS THIS WAS NOT FUN TO WRITE
@@ -200,7 +200,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	public void StopTheSound() {
-		worldObj.playEvent((EntityPlayer) null, 1010, getPos(), 0);
+		world.playEvent((EntityPlayer) null, 1010, getPos(), 0);
 		playing = false;
 	}
 
@@ -218,7 +218,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 
 	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			if (playing) {
 				if (songTimeLeft > 0) songTimeLeft--;
 				else StopTheSound();

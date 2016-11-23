@@ -97,7 +97,7 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 			voidicPower--;
 		}
 
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			if (cooking) {
 				cookingTick++;
 				if (cookingTick >= (finishTick = recipe.getRequiredPower())) {
@@ -107,12 +107,12 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 				}
 			}
 
-			IBlockState state = worldObj.getBlockState(pos);
+			IBlockState state = world.getBlockState(pos);
 			if (state.getBlock() instanceof VoidMacerator) {
 				VoidMacerator theMacerator = (VoidMacerator) state.getBlock();
 				if (theMacerator != null) {
-					if (theMacerator.getIsActive(state) && !cooking) theMacerator.setState(false, worldObj, pos);
-					if (!theMacerator.getIsActive(state) && cooking) theMacerator.setState(true, worldObj, pos);
+					if (theMacerator.getIsActive(state) && !cooking) theMacerator.setState(false, world, pos);
+					if (!theMacerator.getIsActive(state) && cooking) theMacerator.setState(true, world, pos);
 				}
 			}
 		}
@@ -137,7 +137,7 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 		if (recipe == null) return false;
 		if (getStackInSlot(SLOT_OUTPUT) == null) return true;
 		if (!getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) return false;
-		int result = getStackInSlot(SLOT_OUTPUT).stackSize + recipe.getOutput().stackSize;
+		int result = getStackInSlot(SLOT_OUTPUT).getCount() + recipe.getOutput().getCount();
 		return (result <= getInventoryStackLimit() && result <= recipe.getOutput().getMaxStackSize());
 	}
 
@@ -146,13 +146,13 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 			if (getStackInSlot(SLOT_OUTPUT) == null) {
 				setInventorySlotContents(SLOT_OUTPUT, recipe.getOutput().copy());
 			} else if (getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) {
-				getStackInSlot(SLOT_OUTPUT).stackSize += recipe.getOutput().stackSize;
+				getStackInSlot(SLOT_OUTPUT).grow(recipe.getOutput().getCount());
 			}
 
 			for (int i = SLOT_INPUT_1; i <= SLOT_INPUT_6; i++) {
-				getStackInSlot(i).stackSize--;
-				if (getStackInSlot(i).stackSize <= 0) {
-					setInventorySlotContents(i, null);
+				getStackInSlot(i).shrink(1);;
+				if (getStackInSlot(i).getCount() <= 0) {
+					setInventorySlotContents(i, ItemStack.EMPTY);
 				}
 			}
 		}

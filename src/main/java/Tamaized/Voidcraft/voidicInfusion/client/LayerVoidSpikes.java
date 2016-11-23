@@ -1,15 +1,13 @@
 package Tamaized.Voidcraft.voidicInfusion.client;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 
 public class LayerVoidSpikes implements LayerRenderer {
 
@@ -23,12 +21,12 @@ public class LayerVoidSpikes implements LayerRenderer {
 
 	@Override
 	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		if (Minecraft.getMinecraft().theWorld == null) return;
+		if (Minecraft.getMinecraft().world == null) return;
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
 		{
 			float perc = 0.00f;
-			if (Minecraft.getMinecraft().theWorld.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null)) perc = Minecraft.getMinecraft().theWorld.getEntityByID(entitylivingbaseIn.getEntityId()).getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc();
+			if (Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null)) perc = Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc();
 			// DebugEvent.textL=""+Minecraft.getMinecraft().theWorld.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null);
 
 			GlStateManager.scale(perc, perc, perc);

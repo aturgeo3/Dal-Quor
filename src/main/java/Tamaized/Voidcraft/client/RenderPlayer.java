@@ -56,7 +56,7 @@ public class RenderPlayer {
 			if (CustomElytraHandler.isElytraFlying(player)) {
 				// rotateCorpse(player, player.ticksExisted + e.getPartialRenderTick(), interpolateRotation(player.prevRenderYawOffset, player.renderYawOffset, e.getPartialRenderTick()), e.getPartialRenderTick());
 				float f = (float) player.getCapability(CapabilityList.ELYTRAFLYING, null).getElytraTime() + partialTick;
-				float zf1 = MathHelper.clamp_float(f * f / 100.0F, 0.0F, 1.0F);
+				float zf1 = MathHelper.clamp(f * f / 100.0F, 0.0F, 1.0F);
 				GlStateManager.rotate(zf1 * (-90.0F - player.rotationPitch), 1.0F, 0.0F, 0.0F);
 				Vec3d vec3d = player.getLook(partialTick);
 				double d0 = player.motionX * player.motionX + player.motionZ * player.motionZ;
@@ -144,7 +144,7 @@ public class RenderPlayer {
 
 		if (entityLiving.deathTime > 0) {
 			float f = ((float) entityLiving.deathTime + partialTicks - 1.0F) / 20.0F * 1.6F;
-			f = MathHelper.sqrt_float(f);
+			f = MathHelper.sqrt(f);
 
 			if (f > 1.0F) {
 				f = 1.0F;

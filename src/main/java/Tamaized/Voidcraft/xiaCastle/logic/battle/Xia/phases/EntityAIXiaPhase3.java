@@ -65,13 +65,13 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 					double d5 = closestEntity.posX - getEntity().posX;
 					double d6 = closestEntity.getEntityBoundingBox().minY + (double) (closestEntity.height / 2.0F) - (getEntity().posY + (double) (getEntity().height / 2.0F));
 					double d7 = closestEntity.posZ - getEntity().posZ;
-					EntityHerobrineFireball entitylargefireball = new EntityHerobrineFireball(getEntity().worldObj, getEntity(), d5, d6, d7);
+					EntityHerobrineFireball entitylargefireball = new EntityHerobrineFireball(getEntity().world, getEntity(), d5, d6, d7);
 					double d8 = 4.0D;
 					Vec3d vec3 = getEntity().getLook(1.0F);
 					entitylargefireball.posX = getEntity().posX;// + vec3.xCoord * d8;
 					entitylargefireball.posY = getEntity().posY + (double) (getEntity().height / 2.0F) + 0.5D;
 					entitylargefireball.posZ = getEntity().posZ;// + vec3.zCoord * d8;
-					getEntity().worldObj.spawnEntityInWorld(entitylargefireball);
+					getEntity().world.spawnEntity(entitylargefireball);
 					break;
 				case ACTION_LITSTRIKE:
 					getEntity().setArmRotations(0, 180, 0, 0, true);
@@ -93,7 +93,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 						getEntity().setArmRotations(0, 90, 0, 0, true);
 						resetAnimationTick = 20 * 2;
 						ProjectileDisintegration disint = new ProjectileDisintegration(world, getEntity(), (EntityLivingBase) closestEntity, 10.0F);
-						world.spawnEntityInWorld(disint);
+						world.spawnEntity(disint);
 					}
 					break;
 				case ACTION_VOIDICINFUSION:
@@ -146,7 +146,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private void watchNew() {
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for (Class c : watchedClass) {
-			list.addAll(getEntity().worldObj.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
+			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
 		Random rand = world.rand;
 		closestEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;

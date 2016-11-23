@@ -44,7 +44,7 @@ public class BlockEtherealPlant extends TamBlockCrops {
 
 	@Override
 	protected boolean isCorrectLightLevel(int currentLight) {
-		//System.out.println(currentLight);
+		// System.out.println(currentLight);
 		return currentLight <= 2;
 	}
 
@@ -69,7 +69,7 @@ public class BlockEtherealPlant extends TamBlockCrops {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (getAge(state) >= getMaxAge()) {
 			if (worldIn.isRemote) return true;
 			TileEntity tileEntity = worldIn.getTileEntity(pos.down());
@@ -83,7 +83,7 @@ public class BlockEtherealPlant extends TamBlockCrops {
 			int a = rand.nextInt(3);
 			if (a > 0) {
 				EtherealFruit fruit;
-				switch(alteration){
+				switch (alteration) {
 					case REDSTONE:
 						fruit = voidCraft.items.etherealFruit_redstone;
 						break;

@@ -16,9 +16,9 @@ public class WorldProviderXia extends WorldProvider {
 	 * creates a new world chunk manager for WorldProvider
 	 */
 	@Override
-	protected void createBiomeProvider() {
+	protected void init() {
 		this.biomeProvider = new BiomeProviderSingle(voidCraft.biomes.biomeXia);
-		this.isHellWorld = false;
+		this.doesWaterVaporize = false;
 		this.hasNoSky = true;
 	}
 
@@ -49,7 +49,7 @@ public class WorldProviderXia extends WorldProvider {
 	 */
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderXia(this.worldObj, this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.worldObj.getSeed());
+		return new ChunkProviderXia(world, world.getWorldInfo().isMapFeaturesEnabled(), world.getSeed());
 	}
 
 	/**

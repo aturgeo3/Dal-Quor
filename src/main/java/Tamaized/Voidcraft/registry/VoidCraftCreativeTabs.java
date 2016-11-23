@@ -2,13 +2,11 @@ package Tamaized.Voidcraft.registry;
 
 import java.util.ArrayList;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 
 public class VoidCraftCreativeTabs implements ITamRegistry {
 
@@ -19,18 +17,14 @@ public class VoidCraftCreativeTabs implements ITamRegistry {
 	public void preInit() {
 		tabVoid = new CreativeTabs("tabVoid") {
 			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(voidCraft.blocks.blockPortalVoid);
+			public ItemStack getTabIconItem() {
+				return new ItemStack(voidCraft.blocks.blockPortalVoid);
 			}
 		};
-/*
-		tForge = new CreativeTabs("tForge") {
-			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(voidCraft.blocks.blockNoBreak);
-			}
-		};
-	*/}
+		/*
+		 * tForge = new CreativeTabs("tForge") {
+		 * @Override public Item getTabIconItem() { return Item.getItemFromBlock(voidCraft.blocks.blockNoBreak); } };
+		 */}
 
 	@Override
 	public void init() {
@@ -57,19 +51,19 @@ public class VoidCraftCreativeTabs implements ITamRegistry {
 	@Override
 	public void clientPreInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientPostInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.entity.ghost.render;
 
 import java.util.Random;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBiped.ArmPose;
@@ -13,8 +15,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 
 @SideOnly(Side.CLIENT)
 public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
@@ -70,7 +70,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 			dxPos = dxPos+(rand.nextFloat()-0.5);
 			dyPos = dyPos+(rand.nextFloat()-0.5);
 			dzPos = dzPos+(rand.nextFloat()-0.5);
-			entity.worldObj.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, entity.getPosition().getX()+dxPos, entity.getPosition().getY()+dyPos+2, entity.getPosition().getZ()+dzPos, -dxPos+dxPos2, -dyPos-0.5, -dzPos+dzPos2);
+			entity.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, entity.getPosition().getX()+dxPos, entity.getPosition().getY()+dyPos+2, entity.getPosition().getZ()+dzPos, -dxPos+dxPos2, -dyPos-0.5, -dzPos+dzPos2);
 		}
 		super.doRender(entity, x, y, z, yaw, partialTicks);
 		model.leftArmPose = ArmPose.EMPTY;

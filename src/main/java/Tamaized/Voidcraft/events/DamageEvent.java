@@ -43,7 +43,7 @@ public class DamageEvent {
 			if (living.hasCapability(CapabilityList.VOIDICINFUSION, null) && living.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.50f) {
 				if (Math.floor(Math.random() * 5) == 0 && isWhiteListed(e.getSource())) { // 0-4; 25%
 					e.setCanceled(true);
-					living.addChatMessage(new TextComponentString("*Incorporeal"));
+					living.sendMessage(new TextComponentString("*Incorporeal"));
 					if (isWhiteListed(e.getSource()) && !e.getSource().damageType.equals("arrow")) {
 						if (e.getSource().getEntity() != null && !(e.getSource().getEntity() instanceof EntityVoidMob || e.getSource().getEntity() instanceof EntityVoidNPC || e.getSource().getEntity() instanceof EntityBossCorruptedPawnBase)) {
 							int a = (int) Math.floor(living.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() * 10);

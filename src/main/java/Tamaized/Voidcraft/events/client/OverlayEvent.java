@@ -22,7 +22,7 @@ public class OverlayEvent {
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e) {
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayerSP player = mc.thePlayer;
+		EntityPlayerSP player = mc.player;
 
 		if (e.getType() == e.getType().PORTAL) {
 			if (ClientPortalDataHandler.active) {

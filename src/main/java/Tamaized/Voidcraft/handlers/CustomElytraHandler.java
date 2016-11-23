@@ -8,6 +8,7 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -37,8 +38,8 @@ public class CustomElytraHandler {
 		if (e.phase == Phase.END) {
 			EntityPlayer entity = e.player;
 			doElytraFlyingChecks(entity);
-			if (entity.worldObj.isRemote) {
-				net.minecraft.client.entity.EntityPlayerSP clientPlayer = net.minecraft.client.Minecraft.getMinecraft().thePlayer;
+			if (entity.world.isRemote) {
+				net.minecraft.client.entity.EntityPlayerSP clientPlayer = net.minecraft.client.Minecraft.getMinecraft().player;
 				doElytraFlyingChecks(clientPlayer);
 				if (clientPlayer.movementInput.jump && !clientPlayer.onGround && clientPlayer.motionY < 0.0D && !isElytraFlying(clientPlayer) && !clientPlayer.capabilities.isFlying) {
 					ItemStack itemstack = clientPlayer.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
@@ -83,8 +84,8 @@ public class CustomElytraHandler {
 							entity.motionX *= 0.9900000095367432D;
 							entity.motionY *= 0.9800000190734863D;
 							entity.motionZ *= 0.9900000095367432D;
-							entity.moveEntity(entity.motionX, entity.motionY, entity.motionZ);
-							if (entity.isCollidedHorizontally && !entity.worldObj.isRemote) {
+							entity.move(MoverType.SELF, entity.motionX, entity.motionY, entity.motionZ);
+							if (entity.isCollidedHorizontally && !entity.world.isRemote) {
 								double d10 = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
 								double d3 = d8 - d10;
 								float f5 = (float) (d3 * 10.0D - 3.0D);
@@ -93,7 +94,7 @@ public class CustomElytraHandler {
 									entity.attackEntityFrom(DamageSource.flyIntoWall, f5);
 								}
 
-								if (entity.onGround && !entity.worldObj.isRemote) {
+								if (entity.onGround && !entity.world.isRemote) {
 									setFlying(entity, false);
 								}
 							}
@@ -105,7 +106,7 @@ public class CustomElytraHandler {
 				double p_1 = entity.posX - px;
 				double p_2 = entity.posY - py;
 				double p_3 = entity.posZ - pz;
-				int l = Math.round(MathHelper.sqrt_double(p_1 * p_1 + p_2 * p_2 + p_3 * p_3) * 100.0F);
+				int l = Math.round(MathHelper.sqrt(p_1 * p_1 + p_2 * p_2 + p_3 * p_3) * 100.0F);
 				entity.addStat(StatList.AVIATE_ONE_CM, l);
 			}
 		}
@@ -118,7 +119,7 @@ public class CustomElytraHandler {
 			if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
 
 				int ticks = e.getCapability(CapabilityList.ELYTRAFLYING, null).getElytraTime() + 1;
-				if (!e.worldObj.isRemote && (ticks) % 20 == 0) {
+				if (!e.world.isRemote && (ticks) % 20 == 0) {
 					itemstack.damageItem(1, e);
 				}
 				e.getCapability(CapabilityList.ELYTRAFLYING, null).setElytraTime(ticks);

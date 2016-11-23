@@ -1,9 +1,11 @@
 package Tamaized.Voidcraft.Addons.JEI.infuser;
 
+import java.util.Arrays;
 import java.util.List;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
+import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import mezz.jei.api.gui.ICraftingGridHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -55,33 +57,27 @@ public class InfuserRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-
-	}
-
-	@Override
-	public void drawAnimations(Minecraft minecraft) {
-
 		fluidAnimation.draw(minecraft);
 		progressAnimation.draw(minecraft);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-		guiItemStacks.init(OUTPUT_SLOT, false, 146, 34);
-		guiItemStacks.init(FLUID_SLOT, true, 51, 33);
-		guiItemStacks.init(INPUT_SLOT, true, 89, 33);
-		if (recipeWrapper instanceof InfuserRecipeJEI) {
-			InfuserRecipeJEI recipe = (InfuserRecipeJEI) recipeWrapper;
-			guiItemStacks.set(FLUID_SLOT, (List) recipe.getInputs().get(1));
-			craftingGridHelper.setOutput(guiItemStacks, recipe.getOutputs());
-			craftingGridHelper.setInput(guiItemStacks, (List) recipe.getInputs().get(0), 2, 3);
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
+		IGuiItemStackGroup stackGroup = recipeLayout.getItemStacks();
+		stackGroup.init(OUTPUT_SLOT, false, 146, 34);
+		stackGroup.init(FLUID_SLOT, true, 51, 33);
+		stackGroup.init(INPUT_SLOT, true, 89, 33);
+		if (recipeWrapper instanceof VoidCraftRecipeWrapperJEI) {
+			VoidCraftRecipeWrapperJEI recipe = (VoidCraftRecipeWrapperJEI) recipeWrapper;
+			stackGroup.set(FLUID_SLOT, Arrays.asList(voidCraft.fluids.getBucket()));
+			craftingGridHelper.setOutput(stackGroup, Arrays.asList(recipe.getOutput()));
+			craftingGridHelper.setInputStacks(stackGroup, Arrays.asList(recipe.getInputs()));
 		}
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		setRecipe(recipeLayout, recipeWrapper);
+	public IDrawable getIcon() {
+		return null;
 	}
 
 }

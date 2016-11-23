@@ -36,8 +36,8 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 
 	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote) {
-			if (getStackInSlot(SLOT_OUTPUT) == null || getStackInSlot(SLOT_OUTPUT).stackSize < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()) pickupNextBlock();
+		if (!world.isRemote) {
+			if (getStackInSlot(SLOT_OUTPUT) == null || getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()) pickupNextBlock();
 		}
 	}
 
@@ -54,15 +54,15 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 	}
 
 	private void pickupNextBlock() {
-		if (hasEnoughPower() && (getStackInSlot(SLOT_OUTPUT) == null || (getStackInSlot(SLOT_OUTPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole) && getStackInSlot(SLOT_OUTPUT).stackSize < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()))) {
+		if (hasEnoughPower() && (getStackInSlot(SLOT_OUTPUT).isEmpty() || (getStackInSlot(SLOT_OUTPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole) && getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()))) {
 			BlockPosWrapper wrapper = searchState(voidCraft.blocks.realityHole, getPos(), 4);
 			if (wrapper.state == null) return;
-			worldObj.setBlockToAir(wrapper.pos);
+			world.setBlockToAir(wrapper.pos);
 			usePower();
 			if (getStackInSlot(SLOT_OUTPUT) == null) {
 				setInventorySlotContents(SLOT_OUTPUT, new ItemStack(voidCraft.blocks.realityHole));
 			} else {
-				getStackInSlot(SLOT_OUTPUT).stackSize++;
+				getStackInSlot(SLOT_OUTPUT).grow(1);
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = -radius; z <= radius; z++) {
 				for (int y = radius; y >= -radius; y--) {
-					IBlockState state = worldObj.getBlockState(origin.add(x, y, z));
+					IBlockState state = world.getBlockState(origin.add(x, y, z));
 					if (state != null && state.getBlock() == voidCraft.blocks.realityHole) {
 						return new BlockPosWrapper(origin.add(x, y, z), state);
 					}

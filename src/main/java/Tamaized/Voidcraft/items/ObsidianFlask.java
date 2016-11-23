@@ -24,11 +24,11 @@ public class ObsidianFlask extends TamItem {
 		if (!worldIn.isRemote) {
 			EntityObsidianFlask e = new EntityObsidianFlask(worldIn, playerIn);
 			e.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-			worldIn.spawnEntityInWorld(e);
+			worldIn.spawnEntity(e);
 		}
 		worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SPLASH_POTION_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 		if (!playerIn.capabilities.isCreativeMode) {
-			stack.func_190918_g(1);
+			stack.shrink(1);
 		}
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}

@@ -1,9 +1,10 @@
 package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
-import java.util.List;
+import java.util.Arrays;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
+import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import mezz.jei.api.gui.ICraftingGridHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -15,7 +16,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class AlchemyRecipeCategory implements IRecipeCategory {
@@ -53,39 +53,34 @@ public class AlchemyRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-
-	}
-
-	@Override
-	public void drawAnimations(Minecraft minecraft) {
 		powerAnimation.draw(minecraft);
 		progressAnimation.draw(minecraft);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper) {
+	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 
 		IDrawableStatic progressRender = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 24, 420, 4, 12, 0, 0, 44, 0);
 		progressAnimation = VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createAnimatedDrawable(progressRender, 100, IDrawableAnimated.StartDirection.BOTTOM, false);
-		
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_OUTPUT, false, 37, 20);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_1, true, 13, -5);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_2, true, 2, 20);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_3, true, 13, 45);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_4, true, 61, -5);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_5, true, 72, 20);
-		guiItemStacks.init(TileEntityVoidicAlchemy.SLOT_INPUT_6, true, 61, 45);
-		if (recipeWrapper instanceof AlchemyRecipeJEI) {
-			AlchemyRecipeJEI recipe = (AlchemyRecipeJEI) recipeWrapper;
-			craftingGridHelper.setOutput(guiItemStacks, recipe.getOutputs());
-			craftingGridHelper.setInputStacks(guiItemStacks, recipe.getInputs(), TileEntityVoidicAlchemy.SLOT_INPUT_6, TileEntityVoidicAlchemy.SLOT_INPUT_6);
+
+		IGuiItemStackGroup stackGroup = recipeLayout.getItemStacks();
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_OUTPUT, false, 37, 20);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_1, true, 13, -5);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_2, true, 2, 20);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_3, true, 13, 45);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_4, true, 61, -5);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_5, true, 72, 20);
+		stackGroup.init(TileEntityVoidicAlchemy.SLOT_INPUT_6, true, 61, 45);
+		if (recipeWrapper instanceof VoidCraftRecipeWrapperJEI) {
+			VoidCraftRecipeWrapperJEI recipe = (VoidCraftRecipeWrapperJEI) recipeWrapper;
+			craftingGridHelper.setOutput(stackGroup, Arrays.asList(recipe.getOutput()));
+			craftingGridHelper.setInputStacks(stackGroup, Arrays.asList(recipe.getInputs()));
 		}
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		setRecipe(recipeLayout, recipeWrapper);
+	public IDrawable getIcon() {
+		return null;
 	}
 
 }

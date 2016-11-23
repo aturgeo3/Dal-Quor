@@ -33,7 +33,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 
 	private void activate(ItemStack stack, EntityPlayer player) {
 		Vec3d[] vecs = RayTraceHelper.getPlayerTraceVec(player, 64);
-		RayTraceResult result = RayTraceHelper.tracePath(player.worldObj, vecs[0], vecs[1], 1, null);
+		RayTraceResult result = RayTraceHelper.tracePath(player.world, vecs[0], vecs[1], 1, null);
 		if (result != null && result.getBlockPos() != null) {
 			BlockPos pos = result.getBlockPos();
 			switch (result.sideHit) {
@@ -89,12 +89,12 @@ public class RealityTeleporter extends VoidicPowerItem {
 
 			@Override
 			public boolean isItemValidForSlot(int index, ItemStack stack) {
-				return stack.func_190926_b() ? false : stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+				return stack.isEmpty() ? false : stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
 			}
 
 			@Override
-			public boolean func_191420_l() { // NO IDEA WHAT THIS DOES
-				return false;
+			public boolean isEmpty() {
+				return stack.isEmpty();
 			}
 		};
 	}
@@ -128,14 +128,14 @@ public class RealityTeleporter extends VoidicPowerItem {
 			if (loc.length == 3) {
 				BlockPos newPos = new BlockPos(loc[0], loc[1], loc[2]);
 				if (teleporter.getPos().equals(newPos)) {
-					if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Cannot link to the same block"));
+					if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentString("Cannot link to the same block"));
 				} else {
 					teleporter.setLink(newPos);
-					if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Linked: { x:" + loc[0] + ", y:" + loc[1] + ", z:" + loc[2] + " }"));
+					if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentString("Linked: { x:" + loc[0] + ", y:" + loc[1] + ", z:" + loc[2] + " }"));
 				}
 			} else {
 				ct.setIntArray("link", new int[] { pos.getX(), pos.getY(), pos.getZ() });
-				if (!worldIn.isRemote) playerIn.addChatMessage(new TextComponentString("Saved Link: { x:" + pos.getX() + ", y:" + pos.getY() + ", z:" + pos.getZ() + " }"));
+				if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentString("Saved Link: { x:" + pos.getX() + ", y:" + pos.getY() + ", z:" + pos.getZ() + " }"));
 			}
 			return EnumActionResult.SUCCESS;
 		}
@@ -149,10 +149,10 @@ public class RealityTeleporter extends VoidicPowerItem {
 		InventoryItem inv = createInventory(stack);
 		ItemStack holes = inv.getStackInSlot(0);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && holes.func_190926_b() && holes.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole)) {
+		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && holes.isEmpty() && holes.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole)) {
 			activate(stack, player);
 			cap.drain(useAmount());
-			holes.func_190918_g(1);
+			holes.shrink(1);
 			inv.saveData();
 			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		} else {

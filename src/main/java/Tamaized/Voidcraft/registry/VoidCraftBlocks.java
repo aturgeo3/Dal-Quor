@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.TamModized.blocks.TamBlockFence;
 import Tamaized.TamModized.blocks.TamBlockStairs;
-import Tamaized.TamModized.blocks.slab.TamBlockSlab;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabDouble;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
-import Tamaized.TamModized.blocks.slab.TamItemBlockSlab;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.TamModized.registry.TamColorRegistry;
@@ -37,11 +35,13 @@ import Tamaized.Voidcraft.machina.VoidicAlchemyTable;
 import Tamaized.Voidcraft.machina.VoidicPowerCable;
 import Tamaized.Voidcraft.machina.VoidicPowerCharger;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -82,7 +82,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static RealityTeleporterBlock realityTeleporterBlock;
 
 	public static BlockEtherealPlant etherealPlant;
-	
+
 	public static BlockSpellIceSpike iceSpike;
 
 	public static AIBlock AIBlock;
@@ -128,15 +128,24 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(realityTeleporterBlock = new RealityTeleporterBlock(voidCraft.tabs.tabVoid, Material.IRON, "realityTeleporterBlock", 3.5f));
 
 		modelList.add(etherealPlant = new BlockEtherealPlant(voidCraft.tabs.tabVoid, "etherealPlant", 1.0f));
-		
+
 		modelList.add(iceSpike = new BlockSpellIceSpike(voidCraft.tabs.tabVoid, Material.ICE, "blockSpellIceSpike", -1F));
 
 		// Slabs have to be registered outside of their class
-		GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
-		GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
-		GameRegistry.registerBlock(blockFakeBedrockHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockHalfSlab).getName(), blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab, false);
-		GameRegistry.registerBlock(blockFakeBedrockDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockDoubleSlab).getName(), blockVoidBrickHalfSlab, blockFakeBedrockDoubleSlab, false);
+		registerBlockSlab(blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab);
+		// GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		// GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
+		// GameRegistry.registerBlock(blockFakeBedrockHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockHalfSlab).getName(), blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab, false);
+		// GameRegistry.registerBlock(blockFakeBedrockDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockDoubleSlab).getName(), blockVoidBrickHalfSlab, blockFakeBedrockDoubleSlab, false);
 
+	}
+
+	private static void registerBlockSlab(BlockSlab slab, BlockSlab doubleslab) { // TODO: Put this in TamModized
+		GameRegistry.register(slab);
+		GameRegistry.register(doubleslab);
+		ItemSlab item = new ItemSlab(slab, slab, doubleslab);
+		item.setRegistryName(slab.getRegistryName());
+		GameRegistry.register(item);
 	}
 
 	@Override

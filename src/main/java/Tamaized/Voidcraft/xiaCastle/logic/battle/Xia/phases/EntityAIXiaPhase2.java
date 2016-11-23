@@ -1,7 +1,6 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
@@ -12,7 +11,6 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.actions.XiaPhase2Act
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -211,7 +209,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private void watchNew() {
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for (Class c : watchedClass) {
-			list.addAll(getEntity().worldObj.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
+			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
 		Random rand = world.rand;
 		closestEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;

@@ -1,13 +1,15 @@
 package Tamaized.Voidcraft.entity.ghost;
 
+import com.mojang.authlib.GameProfile;
+
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
+import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import io.netty.buffer.ByteBuf;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -18,22 +20,16 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
-import Tamaized.Voidcraft.sound.VoidSoundEvents;
-
-import com.mojang.authlib.GameProfile;
 
 public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAdditionalSpawnData {
 
 	private GameProfile profile;
 	private PlayerNameAlias alias;
-	
+
 	private boolean hasInteracted = false;
 	private boolean running = false;
 	private int tick = 0;
-	private int finalTick = 20*6;
+	private int finalTick = 20 * 6;
 
 	public EntityGhostPlayerBase(World par1World) {
 		super(par1World);
@@ -69,31 +65,31 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public PlayerNameAlias getAlias() {
 		return alias;
 	}
-	
-	public boolean hasInteracted(){
+
+	public boolean hasInteracted() {
 		return hasInteracted;
 	}
-	
-	public boolean isRunning(){
+
+	public boolean isRunning() {
 		return running;
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			if (profile == null) {
 				this.setDead();
 				return;
 			}
-			if(running) tick++;
-			if(tick >= finalTick) hasInteracted = true;
+			if (running) tick++;
+			if (tick >= finalTick) hasInteracted = true;
 		}
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
-		if(running) return false;
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
+		if (running) return false;
 		running = true;
 		return true;
 	}

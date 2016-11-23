@@ -38,9 +38,9 @@ public class VoidTickEvent {
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
 		if (e.phase == e.phase.END) return;
 
-		if (e.player.worldObj.provider.getDimension() == voidCraft.config.getDimensionIDvoid()) {
+		if (e.player.world.provider.getDimension() == voidCraft.config.getDimensionIDvoid()) {
 			if (e.player.getPosition().getY() >= 127) e.player.attackEntityFrom(DamageSource.outOfWorld, 4.0F);
-		} else if (e.player.worldObj.provider.getDimension() != voidCraft.config.getDimensionIDxia()) {
+		} else if (e.player.world.provider.getDimension() != voidCraft.config.getDimensionIDxia()) {
 			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256) {
 				EntityPlayerMP player = (EntityPlayerMP) e.player;
 				transferPlayerToDimension(player.mcServer, player, voidCraft.config.getDimensionIDvoid(), new TeleportLoc(player.getPosition().add(0, 256 * 2, 0)));
@@ -56,14 +56,14 @@ public class VoidTickEvent {
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;
 					player.sendPlayerAbilities();
-					player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY + "You feel heavy, you can not sustain flight"));
+					player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY + "You feel heavy, you can not sustain flight"));
 				}
 			}
 		}
 
-		if (e.player.worldObj.isRemote || e.side == e.side.CLIENT) {
-			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
-			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
+		if (e.player.world.isRemote || e.side == e.side.CLIENT) {
+			BlockPos bPos = new BlockPos(MathHelper.floor(e.player.posX), MathHelper.floor(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor(e.player.posZ));
+			Block block = e.player.world.getBlockState(bPos).getBlock();
 			if (ClientPortalDataHandler.type != voidCraft.config.getDimensionIDvoid() && block == voidCraft.blocks.blockPortalVoid) {
 				if (!ClientPortalDataHandler.active) {
 					ClientPortalDataHandler.type = voidCraft.config.getDimensionIDvoid();
@@ -86,8 +86,8 @@ public class VoidTickEvent {
 		if (data.get(e.player.getGameProfile().getId()) != null) {
 
 			// Determine when to Teleport
-			BlockPos bPos = new BlockPos(MathHelper.floor_double(e.player.posX), MathHelper.floor_double(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor_double(e.player.posZ));
-			Block block = e.player.worldObj.getBlockState(bPos).getBlock();
+			BlockPos bPos = new BlockPos(MathHelper.floor(e.player.posX), MathHelper.floor(e.player.posY - 0.2D - (double) e.player.getYOffset()), MathHelper.floor(e.player.posZ));
+			Block block = e.player.world.getBlockState(bPos).getBlock();
 			PortalDataHandler j = data.get(e.player.getGameProfile().getId());
 			if (j.type != voidCraft.config.getDimensionIDvoid() && block == voidCraft.blocks.blockPortalVoid) {
 				if (!j.active) {
@@ -190,14 +190,14 @@ public class VoidTickEvent {
 		p_82448_3_.theProfiler.endSection();
 
 		p_82448_3_.theProfiler.startSection("placing");
-		d0 = (double) MathHelper.clamp_int((int) d0, -29999872, 29999872);
-		d1 = (double) MathHelper.clamp_int((int) d1, -29999872, 29999872);
+		d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
+		d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
 
 		if (p_82448_1_.isEntityAlive()) {
 			p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
 			if (teleporter.teleporter != null) teleporter.teleporter.placeInPortal(p_82448_1_, f);
 			else p_82448_1_.setPositionAndUpdate(teleporter.pos.getX(), teleporter.pos.getY(), teleporter.pos.getZ());
-			p_82448_4_.spawnEntityInWorld(p_82448_1_);
+			p_82448_4_.spawnEntity(p_82448_1_);
 			p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
 		}
 		p_82448_3_.theProfiler.endSection();

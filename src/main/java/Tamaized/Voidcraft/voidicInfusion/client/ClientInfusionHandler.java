@@ -29,8 +29,8 @@ public class ClientInfusionHandler {
 	@SubscribeEvent
 	public void update(ClientTickEvent e) {
 		if (e.phase == Phase.END && !Minecraft.getMinecraft().isGamePaused()) {
-			World world = Minecraft.getMinecraft().theWorld;
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			World world = Minecraft.getMinecraft().world;
+			EntityPlayer player = Minecraft.getMinecraft().player;
 			if (world == null || player == null) return;
 			// if(player.hasCapability(CapabilityList.VOIDICINFUSION, null)){
 			// amount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusion();
@@ -73,7 +73,7 @@ public class ClientInfusionHandler {
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e) {
 		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayerSP player = mc.thePlayer;
+		EntityPlayerSP player = mc.player;
 
 		if (e.getType() == e.getType().PORTAL) {
 			ScaledResolution scaledRes = new ScaledResolution(mc);

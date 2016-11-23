@@ -11,13 +11,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderVoid extends WorldProvider {
+
 	/**
 	 * creates a new world chunk manager for WorldProvider
 	 */
 	@Override
-	protected void createBiomeProvider() {
+	protected void init() {
 		this.biomeProvider = new BiomeProviderSingle(voidCraft.biomes.biomeVoid);
-		this.isHellWorld = true;
+		this.doesWaterVaporize = false;
 		this.hasNoSky = true;
 	}
 
@@ -48,7 +49,7 @@ public class WorldProviderVoid extends WorldProvider {
 	 */
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderVoid(this.worldObj, this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.worldObj.getSeed());
+		return new ChunkProviderVoid(world, world.getWorldInfo().isMapFeaturesEnabled(), world.getSeed());
 	}
 
 	/**

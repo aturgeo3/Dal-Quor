@@ -73,7 +73,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 				case 1: // Voidic Fire (Same as Lich)
 					getEntity().setArmRotations(180, 0, 0, 0, true);
 					resetAnimationTick = 20 * 4;
-					getEntity().worldObj.spawnEntityInWorld(new EntityLichInferno(getEntity().worldObj, getEntity().getPosition(), 10, 10));
+					getEntity().world.spawnEntity(new EntityLichInferno(getEntity().world, getEntity().getPosition(), 10, 10));
 					break;
 				case 2: // Use the force luke :P some sort of choke mechanic idk
 					if (closestEntity == null) break;

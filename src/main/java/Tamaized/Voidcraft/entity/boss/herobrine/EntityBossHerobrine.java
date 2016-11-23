@@ -2,23 +2,20 @@ package Tamaized.Voidcraft.entity.boss.herobrine;
 
 import java.util.ArrayList;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 
 public class EntityBossHerobrine extends EntityVoidBoss {
 
@@ -43,9 +40,9 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		// start();
-		return super.processInteract(player, hand, stack);
+		return super.processInteract(player, hand);
 	}
 
 	@Override

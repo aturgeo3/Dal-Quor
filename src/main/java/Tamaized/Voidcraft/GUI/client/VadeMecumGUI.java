@@ -6,7 +6,6 @@ import java.io.IOException;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.proxy.ClientProxy;
@@ -110,7 +109,7 @@ public class VadeMecumGUI extends GuiScreen {
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry() != "null" && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
-		//else setEntry(ClientProxy.vadeMecumEntryList, 0);
+		// else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		else setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
@@ -124,7 +123,7 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		if (keyCode == 1 || this.mc.gameSettings.keyBindInventory.isActiveAndMatches(keyCode)) {
-			this.mc.thePlayer.closeScreen();
+			this.mc.player.closeScreen();
 		}
 	}
 
@@ -179,7 +178,7 @@ public class VadeMecumGUI extends GuiScreen {
 					entry.goBack(this);
 					break;
 				case EntryBack:
-					//setEntry(ClientProxy.vadeMecumEntryList, 0);
+					// setEntry(ClientProxy.vadeMecumEntryList, 0);
 					setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case Credits:
@@ -333,7 +332,7 @@ public class VadeMecumGUI extends GuiScreen {
 			itemRender.renderItemIntoGUI(stack, x, y);
 			// drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
 			GlStateManager.disableDepth();
-			if (stack.stackSize > 1) drawString(fontRendererObj, "" + stack.stackSize, x + 11, y + 9, 0xFFFFFF);
+			if (stack.getCount() > 1) drawString(fontRendererObj, "" + stack.getCount(), x + 11, y + 9, 0xFFFFFF);
 			GlStateManager.enableDepth();
 			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();

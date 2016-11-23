@@ -58,7 +58,7 @@ public class VoidicDrill extends VoidicPowerItem {
 		if (!((tick % 5) == 0)) return;
 		if (!(entity instanceof EntityPlayer)) return;
 		EntityPlayer player = (EntityPlayer) entity;
-		World world = player.worldObj;
+		World world = player.world;
 		EnumHand hand = player.getActiveHand();
 		if (!world.isRemote) {
 			HashSet<Entity> exclude = new HashSet<Entity>();

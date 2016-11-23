@@ -3,6 +3,13 @@ package Tamaized.Voidcraft.entity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
+import Tamaized.Voidcraft.entity.client.animation.IAnimatable;
+import Tamaized.Voidcraft.network.IVoidBossAIPacket;
+import Tamaized.Voidcraft.network.VoidBossAIBus;
+import Tamaized.Voidcraft.sound.BossMusicManager;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -15,13 +22,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
-import Tamaized.Voidcraft.entity.client.animation.IAnimatable;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.network.VoidBossAIBus;
-import Tamaized.Voidcraft.sound.BossMusicManager;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 
 public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossData {
 
@@ -124,7 +124,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	}
 
 	private void handlerUpdate() {
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			if (handler == null) {
 				setDead();
 				return;
@@ -145,8 +145,8 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	}
 
 	private void updateAI() {
-		if (worldObj.isRemote) return;
-		
+		if (world.isRemote) return;
+
 		if (ready) {
 			phase++;
 			preInitPhase(phase);
@@ -217,13 +217,13 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		if (deathTime >= 20) {
 			int i;
 
-			if (!worldObj.isRemote && (recentlyHit > 0 || isPlayer()) && canDropLoot() && worldObj.getGameRules().getBoolean("doMobLoot")) {
+			if (!world.isRemote && (recentlyHit > 0 || isPlayer()) && canDropLoot() && world.getGameRules().getBoolean("doMobLoot")) {
 				i = getExperiencePoints(attackingPlayer);
 
 				while (i > 0) {
 					int j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					world.spawnEntity(new EntityXPOrb(world, posX, posY, posZ, j));
 				}
 			}
 
@@ -233,7 +233,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 				double d2 = rand.nextGaussian() * 0.02D;
 				double d0 = rand.nextGaussian() * 0.02D;
 				double d1 = rand.nextGaussian() * 0.02D;
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (double) (rand.nextFloat() * width * 2.0F) - (double) width, posY + (double) (rand.nextFloat() * height), posZ + (double) (rand.nextFloat() * width * 2.0F) - (double) width, d2, d0, d1);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (double) (rand.nextFloat() * width * 2.0F) - (double) width, posY + (double) (rand.nextFloat() * height), posZ + (double) (rand.nextFloat() * width * 2.0F) - (double) width, d2, d0, d1);
 			}
 		}
 	}

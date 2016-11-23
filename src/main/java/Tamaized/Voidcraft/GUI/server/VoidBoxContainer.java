@@ -49,7 +49,7 @@ public class VoidBoxContainer extends ContainerBase {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -60,39 +60,39 @@ public class VoidBoxContainer extends ContainerBase {
 				if (hoverSlot >= 3 && hoverSlot < 28) {
 					if (te.isItemValidForSlot(1, itemstack1)) {
 						if (!this.mergeItemStack(itemstack1, 1, 2, true)) {
-							return null;
+							return ItemStack.EMPTY;
 						}
 					} else if (!this.mergeItemStack(itemstack1, 30, 39, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= 28 && hoverSlot <= 38) {
 					if (te.isItemValidForSlot(1, itemstack1)) {
 						if (!this.mergeItemStack(itemstack1, 1, 2, true)) {
-							return null;
+							return ItemStack.EMPTY;
 						}
 					} else if (!this.mergeItemStack(itemstack1, 3, 27, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot > 0 && hoverSlot < 3) {
 					if (!this.mergeItemStack(itemstack1, 3, 27, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 			} else {
 				return itemstack;
 			}
 
-			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+			if (itemstack1.getCount() == 0) {
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
-				return null;
+			if (itemstack1.getCount() == itemstack.getCount()) {
+				return ItemStack.EMPTY;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onTake(player, itemstack1);
 
 		}
 
@@ -101,7 +101,7 @@ public class VoidBoxContainer extends ContainerBase {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return this.te.isUseableByPlayer(entityplayer);
+		return this.te.isUsableByPlayer(entityplayer);
 	}
 
 }

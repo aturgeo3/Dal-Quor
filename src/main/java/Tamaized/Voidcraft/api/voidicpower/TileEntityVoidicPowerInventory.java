@@ -17,6 +17,8 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 
 	public TileEntityVoidicPowerInventory(int slotAmount) {
 		slots = new ItemStack[slotAmount];
+		for (int index = 0; index < slots.length; index++)
+			slots[index] = ItemStack.EMPTY;
 	}
 
 	@Override
@@ -24,12 +26,14 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 		super.readFromNBT(nbt);
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		slots = new ItemStack[getSizeInventory()];
+		for (int index = 0; index < slots.length; index++)
+			slots[index] = ItemStack.EMPTY;
 		if (list != null) {
 			for (int i = 0; i < list.tagCount(); i++) {
 				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
 				byte b = nbtc.getByte("Slot");
 				if (b >= 0 && b < slots.length) {
-					slots[b] = ItemStack.loadItemStackFromNBT(nbtc);
+					slots[b] = new ItemStack(nbtc);
 				}
 			}
 		}
@@ -40,7 +44,7 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 		super.writeToNBT(nbt);
 		NBTTagList list = new NBTTagList();
 		for (int i = 0; i < slots.length; i++) {
-			if (slots[i] != null) {
+			if (!slots[i].isEmpty()) {
 				NBTTagCompound nbtc = new NBTTagCompound();
 				nbtc.setByte("Slot", (byte) i);
 				slots[i].writeToNBT(nbtc);
@@ -65,13 +69,13 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 	public ItemStack decrStackSize(int i, int j) {
 		if (slots[i] != null) {
 			ItemStack itemstack;
-			if (slots[i].stackSize <= j) {
+			if (slots[i].getCount() <= j) {
 				itemstack = slots[i];
 				slots[i] = null;
 				return itemstack;
 			} else {
 				itemstack = slots[i].splitStack(j);
-				if (slots[i].stackSize == 0) {
+				if (slots[i].getCount() == 0) {
 					slots[i] = null;
 				}
 				return itemstack;
@@ -93,17 +97,24 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
 		slots[i] = stack;
-		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-			stack.stackSize = getInventoryStackLimit();
+		if (stack != null && stack.getCount() > getInventoryStackLimit()) {
+			stack.setCount(getInventoryStackLimit());
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		for (ItemStack stack : slots)
+			if (!stack.isEmpty()) return false;
+		return true;
 	}
 
 	@Override
 	public abstract int getInventoryStackLimit();
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(pos) != this ? false : player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D) <= 64.0D;
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return world.getTileEntity(pos) != this ? false : player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override

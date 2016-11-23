@@ -40,7 +40,7 @@ public abstract class InventoryItem implements IInventory {
 	protected NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTTagList list = new NBTTagList();
 		for (int i = 0; i < inventory.length; i++) {
-			if (inventory[i].func_190926_b()) {
+			if (!inventory[i].isEmpty()) {
 				NBTTagCompound nbtc = new NBTTagCompound();
 				nbtc.setByte("Slot", (byte) i);
 				inventory[i].writeToNBT(nbtc);
@@ -72,29 +72,29 @@ public abstract class InventoryItem implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int i, int count) {
-		if (inventory[i].func_190926_b()) {
+		if (!inventory[i].isEmpty()) {
 			ItemStack itemstack;
-			if (inventory[i].func_190916_E() <= count) {
+			if (inventory[i].getCount() <= count) {
 				itemstack = inventory[i];
-				inventory[i] = ItemStack.field_190927_a;
+				inventory[i] = ItemStack.EMPTY;
 				return itemstack;
 			} else {
 				itemstack = inventory[i].splitStack(count);
-				if (inventory[i].func_190916_E() == 0) inventory[i] = ItemStack.field_190927_a;
+				if (inventory[i].getCount() == 0) inventory[i] = ItemStack.EMPTY;
 				return itemstack;
 			}
 		}
-		return ItemStack.field_190927_a;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int i) {
-		if (inventory[i].func_190926_b()) {
+		if (!inventory[i].isEmpty()) {
 			ItemStack itemstack = inventory[i];
-			inventory[i] = ItemStack.field_190927_a;
+			inventory[i] = ItemStack.EMPTY;
 			return itemstack;
 		}
-		return ItemStack.field_190927_a;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class InventoryItem implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(EntityPlayer player) {
 		return true;
 	}
 

@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.model;
 
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -7,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 
 public class ModelXia extends ModelBase {
 
@@ -238,7 +238,7 @@ public class ModelXia extends ModelBase {
 			ModelRenderer modelrenderer = getArmForSide(enumhandside, false);
 			ModelRenderer modelrendererOverlay = getArmForSide(enumhandside, true);
 			float f1 = swingProgress;
-			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f1) * ((float) Math.PI * 2F)) * 0.2F;
+			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f1) * ((float) Math.PI * 2F)) * 0.2F;
 
 			if (enumhandside == EnumHandSide.LEFT) {
 				body.rotateAngleY *= -1.0F;

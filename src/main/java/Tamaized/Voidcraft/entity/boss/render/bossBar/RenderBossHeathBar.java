@@ -9,20 +9,18 @@ package Tamaized.Voidcraft.entity.boss.render.bossBar;
 
 import java.awt.Rectangle;
 
+import org.lwjgl.opengl.GL11;
+
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import Tamaized.Voidcraft.voidCraft;
 
 public class RenderBossHeathBar {
 
@@ -113,8 +111,8 @@ public class RenderBossHeathBar {
 		// GL11.glEnable(GL11.GL_BLEND);
 
 		Entity e = (Entity) voidBoss;
-		EntityPlayer p = mc.thePlayer;
-		if (e.isDead || !p.worldObj.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32) voidBoss = null;
+		EntityPlayer p = mc.player;
+		if (e.isDead || !p.world.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32) voidBoss = null;
 
 		if (flashTickWait <= 0) {
 			if (flashTickFlag) {

@@ -72,7 +72,7 @@ public class HeimdallContainer extends ContainerBase {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		ItemStack itemstack = ItemStack.field_190927_a;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -81,46 +81,46 @@ public class HeimdallContainer extends ContainerBase {
 
 			if (hoverSlot == te.SLOT_BUCKET || hoverSlot == te.SLOT_INPUT) {
 				if (!mergeItemStack(itemstack1, 2, 38, true)) {
-					return ItemStack.field_190927_a;
+					return ItemStack.EMPTY;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
 				if (!getSlot(te.SLOT_BUCKET).getHasStack() && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)) {
 					if (!mergeItemStack(itemstack1, te.SLOT_BUCKET, te.SLOT_BUCKET + 1, false)) {
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				} else if (!getSlot(te.SLOT_INPUT).getHasStack() && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
 					if (!mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= 2 && hoverSlot < 29) {
 					if (!mergeItemStack(itemstack1, 29, 38, false)) {
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= 29 && hoverSlot < 38) {
 					if (!mergeItemStack(itemstack1, 2, 29, false)) {
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 
-			if (itemstack1.func_190916_E() == 0) {
-				slot.putStack(ItemStack.field_190927_a);
+			if (itemstack1.getCount() == 0) {
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.func_190916_E() == itemstack.func_190916_E()) {
-				return ItemStack.field_190927_a;
+			if (itemstack1.getCount() == itemstack.getCount()) {
+				return ItemStack.EMPTY;
 			}
 
-			slot.func_190901_a(player, itemstack1);
+			slot.onTake(player, itemstack1);
 		}
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUseableByPlayer(entityplayer);
+		return te.isUsableByPlayer(entityplayer);
 	}
 }

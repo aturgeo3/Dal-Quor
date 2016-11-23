@@ -4,8 +4,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.annotation.Nullable;
-
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
@@ -19,7 +17,6 @@ import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -82,7 +79,7 @@ public class EntityBossXia extends EntityVoidBoss {
 			outputStream.writeFloat(leftArmYaw);
 			outputStream.writeFloat(rightArmYaw);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(worldObj.provider.getDimension(), posX, posY, posZ, 64));
+			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			bos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -104,9 +101,9 @@ public class EntityBossXia extends EntityVoidBoss {
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand, @Nullable ItemStack stack) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		// start();
-		return super.processInteract(player, hand, stack);
+		return super.processInteract(player, hand);
 	}
 
 	@Override

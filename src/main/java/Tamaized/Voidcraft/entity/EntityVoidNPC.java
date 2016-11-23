@@ -32,8 +32,8 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 
 	public EntityVoidNPC(World p_i1738_1_) {
 		super(p_i1738_1_);
-		this.experienceValue = 10;
-		this.ignoreFrustumCheck = true;
+		experienceValue = 10;
+		ignoreFrustumCheck = true;
 	}
 
 	@Override
@@ -56,10 +56,10 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 */
 	@Override
 	public void onLivingUpdate() {
-		this.updateArmSwingProgress();
-		float f = this.getBrightness(1.0F);
+		updateArmSwingProgress();
+		float f = getBrightness(1.0F);
 		if (f > 0.5F) {
-			this.entityAge += 2;
+			entityAge += 2;
 		}
 		super.onLivingUpdate();
 	}
@@ -79,8 +79,8 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!this.worldObj.isRemote && this.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL) {
-			this.setDead();
+		if (!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+			setDead();
 		}
 	}
 
@@ -89,7 +89,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 */
 	@Override
 	public boolean isEntityAlive() {
-		return !canDie ? true : !this.isDead && this.getHealth() > 0.0F;
+		return !canDie ? true : !isDead && getHealth() > 0.0F;
 	}
 
 	/**
@@ -98,20 +98,20 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	@Override
 	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
 		/*
-		 * if(isFlying){ jumpMovementFactor = 0.0F; double d3 = this.motionY; this.motionY = d3 * 0.6D; }else{ jumpMovementFactor = 0.2F; super.moveEntityWithHeading(p_70612_1_, p_70612_2_); }
+		 * if(isFlying){ jumpMovementFactor = 0.0F; double d3 = motionY; motionY = d3 * 0.6D; }else{ jumpMovementFactor = 0.2F; super.moveEntityWithHeading(p_70612_1_, p_70612_2_); }
 		 */
 		// super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
-		this.prevLimbSwingAmount = this.limbSwingAmount;
-		double d0 = this.posX - this.prevPosX;
-		double d1 = this.posZ - this.prevPosZ;
-		float f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
+		prevLimbSwingAmount = limbSwingAmount;
+		double d0 = posX - prevPosX;
+		double d1 = posZ - prevPosZ;
+		float f6 = MathHelper.sqrt(d0 * d0 + d1 * d1) * 4.0F;
 
 		if (f6 > 1.0F) {
 			f6 = 1.0F;
 		}
 
-		this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
-		this.limbSwing += this.limbSwingAmount;
+		limbSwingAmount += (f6 - limbSwingAmount) * 0.4F;
+		limbSwing += limbSwingAmount;
 	}
 
 	@Override
@@ -129,12 +129,12 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (this.isEntityInvulnerable()) {
+		if (isEntityInvulnerable()) {
 			return false;
 		} else if (super.attackEntityFrom(source, amount)) {
 			Entity entity = source.getEntity();
 			if (entity != this && entity instanceof EntityLivingBase) {
-				this.setAttackTarget((EntityLivingBase) entity);
+				setAttackTarget((EntityLivingBase) entity);
 			}
 			return true;
 		} else {
@@ -148,14 +148,14 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 * @param b
 	 */
 	public void setInvul(boolean b) {
-		this.invulnerable = b;
+		invulnerable = b;
 	}
 
 	/**
 	 * Return whether this entity is invulnerable to damage. Again, im lazy
 	 */
 	public boolean isEntityInvulnerable() {
-		return this.invulnerable;
+		return invulnerable;
 	}
 
 	/**
@@ -183,11 +183,11 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	public boolean attackEntityAsMob(Entity entityIn) {
 		// if(p_70652_1_ instanceof VoidChain) return false;
 
-		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+		float f = (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 
 		if (entityIn instanceof EntityLivingBase) {
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
+			f += EnchantmentHelper.getModifierForCreature(getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 
@@ -195,9 +195,9 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 
 		if (flag) {
 			if (i > 0) {
-				entityIn.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
-				this.motionX *= 0.6D;
-				this.motionZ *= 0.6D;
+				entityIn.addVelocity((double) (-MathHelper.sin(rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+				motionX *= 0.6D;
+				motionZ *= 0.6D;
 			}
 
 			int j = EnchantmentHelper.getFireAspectModifier(this);
@@ -208,20 +208,20 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 
 			if (entityIn instanceof EntityPlayer) {
 				EntityPlayer entityplayer = (EntityPlayer) entityIn;
-				ItemStack itemstack = this.getHeldItemMainhand();
+				ItemStack itemstack = getHeldItemMainhand();
 				ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : null;
 
 				if (itemstack != null && itemstack1 != null && itemstack.getItem() instanceof ItemAxe && itemstack1.getItem() == Items.SHIELD) {
 					float f1 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
 
-					if (this.rand.nextFloat() < f1) {
+					if (rand.nextFloat() < f1) {
 						entityplayer.getCooldownTracker().setCooldown(Items.SHIELD, 100);
-						this.worldObj.setEntityState(entityplayer, (byte) 30);
+						world.setEntityState(entityplayer, (byte) 30);
 					}
 				}
 			}
 
-			this.applyEnchantments(this, entityIn);
+			applyEnchantments(this, entityIn);
 		}
 
 		return flag;
@@ -230,7 +230,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	/**
 	 * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
 	 *//*
-		 * protected void attackEntity(Entity p_70785_1_, float p_70785_2_){ if (this.attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > this.boundingBox.minY && p_70785_1_.boundingBox.minY < this.boundingBox.maxY){ this.attackTime = 20; this.attackEntityAsMob(p_70785_1_); } }
+		 * protected void attackEntity(Entity p_70785_1_, float p_70785_2_){ if (attackTime <= 0 && p_70785_2_ < 2.0F && p_70785_1_.boundingBox.maxY > boundingBox.minY && p_70785_1_.boundingBox.minY < boundingBox.maxY){ attackTime = 20; attackEntityAsMob(p_70785_1_); } }
 		 */
 
 	/**
@@ -238,7 +238,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 */
 	@Override
 	public float getBlockPathWeight(BlockPos pos) {
-		return 0.5F - this.worldObj.getLightBrightness(pos);
+		return 0.5F - world.getLightBrightness(pos);
 	}
 
 	/**
@@ -253,13 +253,13 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	 */
 	@Override
 	public boolean getCanSpawnHere() {
-		return this.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
+		return world.getDifficulty() != EnumDifficulty.PEACEFUL && isValidLightLevel() && super.getCanSpawnHere();
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 
 	/**

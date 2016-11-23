@@ -68,7 +68,7 @@ public class VoidicChargerContainer extends ContainerBase {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -77,43 +77,43 @@ public class VoidicChargerContainer extends ContainerBase {
 
 			if (hoverSlot == 0) {
 				if (!this.mergeItemStack(itemstack1, 1, 37, true)) {
-					return null;
+					return ItemStack.EMPTY;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
 				if (!this.getSlot(0).getHasStack()) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= 1 && hoverSlot < 28) {
 					if (!this.mergeItemStack(itemstack1, 28, 37, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= 28 && hoverSlot < 37) {
 					if (!this.mergeItemStack(itemstack1, 1, 28, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 
-			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
+			if (itemstack1.getCount() == 0) {
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemstack.stackSize) {
+			if (itemstack1.getCount() == itemstack.getCount()) {
 				return null;
 			}
 
-			slot.onPickupFromSlot(player, itemstack1);
+			slot.onTake(player, itemstack1);
 		}
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		return te.isUseableByPlayer(playerIn);
+		return te.isUsableByPlayer(playerIn);
 	}
 
 }

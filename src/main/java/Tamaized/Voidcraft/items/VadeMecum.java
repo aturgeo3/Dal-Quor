@@ -8,7 +8,6 @@ import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import Tamaized.Voidcraft.handlers.VadeMecumRitualHandler;
 import Tamaized.Voidcraft.handlers.VadeMecumWordsOfPower;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -64,19 +63,20 @@ public class VadeMecum extends TamItem {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
 		if (state != null && state.getBlock() == voidCraft.blocks.ritualBlock) {
 			if (!world.isRemote) VadeMecumRitualHandler.invokeRitual(player, world, pos);
 			return EnumActionResult.SUCCESS;
 		}
-		return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+		return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		dorightClick(world, player, stack);
-		return super.onItemRightClick(stack, world, player, hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
@@ -109,8 +109,8 @@ public class VadeMecum extends TamItem {
 			IVadeMecumItemCapability itemCap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 			if (itemCap != null && itemCap.getBookState()) {
 				boolean flag = false;
-				if (entity == Minecraft.getMinecraft().thePlayer) {
-					flag = Minecraft.getMinecraft().gameSettings.thirdPersonView == 0;
+				if (entity == net.minecraft.client.Minecraft.getMinecraft().player) {
+					flag = net.minecraft.client.Minecraft.getMinecraft().gameSettings.thirdPersonView == 0;
 				}
 				if (flag) {
 					if (voidCraft.config.getRenderFirstPersonParticles()) {

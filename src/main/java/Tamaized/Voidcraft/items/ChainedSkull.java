@@ -90,9 +90,9 @@ public class ChainedSkull extends TamItem {
 					default:
 						break;
 				}
-				world.spawnEntityInWorld(entity);
-				player.addChatMessage(new TextComponentTranslation("???: Go forth, my pawn."));
-				stack.func_190918_g(1);
+				world.spawnEntity(entity);
+				player.sendMessage(new TextComponentTranslation("???: Go forth, my pawn."));
+				stack.shrink(1);
 			}
 			return EnumActionResult.PASS;
 		}

@@ -4,15 +4,12 @@ import java.util.List;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,7 +30,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 
 	@Override
 	public void onUpdate() {
-		if (worldObj != null && !worldObj.isRemote) {
+		if (world != null && !world.isRemote) {
 			validateInstance();
 			if (running) {
 				doHandlerStartChecks();
@@ -56,16 +53,16 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 			AxisAlignedBB xiaBB = new AxisAlignedBB(xiaLoc.add(-18, 0, 7), xiaLoc.add(18, 10, 15));
 			List<EntityPlayer> list;
 			if (!twins.isRunning() && !twins.isDone()) {
-				list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, twinsBB);
-				if (!list.isEmpty()) twins.start(worldObj, twinsLoc);
+				list = world.getEntitiesWithinAABB(EntityPlayer.class, twinsBB);
+				if (!list.isEmpty()) twins.start(world, twinsLoc);
 			}
 			if (!herobrine.isRunning() && !herobrine.isDone()) {
-				list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, herobrineBB);
-				if (!list.isEmpty()) herobrine.start(worldObj, herobrineLoc);
+				list = world.getEntitiesWithinAABB(EntityPlayer.class, herobrineBB);
+				if (!list.isEmpty()) herobrine.start(world, herobrineLoc);
 			}
 			if (!xia.isRunning() && !xia.isDone() && xiaDoorOpen) {
-				list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, xiaBB);
-				if (!list.isEmpty()) xia.start(worldObj, xiaLoc);
+				list = world.getEntitiesWithinAABB(EntityPlayer.class, xiaBB);
+				if (!list.isEmpty()) xia.start(world, xiaLoc);
 			}
 		}
 	}
@@ -76,30 +73,30 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	public void validateInstance() {
-		if (worldObj != null) if ((worldObj.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone()))) || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
-		if (!running && worldObj != null && !worldObj.playerEntities.isEmpty()) start();
+		if (world != null) if ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone()))) || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
+		if (!running && world != null && !world.playerEntities.isEmpty()) start();
 	}
 
 	private void handleProgressVisual() {
 		BlockPos pos1 = new BlockPos(48, 79, 82);
 		BlockPos pos2 = new BlockPos(56, 79, 82);
-		TileEntity te1 = worldObj.getTileEntity(pos1);
-		TileEntity te2 = worldObj.getTileEntity(pos2);
+		TileEntity te1 = world.getTileEntity(pos1);
+		TileEntity te2 = world.getTileEntity(pos2);
 		TileEntityAIBlock ai1 = null;
 		TileEntityAIBlock ai2 = null;
 		if (!(te1 instanceof TileEntityAIBlock)) {
-			worldObj.setBlockState(pos1, voidCraft.blocks.AIBlock.getDefaultState());
-			ai1 = (TileEntityAIBlock) worldObj.getTileEntity(pos1);
+			world.setBlockState(pos1, voidCraft.blocks.AIBlock.getDefaultState());
+			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
 		} else {
-			ai1 = (TileEntityAIBlock) worldObj.getTileEntity(pos1);
+			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
-			worldObj.setBlockState(pos2, voidCraft.blocks.AIBlock.getDefaultState());
-			ai2 = (TileEntityAIBlock) worldObj.getTileEntity(pos2);
+			world.setBlockState(pos2, voidCraft.blocks.AIBlock.getDefaultState());
+			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
 		} else {
-			ai2 = (TileEntityAIBlock) worldObj.getTileEntity(pos2);
+			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 		}
 		if (running) {
 			int state1 = herobrine.isDone() ? 1 : 0;
@@ -133,7 +130,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				worldObj.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? voidCraft.blocks.realityHole.getDefaultState() : voidCraft.blocks.blockNoBreak.getDefaultState());
+				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? voidCraft.blocks.realityHole.getDefaultState() : voidCraft.blocks.blockNoBreak.getDefaultState());
 			}
 		}
 		xiaDoorOpen = false;
@@ -143,7 +140,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				worldObj.setBlockToAir(doorPos.add(x, y, 0));
+				world.setBlockToAir(doorPos.add(x, y, 0));
 			}
 		}
 		xiaDoorOpen = true;

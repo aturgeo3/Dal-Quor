@@ -26,15 +26,15 @@ public class VadeMecumRitualHandler {
 		if (cap == null || world.getBlockState(pos).getBlock() != voidCraft.blocks.ritualBlock) return;
 		switch (getRitual(cap, world, pos, true)) {
 			case INTRO:
-				player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Intro"));
+				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Intro"));
 				cap.addCategory(IVadeMecumCapability.Category.INTRO);
 				break;
 			case POWERINTRO:
-				player.addChatMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Words of Power"));
+				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Words of Power"));
 				cap.addCategory(IVadeMecumCapability.Category.TOME);
 				break;
 			default:
-				player.addChatMessage(new TextComponentTranslation(TextFormatting.RED + "Unknown Ritual"));
+				player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Unknown Ritual"));
 				break;
 		}
 	}

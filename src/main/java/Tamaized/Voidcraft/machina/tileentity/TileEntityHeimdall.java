@@ -62,8 +62,8 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 	public int getMaxEnergyStored() {
 		return maxForgeEnergy;
 	}
-	
-	public void setEnergyAmount(int a){
+
+	public void setEnergyAmount(int a) {
 		forgeEnergy = a;
 	}
 
@@ -80,7 +80,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 
 			// Fill A Bucket
 			if (tank.getFluidAmount() >= 1000) {
@@ -92,7 +92,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 			// Check for quartz dust and handle
 			if (forgeEnergy + quartzAmount < maxForgeEnergy && slots[SLOT_INPUT] != null && slots[SLOT_INPUT].getItem() == voidCraft.items.quartzDust) {
-				if (slots[SLOT_INPUT].func_190916_E() > 1) slots[SLOT_INPUT].func_190918_g(1);
+				if (slots[SLOT_INPUT].getCount() > 1) slots[SLOT_INPUT].shrink(1);
 				else slots[SLOT_INPUT] = null;
 				forgeEnergy += quartzAmount;
 			}
@@ -106,7 +106,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 			// Check if Void Machina is nearby; if so give it fluid
 			if (tank.getFluidAmount() > 0) {
 				for (EnumFacing face : EnumFacing.VALUES) {
-					TileEntity te = worldObj.getTileEntity(getPos().offset(face));
+					TileEntity te = world.getTileEntity(getPos().offset(face));
 					if (te instanceof IFluidHandler) {
 						IFluidHandler fte = ((IFluidHandler) te);
 						if (fte.fill(new FluidStack(voidCraft.fluids.voidFluid, 1), true) > 0) {
@@ -184,5 +184,12 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	public void setFluidAmount(int amount) {
 		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+	}
+
+	@Override
+	public boolean isEmpty() {
+		for (ItemStack stack : slots)
+			if (!stack.isEmpty()) return false;
+		return true;
 	}
 }

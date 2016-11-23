@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.herobrine.extra;
 
+import Tamaized.Voidcraft.blocks.AIBlock;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,8 +13,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.blocks.AIBlock;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 
 public class EntityHerobrineFireball extends EntityFireball {
 
@@ -36,20 +36,20 @@ public class EntityHerobrineFireball extends EntityFireball {
      */
     @Override
     protected void onImpact(RayTraceResult p_70227_1_){
-        if (!this.worldObj.isRemote){
+        if (!this.world.isRemote){
             if (p_70227_1_.entityHit != null){
                 p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
             }else if(p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK){
-            	Block b = worldObj.getBlockState(p_70227_1_.getBlockPos()).getBlock();
+				Block b = world.getBlockState(p_70227_1_.getBlockPos()).getBlock();
             	if(b instanceof AIBlock){
-            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.worldObj, p_70227_1_.getBlockPos());
+            		TileEntity te = ((AIBlock) b).getMyTileEntity(this.world, p_70227_1_.getBlockPos());
             		if(te instanceof TileEntityAIBlock){
             			((TileEntityAIBlock) te).boom();
             		}
             	}
             }
 
-            this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, false);
+            this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.field_92057_e, true, false);
             this.setDead();
         }
     }

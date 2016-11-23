@@ -24,8 +24,8 @@ public class BGMusic {
 	@SubscribeEvent
 	public void PlaySoundEvent(PlaySoundEvent e) {
 		// if(e.getSound().getCategory() == SoundCategory.MUSIC)DebugEvent.textL = (e.getName()+" "+e.getSound().getCategory()+" "+e.getResultSound().getSoundLocation());
-		World world = Minecraft.getMinecraft().theWorld;
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		World world = Minecraft.getMinecraft().world;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (e.getSound().getCategory() == SoundCategory.MUSIC && world != null && world.provider != null) {
 			/*
 			 * if(world.provider.getDimension() == voidCraft.dimensionIdXia){ TODO if(Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(sound)){ e.setResultSound(null); }else{ sound = PositionedSoundRecord.getMusicRecord(VoidSoundEvents.BGMusicSoundEvents.undertale_core.getTrack()); e.setResultSound(sound); } }else
@@ -47,7 +47,7 @@ public class BGMusic {
 	@SubscribeEvent
 	public void tick(ClientTickEvent e) {
 		if (e.phase == Phase.END) {
-			World world = Minecraft.getMinecraft().theWorld;
+			World world = Minecraft.getMinecraft().world;
 			if (world != null && world.provider != null) {
 				if (world.provider.getDimension() != voidCraft.config.getDimensionIDxia()) {
 					if (world.provider.getDimension() != voidCraft.config.getDimensionIDvoid()) {

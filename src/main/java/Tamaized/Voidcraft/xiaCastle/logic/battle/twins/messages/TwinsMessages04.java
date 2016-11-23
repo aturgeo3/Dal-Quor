@@ -30,10 +30,10 @@ public class TwinsMessages04 {
 			for(EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))){
 				switch(childPhase){
 					case 0:
-						p.addChatMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] ..."));
+						p.sendMessage(new TextComponentTranslation(TextFormatting.AQUA+"[Zol] ..."));
 						break;
 					case 1:
-						p.addChatMessage(new TextComponentTranslation(TextFormatting.GREEN+"[Dol] How about this one?"));
+						p.sendMessage(new TextComponentTranslation(TextFormatting.GREEN+"[Dol] How about this one?"));
 						break;
 					case 2:
 						worldObj.setBlockState(pos.add(3, 0, 0), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.WEST));

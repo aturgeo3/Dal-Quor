@@ -2,8 +2,6 @@ package Tamaized.Voidcraft.machina;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
@@ -166,7 +164,8 @@ public class VoidMacerator extends TamBlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack heldItem = player.getHeldItem(hand);
 		if (!world.isRemote) {
 			FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Macerator), world, pos.getX(), pos.getY(), pos.getZ());
 		}
@@ -180,7 +179,7 @@ public class VoidMacerator extends TamBlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int l = MathHelper.floor((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (l == 0) {
 			world.setBlockState(pos, this.getStateFromMeta(2), 2);
@@ -218,14 +217,14 @@ public class VoidMacerator extends TamBlockContainer {
 					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
-					while (itemstack.stackSize > 0) {
+					while (itemstack.getCount() > 0) {
 						int j = this.rand.nextInt(21);
 
-						if (j > itemstack.stackSize) {
-							j = itemstack.stackSize;
+						if (j > itemstack.getCount()) {
+							j = itemstack.getCount();
 						}
 
-						itemstack.stackSize -= j;
+						itemstack.shrink(j);
 
 						EntityItem item = new EntityItem(world, (double) ((float) pos.getX() + f), (double) ((float) pos.getY() + f1), (double) ((float) pos.getZ() + f2), new ItemStack(itemstack.getItem()));
 
@@ -238,7 +237,7 @@ public class VoidMacerator extends TamBlockContainer {
 						item.motionY = (double) ((float) this.rand.nextGaussian() * f3 + 0.2F);
 						item.motionZ = (double) ((float) this.rand.nextGaussian() * f3);
 
-						world.spawnEntityInWorld(item);
+						world.spawnEntity(item);
 					}
 				}
 			}

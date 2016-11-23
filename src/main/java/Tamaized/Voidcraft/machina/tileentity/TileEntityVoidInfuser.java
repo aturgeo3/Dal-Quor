@@ -35,14 +35,14 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		if (tank.getFluid() != null) this.tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
-		this.cookingTick = nbt.getInteger("cookingTick");
+		if (tank.getFluid() != null) tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		cookingTick = nbt.getInteger("cookingTick");
 	}
 
 	@Override
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fluidAmount", tank.getFluidAmount());
-		nbt.setInteger("cookingTick", this.cookingTick);
+		nbt.setInteger("cookingTick", cookingTick);
 		return nbt;
 	}
 
@@ -71,34 +71,34 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 			if (cookingTick >= (finishTick = recipe.getRequiredFluid())) {
 				cookingTick = 0;
 				bakeItem();
-				this.markDirty();
+				markDirty();
 			}
 		}
 	}
 
 	private void bakeItem() {
 		if (canCook()) {
-			if (this.slots[SLOT_OUTPUT] == null) {
-				this.slots[SLOT_OUTPUT] = recipe.getOutput().copy();
-			} else if (this.slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) {
-				this.slots[SLOT_OUTPUT].stackSize += recipe.getOutput().stackSize;
+			if (slots[SLOT_OUTPUT].isEmpty()) {
+				slots[SLOT_OUTPUT] = recipe.getOutput().copy();
+			} else if (slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) {
+				slots[SLOT_OUTPUT].grow(recipe.getOutput().getCount());
 			}
 
-			this.slots[SLOT_INPUT].stackSize--;
+			slots[SLOT_INPUT].shrink(1);
 
-			if (this.slots[SLOT_INPUT].stackSize <= 0) {
-				this.slots[SLOT_INPUT] = null;
+			if (slots[SLOT_INPUT].getCount() <= 0) {
+				slots[SLOT_INPUT] = ItemStack.EMPTY;
 			}
 		}
 	}
 
 	private boolean canCook() {
-		if (this.slots[SLOT_INPUT] == null) return false;
+		if (slots[SLOT_INPUT].isEmpty()) return false;
 		recipe = voidCraft.teRecipes.infuser.getRecipe(new ItemStack[] { slots[SLOT_INPUT] });
 		if (recipe == null) return false;
-		if (this.slots[SLOT_OUTPUT] == null) return true;
-		if (!this.slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) return false;
-		int result = this.slots[SLOT_OUTPUT].stackSize + recipe.getOutput().stackSize;
+		if (slots[SLOT_OUTPUT] == null) return true;
+		if (!slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) return false;
+		int result = slots[SLOT_OUTPUT].getCount() + recipe.getOutput().getCount();
 		return (result <= getInventoryStackLimit() && result <= recipe.getOutput().getMaxStackSize());
 	}
 

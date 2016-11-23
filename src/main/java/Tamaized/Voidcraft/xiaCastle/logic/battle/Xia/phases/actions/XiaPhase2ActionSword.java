@@ -72,7 +72,7 @@ public class XiaPhase2ActionSword {
 			outputStream.writeInt(xia.getEntityId());
 			outputStream.writeInt(EntityAnimationsXia.getAnimationID(animation));
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(xia.worldObj.provider.getDimension(), xia.posX, xia.posY, xia.posZ, 64));
+			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(xia.world.provider.getDimension(), xia.posX, xia.posY, xia.posZ, 64));
 			bos.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -92,8 +92,8 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		double d0 = target.posX - posX;
 		double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - posY;
 		double d2 = target.posZ - posZ;
-		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-		setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - worldObj.getDifficulty().getDifficultyId() * 4));
+		double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+		setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - world.getDifficulty().getDifficultyId() * 4));
 	}
 
 	@Override
@@ -132,17 +132,17 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		onEntityUpdate();
 
 		if (prevRotationPitch == 0.0F && prevRotationYaw == 0.0F) {
-			float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			float f = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 			prevRotationYaw = rotationYaw = (float) (Math.atan2(motionX, motionZ) * (180.0D / Math.PI));
 			prevRotationPitch = rotationPitch = (float) (Math.atan2(motionY, (double) f) * (180.0D / Math.PI));
 		}
 
 		BlockPos blockpos = new BlockPos(xTile, yTile, zTile);
-		IBlockState iblockstate = worldObj.getBlockState(blockpos);
+		IBlockState iblockstate = world.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
 
 		if (iblockstate.getMaterial() != Material.AIR) {// check if hit block
-			AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(worldObj, blockpos);
+			AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(world, blockpos);
 			if (axisalignedbb != Block.NULL_AABB && axisalignedbb.offset(blockpos).isVecInside(new Vec3d(posX, posY, posZ))) {
 				inGround = true;
 			}
@@ -176,7 +176,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			++ticksInAir;
 			Vec3d vec3d1 = new Vec3d(posX, posY, posZ);
 			Vec3d vec3d = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
-			RayTraceResult raytraceresult = worldObj.rayTraceBlocks(vec3d1, vec3d, false, true, false);
+			RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d1, vec3d, false, true, false);
 			vec3d1 = new Vec3d(posX, posY, posZ);
 			vec3d = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
@@ -211,7 +211,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			posX += motionX * speed;
 			posY += motionY * speed;
 			posZ += motionZ * speed;
-			float f4 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			float f4 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 			rotationYaw = (float) (Math.atan2(motionX, motionZ) * (180.0D / Math.PI));
 
 			for (rotationPitch = (float) (MathHelper.atan2(motionY, (double) f4) * (180D / Math.PI)); rotationPitch - prevRotationPitch < -180.0F; prevRotationPitch -= 360.0F) {
@@ -238,7 +238,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			if (isInWater()) {
 				for (int l = 0; l < 4; ++l) {
 					f4 = 0.25F;
-					worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * (double) f4, posY - motionY * (double) f4, posZ - motionZ * (double) f4, motionX, motionY, motionZ);
+					world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * (double) f4, posY - motionY * (double) f4, posZ - motionZ * (double) f4, motionX, motionY, motionZ);
 				}
 				f1 = 0.6F;
 			}
@@ -255,7 +255,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			doBlockCollisions();
 		}
 
-		if (worldObj.isRemote) particles();
+		if (world.isRemote) particles();
 	}
 
 	@Override
@@ -264,8 +264,8 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 
 		if (entity != null) {
 			if (entity == shootingEntity) return;
-			float f = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
-			int i = MathHelper.ceiling_double_int((double) f * damage);
+			float f = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+			int i = MathHelper.ceil((double) f * damage);
 
 			// if (getIsCritical()){
 			// i += rand.nextInt(i / 2 + 2);
@@ -281,12 +281,12 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 				if (entity instanceof EntityLivingBase) {
 					EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
 
-					if (!worldObj.isRemote) {
+					if (!world.isRemote) {
 						// entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
 					}
 
 					if (knockbackStrength > 0) {
-						float f1 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+						float f1 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 
 						if (f1 > 0.0F) {
 							entitylivingbase.addVelocity(motionX * (double) knockbackStrength * 0.6000000238418579D / (double) f1, 0.1D, motionZ * (double) knockbackStrength * 0.6000000238418579D / (double) f1);
@@ -318,7 +318,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 				prevRotationYaw += 180.0F;
 				ticksInAir = 0;
 
-				if (!worldObj.isRemote && motionX * motionX + motionY * motionY + motionZ * motionZ < 0.0010000000474974513D) {
+				if (!world.isRemote && motionX * motionX + motionY * motionY + motionZ * motionZ < 0.0010000000474974513D) {
 					if (pickupStatus == EntityArrow.PickupStatus.ALLOWED) {
 						entityDropItem(getArrowStack(), 0.1F);
 					}
@@ -331,13 +331,13 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			xTile = blockpos.getX();
 			yTile = blockpos.getY();
 			zTile = blockpos.getZ();
-			IBlockState iblockstate = worldObj.getBlockState(blockpos);
+			IBlockState iblockstate = world.getBlockState(blockpos);
 			inTile = iblockstate.getBlock();
 			inData = inTile.getMetaFromState(iblockstate);
 			motionX = (double) ((float) (raytraceResultIn.hitVec.xCoord - posX));
 			motionY = (double) ((float) (raytraceResultIn.hitVec.yCoord - posY));
 			motionZ = (double) ((float) (raytraceResultIn.hitVec.zCoord - posZ));
-			float f2 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+			float f2 = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 			posX -= motionX / (double) f2 * 0.05000000074505806D;
 			posY -= motionY / (double) f2 * 0.05000000074505806D;
 			posZ -= motionZ / (double) f2 * 0.05000000074505806D;
@@ -347,14 +347,14 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			// setIsCritical(false);
 
 			if (iblockstate.getMaterial() != Material.AIR) {
-				inTile.onEntityCollidedWithBlock(worldObj, blockpos, iblockstate, this);
+				inTile.onEntityCollidedWithBlock(world, blockpos, iblockstate, this);
 			}
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	private void particles() {
-		net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.AcidFX(worldObj, posX, posY, posZ));
+		net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.AcidFX(world, posX, posY, posZ));
 	}
 
 	/**

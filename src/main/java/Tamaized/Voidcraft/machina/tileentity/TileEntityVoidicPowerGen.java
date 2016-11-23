@@ -53,7 +53,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 			drain(new FluidStack(voidCraft.fluids.voidFluid, use), true);
 			voidicPower += gen;
 		}
-		VoidicPowerHandler.sendToSurrounding(this, worldObj, pos);
+		VoidicPowerHandler.sendToSurrounding(this, world, pos);
 	}
 
 	@Override
