@@ -6,17 +6,16 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 
 public class AlchemyRecipeMaker {
 
 	@Nonnull
-	public static List<VoidCraftRecipeWrapperJEI<AlchemyRecipe>> getRecipes() {
-		ArrayList<VoidCraftRecipeWrapperJEI<AlchemyRecipe>> recipes = new ArrayList<VoidCraftRecipeWrapperJEI<AlchemyRecipe>>();
+	public static List<AlchemyRecipeWrapperJEI> getRecipes() {
+		ArrayList<AlchemyRecipeWrapperJEI> recipes = new ArrayList<AlchemyRecipeWrapperJEI>();
 		if (voidCraft.teRecipes.alchemy.getList() != null) {
 			for (AlchemyRecipe recipe : voidCraft.teRecipes.alchemy.getList()) {
-				recipes.add(new VoidCraftRecipeWrapperJEI<AlchemyRecipe>(recipe));
+				recipes.add(new AlchemyRecipeWrapperJEI(recipe));
 			}
 		} else {
 			voidCraft.logger.warn("Issue loading AlchemyRecipe JEI list");
