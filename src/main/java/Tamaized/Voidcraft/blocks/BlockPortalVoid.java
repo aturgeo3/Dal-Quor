@@ -2,6 +2,10 @@ package Tamaized.Voidcraft.blocks;
 
 import java.util.Random;
 
+import com.google.common.cache.LoadingCache;
+
+import Tamaized.TamModized.blocks.TamBlockPortal;
+import Tamaized.Voidcraft.voidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
@@ -15,10 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.TamModized.blocks.TamBlockPortal;
-import Tamaized.Voidcraft.voidCraft;
-
-import com.google.common.cache.LoadingCache;
 
 public class BlockPortalVoid extends TamBlockPortal {
 
@@ -45,7 +45,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 	}
 
 	@Override
-	public void onNeighborBlockChange(IBlockState state, World world, BlockPos pos, Block neighborBlock) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) { // TODO: TamModized
 		EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis) state.getValue(AXIS);
 
 		if (enumfacing$axis == EnumFacing.Axis.X) {
@@ -63,9 +63,12 @@ public class BlockPortalVoid extends TamBlockPortal {
 		}
 	}
 
+	@Override
+	public void onNeighborBlockChange(IBlockState state, World world, BlockPos pos, Block neighborBlock) {
+	}
+
 	/**
-	 * A randomly called display update to be able to add particles or other
-	 * items for display
+	 * A randomly called display update to be able to add particles or other items for display
 	 */
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -100,9 +103,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 	}
 
 	/**
-	 * Returns true if the given side of this block type should be rendered, if
-	 * the adjacent block is at the given coordinates. Args: blockAccess, x, y,
-	 * z, side
+	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given coordinates. Args: blockAccess, x, y, z, side
 	 */
 	@SideOnly(Side.CLIENT)
 	@Override

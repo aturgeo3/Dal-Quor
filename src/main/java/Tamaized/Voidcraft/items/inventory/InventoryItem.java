@@ -16,6 +16,8 @@ public abstract class InventoryItem implements IInventory {
 	public InventoryItem(ItemStack stack, int slots) {
 		parent = stack;
 		inventory = new ItemStack[slots];
+		for (int index = 0; index < inventory.length; index++)
+			inventory[index] = ItemStack.EMPTY;
 		readFromNBT(parent.getOrCreateSubCompound(voidCraft.modid + "_InventoryItem"));
 	}
 
@@ -26,6 +28,8 @@ public abstract class InventoryItem implements IInventory {
 	protected void readFromNBT(NBTTagCompound nbt) {
 		NBTTagList list = (NBTTagList) nbt.getTag("Items");
 		inventory = new ItemStack[getSizeInventory()];
+		for (int index = 0; index < inventory.length; index++)
+			inventory[index] = ItemStack.EMPTY;
 		if (list != null) {
 			for (int i = 0; i < list.tagCount(); i++) {
 				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);

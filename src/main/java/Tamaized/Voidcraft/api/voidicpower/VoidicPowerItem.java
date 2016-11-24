@@ -150,6 +150,11 @@ public abstract class VoidicPowerItem extends TamItem {
 		}
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;
 	}
+	//TODO:
+//	@Override
+//	public int getRGBDurabilityForDisplay(ItemStack stack) {
+//		return super.getRGBDurabilityForDisplay(stack);
+//	}
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {

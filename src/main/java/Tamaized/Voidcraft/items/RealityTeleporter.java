@@ -149,7 +149,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 		InventoryItem inv = createInventory(stack);
 		ItemStack holes = inv.getStackInSlot(0);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && holes.isEmpty() && holes.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole)) {
+		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && !holes.isEmpty() && holes.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole)) {
 			activate(stack, player);
 			cap.drain(useAmount());
 			holes.shrink(1);

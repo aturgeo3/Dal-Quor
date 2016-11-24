@@ -68,9 +68,9 @@ tile.etherealPlant.name=Ethereal Plant
 tile.realityTeleporterBlock.name=Reality Teleportation Block
 
 # Potion
-effect.voidcraft:voidicInfusionImmunity=Voidic Immunity
-effect.voidcraft:voidImmunity=Plenum
-potion.effect.voidImmunity=Potion of Plenum
+effect.voidcraft:voidicinfusionimmunity=Voidic Immunity
+effect.voidcraft:voidimmunity=Plenum
+potion.effect.voidimmunity=Potion of Plenum
 
 # Fluid
 fluid.void=Liquid Void

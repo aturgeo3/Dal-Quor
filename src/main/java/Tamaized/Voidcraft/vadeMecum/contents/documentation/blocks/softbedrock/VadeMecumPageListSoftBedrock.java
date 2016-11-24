@@ -39,12 +39,12 @@ public class VadeMecumPageListSoftBedrock implements IVadeMecumPageProvider {
 						ItemStack.EMPTY,
 						ItemStack.EMPTY,
 						ItemStack.EMPTY,
-						ItemStack.EMPTY,
-						ItemStack.EMPTY,
-						ItemStack.EMPTY,
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
 						new ItemStack(voidCraft.blocks.blockFakeBedrock),
-						new ItemStack(voidCraft.blocks.blockFakeBedrock) }, new ItemStack(voidCraft.blocks.blockFakeBedrockHalfSlab, 6))) };
+						new ItemStack(voidCraft.blocks.blockFakeBedrock),
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY }, new ItemStack(voidCraft.blocks.blockFakeBedrockHalfSlab, 6))) };
 	}
 
 }
