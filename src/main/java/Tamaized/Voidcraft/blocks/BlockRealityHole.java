@@ -59,8 +59,8 @@ public class BlockRealityHole extends TamBlock {
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return null;
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return NULL_AABB;
 	}
 
 	private class RealityTeleporter extends Teleporter {
