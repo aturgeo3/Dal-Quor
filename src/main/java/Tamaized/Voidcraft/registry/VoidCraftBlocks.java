@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.TamModized.blocks.TamBlockFence;
 import Tamaized.TamModized.blocks.TamBlockStairs;
+import Tamaized.TamModized.blocks.slab.TamBlockSlab;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabDouble;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
 import Tamaized.TamModized.registry.ITamModel;
@@ -35,7 +36,6 @@ import Tamaized.Voidcraft.machina.VoidicAlchemyTable;
 import Tamaized.Voidcraft.machina.VoidicPowerCable;
 import Tamaized.Voidcraft.machina.VoidicPowerCharger;
 import Tamaized.Voidcraft.machina.VoidicPowerGen;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -140,7 +140,9 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 	}
 
-	private static void registerBlockSlab(BlockSlab slab, BlockSlab doubleslab) { // TODO: Put this in TamModized
+	private static void registerBlockSlab(TamBlockSlab slab, TamBlockSlab doubleslab) { // TODO: Put this in TamModized
+		slab.setRegistryName(slab.getModelDir() + "/" + slab.getName());
+		doubleslab.setRegistryName(doubleslab.getModelDir() + "/" + doubleslab.getName());
 		GameRegistry.register(slab);
 		GameRegistry.register(doubleslab);
 		ItemSlab item = new ItemSlab(slab, slab, doubleslab);
