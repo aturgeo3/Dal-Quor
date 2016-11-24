@@ -142,9 +142,12 @@ public abstract class VoidicPowerItem extends TamItem {
 
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
-		cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
+		IVoidicPowerCapability cap = null;
+		if (stack.hasCapability(CapabilityList.VOIDICPOWER, null)) {
+			cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
+			NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
+			cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
+		}
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;
 	}
 
