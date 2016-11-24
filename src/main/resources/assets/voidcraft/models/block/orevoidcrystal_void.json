@@ -1,0 +1,8 @@
+{
+    "parent": "voidcraft:block/template_overlay",
+    "textures": {
+		"particle": "blocks/bedrock",
+        "base": "blocks/bedrock",
+        "overlay": "voidcraft:blocks/VoidCrystalOre"
+    }
+}

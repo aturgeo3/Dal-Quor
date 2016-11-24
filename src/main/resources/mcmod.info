@@ -1,0 +1,18 @@
+[
+{
+  "modid": "voidcraft",
+  "name": "VoidCraft",
+  "description": "Explore the Void",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Tamaized"],
+  "credits": "Tamaized",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [ "Forge@[${fVersion},)", "tammodized@[${tamVersion},)" ],
+  "requiredMods": [ "Forge@[${fVersion},)", "tammodized@[${tamVersion},)" ],
+  "useDependencyInformation": true
+}
+]
