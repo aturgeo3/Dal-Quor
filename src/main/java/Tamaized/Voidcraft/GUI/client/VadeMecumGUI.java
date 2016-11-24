@@ -43,7 +43,7 @@ public class VadeMecumGUI extends GuiScreen {
 	private VadeMecumEntry entry;
 	private VadeMecumEntry nextEntry;
 	private int pageNumber = 0;
-	private ItemStack renderStackHover;
+	private ItemStack renderStackHover = ItemStack.EMPTY;
 
 	private VadeMecumGUI.ArrowButton button_back;
 	private VadeMecumGUI.ArrowButton button_forward;

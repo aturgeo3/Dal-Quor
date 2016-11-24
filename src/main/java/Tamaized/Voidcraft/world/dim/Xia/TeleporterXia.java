@@ -65,7 +65,7 @@ public class TeleporterXia extends Teleporter {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 			SchematicLoader loader = new SchematicLoader();
-			SchematicLoader.buildSchematic("xiaCastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
+			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
 			worldServerInstance.setBlockState(tePos, voidCraft.blocks.xiaBlock.getDefaultState());
 			TileEntity te = worldServerInstance.getTileEntity(tePos);
 			if (te instanceof TileEntityXiaCastle) {
