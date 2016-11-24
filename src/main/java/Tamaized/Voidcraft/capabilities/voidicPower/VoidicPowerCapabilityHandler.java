@@ -152,7 +152,7 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 	}
 
 	private void sendPacketUpdates(EntityPlayerMP player, int slot, ItemStack stack, IVoidicPowerCapability cap) {
-		NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
+		NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
 		nbt.setInteger("currPower", cap.getCurrentPower());
 		nbt.setInteger("maxPower", cap.getMaxPower());
 		/*

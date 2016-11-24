@@ -114,7 +114,7 @@ public abstract class VoidicPowerItem extends TamItem {
 					}
 				}
 			} else {
-				NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
+				NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
 				cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 			}
 			if (cap.isInUse()) {
@@ -145,7 +145,7 @@ public abstract class VoidicPowerItem extends TamItem {
 		IVoidicPowerCapability cap = null;
 		if (stack.hasCapability(CapabilityList.VOIDICPOWER, null)) {
 			cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-			NBTTagCompound nbt = stack.getSubCompound(voidCraft.modid);
+			NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
 			cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		}
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;

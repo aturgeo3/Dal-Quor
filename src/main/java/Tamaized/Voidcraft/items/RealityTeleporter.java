@@ -100,19 +100,19 @@ public class RealityTeleporter extends VoidicPowerItem {
 	}
 
 	public static void clearLink(ItemStack stack) {
-		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc");
+		NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid + "_LinkLoc");
 		ct.removeTag("link");
 	}
 
 	public static boolean hasLink(ItemStack stack) {
-		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc");
+		NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid + "_LinkLoc");
 		int[] loc = ct.getIntArray("link");
 		return loc.length == 3;
 	}
 
 	public static BlockPos getLink(ItemStack stack) {
 		if (!hasLink(stack)) return null;
-		NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc");
+		NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid + "_LinkLoc");
 		int[] loc = ct.getIntArray("link");
 		return new BlockPos(loc[0], loc[1], loc[2]);
 	}
@@ -123,7 +123,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te != null && te instanceof TileEntityRealityTeleporter) {
 			TileEntityRealityTeleporter teleporter = (TileEntityRealityTeleporter) te;
-			NBTTagCompound ct = stack.getSubCompound(voidCraft.modid + "_LinkLoc");
+			NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid + "_LinkLoc");
 			int[] loc = ct.getIntArray("link");
 			if (loc.length == 3) {
 				BlockPos newPos = new BlockPos(loc[0], loc[1], loc[2]);

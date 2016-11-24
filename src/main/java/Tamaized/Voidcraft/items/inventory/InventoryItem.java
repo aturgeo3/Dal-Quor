@@ -16,11 +16,11 @@ public abstract class InventoryItem implements IInventory {
 	public InventoryItem(ItemStack stack, int slots) {
 		parent = stack;
 		inventory = new ItemStack[slots];
-		readFromNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem"));
+		readFromNBT(parent.getOrCreateSubCompound(voidCraft.modid + "_InventoryItem"));
 	}
 
 	public void saveData() {
-		writeToNBT(parent.getSubCompound(voidCraft.modid + "_InventoryItem"));
+		writeToNBT(parent.getOrCreateSubCompound(voidCraft.modid + "_InventoryItem"));
 	}
 
 	protected void readFromNBT(NBTTagCompound nbt) {
