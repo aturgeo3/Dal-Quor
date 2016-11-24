@@ -36,7 +36,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	private int songTime;
 	private boolean loop;
 	private boolean autoFill;
-	private ItemStack oldRecord;
+	private ItemStack oldRecord = ItemStack.EMPTY;
 
 	// Unused for now
 	private boolean isPowered = false;
