@@ -15,50 +15,50 @@ public class RitualList {
 	public RitualList() {
 		Intro = new ItemStack[] {
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, new ItemStack(voidCraft.blocks.ritualBlock), null,
+				ItemStack.EMPTY, new ItemStack(voidCraft.blocks.ritualBlock), ItemStack.EMPTY,
 
-				null, null, null,
-
-				//////////////////////////////////////////////////////////////////////////////////////////
-
-				null, null, null,
-
-				null, null, null,
-
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null };
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY };
 		PowerIntro = new ItemStack[] {
 
-				null, new ItemStack(Blocks.MAGMA), null,
+				ItemStack.EMPTY, new ItemStack(Blocks.MAGMA), ItemStack.EMPTY,
 
 				new ItemStack(Blocks.COAL_BLOCK), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.GLOWSTONE),
 
-				null, new ItemStack(Blocks.PRISMARINE, 1, 1), null,
+				ItemStack.EMPTY, new ItemStack(Blocks.PRISMARINE, 1, 1), ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null,
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				null, null, null };
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY };
 	}
 
 }

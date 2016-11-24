@@ -56,10 +56,10 @@ public class ServerPacketHandler {
 				switch (getPacketTypeFromID(pktType)) {
 					case LINK_CLEAR: {
 						int slot = bbis.readInt();
-						ItemStack stack = null;
+						ItemStack stack = ItemStack.EMPTY;
 						if (slot >= 0 && slot < player.inventory.mainInventory.size()) stack = player.inventory.mainInventory.get(slot);
 						else if (slot == -1) stack = player.inventory.offHandInventory.get(0);
-						if (stack != null && stack.getItem() == voidCraft.items.realityTeleporter) {
+						if (!stack.isEmpty() && stack.getItem() == voidCraft.items.realityTeleporter) {
 							RealityTeleporter.clearLink(stack);
 						}
 					}
@@ -67,7 +67,7 @@ public class ServerPacketHandler {
 					case CUSTOM_ELYTRA: {
 						if (!player.onGround && player.motionY < 0.0D && !CustomElytraHandler.isElytraFlying(player) && !player.isInWater()) {
 							ItemStack itemstack = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-							if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
+							if (!itemstack.isEmpty() && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
 								CustomElytraHandler.setFlying(player, true);
 							}
 						} else {

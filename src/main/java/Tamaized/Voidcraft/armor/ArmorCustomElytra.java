@@ -25,10 +25,12 @@ public class ArmorCustomElytra extends TamArmor {
 		this.maxStackSize = 1;
 		this.setMaxDamage(432);
 		this.addPropertyOverride(new ResourceLocation("broken"), new IItemPropertyGetter() {
+			
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				return ItemElytra.isBroken(stack) ? 0.0F : 1.0F;
 			}
+			
 		});
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
 	}

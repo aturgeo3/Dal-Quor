@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerator.MaceratorRecipe> {
 
@@ -20,8 +17,8 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 			return false;
 		}
 	}
-	
-	public ArrayList<MaceratorRecipe> getList(){ // TODO: move this into TamModized
+
+	public ArrayList<MaceratorRecipe> getList() { // TODO: move this into TamModized
 		return recipes;
 	}
 
@@ -58,7 +55,7 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 			}
 			return recipe.getOutput();
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public MaceratorRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized

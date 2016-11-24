@@ -214,9 +214,9 @@ public class VadeMecumGUI extends GuiScreen {
 		if (playerStats.getCurrentActive() != null) {
 
 		}
-		if (renderStackHover != null) {
+		if (!renderStackHover.isEmpty()) {
 			renderToolTip(renderStackHover, mouseX, mouseY);
-			renderStackHover = null;
+			renderStackHover = ItemStack.EMPTY;
 		}
 	}
 

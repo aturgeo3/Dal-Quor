@@ -198,7 +198,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 	private void addPreSmelting(Item i, String s) {
 		for (ItemStack ore : OreDictionary.getOres(s)) {
-			if (ore != null) {
+			if (!ore.isEmpty()) {
 				GameRegistry.addSmelting(i, ore, ore.getItemDamage());
 			}
 		}
@@ -213,7 +213,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public String getModID() {
 		return voidCraft.modid;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void clientPreInit() {
@@ -224,7 +224,7 @@ public class VoidCraftItems implements ITamRegistry {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void clientInit() {
-		//VadeMecumMeshDefinition.register();
+		// VadeMecumMeshDefinition.register();
 	}
 
 	@Override

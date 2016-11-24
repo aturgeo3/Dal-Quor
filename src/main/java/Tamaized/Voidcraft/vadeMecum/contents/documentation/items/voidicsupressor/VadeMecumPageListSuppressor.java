@@ -18,13 +18,13 @@ public class VadeMecumPageListSuppressor implements IVadeMecumPageProvider {
 				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(voidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(Items.COMPASS),
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(Items.REDSTONE),
 						new ItemStack(voidCraft.items.voidCloth),
-						null,
-						null,
-						null,
-						null }, new ItemStack(voidCraft.items.voidicSuppressor)))};
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY }, new ItemStack(voidCraft.items.voidicSuppressor)))};
 	}
 
 }

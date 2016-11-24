@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.vadeMecum.RitualList;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -90,7 +89,7 @@ public class VadeMecumRitualHandler {
 			for (int z = 1; z >= -1; z--) {
 				for (int x = 1; x >= -1; x--) {
 					i++;
-					if (stackList[i] == null) continue;
+					if (stackList[i].isEmpty()) continue;
 					IBlockState state = world.getBlockState(pos.add(x, y, z));
 					if (Item.getItemFromBlock(state.getBlock()) != stackList[i].getItem()) {
 						flag = false;
@@ -107,7 +106,7 @@ public class VadeMecumRitualHandler {
 			for (int x = -1; x <= 1; x++) {
 				for (int z = 1; z >= -1; z--) {
 					i++;
-					if (stackList[i] == null) continue;
+					if (stackList[i].isEmpty()) continue;
 					IBlockState state = world.getBlockState(pos.add(x, y, z));
 					if (Item.getItemFromBlock(state.getBlock()) != stackList[i].getItem()) {
 						flag = false;
@@ -124,7 +123,7 @@ public class VadeMecumRitualHandler {
 			for (int z = -1; z <= 1; z++) {
 				for (int x = -1; x <= 1; x++) {
 					i++;
-					if (stackList[i] == null) continue;
+					if (stackList[i].isEmpty()) continue;
 					IBlockState state = world.getBlockState(pos.add(x, y, z));
 					if (Item.getItemFromBlock(state.getBlock()) != stackList[i].getItem()) {
 						flag = false;
@@ -141,7 +140,7 @@ public class VadeMecumRitualHandler {
 			for (int x = 1; x >= -1; x--) {
 				for (int z = -1; z <= 1; z++) {
 					i++;
-					if (stackList[i] == null) continue;
+					if (stackList[i].isEmpty()) continue;
 					IBlockState state = world.getBlockState(pos.add(x, y, z));
 					if (Item.getItemFromBlock(state.getBlock()) != stackList[i].getItem()) {
 						flag = false;
@@ -164,7 +163,7 @@ public class VadeMecumRitualHandler {
 					for (int z = 1; z >= -1; z--) {
 						for (int x = 1; x >= -1; x--) {
 							i++;
-							if (stackList[i] != null) world.setBlockToAir(pos.add(x, y, z));
+							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -175,7 +174,7 @@ public class VadeMecumRitualHandler {
 					for (int x = -1; x <= 1; x++) {
 						for (int z = 1; z >= -1; z--) {
 							i++;
-							if (stackList[i] != null) world.setBlockToAir(pos.add(x, y, z));
+							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -186,7 +185,7 @@ public class VadeMecumRitualHandler {
 					for (int z = -1; z <= 1; z++) {
 						for (int x = -1; x <= 1; x++) {
 							i++;
-							if (stackList[i] != null) world.setBlockToAir(pos.add(x, y, z));
+							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -197,7 +196,7 @@ public class VadeMecumRitualHandler {
 					for (int x = 1; x >= -1; x--) {
 						for (int z = -1; z <= 1; z++) {
 							i++;
-							if (stackList[i] != null) world.setBlockToAir(pos.add(x, y, z));
+							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}

@@ -78,8 +78,8 @@ public class GuiHandler implements IGuiHandler {
 			case VoidicAlchemy:
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidicAlchemy) return new VoidicAlchemyContainer(player.inventory, (TileEntityVoidicAlchemy) tileEntity);
 			case RealityTeleporter:
-				if (main != null && main.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterContainer(player.inventory, main);
-				else if (off != null && off.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterContainer(player.inventory, off);
+				if (!main.isEmpty() && main.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterContainer(player.inventory, main);
+				else if (!off.isEmpty() && off.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterContainer(player.inventory, off);
 			default:
 				return null;
 		}
@@ -112,8 +112,8 @@ public class GuiHandler implements IGuiHandler {
 			case VoidicAlchemy:
 				if (tileEntity != null && tileEntity instanceof TileEntityVoidicAlchemy) return new VoidicAlchemyGUI(player.inventory, (TileEntityVoidicAlchemy) tileEntity);
 			case RealityTeleporter:
-				if (main != null && main.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterGUI(player.inventory, main);
-				else if (off != null && off.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterGUI(player.inventory, off);
+				if (!main.isEmpty() && main.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterGUI(player.inventory, main);
+				else if (!off.isEmpty() && off.getItem() == voidCraft.items.realityTeleporter) return new RealityTeleporterGUI(player.inventory, off);
 			default:
 				return null;
 		}

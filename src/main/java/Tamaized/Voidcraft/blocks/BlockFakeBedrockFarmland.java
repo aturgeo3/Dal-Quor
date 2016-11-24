@@ -51,7 +51,7 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItem(hand);
-		if (stack != null && worldIn.isAirBlock(pos.up())) {
+		if (!stack.isEmpty() && worldIn.isAirBlock(pos.up())) {
 			TileEntity t = worldIn.getTileEntity(pos);
 			if (!(t instanceof TileEntityFakeBedrockFarmland)) return false;
 			TileEntityFakeBedrockFarmland te = (TileEntityFakeBedrockFarmland) t;

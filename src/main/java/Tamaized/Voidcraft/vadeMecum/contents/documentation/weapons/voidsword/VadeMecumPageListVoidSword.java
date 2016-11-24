@@ -15,15 +15,15 @@ public class VadeMecumPageListVoidSword implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
 				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.tools.voidSword).getDisplayName(), new ItemStack[] {
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(voidCraft.items.voidcrystal),
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(Blocks.OBSIDIAN),
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(Blocks.OBSIDIAN),
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(Items.DIAMOND),
-						null }, new ItemStack(voidCraft.tools.voidSword))) };
+						ItemStack.EMPTY }, new ItemStack(voidCraft.tools.voidSword))) };
 	}
 
 }

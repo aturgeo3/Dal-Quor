@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -8,7 +9,6 @@ import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 
 public class VoidInfuserContainer extends ContainerBase {
 
@@ -75,7 +75,7 @@ public class VoidInfuserContainer extends ContainerBase {
 		/*
 		 * array[] = {a, b, c} array[].length = 3 mergeItemStack 3rd param needs to be 1 higher than our actual length, so we do 1+length because array[].length returns AMOUNT we must subtract 1 to get to index 0 main inv = 9*3 = 27; subtract 1 for index 0 we get 26. Translation : min:(array[].length-1)+1; max:(array[].length-1)+27; This gets us 3-30 hot bar: 9 slots; -1 for index 0 so 0-8; after Translation: min(array[].length-1)+1+mainInvMaxNoShift(27)+1; max:min(array[].length-1)+1+mainInvMaxNoShift(27)+8+1; this gets us 3+27+1 to 3+27+8+1 or 31-39 So, we can shorten all this nicely +Main (arrayLength) to (arrayLength+27) +Hotbar (Main.max+1) to (Main.max+9)
 		 */
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
 
 		if (slot != null && slot.getHasStack()) {
@@ -84,37 +84,37 @@ public class VoidInfuserContainer extends ContainerBase {
 
 			if (hoverSlot < te.SLOTS_ALL.length) {
 				if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length + 27 + 9, true)) {
-					return null;
+					return ItemStack.EMPTY;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
-				if (te.getStackInSlot(te.SLOT_BUCKET) == null && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)) {
+				if (te.getStackInSlot(te.SLOT_BUCKET).isEmpty() && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)) {
 					if (!this.mergeItemStack(itemstack1, te.SLOT_BUCKET, te.SLOT_BUCKET + 1, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
 					if (!this.mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot > te.SLOTS_ALL.length - 1 && hoverSlot < 27 + te.SLOTS_ALL.length - 1) {
 					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length + 27, te.SLOTS_ALL.length + 27 + 9, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				} else if (hoverSlot >= te.SLOTS_ALL.length + 27 && hoverSlot < te.SLOTS_ALL.length + 27 + 9) {
 					if (!this.mergeItemStack(itemstack1, te.SLOTS_ALL.length, te.SLOTS_ALL.length + 27, false)) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 			}
 
 			if (itemstack1.getCount() == 0) {
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
 
 			if (itemstack1.getCount() == itemstack.getCount()) {
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			slot.onTake(player, itemstack1);

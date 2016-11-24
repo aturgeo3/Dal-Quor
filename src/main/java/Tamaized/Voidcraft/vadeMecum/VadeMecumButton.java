@@ -34,13 +34,13 @@ public class VadeMecumButton extends GuiButton {
 			if (flag) {
 				j += 128;
 			}
-			gui.drawTexturedModalRect(this.xPosition + 10, this.yPosition, width+60, height, i, j, 256, 128);
+			gui.drawTexturedModalRect(this.xPosition + 10, this.yPosition, width + 60, height, i, j, 256, 128);
 			GlStateManager.enableBlend();
-			mc.getRenderManager().getFontRenderer().drawSplitString(displayString, xPosition + 20, yPosition + (height / 2) - (mc.getRenderManager().getFontRenderer().FONT_HEIGHT / 2*((int)Math.ceil((float)mc.getRenderManager().getFontRenderer().getStringWidth(displayString)/120F))), 120, 0x000000);
+			mc.getRenderManager().getFontRenderer().drawSplitString(displayString, xPosition + 20, yPosition + (height / 2) - (mc.getRenderManager().getFontRenderer().FONT_HEIGHT / 2 * ((int) Math.ceil((float) mc.getRenderManager().getFontRenderer().getStringWidth(displayString) / 120F))), 120, 0x000000);
 			GlStateManager.disableBlend();
 			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderHelper.enableGUIStandardItemLighting();
-			if (stackToRender != null) mc.getRenderItem().renderItemIntoGUI(stackToRender, xPosition, yPosition + (height / 2) - 8);
+			if (!stackToRender.isEmpty()) mc.getRenderItem().renderItemIntoGUI(stackToRender, xPosition, yPosition + (height / 2) - 8);
 			RenderHelper.disableStandardItemLighting();
 		}
 	}

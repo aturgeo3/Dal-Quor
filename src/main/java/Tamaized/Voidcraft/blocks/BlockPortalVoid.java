@@ -174,35 +174,35 @@ public class BlockPortalVoid extends TamBlockPortal {
 		private int width;
 
 		public Size(World worldIn, BlockPos p_i45694_2_, EnumFacing.Axis p_i45694_3_) {
-			this.world = worldIn;
-			this.axis = p_i45694_3_;
+			world = worldIn;
+			axis = p_i45694_3_;
 
 			if (p_i45694_3_ == EnumFacing.Axis.X) {
-				this.leftDir = EnumFacing.EAST;
-				this.rightDir = EnumFacing.WEST;
+				leftDir = EnumFacing.EAST;
+				rightDir = EnumFacing.WEST;
 			} else {
-				this.leftDir = EnumFacing.NORTH;
-				this.rightDir = EnumFacing.SOUTH;
+				leftDir = EnumFacing.NORTH;
+				rightDir = EnumFacing.SOUTH;
 			}
 
-			for (BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && this.isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
+			for (BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
 				;
 			}
 
-			int i = this.getDistanceUntilEdge(p_i45694_2_, this.leftDir) - 1;
+			int i = getDistanceUntilEdge(p_i45694_2_, leftDir) - 1;
 
 			if (i >= 0) {
-				this.bottomLeft = p_i45694_2_.offset(this.leftDir, i);
-				this.width = this.getDistanceUntilEdge(this.bottomLeft, this.rightDir);
+				bottomLeft = p_i45694_2_.offset(leftDir, i);
+				width = getDistanceUntilEdge(bottomLeft, rightDir);
 
-				if (this.width < 2 || this.width > 21) {
-					this.bottomLeft = null;
-					this.width = 0;
+				if (width < 2 || width > 21) {
+					bottomLeft = null;
+					width = 0;
 				}
 			}
 
-			if (this.bottomLeft != null) {
-				this.height = this.func_150858_a();
+			if (bottomLeft != null) {
+				height = func_150858_a();
 			}
 		}
 
@@ -212,47 +212,47 @@ public class BlockPortalVoid extends TamBlockPortal {
 			for (i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!this.isEmptyBlock(this.world.getBlockState(blockpos).getBlock()) || this.world.getBlockState(blockpos.down()).getBlock() != voidCraft.blocks.blockVoidcrystal) {
+				if (!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != voidCraft.blocks.blockVoidcrystal) {
 					break;
 				}
 			}
 
-			Block block = this.world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
+			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
 			return block == voidCraft.blocks.blockVoidcrystal ? i : 0;
 		}
 
 		public int func_181100_a() {
-			return this.height;
+			return height;
 		}
 
 		public int func_181101_b() {
-			return this.width;
+			return width;
 		}
 
 		protected int func_150858_a() {
 			label24:
 
-			for (this.height = 0; this.height < 21; ++this.height) {
-				for (int i = 0; i < this.width; ++i) {
-					BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i).up(this.height);
-					Block block = this.world.getBlockState(blockpos).getBlock();
+			for (height = 0; height < 21; ++height) {
+				for (int i = 0; i < width; ++i) {
+					BlockPos blockpos = bottomLeft.offset(rightDir, i).up(height);
+					Block block = world.getBlockState(blockpos).getBlock();
 
-					if (!this.isEmptyBlock(block)) {
+					if (!isEmptyBlock(block)) {
 						break label24;
 					}
 
 					if (block == voidCraft.blocks.blockPortalVoid) {
-						++this.portalBlockCount;
+						++portalBlockCount;
 					}
 
 					if (i == 0) {
-						block = this.world.getBlockState(blockpos.offset(this.leftDir)).getBlock();
+						block = world.getBlockState(blockpos.offset(leftDir)).getBlock();
 
 						if (block != voidCraft.blocks.blockVoidcrystal) {
 							break label24;
 						}
-					} else if (i == this.width - 1) {
-						block = this.world.getBlockState(blockpos.offset(this.rightDir)).getBlock();
+					} else if (i == width - 1) {
+						block = world.getBlockState(blockpos.offset(rightDir)).getBlock();
 
 						if (block != voidCraft.blocks.blockVoidcrystal) {
 							break label24;
@@ -261,19 +261,19 @@ public class BlockPortalVoid extends TamBlockPortal {
 				}
 			}
 
-			for (int j = 0; j < this.width; ++j) {
-				if (this.world.getBlockState(this.bottomLeft.offset(this.rightDir, j).up(this.height)).getBlock() != voidCraft.blocks.blockVoidcrystal) {
-					this.height = 0;
+			for (int j = 0; j < width; ++j) {
+				if (world.getBlockState(bottomLeft.offset(rightDir, j).up(height)).getBlock() != voidCraft.blocks.blockVoidcrystal) {
+					height = 0;
 					break;
 				}
 			}
 
-			if (this.height <= 21 && this.height >= 3) {
-				return this.height;
+			if (height <= 21 && height >= 3) {
+				return height;
 			} else {
-				this.bottomLeft = null;
-				this.width = 0;
-				this.height = 0;
+				bottomLeft = null;
+				width = 0;
+				height = 0;
 				return 0;
 			}
 		}
@@ -283,15 +283,15 @@ public class BlockPortalVoid extends TamBlockPortal {
 		}
 
 		public boolean isValid() {
-			return this.bottomLeft != null && this.width >= 2 && this.width <= 21 && this.height >= 3 && this.height <= 21;
+			return bottomLeft != null && width >= 2 && width <= 21 && height >= 3 && height <= 21;
 		}
 
 		public void placePortalBlocks() {
-			for (int i = 0; i < this.width; ++i) {
-				BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
+			for (int i = 0; i < width; ++i) {
+				BlockPos blockpos = bottomLeft.offset(rightDir, i);
 
-				for (int j = 0; j < this.height; ++j) {
-					this.world.setBlockState(blockpos.up(j), voidCraft.blocks.blockPortalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, this.axis), 2);
+				for (int j = 0; j < height; ++j) {
+					world.setBlockState(blockpos.up(j), voidCraft.blocks.blockPortalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, axis), 2);
 				}
 			}
 		}

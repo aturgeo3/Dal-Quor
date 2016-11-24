@@ -422,6 +422,6 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 
 	@Override
 	protected ItemStack getArrowStack() {
-		return null;
+		return ItemStack.EMPTY;
 	}
 }

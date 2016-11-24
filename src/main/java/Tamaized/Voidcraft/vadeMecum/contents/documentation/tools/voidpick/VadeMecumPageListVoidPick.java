@@ -18,12 +18,12 @@ public class VadeMecumPageListVoidPick implements IVadeMecumPageProvider {
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(voidCraft.items.voidcrystal),
 						new ItemStack(voidCraft.items.voidcrystal),
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(Blocks.OBSIDIAN),
-						null,
-						null,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
 						new ItemStack(Items.DIAMOND),
-						null }, new ItemStack(voidCraft.tools.voidPickaxe))) };
+						ItemStack.EMPTY }, new ItemStack(voidCraft.tools.voidPickaxe))) };
 	}
 
 }

@@ -113,7 +113,7 @@ public class VoidicPowerGenContainer extends ContainerBase {
 			}
 
 			if (itemstack1.getCount() == itemstack.getCount()) {
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			slot.onTake(player, itemstack1);

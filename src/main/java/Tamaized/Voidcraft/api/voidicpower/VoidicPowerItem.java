@@ -70,7 +70,7 @@ public abstract class VoidicPowerItem extends TamItem {
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return slotChanged ? true : (oldStack == null || newStack == null) ? true : oldStack.getItem() != newStack.getItem();
+		return slotChanged ? true : (oldStack.isEmpty() || newStack.isEmpty()) ? true : oldStack.getItem() != newStack.getItem();
 	}
 
 	@Override

@@ -111,23 +111,23 @@ public class RealityTeleporterGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = "Reality Teleporter";
-		this.fontRendererObj.drawString(text, this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
+		fontRendererObj.drawString(text, xSize / 2 - fontRendererObj.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 		BlockPos linkPos = RealityTeleporter.getLink(parent);
 		if (linkPos != null) {
 			text = "Linked to:";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
+			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 			text = "{ x: " + linkPos.getX() + ", y:" + linkPos.getY() + ", z:" + linkPos.getZ() + " }";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 60, 0xAAAAAA);
+			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 60, 0xAAAAAA);
 		} else {
 			text = "Not Linked";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
+			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 		}
 		text = "Voidic Power:";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 70, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 70, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getCurrentPower() + "/";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 60, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 60, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getMaxPower() + "";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 50, 0xFF0000);
+		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 50, 0xFF0000);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class RealityTeleporterGUI extends GuiContainer {
 			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(daTexture);
 			drawTexturedModalRect(guiLeft + 78, guiTop + 66, 0, 0, xSize / 2, ySize / 2);
-			this.updateScreen();
+			updateScreen();
 		}
 		GlStateManager.popAttrib();
 		GlStateManager.popMatrix();

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import net.minecraft.item.ItemStack;
 
 public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.InfuserRecipe> {
@@ -18,8 +17,8 @@ public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.Inf
 			return false;
 		}
 	}
-	
-	public ArrayList<InfuserRecipe> getList(){ // TODO: move this into TamModized
+
+	public ArrayList<InfuserRecipe> getList() { // TODO: move this into TamModized
 		return recipes;
 	}
 
@@ -56,7 +55,7 @@ public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.Inf
 			}
 			return recipe.getOutput();
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public InfuserRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized

@@ -41,13 +41,13 @@ public class ClientInfusionHandler {
 			if (tick % 20 == 0) {
 				if (world != null && world.provider != null) {
 					boolean flag = true;
-					if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor) {
+					if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor) {
 						IVoidicPowerCapability cap = player.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
 						if (cap != null && cap.getCurrentPower() > 0) {
 							//cap.drain(1);
 							flag = false;
 						}
-					} else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
+					} else if (!player.getHeldItemOffhand().isEmpty() && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
 						IVoidicPowerCapability cap = player.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
 						if (cap != null && cap.getCurrentPower() > 0) {
 							//cap.drain(1);

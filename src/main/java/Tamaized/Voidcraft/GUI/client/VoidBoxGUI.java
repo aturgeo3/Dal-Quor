@@ -15,7 +15,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemRecord;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -37,8 +36,6 @@ public class VoidBoxGUI extends GuiContainer {
 
 	private int CurrColor = 0;
 
-	private ItemStack oldRecord;
-
 	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidBox.png");
 
 	public VoidBoxGUI(InventoryPlayer inventoryPlayer, TileEntityVoidBox tileEntity) {
@@ -49,7 +46,7 @@ public class VoidBoxGUI extends GuiContainer {
 		this.xSize = 347;
 		this.ySize = 320;
 	}
-	
+
 	@Override
 	public void initGui() {
 		super.initGui();
@@ -65,7 +62,7 @@ public class VoidBoxGUI extends GuiContainer {
 	public void updateScreen() {
 		super.updateScreen();
 
-		BtnPlay.enabled = voidBox.getStackInSlot(voidBox.SLOT_NEXT) != null && ((voidBox.getStackInSlot(voidBox.SLOT_NEXT).getItem() instanceof ItemRecord) && voidBox.getStackInSlot(voidBox.SLOT_CURRENT) == null);
+		BtnPlay.enabled = !voidBox.getStackInSlot(voidBox.SLOT_NEXT).isEmpty() && ((voidBox.getStackInSlot(voidBox.SLOT_NEXT).getItem() instanceof ItemRecord) && voidBox.getStackInSlot(voidBox.SLOT_CURRENT).isEmpty());
 		BtnStop.enabled = voidBox.isPlaying();
 
 		if (CurrColor > 102) CurrColor = 15;
@@ -126,7 +123,7 @@ public class VoidBoxGUI extends GuiContainer {
 		this.fontRendererObj.drawString("Void Music Box", this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, this.ySize - 260, 0x7700FF);
 		this.fontRendererObj.drawString("Currently Playing:", (this.xSize / 12 - this.fontRendererObj.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
 
-		if (voidBox.isPlaying() && voidBox.getStackInSlot(0) != null) {
+		if (voidBox.isPlaying() && !voidBox.getStackInSlot(0).isEmpty()) {
 			int hexacolor = 0x000000;
 
 			if (CurrColor == 0) hexacolor = 0x000000;
@@ -234,7 +231,7 @@ public class VoidBoxGUI extends GuiContainer {
 			else if (CurrColor == 102) hexacolor = 0xFF0022;
 			else if (CurrColor == 103) hexacolor = 0xFF0011;
 
-			fontRendererObj.drawString(voidBox.getStackInSlot(0) != null ? ((ItemRecord) voidBox.getStackInSlot(0).getItem()).getRecordNameLocal() : "", (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, hexacolor);
+			fontRendererObj.drawString(!voidBox.getStackInSlot(0).isEmpty() ? ((ItemRecord) voidBox.getStackInSlot(0).getItem()).getRecordNameLocal() : "", (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, hexacolor);
 		}
 
 		if (voidBox.getLoopState()) fontRendererObj.drawString("Loop: On", (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, 0x00FF00);

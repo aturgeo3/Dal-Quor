@@ -43,7 +43,7 @@ public class CustomElytraHandler {
 				doElytraFlyingChecks(clientPlayer);
 				if (clientPlayer.movementInput.jump && !clientPlayer.onGround && clientPlayer.motionY < 0.0D && !isElytraFlying(clientPlayer) && !clientPlayer.capabilities.isFlying) {
 					ItemStack itemstack = clientPlayer.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-					if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
+					if (!itemstack.isEmpty() && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
 						setFlying(clientPlayer, true);
 						sendPacketToServer(clientPlayer);
 						net.minecraft.client.Minecraft.getMinecraft().getSoundHandler().playSound(new net.minecraft.client.audio.ElytraSound(clientPlayer));
@@ -116,7 +116,7 @@ public class CustomElytraHandler {
 		if (!e.hasCapability(CapabilityList.ELYTRAFLYING, null)) return;
 		if (!e.onGround && !e.isRiding()) {
 			ItemStack itemstack = e.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-			if (itemstack != null && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
+			if (!itemstack.isEmpty() && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
 
 				int ticks = e.getCapability(CapabilityList.ELYTRAFLYING, null).getElytraTime() + 1;
 				if (!e.world.isRemote && (ticks) % 20 == 0) {

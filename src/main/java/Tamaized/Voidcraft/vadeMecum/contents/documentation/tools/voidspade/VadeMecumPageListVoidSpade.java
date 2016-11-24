@@ -15,15 +15,15 @@ public class VadeMecumPageListVoidSpade implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
 				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.tools.voidSpade).getDisplayName(), new ItemStack[] {
-						null,
+						ItemStack.EMPTY,
 						new ItemStack(voidCraft.items.voidcrystal),
-						null,
-						null,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
 						new ItemStack(Blocks.OBSIDIAN),
-						null,
-						null,
+						ItemStack.EMPTY,
+						ItemStack.EMPTY,
 						new ItemStack(Items.DIAMOND),
-						null }, new ItemStack(voidCraft.tools.voidSpade))) };
+						ItemStack.EMPTY }, new ItemStack(voidCraft.tools.voidSpade))) };
 	}
 
 }

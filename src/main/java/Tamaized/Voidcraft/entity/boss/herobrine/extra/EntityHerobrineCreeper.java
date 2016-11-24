@@ -225,7 +225,7 @@ public class EntityHerobrineCreeper extends EntityMob {
 
 	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (stack != null && stack.getItem() == Items.FLINT_AND_STEEL) {
+		if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL) {
 			world.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 			player.swingArm(hand);
 

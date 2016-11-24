@@ -52,9 +52,9 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPowerInventory {
 	@Override
 	public void onUpdate() {
 		boolean cooking = false;
-		if (lastCookingItem == null || getStackInSlot(SLOT_INPUT) == null || lastCookingItem != getStackInSlot(SLOT_INPUT).getItem()) {
+		if (lastCookingItem == null || getStackInSlot(SLOT_INPUT).isEmpty() || lastCookingItem != getStackInSlot(SLOT_INPUT).getItem()) {
 			cookingTick = 0;
-			lastCookingItem = (getStackInSlot(SLOT_INPUT) != null) ? getStackInSlot(SLOT_INPUT).getItem() : null;
+			lastCookingItem = (!getStackInSlot(SLOT_INPUT).isEmpty()) ? getStackInSlot(SLOT_INPUT).getItem() : null;
 		}
 
 		if (voidicPower > 0 && canCook()) {

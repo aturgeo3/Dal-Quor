@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.machina.addons.TERecipesMacerator.MaceratorRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.AlchemyRecipe> {
@@ -19,8 +17,8 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 			return false;
 		}
 	}
-	
-	public ArrayList<AlchemyRecipe> getList(){ // TODO: move this into TamModized
+
+	public ArrayList<AlchemyRecipe> getList() { // TODO: move this into TamModized
 		return recipes;
 	}
 
@@ -57,7 +55,7 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 			}
 			return recipe.getOutput();
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public AlchemyRecipe getRecipe(ItemStack[] stacks) {// TODO: move this into TamModized
@@ -66,7 +64,7 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 			for (ItemStack stack : stacks) {
 				boolean flag2 = false;
 				for (ItemStack checkStack : recipe.getInput()) {
-					if (stack != null && checkStack != null && stack.getItem() == checkStack.getItem()) {
+					if (!stack.isEmpty() && !checkStack.isEmpty() && stack.getItem() == checkStack.getItem()) {
 						flag2 = true;
 						break;
 					}

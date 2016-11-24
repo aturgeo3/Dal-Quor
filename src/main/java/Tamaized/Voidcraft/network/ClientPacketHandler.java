@@ -60,7 +60,7 @@ public class ClientPacketHandler {
 			case VOIDICPOWERITEM: {
 				int slot = bbis.readInt();
 				ItemStack stack = ItemStackNetworkHelper.decodeStack(parBB, bbis);
-				ItemStack checkStack = null;
+				ItemStack checkStack = ItemStack.EMPTY;
 				switch (slot) {
 					case VoidicPowerItem.PLAYER_INV_SLOT_OFFHAND:
 						checkStack = Minecraft.getMinecraft().player.inventory.offHandInventory.get(0);
@@ -81,7 +81,7 @@ public class ClientPacketHandler {
 						checkStack = Minecraft.getMinecraft().player.inventory.mainInventory.get(slot);
 						break;
 				}
-				if (checkStack == null || stack == null || !ItemStack.areItemStacksEqual(checkStack, stack)) break;
+				if (checkStack.isEmpty() || stack.isEmpty() || !ItemStack.areItemStacksEqual(checkStack, stack)) break;
 				IVoidicPowerCapability cap = checkStack.getCapability(CapabilityList.VOIDICPOWER, null);
 				if (cap != null) {
 					cap.decodePacket(bbis);

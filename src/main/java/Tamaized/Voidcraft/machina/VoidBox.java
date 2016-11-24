@@ -85,7 +85,7 @@ public class VoidBox extends TamBlockContainer {
 				for (int i = 0; i < tileentity.SLOTS_ALL.length; i++) {
 					ItemStack itemstack = tileentity.getStackInSlot(i);
 
-					if (itemstack != null) {
+					if (!itemstack.isEmpty()) {
 						float f = this.rand.nextFloat() * 0.8F + 0.1F;
 						float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
 						float f2 = this.rand.nextFloat() * 0.8F + 0.1F;

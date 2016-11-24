@@ -419,6 +419,6 @@ public class VoidChain extends EntityArrow implements IProjectile, IEntityAdditi
 
 	@Override
 	protected ItemStack getArrowStack() {
-		return null;
+		return ItemStack.EMPTY;
 	}
 }

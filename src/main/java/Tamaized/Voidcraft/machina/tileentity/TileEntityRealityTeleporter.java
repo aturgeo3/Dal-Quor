@@ -32,7 +32,7 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT && stack != null && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 
 	@Override
 	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT && stack != null && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 	}
 
 	public boolean canUse() {
-		return getPowerAmount() >= getPowerUse() && getStackInSlot(SLOT_INPUT) != null && getStackInSlot(SLOT_INPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+		return getPowerAmount() >= getPowerUse() && !getStackInSlot(SLOT_INPUT).isEmpty() && getStackInSlot(SLOT_INPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
 	}
 
 	public void useResources() {

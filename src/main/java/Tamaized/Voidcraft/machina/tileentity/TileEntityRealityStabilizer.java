@@ -37,7 +37,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 	@Override
 	public void onUpdate() {
 		if (!world.isRemote) {
-			if (getStackInSlot(SLOT_OUTPUT) == null || getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()) pickupNextBlock();
+			if (getStackInSlot(SLOT_OUTPUT).isEmpty() || getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()) pickupNextBlock();
 		}
 	}
 
@@ -59,7 +59,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 			if (wrapper.state == null) return;
 			world.setBlockToAir(wrapper.pos);
 			usePower();
-			if (getStackInSlot(SLOT_OUTPUT) == null) {
+			if (getStackInSlot(SLOT_OUTPUT).isEmpty()) {
 				setInventorySlotContents(SLOT_OUTPUT, new ItemStack(voidCraft.blocks.realityHole));
 			} else {
 				getStackInSlot(SLOT_OUTPUT).grow(1);
