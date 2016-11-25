@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -8,7 +9,6 @@ import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 
 public class VoidMaceratorContainer extends ContainerBase {
 
@@ -16,6 +16,7 @@ public class VoidMaceratorContainer extends ContainerBase {
 
 	private int powerAmount = 0;
 	private int cookAmount = 0;
+	private int finishTick = 0;
 
 	public VoidMaceratorContainer(InventoryPlayer inventory, TileEntityVoidMacerator tileEntity) {
 		te = tileEntity;
@@ -51,13 +52,18 @@ public class VoidMaceratorContainer extends ContainerBase {
 			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
 
 			if (cookAmount != te.cookingTick) {
-				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
 				cookAmount = te.cookingTick;
+				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
+			}
+
+			if (finishTick != te.finishTick) {
+				finishTick = te.finishTick;
+				icontainerlistener.sendProgressBarUpdate(this, 1, finishTick);
 			}
 
 			if (powerAmount != te.getPowerAmount()) {
-				icontainerlistener.sendProgressBarUpdate(this, 1, powerAmount);
 				powerAmount = te.getPowerAmount();
+				icontainerlistener.sendProgressBarUpdate(this, 2, powerAmount);
 			}
 		}
 	}
@@ -66,7 +72,8 @@ public class VoidMaceratorContainer extends ContainerBase {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2) {
 		if (slot == 0) te.cookingTick = par2;
-		if (slot == 1) te.setPowerAmount(par2);
+		if (slot == 1) te.finishTick = par2;
+		if (slot == 2) te.setPowerAmount(par2);
 	}
 
 	@Override
