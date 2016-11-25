@@ -1,14 +1,14 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlaceOrRemove;
+import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
-import Tamaized.Voidcraft.GUI.slots.SlotCantPlaceOrRemove;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 
 public class VoidBoxContainer extends ContainerBase {
 
@@ -56,30 +56,32 @@ public class VoidBoxContainer extends ContainerBase {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (hoverSlot != 0) {
-				if (hoverSlot >= 3 && hoverSlot < 28) {
-					if (te.isItemValidForSlot(1, itemstack1)) {
-						if (!this.mergeItemStack(itemstack1, 1, 2, true)) {
-							return ItemStack.EMPTY;
-						}
-					} else if (!this.mergeItemStack(itemstack1, 30, 39, false)) {
+			final int maxSlots = te.getSizeInventory();
+
+			if (hoverSlot < maxSlots && te.canExtractItem(hoverSlot, itemstack, null)) {
+				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+					return ItemStack.EMPTY;
+				}
+				slot.onSlotChange(itemstack1, itemstack);
+			} else {
+				ItemStack slotCheck = te.getStackInSlot(te.SLOT_NEXT);
+				if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_NEXT, itemstack1, null)) {
+					if (!mergeItemStack(itemstack1, te.SLOT_NEXT, te.SLOT_NEXT + 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (hoverSlot >= 28 && hoverSlot <= 38) {
-					if (te.isItemValidForSlot(1, itemstack1)) {
-						if (!this.mergeItemStack(itemstack1, 1, 2, true)) {
-							return ItemStack.EMPTY;
-						}
-					} else if (!this.mergeItemStack(itemstack1, 3, 27, false)) {
+				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
+					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (hoverSlot > 0 && hoverSlot < 3) {
-					if (!this.mergeItemStack(itemstack1, 3, 27, false)) {
+				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
+					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
+						return ItemStack.EMPTY;
+					}
+				} else {
+					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
 						return ItemStack.EMPTY;
 					}
 				}
-			} else {
-				return itemstack;
 			}
 
 			if (itemstack1.getCount() == 0) {

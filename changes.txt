@@ -1,2 +1,10 @@
  - Tamaized: Vade Mecum Documentation text is no longer hardcoded but is instead stored in the lang file
  - Tamaized: Boss Bar render is no longer a placeholder
+ - Tamaized: Voidic Suppressor texture is now 16x16
+ - Tamaized: Port to 1.11
+ - Tamaized: Updated TamModized dependency
+ - Tamaized: Updated JEI implementations
+ - Tamaized: Improved GUIs (Heimdall and Void Infuser)
+ - Tamaized: Fixed Void Macerator GUI progress visual
+ - Tamaized: Voidic Power Item Durability Bar is now pink
+ - Tamaized: Fixed Various Container Shift Clicking

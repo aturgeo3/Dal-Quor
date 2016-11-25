@@ -1,6 +1,5 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -85,22 +84,29 @@ public class VoidicPowerGenContainer extends ContainerBase {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (hoverSlot == 0) {
-				if (!mergeItemStack(itemstack1, 1, 37, true)) {
+			final int maxSlots = te.getSizeInventory();
+
+			if (hoverSlot < maxSlots) {
+				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
 					return ItemStack.EMPTY;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
-				if (!getSlot(0).getHasStack() && itemstack1.isItemEqual(voidCraft.fluids.getBucket())) {
-					if (!mergeItemStack(itemstack1, 0, 1, false)) {
+				ItemStack slotCheck = te.getStackInSlot(te.SLOT_DEFAULT);
+				if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_DEFAULT, itemstack1, null)) {
+					if (!mergeItemStack(itemstack1, te.SLOT_DEFAULT, te.SLOT_DEFAULT + 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (hoverSlot >= 1 && hoverSlot < 28) {
-					if (!mergeItemStack(itemstack1, 28, 37, false)) {
+				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
+					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (hoverSlot >= 28 && hoverSlot < 37) {
-					if (!mergeItemStack(itemstack1, 1, 28, false)) {
+				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
+					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
+						return ItemStack.EMPTY;
+					}
+				} else {
+					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
 						return ItemStack.EMPTY;
 					}
 				}
