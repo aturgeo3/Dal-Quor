@@ -44,7 +44,6 @@ public class RenderWraith extends RenderLiving
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
 		return Wraith_Texture;
 	}
 }

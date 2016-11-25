@@ -275,7 +275,6 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new DeathEvent());
 
 		// Register Projectiles and other misc entities
-		// TODO: put this in TamModized
 		registerEntity(VoidChain.class, "VoidChain", this, modid, 128, 1, true);
 		registerEntity(AcidBall.class, "AcidBall", this, modid, 128, 1, true);
 		//registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);

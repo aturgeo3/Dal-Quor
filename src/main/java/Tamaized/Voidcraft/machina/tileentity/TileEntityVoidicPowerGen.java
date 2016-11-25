@@ -140,7 +140,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? ItemStack.areItemsEqual(stack, voidCraft.fluids.getBucket()) : false;
+		return i == SLOT_DEFAULT ? stack.isItemEqual(voidCraft.fluids.getBucket()) : false;
 	}
 
 }

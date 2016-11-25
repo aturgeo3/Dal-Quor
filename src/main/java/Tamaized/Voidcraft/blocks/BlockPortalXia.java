@@ -103,7 +103,7 @@ public class BlockPortalXia extends TamBlockPortal {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) { // TODO: TamModized
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) {
 		byte b0 = 0;
 		byte b1 = 1;
 
@@ -142,11 +142,6 @@ public class BlockPortalXia extends TamBlockPortal {
 				world.setBlockToAir(pos);
 			}
 		}
-	}
-
-	@Override
-	public void onNeighborBlockChange(IBlockState state, World world, BlockPos pos, Block neighborBlock) {
-
 	}
 
 	/**

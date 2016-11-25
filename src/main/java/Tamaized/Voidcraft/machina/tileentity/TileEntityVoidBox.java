@@ -241,11 +241,6 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_NEXT ? stack.getItem() instanceof ItemRecord : false;
-	}
-
-	@Override
 	public String getName() {
 		return "voidicMusicBox";
 	}
@@ -266,12 +261,13 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i) {
+	protected boolean canExtractSlot(int i, ItemStack stack) {
 		return i == SLOT_FINISH;
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i) {
-		return i == SLOT_NEXT;
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return i == SLOT_NEXT ? stack.getItem() instanceof ItemRecord : false;
 	}
+
 }

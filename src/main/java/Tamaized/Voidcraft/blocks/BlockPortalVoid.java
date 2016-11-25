@@ -45,7 +45,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) { // TODO: TamModized
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) {
 		EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis) state.getValue(AXIS);
 
 		if (enumfacing$axis == EnumFacing.Axis.X) {
@@ -61,10 +61,6 @@ public class BlockPortalVoid extends TamBlockPortal {
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		}
-	}
-
-	@Override
-	public void onNeighborBlockChange(IBlockState state, World world, BlockPos pos, Block neighborBlock) {
 	}
 
 	/**

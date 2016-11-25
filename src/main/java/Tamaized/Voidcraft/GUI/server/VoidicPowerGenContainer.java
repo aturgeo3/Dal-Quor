@@ -91,7 +91,7 @@ public class VoidicPowerGenContainer extends ContainerBase {
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else {
-				if (!getSlot(0).getHasStack() && itemstack1.getItem() == voidCraft.fluids.getBucket().getItem()) {
+				if (!getSlot(0).getHasStack() && itemstack1.isItemEqual(voidCraft.fluids.getBucket())) {
 					if (!mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}

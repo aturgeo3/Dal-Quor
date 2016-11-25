@@ -117,13 +117,8 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i) {
+	protected boolean canExtractSlot(int i, ItemStack stack) {
 		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : i == SLOT_OUTPUT;
-	}
-
-	@Override
-	protected boolean canInsertSlot(int i) {
-		return i != SLOT_OUTPUT;
 	}
 
 	@Override

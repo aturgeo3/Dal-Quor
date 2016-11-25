@@ -121,7 +121,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-		return slot == SLOT_BUCKET ? ItemStack.areItemsEqual(itemstack, voidCraft.fluids.getBucket()) : slot == SLOT_INPUT ? itemstack.getItem() == voidCraft.items.quartzDust : false;
+		return slot == SLOT_BUCKET ? itemstack.isItemEqual(voidCraft.fluids.getBucket()) : slot == SLOT_INPUT ? itemstack.getItem() == voidCraft.items.quartzDust : false;
 	}
 
 	@Override
@@ -130,8 +130,8 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 	}
 
 	@Override
-	protected boolean canExtractSlot(int slot) {
-		return slot == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : false;
+	protected boolean canExtractSlot(int i, ItemStack stack) {
+		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : false;
 	}
 
 	@Override

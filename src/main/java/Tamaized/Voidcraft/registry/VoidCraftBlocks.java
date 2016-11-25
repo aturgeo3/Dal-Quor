@@ -197,7 +197,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	}
 
 	@Override
-	public void clientInit() { // TODO: move this into TamModized
+	public void clientInit() {
 
 		final net.minecraft.client.renderer.color.IBlockColor fakeBedrockFarmlandColorHandler = (state, blockAccess, pos, tintIndex) -> {
 			if (blockAccess != null && pos != null && blockAccess.getTileEntity(pos) != null) {

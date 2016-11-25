@@ -44,7 +44,6 @@ public class RenderSpectreChain extends RenderLiving
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		// TODO Auto-generated method stub
 		return SpectreChain_Texture;
 	}
 }
