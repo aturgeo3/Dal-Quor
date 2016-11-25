@@ -53,11 +53,6 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? stack.getItem() instanceof VoidicPowerItem : false;
-	}
-
-	@Override
 	public String getName() {
 		return null;
 	}
@@ -93,8 +88,8 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return true;
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return i == SLOT_DEFAULT ? stack.getItem() instanceof VoidicPowerItem : false;
 	}
 
 }

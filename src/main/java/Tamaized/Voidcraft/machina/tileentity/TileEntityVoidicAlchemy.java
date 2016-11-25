@@ -36,11 +36,6 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return index == SLOT_OUTPUT ? false : true;
-	}
-
-	@Override
 	public String getName() {
 		return "teVoidicAlchemy";
 	}
@@ -159,13 +154,13 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_OUTPUT;
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		return index >= SLOT_INPUT_1 && index <= SLOT_INPUT_6 ? true : false;
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return true;
+	protected boolean canExtractSlot(int i, ItemStack stack) {
+		return i == SLOT_OUTPUT;
 	}
 
 }

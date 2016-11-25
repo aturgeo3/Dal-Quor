@@ -8,10 +8,11 @@ import net.minecraft.item.ItemStack;
 public abstract class ContainerBase extends Container {
 
 	@Override
-	protected boolean mergeItemStack(ItemStack itemstack, int i, int j, boolean flag) {
+	protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
+		return super.mergeItemStack(stack, startIndex, endIndex, reverseDirection);
 		// The default implementation in Slot doesn't take into account the Slot.isItemValid() and Slot.getSlotStackLimit() values.
 		// So here is a modified implementation. I have only modified the parts with a comment.
-
+/*
 		boolean flag1 = false;
 		int k = i;
 		if (flag) {
@@ -96,7 +97,7 @@ public abstract class ContainerBase extends Container {
 				}
 			} while (true);
 		}
-		return flag1;
+		return flag1;*/
 	}
 
 	@Override

@@ -62,11 +62,6 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? stack.getItem() == voidCraft.fluids.getBucket().getItem() : false;
-	}
-
-	@Override
 	public String getName() {
 		return "voidicPowerGen";
 	}
@@ -144,8 +139,8 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return true;
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return i == SLOT_DEFAULT ? ItemStack.areItemsEqual(stack, voidCraft.fluids.getBucket()) : false;
 	}
 
 }

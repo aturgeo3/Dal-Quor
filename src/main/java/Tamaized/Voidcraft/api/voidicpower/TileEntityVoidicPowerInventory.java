@@ -128,9 +128,6 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 	}
 
 	@Override
-	public abstract boolean isItemValidForSlot(int i, ItemStack stack);
-
-	@Override
 	public int getField(int id) {
 		switch (id) {
 			default:
@@ -172,21 +169,30 @@ public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPow
 	public abstract int[] getSlotsForFace(EnumFacing side);
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		return Arrays.asList(getSlotsForFace(direction)).contains(index) ? isItemValidForSlot(index, itemStackIn) : false;
-	}
-
-	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		if (Arrays.asList(getSlotsForFace(direction)).contains(index)) {
-			return true;
+	public final boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		int[] array = getSlotsForFace(direction);
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == index) {
+				return isItemValidForSlot(index, itemStackIn);
+			}
 		}
 		return false;
 	}
 
-	protected abstract boolean canExtractSlot(int i, ItemStack stack);
+	@Override
+	public final boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		int[] array = getSlotsForFace(direction);
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == index) {
+				return canExtractSlot(index, stack);
+			}
+		}
+		return false;
+	}
 
-	@Deprecated
-	protected abstract boolean canInsertSlot(int i, ItemStack stack);
+	@Override
+	public abstract boolean isItemValidForSlot(int i, ItemStack stack);
+
+	protected abstract boolean canExtractSlot(int i, ItemStack stack);
 
 }

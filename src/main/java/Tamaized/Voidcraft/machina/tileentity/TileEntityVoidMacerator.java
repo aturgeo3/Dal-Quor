@@ -110,11 +110,6 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i != SLOT_OUTPUT;
-	}
-
-	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		return SLOTS_ALL;
 	}
@@ -150,12 +145,12 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_OUTPUT;
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return i == SLOT_INPUT;
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT;
+	protected boolean canExtractSlot(int i, ItemStack stack) {
+		return i == SLOT_OUTPUT;
 	}
 }

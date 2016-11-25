@@ -31,11 +31,6 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
-	}
-
-	@Override
 	public String getName() {
 		return "teRealityTeleporter";
 	}
@@ -51,13 +46,13 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return true;
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+	protected boolean canExtractSlot(int i, ItemStack stack) {
+		return true;
 	}
 
 	@Override

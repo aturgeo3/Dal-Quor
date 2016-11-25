@@ -93,11 +93,6 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return false;
-	}
-
-	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		return SLOTS_ALL;
 	}
@@ -133,13 +128,13 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 	}
 
 	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_OUTPUT;
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return false;
 	}
 
 	@Override
-	protected boolean canInsertSlot(int i, ItemStack stack) {
-		return false;
+	protected boolean canExtractSlot(int i, ItemStack stack) {
+		return i == SLOT_OUTPUT;
 	}
 
 }
