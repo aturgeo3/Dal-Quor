@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -14,14 +15,14 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityBossDol extends EntityVoidBoss {
+public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 
 	public EntityBossDol(World par1World) {
 		super(par1World);
 		this.setInvul(true);
 	}
 
-	public EntityBossDol(World world, IBattleHandler handler) {
+	public EntityBossDol(World world, TwinsBattleHandler handler) {
 		super(world, handler, true);
 		this.setInvul(true);
 	}
@@ -35,6 +36,11 @@ public class EntityBossDol extends EntityVoidBoss {
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
 
+	}
+	
+	@Override
+	protected void deathHook() {
+		
 	}
 
 	@Override

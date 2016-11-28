@@ -4,19 +4,23 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase3;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -29,7 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
-public class EntityBossXia extends EntityVoidBoss {
+public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 
 	/**
 	 * Degrees
@@ -56,7 +60,7 @@ public class EntityBossXia extends EntityVoidBoss {
 		this.setInvul(true);
 	}
 
-	public EntityBossXia(World world, IBattleHandler handler) {
+	public EntityBossXia(World world, XiaBattleHandler handler) {
 		super(world, handler, false);
 		this.setInvul(true);
 	}
@@ -90,6 +94,17 @@ public class EntityBossXia extends EntityVoidBoss {
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
 		sendPacketToBus(new XiaTookDamagePacket());
+	}
+
+	@Override
+	protected void deathHook() {
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaHelmet)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaChest)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaLegs)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaBoots)));
+		for(EntityPlayer player : getHandler().getPlayers()){
+			player.sendMessage(new TextComponentString(ChatFormatting.DARK_GRAY+"[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
+		}
 	}
 
 	public class XiaTookDamagePacket implements IVoidBossAIPacket {

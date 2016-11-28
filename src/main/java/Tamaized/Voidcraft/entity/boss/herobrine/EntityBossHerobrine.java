@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
@@ -17,14 +17,14 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityBossHerobrine extends EntityVoidBoss {
+public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> {
 
 	public EntityBossHerobrine(World par1World) {
 		super(par1World);
 		this.setInvul(true);
 	}
 
-	public EntityBossHerobrine(World world, IBattleHandler handler) {
+	public EntityBossHerobrine(World world, HerobrineBattleHandler handler) {
 		super(world, handler, false);
 		this.setInvul(true);
 	}
@@ -37,6 +37,11 @@ public class EntityBossHerobrine extends EntityVoidBoss {
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
 		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
+	}
+	
+	@Override
+	protected void deathHook() {
+		
 	}
 
 	@Override

@@ -32,6 +32,10 @@ public class XiaBattleHandler implements IBattleHandler {
 	private AxisAlignedBB checkBB;
 	private ArrayList<EntityPlayer> players = new ArrayList<EntityPlayer>();
 	private EntityBossXia xia;
+	
+	public ArrayList<EntityPlayer> getPlayers(){
+		return players;
+	}
 
 	@Override
 	public void update() {

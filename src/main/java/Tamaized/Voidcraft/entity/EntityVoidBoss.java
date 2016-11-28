@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossData {
+public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoidNPC implements IVoidBossData {
 
-	private IBattleHandler handler;
+	private T handler;
 	private VoidBossAIBus bus;
 
 	private int phase = 0;
@@ -46,7 +46,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 		addDefaultTasks();
 	}
 
-	public EntityVoidBoss(World world, IBattleHandler handler, boolean hasIdleTask) {
+	public EntityVoidBoss(World world, T handler, boolean hasIdleTask) {
 		this(world);
 		this.handler = handler;
 		bus = new VoidBossAIBus();
@@ -61,6 +61,10 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	protected void addDefaultTasks() {
 		for (Class c : getFilters())
 			tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
+	}
+	
+	public T getHandler(){
+		return handler;
 	}
 
 	public void start() {
@@ -200,6 +204,7 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 	@Override
 	public void onDeath(DamageSource p_70645_1_) { // Switch phases when we fake death
 		if (phase > maxPhases()) {
+			deathHook();
 			setHealth(0);
 			isDead = true;
 			super.onDeath(p_70645_1_);
@@ -209,6 +214,11 @@ public abstract class EntityVoidBoss extends EntityVoidNPC implements IVoidBossD
 			updateAI();
 		}
 	}
+	
+	/**
+	 * called upon a true death for bosses to do final tasks such as drop items
+	 */
+	protected abstract void deathHook();
 
 	private void trueDeathUpdate() {
 		active = false;
