@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -80,7 +81,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 	public ProjectileDisintegration(World worldIn, EntityLivingBase shooter, double x, double y, double z) {
 		this(worldIn);
 		shootingEntity = shooter;
-		setPosition(x, y+shooter.getEyeHeight(), z);
+		setPosition(x, y + shooter.getEyeHeight(), z);
 		Vec3d vec = shooter.getLook(1.0f);
 		setVelocity(vec.xCoord, vec.yCoord, vec.zCoord);
 	}
@@ -90,10 +91,10 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		shootingEntity = shooter;
 		damage = dmg;
 		double d0 = target.posX - posX;
-		double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - posY;
+		double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 2.0F) - posY;
 		double d2 = target.posZ - posZ;
 		double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-		setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - world.getDifficulty().getDifficultyId() * 4));
+		setThrowableHeading(d0, d1/* + d3 * 0.20000000298023224D */, d2, 1.6F, (float) (14 - world.getDifficulty().getDifficultyId() * 4));
 	}
 
 	@Override
@@ -174,6 +175,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		} else { // Traveling
 			timeInGround = 0;
 			++ticksInAir;
+			if (ticksInAir > 20 * 10) setDead();
 			Vec3d vec3d1 = new Vec3d(posX, posY, posZ);
 			Vec3d vec3d = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 			RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d1, vec3d, false, true, false);
@@ -236,6 +238,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			float f2 = range;
 
 			if (isInWater()) {
+				setDead();
 				for (int l = 0; l < 4; ++l) {
 					f4 = 0.25F;
 					world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, posX - motionX * (double) f4, posY - motionY * (double) f4, posZ - motionZ * (double) f4, motionX, motionY, motionZ);
@@ -263,7 +266,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		Entity entity = raytraceResultIn.entityHit;
 
 		if (entity != null) {
-			if (entity == shootingEntity) return;
+			if (entity == shootingEntity || entity instanceof EntityBossXia) return;
 			float f = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 			int i = MathHelper.ceil((double) f * damage);
 

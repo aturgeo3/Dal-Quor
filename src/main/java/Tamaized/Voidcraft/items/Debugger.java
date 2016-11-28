@@ -3,11 +3,12 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -45,14 +46,14 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
-		// playerIn.clearActivePotions();
-		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
+		 playerIn.clearActivePotions();
+		 playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
-		ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
+		//ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
 		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
 		// entity.setPositionAndRotation(x, y, z, yaw, pitch);
-		worldIn.spawnEntity(entity);
+		//worldIn.spawnEntity(entity);
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);

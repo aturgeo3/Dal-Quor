@@ -18,6 +18,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -97,7 +98,23 @@ public class EntityBossXia extends EntityVoidBoss {
 
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
-
+		Potion pot = potioneffectIn.getPotion();
+		if (pot == voidCraft.potions.fireSheath || pot == voidCraft.potions.frostSheath || pot == voidCraft.potions.litSheath || pot == voidCraft.potions.acidSheath) super.addPotionEffect(potioneffectIn);
+		if (!world.isRemote) {
+			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+			DataOutputStream outputStream = new DataOutputStream(bos);
+			try {
+				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_SHEATHE));
+				outputStream.writeInt(getEntityId());
+				outputStream.writeInt(Potion.getIdFromPotion(pot));
+				outputStream.writeInt(potioneffectIn.getDuration());
+				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+				if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+				bos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

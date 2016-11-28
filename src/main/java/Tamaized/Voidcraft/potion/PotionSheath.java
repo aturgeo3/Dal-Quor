@@ -22,7 +22,7 @@ public class PotionSheath extends Potion {
 	
 	public PotionSheath(String name, Type type) {
 		super(false, 0x000000);
-		iconTexture = new ResourceLocation(voidCraft.modid, "textures/potions/sheath.png");
+		iconTexture = new ResourceLocation(voidCraft.modid, "textures/potions/sheathe.png");
 		this.type = type;
 		setRegistryName(voidCraft.modid, name);
 		setPotionName("effect." + getRegistryName().toString());

@@ -33,6 +33,8 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 		if (world != null && !world.isRemote) {
 			validateInstance();
 			if (running) {
+				if (!twins.isDone()) twins.setDone();
+				if (!herobrine.isDone()) herobrine.setDone();
 				doHandlerStartChecks();
 				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) {
 					// if (!xiaDoorOpen) {

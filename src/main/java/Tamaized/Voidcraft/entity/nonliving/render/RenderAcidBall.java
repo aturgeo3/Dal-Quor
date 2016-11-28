@@ -21,7 +21,7 @@ public class RenderAcidBall extends Render {
 		super(renderManager);
 	}
 
-	private static final ResourceLocation arrowTextures = new ResourceLocation("VoidCraft:textures/entity/AcidBall.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation("VoidCraft:textures/entity/acidball.png");
 
 	public void renderArrow(EntityArrow par1AcidBall, double par2, double par4, double par6, float par8, float par9) {
 		this.bindEntityTexture(par1AcidBall);

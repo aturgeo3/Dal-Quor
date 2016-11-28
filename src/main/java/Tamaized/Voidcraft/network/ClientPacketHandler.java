@@ -10,12 +10,15 @@ import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
+import Tamaized.Voidcraft.helper.TempParticleHelper;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
@@ -25,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, PLAYER_MOTION, VADEMECUM_UPDATE, VOIDICPOWERITEM
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, XIA_SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -57,6 +60,10 @@ public class ClientPacketHandler {
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
+			case PARTICLE: {
+				TempParticleHelper.decodePacket(bbis);
+			}
+				break;
 			case VOIDICPOWERITEM: {
 				int slot = bbis.readInt();
 				ItemStack stack = ItemStackNetworkHelper.decodeStack(parBB, bbis);
@@ -106,6 +113,14 @@ public class ClientPacketHandler {
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
 					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
+				}
+			}
+				break;
+			case XIA_SHEATHE: {
+				entity = theWorld.getEntityByID(bbis.readInt());
+				if (entity instanceof EntityBossXia) {
+					EntityBossXia xia = (EntityBossXia) entity;
+					xia.addPotionEffect(new PotionEffect(Potion.getPotionById(bbis.readInt()), bbis.readInt()));
 				}
 			}
 				break;
