@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 
+	public static final BlockPos LOCATION = new BlockPos(52, 55, 4);
+
 	private boolean running = false;
 	private boolean xiaDoorOpen = false;
 
@@ -67,6 +69,10 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 				if (!list.isEmpty()) xia.start(world, xiaLoc);
 			}
 		}
+	}
+
+	public boolean canPlayersFly() {
+		return xia.isDone();
 	}
 
 	public boolean isActive() {

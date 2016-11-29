@@ -20,8 +20,6 @@ public class TeleporterXia extends Teleporter {
 	private final WorldServer worldServerInstance;
 	private final Random random;
 
-	private BlockPos tePos = new BlockPos(52, 55, 4);
-
 	public TeleporterXia(WorldServer par1WorldServer) {
 		super(par1WorldServer);
 
@@ -43,7 +41,7 @@ public class TeleporterXia extends Teleporter {
 	}
 
 	public boolean isActive(Entity e) {
-		TileEntity te = /* DimensionManager.getWorld(voidCraft.config.getDimensionIDxia()) */worldServerInstance.getTileEntity(tePos);
+		TileEntity te = /* DimensionManager.getWorld(voidCraft.config.getDimensionIDxia()) */worldServerInstance.getTileEntity(TileEntityXiaCastle.LOCATION);
 		if (te instanceof TileEntityXiaCastle) {
 			TileEntityXiaCastle castleLogic = ((TileEntityXiaCastle) te);
 			castleLogic.validateInstance();
@@ -66,8 +64,8 @@ public class TeleporterXia extends Teleporter {
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 			SchematicLoader loader = new SchematicLoader();
 			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
-			worldServerInstance.setBlockState(tePos, voidCraft.blocks.xiaBlock.getDefaultState());
-			TileEntity te = worldServerInstance.getTileEntity(tePos);
+			worldServerInstance.setBlockState(TileEntityXiaCastle.LOCATION, voidCraft.blocks.xiaBlock.getDefaultState());
+			TileEntity te = worldServerInstance.getTileEntity(TileEntityXiaCastle.LOCATION);
 			if (te instanceof TileEntityXiaCastle) {
 				TileEntityXiaCastle castleLogic = ((TileEntityXiaCastle) te);
 				castleLogic.validateInstance();

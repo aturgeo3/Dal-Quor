@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
@@ -50,8 +51,8 @@ public class VoidTickEvent {
 		// Prevent players from flying in Xia DIM
 		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
-			if (e.player.dimension == voidCraft.config.getDimensionIDxia()) {
-				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && !XiaFlightHandler.shouldPlayerHaveFlight(player)) {
+			if (player.dimension == voidCraft.config.getDimensionIDxia()) {
+				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (XiaFlightHandler.shouldPlayerHaveFlight(player) ? !(player.world.getTileEntity(TileEntityXiaCastle.LOCATION) instanceof TileEntityXiaCastle && ((TileEntityXiaCastle) player.world.getTileEntity(TileEntityXiaCastle.LOCATION)).canPlayersFly()) : true)) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;
