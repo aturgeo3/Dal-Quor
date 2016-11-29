@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
+import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

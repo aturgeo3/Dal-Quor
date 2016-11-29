@@ -32,8 +32,8 @@ public class XiaBattleHandler implements IBattleHandler {
 	private AxisAlignedBB checkBB;
 	private ArrayList<EntityPlayer> players = new ArrayList<EntityPlayer>();
 	private EntityBossXia xia;
-	
-	public ArrayList<EntityPlayer> getPlayers(){
+
+	public ArrayList<EntityPlayer> getPlayers() {
 		return players;
 	}
 
@@ -78,7 +78,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		xia.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(voidCraft.armors.xiaBoots));
 		xia.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(voidCraft.tools.demonSword));
 		ItemStack vade = new ItemStack(voidCraft.items.vadeMecum);
-		if(vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
+		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.OFF_HAND, vade);
 		worldObj.spawnEntity(xia);
 		checkBB = new AxisAlignedBB(pos.add(-19, -1, -3), pos.add(19, 26, 51));
@@ -117,7 +117,7 @@ public class XiaBattleHandler implements IBattleHandler {
 	public boolean isDone() {
 		return isDone;
 	}
-	
+
 	@Override
 	public void setDone() {
 		stop();

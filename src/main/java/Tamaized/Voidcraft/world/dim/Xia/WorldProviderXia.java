@@ -7,10 +7,13 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderXia extends WorldProvider {
+	
+	private static final XiaSkyRender skyRender = new XiaSkyRender();
 
 	/**
 	 * creates a new world chunk manager for WorldProvider
@@ -20,6 +23,11 @@ public class WorldProviderXia extends WorldProvider {
 		this.biomeProvider = new BiomeProviderSingle(voidCraft.biomes.biomeXia);
 		this.doesWaterVaporize = false;
 		this.hasNoSky = true;
+	}
+	
+	@Override
+	public IRenderHandler getSkyRenderer() {
+		return skyRender;
 	}
 
 	@SideOnly(Side.CLIENT)

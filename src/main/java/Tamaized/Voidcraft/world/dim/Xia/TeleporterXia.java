@@ -3,8 +3,8 @@ package Tamaized.Voidcraft.world.dim.Xia;
 import java.util.Random;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

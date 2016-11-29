@@ -1,11 +1,13 @@
-package Tamaized.Voidcraft.blocks.tileentity;
+package Tamaized.Voidcraft.xiaCastle.logic;
 
 import java.util.List;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,10 +27,12 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	private final IBattleHandler twins = new TwinsBattleHandler();
 	private final IBattleHandler herobrine = new HerobrineBattleHandler();
 	private final IBattleHandler xia = new XiaBattleHandler();
+	private final IBattleHandler xia2 = new Xia2BattleHandler();
 
 	private BlockPos twinsLoc;
 	private BlockPos herobrineLoc;
 	private BlockPos xiaLoc;
+	private BlockPos xia2Loc;
 
 	@Override
 	public void onUpdate() {
@@ -45,6 +49,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 				if (twins.isRunning()) twins.update();
 				if (herobrine.isRunning()) herobrine.update();
 				if (xia.isRunning()) xia.update();
+				if (xia2.isRunning()) xia2.update();
 			}
 			handleProgressVisual();
 		}
@@ -68,6 +73,9 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 				list = world.getEntitiesWithinAABB(EntityPlayer.class, xiaBB);
 				if (!list.isEmpty()) xia.start(world, xiaLoc);
 			}
+			if(!xia2.isRunning() && !xia2.isDone() && xia.isDone()){
+				xia2.start(world, xia2Loc);
+			}
 		}
 	}
 
@@ -81,7 +89,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	public void validateInstance() {
-		if (world != null) if ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone()))) || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
+		if (world != null) if ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone() && xia2.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone() && !xia2.isDone()))) || xia2Loc == null || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
 		if (!running && world != null && !world.playerEntities.isEmpty()) start();
 	}
 

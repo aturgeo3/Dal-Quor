@@ -6,10 +6,10 @@ import java.util.Map;
 import java.util.UUID;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityXiaCastle;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;

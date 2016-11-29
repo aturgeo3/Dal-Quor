@@ -31,6 +31,7 @@ public class ModelXia extends ModelBase {
 	public ModelXia() {
 		leftArmPose = ModelBiped.ArmPose.EMPTY;
 		rightArmPose = ModelBiped.ArmPose.EMPTY;
+
 		textureWidth = 64;
 		textureHeight = 64;
 

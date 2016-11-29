@@ -8,6 +8,7 @@ import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.helper.TempParticleHelper;
@@ -112,6 +113,9 @@ public class ClientPacketHandler {
 				entity = theWorld.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
+					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
+				} else if (entity instanceof EntityBossXia2) {
+					EntityBossXia2 xia = (EntityBossXia2) entity;
 					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
 				}
 			}
