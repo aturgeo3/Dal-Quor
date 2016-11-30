@@ -3,9 +3,8 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
+import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -38,9 +37,9 @@ public class Debugger extends TamItem {
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
-			EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			entity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
-			worldIn.spawnEntity(entity);
+			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
+			// entity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
+			// worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -48,6 +47,7 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
+		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);

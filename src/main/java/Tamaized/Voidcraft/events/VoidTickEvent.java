@@ -9,7 +9,7 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
-import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
+import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
@@ -52,7 +52,7 @@ public class VoidTickEvent {
 		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
 			if (player.dimension == voidCraft.config.getDimensionIDxia()) {
-				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (XiaFlightHandler.shouldPlayerHaveFlight(player) ? !(player.world.getTileEntity(TileEntityXiaCastle.LOCATION) instanceof TileEntityXiaCastle && ((TileEntityXiaCastle) player.world.getTileEntity(TileEntityXiaCastle.LOCATION)).canPlayersFly()) : true)) {
+				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (XiaFlightHandler.shouldPlayerHaveFlight(player) ? !(player.world.provider instanceof WorldProviderXia && ((WorldProviderXia) player.world.provider).getXiaCastleHandler().canPlayersFly()) : true)) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;

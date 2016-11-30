@@ -4,13 +4,12 @@ import java.util.Random;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 
 public class TeleporterXia extends Teleporter {
@@ -41,12 +40,11 @@ public class TeleporterXia extends Teleporter {
 	}
 
 	public boolean isActive(Entity e) {
-		TileEntity te = /* DimensionManager.getWorld(voidCraft.config.getDimensionIDxia()) */worldServerInstance.getTileEntity(TileEntityXiaCastle.LOCATION);
-		if (te instanceof TileEntityXiaCastle) {
-			TileEntityXiaCastle castleLogic = ((TileEntityXiaCastle) te);
-			castleLogic.validateInstance();
-			System.out.println(castleLogic.isActive());
-			return castleLogic.isActive();
+		WorldProvider wp = worldServerInstance.provider;
+		if (wp instanceof WorldProviderXia) {
+			WorldProviderXia xiaProvider = ((WorldProviderXia) wp);
+			xiaProvider.getXiaCastleHandler().validateInstance();
+			return xiaProvider.getXiaCastleHandler().isActive();
 		}
 		return false;
 	}
@@ -64,13 +62,6 @@ public class TeleporterXia extends Teleporter {
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 			SchematicLoader loader = new SchematicLoader();
 			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
-			worldServerInstance.setBlockState(TileEntityXiaCastle.LOCATION, voidCraft.blocks.xiaBlock.getDefaultState());
-			TileEntity te = worldServerInstance.getTileEntity(TileEntityXiaCastle.LOCATION);
-			if (te instanceof TileEntityXiaCastle) {
-				TileEntityXiaCastle castleLogic = ((TileEntityXiaCastle) te);
-				castleLogic.validateInstance();
-				if (!castleLogic.isActive()) castleLogic.start();
-			}
 		}
 
 		return true;

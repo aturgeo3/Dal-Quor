@@ -2,7 +2,6 @@ package Tamaized.Voidcraft.xiaCastle.logic;
 
 import java.util.List;
 
-import Tamaized.TamModized.tileentity.TamTileEntity;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
@@ -13,11 +12,13 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
+public class XiaCastleLogicHandler {
+
+	private final World world;
 
 	public static final BlockPos LOCATION = new BlockPos(52, 55, 4);
 
@@ -34,13 +35,17 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	private BlockPos xiaLoc;
 	private BlockPos xia2Loc;
 
-	@Override
+	public XiaCastleLogicHandler(World world) {
+		this.world = world;
+	}
+
 	public void onUpdate() {
 		if (world != null && !world.isRemote) {
 			validateInstance();
 			if (running) {
 				if (!twins.isDone()) twins.setDone();
 				if (!herobrine.isDone()) herobrine.setDone();
+				if (!xia.isDone()) xia.setDone();
 				doHandlerStartChecks();
 				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) {
 					// if (!xiaDoorOpen) {
@@ -56,7 +61,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	private void doHandlerStartChecks() {
-		if (twinsLoc != null && herobrineLoc != null && xiaLoc != null) {
+		if (twinsLoc != null && herobrineLoc != null && xiaLoc != null && xia2Loc != null) {
 			AxisAlignedBB twinsBB = new AxisAlignedBB(twinsLoc.add(-5, 0, 0), twinsLoc.add(5, 2, -6));
 			AxisAlignedBB herobrineBB = new AxisAlignedBB(herobrineLoc.add(0, 0, -10), herobrineLoc.add(8, 2, 10));
 			AxisAlignedBB xiaBB = new AxisAlignedBB(xiaLoc.add(-18, 0, 7), xiaLoc.add(18, 10, 15));
@@ -73,7 +78,7 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 				list = world.getEntitiesWithinAABB(EntityPlayer.class, xiaBB);
 				if (!list.isEmpty()) xia.start(world, xiaLoc);
 			}
-			if(!xia2.isRunning() && !xia2.isDone() && xia.isDone()){
+			if (!xia2.isRunning() && !xia2.isDone() && xia.isDone()) {
 				xia2.start(world, xia2Loc);
 			}
 		}
@@ -123,21 +128,24 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 	}
 
 	public void start() {
+		if (world == null) return;
 		stop();
 		setupPos();
 		running = true;
 	}
 
 	private void setupPos() {
-		twinsLoc = getPos().add(93 - 52, 71 - 55, 70 - 4);
-		herobrineLoc = getPos().add(12 - 52, 71 - 55, 70 - 4);
-		xiaLoc = getPos().add(52 - 52, 75 - 55, 85 - 4);
+		twinsLoc = LOCATION.add(93 - 52, 71 - 55, 70 - 4);
+		herobrineLoc = LOCATION.add(12 - 52, 71 - 55, 70 - 4);
+		xiaLoc = LOCATION.add(52 - 52, 75 - 55, 85 - 4);
+		xia2Loc = LOCATION.add(0, 70, 170);
 	}
 
 	public void stop() {
 		twins.stop();
 		herobrine.stop();
 		xia.stop();
+		xia2.stop();
 		closeDoor();
 		running = false;
 	}
@@ -162,11 +170,9 @@ public class TileEntityXiaCastle extends TamTileEntity implements ITickable {
 		xiaDoorOpen = true;
 	}
 
-	@Override
 	public void readNBT(NBTTagCompound nbt) {
 	}
 
-	@Override
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		return nbt;
 	}

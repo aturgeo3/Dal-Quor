@@ -1,7 +1,12 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2;
 
+import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -32,33 +37,50 @@ public class Xia2BattleHandler implements IBattleHandler {
 	}
 
 	@Override
-	public void start(World worldObj, BlockPos pos) {
-		// TODO Auto-generated method stub
-
+	public void start(World world, BlockPos p) {
+		System.out.println("Xia2BattleHandler Start");
+		worldObj = world;
+		pos = p;
+		stop();
+		phase = 0;
+		isDone = false;
+		readyForInput = false;
+		xia = new EntityBossXia2(worldObj, this);
+		xia.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
+		ItemStack vade = new ItemStack(voidCraft.items.vadeMecum);
+		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
+		xia.setHeldItem(EnumHand.MAIN_HAND, vade);
+		worldObj.spawnEntity(xia);
+		xia.start();
+		running = true;
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		readyForInput = false;
+		isDone = false;
+		if (xia != null) {
+			if (xia.isDone()) isDone = true;
+			worldObj.removeEntity(xia);
+		}
+		xia = null;
+		running = false;
 	}
 
 	@Override
 	public boolean isRunning() {
-		// TODO Auto-generated method stub
-		return false;
+		return running;
 	}
 
 	@Override
 	public boolean isDone() {
-		// TODO Auto-generated method stub
-		return false;
+		return isDone;
 	}
 
 	@Override
 	public void setDone() {
-		// TODO Auto-generated method stub
-
+		stop();
+		isDone = true;
 	}
 
 }

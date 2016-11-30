@@ -95,7 +95,6 @@ import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
-import Tamaized.Voidcraft.xiaCastle.logic.TileEntityXiaCastle;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
@@ -115,7 +114,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = voidCraft.modid, name = "VoidCraft", guiFactory = "Tamaized.Voidcraft.GUI.client.GUIConfigFactory", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
@@ -244,7 +242,6 @@ public class voidCraft extends TamModBase {
 		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
 		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
-		GameRegistry.registerTileEntity(TileEntityXiaCastle.class, "tileEntityXiaCastle");
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
 		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
 		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, "tileEntityVoidicCharger");
@@ -277,7 +274,7 @@ public class voidCraft extends TamModBase {
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, modid, 128, 1, true);
 		registerEntity(AcidBall.class, "AcidBall", this, modid, 128, 1, true);
-		//registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
+		// registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
 		registerEntity(EntityHerobrineFireball.class, "HerobrineFireball", this, modid, 128, 1, true);
 		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, modid, 128, 1, true);
 		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, modid, 128, 1, true);

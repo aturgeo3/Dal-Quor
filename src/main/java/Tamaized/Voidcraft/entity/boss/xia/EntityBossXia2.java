@@ -10,6 +10,7 @@ import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase1;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -120,6 +121,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 
 	@Override
 	protected void initPhase(int phase) {
+		System.out.println("xia2: " + phase);
 		switch (phase) {
 			case 1: {
 				/**
@@ -131,7 +133,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 				setHealth(getMaxHealth());
 				// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 				setInvul(false);
-				// addAI(new EntityAIXiaPhase1(this, getFilters()));
+				addAI(new EntityAIXia2Phase1(this, getFilters()));
 			}
 				break;
 			case 2: {

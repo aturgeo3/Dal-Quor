@@ -159,7 +159,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 		if (phase > maxPhases()) {
 			isDone = true;
-			if (getHealth() <= 0.0F) {
+			if (getHealth() < 0.0F) {
 				trueDeathUpdate();
 			}
 		} else {

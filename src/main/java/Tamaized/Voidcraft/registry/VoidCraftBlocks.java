@@ -23,7 +23,6 @@ import Tamaized.Voidcraft.blocks.BlockRealityHole;
 import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
-import Tamaized.Voidcraft.blocks.XiaBlock;
 import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.machina.Heimdall;
@@ -86,7 +85,6 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static BlockSpellIceSpike iceSpike;
 
 	public static AIBlock AIBlock;
-	public static XiaBlock xiaBlock;
 
 	@Override
 	public void preInit() {
@@ -107,7 +105,6 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(blockVoidBrickDoubleSlab = new TamBlockSlabDouble(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidBrickDoubleSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
 		modelList.add(blockVoidBrickHalfSlab = new TamBlockSlabHalf(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidBrickHalfSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
 		modelList.add(AIBlock = new AIBlock("AIBlock"));
-		modelList.add(xiaBlock = new XiaBlock("xiaBlock"));
 		modelList.add(realityHole = new BlockRealityHole(voidCraft.tabs.tabVoid, Material.CLOTH, "blockRealityHole", -1F));
 		modelList.add(ritualBlock = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "ritualBlock", 3.0F));
 
@@ -154,7 +151,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 	@Override
 	public void init() {
 		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', voidCraft.items.voidcrystal);
-		//GameRegistry.addRecipe(new ItemStack(ritualBlock, 8), "XXX", "XYX", "XXX", 'X', Blocks.STONEBRICK, 'Y', voidCraft.items.voidcrystal);
+		// GameRegistry.addRecipe(new ItemStack(ritualBlock, 8), "XXX", "XYX", "XXX", 'X', Blocks.STONEBRICK, 'Y', voidCraft.items.voidcrystal);
 		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', voidCraft.items.voidCloth, 'Z', Items.CAULDRON);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidInfuser), voidInfuserInert, voidCraft.items.voidStar);
 		GameRegistry.addRecipe(new ItemStack(voidBox), "XXX", "XYX", "XZX", 'X', voidCraft.items.voidCloth, 'Y', Blocks.JUKEBOX, 'Z', voidCraft.items.voidStar);

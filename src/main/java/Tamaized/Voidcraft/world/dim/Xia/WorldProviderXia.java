@@ -1,9 +1,11 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.xiaCastle.logic.XiaCastleLogicHandler;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -12,8 +14,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderXia extends WorldProvider {
-	
+
 	private static final XiaSkyRender skyRender = new XiaSkyRender();
+
+	private XiaCastleLogicHandler xiaCastleHandler;
 
 	/**
 	 * creates a new world chunk manager for WorldProvider
@@ -23,18 +27,32 @@ public class WorldProviderXia extends WorldProvider {
 		this.biomeProvider = new BiomeProviderSingle(voidCraft.biomes.biomeXia);
 		this.doesWaterVaporize = false;
 		this.hasNoSky = true;
+		if (world instanceof WorldServer) {
+			xiaCastleHandler = new XiaCastleLogicHandler(world);
+			if (world.getChunkProvider() != null) xiaCastleHandler.start();
+		}
 	}
-	
+
+	@Override
+	public void onWorldUpdateEntities() {
+		super.onWorldUpdateEntities();
+		if (xiaCastleHandler != null) xiaCastleHandler.onUpdate();
+	}
+
+	public final XiaCastleLogicHandler getXiaCastleHandler() {
+		return xiaCastleHandler;
+	}
+
 	@Override
 	public IRenderHandler getSkyRenderer() {
 		return skyRender;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
 	/**
 	 * Return Vec3D with biome specific fog color
 	 */
+	@SideOnly(Side.CLIENT)
+	@Override
 	public Vec3d getFogColor(float par1, float par2) {
 		return new Vec3d(0.0D, 0.0D, 0.0D);
 	}
@@ -106,15 +124,20 @@ public class WorldProviderXia extends WorldProvider {
 		return 50;
 	}
 
+	@Override
 	public WorldBorder createWorldBorder() {
 		return new WorldBorder() {
+
+			@Override
 			public double getCenterX() {
 				return super.getCenterX() / 8.0D;
 			}
 
+			@Override
 			public double getCenterZ() {
 				return super.getCenterZ() / 8.0D;
 			}
+
 		};
 	}
 
