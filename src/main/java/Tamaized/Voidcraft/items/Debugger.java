@@ -3,8 +3,9 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
+import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,21 +34,22 @@ public class Debugger extends TamItem {
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
-			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn);
+			EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn, false);
+			entity.setRuneState(playerIn, 100);
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			// entity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
-			// worldIn.spawnEntity(entity);
+			entity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
+			worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
-		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
+		// if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
+		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);

@@ -26,10 +26,18 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	private GameProfile profile;
 	private PlayerNameAlias alias;
 
+	private boolean canInteract = false;
 	private boolean hasInteracted = false;
 	private boolean running = false;
 	private int tick = 0;
 	private int finalTick = 20 * 6;
+
+	private boolean rune = false;
+	private Entity runeTarget;
+	private int runeState = 0;
+	private int maxRuneState = 100;
+
+	private int runeRotation = 0;
 
 	public EntityGhostPlayerBase(World par1World) {
 		super(par1World);
@@ -45,10 +53,48 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	}
 
-	protected EntityGhostPlayerBase(World world, PlayerNameAlias alias) {
+	protected EntityGhostPlayerBase(World world, PlayerNameAlias alias, boolean interactable) {
 		this(world);
 		profile = voidCraft.skinHandler.getGameProfile(alias);
 		this.alias = alias;
+		canInteract = interactable;
+	}
+
+	public boolean isInteractable() {
+		return canInteract;
+	}
+
+	public void setRuneState(Entity target, int length) {
+		rune = true;
+		runeTarget = target;
+		runeState = 0;
+		maxRuneState = length;
+		running = true;
+		tick = 0;
+	}
+
+	public boolean hasRuneState() {
+		return rune;
+	}
+
+	public int getRuneState() {
+		return runeState;
+	}
+
+	public int getMaxRuneState() {
+		return maxRuneState;
+	}
+
+	public float getRuneStatePerc() {
+		return (float) runeState / (float) maxRuneState;
+	}
+
+	public Entity getRuneTarget() {
+		return runeTarget;
+	}
+
+	public int getRuneRotationForRender() {
+		return runeRotation;
 	}
 
 	@Override
@@ -82,14 +128,19 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 				this.setDead();
 				return;
 			}
-			if (running) tick++;
+			if (running) {
+				if (rune && runeState < maxRuneState) runeState++;
+				tick++;
+			}
 			if (tick >= finalTick) hasInteracted = true;
+			if (tick % (maxRuneState - runeState) == 0) runeRotation++;
+			if (runeRotation >= 360) runeRotation = 0;
 		}
 	}
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		if (running) return false;
+		if (running || !canInteract) return false;
 		running = true;
 		return true;
 	}
@@ -146,8 +197,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		return new TextComponentString(profile == null ? "null" : profile.getName() == null ? "null" : profile.getName());
 	}
 
-	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias) {
-		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias) : new EntityGhostPlayer(world, alias);
+	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias, boolean interactable) {
+		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable) : new EntityGhostPlayer(world, alias, interactable);
 	}
 
 }

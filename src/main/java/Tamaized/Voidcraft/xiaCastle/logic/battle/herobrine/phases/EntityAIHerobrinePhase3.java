@@ -112,7 +112,7 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 		PlayerNameAlias alias = getRandomUnusedAlias(0);
 		alreadyUsed.add(SkinHandler.getUUID(alias));
 		usedLocs.add(i);
-		EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(world, alias);
+		EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(world, alias, true);
 		currGhost = entity;
 		switch (i) {
 			case 0:
