@@ -48,7 +48,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	}
 
 	private void handleInfusionGain(EntityLivingBase entity) {
-		boolean flag = false;
+		boolean flag = true;
 		ItemStack mainHand = entity.getHeldItemMainhand();
 		ItemStack offHand = entity.getHeldItemOffhand();
 		if ((!mainHand.isEmpty() && mainHand.getItem() == voidCraft.items.voidicSuppressor)) {
@@ -183,6 +183,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	@Override
 	public void load(EntityLivingBase living) {
+		if (maxInfusion < 6000) maxInfusion = 6000;
 		float i = 0;
 		for (IAttributeInstance att : living.getAttributeMap().getAllAttributes()) {
 			if (att.getAttribute() == SharedMonsterAttributes.MAX_HEALTH) {
