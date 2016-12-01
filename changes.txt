@@ -1,6 +1,0 @@
- - Tamaized: Fixed an exploit that would set a player's max health to 1024
- - Tamaized: Overhauled the entire internal Voidic Infusion code to be much nicer and easier to work around.
-  * Because of this, things may or may not appear much smoother such as the various rendering of voidic infusion effects
- - Tamaized: Voidic Suppressor max amount of Voidic Power has been increased to 20000
-  * It now drains at a rate of 1 per tick rather than 1 per second.
-  * To get the new max value, recraft the Voidic Suppressor as old ones will retain the max value of 2000
