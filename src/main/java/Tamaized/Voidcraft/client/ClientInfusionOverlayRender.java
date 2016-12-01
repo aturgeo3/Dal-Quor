@@ -1,7 +1,8 @@
-package Tamaized.Voidcraft.voidicInfusion.client;
+package Tamaized.Voidcraft.client;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -18,62 +19,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
-public class ClientInfusionHandler {
-
-	public int amount = 0;
-	public int maxAmount = 300;
-	private int tick = 0;
+public class ClientInfusionOverlayRender {
 
 	private static ResourceLocation texture = new ResourceLocation(voidCraft.modid, "textures/gui/voidicInfusion.png");
-
-	@SubscribeEvent
-	public void update(ClientTickEvent e) {
-		if (e.phase == Phase.END && !Minecraft.getMinecraft().isGamePaused()) {
-			World world = Minecraft.getMinecraft().world;
-			EntityPlayer player = Minecraft.getMinecraft().player;
-			if (world == null || player == null) return;
-			// if(player.hasCapability(CapabilityList.VOIDICINFUSION, null)){
-			// amount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusion();
-			// maxAmount = player.getCapability(CapabilityList.VOIDICINFUSION, null).getMaxInfusion();
-			// }
-			// DebugEvent.textR = tick+" "+amount+" "+maxAmount;
-			tick++;
-			if (tick % 20 == 0) {
-				if (world != null && world.provider != null) {
-					boolean flag = true;
-					if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == voidCraft.items.voidicSuppressor) {
-						IVoidicPowerCapability cap = player.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
-						if (cap != null && cap.getCurrentPower() > 0) {
-							//cap.drain(1);
-							flag = false;
-						}
-					} else if (!player.getHeldItemOffhand().isEmpty() && player.getHeldItemOffhand().getItem() == voidCraft.items.voidicSuppressor) {
-						IVoidicPowerCapability cap = player.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
-						if (cap != null && cap.getCurrentPower() > 0) {
-							//cap.drain(1);
-							flag = false;
-						}
-					}
-					if (world.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
-						amount++;
-						if (amount > maxAmount) amount = maxAmount;
-					} else {
-						amount -= 10;
-						if (amount < 0) amount = 0;
-					}
-					float perc = ((float) amount / (float) maxAmount);
-					// if(perc>=0.75f) player.capabilities.allowFlying = true;
-					// DebugEvent.textL = perc+"";
-				}
-				tick = 0;
-			}
-		}
-	}
 
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e) {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayerSP player = mc.player;
+		if (!player.hasCapability(CapabilityList.VOIDICINFUSION, null)) return;
+		IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 
 		if (e.getType() == e.getType().PORTAL) {
 			ScaledResolution scaledRes = new ScaledResolution(mc);
@@ -81,7 +36,7 @@ public class ClientInfusionHandler {
 			GlStateManager.disableDepth();
 			GlStateManager.depthMask(false);
 			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, (float) amount / (float) maxAmount);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, cap.getInfusionPerc());
 			mc.getTextureManager().bindTexture(texture);
 
 			Tessellator tessellator = Tessellator.getInstance();

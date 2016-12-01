@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
@@ -12,7 +14,6 @@ import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler;
 import Tamaized.Voidcraft.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
-import Tamaized.Voidcraft.voidicInfusion.PlayerInfusionHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -92,8 +93,8 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) closestEntity;
-						PlayerInfusionHandler handler = voidCraft.infusionHandler.getPlayerInfusionHandler(player.getGameProfile().getId());
-						handler.addInfusion(handler.getMaxInfusion() - (1 + handler.getInfusion()));
+						IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
+						if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
 					}
 					break;
 				default:
@@ -139,7 +140,6 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 		while (world.isAirBlock(new BlockPos(getPosition().xCoord + loc[0], getPosition().yCoord + loc[1], getPosition().zCoord + loc[2]))) {
 			loc[1] -= 1.0D;
 		}
-		System.out.println(loc[0] + ", " + loc[1] + ", " + loc[2]);
 		return loc;
 	}
 

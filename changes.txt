@@ -1,0 +1,3 @@
+ - Tamaized: Fixed an exploit that would set a player's max health to 1024
+ - Tamaized: Overhauled the entire internal Voidic Infusion code to be much nicer and easier to work around.
+  * Because of this, things may or may not appear much smoother such as the various rendering of voidic infusion effects

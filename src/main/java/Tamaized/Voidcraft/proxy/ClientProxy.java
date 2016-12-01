@@ -5,7 +5,10 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
+import Tamaized.Voidcraft.client.ClientInfusionOverlayRender;
+import Tamaized.Voidcraft.client.ClientRenderTicker;
 import Tamaized.Voidcraft.client.LayerCustomElytra;
+import Tamaized.Voidcraft.client.LayerVoidSpikes;
 import Tamaized.Voidcraft.client.RenderNull;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
@@ -63,9 +66,6 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
-import Tamaized.Voidcraft.voidicInfusion.client.ClientInfusionHandler;
-import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
-import Tamaized.Voidcraft.voidicInfusion.client.LayerVoidSpikes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
@@ -81,7 +81,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends AbstractVoidCraftProxy {
 
-	public static ClientInfusionHandler infusionHandler = new ClientInfusionHandler();
+	public static ClientInfusionOverlayRender infusionHandler = new ClientInfusionOverlayRender();
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
 

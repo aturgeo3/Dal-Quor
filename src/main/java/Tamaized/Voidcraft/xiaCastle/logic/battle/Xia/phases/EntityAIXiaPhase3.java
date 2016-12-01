@@ -1,31 +1,24 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.helper.TempParticleHelper;
-import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.voidicInfusion.PlayerInfusionHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
@@ -34,8 +27,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
 
@@ -119,8 +110,8 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) closestEntity;
-						PlayerInfusionHandler handler = voidCraft.infusionHandler.getPlayerInfusionHandler(player.getGameProfile().getId());
-						handler.addInfusion(handler.getMaxInfusion() - (1 + handler.getInfusion()));
+						IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
+						if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
 					}
 					break;
 			}
@@ -134,7 +125,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 		resetAnimationTick = 20 * 2;
 		world.playSound((EntityPlayer) null, getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
 		TempParticleHelper.spawnVanillaParticleOnServer(world, EnumParticleTypes.EXPLOSION_HUGE, getEntity().posX, getEntity().posY, getEntity().posZ, 1.0D, 0.0D, 0.0D);
-		
+
 		for (Entity e : world.getEntitiesWithinAABBExcludingEntity(getEntity(), new AxisAlignedBB(getEntity().posX - 5, getEntity().posY - 5, getEntity().posZ - 5, getEntity().posX + 5, getEntity().posY + 5, getEntity().posZ + 5))) {
 			double mX = 0;
 			double mY = 1;

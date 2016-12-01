@@ -38,7 +38,6 @@ public class Xia2BattleHandler implements IBattleHandler {
 
 	@Override
 	public void start(World world, BlockPos p) {
-		System.out.println("Xia2BattleHandler Start");
 		worldObj = world;
 		pos = p;
 		stop();

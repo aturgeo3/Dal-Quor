@@ -12,7 +12,6 @@ import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.helper.TempParticleHelper;
-import Tamaized.Voidcraft.proxy.ClientProxy;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
@@ -21,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -56,8 +56,7 @@ public class ClientPacketHandler {
 
 	@SideOnly(Side.CLIENT)
 	public static void processPacket(ByteBuf parBB) throws IOException {
-		World theWorld = Minecraft.getMinecraft().world;
-		Entity entity;
+		World world = Minecraft.getMinecraft().world;
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
@@ -102,7 +101,7 @@ public class ClientPacketHandler {
 			}
 				break;
 			case XIA_ANIMATIONS: {
-				entity = theWorld.getEntityByID(bbis.readInt());
+				Entity entity = world.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
 					xia.addAnimation(new EntityAnimationsXia(xia, EntityAnimationsXia.getAnimationFromID(bbis.readInt())));
@@ -110,7 +109,7 @@ public class ClientPacketHandler {
 			}
 				break;
 			case XIA_ARMSTATE: {
-				entity = theWorld.getEntityByID(bbis.readInt());
+				Entity entity = world.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
 					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
@@ -121,7 +120,7 @@ public class ClientPacketHandler {
 			}
 				break;
 			case XIA_SHEATHE: {
-				entity = theWorld.getEntityByID(bbis.readInt());
+				Entity entity = world.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
 					EntityBossXia xia = (EntityBossXia) entity;
 					xia.addPotionEffect(new PotionEffect(Potion.getPotionById(bbis.readInt()), bbis.readInt()));
@@ -129,15 +128,16 @@ public class ClientPacketHandler {
 			}
 				break;
 			case INFUSION_UPDATE: {
-				ClientProxy.infusionHandler.amount = bbis.readInt();
-				ClientProxy.infusionHandler.maxAmount = bbis.readInt();
+				Entity entity = world.getEntityByID(bbis.readInt());
+				IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
+				if (cap != null) cap.decodePacket(bbis);
 			}
 				break;
 			case INFUSION_UPDATE_ALL: {
 				int id = bbis.readInt();
 				int amount = bbis.readInt();
 				int maxAmount = bbis.readInt();
-				entity = Minecraft.getMinecraft().world.getEntityByID(id);
+				Entity entity = world.getEntityByID(id);
 				if (entity != null && entity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 					IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
 					cap.setInfusion(amount);

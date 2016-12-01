@@ -225,7 +225,6 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		while (world.isAirBlock(new BlockPos(getPosition().xCoord + loc[0], getPosition().yCoord + loc[1], getPosition().zCoord + loc[2]))) {
 			loc[1] -= 1.0D;
 		}
-		System.out.println(loc[0] + ", " + loc[1] + ", " + loc[2]);
 		return loc;
 	}
 

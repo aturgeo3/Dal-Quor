@@ -10,8 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.model.ModelVoidicCharger;
+import Tamaized.Voidcraft.client.ClientRenderTicker;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
-import Tamaized.Voidcraft.voidicInfusion.client.ClientRenderTicker;
 
 public class RenderVoidicCharger extends TileEntitySpecialRenderer<TileEntityVoidicCharger> {
 	

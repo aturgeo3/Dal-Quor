@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.voidicInfusion.client;
+package Tamaized.Voidcraft.client;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -29,7 +29,7 @@ public class LayerVoidSpikes implements LayerRenderer {
 			if (Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null)) perc = Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc();
 			// DebugEvent.textL=""+Minecraft.getMinecraft().theWorld.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null);
 
-			GlStateManager.scale(perc, perc, perc);
+			GlStateManager.scale(perc+0, perc+0, perc+0);
 			// GlStateManager.rotate(180, 1, 0, 1);
 			// GlStateManager.rotate(-90, 0, 1, 0);
 			// GlStateManager.scale(1, -1, 1);

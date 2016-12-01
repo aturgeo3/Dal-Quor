@@ -121,7 +121,6 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 
 	@Override
 	protected void initPhase(int phase) {
-		System.out.println("xia2: " + phase);
 		switch (phase) {
 			case 1: {
 				/**

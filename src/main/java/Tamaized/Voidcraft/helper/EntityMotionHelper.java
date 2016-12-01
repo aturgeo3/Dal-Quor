@@ -40,7 +40,6 @@ public class EntityMotionHelper {
 
 	@SideOnly(Side.CLIENT)
 	public static void updatePlayerMotion(double x, double y, double z) {
-		System.out.println(x + ", " + y + ", " + z);
 		net.minecraft.client.Minecraft.getMinecraft().player.addVelocity(x, y, z);
 	}
 

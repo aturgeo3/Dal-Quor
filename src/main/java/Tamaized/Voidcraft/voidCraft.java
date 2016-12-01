@@ -60,6 +60,7 @@ import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.CraftingHandler;
 import Tamaized.Voidcraft.handlers.SkinHandler;
+import Tamaized.Voidcraft.handlers.VoidicInfusionHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
@@ -91,7 +92,6 @@ import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
 import Tamaized.Voidcraft.vadeMecum.RitualList;
-import Tamaized.Voidcraft.voidicInfusion.VoidicInfusionHandler;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
@@ -141,7 +141,6 @@ public class voidCraft extends TamModBase {
 	public VoidTickEvent VoidTickEvent;
 
 	public static final SkinHandler skinHandler = new SkinHandler();
-	public static VoidicInfusionHandler infusionHandler = new VoidicInfusionHandler();
 	public static RitualList ritualList;
 
 	// Public API Integrations
@@ -262,7 +261,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
 		MinecraftForge.EVENT_BUS.register(BossMusicManager.instance); // We want to give this class a tick updater
 		MinecraftForge.EVENT_BUS.register(new BlockBreakPlaceEvent());
-		MinecraftForge.EVENT_BUS.register(infusionHandler);
+		MinecraftForge.EVENT_BUS.register(new VoidicInfusionHandler());
 		MinecraftForge.EVENT_BUS.register(new DamageEvent());
 		MinecraftForge.EVENT_BUS.register(new XiaFlightHandler());
 		MinecraftForge.EVENT_BUS.register(new CapabilitySyncEvent());

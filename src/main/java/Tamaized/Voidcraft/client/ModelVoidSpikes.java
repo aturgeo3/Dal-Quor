@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.voidicInfusion.client;
+package Tamaized.Voidcraft.client;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;

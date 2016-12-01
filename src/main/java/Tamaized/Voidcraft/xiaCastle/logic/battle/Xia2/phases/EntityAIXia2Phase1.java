@@ -2,13 +2,13 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.voidicInfusion.PlayerInfusionHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -95,8 +95,8 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 				resetAnimationTick = 20 * 2;
 				if (closestEntity instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) closestEntity;
-					PlayerInfusionHandler handler = voidCraft.infusionHandler.getPlayerInfusionHandler(player.getGameProfile().getId());
-					handler.addInfusion(handler.getMaxInfusion() - (1 + handler.getInfusion()));
+					IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
+					if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
 				}
 				break;
 		}
