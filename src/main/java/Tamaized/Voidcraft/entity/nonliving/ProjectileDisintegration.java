@@ -7,6 +7,7 @@ import com.google.common.base.Predicates;
 
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
+import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -266,7 +267,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		Entity entity = raytraceResultIn.entityHit;
 
 		if (entity != null) {
-			if (entity == shootingEntity || entity instanceof EntityBossXia) return;
+			if (entity == shootingEntity || entity instanceof EntityBossXia|| entity instanceof EntityBossXia2) return;
 			float f = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 			int i = MathHelper.ceil((double) f * damage);
 

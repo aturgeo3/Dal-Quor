@@ -1,9 +1,12 @@
 package Tamaized.Voidcraft.entity.boss.xia.render;
 
+import org.lwjgl.opengl.GL11;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -34,7 +37,8 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
-			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
+			if (entity.shouldSphereRender()) renderSphere(x, y, z);
+			// if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
 			ItemStack itemstack = entity.getHeldItemMainhand();
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
 			ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
@@ -73,15 +77,15 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 			renderLabel(entity, x, y, z);
 			RenderBossHeathBar.setCurrentBoss(entity);
 		}
-		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
+		// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
 		Minecraft mc = Minecraft.getMinecraft();
 		World world = mc.world;
 		if (!mc.isGamePaused()) {
 			for (int i = 0; i < 10; i++) {
 				Double dX = (world.rand.nextDouble() * 1.0) - 0.5D;
 				Double dZ = (world.rand.nextDouble() * 1.0) - 0.5D;
-				//world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX + dX, entity.posY, entity.posZ + dZ, 0, 0, 0);
-				world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX, entity.posY+0.25, entity.posZ, dX, 0, dZ);
+				// world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX + dX, entity.posY, entity.posZ + dZ, 0, 0, 0);
+				world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX, entity.posY + 0.25, entity.posZ, dX, 0, dZ);
 			}
 		}
 		GlStateManager.popMatrix();
@@ -106,6 +110,32 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 		}
 	}
 
+	private void renderSphere(double x, double y, double z) {
+		GlStateManager.pushMatrix();
+		{
+			GlStateManager.color(0x77 / 255F, 0x00 / 255F, 0xFF / 255F, 0.5F);
+			GlStateManager.translate(x + 0.0F, y + 1.0F, z + 0.0F);
+			GlStateManager.rotate(90, 1, 0, 0);
+
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glDepthMask(false);
+
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			// GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			
+			//GlStateManager.scale(1, 1, 1);
+			GL11.glCallList(ClientProxy.sphereIdOutside);
+
+			//GlStateManager.scale(1, 1, 1);
+			GL11.glCallList(ClientProxy.sphereIdInside);
+			GL11.glDepthMask(true);
+
+			GlStateManager.color(1, 1, 1, 1);
+		}
+		GlStateManager.popMatrix();
+	}
+
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return TEXTURE;
@@ -120,4 +150,5 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 		// y += (double)((float)getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * z);
 		renderLivingLabel(entity, entity.getDisplayName().getFormattedText(), x, y, z, 32);
 	}
+
 }

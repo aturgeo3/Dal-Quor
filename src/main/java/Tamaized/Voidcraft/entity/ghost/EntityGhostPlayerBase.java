@@ -1,22 +1,36 @@
 package Tamaized.Voidcraft.entity.ghost;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import com.mojang.authlib.GameProfile;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.particles.ParticleColorEnchantmentTable;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,17 +74,21 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		canInteract = interactable;
 	}
 
-	public boolean isInteractable() {
-		return canInteract;
-	}
-
-	public void setRuneState(Entity target, int length) {
+	protected EntityGhostPlayerBase(World world, PlayerNameAlias alias, boolean interactable, Entity target, int length) {
+		this(world);
+		profile = voidCraft.skinHandler.getGameProfile(alias);
+		this.alias = alias;
+		canInteract = interactable;
 		rune = true;
 		runeTarget = target;
 		runeState = 0;
 		maxRuneState = length;
 		running = true;
 		tick = 0;
+	}
+
+	public boolean isInteractable() {
+		return canInteract;
 	}
 
 	public boolean hasRuneState() {
@@ -89,6 +107,10 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		return (float) runeState / (float) maxRuneState;
 	}
 
+	public boolean isRuneCharged() {
+		return getRuneStatePerc() >= 1.0F;
+	}
+
 	public Entity getRuneTarget() {
 		return runeTarget;
 	}
@@ -99,13 +121,23 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
-		ByteBufUtils.writeUTF8String(buffer, alias.toString());
+		ByteBufUtils.writeUTF8String(buffer, alias == null ? PlayerNameAlias.Tamaized.toString() : alias.toString());
+		buffer.writeBoolean(rune);
+		if (rune) {
+			buffer.writeInt(runeTarget.getEntityId());
+			buffer.writeInt(maxRuneState);
+		}
 	}
 
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		alias = PlayerNameAlias.valueOf(ByteBufUtils.readUTF8String(additionalData));
 		profile = voidCraft.skinHandler.getGameProfile(alias);
+		rune = additionalData.readBoolean();
+		if (rune) {
+			runeTarget = world.getEntityByID(additionalData.readInt());
+			maxRuneState = additionalData.readInt();
+		}
 	}
 
 	public PlayerNameAlias getAlias() {
@@ -130,12 +162,75 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 			}
 			if (running) {
 				if (rune && runeState < maxRuneState) runeState++;
-				tick++;
 			}
 			if (tick >= finalTick) hasInteracted = true;
-			if (tick % (maxRuneState - runeState) == 0) runeRotation++;
-			if (runeRotation >= 360) runeRotation = 0;
+			sendPacketUpdates();
 		}
+		runeRotation += (int) Math.ceil(20F * getRuneStatePerc());
+		if (runeRotation >= 360) runeRotation = 0;
+		if (rune) {
+			if(runeTarget != null){
+				updateLook();
+				if (world.isRemote && isRuneCharged()) {
+					for (int i = 0; i < 10; i++) {
+						double rx = (world.rand.nextDouble() * 1.5) - 0.5;
+						double ry = (world.rand.nextDouble() * 1.5) - 0.5;
+						double rz = (world.rand.nextDouble() * 1.5) - 0.5;
+						double ox = posX;
+						double oy = posY;
+						double oz = posZ;
+						double tx = getRuneTarget().posX + rx;
+						double ty = getRuneTarget().posY + (getRuneTarget().height / 2.0F) + ry;
+						double tz = getRuneTarget().posZ + rz;
+						Vec3d vec = getLookVec();
+						double offsetX = (vec.xCoord * 1);
+						double offsetY = 1.5;
+						double offsetZ = (vec.zCoord * 1);
+						double dx = ox - (tx - offsetX);
+						double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
+						double dz = oz - (tz - offsetZ);
+						Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
+					}
+				}
+			}else{
+				setDead();
+			}
+		}
+		tick++;
+	}
+
+	private void sendPacketUpdates() {
+		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.GHOSTPLAYER_UPDATES));
+			outputStream.writeInt(getEntityId());
+			outputStream.writeBoolean(rune);
+			outputStream.writeInt(runeTarget.getEntityId());
+			outputStream.writeInt(runeState);
+			outputStream.writeInt(maxRuneState);
+			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+			voidCraft.channel.sendToAllAround(packet, new TargetPoint(dimension, posX, posY, posZ, 32 * 8));
+			bos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void decodePacket(ByteBufInputStream stream) throws IOException {
+		rune = stream.readBoolean();
+		runeTarget = world.getEntityByID(stream.readInt());
+		runeState = stream.readInt();
+		maxRuneState = stream.readInt();
+	}
+
+	private void updateLook() {
+		getLookHelper().setLookPosition(runeTarget.posX, runeTarget.posY + (double) runeTarget.getEyeHeight(), runeTarget.posZ, 10.0F, (float) getVerticalFaceSpeed());
+		double d0 = runeTarget.posX - posX;
+		double d2 = runeTarget.posZ - posZ;
+		float f = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+		float f3 = MathHelper.wrapDegrees(f - rotationYaw);
+		rotationYaw = rotationYaw + f3;
 	}
 
 	@Override
@@ -199,6 +294,10 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias, boolean interactable) {
 		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable) : new EntityGhostPlayer(world, alias, interactable);
+	}
+
+	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias, boolean interactable, Entity target, int length) {
+		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable, target, length) : new EntityGhostPlayer(world, alias, interactable, target, length);
 	}
 
 }

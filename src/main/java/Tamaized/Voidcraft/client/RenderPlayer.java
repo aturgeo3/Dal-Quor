@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.client;
 
+import org.lwjgl.util.glu.Sphere;
+
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.handlers.CustomElytraHandler;

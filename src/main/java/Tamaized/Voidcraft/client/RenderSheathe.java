@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.Sphere;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.events.client.TextureStitch;

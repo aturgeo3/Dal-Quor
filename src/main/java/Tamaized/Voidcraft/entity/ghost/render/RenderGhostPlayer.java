@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.entity.ghost.render;
 
 import java.util.Random;
 
+import org.lwjgl.util.glu.Sphere;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import net.minecraft.client.Minecraft;
@@ -47,7 +49,12 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		ModelBiped model = (ModelBiped) getMainModel();
 		{
 			if (entity.isInteractable()) renderInteractable(entity, model);
-			if (entity.hasRuneState()) renderRuneState(entity, model);
+			GlStateManager.pushMatrix();
+			{
+				GlStateManager.translate(x, y + 2F, z);
+				if (entity.hasRuneState()) renderRuneState(entity, model);
+			}
+			GlStateManager.popMatrix();
 		}
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.5f);
 		super.doRender(entity, x, y, z, yaw, partialTicks); // Entity texture is bound here, we're free to bind whatever we want before this and not care
@@ -98,8 +105,14 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		GlStateManager.color((119F * entity.getRuneStatePerc()) / 255F, 0.0F, entity.getRuneStatePerc(), 1.0F);
 		GlStateManager.pushMatrix();
 		{
+			GlStateManager.rotate(-entity.rotationYawHead + 180, 0, 1, 0);
+			GlStateManager.rotate(30, 1, 0, 0);
 			GlStateManager.rotate(entity.getRuneRotationForRender(), 0, 0, 1);
+			GlStateManager.disableLighting();
+			GlStateManager.disableCull();
 			drawRune();
+			GlStateManager.enableCull();
+			GlStateManager.enableLighting();
 		}
 		GlStateManager.popMatrix();
 	}
@@ -109,10 +122,13 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		Tessellator tess = Tessellator.getInstance();
 		VertexBuffer vertexbuffer = tess.getBuffer();
 		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-		vertexbuffer.pos(0.0D, 256D, 0.0D).tex(0.0D, 1.0D).color(64, 64, 64, 255).endVertex();
-		vertexbuffer.pos(256D, 256D, 0.0D).tex(1.0D, 1.0D).color(64, 64, 64, 255).endVertex();
-		vertexbuffer.pos(256D, 0.0D, 0.0D).tex(1.0D, 0.0D).color(64, 64, 64, 255).endVertex();
-		vertexbuffer.pos(0.0D, 0.0D, 0.0D).tex(0.0D, 0.0D).color(64, 64, 64, 255).endVertex();
+		double x = 2.0D;
+		double y = 2.205D;
+		double z = -1.0D;
+		vertexbuffer.pos(x - 4.0D, y, z).tex(0.0D, 1.0D).endVertex();
+		vertexbuffer.pos(x, y, z).tex(1.0D, 1.0D).endVertex();
+		vertexbuffer.pos(x, y - 4.0D, z).tex(1.0D, 0.0D).endVertex();
+		vertexbuffer.pos(x - 4.0D, y - 4.0D, z).tex(0.0D, 0.0D).endVertex();
 		tess.draw();
 	}
 

@@ -10,6 +10,7 @@ import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
 import Tamaized.Voidcraft.helper.TempParticleHelper;
 import io.netty.buffer.ByteBuf;
@@ -29,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_ARMSTATE, XIA_ANIMATIONS, XIA_SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_UPDATES, XIA_ANIMATIONS, XIA_SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM, GHOSTPLAYER_UPDATES
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -60,6 +61,13 @@ public class ClientPacketHandler {
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
+			case GHOSTPLAYER_UPDATES: {
+				Entity entity = world.getEntityByID(bbis.readInt());
+				if (entity instanceof EntityGhostPlayerBase) {
+					((EntityGhostPlayerBase) entity).decodePacket(bbis);
+				}
+			}
+				break;
 			case PARTICLE: {
 				TempParticleHelper.decodePacket(bbis);
 			}
@@ -108,14 +116,12 @@ public class ClientPacketHandler {
 				}
 			}
 				break;
-			case XIA_ARMSTATE: {
+			case XIA_UPDATES: {
 				Entity entity = world.getEntityByID(bbis.readInt());
 				if (entity instanceof EntityBossXia) {
-					EntityBossXia xia = (EntityBossXia) entity;
-					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
+					((EntityBossXia) entity).decodePacket(bbis);
 				} else if (entity instanceof EntityBossXia2) {
-					EntityBossXia2 xia = (EntityBossXia2) entity;
-					xia.setArmRotations(bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), bbis.readFloat(), false);
+					((EntityBossXia2) entity).decodePacket(bbis);
 				}
 			}
 				break;

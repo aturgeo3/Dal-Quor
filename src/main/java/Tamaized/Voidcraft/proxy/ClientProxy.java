@@ -1,5 +1,9 @@
 package Tamaized.Voidcraft.proxy;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.GLU;
+import org.lwjgl.util.glu.Sphere;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
@@ -73,6 +77,7 @@ import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -84,6 +89,11 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 	public static ClientInfusionOverlayRender infusionHandler = new ClientInfusionOverlayRender();
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
+	
+	private static final ResourceLocation WHITESPACE = new ResourceLocation(voidCraft.modid + ":textures/entity/whitespace.png");
+
+	public static int sphereIdOutside;
+	public static int sphereIdInside;
 
 	@Override
 	public void preRegisters() {
@@ -164,6 +174,33 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
 		voidCraft.channel.register(new ClientPacketHandler());
+		
+
+		Sphere sphere = new Sphere();
+		// Set up paramters that are common to both outside and inside.
+		// GLU_FILL as a solid.
+		sphere.setDrawStyle(GLU.GLU_FILL);
+		// GLU_SMOOTH will try to smoothly apply lighting
+		sphere.setNormals(GLU.GLU_SMOOTH);
+		// First make the call list for the outside of the sphere
+		sphere.setOrientation(GLU.GLU_OUTSIDE);
+		sphereIdOutside = GL11.glGenLists(1);
+		// Create a new list to hold our sphere data.
+		GL11.glNewList(sphereIdOutside, GL11.GL_COMPILE);
+		// binds the texture
+		Minecraft.getMinecraft().getTextureManager().bindTexture(WHITESPACE);
+		// The drawing the sphere is automatically doing is getting added to our list. Careful, the last 2 variables
+		// control the detail, but have a massive impact on performance. 32x32 is a good balance on my machine.s
+		sphere.draw(5F, 32, 32);
+		GL11.glEndList();
+		// Now make the call list for the inside of the sphere
+		sphere.setOrientation(GLU.GLU_INSIDE);
+		sphereIdInside = GL11.glGenLists(1);
+		// Create a new list to hold our sphere data.
+		GL11.glNewList(sphereIdInside, GL11.GL_COMPILE);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(WHITESPACE);
+		sphere.draw(1F, 32, 32);
+		GL11.glEndList();
 	}
 
 }

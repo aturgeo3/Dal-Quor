@@ -3,10 +3,11 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
+import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -34,14 +35,16 @@ public class Debugger extends TamItem {
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
-			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn, false);
-			// entity.setRuneState(playerIn, 100);
+			//EntityPig pig = new EntityPig(worldIn);
+			//pig.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+			//worldIn.spawnEntity(pig);
+			EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn, false, playerIn, 20*30);
 			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			// entity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
-			// worldIn.spawnEntity(entity);
+			entity.setPositionAndUpdate(pos.getX() + 5.5, pos.getY() + 1, pos.getZ() + 0.5);
+			worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -49,8 +52,8 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
-		IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
-		if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
+		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
+		// if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
 		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));

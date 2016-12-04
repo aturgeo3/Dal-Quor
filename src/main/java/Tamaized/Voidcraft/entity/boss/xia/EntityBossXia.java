@@ -15,6 +15,7 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase3;
+import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -77,7 +78,7 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ARMSTATE));
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_UPDATES));
 			outputStream.writeInt(getEntityId());
 			outputStream.writeFloat(leftArmPitch);
 			outputStream.writeFloat(rightArmPitch);
@@ -89,6 +90,10 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void decodePacket(ByteBufInputStream stream) throws IOException{
+		setArmRotations(stream.readFloat(), stream.readFloat(), stream.readFloat(), stream.readFloat(), false);
 	}
 
 	@Override

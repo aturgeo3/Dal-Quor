@@ -3,14 +3,18 @@ package Tamaized.Voidcraft.entity.boss.xia;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase1;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase2;
+import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -48,6 +52,10 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 	 */
 	public float rightArmPitch = 0.0f;
 
+	private boolean sphereState = false;
+
+	private List<EntityGhostPlayerBase> ghostList = new ArrayList<EntityGhostPlayerBase>();
+
 	public EntityBossXia2(World par1World) {
 		super(par1World);
 		this.setInvul(true);
@@ -56,6 +64,15 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 	public EntityBossXia2(World world, Xia2BattleHandler handler) {
 		super(world, handler, false);
 		this.setInvul(true);
+	}
+
+	public void setSphereState(boolean state) {
+		sphereState = state;
+		sendPacketUpdates();
+	}
+
+	public boolean shouldSphereRender() {
+		return sphereState;
 	}
 
 	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
@@ -70,18 +87,24 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ARMSTATE));
+			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_UPDATES));
 			outputStream.writeInt(getEntityId());
 			outputStream.writeFloat(leftArmPitch);
 			outputStream.writeFloat(rightArmPitch);
 			outputStream.writeFloat(leftArmYaw);
 			outputStream.writeFloat(rightArmYaw);
+			outputStream.writeBoolean(sphereState);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
 			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			bos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void decodePacket(ByteBufInputStream stream) throws IOException {
+		setArmRotations(stream.readFloat(), stream.readFloat(), stream.readFloat(), stream.readFloat(), false);
+		setSphereState(stream.readBoolean());
 	}
 
 	@Override
@@ -119,8 +142,22 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 		}
 	}
 
+	public void addGhost(EntityGhostPlayerBase ghost) {
+		ghostList.add(ghost);
+	}
+
+	public List<EntityGhostPlayerBase> getGhostList() {
+		return ghostList;
+	}
+
+	public void clearGhosts() {
+		ghostList.clear();
+	}
+
 	@Override
 	protected void initPhase(int phase) {
+		setSphereState(false);
+		clearGhosts();
 		switch (phase) {
 			case 1: {
 				/**
@@ -143,7 +180,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 				setHealth(getMaxHealth());
 				setInvul(false);
-				// addAI(new EntityAIXiaPhase2(this, getFilters()));
+				addAI(new EntityAIXia2Phase2(this, getFilters()));
 			}
 				break;
 			case 3: {

@@ -18,6 +18,7 @@ import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.items.VadeMecum;
 import Tamaized.Voidcraft.items.VoidStar;
 import Tamaized.Voidcraft.items.VoidicDrill;
+import Tamaized.Voidcraft.items.VoidicEssence;
 import Tamaized.Voidcraft.items.VoidicSuppressor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -49,6 +50,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public static ChainedSkull ChainedSkull;
 	public static TamItem voidCloth;
 	public static TamItem voidCrystalBucket;
+	public static VoidicEssence voidicEssence;
 
 	public static TamItem quartzDust;
 	public static TamItem coalDust;
@@ -99,7 +101,8 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(ChainedSkull = new ChainedSkull(voidCraft.tabs.tabVoid, "ChainedSkull", 1));
 		modelList.add(voidCloth = new TamItem(voidCraft.tabs.tabVoid, "voidCloth", 64));
 		modelList.add(voidCrystalBucket = new TamItem(voidCraft.tabs.tabVoid, "voidCrystalBucket", 1));
-
+		modelList.add(voidicEssence = new VoidicEssence(voidCraft.tabs.tabVoid, "voidicEssence", 1));
+		
 		// dust
 		modelList.add(quartzDust = new TamItem(voidCraft.tabs.tabVoid, "quartzDust", 64));
 		modelList.add(coalDust = new TamItem(voidCraft.tabs.tabVoid, "coalDust", 64));
