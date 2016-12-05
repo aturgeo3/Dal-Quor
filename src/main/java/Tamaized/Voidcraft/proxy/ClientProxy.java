@@ -36,6 +36,8 @@ import Tamaized.Voidcraft.entity.boss.twins.render.RenderDol;
 import Tamaized.Voidcraft.entity.boss.twins.render.RenderZol;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia;
@@ -89,7 +91,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 	public static ClientInfusionOverlayRender infusionHandler = new ClientInfusionOverlayRender();
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
-	
+
 	private static final ResourceLocation WHITESPACE = new ResourceLocation(voidCraft.modid + ":textures/entity/whitespace.png");
 
 	public static int sphereIdOutside;
@@ -141,7 +143,6 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobSpectreChain.class, new RenderSpectreChain(new ModelSpectreChain(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobVoidWrath.class, new RenderVoidWrath(new ModelVoidWrath(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossCorruptedPawn.class, new RenderCorruptedPawn(new ModelCorruptedPawn(), shadowSize));
-		// npcs
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossHerobrine.class, new RenderHerobrine(new ModelHerobrine(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossDol.class, new RenderDol(new ModelTwins(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossZol.class, new RenderZol(new ModelTwins(), shadowSize));
@@ -153,6 +154,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new RenderWitherSkull(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new RenderHerobrineShadow(new ModelHerobrine()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWitherbrine.class, new RenderWitherbrine(Minecraft.getMinecraft().getRenderManager()));
 
 		// Projectiles and MISC.
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
@@ -174,7 +176,6 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
 		voidCraft.channel.register(new ClientPacketHandler());
-		
 
 		Sphere sphere = new Sphere();
 		// Set up paramters that are common to both outside and inside.
