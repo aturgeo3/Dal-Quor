@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer.LayerEnderDragonXiaDeath;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer.LayerEnderDragonXiaEyes;
@@ -83,6 +84,7 @@ public class RenderDragonXia extends RenderLiving<EntityDragonXia> {
 	 */
 	@Override
 	public void doRender(EntityDragonXia entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
 		if (entity.healingEnderCrystal != null) {

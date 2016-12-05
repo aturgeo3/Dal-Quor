@@ -3,6 +3,9 @@ package Tamaized.Voidcraft.entity.boss.xia.finalphase;
 import java.util.Iterator;
 import java.util.List;
 
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEndPortal;
 import net.minecraft.entity.Entity;
@@ -27,13 +30,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenEndPodium;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia, IMob {
+public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia, IMob, IAlternateBoss {
+	
 	public double targetX;
 	public double targetY;
 	public double targetZ;
@@ -64,6 +71,8 @@ public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia
 	public int deathTicks;
 	/** The current endercrystal that is healing this dragon */
 	public EntityEnderCrystal healingEnderCrystal;
+	
+	public final AlternateBossBarWrapper bossBarWrapper;
 
 	public EntityDragonXia(World p_i1700_1_) {
 		super(p_i1700_1_);
@@ -74,6 +83,7 @@ public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia
 		this.isImmuneToFire = true;
 		this.targetY = 100.0D;
 		this.ignoreFrustumCheck = true;
+		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 	}
 
 	@Override
@@ -587,6 +597,16 @@ public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia
 		}
 
 		return (float) d0;
+	}
+
+	@Override
+	public float getHealthPerc() {
+		return getHealth() / getMaxHealth();
+	}
+
+	@Override
+	public ITextComponent getAlternateBossName() {
+		return new TextComponentString("Ender Dragon");
 	}
 
 }

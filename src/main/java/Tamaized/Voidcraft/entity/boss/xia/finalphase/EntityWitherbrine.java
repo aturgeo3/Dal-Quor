@@ -7,7 +7,12 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -42,14 +47,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
+public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IAlternateBoss {
+
 	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
@@ -63,13 +70,15 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 	private final int[] idleHeadUpdates = new int[2];
 	/** Time before the Wither tries to break blocks */
 	private int blockBreakCounter;
-	private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+	//private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
 		@Override
 		public boolean apply(@Nullable Entity p_apply_1_) {
-			return p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
+			return p_apply_1_ instanceof EntityDragonXia && p_apply_1_ instanceof EntityVoidBoss && p_apply_1_ instanceof EntityVoidNPC &&p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
 		}
 	};
+	
+	public final AlternateBossBarWrapper bossBarWrapper;
 
 	public EntityWitherbrine(World worldIn) {
 		super(worldIn);
@@ -78,6 +87,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 		this.isImmuneToFire = true;
 		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
 		this.experienceValue = 50;
+		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 	}
 
 	@Override
@@ -123,7 +133,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 		this.setInvulTime(compound.getInteger("Invul"));
 
 		if (this.hasCustomName()) {
-			this.bossInfo.setName(this.getDisplayName());
+			//this.bossInfo.setName(this.getDisplayName());
 		}
 	}
 
@@ -317,7 +327,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 				--this.blockBreakCounter;
 
 				if (this.blockBreakCounter == 0 && this.world.getGameRules().getBoolean("mobGriefing")) {
-					int i1 = MathHelper.floor(this.posY);
+				/*	int i1 = MathHelper.floor(this.posY);
 					int l1 = MathHelper.floor(this.posX);
 					int i2 = MathHelper.floor(this.posZ);
 					boolean flag = false;
@@ -341,7 +351,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 
 					if (flag) {
 						this.world.playEvent((EntityPlayer) null, 1022, new BlockPos(this), 0);
-					}
+					}*/
 				}
 			}
 
@@ -349,7 +359,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 				this.heal(1.0F);
 			}
 
-			this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+			//this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		}
 	}
 
@@ -377,7 +387,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 	@Override
 	public void addTrackingPlayer(EntityPlayerMP player) {
 		super.addTrackingPlayer(player);
-		this.bossInfo.addPlayer(player);
+		//this.bossInfo.addPlayer(player);
 	}
 
 	/**
@@ -386,7 +396,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 	@Override
 	public void removeTrackingPlayer(EntityPlayerMP player) {
 		super.removeTrackingPlayer(player);
-		this.bossInfo.removePlayer(player);
+		//this.bossInfo.removePlayer(player);
 	}
 
 	private double getHeadX(int p_82214_1_) {
@@ -616,5 +626,15 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob {
 		public boolean shouldExecute() {
 			return EntityWitherbrine.this.getInvulTime() > 0;
 		}
+	}
+
+	@Override
+	public float getHealthPerc() {
+		return getHealth() / getMaxHealth();
+	}
+
+	@Override
+	public ITextComponent getAlternateBossName() {
+		return new TextComponentString("Witherbrine");
 	}
 }

@@ -1,15 +1,15 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.ModelWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderWitherbrine;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class LayerWitherbrineAura implements LayerRenderer<EntityWither> {
+public class LayerWitherbrineAura implements LayerRenderer<EntityWitherbrine> {
 	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(voidCraft.modid, "textures/entity/witherbrine/wither_armor.png");
 	private final RenderWitherbrine witherRenderer;
 	private final ModelWitherbrine witherModel = new ModelWitherbrine(0.5F);
@@ -18,7 +18,7 @@ public class LayerWitherbrineAura implements LayerRenderer<EntityWither> {
 		this.witherRenderer = witherRendererIn;
 	}
 
-	public void doRenderLayer(EntityWither entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void doRenderLayer(EntityWitherbrine entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		if (entitylivingbaseIn.isArmored()) {
 			GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());
 			this.witherRenderer.bindTexture(WITHER_ARMOR);

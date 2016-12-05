@@ -4,9 +4,9 @@ import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.boss.dragon.phase.PhaseList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -33,7 +33,10 @@ public class Debugger extends TamItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			// EntityWitherbrine entity = new EntityWitherbrine(worldIn);
+			EntityWitherbrine wither = new EntityWitherbrine(worldIn);
+			wither.setPositionAndUpdate(pos.getX(), pos.getY() + 5, pos.getZ());
+			wither.ignite();
+			worldIn.spawnEntity(wither);
 			EntityDragonXia entity = new EntityDragonXia(worldIn);
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
 			// EntityPig pig = new EntityPig(worldIn);
@@ -45,7 +48,6 @@ public class Debugger extends TamItem {
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			entity.setPositionAndUpdate(pos.getX() + 5.5, pos.getY() + 1, pos.getZ() + 0.5);
-			// entity.ignite();
 			worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
