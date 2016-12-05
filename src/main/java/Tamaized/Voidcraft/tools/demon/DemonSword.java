@@ -1,12 +1,13 @@
 package Tamaized.Voidcraft.tools.demon;
 
+import Tamaized.TamModized.tools.TamSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import Tamaized.TamModized.tools.TamSword;
-import Tamaized.Voidcraft.voidCraft;
+import net.minecraft.util.DamageSource;
 
 public class DemonSword extends TamSword {
 

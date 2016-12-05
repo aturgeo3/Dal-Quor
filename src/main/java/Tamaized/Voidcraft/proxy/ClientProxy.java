@@ -36,7 +36,9 @@ import Tamaized.Voidcraft.entity.boss.twins.render.RenderDol;
 import Tamaized.Voidcraft.entity.boss.twins.render.RenderZol;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderDragonXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
@@ -155,6 +157,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new RenderHerobrineShadow(new ModelHerobrine()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWitherbrine.class, new RenderWitherbrine(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonXia.class, new RenderDragonXia(Minecraft.getMinecraft().getRenderManager()));
 
 		// Projectiles and MISC.
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
