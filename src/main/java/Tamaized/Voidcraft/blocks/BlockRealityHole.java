@@ -5,6 +5,7 @@ import java.util.Random;
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -54,7 +55,7 @@ public class BlockRealityHole extends TamBlock {
 						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}
 				}
-			} else if (!(entityIn instanceof EntityVoidBoss)) entityIn.setDead();
+			} else if (!(entityIn instanceof EntityVoidBoss) && !(entityIn instanceof IAlternateBoss)) entityIn.setDead();
 		}
 	}
 

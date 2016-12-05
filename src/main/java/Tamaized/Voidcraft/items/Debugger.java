@@ -33,11 +33,6 @@ public class Debugger extends TamItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			EntityWitherbrine wither = new EntityWitherbrine(worldIn);
-			wither.setPositionAndUpdate(pos.getX(), pos.getY() + 5, pos.getZ());
-			wither.ignite();
-			worldIn.spawnEntity(wither);
-			EntityDragonXia entity = new EntityDragonXia(worldIn);
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
 			// EntityPig pig = new EntityPig(worldIn);
 			// pig.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
@@ -47,8 +42,8 @@ public class Debugger extends TamItem {
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			entity.setPositionAndUpdate(pos.getX() + 5.5, pos.getY() + 1, pos.getZ() + 0.5);
-			worldIn.spawnEntity(entity);
+			//entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
+			//worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -56,6 +51,14 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
+		EntityWitherbrine wither = new EntityWitherbrine(worldIn);
+		wither.setPositionAndUpdate(playerIn.posX, playerIn.posY, playerIn.posZ);
+		wither.ignite();
+		worldIn.spawnEntity(wither);
+		EntityDragonXia dragon = new EntityDragonXia(worldIn);
+		dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
+		worldIn.spawnEntity(dragon);
+		
 		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
 		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();

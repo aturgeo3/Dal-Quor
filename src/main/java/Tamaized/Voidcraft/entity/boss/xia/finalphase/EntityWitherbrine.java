@@ -74,7 +74,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
 		@Override
 		public boolean apply(@Nullable Entity p_apply_1_) {
-			return p_apply_1_ instanceof EntityDragonXia && p_apply_1_ instanceof EntityVoidBoss && p_apply_1_ instanceof EntityVoidNPC &&p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
+			return !(p_apply_1_ instanceof EntityDragonXia) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
 		}
 	};
 	
@@ -99,7 +99,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, false, NOT_UNDEAD));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, false, false, NOT_UNDEAD));
 	}
 
 	@Override
@@ -159,27 +159,33 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	public void onLivingUpdate() {
 		this.motionY *= 0.6000000238418579D;
 
-		if (!this.world.isRemote && this.getWatchedTargetId(0) > 0) {
-			Entity entity = this.world.getEntityByID(this.getWatchedTargetId(0));
+		if (!this.world.isRemote) {
+			if(this.getWatchedTargetId(0) > 0){
+				Entity entity = this.world.getEntityByID(this.getWatchedTargetId(0));
 
-			if (entity != null) {
-				if (this.posY < entity.posY || !this.isArmored() && this.posY < entity.posY + 5.0D) {
-					if (this.motionY < 0.0D) {
-						this.motionY = 0.0D;
+				if (entity != null) {
+					if (this.posY < entity.posY || !this.isArmored() && this.posY < entity.posY + 5.0D) {
+						if (this.motionY < 0.0D) {
+							this.motionY = 0.0D;
+						}
+
+						this.motionY += (0.5D - this.motionY) * 0.6000000238418579D;
 					}
 
-					this.motionY += (0.5D - this.motionY) * 0.6000000238418579D;
-				}
+					double d0 = entity.posX - this.posX;
+					double d1 = entity.posZ - this.posZ;
+					double d3 = d0 * d0 + d1 * d1;
 
-				double d0 = entity.posX - this.posX;
-				double d1 = entity.posZ - this.posZ;
-				double d3 = d0 * d0 + d1 * d1;
-
-				if (d3 > 9.0D) {
-					double d5 = (double) MathHelper.sqrt(d3);
-					this.motionX += (d0 / d5 * 0.5D - this.motionX) * 0.6000000238418579D;
-					this.motionZ += (d1 / d5 * 0.5D - this.motionZ) * 0.6000000238418579D;
+					if (d3 > 9.0D) {
+						double d5 = (double) MathHelper.sqrt(d3);
+						this.motionX += (d0 / d5 * 0.5D - this.motionX) * 0.6000000238418579D;
+						this.motionZ += (d1 / d5 * 0.5D - this.motionZ) * 0.6000000238418579D;
+					}
+				}else{
+					motionY = 0;
 				}
+			}else{
+				motionY = 0;
 			}
 		}
 
@@ -233,6 +239,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		}
 
 		if (this.getInvulTime() > 0) {
+			motionY = 0;
 			for (int i1 = 0; i1 < 3; ++i1) {
 				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + this.rand.nextGaussian(), this.posY + (double) (this.rand.nextFloat() * 3.3F), this.posZ + this.rand.nextGaussian(), 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D, new int[0]);
 			}

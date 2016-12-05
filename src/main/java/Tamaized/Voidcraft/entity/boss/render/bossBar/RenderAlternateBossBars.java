@@ -27,7 +27,7 @@ public class RenderAlternateBossBars {
 
 	public static void render(ScaledResolution scaledResolution, float partialTicks) {
 		int i = scaledResolution.getScaledWidth();
-		int j = 36;// 12;
+		int j = 40;// 12;
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		for (AlternateBossBarWrapper wrapper : wrapperList) {
 			Minecraft.getMinecraft().getTextureManager().bindTexture(GUI_BARS_TEXTURES);
@@ -50,7 +50,7 @@ public class RenderAlternateBossBars {
 			drawTexturedModalRect(x, y, 0, 80 + (wrapper.overlay.ordinal() - 1) * 5 * 2, 182, 5, 0);
 		}
 
-		int i = (int) (wrapper.getHealthPerc() * 183.0F);
+		int i = (int) (wrapper.getHealthPerc() * 183.0F)-1;
 
 		if (i > 0) {
 			drawTexturedModalRect(x, y, 0, wrapper.color.ordinal() * 5 * 2 + 5, i, 5, 0);

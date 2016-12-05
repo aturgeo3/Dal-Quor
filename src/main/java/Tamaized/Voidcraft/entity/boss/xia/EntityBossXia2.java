@@ -68,7 +68,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 
 	public void setSphereState(boolean state) {
 		sphereState = state;
-		sendPacketUpdates();
+		if (!world.isRemote) sendPacketUpdates();
 	}
 
 	public boolean shouldSphereRender() {
@@ -95,7 +95,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 			outputStream.writeFloat(rightArmYaw);
 			outputStream.writeBoolean(sphereState);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 32 * 6));
 			bos.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -64,11 +64,12 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 		if (getEntity().shouldSphereRender()) {
 			List<EntityGhostPlayerBase> list = getEntity().getGhostList();
 			if (list.size() < 3) {
-				if (tick % (actionTick) == 0){
+				if (tick % (actionTick) == 0) {
 					ItemStack stack = new ItemStack(voidCraft.items.voidicEssence);
 					stack.getOrCreateSubCompound(voidCraft.modid).setInteger("xia", getEntity().getEntityId());
 					stack.getOrCreateSubCompound(voidCraft.modid).setInteger("phase", 2);
 					EntityItem item = new EntityItem(world, getEntity().posX, getEntity().posY, getEntity().posZ, stack);
+					item.addVelocity((world.rand.nextDouble() * 1) - 0.5, 0.5, (world.rand.nextDouble() * 1) - 0.5);
 					world.spawnEntity(item);
 				}
 			} else {

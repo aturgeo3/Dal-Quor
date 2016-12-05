@@ -41,9 +41,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia, IMob, IAlternateBoss {
 	
-	public double targetX;
-	public double targetY;
-	public double targetZ;
+	public double targetX = 52;
+	public double targetY = 120;
+	public double targetZ = 155;
 	/** Ring buffer array for the last 64 Y-positions and yaw rotations. Used to calculate offsets for the animations. */
 	public double[][] ringBuffer = new double[64][3];
 	/** Index into the ring buffer. Incremented once per tick and restarts at 0 once it reaches the end of the buffer. */
@@ -426,9 +426,9 @@ public class EntityDragonXia extends EntityLiving implements IEntityMultiPartXia
 			boolean flag = false;
 
 			do {
-				this.targetX = 0.0D;
-				this.targetY = (double) (70.0F + this.rand.nextFloat() * 50.0F);
-				this.targetZ = 0.0D;
+				this.targetX = 52.0D;
+				this.targetY = 120;
+				this.targetZ = 155.0D;
 				this.targetX += (double) (this.rand.nextFloat() * 120.0F - 60.0F);
 				this.targetZ += (double) (this.rand.nextFloat() * 120.0F - 60.0F);
 				double d0 = this.posX - this.targetX;
