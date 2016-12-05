@@ -58,6 +58,7 @@ public class VoidCraftAchievements implements ITamRegistry {
 		voidCraftAchMainLine_5.registerStat();
 		voidCraftAchMainLine_6 = new Achievement("achievement.achM_6", "achM_6", 4, 9, voidCraft.blocks.blockPortalXia, voidCraftAchMainLine_5);
 		voidCraftAchMainLine_6.registerStat();
+		//7 Ascension
 		
 		voidCraftAchSideLine1_1 = new Achievement("achievement.achS1_1", "achS1_1", 3, 0, voidCraft.tools.voidSword, voidCraftAchMainLine_1);
 		voidCraftAchSideLine1_1.registerStat();
