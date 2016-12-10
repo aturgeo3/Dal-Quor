@@ -62,8 +62,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		for (Class c : getFilters())
 			tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
 	}
-	
-	public T getHandler(){
+
+	public T getHandler() {
 		return handler;
 	}
 
@@ -203,18 +203,15 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	 */
 	@Override
 	public void onDeath(DamageSource p_70645_1_) { // Switch phases when we fake death
-		if (phase > maxPhases()) {
-			deathHook();
-			setHealth(0);
-			isDead = true;
-			super.onDeath(p_70645_1_);
-			setDead();
-		} else {
-			ready = true;
-			updateAI();
-		}
+		if (phase >= maxPhases()) deathHook();
+		// setHealth(0);
+		// isDead = true;
+		// super.onDeath(p_70645_1_);
+		// setDead();
+		ready = true;
+		updateAI();
 	}
-	
+
 	/**
 	 * called upon a true death for bosses to do final tasks such as drop items
 	 */

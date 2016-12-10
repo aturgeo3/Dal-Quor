@@ -28,6 +28,7 @@ import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityStorage;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -40,6 +41,8 @@ import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityZolXia;
+import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.EntityDolXia;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.mob.EntityMobLich;
@@ -309,7 +312,10 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityGhostBiped.class, "GhostBiped", this, modid, 64, 1, true);
 		registerEntityWithEgg(EntityHerobrineCreeper.class, "HerobrineCreeper", this, modid, 64, 1, true, 0xFF0000, 0x000000);
 		registerEntity(EntityWitherbrine.class, "Witherbrine", this, modid, 64, 1, true);
+		registerEntity(EntityDragonOld.class, "DragonOld", this, modid, 64, 1, true);
 		registerEntity(EntityDragonXia.class, "DragonXia", this, modid, 64, 1, true);
+		registerEntity(EntityDolXia.class, "DolXia", this, modid, 64, 1, true);
+		registerEntity(EntityZolXia.class, "ZolXia", this, modid, 64, 1, true);
 
 		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));

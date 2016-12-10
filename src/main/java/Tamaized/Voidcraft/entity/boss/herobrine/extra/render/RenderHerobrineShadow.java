@@ -13,7 +13,7 @@ import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 
 public class RenderHerobrineShadow<T extends EntityHerobrineShadow> extends Render<T> {
 
-	private static final ResourceLocation Herobrine_Texture = new ResourceLocation("VoidCraft:textures/entity/Herobrine.png"); // refers to:assets/yourmod/textures/entity/yourtexture.png
+	private static final ResourceLocation Herobrine_Texture = new ResourceLocation("VoidCraft:textures/entity/herobrine.png"); // refers to:assets/yourmod/textures/entity/yourtexture.png
 	protected ModelBase mainModel;
 
 	public RenderHerobrineShadow(ModelBase par1ModelBase) {

@@ -1,10 +1,13 @@
 package Tamaized.Voidcraft.entity.boss.twins;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
+import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -106,6 +109,16 @@ public class EntityBossZol extends EntityVoidBoss<TwinsBattleHandler> {
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TextComponentString("Zol");
+	}
+
+	@Override
+	protected void encodePacketData(DataOutputStream stream) throws IOException {
+		
+	}
+
+	@Override
+	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+		
 	}
 
 }

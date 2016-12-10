@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.entity.boss.herobrine.extra;
 
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -37,7 +37,7 @@ public class EntityHerobrineFireball extends EntityFireball {
 	 */
 	@Override
 	protected void onImpact(RayTraceResult p_70227_1_) {
-		if (!this.world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityBossXia2)) {
+		if (!this.world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityVoidBoss)) {
 			if (p_70227_1_.entityHit != null) {
 				p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
 			} else if (p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK) {

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer;
+package Tamaized.Voidcraft.entity.boss.dragon.render.layer;
 
 import java.util.Random;
 
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,10 +10,10 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
-public class LayerEnderDragonXiaDeath implements LayerRenderer<EntityDragonXia> {
+public class LayerEnderDragonOldDeath implements LayerRenderer<EntityDragonOld> {
 
 	@Override
-	public void doRenderLayer(EntityDragonXia entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void doRenderLayer(EntityDragonOld entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		if (entitylivingbaseIn.deathTicks > 0) {
 			Tessellator tessellator = Tessellator.getInstance();
 			VertexBuffer vertexbuffer = tessellator.getBuffer();

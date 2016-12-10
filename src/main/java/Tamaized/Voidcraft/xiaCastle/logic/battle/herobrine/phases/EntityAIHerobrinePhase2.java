@@ -37,8 +37,12 @@ public class EntityAIHerobrinePhase2<T extends EntityBossHerobrine> extends Enti
 	}
 
 	@Override
-	public void Init() {
-		super.Init();
+	protected void preInit() {
+
+	}
+
+	@Override
+	protected void postInit() {
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
 				if ((x == 0 && z == 0) || Math.floor(Math.random() * 20) != 0) continue;

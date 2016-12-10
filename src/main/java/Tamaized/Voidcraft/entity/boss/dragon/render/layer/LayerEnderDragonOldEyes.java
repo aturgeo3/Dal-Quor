@@ -1,23 +1,23 @@
-package Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer;
+package Tamaized.Voidcraft.entity.boss.dragon.render.layer;
 
 import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderDragonXia;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
+import Tamaized.Voidcraft.entity.boss.dragon.render.RenderDragonOld;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerEnderDragonXiaEyes implements LayerRenderer<EntityDragonXia> {
+public class LayerEnderDragonOldEyes implements LayerRenderer<EntityDragonOld> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon_eyes.png");
-	private final RenderDragonXia dragonRenderer;
+	private final RenderDragonOld dragonRenderer;
 
-	public LayerEnderDragonXiaEyes(RenderDragonXia dragonRendererIn) {
+	public LayerEnderDragonOldEyes(RenderDragonOld dragonRendererIn) {
 		this.dragonRenderer = dragonRendererIn;
 	}
 
 	@Override
-	public void doRenderLayer(EntityDragonXia entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void doRenderLayer(EntityDragonOld entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		this.dragonRenderer.bindTexture(TEXTURE);
 		GlStateManager.enableBlend();
 		GlStateManager.disableAlpha();

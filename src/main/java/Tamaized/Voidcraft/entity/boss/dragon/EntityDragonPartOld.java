@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.entity.boss.xia.finalphase;
+package Tamaized.Voidcraft.entity.boss.dragon;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 
-public class EntityDragonPartXia extends Entity {
+public class EntityDragonPartOld extends Entity {
 	/** The dragon entity this dragon part belongs to */
-	public final IEntityMultiPartXia entityDragonObj;
+	public final IEntityMultiPartOld entityDragonObj;
 	public final String field_146032_b;
 
-	public EntityDragonPartXia(IEntityMultiPartXia p_i1697_1_, String p_i1697_2_, float p_i1697_3_, float p_i1697_4_) {
+	public EntityDragonPartOld(IEntityMultiPartOld p_i1697_1_, String p_i1697_2_, float p_i1697_3_, float p_i1697_4_) {
 		super(p_i1697_1_.getWorld());
 		this.setSize(p_i1697_3_, p_i1697_4_);
 		this.entityDragonObj = p_i1697_1_;

@@ -43,8 +43,12 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	}
 
 	@Override
-	public void Init() {
-		super.Init();
+	protected void preInit() {
+
+	}
+
+	@Override
+	protected void postInit() {
 		loc = getEntity().getPosition().add(0, 10, 0);
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {

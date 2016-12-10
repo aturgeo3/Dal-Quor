@@ -1,5 +1,7 @@
-package Tamaized.Voidcraft.entity.boss.xia.model;
+package Tamaized.Voidcraft.entity.boss.model;
 
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.EntityVoidNPC.ArmRotation;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -9,7 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelXia extends ModelBase {
+public class ModelVoidBossOverlay<T extends EntityVoidNPC> extends ModelBase {
 
 	ModelRenderer head;
 	ModelRenderer body;
@@ -28,7 +30,7 @@ public class ModelXia extends ModelBase {
 	public ModelBiped.ArmPose leftArmPose;
 	public ModelBiped.ArmPose rightArmPose;
 
-	public ModelXia() {
+	public ModelVoidBossOverlay() {
 		leftArmPose = ModelBiped.ArmPose.EMPTY;
 		rightArmPose = ModelBiped.ArmPose.EMPTY;
 
@@ -115,7 +117,7 @@ public class ModelXia extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		setAnimations((EntityBossXia) entity, 1.0f);
+		setAnimations((T) entity, 1.0f);
 		head.render(f5);
 		body.render(f5);
 		rightarm.render(f5);
@@ -135,11 +137,11 @@ public class ModelXia extends ModelBase {
 		// setAnimations((EntityBossXia) entitylivingbaseIn, partialTickTime);
 	}
 
-	private void setAnimations(EntityBossXia entity, float partialTickTime) {
-		setRotation(leftarm, Math.toRadians(entity.leftArmPitch), Math.toRadians(entity.leftArmYaw), 0.0F);
-		setRotation(rightarm, Math.toRadians(entity.rightArmPitch), Math.toRadians(entity.rightArmYaw), 0.0F);
-		setRotation(overlay_leftarm, Math.toRadians(entity.leftArmPitch), Math.toRadians(entity.leftArmYaw), 0.0F);
-		setRotation(overlay_rightarm, Math.toRadians(entity.rightArmPitch), Math.toRadians(entity.rightArmYaw), 0.0F);
+	private void setAnimations(T entity, float partialTickTime) {
+		setRotation(leftarm, Math.toRadians(entity.getArmRotation(ArmRotation.LeftPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.LeftYaw)), 0.0F);
+		setRotation(rightarm, Math.toRadians(entity.getArmRotation(ArmRotation.RightPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.RightYaw)), 0.0F);
+		setRotation(overlay_leftarm, Math.toRadians(entity.getArmRotation(ArmRotation.LeftPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.LeftYaw)), 0.0F);
+		setRotation(overlay_rightarm, Math.toRadians(entity.getArmRotation(ArmRotation.RightPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.RightYaw)), 0.0F);
 	}
 
 	private void setRotation(ModelRenderer model, double x, double y, double z) {

@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.herobrine;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
@@ -8,6 +10,7 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandle
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
+import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -146,6 +149,16 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	@Override
 	protected int maxPhases() {
 		return 3;
+	}
+
+	@Override
+	protected void encodePacketData(DataOutputStream stream) throws IOException {
+		
+	}
+
+	@Override
+	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+		
 	}
 
 }

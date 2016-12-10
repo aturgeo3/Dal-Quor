@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
+package Tamaized.Voidcraft.entity.boss.dragon.render;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
+import Tamaized.Voidcraft.entity.boss.dragon.render.layer.LayerEnderDragonOldDeath;
+import Tamaized.Voidcraft.entity.boss.dragon.render.layer.LayerEnderDragonOldEyes;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer.LayerEnderDragonXiaDeath;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer.LayerEnderDragonXiaEyes;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -15,20 +15,20 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderDragonXia extends RenderLiving<EntityDragonXia> {
+public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 
 	public static final ResourceLocation ENDERCRYSTAL_BEAM_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
 	private static final ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon_exploding.png");
 	private static final ResourceLocation DRAGON_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon.png");
 
-	public RenderDragonXia(RenderManager renderManagerIn) {
-		super(renderManagerIn, new ModelDragonXia(0.0F), 0.5F);
-		this.addLayer(new LayerEnderDragonXiaEyes(this));
-		this.addLayer(new LayerEnderDragonXiaDeath());
+	public RenderDragonOld(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelDragonOld(0.0F), 0.5F);
+		this.addLayer(new LayerEnderDragonOldEyes(this));
+		this.addLayer(new LayerEnderDragonOldDeath());
 	}
 
 	@Override
-	protected void applyRotations(EntityDragonXia entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
+	protected void applyRotations(EntityDragonOld entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
 		float f = (float) entityLiving.getMovementOffsets(7, partialTicks)[0];
 		float f1 = (float) (entityLiving.getMovementOffsets(5, partialTicks)[1] - entityLiving.getMovementOffsets(10, partialTicks)[1]);
 		GlStateManager.rotate(-f, 0.0F, 1.0F, 0.0F);
@@ -51,7 +51,7 @@ public class RenderDragonXia extends RenderLiving<EntityDragonXia> {
 	 * Renders the model in RenderLiving
 	 */
 	@Override
-	protected void renderModel(EntityDragonXia entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+	protected void renderModel(EntityDragonOld entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
 		if (entitylivingbaseIn.deathTicks > 0) {
 			float f = (float) entitylivingbaseIn.deathTicks / 200.0F;
 			GlStateManager.depthFunc(515);
@@ -83,7 +83,7 @@ public class RenderDragonXia extends RenderLiving<EntityDragonXia> {
 	 * Renders the desired {@code T} type Entity.
 	 */
 	@Override
-	public void doRender(EntityDragonXia entity, double x, double y, double z, float entityYaw, float partialTicks) {
+	public void doRender(EntityDragonOld entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
@@ -134,7 +134,7 @@ public class RenderDragonXia extends RenderLiving<EntityDragonXia> {
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(EntityDragonXia entity) {
+	protected ResourceLocation getEntityTexture(EntityDragonOld entity) {
 		return DRAGON_TEXTURES;
 	}
 }

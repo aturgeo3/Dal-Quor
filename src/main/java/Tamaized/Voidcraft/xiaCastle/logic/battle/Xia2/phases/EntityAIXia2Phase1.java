@@ -36,6 +36,16 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	}
 
 	@Override
+	protected void preInit() {
+
+	}
+
+	@Override
+	protected void postInit() {
+
+	}
+
+	@Override
 	protected void update() {
 		if (resetAnimationTick == 0) {
 			resetAnimationTick--;

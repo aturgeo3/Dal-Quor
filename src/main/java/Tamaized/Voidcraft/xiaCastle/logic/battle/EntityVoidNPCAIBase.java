@@ -29,7 +29,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 
 	protected int tick = 1;
 	private int tick_updateClosestEntity = 2 * 20;
-
+	
 	public EntityVoidNPCAIBase(T entityBoss, ArrayList<Class> c) {
 		watchedClass = new ArrayList<Class>();
 		watchedClass.addAll(c);
@@ -51,19 +51,21 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 		entity = null;
 	}
 
-	public void Init() {
+	protected abstract void preInit();
+
+	public final void Init() {
+		preInit();
 		spawnLoc[0] = entity.posX;
 		spawnLoc[1] = entity.posY;
 		spawnLoc[2] = entity.posZ;
-
+		postInit();
 		execute = true;
 	}
 
-	/**
-	 * DO NOT OVERRIDE THIS METHOD, use update() instead
-	 */
+	protected abstract void postInit();
+
 	@Override
-	public void updateTask() {
+	public final void updateTask() {
 		if (!shouldExecute() || world.isRemote) return;
 		if (tick % tick_updateClosestEntity == 0) updateClosest();
 		update();
@@ -81,9 +83,6 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 		}
 	}
 
-	/**
-	 * Use this method to deal with logic updates
-	 */
 	protected abstract void update();
 
 	/**

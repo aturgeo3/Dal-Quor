@@ -123,11 +123,11 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			// GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			
-			//GlStateManager.scale(1, 1, 1);
+
+			// GlStateManager.scale(1, 1, 1);
 			GL11.glCallList(ClientProxy.sphereIdOutside);
 
-			//GlStateManager.scale(1, 1, 1);
+			// GlStateManager.scale(1, 1, 1);
 			GL11.glCallList(ClientProxy.sphereIdInside);
 			GL11.glDepthMask(true);
 

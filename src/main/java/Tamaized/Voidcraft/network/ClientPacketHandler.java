@@ -8,7 +8,6 @@ import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
@@ -17,11 +16,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, XIA_UPDATES, XIA_ANIMATIONS, XIA_SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM, GHOSTPLAYER_UPDATES
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, ENTITY_UPDATES, XIA_ANIMATIONS, SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM, GHOSTPLAYER_UPDATES
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -116,20 +115,16 @@ public class ClientPacketHandler {
 				}
 			}
 				break;
-			case XIA_UPDATES: {
+			case ENTITY_UPDATES: {
 				Entity entity = world.getEntityByID(bbis.readInt());
-				if (entity instanceof EntityBossXia) {
-					((EntityBossXia) entity).decodePacket(bbis);
-				} else if (entity instanceof EntityBossXia2) {
-					((EntityBossXia2) entity).decodePacket(bbis);
-				}
+				if (entity instanceof IEntitySync) ((IEntitySync) entity).decodePacket(bbis);
 			}
 				break;
-			case XIA_SHEATHE: {
+			case SHEATHE: {
 				Entity entity = world.getEntityByID(bbis.readInt());
-				if (entity instanceof EntityBossXia) {
-					EntityBossXia xia = (EntityBossXia) entity;
-					xia.addPotionEffect(new PotionEffect(Potion.getPotionById(bbis.readInt()), bbis.readInt()));
+				if (entity instanceof EntityLivingBase) {
+					EntityLivingBase living = (EntityLivingBase) entity;
+					living.addPotionEffect(new PotionEffect(Potion.getPotionById(bbis.readInt()), bbis.readInt()));
 				}
 			}
 				break;

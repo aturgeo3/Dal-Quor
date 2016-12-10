@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.herobrine.extra;
 
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.MobEffects;
@@ -24,7 +26,7 @@ public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 	 * Called when this EntityFireball hits a block or entity.
 	 */
 	protected void onImpact(RayTraceResult result) {
-		if (!world.isRemote) {
+		if (!world.isRemote && !(result.entityHit != null && result.entityHit instanceof EntityVoidBoss)) {
 			if (result.entityHit != null) {
 				if (shootingEntity != null) {
 					if (result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(shootingEntity), 8.0F)) {

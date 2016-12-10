@@ -37,14 +37,13 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	@Override
-	public void Init() {
-		super.Init();
+	protected void preInit() {
+
+	}
+
+	@Override
+	protected void postInit() {
 		teleportationBox = new AxisAlignedBB(-18, 0, -25, 18, 5, 6);
-		// teleportLocations = new ArrayList<Double[]>();
-		// teleportLocations.add(currLoc = new Double[] { 0.0D, -0.5D, 0.0D });
-		// teleportLocations.add(new Double[] { 0.0D, -7.0D, -12.0D });
-		// teleportLocations.add(new Double[] { 16.0D, -13.0D, -12.0D });
-		// teleportLocations.add(new Double[] { -16.0D, -13.0D, -12.0D });
 	}
 
 	@Override

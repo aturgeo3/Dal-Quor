@@ -34,11 +34,14 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 	public EntityAIHerobrinePhase1(T entityMobHerobrine, ArrayList<Class> c) {
 		super(entityMobHerobrine, c);
 	}
+	
+	@Override
+	protected void preInit() {
+		
+	}
 
 	@Override
-	public void Init() {
-		super.Init();
-
+	protected void postInit() {
 		loc[0][0] = getEntity().posX + 10;
 		loc[0][1] = getEntity().posY + 10;
 		loc[0][2] = getEntity().posZ;

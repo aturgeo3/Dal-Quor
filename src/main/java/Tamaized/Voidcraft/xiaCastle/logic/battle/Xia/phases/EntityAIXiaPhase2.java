@@ -42,11 +42,16 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 	@Override
 	protected void updateClosest() {
+
 	}
 
 	@Override
-	public void Init() {
-		super.Init();
+	protected void preInit() {
+
+	}
+
+	@Override
+	public void postInit() {
 		teleportationBox = new AxisAlignedBB(-18, 0, -25, 18, 5, 6);
 	}
 

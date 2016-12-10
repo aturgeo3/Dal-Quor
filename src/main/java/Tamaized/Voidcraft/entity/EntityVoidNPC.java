@@ -1,5 +1,10 @@
 package Tamaized.Voidcraft.entity;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import Tamaized.Voidcraft.network.IEntitySync;
+import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -20,7 +25,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public abstract class EntityVoidNPC extends EntityCreature implements IMob {
+public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEntitySync {
 
 	private boolean invulnerable = false;
 	protected boolean canDie = true;
@@ -30,10 +35,35 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	private int[] spawnLoc;
 	private boolean firstSpawn = true;
 
+	/**
+	 * Degrees
+	 */
+	private float leftArmYaw = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	private float leftArmPitch = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	private float rightArmYaw = 0.0f;
+
+	/**
+	 * Degrees
+	 */
+	private float rightArmPitch = 0.0f;
+
+	public enum ArmRotation {
+		LeftYaw, LeftPitch, RightYaw, RightPitch
+	}
+
 	public EntityVoidNPC(World p_i1738_1_) {
 		super(p_i1738_1_);
 		experienceValue = 10;
 		ignoreFrustumCheck = true;
+		enablePersistence();
 	}
 
 	@Override
@@ -50,6 +80,47 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 	}
+
+	public final void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
+		this.leftArmYaw = leftArmYaw;
+		this.leftArmPitch = leftArmPitch;
+		this.rightArmYaw = rightArmYaw;
+		this.rightArmPitch = rightArmPitch;
+		if (sendUpdates) sendPacketUpdates();
+	}
+
+	public final float getArmRotation(ArmRotation arm) {
+		switch (arm) {
+			default:
+			case LeftPitch:
+				return leftArmPitch;
+			case LeftYaw:
+				return leftArmYaw;
+			case RightPitch:
+				return rightArmPitch;
+			case RightYaw:
+				return rightArmYaw;
+		}
+	}
+
+	@Override
+	public final void encodePacket(DataOutputStream stream) throws IOException {
+		stream.writeFloat(leftArmPitch);
+		stream.writeFloat(rightArmPitch);
+		stream.writeFloat(leftArmYaw);
+		stream.writeFloat(rightArmYaw);
+		encodePacketData(stream);
+	}
+
+	protected abstract void encodePacketData(DataOutputStream stream) throws IOException;
+
+	@Override
+	public final void decodePacket(ByteBufInputStream stream) throws IOException {
+		setArmRotations(stream.readFloat(), stream.readFloat(), stream.readFloat(), stream.readFloat(), false);
+		decodePacketData(stream);
+	}
+
+	protected abstract void decodePacketData(ByteBufInputStream stream) throws IOException;
 
 	/**
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
@@ -273,5 +344,15 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob {
 	@Override
 	protected void despawnEntity() {
 
+	}
+
+	@Override
+	protected boolean canDespawn() {
+		return false;
+	}
+
+	@Override
+	public final Entity getEntity() {
+		return this;
 	}
 }

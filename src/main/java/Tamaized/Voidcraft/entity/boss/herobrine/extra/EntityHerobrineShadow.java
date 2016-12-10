@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.herobrine.extra;
 
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
@@ -49,7 +51,7 @@ public class EntityHerobrineShadow extends EntityHerobrineFireball {
 	 */
 	@Override
 	protected void onImpact(RayTraceResult p_70227_1_) {
-		if (!world.isRemote) {
+		if (!world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityVoidBoss)) {
 			if (p_70227_1_.entityHit != null) {
 				p_70227_1_.entityHit.attackEntityFrom(DamageSource.magic, 15.0F);
 			} else if (p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK) {

@@ -3,9 +3,8 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,8 +41,8 @@ public class Debugger extends TamItem {
 			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			//entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
-			//worldIn.spawnEntity(entity);
+			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
+			// worldIn.spawnEntity(entity);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -51,17 +50,23 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
-		EntityWitherbrine wither = new EntityWitherbrine(worldIn);
-		wither.setPositionAndUpdate(playerIn.posX, playerIn.posY, playerIn.posZ);
-		wither.ignite();
-		worldIn.spawnEntity(wither);
-		EntityDragonXia dragon = new EntityDragonXia(worldIn);
-		dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
-		worldIn.spawnEntity(dragon);
-		
+		// EntityWitherbrine wither = new EntityWitherbrine(worldIn);
+		// wither.setPositionAndUpdate(playerIn.posX, playerIn.posY, playerIn.posZ);
+		// wither.ignite();
+		// worldIn.spawnEntity(wither);
+		// EntityDragonXia dragon = new EntityDragonXia(worldIn);
+		// dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
+		// worldIn.spawnEntity(dragon);
+		// EntityDolXia dol = new EntityDolXia(worldIn);
+		// dol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
+		// worldIn.spawnEntity(dol);
+		// EntityZolXia zol = new EntityZolXia(worldIn);
+		// zol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
+		// worldIn.spawnEntity(zol);
+
 		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// if (cap != null) cap.setInfusion(cap.getMaxInfusion() - 1);
-		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
+		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);

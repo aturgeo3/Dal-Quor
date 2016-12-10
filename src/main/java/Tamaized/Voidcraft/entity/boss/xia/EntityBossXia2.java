@@ -9,11 +9,13 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.network.IEntitySync;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase2;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
@@ -30,27 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
-public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
-
-	/**
-	 * Degrees
-	 */
-	public float leftArmYaw = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float leftArmPitch = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float rightArmYaw = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float rightArmPitch = 0.0f;
+public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements IEntitySync {
 
 	private boolean sphereState = false;
 
@@ -75,35 +57,13 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 		return sphereState;
 	}
 
-	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
-		this.leftArmYaw = leftArmYaw;
-		this.leftArmPitch = leftArmPitch;
-		this.rightArmYaw = rightArmYaw;
-		this.rightArmPitch = rightArmPitch;
-		if (sendUpdates) sendPacketUpdates();
+	@Override
+	protected void encodePacketData(DataOutputStream stream) throws IOException {
+		stream.writeBoolean(sphereState);
 	}
 
-	private void sendPacketUpdates() {
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_UPDATES));
-			outputStream.writeInt(getEntityId());
-			outputStream.writeFloat(leftArmPitch);
-			outputStream.writeFloat(rightArmPitch);
-			outputStream.writeFloat(leftArmYaw);
-			outputStream.writeFloat(rightArmYaw);
-			outputStream.writeBoolean(sphereState);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 32 * 6));
-			bos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void decodePacket(ByteBufInputStream stream) throws IOException {
-		setArmRotations(stream.readFloat(), stream.readFloat(), stream.readFloat(), stream.readFloat(), false);
+	@Override
+	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
 		setSphereState(stream.readBoolean());
 	}
 
@@ -129,7 +89,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
-				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_SHEATHE));
+				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
 				outputStream.writeInt(getEntityId());
 				outputStream.writeInt(Potion.getIdFromPotion(pot));
 				outputStream.writeInt(potioneffectIn.getDuration());
@@ -160,39 +120,30 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 		clearGhosts();
 		switch (phase) {
 			case 1: {
-				/**
-				 * Cycle: - Teleports around, does various attacks, can be hit directly
-				 */
 				isFlying = true;
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 				setHealth(getMaxHealth());
 				// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 				setInvul(false);
-				addAI(new EntityAIXia2Phase1(this, getFilters()));
+				//addAI(new EntityAIXia2Phase1(this, getFilters()));
 			}
 				break;
 			case 2: {
-				/**
-				 * Cycle: - Teleports a short distance from a target player, walks towards them with a demonic sword.
-				 */
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 				setHealth(getMaxHealth());
 				setInvul(false);
-				addAI(new EntityAIXia2Phase2(this, getFilters()));
+				//addAI(new EntityAIXia2Phase2(this, getFilters()));
 			}
 				break;
 			case 3: {
-				/**
-				 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back His attacks may involve the Vade Mecum spells
-				 */
 				isFlying = true;
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 				setHealth(getMaxHealth());
 				setInvul(false);
-				// addAI(new EntityAIXiaPhase3(this, getFilters()));
+				addAI(new EntityAIXia2Phase3(this, getFilters()));
 			}
 				break;
 			default:
@@ -257,4 +208,5 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 	protected int maxPhases() {
 		return 3;
 	}
+
 }

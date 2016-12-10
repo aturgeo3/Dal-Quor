@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.entity.boss.xia.model;
 
-import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.EntityVoidNPC.ArmRotation;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,10 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
-/**
- * XiaForm2 - Tamaized Created using Tabula 5.1.0
- */
-public class ModelXia2 extends ModelBase {
+public class ModelXia2<T extends EntityVoidNPC> extends ModelBase {
 
 	public ModelRenderer Head;
 	public ModelRenderer Body;
@@ -52,7 +50,7 @@ public class ModelXia2 extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		setAnimations((EntityBossXia2) entity, 1.0f);
+		setAnimations((T) entity, 1.0f);
 
 		this.LeftArm.render(f5);
 		this.Head.render(f5);
@@ -60,9 +58,9 @@ public class ModelXia2 extends ModelBase {
 		this.Body.render(f5);
 	}
 
-	private void setAnimations(EntityBossXia2 entity, float partialTickTime) {
-		setRotation(LeftArm, Math.toRadians(entity.leftArmPitch), Math.toRadians(entity.leftArmYaw), 0.0F);
-		setRotation(RightArm, Math.toRadians(entity.rightArmPitch), Math.toRadians(entity.rightArmYaw), 0.0F);
+	private void setAnimations(T entity, float partialTickTime) {
+		setRotation(LeftArm, Math.toRadians(entity.getArmRotation(ArmRotation.LeftPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.LeftYaw)), 0.0F);
+		setRotation(RightArm, Math.toRadians(entity.getArmRotation(ArmRotation.RightPitch)), Math.toRadians(entity.getArmRotation(ArmRotation.RightYaw)), 0.0F);
 	}
 
 	private void setRotation(ModelRenderer model, double x, double y, double z) {

@@ -9,12 +9,13 @@ import com.google.common.base.Predicates;
 
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
+import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -70,15 +71,17 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	private final int[] idleHeadUpdates = new int[2];
 	/** Time before the Wither tries to break blocks */
 	private int blockBreakCounter;
-	//private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+	// private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
 		@Override
 		public boolean apply(@Nullable Entity p_apply_1_) {
-			return !(p_apply_1_ instanceof EntityDragonXia) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
+			return !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
 		}
 	};
-	
+
 	public final AlternateBossBarWrapper bossBarWrapper;
+
+	private EntityAIXia2Phase3 ai;
 
 	public EntityWitherbrine(World worldIn) {
 		super(worldIn);
@@ -87,7 +90,13 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.isImmuneToFire = true;
 		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
 		this.experienceValue = 50;
+		enablePersistence();
 		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
+	}
+
+	public EntityWitherbrine(World world, EntityAIXia2Phase3 entityAIXia2Phase3) {
+		this(world);
+		ai = entityAIXia2Phase3;
 	}
 
 	@Override
@@ -133,7 +142,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.setInvulTime(compound.getInteger("Invul"));
 
 		if (this.hasCustomName()) {
-			//this.bossInfo.setName(this.getDisplayName());
+			// this.bossInfo.setName(this.getDisplayName());
 		}
 	}
 
@@ -157,10 +166,13 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 */
 	@Override
 	public void onLivingUpdate() {
+		if (!world.isRemote) {
+			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3) setDead();
+		}
 		this.motionY *= 0.6000000238418579D;
 
 		if (!this.world.isRemote) {
-			if(this.getWatchedTargetId(0) > 0){
+			if (this.getWatchedTargetId(0) > 0) {
 				Entity entity = this.world.getEntityByID(this.getWatchedTargetId(0));
 
 				if (entity != null) {
@@ -181,10 +193,10 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 						this.motionX += (d0 / d5 * 0.5D - this.motionX) * 0.6000000238418579D;
 						this.motionZ += (d1 / d5 * 0.5D - this.motionZ) * 0.6000000238418579D;
 					}
-				}else{
+				} else {
 					motionY = 0;
 				}
-			}else{
+			} else {
 				motionY = 0;
 			}
 		}
@@ -334,31 +346,9 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 				--this.blockBreakCounter;
 
 				if (this.blockBreakCounter == 0 && this.world.getGameRules().getBoolean("mobGriefing")) {
-				/*	int i1 = MathHelper.floor(this.posY);
-					int l1 = MathHelper.floor(this.posX);
-					int i2 = MathHelper.floor(this.posZ);
-					boolean flag = false;
-
-					for (int k2 = -1; k2 <= 1; ++k2) {
-						for (int l2 = -1; l2 <= 1; ++l2) {
-							for (int j = 0; j <= 3; ++j) {
-								int i3 = l1 + k2;
-								int k = i1 + j;
-								int l = i2 + l2;
-								BlockPos blockpos = new BlockPos(i3, k, l);
-								IBlockState iblockstate = this.world.getBlockState(blockpos);
-								Block block = iblockstate.getBlock();
-
-								if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this)) {
-									flag = this.world.destroyBlock(blockpos, true) || flag;
-								}
-							}
-						}
-					}
-
-					if (flag) {
-						this.world.playEvent((EntityPlayer) null, 1022, new BlockPos(this), 0);
-					}*/
+					/*
+					 * int i1 = MathHelper.floor(this.posY); int l1 = MathHelper.floor(this.posX); int i2 = MathHelper.floor(this.posZ); boolean flag = false; for (int k2 = -1; k2 <= 1; ++k2) { for (int l2 = -1; l2 <= 1; ++l2) { for (int j = 0; j <= 3; ++j) { int i3 = l1 + k2; int k = i1 + j; int l = i2 + l2; BlockPos blockpos = new BlockPos(i3, k, l); IBlockState iblockstate = this.world.getBlockState(blockpos); Block block = iblockstate.getBlock(); if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this)) { flag = this.world.destroyBlock(blockpos, true) || flag; } } } } if (flag) { this.world.playEvent((EntityPlayer) null, 1022, new BlockPos(this), 0); }
+					 */
 				}
 			}
 
@@ -366,7 +356,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 				this.heal(1.0F);
 			}
 
-			//this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+			// this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		}
 	}
 
@@ -394,7 +384,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	@Override
 	public void addTrackingPlayer(EntityPlayerMP player) {
 		super.addTrackingPlayer(player);
-		//this.bossInfo.addPlayer(player);
+		// this.bossInfo.addPlayer(player);
 	}
 
 	/**
@@ -403,7 +393,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	@Override
 	public void removeTrackingPlayer(EntityPlayerMP player) {
 		super.removeTrackingPlayer(player);
-		//this.bossInfo.removePlayer(player);
+		// this.bossInfo.removePlayer(player);
 	}
 
 	private double getHeadX(int p_82214_1_) {

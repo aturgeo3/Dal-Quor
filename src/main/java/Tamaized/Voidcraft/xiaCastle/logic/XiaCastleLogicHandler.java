@@ -43,14 +43,8 @@ public class XiaCastleLogicHandler {
 		if (world != null && !world.isRemote) {
 			validateInstance();
 			if (running) {
-				if (!twins.isDone()) twins.setDone();
-				if (!herobrine.isDone()) herobrine.setDone();
-				if (!xia.isDone()) xia.setDone();
 				doHandlerStartChecks();
-				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) {
-					// if (!xiaDoorOpen) {
-					openDoor();
-				}
+				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) openDoor();
 				if (twins.isRunning()) twins.update();
 				if (herobrine.isRunning()) herobrine.update();
 				if (xia.isRunning()) xia.update();
@@ -131,6 +125,9 @@ public class XiaCastleLogicHandler {
 		if (world == null) return;
 		stop();
 		setupPos();
+		twins.setDone();
+		herobrine.setDone();
+		xia.setDone();
 		running = true;
 	}
 

@@ -9,6 +9,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.network.IEntitySync;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
@@ -18,6 +19,7 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase3;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,26 +38,6 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 
-	/**
-	 * Degrees
-	 */
-	public float leftArmYaw = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float leftArmPitch = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float rightArmYaw = 0.0f;
-
-	/**
-	 * Degrees
-	 */
-	public float rightArmPitch = 0.0f;
-
 	public EntityBossXia(World par1World) {
 		super(par1World);
 		this.setInvul(true);
@@ -64,36 +46,6 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 	public EntityBossXia(World world, XiaBattleHandler handler) {
 		super(world, handler, false);
 		this.setInvul(true);
-	}
-
-	public void setArmRotations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw, boolean sendUpdates) {
-		this.leftArmYaw = leftArmYaw;
-		this.leftArmPitch = leftArmPitch;
-		this.rightArmYaw = rightArmYaw;
-		this.rightArmPitch = rightArmPitch;
-		if (sendUpdates) sendPacketUpdates();
-	}
-
-	private void sendPacketUpdates() {
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_UPDATES));
-			outputStream.writeInt(getEntityId());
-			outputStream.writeFloat(leftArmPitch);
-			outputStream.writeFloat(rightArmPitch);
-			outputStream.writeFloat(leftArmYaw);
-			outputStream.writeFloat(rightArmYaw);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-			bos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void decodePacket(ByteBufInputStream stream) throws IOException{
-		setArmRotations(stream.readFloat(), stream.readFloat(), stream.readFloat(), stream.readFloat(), false);
 	}
 
 	@Override
@@ -107,8 +59,8 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaChest)));
 		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaLegs)));
 		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaBoots)));
-		for(EntityPlayer player : getHandler().getPlayers()){
-			player.sendMessage(new TextComponentString(ChatFormatting.DARK_GRAY+"[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
+		for (EntityPlayer player : getHandler().getPlayers()) {
+			player.sendMessage(new TextComponentString(ChatFormatting.DARK_GRAY + "[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
 		}
 	}
 
@@ -124,7 +76,7 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
-				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_SHEATHE));
+				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
 				outputStream.writeInt(getEntityId());
 				outputStream.writeInt(Potion.getIdFromPotion(pot));
 				outputStream.writeInt(potioneffectIn.getDuration());
@@ -235,5 +187,15 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 	@Override
 	protected int maxPhases() {
 		return 3;
+	}
+
+	@Override
+	protected void encodePacketData(DataOutputStream stream) throws IOException {
+		
+	}
+
+	@Override
+	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+		
 	}
 }

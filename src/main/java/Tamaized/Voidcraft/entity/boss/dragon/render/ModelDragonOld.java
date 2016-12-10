@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
+package Tamaized.Voidcraft.entity.boss.dragon.render;
 
-import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityDragonXia;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
-public class ModelDragonXia extends ModelBase {
+public class ModelDragonOld extends ModelBase {
 	/** The head Model renderer of the dragon */
 	private final ModelRenderer head;
 	/** The spine Model renderer of the dragon */
@@ -34,7 +34,7 @@ public class ModelDragonXia extends ModelBase {
 	private final ModelRenderer wingTip;
 	private float partialTicks;
 
-	public ModelDragonXia(float p_i46360_1_) {
+	public ModelDragonOld(float p_i46360_1_) {
 		this.textureWidth = 256;
 		this.textureHeight = 256;
 		this.setTextureOffset("body.body", 0, 0);
@@ -124,7 +124,7 @@ public class ModelDragonXia extends ModelBase {
 	 */
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		GlStateManager.pushMatrix();
-		EntityDragonXia entitydragon = (EntityDragonXia) entityIn;
+		EntityDragonOld entitydragon = (EntityDragonOld) entityIn;
 		float f = entitydragon.prevAnimTime + (entitydragon.animTime - entitydragon.prevAnimTime) * this.partialTicks;
 		this.jaw.rotateAngleX = (float) (Math.sin((double) (f * ((float) Math.PI * 2F))) + 1.0D) * 0.2F;
 		float f1 = (float) (Math.sin((double) (f * ((float) Math.PI * 2F) - 1.0F)) + 1.0D);
