@@ -46,6 +46,21 @@ public class BlockPortalXia extends TamBlockPortal {
 		return new BlockStateContainer(this, new IProperty[0]);
 	}
 
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		super.breakBlock(worldIn, pos, state);
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				for (int y = -1; y <= 0; y++) {
+					BlockPos newPos = pos.add(x, y, z);
+					if (worldIn.getBlockState(newPos).getBlock() == voidCraft.blocks.blockNoBreak) {
+						worldIn.setBlockState(newPos, voidCraft.blocks.blockFakeBedrock.getDefaultState());
+					}
+				}
+			}
+		}
+	}
+
 	public boolean tryToCreatePortal(World par1World, BlockPos pos) {
 		byte b0 = 0;
 		byte b1 = 0;
