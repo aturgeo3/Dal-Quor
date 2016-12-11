@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
@@ -78,8 +79,6 @@ public class Debugger extends TamItem {
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
-		// SchematicLoader loader = new SchematicLoader();
-		// SchematicLoader.buildSchematic("twinsRoom.schematic", loader, worldIn, playerIn.getPosition());
 		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 

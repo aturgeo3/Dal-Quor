@@ -4,6 +4,8 @@ import java.util.List;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.xiaCastle.TwinsSpeech;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
@@ -24,11 +26,14 @@ public class XiaCastleLogicHandler {
 
 	private boolean running = false;
 	private boolean xiaDoorOpen = false;
+	private boolean hasFinished = false;
 
 	private final IBattleHandler twins = new TwinsBattleHandler();
 	private final IBattleHandler herobrine = new HerobrineBattleHandler();
 	private final IBattleHandler xia = new XiaBattleHandler();
 	private final IBattleHandler xia2 = new Xia2BattleHandler();
+
+	private final TwinsSpeech twinsSpeech = new TwinsSpeech();
 
 	private BlockPos twinsLoc;
 	private BlockPos herobrineLoc;
@@ -49,6 +54,8 @@ public class XiaCastleLogicHandler {
 				if (herobrine.isRunning()) herobrine.update();
 				if (xia.isRunning()) xia.update();
 				if (xia2.isRunning()) xia2.update();
+				if (!hasFinished && xia2.isDone()) finish();
+				if (hasFinished && !twinsSpeech.done()) twinsSpeech.update(world.playerEntities);
 			}
 			handleProgressVisual();
 		}
@@ -79,7 +86,7 @@ public class XiaCastleLogicHandler {
 	}
 
 	public boolean canPlayersFly() {
-		return xia.isDone();
+		return xia2.isRunning();
 	}
 
 	public boolean isActive() {
@@ -121,6 +128,17 @@ public class XiaCastleLogicHandler {
 		}
 	}
 
+	private void finish() {
+		SchematicLoader loader = new SchematicLoader();
+		BlockPos pos = new BlockPos(5000, 100, 5000);
+		SchematicLoader.buildSchematic("starforge.schematic", loader, world, pos);
+		world.setBlockState(pos.add(24, 8, 13), voidCraft.blocks.blockPortalXia.getDefaultState());
+		for (EntityPlayer player : world.playerEntities) {
+			player.setPositionAndUpdate(pos.getX() + 22.5, pos.getY() + 8.5, pos.getZ() + 13.5);
+		}
+		hasFinished = true;
+	}
+
 	public void start() {
 		if (world == null) return;
 		stop();
@@ -128,6 +146,8 @@ public class XiaCastleLogicHandler {
 		twins.setDone();
 		herobrine.setDone();
 		xia.setDone();
+		twinsSpeech.reset();
+		hasFinished = false;
 		running = true;
 	}
 
