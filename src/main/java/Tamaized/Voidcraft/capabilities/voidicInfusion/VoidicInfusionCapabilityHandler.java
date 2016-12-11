@@ -33,6 +33,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	private float postInfusionHP = 20.0F;
 
 	private boolean hasFlight = false;
+	private int xiaDefeats = 0;
 
 	private boolean hasLoaded = false;
 
@@ -177,6 +178,16 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	}
 
 	@Override
+	public int getXiaDefeats() {
+		return xiaDefeats;
+	}
+
+	@Override
+	public void setXiaDefeats(int amount) {
+		xiaDefeats = amount;
+	}
+
+	@Override
 	public boolean hasLoaded() {
 		return hasLoaded;
 	}
@@ -203,6 +214,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		// setInfusion(cap.getInfusion());
 		setMaxInfusion(cap.getMaxInfusion());
 		// setPostInfusionHP(cap.getPostInfusionHP());
+		setXiaDefeats(cap.getXiaDefeats());
 	}
 
 	@Override
@@ -210,6 +222,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		setInfusion(stream.readInt());
 		setMaxInfusion(stream.readInt());
 		setPostInfusionHP(stream.readFloat());
+		setXiaDefeats(stream.readInt());
 	}
 
 	private void sendPacketUpdates(EntityLivingBase living) {
@@ -221,8 +234,9 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			outputStream.writeInt(infusion);
 			outputStream.writeInt(maxInfusion);
 			outputStream.writeFloat(postInfusionHP);
+			outputStream.writeFloat(xiaDefeats);
 			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToAllAround(packet, new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 32 * 8));
+			voidCraft.channel.sendToAllAround(packet, new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
 			bos.close();
 		} catch (IOException e) {
 			e.printStackTrace();

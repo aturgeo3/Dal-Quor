@@ -28,8 +28,11 @@ public class TeleporterXia extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		if (entityIn.dimension == 0) {
+		if (entityIn.dimension != voidCraft.config.getDimensionIDxia()) {
 			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
+			while(!worldServerInstance.isAirBlock(bedPos)){
+				bedPos = bedPos.up();
+			}
 			entityIn.setLocationAndAngles((double) bedPos.getX(), (double) bedPos.getY(), (double) bedPos.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
 			return;
 		}

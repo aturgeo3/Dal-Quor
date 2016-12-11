@@ -19,7 +19,7 @@ public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusion
 		compound.setInteger("infusion", instance.getInfusion());
 		compound.setInteger("maxInfusion", instance.getMaxInfusion());
 		compound.setFloat("preInfusionHP", instance.getPreInfusionHP());
-		// compound.setFloat("postInfusionHP", instance.getPostInfusionHP());
+		compound.setFloat("xiaDefeats", instance.getXiaDefeats());
 		return compound;
 	}
 
@@ -29,7 +29,7 @@ public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusion
 		instance.setInfusion(compound.getInteger("infusion"));
 		instance.setMaxInfusion(compound.getInteger("maxInfusion"));
 		instance.setPreInfusionHP(compound.getInteger("preInfusionHP"));
-		// instance.setPostInfusionHP(compound.getInteger("postInfusionHP"));
+		instance.setXiaDefeats(compound.getInteger("xiaDefeats"));
 	}
 
 }

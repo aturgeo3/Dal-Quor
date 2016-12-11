@@ -4,6 +4,8 @@ import java.util.List;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.xiaCastle.TwinsSpeech;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
@@ -94,6 +96,10 @@ public class XiaCastleLogicHandler {
 		return running;
 	}
 
+	public boolean hasFinished() {
+		return hasFinished;
+	}
+
 	public void validateInstance() {
 		if (world != null) if ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone() && xia2.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone() && !xia2.isDone()))) || xia2Loc == null || xiaLoc == null || twinsLoc == null | herobrineLoc == null) stop();
 		if (!running && world != null && !world.playerEntities.isEmpty()) start();
@@ -132,9 +138,10 @@ public class XiaCastleLogicHandler {
 		SchematicLoader loader = new SchematicLoader();
 		BlockPos pos = new BlockPos(5000, 100, 5000);
 		SchematicLoader.buildSchematic("starforge.schematic", loader, world, pos);
-		world.setBlockState(pos.add(24, 8, 13), voidCraft.blocks.blockPortalXia.getDefaultState());
 		for (EntityPlayer player : world.playerEntities) {
 			player.setPositionAndUpdate(pos.getX() + 22.5, pos.getY() + 8.5, pos.getZ() + 13.5);
+			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
+			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
 		}
 		hasFinished = true;
 	}
@@ -143,12 +150,16 @@ public class XiaCastleLogicHandler {
 		if (world == null) return;
 		stop();
 		setupPos();
-		twins.setDone();
-		herobrine.setDone();
-		xia.setDone();
 		twinsSpeech.reset();
 		hasFinished = false;
 		running = true;
+	}
+	
+	public void debug(){
+		twins.setDone();
+		herobrine.setDone();
+		xia.setDone();
+		xia2.setDone();
 	}
 
 	private void setupPos() {

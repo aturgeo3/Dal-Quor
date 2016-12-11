@@ -9,6 +9,7 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.handlers.ClientPortalDataHandler;
 import Tamaized.Voidcraft.handlers.PortalDataHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
+import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
@@ -48,10 +49,11 @@ public class VoidTickEvent {
 			}
 		}
 
-		// Prevent players from flying in Xia DIM
 		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
 			if (player.dimension == voidCraft.config.getDimensionIDxia()) {
+
+				// Prevent players from flying in Xia DIM
 				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (XiaFlightHandler.shouldPlayerHaveFlight(player) ? !(player.world.provider instanceof WorldProviderXia && ((WorldProviderXia) player.world.provider).getXiaCastleHandler().canPlayersFly()) : true)) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
@@ -59,6 +61,13 @@ public class VoidTickEvent {
 					player.sendPlayerAbilities();
 					player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GRAY + "You feel heavy, you can not sustain flight"));
 				}
+
+				// Teleport Player back to their spawn point if the Xia fight is done and they fall to the Void.
+				WorldProvider provider = player.world.provider;
+				if(provider instanceof WorldProviderXia && ((WorldProviderXia)provider).getXiaCastleHandler().hasFinished() && player.posY <= 0){
+					forcePlayerTeleportFromXia(player);
+				}
+
 			}
 		}
 
@@ -137,6 +146,11 @@ public class VoidTickEvent {
 			data.put(e.player.getGameProfile().getId(), new PortalDataHandler(e.player.getGameProfile().getId(), e.player.dimension == voidCraft.config.getDimensionIDvoid() ? 0 : e.player.dimension == voidCraft.config.getDimensionIDxia() ? 0 : e.player.dimension));
 		}
 	}
+	
+	public void forcePlayerTeleportFromXia(EntityPlayerMP player){
+		PortalDataHandler j = data.get(player.getGameProfile().getId());
+		transferPlayerToDimension(player.mcServer, player, j.lastDim, new TeleportLoc(new TeleporterXia(player.mcServer.worldServerForDimension(j.lastDim))));
+	}
 
 	private void teleport(EntityPlayerMP player) {
 		PortalDataHandler j = data.get(player.getGameProfile().getId());
@@ -152,7 +166,7 @@ public class VoidTickEvent {
 			transferPlayerToDimension(player.mcServer, player, j.lastDim, new TeleportLoc(j.getTeleporter(player)));
 		}
 	}
-
+	
 	private void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
 		int j = player.dimension;
 		WorldServer worldserver = mcServer.worldServerForDimension(player.dimension);

@@ -34,6 +34,10 @@ public interface IVoidicInfusionCapability {
 	public float getInfusionPerc();
 
 	public boolean canFly();
+	
+	public int getXiaDefeats();
+	
+	public void setXiaDefeats(int amount);
 
 	public void copyFrom(IVoidicInfusionCapability cap);
 
