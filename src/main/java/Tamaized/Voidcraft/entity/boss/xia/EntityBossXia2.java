@@ -126,7 +126,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 				setHealth(getMaxHealth());
 				// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
 				setInvul(false);
-				//addAI(new EntityAIXia2Phase1(this, getFilters()));
+				addAI(new EntityAIXia2Phase1(this, getFilters()));
 			}
 				break;
 			case 2: {
@@ -134,7 +134,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 				setHealth(getMaxHealth());
 				setInvul(false);
-				//addAI(new EntityAIXia2Phase2(this, getFilters()));
+				addAI(new EntityAIXia2Phase2(this, getFilters()));
 			}
 				break;
 			case 3: {
