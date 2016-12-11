@@ -67,6 +67,9 @@ tile.voidicAlchemyTable.name=Voidic Alchemy Table
 tile.blockFakeBedrockFarmland.name=Soft Bedrock Farmland
 tile.etherealPlant.name=Ethereal Plant
 tile.realityTeleporterBlock.name=Reality Teleportation Block
+tile.cosmicMaterial.name=Cosmic Material
+tile.starforge.name=Star Forge
+tile.starforgeStation.name=Star Forge
 
 # Potion
 effect.voidcraft:voidicinfusionimmunity=Voidic Immunity

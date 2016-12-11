@@ -23,6 +23,7 @@ import Tamaized.Voidcraft.blocks.BlockRealityHole;
 import Tamaized.Voidcraft.blocks.BlockVoidcrystal;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
+import Tamaized.Voidcraft.blocks.StarForgeBlock;
 import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.machina.Heimdall;
@@ -86,6 +87,10 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 	public static AIBlock AIBlock;
 
+	public static TamBlock cosmicMaterial;
+	public static TamBlock starforge;
+	public static StarForgeBlock starforgeStation;
+
 	@Override
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
@@ -106,7 +111,10 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(blockVoidBrickHalfSlab = new TamBlockSlabHalf(voidCraft.tabs.tabVoid, Material.ROCK, "blockVoidBrickHalfSlab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
 		modelList.add(AIBlock = new AIBlock("AIBlock"));
 		modelList.add(realityHole = new BlockRealityHole(voidCraft.tabs.tabVoid, Material.CLOTH, "blockRealityHole", -1F));
-		modelList.add(ritualBlock = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "ritualBlock", 3.0F));
+		modelList.add(ritualBlock = new TamBlock(voidCraft.tabs.tabVoid, Material.IRON, "ritualBlock", 3.0F));
+		modelList.add(cosmicMaterial = new TamBlock(voidCraft.tabs.tabVoid, Material.ROCK, "cosmicMaterial", 30.0F));
+		modelList.add(starforge = new TamBlock(voidCraft.tabs.tabVoid, Material.IRON, "starforge", -1.0F));
+		modelList.add(starforgeStation = new StarForgeBlock(voidCraft.tabs.tabVoid, Material.IRON, "starforgeStation", -1.0F));
 
 		modelList.add(blockPortalVoid = new BlockPortalVoid(voidCraft.tabs.tabVoid, "blockPortalVoid"));
 		modelList.add(blockPortalXia = new BlockPortalXia(voidCraft.tabs.tabVoid, "blockPortalXia"));
