@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.blocks;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 import Tamaized.TamModized.blocks.TamBlockContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -114,7 +113,7 @@ public class StarForgeBlock extends TamBlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			player.sendMessage(new TextComponentString(ChatFormatting.RED+""+ChatFormatting.BOLD+"Note: This currently is not implemented and will be added in the Star Forge Update."));
+			player.sendMessage(new TextComponentString(TextFormatting.RED + "" + TextFormatting.BOLD + "Note: This currently is not implemented and will be added in the Star Forge Update."));
 			// FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Macerator), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;

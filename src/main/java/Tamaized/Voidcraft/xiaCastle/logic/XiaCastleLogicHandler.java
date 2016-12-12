@@ -155,12 +155,12 @@ public class XiaCastleLogicHandler {
 		hasFinished = false;
 		running = true;
 	}
-	
-	public void debug(){
+
+	public void debug() {
 		twins.setDone();
 		herobrine.setDone();
-		xia.setDone();
-		xia2.setDone();
+		// xia.setDone();
+		// xia2.setDone();
 	}
 
 	private void setupPos() {

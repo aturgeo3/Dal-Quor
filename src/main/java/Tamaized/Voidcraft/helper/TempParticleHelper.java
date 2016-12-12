@@ -13,6 +13,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TempParticleHelper { // TODO: move this into TamModized
 
@@ -36,10 +38,12 @@ public class TempParticleHelper { // TODO: move this into TamModized
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static void decodePacket(ByteBufInputStream stream) throws IOException {
 		spawnVanillaParticleOnClient(net.minecraft.client.Minecraft.getMinecraft().world, EnumParticleTypes.getParticleFromId(stream.readInt()), stream.readDouble(), stream.readDouble(), stream.readDouble(), stream.readDouble(), stream.readDouble(), stream.readDouble());
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static void spawnVanillaParticleOnClient(World world, EnumParticleTypes particle, double x, double y, double z, double xS, double yS, double zS) {
 		world.spawnParticle(particle, x, y, z, xS, yS, zS);
 	}

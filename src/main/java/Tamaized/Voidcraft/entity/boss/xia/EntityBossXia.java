@@ -4,12 +4,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
-import Tamaized.Voidcraft.network.IEntitySync;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
@@ -19,7 +16,6 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases.EntityAIXiaPhase3;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +28,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -60,7 +57,7 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaLegs)));
 		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaBoots)));
 		for (EntityPlayer player : getHandler().getPlayers()) {
-			player.sendMessage(new TextComponentString(ChatFormatting.DARK_GRAY + "[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
+			player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
 		}
 	}
 

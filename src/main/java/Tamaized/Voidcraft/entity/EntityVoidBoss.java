@@ -35,7 +35,6 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
 
-	@SideOnly(Side.CLIENT)
 	private ArrayList<IAnimatable> animations = new ArrayList<IAnimatable>();
 
 	public EntityVoidBoss(World world) {
@@ -129,7 +128,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	private void handlerUpdate() {
 		if (!world.isRemote) {
-			if (handler == null) {
+			if (handler == null || bus == null) {
 				setDead();
 				return;
 			}
@@ -168,6 +167,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	}
 
 	private void preInitPhase(int p) {
+		if (bus == null) return;
 		Iterator iter = ai.iterator();
 		while (iter.hasNext()) {
 			Object o = iter.next();

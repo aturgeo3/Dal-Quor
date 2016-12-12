@@ -13,6 +13,8 @@ public class LayerVoidSpikes implements LayerRenderer {
 
 	private final ModelVoidSpikes model;
 	private final RenderPlayer renderer;
+	
+	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/entity/voidspikes.png");
 
 	public LayerVoidSpikes(RenderPlayer playerRenderer) {
 		renderer = playerRenderer;
@@ -21,15 +23,14 @@ public class LayerVoidSpikes implements LayerRenderer {
 
 	@Override
 	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		if (Minecraft.getMinecraft().world == null) return;
+		if (!entitylivingbaseIn.hasCapability(CapabilityList.VOIDICINFUSION, null)) return;
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
 		{
-			float perc = 0.00f;
-			if (Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null)) perc = Minecraft.getMinecraft().world.getEntityByID(entitylivingbaseIn.getEntityId()).getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc();
+			float perc = entitylivingbaseIn.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc();
 			// DebugEvent.textL=""+Minecraft.getMinecraft().theWorld.getEntityByID(entitylivingbaseIn.getEntityId()).hasCapability(CapabilityList.VOIDICINFUSION, null);
 
-			GlStateManager.scale(perc+0, perc+0, perc+0);
+			GlStateManager.scale(perc + 0, perc + 0, perc + 0);
 			// GlStateManager.rotate(180, 1, 0, 1);
 			// GlStateManager.rotate(-90, 0, 1, 0);
 			// GlStateManager.scale(1, -1, 1);
@@ -42,7 +43,7 @@ public class LayerVoidSpikes implements LayerRenderer {
 			this.model.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks);
 			this.model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entitylivingbaseIn);
 
-			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(voidCraft.modid, "textures/entity/asdf.png"));
+			Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
 
 			model.render(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, scale);
 

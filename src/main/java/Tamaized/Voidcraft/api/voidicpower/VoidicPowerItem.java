@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -20,6 +18,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -169,7 +168,7 @@ public abstract class VoidicPowerItem extends TamItem {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (cap != null) tooltip.add(ChatFormatting.DARK_PURPLE + "Power: " + (map.containsKey(cap) ? cap.getCurrentPower() - map.get(cap) : cap.getCurrentPower()) + "/" + cap.getMaxPower());
+		if (cap != null) tooltip.add(TextFormatting.DARK_PURPLE + "Power: " + (map.containsKey(cap) ? cap.getCurrentPower() - map.get(cap) : cap.getCurrentPower()) + "/" + cap.getMaxPower());
 	}
 
 	@Override

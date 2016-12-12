@@ -8,11 +8,9 @@ import com.mojang.authlib.GameProfile;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
-import Tamaized.Voidcraft.particles.ParticleColorEnchantmentTable;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -168,31 +166,36 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 			if (runeTarget != null) {
 				updateLook();
 				if (world.isRemote && isRuneCharged()) {
-					for (int i = 0; i < 10; i++) {
-						double rx = (world.rand.nextDouble() * 1.5) - 0.5;
-						double ry = (world.rand.nextDouble() * 1.5) - 0.5;
-						double rz = (world.rand.nextDouble() * 1.5) - 0.5;
-						double ox = posX;
-						double oy = posY;
-						double oz = posZ;
-						double tx = getRuneTarget().posX + rx;
-						double ty = getRuneTarget().posY + (getRuneTarget().height / 2.0F) + ry;
-						double tz = getRuneTarget().posZ + rz;
-						Vec3d vec = getLookVec();
-						double offsetX = (vec.xCoord * 1);
-						double offsetY = 1.5;
-						double offsetZ = (vec.zCoord * 1);
-						double dx = ox - (tx - offsetX);
-						double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
-						double dz = oz - (tz - offsetZ);
-						Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
-					}
+					spawnParticles();
 				}
 			} else {
 				setDead();
 			}
 		}
 		if (running) tick++;
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void spawnParticles() {
+		for (int i = 0; i < 10; i++) {
+			double rx = (world.rand.nextDouble() * 1.5) - 0.5;
+			double ry = (world.rand.nextDouble() * 1.5) - 0.5;
+			double rz = (world.rand.nextDouble() * 1.5) - 0.5;
+			double ox = posX;
+			double oy = posY;
+			double oz = posZ;
+			double tx = getRuneTarget().posX + rx;
+			double ty = getRuneTarget().posY + (getRuneTarget().height / 2.0F) + ry;
+			double tz = getRuneTarget().posZ + rz;
+			Vec3d vec = getLookVec();
+			double offsetX = (vec.xCoord * 1);
+			double offsetY = 1.5;
+			double offsetZ = (vec.zCoord * 1);
+			double dx = ox - (tx - offsetX);
+			double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
+			double dz = oz - (tz - offsetZ);
+			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.particles.ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
+		}
 	}
 
 	@Override
