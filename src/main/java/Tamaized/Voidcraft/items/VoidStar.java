@@ -54,7 +54,7 @@ public class VoidStar extends TamItem {
 			entityItem.world.setBlockState(new BlockPos(xCoord, yCoord, zCoord), voidCraft.blocks.blockPortalXia.getDefaultState());
 			if (entityItem.getThrower() != null) {
 				EntityPlayer entityplayer = entityItem.world.getPlayerEntityByName(entityItem.getThrower());
-				if (entityplayer != null) entityplayer.addStat(voidCraft.achievements.voidCraftAchMainLine_5, 1);
+				if (entityplayer != null) entityplayer.addStat(voidCraft.achievements.godsSleep, 1);
 			}
 			entityItem.setDead();
 			return true;

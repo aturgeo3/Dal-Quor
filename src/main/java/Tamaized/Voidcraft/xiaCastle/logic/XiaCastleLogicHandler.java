@@ -142,6 +142,7 @@ public class XiaCastleLogicHandler {
 			player.setPositionAndUpdate(pos.getX() + 22.5, pos.getY() + 8.5, pos.getZ() + 13.5);
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
+			player.addStat(voidCraft.achievements.Ascension, 1);
 		}
 		hasFinished = true;
 	}

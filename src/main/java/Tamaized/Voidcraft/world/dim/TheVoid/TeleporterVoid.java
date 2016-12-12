@@ -40,7 +40,7 @@ public class TeleporterVoid extends Teleporter {
 	 */
 	@Override
 	public void placeInPortal(Entity entity, float rotationYaw) {
-		if (entity instanceof EntityPlayer) ((EntityPlayer) entity).addStat(voidCraft.achievements.voidCraftAchMainLine_2, 1);
+		if (entity instanceof EntityPlayer) ((EntityPlayer) entity).addStat(voidCraft.achievements.enterVoid, 1);
 
 		if (!this.placeInExistingPortal(entity, rotationYaw)) {
 			this.makePortal(entity);

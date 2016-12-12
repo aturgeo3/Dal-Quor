@@ -63,6 +63,10 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 		if (!world.isRemote) {
 			if (dol == null || zol == null || dragon == null || wither == null) return;
 			if (!(dol instanceof EntityDolXia) || !(zol instanceof EntityZolXia) || !(dragon instanceof EntityDragonOld) || !(wither instanceof EntityWitherbrine)) return;
+			//System.out.println("beep: "+getEntity().getPosition().getDistance(dragon.getPosition().getX(), dragon.getPosition().getY(), dragon.getPosition().getZ()));
+			if(getEntity().getPosition().getDistance(dragon.getPosition().getX(), dragon.getPosition().getY(), dragon.getPosition().getZ()) > 125){
+				dragon.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
+			}
 			if (tick % litStrikeTick == 0) {
 				int lx = (int) ((world.rand.nextDouble() * (litBox.maxX - litBox.minX)) + litBox.minX);
 				int ly = 70;

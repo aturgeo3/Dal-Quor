@@ -66,6 +66,7 @@ public class VoidTickEvent {
 				WorldProvider provider = player.world.provider;
 				if(provider instanceof WorldProviderXia && ((WorldProviderXia)provider).getXiaCastleHandler().hasFinished() && player.posY <= 0){
 					forcePlayerTeleportFromXia(player);
+					player.addStat(voidCraft.achievements.worldsEnd, 1);
 				}
 
 			}

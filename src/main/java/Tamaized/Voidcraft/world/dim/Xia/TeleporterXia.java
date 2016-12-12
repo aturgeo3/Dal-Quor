@@ -36,7 +36,7 @@ public class TeleporterXia extends Teleporter {
 			entityIn.setLocationAndAngles((double) bedPos.getX(), (double) bedPos.getY(), (double) bedPos.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
 			return;
 		}
-		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(voidCraft.achievements.voidCraftAchMainLine_6, 1);
+		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(voidCraft.achievements.tooFar, 1);
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
 		if (!isActive(entityIn)) makePortal(entityIn);
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
