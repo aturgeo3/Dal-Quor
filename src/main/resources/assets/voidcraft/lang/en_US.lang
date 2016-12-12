@@ -220,6 +220,11 @@ voidcraft.VadeMecum.docs.title.voidDusts=Void Infused Dusts
 voidcraft.VadeMecum.docs.title.corruptedPawn=Corrupted Pawn
 voidcraft.VadeMecum.docs.title.dusts=Void Infused Dusts
 voidcraft.VadeMecum.docs.title.obsidianFlask=Obsidian Flask
+voidcraft.VadeMecum.docs.title.xia=Xia
+voidcraft.VadeMecum.docs.title.voidArmor=Void Crystal Armor
+voidcraft.VadeMecum.docs.title.xiaArmor=Xia's Armor
+voidcraft.VadeMecum.docs.title.herobrine=Avatar of Herobrine
+voidcraft.VadeMecum.docs.title.twins=The Twins: Zol and Dol
 ## -- Descriptions
 voidcraft.VadeMecum.docs.desc.moltenSword=Foes struck by this sword are lit on fire and are inflicted with a weakness and nausea debuff for 5 seconds.
 voidcraft.VadeMecum.docs.desc.demonSword=Foes struck by this sword are dealt the same effects as the Arch-Angelic sword though the durations are now 20 seconds each.
@@ -276,7 +281,7 @@ voidcraft.VadeMecum.docs.desc.voidChain=Dropped from Chained Spectres within the
 voidcraft.VadeMecum.docs.desc.MoltenvoidChainPart=When one smelts a Void Chain the result is interesting. It is a ball of molten chain in which one would think would burn as you touch it, but in fact it is cool to the touch. The only explanation for this would be the voidic properties.
 voidcraft.VadeMecum.docs.desc.MoltenvoidChain=Molten Chain Parts are far too pliable for any real purpose. That is where the fully formed Molten Chains come into play. Combine these parts with Charred Bones and you get a sturdy malleable chain capable of permanently changing shape as needed unlike the parts which revert back into a ball form.
 voidcraft.VadeMecum.docs.desc.burnBone=Taken from your fallen enemies, the Void Wraths. These very sturdy creatures are nothing but bone, so it only makes sense for these bones to also be sturdy right?
-voidcraft.VadeMecum.docs.desc.voidStar=Very similar to the Nether Star. These are dropped from the Corrupted Pawn, in fact they are the cores of such beings. These stars are capable of opening rifts to the void but only when contained correctly.
+voidcraft.VadeMecum.docs.desc.voidStar=Very similar to the Nether Star. These are dropped from the Corrupted Pawn, in fact they are the cores of such beings. These stars are capable of opening rifts to the void but only when contained correctly. Strangely, if the star is surrounded by Soft Bedrock, it'll react and rip open a portal to an unknown world.
 voidcraft.VadeMecum.docs.desc.emptyObsidianFlask.pg1=It is actually possible to collect 'Void' from within the Overworld. You need a special type of flask to do so. Simply get yourself some Empty Obsidian Flasks, head down near bedrock, and Right Click. What do these Flasks do you may ask? Well if you toss one (via right click) they explode on contact. They do not seem to damage the world at all but they cast a purple flame that does not seem to burn. It is a cold flame. Though coming in contact with such a flame
 voidcraft.VadeMecum.docs.desc.emptyObsidianFlask.pg2=yields interesting effects such as blindness and wither.
 voidcraft.VadeMecum.docs.desc.voidCloth=For some unknown reason the only way to obtain this cloth is from taking it from a lifeless corpse of a Void Lich. Though they were already undead to begin with. Even with the cloth in your possesion you can not figure out how exactly it is made or why it has the binding properties that it does. The material proves very useful though.
@@ -284,6 +289,12 @@ voidcraft.VadeMecum.docs.desc.voidDusts=Void Dusts are the result of using a Voi
 voidcraft.VadeMecum.docs.desc.ChainedSkull=Oddly, covering a Wither's skull in Charred Bones followed by Molten Chains transforms the skull. You do not know if it is your mind playing tricks on you or if this skull is alive... breathing... speaking to you. It wants you to place it down. It tells you that you can end the world with it, that you should.                                                 Placing down the skull will result in explosions and a boss fight, be prepared.
 voidcraft.VadeMecum.docs.desc.voidicSuppressor=One of the few items that requires Voidic Power to function. To charge this device place it in a Voidic Charger. If this device contains power, it'll use that power to anchor the holder to the material plane. This means while in your hand or offhand the Voidic Suppressor will remove any Voidic Infusion on you and prevent more from being gained.
 voidcraft.VadeMecum.docs.desc.corruptedPawn=Spawned into the world with a Chained Skull followed by an explosion. These deadly entities are very quick, deal massive damage and have a very large health pool. They attack most other creatures in sight. One must be very prepared before taking one on. Upon death, they drop their inner core, the Void Star.
+voidcraft.VadeMecum.docs.desc.xia.pg1=By tossing a Void Star in the world and surrounding it in Soft Bedrock, something very strange happens. A red portal is ripped open to an unknown world. All that is known of this new world is that it is where the "Gods" reside. Perhaps taking on these so called gods may result in fortune. 
+voidcraft.VadeMecum.docs.desc.voidicEssence=Raw Voidic Essence, this material will vanish when used and provides no use. Although, it resonates when near a very powerful being.
+voidcraft.VadeMecum.docs.desc.xiaArmor=Only obtainable from defeating Xia's first form, this armor has very high defense and grants the ability of flight. Only one piece needs to be equipped for flight, not the entire set.
+voidcraft.VadeMecum.docs.desc.herobrine=The Avatar of Herobrine has 2 forms. In his first form he cannot take direct damage. Though while in this form strange pillars will form, these pillars can only take damage from direct hits from Herobrine himself. Each destroyed pillar will harm Herobrine. His second form resembles that of the Wither. In this form he can take direct damage.
+voidcraft.VadeMecum.docs.desc.twins=The Twins do not like fighting. If possible, they will resort to various puzzles or mind games against their foes instead. Though, they do have the power to strike down their foes who let their guard down trying to solve such puzzles. The Twins will not just destroy without reason, they play fair and will only destroy if the challenge is failed.
+voidcraft.VadeMecum.docs.desc.xiaBoss=Not much is known of Xia, what is known however is that he takes on two forms. The first being a humanoid form where he is susceptible to direct strikes. And his second form, which is more Djinn like. In his second form he is capable of maintaining a shield which protects him from all sources of damage. Though there are ways to bring down this protection momentarily.
 
 # Thaumcraft
 # -- Research

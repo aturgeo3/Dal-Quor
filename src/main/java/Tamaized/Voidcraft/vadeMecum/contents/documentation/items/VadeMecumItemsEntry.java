@@ -15,9 +15,9 @@ import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.obsidianflask.V
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidchain.VadeMecumPageListVoidChain;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidcloth.VadeMecumPageListVoidCloth;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidcrystal.VadeMecumPageListVoidCrystal;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidicessence.VadeMecumPageListVoidicEssence;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidicsupressor.VadeMecumPageListSuppressor;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidstar.VadeMecumPageListVoidStar;
-import Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.realityTeleporter.VadeMecumPageListRealityTeleporter;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumItemsEntry extends VadeMecumEntry {
@@ -26,6 +26,8 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		VoidCrystal, Ectoplasm, VoidChain, MoltenVoidChainPart, MoltenVoidChain, CharredBone,
 
 		VoidStar, ObsidianFlask, VoidInfusedCloth, VoidDusts, ChainedSkull, VoidicSupressor, VoidicDrill,
+		
+		VoidicEssence
 
 	}
 
@@ -51,6 +53,8 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 	public VadeMecumEntry chainedSkull;
 	public VadeMecumEntry voidicSupressor;
 
+	public VadeMecumEntry voidicEssence;
+
 	public VadeMecumItemsEntry(VadeMecumEntry back) {
 		super("docs_Items", "Items", back, null);
 	}
@@ -70,13 +74,15 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		voidDusts = new VadeMecumEntry("docs_Items_voidDusts", "", this, new VadeMecumPageListVoidDusts());
 		chainedSkull = new VadeMecumEntry("docs_Items_chainedSkull", "", this, new VadeMecumPageListChainedSkull());
 		voidicSupressor = new VadeMecumEntry("docs_Items_voidicSupressor", "", this, new VadeMecumPageListSuppressor());
+
+		voidicEssence = new VadeMecumEntry("docs_Items_voidicEssence", "", this, new VadeMecumPageListVoidicEssence());
 	}
 
 	@Override
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		
+
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystal), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidcrystal).getDisplayName(), new ItemStack(voidCraft.items.voidcrystal)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.Ectoplasm), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.items.ectoplasm).getDisplayName(), new ItemStack(voidCraft.items.ectoplasm)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidChain), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.items.voidChain).getDisplayName(), new ItemStack(voidCraft.items.voidChain)));
@@ -85,13 +91,15 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.CharredBone), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.items.burnBone).getDisplayName(), new ItemStack(voidCraft.items.burnBone)));
 
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidStar), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidStar).getDisplayName(), new ItemStack(voidCraft.items.voidStar)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ObsidianFlask), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid+".VadeMecum.docs.title.obsidianFlask", new ItemStack(voidCraft.items.obsidianFlask)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.ObsidianFlask), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.obsidianFlask", new ItemStack(voidCraft.items.obsidianFlask)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusedCloth), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.items.voidCloth).getDisplayName(), new ItemStack(voidCraft.items.voidCloth)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidDusts), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid+".VadeMecum.docs.title.dusts", new ItemStack(voidCraft.items.diamondDust)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidDusts), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.dusts", new ItemStack(voidCraft.items.diamondDust)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSkull), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.items.ChainedSkull).getDisplayName(), new ItemStack(voidCraft.items.ChainedSkull)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicSupressor), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.items.voidicSuppressor).getDisplayName(), new ItemStack(voidCraft.items.voidicSuppressor)));
 
-		}
+		addButton2(new VadeMecumButton(gui, getEntryID(Entry.VoidicEssence), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidicEssence).getDisplayName(), new ItemStack(voidCraft.items.voidicEssence)));
+		
+	}
 
 	@Override
 	protected void actionPerformed(VadeMecumGUI gui, int id, int mouseButton) {
@@ -132,6 +140,9 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 			case VoidicSupressor:
 				gui.changeEntry(voidicSupressor);
 				break;
+			case VoidicEssence:
+				gui.changeEntry(voidicEssence);
+				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
@@ -140,7 +151,7 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 
 	@Override
 	public int getPageLength(VadeMecumGUI gui) {
-		return 1;
+		return 3;
 	}
 
 }
