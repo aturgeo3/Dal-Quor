@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
@@ -64,8 +66,8 @@ public class Debugger extends TamItem {
 		// zol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
 		// worldIn.spawnEntity(zol);
 
-		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
-		// if (cap != null) cap.setXiaDefeats(0);
+		IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
+		if (cap != null) cap.setXiaDefeats(0);
 		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
 		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
 		// playerIn.clearActivePotions();
