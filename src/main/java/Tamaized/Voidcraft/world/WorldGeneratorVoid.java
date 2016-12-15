@@ -30,7 +30,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 		for(int i=0; i<6; i++) {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
-			int Ycoord = random.nextInt(62);
+			int Ycoord = random.nextInt(100);
 			new WorldGenMinable(((OreVoidcrystal)voidCraft.blocks.oreVoidcrystal).getStateVoidFalse(), 5, new Predicate<IBlockState>(){
 
 				@Override
