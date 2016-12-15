@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.events;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceFrost;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
@@ -9,6 +10,9 @@ import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawnBase;
+import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
+import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Tier;
+import Tamaized.Voidcraft.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
@@ -71,6 +75,15 @@ public class DamageEvent {
 	}
 
 	private boolean isWhiteListed(DamageSource source) {
+		Entity e = source.getEntity();
+		if (e != null && e instanceof EntityLivingBase) {
+			EntityLivingBase living = (EntityLivingBase) e;
+			IStarForgeCapability cap = living.getHeldItemMainhand().getCapability(CapabilityList.STARFORGE, null);
+			if (cap != null) {
+				IStarForgeEffect effect = cap.getEffect(Tier.THREE);
+				if (effect != null && effect instanceof StarForgeEffectCripplingVoid) return false;
+			}
+		}
 		return source.damageType.equals("generic") || source.damageType.equals("mob") || source.damageType.equals("player") || source.damageType.equals("arrow") || source.damageType.equals("thrown");
 	}
 

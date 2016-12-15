@@ -19,6 +19,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -106,7 +107,10 @@ public class StarForgePickaxe extends TamPickaxe {
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
 		if (entityLiving instanceof EntityPlayer) {
 			IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-			if (cap != null) cap.onBlockBreak(entityLiving, worldIn, state, pos, rayTrace(worldIn, (EntityPlayer) entityLiving, false).sideHit);
+			if (cap != null){
+				RayTraceResult ray = rayTrace(worldIn, (EntityPlayer) entityLiving, false);
+				cap.onBlockBreak(entityLiving, worldIn, state, pos, ray == null ? null : ray.sideHit);
+			}
 		}
 		return true;
 	}

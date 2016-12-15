@@ -76,7 +76,9 @@ public class Debugger extends TamItem {
 		
 		ItemStack newStack = new ItemStack(voidCraft.tools.starforgedSword);
 		IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
-		cap.addEffect(StarForgeEffectList.blindingFear);
+		cap.addEffect(StarForgeEffectList.voidTouch);
+		cap.addEffect(StarForgeEffectList.voidWrath);
+		cap.addEffect(StarForgeEffectList.voidCripple);
 		playerIn.inventory.addItemStackToInventory(newStack);
 		
 		// playerIn.clearActivePotions();
