@@ -22,7 +22,7 @@ public class DemonSword extends TamSword {
 		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("blindness"), 20 * 20)); // Blind
 		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 20 * 20)); // Poison
 		par2EntityLivingBase.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("wither"), 20 * 20)); // Wither
-		par2EntityLivingBase.setFire(100); // Fire
+		par2EntityLivingBase.setFire(15); // Fire
 		return true;
 	}
 }
