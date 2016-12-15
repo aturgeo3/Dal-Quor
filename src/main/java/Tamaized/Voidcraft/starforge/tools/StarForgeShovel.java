@@ -123,7 +123,7 @@ public class StarForgeShovel extends TamSpade {
 	public EnumActionResult doItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = playerIn.getHeldItem(hand);
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-		return cap == null ? EnumActionResult.PASS : cap.onRightClickBlock(playerIn, worldIn, worldIn.getBlockState(pos), pos, rayTrace(worldIn, playerIn, false).sideHit) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
+		return cap == null ? EnumActionResult.PASS : cap.onRightClickBlock(playerIn, worldIn, worldIn.getBlockState(pos), pos, facing) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
 	}
 
 	@Override
