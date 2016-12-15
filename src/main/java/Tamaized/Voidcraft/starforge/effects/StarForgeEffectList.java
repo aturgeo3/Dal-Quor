@@ -16,11 +16,12 @@ import Tamaized.Voidcraft.starforge.effects.wep.tier2.StarForgeEffectXiaBlessing
 import Tamaized.Voidcraft.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
 import Tamaized.Voidcraft.starforge.effects.wep.tier3.StarForgeEffectMortalFear;
 import Tamaized.Voidcraft.starforge.effects.wep.tier3.StarForgeEffectThirdDegreeBurns;
+import Tamaized.Voidcraft.starforge.effects.wep.tier3.StarForgeEffectVorpal;
 
 public final class StarForgeEffectList {
-	
+
 	private static final List<IStarForgeEffect> effects = new ArrayList<IStarForgeEffect>();
-	
+
 	public static IStarForgeEffect blindingFear;
 	public static IStarForgeEffect firstDegreeBurns;
 	public static IStarForgeEffect voidTouch;
@@ -32,7 +33,7 @@ public final class StarForgeEffectList {
 	public static IStarForgeEffect mortalFear;
 	public static IStarForgeEffect thirdDegreeBurns;
 	public static IStarForgeEffect voidCripple;
-	
+	public static IStarForgeEffect vorp;
 
 	public static IStarForgeEffect haste;
 
@@ -54,27 +55,37 @@ public final class StarForgeEffectList {
 	}
 
 	public static final void register() {
-		
+
+		// Swords
+
+		// Tier 1
 		effects.add(blindingFear = new StarForgeEffectBlindingFear());
 		effects.add(firstDegreeBurns = new StarForgeEffectFirstDegreeBurns());
 		effects.add(voidTouch = new StarForgeEffectVoidTouch());
 
+		// Tier 2
 		effects.add(xiaBlessing = new StarForgeEffectXiaBlessing());
 		effects.add(secondDegreeBurns = new StarForgeEffectSecondDegreeBurns());
 		effects.add(voidWrath = new StarForgeEffectVoidWrath());
 
+		// Tier 3
 		effects.add(mortalFear = new StarForgeEffectMortalFear());
 		effects.add(thirdDegreeBurns = new StarForgeEffectThirdDegreeBurns());
 		effects.add(voidCripple = new StarForgeEffectCripplingVoid());
-		
+		effects.add(vorp = new StarForgeEffectVorpal());
 
+		// Tools
+
+		// Tier 1
 		effects.add(haste = new StarForgeEffectHaste());
 
+		// Tier 2
 		effects.add(silkTouch = new StarForgeEffectSilkTouch());
 		effects.add(fortune = new StarForgeEffectFortune());
 
+		// Tier 3
 		effects.add(threeByThree = new StarForgeEffectThreeByThree());
-		
+
 	}
 
 }
