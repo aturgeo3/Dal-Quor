@@ -10,6 +10,10 @@ import Tamaized.TamModized.tools.TamPickaxe;
 import Tamaized.TamModized.tools.TamSpade;
 import Tamaized.TamModized.tools.TamSword;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.starforge.tools.StarForgeAxe;
+import Tamaized.Voidcraft.starforge.tools.StarForgePickaxe;
+import Tamaized.Voidcraft.starforge.tools.StarForgeShovel;
+import Tamaized.Voidcraft.starforge.tools.StarForgeSword;
 import Tamaized.Voidcraft.tools.VoidHoe;
 import Tamaized.Voidcraft.tools.arch.ArchSword;
 import Tamaized.Voidcraft.tools.chain.ChainSword;
@@ -40,10 +44,15 @@ public class VoidCraftTools implements ITamRegistry {
 	public static SpectrePickaxe spectrePickaxe;
 	public static SpectreAxe spectreAxe;
 
+	public static StarForgeSword starforgedSword;
+	public static StarForgePickaxe starforgedPickaxe;
+	public static StarForgeAxe starforgedAxe;
+	public static StarForgeShovel starforgedSpade;
+
 	@Override
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
-		
+
 		// Swords: 3+dmg; Axe: dmg; Pick: 1+dmg; Spade: 1.5+dmg;
 		// Axe: -3; Pick: -2.8; Spade: -3;
 		// Tools
@@ -66,6 +75,12 @@ public class VoidCraftTools implements ITamRegistry {
 		modelList.add(archSword = new ArchSword(voidCraft.tabs.tabVoid, voidCraft.materials.ArchTools, "archSword"));
 		// demon
 		modelList.add(demonSword = new DemonSword(voidCraft.tabs.tabVoid, voidCraft.materials.DemonTools, "demonSword"));
+
+		// Cosmic
+		modelList.add(starforgedSword = new StarForgeSword(voidCraft.tabs.tabVoid, voidCraft.materials.CosmicTools, "starforgedSword"));
+		modelList.add(starforgedPickaxe = new StarForgePickaxe(voidCraft.tabs.tabVoid, voidCraft.materials.CosmicTools, "starforgedPickaxe"));
+		modelList.add(starforgedAxe = new StarForgeAxe(voidCraft.tabs.tabVoid, voidCraft.materials.CosmicTools, "starforgedAxe"));
+		modelList.add(starforgedSpade = new StarForgeShovel(voidCraft.tabs.tabVoid, voidCraft.materials.CosmicTools, "starforgedShovel"));
 	}
 
 	@Override
@@ -105,19 +120,19 @@ public class VoidCraftTools implements ITamRegistry {
 	@Override
 	public void clientPreInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clientPostInit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -15,6 +15,9 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityStorage;
 import Tamaized.Voidcraft.capabilities.elytraFlying.IElytraFlyingCapability;
+import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
+import Tamaized.Voidcraft.capabilities.starforge.StarForgeCapabilityHandler;
+import Tamaized.Voidcraft.capabilities.starforge.StarForgeCapabilityStorage;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityStorage;
@@ -94,6 +97,7 @@ import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
 import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
 import Tamaized.Voidcraft.vadeMecum.RitualList;
@@ -223,6 +227,7 @@ public class voidCraft extends TamModBase {
 		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVoidicPowerCapability.class, new VoidicPowerCapabilityStorage(), VoidicPowerCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IStarForgeCapability.class, new StarForgeCapabilityStorage(), StarForgeCapabilityHandler.class);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.capabilities.EventHandler());
 
 		// Proxy Stuff
@@ -238,6 +243,9 @@ public class voidCraft extends TamModBase {
 
 		// Run Skin Handler
 		skinHandler.run();
+
+		// Register StarForge Effects
+		StarForgeEffectList.register();
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
