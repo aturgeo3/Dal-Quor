@@ -51,6 +51,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public static TamItem voidCloth;
 	public static TamItem voidCrystalBucket;
 	public static VoidicEssence voidicEssence;
+	public static TamItem voidicPhlogiston;
 
 	public static TamItem quartzDust;
 	public static TamItem coalDust;
@@ -102,6 +103,7 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(voidCloth = new TamItem(voidCraft.tabs.tabVoid, "voidCloth", 64));
 		modelList.add(voidCrystalBucket = new TamItem(voidCraft.tabs.tabVoid, "voidCrystalBucket", 1));
 		modelList.add(voidicEssence = new VoidicEssence(voidCraft.tabs.tabVoid, "voidicEssence", 1));
+		modelList.add(voidicPhlogiston = new TamItem(voidCraft.tabs.tabVoid, "voidicPhlogiston", 64));
 		
 		// dust
 		modelList.add(quartzDust = new TamItem(voidCraft.tabs.tabVoid, "quartzDust", 64));

@@ -13,9 +13,14 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.XiaBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.Xia2BattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
+import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -138,11 +143,20 @@ public class XiaCastleLogicHandler {
 		SchematicLoader loader = new SchematicLoader();
 		BlockPos pos = new BlockPos(5000, 100, 5000);
 		SchematicLoader.buildSchematic("starforge.schematic", loader, world, pos);
+		int i = 0;
 		for (EntityPlayer player : world.playerEntities) {
-			player.setPositionAndUpdate(pos.getX() + 22.5, pos.getY() + 8.5, pos.getZ() + 13.5);
+			i++;
+			player.setPositionAndUpdate(pos.getX() + 23.5, pos.getY() + 8.5, pos.getZ() + 13.5);
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
 			player.addStat(voidCraft.achievements.Ascension, 1);
+		}
+		BlockPos chestPos = pos.add(21, 8, 13);
+		world.setBlockState(chestPos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.EAST));
+		TileEntity te = world.getTileEntity(chestPos);
+		if(te instanceof TileEntityChest){
+			TileEntityChest chest = (TileEntityChest) te;
+			chest.setInventorySlotContents(0, new ItemStack(voidCraft.items.voidicPhlogiston, i));
 		}
 		hasFinished = true;
 	}

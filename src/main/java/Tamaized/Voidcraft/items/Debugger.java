@@ -71,15 +71,15 @@ public class Debugger extends TamItem {
 
 		//IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		//if (cap != null) cap.setXiaDefeats(0);
-		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
-		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
+		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
 		
-		ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
-		IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
-		cap.addEffect(StarForgeEffectList.haste);
-		cap.addEffect(StarForgeEffectList.fortune);
-		cap.addEffect(StarForgeEffectList.threeByThree);
-		playerIn.inventory.addItemStackToInventory(newStack);
+		//ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
+		//IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
+		//cap.addEffect(StarForgeEffectList.haste);
+		//cap.addEffect(StarForgeEffectList.fortune);
+		//cap.addEffect(StarForgeEffectList.threeByThree);
+		//playerIn.inventory.addItemStackToInventory(newStack);
 		
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
