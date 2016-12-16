@@ -32,6 +32,7 @@ import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityStorage;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
+import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -324,6 +325,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityDragonXia.class, "DragonXia", this, modid, 64, 1, true);
 		registerEntity(EntityDolXia.class, "DolXia", this, modid, 64, 1, true);
 		registerEntity(EntityZolXia.class, "ZolXia", this, modid, 64, 1, true);
+		registerEntity(EntityVoidicDragon.class, "VoidicDragon", this, modid, 64, 1, true);
 
 		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));

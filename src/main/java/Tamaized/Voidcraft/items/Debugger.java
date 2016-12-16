@@ -3,13 +3,8 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
+import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -68,11 +63,14 @@ public class Debugger extends TamItem {
 		// EntityZolXia zol = new EntityZolXia(worldIn);
 		// zol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
 		// worldIn.spawnEntity(zol);
+		EntityVoidicDragon dragon = new EntityVoidicDragon(worldIn);
+		dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
+		worldIn.spawnEntity(dragon);
 
 		//IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		//if (cap != null) cap.setXiaDefeats(0);
-		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
-		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
+		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
 		
 		//ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
 		//IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
