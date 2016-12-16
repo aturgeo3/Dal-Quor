@@ -26,6 +26,14 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 		this.addLayer(new LayerEnderDragonOldEyes(this));
 		this.addLayer(new LayerEnderDragonOldDeath());
 	}
+	
+	protected ResourceLocation getExlodeTexture(){
+		return DRAGON_EXPLODING_TEXTURES;
+	}
+	
+	protected ResourceLocation getDragonTexture(){
+		return DRAGON_TEXTURES;
+	}
 
 	@Override
 	protected void applyRotations(EntityDragonOld entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
@@ -57,7 +65,7 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 			GlStateManager.depthFunc(515);
 			GlStateManager.enableAlpha();
 			GlStateManager.alphaFunc(516, f);
-			this.bindTexture(DRAGON_EXPLODING_TEXTURES);
+			this.bindTexture(getExlodeTexture());
 			this.mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 			GlStateManager.alphaFunc(516, 0.1F);
 			GlStateManager.depthFunc(514);
@@ -135,6 +143,6 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 	 */
 	@Override
 	protected ResourceLocation getEntityTexture(EntityDragonOld entity) {
-		return DRAGON_TEXTURES;
+		return getDragonTexture();
 	}
 }

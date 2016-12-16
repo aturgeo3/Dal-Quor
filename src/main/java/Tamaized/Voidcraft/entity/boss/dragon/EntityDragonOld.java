@@ -6,21 +6,15 @@ import java.util.List;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEndPortal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.boss.EntityDragonPart;
-import net.minecraft.entity.boss.dragon.phase.IPhase;
-import net.minecraft.entity.boss.dragon.phase.PhaseList;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -35,15 +29,17 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenEndPodium;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld, IMob, IAlternateBoss {
-	
-	public double targetX = 52;
-	public double targetY = 120;
-	public double targetZ = 155;
+
+	public double targetX;
+	public double targetY;
+	public double targetZ;
+	public double targetXf;
+	public double targetYf;
+	public double targetZf;
 	/** Ring buffer array for the last 64 Y-positions and yaw rotations. Used to calculate offsets for the animations. */
 	public double[][] ringBuffer = new double[64][3];
 	/** Index into the ring buffer. Incremented once per tick and restarts at 0 once it reaches the end of the buffer. */
@@ -71,7 +67,7 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 	public int deathTicks;
 	/** The current endercrystal that is healing this dragon */
 	public EntityEnderCrystal healingEnderCrystal;
-	
+
 	public final AlternateBossBarWrapper bossBarWrapper;
 
 	public EntityDragonOld(World p_i1700_1_) {
@@ -85,6 +81,18 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 		this.ignoreFrustumCheck = true;
 		enablePersistence();
 		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
+
+		this.targetX = targetXf = posX;
+		this.targetY = targetYf = posY;
+		this.targetZ = targetZf = posZ;
+	}
+
+	@Override
+	public void setPosition(double x, double y, double z) {
+		super.setPosition(x, y, z);
+		targetXf = x;
+		targetYf = y;
+		targetZf = z;
 	}
 
 	@Override
@@ -410,9 +418,13 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 			Entity entity = (Entity) p_70971_1_.get(i);
 
 			if (entity instanceof EntityLivingBase) {
-				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
+				entity.attackEntityFrom(DamageSource.causeMobDamage(this), getDamage());
 			}
 		}
+	}
+
+	protected float getDamage() {
+		return 10.0F;
 	}
 
 	/**
@@ -427,9 +439,9 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 			boolean flag = false;
 
 			do {
-				this.targetX = 52.0D;
-				this.targetY = 120;
-				this.targetZ = 155.0D;
+				this.targetX = targetXf;
+				this.targetY = targetYf;
+				this.targetZ = targetZf;
 				this.targetX += (double) (this.rand.nextFloat() * 120.0F - 60.0F);
 				this.targetZ += (double) (this.rand.nextFloat() * 120.0F - 60.0F);
 				double d0 = this.posX - this.targetX;
@@ -523,9 +535,13 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 		if (this.deathTicks == 200 && !this.world.isRemote) {
 
 			this.dropExperience(MathHelper.floor((float) i * 0.2F));
-
+			dropItemsOnDeath();
 			this.setDead();
 		}
+	}
+
+	protected void dropItemsOnDeath() {
+
 	}
 
 	private void dropExperience(int p_184668_1_) {
