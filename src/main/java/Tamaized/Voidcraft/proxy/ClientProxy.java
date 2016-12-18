@@ -53,6 +53,7 @@ import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia2;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.ghost.render.RenderGhostPlayer;
+import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
 import Tamaized.Voidcraft.entity.mob.EntityMobLich;
 import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
 import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
@@ -62,6 +63,7 @@ import Tamaized.Voidcraft.entity.mob.model.ModelLich;
 import Tamaized.Voidcraft.entity.mob.model.ModelSpectreChain;
 import Tamaized.Voidcraft.entity.mob.model.ModelVoidWrath;
 import Tamaized.Voidcraft.entity.mob.model.ModelWraith;
+import Tamaized.Voidcraft.entity.mob.render.RenderEtherealGuardian;
 import Tamaized.Voidcraft.entity.mob.render.RenderLich;
 import Tamaized.Voidcraft.entity.mob.render.RenderSpectreChain;
 import Tamaized.Voidcraft.entity.mob.render.RenderVoidWrath;
@@ -168,6 +170,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidicDragon.class, new RenderVoidicDragon(Minecraft.getMinecraft().getRenderManager()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDolXia.class, new RenderTwinsXia(RenderTwinsXia.TEXTURE_DOL, new ModelVoidBoss<EntityDolXia>(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityZolXia.class, new RenderTwinsXia(RenderTwinsXia.TEXTURE_ZOL, new ModelVoidBoss<EntityZolXia>(), shadowSize));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobEtherealGuardian.class, new RenderEtherealGuardian(shadowSize));
 
 		// Projectiles and MISC.
 		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));

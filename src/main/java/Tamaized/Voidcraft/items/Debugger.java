@@ -63,9 +63,6 @@ public class Debugger extends TamItem {
 		// EntityZolXia zol = new EntityZolXia(worldIn);
 		// zol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
 		// worldIn.spawnEntity(zol);
-		EntityVoidicDragon dragon = new EntityVoidicDragon(worldIn);
-		dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
-		worldIn.spawnEntity(dragon);
 
 		//IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		//if (cap != null) cap.setXiaDefeats(0);

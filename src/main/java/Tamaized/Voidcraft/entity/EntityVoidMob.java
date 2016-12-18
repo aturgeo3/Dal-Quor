@@ -172,6 +172,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 			}
 
 			applyEnchantments(this, entityIn);
+			if (!getHeldItemMainhand().isEmpty() && entityIn instanceof EntityLivingBase) getHeldItemMainhand().getItem().hitEntity(getHeldItemMainhand(), (EntityLivingBase) entityIn, this);
 		}
 
 		return flag;

@@ -1,11 +1,20 @@
 package Tamaized.Voidcraft.entity.mob;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import com.google.common.base.Predicate;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -23,22 +32,33 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
-public class EntityMobVoidWrath extends EntityVoidMob {
+public class EntityMobEtherealGuardian extends EntityVoidMob {
 
-	public EntityMobVoidWrath(World par1World) {
-		super(par1World);
+	public EntityMobEtherealGuardian(World p_i1738_1_) {
+		super(p_i1738_1_);
+		isImmuneToFire = true;
+		ItemStack stack = new ItemStack(voidCraft.tools.starforgedSword);
+		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
+		if(cap != null){
+			cap.addEffect(StarForgeEffectList.firstDegreeBurns);
+			cap.addEffect(StarForgeEffectList.secondDegreeBurns);
+			cap.addEffect(StarForgeEffectList.thirdDegreeBurns);
+		}
+		setHeldItem(EnumHand.MAIN_HAND, stack);
 
-		this.isImmuneToFire = true;
-		this.setSize(0.9F, 2.0F);
-
-		// this.getNavigator().setBreakDoors(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIBreakDoor(this));
 		this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
@@ -50,9 +70,7 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 
 		Predicate ies = new Predicate() {
-			/**
-			 * Return whether the specified entity is applicable to this filter.
-			 */
+
 			public boolean apply(Entity p_82704_1_) {
 				if (p_82704_1_ instanceof EntityWitherSkeleton) return false;
 				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker) return false;
@@ -76,7 +94,33 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(45.0D);
+	}
+	
+	@Override
+	public void onLivingUpdate() {
+		if (!world.isRemote) {
+			if (getActivePotionEffect(voidCraft.potions.fireSheath) == null) {
+				clearActivePotions();
+				Potion potion = voidCraft.potions.fireSheath;
+				PotionEffect effect = new PotionEffect(potion, 100);
+				addPotionEffect(effect);
+				ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
+				DataOutputStream outputStream = new DataOutputStream(bos);
+				try {
+					outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+					outputStream.writeInt(getEntityId());
+					outputStream.writeInt(Potion.getIdFromPotion(potion));
+					outputStream.writeInt(effect.getDuration());
+					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
+					if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+					bos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		super.onLivingUpdate();
 	}
 
 	@Override
@@ -101,6 +145,7 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return voidCraft.items.burnBone;
+		return voidCraft.items.voidicPhlogiston;
 	}
+
 }

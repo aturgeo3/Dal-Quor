@@ -11,22 +11,22 @@ import Tamaized.Voidcraft.voidCraft;
 public class VoidCraftLootTables implements ITamRegistry {
 
 	public static final ResourceLocation chest_voidFortress = new ResourceLocation(voidCraft.modid + ":chests/voidFortress");
+	public static final ResourceLocation chest_voidCity = new ResourceLocation(voidCraft.modid + ":chests/voidCity");
 
 	@Override
 	public void preInit() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void postInit() {
 		LootTableList.register(chest_voidFortress);
+		LootTableList.register(chest_voidCity);
 	}
 
 	@Override

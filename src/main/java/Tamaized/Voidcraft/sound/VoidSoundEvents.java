@@ -97,7 +97,8 @@ public class VoidSoundEvents {
 	public static class EntityMobWrathSoundEvents{
 		public static SoundEvent hurtSound = null;
 		public static SoundEvent deathSound = null;
-		public static SoundEvent ambientSound = null;
+		public static SoundEvent ambientSound1 = null;
+		public static SoundEvent ambientSound2 = null;
 	}
 	
 	public static class EntityMobXiaSoundEvents{
@@ -127,7 +128,8 @@ public class VoidSoundEvents {
 
 		EntityMobWrathSoundEvents.hurtSound = registerSound("wrath.hit");
 		EntityMobWrathSoundEvents.deathSound = registerSound("wrath.death");
-		EntityMobWrathSoundEvents.ambientSound = registerSound("wrath.breathe");
+		EntityMobWrathSoundEvents.ambientSound1 = registerSound("wrath.breathe1");
+		EntityMobWrathSoundEvents.ambientSound2 = registerSound("wrath.breathe2");
 		
 		MiscSoundEvents.chain = registerSound("random.chain");
 		

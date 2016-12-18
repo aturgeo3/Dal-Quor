@@ -49,6 +49,7 @@ import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityZolXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.EntityDolXia;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
+import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
 import Tamaized.Voidcraft.entity.mob.EntityMobLich;
 import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
 import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
@@ -64,6 +65,7 @@ import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.events.DeathEvent;
 import Tamaized.Voidcraft.events.ItemEntityEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
+import Tamaized.Voidcraft.events.PlayerRightClickEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
 import Tamaized.Voidcraft.events.VoidTickEvent;
 import Tamaized.Voidcraft.handlers.ConfigHandler;
@@ -99,6 +101,8 @@ import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
+import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
+import Tamaized.Voidcraft.structures.voidCity.StructureVoidCityPieces;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
 import Tamaized.Voidcraft.vadeMecum.RitualList;
@@ -283,6 +287,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(config);
 		MinecraftForge.EVENT_BUS.register(new ItemEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new DeathEvent());
+		MinecraftForge.EVENT_BUS.register(new PlayerRightClickEvent());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, modid, 128, 1, true);
@@ -304,7 +309,9 @@ public class voidCraft extends TamModBase {
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 
 		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
+		MapGenStructureIO.registerStructure(MapGenVoidCity.Start.class, "VoidCity");
 		StructureVoidFortressPieces.registerNetherFortressPieces();
+		StructureVoidCityPieces.registerPieces();
 
 		// Register Mobs
 		registerEntityWithEgg(EntityMobWraith.class, "Wraith", this, modid, 64, 1, true, 0xFFFFFF, 0x000000);
@@ -326,6 +333,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityDolXia.class, "DolXia", this, modid, 64, 1, true);
 		registerEntity(EntityZolXia.class, "ZolXia", this, modid, 64, 1, true);
 		registerEntity(EntityVoidicDragon.class, "VoidicDragon", this, modid, 64, 1, true);
+		registerEntityWithEgg(EntityMobEtherealGuardian.class, "EtherealGuardian", this, modid, 64, 1, true, 0xFF0000, 0x000000);
 
 		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));

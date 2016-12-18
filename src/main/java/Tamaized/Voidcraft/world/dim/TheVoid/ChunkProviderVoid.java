@@ -7,6 +7,7 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -35,7 +36,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	private final World world;
 	private final boolean generateStructures;
 	private final Random rand;
-	public MapGenVoidFortress genTest = new MapGenVoidFortress();
+	public MapGenVoidFortress genFortress = new MapGenVoidFortress();
+	private final MapGenVoidCity genCity = new MapGenVoidCity(this);
 
 	private double[] buffer;
 	private NoiseGeneratorOctaves lperlinNoise1;
@@ -239,8 +241,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		this.prepareHeights(x, z, chunkprimer);
 		this.buildSurfaces(x, z, chunkprimer);
 		this.genNetherCaves.generate(this.world, x, z, chunkprimer);
-
-		this.genTest.generate(this.world, x, z, chunkprimer);
+		this.genCity.generate(this.world, x, z, chunkprimer);
+		this.genFortress.generate(this.world, x, z, chunkprimer);
 
 		Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
 		Biome[] abiome = this.world.getBiomeProvider().getBiomesForGeneration((Biome[]) null, x * 16, z * 16, 16, 16);
@@ -333,7 +335,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		BlockFalling.fallInstantly = true;
 		BlockPos blockpos = new BlockPos(x * 16, 0, z * 16);
 		ChunkPos chunkpos = new ChunkPos(x, z);
-		this.genTest.generateStructure(this.world, this.rand, chunkpos);
+		this.genFortress.generateStructure(this.world, this.rand, chunkpos);
+		this.genCity.generateStructure(this.world, this.rand, chunkpos);
 
 		WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>() {
 
@@ -363,15 +366,21 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		if (this.genTest != null) {
-			if (this.genTest.isInsideStructure(pos)) {
-				if (Math.floor(Math.random() * 10) == 0) return this.genTest.getSpawnList();
+		if (this.genFortress != null) {
+			if (this.genFortress.isInsideStructure(pos)) {
+				if (Math.floor(Math.random() * 10) == 0) return this.genFortress.getSpawnList();
 				// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
 			}
 		}
-		if (this.genTest.isPositionInStructure(world, pos) && this.world.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick) {
-			if (Math.floor(Math.random() * 40) == 0) return this.genTest.getSpawnList();
+		if (this.genFortress.isPositionInStructure(world, pos) && this.world.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick) {
+			if (Math.floor(Math.random() * 40) == 0) return this.genFortress.getSpawnList();
 			// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
+		}
+		if (pos.getY() >= 128) {
+			IBlockState state = world.getBlockState(pos.down());
+			if (state != null && state.getBlock() == voidCraft.blocks.blockVoidbrick && world.rand.nextInt(5) == 0) {
+				return genCity.getSpawnList();
+			}
 		}
 		// System.out.println(world.getBiomeForCoordsBody(pos));
 		// System.out.println(creatureType);
@@ -386,6 +395,6 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
-		this.genTest.generate(this.world, x, z, (ChunkPrimer) null);
+		this.genFortress.generate(this.world, x, z, (ChunkPrimer) null);
 	}
 }

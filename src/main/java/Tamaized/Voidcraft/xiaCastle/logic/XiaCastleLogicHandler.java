@@ -156,7 +156,7 @@ public class XiaCastleLogicHandler {
 		TileEntity te = world.getTileEntity(chestPos);
 		if(te instanceof TileEntityChest){
 			TileEntityChest chest = (TileEntityChest) te;
-			chest.setInventorySlotContents(0, new ItemStack(voidCraft.items.voidicPhlogiston, i));
+			chest.setInventorySlotContents(0, new ItemStack(voidCraft.items.quoriFragment, i));
 		}
 		hasFinished = true;
 	}
