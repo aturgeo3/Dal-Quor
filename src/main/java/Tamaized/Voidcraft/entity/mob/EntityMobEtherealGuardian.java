@@ -52,7 +52,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 		isImmuneToFire = true;
 		ItemStack stack = new ItemStack(voidCraft.tools.starforgedSword);
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-		if(cap != null){
+		if (cap != null) {
 			cap.addEffect(StarForgeEffectList.firstDegreeBurns);
 			cap.addEffect(StarForgeEffectList.secondDegreeBurns);
 			cap.addEffect(StarForgeEffectList.thirdDegreeBurns);
@@ -96,7 +96,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(45.0D);
 	}
-	
+
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
@@ -146,6 +146,14 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	@Override
 	protected Item getDropItem() {
 		return voidCraft.items.voidicPhlogiston;
+	}
+
+	/**
+	 * Overridden to remove the ability to drop Weapons and Armor
+	 */
+	@Override
+	protected int getExperiencePoints(EntityPlayer player) {
+		return this.experienceValue;
 	}
 
 }

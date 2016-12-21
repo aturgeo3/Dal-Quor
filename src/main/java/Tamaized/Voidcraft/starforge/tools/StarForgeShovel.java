@@ -5,11 +5,14 @@ import java.util.List;
 import Tamaized.TamModized.tools.TamSpade;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
+import Tamaized.Voidcraft.starforge.IStarForgeTool;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Tier;
+import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,10 +36,15 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class StarForgeShovel extends TamSpade {
+public class StarForgeShovel extends TamSpade implements IStarForgeTool {
 
 	public StarForgeShovel(CreativeTabs tab, ToolMaterial material, String n) {
 		super(tab, material, n);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.TOOL;
 	}
 
 	@Override

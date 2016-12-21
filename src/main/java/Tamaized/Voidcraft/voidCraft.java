@@ -12,6 +12,7 @@ import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
 import Tamaized.Voidcraft.capabilities.elytraFlying.ElytraFlyingCapabilityStorage;
 import Tamaized.Voidcraft.capabilities.elytraFlying.IElytraFlyingCapability;
@@ -100,6 +101,7 @@ import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
 import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.sound.BossMusicManager;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import Tamaized.Voidcraft.starforge.StarForgeEffectRecipeList;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
 import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidCity.StructureVoidCityPieces;
@@ -251,6 +253,7 @@ public class voidCraft extends TamModBase {
 
 		// Register StarForge Effects
 		StarForgeEffectList.register();
+		StarForgeEffectRecipeList.instance.register();
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
@@ -267,6 +270,7 @@ public class voidCraft extends TamModBase {
 		GameRegistry.registerTileEntity(TileEntityVoidicAlchemy.class, "tileEntityVoidicAlchemy");
 		GameRegistry.registerTileEntity(TileEntityRealityTeleporter.class, "tileEntityRealityTeleporter");
 		GameRegistry.registerTileEntity(TileEntitySpellIceSpike.class, "tileEntitySpellIceSpike");
+		GameRegistry.registerTileEntity(TileEntityStarForge.class, "tileEntityStarForge");
 
 		// GUI Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());

@@ -36,6 +36,14 @@ item.etherealSeed.name=Ethereal Seeds
 item.vadeMecum.name=Void Vade Mecum
 item.realityTeleporter.name=Reality Teleporter
 item.voidicEssence.name=Voidic Essence
+item.starforgedSword.name=Starforged Sword
+item.starforgedPickaxe.name=Starforged Pickaxe
+item.starforgedAxe.name=Starforged Axe
+item.starforgedShovel.name=Starforged Shovel
+item.voidicPhlogiston.name=Voidic Phlogiston
+item.voidicDragonScale.name=Voidic Dragon Scale
+item.astralEssence.name=Astral Essence
+item.quoriFragment.name=Quori Fragment
 
 # Blocks
 tile.voidcraft:blockVoidFluid.name=Liquid Void

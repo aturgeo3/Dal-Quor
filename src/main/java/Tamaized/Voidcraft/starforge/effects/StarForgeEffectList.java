@@ -47,11 +47,11 @@ public final class StarForgeEffectList {
 	}
 
 	public static final int getEffectID(IStarForgeEffect effect) {
-		return effects.indexOf(effect);
+		return effects.indexOf(effect) + 1;
 	}
 
 	public static final IStarForgeEffect getEffect(int id) {
-		return id < 0 ? null : id >= effects.size() ? null : effects.get(id);
+		return id < 1 ? null : id > effects.size() ? null : effects.get(id - 1);
 	}
 
 	public static final void register() {

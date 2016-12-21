@@ -6,9 +6,12 @@ import Tamaized.TamModized.tools.TamSword;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.capabilities.starforge.StarForgeCapabilityHandler;
+import Tamaized.Voidcraft.starforge.IStarForgeTool;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Tier;
+import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,10 +32,15 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class StarForgeSword extends TamSword {
+public class StarForgeSword extends TamSword implements IStarForgeTool {
 
 	public StarForgeSword(CreativeTabs tab, ToolMaterial material, String n) {
 		super(tab, material, n);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.SWORD;
 	}
 
 	@Override

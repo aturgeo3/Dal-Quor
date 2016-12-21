@@ -1,23 +1,32 @@
 package Tamaized.Voidcraft.network;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
+import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
+import Tamaized.Voidcraft.helper.GUIListElement;
 import Tamaized.Voidcraft.items.HookShot;
 import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
+import Tamaized.Voidcraft.starforge.StarForgeEffectEntry;
+import Tamaized.Voidcraft.starforge.StarForgeToolEntry;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,7 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class ServerPacketHandler {
 
 	public static enum PacketType {
-		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, VADEMECUM_LASTENTRY, CUSTOM_ELYTRA, LINK_CLEAR
+		VOIDBOX_PLAY, VOIDBOX_STOP, VOIDBOX_LOOP, VOIDBOX_AUTO, HOOKSHOT_STOP, VADEMECUM, VADEMECUM_LASTENTRY, CUSTOM_ELYTRA, LINK_CLEAR, STARFORGE_CRAFT
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -48,12 +57,55 @@ public class ServerPacketHandler {
 
 	public static void processPacketOnServer(ByteBuf parBB, Side parSide, EntityPlayerMP player) {
 		if (parSide == Side.SERVER) {
+			World world = player.world;
 			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 			int pktType;
 			try {
-				TileEntityVoidBox voidBox;
 				pktType = bbis.readInt();
 				switch (getPacketTypeFromID(pktType)) {
+					case STARFORGE_CRAFT: {
+						TileEntity te = world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						if (te instanceof TileEntityStarForge) {
+							TileEntityStarForge tile = (TileEntityStarForge) te;
+							int index = bbis.readInt();
+							ArrayList<GUIListElement> list = tile.buildPossibleEffectList();
+							if (index >= 0 && index < list.size()) {
+								GUIListElement element = list.get(index);
+								if (element instanceof StarForgeToolEntry) {
+									StarForgeToolEntry entry = (StarForgeToolEntry) element;
+									if (tile.getStackInSlot(tile.SLOT_OUTPUT).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).getCount() >= 4 && tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).getCount() >= 1) {
+										tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).shrink(4);
+										tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).shrink(1);
+										tile.setInventorySlotContents(tile.SLOT_OUTPUT, entry.getTool());
+									}
+								} else if (element instanceof StarForgeEffectEntry) {
+									StarForgeEffectEntry entry = (StarForgeEffectEntry) element;
+									if (!tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_OUTPUT).isEmpty()) {
+										boolean flag = true;
+										for (ItemStack checkStack : entry.getRecipe().getInputs()) {
+											int slot = checkStack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == voidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == voidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == voidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+											if (tile.getStackInSlot(slot).getCount() >= checkStack.getCount()) break;
+											flag = false;
+										}
+										if (flag) {
+											ItemStack tool = tile.getStackInSlot(tile.SLOT_INPUT_TOOL).copy();
+											IStarForgeCapability cap = tool.getCapability(CapabilityList.STARFORGE, null);
+											if (cap != null && cap.getEffect(entry.getRecipe().getEffect().getTier()) == null) {
+												for (ItemStack checkStack : entry.getRecipe().getInputs()) {
+													int slot = checkStack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == voidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == voidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == voidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+													tile.getStackInSlot(slot).shrink(checkStack.getCount());
+												}
+												cap.addEffect(entry.getRecipe().getEffect());
+											}
+											tile.setInventorySlotContents(tile.SLOT_OUTPUT, tool);
+											tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, ItemStack.EMPTY);
+										}
+									}
+								}
+							}
+						}
+					}
+						break;
 					case LINK_CLEAR: {
 						int slot = bbis.readInt();
 						ItemStack stack = ItemStack.EMPTY;
@@ -84,7 +136,7 @@ public class ServerPacketHandler {
 						if (cap != null) cap.setLastEntry(bbis.readUTF());
 						break;
 					case VOIDBOX_PLAY: {
-						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						TileEntityVoidBox voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -93,7 +145,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_STOP: {
-						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						TileEntityVoidBox voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -102,7 +154,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_LOOP: {
-						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						TileEntityVoidBox voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;
@@ -111,7 +163,7 @@ public class ServerPacketHandler {
 					}
 						break;
 					case VOIDBOX_AUTO: {
-						voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
+						TileEntityVoidBox voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));
 						if (voidBox == null) {
 							bbis.close();
 							return;

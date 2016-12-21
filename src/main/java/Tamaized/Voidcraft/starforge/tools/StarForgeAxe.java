@@ -5,9 +5,12 @@ import java.util.List;
 import Tamaized.TamModized.tools.TamAxe;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
+import Tamaized.Voidcraft.starforge.IStarForgeTool;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Tier;
+import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,10 +31,15 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class StarForgeAxe extends TamAxe {
+public class StarForgeAxe extends TamAxe implements IStarForgeTool {
 
 	public StarForgeAxe(CreativeTabs tab, ToolMaterial material, String n) {
 		super(tab, material, n);
+	}
+
+	@Override
+	public Type getType() {
+		return Type.TOOL;
 	}
 
 	@Override
@@ -107,7 +115,7 @@ public class StarForgeAxe extends TamAxe {
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
 		if (entityLiving instanceof EntityPlayer) {
 			IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-			if (cap != null){
+			if (cap != null) {
 				RayTraceResult ray = rayTrace(worldIn, (EntityPlayer) entityLiving, false);
 				cap.onBlockBreak(entityLiving, worldIn, state, pos, ray == null ? null : ray.sideHit);
 			}
