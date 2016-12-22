@@ -1,6 +1,0 @@
- - Tamaized: Nerfed length of fire from various swords. Molten: 5, Arch: 10, Demon: 15
- - Tamaized: Increased Y level range of Void Crystal Ore in The End to max 100.
- - Anromora: Updated the Sword Textures.
- - Tamaized: Updated TamModized
- - Tamaized: Removed Shulkers from the Void Fortress
- - Tamaized: Voidic Infusion now works with other entities
