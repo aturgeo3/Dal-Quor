@@ -2,3 +2,4 @@
  - Tamaized: Increased Y level range of Void Crystal Ore in The End to max 100.
  - Anromora: Updated the Sword Textures.
  - Tamaized: Updated TamModized
+ - Tamaized: Removed Shulkers from the Void Fortress

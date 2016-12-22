@@ -22,7 +22,6 @@ public class MapGenVoidFortress extends MapGenStructure {
 
 	public MapGenVoidFortress() {
 		this.spawnList.add(new SpawnListEntry(EntityMobVoidWrath.class, 3, 0, 1));
-		this.spawnList.add(new SpawnListEntry(EntityShulker.class, 1, 0, 1));
 		this.spawnList.add(new SpawnListEntry(EntityHerobrineCreeper.class, 1, 0, 1));
 	}
 
