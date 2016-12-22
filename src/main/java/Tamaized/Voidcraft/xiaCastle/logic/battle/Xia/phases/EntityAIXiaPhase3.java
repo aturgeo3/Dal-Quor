@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
@@ -11,7 +12,6 @@ import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
-import Tamaized.Voidcraft.helper.TempParticleHelper;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.Entity;
@@ -134,7 +134,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 		getEntity().setArmRotations(135, 135, 45, -45, true);
 		resetAnimationTick = 20 * 2;
 		world.playSound((EntityPlayer) null, getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
-		TempParticleHelper.spawnVanillaParticleOnServer(world, EnumParticleTypes.EXPLOSION_HUGE, getEntity().posX, getEntity().posY, getEntity().posZ, 1.0D, 0.0D, 0.0D);
+		ParticleHelper.spawnVanillaParticleOnServer(world, EnumParticleTypes.EXPLOSION_HUGE, getEntity().posX, getEntity().posY, getEntity().posZ, 1.0D, 0.0D, 0.0D);
 
 		for (Entity e : world.getEntitiesWithinAABBExcludingEntity(getEntity(), new AxisAlignedBB(getEntity().posX - 5, getEntity().posY - 5, getEntity().posZ - 5, getEntity().posX + 5, getEntity().posY + 5, getEntity().posZ + 5))) {
 			double mX = 0;

@@ -11,7 +11,6 @@ import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.helper.EntityMotionHelper;
-import Tamaized.Voidcraft.helper.TempParticleHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;
@@ -29,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientPacketHandler {
 
 	public static enum PacketType {
-		INFUSION_UPDATE, INFUSION_UPDATE_ALL, ENTITY_UPDATES, XIA_ANIMATIONS, SHEATHE, PLAYER_MOTION, PARTICLE, VADEMECUM_UPDATE, VOIDICPOWERITEM, GHOSTPLAYER_UPDATES
+		INFUSION_UPDATE, INFUSION_UPDATE_ALL, ENTITY_UPDATES, XIA_ANIMATIONS, SHEATHE, PLAYER_MOTION, VADEMECUM_UPDATE, VOIDICPOWERITEM, GHOSTPLAYER_UPDATES
 	}
 
 	public static int getPacketTypeID(PacketType type) {
@@ -65,10 +64,6 @@ public class ClientPacketHandler {
 				if (entity instanceof EntityGhostPlayerBase) {
 					((EntityGhostPlayerBase) entity).decodePacket(bbis);
 				}
-			}
-				break;
-			case PARTICLE: {
-				TempParticleHelper.decodePacket(bbis);
 			}
 				break;
 			case VOIDICPOWERITEM: {

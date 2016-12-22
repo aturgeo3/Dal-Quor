@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.TamModized.blocks.TamBlockFence;
 import Tamaized.TamModized.blocks.TamBlockStairs;
-import Tamaized.TamModized.blocks.slab.TamBlockSlab;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabDouble;
 import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.TamModized.registry.RegistryHelper;
 import Tamaized.TamModized.registry.TamColorRegistry;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
@@ -41,7 +41,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -137,23 +136,13 @@ public class VoidCraftBlocks implements ITamRegistry {
 		modelList.add(iceSpike = new BlockSpellIceSpike(voidCraft.tabs.tabVoid, Material.ICE, "blockSpellIceSpike", -1F));
 
 		// Slabs have to be registered outside of their class
-		registerBlockSlab(blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab);
-		registerBlockSlab(blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab);
+		RegistryHelper.registerBlockSlab(blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab);
+		RegistryHelper.registerBlockSlab(blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab);
 		// GameRegistry.registerBlock(blockVoidBrickHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickHalfSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
 		// GameRegistry.registerBlock(blockVoidBrickDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockVoidBrickDoubleSlab).getName(), blockVoidBrickHalfSlab, blockVoidBrickDoubleSlab, false);
 		// GameRegistry.registerBlock(blockFakeBedrockHalfSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockHalfSlab).getName(), blockFakeBedrockHalfSlab, blockFakeBedrockDoubleSlab, false);
 		// GameRegistry.registerBlock(blockFakeBedrockDoubleSlab, TamItemBlockSlab.class, voidCraft.modid + ":blocks/" + ((TamBlockSlab) blockFakeBedrockDoubleSlab).getName(), blockVoidBrickHalfSlab, blockFakeBedrockDoubleSlab, false);
 
-	}
-
-	private static void registerBlockSlab(TamBlockSlab slab, TamBlockSlab doubleslab) { // TODO: Put this in TamModized
-		slab.setRegistryName(slab.getModelDir() + "/" + slab.getName());
-		doubleslab.setRegistryName(doubleslab.getModelDir() + "/" + doubleslab.getName());
-		GameRegistry.register(slab);
-		GameRegistry.register(doubleslab);
-		ItemSlab item = new ItemSlab(slab, slab, doubleslab);
-		item.setRegistryName(slab.getRegistryName());
-		GameRegistry.register(item);
 	}
 
 	@Override
