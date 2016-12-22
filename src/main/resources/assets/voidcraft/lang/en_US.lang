@@ -150,6 +150,16 @@ entity.Dol.name=Dol
 entity.Zol.name=Zol
 entity.Xia.name=Xia
 entity.Xia2.name=Xia
+entity.EtherealGuardian.name=Ethereal Guardian
+entity.HerobrineCreeper.name=Herobrine's Creeper
+entity.GhostPlayer.name=Ghost
+entity.GhostBiped.name=Ghost
+entity.Witherbrine.name=Witherbrine
+entity.DragonOld.name=Ender Dragon
+entity.DragonXia.name=Ender Dragon
+entity.DolXia.name=Dol
+entity.ZolXia.name=Zol
+entity.VoidicDragon.name=Voidic Dragon
 
 # Achievements
 achievement.voidCrystal=Void?
