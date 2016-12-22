@@ -5,6 +5,7 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.etherealGuardian.VadeMecumPageListEtherealGuardian;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.lich.VadeMecumPageListLich;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs.spectre.VadeMecumPageListSpectreChain;
@@ -16,7 +17,7 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumMobsEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		VoidWraith, ChainedSpectre, VoidWrath, VoidLich, HerobrineCreeper
+		VoidWraith, ChainedSpectre, VoidWrath, VoidLich, HerobrineCreeper, EtherealGuardian
 	}
 
 	public static int getEntryID(Entry e) {
@@ -32,6 +33,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public VadeMecumEntry voidWrath;
 	public VadeMecumEntry voidLich;
 	public VadeMecumEntry herobrineCreeper;
+	public VadeMecumEntry etherealGuardian;
 
 	public VadeMecumMobsEntry(VadeMecumEntry back) {
 		super("docs_Mobs", voidCraft.modid+".VadeMecum.docs.title.mobs", back, null);
@@ -44,6 +46,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 		voidWrath = new VadeMecumEntry("docs_Mobs_voidWrath", "", this, new VadeMecumPageListVoidWrath());
 		voidLich = new VadeMecumEntry("docs_Mobs_voidLich", "", this, new VadeMecumPageListLich());
 		herobrineCreeper = new VadeMecumEntry("docs_Mobs_herobrineCreeper", "", this, new VadeMecumPageListHerobrineCreeper());
+		etherealGuardian = new VadeMecumEntry("docs_Mobs_etherealGuardian", "", this, new VadeMecumPageListEtherealGuardian());
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidWrath), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, voidCraft.modid+".VadeMecum.docs.title.voidWrath", new ItemStack(voidCraft.items.burnBone)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidLich), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid+".VadeMecum.docs.title.lich", new ItemStack(voidCraft.items.voidCloth)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.HerobrineCreeper), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, voidCraft.modid+".VadeMecum.docs.title.herobrindCreeper", new ItemStack(Items.GUNPOWDER)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.EtherealGuardian), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, voidCraft.modid+".VadeMecum.docs.title.etherealGuardian", new ItemStack(voidCraft.items.voidicPhlogiston)));
 	}
 
 	@Override
@@ -74,6 +78,9 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 				break;
 			case HerobrineCreeper:
 				gui.changeEntry(herobrineCreeper);
+				break;
+			case EtherealGuardian:
+				gui.changeEntry(etherealGuardian);
 				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);

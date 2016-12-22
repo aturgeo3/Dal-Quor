@@ -5,6 +5,7 @@ import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
+import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.cosmicMaterial.VadeMecumPageListCosmicMaterial;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.realityhole.VadeMecumPageListRealityHole;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.ritual.VadeMecumPageListRitualBlock;
 import Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks.softbedrock.VadeMecumPageListSoftBedrock;
@@ -16,7 +17,7 @@ import net.minecraft.item.ItemStack;
 public class VadeMecumBlocksEntry extends VadeMecumEntry {
 
 	public static enum Entry {
-		VoidCrystalBlock, VoidCrystalOre, SoftBedrock, VoidBrick, HoleinReality, RitualBlock
+		VoidCrystalBlock, VoidCrystalOre, SoftBedrock, VoidBrick, HoleinReality, CosmicMaterial, RitualBlock
 	}
 
 	public static int getEntryID(Entry e) {
@@ -32,6 +33,7 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 	public VadeMecumEntry softBedrock;
 	public VadeMecumEntry voidBrick;
 	public VadeMecumEntry holeInReality;
+	public VadeMecumEntry cosmicMaterial;
 	public VadeMecumEntry ritualBlock;
 
 	public VadeMecumBlocksEntry(VadeMecumEntry back) {
@@ -45,6 +47,7 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 		softBedrock = new VadeMecumEntry("docs_Blocks_softBedrock", "", this, new VadeMecumPageListSoftBedrock());
 		voidBrick = new VadeMecumEntry("docs_Blocks_voidBrick", "", this, new VadeMecumPageListVoidBrick());
 		holeInReality = new VadeMecumEntry("docs_Blocks_holeInReality", "", this, new VadeMecumPageListRealityHole());
+		cosmicMaterial = new VadeMecumEntry("docs_Blocks_cosmicMaterial", "", this, new VadeMecumPageListCosmicMaterial());
 		ritualBlock = new VadeMecumEntry("docs_Blocks_ritualBlock", "", this, new VadeMecumPageListRitualBlock());
 	}
 
@@ -57,6 +60,7 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.SoftBedrock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.blocks.blockFakeBedrock).getDisplayName(), new ItemStack(voidCraft.blocks.blockFakeBedrock)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidBrick), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.blocks.blockVoidbrick).getDisplayName(), new ItemStack(voidCraft.blocks.blockVoidbrick)));
 		addButton(new VadeMecumButton(gui, getEntryID(Entry.HoleinReality), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.blocks.realityHole).getDisplayName(), new ItemStack(voidCraft.blocks.realityHole)));
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.CosmicMaterial), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.blocks.cosmicMaterial).getDisplayName(), new ItemStack(voidCraft.blocks.cosmicMaterial)));
 		//addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlock), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.blocks.ritualBlock).getDisplayName(), new ItemStack(voidCraft.blocks.ritualBlock)));
 	}
 
@@ -77,6 +81,9 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 				break;
 			case HoleinReality:
 				gui.changeEntry(holeInReality);
+				break;
+			case CosmicMaterial:
+				gui.changeEntry(cosmicMaterial);
 				break;
 			case RitualBlock:
 				gui.changeEntry(ritualBlock);

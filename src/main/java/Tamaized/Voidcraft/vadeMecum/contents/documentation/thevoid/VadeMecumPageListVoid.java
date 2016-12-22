@@ -12,7 +12,9 @@ public class VadeMecumPageListVoid implements IVadeMecumPageProvider {
 		return new IVadeMecumPage[] {
 				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.theVoid", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg1"),
 				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg2"),
-				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg3") };
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg3"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg4"),
+				new VadeMecumPage("", voidCraft.modid+".VadeMecum.docs.desc.theVoid.pg5") };
 	}
 
 }

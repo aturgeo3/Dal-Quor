@@ -32,6 +32,8 @@ public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 		addButton(new VadeMecumButton(gui, VadeMecumDocumentationEntryList.getEntryID(VadeMecumDocumentationEntryList.Entry.VOID), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.theVoid", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.blockPortalVoid))));
 		addButton(new VadeMecumButton(gui, VadeMecumDocumentationEntryList.getEntryID(VadeMecumDocumentationEntryList.Entry.VOIDICINFUSION), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 4), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.voidicInfusion", new ItemStack(voidCraft.items.voidicSuppressor)));
 		addButton(new VadeMecumButton(gui, VadeMecumDocumentationEntryList.getEntryID(VadeMecumDocumentationEntryList.Entry.XIA), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 5), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.xia", new ItemStack(voidCraft.blocks.blockPortalXia)));
+	
+		addButton2(new VadeMecumButton(gui, VadeMecumDocumentationEntryList.getEntryID(VadeMecumDocumentationEntryList.Entry.STARFORGE), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.starforge", new ItemStack(voidCraft.blocks.starforgeStation)));
 	}
 
 	@Override
@@ -73,6 +75,9 @@ public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 			case XIA:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.XIA);
 				break;
+			case STARFORGE:
+				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.STARFORGE);
+				break;
 			default:
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
@@ -81,7 +86,7 @@ public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 
 	@Override
 	public int getPageLength(VadeMecumGUI gui) {
-		return 1;
+		return 3;
 	}
 
 }
