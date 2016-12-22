@@ -22,15 +22,7 @@ public class RenderPlayer {
 		GlStateManager.pushAttrib();
 		EntityPlayer player = e.getEntityPlayer();
 		if (player != null) {
-			float f1 = 1.0f;
-			if (player.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
-				IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
-				float f2 = 1.65f - cap.getInfusionPerc();
-				f1 = f2 < 0.65f ? 0.65f : f2;
-				f1 = f1 > 1.0f ? 1.0f : f1;
-			}
 			// renderElytra(player, e.getPartialRenderTick());
-			GlStateManager.color(f1, f1, f1, f1);
 		}
 	}
 

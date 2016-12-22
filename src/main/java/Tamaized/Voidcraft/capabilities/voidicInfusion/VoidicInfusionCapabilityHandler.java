@@ -7,6 +7,10 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
+import Tamaized.Voidcraft.entity.EntityVoidBoss;
+import Tamaized.Voidcraft.entity.EntityVoidMob;
+import Tamaized.Voidcraft.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
@@ -15,6 +19,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -41,6 +47,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	@Override
 	public void update(EntityLivingBase entity) {
+		if (entity instanceof EntityVoidMob || entity instanceof EntityVoidNPC || entity instanceof EntityWither || entity instanceof EntityDragon || entity instanceof EntityDragonOld) return;
 		handleInfusionGain(entity);
 		doHealthChecks(entity);
 		handleEffects(entity);
@@ -102,8 +109,14 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	private void handleEffects(EntityLivingBase entity) {
 		if (infusion >= maxInfusion) {
-			entity.attackEntityFrom(new DamageSourceVoidicInfusion(), entity.getMaxHealth());
-			infusion = 0;
+			if (entity instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) entity;
+				if (!player.capabilities.isCreativeMode) {
+					entity.attackEntityFrom(new DamageSourceVoidicInfusion(), entity.getMaxHealth());
+				}
+			} else {
+				entity.attackEntityFrom(new DamageSourceVoidicInfusion(), entity.getMaxHealth());
+			}
 			return;
 		}
 		if (entity instanceof EntityPlayer) {

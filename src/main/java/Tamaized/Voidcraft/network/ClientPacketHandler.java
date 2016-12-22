@@ -125,19 +125,9 @@ public class ClientPacketHandler {
 				break;
 			case INFUSION_UPDATE: {
 				Entity entity = world.getEntityByID(bbis.readInt());
-				IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
-				if (cap != null) cap.decodePacket(bbis);
-			}
-				break;
-			case INFUSION_UPDATE_ALL: {
-				int id = bbis.readInt();
-				int amount = bbis.readInt();
-				int maxAmount = bbis.readInt();
-				Entity entity = world.getEntityByID(id);
-				if (entity != null && entity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
+				if (entity != null && entity instanceof EntityLivingBase) {
 					IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
-					cap.setInfusion(amount);
-					cap.setMaxInfusion(maxAmount);
+					if (cap != null) cap.decodePacket(bbis);
 				}
 			}
 				break;

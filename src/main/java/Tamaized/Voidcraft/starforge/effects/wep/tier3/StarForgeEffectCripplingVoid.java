@@ -41,6 +41,7 @@ public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 				IVoidicInfusionCapability cap = livingHit.getCapability(CapabilityList.VOIDICINFUSION, null);
 				if (cap != null) {
 					cap.setInfusion(cap.getMaxInfusion() - 100);
+					System.out.println(cap.getInfusion()+"/"+cap.getMaxInfusion());
 				}
 			}
 		}

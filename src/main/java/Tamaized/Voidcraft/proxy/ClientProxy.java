@@ -142,6 +142,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		MinecraftForge.EVENT_BUS.register(new DebugEvent());
 		MinecraftForge.EVENT_BUS.register(infusionHandler);
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderPlayer());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderLiving());
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderSheathe());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 		MinecraftForge.EVENT_BUS.register(new TextureStitch());

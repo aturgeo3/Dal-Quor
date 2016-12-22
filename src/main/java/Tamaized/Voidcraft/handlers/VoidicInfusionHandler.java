@@ -9,9 +9,9 @@ public class VoidicInfusionHandler {
 
 	@SubscribeEvent
 	public void update(LivingUpdateEvent e) {
-		if (e.getEntityLiving().hasCapability(CapabilityList.VOIDICINFUSION, null)){
+		if (e.getEntityLiving().hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 			IVoidicInfusionCapability cap = e.getEntityLiving().getCapability(CapabilityList.VOIDICINFUSION, null);
-			if(cap.hasLoaded()) cap.update(e.getEntityLiving());
+			if (cap.hasLoaded()) cap.update(e.getEntityLiving());
 			else cap.load(e.getEntityLiving());
 		}
 	}

@@ -3,3 +3,4 @@
  - Anromora: Updated the Sword Textures.
  - Tamaized: Updated TamModized
  - Tamaized: Removed Shulkers from the Void Fortress
+ - Tamaized: Voidic Infusion now works with other entities
