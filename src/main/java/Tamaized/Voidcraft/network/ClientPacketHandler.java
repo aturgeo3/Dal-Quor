@@ -56,6 +56,7 @@ public class ClientPacketHandler {
 	@SideOnly(Side.CLIENT)
 	public static void processPacket(ByteBuf parBB) throws IOException {
 		World world = Minecraft.getMinecraft().world;
+		if (world == null) return;
 		ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 		int pktType = bbis.readInt();
 		switch (getPacketTypeFromID(pktType)) {
