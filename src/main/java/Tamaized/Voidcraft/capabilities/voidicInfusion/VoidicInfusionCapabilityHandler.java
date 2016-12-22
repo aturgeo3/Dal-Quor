@@ -47,7 +47,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	@Override
 	public void update(EntityLivingBase entity) {
-		if (entity instanceof EntityVoidMob || entity instanceof EntityVoidNPC || entity instanceof EntityWither || entity instanceof EntityDragon || entity instanceof EntityDragonOld) return;
+		if (entity == null || entity instanceof EntityVoidMob || entity instanceof EntityVoidNPC || entity instanceof EntityWither || entity instanceof EntityDragon || entity instanceof EntityDragonOld) return;
 		handleInfusionGain(entity);
 		doHealthChecks(entity);
 		handleEffects(entity);
@@ -239,6 +239,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	}
 
 	private void sendPacketUpdates(EntityLivingBase living) {
+		if (living == null) return;
 		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
