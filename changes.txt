@@ -1,2 +1,0 @@
- - Tamaized: Updated for Minecraft 1.11.2
- - Tamaized: Fixed Typos in the Vade Mecum
