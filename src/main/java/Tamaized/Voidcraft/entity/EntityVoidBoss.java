@@ -249,7 +249,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	protected void onDeathUpdate() { // Intercept deathUpdate to keep entity alive
 		if (ready) return;
 		isDead = false;
-		onDeath(DamageSource.generic);
+		onDeath(DamageSource.GENERIC);
 	}
 
 	@Override

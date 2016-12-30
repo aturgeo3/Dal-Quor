@@ -53,7 +53,7 @@ public class EntityHerobrineShadow extends EntityHerobrineFireball {
 	protected void onImpact(RayTraceResult p_70227_1_) {
 		if (!world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityVoidBoss)) {
 			if (p_70227_1_.entityHit != null) {
-				p_70227_1_.entityHit.attackEntityFrom(DamageSource.magic, 15.0F);
+				p_70227_1_.entityHit.attackEntityFrom(DamageSource.MAGIC, 15.0F);
 			} else if (p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 			}

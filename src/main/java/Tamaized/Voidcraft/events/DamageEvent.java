@@ -62,7 +62,7 @@ public class DamageEvent {
 			if (e.getSource() != null && e.getSource().getEntity() != null && e.getSource().getEntity() instanceof EntityLivingBase) {
 				EntityLivingBase attacker = (EntityLivingBase) e.getSource().getEntity();
 				if (living.getActivePotionEffect(voidCraft.potions.fireSheath) != null) {
-					attacker.attackEntityFrom(DamageSource.onFire, 2.0f);
+					attacker.attackEntityFrom(DamageSource.ON_FIRE, 2.0f);
 				} else if (living.getActivePotionEffect(voidCraft.potions.frostSheath) != null) {
 					attacker.attackEntityFrom(new DamageSourceFrost(), 2.0f);
 				} else if (living.getActivePotionEffect(voidCraft.potions.litSheath) != null) {

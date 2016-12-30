@@ -37,7 +37,7 @@ public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 						}
 					}
 				} else {
-					result.entityHit.attackEntityFrom(DamageSource.magic, 8.0F);
+					result.entityHit.attackEntityFrom(DamageSource.MAGIC, 8.0F);
 				}
 
 				if (result.entityHit instanceof EntityLivingBase) {

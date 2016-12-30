@@ -476,8 +476,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isEntityInvulnerable(source)) {
 			return false;
-		} else if (source != DamageSource.drown && !(source.getEntity() instanceof EntityWitherbrine)) {
-			if (this.getInvulTime() > 0 && source != DamageSource.outOfWorld) {
+		} else if (source != DamageSource.DROWN && !(source.getEntity() instanceof EntityWitherbrine)) {
+			if (this.getInvulTime() > 0 && source != DamageSource.OUT_OF_WORLD) {
 				return false;
 			} else {
 				if (this.isArmored()) {

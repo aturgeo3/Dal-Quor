@@ -91,7 +91,7 @@ public class CustomElytraHandler {
 								float f5 = (float) (d3 * 10.0D - 3.0D);
 								if (f5 > 0.0F) {
 									entity.playSound((int) f5 > 4 ? SoundEvents.ENTITY_PLAYER_BIG_FALL : SoundEvents.ENTITY_PLAYER_SMALL_FALL, 1.0F, 1.0F);
-									entity.attackEntityFrom(DamageSource.flyIntoWall, f5);
+									entity.attackEntityFrom(DamageSource.FLY_INTO_WALL, f5);
 								}
 
 								if (entity.onGround && !entity.world.isRemote) {

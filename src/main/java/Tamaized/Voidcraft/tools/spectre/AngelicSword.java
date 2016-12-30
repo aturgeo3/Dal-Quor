@@ -24,7 +24,7 @@ public class AngelicSword extends TamSword{
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase){
         par1ItemStack.damageItem(1, par3EntityLivingBase);
         if(par2EntityLivingBase instanceof EntityVoidMob && !(par2EntityLivingBase instanceof EntityBossCorruptedPawn)){
-        	par2EntityLivingBase.attackEntityFrom(DamageSource.generic, 9999);
+        	par2EntityLivingBase.attackEntityFrom(DamageSource.GENERIC, 9999);
         }
         return true;
     }

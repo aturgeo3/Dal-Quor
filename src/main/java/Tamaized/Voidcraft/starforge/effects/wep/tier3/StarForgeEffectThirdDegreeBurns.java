@@ -33,7 +33,7 @@ public class StarForgeEffectThirdDegreeBurns implements IStarForgeEffect {
 
 	@Override
 	public void onEntityHit(Entity entityUser, Entity entityHit) {
-		entityHit.attackEntityFrom(DamageSource.onFire, 20.0F);
+		entityHit.attackEntityFrom(DamageSource.ON_FIRE, 20.0F);
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class EntityObsidianFlask extends EntityThrowable {
 		}
 
 		if (result.entityHit != null) {
-			result.entityHit.attackEntityFrom(DamageSource.outOfWorld, 5);
+			result.entityHit.attackEntityFrom(DamageSource.OUT_OF_WORLD, 5);
 		} else {
 			implosion(result.getBlockPos());
 		}

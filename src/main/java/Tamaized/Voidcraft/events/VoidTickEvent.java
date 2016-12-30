@@ -41,7 +41,7 @@ public class VoidTickEvent {
 		if (e.phase == e.phase.END) return;
 
 		if (e.player.world.provider.getDimension() == voidCraft.config.getDimensionIDvoid()) {
-			if (e.player.getPosition().getY() >= 127) e.player.attackEntityFrom(DamageSource.outOfWorld, 4.0F);
+			if (e.player.getPosition().getY() >= 127) e.player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 4.0F);
 		} else if (e.player.world.provider.getDimension() != voidCraft.config.getDimensionIDxia()) {
 			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256) {
 				EntityPlayerMP player = (EntityPlayerMP) e.player;
