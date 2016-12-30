@@ -11,7 +11,7 @@ public class VadeMecumPageListAstralEssence implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(new ItemStack(voidCraft.items.voidicDragonScale).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.astralEssence") };
+				new VadeMecumPage(new ItemStack(voidCraft.items.astralEssence).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.astralEssence") };
 	}
 
 }

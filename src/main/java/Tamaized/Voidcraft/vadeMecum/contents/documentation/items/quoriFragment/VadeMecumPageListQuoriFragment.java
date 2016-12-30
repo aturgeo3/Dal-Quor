@@ -11,7 +11,7 @@ public class VadeMecumPageListQuoriFragment implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(new ItemStack(voidCraft.items.voidicDragonScale).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.quoriFragment") };
+				new VadeMecumPage(new ItemStack(voidCraft.items.quoriFragment).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.quoriFragment") };
 	}
 
 }

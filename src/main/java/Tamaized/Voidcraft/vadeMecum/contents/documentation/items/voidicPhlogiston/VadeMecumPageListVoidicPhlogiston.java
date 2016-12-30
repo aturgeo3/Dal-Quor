@@ -11,7 +11,7 @@ public class VadeMecumPageListVoidicPhlogiston implements IVadeMecumPageProvider
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(new ItemStack(voidCraft.items.voidicDragonScale).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicPhlogiston") };
+				new VadeMecumPage(new ItemStack(voidCraft.items.voidicPhlogiston).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicPhlogiston") };
 	}
 
 }

@@ -10,7 +10,7 @@ public class VadeMecumPageListHerobrineCreeper implements IVadeMecumPageProvider
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.herobrindCreeper", voidCraft.modid+".VadeMecum.docs.desc.herobrindCreeper") };
+				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.herobrineCreeper", voidCraft.modid+".VadeMecum.docs.desc.herobrineCreeper") };
 	}
 
 }
