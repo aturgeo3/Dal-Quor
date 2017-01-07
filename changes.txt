@@ -5,3 +5,4 @@ Leo (1/3/17)
 New Angelic Sword, reuploaded Void Crystal Sword
 
  - Tamaized: Updated TamModized (0.4.2)
+ - Tamaized: Added Spectre Shovel and Spectre Hoe

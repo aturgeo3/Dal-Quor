@@ -20,8 +20,6 @@ import Tamaized.Voidcraft.tools.chain.ChainSword;
 import Tamaized.Voidcraft.tools.demon.DemonSword;
 import Tamaized.Voidcraft.tools.molten.MoltenSword;
 import Tamaized.Voidcraft.tools.spectre.AngelicSword;
-import Tamaized.Voidcraft.tools.spectre.SpectreAxe;
-import Tamaized.Voidcraft.tools.spectre.SpectrePickaxe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -41,8 +39,10 @@ public class VoidCraftTools implements ITamRegistry {
 	public static MoltenSword moltenSword;
 	public static ArchSword archSword;
 	public static DemonSword demonSword;
-	public static SpectrePickaxe spectrePickaxe;
-	public static SpectreAxe spectreAxe;
+	public static TamPickaxe spectrePickaxe;
+	public static TamAxe spectreAxe;
+	public static TamSpade spectreSpade;
+	public static TamHoe spectreHoe;
 
 	public static StarForgeSword starforgedSword;
 	public static StarForgePickaxe starforgedPickaxe;
@@ -65,8 +65,10 @@ public class VoidCraftTools implements ITamRegistry {
 
 		// spectre
 		modelList.add(angelicSword = new AngelicSword(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "angelicSword"));
-		modelList.add(spectrePickaxe = new SpectrePickaxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectrePickaxe"));
-		modelList.add(spectreAxe = new SpectreAxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectreAxe"));
+		modelList.add(spectrePickaxe = new TamPickaxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectrePickaxe"));
+		modelList.add(spectreAxe = new TamAxe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectreAxe"));
+		modelList.add(spectreSpade = new TamSpade(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectreSpade"));
+		modelList.add(spectreHoe = new VoidHoe(voidCraft.tabs.tabVoid, voidCraft.materials.spectreTools, "spectreHoe"));
 		// chain
 		modelList.add(chainSword = new ChainSword(voidCraft.tabs.tabVoid, voidCraft.materials.chainTools, "chainSword"));
 		// molten
@@ -92,9 +94,11 @@ public class VoidCraftTools implements ITamRegistry {
 		GameRegistry.addRecipe(new ItemStack(voidHoe, 1), " XX", " O ", " D ", 'X', voidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
 		GameRegistry.addRecipe(new ItemStack(voidSword, 1), " X ", "OXO", " D ", 'X', voidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
 		// +spectre
+		GameRegistry.addRecipe(new ItemStack(angelicSword, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidSword, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
 		GameRegistry.addRecipe(new ItemStack(spectrePickaxe, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidPickaxe, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
 		GameRegistry.addRecipe(new ItemStack(spectreAxe, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidAxe, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
-		GameRegistry.addRecipe(new ItemStack(angelicSword, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidSword, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
+		GameRegistry.addRecipe(new ItemStack(spectreSpade, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidSpade, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
+		GameRegistry.addRecipe(new ItemStack(spectreHoe, 1), "XXX", "XSX", "XXX", 'S', new ItemStack(voidHoe, 1, voidCraft.WILDCARD_VALUE), 'X', voidCraft.items.ectoplasm);
 		// +molten and beyond
 		GameRegistry.addRecipe(new ItemStack(moltenSword), "XXX", "XSX", "XXX", 'X', voidCraft.items.MoltenvoidChain, 'S', new ItemStack(chainSword, 1, voidCraft.WILDCARD_VALUE));
 		GameRegistry.addRecipe(new ItemStack(chainSword), "XXX", "XSX", "XXX", 'X', voidCraft.items.voidChain, 'S', new ItemStack(voidSword, 1, voidCraft.WILDCARD_VALUE));
