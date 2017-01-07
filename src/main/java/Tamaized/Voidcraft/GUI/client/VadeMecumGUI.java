@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.GUI.client;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -10,8 +12,6 @@ import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -23,9 +23,7 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -355,16 +353,11 @@ public class VadeMecumGUI extends GuiScreen {
 	}
 
 	public void sendPacketUpdates(VadeMecumPacketHandler.RequestType request, int objectID) {
-		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM);
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(pktType);
-			VadeMecumPacketHandler.ClientToServerRequest(outputStream, player, request, objectID);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToServer(packet);
-			outputStream.close();
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM));
+			DataOutputStream stream = packet.getStream();
+			VadeMecumPacketHandler.ClientToServerRequest(stream, player, request, objectID);
+			packet.sendPacketToServer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -372,16 +365,11 @@ public class VadeMecumGUI extends GuiScreen {
 
 	private void sendLastEntryPacket(String entry) {
 		if (entry.equals("")) return;
-		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY);
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(pktType);
-			outputStream.writeUTF(entry);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToServer(packet);
-			outputStream.close();
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY));
+			DataOutputStream stream = packet.getStream();
+			stream.writeUTF(entry);
+			packet.sendPacketToServer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

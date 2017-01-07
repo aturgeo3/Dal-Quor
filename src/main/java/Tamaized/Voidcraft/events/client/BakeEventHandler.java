@@ -13,7 +13,7 @@ public class BakeEventHandler {
 
     @SubscribeEvent
     public void onModelBakeEvent(ModelBakeEvent event){
-    	voidCraft.logger.info("Baking TESR Blocks");
+    	voidCraft.instance.logger.info("Baking TESR Blocks");
         event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(voidCraft.blocks.Heimdall);
         event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(voidCraft.blocks.blockNoBreak);
         event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(voidCraft.blocks.voidicCharger);

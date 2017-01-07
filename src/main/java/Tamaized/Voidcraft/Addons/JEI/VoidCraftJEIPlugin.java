@@ -26,7 +26,7 @@ public class VoidCraftJEIPlugin extends BlankModPlugin {
 
 	@Override
 	public void register(@Nonnull IModRegistry registry) {
-		voidCraft.logger.info("JEI detected, loading VoidCraft JEI Plugin");
+		voidCraft.instance.logger.info("JEI detected, loading VoidCraft JEI Plugin");
 		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
 		jeiHelpers = registry.getJeiHelpers();
 

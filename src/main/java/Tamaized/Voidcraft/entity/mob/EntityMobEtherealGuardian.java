@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import com.google.common.base.Predicate;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
@@ -105,16 +107,13 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 				Potion potion = voidCraft.potions.fireSheath;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
-				ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-				DataOutputStream outputStream = new DataOutputStream(bos);
 				try {
-					outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-					outputStream.writeInt(getEntityId());
-					outputStream.writeInt(Potion.getIdFromPotion(potion));
-					outputStream.writeInt(effect.getDuration());
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-					bos.close();
+					PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+					DataOutputStream stream = packet.getStream();
+					stream.writeInt(getEntityId());
+					stream.writeInt(Potion.getIdFromPotion(potion));
+					stream.writeInt(effect.getDuration());
+					packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

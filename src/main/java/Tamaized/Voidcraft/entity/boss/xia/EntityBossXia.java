@@ -4,6 +4,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
@@ -70,16 +72,13 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 		Potion pot = potioneffectIn.getPotion();
 		if (pot == voidCraft.potions.fireSheath || pot == voidCraft.potions.frostSheath || pot == voidCraft.potions.litSheath || pot == voidCraft.potions.acidSheath) super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
-				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-				outputStream.writeInt(getEntityId());
-				outputStream.writeInt(Potion.getIdFromPotion(pot));
-				outputStream.writeInt(potioneffectIn.getDuration());
-				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-				if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-				bos.close();
+				PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+				DataOutputStream stream = packet.getStream();
+				stream.writeInt(getEntityId());
+				stream.writeInt(Potion.getIdFromPotion(pot));
+				stream.writeInt(potioneffectIn.getDuration());
+				packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -188,11 +187,11 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 
 	@Override
 	protected void encodePacketData(DataOutputStream stream) throws IOException {
-		
+
 	}
 
 	@Override
 	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
-		
+
 	}
 }

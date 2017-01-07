@@ -4,20 +4,18 @@ import java.io.DataOutputStream;
 
 import org.lwjgl.opengl.GL11;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemRecord;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class VoidBoxGUI extends GuiContainer {
 
@@ -95,21 +93,16 @@ public class VoidBoxGUI extends GuiContainer {
 	}
 
 	private void sendPacket(ServerPacketHandler.PacketType type) {
-		int pktType = ServerPacketHandler.getPacketTypeID(type);
 		int xcoord = voidBox.getPos().getX();
 		int ycoord = voidBox.getPos().getY();
 		int zcoord = voidBox.getPos().getZ();
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(pktType);
-			outputStream.writeInt(xcoord);
-			outputStream.writeInt(ycoord);
-			outputStream.writeInt(zcoord);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToServer(packet);
-			outputStream.close();
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
+			DataOutputStream stream = packet.getStream();
+			stream.writeInt(xcoord);
+			stream.writeInt(ycoord);
+			stream.writeInt(zcoord);
+			packet.sendPacketToServer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapability> {
 
 	public VoidicPowerCapabilityStorage() {
-		voidCraft.logger.info("VoidicPowerCapabilityStorage Registered");
+		voidCraft.instance.logger.info("VoidicPowerCapabilityStorage Registered");
 	}
 
 	@Override

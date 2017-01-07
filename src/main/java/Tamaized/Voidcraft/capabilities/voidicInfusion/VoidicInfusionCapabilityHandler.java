@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.capabilities.voidicInfusion;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
@@ -240,18 +242,15 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	private void sendPacketUpdates(EntityLivingBase living) {
 		if (living == null) return;
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
-			outputStream.writeInt(living.getEntityId());
-			outputStream.writeInt(infusion);
-			outputStream.writeInt(maxInfusion);
-			outputStream.writeFloat(postInfusionHP);
-			outputStream.writeFloat(xiaDefeats);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToAllAround(packet, new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
+			DataOutputStream stream = packet.getStream();
+			stream.writeInt(living.getEntityId());
+			stream.writeInt(infusion);
+			stream.writeInt(maxInfusion);
+			stream.writeFloat(postInfusionHP);
+			stream.writeFloat(xiaDefeats);
+			packet.sendPacket(new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

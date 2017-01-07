@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusionCapability> {
 
 	public VoidicInfusionCapabilityStorage() {
-		voidCraft.logger.info("VoidicInfusionCapabilityStorage Registered");
+		voidCraft.instance.logger.info("VoidicInfusionCapabilityStorage Registered");
 	}
 
 	@Override

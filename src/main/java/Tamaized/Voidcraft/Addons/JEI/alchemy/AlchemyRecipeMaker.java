@@ -18,7 +18,7 @@ public class AlchemyRecipeMaker {
 				recipes.add(new AlchemyRecipeWrapperJEI(recipe));
 			}
 		} else {
-			voidCraft.logger.warn("Issue loading AlchemyRecipe JEI list");
+			voidCraft.instance.logger.warn("Issue loading AlchemyRecipe JEI list");
 		}
 		return recipes;
 	}

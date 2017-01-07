@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
@@ -17,11 +19,8 @@ import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase1;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase2;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -30,7 +29,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements IEntitySync {
 
@@ -86,16 +84,13 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 		Potion pot = potioneffectIn.getPotion();
 		if (pot == voidCraft.potions.fireSheath || pot == voidCraft.potions.frostSheath || pot == voidCraft.potions.litSheath || pot == voidCraft.potions.acidSheath) super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
-				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-				outputStream.writeInt(getEntityId());
-				outputStream.writeInt(Potion.getIdFromPotion(pot));
-				outputStream.writeInt(potioneffectIn.getDuration());
-				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-				if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-				bos.close();
+				PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+				DataOutputStream stream = packet.getStream();
+				stream.writeInt(getEntityId());
+				stream.writeInt(Potion.getIdFromPotion(pot));
+				stream.writeInt(potioneffectIn.getDuration());
+				packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

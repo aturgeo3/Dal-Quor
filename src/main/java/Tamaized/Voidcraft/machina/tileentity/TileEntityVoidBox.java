@@ -182,12 +182,12 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 				playing = true;
 				// IF YOU GOT THIS FAR, CONGRATS THIS WAS NOT FUN TO WRITE
 			} catch (Exception e) {
-				voidCraft.logger.warn("Could not play ItemRecord");
+				voidCraft.instance.logger.warn("Could not play ItemRecord");
 				e.printStackTrace();
 				loop = false; // Prevent soft lock
 			}
 		} else {
-			voidCraft.logger.warn("NULL/NON-ITEMRECORD IN SLOT DETECTED");
+			voidCraft.instance.logger.warn("NULL/NON-ITEMRECORD IN SLOT DETECTED");
 		}
 	}
 

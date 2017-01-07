@@ -133,7 +133,7 @@ public class VoidTickEvent {
 					// Client Side do nothing
 				} else {
 					String err = "ISSUE DETECTED, REPORT THIS TO THE AUTHOR OF VOIDCRAFT; Data: " + j + " : " + e.player + "; " + e.player.getClass();
-					voidCraft.logger.info(err);
+					voidCraft.instance.logger.info(err);
 					// System.out.println(err);
 				}
 				j.hasTeleported = true;
@@ -143,7 +143,7 @@ public class VoidTickEvent {
 				j.hasTeleported = false;
 			}
 		} else {
-			voidCraft.logger.info("Adding UUID: '" + e.player.getGameProfile().getId() + "' (" + e.player.getGameProfile().getName() + ") to Portal Overlay Handler");
+			voidCraft.instance.logger.info("Adding UUID: '" + e.player.getGameProfile().getId() + "' (" + e.player.getGameProfile().getName() + ") to Portal Overlay Handler");
 			data.put(e.player.getGameProfile().getId(), new PortalDataHandler(e.player.getGameProfile().getId(), e.player.dimension == voidCraft.config.getDimensionIDvoid() ? 0 : e.player.dimension == voidCraft.config.getDimensionIDxia() ? 0 : e.player.dimension));
 		}
 	}

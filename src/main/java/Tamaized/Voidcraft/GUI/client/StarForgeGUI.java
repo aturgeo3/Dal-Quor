@@ -6,21 +6,16 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.StarForgeContainer;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.helper.GUIElementList;
 import Tamaized.Voidcraft.helper.GUIListElement;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
-import Tamaized.Voidcraft.starforge.IStarForgeTool;
 import Tamaized.Voidcraft.starforge.StarForgeEffectEntry;
-import Tamaized.Voidcraft.starforge.StarForgeEffectRecipeList;
 import Tamaized.Voidcraft.starforge.StarForgeToolEntry;
-import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -29,9 +24,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class StarForgeGUI extends GuiContainer {
 
@@ -96,19 +89,14 @@ public class StarForgeGUI extends GuiContainer {
 		int zcoord = te.getPos().getZ();
 		switch (button.id) {
 			case BUTTON_CRAFT:
-				int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.STARFORGE_CRAFT);
-				ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-				DataOutputStream outputStream = new DataOutputStream(bos);
 				try {
-					outputStream.writeInt(pktType);
-					outputStream.writeInt(xcoord);
-					outputStream.writeInt(ycoord);
-					outputStream.writeInt(zcoord);
-					outputStream.writeInt(scroll.getSelectedIndex());
-					FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-					voidCraft.channel.sendToServer(packet);
-					outputStream.close();
-					bos.close();
+					PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.STARFORGE_CRAFT));
+					DataOutputStream stream = packet.getStream();
+					stream.writeInt(xcoord);
+					stream.writeInt(ycoord);
+					stream.writeInt(zcoord);
+					stream.writeInt(scroll.getSelectedIndex());
+					packet.sendPacketToServer();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}

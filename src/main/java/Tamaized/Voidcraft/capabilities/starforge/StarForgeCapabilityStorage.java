@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class StarForgeCapabilityStorage implements IStorage<IStarForgeCapability> {
 
 	public StarForgeCapabilityStorage() {
-		voidCraft.logger.info("StarForgeCapabilityStorage Registered");
+		voidCraft.instance.logger.info("StarForgeCapabilityStorage Registered");
 	}
 
 	@Override

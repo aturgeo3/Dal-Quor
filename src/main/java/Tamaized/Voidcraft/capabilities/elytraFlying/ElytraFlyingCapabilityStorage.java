@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class ElytraFlyingCapabilityStorage implements IStorage<IElytraFlyingCapability> {
 
 	public ElytraFlyingCapabilityStorage() {
-		voidCraft.logger.info("ElytraFlyingCapabilityStorage Registered");
+		voidCraft.instance.logger.info("ElytraFlyingCapabilityStorage Registered");
 	}
 
 	@Override

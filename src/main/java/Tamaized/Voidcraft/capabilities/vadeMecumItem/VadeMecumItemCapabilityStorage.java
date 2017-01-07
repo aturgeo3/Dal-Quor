@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class VadeMecumItemCapabilityStorage implements IStorage<IVadeMecumItemCapability> {
 
 	public VadeMecumItemCapabilityStorage() {
-		voidCraft.logger.info("VadeMecumItemCapabilityStorage Registered");
+		voidCraft.instance.logger.info("VadeMecumItemCapabilityStorage Registered");
 	}
 
 	@Override

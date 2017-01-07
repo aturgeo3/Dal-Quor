@@ -3,14 +3,12 @@ package Tamaized.Voidcraft.helper;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,16 +21,13 @@ public class EntityMotionHelper {
 	}
 
 	private static void sendPacketToPlayer(EntityPlayerMP e, double x, double y, double z) {
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.PLAYER_MOTION));
-			outputStream.writeDouble(x);
-			outputStream.writeDouble(y);
-			outputStream.writeDouble(z);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			if (voidCraft.channel != null && packet != null) voidCraft.channel.sendTo(packet, e);
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.PLAYER_MOTION));
+			DataOutputStream stream = packet.getStream();
+			stream.writeDouble(x);
+			stream.writeDouble(y);
+			stream.writeDouble(z);
+			packet.sendPacket(e);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

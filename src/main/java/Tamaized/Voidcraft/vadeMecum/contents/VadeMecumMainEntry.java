@@ -58,7 +58,7 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	}
 
 	public void preLoadObject() {
-		voidCraft.logger.info("Preloading Vade Mecum Entry Objects");
+		voidCraft.instance.logger.info("Preloading Vade Mecum Entry Objects");
 		Docs.preLoadObjects();
 		Progression.preLoadObjects();
 	}

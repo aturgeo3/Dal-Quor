@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
@@ -16,14 +18,11 @@ import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IEntitySync;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -31,7 +30,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySync, IAlternateBoss {
 
@@ -99,16 +97,13 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 		if (pot != voidCraft.potions.fireSheath && pot != voidCraft.potions.frostSheath && pot != voidCraft.potions.litSheath && pot != voidCraft.potions.acidSheath) return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
-				outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-				outputStream.writeInt(getEntityId());
-				outputStream.writeInt(Potion.getIdFromPotion(pot));
-				outputStream.writeInt(potioneffectIn.getDuration());
-				FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-				if (voidCraft.channel != null && packet != null) voidCraft.channel.sendToAllAround(packet, new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-				bos.close();
+				PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+				DataOutputStream stream = packet.getStream();
+				stream.writeInt(getEntityId());
+				stream.writeInt(Potion.getIdFromPotion(pot));
+				stream.writeInt(potioneffectIn.getDuration());
+				packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -137,7 +132,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 				updateMotion();
 				if (ticksExisted % 20 == 0) watchNew();
 				updateLook();
-				//collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
+				// collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
 				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
 			}
 		} else {

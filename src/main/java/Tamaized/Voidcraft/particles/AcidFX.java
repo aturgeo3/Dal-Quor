@@ -33,7 +33,7 @@ public class AcidFX extends TamParticle {
 	}
 
 	@Override
-	public void renderParticle(VertexBuffer worldRenderer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+	public boolean render(VertexBuffer worldRenderer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 		Tessellator tessellator = Tessellator.getInstance();
 		VertexBuffer vertexbuffer = tessellator.getBuffer();
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
@@ -59,6 +59,7 @@ public class AcidFX extends TamParticle {
 		//GL11.glDisable(GL11.GL_BLEND);
 		//GL11.glDepthMask(true);
 		//GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+		return false;
 	}
 
 	@Override

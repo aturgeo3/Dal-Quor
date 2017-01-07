@@ -30,9 +30,9 @@ public class XiaLaser extends TamParticle {
 	}
 
 	@Override
-	public void renderParticle(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+	public boolean render(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 		Entity e = entity.world.getEntityByID(entityID);
-		if (e == null) return;
+		if (e == null) return false;
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.disableFog();
 		Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityBeaconRenderer.TEXTURE_BEACON_BEAM);
@@ -47,6 +47,7 @@ public class XiaLaser extends TamParticle {
 		}
 		GlStateManager.popMatrix();
 		GlStateManager.enableFog();
+		return false;
 	}
 
 	@Override

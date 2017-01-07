@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.GUI.client;
 
 import java.io.DataOutputStream;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.server.RealityTeleporterContainer;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -9,18 +11,14 @@ import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.items.inventory.InventoryItem;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -93,16 +91,11 @@ public class RealityTeleporterGUI extends GuiContainer {
 	}
 
 	private void sendPacket(ServerPacketHandler.PacketType type) {
-		int pktType = ServerPacketHandler.getPacketTypeID(type);
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(pktType);
-			outputStream.writeInt(slotID);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToServer(packet);
-			outputStream.close();
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
+			DataOutputStream stream = packet.getStream();
+			stream.writeInt(slotID);
+			packet.sendPacketToServer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

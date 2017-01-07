@@ -5,19 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
-import io.netty.buffer.ByteBufOutputStream;
-import io.netty.buffer.Unpooled;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,15 +42,10 @@ public class HookShot extends TamItem {
 	}
 
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int count) { // Doesnt seem to be called server side so send a packet
-		int pktType = ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.HOOKSHOT_STOP);
-		ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer());
-		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-			outputStream.writeInt(pktType);
-			FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName);
-			voidCraft.channel.sendToServer(packet);
-			outputStream.close();
-			bos.close();
+			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.HOOKSHOT_STOP));
+			DataOutputStream stream = packet.getStream();
+			packet.sendPacketToServer();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
