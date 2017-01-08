@@ -3,11 +3,12 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -76,8 +77,8 @@ public class Debugger extends TamItem {
 		//cap.addEffect(StarForgeEffectList.threeByThree);
 		//playerIn.inventory.addItemStackToInventory(newStack);
 		
-		// playerIn.clearActivePotions();
-		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
+		 playerIn.clearActivePotions();
+		 playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);

@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -20,6 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -82,7 +84,7 @@ public class VadeMecum extends TamItem {
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 		if (cap == null) return false;
-		boolean tempFlag = false;
+		boolean tempFlag = true;
 		if (player.isSneaking() && tempFlag) {
 			cap.toggleBookState();
 		} else {
@@ -103,43 +105,25 @@ public class VadeMecum extends TamItem {
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
-		if (world.isRemote && entity instanceof EntityLivingBase && isSelected) {
+		if (world.isRemote && entity instanceof EntityLivingBase && isSelected && !net.minecraft.client.Minecraft.getMinecraft().isGamePaused() && world.rand.nextInt(20) == 0) {
 			EntityLivingBase living = (EntityLivingBase) entity;
 			IVadeMecumCapability playerCap = living.getCapability(CapabilityList.VADEMECUM, null);
 			IVadeMecumItemCapability itemCap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 			if (itemCap != null && itemCap.getBookState()) {
-				boolean flag = false;
-				if (entity == net.minecraft.client.Minecraft.getMinecraft().player) {
-					flag = net.minecraft.client.Minecraft.getMinecraft().gameSettings.thirdPersonView == 0;
+				/*
+				 * if (flag) { if (voidCraft.config.getRenderFirstPersonParticles()) { double pitch180 = (180 - (living.rotationPitch + 90)); double pitch90 = ((living.rotationPitch)); double pitch1802 = ((living.rotationPitch + 90)); double pitch = (1 + Math.cos(Math.toRadians(living.rotationPitch + 90))) / 2; double yaw = Math.toRadians(living.rotationYaw - 90); double range = ((pitch1802 < 90 ? pitch1802 : 180 - pitch1802) / 90) * 2.0D; double xOffset = range * -Math.cos(yaw); double yOffset = pitch * 2.85D; double zOffset = range * -Math.sin(yaw); double yaw2 = Math.toRadians(living.rotationYaw); double range2 = 0.25D; double xOffset2 = range2 * -Math.cos(yaw2); double zOffset2 = range2 * -Math.sin(yaw2); world.spawnParticle(EnumParticleTypes.PORTAL, living.posX + xOffset, living.posY + yOffset, living.posZ + zOffset, -xOffset + xOffset2, 1.15D - yOffset, -zOffset + zOffset2); } } else {
+				 */
+				if (voidCraft.config.getRenderThirdPersonParticles()) {
+					double yaw = Math.toRadians(living.renderYawOffset - 50);
+					double range = 0.63D;
+					double sneakRange = 0.43D;
+					double xOffset = entity.isSneaking() ? (sneakRange * -Math.cos(yaw)) : (range * -Math.cos(yaw));
+					double yOffset = entity.isSneaking() ? -0.5D : 0.0D;
+					double zOffset = entity.isSneaking() ? (sneakRange * -Math.sin(yaw)) : (range * -Math.sin(yaw));
+					net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(living.posX + xOffset, living.posY + yOffset + 0.785D, living.posZ + zOffset), new Vec3d(0, 0, 0), 20 * 2, 0.05F, world.rand.nextFloat() * 0.9F + 0.1F, 0x7700FFFF));
+					// world.spawnParticle(EnumParticleTypes.PORTAL, living.posX + xOffset, living.posY + yOffset, living.posZ + zOffset, 0, 0, 0);
 				}
-				if (flag) {
-					if (voidCraft.config.getRenderFirstPersonParticles()) {
-						double pitch180 = (180 - (living.rotationPitch + 90));
-						double pitch90 = ((living.rotationPitch));
-						double pitch1802 = ((living.rotationPitch + 90));
-						double pitch = (1 + Math.cos(Math.toRadians(living.rotationPitch + 90))) / 2;
-						double yaw = Math.toRadians(living.rotationYaw - 90);
-						double range = ((pitch1802 < 90 ? pitch1802 : 180 - pitch1802) / 90) * 2.0D;
-						double xOffset = range * -Math.cos(yaw);
-						double yOffset = pitch * 2.85D;
-						double zOffset = range * -Math.sin(yaw);
-						double yaw2 = Math.toRadians(living.rotationYaw);
-						double range2 = 0.25D;
-						double xOffset2 = range2 * -Math.cos(yaw2);
-						double zOffset2 = range2 * -Math.sin(yaw2);
-						world.spawnParticle(EnumParticleTypes.PORTAL, living.posX + xOffset, living.posY + yOffset, living.posZ + zOffset, -xOffset + xOffset2, 1.15D - yOffset, -zOffset + zOffset2);
-					}
-				} else {
-					if (voidCraft.config.getRenderThirdPersonParticles()) {
-						double yaw = Math.toRadians(living.renderYawOffset - 50);
-						double range = 0.63D;
-						double sneakRange = 0.43D;
-						double xOffset = entity.isSneaking() ? (sneakRange * -Math.cos(yaw)) : (range * -Math.cos(yaw));
-						double yOffset = entity.isSneaking() ? -0.5D : 0.0D;
-						double zOffset = entity.isSneaking() ? (sneakRange * -Math.sin(yaw)) : (range * -Math.sin(yaw));
-						world.spawnParticle(EnumParticleTypes.PORTAL, living.posX + xOffset, living.posY + yOffset, living.posZ + zOffset, 0, 0, 0);
-					}
-				}
+				// }
 			}
 		}
 	}

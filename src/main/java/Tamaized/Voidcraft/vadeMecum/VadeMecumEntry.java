@@ -8,24 +8,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
-import Tamaized.Voidcraft.events.client.DebugEvent;
+import Tamaized.Voidcraft.proxy.ClientProxy;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumEntry {
-	
+
 	private static Map<String, VadeMecumEntry> map = new HashMap<String, VadeMecumEntry>();
-	
-	public static VadeMecumEntry getEntry(String entry){
+
+	public static VadeMecumEntry getEntry(String entry) {
 		return map.get(entry);
 	}
-	
-	public static String getEntry(VadeMecumEntry entry){
-		for(Entry<String, VadeMecumEntry> e : map.entrySet()){
-			if(e.getValue() == entry) return e.getKey();
+
+	public static String getEntry(VadeMecumEntry entry) {
+		for (Entry<String, VadeMecumEntry> e : map.entrySet()) {
+			if (e.getValue() == entry) return e.getKey();
 		}
 		return null;
 	}
@@ -92,7 +91,7 @@ public class VadeMecumEntry {
 	}
 
 	public void goBack(VadeMecumGUI gui) {
-		if (backPage != null) gui.changeEntry(backPage);
+		gui.changeEntry(backPage == null ? ClientProxy.vadeMecumEntryList : backPage);
 	}
 
 	protected void actionPerformed(VadeMecumGUI gui, int id, int mouseButton) {

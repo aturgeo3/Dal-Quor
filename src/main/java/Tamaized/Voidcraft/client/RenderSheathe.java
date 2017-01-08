@@ -1,11 +1,13 @@
 package Tamaized.Voidcraft.client;
 
 import java.nio.FloatBuffer;
+import java.util.Random;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Sphere;
 
+import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.events.client.TextureStitch;
 import net.minecraft.client.Minecraft;
@@ -16,11 +18,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderSheathe {
-	
+
 	private static final FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
 
 	@SubscribeEvent
@@ -28,13 +31,13 @@ public class RenderSheathe {
 		GlStateManager.pushMatrix();
 		GlStateManager.pushAttrib();
 		EntityLivingBase entity = e.getEntity();
-		
+
 		GL11.glGetFloat(GL11.GL_CURRENT_COLOR, buffer);
-		
+
 		if (entity != null) {
 			render(e.getRenderer(), entity, e.getX(), e.getY(), e.getZ(), Minecraft.getMinecraft().getRenderPartialTicks());
 		}
-		
+
 		GlStateManager.color(buffer.get(0), buffer.get(1), buffer.get(2), buffer.get(3));
 	}
 
@@ -45,7 +48,7 @@ public class RenderSheathe {
 	}
 
 	private void render(net.minecraft.client.renderer.entity.RenderLivingBase render, EntityLivingBase entity, double x, double y, double z, float partialTicks) {
-		
+
 		float[] colors = null;
 		if (entity.getActivePotionEffect(voidCraft.potions.fireSheath) != null) {
 			colors = new float[] { 1.0f, 0.65f, 0.0f, 1.0f };
@@ -57,6 +60,15 @@ public class RenderSheathe {
 			colors = new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
 		}
 		if (colors == null) return;
+		Random rand = entity.world.rand;
+		double dx = (rand.nextFloat() * 1.0f) - 0.5f;
+		double dz = (rand.nextFloat() * 1.0f) - 0.5f;
+		int hexColor = 0;
+		hexColor += ((int) (colors[0] * 255f) << 24);
+		hexColor += ((int) (colors[1] * 255f) << 16);
+		hexColor += ((int) (colors[2] * 255f) << 8);
+		hexColor += ((int) (colors[3] * 255f));
+		if (!Minecraft.getMinecraft().isGamePaused()) Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(entity.world, new Vec3d(entity.posX + dx, entity.posY + 1, entity.posZ + dz), new Vec3d(0, 0, 0), 20 * 2, -(rand.nextFloat() * 0.05f) - 0.01f, rand.nextFloat(), hexColor));
 		GlStateManager.disableLighting();
 		TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
 		TextureAtlasSprite textureatlassprite = TextureStitch.colorFire_layer_0;

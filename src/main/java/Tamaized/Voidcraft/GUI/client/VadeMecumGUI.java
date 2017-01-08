@@ -108,7 +108,7 @@ public class VadeMecumGUI extends GuiScreen {
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry() != "null" && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
 		// else setEntry(ClientProxy.vadeMecumEntryList, 0);
-		else setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
+		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
 		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
 		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, 195, false));
@@ -154,9 +154,9 @@ public class VadeMecumGUI extends GuiScreen {
 	private void updateButtons() {
 		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength(this) : false;
 		if (button_back != null) button_back.visible = canDrawPage() ? pageNumber > 0 : false;
-		if (button_entryBack != null) button_entryBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN);
+		if (button_entryBack != null) button_entryBack.visible = (entry != ClientProxy.vadeMecumEntryList/* && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN */);
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
-		if (button_largeBack != null) button_largeBack.visible = (entry != ClientProxy.vadeMecumEntryList && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN);
+		if (button_largeBack != null) button_largeBack.visible = (entry != ClientProxy.vadeMecumEntryList/* && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN */);
 	}
 
 	/**
@@ -176,8 +176,8 @@ public class VadeMecumGUI extends GuiScreen {
 					entry.goBack(this);
 					break;
 				case EntryBack:
-					// setEntry(ClientProxy.vadeMecumEntryList, 0);
-					setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
+					setEntry(ClientProxy.vadeMecumEntryList, 0);
+					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case Credits:
 					break;
