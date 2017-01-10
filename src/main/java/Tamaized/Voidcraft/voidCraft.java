@@ -58,6 +58,7 @@ import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
@@ -304,6 +305,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityHerobrineShadow.class, "HerobrineShadow", this, modid, 128, 1, true);
 		registerEntity(EntityLichInferno.class, "LichInferno", this, modid, 128, 1, true);
 		registerEntity(ProjectileDisintegration.class, "ProjectileDisintegration", this, modid, 128, 1, true);
+		registerEntity(EntitySpellRune.class, "EntitySpellRune", this, modid, 64, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(config.getDimensionIDvoid(), DimensionType.register("The Void", "_void", config.getDimensionIDvoid(), WorldProviderVoid.class, false));

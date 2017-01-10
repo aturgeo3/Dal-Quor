@@ -13,6 +13,7 @@ import Tamaized.Voidcraft.client.ClientInfusionOverlayRender;
 import Tamaized.Voidcraft.client.ClientRenderTicker;
 import Tamaized.Voidcraft.client.LayerCustomElytra;
 import Tamaized.Voidcraft.client.LayerVoidSpikes;
+import Tamaized.Voidcraft.client.RenderGeneric;
 import Tamaized.Voidcraft.client.RenderNull;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
@@ -64,16 +65,14 @@ import Tamaized.Voidcraft.entity.mob.model.ModelSpectreChain;
 import Tamaized.Voidcraft.entity.mob.model.ModelVoidWrath;
 import Tamaized.Voidcraft.entity.mob.model.ModelWraith;
 import Tamaized.Voidcraft.entity.mob.render.RenderEtherealGuardian;
-import Tamaized.Voidcraft.entity.mob.render.RenderLich;
-import Tamaized.Voidcraft.entity.mob.render.RenderSpectreChain;
-import Tamaized.Voidcraft.entity.mob.render.RenderVoidWrath;
-import Tamaized.Voidcraft.entity.mob.render.RenderWraith;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderAcidBall;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.render.RenderSpellRune;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderVoidChain;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.OverlayEvent;
@@ -85,7 +84,9 @@ import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
 import net.minecraft.item.Item;
@@ -94,6 +95,7 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends AbstractVoidCraftProxy {
@@ -117,6 +119,194 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		voidCraft.instance.clientPreInit();
 		vadeMecumEntryList = new VadeMecumMainEntry();
 		vadeMecumEntryList.preLoadObject();
+
+		float shadowSize = 0.5F;
+		// MOBS
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobWraith.class, new IRenderFactory<EntityMobWraith>() {
+			@Override
+			public Render<? super EntityMobWraith> createRenderFor(RenderManager manager) {
+				return new RenderGeneric(manager, new ModelWraith(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zwraith.png"));
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobSpectreChain.class, new IRenderFactory<EntityMobSpectreChain>() {
+			@Override
+			public Render<? super EntityMobSpectreChain> createRenderFor(RenderManager manager) {
+				return new RenderGeneric(manager, new ModelSpectreChain(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zSpectreChain.png"));
+			}
+		});
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobLich.class, new IRenderFactory<EntityMobLich>() {
+			@Override
+			public Render<? super EntityMobLich> createRenderFor(RenderManager manager) {
+				return new RenderGeneric(manager, new ModelLich(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zLich.png"));
+			}
+		});
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobVoidWrath.class, new IRenderFactory<EntityMobVoidWrath>() {
+			@Override
+			public Render<? super EntityMobVoidWrath> createRenderFor(RenderManager manager) {
+				return new RenderGeneric(manager, new ModelVoidWrath(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zVoidWrath.png"));
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossCorruptedPawn.class, new IRenderFactory<EntityBossCorruptedPawn>() {
+			@Override
+			public Render<? super EntityBossCorruptedPawn> createRenderFor(RenderManager manager) {
+				return new RenderCorruptedPawn(manager, new ModelCorruptedPawn(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossHerobrine.class, new IRenderFactory<EntityBossHerobrine>() {
+			@Override
+			public Render<? super EntityBossHerobrine> createRenderFor(RenderManager manager) {
+				return new RenderHerobrine(manager, new ModelVoidBoss<EntityBossHerobrine>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossDol.class, new IRenderFactory<EntityBossDol>() {
+			@Override
+			public Render<? super EntityBossDol> createRenderFor(RenderManager manager) {
+				return new RenderDol(manager, shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossZol.class, new IRenderFactory<EntityBossZol>() {
+			@Override
+			public Render<? super EntityBossZol> createRenderFor(RenderManager manager) {
+				return new RenderZol(manager, new ModelVoidBoss<EntityBossZol>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia.class, new IRenderFactory<EntityBossXia>() {
+			@Override
+			public Render<? super EntityBossXia> createRenderFor(RenderManager manager) {
+				return new RenderXia(manager, new ModelVoidBossOverlay<EntityBossXia>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia2.class, new IRenderFactory<EntityBossXia2>() {
+			@Override
+			public Render<? super EntityBossXia2> createRenderFor(RenderManager manager) {
+				return new RenderXia2(manager, new ModelXia2<EntityBossXia2>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, new IRenderFactory<EntityGhostPlayer>() {
+			@Override
+			public Render<? super EntityGhostPlayer> createRenderFor(RenderManager manager) {
+				return new RenderGhostPlayer(manager, new ModelPlayer(0.0F, false));
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new IRenderFactory<EntityGhostBiped>() {
+			@Override
+			public Render<? super EntityGhostBiped> createRenderFor(RenderManager manager) {
+				return new RenderGhostPlayer(manager, new ModelBiped(0.0F));
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new IRenderFactory<EntityHerobrineCreeper>() {
+			@Override
+			public Render<? super EntityHerobrineCreeper> createRenderFor(RenderManager manager) {
+				return new RenderHerobrineCreeper(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new IRenderFactory<EntityHerobrineWitherSkull>() {
+			@Override
+			public Render<? super EntityHerobrineWitherSkull> createRenderFor(RenderManager manager) {
+				return new RenderWitherSkull(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new IRenderFactory<EntityHerobrineTNTPrimed>() {
+			@Override
+			public Render<? super EntityHerobrineTNTPrimed> createRenderFor(RenderManager manager) {
+				return new RenderHerobrineTNTPrimed(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new IRenderFactory<EntityHerobrineShadow>() {
+			@Override
+			public Render<? super EntityHerobrineShadow> createRenderFor(RenderManager manager) {
+				return new RenderHerobrineShadow(manager, new ModelHerobrineShadow<EntityHerobrineShadow>());
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityWitherbrine.class, new IRenderFactory<EntityWitherbrine>() {
+			@Override
+			public Render<? super EntityWitherbrine> createRenderFor(RenderManager manager) {
+				return new RenderWitherbrine(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonOld.class, new IRenderFactory<EntityDragonOld>() {
+			@Override
+			public Render<? super EntityDragonOld> createRenderFor(RenderManager manager) {
+				return new RenderDragonOld(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonXia.class, new IRenderFactory<EntityDragonXia>() {
+			@Override
+			public Render<? super EntityDragonXia> createRenderFor(RenderManager manager) {
+				return new RenderDragonOld(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidicDragon.class, new IRenderFactory<EntityVoidicDragon>() {
+			@Override
+			public Render<? super EntityVoidicDragon> createRenderFor(RenderManager manager) {
+				return new RenderVoidicDragon(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDolXia.class, new IRenderFactory<EntityDolXia>() {
+			@Override
+			public Render<? super EntityDolXia> createRenderFor(RenderManager manager) {
+				return new RenderTwinsXia(manager, RenderTwinsXia.TEXTURE_DOL, new ModelVoidBoss<EntityDolXia>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityZolXia.class, new IRenderFactory<EntityZolXia>() {
+			@Override
+			public Render<? super EntityZolXia> createRenderFor(RenderManager manager) {
+				return new RenderTwinsXia(manager, RenderTwinsXia.TEXTURE_ZOL, new ModelVoidBoss<EntityZolXia>(), shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityMobEtherealGuardian.class, new IRenderFactory<EntityMobEtherealGuardian>() {
+			@Override
+			public Render<? super EntityMobEtherealGuardian> createRenderFor(RenderManager manager) {
+				return new RenderEtherealGuardian(manager, shadowSize);
+			}
+		});
+
+		// Projectiles and MISC.
+		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new IRenderFactory<VoidChain>() {
+			@Override
+			public Render<? super VoidChain> createRenderFor(RenderManager manager) {
+				return new RenderVoidChain(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new IRenderFactory<AcidBall>() {
+			@Override
+			public Render<? super AcidBall> createRenderFor(RenderManager manager) {
+				return new RenderAcidBall(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(ProjectileDisintegration.class, new IRenderFactory<ProjectileDisintegration>() {
+			@Override
+			public Render<? super ProjectileDisintegration> createRenderFor(RenderManager manager) {
+				return new RenderAcidBall(manager);
+			}
+		});
+		// RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineFireball.class, new IRenderFactory<EntityHerobrineFireball>() {
+			@Override
+			public Render<? super EntityHerobrineFireball> createRenderFor(RenderManager manager) {
+				return new RenderFireball(manager, 2.0F);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityLichInferno.class, new IRenderFactory<EntityLichInferno>() {
+			@Override
+			public Render<? super EntityLichInferno> createRenderFor(RenderManager manager) {
+				return new RenderNull(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new IRenderFactory<EntityObsidianFlask>() {
+			@Override
+			public Render<? super EntityObsidianFlask> createRenderFor(RenderManager manager) {
+				return new RenderObsidianFlask(manager, voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem());
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpellRune.class, new IRenderFactory<EntitySpellRune>() {
+			@Override
+			public Render<? super EntitySpellRune> createRenderFor(RenderManager manager) {
+				return new RenderSpellRune(manager);
+			}
+		});
 	}
 
 	@Override
@@ -146,41 +336,6 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.RenderSheathe());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 		MinecraftForge.EVENT_BUS.register(new TextureStitch());
-
-		float shadowSize = 0.5F;
-		// MOBS
-		RenderingRegistry.registerEntityRenderingHandler(EntityMobWraith.class, new RenderWraith(new ModelWraith(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMobLich.class, new RenderLich(new ModelLich(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMobSpectreChain.class, new RenderSpectreChain(new ModelSpectreChain(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMobVoidWrath.class, new RenderVoidWrath(new ModelVoidWrath(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossCorruptedPawn.class, new RenderCorruptedPawn(new ModelCorruptedPawn(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossHerobrine.class, new RenderHerobrine(new ModelVoidBoss<EntityBossHerobrine>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossDol.class, new RenderDol(shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossZol.class, new RenderZol(new ModelVoidBoss<EntityBossZol>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia.class, new RenderXia(new ModelVoidBossOverlay<EntityBossXia>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia2.class, new RenderXia2(new ModelXia2<EntityBossXia2>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, new RenderGhostPlayer(new ModelPlayer(0.0F, false)));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, new RenderGhostPlayer(new ModelBiped(0.0F)));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, new RenderHerobrineCreeper());
-		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, new RenderWitherSkull(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, new RenderHerobrineTNTPrimed(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineShadow.class, new RenderHerobrineShadow(new ModelHerobrineShadow<EntityHerobrineShadow>()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityWitherbrine.class, new RenderWitherbrine(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonOld.class, new RenderDragonOld(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonXia.class, new RenderDragonOld(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityVoidicDragon.class, new RenderVoidicDragon(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDolXia.class, new RenderTwinsXia(RenderTwinsXia.TEXTURE_DOL, new ModelVoidBoss<EntityDolXia>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityZolXia.class, new RenderTwinsXia(RenderTwinsXia.TEXTURE_ZOL, new ModelVoidBoss<EntityZolXia>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityMobEtherealGuardian.class, new RenderEtherealGuardian(shadowSize));
-
-		// Projectiles and MISC.
-		RenderingRegistry.registerEntityRenderingHandler(VoidChain.class, new RenderVoidChain(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(AcidBall.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(ProjectileDisintegration.class, new RenderAcidBall(Minecraft.getMinecraft().getRenderManager()));
-		// RenderingRegistry.registerEntityRenderingHandler(EntityHookShot.class, new RenderHook(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineFireball.class, new RenderFireball(Minecraft.getMinecraft().getRenderManager(), 2.0F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLichInferno.class, new RenderNull());
-		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new RenderObsidianFlask(Minecraft.getMinecraft().getRenderManager(), voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem()));
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));

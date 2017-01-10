@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
@@ -32,8 +33,8 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		POS, NEG, STILL
 	}
 
-	public RenderGhostPlayer(ModelBiped model) {
-		super(Minecraft.getMinecraft().getRenderManager(), model, 0.5F);
+	public RenderGhostPlayer(RenderManager manager, ModelBiped model) {
+		super(manager, model, 0.5F);
 		playerModel = model instanceof ModelPlayer;
 	}
 

@@ -5,6 +5,7 @@ import Tamaized.Voidcraft.entity.boss.model.ModelVoidBoss;
 import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,8 +16,8 @@ public class RenderDol<T extends EntityLiving> extends RenderLiving<T> {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/entity/dol.png");
 
-	public RenderDol(float shadow) {
-		super(Minecraft.getMinecraft().getRenderManager(), new ModelVoidBoss<EntityBossDol>(), shadow);
+	public RenderDol(RenderManager manager, float shadow) {
+		super(manager, new ModelVoidBoss<EntityBossDol>(), shadow);
 	}
 
 	@Override

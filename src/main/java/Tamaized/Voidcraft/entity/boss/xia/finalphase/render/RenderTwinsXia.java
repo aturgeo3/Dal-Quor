@@ -7,6 +7,7 @@ import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityTwinsXia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
@@ -16,7 +17,7 @@ public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
 
 	private final ResourceLocation TEXTURE;
 
-	public RenderTwinsXia(ResourceLocation texture, ModelVoidBoss model, float shadowsizeIn) {
+	public RenderTwinsXia(RenderManager manager, ResourceLocation texture, ModelVoidBoss model, float shadowsizeIn) {
 		super(Minecraft.getMinecraft().getRenderManager(), model, shadowsizeIn);
 		TEXTURE = texture;
 	}

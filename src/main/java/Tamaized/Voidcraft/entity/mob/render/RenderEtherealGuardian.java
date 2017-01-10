@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -23,8 +24,8 @@ public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardi
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid + ":textures/entity/etherealguardian.png");
 
-	public RenderEtherealGuardian(float par2) {
-		super(Minecraft.getMinecraft().getRenderManager(), new ModelEtherealGuardian(), par2);
+	public RenderEtherealGuardian(RenderManager manager, float par2) {
+		super(manager, new ModelEtherealGuardian(), par2);
 		addLayer(new LayerBipedArmor(this));
 	}
 

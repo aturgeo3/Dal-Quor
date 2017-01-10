@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderNull extends Render {
+public class RenderNull extends Render<Entity> {
 
-	public RenderNull() {
+	public RenderNull(RenderManager manager) {
 		super(Minecraft.getMinecraft().getRenderManager());
 	}
 	

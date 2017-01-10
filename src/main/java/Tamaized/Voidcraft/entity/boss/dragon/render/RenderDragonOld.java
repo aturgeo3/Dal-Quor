@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
+public class RenderDragonOld<T extends EntityDragonOld> extends RenderLiving<T> {
 
 	public static final ResourceLocation ENDERCRYSTAL_BEAM_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
 	private static final ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon_exploding.png");
@@ -36,7 +36,7 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 	}
 
 	@Override
-	protected void applyRotations(EntityDragonOld entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
+	protected void applyRotations(T entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
 		float f = (float) entityLiving.getMovementOffsets(7, partialTicks)[0];
 		float f1 = (float) (entityLiving.getMovementOffsets(5, partialTicks)[1] - entityLiving.getMovementOffsets(10, partialTicks)[1]);
 		GlStateManager.rotate(-f, 0.0F, 1.0F, 0.0F);
@@ -59,7 +59,7 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 	 * Renders the model in RenderLiving
 	 */
 	@Override
-	protected void renderModel(EntityDragonOld entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+	protected void renderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
 		if (entitylivingbaseIn.deathTicks > 0) {
 			float f = (float) entitylivingbaseIn.deathTicks / 200.0F;
 			GlStateManager.depthFunc(515);
@@ -91,7 +91,7 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 	 * Renders the desired {@code T} type Entity.
 	 */
 	@Override
-	public void doRender(EntityDragonOld entity, double x, double y, double z, float entityYaw, float partialTicks) {
+	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
@@ -142,7 +142,7 @@ public class RenderDragonOld extends RenderLiving<EntityDragonOld> {
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(EntityDragonOld entity) {
+	protected ResourceLocation getEntityTexture(T entity) {
 		return getDragonTexture();
 	}
 }
