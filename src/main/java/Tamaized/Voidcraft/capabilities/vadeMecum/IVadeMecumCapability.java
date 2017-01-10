@@ -11,15 +11,15 @@ public interface IVadeMecumCapability {
 	public static enum Category {
 		INTRO, TOME,
 
-		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+		Flame, FireSheathe, Fireball, FireTrap, ExplosionFire, RingOfFire,
 
-		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+		Shock, ShockSheathe, LitStrike, LitTrap, ExplosionLit, RingOfLit,
 
-		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+		Freeze, FrostSheathe, IceSpike, FrostTrap, ExplosionFrost, RingOfFrost,
 
-		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+		AcidSpray, AcidSheathe, Disint, AcidTrap, ExplosionAcid, RingOfAcid,
 
-		VoidicTouch, VoidicSheath, Implosion
+		VoidicTouch, VoidicSheathe, Implosion
 	}
 
 	public static int getCategoryID(Category c) {
@@ -31,15 +31,15 @@ public interface IVadeMecumCapability {
 	}
 
 	public static enum ActivePower {
-		Flame, FireSheath, Fireball, FireTrap, ExplosionFire, CircleOfFire,
+		Flame, FireSheathe, Fireball, FireTrap, ExplosionFire, RingOfFire,
 
-		Shock, ShockSheath, LitStrike, LitTrap, ExplosionLit, CircleOfLit,
+		Shock, ShockSheathe, LitStrike, LitTrap, ExplosionLit, RingOfLit,
 
-		Freeze, FrostSheath, IceSpike, FrostTrap, ExplosionFrost, CircleOfFrost,
+		Freeze, FrostSheathe, IceSpike, FrostTrap, ExplosionFrost, RingOfFrost,
 
-		AcidSpray, AcidSheath, Disint, AcidTrap, ExplosionAcid, CircleOfAcid,
+		AcidSpray, AcidSheathe, Disint, AcidTrap, ExplosionAcid, RingOfAcid,
 
-		VoidicTouch, VoidicSheath, Implosion
+		VoidicTouch, VoidicSheathe, Implosion
 	}
 
 	public static int getActivePowerID(ActivePower c) {

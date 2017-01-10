@@ -28,7 +28,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.CircleOfFrost;
+		power = IVadeMecumCapability.ActivePower.RingOfFrost;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -71,7 +71,7 @@ public class VadeMecumWordsOfPower {
 						useCharge = true;
 					}
 					break;
-				case FireSheath:
+				case FireSheathe:
 					player.removePotionEffect(voidCraft.potions.frostSheath);
 					player.removePotionEffect(voidCraft.potions.acidSheath);
 					player.removePotionEffect(voidCraft.potions.litSheath);
@@ -91,7 +91,7 @@ public class VadeMecumWordsOfPower {
 					world.createExplosion(player, player.posX, player.posY, player.posZ, 10.0F, false);
 					useCharge = true;
 					break;
-				case CircleOfFire:
+				case RingOfFire:
 					for (BlockPos pos : createCircle(player.getPosition()))
 						if (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 					useCharge = true;
@@ -116,7 +116,7 @@ public class VadeMecumWordsOfPower {
 				case LitTrap:
 					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.SHOCK, 10, 5, 0xFFFFFF));
 					break;
-				case CircleOfLit:
+				case RingOfLit:
 					for (BlockPos pos : createCircle(player.getPosition())) {
 						EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, player, pos.getX(), pos.getY(), pos.getZ(), false);
 						world.addWeatherEffect(entitylightningbolt);
@@ -126,7 +126,7 @@ public class VadeMecumWordsOfPower {
 				case FrostTrap:
 					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.FROST, 10, 5, 0x00FFFF));
 					break;
-				case CircleOfFrost:
+				case RingOfFrost:
 					for (BlockPos pos : createCircle(player.getPosition()))
 						if (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) {
 							world.setBlockState(pos, voidCraft.blocks.iceSpike.getDefaultState());
