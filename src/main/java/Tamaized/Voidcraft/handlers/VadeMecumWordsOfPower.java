@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -16,6 +17,7 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -93,7 +95,7 @@ public class VadeMecumWordsOfPower {
 					break;
 				case RingOfFire:
 					for (BlockPos pos : createCircle(player.getPosition()))
-						if (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.isBlockFullCube(pos.down()))) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 					useCharge = true;
 					break;
 				case LitStrike:
@@ -128,8 +130,8 @@ public class VadeMecumWordsOfPower {
 					break;
 				case RingOfFrost:
 					for (BlockPos pos : createCircle(player.getPosition()))
-						if (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) {
-							world.setBlockState(pos, voidCraft.blocks.iceSpike.getDefaultState());
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
+							world.setBlockState(pos, voidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 							TileEntity te = world.getTileEntity(pos);
 							if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(player);
 						}
