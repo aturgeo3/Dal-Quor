@@ -66,6 +66,7 @@ import Tamaized.Voidcraft.entity.mob.model.ModelVoidWrath;
 import Tamaized.Voidcraft.entity.mob.model.ModelWraith;
 import Tamaized.Voidcraft.entity.mob.render.RenderEtherealGuardian;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
+import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
@@ -86,9 +87,11 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderFireball;
+import net.minecraft.client.renderer.entity.RenderLightningBolt;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -305,6 +308,12 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 			@Override
 			public Render<? super EntitySpellRune> createRenderFor(RenderManager manager) {
 				return new RenderSpellRune(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityCasterLightningBolt.class, new IRenderFactory<EntityLightningBolt>() {
+			@Override
+			public Render<? super EntityLightningBolt> createRenderFor(RenderManager manager) {
+				return new RenderLightningBolt(manager);
 			}
 		});
 	}

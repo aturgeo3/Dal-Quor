@@ -4,16 +4,18 @@ import java.util.HashSet;
 
 import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -23,10 +25,10 @@ public class VadeMecumWordsOfPower {
 
 	public static void invoke(World world, EntityPlayer player) {
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap == null) return;
+		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.CircleOfLit;
+		power = IVadeMecumCapability.ActivePower.CircleOfFrost;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -99,12 +101,12 @@ public class VadeMecumWordsOfPower {
 					result = RayTraceHelper.tracePath(world, player, 32, 1, exclude);
 					if (result != null) {
 						if (result.entityHit != null) {
-							EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ, false);
+							EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, player, result.entityHit.posX, result.entityHit.posY, result.entityHit.posZ, false);
 							world.addWeatherEffect(entitylightningbolt);
 						} else {
 							BlockPos bp = result.getBlockPos();
 							if (bp != null) {
-								EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, bp.getX(), bp.getY() + 1, bp.getZ(), false);
+								EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, player, bp.getX(), bp.getY() + 1, bp.getZ(), false);
 								world.addWeatherEffect(entitylightningbolt);
 							}
 						}
@@ -116,13 +118,22 @@ public class VadeMecumWordsOfPower {
 					break;
 				case CircleOfLit:
 					for (BlockPos pos : createCircle(player.getPosition())) {
-						EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), false);
+						EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, player, pos.getX(), pos.getY(), pos.getZ(), false);
 						world.addWeatherEffect(entitylightningbolt);
 					}
 					useCharge = true;
 					break;
 				case FrostTrap:
 					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.FROST, 10, 5, 0x00FFFF));
+					break;
+				case CircleOfFrost:
+					for (BlockPos pos : createCircle(player.getPosition()))
+						if (world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) {
+							world.setBlockState(pos, voidCraft.blocks.iceSpike.getDefaultState());
+							TileEntity te = world.getTileEntity(pos);
+							if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(player);
+						}
+					useCharge = true;
 					break;
 				case AcidTrap:
 					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.ACID, 15, 5, 0x00FF00));

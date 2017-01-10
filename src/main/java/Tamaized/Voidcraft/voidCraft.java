@@ -57,6 +57,7 @@ import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
 import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
+import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
@@ -66,6 +67,7 @@ import Tamaized.Voidcraft.events.CapabilitySyncEvent;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.events.DeathEvent;
 import Tamaized.Voidcraft.events.ItemEntityEvent;
+import Tamaized.Voidcraft.events.LitStrikeEvent;
 import Tamaized.Voidcraft.events.PickUpEvent;
 import Tamaized.Voidcraft.events.PlayerRightClickEvent;
 import Tamaized.Voidcraft.events.SpawnEvent;
@@ -293,6 +295,7 @@ public class voidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new ItemEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new DeathEvent());
 		MinecraftForge.EVENT_BUS.register(new PlayerRightClickEvent());
+		MinecraftForge.EVENT_BUS.register(new LitStrikeEvent());
 
 		// Register Projectiles and other misc entities
 		registerEntity(VoidChain.class, "VoidChain", this, modid, 128, 1, true);
@@ -306,6 +309,7 @@ public class voidCraft extends TamModBase {
 		registerEntity(EntityLichInferno.class, "LichInferno", this, modid, 128, 1, true);
 		registerEntity(ProjectileDisintegration.class, "ProjectileDisintegration", this, modid, 128, 1, true);
 		registerEntity(EntitySpellRune.class, "EntitySpellRune", this, modid, 64, 1, true);
+		registerEntity(EntityCasterLightningBolt.class, "EntityCasterLightningBolt", this, modid, 64, 1, true);
 
 		// Register Dimensions
 		DimensionManager.registerDimension(config.getDimensionIDvoid(), DimensionType.register("The Void", "_void", config.getDimensionIDvoid(), WorldProviderVoid.class, false));
