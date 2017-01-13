@@ -72,7 +72,7 @@ public class VadeMecumGUI extends GuiScreen {
 		vadeW = 256 + 140;
 		vadeH = 192 + 25;
 		vadeX = (width - vadeW) / 2;
-		vadeY = 5;
+		vadeY = (height - vadeH) / 2;
 	}
 
 	public int getX() {

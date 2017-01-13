@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class TamFluidFiniteBlock extends BlockFluidFinite implements ITamModel {
+public class TamFluidFiniteBlock extends BlockFluidFinite implements ITamModel { // TODO: MOVE THIS INTO TAMMODIZED
 
 	private final String name;
 	private final DamageSource damageSource;
@@ -52,11 +52,11 @@ public class TamFluidFiniteBlock extends BlockFluidFinite implements ITamModel {
 	public Item getAsItem() {
 		return Item.getItemFromBlock(this);
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
 		entityIn.attackEntityFrom(damageSource, damage);
 	}
-	
+
 }

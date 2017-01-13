@@ -1,1 +1,2 @@
  - Updated TamModized
+ - Tamaized: The Void Vade Mecum GUI will now center vertically
