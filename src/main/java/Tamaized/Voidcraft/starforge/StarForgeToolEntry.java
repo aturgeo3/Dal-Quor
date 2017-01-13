@@ -33,8 +33,8 @@ public class StarForgeToolEntry extends GUIListElement {
 		if (!(gui instanceof StarForgeGUI)) return;
 		StarForgeGUI starforgeGUI = (StarForgeGUI) gui;
 		VertexBuffer worldr = tess.getBuffer();
-		int min = gui.width - 200;
-		int max = x;
+		int min = gui.getGuiLeft()+(gui.getXSize()/2)+10;//gui.width - 200;
+		int max = x+7;
 		int slotTop = y;
 		int slotBuffer = height;
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -50,10 +50,10 @@ public class StarForgeToolEntry extends GUIListElement {
 		worldr.pos(min + 1, slotTop - 1, 0).tex(0, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
 		tess.draw();
 		GlStateManager.enableTexture2D();
-		starforgeGUI.drawString(mc.fontRendererObj, tool.getDisplayName(), x - 180, y + 5, 0xFFFFFF);
+		starforgeGUI.drawString(mc.fontRendererObj, tool.getDisplayName(), x - 160, y + 5, 0xFFFFFF);
 		int i = mc.fontRendererObj.getStringWidth(tool.getDisplayName());
-		starforgeGUI.renderItemStack(new ItemStack(voidCraft.blocks.cosmicMaterial, 4), (x - 180) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
-		starforgeGUI.renderItemStack(new ItemStack(voidCraft.items.quoriFragment, 1), (x - 180) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(voidCraft.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(voidCraft.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 	}
 
 }

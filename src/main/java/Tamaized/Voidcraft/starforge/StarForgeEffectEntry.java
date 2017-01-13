@@ -31,8 +31,8 @@ public class StarForgeEffectEntry extends GUIListElement {
 		if (!(gui instanceof StarForgeGUI)) return;
 		StarForgeGUI starforgeGUI = (StarForgeGUI) gui;
 		VertexBuffer worldr = tess.getBuffer();
-		int min = gui.width - 200;
-		int max = x;
+		int min = gui.getGuiLeft()+(gui.getXSize()/2)+10;//gui.width - 200;
+		int max = x+7;
 		int slotTop = y;
 		int slotBuffer = height;
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -48,11 +48,11 @@ public class StarForgeEffectEntry extends GUIListElement {
 		worldr.pos(min + 1, slotTop - 1, 0).tex(0, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
 		tess.draw();
 		GlStateManager.enableTexture2D();
-		starforgeGUI.drawString(mc.fontRendererObj, recipe.getEffect().getName(), x - 180, y + 5, 0xFFFFFF);
+		starforgeGUI.drawString(mc.fontRendererObj, recipe.getEffect().getName(), x - 160, y + 5, 0xFFFFFF);
 		int i = mc.fontRendererObj.getStringWidth(recipe.getEffect().getName());
 		int index = 0;
 		for (ItemStack stack : recipe.getInputs()) {
-			starforgeGUI.renderItemStack(stack, (x - 180) + i + 5 + (20 * index), y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+			starforgeGUI.renderItemStack(stack, (x - 160) + i + 5 + (20 * index), y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 			index++;
 		}
 	}

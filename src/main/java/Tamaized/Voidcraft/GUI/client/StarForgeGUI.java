@@ -57,7 +57,7 @@ public class StarForgeGUI extends GuiContainer {
 		setupScroll();
 
 		buttonList.clear();
-		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, width - 200, height - 102, 190, 20, "Forge"));
+		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, guiLeft+(xSize/2)+10, height - 102, 170, 20, "Forge"));
 	}
 
 	private void setupScroll() {
@@ -66,7 +66,7 @@ public class StarForgeGUI extends GuiContainer {
 		// scroll.setSlotXBoundsFromLeft(width - 190);
 		// scroll.registerScrollButtons(7, 8);
 		// height - 88 + 4
-		scroll = new GUIElementList(this, te.buildPossibleEffectList(), width - 200, 40, 190, height - 110, 22);
+		scroll = new GUIElementList(this, te.buildPossibleEffectList(), guiLeft+(xSize/2)+10, 40, 170, height - 110, 22);
 
 	}
 
