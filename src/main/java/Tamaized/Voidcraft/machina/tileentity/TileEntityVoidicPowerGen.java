@@ -44,7 +44,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 		int gen = genAmount * rate;
 		int use = useAmount * rate;
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).isItemEqual(voidCraft.fluids.getBucket())) {
+			if (!getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).isItemEqual(voidCraft.fluids.voidBucket.getBucket())) {
 				fill(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
 				setInventorySlotContents(SLOT_DEFAULT, new ItemStack(Items.BUCKET));
 			}
@@ -140,7 +140,7 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? stack.isItemEqual(voidCraft.fluids.getBucket()) : false;
+		return i == SLOT_DEFAULT ? stack.isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false;
 	}
 
 }

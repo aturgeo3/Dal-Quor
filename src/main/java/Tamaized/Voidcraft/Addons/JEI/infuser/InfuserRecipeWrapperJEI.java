@@ -23,7 +23,7 @@ public class InfuserRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<InfuserRe
 		g.init(FLUID_SLOT, true, 51, 33);
 		g.init(INPUT_SLOT, true, 89, 33);
 
-		g.set(FLUID_SLOT, Arrays.asList(voidCraft.fluids.getBucket()));
+		g.set(FLUID_SLOT, Arrays.asList(voidCraft.fluids.voidBucket.getBucket()));
 		g.set(OUTPUT_SLOT, Arrays.asList(getOutput()));
 		g.set(INPUT_SLOT, getInputs());
 	}

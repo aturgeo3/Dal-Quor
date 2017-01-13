@@ -16,6 +16,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.BlockFluidFinite;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,6 +48,7 @@ public class Debugger extends TamItem {
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
 			// worldIn.spawnEntity(entity);
+			voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME),  true);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -65,20 +70,20 @@ public class Debugger extends TamItem {
 		// zol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
 		// worldIn.spawnEntity(zol);
 
-		//IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
-		//if (cap != null) cap.setXiaDefeats(0);
-		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
-		//if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
-		
-		//ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
-		//IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
-		//cap.addEffect(StarForgeEffectList.haste);
-		//cap.addEffect(StarForgeEffectList.fortune);
-		//cap.addEffect(StarForgeEffectList.threeByThree);
-		//playerIn.inventory.addItemStackToInventory(newStack);
-		
-		 playerIn.clearActivePotions();
-		 playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheath, 20 * 90));
+		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
+		// if (cap != null) cap.setXiaDefeats(0);
+		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
+		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+
+		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
+		// IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
+		// cap.addEffect(StarForgeEffectList.haste);
+		// cap.addEffect(StarForgeEffectList.fortune);
+		// cap.addEffect(StarForgeEffectList.threeByThree);
+		// playerIn.inventory.addItemStackToInventory(newStack);
+
+		playerIn.clearActivePotions();
+		playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheath, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);

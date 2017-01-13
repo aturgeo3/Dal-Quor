@@ -60,7 +60,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 		}
 
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket())) {
+			if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.voidBucket.getBucket())) {
 				fill(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
 				slots[SLOT_BUCKET] = new ItemStack(Items.BUCKET);
 			}
@@ -103,12 +103,12 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	public static boolean isItemFuel(ItemStack stack) {
-		return stack.isItemEqual(voidCraft.fluids.getBucket());
+		return stack.isItemEqual(voidCraft.fluids.voidBucket.getBucket());
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i != SLOT_OUTPUT ? i == SLOT_BUCKET ? isItemFuel(itemstack) : !itemstack.isItemEqual(voidCraft.fluids.getBucket()) : false;
+		return i != SLOT_OUTPUT ? i == SLOT_BUCKET ? isItemFuel(itemstack) : !itemstack.isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false;
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	@Override
 	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : i == SLOT_OUTPUT;
+		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false : i == SLOT_OUTPUT;
 	}
 
 	@Override

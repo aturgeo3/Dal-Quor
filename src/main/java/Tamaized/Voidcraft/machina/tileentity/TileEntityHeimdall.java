@@ -86,7 +86,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 			if (tank.getFluidAmount() >= 1000) {
 				if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].getItem() == Items.BUCKET) {
 					tank.drain(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
-					slots[SLOT_BUCKET] = voidCraft.fluids.getBucket();
+					slots[SLOT_BUCKET] = voidCraft.fluids.voidBucket.getBucket();
 				}
 			}
 
@@ -131,7 +131,7 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IFluid
 
 	@Override
 	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.getBucket()) : false : false;
+		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false : false;
 	}
 
 	@Override

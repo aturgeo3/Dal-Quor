@@ -178,7 +178,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 		GameRegistry.addSmelting(voidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
-		GameRegistry.addSmelting(voidCrystalBucket, voidCraft.fluids.getBucket(), 0.1F);
+		GameRegistry.addSmelting(voidCrystalBucket, voidCraft.fluids.voidBucket.getBucket(), 0.1F);
 		// dust
 		GameRegistry.addSmelting(ironDust, new ItemStack(Items.IRON_INGOT), 0);
 		GameRegistry.addSmelting(goldDust, new ItemStack(Items.GOLD_INGOT), 0);

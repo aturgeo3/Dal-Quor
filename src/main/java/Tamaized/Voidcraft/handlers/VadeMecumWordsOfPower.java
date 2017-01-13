@@ -30,7 +30,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.RingOfFrost;
+		power = IVadeMecumCapability.ActivePower.AcidTrap;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -138,7 +138,14 @@ public class VadeMecumWordsOfPower {
 					useCharge = true;
 					break;
 				case AcidTrap:
-					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.ACID, 15, 5, 0x00FF00));
+					useCharge = castRune(world, player, new EntitySpellRune(world, EntitySpellRune.DamageType.ACID, 10, 5, 0x00FF00));
+					break;
+				case RingOfAcid:
+					for (BlockPos pos : createCircle(player.getPosition()))
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
+							world.setBlockState(pos, voidCraft.fluids.acidFluidBlock.getDefaultState());
+						}
+					useCharge = true;
 					break;
 				default:
 					break;

@@ -8,6 +8,7 @@ import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
+import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceFrost;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
@@ -22,6 +23,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -124,6 +126,14 @@ public class EntitySpellRune extends Entity implements IEntityAdditionalSpawnDat
 					source = new DamageSourceFrost();
 					break;
 				case ACID:
+					for (int x = -1; x <= 1; x++) {
+						for (int z = -1; z <= 1; z++) {
+							BlockPos pos = new BlockPos(getPosition().add(x, 0, z));
+							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
+								world.setBlockState(pos, voidCraft.fluids.acidFluidBlock.getDefaultState());
+							}
+						}
+					}
 					source = new DamageSourceAcid();
 					break;
 				case SHOCK:
