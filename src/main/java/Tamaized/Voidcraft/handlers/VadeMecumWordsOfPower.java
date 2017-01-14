@@ -14,8 +14,10 @@ import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
+import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
@@ -37,7 +39,7 @@ import net.minecraft.world.World;
 
 public class VadeMecumWordsOfPower {
 
-	public static void invoke(World world, EntityPlayer player) {
+	public static void invoke(World world, EntityPlayer player) { // TODO: clean all this up, make methods/classes/helpers and so on for all this junk
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
@@ -265,7 +267,10 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case AcidSheathe: {
-					// TODO
+					player.removePotionEffect(voidCraft.potions.litSheath);
+					player.removePotionEffect(voidCraft.potions.frostSheath);
+					player.removePotionEffect(voidCraft.potions.fireSheath);
+					player.addPotionEffect(new PotionEffect(voidCraft.potions.acidSheath, 20 * 90));
 					useCharge = true;
 				}
 					break;
@@ -281,7 +286,14 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case ExplosionAcid: {
-					// TODO
+					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(player.posX - 5, player.posY - 5, player.posZ - 5, player.posX + 5, player.posY + 5, player.posZ + 5));
+					for (Entity e : damageList) {
+						if (!(e instanceof EntityLivingBase)) continue;
+						((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
+					}
+					for (int index = 0; index < 1000; index++) {
+						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, player.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
+					}
 					useCharge = true;
 				}
 					break;
@@ -294,8 +306,14 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case VoidicTouch: {
-					// TODO
-					useCharge = true;
+					exclude.add(player);
+					RayTraceResult ray = RayTraceHelper.tracePath(world, player, 2, 1, exclude);
+					if (ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
+						((EntityLivingBase) ray.entityHit).attackEntityFrom(new DamageSourceVoidicInfusion(), 5);
+						IVoidicInfusionCapability inf = ((EntityLivingBase) ray.entityHit).getCapability(CapabilityList.VOIDICINFUSION, null);
+						if (inf != null) inf.addInfusion(600);
+						useCharge = true;
+					}
 				}
 					break;
 				case VoidicSheathe: {
