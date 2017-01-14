@@ -18,6 +18,7 @@ import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
 import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
+import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +42,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.AcidSpray;
+		power = IVadeMecumCapability.ActivePower.Disint;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -269,7 +270,9 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case Disint: {
-					// TODO
+					ProjectileDisintegration disint = new ProjectileDisintegration(world, player, player.posX, player.posY, player.posZ);
+					disint.setDamageRangeSpeed(15, 0.0F, 0.5D);
+					world.spawnEntity(disint);
 					useCharge = true;
 				}
 					break;
