@@ -68,11 +68,13 @@ import Tamaized.Voidcraft.entity.mob.render.RenderEtherealGuardian;
 import Tamaized.Voidcraft.entity.nonliving.AcidBall;
 import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderAcidBall;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderObsidianFlask;
+import Tamaized.Voidcraft.entity.nonliving.render.RenderSpellImplosion;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderSpellRune;
 import Tamaized.Voidcraft.entity.nonliving.render.RenderVoidChain;
 import Tamaized.Voidcraft.events.client.DebugEvent;
@@ -314,6 +316,12 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 			@Override
 			public Render<? super EntityLightningBolt> createRenderFor(RenderManager manager) {
 				return new RenderLightningBolt(manager);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpellImplosion.class, new IRenderFactory<EntitySpellImplosion>() {
+			@Override
+			public Render<? super EntitySpellImplosion> createRenderFor(RenderManager manager) {
+				return new RenderSpellImplosion(manager);
 			}
 		});
 	}

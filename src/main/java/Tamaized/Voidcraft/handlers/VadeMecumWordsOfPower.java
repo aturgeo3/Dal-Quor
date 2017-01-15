@@ -18,6 +18,7 @@ import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
+import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.helper.SheatheHelper;
@@ -45,7 +46,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.VoidicSheathe;
+		power = IVadeMecumCapability.ActivePower.Implosion;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -311,7 +312,11 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case Implosion: {
-					// TODO
+					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(player.posX - 5, player.posY - 5, player.posZ - 5, player.posX + 5, player.posY + 5, player.posZ + 5));
+					for (Entity e : damageList) {
+						if (!(e instanceof EntityLivingBase)) continue;
+						world.spawnEntity(new EntitySpellImplosion(world, e));
+					}
 					useCharge = true;
 				}
 					break;

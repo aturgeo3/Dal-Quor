@@ -4,6 +4,7 @@ import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,8 +48,10 @@ public class Debugger extends TamItem {
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
-			// worldIn.spawnEntity(entity);
-			voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
+			EntitySpellImplosion entity = new EntitySpellImplosion(worldIn);
+			entity.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
+			worldIn.spawnEntity(entity);
+			// voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
 		}
 		return EnumActionResult.PASS;
 	}
