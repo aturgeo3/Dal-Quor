@@ -377,6 +377,7 @@ public class voidCraft extends TamModBase {
 	}
 
 	public static void reloadRitualList() {
+		instance.logger.info("Reloading Ritual List");
 		ritualList = new RitualList();
 	}
 }

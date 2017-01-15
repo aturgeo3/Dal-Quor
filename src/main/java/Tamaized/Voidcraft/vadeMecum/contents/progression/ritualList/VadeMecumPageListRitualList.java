@@ -15,9 +15,19 @@ public class VadeMecumPageListRitualList implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		ArrayList<IVadeMecumPage> pages = new ArrayList<IVadeMecumPage>();
 		pages.add(new VadeMecumPage("Voidic Ritual List", "This page will display the available rituals that can be invoked to advance your Vade Mecum Knowledge"));
-		if(cap.getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)){
-			if(!cap.getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)){
+		if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) {
+			if (!cap.getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
 				pages.add(new VadeMecumPageMultiBlock("Words of Power", voidCraft.ritualList.PowerIntro));
+			} else {
+				// Fire
+
+				// Frost
+
+				// Shock
+
+				// Acid
+				
+				// Void
 			}
 		}
 		return pages.toArray(new IVadeMecumPage[pages.size()]);

@@ -163,7 +163,7 @@ public class VadeMecumRitualHandler {
 					for (int z = 1; z >= -1; z--) {
 						for (int x = 1; x >= -1; x--) {
 							i++;
-							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
+							if (!stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -174,7 +174,7 @@ public class VadeMecumRitualHandler {
 					for (int x = -1; x <= 1; x++) {
 						for (int z = 1; z >= -1; z--) {
 							i++;
-							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
+							if (!stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -185,7 +185,7 @@ public class VadeMecumRitualHandler {
 					for (int z = -1; z <= 1; z++) {
 						for (int x = -1; x <= 1; x++) {
 							i++;
-							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
+							if (!stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}
@@ -196,7 +196,7 @@ public class VadeMecumRitualHandler {
 					for (int x = 1; x >= -1; x--) {
 						for (int z = -1; z <= 1; z++) {
 							i++;
-							if (stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
+							if (!stackList[i].isEmpty()) world.setBlockToAir(pos.add(x, y, z));
 						}
 					}
 				}

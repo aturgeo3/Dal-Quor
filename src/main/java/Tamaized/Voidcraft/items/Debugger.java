@@ -4,6 +4,8 @@ import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,9 +50,9 @@ public class Debugger extends TamItem {
 			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
-			EntitySpellImplosion entity = new EntitySpellImplosion(worldIn);
-			entity.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
-			worldIn.spawnEntity(entity);
+			// EntitySpellImplosion entity = new EntitySpellImplosion(worldIn);
+			// entity.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
+			// worldIn.spawnEntity(entity);
 			// voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
 		}
 		return EnumActionResult.PASS;
@@ -84,6 +86,10 @@ public class Debugger extends TamItem {
 		// cap.addEffect(StarForgeEffectList.fortune);
 		// cap.addEffect(StarForgeEffectList.threeByThree);
 		// playerIn.inventory.addItemStackToInventory(newStack);
+
+		voidCraft.reloadRitualList();
+		IVadeMecumCapability cap = playerIn.getCapability(CapabilityList.VADEMECUM, null);
+		if (cap != null) cap.clearCategories();
 
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheathe, 20 * 90));
