@@ -11,16 +11,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionSheath extends Potion {
+public class PotionSheathe extends Potion {
 	
 	public static enum Type {
-		Fire, Frost, Lit, Acid
+		Fire, Frost, Lit, Acid, Void
 	}
 
 	private final ResourceLocation iconTexture;
 	private final Type type;
 	
-	public PotionSheath(String name, Type type) {
+	public PotionSheathe(String name, Type type) {
 		super(false, 0x000000);
 		iconTexture = new ResourceLocation(voidCraft.modid, "textures/potions/sheathe.png");
 		this.type = type;

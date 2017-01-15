@@ -27,9 +27,9 @@ public class EntityDolXia extends EntityTwinsXia {
 	@Override
 	protected void update() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.acidSheath) == null) {
+			if (getActivePotionEffect(voidCraft.potions.acidSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(voidCraft.potions.acidSheath, 100));
+				addPotionEffect(new PotionEffect(voidCraft.potions.acidSheathe, 100));
 			}
 			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
 				ProjectileDisintegration disint = new ProjectileDisintegration(world, this, (EntityLivingBase) watchedEntity, 6.0F);

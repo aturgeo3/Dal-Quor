@@ -48,7 +48,7 @@ public class Debugger extends TamItem {
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
 			// worldIn.spawnEntity(entity);
-			voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME),  true);
+			voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
 		}
 		return EnumActionResult.PASS;
 	}
@@ -82,8 +82,8 @@ public class Debugger extends TamItem {
 		// cap.addEffect(StarForgeEffectList.threeByThree);
 		// playerIn.inventory.addItemStackToInventory(newStack);
 
-		playerIn.clearActivePotions();
-		playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheath, 20 * 90));
+		// playerIn.clearActivePotions();
+		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheathe, 20 * 90));
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);

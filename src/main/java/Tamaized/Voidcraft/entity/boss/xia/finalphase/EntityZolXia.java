@@ -28,9 +28,9 @@ public class EntityZolXia extends EntityTwinsXia {
 	protected void update() {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.litSheath) == null) {
+			if (getActivePotionEffect(voidCraft.potions.litSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(voidCraft.potions.litSheath, 100));
+				addPotionEffect(new PotionEffect(voidCraft.potions.litSheathe, 100));
 			}
 			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
 				double x = watchedEntity.posX;

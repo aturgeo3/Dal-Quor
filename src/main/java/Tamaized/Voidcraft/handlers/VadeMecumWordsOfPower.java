@@ -8,7 +8,6 @@ import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler.ParticleFluffData;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
@@ -21,6 +20,8 @@ import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
+import Tamaized.Voidcraft.helper.SheatheHelper;
+import Tamaized.Voidcraft.potion.PotionSheathe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +45,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.Disint;
+		power = IVadeMecumCapability.ActivePower.VoidicSheathe;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
@@ -95,10 +96,7 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case FireSheathe: {
-					player.removePotionEffect(voidCraft.potions.frostSheath);
-					player.removePotionEffect(voidCraft.potions.acidSheath);
-					player.removePotionEffect(voidCraft.potions.litSheath);
-					player.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheath, 20 * 90));
+					SheatheHelper.castSheathe(player, PotionSheathe.Type.Fire, 20 * 90);
 					useCharge = true;
 				}
 					break;
@@ -135,10 +133,7 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case ShockSheathe: {
-					player.removePotionEffect(voidCraft.potions.frostSheath);
-					player.removePotionEffect(voidCraft.potions.acidSheath);
-					player.removePotionEffect(voidCraft.potions.fireSheath);
-					player.addPotionEffect(new PotionEffect(voidCraft.potions.litSheath, 20 * 90));
+					SheatheHelper.castSheathe(player, PotionSheathe.Type.Lit, 20 * 90);
 					useCharge = true;
 				}
 					break;
@@ -194,10 +189,7 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case FrostSheathe: {
-					player.removePotionEffect(voidCraft.potions.litSheath);
-					player.removePotionEffect(voidCraft.potions.acidSheath);
-					player.removePotionEffect(voidCraft.potions.fireSheath);
-					player.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheath, 20 * 90));
+					SheatheHelper.castSheathe(player, PotionSheathe.Type.Frost, 20 * 90);
 					useCharge = true;
 				}
 					break;
@@ -267,10 +259,7 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case AcidSheathe: {
-					player.removePotionEffect(voidCraft.potions.litSheath);
-					player.removePotionEffect(voidCraft.potions.frostSheath);
-					player.removePotionEffect(voidCraft.potions.fireSheath);
-					player.addPotionEffect(new PotionEffect(voidCraft.potions.acidSheath, 20 * 90));
+					SheatheHelper.castSheathe(player, PotionSheathe.Type.Acid, 20 * 90);
 					useCharge = true;
 				}
 					break;
@@ -317,7 +306,7 @@ public class VadeMecumWordsOfPower {
 				}
 					break;
 				case VoidicSheathe: {
-					// TODO
+					SheatheHelper.castSheathe(player, PotionSheathe.Type.Void, 20 * 90);
 					useCharge = true;
 				}
 					break;

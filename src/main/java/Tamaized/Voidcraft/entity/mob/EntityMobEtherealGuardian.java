@@ -102,9 +102,9 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.fireSheath) == null) {
+			if (getActivePotionEffect(voidCraft.potions.fireSheathe) == null) {
 				clearActivePotions();
-				Potion potion = voidCraft.potions.fireSheath;
+				Potion potion = voidCraft.potions.fireSheathe;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
 				try {

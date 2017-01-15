@@ -10,6 +10,7 @@ import org.lwjgl.util.glu.Sphere;
 import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.events.client.TextureStitch;
+import Tamaized.Voidcraft.helper.SheatheHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -49,16 +50,7 @@ public class RenderSheathe {
 
 	private void render(net.minecraft.client.renderer.entity.RenderLivingBase render, EntityLivingBase entity, double x, double y, double z, float partialTicks) {
 
-		float[] colors = null;
-		if (entity.getActivePotionEffect(voidCraft.potions.fireSheath) != null) {
-			colors = new float[] { 1.0f, 0.65f, 0.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.frostSheath) != null) {
-			colors = new float[] { 0.0f, 1.0f, 1.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.litSheath) != null) {
-			colors = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.acidSheath) != null) {
-			colors = new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
-		}
+		float[] colors = SheatheHelper.getColor(entity);
 		if (colors == null) return;
 		Random rand = entity.world.rand;
 		double dx = (rand.nextFloat() * 1.0f) - 0.5f;

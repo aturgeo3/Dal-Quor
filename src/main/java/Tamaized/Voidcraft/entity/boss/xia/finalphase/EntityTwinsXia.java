@@ -94,7 +94,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot != voidCraft.potions.fireSheath && pot != voidCraft.potions.frostSheath && pot != voidCraft.potions.litSheath && pot != voidCraft.potions.acidSheath) return;
+		if (pot != voidCraft.potions.fireSheathe && pot != voidCraft.potions.frostSheathe && pot != voidCraft.potions.litSheathe && pot != voidCraft.potions.acidSheathe) return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			try {
