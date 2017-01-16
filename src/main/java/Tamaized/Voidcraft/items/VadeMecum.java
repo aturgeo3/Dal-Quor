@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VadeMecum extends TamItem {
-
+	
 	public VadeMecum(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
 	}
@@ -84,11 +84,10 @@ public class VadeMecum extends TamItem {
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 		if (cap == null) return false;
-		boolean tempFlag = true;
-		if (player.isSneaking() && tempFlag) {
+		if (player.isSneaking()) {
 			cap.toggleBookState();
 		} else {
-			if (cap.getBookState() && tempFlag) {
+			if (cap.getBookState()) {
 				VadeMecumWordsOfPower.invoke(world, player);
 			} else {
 				if (world.isRemote) openBook(player, world, player.getPosition());
