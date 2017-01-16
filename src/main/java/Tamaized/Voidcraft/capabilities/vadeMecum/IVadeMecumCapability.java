@@ -9,7 +9,7 @@ import io.netty.buffer.ByteBufInputStream;
 public interface IVadeMecumCapability {
 
 	public static enum Category {
-		INTRO, TOME,
+		NULL, INTRO, TOME,
 
 		Flame, FireSheathe, Fireball, FireTrap, ExplosionFire, RingOfFire,
 
