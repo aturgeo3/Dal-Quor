@@ -37,13 +37,12 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
+		addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlocks), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock))));
 		if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) {
-			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualList), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Rituals", new ItemStack(voidCraft.blocks.ritualBlock)));
+			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualList), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Rituals", new ItemStack(voidCraft.blocks.ritualBlock)));
 			if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
-				addButton(new VadeMecumButton(gui, getEntryID(Entry.Tome), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Words of Power", activeVade));
+				addButton(new VadeMecumButton(gui, getEntryID(Entry.Tome), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Words of Power", activeVade));
 			}
-		} else {
-			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlocks), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock))));
 		}
 	}
 

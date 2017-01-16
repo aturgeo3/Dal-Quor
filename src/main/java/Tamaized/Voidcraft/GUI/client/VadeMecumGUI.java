@@ -110,8 +110,8 @@ public class VadeMecumGUI extends GuiScreen {
 		// else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		else setEntry(ClientProxy.vadeMecumEntryList, 0);
 		int i = (this.width - 192) / 2;
-		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, 195, true));
-		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, 195, false));
+		this.button_forward = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), i + 230, vadeY + 185, true));
+		this.button_back = (VadeMecumGUI.ArrowButton) this.addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), i - 60, vadeY + 185, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
 		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), i - 58, vadeY + 10));
