@@ -94,25 +94,25 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 		initObjects();
 		clearButtons();
 
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidCrystal), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidcrystal).getDisplayName(), new ItemStack(voidCraft.items.voidcrystal)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Ectoplasm), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.items.ectoplasm).getDisplayName(), new ItemStack(voidCraft.items.ectoplasm)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidChain), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.items.voidChain).getDisplayName(), new ItemStack(voidCraft.items.voidChain)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.MoltenVoidChainPart), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.items.MoltenvoidChainPart).getDisplayName(), new ItemStack(voidCraft.items.MoltenvoidChainPart)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.MoltenVoidChain), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.items.MoltenvoidChain).getDisplayName(), new ItemStack(voidCraft.items.MoltenvoidChain)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.CharredBone), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.items.burnBone).getDisplayName(), new ItemStack(voidCraft.items.burnBone)));
+		addButton(gui, getEntryID(Entry.VoidCrystal), new ItemStack(voidCraft.items.voidcrystal).getDisplayName(), new ItemStack(voidCraft.items.voidcrystal));
+		addButton(gui, getEntryID(Entry.Ectoplasm), new ItemStack(voidCraft.items.ectoplasm).getDisplayName(), new ItemStack(voidCraft.items.ectoplasm));
+		addButton(gui, getEntryID(Entry.VoidChain), new ItemStack(voidCraft.items.voidChain).getDisplayName(), new ItemStack(voidCraft.items.voidChain));
+		addButton(gui, getEntryID(Entry.MoltenVoidChainPart), new ItemStack(voidCraft.items.MoltenvoidChainPart).getDisplayName(), new ItemStack(voidCraft.items.MoltenvoidChainPart));
+		addButton(gui, getEntryID(Entry.MoltenVoidChain), new ItemStack(voidCraft.items.MoltenvoidChain).getDisplayName(), new ItemStack(voidCraft.items.MoltenvoidChain));
+		addButton(gui, getEntryID(Entry.CharredBone), new ItemStack(voidCraft.items.burnBone).getDisplayName(), new ItemStack(voidCraft.items.burnBone));
 
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidStar), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidStar).getDisplayName(), new ItemStack(voidCraft.items.voidStar)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ObsidianFlask), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.obsidianFlask", new ItemStack(voidCraft.items.obsidianFlask)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidInfusedCloth), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.items.voidCloth).getDisplayName(), new ItemStack(voidCraft.items.voidCloth)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidDusts), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.dusts", new ItemStack(voidCraft.items.diamondDust)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.ChainedSkull), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.items.ChainedSkull).getDisplayName(), new ItemStack(voidCraft.items.ChainedSkull)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicSupressor), gui.getX() + 48 + (170 * 1), gui.getY() + 35 + (25 * 5), 100, 20, new ItemStack(voidCraft.items.voidicSuppressor).getDisplayName(), new ItemStack(voidCraft.items.voidicSuppressor)));
+		addButton(gui, getEntryID(Entry.VoidStar), new ItemStack(voidCraft.items.voidStar).getDisplayName(), new ItemStack(voidCraft.items.voidStar));
+		addButton(gui, getEntryID(Entry.ObsidianFlask), voidCraft.modid + ".VadeMecum.docs.title.obsidianFlask", new ItemStack(voidCraft.items.obsidianFlask));
+		addButton(gui, getEntryID(Entry.VoidInfusedCloth), new ItemStack(voidCraft.items.voidCloth).getDisplayName(), new ItemStack(voidCraft.items.voidCloth));
+		addButton(gui, getEntryID(Entry.VoidDusts), voidCraft.modid + ".VadeMecum.docs.title.dusts", new ItemStack(voidCraft.items.diamondDust));
+		addButton(gui, getEntryID(Entry.ChainedSkull), new ItemStack(voidCraft.items.ChainedSkull).getDisplayName(), new ItemStack(voidCraft.items.ChainedSkull));
+		addButton(gui, getEntryID(Entry.VoidicSupressor), new ItemStack(voidCraft.items.voidicSuppressor).getDisplayName(), new ItemStack(voidCraft.items.voidicSuppressor));
 
-		addButton2(new VadeMecumButton(gui, getEntryID(Entry.VoidicEssence), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, new ItemStack(voidCraft.items.voidicEssence).getDisplayName(), new ItemStack(voidCraft.items.voidicEssence)));
-		addButton2(new VadeMecumButton(gui, getEntryID(Entry.VoidicDragonscale), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, new ItemStack(voidCraft.items.voidicDragonScale).getDisplayName(), new ItemStack(voidCraft.items.voidicDragonScale)));
-		addButton2(new VadeMecumButton(gui, getEntryID(Entry.QuoriFragment), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, new ItemStack(voidCraft.items.quoriFragment).getDisplayName(), new ItemStack(voidCraft.items.quoriFragment)));
-		addButton2(new VadeMecumButton(gui, getEntryID(Entry.AstralEssence), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, new ItemStack(voidCraft.items.astralEssence).getDisplayName(), new ItemStack(voidCraft.items.astralEssence)));
-		addButton2(new VadeMecumButton(gui, getEntryID(Entry.VoidicPhlogiston), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, new ItemStack(voidCraft.items.voidicPhlogiston).getDisplayName(), new ItemStack(voidCraft.items.voidicPhlogiston)));
+		addButton(gui, getEntryID(Entry.VoidicEssence), new ItemStack(voidCraft.items.voidicEssence).getDisplayName(), new ItemStack(voidCraft.items.voidicEssence));
+		addButton(gui, getEntryID(Entry.VoidicDragonscale), new ItemStack(voidCraft.items.voidicDragonScale).getDisplayName(), new ItemStack(voidCraft.items.voidicDragonScale));
+		addButton(gui, getEntryID(Entry.QuoriFragment), new ItemStack(voidCraft.items.quoriFragment).getDisplayName(), new ItemStack(voidCraft.items.quoriFragment));
+		addButton(gui, getEntryID(Entry.AstralEssence), new ItemStack(voidCraft.items.astralEssence).getDisplayName(), new ItemStack(voidCraft.items.astralEssence));
+		addButton(gui, getEntryID(Entry.VoidicPhlogiston), new ItemStack(voidCraft.items.voidicPhlogiston).getDisplayName(), new ItemStack(voidCraft.items.voidicPhlogiston));
 
 	}
 
@@ -174,11 +174,6 @@ public class VadeMecumItemsEntry extends VadeMecumEntry {
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
-	}
-
-	@Override
-	public int getPageLength(VadeMecumGUI gui) {
-		return 3;
 	}
 
 }

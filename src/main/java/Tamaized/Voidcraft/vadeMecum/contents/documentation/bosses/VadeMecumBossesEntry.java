@@ -51,11 +51,11 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 		initObjects();
 		clearButtons();
 
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.CorruptedPawn), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.corruptedPawn", new ItemStack(voidCraft.items.ChainedSkull)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Herobrine), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.herobrine", new ItemStack(Blocks.TNT)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Twins), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.twins", new ItemStack(Blocks.GRASS)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Xia), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 3), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.xia", new ItemStack(voidCraft.armors.xiaHelmet)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.VoidicDragon), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 4), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.voidicDragon", new ItemStack(Blocks.DRAGON_EGG)));
+		addButton(gui, getEntryID(Entry.CorruptedPawn), voidCraft.modid + ".VadeMecum.docs.title.corruptedPawn", new ItemStack(voidCraft.items.ChainedSkull));
+		addButton(gui, getEntryID(Entry.Herobrine), voidCraft.modid + ".VadeMecum.docs.title.herobrine", new ItemStack(Blocks.TNT));
+		addButton(gui, getEntryID(Entry.Twins), voidCraft.modid + ".VadeMecum.docs.title.twins", new ItemStack(Blocks.GRASS));
+		addButton(gui, getEntryID(Entry.Xia), voidCraft.modid + ".VadeMecum.docs.title.xia", new ItemStack(voidCraft.armors.xiaHelmet));
+		addButton(gui, getEntryID(Entry.VoidicDragon), voidCraft.modid + ".VadeMecum.docs.title.voidicDragon", new ItemStack(Blocks.DRAGON_EGG));
 	}
 
 	@Override
@@ -80,11 +80,6 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
-	}
-
-	@Override
-	public int getPageLength(VadeMecumGUI gui) {
-		return 1;
 	}
 
 }

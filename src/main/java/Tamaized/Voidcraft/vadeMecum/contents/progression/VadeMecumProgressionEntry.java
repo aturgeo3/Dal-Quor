@@ -37,11 +37,11 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualBlocks), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock))));
+		addButton(gui, getEntryID(Entry.RitualBlocks), "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock)));
 		if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) {
-			addButton(new VadeMecumButton(gui, getEntryID(Entry.RitualList), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, "Rituals", new ItemStack(voidCraft.blocks.ritualBlock)));
+			addButton(gui, getEntryID(Entry.RitualList), "Rituals", new ItemStack(voidCraft.blocks.ritualBlock));
 			if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
-				addButton(new VadeMecumButton(gui, getEntryID(Entry.Tome), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 2), 100, 20, "Words of Power", activeVade));
+				addButton(gui, getEntryID(Entry.Tome), "Words of Power", activeVade);
 			}
 		}
 	}
@@ -65,10 +65,4 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 		// gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, IVadeMecumCapability.getActivePowerID(IVadeMecumCapability.ActivePower.TEST));
 		// gui.sendPacketUpdates(VadeMecumPacketHandler.RequestType.ACTIVE_CURRENT_SET, -1);
 	}
-
-	@Override
-	public int getPageLength(VadeMecumGUI gui) {
-		return 1;
-	}
-
 }

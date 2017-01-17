@@ -40,8 +40,8 @@ public class VadeMecumArmorEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Void), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 0), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.voidArmor", new ItemStack(voidCraft.armors.voidHelmet)));
-		addButton(new VadeMecumButton(gui, getEntryID(Entry.Xia), gui.getX() + 48 + (170 * 0), gui.getY() + 35 + (25 * 1), 100, 20, voidCraft.modid + ".VadeMecum.docs.title.xiaArmor", new ItemStack(voidCraft.armors.xiaHelmet)));
+		addButton(gui, getEntryID(Entry.Void), voidCraft.modid + ".VadeMecum.docs.title.voidArmor", new ItemStack(voidCraft.armors.voidHelmet));
+		addButton(gui, getEntryID(Entry.Xia), voidCraft.modid + ".VadeMecum.docs.title.xiaArmor", new ItemStack(voidCraft.armors.xiaHelmet));
 	}
 
 	@Override
@@ -57,11 +57,6 @@ public class VadeMecumArmorEntry extends VadeMecumEntry {
 				gui.changeEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN);
 				break;
 		}
-	}
-
-	@Override
-	public int getPageLength(VadeMecumGUI gui) {
-		return 1;
 	}
 
 }
