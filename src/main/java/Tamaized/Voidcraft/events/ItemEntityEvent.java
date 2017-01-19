@@ -15,17 +15,14 @@ public class ItemEntityEvent {
 
 	@SubscribeEvent
 	public void tick(WorldTickEvent e) {
-		if (e.phase == Phase.START || e.world == null || e.world.isRemote) return;
-		for (Entity entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
-			if (entity instanceof EntityItem) {
-				EntityItem ei = (EntityItem) entity;
-				ItemStack stack = ei.getEntityItem();
-				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(ei.getPosition()).getBlock() == voidCraft.blocks.fireVoid) {
-					e.world.setBlockToAir(ei.getPosition());
-					e.world.addWeatherEffect(new EntityLightningBolt(e.world, ei.getPosition().getX(), ei.getPosition().getY(), ei.getPosition().getZ(), true));
-					e.world.spawnEntity(new EntityItem(e.world, ei.getPosition().getX(), ei.getPosition().getY(), ei.getPosition().getZ(), new ItemStack(voidCraft.items.vadeMecum)));
-					ei.setDead();
-				}
+		if (e.phase == Phase.END || e.world == null || e.world.isRemote) return;
+		for (EntityItem entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
+			ItemStack stack = entity.getEntityItem();
+			if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == voidCraft.blocks.fireVoid) {
+				e.world.setBlockToAir(entity.getPosition());
+				e.world.addWeatherEffect(new EntityLightningBolt(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), true));
+				e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(voidCraft.items.vadeMecum)));
+				entity.setDead();
 			}
 		}
 	}
