@@ -111,7 +111,7 @@ public class VadeMecumEntry {
 	}
 
 	public final void goBack(VadeMecumGUI gui) {
-		gui.changeEntry(backPage == null ? ClientProxy.vadeMecumEntryList : backPage);
+		gui.changeEntry(backPage == null ? (voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN) : backPage);
 	}
 
 	protected void actionPerformed(VadeMecumGUI gui, int id, int mouseButton) {

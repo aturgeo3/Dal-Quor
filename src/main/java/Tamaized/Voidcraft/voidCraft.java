@@ -138,7 +138,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = voidCraft.modid, name = "VoidCraft", guiFactory = "Tamaized.Voidcraft.GUI.client.GUIConfigFactory", version = voidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[" + TamModized.version + ",)")
 public class voidCraft extends TamModBase {
-
+	
+	public static final boolean isDevBuild = false;
+	
 	public static final String version = "${version}";
 	public static final String modid = "voidcraft";
 
@@ -377,7 +379,6 @@ public class voidCraft extends TamModBase {
 	}
 
 	public static void reloadRitualList() {
-		instance.logger.info("Reloading Ritual List");
 		ritualList = new RitualList();
 	}
 }
