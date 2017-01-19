@@ -7,6 +7,11 @@ import net.minecraft.world.World;
 public class EntityCasterLightningBolt extends EntityLightningBolt {
 
 	private final EntityLivingBase caster;
+	
+	public EntityCasterLightningBolt(World world){
+		super(world, 0, 0, 0, true);
+		caster = null;
+	}
 
 	public EntityCasterLightningBolt(World worldIn, EntityLivingBase caster, double x, double y, double z, boolean effectOnlyIn) {
 		super(worldIn, x, y, z, effectOnlyIn);
