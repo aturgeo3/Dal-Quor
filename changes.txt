@@ -1,6 +1,0 @@
- - Updated TamModized
- - Tamaized: The Void Vade Mecum GUI will now center vertically
- - Tamaized: Fixed some scale issues with the Star Forge GUI
- - Tamaized: Fixed a text overflow in the Vade Mecum.
- - Tamaized: Fixed some position issues with the Vade Mecum buttons
- - Tamaized: Possible Fix for #81 (Needs testing)
