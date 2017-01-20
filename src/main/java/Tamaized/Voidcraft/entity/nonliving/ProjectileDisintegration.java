@@ -8,7 +8,6 @@ import com.google.common.base.Predicates;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -359,9 +358,6 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 
 	@SideOnly(Side.CLIENT)
 	private void particles() {
-		Vec3d vec = getLook(1.0F);
-		for (int index = 0; index < 20; index++)
-			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.TamModized.particles.FX.ParticleFluff(world, getPositionVector(), new Vec3d(-((0.015*vec.xCoord) + ((rand.nextFloat() * 0.125) - 0.0625)), ((0.015*vec.yCoord) + ((rand.nextFloat() * 0.125) - 0.0625)), -((0.015*vec.zCoord) + ((rand.nextFloat() * 0.125) - 0.0625))), rand.nextInt(10), 0, (rand.nextFloat() * 0.85F) + 0.15F, 0x00FF00FF));
 	}
 
 	/**
