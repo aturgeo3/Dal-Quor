@@ -114,8 +114,8 @@ public class VadeMecumGUI extends GuiScreen {
 		button_back = (VadeMecumGUI.ArrowButton) addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), vadeX + 45, vadeY + 185, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
-		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 50, vadeY + 10));
-		if (voidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, getButtonID(Button.WordsOfPower), vadeX + vadeW - 115, vadeY + 15));
+		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY +vadeH-2/*vadeY + 10*/));
+		if (voidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, "Spells", getButtonID(Button.WordsOfPower), vadeX + 42, vadeY +vadeH-3));
 		updateButtons();
 	}
 
@@ -208,7 +208,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (canDrawPage()) {
 			entry.render(this, fontRendererObj, mouseX, mouseY, vadeX, vadeY, pageNumber);
 		}
-		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + 12, 0xFFFF00);
+		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + vadeH-24, 0xFFFF00);
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (playerStats.getCurrentActive() != null) {
 
@@ -293,8 +293,8 @@ public class VadeMecumGUI extends GuiScreen {
 		public static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/button_full.png");
 		private final VadeMecumGUI parent;
 
-		public FullButton(VadeMecumGUI gui, int id, int x, int y) {
-			super(id, x, y, 40, 10, "Spells");
+		public FullButton(VadeMecumGUI gui, String text, int id, int x, int y) {
+			super(id, x, y, 40, 14, text);
 			parent = gui;
 		}
 
@@ -313,8 +313,8 @@ public class VadeMecumGUI extends GuiScreen {
 				if (flag) {
 					j += 124;
 				}
-				parent.drawTexturedModalRect(xPosition, yPosition, 40, 10, i, j, 255, 124);
-				parent.drawCenteredString(parent.fontRendererObj, displayString, xPosition + (width / 2), yPosition + (height / 2), 0xFFFF00);
+				parent.drawTexturedModalRect(xPosition, yPosition, 40, 14, i, j, 255, 124);
+				parent.drawCenteredString(parent.fontRendererObj, displayString, xPosition + (width / 2), yPosition + (height / 2) - (parent.fontRendererObj.FONT_HEIGHT/2), 0xFFFF00);
 			}
 		}
 	}

@@ -111,7 +111,7 @@ import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidCity.StructureVoidCityPieces;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import Tamaized.Voidcraft.structures.voidFortress.StructureVoidFortressPieces;
-import Tamaized.Voidcraft.vadeMecum.RitualList;
+import Tamaized.Voidcraft.vadeMecum.progression.RitualList;
 import Tamaized.Voidcraft.world.WorldGeneratorVoid;
 import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;

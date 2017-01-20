@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.vadeMecum;
+package Tamaized.Voidcraft.vadeMecum.progression;
 
 import java.util.HashMap;
 import java.util.Map;

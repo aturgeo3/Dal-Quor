@@ -6,9 +6,9 @@ import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
-import Tamaized.Voidcraft.vadeMecum.RitualList;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumPageMultiBlock;
+import Tamaized.Voidcraft.vadeMecum.progression.RitualList;
 
 public class VadeMecumPageListRitualList implements IVadeMecumPageProvider {
 
