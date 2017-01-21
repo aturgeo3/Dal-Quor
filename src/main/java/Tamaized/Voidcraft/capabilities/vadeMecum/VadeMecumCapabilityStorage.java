@@ -25,21 +25,7 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 			}
 			compound.setIntArray("category", array.stream().mapToInt(i -> i).toArray());
 		}
-		array.clear();
-		{
-			for (IVadeMecumCapability.ActivePower activePower : instance.getActivePowers()) {
-				array.add(IVadeMecumCapability.getActivePowerID(activePower));
-			}
-			compound.setIntArray("activePower", array.stream().mapToInt(i -> i).toArray());
-		}
-		array.clear();
-		{
-			for (IVadeMecumCapability.PassivePower passivePower : instance.getPassivePowers()) {
-				array.add(IVadeMecumCapability.getPassivePowerID(passivePower));
-			}
-			compound.setIntArray("passivePower", array.stream().mapToInt(i -> i).toArray());
-		}
-		compound.setInteger("currentActive", IVadeMecumCapability.getActivePowerID(instance.getCurrentActive()));
+		compound.setInteger("currentActive", IVadeMecumCapability.getCategoryID(instance.getCurrentActive()));
 		compound.setString("lastEntry", instance.getLastEntry());
 		return compound;
 	}
@@ -56,23 +42,7 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 			}
 			instance.setObtainedCategories(list);
 		}
-		{
-			ArrayList<IVadeMecumCapability.ActivePower> list = new ArrayList<IVadeMecumCapability.ActivePower>();
-			array = compound.getIntArray("activePower");
-			for (int i = 0; i < array.length - 1; i++) {
-				list.add(IVadeMecumCapability.getActivePowerFromID(array[i]));
-			}
-			instance.setActivePowers(list);
-		}
-		{
-			ArrayList<IVadeMecumCapability.PassivePower> list = new ArrayList<IVadeMecumCapability.PassivePower>();
-			array = compound.getIntArray("passivePower");
-			for (int i = 0; i < array.length - 1; i++) {
-				list.add(IVadeMecumCapability.getPassivePowerFromID(array[i]));
-			}
-			instance.setPassivePowers(list);
-		}
-		instance.setCurrentActive(IVadeMecumCapability.getActivePowerFromID(compound.getInteger("currentActive")));
+		instance.setCurrentActive(IVadeMecumCapability.getCategoryFromID(compound.getInteger("currentActive")));
 		instance.setLastEntry(compound.getString("lastEntry"));
 		instance.setLoaded();
 	}

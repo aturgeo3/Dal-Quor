@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class VadeMecumPacketHandler {
 
 	public static enum RequestType {
-		NULL, CATEGORY_ADD, CATEGORY_REMOVE, CATEGORY_CLEAR, ACTIVE_ADD, ACTIVE_REMOVE, ACTIVE_CLEAR, ACTIVE_CURRENT_SET, PASSIVE_ADD, PASSIVE_REMOVE, PASSIVE_CLEAR
+		NULL, CATEGORY_ADD, CATEGORY_REMOVE, CATEGORY_CLEAR, ACTIVE_SET, ACTIVE_CLEAR, PASSIVE_ADD, PASSIVE_REMOVE, PASSIVE_CLEAR
 	}
 
 	public static int getRequestID(RequestType type) {
@@ -39,24 +39,17 @@ public class VadeMecumPacketHandler {
 			case CATEGORY_CLEAR:
 				capability.clearCategories();
 				break;
-			case ACTIVE_ADD:
-				capability.addActivePower(IVadeMecumCapability.getActivePowerFromID(bbis.readInt()));
-			case ACTIVE_REMOVE:
-				capability.removeActivePower(IVadeMecumCapability.getActivePowerFromID(bbis.readInt()));
+			case ACTIVE_SET:
+				capability.setCurrentActive(IVadeMecumCapability.getCategoryFromID(bbis.readInt()));
 				break;
 			case ACTIVE_CLEAR:
-				capability.clearActivePowers();
-				break;
-			case ACTIVE_CURRENT_SET:
-				capability.setCurrentActive(IVadeMecumCapability.getActivePowerFromID(bbis.readInt()));
+				capability.clearActivePower();
 				break;
 			case PASSIVE_ADD:
-				capability.addPassivePower(IVadeMecumCapability.getPassivePowerFromID(bbis.readInt()));
+				break;
 			case PASSIVE_REMOVE:
-				capability.removePassivePower(IVadeMecumCapability.getPassivePowerFromID(bbis.readInt()));
 				break;
 			case PASSIVE_CLEAR:
-				capability.clearPassivePowers();
 				break;
 			default:
 				break;

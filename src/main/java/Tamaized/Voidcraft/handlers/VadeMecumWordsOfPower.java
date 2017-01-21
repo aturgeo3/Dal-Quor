@@ -44,9 +44,9 @@ public class VadeMecumWordsOfPower {
 	public static void invoke(World world, EntityPlayer player) { // TODO: clean all this up, make methods/classes/helpers and so on for all this junk
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap == null || world.isRemote) return;
-		IVadeMecumCapability.ActivePower power = cap.getCurrentActive();
+		IVadeMecumCapability.Category power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.ActivePower.Implosion;
+		power = IVadeMecumCapability.Category.Implosion;
 		if (power != null) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;

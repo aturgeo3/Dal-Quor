@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.Category;
 import io.netty.buffer.ByteBufInputStream;
 
 public interface IVadeMecumCapability {
@@ -11,6 +12,7 @@ public interface IVadeMecumCapability {
 	public static enum Category {
 		NULL, INTRO, TOME,
 
+		// Active
 		Flame, FireSheathe, Fireball, FireTrap, ExplosionFire, RingOfFire,
 
 		Shock, ShockSheathe, LitStrike, LitTrap, ExplosionLit, RingOfLit,
@@ -20,6 +22,7 @@ public interface IVadeMecumCapability {
 		AcidSpray, AcidSheathe, Disint, AcidTrap, ExplosionAcid, RingOfAcid,
 
 		VoidicTouch, VoidicSheathe, Implosion
+
 	}
 
 	public static int getCategoryID(Category c) {
@@ -30,36 +33,77 @@ public interface IVadeMecumCapability {
 		return (id > Category.values().length || id < 0) ? null : Category.values()[id];
 	}
 
-	public static enum ActivePower {
-		Flame, FireSheathe, Fireball, FireTrap, ExplosionFire, RingOfFire,
-
-		Shock, ShockSheathe, LitStrike, LitTrap, ExplosionLit, RingOfLit,
-
-		Freeze, FrostSheathe, IceSpike, FrostTrap, ExplosionFrost, RingOfFrost,
-
-		AcidSpray, AcidSheathe, Disint, AcidTrap, ExplosionAcid, RingOfAcid,
-
-		VoidicTouch, VoidicSheathe, Implosion
+	public static String getCategoryName(Category c) {
+		switch (c) {
+			case INTRO:
+				return "Rituals";
+			case TOME:
+				return "Words of Power";
+			case Flame:
+				return "Word: Flame";
+			case FireSheathe:
+				return "Word: Sheathe - Fire";
+			case Fireball:
+				return "Word: Fireball";
+			case FireTrap:
+				return "Word: Trap - Fire";
+			case ExplosionFire:
+				return "Word: Explosion - Fire";
+			case RingOfFire:
+				return "Word: Ring of Fire";
+			case Shock:
+				return "Word: Shock";
+			case ShockSheathe:
+				return "Word: Sheathe - Shock";
+			case LitStrike:
+				return "Word: Lightning Strike";
+			case LitTrap:
+				return "Word: Trap - Lightning";
+			case ExplosionLit:
+				return "Word: Explosion - Shock";
+			case RingOfLit:
+				return "Word: Ring of Lightning";
+			case Freeze:
+				return "Word: Freeze";
+			case FrostSheathe:
+				return "Word: Sheathe - Frost";
+			case IceSpike:
+				return "Word: Ice Spike";
+			case FrostTrap:
+				return "Word: Trap - Frost";
+			case ExplosionFrost:
+				return "Word: Explosion - Frost";
+			case RingOfFrost:
+				return "Word: Ring of Frost";
+			case AcidSpray:
+				return "Word: Acid Spray";
+			case AcidSheathe:
+				return "Word: Sheathe - Acid";
+			case Disint:
+				return "Word: Disintegrate";
+			case AcidTrap:
+				return "Word: Trap - Acid";
+			case ExplosionAcid:
+				return "Word: Explosion - Acid";
+			case RingOfAcid:
+				return "Word: Ring of Acid";
+			case VoidicTouch:
+				return "Word: Voidic Touch";
+			case VoidicSheathe:
+				return "Word: Sheathe - Voidic";
+			case Implosion:
+				return "Word: Implosion";
+			default:
+				return "null";
+		}
 	}
 
-	public static int getActivePowerID(ActivePower c) {
-		return c == null ? -1 : c.ordinal();
+	public static boolean isActivePower(Category c) {
+		return getCategoryName(c).contains("Word:");
 	}
 
-	public static ActivePower getActivePowerFromID(int id) {
-		return (id > ActivePower.values().length || id < 0) ? null : ActivePower.values()[id];
-	}
-
-	public static enum PassivePower {
-		TEST, TESTTWO
-	}
-
-	public static int getPassivePowerID(PassivePower c) {
-		return c == null ? -1 : c.ordinal();
-	}
-
-	public static PassivePower getPassivePowerFromID(int id) {
-		return (id > PassivePower.values().length || id < 0) ? null : PassivePower.values()[id];
+	public static boolean isPassivePower(Category c) {
+		return false;
 	}
 
 	public boolean isDirty();
@@ -77,34 +121,14 @@ public interface IVadeMecumCapability {
 	public void clearCategories();
 
 	public boolean hasCategory(Category category);
+	
+	public ArrayList<Category> getAvailableActivePowers();
 
-	public ArrayList<ActivePower> getActivePowers();
+	public void setCurrentActive(Category power);
+	
+	public void clearActivePower();
 
-	public void setActivePowers(ArrayList<ActivePower> list);
-
-	public void addActivePower(ActivePower power);
-
-	public void removeActivePower(ActivePower power);
-
-	public void clearActivePowers();
-
-	public boolean hasActivePower(ActivePower power);
-
-	public ArrayList<PassivePower> getPassivePowers();
-
-	public void setPassivePowers(ArrayList<PassivePower> list);
-
-	public void addPassivePower(PassivePower power);
-
-	public void removePassivePower(PassivePower power);
-
-	public void clearPassivePowers();
-
-	public boolean hasPassivePower(PassivePower power);
-
-	public void setCurrentActive(ActivePower power);
-
-	public ActivePower getCurrentActive();
+	public Category getCurrentActive();
 
 	public void setLastEntry(String e);
 
