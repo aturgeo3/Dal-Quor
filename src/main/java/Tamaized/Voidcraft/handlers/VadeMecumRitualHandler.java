@@ -19,34 +19,12 @@ public class VadeMecumRitualHandler {
 	public static void invokeRitual(EntityPlayer player, World world, BlockPos pos) {
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap == null || world.getBlockState(pos).getBlock() != VoidCraft.blocks.ritualBlock) return;
-		switch (getRitual(cap, world, pos, true)) {
-			case INTRO:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Intro"));
-				cap.addCategory(IVadeMecumCapability.Category.INTRO);
-				break;
-			case TOME:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Words of Power"));
-				cap.addCategory(IVadeMecumCapability.Category.TOME);
-				break;
-			case Flame:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Flame"));
-				cap.addCategory(IVadeMecumCapability.Category.Flame);
-				break;
-			case Freeze:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Freeze"));
-				cap.addCategory(IVadeMecumCapability.Category.Freeze);
-				break;
-			case Shock:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Shock"));
-				cap.addCategory(IVadeMecumCapability.Category.Shock);
-				break;
-			case AcidSpray:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Acid"));
-				cap.addCategory(IVadeMecumCapability.Category.AcidSpray);
-				break;
-			default:
-				player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Unknown Ritual"));
-				break;
+		IVadeMecumCapability.Category category = getRitual(cap, world, pos, true);
+		if (category == null || category == IVadeMecumCapability.Category.NULL) {
+			player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Unknown Ritual"));
+		} else {
+			player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + IVadeMecumCapability.getCategoryName(category)));
+			cap.addCategory(IVadeMecumCapability.Category.INTRO);
 		}
 	}
 
@@ -64,23 +42,23 @@ public class VadeMecumRitualHandler {
 		} else {
 			if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
 				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Flame)) {
-					
-				}else{
+
+				} else {
 					list.add(IVadeMecumCapability.Category.Flame);
 				}
 				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Freeze)) {
-					
-				}else{
+
+				} else {
 					list.add(IVadeMecumCapability.Category.Freeze);
 				}
 				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Shock)) {
-					
-				}else{
+
+				} else {
 					list.add(IVadeMecumCapability.Category.Shock);
 				}
 				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.AcidSpray)) {
-					
-				}else{
+
+				} else {
 					list.add(IVadeMecumCapability.Category.AcidSpray);
 				}
 			} else {
