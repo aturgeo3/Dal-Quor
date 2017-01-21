@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.capabilities.vadeMecum;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability> {
 
 	public VadeMecumCapabilityStorage() {
-		voidCraft.instance.logger.info("VadeMecumCapabilityStorage Registered");
+		VoidCraft.instance.logger.info("VadeMecumCapabilityStorage Registered");
 	}
 
 	@Override

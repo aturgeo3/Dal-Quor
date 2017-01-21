@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.xiaCastle.logic.XiaCastleLogicHandler;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -24,7 +24,7 @@ public class WorldProviderXia extends WorldProvider {
 	 */
 	@Override
 	protected void init() {
-		this.biomeProvider = new BiomeProviderSingle(voidCraft.biomes.biomeXia);
+		this.biomeProvider = new BiomeProviderSingle(VoidCraft.biomes.biomeXia);
 		this.doesWaterVaporize = false;
 		this.hasNoSky = true;
 		if (world instanceof WorldServer) {
@@ -143,6 +143,6 @@ public class WorldProviderXia extends WorldProvider {
 
 	@Override
 	public DimensionType getDimensionType() {
-		return DimensionType.getById(voidCraft.config.getDimensionIDxia());
+		return DimensionType.getById(VoidCraft.config.getDimensionIDxia());
 	}
 }

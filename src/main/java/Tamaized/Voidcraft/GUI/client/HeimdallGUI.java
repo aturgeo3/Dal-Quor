@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.HeimdallContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 
@@ -22,7 +22,7 @@ public class HeimdallGUI extends GuiContainer {
 
 	public TileEntityHeimdall te;
 
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/heimdall.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(VoidCraft.modid, "textures/gui/heimdall.png");
 
 	public HeimdallGUI(InventoryPlayer inventoryPlayer, TileEntityHeimdall tileEntity) {
 		super(new HeimdallContainer(inventoryPlayer, tileEntity));

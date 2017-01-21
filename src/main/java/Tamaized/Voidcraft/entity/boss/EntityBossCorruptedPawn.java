@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -154,7 +154,7 @@ public class EntityBossCorruptedPawn extends EntityBossCorruptedPawnBase impleme
 
     @Override
     protected Item getDropItem() {
-        return voidCraft.items.voidStar;
+        return VoidCraft.items.voidStar;
     }
 
     @Override

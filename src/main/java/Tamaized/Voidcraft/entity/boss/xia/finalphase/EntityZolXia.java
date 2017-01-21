@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,9 +28,9 @@ public class EntityZolXia extends EntityTwinsXia {
 	protected void update() {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.litSheathe) == null) {
+			if (getActivePotionEffect(VoidCraft.potions.litSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(voidCraft.potions.litSheathe, 100));
+				addPotionEffect(new PotionEffect(VoidCraft.potions.litSheathe, 100));
 			}
 			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
 				double x = watchedEntity.posX;

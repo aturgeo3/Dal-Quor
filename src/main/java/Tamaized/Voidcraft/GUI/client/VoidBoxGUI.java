@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
@@ -34,7 +34,7 @@ public class VoidBoxGUI extends GuiContainer {
 
 	private int CurrColor = 0;
 
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidBox.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(VoidCraft.modid, "textures/gui/voidBox.png");
 
 	public VoidBoxGUI(InventoryPlayer inventoryPlayer, TileEntityVoidBox tileEntity) {
 		super(new VoidBoxContainer(inventoryPlayer, tileEntity));
@@ -97,7 +97,7 @@ public class VoidBoxGUI extends GuiContainer {
 		int ycoord = voidBox.getPos().getY();
 		int zcoord = voidBox.getPos().getZ();
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
 			DataOutputStream stream = packet.getStream();
 			stream.writeInt(xcoord);
 			stream.writeInt(ycoord);

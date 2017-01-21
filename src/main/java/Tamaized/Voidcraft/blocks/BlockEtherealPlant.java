@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockCrops;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.items.EtherealFruit;
 import net.minecraft.block.Block;
@@ -29,7 +29,7 @@ public class BlockEtherealPlant extends TamBlockCrops {
 
 	public BlockEtherealPlant(CreativeTabs tab, String n, float hardness) {
 		super(tab, Material.PLANTS, n, hardness);
-		plantableBlocks.add(voidCraft.blocks.blockFakeBedrockFarmland);
+		plantableBlocks.add(VoidCraft.blocks.blockFakeBedrockFarmland);
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class BlockEtherealPlant extends TamBlockCrops {
 
 	@Override
 	protected Item getSeed() {
-		return voidCraft.items.etherealSeed;
+		return VoidCraft.items.etherealSeed;
 	}
 
 	@Override
 	protected Item getCrop() {
-		return voidCraft.items.etherealFruit;
+		return VoidCraft.items.etherealFruit;
 	}
 
 	@Override
@@ -85,22 +85,22 @@ public class BlockEtherealPlant extends TamBlockCrops {
 				EtherealFruit fruit;
 				switch (alteration) {
 					case REDSTONE:
-						fruit = voidCraft.items.etherealFruit_redstone;
+						fruit = VoidCraft.items.etherealFruit_redstone;
 						break;
 					case LAPIS:
-						fruit = voidCraft.items.etherealFruit_lapis;
+						fruit = VoidCraft.items.etherealFruit_lapis;
 						break;
 					case GOLD:
-						fruit = voidCraft.items.etherealFruit_gold;
+						fruit = VoidCraft.items.etherealFruit_gold;
 						break;
 					case EMERALD:
-						fruit = voidCraft.items.etherealFruit_emerald;
+						fruit = VoidCraft.items.etherealFruit_emerald;
 						break;
 					case DIAMOND:
-						fruit = voidCraft.items.etherealFruit_diamond;
+						fruit = VoidCraft.items.etherealFruit_diamond;
 						break;
 					default:
-						fruit = voidCraft.items.etherealFruit;
+						fruit = VoidCraft.items.etherealFruit;
 						break;
 				}
 				ItemStack newStack = new ItemStack(fruit, a);

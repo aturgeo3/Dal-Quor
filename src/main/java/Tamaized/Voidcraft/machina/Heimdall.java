@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.machina;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import net.minecraft.block.material.Material;
@@ -33,7 +33,7 @@ public class Heimdall extends TamBlockContainer {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Heimdall), worldIn, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(playerIn, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Heimdall), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

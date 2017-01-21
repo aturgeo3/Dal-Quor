@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 
 public class InfuserRecipeMaker {
@@ -13,7 +13,7 @@ public class InfuserRecipeMaker {
 	@Nonnull
 	public static List<InfuserRecipeWrapperJEI> getRecipes() {
 		ArrayList<InfuserRecipeWrapperJEI> recipes = new ArrayList<InfuserRecipeWrapperJEI>();
-		for (InfuserRecipe recipe : voidCraft.teRecipes.infuser.getList())
+		for (InfuserRecipe recipe : VoidCraft.teRecipes.infuser.getList())
 			recipes.add(new InfuserRecipeWrapperJEI(recipe));
 		return recipes;
 	}

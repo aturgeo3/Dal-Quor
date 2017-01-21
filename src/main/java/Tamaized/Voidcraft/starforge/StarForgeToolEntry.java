@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.starforge;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.StarForgeGUI;
 import Tamaized.Voidcraft.helper.GUIListElement;
 import net.minecraft.client.Minecraft;
@@ -52,8 +52,8 @@ public class StarForgeToolEntry extends GUIListElement {
 		GlStateManager.enableTexture2D();
 		starforgeGUI.drawString(mc.fontRendererObj, tool.getDisplayName(), x - 160, y + 5, 0xFFFFFF);
 		int i = mc.fontRendererObj.getStringWidth(tool.getDisplayName());
-		starforgeGUI.renderItemStack(new ItemStack(voidCraft.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
-		starforgeGUI.renderItemStack(new ItemStack(voidCraft.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 	}
 
 }

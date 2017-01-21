@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.entity.mob;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
@@ -98,7 +98,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
 
 	@Override
 	protected Item getDropItem() {
-		return voidCraft.items.voidChain;
+		return VoidCraft.items.voidChain;
 	}
 
 	@Override

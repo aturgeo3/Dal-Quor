@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.helper;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
@@ -19,15 +19,15 @@ public final class SheatheHelper {
 	}
 
 	public static void onAttack(EntityLivingBase living, EntityLivingBase attacker) {
-		if (living.getActivePotionEffect(voidCraft.potions.fireSheathe) != null) {
+		if (living.getActivePotionEffect(VoidCraft.potions.fireSheathe) != null) {
 			attacker.attackEntityFrom(DamageSource.ON_FIRE, 2.0f);
-		} else if (living.getActivePotionEffect(voidCraft.potions.frostSheathe) != null) {
+		} else if (living.getActivePotionEffect(VoidCraft.potions.frostSheathe) != null) {
 			attacker.attackEntityFrom(new DamageSourceFrost(), 2.0f);
-		} else if (living.getActivePotionEffect(voidCraft.potions.litSheathe) != null) {
+		} else if (living.getActivePotionEffect(VoidCraft.potions.litSheathe) != null) {
 			attacker.attackEntityFrom(new DamageSourceLit(), 2.0f);
-		} else if (living.getActivePotionEffect(voidCraft.potions.acidSheathe) != null) {
+		} else if (living.getActivePotionEffect(VoidCraft.potions.acidSheathe) != null) {
 			attacker.attackEntityFrom(new DamageSourceAcid(), 2.0f);
-		} else if (living.getActivePotionEffect(voidCraft.potions.voidSheathe) != null) {
+		} else if (living.getActivePotionEffect(VoidCraft.potions.voidSheathe) != null) {
 			attacker.attackEntityFrom(new DamageSourceVoidicInfusion(), 2.0f);
 			IVoidicInfusionCapability cap = attacker.getCapability(CapabilityList.VOIDICINFUSION, null);
 			if (cap != null) cap.addInfusion(600);
@@ -35,26 +35,26 @@ public final class SheatheHelper {
 	}
 
 	public static void castSheathe(EntityLivingBase entity, PotionSheathe.Type type, int duration) {
-		entity.removePotionEffect(voidCraft.potions.fireSheathe);
-		entity.removePotionEffect(voidCraft.potions.litSheathe);
-		entity.removePotionEffect(voidCraft.potions.frostSheathe);
-		entity.removePotionEffect(voidCraft.potions.acidSheathe);
-		entity.removePotionEffect(voidCraft.potions.voidSheathe);
+		entity.removePotionEffect(VoidCraft.potions.fireSheathe);
+		entity.removePotionEffect(VoidCraft.potions.litSheathe);
+		entity.removePotionEffect(VoidCraft.potions.frostSheathe);
+		entity.removePotionEffect(VoidCraft.potions.acidSheathe);
+		entity.removePotionEffect(VoidCraft.potions.voidSheathe);
 		switch (type) {
 			case Fire:
-				entity.addPotionEffect(new PotionEffect(voidCraft.potions.fireSheathe, duration));
+				entity.addPotionEffect(new PotionEffect(VoidCraft.potions.fireSheathe, duration));
 				break;
 			case Frost:
-				entity.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheathe, duration));
+				entity.addPotionEffect(new PotionEffect(VoidCraft.potions.frostSheathe, duration));
 				break;
 			case Lit:
-				entity.addPotionEffect(new PotionEffect(voidCraft.potions.litSheathe, duration));
+				entity.addPotionEffect(new PotionEffect(VoidCraft.potions.litSheathe, duration));
 				break;
 			case Acid:
-				entity.addPotionEffect(new PotionEffect(voidCraft.potions.acidSheathe, duration));
+				entity.addPotionEffect(new PotionEffect(VoidCraft.potions.acidSheathe, duration));
 				break;
 			case Void:
-				entity.addPotionEffect(new PotionEffect(voidCraft.potions.voidSheathe, duration));
+				entity.addPotionEffect(new PotionEffect(VoidCraft.potions.voidSheathe, duration));
 				break;
 			default:
 				break;
@@ -62,15 +62,15 @@ public final class SheatheHelper {
 	}
 
 	public static float[] getColor(EntityLivingBase entity) {
-		if (entity.getActivePotionEffect(voidCraft.potions.fireSheathe) != null) {
+		if (entity.getActivePotionEffect(VoidCraft.potions.fireSheathe) != null) {
 			return new float[] { 1.0f, 0.65f, 0.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.frostSheathe) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraft.potions.frostSheathe) != null) {
 			return new float[] { 0.0f, 1.0f, 1.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.litSheathe) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraft.potions.litSheathe) != null) {
 			return new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.acidSheathe) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraft.potions.acidSheathe) != null) {
 			return new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
-		} else if (entity.getActivePotionEffect(voidCraft.potions.voidSheathe) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraft.potions.voidSheathe) != null) {
 			return new float[] { 0x77 / 255F, 0.0f, 0xFF / 255F, 1.0f };
 		}
 		return null;

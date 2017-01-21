@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.dragon.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.entity.boss.dragon.render.layer.LayerEnderDragonOldDeath;
 import Tamaized.Voidcraft.entity.boss.dragon.render.layer.LayerEnderDragonOldEyes;
@@ -18,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 public class RenderDragonOld<T extends EntityDragonOld> extends RenderLiving<T> {
 
 	public static final ResourceLocation ENDERCRYSTAL_BEAM_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal_beam.png");
-	private static final ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon_exploding.png");
-	private static final ResourceLocation DRAGON_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/dragon/dragon.png");
+	private static final ResourceLocation DRAGON_EXPLODING_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/dragon/dragon_exploding.png");
+	private static final ResourceLocation DRAGON_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/dragon/dragon.png");
 
 	public RenderDragonOld(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelDragonOld(0.0F), 0.5F);

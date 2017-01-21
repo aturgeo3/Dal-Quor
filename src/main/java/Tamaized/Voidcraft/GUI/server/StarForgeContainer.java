@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyClass;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
@@ -30,7 +30,7 @@ public class StarForgeContainer extends ContainerBase {
 			}
 		});
 
-		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial), tileEntity, te.SLOT_INPUT_COSMICMATERIAL, 37, 105) {
+		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial), tileEntity, te.SLOT_INPUT_COSMICMATERIAL, 37, 105) {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {
@@ -38,7 +38,7 @@ public class StarForgeContainer extends ContainerBase {
 			}
 		});
 
-		addSlotToContainer(new SlotOnlyItem(voidCraft.items.voidicDragonScale, tileEntity, te.SLOT_INPUT_DRAGONSCALE, 59, 105) {
+		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.voidicDragonScale, tileEntity, te.SLOT_INPUT_DRAGONSCALE, 59, 105) {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {
@@ -46,7 +46,7 @@ public class StarForgeContainer extends ContainerBase {
 			}
 		});
 
-		addSlotToContainer(new SlotOnlyItem(voidCraft.items.quoriFragment, tileEntity, te.SLOT_INPUT_QUORIFRAGMENT, 81, 105) {
+		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.quoriFragment, tileEntity, te.SLOT_INPUT_QUORIFRAGMENT, 81, 105) {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {
@@ -54,7 +54,7 @@ public class StarForgeContainer extends ContainerBase {
 			}
 		});
 
-		addSlotToContainer(new SlotOnlyItem(voidCraft.items.astralEssence, tileEntity, te.SLOT_INPUT_ASTRALESSENCE, 103, 105) {
+		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.astralEssence, tileEntity, te.SLOT_INPUT_ASTRALESSENCE, 103, 105) {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {
@@ -62,7 +62,7 @@ public class StarForgeContainer extends ContainerBase {
 			}
 		});
 
-		addSlotToContainer(new SlotOnlyItem(voidCraft.items.voidicPhlogiston, tileEntity, te.SLOT_INPUT_VOIDICPHLOG, 125, 105) {
+		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.voidicPhlogiston, tileEntity, te.SLOT_INPUT_VOIDICPHLOG, 125, 105) {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {

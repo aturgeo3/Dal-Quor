@@ -8,7 +8,7 @@ import java.util.Map;
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +43,7 @@ public class HookShot extends TamItem {
 
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int count) { // Doesnt seem to be called server side so send a packet
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.HOOKSHOT_STOP));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.HOOKSHOT_STOP));
 			DataOutputStream stream = packet.getStream();
 			packet.sendPacketToServer();
 		} catch (Exception ex) {

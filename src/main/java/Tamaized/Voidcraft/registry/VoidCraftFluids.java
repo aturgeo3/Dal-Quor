@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.registry;
 
 import Tamaized.TamModized.fluids.TamFluidBlock;
 import Tamaized.TamModized.registry.TamFluidRegistryBase;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.fluids.TamFluidFiniteBlock;
 import net.minecraft.block.material.MapColor;
@@ -36,8 +36,8 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 		voidMaterialLiquid = new MaterialLiquid(MapColor.PURPLE);
 		acidMaterialLiquid = new MaterialLiquid(MapColor.GREEN);
 
-		register(voidFluidBlock = new TamFluidBlock(voidCraft.tabs.tabVoid, voidFluid, Material.WATER, "blockVoidFluid"));
-		register(acidFluidBlock = new TamFluidFiniteBlock(voidCraft.tabs.tabVoid, acidFluid, Material.WATER, "blockAcidFluid", new DamageSourceAcid(), 5));
+		register(voidFluidBlock = new TamFluidBlock(VoidCraft.tabs.tabVoid, voidFluid, Material.WATER, "blockVoidFluid"));
+		register(acidFluidBlock = new TamFluidFiniteBlock(VoidCraft.tabs.tabVoid, acidFluid, Material.WATER, "blockAcidFluid", new DamageSourceAcid(), 5));
 
 		voidBucket = new BucketWrapper(ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid));
 	}
@@ -54,7 +54,7 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 
 	@Override
 	public String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	@Override

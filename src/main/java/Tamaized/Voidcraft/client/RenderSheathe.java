@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Sphere;
 
 import Tamaized.TamModized.particles.FX.ParticleFluff;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.helper.SheatheHelper;
 import net.minecraft.client.Minecraft;

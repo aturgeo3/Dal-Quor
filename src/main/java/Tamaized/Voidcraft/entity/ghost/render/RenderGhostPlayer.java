@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.lwjgl.util.glu.Sphere;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(voidCraft.modid, "textures/entity/rune.png");
+	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(VoidCraft.modid, "textures/entity/rune.png");
 
 	private final boolean playerModel;
 
@@ -180,6 +180,6 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
-		return voidCraft.skinHandler.getSkinResource(entity.getAlias());
+		return VoidCraft.skinHandler.getSkinResource(entity.getAlias());
 	}
 }

@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
@@ -139,7 +139,7 @@ public class CustomElytraHandler {
 
 	private static void sendPacketToServer(EntityPlayer sender) {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.CUSTOM_ELYTRA));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.CUSTOM_ELYTRA));
 			DataOutputStream stream = packet.getStream();
 			packet.sendPacketToServer();
 		} catch (Exception ex) {

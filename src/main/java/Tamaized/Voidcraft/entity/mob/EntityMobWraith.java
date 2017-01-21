@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.entity.mob;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
@@ -100,7 +100,7 @@ public class EntityMobWraith extends EntityVoidMob implements IMob{
 
     @Override
     protected Item getDropItem() {
-    	return voidCraft.items.ectoplasm;
+    	return VoidCraft.items.ectoplasm;
     }
     
 }

@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.vadeMecum.progression;
 import java.util.HashMap;
 import java.util.Map;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(voidCraft.blocks.ritualBlock), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(VoidCraft.blocks.ritualBlock), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
@@ -48,7 +48,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.MAGMA), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.COAL_BLOCK), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.GLOWSTONE),
+				new ItemStack(Blocks.COAL_BLOCK), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.GLOWSTONE),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.PRISMARINE, 1, 1), ItemStack.EMPTY,
 
@@ -71,7 +71,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.NETHERRACK), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.NETHERRACK),
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				new ItemStack(Blocks.NETHERRACK), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.NETHERRACK),
 
@@ -94,7 +94,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.SNOW), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.SNOW),
+				new ItemStack(Blocks.SNOW), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.SNOW),
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
 
@@ -117,7 +117,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_BRICKS),
 
-				new ItemStack(Blocks.END_STONE), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.END_STONE),
+				new ItemStack(Blocks.END_STONE), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.END_STONE),
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_BRICKS),
 
@@ -140,7 +140,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.STONE), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.STONE),
 
-				new ItemStack(Blocks.DIRT), new ItemStack(voidCraft.blocks.ritualBlock), new ItemStack(Blocks.DIRT),
+				new ItemStack(Blocks.DIRT), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.DIRT),
 
 				new ItemStack(Blocks.STONE), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.STONE),
 

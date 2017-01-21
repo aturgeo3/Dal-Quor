@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.nonliving;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -54,7 +54,7 @@ public class EntityObsidianFlask extends EntityThrowable {
 	private void implosion(BlockPos pos) {
 		pos = pos.add(0, 1, 0);
 		world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 0, true, true);
-		if (world.isAirBlock(pos)) world.setBlockState(pos, voidCraft.blocks.fireVoid.getDefaultState());
+		if (world.isAirBlock(pos)) world.setBlockState(pos, VoidCraft.blocks.fireVoid.getDefaultState());
 	}
 
 }

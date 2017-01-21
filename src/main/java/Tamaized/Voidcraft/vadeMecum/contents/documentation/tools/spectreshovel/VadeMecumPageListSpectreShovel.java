@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools.spectreshovel;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
@@ -12,16 +12,16 @@ public class VadeMecumPageListSpectreShovel implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(voidCraft.tools.spectreSpade).getDisplayName(), new ItemStack[] {
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.tools.voidSpade),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm),
-						new ItemStack(voidCraft.items.ectoplasm) }, new ItemStack(voidCraft.tools.spectreSpade))) };
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(new ItemStack(VoidCraft.tools.spectreSpade).getDisplayName(), new ItemStack[] {
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.tools.voidSpade),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm),
+						new ItemStack(VoidCraft.items.ectoplasm) }, new ItemStack(VoidCraft.tools.spectreSpade))) };
 	}
 
 }

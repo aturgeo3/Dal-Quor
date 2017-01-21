@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.items.voidicPhlogiston;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
@@ -11,7 +11,7 @@ public class VadeMecumPageListVoidicPhlogiston implements IVadeMecumPageProvider
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(new ItemStack(voidCraft.items.voidicPhlogiston).getDisplayName(), voidCraft.modid+".VadeMecum.docs.desc.voidicPhlogiston") };
+				new VadeMecumPage(new ItemStack(VoidCraft.items.voidicPhlogiston).getDisplayName(), VoidCraft.modid+".VadeMecum.docs.desc.voidicPhlogiston") };
 	}
 
 }

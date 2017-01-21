@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.potion;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
@@ -22,9 +22,9 @@ public class PotionSheathe extends Potion {
 	
 	public PotionSheathe(String name, Type type) {
 		super(false, 0x000000);
-		iconTexture = new ResourceLocation(voidCraft.modid, "textures/potions/sheathe.png");
+		iconTexture = new ResourceLocation(VoidCraft.modid, "textures/potions/sheathe.png");
 		this.type = type;
-		setRegistryName(voidCraft.modid, name);
+		setRegistryName(VoidCraft.modid, name);
 		setPotionName("effect." + getRegistryName().toString());
 		GameRegistry.register(this);
 	}

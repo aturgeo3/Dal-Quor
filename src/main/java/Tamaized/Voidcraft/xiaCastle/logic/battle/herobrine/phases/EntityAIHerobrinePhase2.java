@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
@@ -100,9 +100,9 @@ public class EntityAIHerobrinePhase2<T extends EntityBossHerobrine> extends Enti
 		int nY = getBlockPosition().getY();
 		int nZ = (getBlockPosition().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
-			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
 			b.setup(this, null);
 			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY + 1, nZ))).setup(null, b);

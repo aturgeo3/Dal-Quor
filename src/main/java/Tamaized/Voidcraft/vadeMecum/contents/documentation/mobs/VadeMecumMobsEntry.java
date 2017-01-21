@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.mobs;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -36,7 +36,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public VadeMecumEntry etherealGuardian;
 
 	public VadeMecumMobsEntry(VadeMecumEntry back) {
-		super("docs_Mobs", voidCraft.modid + ".VadeMecum.docs.title.mobs", back, null);
+		super("docs_Mobs", VoidCraft.modid + ".VadeMecum.docs.title.mobs", back, null);
 	}
 
 	@Override
@@ -53,12 +53,12 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.VoidWraith), voidCraft.modid + ".VadeMecum.docs.title.voidWraith", new ItemStack(voidCraft.items.ectoplasm));
-		addButton(gui, getEntryID(Entry.ChainedSpectre), voidCraft.modid + ".VadeMecum.docs.title.chainedSpectre", new ItemStack(voidCraft.items.voidChain));
-		addButton(gui, getEntryID(Entry.VoidWrath), voidCraft.modid + ".VadeMecum.docs.title.voidWrath", new ItemStack(voidCraft.items.burnBone));
-		addButton(gui, getEntryID(Entry.VoidLich), voidCraft.modid + ".VadeMecum.docs.title.lich", new ItemStack(voidCraft.items.voidCloth));
-		addButton(gui, getEntryID(Entry.HerobrineCreeper), voidCraft.modid + ".VadeMecum.docs.title.herobrineCreeper", new ItemStack(Items.GUNPOWDER));
-		addButton(gui, getEntryID(Entry.EtherealGuardian), voidCraft.modid + ".VadeMecum.docs.title.etherealGuardian", new ItemStack(voidCraft.items.voidicPhlogiston));
+		addButton(gui, getEntryID(Entry.VoidWraith), VoidCraft.modid + ".VadeMecum.docs.title.voidWraith", new ItemStack(VoidCraft.items.ectoplasm));
+		addButton(gui, getEntryID(Entry.ChainedSpectre), VoidCraft.modid + ".VadeMecum.docs.title.chainedSpectre", new ItemStack(VoidCraft.items.voidChain));
+		addButton(gui, getEntryID(Entry.VoidWrath), VoidCraft.modid + ".VadeMecum.docs.title.voidWrath", new ItemStack(VoidCraft.items.burnBone));
+		addButton(gui, getEntryID(Entry.VoidLich), VoidCraft.modid + ".VadeMecum.docs.title.lich", new ItemStack(VoidCraft.items.voidCloth));
+		addButton(gui, getEntryID(Entry.HerobrineCreeper), VoidCraft.modid + ".VadeMecum.docs.title.herobrineCreeper", new ItemStack(Items.GUNPOWDER));
+		addButton(gui, getEntryID(Entry.EtherealGuardian), VoidCraft.modid + ".VadeMecum.docs.title.etherealGuardian", new ItemStack(VoidCraft.items.voidicPhlogiston));
 	}
 
 	@Override

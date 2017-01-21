@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.addons.TERecipesMacerator.MaceratorRecipe;
@@ -101,7 +101,7 @@ public class TileEntityVoidMacerator extends TileEntityVoidicPowerInventory {
 
 	private boolean canCook() {
 		if (getStackInSlot(SLOT_INPUT).isEmpty()) return false;
-		recipe = voidCraft.teRecipes.macerator.getRecipe(new ItemStack[] { getStackInSlot(SLOT_INPUT) });
+		recipe = VoidCraft.teRecipes.macerator.getRecipe(new ItemStack[] { getStackInSlot(SLOT_INPUT) });
 		if (recipe == null) return false;
 		if (getStackInSlot(SLOT_OUTPUT).isEmpty()) return true;
 		if (!getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) return false;

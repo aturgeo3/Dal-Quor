@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.weapons;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -35,7 +35,7 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 	public VadeMecumEntry demonSword;
 
 	public VadeMecumWeaponsEntry(VadeMecumEntry back) {
-		super("docs_Weapons", voidCraft.modid + ".VadeMecum.docs.title.weps", back, null);
+		super("docs_Weapons", VoidCraft.modid + ".VadeMecum.docs.title.weps", back, null);
 	}
 
 	@Override
@@ -52,12 +52,12 @@ public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.VoidSword), new ItemStack(voidCraft.tools.voidSword).getDisplayName(), new ItemStack(voidCraft.tools.voidSword));
-		addButton(gui, getEntryID(Entry.AngelicSword), new ItemStack(voidCraft.tools.angelicSword).getDisplayName(), new ItemStack(voidCraft.tools.angelicSword));
-		addButton(gui, getEntryID(Entry.BindSword), new ItemStack(voidCraft.tools.chainSword).getDisplayName(), new ItemStack(voidCraft.tools.chainSword));
-		addButton(gui, getEntryID(Entry.MoltenSword), new ItemStack(voidCraft.tools.moltenSword).getDisplayName(), new ItemStack(voidCraft.tools.moltenSword));
-		addButton(gui, getEntryID(Entry.ArchAngelicSword), new ItemStack(voidCraft.tools.archSword).getDisplayName(), new ItemStack(voidCraft.tools.archSword));
-		addButton(gui, getEntryID(Entry.DemonSword), new ItemStack(voidCraft.tools.demonSword).getDisplayName(), new ItemStack(voidCraft.tools.demonSword));
+		addButton(gui, getEntryID(Entry.VoidSword), new ItemStack(VoidCraft.tools.voidSword).getDisplayName(), new ItemStack(VoidCraft.tools.voidSword));
+		addButton(gui, getEntryID(Entry.AngelicSword), new ItemStack(VoidCraft.tools.angelicSword).getDisplayName(), new ItemStack(VoidCraft.tools.angelicSword));
+		addButton(gui, getEntryID(Entry.BindSword), new ItemStack(VoidCraft.tools.chainSword).getDisplayName(), new ItemStack(VoidCraft.tools.chainSword));
+		addButton(gui, getEntryID(Entry.MoltenSword), new ItemStack(VoidCraft.tools.moltenSword).getDisplayName(), new ItemStack(VoidCraft.tools.moltenSword));
+		addButton(gui, getEntryID(Entry.ArchAngelicSword), new ItemStack(VoidCraft.tools.archSword).getDisplayName(), new ItemStack(VoidCraft.tools.archSword));
+		addButton(gui, getEntryID(Entry.DemonSword), new ItemStack(VoidCraft.tools.demonSword).getDisplayName(), new ItemStack(VoidCraft.tools.demonSword));
 	}
 
 	@Override

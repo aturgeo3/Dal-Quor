@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
@@ -87,7 +87,7 @@ public class Debugger extends TamItem {
 		// cap.addEffect(StarForgeEffectList.threeByThree);
 		// playerIn.inventory.addItemStackToInventory(newStack);
 
-		voidCraft.reloadRitualList();
+		VoidCraft.reloadRitualList();
 		IVadeMecumCapability cap = playerIn.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap != null) cap.clearCategories();
 

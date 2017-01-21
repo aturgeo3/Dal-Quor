@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -24,9 +24,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderBossHeathBar {
 
-	public static final ResourceLocation whitespace = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/WhiteSpace.png");
-	public static final ResourceLocation bar = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/bar.png");
-	public static final ResourceLocation bg = new ResourceLocation(voidCraft.modid + ":textures/gui/BossBar/bg.png");
+	public static final ResourceLocation whitespace = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/WhiteSpace.png");
+	public static final ResourceLocation bar = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/bar.png");
+	public static final ResourceLocation bg = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/bg.png");
 
 	private static IVoidBossData voidBoss;
 

@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.blocks;
 import java.util.ArrayList;
 
 import Tamaized.TamModized.blocks.TamBlockFarmland;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,12 +28,12 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 
 	@Override
 	protected IBlockState getParentBlockState() {
-		return voidCraft.blocks.blockFakeBedrock.getDefaultState();
+		return VoidCraft.blocks.blockFakeBedrock.getDefaultState();
 	}
 
 	@Override
 	protected Block getWaterBlock() {
-		return voidCraft.fluids.voidFluidBlock;
+		return VoidCraft.fluids.voidFluidBlock;
 	}
 
 	@Override
@@ -61,19 +61,19 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.REDSTONE, stack);
 				return true;
 			}
-			if (item == voidCraft.items.lapisDust) {
+			if (item == VoidCraft.items.lapisDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.LAPIS, stack);
 				return true;
 			}
-			if (item == voidCraft.items.diamondDust) {
+			if (item == VoidCraft.items.diamondDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.DIAMOND, stack);
 				return true;
 			}
-			if (item == voidCraft.items.emeraldDust) {
+			if (item == VoidCraft.items.emeraldDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.EMERALD, stack);
 				return true;
 			}
-			if (item == voidCraft.items.goldDust) {
+			if (item == VoidCraft.items.goldDust) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.GOLD, stack);
 				return true;
 			}
@@ -89,8 +89,8 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 	@Override
 	protected ArrayList<IPlantable> getPlantList() {
 		ArrayList<IPlantable> list = new ArrayList<IPlantable>();
-		list.add(voidCraft.blocks.etherealPlant);
-		list.add(voidCraft.items.etherealSeed);
+		list.add(VoidCraft.blocks.etherealPlant);
+		list.add(VoidCraft.items.etherealSeed);
 		return list;
 	}
 

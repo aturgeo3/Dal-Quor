@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.machina;
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import net.minecraft.block.material.Material;
@@ -41,7 +41,7 @@ public class VoidicAlchemyTable extends TamBlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) FMLNetworkHandler.openGui(playerIn, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VoidicAlchemy), worldIn, pos.getX(), pos.getY(), pos.getZ());
+		if (!worldIn.isRemote) FMLNetworkHandler.openGui(playerIn, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VoidicAlchemy), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 

@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.blocks.tileentity;
 import java.util.ArrayList;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.helper.GUIListElement;
@@ -47,10 +47,10 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 		ItemStack stack = getStackInSlot(SLOT_INPUT_TOOL);
 		if (stack.isEmpty()) {
 			try {
-				list.add(new StarForgeToolEntry(new ItemStack(voidCraft.tools.starforgedSword)));
-				list.add(new StarForgeToolEntry(new ItemStack(voidCraft.tools.starforgedPickaxe)));
-				list.add(new StarForgeToolEntry(new ItemStack(voidCraft.tools.starforgedAxe)));
-				list.add(new StarForgeToolEntry(new ItemStack(voidCraft.tools.starforgedSpade)));
+				list.add(new StarForgeToolEntry(new ItemStack(VoidCraft.tools.starforgedSword)));
+				list.add(new StarForgeToolEntry(new ItemStack(VoidCraft.tools.starforgedPickaxe)));
+				list.add(new StarForgeToolEntry(new ItemStack(VoidCraft.tools.starforgedAxe)));
+				list.add(new StarForgeToolEntry(new ItemStack(VoidCraft.tools.starforgedSpade)));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -102,15 +102,15 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 			case SLOT_INPUT_TOOL:
 				return !itemstack.isEmpty() && itemstack.getItem() instanceof IStarForgeTool;
 			case SLOT_INPUT_COSMICMATERIAL:
-				return !itemstack.isEmpty() && itemstack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial);
+				return !itemstack.isEmpty() && itemstack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial);
 			case SLOT_INPUT_DRAGONSCALE:
-				return !itemstack.isEmpty() && itemstack.getItem() == voidCraft.items.voidicDragonScale;
+				return !itemstack.isEmpty() && itemstack.getItem() == VoidCraft.items.voidicDragonScale;
 			case SLOT_INPUT_QUORIFRAGMENT:
-				return !itemstack.isEmpty() && itemstack.getItem() == voidCraft.items.quoriFragment;
+				return !itemstack.isEmpty() && itemstack.getItem() == VoidCraft.items.quoriFragment;
 			case SLOT_INPUT_ASTRALESSENCE:
-				return !itemstack.isEmpty() && itemstack.getItem() == voidCraft.items.astralEssence;
+				return !itemstack.isEmpty() && itemstack.getItem() == VoidCraft.items.astralEssence;
 			case SLOT_INPUT_VOIDICPHLOG:
-				return !itemstack.isEmpty() && itemstack.getItem() == voidCraft.items.voidicPhlogiston;
+				return !itemstack.isEmpty() && itemstack.getItem() == VoidCraft.items.voidicPhlogiston;
 			default:
 				return false;
 		}

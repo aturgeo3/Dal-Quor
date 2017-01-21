@@ -6,7 +6,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 
 public class VoidCraftAchievements implements ITamRegistry {
 
@@ -42,49 +42,49 @@ public class VoidCraftAchievements implements ITamRegistry {
 
 	@Override
 	public void init() {
-		voidCrystal = new Achievement("achievement.voidCrystal", "voidCrystal", 0, 0, voidCraft.items.voidcrystal, (Achievement) null);
+		voidCrystal = new Achievement("achievement.voidCrystal", "voidCrystal", 0, 0, VoidCraft.items.voidcrystal, (Achievement) null);
 		voidCrystal.setSpecial().initIndependentStat().registerStat();
-		enterVoid = new Achievement("achievement.enterVoid", "enterVoid", 0, 3, voidCraft.blocks.blockVoidcrystal, voidCrystal);
+		enterVoid = new Achievement("achievement.enterVoid", "enterVoid", 0, 3, VoidCraft.blocks.blockVoidcrystal, voidCrystal);
 		enterVoid.setSpecial().registerStat();
-		demonsCall = new Achievement("achievement.demonsCall", "demonsCall", 0, 6, voidCraft.items.ChainedSkull, enterVoid);
+		demonsCall = new Achievement("achievement.demonsCall", "demonsCall", 0, 6, VoidCraft.items.ChainedSkull, enterVoid);
 		demonsCall.registerStat();
-		artifact = new Achievement("achievement.artifact", "artifact", 0, 9, voidCraft.items.voidStar, demonsCall);
+		artifact = new Achievement("achievement.artifact", "artifact", 0, 9, VoidCraft.items.voidStar, demonsCall);
 		artifact.setSpecial().registerStat();
-		godsSleep = new Achievement("achievement.godsSleep", "godsSleep", 2, 9, voidCraft.blocks.blockNoBreak, artifact);
+		godsSleep = new Achievement("achievement.godsSleep", "godsSleep", 2, 9, VoidCraft.blocks.blockNoBreak, artifact);
 		godsSleep.registerStat();
-		tooFar = new Achievement("achievement.tooFar", "tooFar", 4, 9, voidCraft.blocks.blockPortalXia, godsSleep);
+		tooFar = new Achievement("achievement.tooFar", "tooFar", 4, 9, VoidCraft.blocks.blockPortalXia, godsSleep);
 		tooFar.registerStat();
-		Ascension = new Achievement("achievement.Ascension", "Ascension", 6, 9, voidCraft.armors.xiaHelmet, tooFar);
+		Ascension = new Achievement("achievement.Ascension", "Ascension", 6, 9, VoidCraft.armors.xiaHelmet, tooFar);
 		Ascension.setSpecial().registerStat();
-		worldsEnd = new Achievement("achievement.worldsEnd", "worldsEnd", 8, 9, voidCraft.blocks.realityHole, Ascension);
+		worldsEnd = new Achievement("achievement.worldsEnd", "worldsEnd", 8, 9, VoidCraft.blocks.realityHole, Ascension);
 		worldsEnd.setSpecial().registerStat();
 
-		betterThanDiamond = new Achievement("achievement.betterThanDiamond", "betterThanDiamond", 3, 0, voidCraft.tools.voidSword, voidCrystal);
+		betterThanDiamond = new Achievement("achievement.betterThanDiamond", "betterThanDiamond", 3, 0, VoidCraft.tools.voidSword, voidCrystal);
 		betterThanDiamond.registerStat();
-		angelicPower = new Achievement("achievement.angelicPower", "angelicPower", 6, 0, voidCraft.tools.angelicSword, betterThanDiamond);
+		angelicPower = new Achievement("achievement.angelicPower", "angelicPower", 6, 0, VoidCraft.tools.angelicSword, betterThanDiamond);
 		angelicPower.setSpecial().registerStat();
 
-		theChains = new Achievement("achievement.theChains", "theChains", 6, 3, voidCraft.tools.chainSword, betterThanDiamond);
+		theChains = new Achievement("achievement.theChains", "theChains", 6, 3, VoidCraft.tools.chainSword, betterThanDiamond);
 		theChains.registerStat();
-		thirdDegreeBurns = new Achievement("achievement.thirdDegreeBurns", "thirdDegreeBurns", 6, 6, voidCraft.tools.moltenSword, theChains);
+		thirdDegreeBurns = new Achievement("achievement.thirdDegreeBurns", "thirdDegreeBurns", 6, 6, VoidCraft.tools.moltenSword, theChains);
 		thirdDegreeBurns.registerStat();
-		Legendary = new Achievement("achievement.Legendary", "Legendary", 4, 6, voidCraft.tools.archSword, thirdDegreeBurns);
+		Legendary = new Achievement("achievement.Legendary", "Legendary", 4, 6, VoidCraft.tools.archSword, thirdDegreeBurns);
 		Legendary.setSpecial().registerStat();
-		demonicPower = new Achievement("achievement.demonicPower", "demonicPower", 2, 6, voidCraft.tools.demonSword, Legendary);
+		demonicPower = new Achievement("achievement.demonicPower", "demonicPower", 2, 6, VoidCraft.tools.demonSword, Legendary);
 		demonicPower.setSpecial().registerStat();
 
-		infuser = new Achievement("achievement.infuser", "infuser", -2, 9, voidCraft.blocks.voidInfuser, artifact);
+		infuser = new Achievement("achievement.infuser", "infuser", -2, 9, VoidCraft.blocks.voidInfuser, artifact);
 		infuser.registerStat();
-		macerator = new Achievement("achievement.macerator", "macerator", -2, 6, voidCraft.blocks.voidMacerator, infuser);
+		macerator = new Achievement("achievement.macerator", "macerator", -2, 6, VoidCraft.blocks.voidMacerator, infuser);
 		macerator.registerStat();
-		heimdall = new Achievement("achievement.heimdall", "heimdall", -2, 3, voidCraft.blocks.Heimdall, macerator);
+		heimdall = new Achievement("achievement.heimdall", "heimdall", -2, 3, VoidCraft.blocks.Heimdall, macerator);
 		heimdall.registerStat();
 
-		generator = new Achievement("achievement.generator", "generator", -4, 9, voidCraft.blocks.voidicGen, infuser);
+		generator = new Achievement("achievement.generator", "generator", -4, 9, VoidCraft.blocks.voidicGen, infuser);
 		generator.registerStat();
-		charger = new Achievement("achievement.charger", "charger", -4, 6, voidCraft.blocks.voidicCharger, generator);
+		charger = new Achievement("achievement.charger", "charger", -4, 6, VoidCraft.blocks.voidicCharger, generator);
 		charger.setSpecial().registerStat();
-		suppressor = new Achievement("achievement.suppressor", "suppressor", -4, 3, voidCraft.items.voidicSuppressor, charger);
+		suppressor = new Achievement("achievement.suppressor", "suppressor", -4, 3, VoidCraft.items.voidicSuppressor, charger);
 		suppressor.registerStat();
 	}
 
@@ -113,7 +113,7 @@ public class VoidCraftAchievements implements ITamRegistry {
 
 	@Override
 	public String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	@Override

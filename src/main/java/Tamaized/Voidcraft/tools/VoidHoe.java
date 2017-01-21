@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.tools;
 
 import Tamaized.TamModized.tools.TamHoe;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,8 +34,8 @@ public class VoidHoe extends TamHoe {
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 			Block block = iblockstate.getBlock();
 
-			if (block == voidCraft.blocks.blockFakeBedrock && facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) {
-				this.setBlock(stack, playerIn, worldIn, pos, voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState());
+			if (block == VoidCraft.blocks.blockFakeBedrock && facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) {
+				this.setBlock(stack, playerIn, worldIn, pos, VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState());
 				return EnumActionResult.SUCCESS;
 			}
 			return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);

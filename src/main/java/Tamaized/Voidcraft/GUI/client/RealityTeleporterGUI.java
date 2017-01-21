@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.RealityTeleporterContainer;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RealityTeleporterGUI extends GuiContainer {
 
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidCharger.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(VoidCraft.modid, "textures/gui/voidCharger.png");
 
 	private final ItemStack parent;
 	private final int slotID;
@@ -92,7 +92,7 @@ public class RealityTeleporterGUI extends GuiContainer {
 
 	private void sendPacket(ServerPacketHandler.PacketType type) {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
 			DataOutputStream stream = packet.getStream();
 			stream.writeInt(slotID);
 			packet.sendPacketToServer();

@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.network;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -83,7 +83,7 @@ public class ServerPacketHandler {
 									if (!tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_OUTPUT).isEmpty()) {
 										boolean flag = true;
 										for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-											int slot = checkStack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == voidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == voidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == voidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+											int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
 											if (tile.getStackInSlot(slot).getCount() >= checkStack.getCount()) break;
 											flag = false;
 										}
@@ -92,7 +92,7 @@ public class ServerPacketHandler {
 											IStarForgeCapability cap = tool.getCapability(CapabilityList.STARFORGE, null);
 											if (cap != null && cap.getEffect(entry.getRecipe().getEffect().getTier()) == null) {
 												for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-													int slot = checkStack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == voidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == voidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == voidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+													int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
 													tile.getStackInSlot(slot).shrink(checkStack.getCount());
 												}
 												cap.addEffect(entry.getRecipe().getEffect());
@@ -111,7 +111,7 @@ public class ServerPacketHandler {
 						ItemStack stack = ItemStack.EMPTY;
 						if (slot >= 0 && slot < player.inventory.mainInventory.size()) stack = player.inventory.mainInventory.get(slot);
 						else if (slot == -1) stack = player.inventory.offHandInventory.get(0);
-						if (!stack.isEmpty() && stack.getItem() == voidCraft.items.realityTeleporter) {
+						if (!stack.isEmpty() && stack.getItem() == VoidCraft.items.realityTeleporter) {
 							RealityTeleporter.clearLink(stack);
 						}
 					}

@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
@@ -28,7 +28,7 @@ public class CapabilitySyncEvent {
 
 	private void sendPacketUpdates(EntityPlayerMP player, IVadeMecumCapability cap) {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.VADEMECUM_UPDATE));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.VADEMECUM_UPDATE));
 			DataOutputStream stream = packet.getStream();
 			cap.encodePacket(stream);
 			packet.sendPacket(player);

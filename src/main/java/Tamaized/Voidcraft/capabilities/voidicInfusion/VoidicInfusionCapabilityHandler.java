@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
@@ -32,7 +32,7 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(voidCraft.modid, "VoidicInfusionCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VoidicInfusionCapabilityHandler");
 
 	private int infusion = 0;
 	private int maxInfusion = 6000;
@@ -61,25 +61,25 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		boolean flag = true;
 		ItemStack mainHand = entity.getHeldItemMainhand();
 		ItemStack offHand = entity.getHeldItemOffhand();
-		if ((!mainHand.isEmpty() && mainHand.getItem() == voidCraft.items.voidicSuppressor)) {
+		if ((!mainHand.isEmpty() && mainHand.getItem() == VoidCraft.items.voidicSuppressor)) {
 			IVoidicPowerCapability cap = entity.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap != null && cap.getCurrentPower() > 0) {
 				cap.drain(1);
 				cap.sendUpdates(null, 0, entity.getHeldItemMainhand());
 				flag = false;
 			}
-		} else if (!offHand.isEmpty() && offHand.getItem() == voidCraft.items.voidicSuppressor) {
+		} else if (!offHand.isEmpty() && offHand.getItem() == VoidCraft.items.voidicSuppressor) {
 			IVoidicPowerCapability cap = entity.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap != null && cap.getCurrentPower() > 0) {
 				cap.drain(1);
 				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
 				flag = false;
 			}
-		} else if (entity.getActivePotionEffect(voidCraft.potions.voidicInfusionImmunity) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraft.potions.voidicInfusionImmunity) != null) {
 			flag = false;
 		}
-		if (entity.world.provider.getDimension() == voidCraft.config.getDimensionIDvoid() && flag) {
-			if (entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == voidCraft.blocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == voidCraft.blocks.blockVoidBrickDoubleSlab)) {
+		if (entity.world.provider.getDimension() == VoidCraft.config.getDimensionIDvoid() && flag) {
+			if (entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraft.blocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidBrickDoubleSlab)) {
 
 			} else {
 				infusion++;
@@ -243,7 +243,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	private void sendPacketUpdates(EntityLivingBase living) {
 		if (living == null) return;
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
 			DataOutputStream stream = packet.getStream();
 			stream.writeInt(living.getEntityId());
 			stream.writeInt(infusion);

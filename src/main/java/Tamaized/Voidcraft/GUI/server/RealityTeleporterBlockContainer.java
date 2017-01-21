@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +19,7 @@ public class RealityTeleporterBlockContainer extends ContainerBase {
 
 	public RealityTeleporterBlockContainer(InventoryPlayer inventory, TileEntityRealityTeleporter host) {
 		te = host;
-		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(voidCraft.blocks.realityHole), te, 0, 176, 96));
+		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraft.blocks.realityHole), te, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {

@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.machina;
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.block.material.Material;
@@ -144,11 +144,11 @@ public class VoidMacerator extends TamBlockContainer {
 		TileEntityVoidMacerator te = (TileEntityVoidMacerator) tileentity;
 
 		if (active) {
-			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
 		} else {
-			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-			worldIn.setBlockState(pos, voidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
 		}
 
 		if (tileentity != null) {
@@ -161,7 +161,7 @@ public class VoidMacerator extends TamBlockContainer {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
 		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Macerator), world, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.Macerator), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
@@ -178,7 +178,7 @@ public class VoidMacerator extends TamBlockContainer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(voidCraft.blocks.voidMacerator);
+		return new ItemStack(VoidCraft.blocks.voidMacerator);
 	}
 
 	@Override

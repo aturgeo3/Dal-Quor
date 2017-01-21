@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -51,11 +51,11 @@ public class VadeMecumBossesEntry extends VadeMecumEntry {
 		initObjects();
 		clearButtons();
 
-		addButton(gui, getEntryID(Entry.CorruptedPawn), voidCraft.modid + ".VadeMecum.docs.title.corruptedPawn", new ItemStack(voidCraft.items.ChainedSkull));
-		addButton(gui, getEntryID(Entry.Herobrine), voidCraft.modid + ".VadeMecum.docs.title.herobrine", new ItemStack(Blocks.TNT));
-		addButton(gui, getEntryID(Entry.Twins), voidCraft.modid + ".VadeMecum.docs.title.twins", new ItemStack(Blocks.GRASS));
-		addButton(gui, getEntryID(Entry.Xia), voidCraft.modid + ".VadeMecum.docs.title.xia", new ItemStack(voidCraft.armors.xiaHelmet));
-		addButton(gui, getEntryID(Entry.VoidicDragon), voidCraft.modid + ".VadeMecum.docs.title.voidicDragon", new ItemStack(Blocks.DRAGON_EGG));
+		addButton(gui, getEntryID(Entry.CorruptedPawn), VoidCraft.modid + ".VadeMecum.docs.title.corruptedPawn", new ItemStack(VoidCraft.items.ChainedSkull));
+		addButton(gui, getEntryID(Entry.Herobrine), VoidCraft.modid + ".VadeMecum.docs.title.herobrine", new ItemStack(Blocks.TNT));
+		addButton(gui, getEntryID(Entry.Twins), VoidCraft.modid + ".VadeMecum.docs.title.twins", new ItemStack(Blocks.GRASS));
+		addButton(gui, getEntryID(Entry.Xia), VoidCraft.modid + ".VadeMecum.docs.title.xia", new ItemStack(VoidCraft.armors.xiaHelmet));
+		addButton(gui, getEntryID(Entry.VoidicDragon), VoidCraft.modid + ".VadeMecum.docs.title.voidicDragon", new ItemStack(Blocks.DRAGON_EGG));
 	}
 
 	@Override

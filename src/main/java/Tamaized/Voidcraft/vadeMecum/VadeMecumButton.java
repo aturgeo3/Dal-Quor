@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class VadeMecumButton extends GuiButton {
 
-	public static final ResourceLocation TEXTURES = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/vadeMecumButton.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/vadeMecumButton.png");
 	private final ItemStack stackToRender;
 	private final VadeMecumGUI gui;
 

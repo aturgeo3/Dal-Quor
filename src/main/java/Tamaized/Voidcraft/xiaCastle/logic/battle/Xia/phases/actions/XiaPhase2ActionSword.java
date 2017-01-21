@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.animations.AnimationXiaSwordSwing;
 import Tamaized.Voidcraft.entity.boss.xia.render.EntityAnimationsXia;
@@ -64,7 +64,7 @@ public class XiaPhase2ActionSword {
 
 	private void sendPacketToClients() {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ANIMATIONS));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.XIA_ANIMATIONS));
 			DataOutputStream stream = packet.getStream();
 			stream.writeInt(xia.getEntityId());
 			stream.writeInt(EntityAnimationsXia.getAnimationID(animation));

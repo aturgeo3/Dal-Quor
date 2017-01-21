@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.entity.mob;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
@@ -107,7 +107,7 @@ public class EntityMobLich extends EntityVoidMob implements IRangedAttackMob {
 
 	@Override
 	protected Item getDropItem() {
-		return voidCraft.items.voidCloth;
+		return VoidCraft.items.voidCloth;
 	}
 
 	@Override

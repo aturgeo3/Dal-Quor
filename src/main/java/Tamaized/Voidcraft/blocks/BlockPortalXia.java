@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.blocks;
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockPortal;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -53,8 +53,8 @@ public class BlockPortalXia extends TamBlockPortal {
 			for (int z = -1; z <= 1; z++) {
 				for (int y = -1; y <= 0; y++) {
 					BlockPos newPos = pos.add(x, y, z);
-					if (worldIn.getBlockState(newPos).getBlock() == voidCraft.blocks.blockNoBreak) {
-						worldIn.setBlockState(newPos, voidCraft.blocks.blockFakeBedrock.getDefaultState());
+					if (worldIn.getBlockState(newPos).getBlock() == VoidCraft.blocks.blockNoBreak) {
+						worldIn.setBlockState(newPos, VoidCraft.blocks.blockFakeBedrock.getDefaultState());
 					}
 				}
 			}
@@ -69,11 +69,11 @@ public class BlockPortalXia extends TamBlockPortal {
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == voidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == voidCraft.blocks.blockFakeBedrock) {
+		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
 			b0 = 1;
 		}
 
-		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == voidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == voidCraft.blocks.blockFakeBedrock) {
+		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == VoidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
 			b1 = 1;
 		}
 
@@ -97,10 +97,10 @@ public class BlockPortalXia extends TamBlockPortal {
 						boolean isAirBlock = par1World.isAirBlock(new BlockPos(x + b0 * l, y + i1, z + b1 * l));
 
 						if (flag) {
-							if (j1 != voidCraft.blocks.blockFakeBedrock) {
+							if (j1 != VoidCraft.blocks.blockFakeBedrock) {
 								return false;
 							}
-						} else if (!isAirBlock && j1 != voidCraft.blocks.fireVoid) {
+						} else if (!isAirBlock && j1 != VoidCraft.blocks.fireVoid) {
 							return false;
 						}
 					}
@@ -109,7 +109,7 @@ public class BlockPortalXia extends TamBlockPortal {
 
 			for (l = 0; l < 2; ++l) {
 				for (i1 = 0; i1 < 3; ++i1) {
-					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), voidCraft.blocks.blockPortalXia.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), VoidCraft.blocks.blockPortalXia.getDefaultState(), 2);
 				}
 			}
 
@@ -133,7 +133,7 @@ public class BlockPortalXia extends TamBlockPortal {
 			;
 		}
 
-		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != voidCraft.blocks.blockFakeBedrock) {
+		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != VoidCraft.blocks.blockFakeBedrock) {
 			world.setBlockToAir(pos);
 		} else {
 			int j1;
@@ -142,14 +142,14 @@ public class BlockPortalXia extends TamBlockPortal {
 				;
 			}
 
-			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == voidCraft.blocks.blockFakeBedrock) {
+			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
 				boolean flag = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
 				boolean flag1 = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this || world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
 
 				if (flag && flag1) {
 					world.setBlockToAir(pos);
 				} else {
-					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != voidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != voidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
+					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != VoidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != VoidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
 						world.setBlockToAir(pos);
 					}
 				}

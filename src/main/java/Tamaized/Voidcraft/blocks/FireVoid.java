@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockFire;
 import Tamaized.TamModized.blocks.TamBlockPortal;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +24,7 @@ public class FireVoid extends TamBlockFire {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != voidCraft.blocks.blockVoidcrystal || !((TamBlockPortal) voidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)) {
+		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != VoidCraft.blocks.blockVoidcrystal || !((TamBlockPortal) VoidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)) {
 			if (!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(world, pos)) {
 				world.setBlockToAir(pos);
 			} else {

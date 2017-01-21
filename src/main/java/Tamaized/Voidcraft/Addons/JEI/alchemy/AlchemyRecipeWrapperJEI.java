@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
@@ -15,7 +15,7 @@ public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRe
 
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		if (!voidCraft.instance.isDevBuild) return;
+		if (!VoidCraft.instance.isDevBuild) return;
 		minecraft.fontRendererObj.drawString("Required Vade Mecum Knowledge:", -40, -30, 0x000000);
 		minecraft.fontRendererObj.drawString("" + (getRecipe().getCategory() == null ? "None" : getRecipe().getCategory()), -40, -20, 0x000000);
 		super.drawInfo(minecraft, recipeWidth, recipeHeight, mouseX, mouseY);

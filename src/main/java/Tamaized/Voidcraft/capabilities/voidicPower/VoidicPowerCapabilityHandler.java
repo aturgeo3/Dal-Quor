@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.capabilities.voidicPower;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(voidCraft.modid, "VoidicPowerCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VoidicPowerCapabilityHandler");
 
 	private int currPower = 0;
 	private int maxPower = 0;
@@ -152,7 +152,7 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 	}
 
 	private void sendPacketUpdates(EntityPlayerMP player, int slot, ItemStack stack, IVoidicPowerCapability cap) {
-		NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
+		NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
 		nbt.setInteger("currPower", cap.getCurrentPower());
 		nbt.setInteger("maxPower", cap.getMaxPower());
 		/*

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
@@ -94,11 +94,11 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot != voidCraft.potions.fireSheathe && pot != voidCraft.potions.frostSheathe && pot != voidCraft.potions.litSheathe && pot != voidCraft.potions.acidSheathe) return;
+		if (pot != VoidCraft.potions.fireSheathe && pot != VoidCraft.potions.frostSheathe && pot != VoidCraft.potions.litSheathe && pot != VoidCraft.potions.acidSheathe) return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			try {
-				PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+				PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
 				DataOutputStream stream = packet.getStream();
 				stream.writeInt(getEntityId());
 				stream.writeInt(Potion.getIdFromPotion(pot));

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.creativetab.CreativeTabs;
@@ -113,7 +113,7 @@ public abstract class VoidicPowerItem extends TamItem {
 					}
 				}
 			} else {
-				NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
+				NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
 				cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 			}
 			if (cap.isInUse()) {
@@ -144,7 +144,7 @@ public abstract class VoidicPowerItem extends TamItem {
 		IVoidicPowerCapability cap = null;
 		if (stack.hasCapability(CapabilityList.VOIDICPOWER, null)) {
 			cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-			NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
+			NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
 			cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		}
 		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;

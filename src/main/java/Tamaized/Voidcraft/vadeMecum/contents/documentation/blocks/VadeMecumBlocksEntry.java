@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.blocks;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -55,12 +55,12 @@ public class VadeMecumBlocksEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.VoidCrystalBlock), new ItemStack(voidCraft.blocks.blockVoidcrystal).getDisplayName(), new ItemStack(voidCraft.blocks.blockVoidcrystal));
-		addButton(gui, getEntryID(Entry.VoidCrystalOre), new ItemStack(voidCraft.blocks.oreVoidcrystal).getDisplayName(), new ItemStack(voidCraft.blocks.oreVoidcrystal));
-		addButton(gui, getEntryID(Entry.SoftBedrock), new ItemStack(voidCraft.blocks.blockFakeBedrock).getDisplayName(), new ItemStack(voidCraft.blocks.blockFakeBedrock));
-		addButton(gui, getEntryID(Entry.VoidBrick), new ItemStack(voidCraft.blocks.blockVoidbrick).getDisplayName(), new ItemStack(voidCraft.blocks.blockVoidbrick));
-		addButton(gui, getEntryID(Entry.HoleinReality), new ItemStack(voidCraft.blocks.realityHole).getDisplayName(), new ItemStack(voidCraft.blocks.realityHole));
-		addButton(gui, getEntryID(Entry.CosmicMaterial), new ItemStack(voidCraft.blocks.cosmicMaterial).getDisplayName(), new ItemStack(voidCraft.blocks.cosmicMaterial));
+		addButton(gui, getEntryID(Entry.VoidCrystalBlock), new ItemStack(VoidCraft.blocks.blockVoidcrystal).getDisplayName(), new ItemStack(VoidCraft.blocks.blockVoidcrystal));
+		addButton(gui, getEntryID(Entry.VoidCrystalOre), new ItemStack(VoidCraft.blocks.oreVoidcrystal).getDisplayName(), new ItemStack(VoidCraft.blocks.oreVoidcrystal));
+		addButton(gui, getEntryID(Entry.SoftBedrock), new ItemStack(VoidCraft.blocks.blockFakeBedrock).getDisplayName(), new ItemStack(VoidCraft.blocks.blockFakeBedrock));
+		addButton(gui, getEntryID(Entry.VoidBrick), new ItemStack(VoidCraft.blocks.blockVoidbrick).getDisplayName(), new ItemStack(VoidCraft.blocks.blockVoidbrick));
+		addButton(gui, getEntryID(Entry.HoleinReality), new ItemStack(VoidCraft.blocks.realityHole).getDisplayName(), new ItemStack(VoidCraft.blocks.realityHole));
+		addButton(gui, getEntryID(Entry.CosmicMaterial), new ItemStack(VoidCraft.blocks.cosmicMaterial).getDisplayName(), new ItemStack(VoidCraft.blocks.cosmicMaterial));
 		// addButton(gui, getEntryID(Entry.RitualBlock), new ItemStack(voidCraft.blocks.ritualBlock).getDisplayName(), new ItemStack(voidCraft.blocks.ritualBlock));
 	}
 

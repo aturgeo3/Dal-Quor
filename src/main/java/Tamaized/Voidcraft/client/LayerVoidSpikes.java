@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.client;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +14,7 @@ public class LayerVoidSpikes implements LayerRenderer {
 	private final ModelVoidSpikes model;
 	private final RenderPlayer renderer;
 	
-	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/entity/voidspikes.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/voidspikes.png");
 
 	public LayerVoidSpikes(RenderPlayer playerRenderer) {
 		renderer = playerRenderer;

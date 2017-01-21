@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
@@ -54,10 +54,10 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 
 	@Override
 	protected void deathHook() {
-		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaHelmet)));
-		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaChest)));
-		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaLegs)));
-		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(voidCraft.armors.xiaBoots)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraft.armors.xiaHelmet)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraft.armors.xiaChest)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraft.armors.xiaLegs)));
+		world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraft.armors.xiaBoots)));
 		for (EntityPlayer player : getHandler().getPlayers()) {
 			player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[Xia] Very well.. Take my armor, you'll gain flight. Fly up through the hole and come do battle with me over the Void..."));
 		}
@@ -70,10 +70,10 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == voidCraft.potions.fireSheathe || pot == voidCraft.potions.frostSheathe || pot == voidCraft.potions.litSheathe || pot == voidCraft.potions.acidSheathe) super.addPotionEffect(potioneffectIn);
+		if (pot == VoidCraft.potions.fireSheathe || pot == VoidCraft.potions.frostSheathe || pot == VoidCraft.potions.litSheathe || pot == VoidCraft.potions.acidSheathe) super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			try {
-				PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+				PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
 				DataOutputStream stream = packet.getStream();
 				stream.writeInt(getEntityId());
 				stream.writeInt(Potion.getIdFromPotion(pot));

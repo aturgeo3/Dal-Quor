@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
@@ -46,7 +46,7 @@ public class Xia2BattleHandler implements IBattleHandler {
 		readyForInput = false;
 		xia = new EntityBossXia2(worldObj, this);
 		xia.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
-		ItemStack vade = new ItemStack(voidCraft.items.vadeMecum);
+		ItemStack vade = new ItemStack(VoidCraft.items.vadeMecum);
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.MAIN_HAND, vade);
 		worldObj.spawnEntity(xia);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
@@ -132,9 +132,9 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 		int nY = getBlockPosition().getY();
 		int nZ = (getBlockPosition().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
-			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ((AIBlock) voidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
 			b.setup(this, null);
 			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY + 1, nZ))).setup(null, b);

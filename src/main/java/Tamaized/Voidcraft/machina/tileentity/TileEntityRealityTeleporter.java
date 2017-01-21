@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import java.util.List;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -47,7 +47,7 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+		return i == SLOT_INPUT && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.realityHole);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class TileEntityRealityTeleporter extends TileEntityVoidicPowerInventory 
 	}
 
 	public boolean canUse() {
-		return getPowerAmount() >= getPowerUse() && !getStackInSlot(SLOT_INPUT).isEmpty() && getStackInSlot(SLOT_INPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole);
+		return getPowerAmount() >= getPowerUse() && !getStackInSlot(SLOT_INPUT).isEmpty() && getStackInSlot(SLOT_INPUT).getItem() == Item.getItemFromBlock(VoidCraft.blocks.realityHole);
 	}
 
 	public void useResources() {

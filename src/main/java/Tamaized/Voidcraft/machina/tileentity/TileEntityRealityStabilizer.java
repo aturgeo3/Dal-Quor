@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -54,13 +54,13 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 	}
 
 	private void pickupNextBlock() {
-		if (hasEnoughPower() && (getStackInSlot(SLOT_OUTPUT).isEmpty() || (getStackInSlot(SLOT_OUTPUT).getItem() == Item.getItemFromBlock(voidCraft.blocks.realityHole) && getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()))) {
-			BlockPosWrapper wrapper = searchState(voidCraft.blocks.realityHole, getPos(), 4);
+		if (hasEnoughPower() && (getStackInSlot(SLOT_OUTPUT).isEmpty() || (getStackInSlot(SLOT_OUTPUT).getItem() == Item.getItemFromBlock(VoidCraft.blocks.realityHole) && getStackInSlot(SLOT_OUTPUT).getCount() < getStackInSlot(SLOT_OUTPUT).getMaxStackSize()))) {
+			BlockPosWrapper wrapper = searchState(VoidCraft.blocks.realityHole, getPos(), 4);
 			if (wrapper.state == null) return;
 			world.setBlockToAir(wrapper.pos);
 			usePower();
 			if (getStackInSlot(SLOT_OUTPUT).isEmpty()) {
-				setInventorySlotContents(SLOT_OUTPUT, new ItemStack(voidCraft.blocks.realityHole));
+				setInventorySlotContents(SLOT_OUTPUT, new ItemStack(VoidCraft.blocks.realityHole));
 			} else {
 				getStackInSlot(SLOT_OUTPUT).grow(1);
 			}
@@ -72,7 +72,7 @@ public class TileEntityRealityStabilizer extends TileEntityVoidicPowerInventory 
 			for (int z = -radius; z <= radius; z++) {
 				for (int y = radius; y >= -radius; y--) {
 					IBlockState state = world.getBlockState(origin.add(x, y, z));
-					if (state != null && state.getBlock() == voidCraft.blocks.realityHole) {
+					if (state != null && state.getBlock() == VoidCraft.blocks.realityHole) {
 						return new BlockPosWrapper(origin.add(x, y, z), state);
 					}
 				}

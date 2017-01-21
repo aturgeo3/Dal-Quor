@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.machina.addons;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.item.ItemStack;
 
@@ -13,7 +13,7 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 
 	@Override
 	protected String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	public ItemStack getOutput(IVadeMecumCapability cap, ItemStack[] stacks) {

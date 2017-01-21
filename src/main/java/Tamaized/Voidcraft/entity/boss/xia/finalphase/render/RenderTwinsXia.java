@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.model.ModelVoidBoss;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityTwinsXia;
@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
 
-	public static final ResourceLocation TEXTURE_DOL = new ResourceLocation(voidCraft.modid, "textures/entity/dol.png");
-	public static final ResourceLocation TEXTURE_ZOL = new ResourceLocation(voidCraft.modid, "textures/entity/zol.png");
+	public static final ResourceLocation TEXTURE_DOL = new ResourceLocation(VoidCraft.modid, "textures/entity/dol.png");
+	public static final ResourceLocation TEXTURE_ZOL = new ResourceLocation(VoidCraft.modid, "textures/entity/zol.png");
 
 	private final ResourceLocation TEXTURE;
 

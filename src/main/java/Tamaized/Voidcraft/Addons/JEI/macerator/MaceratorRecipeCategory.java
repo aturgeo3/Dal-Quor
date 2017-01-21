@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.Addons.JEI.macerator;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class MaceratorRecipeCategory implements IRecipeCategory {
 
-	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/JEI/voidMacerator.png");
+	private final ResourceLocation background = new ResourceLocation(VoidCraft.modid, "textures/gui/JEI/voidMacerator.png");
 	private IDrawableAnimated fluidAnimation;
 	private IDrawableAnimated progressAnimation;
 

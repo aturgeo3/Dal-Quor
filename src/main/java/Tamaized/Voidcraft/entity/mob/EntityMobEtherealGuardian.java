@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
@@ -52,7 +52,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	public EntityMobEtherealGuardian(World p_i1738_1_) {
 		super(p_i1738_1_);
 		isImmuneToFire = true;
-		ItemStack stack = new ItemStack(voidCraft.tools.starforgedSword);
+		ItemStack stack = new ItemStack(VoidCraft.tools.starforgedSword);
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
 		if (cap != null) {
 			cap.addEffect(StarForgeEffectList.firstDegreeBurns);
@@ -102,13 +102,13 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.fireSheathe) == null) {
+			if (getActivePotionEffect(VoidCraft.potions.fireSheathe) == null) {
 				clearActivePotions();
-				Potion potion = voidCraft.potions.fireSheathe;
+				Potion potion = VoidCraft.potions.fireSheathe;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
 				try {
-					PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
+					PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
 					DataOutputStream stream = packet.getStream();
 					stream.writeInt(getEntityId());
 					stream.writeInt(Potion.getIdFromPotion(potion));
@@ -144,7 +144,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return voidCraft.items.voidicPhlogiston;
+		return VoidCraft.items.voidicPhlogiston;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.world.dim.Xia;
 
 import java.util.Random;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class TeleporterXia extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		if (entityIn.dimension != voidCraft.config.getDimensionIDxia()) {
+		if (entityIn.dimension != VoidCraft.config.getDimensionIDxia()) {
 			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
 			while(!worldServerInstance.isAirBlock(bedPos)){
 				bedPos = bedPos.up();
@@ -36,7 +36,7 @@ public class TeleporterXia extends Teleporter {
 			entityIn.setLocationAndAngles((double) bedPos.getX(), (double) bedPos.getY(), (double) bedPos.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
 			return;
 		}
-		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(voidCraft.achievements.tooFar, 1);
+		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(VoidCraft.achievements.tooFar, 1);
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
 		if (!isActive(entityIn)) makePortal(entityIn);
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
@@ -60,7 +60,7 @@ public class TeleporterXia extends Teleporter {
 		int j = MathHelper.floor(e.posY);
 		int k = MathHelper.floor(e.posZ);
 
-		if (e.dimension == voidCraft.config.getDimensionIDxia()) {
+		if (e.dimension == VoidCraft.config.getDimensionIDxia()) {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 			SchematicLoader loader = new SchematicLoader();

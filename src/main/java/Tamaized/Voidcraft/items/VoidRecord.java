@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.sound.VoidSoundEvents.SoundTrack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -37,7 +37,7 @@ public class VoidRecord extends ItemRecord implements ITamModel { // TDOD: just 
 		name = n;
 		setUnlocalizedName(name);
 		setMaxStackSize(1);
-		setCreativeTab(voidCraft.tabs.tabVoid);
+		setCreativeTab(VoidCraft.tabs.tabVoid);
 		GameRegistry.register(this.setRegistryName(getModelDir() + "/" + getName()));
 	}
 

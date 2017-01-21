@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -18,7 +18,7 @@ public class VoidCraftCreativeTabs implements ITamRegistry {
 		tabVoid = new CreativeTabs("tabVoid") {
 			@Override
 			public ItemStack getTabIconItem() {
-				return new ItemStack(voidCraft.blocks.blockPortalVoid);
+				return new ItemStack(VoidCraft.blocks.blockPortalVoid);
 			}
 		};
 		/*
@@ -45,7 +45,7 @@ public class VoidCraftCreativeTabs implements ITamRegistry {
 
 	@Override
 	public String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	@Override

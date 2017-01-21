@@ -5,7 +5,7 @@ import java.util.HashSet;
 import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import net.minecraft.block.Block;
@@ -96,7 +96,7 @@ public class VoidicDrill extends VoidicPowerItem {
 				}
 			}
 			VoidDrillParticleData data = new VoidDrillParticleData(ray == null ? player.getLook(1.0F).scale(10) : ray, hand == EnumHand.OFF_HAND, player.getEntityId());
-			ParticleHelper.sendPacketToClients(world, voidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(voidCraft.particles.drillRayHandler, data));
+			ParticleHelper.sendPacketToClients(world, VoidCraft.particles.drillRayHandler, new Vec3d(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()), 64, new ParticleHelper.ParticlePacketHelper(VoidCraft.particles.drillRayHandler, data));
 		}
 	}
 

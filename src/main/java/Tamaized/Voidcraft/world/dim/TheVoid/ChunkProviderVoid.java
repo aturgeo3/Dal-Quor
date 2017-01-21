@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
 import net.minecraft.block.BlockFalling;
@@ -140,7 +140,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 									// else if(randy == 2) l2 = Blocks.end_stone;
 									// else if(randy == 3) l2 = Blocks.skull;
 									// else l2 = voidCraft.blocks.blockFakeBedrock; //TODO not implementing this change yet cuz I wanna think on it some more.
-									iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState();
+									iblockstate = VoidCraft.blocks.blockFakeBedrock.getDefaultState();
 									// }
 								}
 								// iblockstate = Blocks.NETHERRACK.getDefaultState();//voidCraft.blocks.blockFakeBedrock.getDefaultState();
@@ -179,36 +179,36 @@ public class ChunkProviderVoid implements IChunkGenerator {
 				boolean flag1 = this.gravelNoise[j + k * 16] + this.rand.nextDouble() * 0.2D > 0.0D;
 				int l = (int) (this.depthBuffer[j + k * 16] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
 				int i1 = -1;
-				IBlockState iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack Blocks.AIR.getDefaultState();//
-				IBlockState iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
+				IBlockState iblockstate = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack Blocks.AIR.getDefaultState();//
+				IBlockState iblockstate1 = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
 
 				for (int j1 = 127; j1 >= 0; --j1) {
 					if (j1 < 127 - this.rand.nextInt(5) && j1 > this.rand.nextInt(5)) {
 						IBlockState iblockstate2 = primer.getBlockState(k, j1, j);
 
 						if (iblockstate2.getBlock() != null && iblockstate2.getMaterial() != Material.AIR) {
-							if (iblockstate2.getBlock() == voidCraft.blocks.blockFakeBedrock) { // netherrack
+							if (iblockstate2.getBlock() == VoidCraft.blocks.blockFakeBedrock) { // netherrack
 								if (i1 == -1) {
 									if (l <= 0) {
-										iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState();
-										iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
+										iblockstate = VoidCraft.blocks.blockFakeBedrock.getDefaultState();
+										iblockstate1 = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
 									} else if (j1 >= i - 4 && j1 <= i + 1) {
-										iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
-										iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
+										iblockstate = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
+										iblockstate1 = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
 
 										if (flag1) {
-											iblockstate = voidCraft.blocks.realityHole.getDefaultState(); // gravel
-											iblockstate1 = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
+											iblockstate = VoidCraft.blocks.realityHole.getDefaultState(); // gravel
+											iblockstate1 = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // netherrack
 										}
 
 										if (flag) {
-											iblockstate = voidCraft.blocks.realityHole.getDefaultState(); // soulsand
-											iblockstate1 = voidCraft.blocks.realityHole.getDefaultState(); // soulsand
+											iblockstate = VoidCraft.blocks.realityHole.getDefaultState(); // soulsand
+											iblockstate1 = VoidCraft.blocks.realityHole.getDefaultState(); // soulsand
 										}
 									}
 
 									if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
-										iblockstate = voidCraft.blocks.blockFakeBedrock.getDefaultState(); // lavaStill
+										iblockstate = VoidCraft.blocks.blockFakeBedrock.getDefaultState(); // lavaStill
 									}
 
 									i1 = l;
@@ -338,11 +338,11 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		this.genFortress.generateStructure(this.world, this.rand, chunkpos);
 		this.genCity.generateStructure(this.world, this.rand, chunkpos);
 
-		WorldGenMinable worldgenminable = new WorldGenMinable(voidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>() {
+		WorldGenMinable worldgenminable = new WorldGenMinable(VoidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>() {
 
 			@Override
 			public boolean apply(IBlockState input) {
-				return (input == voidCraft.blocks.blockFakeBedrock.getDefaultState());
+				return (input == VoidCraft.blocks.blockFakeBedrock.getDefaultState());
 			}
 
 		});
@@ -372,13 +372,13 @@ public class ChunkProviderVoid implements IChunkGenerator {
 				// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
 			}
 		}
-		if (this.genFortress.isPositionInStructure(world, pos) && this.world.getBlockState(pos.down()).getBlock() == voidCraft.blocks.blockVoidbrick) {
+		if (this.genFortress.isPositionInStructure(world, pos) && this.world.getBlockState(pos.down()).getBlock() == VoidCraft.blocks.blockVoidbrick) {
 			if (Math.floor(Math.random() * 40) == 0) return this.genFortress.getSpawnList();
 			// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
 		}
 		if (pos.getY() >= 128) {
 			IBlockState state = world.getBlockState(pos.down());
-			if (state != null && state.getBlock() == voidCraft.blocks.blockVoidbrick && world.rand.nextInt(5) == 0) {
+			if (state != null && state.getBlock() == VoidCraft.blocks.blockVoidbrick && world.rand.nextInt(5) == 0) {
 				return genCity.getSpawnList();
 			}
 		}

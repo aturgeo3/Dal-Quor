@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.mob.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
 import Tamaized.Voidcraft.entity.mob.model.ModelEtherealGuardian;
 import net.minecraft.client.Minecraft;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardian> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid + ":textures/entity/etherealguardian.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid + ":textures/entity/etherealguardian.png");
 
 	public RenderEtherealGuardian(RenderManager manager, float par2) {
 		super(manager, new ModelEtherealGuardian(), par2);

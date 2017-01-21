@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.bosses.xia;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPage;
 import Tamaized.Voidcraft.vadeMecum.IVadeMecumPageProvider;
@@ -10,7 +10,7 @@ public class VadeMecumPageListXia implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
-				new VadeMecumPage(voidCraft.modid+".VadeMecum.docs.title.xia", voidCraft.modid+".VadeMecum.docs.desc.xiaBoss") };
+				new VadeMecumPage(VoidCraft.modid+".VadeMecum.docs.title.xia", VoidCraft.modid+".VadeMecum.docs.desc.xiaBoss") };
 	}
 
 }

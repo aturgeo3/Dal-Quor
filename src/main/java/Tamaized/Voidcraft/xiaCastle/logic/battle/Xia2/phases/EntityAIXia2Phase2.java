@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases;
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -75,9 +75,9 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			List<EntityGhostPlayerBase> list = getEntity().getGhostList();
 			if (list.size() < 3) {
 				if (tick % (actionTick) == 0) {
-					ItemStack stack = new ItemStack(voidCraft.items.voidicEssence);
-					stack.getOrCreateSubCompound(voidCraft.modid).setInteger("xia", getEntity().getEntityId());
-					stack.getOrCreateSubCompound(voidCraft.modid).setInteger("phase", 2);
+					ItemStack stack = new ItemStack(VoidCraft.items.voidicEssence);
+					stack.getOrCreateSubCompound(VoidCraft.modid).setInteger("xia", getEntity().getEntityId());
+					stack.getOrCreateSubCompound(VoidCraft.modid).setInteger("phase", 2);
 					EntityItem item = new EntityItem(world, getEntity().posX, getEntity().posY, getEntity().posZ, stack);
 					item.addVelocity((world.rand.nextDouble() * 1) - 0.5, 0.5, (world.rand.nextDouble() * 1) - 0.5);
 					world.spawnEntity(item);

@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityTwinsXia;
 import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
@@ -27,9 +27,9 @@ public class EntityDolXia extends EntityTwinsXia {
 	@Override
 	protected void update() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(voidCraft.potions.acidSheathe) == null) {
+			if (getActivePotionEffect(VoidCraft.potions.acidSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(voidCraft.potions.acidSheathe, 100));
+				addPotionEffect(new PotionEffect(VoidCraft.potions.acidSheathe, 100));
 			}
 			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
 				ProjectileDisintegration disint = new ProjectileDisintegration(world, this, (EntityLivingBase) watchedEntity, 6.0F);

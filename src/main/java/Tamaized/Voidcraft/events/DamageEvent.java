@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.events;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
@@ -28,7 +28,7 @@ public class DamageEvent {
 	public void entityDamaged(LivingAttackEvent e) {
 
 		// Vanilla Void
-		if (e.getSource().damageType.equals("outOfWorld") && e.getEntity() != null && e.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) e.getEntity()).getActivePotionEffect(voidCraft.potions.voidImmunity) != null) {
+		if (e.getSource().damageType.equals("outOfWorld") && e.getEntity() != null && e.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) e.getEntity()).getActivePotionEffect(VoidCraft.potions.voidImmunity) != null) {
 			e.setCanceled(true);
 			return;
 		}

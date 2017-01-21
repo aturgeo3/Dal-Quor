@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.AIBlock;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.block.SoundType;
@@ -88,7 +88,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 			}
 			if (oldState != state) {
 				oldState = state;
-				world.setBlockState(pos, voidCraft.blocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
+				world.setBlockState(pos, VoidCraft.blocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
 			}
 		}
 	}

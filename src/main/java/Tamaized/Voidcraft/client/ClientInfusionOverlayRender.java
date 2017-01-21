@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.client;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
 public class ClientInfusionOverlayRender {
 
-	private static ResourceLocation texture = new ResourceLocation(voidCraft.modid, "textures/gui/voidicInfusion.png");
+	private static ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/gui/voidicInfusion.png");
 
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e) {

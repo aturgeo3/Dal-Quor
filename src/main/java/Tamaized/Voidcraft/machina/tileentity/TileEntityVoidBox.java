@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import com.google.gson.stream.JsonReader;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.sound.OggLength;
 import Tamaized.Voidcraft.sound.VanillaRecordLengths;
 import net.minecraft.entity.player.EntityPlayer;
@@ -182,12 +182,12 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 				playing = true;
 				// IF YOU GOT THIS FAR, CONGRATS THIS WAS NOT FUN TO WRITE
 			} catch (Exception e) {
-				voidCraft.instance.logger.warn("Could not play ItemRecord");
+				VoidCraft.instance.logger.warn("Could not play ItemRecord");
 				e.printStackTrace();
 				loop = false; // Prevent soft lock
 			}
 		} else {
-			voidCraft.instance.logger.warn("NULL/NON-ITEMRECORD IN SLOT DETECTED");
+			VoidCraft.instance.logger.warn("NULL/NON-ITEMRECORD IN SLOT DETECTED");
 		}
 	}
 

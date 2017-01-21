@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
 import net.minecraft.item.Item;
@@ -64,25 +64,25 @@ public final class StarForgeEffectRecipeList {
 	}
 
 	private void registerRecipes() {
-		register(StarForgeEffectList.blindingFear, new ItemStack(voidCraft.blocks.cosmicMaterial, 8), new ItemStack(voidCraft.items.astralEssence, 4), new ItemStack(voidCraft.items.voidicPhlogiston, 4));
-		register(StarForgeEffectList.firstDegreeBurns, new ItemStack(voidCraft.blocks.cosmicMaterial, 8), new ItemStack(voidCraft.items.voidicPhlogiston, 8));
-		register(StarForgeEffectList.voidTouch, new ItemStack(voidCraft.blocks.cosmicMaterial, 8), new ItemStack(voidCraft.items.astralEssence, 8));
+		register(StarForgeEffectList.blindingFear, new ItemStack(VoidCraft.blocks.cosmicMaterial, 8), new ItemStack(VoidCraft.items.astralEssence, 4), new ItemStack(VoidCraft.items.voidicPhlogiston, 4));
+		register(StarForgeEffectList.firstDegreeBurns, new ItemStack(VoidCraft.blocks.cosmicMaterial, 8), new ItemStack(VoidCraft.items.voidicPhlogiston, 8));
+		register(StarForgeEffectList.voidTouch, new ItemStack(VoidCraft.blocks.cosmicMaterial, 8), new ItemStack(VoidCraft.items.astralEssence, 8));
 
-		register(StarForgeEffectList.xiaBlessing, new ItemStack(voidCraft.blocks.cosmicMaterial, 16), new ItemStack(voidCraft.items.astralEssence, 8), new ItemStack(voidCraft.items.voidicPhlogiston, 8));
-		register(StarForgeEffectList.secondDegreeBurns, new ItemStack(voidCraft.blocks.cosmicMaterial, 16), new ItemStack(voidCraft.items.voidicPhlogiston, 16));
-		register(StarForgeEffectList.voidWrath, new ItemStack(voidCraft.blocks.cosmicMaterial, 16), new ItemStack(voidCraft.items.astralEssence, 8), new ItemStack(voidCraft.items.voidicDragonScale, 8));
+		register(StarForgeEffectList.xiaBlessing, new ItemStack(VoidCraft.blocks.cosmicMaterial, 16), new ItemStack(VoidCraft.items.astralEssence, 8), new ItemStack(VoidCraft.items.voidicPhlogiston, 8));
+		register(StarForgeEffectList.secondDegreeBurns, new ItemStack(VoidCraft.blocks.cosmicMaterial, 16), new ItemStack(VoidCraft.items.voidicPhlogiston, 16));
+		register(StarForgeEffectList.voidWrath, new ItemStack(VoidCraft.blocks.cosmicMaterial, 16), new ItemStack(VoidCraft.items.astralEssence, 8), new ItemStack(VoidCraft.items.voidicDragonScale, 8));
 
-		register(StarForgeEffectList.mortalFear, new ItemStack(voidCraft.blocks.cosmicMaterial, 32), new ItemStack(voidCraft.items.quoriFragment, 1), new ItemStack(voidCraft.items.astralEssence, 16), new ItemStack(voidCraft.items.voidicDragonScale, 16));
-		register(StarForgeEffectList.thirdDegreeBurns, new ItemStack(voidCraft.blocks.cosmicMaterial, 32), new ItemStack(voidCraft.items.quoriFragment, 1), new ItemStack(voidCraft.items.voidicPhlogiston, 32));
-		register(StarForgeEffectList.voidCripple, new ItemStack(voidCraft.blocks.cosmicMaterial, 32), new ItemStack(voidCraft.items.quoriFragment, 1), new ItemStack(voidCraft.items.astralEssence, 8), new ItemStack(voidCraft.items.voidicDragonScale, 24));
-		register(StarForgeEffectList.vorp, new ItemStack(voidCraft.blocks.cosmicMaterial, 32), new ItemStack(voidCraft.items.quoriFragment, 1), new ItemStack(voidCraft.items.astralEssence, 32));
+		register(StarForgeEffectList.mortalFear, new ItemStack(VoidCraft.blocks.cosmicMaterial, 32), new ItemStack(VoidCraft.items.quoriFragment, 1), new ItemStack(VoidCraft.items.astralEssence, 16), new ItemStack(VoidCraft.items.voidicDragonScale, 16));
+		register(StarForgeEffectList.thirdDegreeBurns, new ItemStack(VoidCraft.blocks.cosmicMaterial, 32), new ItemStack(VoidCraft.items.quoriFragment, 1), new ItemStack(VoidCraft.items.voidicPhlogiston, 32));
+		register(StarForgeEffectList.voidCripple, new ItemStack(VoidCraft.blocks.cosmicMaterial, 32), new ItemStack(VoidCraft.items.quoriFragment, 1), new ItemStack(VoidCraft.items.astralEssence, 8), new ItemStack(VoidCraft.items.voidicDragonScale, 24));
+		register(StarForgeEffectList.vorp, new ItemStack(VoidCraft.blocks.cosmicMaterial, 32), new ItemStack(VoidCraft.items.quoriFragment, 1), new ItemStack(VoidCraft.items.astralEssence, 32));
 
-		register(StarForgeEffectList.haste, new ItemStack(voidCraft.blocks.cosmicMaterial, 8), new ItemStack(voidCraft.items.astralEssence, 8));
+		register(StarForgeEffectList.haste, new ItemStack(VoidCraft.blocks.cosmicMaterial, 8), new ItemStack(VoidCraft.items.astralEssence, 8));
 
-		register(StarForgeEffectList.silkTouch, new ItemStack(voidCraft.blocks.cosmicMaterial, 16), new ItemStack(voidCraft.items.astralEssence, 8), new ItemStack(voidCraft.items.voidicPhlogiston, 4), new ItemStack(voidCraft.items.voidicDragonScale, 4));
-		register(StarForgeEffectList.fortune, new ItemStack(voidCraft.blocks.cosmicMaterial, 16), new ItemStack(voidCraft.items.astralEssence, 8), new ItemStack(voidCraft.items.voidicDragonScale, 8));
+		register(StarForgeEffectList.silkTouch, new ItemStack(VoidCraft.blocks.cosmicMaterial, 16), new ItemStack(VoidCraft.items.astralEssence, 8), new ItemStack(VoidCraft.items.voidicPhlogiston, 4), new ItemStack(VoidCraft.items.voidicDragonScale, 4));
+		register(StarForgeEffectList.fortune, new ItemStack(VoidCraft.blocks.cosmicMaterial, 16), new ItemStack(VoidCraft.items.astralEssence, 8), new ItemStack(VoidCraft.items.voidicDragonScale, 8));
 
-		register(StarForgeEffectList.threeByThree, new ItemStack(voidCraft.blocks.cosmicMaterial, 32), new ItemStack(voidCraft.items.quoriFragment, 1), new ItemStack(voidCraft.items.astralEssence, 16), new ItemStack(voidCraft.items.voidicPhlogiston, 8), new ItemStack(voidCraft.items.voidicDragonScale, 8));
+		register(StarForgeEffectList.threeByThree, new ItemStack(VoidCraft.blocks.cosmicMaterial, 32), new ItemStack(VoidCraft.items.quoriFragment, 1), new ItemStack(VoidCraft.items.astralEssence, 16), new ItemStack(VoidCraft.items.voidicPhlogiston, 8), new ItemStack(VoidCraft.items.voidicDragonScale, 8));
 	}
 
 	private void register(IStarForgeEffect effect, ItemStack... stack) {

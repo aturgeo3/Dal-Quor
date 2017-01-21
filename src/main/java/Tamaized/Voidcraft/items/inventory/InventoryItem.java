@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.items.inventory;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -18,11 +18,11 @@ public abstract class InventoryItem implements IInventory {
 		inventory = new ItemStack[slots];
 		for (int index = 0; index < inventory.length; index++)
 			inventory[index] = ItemStack.EMPTY;
-		readFromNBT(parent.getOrCreateSubCompound(voidCraft.modid + "_InventoryItem"));
+		readFromNBT(parent.getOrCreateSubCompound(VoidCraft.modid + "_InventoryItem"));
 	}
 
 	public void saveData() {
-		writeToNBT(parent.getOrCreateSubCompound(voidCraft.modid + "_InventoryItem"));
+		writeToNBT(parent.getOrCreateSubCompound(VoidCraft.modid + "_InventoryItem"));
 	}
 
 	protected void readFromNBT(NBTTagCompound nbt) {

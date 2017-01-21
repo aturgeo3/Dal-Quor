@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.client;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.ArmorCustomElytra;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerCustomElytra implements LayerRenderer<AbstractClientPlayer> {
 	/** The basic Elytra texture. */
-	private static final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation(voidCraft.modid, "textures/models/armor/elytra.png");
+	private static final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation(VoidCraft.modid, "textures/models/armor/elytra.png");
 	/** Instance of the player renderer. */
 	private final RenderPlayer renderPlayer;
 	/** The model used by the Elytra. */

@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.events;
 
 import java.util.ConcurrentModificationException;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
@@ -21,15 +21,15 @@ public class ItemEntityEvent {
 		try {
 			for (EntityItem entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
 				ItemStack stack = entity.getEntityItem();
-				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == voidCraft.blocks.fireVoid) {
+				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == VoidCraft.blocks.fireVoid) {
 					e.world.setBlockToAir(entity.getPosition());
 					e.world.addWeatherEffect(new EntityLightningBolt(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), true));
-					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(voidCraft.items.vadeMecum)));
+					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(VoidCraft.items.vadeMecum)));
 					entity.setDead();
 				}
 			}
 		} catch (ConcurrentModificationException stacktrace) {
-			voidCraft.instance.logger.error("Something went very wrong while trying to retrieve the loadedEntityList from the world!");
+			VoidCraft.instance.logger.error("Something went very wrong while trying to retrieve the loadedEntityList from the world!");
 			stacktrace.printStackTrace();
 		}
 	}

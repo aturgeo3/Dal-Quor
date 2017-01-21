@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.ModelWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderWitherbrine;
@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 public class LayerWitherbrineAura implements LayerRenderer<EntityWitherbrine> {
-	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(voidCraft.modid, "textures/entity/witherbrine/wither_armor.png");
+	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither_armor.png");
 	private final RenderWitherbrine witherRenderer;
 	private final ModelWitherbrine witherModel = new ModelWitherbrine(0.5F);
 

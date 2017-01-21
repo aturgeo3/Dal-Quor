@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.init.Blocks;
@@ -173,7 +173,7 @@ public class StructureVoidCityPieces {
 	};
 
 	public static void registerPieces() {
-		MapGenStructureIO.registerStructureComponent(StructureVoidCityPieces.CityTemplate.class, voidCraft.modid + "VCP");
+		MapGenStructureIO.registerStructureComponent(StructureVoidCityPieces.CityTemplate.class, VoidCraft.modid + "VCP");
 	}
 
 	private static StructureVoidCityPieces.CityTemplate addPiece(TemplateManager p_191090_0_, StructureVoidCityPieces.CityTemplate p_191090_1_, BlockPos p_191090_2_, String p_191090_3_, Rotation p_191090_4_, boolean p_191090_5_) {
@@ -264,7 +264,7 @@ public class StructureVoidCityPieces {
 		}
 
 		private void loadTemplate(TemplateManager p_191085_1_) {
-			Template template = p_191085_1_.getTemplate((MinecraftServer) null, new ResourceLocation(voidCraft.modid, "voidcity/" + this.pieceName));
+			Template template = p_191085_1_.getTemplate((MinecraftServer) null, new ResourceLocation(VoidCraft.modid, "voidcity/" + this.pieceName));
 			PlacementSettings placementsettings = (this.overwrite ? StructureVoidCityPieces.OVERWRITE : StructureVoidCityPieces.INSERT).copy().setRotation(this.rotation);
 			this.setup(template, this.templatePosition, placementsettings);
 		}
@@ -298,7 +298,7 @@ public class StructureVoidCityPieces {
 					TileEntity tileentity = p_186175_3_.getTileEntity(blockpos);
 
 					if (tileentity instanceof TileEntityChest) {
-						((TileEntityChest) tileentity).setLootTable(voidCraft.lootTables.chest_voidCity, p_186175_4_.nextLong());
+						((TileEntityChest) tileentity).setLootTable(VoidCraft.lootTables.chest_voidCity, p_186175_4_.nextLong());
 					}
 				}
 			} else if (p_186175_1_.startsWith("Sentry")) {
@@ -308,7 +308,7 @@ public class StructureVoidCityPieces {
 				//p_186175_3_.spawnEntity(entityshulker);
 			} else if (p_186175_1_.startsWith("Elytra")) {
 				EntityItemFrame entityitemframe = new EntityItemFrame(p_186175_3_, p_186175_2_, this.rotation.rotate(EnumFacing.SOUTH));
-				entityitemframe.setDisplayedItem(new ItemStack(voidCraft.items.astralEssence));
+				entityitemframe.setDisplayedItem(new ItemStack(VoidCraft.items.astralEssence));
 				p_186175_3_.spawnEntity(entityitemframe);
 			}
 		}

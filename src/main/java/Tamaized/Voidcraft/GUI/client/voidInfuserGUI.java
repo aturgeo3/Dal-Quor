@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidInfuserContainer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 
@@ -22,7 +22,7 @@ public class voidInfuserGUI extends GuiContainer {
 	
 	public TileEntityVoidInfuser te;
 	
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/voidInfuser.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(VoidCraft.modid, "textures/gui/voidInfuser.png");
 
 	public voidInfuserGUI (InventoryPlayer inventoryPlayer, TileEntityVoidInfuser tileEntity) {
 		super(new VoidInfuserContainer(inventoryPlayer, tileEntity));

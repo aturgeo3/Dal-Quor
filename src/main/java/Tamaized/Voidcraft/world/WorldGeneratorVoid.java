@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.OreVoidcrystal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -22,7 +22,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 		int dimension = world.provider.getDimension();
 		if (dimension == 1) {
 			generateEnd(world, random, chunkX * 16, chunkZ * 16);
-		} else if (dimension == voidCraft.config.getDimensionIDvoid()) {
+		} else if (dimension == VoidCraft.config.getDimensionIDvoid()) {
 			generateVoid(world, random, chunkX * 16, chunkZ * 16);
 		}
 	}
@@ -32,7 +32,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(100);
-			new WorldGenMinable(((OreVoidcrystal) voidCraft.blocks.oreVoidcrystal).getStateVoidFalse(), 5, new Predicate<IBlockState>() {
+			new WorldGenMinable(((OreVoidcrystal) VoidCraft.blocks.oreVoidcrystal).getStateVoidFalse(), 5, new Predicate<IBlockState>() {
 
 				@Override
 				public boolean apply(IBlockState input) {
@@ -45,7 +45,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(100);
-			new WorldGenMinable(voidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
+			new WorldGenMinable(VoidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
 
 				@Override
 				public boolean apply(IBlockState input) {
@@ -61,11 +61,11 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 			int Xcoord = BlockX + random.nextInt(16);
 			int Zcoord = BlockZ + random.nextInt(16);
 			int Ycoord = random.nextInt(255);
-			new WorldGenMinable(voidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
+			new WorldGenMinable(VoidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
 
 				@Override
 				public boolean apply(IBlockState input) {
-					return input == voidCraft.blocks.blockFakeBedrock.getDefaultState();
+					return input == VoidCraft.blocks.blockFakeBedrock.getDefaultState();
 				}
 
 			}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));

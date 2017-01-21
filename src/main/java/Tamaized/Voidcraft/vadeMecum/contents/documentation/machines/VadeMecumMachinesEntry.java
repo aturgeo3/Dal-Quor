@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.machines;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -44,7 +44,7 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 	public VadeMecumEntry teleporter;
 
 	public VadeMecumMachinesEntry(VadeMecumEntry back) {
-		super("docs_Machines", voidCraft.modid + ".VadeMecum.docs.title.machines", back, null);
+		super("docs_Machines", VoidCraft.modid + ".VadeMecum.docs.title.machines", back, null);
 	}
 
 	@Override
@@ -66,17 +66,17 @@ public class VadeMecumMachinesEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.VoidInfusionAltar), new ItemStack(voidCraft.blocks.voidInfuser).getDisplayName(), new ItemStack(voidCraft.blocks.voidInfuser));
-		addButton(gui, getEntryID(Entry.VoidInfusedMacerator), new ItemStack(voidCraft.blocks.voidMacerator).getDisplayName(), new ItemStack(voidCraft.blocks.voidMacerator));
-		addButton(gui, getEntryID(Entry.Heimdall), new ItemStack(voidCraft.blocks.Heimdall).getDisplayName(), new ItemStack(voidCraft.blocks.Heimdall));
-		addButton(gui, getEntryID(Entry.VoidicGenerator), new ItemStack(voidCraft.blocks.voidicGen).getDisplayName(), new ItemStack(voidCraft.blocks.voidicGen));
-		addButton(gui, getEntryID(Entry.VoidicCable), new ItemStack(voidCraft.blocks.voidicCable).getDisplayName(), new ItemStack(voidCraft.blocks.voidicCable));
-		addButton(gui, getEntryID(Entry.VoidMusicBox), new ItemStack(voidCraft.blocks.voidBox).getDisplayName(), new ItemStack(voidCraft.blocks.voidBox));
+		addButton(gui, getEntryID(Entry.VoidInfusionAltar), new ItemStack(VoidCraft.blocks.voidInfuser).getDisplayName(), new ItemStack(VoidCraft.blocks.voidInfuser));
+		addButton(gui, getEntryID(Entry.VoidInfusedMacerator), new ItemStack(VoidCraft.blocks.voidMacerator).getDisplayName(), new ItemStack(VoidCraft.blocks.voidMacerator));
+		addButton(gui, getEntryID(Entry.Heimdall), new ItemStack(VoidCraft.blocks.Heimdall).getDisplayName(), new ItemStack(VoidCraft.blocks.Heimdall));
+		addButton(gui, getEntryID(Entry.VoidicGenerator), new ItemStack(VoidCraft.blocks.voidicGen).getDisplayName(), new ItemStack(VoidCraft.blocks.voidicGen));
+		addButton(gui, getEntryID(Entry.VoidicCable), new ItemStack(VoidCraft.blocks.voidicCable).getDisplayName(), new ItemStack(VoidCraft.blocks.voidicCable));
+		addButton(gui, getEntryID(Entry.VoidMusicBox), new ItemStack(VoidCraft.blocks.voidBox).getDisplayName(), new ItemStack(VoidCraft.blocks.voidBox));
 
-		addButton(gui, getEntryID(Entry.VoidicCharger), new ItemStack(voidCraft.blocks.voidicCharger).getDisplayName(), new ItemStack(voidCraft.blocks.voidicCharger));
-		addButton(gui, getEntryID(Entry.RealityStabilizer), new ItemStack(voidCraft.blocks.realityStabilizer).getDisplayName(), new ItemStack(voidCraft.blocks.realityStabilizer));
-		addButton(gui, getEntryID(Entry.AlchemyTable), new ItemStack(voidCraft.blocks.voidicAlchemyTable).getDisplayName(), new ItemStack(voidCraft.blocks.voidicAlchemyTable));
-		addButton(gui, getEntryID(Entry.Teleporter), new ItemStack(voidCraft.blocks.realityTeleporterBlock).getDisplayName(), new ItemStack(voidCraft.blocks.realityTeleporterBlock));
+		addButton(gui, getEntryID(Entry.VoidicCharger), new ItemStack(VoidCraft.blocks.voidicCharger).getDisplayName(), new ItemStack(VoidCraft.blocks.voidicCharger));
+		addButton(gui, getEntryID(Entry.RealityStabilizer), new ItemStack(VoidCraft.blocks.realityStabilizer).getDisplayName(), new ItemStack(VoidCraft.blocks.realityStabilizer));
+		addButton(gui, getEntryID(Entry.AlchemyTable), new ItemStack(VoidCraft.blocks.voidicAlchemyTable).getDisplayName(), new ItemStack(VoidCraft.blocks.voidicAlchemyTable));
+		addButton(gui, getEntryID(Entry.Teleporter), new ItemStack(VoidCraft.blocks.realityTeleporterBlock).getDisplayName(), new ItemStack(VoidCraft.blocks.realityTeleporterBlock));
 	}
 
 	@Override

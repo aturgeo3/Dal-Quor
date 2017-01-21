@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.layer.LayerWitherbrineAura;
@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 
-	private static final ResourceLocation INVULNERABLE_WITHER_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/witherbrine/wither_invulnerable.png");
-	private static final ResourceLocation WITHER_TEXTURES = new ResourceLocation(voidCraft.modid, "textures/entity/witherbrine/wither.png");
+	private static final ResourceLocation INVULNERABLE_WITHER_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither_invulnerable.png");
+	private static final ResourceLocation WITHER_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither.png");
 
 	public RenderWitherbrine(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelWitherbrine(0.0F), 1.0F);

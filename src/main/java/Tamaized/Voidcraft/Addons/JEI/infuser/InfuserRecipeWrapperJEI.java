@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.Addons.JEI.infuser;
 
 import java.util.Arrays;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 import mezz.jei.api.gui.IGuiIngredientGroup;
@@ -23,7 +23,7 @@ public class InfuserRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<InfuserRe
 		g.init(FLUID_SLOT, true, 51, 33);
 		g.init(INPUT_SLOT, true, 89, 33);
 
-		g.set(FLUID_SLOT, Arrays.asList(voidCraft.fluids.voidBucket.getBucket()));
+		g.set(FLUID_SLOT, Arrays.asList(VoidCraft.fluids.voidBucket.getBucket()));
 		g.set(OUTPUT_SLOT, Arrays.asList(getOutput()));
 		g.set(INPUT_SLOT, getInputs());
 	}

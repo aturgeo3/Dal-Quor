@@ -8,7 +8,7 @@ import org.lwjgl.input.Mouse;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.StarForgeContainer;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import Tamaized.Voidcraft.helper.GUIElementList;
@@ -28,7 +28,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class StarForgeGUI extends GuiContainer {
 
-	private static final ResourceLocation daTexture = new ResourceLocation(voidCraft.modid, "textures/gui/starforge.png");
+	private static final ResourceLocation daTexture = new ResourceLocation(VoidCraft.modid, "textures/gui/starforge.png");
 
 	public TileEntityStarForge te;
 	private GUIElementList scroll;
@@ -90,7 +90,7 @@ public class StarForgeGUI extends GuiContainer {
 		switch (button.id) {
 			case BUTTON_CRAFT:
 				try {
-					PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.STARFORGE_CRAFT));
+					PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.STARFORGE_CRAFT));
 					DataOutputStream stream = packet.getStream();
 					stream.writeInt(xcoord);
 					stream.writeInt(ycoord);
@@ -131,7 +131,7 @@ public class StarForgeGUI extends GuiContainer {
 					if (!te.getStackInSlot(te.SLOT_INPUT_TOOL).isEmpty() && te.getStackInSlot(te.SLOT_OUTPUT).isEmpty()) {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-							int slot = checkStack.getItem() == Item.getItemFromBlock(voidCraft.blocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == voidCraft.items.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == voidCraft.items.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == voidCraft.items.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
+							int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
 							if (te.getStackInSlot(slot).getCount() >= checkStack.getCount()) break;
 							flag = false;
 						}

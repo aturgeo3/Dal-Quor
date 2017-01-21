@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.mob.lich;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.FireVoid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -94,7 +94,7 @@ public class EntityLichInferno extends Entity {
 	private void placeFireAt(BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
 		if (state == null || state.getBlock().isReplaceable(world, pos)) {
-			world.setBlockState(pos, voidCraft.blocks.fireVoid.getDefaultState());
+			world.setBlockState(pos, VoidCraft.blocks.fireVoid.getDefaultState());
 		}
 	}
 

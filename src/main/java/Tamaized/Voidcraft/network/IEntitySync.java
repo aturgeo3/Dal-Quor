@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -15,7 +15,7 @@ public interface IEntitySync {
 	default void sendPacketUpdates() {
 		if (getEntity().world.isRemote) return;
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.ENTITY_UPDATES));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.ENTITY_UPDATES));
 			DataOutputStream stream = packet.getStream();
 			stream.writeInt(getEntity().getEntityId());
 			encodePacket(stream);

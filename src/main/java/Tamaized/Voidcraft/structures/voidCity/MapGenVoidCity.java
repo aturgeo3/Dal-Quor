@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
 import Tamaized.Voidcraft.world.dim.TheVoid.ChunkProviderVoid;
 import net.minecraft.util.Rotation;
@@ -29,7 +29,7 @@ public class MapGenVoidCity extends MapGenStructure {
 	}
 
 	public String getStructureName() {
-		return voidCraft.modid + "EndCity";
+		return VoidCraft.modid + "EndCity";
 	}
 
 	public List<Biome.SpawnListEntry> getSpawnList() {

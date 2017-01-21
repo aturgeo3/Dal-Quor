@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.capabilities.starforge;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class StarForgeCapabilityHandler implements IStarForgeCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(voidCraft.modid, "StarForgeCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "StarForgeCapabilityHandler");
 
 	private IStarForgeEffect tier1;
 	private IStarForgeEffect tier2;
@@ -123,7 +123,7 @@ public class StarForgeCapabilityHandler implements IStarForgeCapability {
 	}
 
 	private void sendClientUpdates(ItemStack stack) {
-		NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid);
+		NBTTagCompound ct = stack.getOrCreateSubCompound(VoidCraft.modid);
 		NBTTagCompound starforgeCompound = new NBTTagCompound();
 		starforgeCompound.setInteger("tier1", StarForgeEffectList.getEffectID(tier1));
 		starforgeCompound.setInteger("tier2", StarForgeEffectList.getEffectID(tier2));
@@ -132,7 +132,7 @@ public class StarForgeCapabilityHandler implements IStarForgeCapability {
 	}
 
 	private void updateClient(ItemStack stack) {
-		NBTTagCompound ct = stack.getOrCreateSubCompound(voidCraft.modid);
+		NBTTagCompound ct = stack.getOrCreateSubCompound(VoidCraft.modid);
 		NBTTagCompound starforgeCompound = ct.getCompoundTag("StarForge_Client");
 		setEffect(IStarForgeEffect.Tier.ONE, StarForgeEffectList.getEffect(starforgeCompound.getInteger("tier1")));
 		setEffect(IStarForgeEffect.Tier.TWO, StarForgeEffectList.getEffect(starforgeCompound.getInteger("tier2")));

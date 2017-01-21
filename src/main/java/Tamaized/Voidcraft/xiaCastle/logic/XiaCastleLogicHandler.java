@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.xiaCastle.logic;
 
 import java.util.List;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
@@ -118,14 +118,14 @@ public class XiaCastleLogicHandler {
 		TileEntityAIBlock ai1 = null;
 		TileEntityAIBlock ai2 = null;
 		if (!(te1 instanceof TileEntityAIBlock)) {
-			world.setBlockState(pos1, voidCraft.blocks.AIBlock.getDefaultState());
+			world.setBlockState(pos1, VoidCraft.blocks.AIBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
 		} else {
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
-			world.setBlockState(pos2, voidCraft.blocks.AIBlock.getDefaultState());
+			world.setBlockState(pos2, VoidCraft.blocks.AIBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
 		} else {
@@ -149,14 +149,14 @@ public class XiaCastleLogicHandler {
 			player.setPositionAndUpdate(pos.getX() + 23.5, pos.getY() + 8.5, pos.getZ() + 13.5);
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
-			player.addStat(voidCraft.achievements.Ascension, 1);
+			player.addStat(VoidCraft.achievements.Ascension, 1);
 		}
 		BlockPos chestPos = pos.add(21, 8, 13);
 		world.setBlockState(chestPos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.EAST));
 		TileEntity te = world.getTileEntity(chestPos);
 		if(te instanceof TileEntityChest){
 			TileEntityChest chest = (TileEntityChest) te;
-			chest.setInventorySlotContents(0, new ItemStack(voidCraft.items.quoriFragment, i));
+			chest.setInventorySlotContents(0, new ItemStack(VoidCraft.items.quoriFragment, i));
 		}
 		hasFinished = true;
 	}
@@ -197,7 +197,7 @@ public class XiaCastleLogicHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? voidCraft.blocks.realityHole.getDefaultState() : voidCraft.blocks.blockNoBreak.getDefaultState());
+				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? VoidCraft.blocks.realityHole.getDefaultState() : VoidCraft.blocks.blockNoBreak.getDefaultState());
 			}
 		}
 		xiaDoorOpen = false;

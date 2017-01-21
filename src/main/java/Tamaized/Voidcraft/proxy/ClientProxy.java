@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
@@ -109,19 +109,19 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
 
-	private static final ResourceLocation WHITESPACE = new ResourceLocation(voidCraft.modid + ":textures/entity/whitespace.png");
+	private static final ResourceLocation WHITESPACE = new ResourceLocation(VoidCraft.modid + ":textures/entity/whitespace.png");
 
 	public static int sphereIdOutside;
 	public static int sphereIdInside;
 
 	@Override
 	public void preRegisters() {
-		OBJLoader.INSTANCE.addDomain(voidCraft.modid);
+		OBJLoader.INSTANCE.addDomain(VoidCraft.modid);
 	}
 
 	@Override
 	public void preInit() {
-		voidCraft.instance.clientPreInit();
+		VoidCraft.instance.clientPreInit();
 		vadeMecumEntryList = new VadeMecumMainEntry();
 		vadeMecumEntryList.preLoadObject();
 
@@ -130,27 +130,27 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobWraith.class, new IRenderFactory<EntityMobWraith>() {
 			@Override
 			public Render<? super EntityMobWraith> createRenderFor(RenderManager manager) {
-				return new RenderGeneric(manager, new ModelWraith(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zwraith.png"));
+				return new RenderGeneric(manager, new ModelWraith(), shadowSize, new ResourceLocation(VoidCraft.modid, "textures/entity/zwraith.png"));
 			}
 		});
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobSpectreChain.class, new IRenderFactory<EntityMobSpectreChain>() {
 			@Override
 			public Render<? super EntityMobSpectreChain> createRenderFor(RenderManager manager) {
-				return new RenderGeneric(manager, new ModelSpectreChain(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zSpectreChain.png"));
+				return new RenderGeneric(manager, new ModelSpectreChain(), shadowSize, new ResourceLocation(VoidCraft.modid, "textures/entity/zSpectreChain.png"));
 			}
 		});
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobLich.class, new IRenderFactory<EntityMobLich>() {
 			@Override
 			public Render<? super EntityMobLich> createRenderFor(RenderManager manager) {
-				return new RenderGeneric(manager, new ModelLich(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zLich.png"));
+				return new RenderGeneric(manager, new ModelLich(), shadowSize, new ResourceLocation(VoidCraft.modid, "textures/entity/zLich.png"));
 			}
 		});
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobVoidWrath.class, new IRenderFactory<EntityMobVoidWrath>() {
 			@Override
 			public Render<? super EntityMobVoidWrath> createRenderFor(RenderManager manager) {
-				return new RenderGeneric(manager, new ModelVoidWrath(), shadowSize, new ResourceLocation(voidCraft.modid, "textures/entity/zVoidWrath.png"));
+				return new RenderGeneric(manager, new ModelVoidWrath(), shadowSize, new ResourceLocation(VoidCraft.modid, "textures/entity/zVoidWrath.png"));
 			}
 		});
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossCorruptedPawn.class, new IRenderFactory<EntityBossCorruptedPawn>() {
@@ -303,7 +303,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityObsidianFlask.class, new IRenderFactory<EntityObsidianFlask>() {
 			@Override
 			public Render<? super EntityObsidianFlask> createRenderFor(RenderManager manager) {
-				return new RenderObsidianFlask(manager, voidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem());
+				return new RenderObsidianFlask(manager, VoidCraft.items.obsidianFlask, Minecraft.getMinecraft().getRenderItem());
 			}
 		});
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpellRune.class, new IRenderFactory<EntitySpellRune>() {
@@ -328,20 +328,20 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 
 	@Override
 	public void init() {
-		voidCraft.instance.clientInit();
+		VoidCraft.instance.clientInit();
 		RenderNoBreak renderNoBreak = new RenderNoBreak();
 		RenderVoidicCharger renderCharger = new RenderVoidicCharger();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, renderNoBreak);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoidicCharger.class, renderCharger);
 
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.blockNoBreak), 0, TileEntityNoBreak.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(voidCraft.blocks.voidicCharger), 0, TileEntityVoidicCharger.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraft.blocks.blockNoBreak), 0, TileEntityNoBreak.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraft.blocks.voidicCharger), 0, TileEntityVoidicCharger.class);
 	}
 
 	@Override
 	public void postInit() {
-		voidCraft.instance.clientPostInit();
+		VoidCraft.instance.clientPostInit();
 		// Events
 		MinecraftForge.EVENT_BUS.register(new OverlayEvent());
 		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
@@ -364,7 +364,7 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
 		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
-		voidCraft.channel.register(new ClientPacketHandler());
+		VoidCraft.channel.register(new ClientPacketHandler());
 
 		Sphere sphere = new Sphere();
 		// Set up paramters that are common to both outside and inside.

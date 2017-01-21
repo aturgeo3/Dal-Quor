@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.nonliving.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSpellRune<T extends EntitySpellRune> extends Render<T> {
 
-	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(voidCraft.modid, "textures/entity/rune.png");
+	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(VoidCraft.modid, "textures/entity/rune.png");
 
 	public RenderSpellRune(RenderManager renderManager) {
 		super(renderManager);

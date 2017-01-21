@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.twins.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.model.ModelVoidBoss;
 import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDol<T extends EntityLiving> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/entity/dol.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/dol.png");
 
 	public RenderDol(RenderManager manager, float shadow) {
 		super(manager, new ModelVoidBoss<EntityBossDol>(), shadow);

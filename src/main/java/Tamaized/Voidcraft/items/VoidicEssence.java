@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
@@ -27,7 +27,7 @@ public class VoidicEssence extends TamItem {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem(hand);
-			NBTTagCompound nbt = stack.getOrCreateSubCompound(voidCraft.modid);
+			NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
 			int id = nbt.getInteger("xia");
 			int phase = nbt.getInteger("phase");
 			if (id > 0) {

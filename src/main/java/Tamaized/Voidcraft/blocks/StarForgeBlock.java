@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import net.minecraft.block.Block;
@@ -115,7 +115,7 @@ public class StarForgeBlock extends TamBlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, voidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.StarForge), world, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.StarForge), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,7 +10,7 @@ import net.minecraft.util.text.TextFormatting;
 
 public class VadeMecumPageMultiBlock extends VadeMecumPage {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/Ritual.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/Ritual.png");
 
 	private final ItemStack[] stackList;
 

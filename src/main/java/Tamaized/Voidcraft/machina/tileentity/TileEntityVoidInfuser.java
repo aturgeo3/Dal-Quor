@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
 import net.minecraft.init.Items;
@@ -35,7 +35,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		if (tank.getFluid() != null) tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		if (tank.getFluid() != null) tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
 		cookingTick = nbt.getInteger("cookingTick");
 	}
 
@@ -56,12 +56,12 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 		if (tank.getFluidAmount() > 0 && canCook()) {
 			cooking = true;
-			drain(new FluidStack(voidCraft.fluids.voidFluid, 1), true);
+			drain(new FluidStack(VoidCraft.fluids.voidFluid, 1), true);
 		}
 
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.voidBucket.getBucket())) {
-				fill(new FluidStack(voidCraft.fluids.voidFluid, 1000), true);
+			if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].isItemEqual(VoidCraft.fluids.voidBucket.getBucket())) {
+				fill(new FluidStack(VoidCraft.fluids.voidFluid, 1000), true);
 				slots[SLOT_BUCKET] = new ItemStack(Items.BUCKET);
 			}
 		}
@@ -94,7 +94,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	private boolean canCook() {
 		if (slots[SLOT_INPUT].isEmpty()) return false;
-		recipe = voidCraft.teRecipes.infuser.getRecipe(new ItemStack[] { slots[SLOT_INPUT] });
+		recipe = VoidCraft.teRecipes.infuser.getRecipe(new ItemStack[] { slots[SLOT_INPUT] });
 		if (recipe == null) return false;
 		if (slots[SLOT_OUTPUT].isEmpty()) return true;
 		if (!slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) return false;
@@ -103,12 +103,12 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	public static boolean isItemFuel(ItemStack stack) {
-		return stack.isItemEqual(voidCraft.fluids.voidBucket.getBucket());
+		return stack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket());
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i != SLOT_OUTPUT ? i == SLOT_BUCKET ? isItemFuel(itemstack) : !itemstack.isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false;
+		return i != SLOT_OUTPUT ? i == SLOT_BUCKET ? isItemFuel(itemstack) : !itemstack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) : false;
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 
 	@Override
 	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(voidCraft.fluids.voidBucket.getBucket()) : false : i == SLOT_OUTPUT;
+		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) : false : i == SLOT_OUTPUT;
 	}
 
 	@Override
@@ -165,6 +165,6 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFl
 	}
 
 	public void setFluidAmount(int amount) {
-		tank.setFluid(new FluidStack(voidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 }

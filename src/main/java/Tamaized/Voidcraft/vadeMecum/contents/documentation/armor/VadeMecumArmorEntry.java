@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.armor;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -40,8 +40,8 @@ public class VadeMecumArmorEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.Void), voidCraft.modid + ".VadeMecum.docs.title.voidArmor", new ItemStack(voidCraft.armors.voidHelmet));
-		addButton(gui, getEntryID(Entry.Xia), voidCraft.modid + ".VadeMecum.docs.title.xiaArmor", new ItemStack(voidCraft.armors.xiaHelmet));
+		addButton(gui, getEntryID(Entry.Void), VoidCraft.modid + ".VadeMecum.docs.title.voidArmor", new ItemStack(VoidCraft.armors.voidHelmet));
+		addButton(gui, getEntryID(Entry.Xia), VoidCraft.modid + ".VadeMecum.docs.title.xiaArmor", new ItemStack(VoidCraft.armors.xiaHelmet));
 	}
 
 	@Override

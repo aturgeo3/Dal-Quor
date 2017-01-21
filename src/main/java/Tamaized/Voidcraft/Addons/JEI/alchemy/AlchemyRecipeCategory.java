@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class AlchemyRecipeCategory implements IRecipeCategory {
 
-	private final ResourceLocation background = new ResourceLocation(voidCraft.modid, "textures/gui/JEI/voidicAlchemy.png");
+	private final ResourceLocation background = new ResourceLocation(VoidCraft.modid, "textures/gui/JEI/voidicAlchemy.png");
 	private IDrawableAnimated powerAnimation;
 	private IDrawableAnimated progressAnimation;
 

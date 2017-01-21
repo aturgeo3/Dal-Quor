@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
@@ -18,8 +18,8 @@ public class WorldGenEtherealPlants extends WorldGenMinable {
 	private final Predicate<IBlockState> predicate;
 
 	public WorldGenEtherealPlants() {
-		super(voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), numberOfBlocks);
-		predicate = BlockMatcher.forBlock(voidCraft.blocks.blockFakeBedrock);
+		super(VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), numberOfBlocks);
+		predicate = BlockMatcher.forBlock(VoidCraft.blocks.blockFakeBedrock);
 	}
 
 	@Override
@@ -64,26 +64,26 @@ public class WorldGenEtherealPlants extends WorldGenMinable {
 									IBlockState state = worldIn.getBlockState(blockpos);
 									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
 										//System.out.println("ding: "+blockpos);
-										worldIn.setBlockState(blockpos, voidCraft.fluids.voidFluidBlock.getDefaultState());
+										worldIn.setBlockState(blockpos, VoidCraft.fluids.voidFluidBlock.getDefaultState());
 										if(worldIn.rand.nextInt(4) == 0){
 											if (worldIn.isAirBlock(blockpos.north().up())) {
-												worldIn.setBlockState(blockpos.north(), voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.north().up(), voidCraft.blocks.etherealPlant.withAge(voidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.north(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.north().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.south().up())) {
-												worldIn.setBlockState(blockpos.south(), voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.south().up(), voidCraft.blocks.etherealPlant.withAge(voidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.south(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.south().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.east().up())) {
-												worldIn.setBlockState(blockpos.east(), voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.east().up(), voidCraft.blocks.etherealPlant.withAge(voidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.east(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.east().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.west().up())) {
-												worldIn.setBlockState(blockpos.west(), voidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.west().up(), voidCraft.blocks.etherealPlant.withAge(voidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.west(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.west().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											return true;

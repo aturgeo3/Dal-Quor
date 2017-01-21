@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.xia.render;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.model.ModelVoidBossOverlay;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderXia<T extends EntityBossXia> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid + ":textures/entity/xia.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid + ":textures/entity/xia.png");
 
 	public RenderXia(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

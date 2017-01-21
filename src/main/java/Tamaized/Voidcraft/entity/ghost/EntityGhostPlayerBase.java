@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import com.mojang.authlib.GameProfile;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.handlers.SkinHandler.PlayerNameAlias;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
@@ -61,14 +61,14 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	protected EntityGhostPlayerBase(World world, PlayerNameAlias alias, boolean interactable) {
 		this(world);
-		profile = voidCraft.skinHandler.getGameProfile(alias);
+		profile = VoidCraft.skinHandler.getGameProfile(alias);
 		this.alias = alias;
 		canInteract = interactable;
 	}
 
 	protected EntityGhostPlayerBase(World world, PlayerNameAlias alias, boolean interactable, Entity target, int length) {
 		this(world);
-		profile = voidCraft.skinHandler.getGameProfile(alias);
+		profile = VoidCraft.skinHandler.getGameProfile(alias);
 		this.alias = alias;
 		canInteract = interactable;
 		rune = true;
@@ -125,7 +125,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		alias = PlayerNameAlias.valueOf(ByteBufUtils.readUTF8String(additionalData));
-		profile = voidCraft.skinHandler.getGameProfile(alias);
+		profile = VoidCraft.skinHandler.getGameProfile(alias);
 		canInteract = additionalData.readBoolean();
 		rune = additionalData.readBoolean();
 		if (rune) {
@@ -292,11 +292,11 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	}
 
 	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias, boolean interactable) {
-		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable) : new EntityGhostPlayer(world, alias, interactable);
+		return VoidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable) : new EntityGhostPlayer(world, alias, interactable);
 	}
 
 	public static EntityGhostPlayerBase newInstance(World world, PlayerNameAlias alias, boolean interactable, Entity target, int length) {
-		return voidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable, target, length) : new EntityGhostPlayer(world, alias, interactable, target, length);
+		return VoidCraft.skinHandler.isBipedModel(alias) ? new EntityGhostBiped(world, alias, interactable, target, length) : new EntityGhostPlayer(world, alias, interactable, target, length);
 	}
 
 }

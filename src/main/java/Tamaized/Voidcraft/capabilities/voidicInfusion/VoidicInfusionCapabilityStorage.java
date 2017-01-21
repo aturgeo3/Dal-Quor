@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.capabilities.voidicInfusion;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class VoidicInfusionCapabilityStorage implements IStorage<IVoidicInfusionCapability> {
 
 	public VoidicInfusionCapabilityStorage() {
-		voidCraft.instance.logger.info("VoidicInfusionCapabilityStorage Registered");
+		VoidCraft.instance.logger.info("VoidicInfusionCapabilityStorage Registered");
 	}
 
 	@Override

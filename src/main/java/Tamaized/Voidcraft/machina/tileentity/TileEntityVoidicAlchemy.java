@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.machina.tileentity;
 
 import java.util.UUID;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -175,7 +175,7 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 				return false;
 			}
 		}
-		recipe = voidCraft.teRecipes.alchemy.getRecipe(owner, new ItemStack[] { getStackInSlot(SLOT_INPUT_1), getStackInSlot(SLOT_INPUT_2), getStackInSlot(SLOT_INPUT_3), getStackInSlot(SLOT_INPUT_4), getStackInSlot(SLOT_INPUT_5), getStackInSlot(SLOT_INPUT_6) });
+		recipe = VoidCraft.teRecipes.alchemy.getRecipe(owner, new ItemStack[] { getStackInSlot(SLOT_INPUT_1), getStackInSlot(SLOT_INPUT_2), getStackInSlot(SLOT_INPUT_3), getStackInSlot(SLOT_INPUT_4), getStackInSlot(SLOT_INPUT_5), getStackInSlot(SLOT_INPUT_6) });
 		if (recipe == null) return false;
 		if (getStackInSlot(SLOT_OUTPUT).isEmpty()) return true;
 		if (!getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) return false;

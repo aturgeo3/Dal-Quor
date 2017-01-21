@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.documentation.tools;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
@@ -46,7 +46,7 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public VadeMecumEntry realityTeleporter;
 
 	public VadeMecumToolsEntry(VadeMecumEntry back) {
-		super("docs_Tools", voidCraft.modid + ".VadeMecum.docs.title.tools", back, null);
+		super("docs_Tools", VoidCraft.modid + ".VadeMecum.docs.title.tools", back, null);
 	}
 
 	@Override
@@ -68,17 +68,17 @@ public class VadeMecumToolsEntry extends VadeMecumEntry {
 	public void init(VadeMecumGUI gui) {
 		initObjects();
 		clearButtons();
-		addButton(gui, getEntryID(Entry.VoidPick), new ItemStack(voidCraft.tools.voidPickaxe).getDisplayName(), new ItemStack(voidCraft.tools.voidPickaxe));
-		addButton(gui, getEntryID(Entry.VoidAxe), new ItemStack(voidCraft.tools.voidAxe).getDisplayName(), new ItemStack(voidCraft.tools.voidAxe));
-		addButton(gui, getEntryID(Entry.VoidShovel), new ItemStack(voidCraft.tools.voidSpade).getDisplayName(), new ItemStack(voidCraft.tools.voidSpade));
-		addButton(gui, getEntryID(Entry.VoidHoe), new ItemStack(voidCraft.tools.voidHoe).getDisplayName(), new ItemStack(voidCraft.tools.voidHoe));
-		addButton(gui, getEntryID(Entry.SpectrePick), new ItemStack(voidCraft.tools.spectrePickaxe).getDisplayName(), new ItemStack(voidCraft.tools.spectrePickaxe));
-		addButton(gui, getEntryID(Entry.SpectreAxe), new ItemStack(voidCraft.tools.spectreAxe).getDisplayName(), new ItemStack(voidCraft.tools.spectreAxe));
+		addButton(gui, getEntryID(Entry.VoidPick), new ItemStack(VoidCraft.tools.voidPickaxe).getDisplayName(), new ItemStack(VoidCraft.tools.voidPickaxe));
+		addButton(gui, getEntryID(Entry.VoidAxe), new ItemStack(VoidCraft.tools.voidAxe).getDisplayName(), new ItemStack(VoidCraft.tools.voidAxe));
+		addButton(gui, getEntryID(Entry.VoidShovel), new ItemStack(VoidCraft.tools.voidSpade).getDisplayName(), new ItemStack(VoidCraft.tools.voidSpade));
+		addButton(gui, getEntryID(Entry.VoidHoe), new ItemStack(VoidCraft.tools.voidHoe).getDisplayName(), new ItemStack(VoidCraft.tools.voidHoe));
+		addButton(gui, getEntryID(Entry.SpectrePick), new ItemStack(VoidCraft.tools.spectrePickaxe).getDisplayName(), new ItemStack(VoidCraft.tools.spectrePickaxe));
+		addButton(gui, getEntryID(Entry.SpectreAxe), new ItemStack(VoidCraft.tools.spectreAxe).getDisplayName(), new ItemStack(VoidCraft.tools.spectreAxe));
 
-		addButton(gui, getEntryID(Entry.SpectreShovel), new ItemStack(voidCraft.tools.spectreSpade).getDisplayName(), new ItemStack(voidCraft.tools.spectreSpade));
-		addButton(gui, getEntryID(Entry.SpectreHoe), new ItemStack(voidCraft.tools.spectreHoe).getDisplayName(), new ItemStack(voidCraft.tools.spectreHoe));
-		addButton(gui, getEntryID(Entry.VoidicDrill), new ItemStack(voidCraft.items.voidicDrill).getDisplayName(), new ItemStack(voidCraft.items.voidicDrill));
-		addButton(gui, getEntryID(Entry.RealityTeleporter), new ItemStack(voidCraft.items.realityTeleporter).getDisplayName(), new ItemStack(voidCraft.items.realityTeleporter));
+		addButton(gui, getEntryID(Entry.SpectreShovel), new ItemStack(VoidCraft.tools.spectreSpade).getDisplayName(), new ItemStack(VoidCraft.tools.spectreSpade));
+		addButton(gui, getEntryID(Entry.SpectreHoe), new ItemStack(VoidCraft.tools.spectreHoe).getDisplayName(), new ItemStack(VoidCraft.tools.spectreHoe));
+		addButton(gui, getEntryID(Entry.VoidicDrill), new ItemStack(VoidCraft.items.voidicDrill).getDisplayName(), new ItemStack(VoidCraft.items.voidicDrill));
+		addButton(gui, getEntryID(Entry.RealityTeleporter), new ItemStack(VoidCraft.items.realityTeleporter).getDisplayName(), new ItemStack(VoidCraft.items.realityTeleporter));
 	}
 
 	@Override

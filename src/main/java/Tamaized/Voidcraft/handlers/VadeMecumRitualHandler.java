@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.handlers;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +18,7 @@ public class VadeMecumRitualHandler {
 
 	public static void invokeRitual(EntityPlayer player, World world, BlockPos pos) {
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap == null || world.getBlockState(pos).getBlock() != voidCraft.blocks.ritualBlock) return;
+		if (cap == null || world.getBlockState(pos).getBlock() != VoidCraft.blocks.ritualBlock) return;
 		switch (getRitual(cap, world, pos, true)) {
 			case INTRO:
 				player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "Intro"));
@@ -91,9 +91,9 @@ public class VadeMecumRitualHandler {
 	}
 
 	public static boolean doChecks(IVadeMecumCapability.Category ritual, World world, BlockPos pos, boolean clear) {
-		int val = check(voidCraft.ritualList.getRitual(ritual), world, pos);
+		int val = check(VoidCraft.ritualList.getRitual(ritual), world, pos);
 		if (val > 0) {
-			if (clear) clear(voidCraft.ritualList.getRitual(ritual), val, world, pos);
+			if (clear) clear(VoidCraft.ritualList.getRitual(ritual), val, world, pos);
 			return true;
 		}
 		return false;

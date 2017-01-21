@@ -6,12 +6,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 
 public class VoidCraftLootTables implements ITamRegistry {
 
-	public static final ResourceLocation chest_voidFortress = new ResourceLocation(voidCraft.modid + ":chests/voidFortress");
-	public static final ResourceLocation chest_voidCity = new ResourceLocation(voidCraft.modid + ":chests/voidCity");
+	public static final ResourceLocation chest_voidFortress = new ResourceLocation(VoidCraft.modid + ":chests/voidFortress");
+	public static final ResourceLocation chest_voidCity = new ResourceLocation(VoidCraft.modid + ":chests/voidCity");
 
 	@Override
 	public void preInit() {
@@ -36,7 +36,7 @@ public class VoidCraftLootTables implements ITamRegistry {
 
 	@Override
 	public String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import net.minecraft.client.gui.FontRenderer;
@@ -67,7 +67,7 @@ public class VadeMecumEntry {
 		if (page >= 0) {
 			if (!buttons.containsKey(page)) {
 				// Something when very wrong, spit out map contents and don't add the button.
-				voidCraft.instance.logger.error("A null page was recieved from a Vade Mecum Button List (" + page + "): " + buttons.entrySet());
+				VoidCraft.instance.logger.error("A null page was recieved from a Vade Mecum Button List (" + page + "): " + buttons.entrySet());
 				return;
 			}
 			if (buttons.get(page).size() >= 6) {
@@ -111,7 +111,7 @@ public class VadeMecumEntry {
 	}
 
 	public final void goBack(VadeMecumGUI gui) {
-		gui.changeEntry(backPage == null ? (voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN) : backPage);
+		gui.changeEntry(backPage == null ? (VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN) : backPage);
 	}
 
 	protected void actionPerformed(VadeMecumGUI gui, int id, int mouseButton) {

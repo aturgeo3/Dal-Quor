@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.slots.SlotCantRemove;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -27,7 +27,7 @@ public class RealityTeleporterContainer extends ContainerBase {
 		parent = host;
 		itemInventory = RealityTeleporter.createInventory(parent);
 		cap = parent.hasCapability(CapabilityList.VOIDICPOWER, null) ? parent.getCapability(CapabilityList.VOIDICPOWER, null) : null;
-		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(voidCraft.blocks.realityHole), itemInventory, 0, 176, 96));
+		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraft.blocks.realityHole), itemInventory, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {

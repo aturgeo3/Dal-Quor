@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +22,7 @@ public class EntityMotionHelper {
 
 	private static void sendPacketToPlayer(EntityPlayerMP e, double x, double y, double z) {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.PLAYER_MOTION));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.PLAYER_MOTION));
 			DataOutputStream stream = packet.getStream();
 			stream.writeDouble(x);
 			stream.writeDouble(y);

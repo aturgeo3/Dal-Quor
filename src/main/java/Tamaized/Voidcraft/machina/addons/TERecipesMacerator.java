@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.machina.addons;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 
 public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerator.MaceratorRecipe> {
@@ -13,7 +13,7 @@ public class TERecipesMacerator extends TamTileEntityRecipeList<TERecipesMacerat
 
 	@Override
 	protected String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	public class MaceratorRecipe extends TamTileEntityRecipeList.TamTERecipe {

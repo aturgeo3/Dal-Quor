@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.sound;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -145,7 +145,7 @@ public class VoidSoundEvents {
 	}
 	
 	private static SoundEvent registerSound(String soundName) {
-		ResourceLocation soundID = new ResourceLocation(voidCraft.modid, soundName);
+		ResourceLocation soundID = new ResourceLocation(VoidCraft.modid, soundName);
 		return GameRegistry.register(new SoundEvent(soundID).setRegistryName(soundID));
 	}
 	

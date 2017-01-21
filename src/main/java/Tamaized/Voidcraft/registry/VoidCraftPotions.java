@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.potion.PotionSheathe;
 import Tamaized.Voidcraft.potion.PotionVoidImmunity;
 import Tamaized.Voidcraft.potion.PotionVoidicInfusionImmunity;
@@ -61,7 +61,7 @@ public class VoidCraftPotions implements ITamRegistry {
 
 	@Override
 	public String getModID() {
-		return voidCraft.modid;
+		return VoidCraft.modid;
 	}
 
 	@Override

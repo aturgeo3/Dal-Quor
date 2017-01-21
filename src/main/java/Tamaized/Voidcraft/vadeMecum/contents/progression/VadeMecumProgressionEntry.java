@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents.progression;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
@@ -30,16 +30,16 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 
 	public VadeMecumProgressionEntry() {
 		super("progressionMainEntry", "Void Vade Mecum - Progression", null, null);
-		activeVade = new ItemStack(voidCraft.items.vadeMecum);
+		activeVade = new ItemStack(VoidCraft.items.vadeMecum);
 		activeVade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 	}
 
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(gui, getEntryID(Entry.RitualBlocks), "Ritual Blocks", new ItemStack(Item.getItemFromBlock(voidCraft.blocks.ritualBlock)));
+		addButton(gui, getEntryID(Entry.RitualBlocks), "Ritual Blocks", new ItemStack(Item.getItemFromBlock(VoidCraft.blocks.ritualBlock)));
 		if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.INTRO)) {
-			addButton(gui, getEntryID(Entry.RitualList), "Rituals", new ItemStack(voidCraft.blocks.ritualBlock));
+			addButton(gui, getEntryID(Entry.RitualList), "Rituals", new ItemStack(VoidCraft.blocks.ritualBlock));
 			if (gui.getPlayerStats().getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
 				addButton(gui, getEntryID(Entry.Tome), "Words of Power", activeVade);
 			}

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.handlers.VadeMecumPacketHandler;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VadeMecumGUI extends GuiScreen {
 
-	public static final ResourceLocation TEXTURES = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/VadeMecum.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/VadeMecum.png");
 
 	private int vadeW;
 	private int vadeH;
@@ -104,18 +104,18 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	public void initGui() {
 		initPosSize();
-		voidCraft.reloadRitualList();
+		VoidCraft.reloadRitualList();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (playerStats != null && playerStats.getLastEntry() != null && playerStats.getLastEntry() != "null" && playerStats.getLastEntry().contains(":")) setEntry(VadeMecumEntry.getEntry(playerStats.getLastEntry().split(":")[0]), Integer.parseInt(playerStats.getLastEntry().split(":")[1]));
 		// else setEntry(ClientProxy.vadeMecumEntryList, 0);
-		else setEntry(voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
+		else setEntry(VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 		button_forward = (VadeMecumGUI.ArrowButton) addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Forward), vadeX + vadeW - 70, vadeY + 185, true));
 		button_back = (VadeMecumGUI.ArrowButton) addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), vadeX + 45, vadeY + 185, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
 		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY +vadeH-2/*vadeY + 10*/));
-		if (voidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, "Spells", getButtonID(Button.WordsOfPower), vadeX + 42, vadeY +vadeH-3));
+		if (VoidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, "Spells", getButtonID(Button.WordsOfPower), vadeX + 42, vadeY +vadeH-3));
 		updateButtons();
 	}
 
@@ -155,9 +155,9 @@ public class VadeMecumGUI extends GuiScreen {
 	private void updateButtons() {
 		if (button_forward != null) button_forward.visible = canDrawPage() ? pageNumber + 2 < entry.getPageLength(this) : false;
 		if (button_back != null) button_back.visible = canDrawPage() ? pageNumber > 0 : false;
-		if (button_entryBack != null) button_entryBack.visible = (entry != (voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN));
+		if (button_entryBack != null) button_entryBack.visible = (entry != (VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN));
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
-		if (button_largeBack != null) button_largeBack.visible = (entry != (voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN)/* && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN */);
+		if (button_largeBack != null) button_largeBack.visible = (entry != (VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN)/* && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN */);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class VadeMecumGUI extends GuiScreen {
 					entry.goBack(this);
 					break;
 				case EntryBack:
-					setEntry(voidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
+					setEntry(VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case Credits:
@@ -290,7 +290,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	@SideOnly(Side.CLIENT)
 	static class FullButton extends GuiButton {
-		public static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/button_full.png");
+		public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/button_full.png");
 		private final VadeMecumGUI parent;
 
 		public FullButton(VadeMecumGUI gui, String text, int id, int x, int y) {
@@ -321,7 +321,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	@SideOnly(Side.CLIENT)
 	static class OverlayButton extends GuiButton {
-		public static final ResourceLocation TEXTURE = new ResourceLocation(voidCraft.modid, "textures/gui/VadeMecum/edgeButton.png");
+		public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/edgeButton.png");
 		private final boolean isForward;
 		private final VadeMecumGUI parent;
 
@@ -386,7 +386,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	public void sendPacketUpdates(VadeMecumPacketHandler.RequestType request, int objectID) {
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM));
 			DataOutputStream stream = packet.getStream();
 			VadeMecumPacketHandler.ClientToServerRequest(stream, player, request, objectID);
 			packet.sendPacketToServer();
@@ -398,7 +398,7 @@ public class VadeMecumGUI extends GuiScreen {
 	private void sendLastEntryPacket(String entry) {
 		if (entry.equals("")) return;
 		try {
-			PacketWrapper packet = PacketHelper.createPacket(voidCraft.channel, voidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY));
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM_LASTENTRY));
 			DataOutputStream stream = packet.getStream();
 			stream.writeUTF(entry);
 			packet.sendPacketToServer();

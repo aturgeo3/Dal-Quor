@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
@@ -105,7 +105,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 				case ACTION_ICESPIKE:
 					getEntity().setArmRotations(180, 180, 0, 0, true);
 					resetAnimationTick = 20 * 2;
-					if (world.isAirBlock(closestEntity.getPosition())) world.setBlockState(closestEntity.getPosition(), voidCraft.blocks.iceSpike.getDefaultState());
+					if (world.isAirBlock(closestEntity.getPosition())) world.setBlockState(closestEntity.getPosition(), VoidCraft.blocks.iceSpike.getDefaultState());
 					break;
 				case ACTION_DISINT:
 					if (closestEntity instanceof EntityLivingBase) {
@@ -145,15 +145,15 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private boolean hasSheathe() {
-		if (getEntity().getActivePotionEffect(voidCraft.potions.fireSheathe) != null) {
+		if (getEntity().getActivePotionEffect(VoidCraft.potions.fireSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(voidCraft.potions.frostSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.frostSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(voidCraft.potions.litSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.litSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(voidCraft.potions.acidSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.acidSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(voidCraft.potions.voidSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.voidSheathe) != null) {
 			return true;
 		}
 		return false;
@@ -163,22 +163,22 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 		getEntity().setArmRotations(180, 0, 0, 0, true);
 		resetAnimationTick = 20 * 2;
 		getEntity().clearActivePotions();
-		Potion sheathe = voidCraft.potions.fireSheathe;
+		Potion sheathe = VoidCraft.potions.fireSheathe;
 		switch (rand.nextInt(5)) {
 			case 0:
-				sheathe = voidCraft.potions.fireSheathe;
+				sheathe = VoidCraft.potions.fireSheathe;
 				break;
 			case 1:
-				sheathe = voidCraft.potions.frostSheathe;
+				sheathe = VoidCraft.potions.frostSheathe;
 				break;
 			case 2:
-				sheathe = voidCraft.potions.litSheathe;
+				sheathe = VoidCraft.potions.litSheathe;
 				break;
 			case 3:
-				sheathe = voidCraft.potions.acidSheathe;
+				sheathe = VoidCraft.potions.acidSheathe;
 				break;
 			case 4:
-				sheathe = voidCraft.potions.voidSheathe;
+				sheathe = VoidCraft.potions.voidSheathe;
 				break;
 			default:
 				break;

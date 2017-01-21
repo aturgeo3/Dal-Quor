@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.vadeMecum.contents;
 
-import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumButton;
 import Tamaized.Voidcraft.vadeMecum.VadeMecumEntry;
@@ -34,8 +34,8 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(gui, getEntryID(Entry.Progression), "Mysteries of the Void", new ItemStack(voidCraft.blocks.ritualBlock));
-		addButton(gui, getEntryID(Entry.Docs), "Documentation", new ItemStack(voidCraft.items.voidcrystal));
+		addButton(gui, getEntryID(Entry.Progression), "Mysteries of the Void", new ItemStack(VoidCraft.blocks.ritualBlock));
+		addButton(gui, getEntryID(Entry.Docs), "Documentation", new ItemStack(VoidCraft.items.voidcrystal));
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	}
 
 	public void preLoadObject() {
-		voidCraft.instance.logger.info("Preloading Vade Mecum Entry Objects");
+		VoidCraft.instance.logger.info("Preloading Vade Mecum Entry Objects");
 		Docs.preLoadObjects();
 		Progression.preLoadObjects();
 	}
