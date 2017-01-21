@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.voidCraft;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy;
 import Tamaized.Voidcraft.machina.addons.TERecipesMacerator;
@@ -57,7 +58,9 @@ public class VoidCraftTERecipes implements ITamRegistry {
 
 		ItemStack[] voidicImmunityInputStack = new ItemStack[] { new ItemStack(voidCraft.items.etherealFruit), new ItemStack(voidCraft.items.etherealFruit_redstone), new ItemStack(voidCraft.items.etherealFruit_lapis), new ItemStack(voidCraft.items.etherealFruit_gold), new ItemStack(voidCraft.items.etherealFruit_emerald), new ItemStack(voidCraft.items.etherealFruit_diamond) };
 		ItemStack result = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), voidCraft.potions.type_voidImmunity);
-		alchemy.registerRecipe(alchemy.new AlchemyRecipe(voidicImmunityInputStack, result, 350));
+		alchemy.registerRecipe(alchemy.new AlchemyRecipe(null, voidicImmunityInputStack, result, 350));
+		ItemStack[] testInputStack = new ItemStack[] { new ItemStack(voidCraft.items.diamondDust), new ItemStack(voidCraft.items.ironDust), new ItemStack(voidCraft.items.goldDust), new ItemStack(voidCraft.items.emeraldDust), new ItemStack(Items.REDSTONE), new ItemStack(voidCraft.items.lapisDust) };
+		if (voidCraft.instance.isDevBuild) alchemy.registerRecipe(alchemy.new AlchemyRecipe(IVadeMecumCapability.Category.Flame, testInputStack, new ItemStack(voidCraft.items.debugger), 350));
 	}
 
 	@Override

@@ -175,6 +175,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void copyFrom(IVadeMecumCapability cap) {
+		if (cap == null) return;
 		setObtainedCategories(cap.getObtainedCategories());
 		setActivePowers(cap.getActivePowers());
 		setPassivePowers(cap.getPassivePowers());

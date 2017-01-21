@@ -23,6 +23,10 @@ public abstract class VoidCraftRecipeWrapperJEI<T extends TamTileEntityRecipeLis
 		ingredients.setOutput(ItemStack.class, getOutput());
 	}
 
+	public T getRecipe() {
+		return recipe;
+	}
+
 	public List<ItemStack> getInputs() {
 		return Arrays.asList(recipe.getInput());
 	}
@@ -34,7 +38,7 @@ public abstract class VoidCraftRecipeWrapperJEI<T extends TamTileEntityRecipeLis
 	public boolean isValid() {
 		return recipe != null && recipe.getInput().length > 0 && !recipe.getOutput().isEmpty();
 	}
-	
+
 	public abstract void setupSlots(IGuiIngredientGroup g);
 
 }

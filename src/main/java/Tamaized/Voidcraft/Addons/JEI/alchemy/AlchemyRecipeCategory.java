@@ -2,6 +2,8 @@ package Tamaized.Voidcraft.Addons.JEI.alchemy;
 
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -43,7 +45,7 @@ public class AlchemyRecipeCategory implements IRecipeCategory {
 	public IDrawable getBackground() {
 		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 150, 75, -10, 0, -60, 0);
 	}
-
+	
 	@Override
 	public void drawExtras(Minecraft minecraft) {
 		powerAnimation.draw(minecraft);

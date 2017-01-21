@@ -1,14 +1,23 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import java.util.UUID;
+
 import Tamaized.Voidcraft.voidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.capabilities.vadeMecum.VadeMecumCapabilityHandler;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 
@@ -26,8 +35,20 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 	public int finishTick = 0;
 	private AlchemyRecipe recipe;
 
+	private String ownerName = "";
+	private UUID ownerID;
+	private IVadeMecumCapability owner;
+	private int capTick = 1;
+
 	public TileEntityVoidicAlchemy() {
 		super(SLOTS_ALL.length + 1);
+	}
+
+	public void setOwner(EntityPlayer player) {
+		ownerName = player.getGameProfile().getName();
+		ownerID = player.getGameProfile().getId();
+		owner = player.getCapability(CapabilityList.VADEMECUM, null);
+		player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "Owner Set: " + player.getGameProfile().getName() + "; pos{" + getPos().getX() + ", " + getPos().getY() + ",  " + getPos().getZ() + "}"));
 	}
 
 	@Override
@@ -73,11 +94,26 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 	@Override
 	protected void readNBT(NBTTagCompound nbt) {
 		cookingTick = nbt.getInteger("cookingTick");
+		NBTTagCompound ownerData = nbt.getCompoundTag("ownerData");
+		ownerName = ownerData.getString("ownerName");
+		String id = ownerData.getString("ownerID");
+		ownerID = (id.isEmpty() || id.equals("null")) ? null : UUID.fromString(id);
+		NBTTagCompound capData = ownerData.getCompoundTag("capData");
+		if (!capData.hasNoTags()) {
+			owner = new VadeMecumCapabilityHandler();
+			CapabilityList.VADEMECUM.readNBT(owner, null, capData);
+		}
 	}
 
 	@Override
 	protected NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("cookingTick", cookingTick);
+		NBTTagCompound ownerData = new NBTTagCompound();
+		ownerData.setString("ownerName", ownerName);
+		ownerData.setString("ownerID", ownerID == null ? "null" : ownerID.toString());
+		NBTTagCompound capData = owner == null ? new NBTTagCompound() : (NBTTagCompound) CapabilityList.VADEMECUM.writeNBT(owner, null);
+		ownerData.setTag("capData", capData);
+		nbt.setTag("ownerData", ownerData);
 		return nbt;
 	}
 
@@ -86,6 +122,7 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 		boolean cooking = false;
 
 		doLastItemChecks();
+		if (capTick++ % 20 == 0) validateCapData();
 
 		if (voidicPower > 0 && canCook()) {
 			cooking = true;
@@ -113,6 +150,16 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 		}
 	}
 
+	private void validateCapData() {
+		capTick = 1;
+		if (ownerID == null) return;
+		EntityPlayer player = world.getPlayerEntityByUUID(ownerID);
+		if (player != null) {
+			owner = new VadeMecumCapabilityHandler();
+			owner.copyFrom(player.getCapability(CapabilityList.VADEMECUM, null));
+		}
+	}
+
 	private void doLastItemChecks() {
 		for (int i = SLOT_INPUT_1; i <= SLOT_INPUT_6; i++) {
 			if (lastItem[i] == null || getStackInSlot(i).isEmpty() || lastItem[i] != getStackInSlot(i).getItem()) {
@@ -128,7 +175,7 @@ public class TileEntityVoidicAlchemy extends TileEntityVoidicPowerInventory {
 				return false;
 			}
 		}
-		recipe = voidCraft.teRecipes.alchemy.getRecipe(new ItemStack[] { getStackInSlot(SLOT_INPUT_1), getStackInSlot(SLOT_INPUT_2), getStackInSlot(SLOT_INPUT_3), getStackInSlot(SLOT_INPUT_4), getStackInSlot(SLOT_INPUT_5), getStackInSlot(SLOT_INPUT_6) });
+		recipe = voidCraft.teRecipes.alchemy.getRecipe(owner, new ItemStack[] { getStackInSlot(SLOT_INPUT_1), getStackInSlot(SLOT_INPUT_2), getStackInSlot(SLOT_INPUT_3), getStackInSlot(SLOT_INPUT_4), getStackInSlot(SLOT_INPUT_5), getStackInSlot(SLOT_INPUT_6) });
 		if (recipe == null) return false;
 		if (getStackInSlot(SLOT_OUTPUT).isEmpty()) return true;
 		if (!getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) return false;
