@@ -31,6 +31,8 @@ public class VadeMecumPageMultiBlock extends VadeMecumPage {
 		gui.mc.getTextureManager().bindTexture(TEXTURE);
 		gui.drawTexturedModalRect(layerX, layerY + 35, 128, 128, 0, 0, 256, 256);
 
+		if (stackList == null || stackList.length <= 0) return;
+		
 		if (!stackList[0].isEmpty()) gui.renderItemStack(stackList[0], layerX + 23, layerY + 90, mx, my);
 		if (!stackList[1].isEmpty()) gui.renderItemStack(stackList[1], layerX + 39, layerY + 82, mx, my);
 		if (!stackList[2].isEmpty()) gui.renderItemStack(stackList[2], layerX + 55, layerY + 74, mx, my);

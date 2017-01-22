@@ -113,6 +113,29 @@ public class RitualList {
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				new ItemStack(Blocks.MAGMA), ItemStack.EMPTY, new ItemStack(Blocks.MAGMA) });
+		map.put(IVadeMecumCapability.Category.Fireball, new ItemStack[] {
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, new ItemStack(VoidCraft.blocks.ritualBlock), ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, new ItemStack(Blocks.NETHERRACK), ItemStack.EMPTY,
+
+				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.TNT), new ItemStack(Blocks.MAGMA),
+
+				ItemStack.EMPTY, new ItemStack(Blocks.NETHERRACK), ItemStack.EMPTY,
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, new ItemStack(Blocks.NETHERRACK), ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, });
 		map.put(IVadeMecumCapability.Category.Freeze, new ItemStack[] {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
@@ -159,6 +182,29 @@ public class RitualList {
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				new ItemStack(Blocks.SNOW), ItemStack.EMPTY, new ItemStack(Blocks.SNOW) });
+		map.put(IVadeMecumCapability.Category.IceSpike, new ItemStack[] {
+
+				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
+
+				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
+
+				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(VoidCraft.blocks.ritualBlock),
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, new ItemStack(Blocks.ICE), ItemStack.EMPTY,
+
+				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
+
+				ItemStack.EMPTY, new ItemStack(Blocks.ICE), ItemStack.EMPTY,
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, new ItemStack(Blocks.ICE), ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY });
 		map.put(IVadeMecumCapability.Category.Shock, new ItemStack[] {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_BRICKS),

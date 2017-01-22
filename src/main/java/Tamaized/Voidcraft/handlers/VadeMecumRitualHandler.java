@@ -43,7 +43,23 @@ public class VadeMecumRitualHandler {
 			if (cap.hasCategory(IVadeMecumCapability.Category.TOME)) {
 				if (cap.hasCategory(IVadeMecumCapability.Category.Flame)) {
 					if (cap.hasCategory(IVadeMecumCapability.Category.FireSheathe)) {
+						if (cap.hasCategory(IVadeMecumCapability.Category.Fireball)) {
+							if (cap.hasCategory(IVadeMecumCapability.Category.FireTrap)) {
+								if (cap.hasCategory(IVadeMecumCapability.Category.ExplosionFire)) {
+									if (cap.hasCategory(IVadeMecumCapability.Category.RingOfFire)) {
 
+									} else {
+										list.add(IVadeMecumCapability.Category.RingOfFire);
+									}
+								} else {
+									list.add(IVadeMecumCapability.Category.ExplosionFire);
+								}
+							} else {
+								list.add(IVadeMecumCapability.Category.FireTrap);
+							}
+						} else {
+							list.add(IVadeMecumCapability.Category.Fireball);
+						}
 					} else {
 						list.add(IVadeMecumCapability.Category.FireSheathe);
 					}
@@ -52,7 +68,23 @@ public class VadeMecumRitualHandler {
 				}
 				if (cap.hasCategory(IVadeMecumCapability.Category.Freeze)) {
 					if (cap.hasCategory(IVadeMecumCapability.Category.FrostSheathe)) {
+						if (cap.hasCategory(IVadeMecumCapability.Category.IceSpike)) {
+							if (cap.hasCategory(IVadeMecumCapability.Category.FrostTrap)) {
+								if (cap.hasCategory(IVadeMecumCapability.Category.ExplosionFrost)) {
+									if (cap.hasCategory(IVadeMecumCapability.Category.RingOfFrost)) {
 
+									} else {
+										list.add(IVadeMecumCapability.Category.RingOfFrost);
+									}
+								} else {
+									list.add(IVadeMecumCapability.Category.ExplosionFrost);
+								}
+							} else {
+								list.add(IVadeMecumCapability.Category.FrostTrap);
+							}
+						} else {
+							list.add(IVadeMecumCapability.Category.IceSpike);
+						}
 					} else {
 						list.add(IVadeMecumCapability.Category.FrostSheathe);
 					}
@@ -61,7 +93,23 @@ public class VadeMecumRitualHandler {
 				}
 				if (cap.hasCategory(IVadeMecumCapability.Category.Shock)) {
 					if (cap.hasCategory(IVadeMecumCapability.Category.ShockSheathe)) {
+						if (cap.hasCategory(IVadeMecumCapability.Category.LitStrike)) {
+							if (cap.hasCategory(IVadeMecumCapability.Category.LitTrap)) {
+								if (cap.hasCategory(IVadeMecumCapability.Category.ExplosionLit)) {
+									if (cap.hasCategory(IVadeMecumCapability.Category.RingOfLit)) {
 
+									} else {
+										list.add(IVadeMecumCapability.Category.RingOfLit);
+									}
+								} else {
+									list.add(IVadeMecumCapability.Category.ExplosionLit);
+								}
+							} else {
+								list.add(IVadeMecumCapability.Category.LitTrap);
+							}
+						} else {
+							list.add(IVadeMecumCapability.Category.LitStrike);
+						}
 					} else {
 						list.add(IVadeMecumCapability.Category.ShockSheathe);
 					}
@@ -70,12 +118,47 @@ public class VadeMecumRitualHandler {
 				}
 				if (cap.hasCategory(IVadeMecumCapability.Category.AcidSpray)) {
 					if (cap.hasCategory(IVadeMecumCapability.Category.AcidSheathe)) {
+						if (cap.hasCategory(IVadeMecumCapability.Category.Disint)) {
+							if (cap.hasCategory(IVadeMecumCapability.Category.AcidTrap)) {
+								if (cap.hasCategory(IVadeMecumCapability.Category.ExplosionAcid)) {
+									if (cap.hasCategory(IVadeMecumCapability.Category.RingOfAcid)) {
 
+									} else {
+										list.add(IVadeMecumCapability.Category.RingOfAcid);
+									}
+								} else {
+									list.add(IVadeMecumCapability.Category.ExplosionAcid);
+								}
+							} else {
+								list.add(IVadeMecumCapability.Category.AcidTrap);
+							}
+						} else {
+							list.add(IVadeMecumCapability.Category.Disint);
+						}
 					} else {
 						list.add(IVadeMecumCapability.Category.AcidSheathe);
 					}
 				} else {
 					list.add(IVadeMecumCapability.Category.AcidSpray);
+				}
+				if (cap.hasCategory(IVadeMecumCapability.Category.Flame) && cap.hasCategory(IVadeMecumCapability.Category.Freeze) && cap.hasCategory(IVadeMecumCapability.Category.Shock) && cap.hasCategory(IVadeMecumCapability.Category.AcidSpray)) {
+					if (cap.hasCategory(IVadeMecumCapability.Category.VoidicTouch)) {
+						if (cap.hasCategory(IVadeMecumCapability.Category.FireSheathe) && cap.hasCategory(IVadeMecumCapability.Category.FrostSheathe) && cap.hasCategory(IVadeMecumCapability.Category.ShockSheathe) && cap.hasCategory(IVadeMecumCapability.Category.AcidSheathe)) {
+							if (cap.hasCategory(IVadeMecumCapability.Category.VoidicSheathe)) {
+								if (cap.hasCategory(IVadeMecumCapability.Category.ExplosionFire) && cap.hasCategory(IVadeMecumCapability.Category.ExplosionFrost) && cap.hasCategory(IVadeMecumCapability.Category.ExplosionLit) && cap.hasCategory(IVadeMecumCapability.Category.ExplosionAcid)) {
+									if (cap.hasCategory(IVadeMecumCapability.Category.Implosion)) {
+
+									} else {
+										list.add(IVadeMecumCapability.Category.Implosion);
+									}
+								}
+							} else {
+								list.add(IVadeMecumCapability.Category.VoidicTouch);
+							}
+						}
+					} else {
+						list.add(IVadeMecumCapability.Category.VoidicTouch);
+					}
 				}
 			} else {
 				list.add(IVadeMecumCapability.Category.TOME);
@@ -86,11 +169,12 @@ public class VadeMecumRitualHandler {
 
 	public static boolean doChecks(IVadeMecumCapability.Category ritual, World world, BlockPos pos, boolean clear) {
 		ItemStack[] ritualStacks = VoidCraft.ritualList.getRitual(ritual);
+		if (ritualStacks == null || ritualStacks.length <= 0) return false;
 		int index = 0;
 		for (index = 0; index < ritualStacks.length; index++) {
 			if (ritualStacks[index].getItem() == Item.getItemFromBlock(VoidCraft.blocks.ritualBlock)) break;
 		}
-		pos = pos.add(index % 3 == 0 ? -1 : (index > 1 && (index - 2) % 3 == 0) ? 1 : 0, index > 8 ? index > 17 ? -2 : -1 : 0, (index % 9 == 0 || (index - 1) % 9 == 0 || (index - 2) % 9 == 0) ? -1 : ((index - 6) % 9 == 0 || (index - 7) % 9 == 0 || (index - 8) % 9 == 0) ? 1 : 0);
+		pos = pos.add(index % 3 == 0 ? 1 : (index > 1 && (index - 2) % 3 == 0) ? -1 : 0, index > 8 ? index > 17 ? -2 : -1 : 0, (index % 9 == 0 || (index - 1) % 9 == 0 || (index - 2) % 9 == 0) ? 1 : ((index - 6) % 9 == 0 || (index - 7) % 9 == 0 || (index - 8) % 9 == 0) ? -1 : 0);
 		// System.out.print(pos);
 		int val = check(ritualStacks, world, pos);
 		if (val > 0) {
