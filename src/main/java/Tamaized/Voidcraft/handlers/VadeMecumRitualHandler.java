@@ -40,24 +40,40 @@ public class VadeMecumRitualHandler {
 		if (cap.getObtainedCategories().isEmpty()) {
 			list.add(IVadeMecumCapability.Category.INTRO);
 		} else {
-			if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.TOME)) {
-				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Flame)) {
+			if (cap.hasCategory(IVadeMecumCapability.Category.TOME)) {
+				if (cap.hasCategory(IVadeMecumCapability.Category.Flame)) {
+					if (cap.hasCategory(IVadeMecumCapability.Category.FireSheathe)) {
 
+					} else {
+						list.add(IVadeMecumCapability.Category.FireSheathe);
+					}
 				} else {
 					list.add(IVadeMecumCapability.Category.Flame);
 				}
-				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Freeze)) {
+				if (cap.hasCategory(IVadeMecumCapability.Category.Freeze)) {
+					if (cap.hasCategory(IVadeMecumCapability.Category.FrostSheathe)) {
 
+					} else {
+						list.add(IVadeMecumCapability.Category.FrostSheathe);
+					}
 				} else {
 					list.add(IVadeMecumCapability.Category.Freeze);
 				}
-				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.Shock)) {
+				if (cap.hasCategory(IVadeMecumCapability.Category.Shock)) {
+					if (cap.hasCategory(IVadeMecumCapability.Category.ShockSheathe)) {
 
+					} else {
+						list.add(IVadeMecumCapability.Category.ShockSheathe);
+					}
 				} else {
 					list.add(IVadeMecumCapability.Category.Shock);
 				}
-				if (cap.getObtainedCategories().contains(IVadeMecumCapability.Category.AcidSpray)) {
+				if (cap.hasCategory(IVadeMecumCapability.Category.AcidSpray)) {
+					if (cap.hasCategory(IVadeMecumCapability.Category.AcidSheathe)) {
 
+					} else {
+						list.add(IVadeMecumCapability.Category.AcidSheathe);
+					}
 				} else {
 					list.add(IVadeMecumCapability.Category.AcidSpray);
 				}
