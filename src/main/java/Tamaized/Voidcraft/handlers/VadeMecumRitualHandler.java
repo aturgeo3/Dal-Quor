@@ -85,9 +85,16 @@ public class VadeMecumRitualHandler {
 	}
 
 	public static boolean doChecks(IVadeMecumCapability.Category ritual, World world, BlockPos pos, boolean clear) {
-		int val = check(VoidCraft.ritualList.getRitual(ritual), world, pos);
+		ItemStack[] ritualStacks = VoidCraft.ritualList.getRitual(ritual);
+		int index = 0;
+		for (index = 0; index < ritualStacks.length; index++) {
+			if (ritualStacks[index].getItem() == Item.getItemFromBlock(VoidCraft.blocks.ritualBlock)) break;
+		}
+		pos = pos.add(index % 3 == 0 ? -1 : (index > 1 && (index - 2) % 3 == 0) ? 1 : 0, index > 8 ? index > 17 ? -2 : -1 : 0, (index % 9 == 0 || (index - 1) % 9 == 0 || (index - 2) % 9 == 0) ? -1 : ((index - 6) % 9 == 0 || (index - 7) % 9 == 0 || (index - 8) % 9 == 0) ? 1 : 0);
+		// System.out.print(pos);
+		int val = check(ritualStacks, world, pos);
 		if (val > 0) {
-			if (clear) clear(VoidCraft.ritualList.getRitual(ritual), val, world, pos);
+			if (clear) clear(ritualStacks, val, world, pos);
 			return true;
 		}
 		return false;

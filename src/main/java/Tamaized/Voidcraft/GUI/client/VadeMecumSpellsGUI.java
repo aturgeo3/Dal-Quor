@@ -39,7 +39,7 @@ public class VadeMecumSpellsGUI extends GuiScreen {
 		IVadeMecumCapability cap = mc.player.getCapability(CapabilityList.VADEMECUM, null);
 		int index = 0;
 		for (Category spell : cap.getAvailableActivePowers()) {
-			buttonList.add(new SpellButton(cap, BUTTON_SPELL, xLoc, yLoc + (25 * (index)), spell));
+			buttonList.add(new SpellButton(cap, BUTTON_SPELL, xLoc + (100 * ((int) Math.floor(index / 7))), yLoc + (25 * (index % 7)), spell));
 			index++;
 		}
 	}
@@ -95,7 +95,7 @@ public class VadeMecumSpellsGUI extends GuiScreen {
 		private final IVadeMecumCapability data;
 
 		public SpellButton(IVadeMecumCapability cap, int buttonId, int x, int y, IVadeMecumCapability.Category theSpell) {
-			super(buttonId, x, y, 80, 18, "");
+			super(buttonId, x, y, 90, 18, "");
 			data = cap;
 			spell = theSpell;
 		}
