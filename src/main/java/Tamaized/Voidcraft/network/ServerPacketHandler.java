@@ -131,9 +131,10 @@ public class ServerPacketHandler {
 						VadeMecumPacketHandler.DecodeRequestServer(bbis, player);
 					}
 						break;
-					case VADEMECUM_LASTENTRY:
+					case VADEMECUM_LASTENTRY: {
 						IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
 						if (cap != null) cap.setLastEntry(bbis.readUTF());
+					}
 						break;
 					case VOIDBOX_PLAY: {
 						TileEntityVoidBox voidBox = (TileEntityVoidBox) player.world.getTileEntity(new BlockPos(bbis.readInt(), bbis.readInt(), bbis.readInt()));

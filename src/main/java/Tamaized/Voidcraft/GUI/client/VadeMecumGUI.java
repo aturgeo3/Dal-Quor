@@ -114,8 +114,8 @@ public class VadeMecumGUI extends GuiScreen {
 		button_back = (VadeMecumGUI.ArrowButton) addButton(new VadeMecumGUI.ArrowButton(getButtonID(Button.Back), vadeX + 45, vadeY + 185, false));
 		button_entryBack = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = (VadeMecumGUI.OverlayButton) addButton(new VadeMecumGUI.OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
-		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY +vadeH-2/*vadeY + 10*/));
-		if (VoidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, "Spells", getButtonID(Button.WordsOfPower), vadeX + 42, vadeY +vadeH-3));
+		button_largeBack = (VadeMecumGUI.LargeArrowButton) addButton(new VadeMecumGUI.LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY + vadeH - 2/* vadeY + 10 */));
+		if (VoidCraft.isDevBuild) button_spells = (VadeMecumGUI.FullButton) addButton(new VadeMecumGUI.FullButton(this, "Spells", getButtonID(Button.WordsOfPower), vadeX + 42, vadeY + vadeH - 3));
 		updateButtons();
 	}
 
@@ -135,6 +135,8 @@ public class VadeMecumGUI extends GuiScreen {
 
 	public void changeEntry(VadeMecumEntry e) {
 		nextEntry = e;
+		String eName = VadeMecumEntry.getEntry(e);
+		if (eName != null) sendLastEntryPacket(eName + ":" + pageNumber);
 	}
 
 	@Override
@@ -158,6 +160,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (button_entryBack != null) button_entryBack.visible = (entry != (VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN));
 		if (button_credits != null) button_credits.visible = false;// entry == ClientProxy.vadeMecumEntryList.MAIN;
 		if (button_largeBack != null) button_largeBack.visible = (entry != (VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN)/* && entry != ClientProxy.vadeMecumEntryList.Docs.MAIN && entry != ClientProxy.vadeMecumEntryList.Progression.MAIN */);
+		if (button_spells != null) button_spells.visible = playerStats != null ? playerStats.hasCategory(IVadeMecumCapability.Category.TOME) : false;
 	}
 
 	/**
@@ -179,6 +182,9 @@ public class VadeMecumGUI extends GuiScreen {
 				case EntryBack:
 					setEntry(VoidCraft.isDevBuild ? ClientProxy.vadeMecumEntryList : ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
+					break;
+				case WordsOfPower:
+					mc.displayGuiScreen(new Tamaized.Voidcraft.GUI.client.VadeMecumSpellsGUI());
 					break;
 				case Credits:
 					break;
@@ -208,7 +214,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (canDrawPage()) {
 			entry.render(this, fontRendererObj, mouseX, mouseY, vadeX, vadeY, pageNumber);
 		}
-		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + vadeH-24, 0xFFFF00);
+		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, "Main", vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
 		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, "Credits", vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (playerStats.getCurrentActive() != null) {
 
@@ -314,7 +320,7 @@ public class VadeMecumGUI extends GuiScreen {
 					j += 124;
 				}
 				parent.drawTexturedModalRect(xPosition, yPosition, 40, 14, i, j, 255, 124);
-				parent.drawCenteredString(parent.fontRendererObj, displayString, xPosition + (width / 2), yPosition + (height / 2) - (parent.fontRendererObj.FONT_HEIGHT/2), 0xFFFF00);
+				parent.drawCenteredString(parent.fontRendererObj, displayString, xPosition + (width / 2), yPosition + (height / 2) - (parent.fontRendererObj.FONT_HEIGHT / 2), 0xFFFF00);
 			}
 		}
 	}
@@ -382,17 +388,6 @@ public class VadeMecumGUI extends GuiScreen {
 		vertexbuffer.pos((double) (x + 0), (double) (y + 0), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + 0) * 0.00390625F)).endVertex();
 		tessellator.draw();
 		GlStateManager.disableBlend();
-	}
-
-	public void sendPacketUpdates(VadeMecumPacketHandler.RequestType request, int objectID) {
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM));
-			DataOutputStream stream = packet.getStream();
-			VadeMecumPacketHandler.ClientToServerRequest(stream, player, request, objectID);
-			packet.sendPacketToServer();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	private void sendLastEntryPacket(String entry) {

@@ -37,7 +37,7 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 		{
 			ArrayList<IVadeMecumCapability.Category> list = new ArrayList<IVadeMecumCapability.Category>();
 			array = compound.getIntArray("category");
-			for (int i = 0; i < array.length - 1; i++) {
+			for (int i = 0; i < array.length; i++) {
 				list.add(IVadeMecumCapability.getCategoryFromID(array[i]));
 			}
 			instance.setObtainedCategories(list);

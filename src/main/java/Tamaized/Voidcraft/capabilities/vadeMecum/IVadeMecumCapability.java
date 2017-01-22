@@ -34,6 +34,7 @@ public interface IVadeMecumCapability {
 	}
 
 	public static String getCategoryName(Category c) {
+		if (c == null) return "null";
 		switch (c) {
 			case INTRO:
 				return "Rituals";
@@ -121,11 +122,11 @@ public interface IVadeMecumCapability {
 	public void clearCategories();
 
 	public boolean hasCategory(Category category);
-	
+
 	public ArrayList<Category> getAvailableActivePowers();
 
 	public void setCurrentActive(Category power);
-	
+
 	public void clearActivePower();
 
 	public Category getCurrentActive();

@@ -126,7 +126,7 @@ public class VadeMecumEntry {
 
 	protected final void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
-		if (pageList != null) {
+		if (pageList != null && pageList.length > page) {
 			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
 			if (page + 1 < getPageLength(gui)) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}

@@ -46,8 +46,8 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.Category power = cap.getCurrentActive();
 		boolean useCharge = false;
-		power = IVadeMecumCapability.Category.Implosion;
-		if (power != null) {
+		power = cap.getCurrentActive();
+		if (power != null && cap.hasCategory(power)) {
 			HashSet<Entity> exclude = new HashSet<Entity>();
 			RayTraceResult result;
 			switch (power) {
@@ -58,37 +58,33 @@ public class VadeMecumWordsOfPower {
 						if (result.entityHit != null) {
 							result.entityHit.setFire(10);
 						} else {
-							BlockPos bp = result.getBlockPos();
-							BlockPos pos = bp;
-							if (bp != null) {
-								switch (result.sideHit) {
-									case UP: {
-										pos = pos.add(0, 1, 0);
-									}
-										break;
-									case DOWN: {
-										pos = pos.add(0, -1, 0);
-									}
-										break;
-									case NORTH: {
-										pos = pos.add(0, 0, -1);
-									}
-										break;
-									case SOUTH: {
-										pos = pos.add(0, 0, 1);
-									}
-										break;
-									case EAST: {
-										pos = pos.add(1, 0, 0);
-									}
-										break;
-									case WEST: {
-										pos = pos.add(-1, 0, 0);
-									}
-										break;
-									default:
+							BlockPos pos = result.getBlockPos();
+							switch (result.sideHit) {
+								default:
+								case UP: {
+									pos = pos.add(0, 1, 0);
 								}
-								break;
+									break;
+								case DOWN: {
+									pos = pos.add(0, -1, 0);
+								}
+									break;
+								case NORTH: {
+									pos = pos.add(0, 0, -1);
+								}
+									break;
+								case SOUTH: {
+									pos = pos.add(0, 0, 1);
+								}
+									break;
+								case EAST: {
+									pos = pos.add(1, 0, 0);
+								}
+									break;
+								case WEST: {
+									pos = pos.add(-1, 0, 0);
+								}
+									break;
 							}
 							if (world.isAirBlock(pos)) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 						}
@@ -127,7 +123,7 @@ public class VadeMecumWordsOfPower {
 				case Shock: {
 					exclude.add(player);
 					RayTraceResult ray = RayTraceHelper.tracePath(world, player, 2, 1, exclude);
-					if (ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
+					if (ray != null && ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
 						((EntityLivingBase) ray.entityHit).attackEntityFrom(new DamageSourceLit(), 5);
 						useCharge = true;
 					}
@@ -183,7 +179,7 @@ public class VadeMecumWordsOfPower {
 				case Freeze: {
 					exclude.add(player);
 					RayTraceResult ray = RayTraceHelper.tracePath(world, player, 2, 1, exclude);
-					if (ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
+					if (ray != null && ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
 						((EntityLivingBase) ray.entityHit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 						useCharge = true;
 					}
@@ -298,7 +294,7 @@ public class VadeMecumWordsOfPower {
 				case VoidicTouch: {
 					exclude.add(player);
 					RayTraceResult ray = RayTraceHelper.tracePath(world, player, 2, 1, exclude);
-					if (ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
+					if (ray != null && ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
 						((EntityLivingBase) ray.entityHit).attackEntityFrom(new DamageSourceVoidicInfusion(), 5);
 						IVoidicInfusionCapability inf = ((EntityLivingBase) ray.entityHit).getCapability(CapabilityList.VOIDICINFUSION, null);
 						if (inf != null) inf.addInfusion(600);

@@ -3,8 +3,12 @@ package Tamaized.Voidcraft.handlers;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import Tamaized.TamModized.helper.PacketHelper;
+import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.network.ServerPacketHandler;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -22,9 +26,16 @@ public class VadeMecumPacketHandler {
 		return id > RequestType.values().length - 1 ? RequestType.NULL : RequestType.values()[id];
 	}
 
-	public static void ClientToServerRequest(DataOutputStream stream, EntityPlayer player, RequestType type, int enumID) throws IOException {
-		stream.writeInt(getRequestID(type));
-		stream.writeInt(enumID);
+	public static void ClientToServerRequest(RequestType type, int objectID) {
+		try {
+			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.VADEMECUM));
+			DataOutputStream stream = packet.getStream();
+			stream.writeInt(getRequestID(type));
+			stream.writeInt(objectID);
+			packet.sendPacketToServer();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void DecodeRequestServer(ByteBufInputStream bbis, EntityPlayer player) throws IOException {
@@ -40,7 +51,8 @@ public class VadeMecumPacketHandler {
 				capability.clearCategories();
 				break;
 			case ACTIVE_SET:
-				capability.setCurrentActive(IVadeMecumCapability.getCategoryFromID(bbis.readInt()));
+				IVadeMecumCapability.Category category = IVadeMecumCapability.getCategoryFromID(bbis.readInt());
+				if (category != null && IVadeMecumCapability.isActivePower(category) && capability.hasCategory(category)) capability.setCurrentActive(category);
 				break;
 			case ACTIVE_CLEAR:
 				capability.clearActivePower();
