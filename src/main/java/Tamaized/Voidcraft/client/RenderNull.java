@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderNull extends Render<Entity> {
 
 	public RenderNull(RenderManager manager) {
-		super(Minecraft.getMinecraft().getRenderManager());
+		super(manager);
 	}
 	
 	@Override

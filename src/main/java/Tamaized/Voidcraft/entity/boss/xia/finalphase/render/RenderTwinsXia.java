@@ -18,7 +18,7 @@ public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
 	private final ResourceLocation TEXTURE;
 
 	public RenderTwinsXia(RenderManager manager, ResourceLocation texture, ModelVoidBoss model, float shadowsizeIn) {
-		super(Minecraft.getMinecraft().getRenderManager(), model, shadowsizeIn);
+		super(manager, model, shadowsizeIn);
 		TEXTURE = texture;
 	}
 
