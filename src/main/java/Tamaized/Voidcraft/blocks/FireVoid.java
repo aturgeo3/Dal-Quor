@@ -1,5 +1,7 @@
 package Tamaized.Voidcraft.blocks;
 
+import java.util.Random;
+
 import Tamaized.TamModized.blocks.TamBlockFire;
 import Tamaized.TamModized.blocks.TamBlockPortal;
 import Tamaized.Voidcraft.VoidCraft;
@@ -48,6 +50,12 @@ public class FireVoid extends TamBlockFire {
 	@Override
 	protected boolean canNeighborCatchFire(World worldIn, BlockPos pos) {
 		return false;
+	}
+
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		super.updateTick(world, pos, state, rand);
+		if (world.isAirBlock(pos.down())) world.setBlockToAir(pos);
 	}
 
 	@Override

@@ -68,16 +68,16 @@ public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardi
 				renderHeldItem(entity, itemstack1, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, EnumHandSide.LEFT);
 				GlStateManager.popMatrix();
 			}
-		}
-		// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
-		Minecraft mc = Minecraft.getMinecraft();
-		World world = mc.world;
-		if (!mc.isGamePaused()) {
-			for (int i = 0; i < 10; i++) {
-				Double dX = (world.rand.nextDouble() * 1.0) - 0.5D;
-				Double dZ = (world.rand.nextDouble() * 1.0) - 0.5D;
-				 world.spawnParticle(EnumParticleTypes.FLAME, entity.posX + dX, entity.posY+0.75, entity.posZ + dZ, 0, -0.04, 0);
-				//world.spawnParticle(EnumParticleTypes.FLAME, entity.posX, entity.posY + 0.25, entity.posZ, 0, 0, 0);
+			// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
+			Minecraft mc = Minecraft.getMinecraft();
+			World world = mc.world;
+			if (!mc.isGamePaused()) {
+				for (int i = 0; i < 10; i++) {
+					Double dX = (world.rand.nextDouble() * 1.0) - 0.5D;
+					Double dZ = (world.rand.nextDouble() * 1.0) - 0.5D;
+					world.spawnParticle(EnumParticleTypes.FLAME, entity.posX + dX, entity.posY + 0.75, entity.posZ + dZ, 0, -0.04, 0);
+					// world.spawnParticle(EnumParticleTypes.FLAME, entity.posX, entity.posY + 0.25, entity.posZ, 0, 0, 0);
+				}
 			}
 		}
 		GlStateManager.popMatrix();

@@ -6,6 +6,7 @@ import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,6 +41,10 @@ public class Debugger extends TamItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
+			EntityCompanionFireElemental fireElemental = new EntityCompanionFireElemental(worldIn);
+			fireElemental.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
+			fireElemental.tame(playerIn);
+			worldIn.spawnEntity(fireElemental);
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
 			// EntityPig pig = new EntityPig(worldIn);
 			// pig.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
@@ -87,9 +92,9 @@ public class Debugger extends TamItem {
 		// cap.addEffect(StarForgeEffectList.threeByThree);
 		// playerIn.inventory.addItemStackToInventory(newStack);
 
-		VoidCraft.reloadRitualList();
-		IVadeMecumCapability cap = playerIn.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap != null) cap.clearCategories();
+		// VoidCraft.reloadRitualList();
+		// IVadeMecumCapability cap = playerIn.getCapability(CapabilityList.VADEMECUM, null);
+		// if (cap != null) cap.clearCategories();
 
 		// playerIn.clearActivePotions();
 		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheathe, 20 * 90));

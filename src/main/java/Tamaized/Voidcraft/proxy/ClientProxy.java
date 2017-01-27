@@ -51,6 +51,8 @@ import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.RenderWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia;
 import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia2;
+import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
+import Tamaized.Voidcraft.entity.companion.render.RenderFireElementalCompanion;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.ghost.render.RenderGhostPlayer;
@@ -265,6 +267,12 @@ public class ClientProxy extends AbstractVoidCraftProxy {
 			@Override
 			public Render<? super EntityMobEtherealGuardian> createRenderFor(RenderManager manager) {
 				return new RenderEtherealGuardian(manager, shadowSize);
+			}
+		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityCompanionFireElemental.class, new IRenderFactory<EntityCompanionFireElemental>() {
+			@Override
+			public Render<? super EntityCompanionFireElemental> createRenderFor(RenderManager manager) {
+				return new RenderFireElementalCompanion(manager, shadowSize);
 			}
 		});
 
