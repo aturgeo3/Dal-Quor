@@ -3,9 +3,12 @@ package Tamaized.Voidcraft.capabilities.vadeMecum;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.Category;
+import Tamaized.Voidcraft.handlers.VadeMecumWordsOfPower;
 import io.netty.buffer.ByteBufInputStream;
+import net.minecraft.item.ItemStack;
 
 public interface IVadeMecumCapability {
 
@@ -33,74 +36,27 @@ public interface IVadeMecumCapability {
 		return (id > Category.values().length || id < 0) ? null : Category.values()[id];
 	}
 
-	public static String getCategoryName(Category c) {
-		if (c == null) return "null";
-		switch (c) {
-			case INTRO:
-				return "Rituals";
-			case TOME:
-				return "Words of Power";
-			case Flame:
-				return "Word: Flame";
-			case FireSheathe:
-				return "Word: Sheathe - Fire";
-			case Fireball:
-				return "Word: Fireball";
-			case FireTrap:
-				return "Word: Trap - Fire";
-			case ExplosionFire:
-				return "Word: Explosion - Fire";
-			case RingOfFire:
-				return "Word: Ring of Fire";
-			case Shock:
-				return "Word: Shock";
-			case ShockSheathe:
-				return "Word: Sheathe - Shock";
-			case LitStrike:
-				return "Word: Lightning Strike";
-			case LitTrap:
-				return "Word: Trap - Lightning";
-			case ExplosionLit:
-				return "Word: Explosion - Shock";
-			case RingOfLit:
-				return "Word: Ring of Lightning";
-			case Freeze:
-				return "Word: Freeze";
-			case FrostSheathe:
-				return "Word: Sheathe - Frost";
-			case IceSpike:
-				return "Word: Ice Spike";
-			case FrostTrap:
-				return "Word: Trap - Frost";
-			case ExplosionFrost:
-				return "Word: Explosion - Frost";
-			case RingOfFrost:
-				return "Word: Ring of Frost";
-			case AcidSpray:
-				return "Word: Acid Spray";
-			case AcidSheathe:
-				return "Word: Sheathe - Acid";
-			case Disint:
-				return "Word: Disintegrate";
-			case AcidTrap:
-				return "Word: Trap - Acid";
-			case ExplosionAcid:
-				return "Word: Explosion - Acid";
-			case RingOfAcid:
-				return "Word: Ring of Acid";
-			case VoidicTouch:
-				return "Word: Voidic Touch";
-			case VoidicSheathe:
-				return "Word: Sheathe - Voidic";
-			case Implosion:
-				return "Word: Implosion";
-			default:
-				return "null";
+	public static class CategoryDataWrapper {
+		
+		private final String name;
+		private final ItemStack stack;
+
+		public CategoryDataWrapper(String name, ItemStack stack) {
+			this.name = name;
+			this.stack = stack;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public ItemStack getStack() {
+			return stack;
 		}
 	}
 
 	public static boolean isActivePower(Category c) {
-		return getCategoryName(c).contains("Word:");
+		return VadeMecumWordsOfPower.getCategoryData(c).getName().contains("Word:");
 	}
 
 	public static boolean isPassivePower(Category c) {

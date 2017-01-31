@@ -23,7 +23,7 @@ public class VadeMecumRitualHandler {
 		if (category == null || category == IVadeMecumCapability.Category.NULL) {
 			player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Unknown Ritual"));
 		} else {
-			player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + IVadeMecumCapability.getCategoryName(category)));
+			player.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + VadeMecumWordsOfPower.getCategoryData(category).getName()));
 			cap.addCategory(category);
 		}
 	}

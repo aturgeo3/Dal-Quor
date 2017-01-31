@@ -1,7 +1,9 @@
 package Tamaized.Voidcraft.handlers;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.helper.RayTraceHelper;
@@ -13,6 +15,8 @@ import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.Category;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.CategoryDataWrapper;
 import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
@@ -29,7 +33,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -40,6 +47,45 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class VadeMecumWordsOfPower {
+
+	private static final Map<Category, CategoryDataWrapper> categoryMap = new HashMap<Category, CategoryDataWrapper>();
+	private static final CategoryDataWrapper NullWrapper = new CategoryDataWrapper("null", ItemStack.EMPTY);
+
+	static {
+		categoryMap.put(IVadeMecumCapability.Category.INTRO, new CategoryDataWrapper("Rituals", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.TOME, new CategoryDataWrapper("Words of Power", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Flame, new CategoryDataWrapper("Word: Flame", new ItemStack(Items.FLINT)));
+		categoryMap.put(IVadeMecumCapability.Category.FireSheathe, new CategoryDataWrapper("Word: Sheathe - Fire", new ItemStack(Items.MAGMA_CREAM)));
+		categoryMap.put(IVadeMecumCapability.Category.Fireball, new CategoryDataWrapper("Word: Fireball", new ItemStack(Items.FIRE_CHARGE)));
+		categoryMap.put(IVadeMecumCapability.Category.FireTrap, new CategoryDataWrapper("Word: Trap - Fire", new ItemStack(Blocks.MAGMA)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionFire, new CategoryDataWrapper("Word: Explosion - Fire", new ItemStack(Blocks.TNT)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfFire, new CategoryDataWrapper("Word: Ring of Fire", new ItemStack(Items.GUNPOWDER)));
+		categoryMap.put(IVadeMecumCapability.Category.Shock, new CategoryDataWrapper("Word: Shock", new ItemStack(Items.FEATHER)));
+		categoryMap.put(IVadeMecumCapability.Category.ShockSheathe, new CategoryDataWrapper("Word: Sheathe - Shock", new ItemStack(Blocks.CARPET)));
+		categoryMap.put(IVadeMecumCapability.Category.LitStrike, new CategoryDataWrapper("Word: Lightning Strike", new ItemStack(Blocks.END_ROD)));
+		categoryMap.put(IVadeMecumCapability.Category.LitTrap, new CategoryDataWrapper("Word: Trap - Lightning", new ItemStack(Items.GHAST_TEAR)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionLit, new CategoryDataWrapper("Word: Explosion - Shock", new ItemStack(Items.CHORUS_FRUIT_POPPED)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfLit, new CategoryDataWrapper("Word: Ring of Lightning", new ItemStack(Blocks.GLOWSTONE)));
+		categoryMap.put(IVadeMecumCapability.Category.Freeze, new CategoryDataWrapper("Word: Freeze", new ItemStack(Items.SNOWBALL)));
+		categoryMap.put(IVadeMecumCapability.Category.FrostSheathe, new CategoryDataWrapper("Word: Sheathe - Frost", new ItemStack(Blocks.SNOW)));
+		categoryMap.put(IVadeMecumCapability.Category.IceSpike, new CategoryDataWrapper("Word: Ice Spike", new ItemStack(Blocks.ICE)));
+		categoryMap.put(IVadeMecumCapability.Category.FrostTrap, new CategoryDataWrapper("Word: Trap - Frost", new ItemStack(Blocks.PRISMARINE)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionFrost, new CategoryDataWrapper("Word: Explosion - Frost", new ItemStack(Items.SPLASH_POTION)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfFrost, new CategoryDataWrapper("Word: Ring of Frost", new ItemStack(Items.PRISMARINE_CRYSTALS)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidSpray, new CategoryDataWrapper("Word: Acid Spray", new ItemStack(Blocks.DIRT)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidSheathe, new CategoryDataWrapper("Word: Sheathe - Acid", new ItemStack(Items.SLIME_BALL)));
+		categoryMap.put(IVadeMecumCapability.Category.Disint, new CategoryDataWrapper("Word: Disintegrate", new ItemStack(Blocks.MOSSY_COBBLESTONE)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidTrap, new CategoryDataWrapper("Word: Trap - Acid", new ItemStack(Blocks.SLIME_BLOCK)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionAcid, new CategoryDataWrapper("Word: Explosion - Acid", new ItemStack(Items.POISONOUS_POTATO)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfAcid, new CategoryDataWrapper("Word: Ring of Acid", new ItemStack(Items.FISH, 1, 3)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper("Word: Voidic Touch", new ItemStack(VoidCraft.items.voidcrystal)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper("Word: Sheathe - Voidic", new ItemStack(VoidCraft.blocks.blockVoidbrick)));
+		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper("Word: Implosion", new ItemStack(VoidCraft.blocks.realityHole)));
+	}
+
+	public static CategoryDataWrapper getCategoryData(Category c) {
+		return c == null ? NullWrapper : categoryMap.containsKey(c) ? categoryMap.get(c) : NullWrapper;
+	}
 
 	public static void invoke(World world, EntityPlayer player) { // TODO: clean all this up, make methods/classes/helpers and so on for all this junk
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);

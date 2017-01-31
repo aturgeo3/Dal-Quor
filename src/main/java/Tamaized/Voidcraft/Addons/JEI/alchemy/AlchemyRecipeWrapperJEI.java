@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.Addons.JEI.alchemy;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.handlers.VadeMecumWordsOfPower;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import mezz.jei.api.gui.IGuiIngredientGroup;
@@ -18,7 +19,7 @@ public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRe
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		if (!VoidCraft.instance.isDevBuild) return;
 		minecraft.fontRendererObj.drawString("Required Vade Mecum Knowledge:", -40, -30, 0x000000);
-		minecraft.fontRendererObj.drawString("" + (getRecipe().getCategory() == null ? "None" : IVadeMecumCapability.getCategoryName(getRecipe().getCategory())), -40, -20, 0x000000);
+		minecraft.fontRendererObj.drawString("" + (getRecipe().getCategory() == null ? "None" : VadeMecumWordsOfPower.getCategoryData(getRecipe().getCategory()).getName()), -40, -20, 0x000000);
 		super.drawInfo(minecraft, recipeWidth, recipeHeight, mouseX, mouseY);
 	}
 

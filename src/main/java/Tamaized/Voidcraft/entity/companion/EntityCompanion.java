@@ -67,7 +67,8 @@ public abstract class EntityCompanion extends EntityTameable {
 	private void applyAttributes() {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getDefaultMoveSpeed(isTamed()));
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getDefaultMaxHealth(isTamed()));
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
+		if (getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null) getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
+		else getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
 	}
 
 	@Override
