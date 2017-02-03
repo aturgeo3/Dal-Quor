@@ -92,7 +92,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	}
 
 	private void doHealthChecks(EntityLivingBase living) {
-		if (!living.world.isRemote) {
+		if (!living.world.isRemote && living instanceof EntityPlayer) {
 			float i = 0;
 			for (IAttributeInstance att : living.getAttributeMap().getAllAttributes()) {
 				if (att.getAttribute() == SharedMonsterAttributes.MAX_HEALTH) {
