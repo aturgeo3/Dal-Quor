@@ -184,7 +184,7 @@ public class VadeMecumGUI extends GuiScreen {
 					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case WordsOfPower:
-					mc.displayGuiScreen(new Tamaized.Voidcraft.GUI.client.VadeMecumSpellsGUI());
+//					mc.displayGuiScreen(new Tamaized.Voidcraft.GUI.client.VadeMecumSpellsGUI());
 					break;
 				case Credits:
 					break;
