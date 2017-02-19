@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.render.layer.LayerHerobrineCreeperCharge;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -23,6 +22,7 @@ public class RenderHerobrineCreeper<T extends EntityHerobrineCreeper> extends Re
 	/**
 	 * Allows the render to do state modifications necessary before the model is rendered.
 	 */
+	@Override
 	protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime) {
 		float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 		float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
@@ -32,17 +32,18 @@ public class RenderHerobrineCreeper<T extends EntityHerobrineCreeper> extends Re
 		float f2 = (1.0F + f * 0.4F) * f1;
 		float f3 = (1.0F + f * 0.1F) / f1;
 		GlStateManager.scale(f2, f3, f2);
+		GlStateManager.enableBlend();
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.color(0.0f, 0.0f, 0.0f, 0.5f);
 	}
 
 	/**
 	 * Renders the desired {@code T} type Entity.
 	 */
+	@Override
 	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();
-		GlStateManager.enableBlend();
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color(0.0f, 0.0f, 0.0f, 0.5f);
 		// GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -54,6 +55,7 @@ public class RenderHerobrineCreeper<T extends EntityHerobrineCreeper> extends Re
 	/**
 	 * Gets an RGBA int color multiplier to apply.
 	 */
+	@Override
 	protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime) {
 		float f = entitylivingbaseIn.getCreeperFlashIntensity(partialTickTime);
 
@@ -69,6 +71,7 @@ public class RenderHerobrineCreeper<T extends EntityHerobrineCreeper> extends Re
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return CREEPER_TEXTURES;
 	}
