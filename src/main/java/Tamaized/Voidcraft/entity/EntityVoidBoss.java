@@ -279,6 +279,11 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	public boolean isEntityAlive() {
 		return maxPhases() >= phase;
 	}
+	
+	@Override
+	public boolean isNonBoss() {
+		return false;
+	}
 
 	@Override
 	protected void despawnEntity() {

@@ -189,6 +189,11 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 		this.setInvulTime(200);
 		this.setHealth(this.getMaxHealth() / 3.0F);
 	}
+	
+	@Override
+	public boolean isNonBoss() {
+		return false;
+	}
 
 	public boolean isArmored() {
 		return this.getHealth() <= this.getMaxHealth() / 2.0F;

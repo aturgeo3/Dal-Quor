@@ -105,6 +105,11 @@ public class EntityDragonOld extends EntityLiving implements IEntityMultiPartOld
 	protected void entityInit() {
 		super.entityInit();
 	}
+	
+	@Override
+	public boolean isNonBoss() {
+		return false;
+	}
 
 	/**
 	 * Returns a double[3] array with movement offsets, used to calculate trailing tail/neck positions. [0] = yaw offset, [1] = y offset, [2] = unused, always 0. Parameters: buffer index offset, partial ticks.
