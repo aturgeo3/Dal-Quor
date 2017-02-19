@@ -1,7 +1,10 @@
 package Tamaized.Voidcraft.entity.boss.xia.render;
 
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 
+import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
@@ -20,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +42,7 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
-			if (entity.shouldSphereRender()) renderSphere(x, y, z);
+			if (entity.shouldSphereRender()) renderSphere(entity.world, entity, 1, 10);
 			// if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
 			ItemStack itemstack = entity.getHeldItemMainhand();
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
@@ -111,7 +115,18 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 		}
 	}
 
-	private void renderSphere(double x, double y, double z) {
+	private void renderSphere(World world, T entity, double radius, int amount) {
+		if (world == null || Minecraft.getMinecraft().isGamePaused()) return;
+		Random rand = world.rand;
+		for (int index = 0; index < amount; index++) {
+			Vec3d vec = entity.getLook(1.0F).rotatePitch(rand.nextInt(360)).rotateYaw(rand.nextInt(360));
+			float speed = 0.08F;
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, entity.getPositionVector().addVector(0, radius, 0).add(vec), Vec3d.ZERO, rand.nextInt(6) + 2, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
+		}
+	}
+
+	@Deprecated
+	private void renderSphere_old(double x, double y, double z) {
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.color(0x77 / 255F, 0x00 / 255F, 0xFF / 255F, 0.5F);
