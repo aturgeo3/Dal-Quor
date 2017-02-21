@@ -3,3 +3,4 @@
  - Added a Void Crystal Shield
  - The Void Infuser can now repair damaged Void Crystal Tools, Armors, Weapons, And Shields.
  - Fixed Item Drops when breaking Tile Entities
+ - Limited Heimdall bucket slot to max stack size of 1 to prevent bucket loss.
