@@ -3,16 +3,12 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
-import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
 import Tamaized.Voidcraft.world.SchematicLoader;
+import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -20,10 +16,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.BlockFluidFinite;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -41,10 +33,10 @@ public class Debugger extends TamItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			EntityCompanionFireElemental fireElemental = new EntityCompanionFireElemental(worldIn);
-			fireElemental.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
-			fireElemental.tame(playerIn);
-			worldIn.spawnEntity(fireElemental);
+			// EntityCompanionFireElemental fireElemental = new EntityCompanionFireElemental(worldIn);
+			// fireElemental.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
+			// fireElemental.tame(playerIn);
+			// worldIn.spawnEntity(fireElemental);
 			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
 			// EntityPig pig = new EntityPig(worldIn);
 			// pig.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
@@ -83,7 +75,7 @@ public class Debugger extends TamItem {
 		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// if (cap != null) cap.setXiaDefeats(0);
 		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
-		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
 
 		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
 		// IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
