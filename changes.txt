@@ -5,3 +5,4 @@
  - Fixed Item Drops when breaking Tile Entities
  - Limited Heimdall bucket slot to max stack size of 1 to prevent bucket loss.
  - Fixed the Twins Render during the Xia Form 2 fight
+ - Fixed an issue with Starforged Crafting

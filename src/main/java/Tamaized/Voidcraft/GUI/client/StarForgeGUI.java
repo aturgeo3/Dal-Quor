@@ -132,7 +132,7 @@ public class StarForgeGUI extends GuiContainer {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
 							int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
-							if (te.getStackInSlot(slot).getCount() >= checkStack.getCount()) break;
+							if (te.getStackInSlot(slot).getCount() >= checkStack.getCount()) continue;
 							flag = false;
 						}
 						if (flag) enough = true;
