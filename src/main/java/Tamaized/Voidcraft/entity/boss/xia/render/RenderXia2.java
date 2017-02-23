@@ -125,33 +125,6 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 		}
 	}
 
-	@Deprecated
-	private void renderSphere_old(double x, double y, double z) {
-		GlStateManager.pushMatrix();
-		{
-			GlStateManager.color(0x77 / 255F, 0x00 / 255F, 0xFF / 255F, 0.5F);
-			GlStateManager.translate(x + 0.0F, y + 1.0F, z + 0.0F);
-			GlStateManager.rotate(90, 1, 0, 0);
-
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glDepthMask(false);
-
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			// GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-
-			// GlStateManager.scale(1, 1, 1);
-			GL11.glCallList(ClientProxy.sphereIdOutside);
-
-			// GlStateManager.scale(1, 1, 1);
-			GL11.glCallList(ClientProxy.sphereIdInside);
-			GL11.glDepthMask(true);
-
-			GlStateManager.color(1, 1, 1, 1);
-		}
-		GlStateManager.popMatrix();
-	}
-
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return TEXTURE;
