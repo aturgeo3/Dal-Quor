@@ -92,7 +92,7 @@ public class VadeMecum extends TamItem {
 		return super.onItemRightClick(world, player, hand);
 	}
 
-	// @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 		if (cap == null) return false;

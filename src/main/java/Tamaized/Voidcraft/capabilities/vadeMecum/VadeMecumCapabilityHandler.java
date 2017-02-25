@@ -3,9 +3,15 @@ package Tamaized.Voidcraft.capabilities.vadeMecum;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.network.ItemStackNetworkHelper;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
@@ -19,6 +25,16 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	private Category currActivePower;
 	private String lastEntry = "null";
+
+	private Map<Category, ItemStack> spellComponents = new HashMap<Category, ItemStack>() {
+
+		@Override
+		public ItemStack get(Object key) {
+			ItemStack stack = super.get(key);
+			return stack == null ? ItemStack.EMPTY : stack;
+		};
+
+	};
 
 	public void markDirty() {
 		markDirty = true;
@@ -115,11 +131,88 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
+	public Map<Category, ItemStack> getComponents() {
+		return spellComponents;
+	}
+
+	@Override
+	public void clearComponents() {
+		spellComponents.clear();
+		markDirty();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(Category slot) {
+		return spellComponents.get(slot);
+	}
+
+	@Override
+	public ItemStack addStackToSlot(Category slot, ItemStack stack) {
+		ItemStack slotStack = spellComponents.get(slot);
+		if (slotStack == ItemStack.EMPTY) {
+			setStackSlot(slot, stack);
+			markDirty();
+			return ItemStack.EMPTY;
+		} else if (ItemStack.areItemsEqual(slotStack, stack)) {
+			int room = slotStack.getMaxStackSize() - slotStack.getCount();
+			int amount = Math.min(room, stack.getCount());
+			slotStack.grow(amount);
+			setStackSlot(slot, slotStack);
+			stack.shrink(amount);
+			markDirty();
+			return stack.getCount() <= 0 ? ItemStack.EMPTY : stack;
+		}
+		markDirty();
+		return stack;
+	}
+
+	@Override
+	public void setStackSlot(Category slot, ItemStack stack) {
+		spellComponents.put(slot, stack);
+		markDirty();
+	}
+
+	@Override
+	public ItemStack decrStackSize(Category slot, int amount) {
+		if (!getStackInSlot(slot).isEmpty()) {
+			ItemStack itemstack;
+			if (getStackInSlot(slot).getCount() <= amount) {
+				itemstack = getStackInSlot(slot);
+				setStackSlot(slot, ItemStack.EMPTY);
+				markDirty();
+				return itemstack;
+			} else {
+				itemstack = getStackInSlot(slot).splitStack(amount);
+				if (getStackInSlot(slot).getCount() == 0) {
+					setStackSlot(slot, ItemStack.EMPTY);
+				}
+				markDirty();
+				return itemstack;
+			}
+		}
+		markDirty();
+		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(Category slot) {
+		if (!getStackInSlot(slot).isEmpty()) {
+			ItemStack itemstack = getStackInSlot(slot);
+			setStackSlot(slot, ItemStack.EMPTY);
+			markDirty();
+			return itemstack;
+		}
+		markDirty();
+		return ItemStack.EMPTY;
+	}
+
+	@Override
 	public void copyFrom(IVadeMecumCapability cap) {
 		if (cap == null) return;
+		clearComponents();
+		spellComponents.putAll(cap.getComponents());
 		setObtainedCategories(cap.getObtainedCategories());
 		setCurrentActive(cap.getCurrentActive());
-		// setPassivePowers(cap.getPassivePowers());
 		setCurrentActive(cap.getCurrentActive());
 		setLastEntry(cap.getLastEntry());
 		setLoaded();
@@ -127,14 +220,19 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
-	public void decodePacket(ByteBufInputStream stream) throws IOException {
+	public void decodePacket(ByteBuf buf, ByteBufInputStream stream) throws IOException {
 		setCurrentActive(IVadeMecumCapability.getCategoryFromID(stream.readInt()));
 		setLastEntry(stream.readUTF());
 		// Do Arrays last
-		int category = stream.readInt();
 		clearCategories();
-		for (int i = 0; i < category; i++) {
+		int l = stream.readInt();
+		for (int i = 0; i < l; i++) {
 			addCategory(IVadeMecumCapability.getCategoryFromID(stream.readInt()));
+		}
+		clearComponents();
+		l = stream.readInt();
+		for (int i = 0; i < l; i++) {
+			spellComponents.put(IVadeMecumCapability.getCategoryFromID(stream.readInt()), ItemStackNetworkHelper.decodeStack(buf, stream));
 		}
 	}
 
@@ -146,6 +244,11 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 		stream.writeInt(getObtainedCategories().size());
 		for (Category cat : getObtainedCategories()) {
 			stream.writeInt(IVadeMecumCapability.getCategoryID(cat));
+		}
+		stream.writeInt(spellComponents.size());
+		for (Entry<Category, ItemStack> entry : spellComponents.entrySet()) {
+			stream.writeInt(IVadeMecumCapability.getCategoryID(entry.getKey()));
+			ItemStackNetworkHelper.encodeStack(entry.getValue(), stream);
 		}
 	}
 

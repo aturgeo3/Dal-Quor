@@ -3,6 +3,8 @@ package Tamaized.Voidcraft.items;
 import java.util.List;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
@@ -16,6 +18,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -56,8 +59,8 @@ public class Debugger extends TamItem {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, hand);
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		if (world.isRemote) return super.onItemRightClick(world, player, hand);
 		// EntityWitherbrine wither = new EntityWitherbrine(worldIn);
 		// wither.setPositionAndUpdate(playerIn.posX, playerIn.posY, playerIn.posZ);
 		// wither.ignite();
@@ -75,7 +78,8 @@ public class Debugger extends TamItem {
 		// IVoidicInfusionCapability cap = playerIn.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// if (cap != null) cap.setXiaDefeats(0);
 		// if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().start();
-		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+//		if (worldIn.provider instanceof WorldProviderXia) ((WorldProviderXia) worldIn.provider).getXiaCastleHandler().debug();
+		FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 
 		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
 		// IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
@@ -99,7 +103,7 @@ public class Debugger extends TamItem {
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
-		return super.onItemRightClick(worldIn, playerIn, hand);
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	@SideOnly(Side.CLIENT)
