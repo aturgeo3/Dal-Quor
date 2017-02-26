@@ -5,18 +5,15 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.entity.boss.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -24,6 +21,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -40,13 +38,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData {
+public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData, IMob {
 
 	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer> createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
 		@Override
 		public boolean apply(@Nullable Entity p_apply_1_) {
-			return !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
+			return true;//!(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
 		}
 	};
 
@@ -64,15 +62,20 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 	protected void initEntityAI() {
 		this.tasks.addTask(0, new EntityBossCorruptedPawn.AIDoNothing());
 		this.tasks.addTask(1, new EntityAISwimming(this));
+		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, false, false, NOT_UNDEAD));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, NOT_UNDEAD));
+//		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, true)); //IronGolem and Snowman extend this
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, true)); //Normal Minecraft mobs
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, true)); //Passive animals
+//        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, true)); //Slime extends living so need to add it manually
 
-		/*
-		 * // this.getNavigator().setBreakDoors(true); this.tasks.addTask(0, new EntityAISwimming(this)); this.tasks.addTask(1, new EntityAIBreakDoor(this)); this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false)); this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D)); this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1.0D, false)); this.tasks.addTask(6, new EntityAIWander(this, 1.0D)); this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F)); this.tasks.addTask(7, new EntityAILookIdle(this)); this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true)); this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true)); this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true)); this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, true)); // IronGolem and Snowman extend this this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, true)); // Normal Minecraft mobs this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, true)); // Passive animals this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, true)); // Slime extends living so need to add it manually
-		 */
 	}
 
 	class AIDoNothing extends EntityAIBase {
@@ -96,7 +99,7 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 	}
 
 	public static void registerFixesWither(DataFixer fixer) {
-		// EntityLiving.registerFixesMob(fixer, "EntityBossCorruptedPawn");
+		EntityLiving.registerFixesMob(fixer, EntityBossCorruptedPawn.class);
 	}
 
 	/**
@@ -189,7 +192,7 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 		this.setInvulTime(200);
 		this.setHealth(this.getMaxHealth() / 3.0F);
 	}
-	
+
 	@Override
 	public boolean isNonBoss() {
 		return false;
