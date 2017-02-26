@@ -135,7 +135,30 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.NETHERRACK), ItemStack.EMPTY,
 
-				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, });
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY });
+		map.put(IVadeMecumCapability.Category.FireTrap, new ItemStack[] {
+
+				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
+
+				new ItemStack(Blocks.MAGMA), new ItemStack(VoidCraft.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+
+				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY });
 		map.put(IVadeMecumCapability.Category.Freeze, new ItemStack[] {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
