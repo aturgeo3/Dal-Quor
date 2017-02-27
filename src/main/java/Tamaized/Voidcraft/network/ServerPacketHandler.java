@@ -75,14 +75,14 @@ public class ServerPacketHandler {
 								GUIListElement element = list.get(index);
 								if (element instanceof StarForgeToolEntry) {
 									StarForgeToolEntry entry = (StarForgeToolEntry) element;
-									if (tile.getStackInSlot(tile.SLOT_OUTPUT).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).getCount() >= 4 && tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).getCount() >= 1) {
+									if (tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).getCount() >= 4 && tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).getCount() >= 1) {
 										tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).shrink(4);
 										tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).shrink(1);
-										tile.setInventorySlotContents(tile.SLOT_OUTPUT, entry.getTool());
+										tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, entry.getTool());
 									}
 								} else if (element instanceof StarForgeEffectEntry) {
 									StarForgeEffectEntry entry = (StarForgeEffectEntry) element;
-									if (!tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_OUTPUT).isEmpty()) {
+									if (!tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_TOOL).hasCapability(CapabilityList.STARFORGE, null)) {
 										boolean flag = true;
 										for (ItemStack checkStack : entry.getRecipe().getInputs()) {
 											int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
@@ -99,8 +99,7 @@ public class ServerPacketHandler {
 												}
 												cap.addEffect(entry.getRecipe().getEffect());
 											}
-											tile.setInventorySlotContents(tile.SLOT_OUTPUT, tool);
-											tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, ItemStack.EMPTY);
+											tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, tool);
 										}
 									}
 								}
