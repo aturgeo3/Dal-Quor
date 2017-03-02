@@ -15,16 +15,7 @@ public class VadeMecumPageListSuppressor implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[] {
 				new VadeMecumPage(new ItemStack(VoidCraft.items.voidicSuppressor).getDisplayName(), VoidCraft.modid+".VadeMecum.docs.desc.voidicSuppressor"),
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(VoidCraft.modid+".VadeMecum.recipe.normal", new ItemStack[] {
-						new ItemStack(VoidCraft.items.voidcrystal),
-						new ItemStack(Items.COMPASS),
-						ItemStack.EMPTY,
-						new ItemStack(Items.REDSTONE),
-						new ItemStack(VoidCraft.items.voidCloth),
-						ItemStack.EMPTY,
-						ItemStack.EMPTY,
-						ItemStack.EMPTY,
-						ItemStack.EMPTY }, new ItemStack(VoidCraft.items.voidicSuppressor)))};
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal(VoidCraft.modid+".VadeMecum.recipe.normal", new ItemStack(VoidCraft.items.voidicSuppressor)))};
 	}
 
 }
