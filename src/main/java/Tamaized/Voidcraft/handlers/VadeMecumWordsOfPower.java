@@ -49,6 +49,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class VadeMecumWordsOfPower {
@@ -101,6 +102,10 @@ public class VadeMecumWordsOfPower {
 		IVadeMecumCapability cap = caster.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.Category power = cap.getCurrentActive();
+		if (cap.getStackInSlot(power).isEmpty() || cap.getStackInSlot(power).getCount() <= 0) {
+			caster.sendMessage(new TextComponentString("Not enough spell material to cast " + getCategoryData(power).getName()));
+			return;
+		}
 		boolean useCharge = false;
 		power = cap.getCurrentActive();
 		if (power != null && cap.hasCategory(power)) {
@@ -399,7 +404,7 @@ public class VadeMecumWordsOfPower {
 		}
 
 		if (useCharge) {
-
+			cap.getStackInSlot(power).shrink(1);
 		}
 	}
 
