@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.handlers;
+package Tamaized.Voidcraft.vadeMecum.progression;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,10 +41,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionHelper;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.datafix.fixes.PotionItems;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -79,7 +83,7 @@ public class VadeMecumWordsOfPower {
 		categoryMap.put(IVadeMecumCapability.Category.FrostSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Sheathe - Frost", new ItemStack(Blocks.SNOW)));
 		categoryMap.put(IVadeMecumCapability.Category.IceSpike, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Ice Spike", new ItemStack(Blocks.ICE)));
 		categoryMap.put(IVadeMecumCapability.Category.FrostTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Trap - Frost", new ItemStack(Blocks.PRISMARINE)));
-		categoryMap.put(IVadeMecumCapability.Category.ExplosionFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Explosion - Frost", new ItemStack(Items.SPLASH_POTION)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Explosion - Frost", PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionType.getPotionTypeForName("water"))));
 		categoryMap.put(IVadeMecumCapability.Category.RingOfFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "Word: Ring of Frost", new ItemStack(Items.PRISMARINE_CRYSTALS)));
 
 		categoryMap.put(IVadeMecumCapability.Category.AcidSpray, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "Word: Acid Spray", new ItemStack(Blocks.DIRT)));
@@ -92,6 +96,17 @@ public class VadeMecumWordsOfPower {
 		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "Word: Voidic Touch", new ItemStack(VoidCraft.items.voidcrystal)));
 		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "Word: Sheathe - Voidic", new ItemStack(VoidCraft.blocks.blockVoidbrick)));
 		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "Word: Implosion", new ItemStack(VoidCraft.blocks.realityHole)));
+
+		categoryMap.put(IVadeMecumCapability.Category.Invoke, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "Word: Invoke Infusion", new ItemStack(VoidCraft.blocks.blockVoidcrystal)));
+
+		categoryMap.put(IVadeMecumCapability.Category.Voice, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "The Voice", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Voidic Control", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.ImprovedCasting, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Improved Casting", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Empowerment, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Empowerment", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Tolerance, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Tolerance", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.TotalControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Total Control", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Dreams, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "Dreams", ItemStack.EMPTY));
+
 	}
 
 	public static CategoryDataWrapper getCategoryData(Category c) {
@@ -121,6 +136,8 @@ public class VadeMecumWordsOfPower {
 					} else {
 						doCast = true;
 					}
+				} else {
+					doCast = true;
 				}
 			}
 			if (doCast) {
@@ -393,6 +410,12 @@ public class VadeMecumWordsOfPower {
 							if (!(e instanceof EntityLivingBase)) continue;
 							world.spawnEntity(new EntitySpellImplosion(world, e));
 						}
+						useCharge = true;
+					}
+						break;
+					case Invoke: {
+						IVoidicInfusionCapability c = caster.getCapability(CapabilityList.VOIDICINFUSION, null);
+						if (c != null) c.addInfusion(1000);
 						useCharge = true;
 					}
 						break;

@@ -48,6 +48,33 @@ public class MapGenVoidFortress extends MapGenStructure {
 		return new MapGenVoidFortress.Start(this.world, this.rand, chunkX, chunkZ);
 	}
 
+	@Override
+	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos, boolean p_180706_3_) {
+		int i = 1000;
+		int j = pos.getX() >> 4;
+		int k = pos.getZ() >> 4;
+
+		for (int l = 0; l <= 1000; ++l) {
+			for (int i1 = -l; i1 <= l; ++i1) {
+				boolean flag = i1 == -l || i1 == l;
+
+				for (int j1 = -l; j1 <= l; ++j1) {
+					boolean flag1 = j1 == -l || j1 == l;
+
+					if (flag || flag1) {
+						int k1 = j + i1;
+						int l1 = k + j1;
+
+						if (this.canSpawnStructureAtCoords(k1, l1) && (!p_180706_3_ || !worldIn.isChunkGeneratedAt(k1, l1))) {
+							return new BlockPos((k1 << 4) + 8, 64, (l1 << 4) + 8);
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public static class Start extends StructureStart {
 
 		public Start() {
@@ -70,11 +97,6 @@ public class MapGenVoidFortress extends MapGenStructure {
 			this.updateBoundingBox();
 			this.setRandomHeight(worldIn, random, 48, 70);
 		}
-	}
-
-	@Override
-	public BlockPos getClosestStrongholdPos(World worldIn, BlockPos pos, boolean p_180706_3_) {
-		return null;
 	}
 
 }

@@ -36,8 +36,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	private final World world;
 	private final boolean generateStructures;
 	private final Random rand;
-	public MapGenVoidFortress genFortress = new MapGenVoidFortress();
-	private final MapGenVoidCity genCity = new MapGenVoidCity(this);
+	public final MapGenVoidFortress genFortress = new MapGenVoidFortress();
+	public final MapGenVoidCity genCity = new MapGenVoidCity(this);
 
 	private double[] buffer;
 	private NoiseGeneratorOctaves lperlinNoise1;
@@ -390,7 +390,15 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 	@Override
 	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
-		return null;
+		return structureName.equals(genFortress.getStructureName()) ?
+
+				genFortress.getClosestStrongholdPos(worldIn, position, p_180513_4_) :
+
+				structureName.equals(genCity.getStructureName()) ?
+
+						genCity.getClosestStrongholdPos(worldIn, position, p_180513_4_) :
+
+						null;
 	}
 
 	@Override
