@@ -7,6 +7,7 @@ import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.potion.PotionSheathe;
 import Tamaized.Voidcraft.potion.PotionVoidImmunity;
+import Tamaized.Voidcraft.potion.PotionVoidicInfusion;
 import Tamaized.Voidcraft.potion.PotionVoidicInfusionImmunity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -17,6 +18,7 @@ public class VoidCraftPotions implements ITamRegistry {
 
 	private ArrayList<ITamModel> modelList;
 
+	public static Potion voidicInfusion;
 	public static Potion voidicInfusionImmunity;
 	public static Potion voidImmunity;
 
@@ -31,16 +33,18 @@ public class VoidCraftPotions implements ITamRegistry {
 	@Override
 	public void preInit() {
 		modelList = new ArrayList<ITamModel>();
-		voidicInfusionImmunity = new PotionVoidicInfusionImmunity("voidicInfusionImmunity");
-		voidImmunity = new PotionVoidImmunity("voidImmunity");
-		
-		fireSheathe = new PotionSheathe("potionSheatheFire", PotionSheathe.Type.Fire);
-		frostSheathe = new PotionSheathe("potionSheatheFrost", PotionSheathe.Type.Frost);
-		litSheathe = new PotionSheathe("potionSheatheLit", PotionSheathe.Type.Lit);
-		acidSheathe = new PotionSheathe("potionSheatheAcid", PotionSheathe.Type.Acid);
-		voidSheathe = new PotionSheathe("potionSheatheVoid", PotionSheathe.Type.Void);
 
-		type_voidImmunity = new PotionType(new PotionEffect[] { new PotionEffect(voidImmunity, ((60*3)+30)*20) }).setRegistryName("voidImmunity");
+		voidicInfusion = new PotionVoidicInfusion("voidicinfusion");
+		voidicInfusionImmunity = new PotionVoidicInfusionImmunity("voidicinfusionimmunity");
+		voidImmunity = new PotionVoidImmunity("voidimmunity");
+
+		fireSheathe = new PotionSheathe("potionsheathefire", PotionSheathe.Type.Fire);
+		frostSheathe = new PotionSheathe("potionsheathefrost", PotionSheathe.Type.Frost);
+		litSheathe = new PotionSheathe("potionsheathelit", PotionSheathe.Type.Lit);
+		acidSheathe = new PotionSheathe("potionsheatheacid", PotionSheathe.Type.Acid);
+		voidSheathe = new PotionSheathe("potionsheathevoid", PotionSheathe.Type.Void);
+
+		type_voidImmunity = new PotionType(new PotionEffect[] { new PotionEffect(voidImmunity, ((60 * 3) + 30) * 20) }).setRegistryName("voidimmunity");
 		GameRegistry.register(type_voidImmunity);
 	}
 
