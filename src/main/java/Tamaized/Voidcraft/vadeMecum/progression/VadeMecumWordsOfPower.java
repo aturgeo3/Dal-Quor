@@ -17,8 +17,8 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.Category;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability.CategoryDataWrapper;
-import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
+import Tamaized.Voidcraft.damageSources.DamageSourceFrost;
 import Tamaized.Voidcraft.damageSources.DamageSourceLit;
 import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.companion.EntityCompanion;
@@ -40,26 +40,18 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumHandSide;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.datafix.fixes.PotionItems;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class VadeMecumWordsOfPower {
@@ -130,7 +122,7 @@ public class VadeMecumWordsOfPower {
 		if (cap == null || world.isRemote) return;
 		IVadeMecumCapability.Category power = cap.getCurrentActive();
 		if ((cap.getStackInSlot(power).isEmpty() || cap.getStackInSlot(power).getCount() <= 0) && !caster.inventory.hasItemStack(getCategoryData(power).getStack())) {
-			caster.sendMessage(new TextComponentString("Not enough spell material to cast " + getCategoryData(power).getName()));
+			caster.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.spells.nomats", getCategoryData(power).getName()));
 			return;
 		}
 		boolean useCharge = false;
@@ -351,7 +343,7 @@ public class VadeMecumWordsOfPower {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
 							if (!(e instanceof EntityLivingBase)) continue;
-							((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
+							((EntityLivingBase) e).attackEntityFrom(new DamageSourceFrost(), 10);
 							((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 						}
 						for (int index = 0; index < 1000; index++) {
@@ -403,7 +395,7 @@ public class VadeMecumWordsOfPower {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
 							if (!(e instanceof EntityLivingBase)) continue;
-							((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
+							((EntityLivingBase) e).attackEntityFrom(new DamageSourceAcid(), 10);
 						}
 						for (int index = 0; index < 1000; index++) {
 							ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
@@ -565,7 +557,7 @@ public class VadeMecumWordsOfPower {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
 						if (!(e instanceof EntityLivingBase)) continue;
-						((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
+						((EntityLivingBase) e).attackEntityFrom(new DamageSourceFrost(), 10);
 						((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 					}
 					for (int index = 0; index < 1000; index++) {
@@ -612,7 +604,7 @@ public class VadeMecumWordsOfPower {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
 						if (!(e instanceof EntityLivingBase)) continue;
-						((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
+						((EntityLivingBase) e).attackEntityFrom(new DamageSourceAcid(), 10);
 					}
 					for (int index = 0; index < 1000; index++) {
 						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
