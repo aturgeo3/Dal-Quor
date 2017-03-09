@@ -5,7 +5,6 @@ import java.util.Random;
 import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

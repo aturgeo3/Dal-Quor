@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
 import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

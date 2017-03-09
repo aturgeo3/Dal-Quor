@@ -2,14 +2,11 @@ package Tamaized.Voidcraft.entity.boss.xia.render;
 
 import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
 import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
 import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
-import Tamaized.Voidcraft.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;

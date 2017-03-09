@@ -3,7 +3,6 @@ package Tamaized.Voidcraft.machina;
 import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
