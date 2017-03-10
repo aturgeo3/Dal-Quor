@@ -530,8 +530,8 @@ voidcraft.VadeMecum.passive.Flight.desc=Normally you gain the ability to Fly fro
 voidcraft.VadeMecum.passive.Vigor=Vigor
 voidcraft.VadeMecum.passive.Vigor.desc=While active, Voidic Infusion no longer decreases your maximum health but instead increases it. You can still die with max infusion unless you have Voidic Anchor active.
 ## -- Voice
-voidcraft.VadeMecum.voice.VoidicControl=§5[§kVoice§r§5]: Very Good.
-voidcraft.VadeMecum.voice.Tolerance=§5[§kVoice§r§5]: Very Good, your infusion has been consumed in order to create your new power.
+voidcraft.VadeMecum.voice.Tolerance=§5[§kVoice§r§5]: Very Good.
+voidcraft.VadeMecum.voice.VoidicControl=§5[§kVoice§r§5]: Very Good, your infusion has been consumed in order to create your new power.
 voidcraft.VadeMecum.voice.Voice=§5[§kVoice§r§5]: Your task is complete. I've added a new entry to your Vade Mecum.
 voidcraft.VadeMecum.voice.Dreams=§5[§kVoice§r§5]: The Quori and I thank you mortal, you've been a great contribution to us.
 
