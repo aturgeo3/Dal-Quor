@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.entity.nonliving.render;
 
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.nonliving.VoidChain;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -19,7 +20,7 @@ public class RenderVoidChain extends Render<VoidChain>{
 		super(renderManager);
 	}
 	
-	private static final ResourceLocation arrowTextures = new ResourceLocation("VoidCraft:textures/entity/voidChain.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation(VoidCraft.modid, "textures/entity/voidchain.png");
 	
 	public void renderArrow(VoidChain entity, double x, double y, double z, float entityYaw, float partialTicks){
 		this.bindEntityTexture(entity);

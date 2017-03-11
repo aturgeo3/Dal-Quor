@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.entity.boss.herobrine.render;
 
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderBossHeathBar;
 import net.minecraft.client.model.ModelBase;
@@ -12,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderHerobrine<T extends EntityBossHerobrine> extends RenderLiving<T>{
 	
-	private static final ResourceLocation Herobrine_Texture = new ResourceLocation("VoidCraft:textures/entity/Herobrine.png");  //refers to:assets/yourmod/textures/entity/yourtexture.png
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/herobrine.png");
 	 
     public RenderHerobrine(RenderManager manager, ModelBase par1ModelBase, float par2){
         super(manager, par1ModelBase, par2);
@@ -33,7 +34,7 @@ public class RenderHerobrine<T extends EntityBossHerobrine> extends RenderLiving
 
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
-		return Herobrine_Texture;
+		return TEXTURE;
 	}
 	
 	protected void renderLabel(T yourentityLiving, double par2, double par4, double par6){

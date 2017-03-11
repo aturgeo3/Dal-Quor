@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class VadeMecumMeshDefinition implements ItemMeshDefinition {
 	
-	private static final ModelResourceLocation closed = new ModelResourceLocation(new ResourceLocation(VoidCraft.modid, "items/vadeMecum"),  "inventory");
-	private static final ModelResourceLocation open = new ModelResourceLocation(new ResourceLocation(VoidCraft.modid, "items/vadeMecum_open"),  "inventory");
+	private static final ModelResourceLocation closed = new ModelResourceLocation(new ResourceLocation(VoidCraft.modid, "items/vademecum"),  "inventory");
+	private static final ModelResourceLocation open = new ModelResourceLocation(new ResourceLocation(VoidCraft.modid, "items/vademecum_open"),  "inventory");
 	
 	public static void preRegister(){
 		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vadeMecum, 0, closed);

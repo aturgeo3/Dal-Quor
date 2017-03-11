@@ -24,9 +24,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderBossHeathBar {
 
-	public static final ResourceLocation whitespace = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/WhiteSpace.png");
-	public static final ResourceLocation bar = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/bar.png");
-	public static final ResourceLocation bg = new ResourceLocation(VoidCraft.modid + ":textures/gui/BossBar/bg.png");
+	public static final ResourceLocation whitespace = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/Whitespace.png");
+	public static final ResourceLocation bar = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/bar.png");
+	public static final ResourceLocation bg = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/bg.png");
 
 	private static IVoidBossData voidBoss;
 

@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class RenderFireElementalCompanion extends RenderLiving<EntityCompanionFireElemental> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid + ":textures/entity/elemental_fire.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/elemental_fire.png");
 
 	public RenderFireElementalCompanion(RenderManager manager, float par2) {
 		super(manager, new ModelFireElementalCompanion(), par2);

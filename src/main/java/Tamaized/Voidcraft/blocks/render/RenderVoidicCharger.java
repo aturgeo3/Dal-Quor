@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderVoidicCharger extends TileEntitySpecialRenderer<TileEntityVoidicCharger> {
 	
-	private static final ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/models/blocks/voidicCharger.png");
+	private static final ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/models/blocks/voidiccharger.png");
 	
 	private final ModelVoidicCharger model;
 	
