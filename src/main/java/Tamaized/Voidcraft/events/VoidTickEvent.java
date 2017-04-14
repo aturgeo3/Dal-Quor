@@ -72,7 +72,7 @@ public class VoidTickEvent {
 						}
 					}
 					if (cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && !cap.hasCategory(IVadeMecumCapability.Category.TotalControl)) {
-						if (e.player.posY >= 187 && provider.genCity.isPositionInStructure(world, e.player.getPosition())) {
+						if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == VoidCraft.items.astralEssence) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == VoidCraft.items.astralEssence)) {
 							cap.addCategory(e.player, IVadeMecumCapability.Category.TotalControl);
 						}
 					}
