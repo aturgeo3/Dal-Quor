@@ -7,6 +7,7 @@ import com.google.common.cache.LoadingCache;
 import Tamaized.TamModized.blocks.TamBlockPortal;
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockPortalVoid extends TamBlockPortal {
 
 	public BlockPortalVoid(CreativeTabs tab, String n) {
-		super(tab, n, true);
+		super(tab, n, true, SoundType.GLASS);
 	}
 
 	@Override
