@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.entity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.entity.client.animation.IAnimatable;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
@@ -17,8 +18,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import net.minecraftforge.common.ForgeChunkManager.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -36,12 +41,21 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	private ArrayList<IAnimatable> animations = new ArrayList<IAnimatable>();
 
+	private Ticket chunkLoadTicket;
+
 	public EntityVoidBoss(World world) {
 		super(world);
 		isImmuneToFire = immuneToFire();
 		hurtResistantTime = 10;
 		setSize(sizeWidth(), sizeHeight());
 		addDefaultTasks();
+		enablePersistence();
+		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
+		if (chunkLoadTicket != null) chunkLoadTicket.bindEntity(this);
+	}
+
+	protected Ticket getChunkloader() {
+		return chunkLoadTicket;
 	}
 
 	public EntityVoidBoss(World world, T handler, boolean hasIdleTask) {
@@ -122,6 +136,14 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		if (chunkLoadTicket != null) {
+			for (ChunkPos pos : chunkLoadTicket.getChunkList()) {
+				ForgeChunkManager.unforceChunk(chunkLoadTicket, pos);
+			}
+			for (int x = -1; x <= 1; x++)
+				for (int z = -1; z <= 1; z++)
+					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromChunkCoords((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
+		}
 		handlerUpdate();
 	}
 
@@ -277,7 +299,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	public boolean isEntityAlive() {
 		return maxPhases() >= phase;
 	}
-	
+
 	@Override
 	public boolean isNonBoss() {
 		return false;
@@ -285,14 +307,22 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	@Override
 	protected void despawnEntity() {
+
+	}
+
+	@Override
+	protected boolean canDespawn() {
+		return false;
 	}
 
 	@Override
 	protected void collideWithEntity(Entity par1Entity) {
+
 	}
 
 	@Override
 	public void applyEntityCollision(Entity par1Entity) {
+
 	}
 
 	@Override
