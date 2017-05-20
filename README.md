@@ -25,6 +25,7 @@ This mod currently has integrations with:
     * Thaumcraft
 * 1.9.4 - 1.11
     * JEI
+    * Void Fog
 * 1.8.9
     * None
 * 1.7.10
