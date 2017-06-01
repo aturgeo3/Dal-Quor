@@ -4,6 +4,8 @@ import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.client.animation.AnimatableModel.AnimatableModelArms;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelLordOfBlades extends AnimatableModelArms {
 
@@ -448,7 +450,6 @@ public class ModelLordOfBlades extends AnimatableModelArms {
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		((EntityVoidNPC) entity).renderAnimation(this);
 		armLeft.render(f5);
 		bodyOverlay.render(f5);
 		legLeftOverlay.render(f5);
@@ -472,8 +473,82 @@ public class ModelLordOfBlades extends AnimatableModelArms {
 		modelRenderer.rotateAngleZ = z;
 	}
 
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
+		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
+
+		head.rotateAngleX = headPitch / (180F / (float) Math.PI);
+		head.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
+		headOverlay.rotateAngleX = headPitch / (180F / (float) Math.PI);
+		headOverlay.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
+
+		body.rotateAngleY = 0.0F;
+		armRight.rotationPointZ = 0.0F;
+		armRight.rotationPointX = -5.0F;
+		armLeft.rotationPointZ = 0.0F;
+		armLeft.rotationPointX = 5.0F;
+		bodyOverlay.rotateAngleY = 0.0F;
+		armRightOverlay.rotationPointZ = 0.0F;
+		armRightOverlay.rotationPointX = -5.0F;
+		armLeftOverlay.rotationPointZ = 0.0F;
+		armLeftOverlay.rotationPointX = 5.0F;
+		float f = 1.0F;
+
+		armRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
+		armLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
+		armRight.rotateAngleZ = 0.0F;
+		armLeft.rotateAngleZ = 0.0F;
+		legRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
+		legLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount / f;
+		legRight.rotateAngleY = 0.0F;
+		legLeft.rotateAngleY = 0.0F;
+		legRight.rotateAngleZ = 0.0F;
+		legLeft.rotateAngleZ = 0.0F;
+		armRightOverlay.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
+		armLeftOverlay.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
+		armRightOverlay.rotateAngleZ = 0.0F;
+		armLeftOverlay.rotateAngleZ = 0.0F;
+		legRightOverlay.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
+		legLeftOverlay.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount / f;
+		legRightOverlay.rotateAngleY = 0.0F;
+		legLeftOverlay.rotateAngleY = 0.0F;
+		legRightOverlay.rotateAngleZ = 0.0F;
+		legLeftOverlay.rotateAngleZ = 0.0F;
+
+		armRight.rotateAngleY = 0.0F;
+		armRight.rotateAngleZ = 0.0F;
+		armRightOverlay.rotateAngleY = 0.0F;
+		armRightOverlay.rotateAngleZ = 0.0F;
+
+		body.rotateAngleX = 0.0F;
+		legRight.rotationPointZ = 0.1F;
+		legLeft.rotationPointZ = 0.1F;
+		legRight.rotationPointY = 12.0F;
+		legLeft.rotationPointY = 12.0F;
+		head.rotationPointY = 0.0F;
+		bodyOverlay.rotateAngleX = 0.0F;
+		legRightOverlay.rotationPointZ = 0.1F;
+		legLeftOverlay.rotationPointZ = 0.1F;
+		legRightOverlay.rotationPointY = 12.0F;
+		legLeftOverlay.rotationPointY = 12.0F;
+		headOverlay.rotationPointY = 0.0F;
+
+		armRight.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		armLeft.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		armRight.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		armLeft.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		armRightOverlay.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		armLeftOverlay.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+		armRightOverlay.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		armLeftOverlay.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		
+		((EntityVoidNPC) entity).renderAnimation(this);
+	}
+
 	@Override
 	public void setAnimations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw) {
-		
+		setRotation(armLeft, Math.toRadians(leftArmPitch), Math.toRadians(leftArmYaw), 0.0F);
+		setRotation(armRight, Math.toRadians(rightArmPitch), Math.toRadians(rightArmYaw), 0.0F);
+		setRotation(armLeftOverlay, Math.toRadians(leftArmPitch), Math.toRadians(leftArmYaw), 0.0F);
+		setRotation(armRightOverlay, Math.toRadians(rightArmPitch), Math.toRadians(rightArmYaw), 0.0F);
 	}
 }

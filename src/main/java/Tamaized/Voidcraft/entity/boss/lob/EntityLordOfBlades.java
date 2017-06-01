@@ -22,16 +22,22 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
 public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
-	
+
 	public static final int animations = AnimationRegistry.register(AnimationTest.class);
 
+	@Override
+	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
+		AnimationTest.play(this, AnimationTest.Type.Idle);
+		return super.processInteract(player, hand);
+	}
+
 	public static class AnimationTest implements IAnimation<EntityLordOfBlades, ModelLordOfBlades> {
-		
+
 		public static enum Type {
 			Idle, Attack, Spell, Spin, Fly, Land, Charge
 		}
-		
-		public static void play(EntityLordOfBlades entity, Type type){
+
+		public static void play(EntityLordOfBlades entity, Type type) {
 			AnimationTest animation = ((AnimationTest) entity.constructAnimation(animations));
 			entity.setAnimation(animation);
 			entity.playAnimation();
@@ -43,17 +49,45 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 		private float rightArmYaw = 0.0f;
 		private float rightArmPitch = 0.0f;
 
-		private int tick = 20 * 2;
+		private Type type;
+		private int phase = 0;
+
+		private void init(Type type) {
+			this.type = type;
+			switch (type) {
+				default:
+				case Idle:
+					break;
+			}
+		}
 
 		@Override
 		public boolean update(EntityLordOfBlades e) {
-			tick--;
-			return tick <= 0;
+			return false;
 		}
 
 		@Override
 		public void render(EntityLordOfBlades e, ModelLordOfBlades model) {
-			model.setAnimations(leftArmPitch, rightArmPitch, leftArmYaw, rightArmYaw);
+			float laP = (float) Math.toDegrees(model.armLeft.rotateAngleX);
+			float raP = (float) Math.toDegrees(model.armRight.rotateAngleX);
+			float laY = (float) Math.toDegrees(model.armLeft.rotateAngleY);
+			float raY = (float) Math.toDegrees(model.armRight.rotateAngleY);
+			model.setAnimations(move(laP, leftArmPitch), move(raP, rightArmPitch), move(laY, leftArmYaw), move(raY, rightArmYaw));
+			if(isDone(model)){
+				
+			}
+		}
+
+		private float move(float o, float r) {
+			float speed = 1;
+			float m = 0;
+			if (o > r) m = -speed;
+			else if (o < r) m = speed;
+			return Math.min(m, m > 0 ? (r - o) : (o - r));
+		}
+		
+		private boolean isDone(ModelLordOfBlades model){
+			return model.armLeft.rotateAngleY == leftArmPitch && model.armRight.rotateAngleY == rightArmPitch && model.armLeft.rotateAngleX == leftArmYaw && model.armRight.rotateAngleX == rightArmYaw;
 		}
 
 		@Override
@@ -73,7 +107,7 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 		}
 
 	}
-	
+
 	public EntityLordOfBlades(World world) {
 		super(world, new IBattleHandler() {
 
@@ -189,11 +223,6 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 	@Override
 	protected int maxPhases() {
 		return 1;
-	}
-	
-	@Override
-	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
-		return super.processInteract(player, hand);
 	}
 
 	@Override
