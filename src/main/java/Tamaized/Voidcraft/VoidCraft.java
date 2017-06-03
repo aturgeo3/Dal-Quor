@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft;
 
-import java.io.File;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-
 import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.proxy.AbstractProxy;
@@ -37,11 +32,7 @@ import Tamaized.Voidcraft.capabilities.voidicPower.VoidicPowerCapabilityStorage;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineShadow;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.*;
 import Tamaized.Voidcraft.entity.boss.lob.EntityLordOfBlades;
 import Tamaized.Voidcraft.entity.boss.twins.EntityBossDol;
 import Tamaized.Voidcraft.entity.boss.twins.EntityBossZol;
@@ -54,62 +45,15 @@ import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.EntityDolXia;
 import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
-import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
-import Tamaized.Voidcraft.entity.mob.EntityMobLich;
-import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
-import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
-import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
+import Tamaized.Voidcraft.entity.mob.*;
 import Tamaized.Voidcraft.entity.mob.dalquor.EntityHashalaq;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
-import Tamaized.Voidcraft.entity.nonliving.AcidBall;
-import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
-import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
-import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
-import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
-import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
-import Tamaized.Voidcraft.entity.nonliving.VoidChain;
-import Tamaized.Voidcraft.events.BlockBreakPlaceEvent;
-import Tamaized.Voidcraft.events.CapabilitySyncEvent;
-import Tamaized.Voidcraft.events.DamageEvent;
-import Tamaized.Voidcraft.events.DeathEvent;
-import Tamaized.Voidcraft.events.ItemEntityEvent;
-import Tamaized.Voidcraft.events.LitStrikeEvent;
-import Tamaized.Voidcraft.events.PickUpEvent;
-import Tamaized.Voidcraft.events.PlayerRightClickEvent;
-import Tamaized.Voidcraft.events.SpawnEvent;
-import Tamaized.Voidcraft.events.VoidTickEvent;
-import Tamaized.Voidcraft.handlers.ConfigHandler;
-import Tamaized.Voidcraft.handlers.ContributorHandler;
-import Tamaized.Voidcraft.handlers.CraftingHandler;
-import Tamaized.Voidcraft.handlers.VoidicInfusionHandler;
-import Tamaized.Voidcraft.handlers.XiaFlightHandler;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityStabilizer;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityTeleporter;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBlastFurnace;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAnchor;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCrystallizer;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerGen;
+import Tamaized.Voidcraft.entity.nonliving.*;
+import Tamaized.Voidcraft.events.*;
+import Tamaized.Voidcraft.handlers.*;
+import Tamaized.Voidcraft.machina.tileentity.*;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
-import Tamaized.Voidcraft.registry.VoidCraftAchievements;
-import Tamaized.Voidcraft.registry.VoidCraftArmors;
-import Tamaized.Voidcraft.registry.VoidCraftBiomes;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.registry.VoidCraftCreativeTabs;
-import Tamaized.Voidcraft.registry.VoidCraftFluids;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
-import Tamaized.Voidcraft.registry.VoidCraftLootTables;
-import Tamaized.Voidcraft.registry.VoidCraftMaterials;
-import Tamaized.Voidcraft.registry.VoidCraftParticles;
-import Tamaized.Voidcraft.registry.VoidCraftPotions;
-import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
-import Tamaized.Voidcraft.registry.VoidCraftTools;
+import Tamaized.Voidcraft.registry.*;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.starforge.StarForgeEffectRecipeList;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
@@ -151,6 +95,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.LogManager;
+
+import java.io.File;
+import java.util.List;
 
 @Mod(modid = VoidCraft.modid, name = "VoidCraft", guiFactory = "Tamaized.Voidcraft.GUI.client.GUIConfigFactory", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class VoidCraft extends TamModBase {
@@ -159,10 +107,7 @@ public class VoidCraft extends TamModBase {
 
 	public static final String version = "${version}";
 	public static final String modid = "voidcraft";
-
-	public static String getVersion() {
-		return version;
-	}
+	public static final String networkChannelName = "VoidCraft";
 
 	@Instance(modid)
 	public static VoidCraft instance = new VoidCraft();
@@ -171,16 +116,12 @@ public class VoidCraft extends TamModBase {
 	public static ConfigHandler config;
 
 	public static FMLEventChannel channel;
-	public static final String networkChannelName = "VoidCraft";
 
 	@SidedProxy(clientSide = "Tamaized.Voidcraft.proxy.ClientProxy", serverSide = "Tamaized.Voidcraft.proxy.ServerProxy")
 	public static AbstractProxy proxy;
 
-	public VoidTickEvent VoidTickEvent;
-
 	public static RitualList ritualList;
 
-	// Public API Integrations
 	public static VoidCraftThaum thaumcraftIntegration;
 	public static boolean isAetherLoaded = false;
 
@@ -197,6 +138,14 @@ public class VoidCraft extends TamModBase {
 	public static VoidCraftLootTables lootTables;
 	public static VoidCraftTERecipes teRecipes;
 	public static VoidCraftParticles particles;
+
+	public static String getVersion() {
+		return version;
+	}
+
+	public static void reloadRitualList() {
+		ritualList = new RitualList();
+	}
 
 	@Override
 	protected AbstractProxy getProxy() {
@@ -316,8 +265,7 @@ public class VoidCraft extends TamModBase {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		// Register Events
-		VoidTickEvent = new VoidTickEvent();
-		MinecraftForge.EVENT_BUS.register(VoidTickEvent);
+		MinecraftForge.EVENT_BUS.register(new VoidTickEvent());
 		MinecraftForge.EVENT_BUS.register(new PickUpEvent());
 		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
 		MinecraftForge.EVENT_BUS.register(new CraftingHandler());
@@ -422,10 +370,6 @@ public class VoidCraft extends TamModBase {
 
 		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 
-	}
-
-	public static void reloadRitualList() {
-		ritualList = new RitualList();
 	}
 
 }
