@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-
 import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
@@ -11,20 +9,7 @@ import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
-import Tamaized.Voidcraft.items.ChainedSkull;
-import Tamaized.Voidcraft.items.CreativeVoidBucket;
-import Tamaized.Voidcraft.items.Debugger;
-import Tamaized.Voidcraft.items.EmptyObsidianFlask;
-import Tamaized.Voidcraft.items.EtherealFruit;
-import Tamaized.Voidcraft.items.ItemDreamBed;
-import Tamaized.Voidcraft.items.ObsidianFlask;
-import Tamaized.Voidcraft.items.RealityTeleporter;
-import Tamaized.Voidcraft.items.VadeMecum;
-import Tamaized.Voidcraft.items.VoidCrystalShield;
-import Tamaized.Voidcraft.items.VoidStar;
-import Tamaized.Voidcraft.items.VoidicDrill;
-import Tamaized.Voidcraft.items.VoidicEssence;
-import Tamaized.Voidcraft.items.VoidicSuppressor;
+import Tamaized.Voidcraft.items.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,6 +21,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
 
 public class VoidCraftItems implements ITamRegistry {
 
@@ -181,23 +168,23 @@ public class VoidCraftItems implements ITamRegistry {
 		// voidDiscs.add(record_bleedingThrough);
 		// voidDiscs.add(record_stringsAttached);
 		// voidDiscs.add(record_running);
+
+        OreDictionary.registerOre("ingotSteel", voidicSteel);
+
+        OreDictionary.registerOre("dustQuartz", quartzDust);
+        OreDictionary.registerOre("dustCoal", coalDust);
+        OreDictionary.registerOre("dustIron", ironDust);
+        OreDictionary.registerOre("dustGold", goldDust);
+        OreDictionary.registerOre("dustCopper", copperDust);
+        OreDictionary.registerOre("dustTin", tinDust);
+        OreDictionary.registerOre("dustLead", leadDust);
+        OreDictionary.registerOre("dustLapis", lapisDust);
+        OreDictionary.registerOre("dustEmerald", emeraldDust);
+        OreDictionary.registerOre("dustDiamond", diamondDust);
 	}
 
 	@Override
 	public void init() {
-
-		OreDictionary.registerOre("ingotSteel", voidicSteel);
-
-		OreDictionary.registerOre("dustQuartz", quartzDust);
-		OreDictionary.registerOre("dustCoal", coalDust);
-		OreDictionary.registerOre("dustIron", ironDust);
-		OreDictionary.registerOre("dustGold", goldDust);
-		OreDictionary.registerOre("dustCopper", copperDust);
-		OreDictionary.registerOre("dustTin", tinDust);
-		OreDictionary.registerOre("dustLead", leadDust);
-		OreDictionary.registerOre("dustLapis", lapisDust);
-		OreDictionary.registerOre("dustEmerald", emeraldDust);
-		OreDictionary.registerOre("dustDiamond", diamondDust);
 
 		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
 		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
