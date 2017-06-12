@@ -23,7 +23,7 @@ This mod currently has integrations with:
 * Planned:
     * Aether II
     * Thaumcraft
-* 1.9.4 - 1.11
+* 1.9.4 - 1.12
     * JEI
     * Void Fog
 * 1.8.9
