@@ -40,6 +40,11 @@ public class AlchemyRecipeCategory implements IRecipeCategory {
 	}
 
 	@Override
+	public String getModName() {
+		return VoidCraft.modid;
+	}
+
+	@Override
 	public IDrawable getBackground() {
 		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 150, 75, 30, 0, -60, 0);
 	}

@@ -7,20 +7,19 @@
  */
 package Tamaized.Voidcraft.entity.boss.render.bossBar;
 
-import java.awt.Rectangle;
-
-import org.lwjgl.opengl.GL11;
-
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 public class RenderBossHeathBar {
 
@@ -71,7 +70,7 @@ public class RenderBossHeathBar {
 			int yOff = -10;
 			GlStateManager.scale(0.75, 0.35, 1.0);
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer worldRender = tessellator.getBuffer();
+			BufferBuilder worldRender = tessellator.getBuffer();
 			worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
 			worldRender.pos(xOff + x + 322, yOff + y, 0).tex(1, 0).endVertex();
 			worldRender.pos(xOff + x, yOff + y, 0).tex(0, 0).endVertex();
@@ -91,7 +90,7 @@ public class RenderBossHeathBar {
 
 		// drawBar(xf, yf, 0, bossHpPerc, fgRect.height);
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldRender = tessellator.getBuffer();
+		BufferBuilder worldRender = tessellator.getBuffer();
 		worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
 		worldRender.pos(xf + bossHpPerc, yf, 0).tex((float) voidBoss.getPercentHPForBossBar(), 0).endVertex();
 		worldRender.pos(xf, yf, 0).tex(0, 0).endVertex();
@@ -140,7 +139,7 @@ public class RenderBossHeathBar {
 
 	public static void drawBar(int x, int y, int z, int w, int h) {
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldRender = tessellator.getBuffer();
+		BufferBuilder worldRender = tessellator.getBuffer();
 		worldRender.begin(7, DefaultVertexFormats.POSITION_TEX);
 		worldRender.pos(x + w, y, z).tex(1, 0).endVertex();
 		worldRender.pos(x, y, z).tex(0, 0).endVertex();

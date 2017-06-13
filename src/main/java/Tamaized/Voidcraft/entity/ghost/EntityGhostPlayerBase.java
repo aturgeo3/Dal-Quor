@@ -1,14 +1,9 @@
 package Tamaized.Voidcraft.entity.ghost;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.UUID;
-
-import com.mojang.authlib.GameProfile;
-
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
+import com.mojang.authlib.GameProfile;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
@@ -26,6 +21,10 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.UUID;
 
 public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAdditionalSpawnData {
 
@@ -266,7 +265,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobZolSoundEvents.hurtSound;
 	}
 

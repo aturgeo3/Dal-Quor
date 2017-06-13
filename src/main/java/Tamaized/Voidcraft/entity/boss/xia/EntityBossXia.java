@@ -1,15 +1,10 @@
 package Tamaized.Voidcraft.entity.boss.xia;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.client.animation.AnimationRegistry;
-import Tamaized.Voidcraft.entity.client.animation.IAnimation;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
@@ -32,6 +27,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 
@@ -132,7 +131,7 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobXiaSoundEvents.hurtSound;
 	}
 

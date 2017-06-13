@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.handlers;
 
-import Tamaized.Voidcraft.VoidCraft;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
@@ -9,8 +7,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
 public class CraftingHandler {
 	
 	@SubscribeEvent
-	public void SomethingCrafted(ItemCraftedEvent event){
-		if (event.crafting.getItem() == VoidCraft.tools.voidSword) {
+	public void SomethingCrafted(ItemCraftedEvent event){ // TODO
+		/*if (event.crafting.getItem() == VoidCraft.tools.voidSword) {
 			event.player.addStat(VoidCraft.achievements.betterThanDiamond, 1);
 		}
 		else if(event.crafting.getItem() == VoidCraft.tools.angelicSword){
@@ -39,12 +37,12 @@ public class CraftingHandler {
 		}
 		else if(event.crafting.getItem() == VoidCraft.items.voidicSuppressor){
 			event.player.addStat(VoidCraft.achievements.suppressor, 1);
-		}
+		}*/
 	}
 	
 	@SubscribeEvent
-	public void MachineCrafted(ItemSmeltedEvent event){
-		if (event.smelting.getItem() == Item.getItemFromBlock((VoidCraft.blocks.voidMacerator))) {
+	public void MachineCrafted(ItemSmeltedEvent event){ // TODO
+		/*if (event.smelting.getItem() == Item.getItemFromBlock((VoidCraft.blocks.voidMacerator))) {
 			event.player.addStat(VoidCraft.achievements.macerator, 1);
 		}
 		else if(event.smelting.getItem() == VoidCraft.tools.demonSword){
@@ -52,7 +50,7 @@ public class CraftingHandler {
 		}
 		else if(event.smelting.getItem() == Item.getItemFromBlock((VoidCraft.blocks.Heimdall))){
 			event.player.addStat(VoidCraft.achievements.heimdall, 1);
-		}
+		}*/
 	}
 	
 }

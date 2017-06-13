@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -92,7 +93,7 @@ public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource source) {
         return VoidSoundEvents.EntityMobLichSoundEvents.hurtSound;
     }
 

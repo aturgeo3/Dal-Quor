@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.entity.boss.herobrine;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.herobrine.HerobrineBattleHandler;
@@ -19,6 +15,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> {
 
@@ -95,7 +95,7 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobHerobrineSoundEvents.hurtSound;
 	}
 

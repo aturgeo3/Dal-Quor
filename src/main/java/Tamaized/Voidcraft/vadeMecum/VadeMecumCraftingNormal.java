@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.ResourceLocation;
@@ -37,9 +38,9 @@ public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 
 		if (recipe instanceof ShapedRecipes) {
 			ShapedRecipes r = (ShapedRecipes) recipe;
-			int size = (r.getRecipeSize() == 4 || r.getRecipeSize() == 9) ? (int) Math.sqrt(r.getRecipeSize()) : 3;
-			for (int index = 0; index <= r.getRecipeSize() - 1; index++) {
-				ItemStack stack = r.recipeItems[index];
+			int size = (r.recipeItems.size() == 4 || r.recipeItems.size() == 9) ? (int) Math.sqrt(r.recipeItems.size()) : 3;
+			for (int index = 0; index <= r.recipeItems.size() - 1; index++) {
+				ItemStack stack = r.recipeItems.get(index).func_193365_a()[0];
 				if (stack.getItem() instanceof ItemBlock) {
 					stack = new ItemStack(stack.getItem());
 				}
@@ -47,9 +48,10 @@ public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 			}
 		} else if (recipe instanceof ShapelessRecipes) {
 			ShapelessRecipes r = (ShapelessRecipes) recipe;
-			int size = r.getRecipeSize() > 3 ? (int) Math.sqrt(r.getRecipeSize()) : 3;
+			int size = r.recipeItems.size() > 3 ? (int) Math.sqrt(r.recipeItems.size()) : 3;
 			int index = 0;
-			for (ItemStack stack : r.recipeItems) {
+			for (Ingredient ing : r.recipeItems) {
+				ItemStack stack = ing.func_193365_a()[0];
 				if (stack.getItem() instanceof ItemBlock) {
 					stack = new ItemStack(stack.getItem());
 				}

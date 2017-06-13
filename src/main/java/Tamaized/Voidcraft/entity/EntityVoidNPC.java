@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.entity;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.VoidCraft;
@@ -11,7 +8,6 @@ import Tamaized.Voidcraft.entity.client.animation.AnimationRegistry;
 import Tamaized.Voidcraft.entity.client.animation.IAnimation;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.network.IEntitySync;
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -33,9 +29,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEntitySync {
 
@@ -138,7 +136,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		IAnimation a = getAnimation();
 		if (animationID >= 0 && (a == null || a.update(this))) animationID = -1;
 		updateArmSwingProgress();
-		float f = getBrightness(1.0F);
+		float f = getBrightness();
 		if (f > 0.5F) {
 			entityAge += 2;
 		}
@@ -168,7 +166,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	}
 
 	@Override
-	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
+	public void func_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 		prevLimbSwingAmount = limbSwingAmount;
 		double d0 = posX - prevPosX;
 		double d1 = posZ - prevPosZ;
@@ -221,7 +219,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.ENTITY_HOSTILE_HURT;
 	}
 

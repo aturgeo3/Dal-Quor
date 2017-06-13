@@ -3,8 +3,10 @@ package Tamaized.Voidcraft.blocks;
 import Tamaized.TamModized.blocks.TamBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockFakeBedrock extends TamBlock {
@@ -13,7 +15,8 @@ public class BlockFakeBedrock extends TamBlock {
 		super(tab, material, n, hardness, SoundType.STONE);
 	}
 
-	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
+	@Override
+	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
 		return true;
 	}
 

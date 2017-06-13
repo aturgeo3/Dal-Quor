@@ -1,15 +1,13 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-
 import Tamaized.TamModized.armors.TamArmor;
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.ArrayList;
 
 public class VoidCraftArmors implements ITamRegistry {
 
@@ -44,10 +42,12 @@ public class VoidCraftArmors implements ITamRegistry {
 
 	@Override
 	public void init() {
-		GameRegistry.addRecipe(new ItemStack(voidHelmet, 1), "XXX", "X X", 'X', VoidCraft.items.voidcrystal);
-		GameRegistry.addRecipe(new ItemStack(voidChest, 1), "X X", "XXX", "XXX", 'X', VoidCraft.items.voidcrystal);
-		GameRegistry.addRecipe(new ItemStack(voidLegs, 1), "XXX", "X X", "X X", 'X', VoidCraft.items.voidcrystal);
-		GameRegistry.addRecipe(new ItemStack(voidBoots, 1), "X X", "X X", 'X', VoidCraft.items.voidcrystal);
+		// TODO
+//		GameRegistry.addRecipe(new ItemStack(voidHelmet, 1), "XXX", "X X", 'X', VoidCraft.items.voidcrystal);
+//		GameRegistry.addRecipe(new ItemStack(voidChest, 1), "X X", "XXX", "XXX", 'X', VoidCraft.items.voidcrystal);
+//		GameRegistry.addRecipe(new ItemStack(voidLegs, 1), "XXX", "X X", "X X", 'X', VoidCraft.items.voidcrystal);
+//		GameRegistry.addRecipe(new ItemStack(voidBoots, 1), "X X", "X X", 'X', VoidCraft.items.voidcrystal);
+
 		// GameRegistry.addShapelessRecipe(new ItemStack(elytra, 1), voidChest, Items.ELYTRA);
 	}
 

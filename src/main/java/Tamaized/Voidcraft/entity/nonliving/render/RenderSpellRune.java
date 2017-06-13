@@ -4,7 +4,7 @@ import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -22,7 +22,7 @@ public class RenderSpellRune<T extends EntitySpellRune> extends Render<T> {
 	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		bindTexture(TEXTURE_RUNE);
 		Tessellator tess = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tess.getBuffer();
+		BufferBuilder vertexbuffer = tess.getBuffer();
 		int color = entity.getColor();
 		GlStateManager.color(((color >> 16) & 0xFF) / 255f, ((color >> 8) & 0xFF) / 255f, (color & 0xFF) / 255f, (0xFF) / 255f);
 		GlStateManager.disableLighting();

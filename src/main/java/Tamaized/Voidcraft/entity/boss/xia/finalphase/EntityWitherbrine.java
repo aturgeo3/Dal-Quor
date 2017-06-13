@@ -1,12 +1,5 @@
 package Tamaized.Voidcraft.entity.boss.xia.finalphase;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import Tamaized.TamModized.entity.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
@@ -16,21 +9,11 @@ import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.Xia2.phases.EntityAIXia2Phase3;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -60,6 +43,9 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IAlternateBoss {
 
@@ -166,7 +152,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.ENTITY_WITHER_HURT;
 	}
 
@@ -491,6 +477,11 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.launchWitherSkullToEntity(0, target);
 	}
 
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+
+	}
+
 	/**
 	 * Called when the entity is attacked.
 	 */
@@ -549,7 +540,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender(float partialTicks) {
+	public int getBrightnessForRender() {
 		return 15728880;
 	}
 

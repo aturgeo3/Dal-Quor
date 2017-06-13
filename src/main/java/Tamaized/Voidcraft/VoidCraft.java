@@ -70,12 +70,16 @@ import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import Tamaized.Voidcraft.world.dim.dalQuor.WorldProviderDalQuor;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -95,6 +99,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.apache.logging.log4j.LogManager;
 
 import java.io.File;
@@ -370,6 +376,23 @@ public class VoidCraft extends TamModBase {
 
 		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 
+	}
+
+	// TODO: This is temporary
+	public static void addRecipe(ResourceLocation id, IRecipe recipe) {
+		CraftingManager.func_193372_a(id, recipe);
+	}
+
+	// TODO: This is temporary
+	public static void addShapedRecipe(ItemStack output, Object... shape) {
+		ResourceLocation id = new ResourceLocation(modid, output.getUnlocalizedName());
+		addRecipe(id, new ShapedOreRecipe(id, output, shape));
+	}
+
+	// TODO: This is temporary
+	public static void addShapelessRecipe(ItemStack output, Object... shape) {
+		ResourceLocation id = new ResourceLocation(modid, output.getUnlocalizedName());
+		addRecipe(id, new ShapelessOreRecipe(id, output, shape));
 	}
 
 }

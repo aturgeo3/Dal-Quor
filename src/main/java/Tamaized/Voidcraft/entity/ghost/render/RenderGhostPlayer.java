@@ -1,16 +1,14 @@
 package Tamaized.Voidcraft.entity.ghost.render;
 
-import java.util.Random;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
 import Tamaized.Voidcraft.handlers.SkinHandler;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBiped.ArmPose;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -19,6 +17,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
@@ -117,7 +117,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 	private void drawRune() {
 		bindTexture(TEXTURE_RUNE);
 		Tessellator tess = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tess.getBuffer();
+		BufferBuilder vertexbuffer = tess.getBuffer();
 		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		double x = 2.0D;
 		double y = 2.205D;

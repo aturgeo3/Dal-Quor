@@ -27,6 +27,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -84,7 +85,7 @@ public class EntityMobWraith extends EntityVoidMob implements IMob{
     }
     
     @Override
-    protected SoundEvent getHurtSound(){
+    protected SoundEvent getHurtSound(DamageSource source){
     	return VoidSoundEvents.EntityMobWraithSoundEvents.hurtSound;
     }
     

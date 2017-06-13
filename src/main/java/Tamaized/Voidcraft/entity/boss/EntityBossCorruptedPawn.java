@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.entity.boss;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-
 import Tamaized.TamModized.entity.dragon.EntityDragonOld;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
@@ -12,19 +8,9 @@ import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.IVoidBossData;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import com.google.common.base.Predicate;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -41,6 +27,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData, IMob {
 
@@ -220,7 +208,7 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobVoidBossSoundEvents.hurtSound;
 	}
 

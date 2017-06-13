@@ -4,7 +4,7 @@ import Tamaized.TamModized.particles.TamParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
@@ -30,7 +30,7 @@ public class XiaLaser extends TamParticle {
 	}
 
 	@Override
-	public boolean render(VertexBuffer worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+	public boolean render(BufferBuilder worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 		Entity e = entity.world.getEntityByID(entityID);
 		if (e == null) return false;
 		GlStateManager.alphaFunc(516, 0.1F);
@@ -143,7 +143,7 @@ public class XiaLaser extends TamParticle {
 			GlStateManager.depthMask(true);
 			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer vertexbuffer = tessellator.getBuffer();
+			BufferBuilder vertexbuffer = tessellator.getBuffer();
 			double d0 = worldTime + partialTicks;
 			double d1 = height < 0 ? d0 : -d0;
 			double d2 = MathHelper.frac(d1 * 0.2D - (double) MathHelper.floor(d1 * 0.1D));

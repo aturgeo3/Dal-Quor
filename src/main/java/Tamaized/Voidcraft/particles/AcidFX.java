@@ -7,7 +7,7 @@ import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -33,9 +33,9 @@ public class AcidFX extends TamParticle {
 	}
 
 	@Override
-	public boolean render(VertexBuffer worldRenderer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+	public boolean render(BufferBuilder worldRenderer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		//GL11.glDepthMask(false);
 		//GL11.glEnable(GL11.GL_BLEND);

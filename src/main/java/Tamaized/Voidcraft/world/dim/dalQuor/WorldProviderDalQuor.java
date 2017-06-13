@@ -1,16 +1,16 @@
 package Tamaized.Voidcraft.world.dim.dalQuor;
 
-import javax.annotation.Nullable;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.world.BiomeProviderDalQuor;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class WorldProviderDalQuor extends WorldProvider {
 

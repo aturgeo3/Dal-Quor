@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.entity.boss.twins;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.twins.TwinsBattleHandler;
@@ -16,6 +12,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 
@@ -99,7 +99,7 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobDolSoundEvents.hurtSound;
 	}
 

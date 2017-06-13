@@ -10,7 +10,6 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.items.*;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
@@ -27,10 +26,7 @@ import java.util.ArrayList;
 public class VoidCraftItems implements ITamRegistry {
 
 	public static ArrayList<ItemRecord> voidDiscs;
-	private ArrayList<ITamModel> modelList;
-
 	public static VadeMecum vadeMecum;
-
 	public static TamItem ectoplasm;
 	public static TamItem voidcrystal;
 	public static EmptyObsidianFlask emptyObsidianFlask;
@@ -53,9 +49,7 @@ public class VoidCraftItems implements ITamRegistry {
 	public static TamItem voidicDragonScale;
 	public static TamItem astralEssence;
 	public static TamItem quoriFragment;
-
 	public static TamItem voidicSteel;
-
 	public static TamItem quartzDust;
 	public static TamItem coalDust;
 	public static TamItem ironDust;
@@ -66,17 +60,13 @@ public class VoidCraftItems implements ITamRegistry {
 	public static TamItem lapisDust;
 	public static TamItem emeraldDust;
 	public static TamItem diamondDust;
-
 	public static Debugger debugger;
 	public static CreativeVoidBucket creativeVoidBucket;
-	// public static HookShot hookShot;
-
 	public static VoidicSuppressor voidicSuppressor;
+	// public static HookShot hookShot;
 	public static VoidicDrill voidicDrill;
 	public static RealityTeleporter realityTeleporter;
-
 	public static VoidCrystalShield voidCrystalShield;
-
 	public static TamItemSeed etherealSeed;
 	public static EtherealFruit etherealFruit;
 	public static EtherealFruit etherealFruit_redstone;
@@ -84,8 +74,8 @@ public class VoidCraftItems implements ITamRegistry {
 	public static EtherealFruit etherealFruit_gold;
 	public static EtherealFruit etherealFruit_emerald;
 	public static EtherealFruit etherealFruit_diamond;
-	
 	public static ItemDreamBed dreamBed;
+	private ArrayList<ITamModel> modelList;
 
 	// public static VoidRecord record_noStrings;
 	// public static VoidRecord record_bleedingThrough;
@@ -155,7 +145,7 @@ public class VoidCraftItems implements ITamRegistry {
 		modelList.add(etherealFruit_gold = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.GOLD, VoidCraft.tabs.tabVoid, "etherealfruit_gold", 64, 2, false));
 		modelList.add(etherealFruit_emerald = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.EMERALD, VoidCraft.tabs.tabVoid, "etherealfruit_emerald", 64, 2, false));
 		modelList.add(etherealFruit_diamond = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.DIAMOND, VoidCraft.tabs.tabVoid, "etherealfruit_diamond", 64, 2, false));
-		
+
 		modelList.add(dreamBed = new ItemDreamBed(VoidCraft.tabs.tabVoid, "dreambed"));
 
 		// modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
@@ -169,34 +159,34 @@ public class VoidCraftItems implements ITamRegistry {
 		// voidDiscs.add(record_stringsAttached);
 		// voidDiscs.add(record_running);
 
-        OreDictionary.registerOre("ingotSteel", voidicSteel);
+		OreDictionary.registerOre("ingotSteel", voidicSteel);
 
-        OreDictionary.registerOre("dustQuartz", quartzDust);
-        OreDictionary.registerOre("dustCoal", coalDust);
-        OreDictionary.registerOre("dustIron", ironDust);
-        OreDictionary.registerOre("dustGold", goldDust);
-        OreDictionary.registerOre("dustCopper", copperDust);
-        OreDictionary.registerOre("dustTin", tinDust);
-        OreDictionary.registerOre("dustLead", leadDust);
-        OreDictionary.registerOre("dustLapis", lapisDust);
-        OreDictionary.registerOre("dustEmerald", emeraldDust);
-        OreDictionary.registerOre("dustDiamond", diamondDust);
+		OreDictionary.registerOre("dustQuartz", quartzDust);
+		OreDictionary.registerOre("dustCoal", coalDust);
+		OreDictionary.registerOre("dustIron", ironDust);
+		OreDictionary.registerOre("dustGold", goldDust);
+		OreDictionary.registerOre("dustCopper", copperDust);
+		OreDictionary.registerOre("dustTin", tinDust);
+		OreDictionary.registerOre("dustLead", leadDust);
+		OreDictionary.registerOre("dustLapis", lapisDust);
+		OreDictionary.registerOre("dustEmerald", emeraldDust);
+		OreDictionary.registerOre("dustDiamond", diamondDust);
 	}
 
 	@Override
 	public void init() {
+		//TODO
+		VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);// GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
+		//		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
+		//		GameRegistry.addRecipe(new ItemStack(emptyObsidianFlask, 4), "OGO", " O ", 'O', Blocks.OBSIDIAN, 'G', Blocks.GLASS);
+		//		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
+		//		GameRegistry.addRecipe(new ItemStack(voidicDrill), "BHB", "CZC", "ESE", 'B', voidicSteel, 'H', VoidCraft.blocks.realityHole, 'C', voidCloth, 'Z', VoidCraft.blocks.voidicCharger, 'E', ectoplasm, 'S', voidStar);
+		//		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
+		//		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
+		//		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
+		//		GameRegistry.addRecipe(new ItemStack(realityTeleporter), "BEZ", "CHC", "BCB", 'B', voidicSteel, 'E', emeraldDust, 'Z', VoidCraft.blocks.voidicCharger, 'C', MoltenvoidChain, 'H', VoidCraft.blocks.realityHole);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
-		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
-		GameRegistry.addRecipe(new ItemStack(emptyObsidianFlask, 4), "OGO", " O ", 'O', Blocks.OBSIDIAN, 'G', Blocks.GLASS);
-		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
-		GameRegistry.addRecipe(new ItemStack(voidicDrill), "BHB", "CZC", "ESE", 'B', voidicSteel, 'H', VoidCraft.blocks.realityHole, 'C', voidCloth, 'Z', VoidCraft.blocks.voidicCharger, 'E', ectoplasm, 'S', voidStar);
-		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
-		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
-		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
-		GameRegistry.addRecipe(new ItemStack(realityTeleporter), "BEZ", "CHC", "BCB", 'B', voidicSteel, 'E', emeraldDust, 'Z', VoidCraft.blocks.voidicCharger, 'C', MoltenvoidChain, 'H', VoidCraft.blocks.realityHole);
-
-		GameRegistry.addRecipe(new ItemStack(voidCrystalShield), "CCC", "CBC", " C ", 'C', voidcrystal, 'B', voidicSteel);
+		//		GameRegistry.addRecipe(new ItemStack(voidCrystalShield), "CCC", "CBC", " C ", 'C', voidcrystal, 'B', voidicSteel);
 
 		GameRegistry.addSmelting(VoidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
@@ -209,19 +199,6 @@ public class VoidCraftItems implements ITamRegistry {
 		this.addPreSmelting(tinDust, "ingotTin");
 		this.addPreSmelting(leadDust, "ingotLead");
 
-		// Discs
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(0)), "XZZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(1)), "ZXZ", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZX", "ZYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "XYZ", "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(2)), "ZZZ", "XYZ",
-		// "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(3)), "ZZZ", "ZYX",
-		// "ZZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(4)), "ZZZ", "ZYZ",
-		// "XZZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
-		// GameRegistry.addRecipe(new ItemStack(voidDiscs.get(5)), "ZZZ", "ZYZ",
-		// "ZXZ", 'X', burnBone, 'Y', voidcrystal, 'Z', Items.COAL);
 	}
 
 	@Override
@@ -263,7 +240,6 @@ public class VoidCraftItems implements ITamRegistry {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void clientPostInit() {
-		// TODO Auto-generated method stub
 
 	}
 

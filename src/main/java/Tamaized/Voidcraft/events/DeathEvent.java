@@ -17,7 +17,7 @@ public class DeathEvent {
 			target.setHealth(target.getMaxHealth());
 			e.setCanceled(true);
 			target.fallDistance=0;
-			VoidCraft.instance.VoidTickEvent.dream((EntityPlayer) target);
+			VoidTickEvent.dream((EntityPlayer) target);
 		}
 		DamageSource source = e.getSource();
 		if (target != null && !(target instanceof EntityMobSpectreChain) && source != null && source.getEntity() != null && source.getEntity() instanceof EntityMobSpectreChain) {

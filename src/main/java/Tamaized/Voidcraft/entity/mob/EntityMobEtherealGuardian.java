@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.entity.mob;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import com.google.common.base.Predicate;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.Voidcraft.VoidCraft;
@@ -15,33 +10,25 @@ import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
+import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class EntityMobEtherealGuardian extends EntityVoidMob {
 
@@ -124,7 +111,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return VoidSoundEvents.EntityMobWrathSoundEvents.hurtSound;
 	}
 

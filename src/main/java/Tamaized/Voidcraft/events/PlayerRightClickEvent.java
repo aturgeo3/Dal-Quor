@@ -23,7 +23,7 @@ public class PlayerRightClickEvent {
 			if (!stack.isEmpty() && stack.getItem() == VoidCraft.items.quoriFragment) {
 				stack.shrink(1);
 				e.setCanceled(true);
-				VoidCraft.instance.VoidTickEvent.dream(e.getEntityPlayer());
+				VoidTickEvent.dream(e.getEntityPlayer());
 			}
 		}
 		if (state != null && state.getBlock() == Blocks.DRAGON_EGG && !stack.isEmpty() && stack.getItem() == VoidCraft.items.voidStar) {

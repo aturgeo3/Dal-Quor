@@ -1,18 +1,12 @@
 package Tamaized.Voidcraft.client;
 
-import java.nio.FloatBuffer;
-import java.util.Random;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-
 import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.helper.SheatheHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -20,6 +14,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+
+import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class RenderSheathe {
 
@@ -66,7 +65,7 @@ public class RenderSheathe {
 		float f = entity.width * 1.4F;
 		GlStateManager.scale(f, f, f);
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 		float f1 = 0.5F;
 		float f2 = 0.0F;
 		float f3 = entity.height / f;

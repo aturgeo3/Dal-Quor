@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.starforge.tools;
 
-import java.util.List;
-
 import Tamaized.TamModized.tools.TamPickaxe;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.starforge.IStarForgeCapability;
@@ -10,6 +8,7 @@ import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Tier;
 import Tamaized.Voidcraft.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,6 +28,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 
@@ -71,7 +73,7 @@ public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, @Nullable World playerIn, List<String> tooltip, ITooltipFlag advanced) {
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
 		if (cap != null) {
 			IStarForgeEffect t1 = cap.getEffect(Tier.ONE);

@@ -1,13 +1,13 @@
 package Tamaized.Voidcraft.starforge;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.StarForgeGUI;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.helper.GUIListElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,21 +20,23 @@ public class StarForgeToolEntry extends GUIListElement {
 	public StarForgeToolEntry(ItemStack tool) throws Exception {
 		super();
 		this.tool = tool;
-		if (tool.isEmpty() || !(tool.getItem() instanceof IStarForgeTool)) throw new Exception("ItemStack was empty or the Item did not implement IStarForgeTool");
+		if (tool.isEmpty() || !(tool.getItem() instanceof IStarForgeTool))
+			throw new Exception("ItemStack was empty or the Item did not implement IStarForgeTool");
 	}
-	
-	public ItemStack getTool(){
+
+	public ItemStack getTool() {
 		return tool;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void draw(GuiContainer gui, Minecraft mc, int x, int y, int height, Tessellator tess) {
-		if (!(gui instanceof StarForgeGUI)) return;
+		if (!(gui instanceof StarForgeGUI))
+			return;
 		StarForgeGUI starforgeGUI = (StarForgeGUI) gui;
-		VertexBuffer worldr = tess.getBuffer();
-		int min = gui.getGuiLeft()+(gui.getXSize()/2)+10;//gui.width - 200;
-		int max = x+7;
+		BufferBuilder worldr = tess.getBuffer();
+		int min = gui.getGuiLeft() + (gui.getXSize() / 2) + 10;//gui.width - 200;
+		int max = x + 7;
 		int slotTop = y;
 		int slotBuffer = height;
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

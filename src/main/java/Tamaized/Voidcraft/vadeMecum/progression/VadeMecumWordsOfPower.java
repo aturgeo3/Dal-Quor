@@ -1,16 +1,11 @@
 package Tamaized.Voidcraft.vadeMecum.progression;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
 import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.helper.ExplosionDamageHelper;
 import Tamaized.TamModized.helper.RayTraceHelper;
+import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.spell.BlockSpellIceSpike;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
@@ -47,13 +42,14 @@ import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class VadeMecumWordsOfPower {
 
@@ -138,7 +134,7 @@ public class VadeMecumWordsOfPower {
 					if (rand <= cap.getFailureChance()) {
 						ExplosionDamageHelper.explode(null, world, world.newExplosion(null, caster.posX, caster.posY, caster.posZ, 7.0F, true, true), 7.0F, caster.posX, caster.posY, caster.posZ);
 						world.playBroadcastSound(1023, caster.getPosition(), 0);
-						caster.addStat(VoidCraft.achievements.familiarity, 1);
+//						caster.addStat(VoidCraft.achievements.familiarity, 1); TODO
 						useCharge = true;
 					} else {
 						doCast = true;

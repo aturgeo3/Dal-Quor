@@ -1,14 +1,9 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import com.google.common.base.Predicate;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
+import com.google.common.base.Predicate;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCavesHell;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -29,27 +24,38 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class ChunkProviderVoid implements IChunkGenerator {
 
-	private boolean hasXiaGen = false;
-
+	public final MapGenVoidFortress genFortress = new MapGenVoidFortress();
+	public final MapGenVoidCity genCity = new MapGenVoidCity(this);
 	private final World world;
 	private final boolean generateStructures;
 	private final Random rand;
-	public final MapGenVoidFortress genFortress = new MapGenVoidFortress();
-	public final MapGenVoidCity genCity = new MapGenVoidCity(this);
-
+	private final ArrayList blankSpawnList = new ArrayList();
+	public NoiseGeneratorOctaves scaleNoise;
+	public NoiseGeneratorOctaves depthNoise;
+	double[] pnr;
+	double[] ar;
+	double[] br;
+	double[] noiseData4;
+	double[] dr;
+	private boolean hasXiaGen = false;
 	private double[] buffer;
 	private NoiseGeneratorOctaves lperlinNoise1;
 	private NoiseGeneratorOctaves lperlinNoise2;
 	private NoiseGeneratorOctaves perlinNoise1;
-	/** Determines whether slowsand or gravel can be generated at a location */
+	/**
+	 * Determines whether slowsand or gravel can be generated at a location
+	 */
 	private NoiseGeneratorOctaves slowsandGravelNoiseGen;
-	/** Determines whether something other than nettherack can be generated at a location */
+	/**
+	 * Determines whether something other than nettherack can be generated at a location
+	 */
 	private NoiseGeneratorOctaves netherrackExculsivityNoiseGen;
-	public NoiseGeneratorOctaves scaleNoise;
-	public NoiseGeneratorOctaves depthNoise;
-
 	/**
 	 * Holds the noise used to determine whether slowsand can be generated at a location
 	 */
@@ -57,13 +63,6 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	private double[] gravelNoise = new double[256];
 	private double[] depthBuffer = new double[256];
 	private MapGenBase genNetherCaves = new MapGenCavesHell();
-	double[] pnr;
-	double[] ar;
-	double[] br;
-	double[] noiseData4;
-	double[] dr;
-
-	private final ArrayList blankSpawnList = new ArrayList();
 
 	public ChunkProviderVoid(World worldIn, boolean p_i45637_2_, long seed) {
 		this.world = worldIn;
@@ -166,7 +165,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	}
 
 	public void buildSurfaces(int p_185937_1_, int p_185937_2_, ChunkPrimer primer) {
-		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer, this.world)) return;
+		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer, this.world))
+			return;
 		int i = this.world.getSeaLevel() + 1;
 		double d0 = 0.03125D;
 		this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, d0, d0, 1.0D);
@@ -263,7 +263,8 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 		net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField event = new net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField(this, p_185938_1_, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_);
 		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return event.getNoisefield();
+		if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY)
+			return event.getNoisefield();
 
 		double d0 = 684.412D;
 		double d1 = 2053.236D;
@@ -370,12 +371,14 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		if (this.genFortress != null) {
 			if (this.genFortress.isInsideStructure(pos)) {
-				if (Math.floor(Math.random() * 10) == 0) return this.genFortress.getSpawnList();
+				if (Math.floor(Math.random() * 10) == 0)
+					return this.genFortress.getSpawnList();
 				// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
 			}
 		}
 		if (this.genFortress.isPositionInStructure(world, pos) && this.world.getBlockState(pos.down()).getBlock() == VoidCraft.blocks.blockVoidbrick) {
-			if (Math.floor(Math.random() * 40) == 0) return this.genFortress.getSpawnList();
+			if (Math.floor(Math.random() * 40) == 0)
+				return this.genFortress.getSpawnList();
 			// if(par1EnumCreatureType == EnumCreatureType.creature) return this.genTest.getSpawnList();
 		}
 		if (pos.getY() >= 128) {
@@ -401,6 +404,17 @@ public class ChunkProviderVoid implements IChunkGenerator {
 						genCity.getClosestStrongholdPos(worldIn, position, p_180513_4_) :
 
 						null;
+	}
+
+	@Override
+	public boolean func_193414_a(World worldIn, String structureName, BlockPos position) {
+		return structureName.equals(genFortress.getStructureName()) ?
+
+				genFortress.isInsideStructure(position) :
+
+				structureName.equals(genCity.getStructureName()) &&
+
+						genCity.isInsideStructure(position);
 	}
 
 	@Override

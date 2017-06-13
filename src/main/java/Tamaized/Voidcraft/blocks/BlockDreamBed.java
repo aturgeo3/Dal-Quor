@@ -1,9 +1,8 @@
 package Tamaized.Voidcraft.blocks;
 
-import java.util.Random;
-
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.events.VoidTickEvent;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockDreamBed extends BlockBed implements ITamModel {
 
@@ -68,7 +69,7 @@ public class BlockDreamBed extends BlockBed implements ITamModel {
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) VoidCraft.instance.VoidTickEvent.dream(playerIn);
+		if (!worldIn.isRemote) VoidTickEvent.dream(playerIn);
 		return true;
 	}
 

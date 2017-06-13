@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.vadeMecum;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,7 +23,7 @@ public class VadeMecumButton extends GuiButton {
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 		if (this.visible) {
 			boolean flag = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -40,7 +40,8 @@ public class VadeMecumButton extends GuiButton {
 			GlStateManager.disableBlend();
 			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderHelper.enableGUIStandardItemLighting();
-			if (!stackToRender.isEmpty()) mc.getRenderItem().renderItemIntoGUI(stackToRender, xPosition, yPosition + (height / 2) - 8);
+			if (!stackToRender.isEmpty())
+				mc.getRenderItem().renderItemIntoGUI(stackToRender, xPosition, yPosition + (height / 2) - 8);
 			RenderHelper.disableStandardItemLighting();
 		}
 	}

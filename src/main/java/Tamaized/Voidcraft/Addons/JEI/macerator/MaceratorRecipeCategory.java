@@ -42,6 +42,11 @@ public class MaceratorRecipeCategory implements IRecipeCategory {
 	}
 
 	@Override
+	public String getModName() {
+		return VoidCraft.modid;
+	}
+
+	@Override
 	public IDrawable getBackground() {
 		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 180, 75, -20, 0, 0, 0);
 	}

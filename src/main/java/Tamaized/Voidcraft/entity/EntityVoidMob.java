@@ -34,7 +34,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 	@Override
 	public void onLivingUpdate() {
 		updateArmSwingProgress();
-		float f = getBrightness(1.0F);
+		float f = getBrightness();
 		if (f > 0.5F) {
 			entityAge += 2;
 		}
@@ -93,7 +93,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.ENTITY_HOSTILE_HURT;
 	}
 

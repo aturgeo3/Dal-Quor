@@ -1,28 +1,19 @@
 package Tamaized.Voidcraft.proxy;
 
 import Tamaized.TamModized.proxy.AbstractProxy;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderNoBreak;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicAnchor;
 import Tamaized.Voidcraft.blocks.render.RenderVoidicCharger;
-import Tamaized.Voidcraft.client.ClientInfusionOverlayRender;
-import Tamaized.Voidcraft.client.ClientRenderTicker;
-import Tamaized.Voidcraft.client.LayerCustomElytra;
-import Tamaized.Voidcraft.client.LayerVoidSpikes;
-import Tamaized.Voidcraft.client.RenderGeneric;
-import Tamaized.Voidcraft.client.RenderNull;
+import Tamaized.Voidcraft.client.*;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.dragon.render.RenderDragonOldWithBar;
 import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
 import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.render.RenderVoidicDragon;
 import Tamaized.Voidcraft.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineShadow;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
-import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
+import Tamaized.Voidcraft.entity.boss.herobrine.extra.*;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.render.ModelHerobrineShadow;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.render.RenderHerobrineCreeper;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.render.RenderHerobrineShadow;
@@ -56,11 +47,7 @@ import Tamaized.Voidcraft.entity.companion.render.RenderFireElementalCompanion;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.ghost.render.RenderGhostPlayer;
-import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
-import Tamaized.Voidcraft.entity.mob.EntityMobLich;
-import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
-import Tamaized.Voidcraft.entity.mob.EntityMobVoidWrath;
-import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
+import Tamaized.Voidcraft.entity.mob.*;
 import Tamaized.Voidcraft.entity.mob.dalquor.EntityHashalaq;
 import Tamaized.Voidcraft.entity.mob.dalquor.model.ModelHashalaq;
 import Tamaized.Voidcraft.entity.mob.lich.EntityLichInferno;
@@ -69,18 +56,8 @@ import Tamaized.Voidcraft.entity.mob.model.ModelSpectreChain;
 import Tamaized.Voidcraft.entity.mob.model.ModelVoidWrath;
 import Tamaized.Voidcraft.entity.mob.model.ModelWraith;
 import Tamaized.Voidcraft.entity.mob.render.RenderEtherealGuardian;
-import Tamaized.Voidcraft.entity.nonliving.AcidBall;
-import Tamaized.Voidcraft.entity.nonliving.EntityCasterLightningBolt;
-import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
-import Tamaized.Voidcraft.entity.nonliving.EntitySpellImplosion;
-import Tamaized.Voidcraft.entity.nonliving.EntitySpellRune;
-import Tamaized.Voidcraft.entity.nonliving.ProjectileDisintegration;
-import Tamaized.Voidcraft.entity.nonliving.VoidChain;
-import Tamaized.Voidcraft.entity.nonliving.render.RenderAcidBall;
-import Tamaized.Voidcraft.entity.nonliving.render.RenderObsidianFlask;
-import Tamaized.Voidcraft.entity.nonliving.render.RenderSpellImplosion;
-import Tamaized.Voidcraft.entity.nonliving.render.RenderSpellRune;
-import Tamaized.Voidcraft.entity.nonliving.render.RenderVoidChain;
+import Tamaized.Voidcraft.entity.nonliving.*;
+import Tamaized.Voidcraft.entity.nonliving.render.*;
 import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.events.client.TextureStitch;
 import Tamaized.Voidcraft.handlers.SkinHandler;
@@ -92,12 +69,8 @@ import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderFireball;
-import net.minecraft.client.renderer.entity.RenderLightningBolt;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.tileentity.RenderWitherSkull;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -110,14 +83,13 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends AbstractProxy {
 
-	public ClientProxy() {
-		super(Side.CLIENT);
-	}
-
+	private static final ResourceLocation WHITESPACE = new ResourceLocation(VoidCraft.modid, "textures/entity/whitespace.png");
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
 
-	private static final ResourceLocation WHITESPACE = new ResourceLocation(VoidCraft.modid, "textures/entity/whitespace.png");
+	public ClientProxy() {
+		super(Side.CLIENT);
+	}
 
 	@Override
 	public void preRegisters() {

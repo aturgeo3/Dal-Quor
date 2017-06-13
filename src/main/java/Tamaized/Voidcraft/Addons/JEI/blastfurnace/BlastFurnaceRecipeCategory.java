@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.Addons.JEI.blastfurnace;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftJEIPlugin;
+import Tamaized.Voidcraft.VoidCraft;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -39,6 +39,11 @@ public class BlastFurnaceRecipeCategory implements IRecipeCategory {
 	@Override
 	public String getTitle() {
 		return "Void Blast Furnace";
+	}
+
+	@Override
+	public String getModName() {
+		return VoidCraft.modid;
 	}
 
 	@Override

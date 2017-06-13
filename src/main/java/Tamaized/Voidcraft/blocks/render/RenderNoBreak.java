@@ -1,17 +1,17 @@
 package Tamaized.Voidcraft.blocks.render;
 
-import java.nio.FloatBuffer;
-import java.util.Random;
-
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+
+import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class RenderNoBreak extends TileEntitySpecialRenderer<TileEntityNoBreak> {
 
@@ -23,8 +23,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer<TileEntityNoBreak> 
 	FloatBuffer buffer = GLAllocation.createDirectFloatBuffer(16);
 
 	@Override
-	public void renderTileEntityAt(TileEntityNoBreak te, double x, double y, double z, float partialTicks, int destroyStage) {
-
+	public void func_192841_a(TileEntityNoBreak te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
 		GlStateManager.disableLighting();
 		RANDOM.setSeed(31100L);
 		GlStateManager.getFloat(2982, MODELVIEW);
@@ -75,7 +74,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer<TileEntityNoBreak> 
 			GlStateManager.multMatrix(PROJECTION);
 			GlStateManager.multMatrix(MODELVIEW);
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer vertexbuffer = tessellator.getBuffer();
+			BufferBuilder vertexbuffer = tessellator.getBuffer();
 			vertexbuffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
 			float f3 = (RANDOM.nextFloat() * 0.5F + 0.1F) * f1;
 			float f4 = (RANDOM.nextFloat() * 0.5F + 0.4F) * f1;

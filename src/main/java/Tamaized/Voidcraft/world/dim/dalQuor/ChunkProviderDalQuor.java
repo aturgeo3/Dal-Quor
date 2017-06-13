@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.world.dim.dalQuor;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -17,46 +12,51 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class ChunkProviderDalQuor implements IChunkGenerator {
 
-	public static IBlockState[] getGenBlocks(Biome biome) {
-		if (biome == VoidCraft.biomes.biomeDreamOverworld) return new IBlockState[] { Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState() };
-		if (biome == VoidCraft.biomes.biomeDreamNether) return new IBlockState[] { Blocks.NETHERRACK.getDefaultState(), Blocks.MAGMA.getDefaultState(), Blocks.MAGMA.getDefaultState() };
-		if (biome == VoidCraft.biomes.biomeDreamEnd) return new IBlockState[] { Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState() };
-		if (biome == VoidCraft.biomes.biomeDreamVoid) return new IBlockState[] { VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState() };
-		else return new IBlockState[] { Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState() };
-	}
-
-	private final Random rand;
 	protected static final IBlockState END_STONE = Blocks.END_STONE.getDefaultState();
 	protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
-	private NoiseGeneratorOctaves lperlinNoise1;
-	private NoiseGeneratorOctaves lperlinNoise2;
-	private NoiseGeneratorOctaves perlinNoise1;
-	/** A NoiseGeneratorOctaves used in generating terrain */
-	public NoiseGeneratorOctaves noiseGen5;
-	/** A NoiseGeneratorOctaves used in generating terrain */
-	public NoiseGeneratorOctaves noiseGen6;
-	/** Reference to the World object. */
+	private final Random rand;
+	/**
+	 * Reference to the World object.
+	 */
 	private final World world;
-	/** are map structures going to be generated (e.g. strongholds) */
-	private NoiseGeneratorSimplex islandNoise;
-	private double[] buffer;
-	/** The biomes that are used to generate the chunk */
-	private Biome[] biomesForGeneration;
+	private final WorldGenIsland endIslands = new WorldGenIsland();
+	/**
+	 * A NoiseGeneratorOctaves used in generating terrain
+	 */
+	public NoiseGeneratorOctaves noiseGen5;
+	/**
+	 * A NoiseGeneratorOctaves used in generating terrain
+	 */
+	public NoiseGeneratorOctaves noiseGen6;
 	double[] pnr;
 	double[] ar;
 	double[] br;
-	private final WorldGenIsland endIslands = new WorldGenIsland();
+	private NoiseGeneratorOctaves lperlinNoise1;
+	private NoiseGeneratorOctaves lperlinNoise2;
+	private NoiseGeneratorOctaves perlinNoise1;
+	/**
+	 * are map structures going to be generated (e.g. strongholds)
+	 */
+	private NoiseGeneratorSimplex islandNoise;
+	private double[] buffer;
+	/**
+	 * The biomes that are used to generate the chunk
+	 */
+	private Biome[] biomesForGeneration;
 	// temporary variables used during event handling
 	private int chunkX = 0;
 	private int chunkZ = 0;
-
 	public ChunkProviderDalQuor(World p_i47241_1_, boolean p_i47241_2_, long p_i47241_3_, BlockPos p_i47241_5_) {
 		this.world = p_i47241_1_;
 		this.rand = new Random(p_i47241_3_);
@@ -76,26 +76,17 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		this.islandNoise = ctx.getIsland();
 	}
 
-	private class WorldGenIsland extends WorldGenerator {
-		public boolean generate(World worldIn, Random rand, BlockPos position) {
-			float f = (float) (rand.nextInt(3) + 4);
-
-			IBlockState[] blockStates = getGenBlocks(world.getBiome(position));
-
-			for (int i = 0; f > 0.5F; --i) {
-				for (int j = MathHelper.floor(-f); j <= MathHelper.ceil(f); ++j) {
-					for (int k = MathHelper.floor(-f); k <= MathHelper.ceil(f); ++k) {
-						if ((float) (j * j + k * k) <= (f + 1.0F) * (f + 1.0F)) {
-							this.setBlockAndNotifyAdequately(worldIn, position.add(j, i, k), i == 0 ? blockStates[0] : i == -1 ? blockStates[1] : blockStates[2]);
-						}
-					}
-				}
-
-				f = (float) ((double) f - ((double) rand.nextInt(2) + 0.5D));
-			}
-
-			return true;
-		}
+	public static IBlockState[] getGenBlocks(Biome biome) {
+		if (biome == VoidCraft.biomes.biomeDreamOverworld)
+			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
+		if (biome == VoidCraft.biomes.biomeDreamNether)
+			return new IBlockState[]{Blocks.NETHERRACK.getDefaultState(), Blocks.MAGMA.getDefaultState(), Blocks.MAGMA.getDefaultState()};
+		if (biome == VoidCraft.biomes.biomeDreamEnd)
+			return new IBlockState[]{Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()};
+		if (biome == VoidCraft.biomes.biomeDreamVoid)
+			return new IBlockState[]{VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState()};
+		else
+			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
 	}
 
 	/**
@@ -380,6 +371,33 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
 
+	}
+
+	@Override
+	public boolean func_193414_a(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
+		return false;
+	}
+
+	private class WorldGenIsland extends WorldGenerator {
+		public boolean generate(World worldIn, Random rand, BlockPos position) {
+			float f = (float) (rand.nextInt(3) + 4);
+
+			IBlockState[] blockStates = getGenBlocks(world.getBiome(position));
+
+			for (int i = 0; f > 0.5F; --i) {
+				for (int j = MathHelper.floor(-f); j <= MathHelper.ceil(f); ++j) {
+					for (int k = MathHelper.floor(-f); k <= MathHelper.ceil(f); ++k) {
+						if ((float) (j * j + k * k) <= (f + 1.0F) * (f + 1.0F)) {
+							this.setBlockAndNotifyAdequately(worldIn, position.add(j, i, k), i == 0 ? blockStates[0] : i == -1 ? blockStates[1] : blockStates[2]);
+						}
+					}
+				}
+
+				f = (float) ((double) f - ((double) rand.nextInt(2) + 0.5D));
+			}
+
+			return true;
+		}
 	}
 
 }

@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.xiaCastle.logic;
 
-import java.util.List;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -26,6 +24,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class XiaCastleLogicHandler {
 
@@ -151,7 +151,7 @@ public class XiaCastleLogicHandler {
 			player.setPositionAndUpdate(pos.getX() + 23.5, pos.getY() + 8.5, pos.getZ() + 13.5);
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
-			player.addStat(VoidCraft.achievements.Ascension, 1);
+//			player.addStat(VoidCraft.achievements.Ascension, 1); TODO
 			if (player.hasCapability(CapabilityList.VADEMECUM, null)) {
 				IVadeMecumCapability vade = player.getCapability(CapabilityList.VADEMECUM, null);
 				if (vade.hasCategory(IVadeMecumCapability.Category.TotalControl) && !vade.hasCategory(IVadeMecumCapability.Category.Dreams)) {

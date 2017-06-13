@@ -1,5 +1,14 @@
 package Tamaized.Voidcraft.capabilities.vadeMecum;
 
+import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.entity.companion.EntityCompanion;
+import Tamaized.Voidcraft.network.ItemStackNetworkHelper;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,27 +17,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.entity.companion.EntityCompanion;
-import Tamaized.Voidcraft.network.ItemStackNetworkHelper;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
-	private boolean markDirty = false;
-
 	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VadeMecumCapabilityHandler");
-	private boolean hasLoaded = false;
-
-	private ArrayList<IVadeMecumCapability.Category> categoryList = new ArrayList<IVadeMecumCapability.Category>();
-
-	private Category currActivePower;
 	private final List<Passive> passiveList = new ArrayList<Passive>();
+	private boolean markDirty = false;
+	private boolean hasLoaded = false;
+	private ArrayList<IVadeMecumCapability.Category> categoryList = new ArrayList<IVadeMecumCapability.Category>();
+	private Category currActivePower;
 	private String lastEntry = "null";
 	private int page = 0;
 	private EntityCompanion companion;
@@ -39,7 +35,9 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 		public ItemStack get(Object key) {
 			ItemStack stack = super.get(key);
 			return stack == null ? ItemStack.EMPTY : stack;
-		};
+		}
+
+		;
 
 	};
 
@@ -75,7 +73,8 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void killCompanion() {
-		if (companion != null) companion.setDead();
+		if (companion != null)
+			companion.setDead();
 		companion = null;
 	}
 
@@ -100,7 +99,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	public void addCategory(EntityLivingBase entity, Category category) {
 		if (!categoryList.contains(category)) {
 			categoryList.add(category);
-			if (entity instanceof EntityPlayer) {
+			/*if (entity instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entity;
 				switch (category) {
 					case Voice:
@@ -127,7 +126,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 					default:
 						break;
 				}
-			}
+			}TODO*/
 		}
 		markDirty();
 	}
@@ -155,14 +154,9 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	public ArrayList<Category> getAvailableActivePowers() {
 		ArrayList<Category> activeList = new ArrayList<Category>();
 		for (Category cat : categoryList)
-			if (IVadeMecumCapability.isActivePower(cat)) activeList.add(cat);
+			if (IVadeMecumCapability.isActivePower(cat))
+				activeList.add(cat);
 		return activeList;
-	}
-
-	@Override
-	public void setCurrentActive(Category power) {
-		if (IVadeMecumCapability.isActivePower(power)) currActivePower = power;
-		markDirty();
 	}
 
 	@Override
@@ -174,6 +168,13 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	@Override
 	public Category getCurrentActive() {
 		return currActivePower;
+	}
+
+	@Override
+	public void setCurrentActive(Category power) {
+		if (IVadeMecumCapability.isActivePower(power))
+			currActivePower = power;
+		markDirty();
 	}
 
 	@Override
@@ -203,14 +204,14 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
-	public void setLastEntry(String e) {
-		lastEntry = (e == null || e.isEmpty()) ? "null" : e;
-		markDirty();
+	public String getLastEntry() {
+		return lastEntry;
 	}
 
 	@Override
-	public String getLastEntry() {
-		return lastEntry;
+	public void setLastEntry(String e) {
+		lastEntry = (e == null || e.isEmpty()) ? "null" : e;
+		markDirty();
 	}
 
 	@Override
@@ -302,7 +303,8 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void copyFrom(IVadeMecumCapability cap) {
-		if (cap == null) return;
+		if (cap == null)
+			return;
 		clearComponents();
 		spellComponents.putAll(cap.getComponents());
 		setObtainedCategories(cap.getObtainedCategories());

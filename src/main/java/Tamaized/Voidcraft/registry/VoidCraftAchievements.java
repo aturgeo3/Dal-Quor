@@ -1,19 +1,16 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-
 import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.AchievementPage;
 
-public class VoidCraftAchievements implements ITamRegistry {
+import java.util.ArrayList;
 
-	public static Achievement vadeMecum;
+public class VoidCraftAchievements implements ITamRegistry { // TODO
+
+	/*public static Achievement vadeMecum;
 	public static Achievement theVoice;
 	public static Achievement anchor; // Require Voice
 	public static Achievement stabilization; // Require Voice
@@ -47,7 +44,7 @@ public class VoidCraftAchievements implements ITamRegistry {
 
 	public static Achievement generator;
 	public static Achievement charger;
-	public static Achievement suppressor;
+	public static Achievement suppressor;*/
 
 	@Override
 	public void preInit() {
@@ -59,7 +56,7 @@ public class VoidCraftAchievements implements ITamRegistry {
 		ItemStack activeVade = new ItemStack(VoidCraft.items.vadeMecum);
 		activeVade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 
-		familiarity = new Achievement("achievement.familiarity", "familiarity", -2, 12, Blocks.TNT, (Achievement) null);
+		/*familiarity = new Achievement("achievement.familiarity", "familiarity", -2, 12, Blocks.TNT, (Achievement) null);
 		familiarity.setSpecial().registerStat();
 		
 		vadeMecum = new Achievement("achievement.vadeMecum", "vadeMecum", 0, 12, VoidCraft.items.vadeMecum, (Achievement) null);
@@ -122,12 +119,12 @@ public class VoidCraftAchievements implements ITamRegistry {
 		charger = new Achievement("achievement.charger", "charger", -4, 6, VoidCraft.blocks.voidicCharger, generator);
 		charger.setSpecial().registerStat();
 		suppressor = new Achievement("achievement.suppressor", "suppressor", -4, 3, VoidCraft.items.voidicSuppressor, charger);
-		suppressor.registerStat();
+		suppressor.registerStat();*/
 	}
 
 	@Override
 	public void postInit() {
-		Achievement[] achArray = {
+		/*Achievement[] achArray = {
 
 				familiarity,
 				
@@ -144,7 +141,7 @@ public class VoidCraftAchievements implements ITamRegistry {
 				generator, charger, suppressor
 
 		};
-		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));
+		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));*/
 	}
 
 	@Override

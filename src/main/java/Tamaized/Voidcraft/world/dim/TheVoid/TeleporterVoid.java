@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import java.util.Random;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.BlockPortalVoid;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -10,7 +8,6 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -20,6 +17,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TeleporterVoid extends Teleporter {
 
@@ -40,7 +39,7 @@ public class TeleporterVoid extends Teleporter {
 	 */
 	@Override
 	public void placeInPortal(Entity entity, float rotationYaw) {
-		if (entity instanceof EntityPlayer) ((EntityPlayer) entity).addStat(VoidCraft.achievements.enterVoid, 1);
+//		if (entity instanceof EntityPlayer) ((EntityPlayer) entity).addStat(VoidCraft.achievements.enterVoid, 1); TODO
 
 		if (!this.placeInExistingPortal(entity, rotationYaw)) {
 			this.makePortal(entity);

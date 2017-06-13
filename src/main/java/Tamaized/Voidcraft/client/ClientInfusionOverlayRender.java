@@ -6,9 +6,9 @@ import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -35,7 +35,7 @@ public class ClientInfusionOverlayRender {
 			mc.getTextureManager().bindTexture(texture);
 
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer worldrenderer = tessellator.getBuffer();
+			BufferBuilder worldrenderer = tessellator.getBuffer();
 			worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
 			worldrenderer.pos(0.0D, (double) scaledRes.getScaledHeight(), -90.0D).tex(0, 1).endVertex();
 			worldrenderer.pos((double) scaledRes.getScaledWidth(), (double) scaledRes.getScaledHeight(), -90.0D).tex(1, 1).endVertex();

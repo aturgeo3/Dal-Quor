@@ -1,15 +1,15 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChunkProviderXia implements IChunkGenerator {
 
@@ -52,6 +52,11 @@ public class ChunkProviderXia implements IChunkGenerator {
 	@Override
 	public void recreateStructures(Chunk chunk, int par1, int par2) {
 
+	}
+
+	@Override
+	public boolean func_193414_a(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
+		return false;
 	}
 
 	@Override

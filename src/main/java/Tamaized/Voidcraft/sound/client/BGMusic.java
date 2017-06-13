@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.sound.client;
 
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.helper.MusicTickerStopper;
 import Tamaized.Voidcraft.sound.BossMusicPlayer;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import net.minecraft.client.Minecraft;
@@ -113,7 +114,7 @@ public class BGMusic {
 	public static void StopMusic() {
 		if (isPlaying(sound)) Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
 		sound = null;
-		Minecraft.getMinecraft().getMusicTicker().stopMusic();
+		MusicTickerStopper.stop(0);
 	}
 
 }

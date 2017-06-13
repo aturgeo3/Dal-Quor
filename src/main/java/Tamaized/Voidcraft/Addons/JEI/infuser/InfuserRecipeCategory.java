@@ -42,6 +42,11 @@ public class InfuserRecipeCategory implements IRecipeCategory {
 	}
 
 	@Override
+	public String getModName() {
+		return VoidCraft.modid;
+	}
+
+	@Override
 	public IDrawable getBackground() {
 		return VoidCraftJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(background, 0, 0, 180, 70, 0, 0, 0, 0);
 	}

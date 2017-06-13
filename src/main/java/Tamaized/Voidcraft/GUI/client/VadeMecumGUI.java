@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.GUI.client;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import org.lwjgl.input.Mouse;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
@@ -18,16 +13,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Mouse;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class VadeMecumGUI extends GuiScreen {
 
@@ -278,7 +277,7 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
 				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -309,7 +308,7 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
 				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -340,7 +339,7 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
 				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -373,7 +372,7 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
 				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -416,7 +415,7 @@ public class VadeMecumGUI extends GuiScreen {
 		float f = 0.00390625F;
 		float f1 = 0.00390625F;
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		vertexbuffer.pos((double) (x + 0), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + 0) * 0.00390625F), (double) ((float) (textureY + textureH) * 0.00390625F)).endVertex();
 		vertexbuffer.pos((double) (x + width), (double) (y + height), (double) zLevel).tex((double) ((float) (textureX + textureW) * 0.00390625F), (double) ((float) (textureY + textureH) * 0.00390625F)).endVertex();

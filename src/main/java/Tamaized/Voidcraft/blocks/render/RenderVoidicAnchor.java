@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.blocks.render;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
 import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.model.ModelVoidicCharger;
@@ -16,6 +12,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Random;
 
 public class RenderVoidicAnchor extends TileEntitySpecialRenderer<TileEntityVoidicAnchor> {
 
@@ -28,7 +27,7 @@ public class RenderVoidicAnchor extends TileEntitySpecialRenderer<TileEntityVoid
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntityVoidicAnchor te, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void func_192841_a(TileEntityVoidicAnchor te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
 		GL11.glPushMatrix();
 		{
 			GlStateManager.disableLighting();

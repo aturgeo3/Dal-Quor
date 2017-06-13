@@ -1,20 +1,16 @@
 package Tamaized.Voidcraft.vadeMecum;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.proxy.ClientProxy;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class VadeMecumEntry {
 
@@ -135,12 +131,12 @@ public class VadeMecumEntry {
 	protected final void renderButtons(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		if (buttons.containsKey(page)) {
 			for (VadeMecumButton button : buttons.get(page)) {
-				button.drawButton(gui.mc, mX, mY);
+				button.func_191745_a(gui.mc, mX, mY, 0);
 			}
 		}
 		if (buttons.containsKey(page + 1)) {
 			for (VadeMecumButton button : buttons.get(page + 1)) {
-				button.drawButton(gui.mc, mX, mY);
+				button.func_191745_a(gui.mc, mX, mY, 0);
 			}
 		}
 	}
