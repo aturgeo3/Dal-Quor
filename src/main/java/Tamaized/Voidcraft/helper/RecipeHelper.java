@@ -14,7 +14,7 @@ public final class RecipeHelper {
 	}
 
 	public static IRecipe getRecipe(ItemStack output) {
-		for (IRecipe recipe : CraftingManager.field_193380_a) {
+		for (IRecipe recipe : CraftingManager.field_193380_a) { // TODO
 			if ((recipe instanceof ShapedRecipes || recipe instanceof ShapelessRecipes) && ItemStack.areItemsEqual(recipe.getRecipeOutput(), output)) {
 				return recipe;
 			}

@@ -69,10 +69,15 @@ import Tamaized.Voidcraft.world.dim.TheVoid.WorldProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
 import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
 import Tamaized.Voidcraft.world.dim.dalQuor.WorldProviderDalQuor;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -99,7 +104,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.apache.logging.log4j.LogManager;
 
@@ -384,15 +389,35 @@ public class VoidCraft extends TamModBase {
 	}
 
 	// TODO: This is temporary
-	public static void addShapedRecipe(ItemStack output, Object... shape) {
+	public static void addShapedRecipe(ItemStack output, int w, int h, Object... shape) {
 		ResourceLocation id = new ResourceLocation(modid, output.getUnlocalizedName());
-		addRecipe(id, new ShapedOreRecipe(id, output, shape));
+		addRecipe(id, new ShapedRecipes(id.toString(), w, h, buildInput(shape), output));
 	}
 
 	// TODO: This is temporary
 	public static void addShapelessRecipe(ItemStack output, Object... shape) {
 		ResourceLocation id = new ResourceLocation(modid, output.getUnlocalizedName());
 		addRecipe(id, new ShapelessOreRecipe(id, output, shape));
+	}
+
+	// TODO: This is temporary
+	private static NonNullList<Ingredient> buildInput (Object[] input) {
+		NonNullList<Ingredient> list = NonNullList.create();
+		for (int i = 0; i < input.length; i++) {
+			Object obj = input[i];
+			if (obj instanceof String)
+				list.add(i, new OreIngredient((String)obj));
+			else if (obj instanceof ItemStack)
+				list.add(i, Ingredient.func_193369_a((ItemStack)obj));
+			else if (obj instanceof Item)
+				list.add(i, Ingredient.func_193367_a((Item)obj));
+			else if (obj instanceof Block)
+				list.add(i, Ingredient.func_193369_a(new ItemStack((Block)obj)));
+			else
+				list.add(i, Ingredient.field_193370_a);
+		}
+
+		return list;
 	}
 
 }

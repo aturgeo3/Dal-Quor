@@ -6,6 +6,7 @@ import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -42,18 +43,44 @@ public class VoidCraftArmors implements ITamRegistry {
 
 	@Override
 	public void init() {
-		// TODO
-//		GameRegistry.addRecipe(new ItemStack(voidHelmet, 1), "XXX", "X X", 'X', VoidCraft.items.voidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(voidChest, 1), "X X", "XXX", "XXX", 'X', VoidCraft.items.voidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(voidLegs, 1), "XXX", "X X", "X X", 'X', VoidCraft.items.voidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(voidBoots, 1), "X X", "X X", 'X', VoidCraft.items.voidcrystal);
+		VoidCraft.addShapedRecipe(new ItemStack(voidHelmet, 1), 3, 2,
+				
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal
+				
+				);
+		VoidCraft.addShapedRecipe(new ItemStack(voidChest, 1), 3, 3,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal
+				
+				);
+		VoidCraft.addShapedRecipe(new ItemStack(voidLegs, 1), 3, 3,
+				
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal
+				
+				);
+		VoidCraft.addShapedRecipe(new ItemStack(voidBoots, 1), 3, 2,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal,
+				
+				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal
+				
+				);
 
 		// GameRegistry.addShapelessRecipe(new ItemStack(elytra, 1), voidChest, Items.ELYTRA);
 	}
 
 	@Override
 	public void postInit() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -69,19 +96,16 @@ public class VoidCraftArmors implements ITamRegistry {
 
 	@Override
 	public void clientPreInit() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void clientInit() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void clientPostInit() {
-		// TODO Auto-generated method stub
 
 	}
 

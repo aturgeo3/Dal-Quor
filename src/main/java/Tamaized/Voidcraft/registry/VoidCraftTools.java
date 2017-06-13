@@ -14,6 +14,9 @@ import Tamaized.Voidcraft.tools.chain.ChainSword;
 import Tamaized.Voidcraft.tools.demon.DemonSword;
 import Tamaized.Voidcraft.tools.molten.MoltenSword;
 import Tamaized.Voidcraft.tools.spectre.AngelicSword;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -78,22 +81,126 @@ public class VoidCraftTools implements ITamRegistry {
 	}
 
 	@Override
-	public void init() { //TODO
-		//		GameRegistry.addRecipe(new ItemStack(voidPickaxe, 1), "XXX", " O ", " D ", 'X', VoidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
-		//		GameRegistry.addRecipe(new ItemStack(voidAxe, 1), " XX", " OX", " D ", 'X', VoidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
-		//		GameRegistry.addRecipe(new ItemStack(voidSpade, 1), " X ", " O ", " D ", 'X', VoidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
-		//		GameRegistry.addRecipe(new ItemStack(voidHoe, 1), " XX", " O ", " D ", 'X', VoidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
-		//		GameRegistry.addRecipe(new ItemStack(voidSword, 1), " X ", "OXO", " D ", 'X', VoidCraft.items.voidcrystal, 'O', Blocks.OBSIDIAN, 'D', Items.DIAMOND);
+	public void init() {
+		VoidCraft.addShapedRecipe(new ItemStack(voidPickaxe, 1), 3, 3,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+
+				ItemStack.EMPTY, Blocks.OBSIDIAN, ItemStack.EMPTY,
+
+				ItemStack.EMPTY, Items.DIAMOND, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidAxe, 1), 2, 3,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+
+				Blocks.OBSIDIAN, VoidCraft.items.voidcrystal,
+
+				Items.DIAMOND, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidSpade, 1), 1, 3,
+
+				VoidCraft.items.voidcrystal,
+
+				Blocks.OBSIDIAN,
+
+				Items.DIAMOND
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidHoe, 1), 2, 3,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+
+				Blocks.OBSIDIAN, ItemStack.EMPTY,
+
+				Items.DIAMOND, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidSword, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.voidcrystal, ItemStack.EMPTY,
+
+				Blocks.OBSIDIAN, VoidCraft.items.voidcrystal, Blocks.OBSIDIAN,
+
+				ItemStack.EMPTY, Items.DIAMOND, ItemStack.EMPTY
+
+		);
 		// +spectre
-		//		GameRegistry.addRecipe(new ItemStack(angelicSword, 1), " X ", "XSX", " I ", 'S', new ItemStack(voidSword, 1, VoidCraft.WILDCARD_VALUE), 'X', VoidCraft.items.ectoplasm, 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(spectrePickaxe, 1), " X ", "XSX", " I ", 'S', new ItemStack(voidPickaxe, 1, VoidCraft.WILDCARD_VALUE), 'X', VoidCraft.items.ectoplasm, 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(spectreAxe, 1), " X ", "XSX", " I ", 'S', new ItemStack(voidAxe, 1, VoidCraft.WILDCARD_VALUE), 'X', VoidCraft.items.ectoplasm, 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(spectreSpade, 1), " X ", "XSX", " I ", 'S', new ItemStack(voidSpade, 1, VoidCraft.WILDCARD_VALUE), 'X', VoidCraft.items.ectoplasm, 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(spectreHoe, 1), " X ", "XSX", " I ", 'S', new ItemStack(voidHoe, 1, VoidCraft.WILDCARD_VALUE), 'X', VoidCraft.items.ectoplasm, 'I', VoidCraft.items.voidicSteel);
+		VoidCraft.addShapedRecipe(new ItemStack(angelicSword, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.ectoplasm, ItemStack.EMPTY,
+
+				VoidCraft.items.ectoplasm, new ItemStack(voidSword, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.ectoplasm,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(spectrePickaxe, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.ectoplasm, ItemStack.EMPTY,
+
+				VoidCraft.items.ectoplasm, new ItemStack(voidPickaxe, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.ectoplasm,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(spectreAxe, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.ectoplasm, ItemStack.EMPTY,
+
+				VoidCraft.items.ectoplasm, new ItemStack(voidAxe, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.ectoplasm,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(spectreSpade, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.ectoplasm, ItemStack.EMPTY,
+
+				VoidCraft.items.ectoplasm, new ItemStack(voidSpade, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.ectoplasm,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(spectreHoe, 1), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.ectoplasm, ItemStack.EMPTY,
+
+				VoidCraft.items.ectoplasm, new ItemStack(voidHoe, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.ectoplasm,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
 		// +molten and beyond
-		//		GameRegistry.addRecipe(new ItemStack(moltenSword), " X ", "XSX", " I ", 'X', VoidCraft.items.MoltenvoidChain, 'S', new ItemStack(chainSword, 1, VoidCraft.WILDCARD_VALUE), 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(chainSword), " X ", "XSX", " I ", 'X', VoidCraft.items.voidChain, 'S', new ItemStack(voidSword, 1, VoidCraft.WILDCARD_VALUE), 'I', VoidCraft.items.voidicSteel);
-		//		GameRegistry.addRecipe(new ItemStack(archSword), "SSS", "XYZ", "SSS", 'S', VoidCraft.items.MoltenvoidChain, 'X', new ItemStack(chainSword, 1, VoidCraft.WILDCARD_VALUE), 'Y', new ItemStack(angelicSword, 1, VoidCraft.WILDCARD_VALUE), 'Z', new ItemStack(moltenSword, 1, VoidCraft.WILDCARD_VALUE));
+		VoidCraft.addShapedRecipe(new ItemStack(moltenSword), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.MoltenvoidChain, ItemStack.EMPTY,
+
+				VoidCraft.items.MoltenvoidChain, new ItemStack(chainSword, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.MoltenvoidChain,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(chainSword), 3, 3,
+
+				ItemStack.EMPTY, VoidCraft.items.voidChain, ItemStack.EMPTY,
+
+				VoidCraft.items.voidChain, new ItemStack(voidSword, 1, VoidCraft.WILDCARD_VALUE), VoidCraft.items.voidChain,
+
+				ItemStack.EMPTY, VoidCraft.items.voidicSteel, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(archSword), 3, 3,
+
+				VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain,
+
+				new ItemStack(chainSword, 1, VoidCraft.WILDCARD_VALUE), new ItemStack(angelicSword, 1, VoidCraft.WILDCARD_VALUE), new ItemStack(moltenSword, 1, VoidCraft.WILDCARD_VALUE),
+
+				VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain
+
+		);
 	}
 
 	@Override

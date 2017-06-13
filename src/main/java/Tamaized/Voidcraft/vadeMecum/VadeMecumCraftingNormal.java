@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.vadeMecum;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.client.VadeMecumGUI;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.helper.RecipeHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -35,7 +35,6 @@ public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 		GlStateManager.color(1, 1, 1, 1);
 		gui.mc.getTextureManager().bindTexture(TEXTURE);
 		gui.drawTexturedModalRect(x, y + 35, 128, 128, 0, 0, 256, 256);
-
 		if (recipe instanceof ShapedRecipes) {
 			ShapedRecipes r = (ShapedRecipes) recipe;
 			int size = (r.recipeItems.size() == 4 || r.recipeItems.size() == 9) ? (int) Math.sqrt(r.recipeItems.size()) : 3;

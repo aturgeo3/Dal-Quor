@@ -18,13 +18,13 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
 public class VoidCraftBlocks implements ITamRegistry {
-
-	private static ArrayList<ITamModel> modelList;
 
 	public static BlockVoidcrystal blockVoidcrystal;
 	public static OreVoidcrystal oreVoidcrystal;
@@ -45,7 +45,6 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static FireVoid fireVoid;
 	public static BlockRealityHole realityHole;
 	public static TamBlock ritualBlock;
-
 	public static VoidBox voidBox;
 	public static VoidMacerator voidMacerator;
 	public static TamBlock voidInfuserInert;
@@ -60,20 +59,16 @@ public class VoidCraftBlocks implements ITamRegistry {
 	public static VoidBlastFurnace voidBlastFurnace;
 	public static VoidicAnchor voidicAnchor;
 	public static VoidicCrystallizer voidicCrystallizer;
-
 	public static BlockEtherealPlant etherealPlant;
-
 	public static BlockSpellIceSpike iceSpike;
-
 	public static AIBlock AIBlock;
-
 	public static TamBlock cosmicMaterial;
 	public static TamBlock starforge;
 	public static StarForgeBlock starforgeStation;
-
 	public static BlockDreamBed dreamBed;
 	public static TamBlock creationforge;
 	public static TamBlock creationforge_ray;
+	private static ArrayList<ITamModel> modelList;
 
 	@Override
 	public void preInit() {
@@ -135,30 +130,173 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 	@Override
 	public void init() {
-		// TODO
-//		GameRegistry.addRecipe(new ItemStack(blockVoidcrystal), "XXX", "XXX", "XXX", 'X', VoidCraft.items.voidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(ritualBlock, 8), "XXX", "XYX", "XXX", 'X', Blocks.STONEBRICK, 'Y', VoidCraft.items.voidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(voidInfuserInert), "XYX", "YZY", "XYX", 'X', blockVoidbrick, 'Y', VoidCraft.items.voidCloth, 'Z', Items.CAULDRON);
-//		GameRegistry.addShapelessRecipe(new ItemStack(voidInfuser), voidInfuserInert, VoidCraft.items.voidStar);
-//		GameRegistry.addRecipe(new ItemStack(voidBlastFurnace), "CBC", "BMB", "CBC", 'C', VoidCraft.items.voidCloth, 'B', blockVoidbrick, 'M', VoidCraft.items.MoltenvoidChainPart);
-//		GameRegistry.addRecipe(new ItemStack(voidBox), "XXX", "XYX", "XZX", 'X', VoidCraft.items.voidCloth, 'Y', Blocks.JUKEBOX, 'Z', VoidCraft.items.voidStar);
-//		GameRegistry.addRecipe(new ItemStack(blockVoidbrick), "XX", "XX", 'X', blockVoidcrystal);
-//		GameRegistry.addRecipe(new ItemStack(blockVoidstairs, 6), "X  ", "XX ", "XXX", 'X', blockVoidbrick);
-//		GameRegistry.addRecipe(new ItemStack(blockVoidstairs, 6), "  X", " XX", "XXX", 'X', blockVoidbrick);
-//		GameRegistry.addRecipe(new ItemStack(blockVoidBrickHalfSlab, 6), "XXX", 'X', blockVoidbrick);
-//		GameRegistry.addRecipe(new ItemStack(blockVoidfence, 6), "   ", "XXX", "XXX", 'X', blockVoidbrick);
-//		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockStairs, 6), "X  ", "XX ", "XXX", 'X', blockFakeBedrock);
-//		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockStairs, 6), "  X", " XX", "XXX", 'X', blockFakeBedrock);
-//		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockHalfSlab, 6), "XXX", 'X', blockFakeBedrock);
-//		GameRegistry.addRecipe(new ItemStack(blockFakeBedrockFence, 6), "   ", "XXX", "XXX", 'X', blockFakeBedrock);
-//		GameRegistry.addRecipe(new ItemStack(voidicCable, 8), "XXX", "XYX", "XXX", 'Y', blockVoidcrystal, 'X', Items.REDSTONE);
-//		GameRegistry.addRecipe(new ItemStack(voidicGen), "XXX", "XYX", "XXX", 'Y', voidInfuser, 'X', Items.REDSTONE);
-//		GameRegistry.addRecipe(new ItemStack(voidicCharger), "DSD", "CZC", "DPD", 'D', VoidCraft.items.diamondDust, 'S', VoidCraft.items.voidStar, 'C', VoidCraft.items.voidCloth, 'Z', Items.END_CRYSTAL, 'P', voidicCable);
-//		GameRegistry.addRecipe(new ItemStack(voidicAnchor), "DSD", "CZC", "XPX", 'X', VoidCraft.items.voidicSteel, 'D', VoidCraft.items.diamondDust, 'S', VoidCraft.items.voidStar, 'C', VoidCraft.items.voidCloth, 'Z', Items.END_CRYSTAL, 'P', voidicCharger);
-//		GameRegistry.addRecipe(new ItemStack(realityStabilizer), "IDI", "DSD", "ICI", 'I', VoidCraft.items.voidicSteel, 'C', voidicCharger, 'S', VoidCraft.items.voidStar, 'D', VoidCraft.items.diamondDust);
-//		GameRegistry.addRecipe(new ItemStack(voidicAlchemyTable), "BCB", "CSC", "BIB", 'B', blockVoidbrick, 'C', VoidCraft.items.voidicSteel, 'S', Items.BREWING_STAND, 'I', voidInfuserInert);
-//		GameRegistry.addRecipe(new ItemStack(realityTeleporterBlock), "BEB", "LHL", "BCB", 'B', VoidCraft.items.voidicSteel, 'E', VoidCraft.items.emeraldDust, 'L', VoidCraft.items.voidCloth, 'H', realityHole, 'C', voidicCharger);
-//		GameRegistry.addRecipe(new ItemStack(voidicCrystallizer), "SCS", "SES", "SCS", 'S', VoidCraft.items.voidicSteel, 'C', VoidCraft.items.voidChain, 'E', VoidCraft.items.ectoplasm);
+		VoidCraft.addShapedRecipe(new ItemStack(blockVoidcrystal), 3, 3,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
+
+				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(ritualBlock, 8), 3, 3,
+
+				Blocks.STONEBRICK, Blocks.STONEBRICK, Blocks.STONEBRICK,
+
+				Blocks.STONEBRICK, VoidCraft.items.voidcrystal, Blocks.STONEBRICK,
+
+				Blocks.STONEBRICK, Blocks.STONEBRICK, Blocks.STONEBRICK
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidInfuserInert), 3, 3,
+
+				blockVoidbrick, VoidCraft.items.voidCloth, blockVoidbrick,
+
+				VoidCraft.items.voidCloth, Items.CAULDRON, VoidCraft.items.voidCloth,
+
+				blockVoidbrick, VoidCraft.items.voidCloth, blockVoidbrick
+
+		);
+		VoidCraft.addShapelessRecipe(new ItemStack(voidInfuser), voidInfuserInert, VoidCraft.items.voidStar);
+		VoidCraft.addShapedRecipe(new ItemStack(voidBlastFurnace), 3, 3,
+
+				VoidCraft.items.voidCloth, blockVoidbrick, VoidCraft.items.voidCloth,
+
+				blockVoidbrick, VoidCraft.items.MoltenvoidChainPart, blockVoidbrick,
+
+				VoidCraft.items.voidCloth, blockVoidbrick, VoidCraft.items.voidCloth
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidBox), 3, 3,
+
+				VoidCraft.items.voidCloth, VoidCraft.items.voidCloth, VoidCraft.items.voidCloth,
+
+				VoidCraft.items.voidCloth, Blocks.JUKEBOX, VoidCraft.items.voidCloth,
+
+				VoidCraft.items.voidCloth, VoidCraft.items.voidStar, VoidCraft.items.voidCloth
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockVoidbrick), 2, 2,
+
+				blockVoidcrystal, blockVoidcrystal,
+
+				blockVoidcrystal, blockVoidcrystal
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockVoidstairs, 6), 3, 3,
+
+				blockVoidbrick, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				blockVoidbrick, blockVoidbrick, ItemStack.EMPTY,
+
+				blockVoidbrick, blockVoidbrick, blockVoidbrick
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockVoidBrickHalfSlab, 6), 3, 1,
+
+				blockVoidbrick, blockVoidbrick, blockVoidbrick
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockVoidfence, 6), 3, 2,
+
+				blockVoidbrick, blockVoidbrick, blockVoidbrick,
+
+				blockVoidbrick, blockVoidbrick, blockVoidbrick
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockFakeBedrockStairs, 6), 3, 3,
+
+				blockFakeBedrock, ItemStack.EMPTY, ItemStack.EMPTY,
+
+				blockFakeBedrock, blockFakeBedrock, ItemStack.EMPTY,
+
+				blockFakeBedrock, blockFakeBedrock, blockFakeBedrock
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockFakeBedrockHalfSlab, 6), 3, 1,
+
+				blockFakeBedrock, blockFakeBedrock, blockFakeBedrock
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(blockFakeBedrockFence, 6), 3, 2,
+
+				blockFakeBedrock, blockFakeBedrock, blockFakeBedrock,
+
+				blockFakeBedrock, blockFakeBedrock, blockFakeBedrock
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicCable, 8), 3, 3,
+
+				Items.REDSTONE, Items.REDSTONE, Items.REDSTONE,
+
+				Items.REDSTONE, blockVoidcrystal, Items.REDSTONE,
+
+				Items.REDSTONE, Items.REDSTONE, Items.REDSTONE
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicGen), 3, 3,
+
+				Items.REDSTONE, Items.REDSTONE, Items.REDSTONE,
+
+				Items.REDSTONE, voidInfuser, Items.REDSTONE,
+
+				Items.REDSTONE, Items.REDSTONE, Items.REDSTONE
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicCharger), 3, 3,
+
+				VoidCraft.items.diamondDust, VoidCraft.items.voidStar, VoidCraft.items.diamondDust,
+
+				VoidCraft.items.voidCloth, Items.END_CRYSTAL, VoidCraft.items.voidCloth,
+
+				VoidCraft.items.diamondDust, voidicCable, VoidCraft.items.diamondDust
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicAnchor), 3, 3,
+
+				VoidCraft.items.diamondDust, VoidCraft.items.voidStar, VoidCraft.items.diamondDust,
+
+				VoidCraft.items.voidCloth, Items.END_CRYSTAL, VoidCraft.items.voidCloth,
+
+				VoidCraft.items.voidicSteel, voidicCharger, VoidCraft.items.voidicSteel
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(realityStabilizer), 3, 3,
+
+				VoidCraft.items.voidicSteel, VoidCraft.items.diamondDust, VoidCraft.items.voidicSteel,
+
+				VoidCraft.items.diamondDust, VoidCraft.items.voidStar, VoidCraft.items.diamondDust,
+
+				VoidCraft.items.voidicSteel, voidicCharger, VoidCraft.items.voidicSteel
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicAlchemyTable), 3, 3,
+
+				blockVoidbrick, VoidCraft.items.voidicSteel, blockVoidbrick,
+
+				VoidCraft.items.voidicSteel, Items.BREWING_STAND, VoidCraft.items.voidicSteel,
+
+				blockVoidbrick, voidInfuserInert, blockVoidbrick
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(realityTeleporterBlock), 3, 3,
+
+				VoidCraft.items.voidicSteel, VoidCraft.items.emeraldDust, VoidCraft.items.voidicSteel,
+
+				VoidCraft.items.voidCloth, realityHole, VoidCraft.items.voidCloth,
+
+				VoidCraft.items.voidicSteel, voidicCharger, VoidCraft.items.voidicSteel
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicCrystallizer), 3, 3,
+
+				VoidCraft.items.voidicSteel, VoidCraft.items.voidChain, VoidCraft.items.voidicSteel,
+
+				VoidCraft.items.voidicSteel, VoidCraft.items.ectoplasm, VoidCraft.items.voidicSteel,
+
+				VoidCraft.items.voidicSteel, VoidCraft.items.voidChain, VoidCraft.items.voidicSteel
+
+		);
 	}
 
 	@Override

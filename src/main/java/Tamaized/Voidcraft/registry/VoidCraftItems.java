@@ -10,6 +10,7 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.items.*;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
@@ -175,18 +176,68 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void init() {
-		//TODO
-		VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);// GameRegistry.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
-		//		GameRegistry.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
-		//		GameRegistry.addRecipe(new ItemStack(emptyObsidianFlask, 4), "OGO", " O ", 'O', Blocks.OBSIDIAN, 'G', Blocks.GLASS);
-		//		GameRegistry.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
-		//		GameRegistry.addRecipe(new ItemStack(voidicDrill), "BHB", "CZC", "ESE", 'B', voidicSteel, 'H', VoidCraft.blocks.realityHole, 'C', voidCloth, 'Z', VoidCraft.blocks.voidicCharger, 'E', ectoplasm, 'S', voidStar);
-		//		GameRegistry.addRecipe(new ItemStack(MoltenvoidChain), "XYX", "YXY", "XYX", 'Y', MoltenvoidChainPart, 'X', burnBone);
-		//		GameRegistry.addRecipe(new ItemStack(ChainedSkull), "XYX", "YZY", "XYX", 'X', MoltenvoidChain, 'Y', burnBone, 'Z', new ItemStack(Items.SKULL, 1, 1));
-		//		GameRegistry.addRecipe(new ItemStack(Items.SKULL, 1, 1), "XX", "XX", 'X', burnBone);
-		//		GameRegistry.addRecipe(new ItemStack(realityTeleporter), "BEZ", "CHC", "BCB", 'B', voidicSteel, 'E', emeraldDust, 'Z', VoidCraft.blocks.voidicCharger, 'C', MoltenvoidChain, 'H', VoidCraft.blocks.realityHole);
+		VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
+		VoidCraft.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
+		VoidCraft.addShapedRecipe(new ItemStack(emptyObsidianFlask, 4), 3, 2,
 
-		//		GameRegistry.addRecipe(new ItemStack(voidCrystalShield), "CCC", "CBC", " C ", 'C', voidcrystal, 'B', voidicSteel);
+				Blocks.OBSIDIAN, Blocks.GLASS, Blocks.OBSIDIAN,
+
+				ItemStack.EMPTY, Blocks.OBSIDIAN, ItemStack.EMPTY
+
+		);
+		VoidCraft.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
+		VoidCraft.addShapedRecipe(new ItemStack(voidicDrill), 3, 3,
+
+				voidicSteel, VoidCraft.blocks.realityHole, voidicSteel,
+
+				voidCloth, VoidCraft.blocks.voidicCharger, voidCloth,
+
+				ectoplasm, voidStar, ectoplasm
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(MoltenvoidChain), 3, 3,
+
+				burnBone, MoltenvoidChainPart, burnBone,
+
+				MoltenvoidChainPart, burnBone, MoltenvoidChainPart,
+
+				burnBone, MoltenvoidChainPart, burnBone
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(ChainedSkull), 3, 3,
+
+				MoltenvoidChain, burnBone, MoltenvoidChain,
+
+				burnBone, new ItemStack(Items.SKULL, 1, 1), burnBone,
+
+				MoltenvoidChain, burnBone, MoltenvoidChain
+
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(Items.SKULL, 1, 1), 2, 2,
+				
+				burnBone, burnBone,
+				
+				burnBone, burnBone
+		
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(realityTeleporter), 3, 3,
+				
+				voidicSteel, emeraldDust, VoidCraft.blocks.voidicCharger,
+				
+				MoltenvoidChain, VoidCraft.blocks.realityHole, MoltenvoidChain,
+				
+				voidicSteel, MoltenvoidChain, voidicSteel
+		
+		);
+		VoidCraft.addShapedRecipe(new ItemStack(voidCrystalShield), 3, 3,
+				
+				voidcrystal, voidcrystal, voidcrystal,
+				
+				voidcrystal, voidicSteel, voidcrystal,
+
+				ItemStack.EMPTY , voidcrystal, ItemStack.EMPTY
+		
+		);
 
 		GameRegistry.addSmelting(VoidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
