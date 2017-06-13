@@ -1,7 +1,11 @@
 package Tamaized.Voidcraft.helper;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +18,8 @@ public final class RecipeHelper {
 	}
 
 	public static IRecipe getRecipe(ItemStack output) {
-		for (IRecipe recipe : CraftingManager.field_193380_a) { // TODO
-			if ((recipe instanceof ShapedRecipes || recipe instanceof ShapelessRecipes) && ItemStack.areItemsEqual(recipe.getRecipeOutput(), output)) {
+		for (IRecipe recipe : CraftingManager.field_193380_a) {
+			if ((recipe instanceof ShapedRecipes || recipe instanceof ShapelessOreRecipe) && ItemStack.areItemsEqual(recipe.getRecipeOutput(), output)) {
 				return recipe;
 			}
 		}

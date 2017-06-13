@@ -6,14 +6,13 @@ import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.helper.RecipeHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 
@@ -39,22 +38,22 @@ public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 			ShapedRecipes r = (ShapedRecipes) recipe;
 			int size = (r.recipeItems.size() == 4 || r.recipeItems.size() == 9) ? (int) Math.sqrt(r.recipeItems.size()) : 3;
 			for (int index = 0; index <= r.recipeItems.size() - 1; index++) {
+				if (r.recipeItems.get(index).func_193365_a().length == 0)
+					continue;
 				ItemStack stack = r.recipeItems.get(index).func_193365_a()[0];
-				if (stack.getItem() instanceof ItemBlock) {
-					stack = new ItemStack(stack.getItem());
-				}
-				if (!stack.isEmpty()) gui.renderItemStack(stack, x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
+				if (!stack.isEmpty())
+					gui.renderItemStack(new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage() == 32767 ? 0 : stack.getItemDamage()), x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
 			}
-		} else if (recipe instanceof ShapelessRecipes) {
-			ShapelessRecipes r = (ShapelessRecipes) recipe;
-			int size = r.recipeItems.size() > 3 ? (int) Math.sqrt(r.recipeItems.size()) : 3;
+		} else if (recipe instanceof ShapelessOreRecipe) {
+			ShapelessOreRecipe r = (ShapelessOreRecipe) recipe;
+			int size = r.func_192400_c().size() > 3 ? (int) Math.sqrt(r.func_192400_c().size()) : 3;
 			int index = 0;
-			for (Ingredient ing : r.recipeItems) {
+			for (Ingredient ing : r.func_192400_c()) {
+				if (ing.func_193365_a().length == 0)
+					continue;
 				ItemStack stack = ing.func_193365_a()[0];
-				if (stack.getItem() instanceof ItemBlock) {
-					stack = new ItemStack(stack.getItem());
-				}
-				if (!stack.isEmpty()) gui.renderItemStack(stack, x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
+				if (!stack.isEmpty())
+					gui.renderItemStack(new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage() == 32767 ? 0 : stack.getItemDamage()), x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
 				index++;
 			}
 		}
