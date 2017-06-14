@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.blocks;
 
-import java.util.Random;
-
 import Tamaized.TamModized.blocks.TamBlockFire;
 import Tamaized.TamModized.blocks.TamBlockPortal;
 import Tamaized.Voidcraft.VoidCraft;
@@ -13,11 +11,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class FireVoid extends TamBlockFire {
 
@@ -42,9 +42,11 @@ public class FireVoid extends TamBlockFire {
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob || entityIn instanceof EntityWitherSkeleton)) {
 			EntityLivingBase e = ((EntityLivingBase) entityIn);
-			e.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 60, 1)); // nausea
-			e.addPotionEffect(new PotionEffect(Potion.getPotionById(20), 60, 1)); // wither
-			e.addPotionEffect(new PotionEffect(Potion.getPotionById(15), 60, 1)); // blind
+			if (!e.isPotionActive(MobEffects.NAUSEA) || !e.isPotionActive(MobEffects.WITHER) || !e.isPotionActive(MobEffects.BLINDNESS)) {
+				e.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 20 * 9, 1));
+				e.addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * 4, 1));
+				e.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20 * 9, 1));
+			}
 		}
 	}
 
@@ -56,7 +58,8 @@ public class FireVoid extends TamBlockFire {
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		super.updateTick(world, pos, state, rand);
-		if (world.isAirBlock(pos.down())) world.setBlockToAir(pos);
+		if (world.isAirBlock(pos.down()))
+			world.setBlockToAir(pos);
 	}
 
 	@Override
