@@ -1,14 +1,10 @@
 package Tamaized.Voidcraft.GUI.client;
 
-import java.io.DataOutputStream;
-
-import org.lwjgl.opengl.GL11;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.VoidBoxContainer;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import net.minecraft.client.Minecraft;
@@ -17,6 +13,9 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.io.DataOutputStream;
 
 public class VoidBoxGUI extends GuiContainer {
 
@@ -44,6 +43,13 @@ public class VoidBoxGUI extends GuiContainer {
 
 		this.xSize = 347;
 		this.ySize = 320;
+	}
+
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override

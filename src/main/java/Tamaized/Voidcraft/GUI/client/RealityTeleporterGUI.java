@@ -1,12 +1,10 @@
 package Tamaized.Voidcraft.GUI.client;
 
-import java.io.DataOutputStream;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.RealityTeleporterContainer;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.items.RealityTeleporter;
@@ -22,6 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.DataOutputStream;
 
 @SideOnly(Side.CLIENT)
 public class RealityTeleporterGUI extends GuiContainer {
@@ -55,6 +55,13 @@ public class RealityTeleporterGUI extends GuiContainer {
 			if (ItemStack.areItemStacksEqual(parent, inventoryPlayer.offHandInventory.get(0))) temp = -1;
 		}
 		slotID = temp;
+	}
+
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override

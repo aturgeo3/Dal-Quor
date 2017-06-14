@@ -28,6 +28,13 @@ public class RealityTeleporterBlockGUI extends GuiContainer {
 	}
 
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.func_191948_b(mouseX, mouseY);
+	}
+
+	@Override
 	public void updateScreen() {
 
 		{

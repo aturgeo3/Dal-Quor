@@ -1,16 +1,10 @@
 package Tamaized.Voidcraft.GUI.client;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.lwjgl.input.Mouse;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.server.StarForgeContainer;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityStarForge;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.helper.GUIElementList;
@@ -27,6 +21,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class StarForgeGUI extends GuiContainer {
 
@@ -148,6 +147,7 @@ public class StarForgeGUI extends GuiContainer {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		updateMouseValues();
+		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		GlStateManager.disableLighting();
 		scroll.drawScreen(mouseX, mouseY, partialTicks);
@@ -155,6 +155,7 @@ public class StarForgeGUI extends GuiContainer {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = ItemStack.EMPTY;
 		}
+		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
