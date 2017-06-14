@@ -1,5 +1,8 @@
 package Tamaized.Voidcraft.handlers;
 
+import Tamaized.Voidcraft.VoidCraft;
+import net.minecraft.item.EnumDyeColor;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -8,16 +11,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
-import Tamaized.Voidcraft.VoidCraft;
-import net.minecraft.item.EnumDyeColor;
-
 public class ContributorHandler {
 
-	private static final String URL_ELEMENTALCOLOR = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.11.2/contributors/companion.properties";
-	private static final String URL_SKINLIST = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.11.2/contributors/ghost.properties";
+	private static final String URL_ELEMENTALCOLOR = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.12/contributors/companion.properties";
+	private static final String URL_SKINLIST = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.12/contributors/ghost.properties";
 
-	public static volatile Map<UUID, EnumDyeColor> elementalColor = new HashMap<UUID, EnumDyeColor>();
-	public static volatile Map<String, UUID> skinList = new HashMap<String, UUID>();
+	public static volatile Map<UUID, EnumDyeColor> elementalColor = new HashMap<>();
+	public static volatile Map<String, UUID> skinList = new HashMap<>();
 
 	private static boolean started = false;
 
