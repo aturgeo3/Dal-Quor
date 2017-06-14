@@ -1,9 +1,8 @@
 package Tamaized.Voidcraft.machina;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAnchor;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCrystallizer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,10 +10,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
@@ -22,6 +22,11 @@ public class VoidicCrystallizer extends TamBlockContainer {
 
 	public VoidicCrystallizer(CreativeTabs tab, Material material, String n, float hardness) {
 		super(tab, material, n, hardness, SoundType.METAL);
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return new AxisAlignedBB(0.1875F, 0.0625F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
 	}
 
 	@Override
