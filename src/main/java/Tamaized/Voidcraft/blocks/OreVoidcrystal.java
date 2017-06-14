@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.blocks;
 
-import java.util.Random;
-
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.SoundType;
@@ -18,14 +16,20 @@ import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.lang.reflect.Field;
+import java.util.Random;
 
 public class OreVoidcrystal extends TamBlock {
 
 	public static final PropertyBool VOID = PropertyBool.create("void");
+	private static Field world;
 
 	public OreVoidcrystal(CreativeTabs tab, Material material, String n, float hardness) {
 		super(tab, material, n, hardness, SoundType.STONE);
@@ -42,14 +46,28 @@ public class OreVoidcrystal extends TamBlock {
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if ((world.provider.getDimension() == VoidCraft.config.getDimensionIdVoid() || world.provider.getDimension() == VoidCraft.config.getDimensionIdDalQuor()) && !state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, true), 2);
-		else if ((world.provider.getDimension() != VoidCraft.config.getDimensionIdVoid() && world.provider.getDimension() != VoidCraft.config.getDimensionIdDalQuor()) && state.getValue(VOID)) world.setBlockState(pos, state.withProperty(VOID, false), 2);
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		int dim = 0;
+		if (worldIn instanceof World)
+			dim = ((World) worldIn).provider.getDimension();
+		else if (worldIn instanceof ChunkCache) {
+			ChunkCache cache = (ChunkCache) worldIn;
+			if (world == null)
+				world = ReflectionHelper.findField(ChunkCache.class, "world", "field_72815_e");
+			try {
+				World w = (World) world.get(cache);
+				if (w != null && w.provider != null)
+					dim = w.provider.getDimension();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return getDefaultState().withProperty(VOID, (dim == VoidCraft.config.getDimensionIdVoid() || dim == VoidCraft.config.getDimensionIdDalQuor()));
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { VOID });
+		return new BlockStateContainer(this, new IProperty[]{VOID});
 	}
 
 	/**
@@ -86,7 +104,8 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-		if (entity instanceof EntityDragon) return false;
+		if (entity instanceof EntityDragon)
+			return false;
 		return true;
 	}
 

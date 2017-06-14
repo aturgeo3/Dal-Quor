@@ -2,7 +2,6 @@ package Tamaized.Voidcraft.machina;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
 import Tamaized.Voidcraft.api.voidicpower.IVoidicPower;
-import Tamaized.Voidcraft.events.client.DebugEvent;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicPowerCable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -160,7 +159,6 @@ public class VoidicPowerCable extends TamBlockContainer {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState s, IBlockAccess source, BlockPos pos) {
 		IBlockState state = getActualState(s, source, pos);
-		DebugEvent.debugMode = false;
 		AxisAlignedBB bb = NULL_AABB;
 		for (AxisAlignedBB axisAlignedBB : getCollisionBoxList(state)) {
 			if (bb == NULL_AABB)
