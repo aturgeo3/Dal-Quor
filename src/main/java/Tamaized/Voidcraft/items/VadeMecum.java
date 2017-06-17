@@ -6,6 +6,7 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumRitualHandler;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.block.state.IBlockState;
@@ -16,10 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -33,6 +31,11 @@ public class VadeMecum extends TamItem {
 
 	public VadeMecum(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
+		addPropertyOverride(new ResourceLocation("open"), (stack, worldIn, entityIn) -> {
+			IVadeMecumItemCapability itemCap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
+			IVadeMecumCapability entityCap = entityIn == null ? null : entityIn.getCapability(CapabilityList.VADEMECUM, null);
+			return (itemCap != null && itemCap.getBookState()) || (entityCap != null && entityCap.isBookActive()) ? 1.0F : 0.0F;
+		});
 	}
 
 	@Override
@@ -48,7 +51,7 @@ public class VadeMecum extends TamItem {
 
 			@Override
 			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-				return capability == CapabilityList.VADEMECUMITEM ? CapabilityList.VADEMECUMITEM.<T> cast(inst) : null;
+				return capability == CapabilityList.VADEMECUMITEM ? CapabilityList.VADEMECUMITEM.<T>cast(inst) : null;
 			}
 
 			@Override
@@ -68,10 +71,11 @@ public class VadeMecum extends TamItem {
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
 		if (state != null) {
-			if (state.getBlock() == VoidCraft.blocks.ritualBlock) {
-				if (!world.isRemote) VadeMecumRitualHandler.invokeRitual(player, world, pos);
+			if (state.getBlock() == VoidCraftBlocks.ritualBlock) {
+				if (!world.isRemote)
+					VadeMecumRitualHandler.invokeRitual(player, world, pos);
 				return EnumActionResult.SUCCESS;
-			} else if (state.getBlock() == VoidCraft.blocks.voidicAlchemyTable) {
+			} else if (state.getBlock() == VoidCraftBlocks.voidicAlchemyTable) {
 				if (!world.isRemote) {
 					TileEntity te = world.getTileEntity(pos);
 					if (te instanceof TileEntityVoidicAlchemy) {
@@ -93,15 +97,19 @@ public class VadeMecum extends TamItem {
 	}
 
 	private boolean dorightClick(World world, EntityPlayer player, ItemStack stack) {
+		IVadeMecumCapability playerCap = player.getCapability(CapabilityList.VADEMECUM, null);
 		IVadeMecumItemCapability cap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
-		if (cap == null) return false;
+		if (playerCap == null || cap == null)
+			return false;
 		if (player.isSneaking()) {
-			cap.toggleBookState();
+			playerCap.setBookActive(!playerCap.isBookActive());
+			cap.setBookState(playerCap.isBookActive());
 		} else {
-			if (cap.getBookState()) {
+			if (playerCap.isBookActive() || cap.getBookState()) {
 				VadeMecumWordsOfPower.invoke(world, player);
 			} else {
-				if (world.isRemote) openBook(player, world, player.getPosition());
+				if (world.isRemote)
+					openBook(player, world, player.getPosition());
 			}
 		}
 		return true;
@@ -118,7 +126,7 @@ public class VadeMecum extends TamItem {
 			EntityLivingBase living = (EntityLivingBase) entity;
 			IVadeMecumCapability playerCap = living.getCapability(CapabilityList.VADEMECUM, null);
 			IVadeMecumItemCapability itemCap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
-			if (itemCap != null && itemCap.getBookState()) {
+			if ((playerCap != null && playerCap.isBookActive()) || (itemCap != null && itemCap.getBookState())) {
 				if (VoidCraft.config.getRenderThirdPersonParticles()) {
 					particles(world, living);
 				}

@@ -1,17 +1,17 @@
 package Tamaized.Voidcraft.capabilities.vadeMecum;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import Tamaized.Voidcraft.entity.companion.EntityCompanion;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumWordsOfPower;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public interface IVadeMecumCapability {
 
@@ -123,6 +123,10 @@ public interface IVadeMecumCapability {
 	}
 
 	public boolean isDirty();
+
+	boolean isBookActive();
+
+	void setBookActive(boolean state);
 
 	public void resetDirty();
 	

@@ -16,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelDynBucket;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -85,69 +84,69 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void preInit() {
-		modelList = new ArrayList<ITamModel>();
+		modelList = new ArrayList<>();
 
-		vadeMecum = new VadeMecum(VoidCraft.tabs.tabVoid, "vademecum", 1); // Don't add this to the model list as it uses an ItemMeshDefinition
+		modelList.add(vadeMecum = new VadeMecum(VoidCraftCreativeTabs.tabVoid, "vademecum", 1));
 
-		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(VoidCraft.tabs.tabVoid, "emptyobsidianflask", 16));
-		modelList.add(obsidianFlask = new ObsidianFlask(EntityObsidianFlask.Type.Normal, VoidCraft.tabs.tabVoid, "obsidianflask", 16));
-		modelList.add(obsidianFlaskFire = new ObsidianFlask(EntityObsidianFlask.Type.Fire, VoidCraft.tabs.tabVoid, "flask_fire", 16));
-		modelList.add(obsidianFlaskFreeze = new ObsidianFlask(EntityObsidianFlask.Type.Freeze, VoidCraft.tabs.tabVoid, "flask_freeze", 16));
-		modelList.add(obsidianFlaskShock = new ObsidianFlask(EntityObsidianFlask.Type.Shock, VoidCraft.tabs.tabVoid, "flask_shock", 16));
-		modelList.add(obsidianFlaskAcid = new ObsidianFlask(EntityObsidianFlask.Type.Acid, VoidCraft.tabs.tabVoid, "flask_acid", 16));
-		modelList.add(obsidianFlaskVoid = new ObsidianFlask(EntityObsidianFlask.Type.Void, VoidCraft.tabs.tabVoid, "flask_void", 16));
-		modelList.add(ectoplasm = new TamItem(VoidCraft.tabs.tabVoid, "ectoplasm", 64));
-		modelList.add(voidcrystal = new TamItem(VoidCraft.tabs.tabVoid, "voidcrystal", 64));
-		modelList.add(voidChain = new TamItem(VoidCraft.tabs.tabVoid, "voidchain", 64));
-		modelList.add(MoltenvoidChain = new TamItem(VoidCraft.tabs.tabVoid, "moltenvoidchain", 64));
-		modelList.add(MoltenvoidChainPart = new TamItem(VoidCraft.tabs.tabVoid, "moltenvoidchainpart", 64));
-		modelList.add(burnBone = new TamItem(VoidCraft.tabs.tabVoid, "burnbone", 64));
-		modelList.add(voidStar = new VoidStar(VoidCraft.tabs.tabVoid, "voidstar", 1));
-		modelList.add(ChainedSkull = new ChainedSkull(VoidCraft.tabs.tabVoid, "chainedskull", 1));
-		modelList.add(voidCloth = new TamItem(VoidCraft.tabs.tabVoid, "voidcloth", 64));
-		modelList.add(voidCrystalBucket = new TamItem(VoidCraft.tabs.tabVoid, "voidcrystalbucket", 1));
-		modelList.add(voidicEssence = new VoidicEssence(VoidCraft.tabs.tabVoid, "voidicessence", 1));
-		modelList.add(voidicPhlogiston = new TamItem(VoidCraft.tabs.tabVoid, "voidicphlogiston", 64));
-		modelList.add(voidicDragonScale = new TamItem(VoidCraft.tabs.tabVoid, "voidicdragonscale", 64));
-		modelList.add(astralEssence = new TamItem(VoidCraft.tabs.tabVoid, "astralessence", 64));
-		modelList.add(quoriFragment = new TamItem(VoidCraft.tabs.tabVoid, "quorifragment", 64));
+		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(VoidCraftCreativeTabs.tabVoid, "emptyobsidianflask", 16));
+		modelList.add(obsidianFlask = new ObsidianFlask(EntityObsidianFlask.Type.Normal, VoidCraftCreativeTabs.tabVoid, "obsidianflask", 16));
+		modelList.add(obsidianFlaskFire = new ObsidianFlask(EntityObsidianFlask.Type.Fire, VoidCraftCreativeTabs.tabVoid, "flask_fire", 16));
+		modelList.add(obsidianFlaskFreeze = new ObsidianFlask(EntityObsidianFlask.Type.Freeze, VoidCraftCreativeTabs.tabVoid, "flask_freeze", 16));
+		modelList.add(obsidianFlaskShock = new ObsidianFlask(EntityObsidianFlask.Type.Shock, VoidCraftCreativeTabs.tabVoid, "flask_shock", 16));
+		modelList.add(obsidianFlaskAcid = new ObsidianFlask(EntityObsidianFlask.Type.Acid, VoidCraftCreativeTabs.tabVoid, "flask_acid", 16));
+		modelList.add(obsidianFlaskVoid = new ObsidianFlask(EntityObsidianFlask.Type.Void, VoidCraftCreativeTabs.tabVoid, "flask_void", 16));
+		modelList.add(ectoplasm = new TamItem(VoidCraftCreativeTabs.tabVoid, "ectoplasm", 64));
+		modelList.add(voidcrystal = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcrystal", 64));
+		modelList.add(voidChain = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidchain", 64));
+		modelList.add(MoltenvoidChain = new TamItem(VoidCraftCreativeTabs.tabVoid, "moltenvoidchain", 64));
+		modelList.add(MoltenvoidChainPart = new TamItem(VoidCraftCreativeTabs.tabVoid, "moltenvoidchainpart", 64));
+		modelList.add(burnBone = new TamItem(VoidCraftCreativeTabs.tabVoid, "burnbone", 64));
+		modelList.add(voidStar = new VoidStar(VoidCraftCreativeTabs.tabVoid, "voidstar", 1));
+		modelList.add(ChainedSkull = new ChainedSkull(VoidCraftCreativeTabs.tabVoid, "chainedskull", 1));
+		modelList.add(voidCloth = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcloth", 64));
+		modelList.add(voidCrystalBucket = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcrystalbucket", 1));
+		modelList.add(voidicEssence = new VoidicEssence(VoidCraftCreativeTabs.tabVoid, "voidicessence", 1));
+		modelList.add(voidicPhlogiston = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicphlogiston", 64));
+		modelList.add(voidicDragonScale = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicdragonscale", 64));
+		modelList.add(astralEssence = new TamItem(VoidCraftCreativeTabs.tabVoid, "astralessence", 64));
+		modelList.add(quoriFragment = new TamItem(VoidCraftCreativeTabs.tabVoid, "quorifragment", 64));
 
-		modelList.add(voidicSteel = new TamItem(VoidCraft.tabs.tabVoid, "voidicsteel", 64));
+		modelList.add(voidicSteel = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicsteel", 64));
 
 		// dust
-		modelList.add(quartzDust = new TamItem(VoidCraft.tabs.tabVoid, "quartzdust", 64));
-		modelList.add(coalDust = new TamItem(VoidCraft.tabs.tabVoid, "coaldust", 64));
-		modelList.add(ironDust = new TamItem(VoidCraft.tabs.tabVoid, "irondust", 64));
-		modelList.add(goldDust = new TamItem(VoidCraft.tabs.tabVoid, "golddust", 64));
-		modelList.add(copperDust = new TamItem(VoidCraft.tabs.tabVoid, "copperdust", 64));
-		modelList.add(tinDust = new TamItem(VoidCraft.tabs.tabVoid, "tindust", 64));
-		modelList.add(leadDust = new TamItem(VoidCraft.tabs.tabVoid, "leaddust", 64));
-		modelList.add(lapisDust = new TamItem(VoidCraft.tabs.tabVoid, "lapisdust", 64));
-		modelList.add(emeraldDust = new TamItem(VoidCraft.tabs.tabVoid, "emeralddust", 64));
-		modelList.add(diamondDust = new TamItem(VoidCraft.tabs.tabVoid, "diamonddust", 64));
+		modelList.add(quartzDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "quartzdust", 64));
+		modelList.add(coalDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "coaldust", 64));
+		modelList.add(ironDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "irondust", 64));
+		modelList.add(goldDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "golddust", 64));
+		modelList.add(copperDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "copperdust", 64));
+		modelList.add(tinDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "tindust", 64));
+		modelList.add(leadDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "leaddust", 64));
+		modelList.add(lapisDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "lapisdust", 64));
+		modelList.add(emeraldDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "emeralddust", 64));
+		modelList.add(diamondDust = new TamItem(VoidCraftCreativeTabs.tabVoid, "diamonddust", 64));
 
-		modelList.add(debugger = new Debugger(VoidCraft.tabs.tabVoid, "debugger", 1));
-		creativeVoidBucket = new CreativeVoidBucket(VoidCraft.tabs.tabVoid, "creativevoidbucket", 1);
-		// modelList.add(hookShot = new HookShot(voidCraft.tabs.tabVoid, "hookShot", 1));
+		modelList.add(debugger = new Debugger(VoidCraftCreativeTabs.tabVoid, "debugger", 1));
+		creativeVoidBucket = new CreativeVoidBucket(VoidCraftCreativeTabs.tabVoid, "creativevoidbucket", 1);
+		// modelList.add(hookShot = new HookShot(VoidCraftCreativeTabs.tabVoid, "hookShot", 1));
 
-		modelList.add(voidicSuppressor = new VoidicSuppressor(VoidCraft.tabs.tabVoid, "voidicsuppressor", 1));
-		modelList.add(voidicDrill = new VoidicDrill(VoidCraft.tabs.tabVoid, "voidicdrill", 1));
-		modelList.add(realityTeleporter = new RealityTeleporter(VoidCraft.tabs.tabVoid, "realityteleporter", 1));
+		modelList.add(voidicSuppressor = new VoidicSuppressor(VoidCraftCreativeTabs.tabVoid, "voidicsuppressor", 1));
+		modelList.add(voidicDrill = new VoidicDrill(VoidCraftCreativeTabs.tabVoid, "voidicdrill", 1));
+		modelList.add(realityTeleporter = new RealityTeleporter(VoidCraftCreativeTabs.tabVoid, "realityteleporter", 1));
 
-		modelList.add(voidCrystalShield = new VoidCrystalShield(VoidCraft.tabs.tabVoid, "voidcrystalshield"));
+		modelList.add(voidCrystalShield = new VoidCrystalShield(VoidCraftCreativeTabs.tabVoid, "voidcrystalshield"));
 		DamageEvent.shieldRegistry.add(voidCrystalShield);
 
 		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
 		soilList.add(VoidCraft.blocks.blockFakeBedrockFarmland);
-		modelList.add(etherealSeed = new TamItemSeed(VoidCraft.tabs.tabVoid, "etherealseed", 64, VoidCraft.blocks.etherealPlant, soilList));
-		modelList.add(etherealFruit = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.NORMAL, VoidCraft.tabs.tabVoid, "etherealfruit", 64, 2, false));
-		modelList.add(etherealFruit_redstone = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.REDSTONE, VoidCraft.tabs.tabVoid, "etherealfruit_redstone", 64, 2, false));
-		modelList.add(etherealFruit_lapis = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.LAPIS, VoidCraft.tabs.tabVoid, "etherealfruit_lapis", 64, 2, false));
-		modelList.add(etherealFruit_gold = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.GOLD, VoidCraft.tabs.tabVoid, "etherealfruit_gold", 64, 2, false));
-		modelList.add(etherealFruit_emerald = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.EMERALD, VoidCraft.tabs.tabVoid, "etherealfruit_emerald", 64, 2, false));
-		modelList.add(etherealFruit_diamond = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.DIAMOND, VoidCraft.tabs.tabVoid, "etherealfruit_diamond", 64, 2, false));
+		modelList.add(etherealSeed = new TamItemSeed(VoidCraftCreativeTabs.tabVoid, "etherealseed", 64, VoidCraft.blocks.etherealPlant, soilList));
+		modelList.add(etherealFruit = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.NORMAL, VoidCraftCreativeTabs.tabVoid, "etherealfruit", 64, 2, false));
+		modelList.add(etherealFruit_redstone = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.REDSTONE, VoidCraftCreativeTabs.tabVoid, "etherealfruit_redstone", 64, 2, false));
+		modelList.add(etherealFruit_lapis = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.LAPIS, VoidCraftCreativeTabs.tabVoid, "etherealfruit_lapis", 64, 2, false));
+		modelList.add(etherealFruit_gold = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.GOLD, VoidCraftCreativeTabs.tabVoid, "etherealfruit_gold", 64, 2, false));
+		modelList.add(etherealFruit_emerald = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.EMERALD, VoidCraftCreativeTabs.tabVoid, "etherealfruit_emerald", 64, 2, false));
+		modelList.add(etherealFruit_diamond = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.DIAMOND, VoidCraftCreativeTabs.tabVoid, "etherealfruit_diamond", 64, 2, false));
 
-		modelList.add(dreamBed = new ItemDreamBed(VoidCraft.tabs.tabVoid, "dreambed"));
+		modelList.add(dreamBed = new ItemDreamBed(VoidCraftCreativeTabs.tabVoid, "dreambed"));
 
 		// modelList.add(record_noStrings = new VoidRecord("Approaching Nirvana - No Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.No_Strings_Attached, "voidDisc1"));
 		// modelList.add(record_bleedingThrough = new VoidRecord("Haven - Bleeding Through", VoidSoundEvents.MusicDiscSoundEvents.Haven_Bleeding_Through, "voidDisc2"));
@@ -278,8 +277,8 @@ public class VoidCraftItems implements ITamRegistry {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void clientPreInit() {
-		VadeMecumMeshDefinition.preRegister();
-		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
+//		VadeMecumMeshDefinition.preRegister();
+//		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
 	}
 
 	@Override

@@ -28,6 +28,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	private String lastEntry = "null";
 	private int page = 0;
 	private EntityCompanion companion;
+	private boolean bookActive = false;
 
 	private Map<Category, ItemStack> spellComponents = new HashMap<Category, ItemStack>() {
 
@@ -36,8 +37,6 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 			ItemStack stack = super.get(key);
 			return stack == null ? ItemStack.EMPTY : stack;
 		}
-
-		;
 
 	};
 
@@ -48,6 +47,17 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	@Override
 	public boolean isDirty() {
 		return markDirty;
+	}
+
+	@Override
+	public boolean isBookActive() {
+		return bookActive;
+	}
+
+	@Override
+	public void setBookActive(boolean state) {
+		bookActive = state;
+		markDirty();
 	}
 
 	@Override
@@ -152,7 +162,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public ArrayList<Category> getAvailableActivePowers() {
-		ArrayList<Category> activeList = new ArrayList<Category>();
+		ArrayList<Category> activeList = new ArrayList<>();
 		for (Category cat : categoryList)
 			if (IVadeMecumCapability.isActivePower(cat))
 				activeList.add(cat);
@@ -319,6 +329,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void decodePacket(ByteBuf buf, ByteBufInputStream stream) throws IOException {
+		setBookActive(stream.readBoolean());
 		setLastEntry(stream.readUTF());
 		setPage(stream.readInt());
 		{
@@ -347,6 +358,7 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	@Override
 	public void encodePacket(DataOutputStream stream) throws IOException {
+		stream.writeBoolean(bookActive);
 		stream.writeUTF(getLastEntry());
 		stream.writeInt(getPage());
 		// Do Arrays last
