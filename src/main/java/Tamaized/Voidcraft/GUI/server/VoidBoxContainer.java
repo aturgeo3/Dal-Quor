@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.GUI.server;
 
 import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
 import Tamaized.Voidcraft.GUI.slots.SlotCantPlaceOrRemove;
+import Tamaized.Voidcraft.GUI.slots.SlotItemHandlerBypass;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,9 +19,9 @@ public class VoidBoxContainer extends Container {
 	public VoidBoxContainer(InventoryPlayer inventory, TileEntityVoidBox tileEntity) {
 		this.te = tileEntity;
 
-		this.addSlotToContainer(new SlotCantPlaceOrRemove(tileEntity, 0, 176, 115));
-		this.addSlotToContainer(new Slot(tileEntity, 1, 140, 103));
-		this.addSlotToContainer(new SlotCantPlace(tileEntity, 2, 140, 127));
+		this.addSlotToContainer(new SlotCantPlaceOrRemove(tileEntity.SLOT_CURRENT, 0, 176, 115));
+		this.addSlotToContainer(new SlotItemHandlerBypass(tileEntity.SLOT_NEXT, 0, 140, 103));
+		this.addSlotToContainer(new SlotCantPlace(tileEntity.SLOT_FINISH, 0, 140, 127));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -49,15 +50,42 @@ public class VoidBoxContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
+			}
+
+			if (itemstack1.getCount() == 0) {
+				slot.putStack(ItemStack.EMPTY);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+
+		return itemstack;
+	}
+
+	@Deprecated
+	public ItemStack old_transferStackInSlot(EntityPlayer player, int hoverSlot) {
+		ItemStack itemstack = ItemStack.EMPTY;
+		/*Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
+
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			final int maxSlots = te.getInventorySize();
 
 			if (hoverSlot < maxSlots && te.canExtractItem(hoverSlot, itemstack, null)) {
 				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
@@ -98,13 +126,13 @@ public class VoidBoxContainer extends Container {
 			slot.onTake(player, itemstack1);
 
 		}
-
+*/
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return this.te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 
 }

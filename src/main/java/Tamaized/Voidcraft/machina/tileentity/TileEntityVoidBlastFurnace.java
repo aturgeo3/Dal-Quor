@@ -1,9 +1,12 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.machina.VoidMacerator;
 import Tamaized.Voidcraft.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,23 +14,37 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+
+import javax.annotation.Nullable;
 
 public class TileEntityVoidBlastFurnace extends TileEntityVoidicPowerInventory {
 
-	public static final int SLOT_INPUT_IRON = 0;
-	public static final int SLOT_INPUT_COAL = 1;
-	public static final int SLOT_OUTPUT = 2;
-	public static final int[] SLOTS_ALL = new int[] { SLOT_INPUT_IRON, SLOT_INPUT_COAL, SLOT_OUTPUT };
-
-	private boolean cooking = false;
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_INPUT_IRON;
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_INPUT_COAL;
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_OUTPUT;
 	public int cookingTick = 0;
 	public int finishTick = 0;
+	private boolean cooking = false;
 	private BlastFurnaceRecipe recipe;
 
-	private Item[] lastItem = new Item[SLOTS_ALL.length + 1];
+	private Item[] lastItem = new Item[2];
 
 	public TileEntityVoidBlastFurnace() {
-		super(SLOTS_ALL.length);
+		super();
+	}
+
+	@Override
+	protected ItemStackHandler[] register() {
+		return new ItemStackHandler[]{SLOT_INPUT_IRON = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraftItems.ironDust)}, true, new ItemStack[0], false), SLOT_INPUT_COAL = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraftItems.coalDust)}, true, new ItemStack[0], false), SLOT_OUTPUT = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[0], false, new ItemStack[0], true)};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return new CombinedInvWrapper(SLOT_INPUT_COAL, SLOT_INPUT_IRON, SLOT_OUTPUT);
 	}
 
 	@Override
@@ -44,11 +61,6 @@ public class TileEntityVoidBlastFurnace extends TileEntityVoidicPowerInventory {
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("cookingTick", cookingTick);
 		return nbt;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
 	}
 
 	@Override
@@ -76,71 +88,61 @@ public class TileEntityVoidBlastFurnace extends TileEntityVoidicPowerInventory {
 			IBlockState state = world.getBlockState(pos);
 			if (state.getBlock() instanceof VoidMacerator) {
 				VoidMacerator theMacerator = (VoidMacerator) state.getBlock();
-				if (theMacerator != null) {
-					if (theMacerator.getIsActive(state) && !cooking) theMacerator.setState(false, world, pos);
-					if (!theMacerator.getIsActive(state) && cooking) theMacerator.setState(true, world, pos);
-				}
+				if (theMacerator.getIsActive(state) && !cooking)
+					VoidMacerator.setState(false, world, pos);
+				if (!theMacerator.getIsActive(state) && cooking)
+					VoidMacerator.setState(true, world, pos);
 			}
 		}
 	}
 
 	private void doLastItemChecks() {
-		for (int i = SLOT_INPUT_IRON; i <= SLOT_INPUT_COAL; i++) {
-			if (lastItem[i] == null || getStackInSlot(i).isEmpty() || lastItem[i] != getStackInSlot(i).getItem()) {
+		TamTileEntityInventory.ItemStackFilterHandler[] slots = new TamTileEntityInventory.ItemStackFilterHandler[]{SLOT_INPUT_IRON, SLOT_INPUT_COAL};
+		for (int i = 0; i < 2; i++) {
+			if (lastItem[i] == null || slots[i].getStackInSlot(0).isEmpty() || lastItem[i] != slots[i].getStackInSlot(0).getItem()) {
 				cookingTick = 0;
-				lastItem[i] = (!getStackInSlot(i).isEmpty()) ? getStackInSlot(i).getItem() : null;
+				lastItem[i] = (!slots[i].getStackInSlot(0).isEmpty()) ? slots[i].getStackInSlot(0).getItem() : null;
 			}
 		}
 	}
 
 	private void bakeItem() {
 		if (canCook()) {
-			if (getStackInSlot(SLOT_OUTPUT).isEmpty()) {
-				setInventorySlotContents(SLOT_OUTPUT, recipe.getOutput().copy());
-			} else if (getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) {
-				getStackInSlot(SLOT_OUTPUT).grow(recipe.getOutput().getCount());
+			if (SLOT_OUTPUT.getStackInSlot(0).isEmpty()) {
+				SLOT_OUTPUT.setStackInSlot(0, recipe.getOutput().copy());
+			} else if (SLOT_OUTPUT.getStackInSlot(0).isItemEqual(recipe.getOutput())) {
+				SLOT_OUTPUT.getStackInSlot(0).grow(recipe.getOutput().getCount());
 			}
 
-			getStackInSlot(SLOT_INPUT_COAL).shrink(1);
-			getStackInSlot(SLOT_INPUT_IRON).shrink(1);
+			SLOT_INPUT_COAL.getStackInSlot(0).shrink(1);
+			SLOT_INPUT_IRON.getStackInSlot(0).shrink(1);
 
-			if (getStackInSlot(SLOT_INPUT_COAL).getCount() <= 0) {
-				setInventorySlotContents(SLOT_INPUT_COAL, ItemStack.EMPTY);
+			if (SLOT_INPUT_COAL.getStackInSlot(0).getCount() <= 0) {
+				SLOT_INPUT_COAL.setStackInSlot(0, ItemStack.EMPTY);
 			}
 
-			if (getStackInSlot(SLOT_INPUT_IRON).getCount() <= 0) {
-				setInventorySlotContents(SLOT_INPUT_IRON, ItemStack.EMPTY);
+			if (SLOT_INPUT_IRON.getStackInSlot(0).getCount() <= 0) {
+				SLOT_INPUT_IRON.setStackInSlot(0, ItemStack.EMPTY);
 			}
 		}
 	}
 
 	private boolean canCook() {
-		if (getStackInSlot(SLOT_INPUT_IRON).isEmpty() || getStackInSlot(SLOT_INPUT_COAL).isEmpty() || world.getBlockState(getPos().down()) == null || world.getBlockState(getPos().down()).getBlock() != VoidCraft.blocks.fireVoid) return false;
-		recipe = VoidCraft.teRecipes.blastFurnace.getRecipe(new ItemStack[] { getStackInSlot(SLOT_INPUT_IRON), getStackInSlot(SLOT_INPUT_COAL) });
-		if (recipe == null) return false;
-		if (getStackInSlot(SLOT_OUTPUT).isEmpty()) return true;
-		if (!getStackInSlot(SLOT_OUTPUT).isItemEqual(recipe.getOutput())) return false;
-		int result = getStackInSlot(SLOT_OUTPUT).getCount() + recipe.getOutput().getCount();
-		return (result <= getInventoryStackLimit() && result <= recipe.getOutput().getMaxStackSize());
+		if (SLOT_INPUT_IRON.getStackInSlot(0).isEmpty() || SLOT_INPUT_COAL.getStackInSlot(0).isEmpty() || world.getBlockState(getPos().down()) == null || world.getBlockState(getPos().down()).getBlock() != VoidCraftBlocks.fireVoid)
+			return false;
+		recipe = VoidCraft.teRecipes.blastFurnace.getRecipe(new ItemStack[]{SLOT_INPUT_IRON.getStackInSlot(0), SLOT_INPUT_COAL.getStackInSlot(0)});
+		if (recipe == null)
+			return false;
+		if (SLOT_OUTPUT.getStackInSlot(0).isEmpty())
+			return true;
+		if (!SLOT_OUTPUT.getStackInSlot(0).isItemEqual(recipe.getOutput()))
+			return false;
+		int result = SLOT_OUTPUT.getStackInSlot(0).getCount() + recipe.getOutput().getCount();
+		return (result <= 64 && result <= recipe.getOutput().getMaxStackSize());
 	}
 
 	public boolean isCooking() {
 		return cooking;
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return SLOTS_ALL;
-	}
-
-	@Override
-	public String getName() {
-		return "teVoidBlastFurnace";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
 	}
 
 	@Override
@@ -161,15 +163,5 @@ public class TileEntityVoidBlastFurnace extends TileEntityVoidicPowerInventory {
 	@Override
 	public boolean canInputPower(EnumFacing face) {
 		return true;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return (i == SLOT_INPUT_IRON && itemstack.getItem() == VoidCraft.items.ironDust) || (i == SLOT_INPUT_COAL && itemstack.getItem() == VoidCraft.items.coalDust);
-	}
-
-	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_OUTPUT;
 	}
 }

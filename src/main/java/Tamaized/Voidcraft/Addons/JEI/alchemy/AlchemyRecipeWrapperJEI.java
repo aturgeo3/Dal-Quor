@@ -3,7 +3,6 @@ package Tamaized.Voidcraft.Addons.JEI.alchemy;
 import Tamaized.TamModized.helper.TranslateHelper;
 import Tamaized.Voidcraft.Addons.JEI.VoidCraftRecipeWrapperJEI;
 import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy.AlchemyRecipe;
-import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumWordsOfPower;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import net.minecraft.client.Minecraft;
@@ -26,22 +25,22 @@ public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRe
 		final int x = 0;
 		final int y = 40;
 
-		g.init(TileEntityVoidicAlchemy.SLOT_OUTPUT, false, 37 + x, 20 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_1, true, 13 + x, -5 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_2, true, 2 + x, 20 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_3, true, 13 + x, 45 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_4, true, 61 + x, -5 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_5, true, 72 + x, 20 + y);
-		g.init(TileEntityVoidicAlchemy.SLOT_INPUT_6, true, 61 + x, 45 + y);
+		g.init(0, false, 37 + x, 20 + y);
+		g.init(1, true, 13 + x, -5 + y);
+		g.init(2, true, 2 + x, 20 + y);
+		g.init(3, true, 13 + x, 45 + y);
+		g.init(4, true, 61 + x, -5 + y);
+		g.init(5, true, 72 + x, 20 + y);
+		g.init(6, true, 61 + x, 45 + y);
 
-		g.set(TileEntityVoidicAlchemy.SLOT_OUTPUT, getOutput());
+		g.set(0, getOutput());
 
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_1, getInputs().get(0));
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_2, getInputs().get(1));
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_3, getInputs().get(2));
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_4, getInputs().get(3));
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_5, getInputs().get(4));
-		g.set(TileEntityVoidicAlchemy.SLOT_INPUT_6, getInputs().get(5));
+		g.set(1, getInputs().get(0));
+		g.set(2, getInputs().get(1));
+		g.set(3, getInputs().get(2));
+		g.set(4, getInputs().get(3));
+		g.set(5, getInputs().get(4));
+		g.set(6, getInputs().get(5));
 
 	}
 

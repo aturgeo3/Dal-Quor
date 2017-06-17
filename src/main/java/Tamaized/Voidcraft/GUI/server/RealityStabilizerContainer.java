@@ -19,7 +19,7 @@ public class RealityStabilizerContainer extends Container {
 	public RealityStabilizerContainer(InventoryPlayer inventory, TileEntityRealityStabilizer tileEntity) {
 		te = tileEntity;
 
-		addSlotToContainer(new SlotCantPlace(tileEntity, 0, 176, 96));
+		addSlotToContainer(new SlotCantPlace(tileEntity.SLOT_OUTPUT, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -61,35 +61,20 @@ public class RealityStabilizerContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
-
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -97,18 +82,13 @@ public class RealityStabilizerContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 }

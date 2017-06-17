@@ -1,13 +1,11 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.fluids.IFaceFluidHandler;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
+import Tamaized.Voidcraft.registry.VoidCraftFluids;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -18,27 +16,44 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TileEntityVoidicCrystallizer extends TileEntityVoidicPowerInventory implements IFaceFluidHandler {
 
-	public static final int SLOT_BUCKET = 0;
-	private int[] slots_all = { SLOT_BUCKET };
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_BUCKET;
 
 	private VoidTank tank;
 
-	private List<EnumFacing> fluidOutput = new ArrayList<EnumFacing>();
-	private List<EnumFacing> fluidInput = new ArrayList<EnumFacing>();
+	private List<EnumFacing> fluidOutput = new ArrayList<>();
+	private List<EnumFacing> fluidInput = new ArrayList<>();
 
 	public TileEntityVoidicCrystallizer() {
-		super(1);
+		super();
 		tank = new VoidTank(this, 1000);
 		fluidInput.add(EnumFacing.UP);
 		fluidInput.add(EnumFacing.DOWN);
 	}
 
 	@Override
+	protected ItemStackHandler[] register() {
+		return new ItemStackHandler[]{SLOT_BUCKET = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[]{VoidCraftFluids.voidBucket.getBucket()}, true, new ItemStack[]{new ItemStack(Items.BUCKET)}, true)};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return SLOT_BUCKET;
+	}
+
+	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
 
 	@Override
@@ -54,32 +69,17 @@ public class TileEntityVoidicCrystallizer extends TileEntityVoidicPowerInventory
 			drain(1000, true);
 			voidicPower -= 144;
 			if (!world.isRemote) {
-				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(VoidCraft.items.voidcrystal));
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(VoidCraftItems.voidcrystal));
 				world.playSound(null, getPos(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.fire.extinguish")), SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 		}
 		// Fill from a Bucket
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!getStackInSlot(SLOT_BUCKET).isEmpty() && getStackInSlot(SLOT_BUCKET).isItemEqual(VoidCraft.fluids.voidBucket.getBucket())) {
-				fill(new FluidStack(VoidCraft.fluids.voidFluid, 1000), true);
-				setInventorySlotContents(SLOT_BUCKET, new ItemStack(Items.BUCKET));
+			if (!SLOT_BUCKET.getStackInSlot(0).isEmpty() && SLOT_BUCKET.getStackInSlot(0).isItemEqual(VoidCraftFluids.voidBucket.getBucket())) {
+				fill(new FluidStack(VoidCraftFluids.voidFluid, 1000), true);
+				SLOT_BUCKET.setStackInSlot(0, new ItemStack(Items.BUCKET));
 			}
 		}
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public String getName() {
-		return "voidicCrystallizer";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
 	}
 
 	@Override
@@ -106,12 +106,12 @@ public class TileEntityVoidicCrystallizer extends TileEntityVoidicPowerInventory
 		return tank.getFluidAmount();
 	}
 
-	public int getMaxFluidAmount() {
-		return tank.getCapacity();
+	public void setFluidAmount(int amount) {
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 
-	public void setFluidAmount(int amount) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+	public int getMaxFluidAmount() {
+		return tank.getCapacity();
 	}
 
 	@Override
@@ -132,21 +132,6 @@ public class TileEntityVoidicCrystallizer extends TileEntityVoidicPowerInventory
 	@Override
 	public boolean canInputPower(EnumFacing face) {
 		return face == EnumFacing.UP || face == EnumFacing.DOWN;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-		return slot == SLOT_BUCKET && itemstack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket());
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing var1) {
-		return slots_all;
-	}
-
-	@Override
-	protected boolean canExtractSlot(int slot, ItemStack stack) {
-		return slot == SLOT_BUCKET && !getStackInSlot(SLOT_BUCKET).isEmpty() ? getStackInSlot(SLOT_BUCKET).getItem() == Items.BUCKET : false;
 	}
 
 	@Override

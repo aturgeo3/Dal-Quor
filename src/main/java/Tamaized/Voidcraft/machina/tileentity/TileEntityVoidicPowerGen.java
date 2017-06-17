@@ -1,45 +1,61 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerHandler;
 import Tamaized.Voidcraft.fluids.IFaceFluidHandler;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
+import Tamaized.Voidcraft.registry.VoidCraftFluids;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory implements IFaceFluidHandler {
 
-	public static final int SLOT_DEFAULT = 0;
-	private int[] slots_all = { SLOT_DEFAULT };
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_DEFAULT;
 
 	private VoidTank tank;
 	private int useAmount = 1;
 	private int genAmount = 2;
 	private int rate = 1;
 
-	private List<EnumFacing> fluidOutput = new ArrayList<EnumFacing>();
-	private List<EnumFacing> fluidInput = new ArrayList<EnumFacing>();
+	private List<EnumFacing> fluidOutput = new ArrayList<>();
+	private List<EnumFacing> fluidInput = new ArrayList<>();
 
 	public TileEntityVoidicPowerGen() {
-		super(1);
+		super();
 		tank = new VoidTank(this, 5000);
-		for (EnumFacing face : EnumFacing.VALUES) {
-			fluidInput.add(face);
-		}
+		fluidInput.addAll(Arrays.asList(EnumFacing.VALUES));
+	}
+
+	@Override
+	protected ItemStackHandler[] register() {
+		SLOT_DEFAULT = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraftItems.creativeVoidBucket), VoidCraftFluids.voidBucket.getBucket()}, true, new ItemStack[]{new ItemStack(Items.BUCKET)}, true);
+		SLOT_DEFAULT.setStackLimit(1);
+		return new ItemStackHandler[]{SLOT_DEFAULT};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return SLOT_DEFAULT;
 	}
 
 	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
 
 	@Override
@@ -53,40 +69,20 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 		rate = 10;
 		int gen = genAmount * rate;
 		int use = useAmount * rate;
-		if (!getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).getItem() == VoidCraft.items.creativeVoidBucket && getFluidAmount() != getMaxFluidAmount()) {
+		if (!SLOT_DEFAULT.getStackInSlot(0).isEmpty() && SLOT_DEFAULT.getStackInSlot(0).getItem() == VoidCraftItems.creativeVoidBucket && getFluidAmount() != getMaxFluidAmount()) {
 			setFluidAmount(getMaxFluidAmount());
 		}
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).isItemEqual(VoidCraft.fluids.voidBucket.getBucket())) {
-				fill(new FluidStack(VoidCraft.fluids.voidFluid, 1000), true);
-				setInventorySlotContents(SLOT_DEFAULT, new ItemStack(Items.BUCKET));
+			if (!SLOT_DEFAULT.getStackInSlot(0).isEmpty() && SLOT_DEFAULT.getStackInSlot(0).isItemEqual(VoidCraftFluids.voidBucket.getBucket())) {
+				fill(new FluidStack(VoidCraftFluids.voidFluid, 1000), true);
+				SLOT_DEFAULT.setStackInSlot(0, new ItemStack(Items.BUCKET));
 			}
 		}
 		if (getFluidAmount() >= use && voidicPower <= getMaxPower() - gen) {
-			drain(new FluidStack(VoidCraft.fluids.voidFluid, use), true);
+			drain(new FluidStack(VoidCraftFluids.voidFluid, use), true);
 			voidicPower += gen;
 		}
 		VoidicPowerHandler.sendToSurrounding(this, world, pos);
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	public String getName() {
-		return "voidicPowerGen";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return slots_all;
 	}
 
 	@Override
@@ -113,12 +109,12 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 		return tank.getFluidAmount();
 	}
 
-	public int getMaxFluidAmount() {
-		return tank.getCapacity();
+	public void setFluidAmount(int amount) {
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 
-	public void setFluidAmount(int amount) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+	public int getMaxFluidAmount() {
+		return tank.getCapacity();
 	}
 
 	@Override
@@ -139,21 +135,6 @@ public class TileEntityVoidicPowerGen extends TileEntityVoidicPowerInventory imp
 	@Override
 	public boolean canInputPower(EnumFacing face) {
 		return false;
-	}
-
-	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		switch (i) {
-			case SLOT_DEFAULT:
-				return stack.getItem() == Items.BUCKET;
-			default:
-				return true;
-		}
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? (stack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) || stack.getItem() == VoidCraft.items.creativeVoidBucket) : false;
 	}
 
 	@Override

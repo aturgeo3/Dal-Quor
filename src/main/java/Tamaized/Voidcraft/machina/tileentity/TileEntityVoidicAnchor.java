@@ -1,9 +1,6 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -11,38 +8,56 @@ import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import Tamaized.Voidcraft.fluids.FluidHelper;
 import Tamaized.Voidcraft.fluids.IFaceFluidHandler;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
+import Tamaized.Voidcraft.registry.VoidCraftFluids;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TileEntityVoidicAnchor extends TileEntityVoidicPowerInventory implements IFaceFluidHandler {
 
-	public static final int SLOT_DEFAULT = 0;
-	private int[] slots_all = { SLOT_DEFAULT };
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_DEFAULT;
 
 	private VoidTank tank;
 	private int radius = 10;
 	private int rate = 10;
 
-	private List<EnumFacing> fluidOutput = new ArrayList<EnumFacing>();
-	private List<EnumFacing> fluidInput = new ArrayList<EnumFacing>();
+	private List<EnumFacing> fluidOutput = new ArrayList<>();
+	private List<EnumFacing> fluidInput = new ArrayList<>();
 
 	public TileEntityVoidicAnchor() {
-		super(1);
+		super();
 		tank = new VoidTank(this, 5000);
 		fluidOutput.add(EnumFacing.DOWN);
 	}
 
 	@Override
+	protected ItemStackHandler[] register() {
+		SLOT_DEFAULT = new TamTileEntityInventory.ItemStackFilterHandler(new ItemStack[]{new ItemStack(Items.BUCKET)}, true, new ItemStack[]{VoidCraftFluids.voidBucket.getBucket()}, true);
+		SLOT_DEFAULT.setStackLimit(1);
+		return new ItemStackHandler[]{SLOT_DEFAULT};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return SLOT_DEFAULT;
+	}
+
+	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, nbt.getInteger("fluidAmount")));
 	}
 
 	@Override
@@ -54,9 +69,9 @@ public class TileEntityVoidicAnchor extends TileEntityVoidicPowerInventory imple
 	@Override
 	public void onUpdate() {
 		// Fill a bucket
-		if (!getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).getItem() == Items.BUCKET && getFluidAmount() >= 1000) {
+		if (!SLOT_DEFAULT.getStackInSlot(0).isEmpty() && SLOT_DEFAULT.getStackInSlot(0).getItem() == Items.BUCKET && getFluidAmount() >= 1000) {
 			drain(1000, true);
-			setInventorySlotContents(SLOT_DEFAULT, VoidCraft.fluids.voidBucket.getBucket());
+			SLOT_DEFAULT.setStackInSlot(0, VoidCraftFluids.voidBucket.getBucket());
 		}
 		// Handle Infusion drain
 		for (EntityLivingBase entity : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().add(-radius, -radius, -radius), getPos().add(radius, radius, radius)))) {
@@ -73,21 +88,6 @@ public class TileEntityVoidicAnchor extends TileEntityVoidicPowerInventory imple
 		if (tank.getFluidAmount() >= rate) {
 			FluidHelper.sendToAllAround(this, world, pos, rate);
 		}
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	public String getName() {
-		return "voidicAnchor";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
 	}
 
 	@Override
@@ -114,12 +114,12 @@ public class TileEntityVoidicAnchor extends TileEntityVoidicPowerInventory imple
 		return tank.getFluidAmount();
 	}
 
-	public int getMaxFluidAmount() {
-		return tank.getCapacity();
-	}
-
 	public void setFluidAmount(int amount) {
 		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+	}
+
+	public int getMaxFluidAmount() {
+		return tank.getCapacity();
 	}
 
 	@Override
@@ -140,21 +140,6 @@ public class TileEntityVoidicAnchor extends TileEntityVoidicPowerInventory imple
 	@Override
 	public boolean canInputPower(EnumFacing face) {
 		return true;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
-		return slot == SLOT_DEFAULT && itemstack.getItem() == Items.BUCKET && getStackInSlot(SLOT_DEFAULT).isEmpty();
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing var1) {
-		return slots_all;
-	}
-
-	@Override
-	protected boolean canExtractSlot(int slot, ItemStack stack) {
-		return slot == SLOT_DEFAULT ? !getStackInSlot(SLOT_DEFAULT).isEmpty() ? getStackInSlot(SLOT_DEFAULT).isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) : false : false;
 	}
 
 	@Override

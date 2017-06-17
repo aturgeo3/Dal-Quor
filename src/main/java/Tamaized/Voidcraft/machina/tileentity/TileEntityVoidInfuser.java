@@ -1,14 +1,10 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.fluids.IFaceFluidHandler;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser.InfuserRecipe;
 import Tamaized.Voidcraft.machina.addons.VoidTank;
+import Tamaized.Voidcraft.registry.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,36 +12,63 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFaceFluidHandler {
 
 	public VoidTank tank;
-
-	public static final int SLOT_BUCKET = 0;
-	public static final int SLOT_INPUT = 1;
-	public static final int SLOT_OUTPUT = 2;
-	public static final int[] SLOTS_ALL = new int[] { 0, 1, 2 };
-
 	public int finishTick = 0;
 	public int cookingTick = 0;
+	public ItemStackFilterHandler SLOT_BUCKET;
+	public ItemStackFilterHandler SLOT_INPUT;
+	public ItemStackFilterHandler SLOT_OUTPUT;
 	private InfuserRecipe recipe;
 
 	private Item lastCookingItem = null;
 
-	private List<EnumFacing> fluidOutput = new ArrayList<EnumFacing>();
-	private List<EnumFacing> fluidInput = new ArrayList<EnumFacing>();
+	private List<EnumFacing> fluidOutput = new ArrayList<>();
+	private List<EnumFacing> fluidInput = new ArrayList<>();
 
 	public TileEntityVoidInfuser() {
-		super(3);
+		super();
 		tank = new VoidTank(this, 3000);
-		for (EnumFacing face : EnumFacing.VALUES) {
-			fluidInput.add(face);
-		}
+		Collections.addAll(fluidInput, EnumFacing.VALUES);
+	}
+
+	public static boolean isItemFuel(ItemStack stack) {
+		return (stack.isItemEqual(VoidCraftFluids.voidBucket.getBucket()) || stack.getItem() == VoidCraftItems.creativeVoidBucket);
+	}
+
+	@Override
+	protected ItemStackHandler[] register() {
+		return new ItemStackHandler[]{
+
+				SLOT_BUCKET = new ItemStackFilterHandler(new ItemStack[]{VoidCraftFluids.voidBucket.getBucket(), new ItemStack(VoidCraftItems.creativeVoidBucket)}, true, new ItemStack[]{new ItemStack(Items.BUCKET)}, true),
+
+				SLOT_INPUT = new ItemStackFilterHandler(new ItemStack[0], true, new ItemStack[0], false),
+
+				SLOT_OUTPUT = new ItemStackFilterHandler(new ItemStack[0], false, new ItemStack[0], true)
+
+		};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return new CombinedInvWrapper(SLOT_BUCKET, SLOT_INPUT, SLOT_OUTPUT);
 	}
 
 	@Override
 	public void readNBT(NBTTagCompound nbt) {
-		if (tank.getFluid() != null) tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, nbt.getInteger("fluidAmount")));
+		if (tank.getFluid() != null)
+			tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, nbt.getInteger("fluidAmount")));
 		cookingTick = nbt.getInteger("cookingTick");
 	}
 
@@ -59,23 +82,23 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFa
 	@Override
 	public void onUpdate() {
 		boolean cooking = false;
-		if (lastCookingItem == null || slots[SLOT_INPUT].isEmpty() || lastCookingItem != slots[SLOT_INPUT].getItem()) {
+		if (lastCookingItem == null || SLOT_INPUT.getStackInSlot(0).isEmpty() || lastCookingItem != SLOT_INPUT.getStackInSlot(0).getItem()) {
 			cookingTick = 0;
-			lastCookingItem = (!slots[SLOT_INPUT].isEmpty()) ? slots[SLOT_INPUT].getItem() : null;
+			lastCookingItem = (!SLOT_INPUT.getStackInSlot(0).isEmpty()) ? SLOT_INPUT.getStackInSlot(0).getItem() : null;
 		}
 
 		if (tank.getFluidAmount() > 0 && canCook()) {
 			cooking = true;
-			drain(new FluidStack(VoidCraft.fluids.voidFluid, 1), true);
+			drain(new FluidStack(VoidCraftFluids.voidFluid, 1), true);
 		}
-		if (!getStackInSlot(SLOT_BUCKET).isEmpty() && getStackInSlot(SLOT_BUCKET).getItem() == VoidCraft.items.creativeVoidBucket && getFluidAmount() != getMaxFluidAmount()) {
+		if (!SLOT_BUCKET.getStackInSlot(0).isEmpty() && SLOT_BUCKET.getStackInSlot(0).getItem() == VoidCraftItems.creativeVoidBucket && getFluidAmount() != getMaxFluidAmount()) {
 			setFluidAmount(getMaxFluidAmount());
 		}
 
 		if (getFluidAmount() <= getMaxFluidAmount() - 1000) {
-			if (!slots[SLOT_BUCKET].isEmpty() && slots[SLOT_BUCKET].isItemEqual(VoidCraft.fluids.voidBucket.getBucket())) {
-				fill(new FluidStack(VoidCraft.fluids.voidFluid, 1000), true);
-				slots[SLOT_BUCKET] = new ItemStack(Items.BUCKET);
+			if (!SLOT_BUCKET.getStackInSlot(0).isEmpty() && SLOT_BUCKET.getStackInSlot(0).isItemEqual(VoidCraftFluids.voidBucket.getBucket())) {
+				fill(new FluidStack(VoidCraftFluids.voidFluid, 1000), true);
+				SLOT_BUCKET.setStackInSlot(0, new ItemStack(Items.BUCKET));
 			}
 		}
 
@@ -90,100 +113,70 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFa
 	}
 
 	private int getRequiredFluid() {
-		ItemStack stack = slots[SLOT_INPUT];
+		ItemStack stack = SLOT_INPUT.getStackInSlot(0);
 		return recipe == null ? (stack.getItemDamage()) : recipe.getRequiredFluid();
 	}
 
 	private void bakeItem() {
 		if (canCook()) {
 			if (recipe == null) {
-				ItemStack stack = slots[SLOT_INPUT].copy();
+				ItemStack stack = SLOT_INPUT.getStackInSlot(0).copy();
 				stack.setItemDamage(0);
-				slots[SLOT_OUTPUT] = stack;
-				slots[SLOT_INPUT] = ItemStack.EMPTY;
+				SLOT_OUTPUT.setStackInSlot(0, stack);
+				SLOT_INPUT.setStackInSlot(0, ItemStack.EMPTY);
 				return;
 			}
-			if (slots[SLOT_OUTPUT].isEmpty()) {
-				slots[SLOT_OUTPUT] = recipe.getOutput().copy();
-			} else if (slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) {
-				slots[SLOT_OUTPUT].grow(recipe.getOutput().getCount());
+			if (SLOT_OUTPUT.getStackInSlot(0).isEmpty()) {
+				SLOT_OUTPUT.setStackInSlot(0, recipe.getOutput().copy());
+			} else if (SLOT_OUTPUT.getStackInSlot(0).isItemEqual(recipe.getOutput())) {
+				SLOT_OUTPUT.getStackInSlot(0).grow(recipe.getOutput().getCount());
 			}
 
-			slots[SLOT_INPUT].shrink(1);
+			SLOT_INPUT.getStackInSlot(0).shrink(1);
 
-			if (slots[SLOT_INPUT].getCount() <= 0) {
-				slots[SLOT_INPUT] = ItemStack.EMPTY;
+			if (SLOT_INPUT.getStackInSlot(0).getCount() <= 0) {
+				SLOT_INPUT.setStackInSlot(0, ItemStack.EMPTY);
 			}
 		}
 	}
 
 	private boolean canCook() {
-		if (slots[SLOT_INPUT].isEmpty()) return false;
-		recipe = VoidCraft.teRecipes.infuser.getRecipe(new ItemStack[] { slots[SLOT_INPUT] });
-		if (recipe == null) return slots[SLOT_OUTPUT].isEmpty() && canRepair(slots[SLOT_INPUT]);
-		if (slots[SLOT_OUTPUT].isEmpty()) return true;
-		if (!slots[SLOT_OUTPUT].isItemEqual(recipe.getOutput())) return false;
-		int result = slots[SLOT_OUTPUT].getCount() + recipe.getOutput().getCount();
-		return (result <= getInventoryStackLimit() && result <= recipe.getOutput().getMaxStackSize());
+		if (SLOT_INPUT.getStackInSlot(0).isEmpty())
+			return false;
+		recipe = VoidCraftTERecipes.infuser.getRecipe(new ItemStack[]{SLOT_INPUT.getStackInSlot(0)});
+		if (recipe == null)
+			return SLOT_OUTPUT.getStackInSlot(0).isEmpty() && canRepair(SLOT_INPUT.getStackInSlot(0));
+		if (SLOT_OUTPUT.getStackInSlot(0).isEmpty())
+			return true;
+		if (!SLOT_OUTPUT.getStackInSlot(0).isItemEqual(recipe.getOutput()))
+			return false;
+		int result = SLOT_OUTPUT.getStackInSlot(0).getCount() + recipe.getOutput().getCount();
+		return (result <= recipe.getOutput().getMaxStackSize());
 	}
 
 	private boolean canRepair(ItemStack stack) {
 		Item item = stack.getItem();
-		return (item == VoidCraft.items.voidCrystalShield ||
+		return (item == VoidCraftItems.voidCrystalShield ||
 
-				item == VoidCraft.tools.voidAxe ||
+				item == VoidCraftTools.voidAxe ||
 
-				item == VoidCraft.tools.voidPickaxe ||
+				item == VoidCraftTools.voidPickaxe ||
 
-				item == VoidCraft.tools.voidSpade ||
+				item == VoidCraftTools.voidSpade ||
 
-				item == VoidCraft.tools.voidSword ||
+				item == VoidCraftTools.voidSword ||
 
-				item == VoidCraft.tools.voidHoe ||
+				item == VoidCraftTools.voidHoe ||
 
-				item == VoidCraft.armors.voidBoots ||
+				item == VoidCraftArmors.voidBoots ||
 
-				item == VoidCraft.armors.voidLegs ||
+				item == VoidCraftArmors.voidLegs ||
 
-				item == VoidCraft.armors.voidChest ||
+				item == VoidCraftArmors.voidChest ||
 
-				item == VoidCraft.armors.voidHelmet) &&
+				item == VoidCraftArmors.voidHelmet) &&
 
 				(stack.getItemDamage() > 0);
-	}
-
-	public static boolean isItemFuel(ItemStack stack) {
-		return (stack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) || stack.getItem() == VoidCraft.items.creativeVoidBucket);
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return i != SLOT_OUTPUT ? i == SLOT_BUCKET ? isItemFuel(itemstack) : !itemstack.isItemEqual(VoidCraft.fluids.voidBucket.getBucket()) : false;
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing var1) {
-		return SLOTS_ALL;
-	}
-
-	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_BUCKET ? !slots[SLOT_BUCKET].isEmpty() ? slots[SLOT_BUCKET].getItem() == Items.BUCKET : false : i == SLOT_OUTPUT;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public String getName() {
-		return "voidInfuser";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
 	}
 
 	@Override
@@ -210,12 +203,12 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFa
 		return tank.getFluidAmount();
 	}
 
-	public int getMaxFluidAmount() {
-		return tank.getCapacity();
+	public void setFluidAmount(int amount) {
+		tank.setFluid(new FluidStack(VoidCraftFluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
 	}
 
-	public void setFluidAmount(int amount) {
-		tank.setFluid(new FluidStack(VoidCraft.fluids.voidFluid, amount > tank.getCapacity() ? tank.getCapacity() : amount));
+	public int getMaxFluidAmount() {
+		return tank.getCapacity();
 	}
 
 	@Override

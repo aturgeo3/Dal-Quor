@@ -1,11 +1,10 @@
 package Tamaized.Voidcraft.machina;
 
-import java.util.Random;
-
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,7 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -27,6 +25,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class VoidMacerator extends TamBlockContainer {
 
@@ -40,13 +40,27 @@ public class VoidMacerator extends TamBlockContainer {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, Boolean.valueOf(false)));
 	}
 
+	public static void setState(boolean active, World worldIn, BlockPos pos) {
+		IBlockState iblockstate = worldIn.getBlockState(pos);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		TileEntityVoidMacerator te = (TileEntityVoidMacerator) tileentity;
+
+		worldIn.setBlockState(pos, VoidCraftBlocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+		worldIn.setBlockState(pos, VoidCraftBlocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
+
+		if (tileentity != null) {
+			tileentity.validate();
+			worldIn.setTileEntity(pos, tileentity);
+		}
+	}
+
 	public boolean getIsActive(IBlockState state) {
 		return state.getValue(ACTIVE);
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { FACING, ACTIVE });
+		return new BlockStateContainer(this, new IProperty[]{FACING, ACTIVE});
 	}
 
 	@Override
@@ -72,7 +86,8 @@ public class VoidMacerator extends TamBlockContainer {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int meta = ((EnumFacing) state.getValue(FACING)).getIndex();
-		if (state.getValue(ACTIVE)) meta = meta + 6;
+		if (state.getValue(ACTIVE))
+			meta = meta + 6;
 		return meta;
 	}
 
@@ -98,25 +113,6 @@ public class VoidMacerator extends TamBlockContainer {
 		}
 	}
 
-	public static void setState(boolean active, World worldIn, BlockPos pos) {
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		TileEntityVoidMacerator te = (TileEntityVoidMacerator) tileentity;
-
-		if (active) {
-			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-		} else {
-			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-			worldIn.setBlockState(pos, VoidCraft.blocks.voidMacerator.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)).withProperty(ACTIVE, active), 3);
-		}
-
-		if (tileentity != null) {
-			tileentity.validate();
-			worldIn.setTileEntity(pos, tileentity);
-		}
-	}
-
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		ItemStack heldItem = player.getHeldItem(hand);
@@ -138,7 +134,7 @@ public class VoidMacerator extends TamBlockContainer {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(VoidCraft.blocks.voidMacerator);
+		return new ItemStack(VoidCraftBlocks.voidMacerator);
 	}
 
 	@Override
@@ -146,7 +142,7 @@ public class VoidMacerator extends TamBlockContainer {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		if (tileentity instanceof TileEntityVoidMacerator) {
-			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityVoidMacerator) tileentity);
+			((TileEntityVoidMacerator) tileentity).dropInventoryItems(worldIn, pos);
 			worldIn.updateComparatorOutputLevel(pos, this);
 		}
 

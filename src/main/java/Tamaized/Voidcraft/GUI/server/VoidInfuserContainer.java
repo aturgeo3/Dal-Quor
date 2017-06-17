@@ -1,12 +1,13 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
+import Tamaized.Voidcraft.GUI.slots.SlotItemHandlerBypass;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,9 +21,9 @@ public class VoidInfuserContainer extends Container {
 	public VoidInfuserContainer(InventoryPlayer inventory, TileEntityVoidInfuser tileEntity) {
 		te = tileEntity;
 
-		addSlotToContainer(new Slot(tileEntity, 0, 130, 100));
-		addSlotToContainer(new Slot(tileEntity, 1, 168, 100));
-		addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 2, 225, 101));
+		addSlotToContainer(new SlotItemHandlerBypass(tileEntity.SLOT_BUCKET, 0, 130, 100));
+		addSlotToContainer(new SlotItemHandlerBypass(tileEntity.SLOT_INPUT, 0, 168, 100));
+		addSlotToContainer(new SlotCantPlace(tileEntity.SLOT_OUTPUT, 0, 225, 101));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -48,9 +49,7 @@ public class VoidInfuserContainer extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
-
+		for (IContainerListener icontainerlistener : listeners) {
 			if (this.cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
 				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
@@ -72,47 +71,20 @@ public class VoidInfuserContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
-		/*
-		 * array[] = {a, b, c} array[].length = 3 mergeItemStack 3rd param needs to be 1 higher than our actual length, so we do 1+length because array[].length returns AMOUNT we must subtract 1 to get to index 0 main inv = 9*3 = 27; subtract 1 for index 0 we get 26. Translation : min:(array[].length-1)+1; max:(array[].length-1)+27; This gets us 3-30 hot bar: 9 slots; -1 for index 0 so 0-8; after Translation: min(array[].length-1)+1+mainInvMaxNoShift(27)+1; max:min(array[].length-1)+1+mainInvMaxNoShift(27)+8+1; this gets us 3+27+1 to 3+27+8+1 or 31-39 So, we can shorten all this nicely +Main (arrayLength) to (arrayLength+27) +Hotbar (Main.max+1) to (Main.max+9)
-		 */
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
-
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				ItemStack slotCheck = te.getStackInSlot(te.SLOT_INPUT);
-				if (!getSlot(te.SLOT_BUCKET).getHasStack() && te.canInsertItem(te.SLOT_BUCKET, itemstack1, null)) {
-					if (!mergeItemStack(itemstack1, te.SLOT_BUCKET, te.SLOT_BUCKET + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
-					if (!mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -120,18 +92,13 @@ public class VoidInfuserContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 }

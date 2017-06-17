@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.GUI.slots.SlotItemHandlerBypass;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,7 +20,7 @@ public class VoidicChargerContainer extends Container {
 	public VoidicChargerContainer(InventoryPlayer inventory, TileEntityVoidicCharger tileEntity) {
 		te = tileEntity;
 
-		this.addSlotToContainer(new Slot(tileEntity, 0, 176, 96));
+		this.addSlotToContainer(new SlotItemHandlerBypass(tileEntity.SLOT_DEFAULT, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -45,9 +46,7 @@ public class VoidicChargerContainer extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) this.listeners.get(i);
-
+		for (IContainerListener icontainerlistener : this.listeners) {
 			if (this.powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
 				icontainerlistener.sendProgressBarUpdate(this, 0, powerAmount);
@@ -68,40 +67,20 @@ public class VoidicChargerContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) this.inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
-
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				ItemStack slotCheck = te.getStackInSlot(te.SLOT_DEFAULT);
-				if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_DEFAULT, itemstack1, null)) {
-					if (!mergeItemStack(itemstack1, te.SLOT_DEFAULT, te.SLOT_DEFAULT + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -109,19 +88,14 @@ public class VoidicChargerContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
-		return te.isUsableByPlayer(playerIn);
+	public boolean canInteractWith(EntityPlayer entityplayer) {
+		return this.te.canInteractWith(entityplayer);
 	}
 
 }

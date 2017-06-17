@@ -1,12 +1,11 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.slots.SlotCantRemove;
-import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.items.inventory.InventoryItem;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -28,7 +27,12 @@ public class RealityTeleporterContainer extends Container {
 		parent = host;
 		itemInventory = RealityTeleporter.createInventory(parent);
 		cap = parent.hasCapability(CapabilityList.VOIDICPOWER, null) ? parent.getCapability(CapabilityList.VOIDICPOWER, null) : null;
-		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraft.blocks.realityHole), itemInventory, 0, 176, 96));
+		addSlotToContainer(new Slot(itemInventory, 0, 176, 96) {
+			@Override
+			public boolean isItemValid(ItemStack stack) {
+				return !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.realityHole);
+			}
+		});
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -74,7 +78,8 @@ public class RealityTeleporterContainer extends Container {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int i, int v) {
-		if (i == 0 && cap != null) cap.setCurrentPower(v);
+		if (i == 0 && cap != null)
+			cap.setCurrentPower(v);
 	}
 
 	@Override

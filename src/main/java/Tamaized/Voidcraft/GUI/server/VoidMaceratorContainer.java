@@ -1,12 +1,13 @@
 package Tamaized.Voidcraft.GUI.server;
 
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
+import Tamaized.Voidcraft.GUI.slots.SlotItemHandlerBypass;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,8 +23,8 @@ public class VoidMaceratorContainer extends Container {
 	public VoidMaceratorContainer(InventoryPlayer inventory, TileEntityVoidMacerator tileEntity) {
 		te = tileEntity;
 
-		addSlotToContainer(new Slot(tileEntity, 0, 168, 100));
-		addSlotToContainer(new SlotFurnaceOutput(inventory.player, tileEntity, 1, 225, 101));
+		addSlotToContainer(new SlotItemHandlerBypass(tileEntity.SLOT_INPUT, 0, 168, 100));
+		addSlotToContainer(new SlotCantPlace(tileEntity.SLOT_OUTPUT, 0, 225, 101));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -49,9 +50,7 @@ public class VoidMaceratorContainer extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
-
+		for (IContainerListener icontainerlistener : listeners) {
 			if (cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
 				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
@@ -72,46 +71,29 @@ public class VoidMaceratorContainer extends Container {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2) {
-		if (slot == 0) te.cookingTick = par2;
-		if (slot == 1) te.finishTick = par2;
-		if (slot == 2) te.setPowerAmount(par2);
+		if (slot == 0)
+			te.cookingTick = par2;
+		if (slot == 1)
+			te.finishTick = par2;
+		if (slot == 2)
+			te.setPowerAmount(par2);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
-
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				ItemStack slotCheck = te.getStackInSlot(te.SLOT_INPUT);
-				if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
-					if (!mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -119,18 +101,13 @@ public class VoidMaceratorContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 }

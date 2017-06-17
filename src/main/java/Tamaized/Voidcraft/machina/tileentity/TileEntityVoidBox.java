@@ -1,17 +1,10 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.gson.stream.JsonReader;
-
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.sound.OggLength;
 import Tamaized.Voidcraft.sound.VanillaRecordLengths;
+import com.google.gson.stream.JsonReader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
@@ -21,28 +14,54 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+
+import javax.annotation.Nullable;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class TileEntityVoidBox extends TamTileEntityInventory {
 
-	public static final int SLOT_CURRENT = 0;
-	public static final int SLOT_NEXT = 1;
-	public static final int SLOT_FINISH = 2;
-	public static final int[] SLOTS_ACCESSABLE = new int[] { 1, 2 };
-	public static final int[] SLOTS_ALL = new int[] { 0, 1, 2 };
-
+	private static Field field;
+	public ItemStackFilterHandler SLOT_CURRENT;
+	public ItemStackFilterHandler SLOT_NEXT;
+	public ItemStackFilterHandler SLOT_FINISH;
 	private boolean playing;
 	private int songTimeLeft;
 	private int songTime;
 	private boolean loop;
 	private boolean autoFill;
 	private ItemStack oldRecord = ItemStack.EMPTY;
-
 	// Unused for now
 	private boolean isPowered = false;
 	private boolean pulsed = false;
 
 	public TileEntityVoidBox() {
-		super(3);
+		super();
+	}
+
+	@Override
+	protected ItemStackHandler[] register() {
+		return new ItemStackHandler[]{
+
+				SLOT_CURRENT = new ItemStackFilterHandler(new ItemStack[0], false, new ItemStack[0], false),
+
+				SLOT_NEXT = new ItemStackFilterHandler(new Class[]{ItemRecord.class}, true, new Class[0], false),
+
+				SLOT_FINISH = new ItemStackFilterHandler(new ItemStack[0], false, new ItemStack[0], true)
+
+		};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing enumFacing) {
+		return new CombinedInvWrapper(SLOT_CURRENT, SLOT_FINISH, SLOT_NEXT);
 	}
 
 	public void readNBT(NBTTagCompound nbt) {
@@ -95,13 +114,13 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	private void PlayTheSound() {
-		ItemStack itemStack = slots[SLOT_CURRENT];
+		ItemStack itemStack = SLOT_CURRENT.getStackInSlot(0);
 		if (!itemStack.isEmpty() && itemStack.getItem() instanceof ItemRecord) {
 			try {
 				ItemRecord theRecord = (ItemRecord) itemStack.getItem();
 				Class<? extends ItemRecord> c = ItemRecord.class;
-				Field field = ReflectionHelper.findField(c, new String[] { "field_150928_b", "RECORDS" });
-				field.setAccessible(true);
+				if (field == null)
+					field = ReflectionHelper.findField(c, "field_150928_b", "RECORDS");
 				Map<SoundEvent, ItemRecord> RECORDS = (Map<SoundEvent, ItemRecord>) field.get(theRecord);
 				SoundEvent soundEvent = null;
 				for (Entry<SoundEvent, ItemRecord> entry : RECORDS.entrySet()) {
@@ -110,7 +129,15 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 						break;
 					}
 				}
+				if (soundEvent == null) {
+					VoidCraft.instance.logger.error("null SoundEvent");
+					return;
+				}
 				ResourceLocation resourceLocation = SoundEvent.REGISTRY.getNameForObject(soundEvent);
+				if (resourceLocation == null) {
+					VoidCraft.instance.logger.error("null ResourceLocation");
+					return;
+				}
 				String modid = resourceLocation.getResourceDomain();
 				String soundID = resourceLocation.getResourcePath();
 				String encodedValue = "";
@@ -160,7 +187,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 					}
 					json.close();
 					jsonStream.close();
-					String[] decodedValue = { "", "" };
+					String[] decodedValue = {"", ""};
 					if (encodedValue.contains(":")) {
 						decodedValue = encodedValue.split(":");
 					} else {
@@ -173,7 +200,7 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 					songTime = songTimeLeft = 20 * VanillaRecordLengths.getLength(soundID.split("\\.")[soundID.split("\\.").length - 1]);
 				}
 				world.playEvent((EntityPlayer) null, 1010, getPos(), Item.getIdFromItem(theRecord));
-				oldRecord = slots[SLOT_CURRENT];
+				oldRecord = SLOT_CURRENT.getStackInSlot(0);
 				playing = true;
 				// IF YOU GOT THIS FAR, CONGRATS THIS WAS NOT FUN TO WRITE
 			} catch (Exception e) {
@@ -187,9 +214,9 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	}
 
 	public void PlayNextSound() {
-		if (slots[SLOT_CURRENT].isEmpty()) {
-			slots[SLOT_CURRENT] = slots[SLOT_NEXT];
-			slots[SLOT_NEXT] = ItemStack.EMPTY;
+		if (SLOT_CURRENT.getStackInSlot(0).isEmpty()) {
+			SLOT_CURRENT.setStackInSlot(0, SLOT_NEXT.getStackInSlot(0).copy());
+			SLOT_NEXT.setStackInSlot(0, ItemStack.EMPTY);
 			PlayTheSound();
 		}
 	}
@@ -201,13 +228,13 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 
 	public void StopTheSoundAndDeposit() {
 		StopTheSound();
-		if (!slots[SLOT_CURRENT].isEmpty() && slots[SLOT_FINISH].isEmpty()) {
-			slots[SLOT_FINISH] = slots[SLOT_CURRENT];
-			slots[SLOT_CURRENT] = ItemStack.EMPTY;
+		if (!SLOT_CURRENT.getStackInSlot(0).isEmpty() && SLOT_FINISH.getStackInSlot(0).isEmpty()) {
+			SLOT_FINISH.setStackInSlot(0, SLOT_CURRENT.getStackInSlot(0).copy());
+			SLOT_CURRENT.setStackInSlot(0, ItemStack.EMPTY);
 		}
 	}
 
-	public void setHasRedstoneSignal(boolean b) {
+	public void setHasRedstoneSignal(boolean b) { // TODO
 		isPowered = b;
 	}
 
@@ -215,54 +242,27 @@ public class TileEntityVoidBox extends TamTileEntityInventory {
 	public void onUpdate() {
 		if (!world.isRemote) {
 			if (playing) {
-				if (songTimeLeft > 0) songTimeLeft--;
-				else StopTheSound();
-				if (slots[SLOT_CURRENT].isEmpty() || !slots[SLOT_CURRENT].equals(oldRecord)) StopTheSound();
+				if (songTimeLeft > 0)
+					songTimeLeft--;
+				else
+					StopTheSound();
+				if (SLOT_CURRENT.getStackInSlot(0).isEmpty() || !SLOT_CURRENT.getStackInSlot(0).equals(oldRecord))
+					StopTheSound();
 			} else {
-				if (loop && !slots[SLOT_CURRENT].isEmpty()) {
+				if (loop && !SLOT_CURRENT.getStackInSlot(0).isEmpty()) {
 					PlayTheSound();
 				}
-				if (!loop && !slots[SLOT_CURRENT].isEmpty() && slots[SLOT_FINISH].isEmpty()) {
-					slots[SLOT_FINISH] = slots[SLOT_CURRENT];
-					slots[SLOT_CURRENT] = ItemStack.EMPTY;
+				if (!loop && !SLOT_CURRENT.getStackInSlot(0).isEmpty() && SLOT_FINISH.getStackInSlot(0).isEmpty()) {
+					SLOT_FINISH.setStackInSlot(0, SLOT_CURRENT.getStackInSlot(0).copy());
+					SLOT_CURRENT.setStackInSlot(0, ItemStack.EMPTY);
 				}
 				if (autoFill) {
-					if (slots[SLOT_CURRENT].isEmpty() && !slots[SLOT_NEXT].isEmpty()) {
+					if (SLOT_CURRENT.getStackInSlot(0).isEmpty() && !SLOT_NEXT.getStackInSlot(0).isEmpty()) {
 						PlayNextSound();
 					}
 				}
 			}
 		}
-	}
-
-	@Override
-	public String getName() {
-		return "voidicMusicBox";
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return SLOTS_ACCESSABLE;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		return i == SLOT_FINISH;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_NEXT ? stack.getItem() instanceof ItemRecord : false;
 	}
 
 }

@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityRealityTeleporter;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -20,7 +20,7 @@ public class RealityTeleporterBlockContainer extends Container {
 
 	public RealityTeleporterBlockContainer(InventoryPlayer inventory, TileEntityRealityTeleporter host) {
 		te = host;
-		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraft.blocks.realityHole), te, 0, 176, 96));
+		addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraftBlocks.realityHole), te.SLOT_INPUT, 0, 176, 96));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -46,11 +46,9 @@ public class RealityTeleporterBlockContainer extends Container {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-
-		for (int i = 0; i < listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
+		for (IContainerListener listener : listeners) {
 			if (te != null && amount != te.getPowerAmount()) {
-				icontainerlistener.sendProgressBarUpdate(this, 0, te.getPowerAmount());
+				listener.sendProgressBarUpdate(this, 0, te.getPowerAmount());
 				amount = te.getPowerAmount();
 			}
 		}
@@ -63,40 +61,20 @@ public class RealityTeleporterBlockContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			final int maxSlots = te.getSizeInventory();
-
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				ItemStack slotCheck = te.getStackInSlot(te.SLOT_INPUT);
-				if ((slotCheck.isEmpty() || (slotCheck.getCount() < slotCheck.getMaxStackSize() && slotCheck.isItemEqual(itemstack))) && te.canInsertItem(te.SLOT_INPUT, itemstack1, null)) {
-					if (!mergeItemStack(itemstack1, te.SLOT_INPUT, te.SLOT_INPUT + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -104,18 +82,13 @@ public class RealityTeleporterBlockContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 }

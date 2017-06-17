@@ -1,196 +1,85 @@
 package Tamaized.Voidcraft.api.voidicpower;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPower implements ISidedInventory {
+import javax.annotation.Nullable;
 
-	private ItemStack[] slots;
+public abstract class TileEntityVoidicPowerInventory extends TileEntityVoidicPower {
 
-	public TileEntityVoidicPowerInventory(int slotAmount) {
-		slots = new ItemStack[slotAmount];
-		for (int index = 0; index < slots.length; index++)
-			slots[index] = ItemStack.EMPTY;
+	private final ItemStackHandler[] inventory;
+
+	public TileEntityVoidicPowerInventory() {
+		inventory = register();
 	}
+
+	public int getInventorySize() {
+		return inventory.length;
+	}
+
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
+	}
+
+	public void dropInventoryItems(World worldIn, BlockPos pos) {
+		dropInventoryItems(worldIn, pos.getX(), pos.getY(), pos.getZ());
+	}
+
+	public void dropInventoryItems(World worldIn, double x, double y, double z) {
+		for (ItemStackHandler inv : inventory)
+			for (int i = 0; i < inv.getSlots(); ++i) {
+				ItemStack itemstack = inv.getStackInSlot(i);
+				if (!itemstack.isEmpty())
+					InventoryHelper.spawnItemStack(worldIn, x, y, z, itemstack);
+			}
+	}
+
+	protected abstract ItemStackHandler[] register();
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		NBTTagList list = (NBTTagList) nbt.getTag("Items");
-		slots = new ItemStack[getSizeInventory()];
-		for (int index = 0; index < slots.length; index++)
-			slots[index] = ItemStack.EMPTY;
-		if (list != null) {
-			for (int i = 0; i < list.tagCount(); i++) {
-				NBTTagCompound nbtc = (NBTTagCompound) list.getCompoundTagAt(i);
-				byte b = nbtc.getByte("Slot");
-				if (b >= 0 && b < slots.length) {
-					slots[b] = new ItemStack(nbtc);
-				}
-			}
+		int index = 0;
+		for (ItemStackHandler slot : inventory) {
+			String id = "itemslot_" + index;
+			if (nbt.hasKey(id))
+				slot.deserializeNBT((NBTTagCompound) nbt.getTag(id));
+			index++;
 		}
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		NBTTagList list = new NBTTagList();
-		for (int i = 0; i < slots.length; i++) {
-			if (!slots[i].isEmpty()) {
-				NBTTagCompound nbtc = new NBTTagCompound();
-				nbtc.setByte("Slot", (byte) i);
-				slots[i].writeToNBT(nbtc);
-				list.appendTag(nbtc);
-			}
+		int index = 0;
+		for (ItemStackHandler slot : inventory) {
+			String id = "itemslot_" + index;
+			nbt.setTag(id, slot.serializeNBT());
+			index++;
 		}
-		nbt.setTag("Items", list);
 		return nbt;
 	}
 
 	@Override
-	public int getSizeInventory() {
-		return slots.length;
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+		return getCap(facing) != null || super.hasCapability(capability, facing);
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int index) {
-		return slots[index];
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing enumFacing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? getCap(enumFacing) : super.getCapability(capability, enumFacing);
 	}
 
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		if (!slots[i].isEmpty()) {
-			ItemStack itemstack;
-			if (slots[i].getCount() <= j) {
-				itemstack = slots[i];
-				slots[i] = ItemStack.EMPTY;
-				return itemstack;
-			} else {
-				itemstack = slots[i].splitStack(j);
-				if (slots[i].getCount() == 0) {
-					slots[i] = ItemStack.EMPTY;
-				}
-				return itemstack;
-			}
-		}
-		return ItemStack.EMPTY;
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int i) {
-		if (!slots[i].isEmpty()) {
-			ItemStack itemstack = slots[i];
-			slots[i] = ItemStack.EMPTY;
-			return itemstack;
-		}
-		return ItemStack.EMPTY;
-	}
-
-	@Override
-	public void setInventorySlotContents(int i, ItemStack stack) {
-		slots[i] = stack;
-		if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit()) {
-			stack.setCount(getInventoryStackLimit());
-		}
-	}
-
-	@Override
-	public boolean isEmpty() {
-		for (ItemStack stack : slots)
-			if (!stack.isEmpty()) return false;
-		return true;
-	}
-
-	@Override
-	public abstract int getInventoryStackLimit();
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player) {
-		return world.getTileEntity(pos) != this ? false : player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player) {
-
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player) {
-
-	}
-
-	@Override
-	public int getField(int id) {
-		switch (id) {
-			default:
-				return 0;
-		}
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		switch (id) {
-			default:
-				break;
-		}
-	}
-
-	@Override
-	public int getFieldCount() {
-		return 0;
-	}
-
-	@Override
-	public void clear() {
-		for (int i = 0; i < slots.length; i++)
-			slots[i] = ItemStack.EMPTY;
-	}
-
-	@Override
-	public abstract String getName();
-
-	@Override
-	public abstract boolean hasCustomName();
-
-	@Override
-	public ITextComponent getDisplayName() {
-		return new TextComponentString(getName());
-	}
-
-	@Override
-	public abstract int[] getSlotsForFace(EnumFacing side);
-
-	@Override
-	public final boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		int[] array = getSlotsForFace(direction);
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] == index) {
-				return isItemValidForSlot(index, itemStackIn);
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public final boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		int[] array = getSlotsForFace(direction);
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] == index) {
-				return canExtractSlot(index, stack);
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public abstract boolean isItemValidForSlot(int i, ItemStack stack);
-
-	protected abstract boolean canExtractSlot(int i, ItemStack stack);
+	@Nullable
+	protected abstract <T extends IItemHandler> T getCap(EnumFacing face);
 
 }

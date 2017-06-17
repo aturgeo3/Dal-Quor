@@ -10,6 +10,8 @@ import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.helper.GUIElementList;
 import Tamaized.Voidcraft.helper.GUIListElement;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import Tamaized.Voidcraft.starforge.StarForgeEffectEntry;
 import Tamaized.Voidcraft.starforge.StarForgeToolEntry;
 import net.minecraft.client.Minecraft;
@@ -21,6 +23,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.ItemStackHandler;
 import org.lwjgl.input.Mouse;
 
 import java.io.DataOutputStream;
@@ -110,7 +113,7 @@ public class StarForgeGUI extends GuiContainer {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		ItemStack stack = te.getStackInSlot(te.SLOT_INPUT_TOOL);
+		ItemStack stack = te.SLOT_INPUT_TOOL.getStackInSlot(0);
 		if (!ItemStack.areItemStacksEqual(dirtyStack, stack) || !ItemStack.areItemStackTagsEqual(dirtyStack, stack)) {
 			setupScroll();
 			dirtyStack = stack;
@@ -123,17 +126,16 @@ public class StarForgeGUI extends GuiContainer {
 			if (index >= 0 && index < list.size()) {
 				GUIListElement element = list.get(index);
 				if (element instanceof StarForgeToolEntry) {
-					StarForgeToolEntry entry = (StarForgeToolEntry) element;
-					if (te.getStackInSlot(te.SLOT_INPUT_TOOL).isEmpty() && te.getStackInSlot(te.SLOT_INPUT_COSMICMATERIAL).getCount() >= 4 && te.getStackInSlot(te.SLOT_INPUT_QUORIFRAGMENT).getCount() >= 1) {
+					if (te.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && te.SLOT_INPUT_COSMICMATERIAL.getStackInSlot(0).getCount() >= 4 && te.SLOT_INPUT_QUORIFRAGMENT.getStackInSlot(0).getCount() >= 1) {
 						enough = true;
 					}
 				} else if (element instanceof StarForgeEffectEntry) {
 					StarForgeEffectEntry entry = (StarForgeEffectEntry) element;
-					if (!te.getStackInSlot(te.SLOT_INPUT_TOOL).isEmpty() && te.getStackInSlot(te.SLOT_INPUT_TOOL).hasCapability(CapabilityList.STARFORGE, null)) {
+					if (!te.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && te.SLOT_INPUT_TOOL.getStackInSlot(0).hasCapability(CapabilityList.STARFORGE, null)) {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-							int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
-							if (te.getStackInSlot(slot).getCount() >= checkStack.getCount()) continue;
+							ItemStackHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
+							if (slot.getStackInSlot(0).getCount() >= checkStack.getCount()) continue;
 							flag = false;
 						}
 						if (flag) enough = true;

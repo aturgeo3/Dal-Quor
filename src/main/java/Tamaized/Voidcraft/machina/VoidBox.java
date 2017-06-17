@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.machina;
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
@@ -81,8 +82,8 @@ public class VoidBox extends TamBlockContainer {
 
 			if (tileentity != null) {
 				tileentity.StopTheSound();
-				
-				InventoryHelper.dropInventoryItems(world, pos, tileentity);
+
+				tileentity.dropInventoryItems(world, pos);
 			}
 		}
 		super.breakBlock(world, pos, state);

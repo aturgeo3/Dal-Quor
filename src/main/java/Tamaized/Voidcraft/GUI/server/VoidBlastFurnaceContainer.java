@@ -1,14 +1,14 @@
 package Tamaized.Voidcraft.GUI.server;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.GUI.slots.SlotCantPlace;
 import Tamaized.Voidcraft.GUI.slots.SlotOnlyItem;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBlastFurnace;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,9 +24,9 @@ public class VoidBlastFurnaceContainer extends Container {
 	public VoidBlastFurnaceContainer(InventoryPlayer inventory, TileEntityVoidBlastFurnace tileEntity) {
 		te = tileEntity;
 
-		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.ironDust, te, te.SLOT_INPUT_IRON, 166, 93));
-		addSlotToContainer(new SlotOnlyItem(VoidCraft.items.coalDust, te, te.SLOT_INPUT_COAL, 166, 111));
-		addSlotToContainer(new SlotFurnaceOutput(inventory.player, te, te.SLOT_OUTPUT, 212, 101));
+		addSlotToContainer(new SlotOnlyItem(VoidCraftItems.ironDust, te.SLOT_INPUT_IRON, 0, 166, 93));
+		addSlotToContainer(new SlotOnlyItem(VoidCraftItems.coalDust, te.SLOT_INPUT_COAL, 0, 166, 111));
+		addSlotToContainer(new SlotCantPlace(te.SLOT_OUTPUT, 0, 212, 101));
 
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -52,22 +52,21 @@ public class VoidBlastFurnaceContainer extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
+		for (IContainerListener listener : listeners) {
 
 			if (cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
-				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
+				listener.sendProgressBarUpdate(this, 0, cookAmount);
 			}
 
 			if (finishTick != te.finishTick) {
 				finishTick = te.finishTick;
-				icontainerlistener.sendProgressBarUpdate(this, 1, finishTick);
+				listener.sendProgressBarUpdate(this, 1, finishTick);
 			}
 
 			if (powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
-				icontainerlistener.sendProgressBarUpdate(this, 2, powerAmount);
+				listener.sendProgressBarUpdate(this, 2, powerAmount);
 			}
 		}
 	}
@@ -81,34 +80,20 @@ public class VoidBlastFurnaceContainer extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int hoverSlot) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot) inventorySlots.get(hoverSlot);
+		Slot slot = this.inventorySlots.get(index);
+
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			final int maxSlots = te.getSizeInventory();
-			if (hoverSlot < maxSlots) {
-				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
+
+			if (index < te.getInventorySize()) {
+				if (!this.mergeItemStack(itemstack1, te.getInventorySize(), this.inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onSlotChange(itemstack1, itemstack);
-			} else {
-				if (mergeItemStack(itemstack1, 0, maxSlots, false)) {
-					
-				} else if (hoverSlot >= maxSlots && hoverSlot < maxSlots + 27) {
-					if (!mergeItemStack(itemstack1, maxSlots + 27, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (hoverSlot >= maxSlots + 27 && hoverSlot < maxSlots + 36) {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 27, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else {
-					if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!this.mergeItemStack(itemstack1, 0, te.getInventorySize(), false)) {
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.getCount() == 0) {
@@ -116,16 +101,13 @@ public class VoidBlastFurnaceContainer extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-			if (itemstack1.getCount() == itemstack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			slot.onTake(player, itemstack1);
 		}
+
 		return itemstack;
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return te.isUsableByPlayer(entityplayer);
+		return this.te.canInteractWith(entityplayer);
 	}
 }

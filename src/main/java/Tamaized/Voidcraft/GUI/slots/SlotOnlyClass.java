@@ -1,14 +1,13 @@
 package Tamaized.Voidcraft.GUI.slots;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
-public class SlotOnlyClass extends Slot {
+public class SlotOnlyClass extends SlotItemHandlerBypass { // TODO TamModized
 	
 	private final Class clazz;
 
-	public SlotOnlyClass(Class validClass, IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	public SlotOnlyClass(Class validClass, IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
 		super(inventoryIn, index, xPosition, yPosition);
 		clazz = validClass;
 	}

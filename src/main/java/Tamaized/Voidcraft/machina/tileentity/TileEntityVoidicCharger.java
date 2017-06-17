@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.machina.tileentity;
 
+import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.api.voidicpower.TileEntityVoidicPowerInventory;
 import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -7,14 +8,40 @@ import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileEntityVoidicCharger extends TileEntityVoidicPowerInventory {
 
-	public static final int SLOT_DEFAULT = 0;
-	private int[] slots_all = { SLOT_DEFAULT };
+	public TamTileEntityInventory.ItemStackFilterHandler SLOT_DEFAULT;
 
 	public TileEntityVoidicCharger() {
-		super(1);
+		super();
+	}
+
+	@Override
+	protected ItemStackHandler[] register() {
+		SLOT_DEFAULT = new TamTileEntityInventory.ItemStackFilterHandler(new Class[]{VoidicPowerItem.class}, true, new Class[0], true) {
+			@Nonnull
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				IVoidicPowerCapability cap = getStackInSlot(0).getCapability(CapabilityList.VOIDICPOWER, null);
+				if (cap != null && cap.getCurrentPower() == cap.getMaxPower())
+					return super.extractItem(slot, amount, simulate);
+				return ItemStack.EMPTY;
+			}
+		};
+		SLOT_DEFAULT.setStackLimit(1);
+		return new ItemStackHandler[]{SLOT_DEFAULT};
+	}
+
+	@Nullable
+	@Override
+	protected IItemHandler getCap(EnumFacing face) {
+		return SLOT_DEFAULT;
 	}
 
 	@Override
@@ -48,48 +75,16 @@ public class TileEntityVoidicCharger extends TileEntityVoidicPowerInventory {
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
-		return 1;
-	}
-
-	@Override
-	public String getName() {
-		return null;
-	}
-
-	@Override
-	public boolean hasCustomName() {
-		return false;
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return slots_all;
-	}
-
-	@Override
 	public void onUpdate() {
-		if (voidicPower > 0 && !getStackInSlot(SLOT_DEFAULT).isEmpty() && getStackInSlot(SLOT_DEFAULT).getItem() instanceof VoidicPowerItem) {
-			IVoidicPowerCapability cap = getStackInSlot(SLOT_DEFAULT).getCapability(CapabilityList.VOIDICPOWER, null);
+		if (voidicPower > 0 && !SLOT_DEFAULT.getStackInSlot(0).isEmpty() && SLOT_DEFAULT.getStackInSlot(0).getItem() instanceof VoidicPowerItem) {
+			IVoidicPowerCapability cap = SLOT_DEFAULT.getStackInSlot(0).getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap != null && cap.getAmountPerc() < 1.0f) {
 				int amount = voidicPower >= maxPowerTransfer() ? maxPowerTransfer() : voidicPower;
 				int overflow = cap.fill(amount);
 				voidicPower -= (amount - overflow);
-				cap.sendUpdates(null, 0, getStackInSlot(SLOT_DEFAULT));
+				cap.sendUpdates(null, 0, SLOT_DEFAULT.getStackInSlot(0));
 			}
 		}
-	}
-
-	@Override
-	protected boolean canExtractSlot(int i, ItemStack stack) {
-		if (stack.isEmpty()) return false;
-		IVoidicPowerCapability cap = getStackInSlot(SLOT_DEFAULT).getCapability(CapabilityList.VOIDICPOWER, null);
-		return cap != null && cap.getCurrentPower() == cap.getMaxPower();
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		return i == SLOT_DEFAULT ? stack.getItem() instanceof VoidicPowerItem : false;
 	}
 
 }

@@ -1,10 +1,8 @@
 package Tamaized.Voidcraft.machina;
 
-import java.util.Random;
-
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.GUI.GuiHandler;
+import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBlastFurnace;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -27,6 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class VoidBlastFurnace extends TamBlockContainer {
 
@@ -157,7 +156,7 @@ public class VoidBlastFurnace extends TamBlockContainer {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		if (tileentity instanceof TileEntityVoidBlastFurnace) {
-			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityVoidBlastFurnace) tileentity);
+			((TileEntityVoidBlastFurnace) tileentity).dropInventoryItems(worldIn, pos);
 			worldIn.updateComparatorOutputLevel(pos, this);
 		}
 

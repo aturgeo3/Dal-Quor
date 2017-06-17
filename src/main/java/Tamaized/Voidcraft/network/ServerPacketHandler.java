@@ -11,6 +11,8 @@ import Tamaized.Voidcraft.handlers.CustomElytraHandler;
 import Tamaized.Voidcraft.helper.GUIListElement;
 import Tamaized.Voidcraft.items.RealityTeleporter;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidBox;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
 import Tamaized.Voidcraft.starforge.StarForgeEffectEntry;
 import Tamaized.Voidcraft.starforge.StarForgeToolEntry;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumPacketHandler;
@@ -28,6 +30,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.items.IItemHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,32 +66,32 @@ public class ServerPacketHandler {
 								GUIListElement element = list.get(index);
 								if (element instanceof StarForgeToolEntry) {
 									StarForgeToolEntry entry = (StarForgeToolEntry) element;
-									if (tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).getCount() >= 4 && tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).getCount() >= 1) {
-										tile.getStackInSlot(tile.SLOT_INPUT_COSMICMATERIAL).shrink(4);
-										tile.getStackInSlot(tile.SLOT_INPUT_QUORIFRAGMENT).shrink(1);
-										tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, entry.getTool());
+									if (tile.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && tile.SLOT_INPUT_COSMICMATERIAL.getStackInSlot(0).getCount() >= 4 && tile.SLOT_INPUT_QUORIFRAGMENT.getStackInSlot(0).getCount() >= 1) {
+										tile.SLOT_INPUT_COSMICMATERIAL.getStackInSlot(0).shrink(4);
+										tile.SLOT_INPUT_QUORIFRAGMENT.getStackInSlot(0).shrink(1);
+										tile.SLOT_INPUT_TOOL.setStackInSlot(0, entry.getTool());
 									}
 								} else if (element instanceof StarForgeEffectEntry) {
 									StarForgeEffectEntry entry = (StarForgeEffectEntry) element;
-									if (!tile.getStackInSlot(tile.SLOT_INPUT_TOOL).isEmpty() && tile.getStackInSlot(tile.SLOT_INPUT_TOOL).hasCapability(CapabilityList.STARFORGE, null)) {
+									if (!tile.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && tile.SLOT_INPUT_TOOL.getStackInSlot(0).hasCapability(CapabilityList.STARFORGE, null)) {
 										boolean flag = true;
 										for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-											int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
-											if (tile.getStackInSlot(slot).getCount() >= checkStack.getCount())
+											IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+											if (slot.getStackInSlot(0).getCount() >= checkStack.getCount())
 												continue;
 											flag = false;
 										}
 										if (flag) {
-											ItemStack tool = tile.getStackInSlot(tile.SLOT_INPUT_TOOL).copy();
+											ItemStack tool = tile.SLOT_INPUT_TOOL.getStackInSlot(0).copy();
 											IStarForgeCapability cap = tool.getCapability(CapabilityList.STARFORGE, null);
 											if (cap != null && cap.getEffect(entry.getRecipe().getEffect().getTier()) == null) {
 												for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-													int slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraft.items.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraft.items.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraft.items.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
-													tile.getStackInSlot(slot).shrink(checkStack.getCount());
+													IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+													slot.getStackInSlot(0).shrink(checkStack.getCount());
 												}
 												cap.addEffect(entry.getRecipe().getEffect());
 											}
-											tile.setInventorySlotContents(tile.SLOT_INPUT_TOOL, tool);
+											tile.SLOT_INPUT_TOOL.setStackInSlot(0, tool);
 										}
 									}
 								}
@@ -103,7 +106,7 @@ public class ServerPacketHandler {
 							stack = player.inventory.mainInventory.get(slot);
 						else if (slot == -1)
 							stack = player.inventory.offHandInventory.get(0);
-						if (!stack.isEmpty() && stack.getItem() == VoidCraft.items.realityTeleporter) {
+						if (!stack.isEmpty() && stack.getItem() == VoidCraftItems.realityTeleporter) {
 							RealityTeleporter.clearLink(stack);
 						}
 					}
@@ -205,11 +208,7 @@ public class ServerPacketHandler {
 	@SubscribeEvent
 	public void onServerPacket(ServerCustomPacketEvent event) {
 		EntityPlayerMP player = ((NetHandlerPlayServer) event.getHandler()).playerEntity;
-		player.getServer().addScheduledTask(new Runnable() {
-			public void run() {
-				processPacketOnServer(event.getPacket().payload(), Side.SERVER, player);
-			}
-		});
+		player.getServer().addScheduledTask(() -> processPacketOnServer(event.getPacket().payload(), Side.SERVER, player));
 	}
 
 	public static enum PacketType {

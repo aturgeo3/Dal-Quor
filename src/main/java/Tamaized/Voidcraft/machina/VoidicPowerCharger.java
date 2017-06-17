@@ -9,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -67,7 +66,7 @@ public class VoidicPowerCharger extends TamBlockContainer {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		if (tileentity instanceof TileEntityVoidicCharger) {
-			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityVoidicCharger) tileentity);
+			((TileEntityVoidicCharger) tileentity).dropInventoryItems(worldIn, pos);
 			worldIn.updateComparatorOutputLevel(pos, this);
 		}
 
