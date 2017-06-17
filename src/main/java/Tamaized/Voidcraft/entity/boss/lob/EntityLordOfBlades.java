@@ -1,15 +1,9 @@
 package Tamaized.Voidcraft.entity.boss.lob;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.lob.render.ModelLordOfBlades;
 import Tamaized.Voidcraft.entity.client.animation.AnimationRegistry;
 import Tamaized.Voidcraft.entity.client.animation.IAnimation;
-import Tamaized.Voidcraft.entity.client.animation.AnimatableModel.AnimatableModelArms;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
 import Tamaized.Voidcraft.xiaCastle.logic.battle.IBattleHandler;
@@ -19,7 +13,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 
@@ -233,8 +232,7 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 
 	@Override
 	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TextComponentTranslation("null");
 	}
 
 	@Override
