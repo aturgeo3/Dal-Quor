@@ -27,7 +27,6 @@ public class VoidBoxGUI extends GuiContainer {
 	private TileEntityVoidBox te;
 	private GuiButton btnPlay;
 	private GuiButton btnStop;
-	private int tick = 0;
 
 	public VoidBoxGUI(InventoryPlayer inventoryPlayer, TileEntityVoidBox tileEntity) {
 		super(new VoidBoxContainer(inventoryPlayer, tileEntity));
@@ -108,15 +107,12 @@ public class VoidBoxGUI extends GuiContainer {
 		name = TranslateHelper.translate("voidcraft.gui.musicbox.curr") + ":";
 		this.fontRendererObj.drawString(name, (this.xSize / 12 - this.fontRendererObj.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
 		if (te.isPlaying() && !te.SLOT_CURRENT.getStackInSlot(0).isEmpty()) {
-			fontRendererObj.drawString(((ItemRecord) te.SLOT_CURRENT.getStackInSlot(0).getItem()).getRecordNameLocal(), (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, getColor(tick));
+			fontRendererObj.drawString(((ItemRecord) te.SLOT_CURRENT.getStackInSlot(0).getItem()).getRecordNameLocal(), (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, getColor(System.currentTimeMillis() / 10));
 		}
 		fontRendererObj.drawString(TranslateHelper.translate("voidcraft.gui.misc.loop") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getLoopState() ? "on" : "off")), (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, te.getLoopState() ? 0x00FF00 : 0xFF0000);
 		fontRendererObj.drawString(TranslateHelper.translate("voidcraft.gui.misc.auto") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getAutoState() ? "on" : "off")), (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 7, ySize - 180, te.getAutoState() ? 0x00FF00 : 0xFF0000);
 		if (te.isPlaying())
 			fontRendererObj.drawString(getTimeInMinutes(te.getSongLength() - te.getSongTimeLeft()) + "/" + getTimeInMinutes(te.getSongLength()), (xSize / 12) + (fontRendererObj.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
-		tick++;
-		if (tick > 360)
-			tick = 0;
 	}
 
 	private int getColor(double hue) {
