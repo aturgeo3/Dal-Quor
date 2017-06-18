@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/realityteleporterblock"
+  },
+  "pattern": [
+    "BEB",
+    "LHL",
+    "BCB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "voidcraft:items/voidicsteel"
+    },
+    "C": {
+      "item": "voidcraft:blocks/voidiccharger"
+    },
+    "E": {
+      "item": "voidcraft:items/emeralddust"
+    },
+    "H": {
+      "item": "voidcraft:blocks/blockrealityhole"
+    },
+    "L": {
+      "item": "voidcraft:items/voidcloth"
+    }
+  }
+}

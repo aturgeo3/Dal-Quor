@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidbox"
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XZX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:items/voidcloth"
+    },
+    "Y": {
+      "item": "minecraft:jukebox"
+    },
+    "Z": {
+      "item": "voidcraft:items/voidstar"
+    }
+  }
+}

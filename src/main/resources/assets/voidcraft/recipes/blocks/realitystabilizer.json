@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/realitystabilizer"
+  },
+  "pattern": [
+    "IDI",
+    "DSD",
+    "ICI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "voidcraft:blocks/voidiccharger"
+    },
+    "S": {
+      "item": "voidcraft:items/voidstar"
+    },
+    "D": {
+      "item": "voidcraft:items/diamonddust"
+    },
+    "I": {
+      "item": "voidcraft:items/voidicsteel"
+    }
+  }
+}

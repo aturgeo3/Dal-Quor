@@ -1,0 +1,31 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidicanchor"
+  },
+  "pattern": [
+    "DSD",
+    "CZC",
+    "XPX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "item": "voidcraft:blocks/voidiccharger"
+    },
+    "S": {
+      "item": "voidcraft:items/voidstar"
+    },
+    "C": {
+      "item": "voidcraft:items/voidcloth"
+    },
+    "D": {
+      "item": "voidcraft:items/diamonddust"
+    },
+    "X": {
+      "item": "voidcraft:items/voidicsteel"
+    },
+    "Z": {
+      "item": "minecraft:end_crystal"
+    }
+  }
+}

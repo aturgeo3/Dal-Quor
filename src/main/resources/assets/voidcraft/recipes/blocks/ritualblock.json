@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/ritualblock",
+    "count": 8
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "Y": {
+      "item": "voidcraft:items/voidcrystal"
+    }
+  }
+}

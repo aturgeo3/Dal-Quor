@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidinfuserinert"
+  },
+  "pattern": [
+    "XYX",
+    "YZY",
+    "XYX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:blocks/blockvoidbrick"
+    },
+    "Y": {
+      "item": "voidcraft:items/voidcloth"
+    },
+    "Z": {
+      "item": "minecraft:cauldron"
+    }
+  }
+}

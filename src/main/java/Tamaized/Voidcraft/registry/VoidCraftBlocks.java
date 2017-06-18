@@ -18,9 +18,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -130,7 +128,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 	@Override
 	public void init() {
-		VoidCraft.addShapedRecipe(new ItemStack(blockVoidcrystal), 3, 3,
+		/*VoidCraft.addShapedRecipe(new ItemStack(blockVoidcrystal), 3, 3,
 
 				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
 
@@ -296,7 +294,7 @@ public class VoidCraftBlocks implements ITamRegistry {
 
 				VoidCraft.items.voidicSteel, VoidCraft.items.voidChain, VoidCraft.items.voidicSteel
 
-		);
+		);*/
 	}
 
 	@Override

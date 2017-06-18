@@ -6,7 +6,6 @@ import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.armor.XiaArmor;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class VoidCraftArmors implements ITamRegistry {
 
 	@Override
 	public void init() {
-		VoidCraft.addShapedRecipe(new ItemStack(voidHelmet, 1), 3, 2,
+		/*VoidCraft.addShapedRecipe(new ItemStack(voidHelmet, 1), 3, 2,
 				
 				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
 				
@@ -74,7 +73,7 @@ public class VoidCraftArmors implements ITamRegistry {
 				
 				VoidCraft.items.voidcrystal,  ItemStack.EMPTY, VoidCraft.items.voidcrystal
 				
-				);
+				);*/
 
 		// GameRegistry.addShapelessRecipe(new ItemStack(elytra, 1), voidChest, Items.ELYTRA);
 	}

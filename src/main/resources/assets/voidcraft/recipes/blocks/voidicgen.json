@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidicgen"
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "Y": {
+      "item": "voidcraft:blocks/voidinfuser"
+    }
+  }
+}

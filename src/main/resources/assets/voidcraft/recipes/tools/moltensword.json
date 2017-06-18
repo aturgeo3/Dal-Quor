@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "voidcraft:tools/moltensword"
+  },
+  "pattern": [
+    " X ",
+    "XSX",
+    " I "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "voidcraft:tools/chainsword",
+      "data": 32767
+    },
+    "X": {
+      "item": "voidcraft:items/moltenvoidchain"
+    },
+    "I": {
+      "item": "voidcraft:items/voidicsteel"
+    }
+  }
+}

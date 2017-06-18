@@ -10,7 +10,6 @@ import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.items.*;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
@@ -175,7 +174,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 	@Override
 	public void init() {
-		VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
+		/*VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
 		VoidCraft.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
 		VoidCraft.addShapedRecipe(new ItemStack(emptyObsidianFlask, 4), 3, 2,
 
@@ -236,7 +235,7 @@ public class VoidCraftItems implements ITamRegistry {
 
 				ItemStack.EMPTY , voidcrystal, ItemStack.EMPTY
 		
-		);
+		);*/
 
 		GameRegistry.addSmelting(VoidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);

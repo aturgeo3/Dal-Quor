@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidicalchemytable"
+  },
+  "pattern": [
+    "BCB",
+    "CSC",
+    "BIB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "voidcraft:blocks/blockvoidbrick"
+    },
+    "C": {
+      "item": "voidcraft:items/voidicsteel"
+    },
+    "S": {
+      "item": "minecraft:brewing_stand"
+    },
+    "I": {
+      "item": "voidcraft:blocks/voidinfuserinert"
+    }
+  }
+}

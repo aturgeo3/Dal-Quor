@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/blockfakebedrockfence",
+    "count": 6
+  },
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:blocks/blockfakebedrock"
+    }
+  }
+}

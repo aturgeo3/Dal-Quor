@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "voidcraft:items/emptyobsidianflask",
+    "count": 4
+  },
+  "pattern": [
+    "OGO",
+    " O "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  }
+}

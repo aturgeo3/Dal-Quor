@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/blockfakebedrockstairs",
+    "count": 6
+  },
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:blocks/blockfakebedrock"
+    }
+  }
+}

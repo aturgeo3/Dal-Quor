@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "voidcraft:tools/voidsword"
+  },
+  "pattern": [
+    " X ",
+    "OXO",
+    " D "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "X": {
+      "item": "voidcraft:items/voidcrystal"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  }
+}

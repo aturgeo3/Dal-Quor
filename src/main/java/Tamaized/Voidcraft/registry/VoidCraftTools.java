@@ -14,9 +14,6 @@ import Tamaized.Voidcraft.tools.chain.ChainSword;
 import Tamaized.Voidcraft.tools.demon.DemonSword;
 import Tamaized.Voidcraft.tools.molten.MoltenSword;
 import Tamaized.Voidcraft.tools.spectre.AngelicSword;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
@@ -82,7 +79,7 @@ public class VoidCraftTools implements ITamRegistry {
 
 	@Override
 	public void init() {
-		VoidCraft.addShapedRecipe(new ItemStack(voidPickaxe, 1), 3, 3,
+		/*VoidCraft.addShapedRecipe(new ItemStack(voidPickaxe, 1), 3, 3,
 
 				VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal, VoidCraft.items.voidcrystal,
 
@@ -200,7 +197,7 @@ public class VoidCraftTools implements ITamRegistry {
 
 				VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain, VoidCraft.items.MoltenvoidChain
 
-		);
+		);*/
 	}
 
 	@Override

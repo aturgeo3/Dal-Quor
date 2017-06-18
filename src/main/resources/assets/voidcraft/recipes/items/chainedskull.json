@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "voidcraft:items/chainedskull"
+  },
+  "pattern": [
+    "XYX",
+    "YZY",
+    "XYX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:items/moltenvoidchain"
+    },
+    "Y": {
+      "item": "voidcraft:items/burnbone"
+    },
+    "Z": {
+      "item": "minecraft:skull",
+      "data": 1
+    }
+  }
+}

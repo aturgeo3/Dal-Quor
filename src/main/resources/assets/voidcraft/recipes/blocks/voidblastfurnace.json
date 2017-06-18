@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidblastfurnace"
+  },
+  "pattern": [
+    "CBC",
+    "BMB",
+    "CBC"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "voidcraft:blocks/blockvoidbrick"
+    },
+    "C": {
+      "item": "voidcraft:items/voidcloth"
+    },
+    "M": {
+      "item": "voidcraft:items/moltenvoidchainpart"
+    }
+  }
+}

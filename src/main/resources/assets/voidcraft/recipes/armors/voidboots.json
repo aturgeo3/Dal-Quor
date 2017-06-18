@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "voidcraft:armors/voidboots"
+  },
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "voidcraft:items/voidcrystal"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "voidcraft:blocks/voidiccable",
+    "count": 8
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "Y": {
+      "item": "voidcraft:blocks/blockvoidcrystal"
+    }
+  }
+}

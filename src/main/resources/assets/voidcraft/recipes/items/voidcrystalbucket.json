@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "voidcraft:items/voidcrystalbucket"
+  },
+  "ingredients": [
+    {
+      "item": "voidcraft:items/voidcrystal"
+    },
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

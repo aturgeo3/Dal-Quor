@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "voidcraft:items/voidcrystalshield"
+  },
+  "pattern": [
+    "CCC",
+    "CBC",
+    " C "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "voidcraft:items/voidicsteel"
+    },
+    "C": {
+      "item": "voidcraft:items/voidcrystal"
+    }
+  }
+}
