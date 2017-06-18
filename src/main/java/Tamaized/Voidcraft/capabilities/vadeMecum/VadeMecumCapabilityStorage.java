@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.capabilities.vadeMecum;
 
-import java.util.ArrayList;
-import java.util.Map.Entry;
-
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -10,6 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+
+import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability> {
 
@@ -48,6 +48,7 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 		compound.setInteger("currentActive", IVadeMecumCapability.getCategoryID(instance.getCurrentActive()));
 		compound.setString("lastEntry", instance.getLastEntry());
 		compound.setInteger("page", instance.getPage());
+		compound.setBoolean("active", instance.isBookActive());
 		return compound;
 	}
 
@@ -79,6 +80,7 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 		instance.setCurrentActive(IVadeMecumCapability.getCategoryFromID(compound.getInteger("currentActive")));
 		instance.setLastEntry(compound.getString("lastEntry"));
 		instance.setPage(compound.getInteger("page"));
+		instance.setBookActive(compound.getBoolean("active"));
 		instance.setLoaded();
 	}
 
