@@ -1,5 +1,6 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
+import Tamaized.Voidcraft.entity.companion.EntityVoidParrot;
 import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
 import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 import net.minecraft.world.biome.Biome;
@@ -18,6 +19,7 @@ public class BiomeGenVoid extends Biome {
 
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobWraith.class, 1, 0, 1));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityMobSpectreChain.class, 1, 0, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityVoidParrot.class, 1, 0, 1));
 
 	}
 

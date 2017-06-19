@@ -191,6 +191,7 @@ entity.voidcraft.ZolXia.name=Zol
 entity.voidcraft.VoidicDragon.name=Voidic Dragon
 entity.voidcraft.FireElemental.name=Fire Elemental
 entity.voidcraft.Hashalaq.name=Hashalaq
+entity.voidcraft.VoidParrot.name=Voidic Parrot
 # --
 entity.Wraith.name=Void Wraith
 entity.SpectreChain.name=Chained Spectre
@@ -213,6 +214,7 @@ entity.ZolXia.name=Zol
 entity.VoidicDragon.name=Voidic Dragon
 entity.FireElemental.name=Fire Elemental
 entity.Hashalaq.name=Hashalaq
+entity.VoidParrot.name=Voidic Parrot
 
 # GUI
 voidcraft.gui.jei.alch.research=Required Vade Mecum Knowledge:
@@ -373,6 +375,7 @@ voidcraft.VadeMecum.docs.title.starforge.effect.silkTouch=Silk Touch
 voidcraft.VadeMecum.docs.title.starforge.effect.fortune=Fortune
 voidcraft.VadeMecum.docs.title.starforge.effect.threeByThree=3x3 Mining
 voidcraft.VadeMecum.docs.title.quori=Dal Quor
+voidcraft.VadeMecum.docs.title.voidicParrot=Voidic Parrot
 ## -- Descriptions
 voidcraft.VadeMecum.docs.desc.moltenSword=Foes struck by this sword are lit on fire and are inflicted with a weakness and nausea debuff for 5 seconds.
 voidcraft.VadeMecum.docs.desc.demonSword=Foes struck by this sword are dealt the same effects as the Arch-Angelic sword though the durations are now 20 seconds each.
@@ -476,6 +479,7 @@ voidcraft.VadeMecum.docs.desc.starforge.effect.silkTouch=Adds Silk Touch to the 
 voidcraft.VadeMecum.docs.desc.starforge.effect.fortune=Adds Fortune 5 to the Tool.
 voidcraft.VadeMecum.docs.desc.starforge.effect.threeByThree=The Tool will now mine in a Three by Three area.
 voidcraft.VadeMecum.docs.desc.quori.pg1=This is an early access version of the 'Dream Update' for VoidCraft, do NOT expect much content here nor any real documentation just yet. The only thing I will say is that you must right click a bed with a Quori Fragment. Have fun.
+voidcraft.VadeMecum.docs.desc.voidicParrot=For reasons unknown, this Ethereal parrot is able to survive the harsh conditions of the Void and feeds on Ethereal Seeds. Very rare, they can be found near an Ethereal Plant from within the Void. Ethereal Seeds can be used to tame them.
 # -- Progression
 voidcraft.VadeMecum.title.progression=Mysteries of the Void
 ## -- Titles

@@ -43,7 +43,10 @@ import Tamaized.Voidcraft.entity.boss.xia.model.ModelXia2;
 import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia;
 import Tamaized.Voidcraft.entity.boss.xia.render.RenderXia2;
 import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
+import Tamaized.Voidcraft.entity.companion.EntityVoidParrot;
+import Tamaized.Voidcraft.entity.companion.render.LayerVoidParrotShoulder;
 import Tamaized.Voidcraft.entity.companion.render.RenderFireElementalCompanion;
+import Tamaized.Voidcraft.entity.companion.render.RenderVoidParrot;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.ghost.render.RenderGhostPlayer;
@@ -68,9 +71,12 @@ import Tamaized.Voidcraft.sound.client.BGMusic;
 import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelParrot;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerEntityOnShoulder;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -80,6 +86,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import java.util.List;
 
 public class ClientProxy extends AbstractProxy {
 
@@ -313,6 +322,12 @@ public class ClientProxy extends AbstractProxy {
 				return new RenderSpellImplosion(manager);
 			}
 		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityVoidParrot.class, new IRenderFactory<EntityVoidParrot>() {
+			@Override
+			public Render<? super EntityVoidParrot> createRenderFor(RenderManager manager) {
+				return new RenderVoidParrot(manager);
+			}
+		});
 	}
 
 	@Override
@@ -340,13 +355,43 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(new TextureStitch());
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
+		try {
+			for (LayerRenderer layer : (List<LayerRenderer>) ReflectionHelper.findField(RenderLivingBase.class, "layerRenderers", "field_177097_h").get(playerRenderer)) {
+				if (layer instanceof LayerEntityOnShoulder) {
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192869_e").set(layer, RenderVoidParrot.TEXTURE);
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192873_i").set(layer, RenderVoidParrot.TEXTURE);
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192865_a").set(layer, new RenderParrot(playerRenderer.getRenderManager()));
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192866_b").set(layer, new RenderParrot(playerRenderer.getRenderManager()));
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192868_d").set(layer, new ModelParrot());
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192872_h").set(layer, new ModelParrot());
+				}
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		playerRenderer.addLayer(new LayerVoidSpikes(playerRenderer));
 		playerRenderer.addLayer(new LayerCustomElytra(playerRenderer));
+		playerRenderer.addLayer(new LayerVoidParrotShoulder(playerRenderer.getRenderManager()));
 		// playerRenderer.addLayer(new LayerSheath(playerRenderer));
 
 		RenderPlayer playerRendererSlim = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim"));
+		try {
+			for (LayerRenderer layer : (List<LayerRenderer>) ReflectionHelper.findField(RenderLivingBase.class, "layerRenderers", "field_177097_h").get(playerRendererSlim)) {
+				if (layer instanceof LayerEntityOnShoulder) {
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192869_e").set(layer, RenderVoidParrot.TEXTURE);
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192873_i").set(layer, RenderVoidParrot.TEXTURE);
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192865_a").set(layer, new RenderParrot(playerRendererSlim.getRenderManager()));
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192866_b").set(layer, new RenderParrot(playerRendererSlim.getRenderManager()));
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192868_d").set(layer, new ModelParrot());
+					ReflectionHelper.findField(LayerEntityOnShoulder.class, "field_192872_h").set(layer, new ModelParrot());
+				}
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		playerRendererSlim.addLayer(new LayerVoidSpikes(playerRendererSlim));
 		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
+		playerRendererSlim.addLayer(new LayerVoidParrotShoulder(playerRendererSlim.getRenderManager()));
 		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
 
 		VoidCraft.channel.register(new ClientPacketHandler());

@@ -5,6 +5,7 @@ import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.boss.EntityBossCorruptedPawn;
 import Tamaized.Voidcraft.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import Tamaized.Voidcraft.entity.companion.EntityVoidParrot;
 import Tamaized.Voidcraft.world.dim.dalQuor.BiomeGenDream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityShulker;
@@ -19,7 +20,7 @@ public class SpawnEvent {
 	public void canEntitySpawn(LivingSpawnEvent.CheckSpawn event) {
 		if (!event.getWorld().isRemote) {
 			if (event.getWorld().provider.getDimension() == VoidCraft.config.getDimensionIdVoid()) {
-				if (event.getEntity() instanceof EntityLivingBase && !(event.getEntity() instanceof EntityPlayer || event.getEntity() instanceof EntityVoidMob || event.getEntity() instanceof EntityBossCorruptedPawn || event.getEntity() instanceof EntityVoidNPC || !(event.getEntity() instanceof EntityHerobrineCreeper) || !(event.getEntity() instanceof EntityShulker))) {
+				if (event.getEntity() instanceof EntityLivingBase && !(event.getEntity() instanceof EntityPlayer || event.getEntity() instanceof EntityVoidParrot || event.getEntity() instanceof EntityVoidMob || event.getEntity() instanceof EntityBossCorruptedPawn || event.getEntity() instanceof EntityVoidNPC || !(event.getEntity() instanceof EntityHerobrineCreeper) || !(event.getEntity() instanceof EntityShulker))) {
 					event.setResult(Result.DENY);
 				}
 			} else if (event.getWorld().provider.getDimension() == VoidCraft.config.getDimensionIdDalQuor()) {

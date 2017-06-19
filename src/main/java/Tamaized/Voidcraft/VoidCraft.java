@@ -43,6 +43,7 @@ import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityWitherbrine;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.EntityZolXia;
 import Tamaized.Voidcraft.entity.boss.xia.finalphase.render.EntityDolXia;
 import Tamaized.Voidcraft.entity.companion.EntityCompanionFireElemental;
+import Tamaized.Voidcraft.entity.companion.EntityVoidParrot;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostBiped;
 import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayer;
 import Tamaized.Voidcraft.entity.mob.*;
@@ -341,6 +342,7 @@ public class VoidCraft extends TamModBase {
 		registerEntity(EntityCompanionFireElemental.class, "FireElemental", this, modid, 64, 1, true);
 		registerEntityWithEgg(EntityHashalaq.class, "Hashalaq", this, modid, 64, 1, true, 0x000000, 0x00FFFF);
 		registerEntityWithEgg(EntityLordOfBlades.class, "LordOfBlades", this, modid, 250, 1, true, 0x777777, 0x000000);
+		registerEntityWithEgg(EntityVoidParrot.class, "VoidParrot", this, modid, 250, 1, true, 0x7700FF, 0x000000);
 
 		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
