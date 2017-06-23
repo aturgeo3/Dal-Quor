@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.machina.addons.TERecipeInfuser;
@@ -17,23 +12,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class VoidCraftTERecipes implements ITamRegistry {
+import java.util.ArrayList;
+import java.util.List;
+
+public class VoidCraftTERecipes {
 
 	public static TERecipesMacerator macerator;
 	public static TERecipeInfuser infuser;
 	public static TERecipesAlchemy alchemy;
 	public static TERecipesBlastFurnace blastFurnace;
 
-	@Override
-	public void preInit() {
+	static {
 		macerator = new TERecipesMacerator();
 		infuser = new TERecipeInfuser();
 		alchemy = new TERecipesAlchemy();
 		blastFurnace = new TERecipesBlastFurnace();
 	}
 
-	@Override
-	public void init() {
+	public static void init() {
 		for (ItemStack input : getOreDict(new String[] { "oreCoal" }))
 			macerator.registerRecipe(macerator.new MaceratorRecipe(new ItemStack[] { input }, new ItemStack(VoidCraft.items.coalDust, 8), 200));
 		for (ItemStack input : getOreDict(new String[] { "oreQuartz" }))
@@ -215,36 +211,6 @@ public class VoidCraftTERecipes implements ITamRegistry {
 
 			);
 		}
-	}
-
-	@Override
-	public void postInit() {
-
-	}
-
-	@Override
-	public ArrayList<ITamModel> getModelList() {
-		return new ArrayList<ITamModel>();
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	public void clientPreInit() {
-
-	}
-
-	@Override
-	public void clientInit() {
-
-	}
-
-	@Override
-	public void clientPostInit() {
-
 	}
 
 	public static List<ItemStack> getOreDict(String[] input) {

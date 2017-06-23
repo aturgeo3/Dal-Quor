@@ -3,18 +3,22 @@ package Tamaized.Voidcraft.registry;
 import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
-import Tamaized.TamModized.registry.ITamModel;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
 import Tamaized.Voidcraft.items.*;
+import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelDynBucket;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,7 +26,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class VoidCraftItems implements ITamRegistry {
+@Mod.EventBusSubscriber
+public class VoidCraftItems {
 
 	public static ArrayList<ItemRecord> voidDiscs;
 	public static VadeMecum vadeMecum;
@@ -74,15 +79,14 @@ public class VoidCraftItems implements ITamRegistry {
 	public static EtherealFruit etherealFruit_emerald;
 	public static EtherealFruit etherealFruit_diamond;
 	public static ItemDreamBed dreamBed;
-	private ArrayList<ITamModel> modelList;
+	private static ArrayList<ITamRegistry> modelList;
 
 	// public static VoidRecord record_noStrings;
 	// public static VoidRecord record_bleedingThrough;
 	// public static VoidRecord record_stringsAttached;
 	// public static VoidRecord record_running;
 
-	@Override
-	public void preInit() {
+	static {
 		modelList = new ArrayList<>();
 
 		modelList.add(vadeMecum = new VadeMecum(VoidCraftCreativeTabs.tabVoid, "vademecum", 1));
@@ -157,7 +161,9 @@ public class VoidCraftItems implements ITamRegistry {
 		// voidDiscs.add(record_bleedingThrough);
 		// voidDiscs.add(record_stringsAttached);
 		// voidDiscs.add(record_running);
+	}
 
+	public static void preInit(){
 		OreDictionary.registerOre("ingotSteel", voidicSteel);
 
 		OreDictionary.registerOre("dustQuartz", quartzDust);
@@ -172,90 +178,21 @@ public class VoidCraftItems implements ITamRegistry {
 		OreDictionary.registerOre("dustDiamond", diamondDust);
 	}
 
-	@Override
-	public void init() {
-		/*VoidCraft.addShapelessRecipe(new ItemStack(voidcrystal, 9), VoidCraft.blocks.blockVoidcrystal);
-		VoidCraft.addShapelessRecipe(new ItemStack(voidCrystalBucket), voidcrystal, Items.BUCKET);
-		VoidCraft.addShapedRecipe(new ItemStack(emptyObsidianFlask, 4), 3, 2,
-
-				Blocks.OBSIDIAN, Blocks.GLASS, Blocks.OBSIDIAN,
-
-				ItemStack.EMPTY, Blocks.OBSIDIAN, ItemStack.EMPTY
-
-		);
-		VoidCraft.addShapelessRecipe(new ItemStack(voidicSuppressor), voidcrystal, Items.COMPASS, Items.REDSTONE, voidCloth);
-		VoidCraft.addShapedRecipe(new ItemStack(voidicDrill), 3, 3,
-
-				voidicSteel, VoidCraft.blocks.realityHole, voidicSteel,
-
-				voidCloth, VoidCraft.blocks.voidicCharger, voidCloth,
-
-				ectoplasm, voidStar, ectoplasm
-
-		);
-		VoidCraft.addShapedRecipe(new ItemStack(MoltenvoidChain), 3, 3,
-
-				burnBone, MoltenvoidChainPart, burnBone,
-
-				MoltenvoidChainPart, burnBone, MoltenvoidChainPart,
-
-				burnBone, MoltenvoidChainPart, burnBone
-
-		);
-		VoidCraft.addShapedRecipe(new ItemStack(ChainedSkull), 3, 3,
-
-				MoltenvoidChain, burnBone, MoltenvoidChain,
-
-				burnBone, new ItemStack(Items.SKULL, 1, 1), burnBone,
-
-				MoltenvoidChain, burnBone, MoltenvoidChain
-
-		);
-		VoidCraft.addShapedRecipe(new ItemStack(Items.SKULL, 1, 1), 2, 2,
-				
-				burnBone, burnBone,
-				
-				burnBone, burnBone
-		
-		);
-		VoidCraft.addShapedRecipe(new ItemStack(realityTeleporter), 3, 3,
-				
-				voidicSteel, emeraldDust, VoidCraft.blocks.voidicCharger,
-				
-				MoltenvoidChain, VoidCraft.blocks.realityHole, MoltenvoidChain,
-				
-				voidicSteel, MoltenvoidChain, voidicSteel
-		
-		);
-		VoidCraft.addShapedRecipe(new ItemStack(voidCrystalShield), 3, 3,
-				
-				voidcrystal, voidcrystal, voidcrystal,
-				
-				voidcrystal, voidicSteel, voidcrystal,
-
-				ItemStack.EMPTY , voidcrystal, ItemStack.EMPTY
-		
-		);*/
-
-		GameRegistry.addSmelting(VoidCraft.blocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
+	public static void init() {
+		GameRegistry.addSmelting(VoidCraftBlocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
-		GameRegistry.addSmelting(voidCrystalBucket, VoidCraft.fluids.voidBucket.getBucket(), 0.1F);
+		GameRegistry.addSmelting(voidCrystalBucket, VoidCraftFluids.voidBucket.getBucket(), 0.1F);
 		// dust
 		GameRegistry.addSmelting(ironDust, new ItemStack(Items.IRON_INGOT), 0);
 		GameRegistry.addSmelting(goldDust, new ItemStack(Items.GOLD_INGOT), 0);
 		GameRegistry.addSmelting(diamondDust, new ItemStack(Items.DIAMOND), 0);
-		this.addPreSmelting(copperDust, "ingotCopper");
-		this.addPreSmelting(tinDust, "ingotTin");
-		this.addPreSmelting(leadDust, "ingotLead");
+		addPreSmelting(copperDust, "ingotCopper");
+		addPreSmelting(tinDust, "ingotTin");
+		addPreSmelting(leadDust, "ingotLead");
 
 	}
 
-	@Override
-	public void postInit() {
-
-	}
-
-	private void addPreSmelting(Item i, String s) {
+	private static void addPreSmelting(Item i, String s) {
 		for (ItemStack ore : OreDictionary.getOres(s)) {
 			if (!ore.isEmpty()) {
 				GameRegistry.addSmelting(i, ore, ore.getItemDamage());
@@ -263,33 +200,33 @@ public class VoidCraftItems implements ITamRegistry {
 		}
 	}
 
-	@Override
-	public ArrayList<ITamModel> getModelList() {
-		return modelList;
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void clientPreInit() {
+/*	public void clientPreInit() {
 //		VadeMecumMeshDefinition.preRegister();
 //		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
-	}
+	}*/
 
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void clientInit() {
+	public static void clientInit() {
 		net.minecraft.client.Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(creativeVoidBucket, 0, ModelDynBucket.LOCATION);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void clientPostInit() {
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		for (ITamRegistry b : modelList)
+			b.registerBlock(event);
+	}
 
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
+		for (ITamRegistry b : modelList)
+			b.registerItem(event);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		for (ITamRegistry b : modelList)
+			b.registerModel(event);
 	}
 
 }

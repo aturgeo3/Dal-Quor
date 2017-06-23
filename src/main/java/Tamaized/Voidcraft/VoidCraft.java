@@ -126,19 +126,19 @@ public class VoidCraft extends TamModBase {
 	public static VoidCraftThaum thaumcraftIntegration;
 	public static boolean isAetherLoaded = false;
 
-	public static VoidCraftMaterials materials;
-	public static VoidCraftCreativeTabs tabs;
-	public static VoidCraftTools tools;
-	public static VoidCraftItems items;
-	public static VoidCraftPotions potions;
-	public static VoidCraftArmors armors;
-	public static VoidCraftFluids fluids;
-	public static VoidCraftBlocks blocks;
-	public static VoidCraftBiomes biomes;
-	public static VoidCraftAchievements achievements;
-	public static VoidCraftLootTables lootTables;
-	public static VoidCraftTERecipes teRecipes;
-	public static VoidCraftParticles particles;
+	public static final VoidCraftMaterials materials = new VoidCraftMaterials();
+	public static final VoidCraftCreativeTabs tabs = new VoidCraftCreativeTabs();
+	public static final VoidCraftTools tools = new VoidCraftTools();
+	public static final VoidCraftItems items = new VoidCraftItems();
+	public static final VoidCraftPotions potions = new VoidCraftPotions();
+	public static final VoidCraftArmors armors = new VoidCraftArmors();
+	public static final VoidCraftFluids fluids = new VoidCraftFluids();
+	public static final VoidCraftBlocks blocks = new VoidCraftBlocks();
+	public static final VoidCraftBiomes biomes = new VoidCraftBiomes();
+	public static final VoidCraftAchievements achievements = new VoidCraftAchievements();
+	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
+	public static final VoidCraftTERecipes teRecipes = new VoidCraftTERecipes();
+	public static final VoidCraftParticles particles = new VoidCraftParticles();
 
 	public static String getVersion() {
 		return version;
@@ -191,20 +191,10 @@ public class VoidCraft extends TamModBase {
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 
-		// yo dawg, Register the Registers... i'm sorry
-		register(materials = new VoidCraftMaterials());
-		register(tabs = new VoidCraftCreativeTabs());
-		register(blocks = new VoidCraftBlocks());
-		register(fluids = new VoidCraftFluids());
-		register(items = new VoidCraftItems());
-		register(potions = new VoidCraftPotions());
-		register(tools = new VoidCraftTools());
-		register(armors = new VoidCraftArmors());
-		register(biomes = new VoidCraftBiomes());
-		register(achievements = new VoidCraftAchievements());
-		register(lootTables = new VoidCraftLootTables());
-		register(teRecipes = new VoidCraftTERecipes());
-		register(particles = new VoidCraftParticles());
+		VoidCraftItems.preInit();
+		VoidCraftBiomes.preInit();
+		VoidCraftPotions.preInit();
+		VoidCraftFluids.preInit();
 
 		// Register Sounds Events
 		VoidSoundEvents.register();
@@ -237,6 +227,10 @@ public class VoidCraft extends TamModBase {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		logger.info("Starting VoidCraft Init");
+
+		VoidCraftItems.init();
+		VoidCraftAchievements.init();
+		VoidCraftTERecipes.init();
 
 		// Register StarForge Effects
 		StarForgeEffectList.register();
@@ -354,6 +348,9 @@ public class VoidCraft extends TamModBase {
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		logger.info("Starting VoidCraft PostInit");
+
+		VoidCraftAchievements.postInit();
+		VoidCraftLootTables.postInit();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new LoadingCallback() {
 			@Override

@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-
-import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.potion.PotionSheathe;
 import Tamaized.Voidcraft.potion.PotionVoidImmunity;
 import Tamaized.Voidcraft.potion.PotionVoidicInfusion;
@@ -14,9 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class VoidCraftPotions implements ITamRegistry {
-
-	private ArrayList<ITamModel> modelList;
+public class VoidCraftPotions {
 
 	public static Potion voidicInfusion;
 	public static Potion voidicInfusionImmunity;
@@ -30,9 +23,7 @@ public class VoidCraftPotions implements ITamRegistry {
 
 	public static PotionType type_voidImmunity;
 
-	@Override
-	public void preInit() {
-		modelList = new ArrayList<ITamModel>();
+	public static void preInit() {
 
 		voidicInfusion = new PotionVoidicInfusion("voidicinfusion");
 		voidicInfusionImmunity = new PotionVoidicInfusionImmunity("voidicinfusionimmunity");
@@ -46,41 +37,6 @@ public class VoidCraftPotions implements ITamRegistry {
 
 		type_voidImmunity = new PotionType(new PotionEffect[] { new PotionEffect(voidImmunity, ((60 * 3) + 30) * 20) }).setRegistryName("voidimmunity");
 		GameRegistry.register(type_voidImmunity);
-	}
-
-	@Override
-	public void init() {
-
-	}
-
-	@Override
-	public void postInit() {
-
-	}
-
-	@Override
-	public ArrayList<ITamModel> getModelList() {
-		return modelList;
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	public void clientPreInit() {
-
-	}
-
-	@Override
-	public void clientInit() {
-
-	}
-
-	@Override
-	public void clientPostInit() {
-
 	}
 
 }

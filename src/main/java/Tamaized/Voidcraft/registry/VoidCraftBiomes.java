@@ -1,10 +1,5 @@
 package Tamaized.Voidcraft.registry;
 
-import java.util.ArrayList;
-
-import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.mob.EntityMobWraith;
 import Tamaized.Voidcraft.world.dim.TheVoid.BiomeGenVoid;
 import Tamaized.Voidcraft.world.dim.Xia.BiomeGenXia;
@@ -18,7 +13,7 @@ import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class VoidCraftBiomes implements ITamRegistry {
+public class VoidCraftBiomes {
 	
 	public static Biome biomeVoid;
 	public static Biome biomeXia;
@@ -28,8 +23,7 @@ public class VoidCraftBiomes implements ITamRegistry {
 	public static Biome biomeDreamEnd;
 	public static Biome biomeDreamVoid;
 
-	@Override
-	public void preInit() {
+	public static void preInit() {
 		float baseHeight = -1F;
 		float heightVariation = 0.1F;
 		BiomeProperties biomeVoidProp = new BiomeProperties("The Void").setBaseBiome("voidcraft_biome_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
@@ -71,41 +65,6 @@ public class VoidCraftBiomes implements ITamRegistry {
 		BiomeDictionary.addTypes(biomeDreamNether, BiomeDictionary.Type.VOID);
 		BiomeDictionary.addTypes(biomeDreamEnd, BiomeDictionary.Type.VOID);
 		BiomeDictionary.addTypes(biomeDreamVoid, BiomeDictionary.Type.VOID);
-	}
-
-	@Override
-	public void init() {
-
-	}
-
-	@Override
-	public void postInit() {
-
-	}
-
-	@Override
-	public ArrayList<ITamModel> getModelList() {
-		return new ArrayList<ITamModel>();
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	public void clientPreInit() {
-		
-	}
-
-	@Override
-	public void clientInit() {
-		
-	}
-
-	@Override
-	public void clientPostInit() {
-		
 	}
 
 }

@@ -1,10 +1,8 @@
 package Tamaized.Voidcraft.items;
 
-import java.util.List;
-
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import Tamaized.Voidcraft.world.dim.Xia.WorldProviderXia;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +15,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class Debugger extends TamItem {
 
@@ -91,8 +91,8 @@ public class Debugger extends TamItem {
 		// IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// cap.setInfusion(5999);
 		// if (cap != null) cap.setXiaDefeats(0);
-		if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
-		if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+//		if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
+//		if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
 		// FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 
 		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
@@ -117,6 +117,9 @@ public class Debugger extends TamItem {
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
+
+		System.out.println(new ModelResourceLocation(getRegistryName(), "inventory"));
+
 		return super.onItemRightClick(world, player, hand);
 
 	}

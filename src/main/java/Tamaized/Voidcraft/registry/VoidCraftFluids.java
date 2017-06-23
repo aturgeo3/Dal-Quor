@@ -1,19 +1,33 @@
 package Tamaized.Voidcraft.registry;
 
 import Tamaized.TamModized.fluids.TamFluidBlock;
-import Tamaized.TamModized.registry.TamFluidRegistryBase;
+import Tamaized.TamModized.registry.ITamRegistry;
+import Tamaized.TamModized.registry.RegistryHelper;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.fluids.ArcaneSludgeFluidBlock;
 import Tamaized.Voidcraft.fluids.TamFluidFiniteBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class VoidCraftFluids extends TamFluidRegistryBase {
+import java.util.ArrayList;
+import java.util.List;
+
+@Mod.EventBusSubscriber
+public class VoidCraftFluids {
 
 	public static Fluid voidFluid;
 	public static Fluid acidFluid;
@@ -29,11 +43,14 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 
 	public static BucketWrapper voidBucket;
 
-	@Override
-	public void preInit() {
-		voidFluid = createFluid("void", "fluids/void/fluid", true, true);
-		acidFluid = createFluid("acid", "fluids/acid/fluid", true, false);
-		arcaneSludgeFluid = createFluid("arcanesludge", "fluids/arcanesludge/fluid", true, false);
+	private static List<ITamRegistry> modelList;
+
+	static {
+		modelList = new ArrayList<>();
+
+		voidFluid = RegistryHelper.createFluid(VoidCraft.modid, "void", "fluids/void/fluid", true, true);
+		acidFluid = RegistryHelper.createFluid(VoidCraft.modid, "acid", "fluids/acid/fluid", true, false);
+		arcaneSludgeFluid = RegistryHelper.createFluid(VoidCraft.modid, "arcanesludge", "fluids/arcanesludge/fluid", true, false);
 
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
 		acidFluid.setLuminosity(7).setDensity(2).setViscosity(500).setGaseous(false);
@@ -43,39 +60,16 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 		acidMaterialLiquid = new MaterialLiquid(MapColor.GREEN);
 		arcaneSludgeMaterialLiquid = new MaterialLiquid(MapColor.CYAN);
 
-		register(voidFluidBlock = new TamFluidBlock(VoidCraft.tabs.tabVoid, voidFluid, Material.WATER, "blockvoidfluid"));
-		register(acidFluidBlock = new TamFluidFiniteBlock(VoidCraft.tabs.tabVoid, acidFluid, Material.WATER, "blockacidfluid", new DamageSourceAcid(), 5));
-		register(arcaneSludgeFluidBlock = new ArcaneSludgeFluidBlock(VoidCraft.tabs.tabVoid, arcaneSludgeFluid, Material.WATER, "blockarcanesludgefluid"));
-
-		voidBucket = new BucketWrapper(ForgeModContainer.getInstance().universalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid));
+		modelList.add(voidFluidBlock = new TamFluidBlock(VoidCraftCreativeTabs.tabVoid, voidFluid, Material.WATER, "blockvoidfluid"));
+		modelList.add(acidFluidBlock = new TamFluidFiniteBlock(VoidCraftCreativeTabs.tabVoid, acidFluid, Material.WATER, "blockacidfluid", new DamageSourceAcid(), 5));
+		modelList.add(arcaneSludgeFluidBlock = new ArcaneSludgeFluidBlock(VoidCraftCreativeTabs.tabVoid, arcaneSludgeFluid, Material.WATER, "blockarcanesludgefluid"));
 	}
 
-	@Override
-	public void init() {
-
+	public static void preInit(){
+		voidBucket = new BucketWrapper(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid));
 	}
 
-	@Override
-	public void postInit() {
-
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	public void clientInit() {
-
-	}
-
-	@Override
-	public void clientPostInit() {
-
-	}
-
-	public class BucketWrapper {
+	public static class BucketWrapper {
 
 		private final ItemStack bucket;
 
@@ -87,6 +81,25 @@ public class VoidCraftFluids extends TamFluidRegistryBase {
 			return bucket.copy();
 		}
 
+	}
+
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		for (ITamRegistry b : modelList)
+			b.registerBlock(event);
+	}
+
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
+		for (ITamRegistry b : modelList)
+			b.registerItem(event);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		for (ITamRegistry b : modelList)
+			b.registerModel(event);
 	}
 
 }

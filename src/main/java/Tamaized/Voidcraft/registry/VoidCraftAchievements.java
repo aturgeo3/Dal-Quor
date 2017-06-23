@@ -1,14 +1,9 @@
 package Tamaized.Voidcraft.registry;
 
-import Tamaized.TamModized.registry.ITamModel;
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-
-public class VoidCraftAchievements implements ITamRegistry { // TODO
+public class VoidCraftAchievements { // TODO
 
 	/*public static Achievement vadeMecum;
 	public static Achievement theVoice;
@@ -46,14 +41,8 @@ public class VoidCraftAchievements implements ITamRegistry { // TODO
 	public static Achievement charger;
 	public static Achievement suppressor;*/
 
-	@Override
-	public void preInit() {
-
-	}
-
-	@Override
-	public void init() {
-		ItemStack activeVade = new ItemStack(VoidCraft.items.vadeMecum);
+	public static void init() {
+		ItemStack activeVade = new ItemStack(VoidCraftItems.vadeMecum);
 		activeVade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 
 		/*familiarity = new Achievement("achievement.familiarity", "familiarity", -2, 12, Blocks.TNT, (Achievement) null);
@@ -122,8 +111,7 @@ public class VoidCraftAchievements implements ITamRegistry { // TODO
 		suppressor.registerStat();*/
 	}
 
-	@Override
-	public void postInit() {
+	public static void postInit() {
 		/*Achievement[] achArray = {
 
 				familiarity,
@@ -142,31 +130,6 @@ public class VoidCraftAchievements implements ITamRegistry { // TODO
 
 		};
 		AchievementPage.registerAchievementPage(new AchievementPage("VoidCraft", achArray));*/
-	}
-
-	@Override
-	public ArrayList<ITamModel> getModelList() {
-		return new ArrayList<ITamModel>();
-	}
-
-	@Override
-	public String getModID() {
-		return VoidCraft.modid;
-	}
-
-	@Override
-	public void clientPreInit() {
-
-	}
-
-	@Override
-	public void clientInit() {
-
-	}
-
-	@Override
-	public void clientPostInit() {
-
 	}
 
 }
