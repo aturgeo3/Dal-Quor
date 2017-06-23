@@ -13,6 +13,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
@@ -58,6 +60,16 @@ public class TileEntityHeimdall extends TamTileEntityInventory implements IEnerg
 	@Override
 	protected IItemHandler getCap(EnumFacing face) {
 		return new CombinedInvWrapper(SLOT_BUCKET, SLOT_INPUT);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing enumFacing) {
+		return capability == CapabilityEnergy.ENERGY ? (T) this : super.getCapability(capability, enumFacing);
 	}
 
 	@Override
