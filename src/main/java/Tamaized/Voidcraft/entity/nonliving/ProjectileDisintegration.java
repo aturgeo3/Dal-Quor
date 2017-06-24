@@ -1,13 +1,10 @@
 package Tamaized.Voidcraft.entity.nonliving;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import Tamaized.Voidcraft.damageSources.DamageSourceAcid;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia2;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -27,15 +24,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class ProjectileDisintegration extends EntityArrow implements IProjectile, IEntityAdditionalSpawnData {
 
@@ -84,7 +79,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		shootingEntity = shooter;
 		setPosition(x, y + shooter.getEyeHeight(), z);
 		Vec3d vec = shooter.getLook(1.0f);
-		setTheVelocity(vec.xCoord, vec.yCoord, vec.zCoord);
+		setTheVelocity(vec.x, vec.y, vec.z);
 	}
 
 	public ProjectileDisintegration(World worldIn, EntityLivingBase shooter, EntityLivingBase target, float dmg) {
@@ -161,7 +156,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 
 		if (iblockstate.getMaterial() != Material.AIR) {// check if hit block
 			AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(world, blockpos);
-			if (axisalignedbb != Block.NULL_AABB && axisalignedbb.offset(blockpos).isVecInside(new Vec3d(posX, posY, posZ))) {
+			if (axisalignedbb != Block.NULL_AABB && axisalignedbb.offset(blockpos).contains(new Vec3d(posX, posY, posZ))) {
 				inGround = true;
 			}
 		}
@@ -200,7 +195,7 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			vec3d = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
 			if (raytraceresult != null) {
-				vec3d = new Vec3d(raytraceresult.hitVec.xCoord, raytraceresult.hitVec.yCoord, raytraceresult.hitVec.zCoord);
+				vec3d = new Vec3d(raytraceresult.hitVec.x, raytraceresult.hitVec.y, raytraceresult.hitVec.z);
 			}
 
 			Entity entity = findEntityOnPath(vec3d1, vec3d);
@@ -354,9 +349,9 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			IBlockState iblockstate = world.getBlockState(blockpos);
 			inTile = iblockstate.getBlock();
 			inData = inTile.getMetaFromState(iblockstate);
-			motionX = (double) ((float) (raytraceResultIn.hitVec.xCoord - posX));
-			motionY = (double) ((float) (raytraceResultIn.hitVec.yCoord - posY));
-			motionZ = (double) ((float) (raytraceResultIn.hitVec.zCoord - posZ));
+			motionX = (double) ((float) (raytraceResultIn.hitVec.x - posX));
+			motionY = (double) ((float) (raytraceResultIn.hitVec.y - posY));
+			motionZ = (double) ((float) (raytraceResultIn.hitVec.z - posZ));
 			float f2 = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 			posX -= motionX / (double) f2 * 0.05000000074505806D;
 			posY -= motionY / (double) f2 * 0.05000000074505806D;

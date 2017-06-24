@@ -68,7 +68,7 @@ public class RealityTeleporterContainer extends Container {
 		for (int i = 0; i < listeners.size(); ++i) {
 			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
 			if (cap != null && amount != cap.getCurrentPower()) {
-				icontainerlistener.sendProgressBarUpdate(this, 0, cap.getCurrentPower());
+				icontainerlistener.sendWindowProperty(this, 0, cap.getCurrentPower());
 				amount = cap.getCurrentPower();
 				itemInventory.saveData();
 			}

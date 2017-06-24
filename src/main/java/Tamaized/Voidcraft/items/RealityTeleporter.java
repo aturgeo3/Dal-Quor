@@ -60,7 +60,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 			}
 			player.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
 		} else {
-			player.setPositionAndUpdate(vecs[1].xCoord, vecs[1].yCoord, vecs[1].zCoord);
+			player.setPositionAndUpdate(vecs[1].x, vecs[1].y, vecs[1].z);
 		}
 	}
 

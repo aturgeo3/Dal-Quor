@@ -28,7 +28,6 @@ public class VoidicPowerGenGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -56,19 +55,19 @@ public class VoidicPowerGenGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.gen.title");
-		fontRendererObj.drawString(text, xSize / 2 - fontRendererObj.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
+		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 		text = TranslateHelper.translate("voidcraft.gui.misc.fluid") + ":";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 2) - 100, ySize / 2 - 65, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 2) - 100, ySize / 2 - 65, 0x7700FF);
 		text = te.getFluidAmount() + "/";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 85, ySize / 2 - 55, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 55, 0x7700FF);
 		text = "" + te.getMaxFluidAmount();
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 85, ySize / 2 - 45, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 45, 0x7700FF);
 		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 2) + 70, ySize / 2 - 65, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 2) + 70, ySize / 2 - 65, 0xFF0000);
 		text = te.getPowerAmount() + "/";
-		fontRendererObj.drawString(text, (xSize / 2) + 38, ySize / 2 - 55, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2) + 38, ySize / 2 - 55, 0xFF0000);
 		text = "" + te.getMaxPower();
-		fontRendererObj.drawString(text, (xSize / 2) + 38, ySize / 2 - 45, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2) + 38, ySize / 2 - 45, 0xFF0000);
 	}
 
 	@Override

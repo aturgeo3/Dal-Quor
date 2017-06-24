@@ -38,20 +38,20 @@ public class VadeMecumCraftingNormal implements IVadeMecumCrafting {
 			ShapedRecipes r = (ShapedRecipes) recipe;
 			int size = (r.recipeItems.size() == 4 || r.recipeItems.size() == 9) ? (int) Math.sqrt(r.recipeItems.size()) : 3;
 			for (int index = 0; index <= r.recipeItems.size() - 1; index++) {
-				if (r.recipeItems.get(index).func_193365_a().length == 0)
+				if (r.recipeItems.get(index).getMatchingStacks().length == 0)
 					continue;
-				ItemStack stack = r.recipeItems.get(index).func_193365_a()[0];
+				ItemStack stack = r.recipeItems.get(index).getMatchingStacks()[0];
 				if (!stack.isEmpty())
 					gui.renderItemStack(new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage() == 32767 ? 0 : stack.getItemDamage()), x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
 			}
 		} else if (recipe instanceof ShapelessOreRecipe) {
 			ShapelessOreRecipe r = (ShapelessOreRecipe) recipe;
-			int size = r.func_192400_c().size() > 3 ? (int) Math.sqrt(r.func_192400_c().size()) : 3;
+			int size = r.getIngredients().size() > 3 ? (int) Math.sqrt(r.getIngredients().size()) : 3;
 			int index = 0;
-			for (Ingredient ing : r.func_192400_c()) {
-				if (ing.func_193365_a().length == 0)
+			for (Ingredient ing : r.getIngredients()) {
+				if (ing.getMatchingStacks().length == 0)
 					continue;
-				ItemStack stack = ing.func_193365_a()[0];
+				ItemStack stack = ing.getMatchingStacks()[0];
 				if (!stack.isEmpty())
 					gui.renderItemStack(new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage() == 32767 ? 0 : stack.getItemDamage()), x + 15 + (40 * (index % size)), y + 50 + (40 * (index / size)), mx, my);
 				index++;

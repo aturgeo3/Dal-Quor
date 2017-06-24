@@ -35,7 +35,6 @@ public class HeimdallGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -59,21 +58,21 @@ public class HeimdallGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.heimdall.title");
-		fontRendererObj.drawString(text, xSize / 2 - fontRendererObj.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
+		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 
 		text = TranslateHelper.translate("voidcraft.gui.misc.fluid") + ":";
-		fontRendererObj.drawString(text, (xSize) - 132, ySize - 230, 0x7700FF);
+		fontRenderer.drawString(text, (xSize) - 132, ySize - 230, 0x7700FF);
 		text = te.getFluidAmount() + "";
-		fontRendererObj.drawString(text, (xSize) - 132, ySize - 220, 0x7700FF);
+		fontRenderer.drawString(text, (xSize) - 132, ySize - 220, 0x7700FF);
 		text = "/" + te.getMaxFluidAmount() + "mb";
-		fontRendererObj.drawString(text, (xSize) - 132, ySize - 210, 0x7700FF);
+		fontRenderer.drawString(text, (xSize) - 132, ySize - 210, 0x7700FF);
 
 		text = TranslateHelper.translate("voidcraft.gui.misc.FE") + ":";
-		fontRendererObj.drawString(text, (xSize - fontRendererObj.getStringWidth(text)) - 226, ySize - 230, 0xAAAAFF);
+		fontRenderer.drawString(text, (xSize - fontRenderer.getStringWidth(text)) - 226, ySize - 230, 0xAAAAFF);
 		text = te.getEnergyStored() + "";
-		fontRendererObj.drawString(text, ((xSize) - (fontRendererObj.getStringWidth(text))) - 226, ySize - 220, 0xAAAAFF);
+		fontRenderer.drawString(text, ((xSize) - (fontRenderer.getStringWidth(text))) - 226, ySize - 220, 0xAAAAFF);
 		text = "/" + te.getMaxEnergyStored();
-		fontRendererObj.drawString(text, (xSize - fontRendererObj.getStringWidth(text)) - 226, ySize - 210, 0xAAAAFF);
+		fontRenderer.drawString(text, (xSize - fontRenderer.getStringWidth(text)) - 226, ySize - 210, 0xAAAAFF);
 	}
 
 	@Override

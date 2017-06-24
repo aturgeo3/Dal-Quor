@@ -48,9 +48,9 @@ public class VoidicCrystallizerContainer extends Container {
 
 		for (IContainerListener icontainerlistener : listeners) {
 			if (fluidAmount != te.getFluidAmount())
-				icontainerlistener.sendProgressBarUpdate(this, 0, te.getFluidAmount());
+				icontainerlistener.sendWindowProperty(this, 0, te.getFluidAmount());
 			if (powerAmount != te.getPowerAmount())
-				icontainerlistener.sendProgressBarUpdate(this, 1, te.getPowerAmount());
+				icontainerlistener.sendWindowProperty(this, 1, te.getPowerAmount());
 		}
 		fluidAmount = te.getFluidAmount();
 		powerAmount = te.getPowerAmount();

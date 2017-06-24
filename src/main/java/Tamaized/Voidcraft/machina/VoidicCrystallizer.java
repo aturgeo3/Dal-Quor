@@ -51,7 +51,7 @@ public class VoidicCrystallizer extends TamBlockContainer {
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state) {
+	public boolean isTopSolid(IBlockState state) {
 		return false;
 	}
 }

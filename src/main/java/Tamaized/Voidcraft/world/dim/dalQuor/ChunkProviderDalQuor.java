@@ -205,7 +205,8 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		}
 	}
 
-	public Chunk provideChunk(int x, int z) {
+	@Override
+	public Chunk generateChunk(int x, int z) {
 		this.chunkX = x;
 		this.chunkZ = z;
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
@@ -365,7 +366,8 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	}
 
 	@Nullable
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
+	@Override
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
 		return null;
 	}
 
@@ -374,7 +376,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	}
 
 	@Override
-	public boolean func_193414_a(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
+	public boolean isInsideStructure(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
 		return false;
 	}
 

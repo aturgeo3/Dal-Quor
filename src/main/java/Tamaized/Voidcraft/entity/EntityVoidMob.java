@@ -36,7 +36,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 		updateArmSwingProgress();
 		float f = getBrightness();
 		if (f > 0.5F) {
-			entityAge += 2;
+			idleTime += 2;
 		}
 		super.onLivingUpdate();
 	}
@@ -74,7 +74,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 		if (isEntityInvulnerable()) {
 			return false;
 		} else if (super.attackEntityFrom(p_70097_1_, p_70097_2_)) {
-			Entity entity = p_70097_1_.getEntity();
+			Entity entity = p_70097_1_.getTrueSource();
 			if (entity != this && entity instanceof EntityLivingBase) {
 				setAttackTarget((EntityLivingBase) entity);
 			}

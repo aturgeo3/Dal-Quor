@@ -29,7 +29,6 @@ public class VoidicAlchemyGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -53,17 +52,17 @@ public class VoidicAlchemyGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.alchemy.title");
-		this.fontRendererObj.drawString(text, this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
+		this.fontRenderer.drawString(text, this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 		text = TranslateHelper.translate("voidcraft.gui.misc.power")+":";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 60, this.ySize / 2 - 65, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 65, 0xFF0000);
 		text = te.getPowerAmount() + "/";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 60, this.ySize / 2 - 55, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 55, 0xFF0000);
 		text = "" + te.getMaxPower();
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 60, this.ySize / 2 - 45, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 45, 0xFF0000);
 		text = TranslateHelper.translate("voidcraft.gui.misc.owner")+":";
-		this.fontRendererObj.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 65, 0xFF0000);
+		this.fontRenderer.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 65, 0xFF0000);
 		text = te.getOwnerName().isEmpty() ? TranslateHelper.translate("voidcraft.gui.misc.none") : te.getOwnerName();
-		this.fontRendererObj.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 55, 0xFF0000);
+		this.fontRenderer.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 55, 0xFF0000);
 	}
 
 	@Override

@@ -1,19 +1,19 @@
 package Tamaized.Voidcraft.structures.voidCity;
 
-import java.util.List;
-import java.util.Random;
-
-import com.google.common.collect.Lists;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.mob.EntityMobEtherealGuardian;
 import Tamaized.Voidcraft.world.dim.TheVoid.ChunkProviderVoid;
+import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class MapGenVoidCity extends MapGenStructure {
 	private final int citySpacing = 20;
@@ -30,6 +30,13 @@ public class MapGenVoidCity extends MapGenStructure {
 
 	public String getStructureName() {
 		return VoidCraft.modid + "EndCity";
+	}
+
+	@Nullable
+	@Override
+	public BlockPos getNearestStructurePos(World worldIn, BlockPos pos, boolean findUnexplored) {
+		this.world = worldIn;
+		return findNearestStructurePosBySpacing(worldIn, this, pos, 20, 11, 10387313, true, 100, findUnexplored);
 	}
 
 	public List<Biome.SpawnListEntry> getSpawnList() {

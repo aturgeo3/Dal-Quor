@@ -37,11 +37,11 @@ public class RenderPlayer {
 				GlStateManager.rotate(zf1 * (-90.0F - player.rotationPitch), 1.0F, 0.0F, 0.0F);
 				Vec3d vec3d = player.getLook(partialTick);
 				double d0 = player.motionX * player.motionX + player.motionZ * player.motionZ;
-				double d1 = vec3d.xCoord * vec3d.xCoord + vec3d.zCoord * vec3d.zCoord;
+				double d1 = vec3d.x * vec3d.x + vec3d.z * vec3d.z;
 
 				if (d0 > 0.0D && d1 > 0.0D) {
-					double d2 = (player.motionX * vec3d.xCoord + player.motionZ * vec3d.zCoord) / (Math.sqrt(d0) * Math.sqrt(d1));
-					double d3 = player.motionX * vec3d.zCoord - player.motionZ * vec3d.xCoord;
+					double d2 = (player.motionX * vec3d.x + player.motionZ * vec3d.z) / (Math.sqrt(d0) * Math.sqrt(d1));
+					double d3 = player.motionX * vec3d.z - player.motionZ * vec3d.x;
 					GlStateManager.rotate((float) (Math.signum(d3) * Math.acos(d2)) * 180.0F / (float) Math.PI, 0.0F, 1.0F, 0.0F);
 				}
 			}

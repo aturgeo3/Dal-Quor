@@ -20,7 +20,7 @@ public class DeathEvent {
 			VoidTickEvent.dream((EntityPlayer) target);
 		}
 		DamageSource source = e.getSource();
-		if (target != null && !(target instanceof EntityMobSpectreChain) && source != null && source.getEntity() != null && source.getEntity() instanceof EntityMobSpectreChain) {
+		if (target != null && !(target instanceof EntityMobSpectreChain) && source != null && source.getTrueSource() != null && source.getTrueSource() instanceof EntityMobSpectreChain) {
 			EntityMobSpectreChain newSpawn = new EntityMobSpectreChain(target.world);
 			newSpawn.setLocationAndAngles(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
 			target.world.spawnEntity(newSpawn);

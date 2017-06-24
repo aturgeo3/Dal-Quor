@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.armor;
 
-import javax.annotation.Nullable;
-
 import Tamaized.TamModized.armors.TamArmor;
 import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.block.BlockDispenser;
@@ -17,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class ArmorCustomElytra extends TamArmor {
 
 	public ArmorCustomElytra(CreativeTabs tab, ArmorMaterial armorMaterial, int par3, EntityEquipmentSlot par4, String type, String n) {
@@ -27,7 +27,7 @@ public class ArmorCustomElytra extends TamArmor {
 			
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-				return ItemElytra.isBroken(stack) ? 0.0F : 1.0F;
+				return ItemElytra.isUsable(stack) ? 0.0F : 1.0F;
 			}
 			
 		});

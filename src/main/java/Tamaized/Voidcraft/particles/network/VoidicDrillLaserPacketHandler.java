@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.particles.network;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.TamModized.particles.ParticlePacketBase;
 import Tamaized.TamModized.particles.TamParticle;
@@ -14,6 +11,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 
 	@Override
@@ -23,9 +23,9 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 		boolean flag = dat.target != null;
 		packet.writeBoolean(flag);
 		if (flag) {
-			packet.writeDouble(dat.target.xCoord);
-			packet.writeDouble(dat.target.yCoord);
-			packet.writeDouble(dat.target.zCoord);
+			packet.writeDouble(dat.target.x);
+			packet.writeDouble(dat.target.y);
+			packet.writeDouble(dat.target.z);
 		}
 		packet.writeInt(dat.id);
 		packet.writeBoolean(dat.offhand);

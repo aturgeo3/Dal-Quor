@@ -163,7 +163,7 @@ public class VoidCraftItems {
 		// voidDiscs.add(record_running);
 	}
 
-	public static void preInit(){
+	public static void init() {
 		OreDictionary.registerOre("ingotSteel", voidicSteel);
 
 		OreDictionary.registerOre("dustQuartz", quartzDust);
@@ -176,9 +176,7 @@ public class VoidCraftItems {
 		OreDictionary.registerOre("dustLapis", lapisDust);
 		OreDictionary.registerOre("dustEmerald", emeraldDust);
 		OreDictionary.registerOre("dustDiamond", diamondDust);
-	}
 
-	public static void init() {
 		GameRegistry.addSmelting(VoidCraftBlocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
 		GameRegistry.addSmelting(voidCrystalBucket, VoidCraftFluids.voidBucket.getBucket(), 0.1F);

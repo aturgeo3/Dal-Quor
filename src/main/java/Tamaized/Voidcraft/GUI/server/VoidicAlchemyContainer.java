@@ -60,17 +60,17 @@ public class VoidicAlchemyContainer extends Container {
 
 			if (this.cookTick != te.cookingTick) {
 				cookTick = te.cookingTick;
-				listener.sendProgressBarUpdate(this, 0, cookTick);
+				listener.sendWindowProperty(this, 0, cookTick);
 			}
 
 			if (this.finishTick != te.finishTick) {
 				finishTick = te.finishTick;
-				listener.sendProgressBarUpdate(this, 1, finishTick);
+				listener.sendWindowProperty(this, 1, finishTick);
 			}
 
 			if (this.powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
-				listener.sendProgressBarUpdate(this, 2, powerAmount);
+				listener.sendWindowProperty(this, 2, powerAmount);
 			}
 		}
 	}

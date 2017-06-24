@@ -131,12 +131,12 @@ public class VadeMecumEntry {
 	protected final void renderButtons(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		if (buttons.containsKey(page)) {
 			for (VadeMecumButton button : buttons.get(page)) {
-				button.func_191745_a(gui.mc, mX, mY, 0);
+				button.drawButton(gui.mc, mX, mY, 0);
 			}
 		}
 		if (buttons.containsKey(page + 1)) {
 			for (VadeMecumButton button : buttons.get(page + 1)) {
-				button.func_191745_a(gui.mc, mX, mY, 0);
+				button.drawButton(gui.mc, mX, mY, 0);
 			}
 		}
 	}

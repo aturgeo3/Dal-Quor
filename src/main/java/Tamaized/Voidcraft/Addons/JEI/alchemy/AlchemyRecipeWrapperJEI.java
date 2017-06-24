@@ -15,8 +15,8 @@ public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRe
 
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		minecraft.fontRendererObj.drawString(TranslateHelper.translate("voidcraft.gui.jei.alch.research"), -40, 0, 0x000000);
-		minecraft.fontRendererObj.drawString(getRecipe().getCategory() == null ? TranslateHelper.translate("voidcraft.gui.misc.none") : TranslateHelper.translate(VadeMecumWordsOfPower.getCategoryData(getRecipe().getCategory()).getName()), -40, 10, 0x000000);
+		minecraft.fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.jei.alch.research"), -40, 0, 0x000000);
+		minecraft.fontRenderer.drawString(getRecipe().getCategory() == null ? TranslateHelper.translate("voidcraft.gui.misc.none") : TranslateHelper.translate(VadeMecumWordsOfPower.getCategoryData(getRecipe().getCategory()).getName()), -40, 10, 0x000000);
 		super.drawInfo(minecraft, recipeWidth, recipeHeight, mouseX, mouseY);
 	}
 

@@ -157,13 +157,12 @@ public class StarForgeGUI extends GuiContainer {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = ItemStack.EMPTY;
 		}
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.starforge.title");
-		this.fontRendererObj.drawString(text, this.xSize / 3 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
+		this.fontRenderer.drawString(text, this.xSize / 3 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 	}
 
 	@Override
@@ -185,9 +184,9 @@ public class StarForgeGUI extends GuiContainer {
 			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
 			itemRender.renderItemIntoGUI(stack, x, y);
-			// drawCenteredString(fontRendererObj, ""+stack.stackSize, x, y, 0xFFFFFF);
+			// drawCenteredString(fontRenderer, ""+stack.stackSize, x, y, 0xFFFFFF);
 			GlStateManager.disableDepth();
-			if (stack.getCount() > 0) drawString(fontRendererObj, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
+			if (stack.getCount() > 0) drawString(fontRenderer, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
 			GlStateManager.enableDepth();
 			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();

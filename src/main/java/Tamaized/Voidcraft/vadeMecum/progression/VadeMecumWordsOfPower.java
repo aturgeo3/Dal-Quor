@@ -116,9 +116,11 @@ public class VadeMecumWordsOfPower {
 
 	public static void invoke(World world, EntityPlayer caster) { // TODO: clean all this up, make methods/classes/helpers and so on for all this junk
 		IVadeMecumCapability cap = caster.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap == null || world.isRemote) return;
+		if (cap == null || world.isRemote)
+			return;
 		IVadeMecumCapability.Category power = cap.getCurrentActive();
-		if (power == null || !IVadeMecumCapability.isActivePower(power) || !cap.hasCategory(power)) return;
+		if (power == null || !IVadeMecumCapability.isActivePower(power) || !cap.hasCategory(power))
+			return;
 		if ((cap.getStackInSlot(power).isEmpty() || cap.getStackInSlot(power).getCount() <= 0) && !caster.inventory.hasItemStack(getCategoryData(power).getStack())) {
 			caster.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.spells.nomats", I18n.format(getCategoryData(power).getName(), new Object[0]).toString().trim()));
 			return;
@@ -134,7 +136,7 @@ public class VadeMecumWordsOfPower {
 					if (rand <= cap.getFailureChance()) {
 						ExplosionDamageHelper.explode(null, world, world.newExplosion(null, caster.posX, caster.posY, caster.posZ, 7.0F, true, true), 7.0F, caster.posX, caster.posY, caster.posZ);
 						world.playBroadcastSound(1023, caster.getPosition(), 0);
-//						caster.addStat(VoidCraft.achievements.familiarity, 1); TODO
+						//						caster.addStat(VoidCraft.achievements.familiarity, 1); TODO
 						useCharge = true;
 					} else {
 						doCast = true;
@@ -154,9 +156,10 @@ public class VadeMecumWordsOfPower {
 						int i = MathHelper.floor(caster.posX) - 2;
 						int j = MathHelper.floor(caster.posZ) - 2;
 						int k = MathHelper.floor(caster.getEntityBoundingBox().minY);
-						theLoop: for (int l = 0; l <= 4; ++l) {
+						theLoop:
+						for (int l = 0; l <= 4; ++l) {
 							for (int i1 = 0; i1 <= 4; ++i1) {
-								if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && world.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isFullyOpaque() && isEmptyBlock(world, new BlockPos(i + l, k, j + i1)) && isEmptyBlock(world, new BlockPos(i + l, k + 1, j + i1))) {
+								if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && world.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isTopSolid() && isEmptyBlock(world, new BlockPos(i + l, k, j + i1)) && isEmptyBlock(world, new BlockPos(i + l, k + 1, j + i1))) {
 									companion.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), companion.rotationYaw, companion.rotationPitch);
 									break theLoop;
 								}
@@ -165,7 +168,7 @@ public class VadeMecumWordsOfPower {
 						world.spawnEntity(companion);
 						useCharge = true;
 					}
-						break;
+					break;
 					case Flame: {
 						exclude.add(caster);
 						result = RayTraceHelper.tracePath(world, caster, 32, 1, exclude);
@@ -179,62 +182,64 @@ public class VadeMecumWordsOfPower {
 									case UP: {
 										pos = pos.add(0, 1, 0);
 									}
-										break;
+									break;
 									case DOWN: {
 										pos = pos.add(0, -1, 0);
 									}
-										break;
+									break;
 									case NORTH: {
 										pos = pos.add(0, 0, -1);
 									}
-										break;
+									break;
 									case SOUTH: {
 										pos = pos.add(0, 0, 1);
 									}
-										break;
+									break;
 									case EAST: {
 										pos = pos.add(1, 0, 0);
 									}
-										break;
+									break;
 									case WEST: {
 										pos = pos.add(-1, 0, 0);
 									}
-										break;
+									break;
 								}
-								if (world.isAirBlock(pos)) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+								if (world.isAirBlock(pos))
+									world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 							}
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case FireSheathe: {
 						SheatheHelper.castSheathe(caster, PotionSheathe.Type.Fire, 20 * 90);
 						useCharge = true;
 					}
-						break;
+					break;
 					case Fireball: {
 						Vec3d vec = caster.getLookVec();
-						EntityFireball entity = new EntityLargeFireball(world, caster, vec.xCoord, vec.yCoord, vec.zCoord);
+						EntityFireball entity = new EntityLargeFireball(world, caster, vec.x, vec.y, vec.z);
 						entity.shootingEntity = caster;
 						world.spawnEntity(entity);
 						useCharge = true;
 					}
-						break;
+					break;
 					case FireTrap: {
 						useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.FIRE, 10, 5, 0xFF5733));
 					}
-						break;
+					break;
 					case ExplosionFire: {
 						world.createExplosion(caster, caster.posX, caster.posY, caster.posZ, 10.0F, false);
 						useCharge = true;
 					}
-						break;
+					break;
 					case RingOfFire: {
 						for (BlockPos pos : createCircle(caster.getPosition()))
-							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.isBlockFullCube(pos.down()))) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.isBlockFullCube(pos.down())))
+								world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 						useCharge = true;
 					}
-						break;
+					break;
 					case Shock: {
 						exclude.add(caster);
 						RayTraceResult ray = RayTraceHelper.tracePath(world, caster, 2, 1, exclude);
@@ -243,12 +248,12 @@ public class VadeMecumWordsOfPower {
 							useCharge = true;
 						}
 					}
-						break;
+					break;
 					case ShockSheathe: {
 						SheatheHelper.castSheathe(caster, PotionSheathe.Type.Lit, 20 * 90);
 						useCharge = true;
 					}
-						break;
+					break;
 					case LitStrike: {
 						exclude.add(caster);
 						result = RayTraceHelper.tracePath(world, caster, 32, 1, exclude);
@@ -266,15 +271,16 @@ public class VadeMecumWordsOfPower {
 							useCharge = true;
 						}
 					}
-						break;
+					break;
 					case LitTrap: {
 						useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.SHOCK, 10, 5, 0xFFFFFF));
 					}
-						break;
+					break;
 					case ExplosionLit: {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
-							if (!(e instanceof EntityLivingBase)) continue;
+							if (!(e instanceof EntityLivingBase))
+								continue;
 							((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
 						}
 						for (int index = 0; index < 1000; index++) {
@@ -282,7 +288,7 @@ public class VadeMecumWordsOfPower {
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case RingOfLit: {
 						for (BlockPos pos : createCircle(caster.getPosition())) {
 							EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, caster, pos.getX(), pos.getY(), pos.getZ(), false);
@@ -290,7 +296,7 @@ public class VadeMecumWordsOfPower {
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case Freeze: {
 						exclude.add(caster);
 						RayTraceResult ray = RayTraceHelper.tracePath(world, caster, 2, 1, exclude);
@@ -299,12 +305,12 @@ public class VadeMecumWordsOfPower {
 							useCharge = true;
 						}
 					}
-						break;
+					break;
 					case FrostSheathe: {
 						SheatheHelper.castSheathe(caster, PotionSheathe.Type.Frost, 20 * 90);
 						useCharge = true;
 					}
-						break;
+					break;
 					case IceSpike: {
 						exclude.add(caster);
 						result = RayTraceHelper.tracePath(world, caster, 32, 1, exclude);
@@ -314,7 +320,8 @@ public class VadeMecumWordsOfPower {
 								if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 									world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 									TileEntity te = world.getTileEntity(pos);
-									if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+									if (te instanceof TileEntitySpellIceSpike)
+										((TileEntitySpellIceSpike) te).setCaster(caster);
 								}
 							} else {
 								BlockPos bp = result.getBlockPos();
@@ -322,26 +329,29 @@ public class VadeMecumWordsOfPower {
 									if (world.getBlockState(bp).getBlock().isReplaceable(world, bp)) {
 										world.setBlockState(bp, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 										TileEntity te = world.getTileEntity(bp);
-										if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+										if (te instanceof TileEntitySpellIceSpike)
+											((TileEntitySpellIceSpike) te).setCaster(caster);
 									} else if ((world.isAirBlock(bp.up()) || world.getBlockState(bp.up()).getBlock().isReplaceable(world, bp.up())) && (!world.isAirBlock(bp) && world.getBlockState(bp).isFullCube())) {
 										world.setBlockState(bp.up(), VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 										TileEntity te = world.getTileEntity(bp.up());
-										if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+										if (te instanceof TileEntitySpellIceSpike)
+											((TileEntitySpellIceSpike) te).setCaster(caster);
 									}
 								}
 							}
 							useCharge = true;
 						}
 					}
-						break;
+					break;
 					case FrostTrap: {
 						useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.FROST, 10, 5, 0x00FFFF));
 					}
-						break;
+					break;
 					case ExplosionFrost: {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
-							if (!(e instanceof EntityLivingBase)) continue;
+							if (!(e instanceof EntityLivingBase))
+								continue;
 							((EntityLivingBase) e).attackEntityFrom(new DamageSourceFrost(), 10);
 							((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 						}
@@ -350,50 +360,52 @@ public class VadeMecumWordsOfPower {
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case RingOfFrost: {
 						for (BlockPos pos : createCircle(caster.getPosition()))
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 								world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 								TileEntity te = world.getTileEntity(pos);
-								if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+								if (te instanceof TileEntitySpellIceSpike)
+									((TileEntitySpellIceSpike) te).setCaster(caster);
 							}
 						useCharge = true;
 					}
-						break;
+					break;
 					case AcidSpray: {
 						Vec3d vec = caster.getLook(1f);
 						int damageRange = 5;
-						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - (vec.xCoord * damageRange), caster.posY - (vec.yCoord * damageRange), caster.posZ - (vec.zCoord * damageRange), caster.posX + (vec.xCoord * damageRange), caster.posY + (vec.yCoord * damageRange), caster.posZ + (vec.zCoord * damageRange)));
+						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - (vec.x * damageRange), caster.posY - (vec.y * damageRange), caster.posZ - (vec.z * damageRange), caster.posX + (vec.x * damageRange), caster.posY + (vec.y * damageRange), caster.posZ + (vec.z * damageRange)));
 						for (Entity e : damageList) {
 							e.attackEntityFrom(new DamageSourceAcid(), 5);
 						}
 						for (int index = 0; index < 300; index++) {
-							ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(vec.xCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.yCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.zCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
+							ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case AcidSheathe: {
 						SheatheHelper.castSheathe(caster, PotionSheathe.Type.Acid, 20 * 90);
 						useCharge = true;
 					}
-						break;
+					break;
 					case Disint: {
 						ProjectileDisintegration disint = new ProjectileDisintegration(world, caster, caster.posX, caster.posY, caster.posZ);
 						disint.setDamageRangeSpeed(15, 0.0F, 0.5D);
 						world.spawnEntity(disint);
 						useCharge = true;
 					}
-						break;
+					break;
 					case AcidTrap: {
 						useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.ACID, 10, 5, 0x00FF00));
 					}
-						break;
+					break;
 					case ExplosionAcid: {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
-							if (!(e instanceof EntityLivingBase)) continue;
+							if (!(e instanceof EntityLivingBase))
+								continue;
 							((EntityLivingBase) e).attackEntityFrom(new DamageSourceAcid(), 10);
 						}
 						for (int index = 0; index < 1000; index++) {
@@ -401,7 +413,7 @@ public class VadeMecumWordsOfPower {
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case RingOfAcid: {
 						for (BlockPos pos : createCircle(caster.getPosition()))
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
@@ -409,7 +421,7 @@ public class VadeMecumWordsOfPower {
 							}
 						useCharge = true;
 					}
-						break;
+					break;
 					case VoidicTouch: {
 						exclude.add(caster);
 						RayTraceResult ray = RayTraceHelper.tracePath(world, caster, 2, 1, exclude);
@@ -419,29 +431,30 @@ public class VadeMecumWordsOfPower {
 							useCharge = true;
 						}
 					}
-						break;
+					break;
 					case VoidicSheathe: {
 						SheatheHelper.castSheathe(caster, PotionSheathe.Type.Void, 20 * 90);
 						useCharge = true;
 					}
-						break;
+					break;
 					case Implosion: {
 						List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 						for (Entity e : damageList) {
-							if (!(e instanceof EntityLivingBase)) continue;
+							if (!(e instanceof EntityLivingBase))
+								continue;
 							world.spawnEntity(new EntitySpellImplosion(world, e));
 						}
 						useCharge = true;
 					}
-						break;
+					break;
 					case Invoke: {
 						caster.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 5));
 						useCharge = true;
 					}
-						break;
+					break;
 					default: {
 					}
-						break;
+					break;
 				}
 			}
 		}
@@ -449,7 +462,8 @@ public class VadeMecumWordsOfPower {
 		if (useCharge) {
 			if (!cap.getStackInSlot(power).isEmpty()) {
 				cap.getStackInSlot(power).shrink(1);
-				if (cap.getStackInSlot(power).getCount() <= 0) cap.setStackSlot(power, ItemStack.EMPTY);
+				if (cap.getStackInSlot(power).getCount() <= 0)
+					cap.setStackSlot(power, ItemStack.EMPTY);
 			} else {
 				for (int i = 0; i < caster.inventory.getSizeInventory(); ++i) {
 					ItemStack itemstack = caster.inventory.getStackInSlot(i);
@@ -463,19 +477,21 @@ public class VadeMecumWordsOfPower {
 	}
 
 	public static void invoke(World world, IVadeMecumCapability.Category power, EntityLivingBase caster, EntityLivingBase target) {
-		if (world.isRemote) return;
+		if (world.isRemote)
+			return;
 		if (power != null) {
 			switch (power) {
 				case Flame: {
 					target.setFire(10);
 					BlockPos pos = target.getPosition();
-					if (world.isAirBlock(pos)) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+					if (world.isAirBlock(pos))
+						world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 				}
-					break;
+				break;
 				case FireSheathe: {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Fire, 20 * 90);
 				}
-					break;
+				break;
 				case Fireball: {
 					double d5 = target.posX - caster.posX;
 					double d6 = target.getEntityBoundingBox().minY + (double) (target.height / 2.0F) - (caster.posY + (double) (caster.height / 2.0F));
@@ -485,50 +501,52 @@ public class VadeMecumWordsOfPower {
 					entity.posY += 1;
 					world.spawnEntity(entity);
 				}
-					break;
+				break;
 				case FireTrap: {
 					// castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.FIRE, 10, 5, 0xFF5733));
 				}
-					break;
+				break;
 				case ExplosionFire: {
 					world.createExplosion(caster, caster.posX, caster.posY, caster.posZ, 10.0F, false);
 				}
-					break;
+				break;
 				case RingOfFire: {
 					for (BlockPos pos : createCircle(caster.getPosition()))
-						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.isBlockFullCube(pos.down()))) world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.isBlockFullCube(pos.down())))
+							world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 				}
-					break;
+				break;
 				case Shock: {
 					target.attackEntityFrom(new DamageSourceLit(), 5);
 				}
-					break;
+				break;
 				case ShockSheathe: {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Lit, 20 * 90);
 				}
-					break;
+				break;
 				case LitStrike: {
 					if (target instanceof EntityPlayer) {
 						EntityCasterLightningBolt entitylightningbolt = new EntityCasterLightningBolt(world, caster, target.posX, target.posY, target.posZ, false);
 						world.addWeatherEffect(entitylightningbolt);
 					}
 				}
-					break;
+				break;
 				case LitTrap: {
 					// useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.SHOCK, 10, 5, 0xFFFFFF));
 				}
-					break;
+				break;
 				case ExplosionLit: {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
-						if (!(e instanceof EntityLivingBase)) continue;
+						if (!(e instanceof EntityLivingBase))
+							continue;
 						((EntityLivingBase) e).attackEntityFrom(new DamageSourceLit(), 10);
 					}
 					for (int index = 0; index < 1000; index++) {
 						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0xFFFFFFFF)));
 					}
 				}
-					break;
+				break;
 				case RingOfLit: {
 					if (target instanceof EntityPlayer) {
 						for (BlockPos pos : createCircle(caster.getPosition())) {
@@ -537,32 +555,34 @@ public class VadeMecumWordsOfPower {
 						}
 					}
 				}
-					break;
+				break;
 				case Freeze: {
 					target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 				}
-					break;
+				break;
 				case FrostSheathe: {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Frost, 20 * 90);
 				}
-					break;
+				break;
 				case IceSpike: {
 					BlockPos pos = target.getPosition();
 					if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 						world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 						TileEntity te = world.getTileEntity(pos);
-						if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+						if (te instanceof TileEntitySpellIceSpike)
+							((TileEntitySpellIceSpike) te).setCaster(caster);
 					}
 				}
-					break;
+				break;
 				case FrostTrap: {
 					// useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.FROST, 10, 5, 0x00FFFF));
 				}
-					break;
+				break;
 				case ExplosionFrost: {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
-						if (!(e instanceof EntityLivingBase)) continue;
+						if (!(e instanceof EntityLivingBase))
+							continue;
 						((EntityLivingBase) e).attackEntityFrom(new DamageSourceFrost(), 10);
 						((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 					}
@@ -570,80 +590,83 @@ public class VadeMecumWordsOfPower {
 						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FFFFFF)));
 					}
 				}
-					break;
+				break;
 				case RingOfFrost: {
 					for (BlockPos pos : createCircle(caster.getPosition()))
 						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 							world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 							TileEntity te = world.getTileEntity(pos);
-							if (te instanceof TileEntitySpellIceSpike) ((TileEntitySpellIceSpike) te).setCaster(caster);
+							if (te instanceof TileEntitySpellIceSpike)
+								((TileEntitySpellIceSpike) te).setCaster(caster);
 						}
 				}
-					break;
+				break;
 				case AcidSpray: {
 					Vec3d vec = caster.getLook(1f);
 					int damageRange = 5;
-					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - (vec.xCoord * damageRange), caster.posY - (vec.yCoord * damageRange), caster.posZ - (vec.zCoord * damageRange), caster.posX + (vec.xCoord * damageRange), caster.posY + (vec.yCoord * damageRange), caster.posZ + (vec.zCoord * damageRange)));
+					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - (vec.x * damageRange), caster.posY - (vec.y * damageRange), caster.posZ - (vec.z * damageRange), caster.posX + (vec.x * damageRange), caster.posY + (vec.y * damageRange), caster.posZ + (vec.z * damageRange)));
 					for (Entity e : damageList) {
 						e.attackEntityFrom(new DamageSourceAcid(), 5);
 					}
 					for (int index = 0; index < 300; index++) {
-						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(vec.xCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.yCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.zCoord * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
+						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
 					}
 				}
-					break;
+				break;
 				case AcidSheathe: {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Acid, 20 * 90);
 				}
-					break;
+				break;
 				case Disint: {
 					ProjectileDisintegration disint = new ProjectileDisintegration(world, caster, caster.posX, caster.posY, caster.posZ);
 					disint.setDamageRangeSpeed(15, 0.0F, 0.5D);
 					world.spawnEntity(disint);
 				}
-					break;
+				break;
 				case AcidTrap: {
 					// useCharge = castRune(world, caster, new EntitySpellRune(world, EntitySpellRune.DamageType.ACID, 10, 5, 0x00FF00));
 				}
-					break;
+				break;
 				case ExplosionAcid: {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
-						if (!(e instanceof EntityLivingBase)) continue;
+						if (!(e instanceof EntityLivingBase))
+							continue;
 						((EntityLivingBase) e).attackEntityFrom(new DamageSourceAcid(), 10);
 					}
 					for (int index = 0; index < 1000; index++) {
 						ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
 					}
 				}
-					break;
+				break;
 				case RingOfAcid: {
 					for (BlockPos pos : createCircle(caster.getPosition()))
 						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 							world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
 						}
 				}
-					break;
+				break;
 				case VoidicTouch: {
 					target.attackEntityFrom(new DamageSourceVoidicInfusion(), 5);
 					target.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 3));
 				}
-					break;
+				break;
 				case VoidicSheathe: {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Void, 20 * 90);
 				}
-					break;
+				break;
 				case Implosion: {
 					List<Entity> damageList = world.getEntitiesWithinAABBExcludingEntity(caster, new AxisAlignedBB(caster.posX - 5, caster.posY - 5, caster.posZ - 5, caster.posX + 5, caster.posY + 5, caster.posZ + 5));
 					for (Entity e : damageList) {
-						if (!(e instanceof EntityLivingBase)) continue;
+						if (!(e instanceof EntityLivingBase))
+							continue;
 						world.spawnEntity(new EntitySpellImplosion(world, e));
 					}
 				}
-					break;
+				break;
 				default: {
 				}
-					break;
+				break;
 			}
 
 		}
@@ -651,7 +674,7 @@ public class VadeMecumWordsOfPower {
 	}
 
 	private static BlockPos[] createCircle(BlockPos pos) {
-		return new BlockPos[] {
+		return new BlockPos[]{
 
 				pos.add(3, 0, 1), pos.add(3, 0, 0), pos.add(3, 0, -1),
 

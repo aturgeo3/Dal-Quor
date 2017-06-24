@@ -48,7 +48,7 @@ public class RealityStabilizerContainer extends Container {
 		for (int i = 0; i < listeners.size(); ++i) {
 			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
 			if (amount != te.getPowerAmount()) {
-				icontainerlistener.sendProgressBarUpdate(this, 0, te.getPowerAmount());
+				icontainerlistener.sendWindowProperty(this, 0, te.getPowerAmount());
 			}
 		}
 		amount = te.getPowerAmount();

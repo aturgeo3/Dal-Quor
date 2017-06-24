@@ -52,12 +52,12 @@ public class VoidInfuserContainer extends Container {
 		for (IContainerListener icontainerlistener : listeners) {
 			if (this.cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
-				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
+				icontainerlistener.sendWindowProperty(this, 0, cookAmount);
 				cookAmount = te.cookingTick;
 			}
 
 			if (amount != te.getFluidAmount()) {
-				icontainerlistener.sendProgressBarUpdate(this, 1, te.getFluidAmount());
+				icontainerlistener.sendWindowProperty(this, 1, te.getFluidAmount());
 				amount = te.getFluidAmount();
 			}
 		}

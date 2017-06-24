@@ -23,7 +23,7 @@ public class RenderVoidicCharger extends TileEntitySpecialRenderer<TileEntityVoi
 	}
 
 	@Override
-	public void func_192841_a(TileEntityVoidicCharger te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_){
+	public void render(TileEntityVoidicCharger te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_){
         GL11.glPushMatrix();
         GlStateManager.disableLighting();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);

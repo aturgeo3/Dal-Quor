@@ -111,17 +111,17 @@ public class TeleporterVoid extends Teleporter {
 			Vec3d aG = new Vec3d(aG1, aG2, 0.0D);
 			EnumFacing eTD = blockpattern$patternhelper.getForwards();
 
-			d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - aG.yCoord * (double) blockpattern$patternhelper.getHeight();
+			d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - aG.y * (double) blockpattern$patternhelper.getHeight();
 
 			if (flag1) {
 				++d2;
 			}
 
 			if (blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X) {
-				d7 = d2 + (1.0D - aG.xCoord) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+				d7 = d2 + (1.0D - aG.x) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 				xP = 1;
 			} else {
-				d5 = d2 + (1.0D - aG.xCoord) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+				d5 = d2 + (1.0D - aG.x) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
 				zP = 1;
 			}
 

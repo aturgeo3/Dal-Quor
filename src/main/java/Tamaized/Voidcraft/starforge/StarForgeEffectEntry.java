@@ -49,8 +49,8 @@ public class StarForgeEffectEntry extends GUIListElement {
 		worldr.pos(min + 1, slotTop - 1, 0).tex(0, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
 		tess.draw();
 		GlStateManager.enableTexture2D();
-		starforgeGUI.drawString(mc.fontRendererObj, recipe.getEffect().getName(), x - 160, y + 5, 0xFFFFFF);
-		int i = mc.fontRendererObj.getStringWidth(recipe.getEffect().getName());
+		starforgeGUI.drawString(mc.fontRenderer, recipe.getEffect().getName(), x - 160, y + 5, 0xFFFFFF);
+		int i = mc.fontRenderer.getStringWidth(recipe.getEffect().getName());
 		int index = 0;
 		for (ItemStack stack : recipe.getInputs()) {
 			starforgeGUI.renderItemStack(stack, (x - 160) + i + 5 + (20 * index), y, starforgeGUI.mouseX, starforgeGUI.mouseY);

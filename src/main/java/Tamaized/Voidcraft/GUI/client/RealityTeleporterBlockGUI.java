@@ -31,7 +31,6 @@ public class RealityTeleporterBlockGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -49,23 +48,23 @@ public class RealityTeleporterBlockGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.title");
-		this.fontRendererObj.drawString(text, this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
+		this.fontRenderer.drawString(text, this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 		BlockPos linkPos = te.getLink();
 		if (linkPos != null) {
 			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.link") + ":";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
+			this.fontRenderer.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
 			text = "{ x: " + linkPos.getX() + ", y:" + linkPos.getY() + ", z:" + linkPos.getZ() + " }";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 60, 0xAAAAAA);
+			this.fontRenderer.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 60, 0xAAAAAA);
 		} else {
 			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.nolink") + ":";
-			this.fontRendererObj.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
+			this.fontRenderer.drawString(text, (this.xSize / 2) + 30, this.ySize / 2 - 70, 0xAAAAAA);
 		}
 		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 70, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 55, this.ySize / 2 - 70, 0xFF0000);
 		text = te == null ? "N/A" : te.getPowerAmount() + "/";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 60, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 55, this.ySize / 2 - 60, 0xFF0000);
 		text = te == null ? "N/A" : te.getMaxPower() + "";
-		this.fontRendererObj.drawString(text, (this.xSize / 2 - this.fontRendererObj.getStringWidth(text) / 1) - 55, this.ySize / 2 - 50, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 55, this.ySize / 2 - 50, 0xFF0000);
 	}
 
 	@Override

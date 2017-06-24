@@ -26,7 +26,7 @@ public class WorldProviderXia extends WorldProvider {
 	protected void init() {
 		this.biomeProvider = new BiomeProviderSingle(VoidCraft.biomes.biomeXia);
 		this.doesWaterVaporize = false;
-		this.hasNoSky = true;
+		this.nether = true;
 		if (world instanceof WorldServer) {
 			xiaCastleHandler = new XiaCastleLogicHandler(world);
 			if (world.getChunkProvider() != null) xiaCastleHandler.start();

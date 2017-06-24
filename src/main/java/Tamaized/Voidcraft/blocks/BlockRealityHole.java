@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.blocks;
 
-import java.util.Random;
-
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
@@ -18,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class BlockRealityHole extends TamBlock {
 
@@ -50,8 +50,8 @@ public class BlockRealityHole extends TamBlock {
 						Random rand = worldIn.rand;
 						int i = rand.nextInt(VoidCraft.config.getRealityWhiteList().size());
 						int dim = VoidCraft.config.getRealityWhiteList().get(i);
-						if (player.mcServer.worldServerForDimension(dim) != null) {
-							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.worldServerForDimension(dim), player.getPosition()));
+						if (player.mcServer.getWorld(dim) != null) {
+							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.getWorld(dim), player.getPosition()));
 						}
 						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}

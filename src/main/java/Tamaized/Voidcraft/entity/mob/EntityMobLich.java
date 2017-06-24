@@ -169,7 +169,7 @@ public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
         }
 
         @Override
-        public boolean continueExecuting() {
+        public boolean shouldContinueExecuting() {
             return shouldExecute() || !entity.getNavigator().noPath();
         }
 

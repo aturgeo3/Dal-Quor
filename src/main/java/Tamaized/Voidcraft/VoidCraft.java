@@ -55,7 +55,6 @@ import Tamaized.Voidcraft.handlers.*;
 import Tamaized.Voidcraft.machina.tileentity.*;
 import Tamaized.Voidcraft.network.ServerPacketHandler;
 import Tamaized.Voidcraft.registry.*;
-import Tamaized.Voidcraft.sound.VoidSoundEvents;
 import Tamaized.Voidcraft.starforge.StarForgeEffectRecipeList;
 import Tamaized.Voidcraft.starforge.effects.StarForgeEffectList;
 import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
@@ -191,14 +190,6 @@ public class VoidCraft extends TamModBase {
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
 
-		VoidCraftItems.preInit();
-		VoidCraftBiomes.preInit();
-		VoidCraftPotions.preInit();
-		VoidCraftFluids.preInit();
-
-		// Register Sounds Events
-		VoidSoundEvents.register();
-
 		// API Loader
 		if (Loader.isModLoaded("Thaumcraft")) {
 			// logger.info("Thaumcraft Detected. Attempting to load API");
@@ -228,9 +219,11 @@ public class VoidCraft extends TamModBase {
 	public void init(FMLInitializationEvent event) {
 		logger.info("Starting VoidCraft Init");
 
+		VoidCraftFluids.init();
 		VoidCraftItems.init();
 		VoidCraftAchievements.init();
 		VoidCraftTERecipes.init();
+		VoidCraftBiomes.init();
 
 		// Register StarForge Effects
 		StarForgeEffectList.register();
@@ -296,8 +289,8 @@ public class VoidCraft extends TamModBase {
 		DimensionManager.registerDimension(config.getDimensionIdDalQuor(), DimensionType.register("Dal Quor", "_dalquor", config.getDimensionIdDalQuor(), WorldProviderDalQuor.class, false));
 
 		// Register Portals
-		PortalHandlerRegistry.register(blocks.blockPortalVoid, config.getDimensionIdVoid(), TeleporterVoid.class);
-		PortalHandlerRegistry.register(blocks.blockPortalXia, config.getDimensionIdXia(), TeleporterXia.class);
+		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalVoid, config.getDimensionIdVoid(), TeleporterVoid.class);
+		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalXia, config.getDimensionIdXia(), TeleporterXia.class);
 
 		// Register World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);

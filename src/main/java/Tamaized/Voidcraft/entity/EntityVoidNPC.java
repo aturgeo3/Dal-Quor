@@ -138,7 +138,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		updateArmSwingProgress();
 		float f = getBrightness();
 		if (f > 0.5F) {
-			entityAge += 2;
+			idleTime += 2;
 		}
 		super.onLivingUpdate();
 	}
@@ -166,7 +166,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	}
 
 	@Override
-	public void func_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
+	public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 		prevLimbSwingAmount = limbSwingAmount;
 		double d0 = posX - prevPosX;
 		double d1 = posZ - prevPosZ;
@@ -185,7 +185,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		if (isInvulnerable()) {
 			return false;
 		} else if (super.attackEntityFrom(source, amount)) {
-			Entity entity = source.getEntity();
+			Entity entity = source.getTrueSource();
 			if (entity != this && entity instanceof EntityLivingBase) {
 				setAttackTarget((EntityLivingBase) entity);
 			}

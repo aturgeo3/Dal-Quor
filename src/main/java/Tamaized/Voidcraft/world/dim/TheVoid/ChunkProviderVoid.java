@@ -235,7 +235,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	}
 
 	@Override
-	public Chunk provideChunk(int x, int z) {
+	public Chunk generateChunk(int x, int z) {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		this.prepareHeights(x, z, chunkprimer);
@@ -394,20 +394,20 @@ public class ChunkProviderVoid implements IChunkGenerator {
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
 		return structureName.equals(genFortress.getStructureName()) ?
 
-				genFortress.getClosestStrongholdPos(worldIn, position, p_180513_4_) :
+				genFortress.getNearestStructurePos(worldIn, position, findUnexplored) :
 
 				structureName.equals(genCity.getStructureName()) ?
 
-						genCity.getClosestStrongholdPos(worldIn, position, p_180513_4_) :
+						genCity.getClosestStrongholdPos(worldIn, position, findUnexplored) :
 
 						null;
 	}
 
 	@Override
-	public boolean func_193414_a(World worldIn, String structureName, BlockPos position) {
+	public boolean isInsideStructure(World worldIn, String structureName, BlockPos position) {
 		return structureName.equals(genFortress.getStructureName()) ?
 
 				genFortress.isInsideStructure(position) :

@@ -48,7 +48,7 @@ public class RealityTeleporterBlockContainer extends Container {
 		super.detectAndSendChanges();
 		for (IContainerListener listener : listeners) {
 			if (te != null && amount != te.getPowerAmount()) {
-				listener.sendProgressBarUpdate(this, 0, te.getPowerAmount());
+				listener.sendWindowProperty(this, 0, te.getPowerAmount());
 				amount = te.getPowerAmount();
 			}
 		}

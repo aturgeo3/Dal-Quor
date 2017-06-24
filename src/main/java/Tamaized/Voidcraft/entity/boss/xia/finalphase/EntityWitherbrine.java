@@ -489,19 +489,19 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isEntityInvulnerable(source)) {
 			return false;
-		} else if (source != DamageSource.DROWN && !(source.getEntity() instanceof EntityWitherbrine)) {
+		} else if (source != DamageSource.DROWN && !(source.getTrueSource() instanceof EntityWitherbrine)) {
 			if (this.getInvulTime() > 0 && source != DamageSource.OUT_OF_WORLD) {
 				return false;
 			} else {
 				if (this.isArmored()) {
-					Entity entity = source.getSourceOfDamage();
+					Entity entity = source.getImmediateSource();
 
 					if (entity instanceof EntityArrow) {
 						return false;
 					}
 				}
 
-				Entity entity1 = source.getEntity();
+				Entity entity1 = source.getTrueSource();
 
 				if (entity1 != null && !(entity1 instanceof EntityPlayer) && entity1 instanceof EntityLivingBase && ((EntityLivingBase) entity1).getCreatureAttribute() == this.getCreatureAttribute()) {
 					return false;
@@ -535,7 +535,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 */
 	@Override
 	protected void despawnEntity() {
-		this.entityAge = 0;
+		this.idleTime = 0;
 	}
 
 	@Override

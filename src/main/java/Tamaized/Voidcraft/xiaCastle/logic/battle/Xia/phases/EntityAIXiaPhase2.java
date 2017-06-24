@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia.phases;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
@@ -17,6 +14,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
 
@@ -186,9 +186,9 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 		float dist = 0.60f;
 
-		double newPointX = vecA.xCoord + ((vecB.xCoord - vecA.xCoord) * dist);
-		double newPointY = vecA.yCoord + ((vecB.yCoord - vecA.yCoord) * dist);
-		double newPointZ = vecA.zCoord + ((vecB.zCoord - vecA.zCoord) * dist);
+		double newPointX = vecA.x + ((vecB.x - vecA.x) * dist);
+		double newPointY = vecA.y + ((vecB.y - vecA.y) * dist);
+		double newPointZ = vecA.z + ((vecB.z - vecA.z) * dist);
 
 		getEntity().setPosition(newPointX, newPointY, newPointZ);
 		currAction = Action.FOLLOW;
@@ -214,7 +214,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		loc[0] = (world.rand.nextDouble() * (teleportationBox.maxX - teleportationBox.minX)) + teleportationBox.minX;
 		loc[1] = teleportationBox.maxY;
 		loc[2] = (world.rand.nextDouble() * (teleportationBox.maxZ - teleportationBox.minZ)) + teleportationBox.minZ;
-		while (world.isAirBlock(new BlockPos(getPosition().xCoord + loc[0], getPosition().yCoord + loc[1], getPosition().zCoord + loc[2]))) {
+		while (world.isAirBlock(new BlockPos(getPosition().x + loc[0], getPosition().y + loc[1], getPosition().z + loc[2]))) {
 			loc[1] -= 1.0D;
 		}
 		return loc;

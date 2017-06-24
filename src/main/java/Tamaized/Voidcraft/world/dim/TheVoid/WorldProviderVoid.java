@@ -19,7 +19,7 @@ public class WorldProviderVoid extends WorldProvider {
 	protected void init() {
 		this.biomeProvider = new BiomeProviderSingle(VoidCraft.biomes.biomeVoid);
 		this.doesWaterVaporize = false;
-		this.hasNoSky = true;
+		this.nether = true;
 	}
 
 	@SideOnly(Side.CLIENT)

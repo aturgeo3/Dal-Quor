@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle.Xia;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.entity.boss.xia.EntityBossXia;
@@ -14,6 +11,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class XiaBattleHandler implements IBattleHandler {
 
@@ -44,7 +44,7 @@ public class XiaBattleHandler implements IBattleHandler {
 				Iterator<EntityPlayer> iter = players.iterator();
 				while (iter.hasNext()) {
 					EntityPlayer player = iter.next();
-					if (!checkBB.isVecInside(player.getPositionVector())) {
+					if (!checkBB.contains(player.getPositionVector())) {
 						iter.remove();
 					}
 				}

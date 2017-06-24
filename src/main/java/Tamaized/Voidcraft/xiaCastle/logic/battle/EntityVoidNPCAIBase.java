@@ -1,7 +1,5 @@
 package Tamaized.Voidcraft.xiaCastle.logic.battle;
 
-import java.util.ArrayList;
-
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityAIBlock;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;
@@ -10,6 +8,8 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends EntityAIBase {
 
@@ -99,7 +99,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 	}
 
 	public BlockPos getBlockPosition() {
-		return new BlockPos(pos.xCoord, Math.ceil(pos.yCoord), pos.zCoord);
+		return new BlockPos(pos.x, Math.ceil(pos.y), pos.z);
 	}
 
 	public abstract void readPacket(IVoidBossAIPacket packet);

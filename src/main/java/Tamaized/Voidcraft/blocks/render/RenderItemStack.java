@@ -1,9 +1,9 @@
 package Tamaized.Voidcraft.blocks.render;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityHeimdall;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -18,12 +18,12 @@ public class RenderItemStack extends TileEntityItemStackRenderer {
 	@Override
 	public void renderByItem(ItemStack itemStack) {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
-		if(block == VoidCraft.blocks.Heimdall) {
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(heimdallInstance, 0.0D, 0.0D, 0.0D, 0.0F);
-		}else if(block == VoidCraft.blocks.blockNoBreak) {
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(noBreakInstance, 0.0D, 0.0D, 0.0D, 0.0F);
-		}else if(block == VoidCraft.blocks.voidicCharger) {
-			TileEntityRendererDispatcher.instance.renderTileEntityAt(voidicChargerInstance, 0.0D, 0.0D, 0.0D, 0.0F);
+		if(block == VoidCraftBlocks.Heimdall) {
+			TileEntityRendererDispatcher.instance.render(heimdallInstance, 0.0D, 0.0D, 0.0D, 0.0F);
+		}else if(block == VoidCraftBlocks.blockNoBreak) {
+			TileEntityRendererDispatcher.instance.render(noBreakInstance, 0.0D, 0.0D, 0.0D, 0.0F);
+		}else if(block == VoidCraftBlocks.voidicCharger) {
+			TileEntityRendererDispatcher.instance.render(voidicChargerInstance, 0.0D, 0.0D, 0.0D, 0.0F);
 		}else{
 			super.renderByItem(itemStack);
 		}

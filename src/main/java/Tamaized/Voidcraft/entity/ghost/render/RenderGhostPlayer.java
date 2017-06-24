@@ -138,7 +138,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 	private void setModelVisibilities(T entity) {
 		ModelPlayer modelplayer = (ModelPlayer) this.getMainModel();
 
-		modelplayer.setInvisible(true);
+		modelplayer.setVisible(false);
 		modelplayer.bipedHead.showModel = true;
 		modelplayer.bipedHeadwear.showModel = true;// entity.isWearing(EnumPlayerModelParts.HAT);
 		modelplayer.bipedBodyWear.showModel = true;// entity.isWearing(EnumPlayerModelParts.JACKET);

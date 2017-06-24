@@ -41,7 +41,6 @@ public class VoidBoxGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -103,16 +102,16 @@ public class VoidBoxGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String name = TranslateHelper.translate("voidcraft.gui.musicbox.title");
-		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, this.ySize - 260, 0x7700FF);
+		this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, this.ySize - 260, 0x7700FF);
 		name = TranslateHelper.translate("voidcraft.gui.musicbox.curr") + ":";
-		this.fontRendererObj.drawString(name, (this.xSize / 12 - this.fontRendererObj.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
+		this.fontRenderer.drawString(name, (this.xSize / 12 - this.fontRenderer.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
 		if (te.isPlaying() && !te.SLOT_CURRENT.getStackInSlot(0).isEmpty()) {
-			fontRendererObj.drawString(((ItemRecord) te.SLOT_CURRENT.getStackInSlot(0).getItem()).getRecordNameLocal(), (xSize / 12) - 13 - (fontRendererObj.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, getColor(System.currentTimeMillis() / 10));
+			fontRenderer.drawString(((ItemRecord) te.SLOT_CURRENT.getStackInSlot(0).getItem()).getRecordNameLocal(), (xSize / 12) - 13 - (fontRenderer.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, getColor(System.currentTimeMillis() / 10));
 		}
-		fontRendererObj.drawString(TranslateHelper.translate("voidcraft.gui.misc.loop") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getLoopState() ? "on" : "off")), (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 220, ySize - 220, te.getLoopState() ? 0x00FF00 : 0xFF0000);
-		fontRendererObj.drawString(TranslateHelper.translate("voidcraft.gui.misc.auto") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getAutoState() ? "on" : "off")), (xSize / 12) - (fontRendererObj.getStringWidth(name) / 12) + 7, ySize - 180, te.getAutoState() ? 0x00FF00 : 0xFF0000);
+		fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.misc.loop") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getLoopState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 220, ySize - 220, te.getLoopState() ? 0x00FF00 : 0xFF0000);
+		fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.misc.auto") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getAutoState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 7, ySize - 180, te.getAutoState() ? 0x00FF00 : 0xFF0000);
 		if (te.isPlaying())
-			fontRendererObj.drawString(getTimeInMinutes(te.getSongLength() - te.getSongTimeLeft()) + "/" + getTimeInMinutes(te.getSongLength()), (xSize / 12) + (fontRendererObj.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
+			fontRenderer.drawString(getTimeInMinutes(te.getSongLength() - te.getSongTimeLeft()) + "/" + getTimeInMinutes(te.getSongLength()), (xSize / 12) + (fontRenderer.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
 	}
 
 	private int getColor(double hue) {

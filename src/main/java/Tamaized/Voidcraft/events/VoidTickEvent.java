@@ -39,15 +39,15 @@ public class VoidTickEvent {
 		if (player instanceof EntityPlayerMP) {
 			EntityPlayerMP p = (EntityPlayerMP) player;
 			int dim = (p.dimension == VoidCraft.config.getDimensionIdDalQuor() ? 0 : VoidCraft.config.getDimensionIdDalQuor());
-			transferPlayerToDimension(p.mcServer, p, dim, new TeleportLoc(new TeleporterDream(p.mcServer.worldServerForDimension(dim))));
+			transferPlayerToDimension(p.mcServer, p, dim, new TeleportLoc(new TeleporterDream(p.mcServer.getWorld(dim))));
 		}
 	}
 
 	private static void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
 		int j = player.dimension;
-		WorldServer worldserver = mcServer.worldServerForDimension(player.dimension);
+		WorldServer worldserver = mcServer.getWorld(player.dimension);
 		player.dimension = dimId;
-		WorldServer worldserver1 = mcServer.worldServerForDimension(player.dimension);
+		WorldServer worldserver1 = mcServer.getWorld(player.dimension);
 		player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType())); // Forge: Use new dimensions information
 		mcServer.getPlayerList().updatePermissionLevel(player);
 		worldserver.removeEntityDangerously(player);
@@ -77,10 +77,10 @@ public class VoidTickEvent {
 		double d4 = p_82448_1_.posY;
 		double d5 = p_82448_1_.posZ;
 		float f = p_82448_1_.rotationYaw;
-		p_82448_3_.theProfiler.startSection("moving");
-		p_82448_3_.theProfiler.endSection();
+		p_82448_3_.profiler.startSection("moving");
+		p_82448_3_.profiler.endSection();
 
-		p_82448_3_.theProfiler.startSection("placing");
+		p_82448_3_.profiler.startSection("placing");
 		d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
 		d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
 
@@ -93,7 +93,7 @@ public class VoidTickEvent {
 			p_82448_4_.spawnEntity(p_82448_1_);
 			p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
 		}
-		p_82448_3_.theProfiler.endSection();
+		p_82448_3_.profiler.endSection();
 		p_82448_1_.setWorld(p_82448_4_);
 	}
 
@@ -169,7 +169,7 @@ public class VoidTickEvent {
 	}
 
 	public void forcePlayerTeleportFromXia(EntityPlayerMP player) {
-		transferPlayerToDimension(player.mcServer, player, 0, new TeleportLoc(new TeleporterXia(player.mcServer.worldServerForDimension(0))));
+		transferPlayerToDimension(player.mcServer, player, 0, new TeleportLoc(new TeleporterXia(player.mcServer.getWorld(0))));
 	}
 
 	private static class TeleportLoc {

@@ -27,7 +27,7 @@ public class RenderVoidicAnchor extends TileEntitySpecialRenderer<TileEntityVoid
 	}
 
 	@Override
-	public void func_192841_a(TileEntityVoidicAnchor te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
+	public void render(TileEntityVoidicAnchor te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
 		GL11.glPushMatrix();
 		{
 			GlStateManager.disableLighting();
@@ -49,7 +49,7 @@ public class RenderVoidicAnchor extends TileEntitySpecialRenderer<TileEntityVoid
 		double distance = 0.35D;
 			Vec3d vec = new Vec3d(distance, distance, distance).rotatePitch(rand.nextInt(360)).rotateYaw(rand.nextInt(360));
 			float speed = 0.04F;
-			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(te.getPos()).addVector(0.5, 1.35F, 0.5).add(vec), new Vec3d(-vec.xCoord * speed, -vec.yCoord * speed, -vec.zCoord * speed), 7, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(te.getPos()).addVector(0.5, 1.35F, 0.5).add(vec), new Vec3d(-vec.x * speed, -vec.y * speed, -vec.z * speed), 7, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
 		if(rand.nextInt(10) == 0)Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(te.getPos()).addVector(0.5, 0.99F, 0.5), new Vec3d(0, 0, 0), 100, 0.01F, rand.nextFloat() * 0.50F + 0.10F, 0x7700FFFF));
 	}
 

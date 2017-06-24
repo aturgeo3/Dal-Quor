@@ -65,7 +65,7 @@ public class RenderFireElementalCompanion extends RenderLiving<EntityCompanionFi
 					Double dX = (world.rand.nextDouble() * 0.40) - 0.2D;
 					Double dY = (world.rand.nextDouble() * 0.8) - 0.4D;
 					Double dZ = (world.rand.nextDouble() * 0.40) - 0.2D;
-					mc.effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(entity.posX + dX, entity.posY + dY + 0.6F, entity.posZ + dZ), new Vec3d(0, 0, 0), world.rand.nextInt(30), 0, world.rand.nextFloat() * 0.5F + 0.1F, (entity.getColor().func_193350_e() << 8) + 0xFF));
+					mc.effectRenderer.addEffect(new ParticleFluff(world, new Vec3d(entity.posX + dX, entity.posY + dY + 0.6F, entity.posZ + dZ), new Vec3d(0, 0, 0), world.rand.nextInt(30), 0, world.rand.nextFloat() * 0.5F + 0.1F, (entity.getColor().getColorValue() << 8) + 0xFF));
 				}
 			}
 		}
@@ -81,7 +81,7 @@ public class RenderFireElementalCompanion extends RenderLiving<EntityCompanionFi
 	protected void preRenderCallback(EntityCompanionFireElemental entitylivingbaseIn, float partialTickTime) {
 		super.preRenderCallback(entitylivingbaseIn, partialTickTime);
 		EnumDyeColor c = entitylivingbaseIn.getColor();
-		GlStateManager.color(c.func_193349_f()[0], c.func_193349_f()[1], c.func_193349_f()[2], 1.0F);
+		GlStateManager.color(c.getColorComponentValues()[0], c.getColorComponentValues()[1], c.getColorComponentValues()[2], 1.0F);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA);
 	}

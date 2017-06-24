@@ -75,7 +75,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		drawCenteredString(fontRendererObj, TranslateHelper.translate("voidcraft.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
+		drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
 	}
 
 	public class PassiveButton extends GuiButton {
@@ -98,16 +98,16 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 		}
 
 		@Override
-		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
-				FontRenderer fontrenderer = mc.fontRendererObj;
+				FontRenderer fontrenderer = mc.fontRenderer;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-				hovered = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+				hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				int i = getHoverState(hovered);
 				GlStateManager.enableBlend();
 				GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 				GlStateManager.blendFunc(770, 771);
-				// drawRect(xPosition + width / 2, yPosition, width / 2, height, 0xFFFFFFFF);
+				// drawRect(x + width / 2, y, width / 2, height, 0xFFFFFFFF);
 				mouseDragged(mc, mouseX, mouseY);
 				int j = 0xBBFFFFFF;
 
@@ -117,9 +117,9 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 					j = 0xFFFFFFFF;
 				}
 
-				drawRect(xPosition, yPosition, xPosition + width, yPosition + height, j);
+				drawRect(x, y, x + width, y + height, j);
 				GlStateManager.pushMatrix();
-				fontrenderer.drawString(TranslateHelper.translate(IVadeMecumCapability.getPassiveName(passive)), xPosition + 18, yPosition + (height / 2) - (mc.fontRendererObj.FONT_HEIGHT / 2), 0x7700FF);
+				fontrenderer.drawString(TranslateHelper.translate(IVadeMecumCapability.getPassiveName(passive)), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
 				GlStateManager.popMatrix();
 			}
 		}

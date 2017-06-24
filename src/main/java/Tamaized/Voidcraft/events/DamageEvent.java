@@ -1,8 +1,5 @@
 package Tamaized.Voidcraft.events;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Tamaized.TamModized.helper.FloatyTextHelper;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
@@ -26,6 +23,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DamageEvent {
 
 	public static List<Item> shieldRegistry = new ArrayList<Item>(); // Move this into TamModized
@@ -40,8 +40,8 @@ public class DamageEvent {
 		}
 
 		// Add Voidic Damage to attacks if attacker has enough infusion
-		if (e.getSource() != null && e.getSource() instanceof DamageSourceVoidicInfusion && e.getSource().getEntity() instanceof EntityLivingBase) {
-			EntityLivingBase attacker = (EntityLivingBase) e.getSource().getEntity();
+		if (e.getSource() != null && e.getSource() instanceof DamageSourceVoidicInfusion && e.getSource().getTrueSource() instanceof EntityLivingBase) {
+			EntityLivingBase attacker = (EntityLivingBase) e.getSource().getTrueSource();
 			Entity victim = e.getEntity();
 			if (!attacker.hasCapability(CapabilityList.VOIDICINFUSION, null) || attacker.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.30f) {
 				victim.attackEntityFrom(new DamageSourceVoidicInfusion(), 1.0f);
@@ -61,8 +61,8 @@ public class DamageEvent {
 			}
 
 			// Sheathe
-			if (e.getSource() != null && isWhiteListed(e.getSource(), false) && e.getSource().getEntity() != null && e.getSource().getEntity() instanceof EntityLivingBase) {
-				EntityLivingBase attacker = (EntityLivingBase) e.getSource().getEntity();
+			if (e.getSource() != null && isWhiteListed(e.getSource(), false) && e.getSource().getTrueSource() != null && e.getSource().getTrueSource() instanceof EntityLivingBase) {
+				EntityLivingBase attacker = (EntityLivingBase) e.getSource().getTrueSource();
 				SheatheHelper.onAttack(living, attacker);
 			}
 		}
@@ -83,7 +83,7 @@ public class DamageEvent {
 			damageShield(player, damage);
 			e.setCanceled(true);
 			if (!e.getSource().isProjectile()) {
-				Entity entity = e.getSource().getSourceOfDamage();
+				Entity entity = e.getSource().getImmediateSource();
 
 				if (entity instanceof EntityLivingBase) {
 					EntityLivingBase p_190629_1_ = (EntityLivingBase) entity;
@@ -122,7 +122,7 @@ public class DamageEvent {
 			if (vec3d != null) {
 				Vec3d vec3d1 = player.getLook(1.0F);
 				Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
-				vec3d2 = new Vec3d(vec3d2.xCoord, 0.0D, vec3d2.zCoord);
+				vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
 
 				if (vec3d2.dotProduct(vec3d1) < 0.0D) {
 					return true;
@@ -134,7 +134,7 @@ public class DamageEvent {
 	}
 
 	private boolean isWhiteListed(DamageSource source, boolean ranged) {
-		Entity e = source.getEntity();
+		Entity e = source.getTrueSource();
 		if (e != null && e instanceof EntityLivingBase) {
 			EntityLivingBase living = (EntityLivingBase) e;
 			IStarForgeCapability cap = living.getHeldItemMainhand().getCapability(CapabilityList.STARFORGE, null);

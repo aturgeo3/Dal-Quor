@@ -43,12 +43,12 @@ public class RenderVoidParrot extends RenderLiving<EntityVoidParrot> {
 	 */
 	@Override
 	public float handleRotationFloat(EntityVoidParrot livingBase, float partialTicks) {
-		return this.func_192861_b(livingBase, partialTicks);
+		return this.getCustomBob(livingBase, partialTicks);
 	}
 
-	private float func_192861_b(EntityVoidParrot p_192861_1_, float p_192861_2_) {
-		float f = p_192861_1_.field_192011_bE + (p_192861_1_.field_192008_bB - p_192861_1_.field_192011_bE) * p_192861_2_;
-		float f1 = p_192861_1_.field_192010_bD + (p_192861_1_.field_192009_bC - p_192861_1_.field_192010_bD) * p_192861_2_;
+	private float getCustomBob(EntityVoidParrot parrot, float p_192861_2_) {
+		float f = parrot.oFlap + (parrot.flap - parrot.oFlap) * p_192861_2_;
+		float f1 = parrot.oFlapSpeed + (parrot.flapSpeed - parrot.oFlapSpeed) * p_192861_2_;
 		return (MathHelper.sin(f) + 1.0F) * f1;
 	}
 }

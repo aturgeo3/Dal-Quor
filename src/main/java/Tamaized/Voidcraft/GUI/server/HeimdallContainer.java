@@ -51,9 +51,9 @@ public class HeimdallContainer extends Container {
 		for (int i = 0; i < listeners.size(); ++i) {
 			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
 			if (fluidAmount != te.getFluidAmount())
-				icontainerlistener.sendProgressBarUpdate(this, 0, te.getFluidAmount());
+				icontainerlistener.sendWindowProperty(this, 0, te.getFluidAmount());
 			if (powerAmount != te.getEnergyStored())
-				icontainerlistener.sendProgressBarUpdate(this, 1, te.getEnergyStored());
+				icontainerlistener.sendWindowProperty(this, 1, te.getEnergyStored());
 		}
 		fluidAmount = te.getFluidAmount();
 		powerAmount = te.getEnergyStored();

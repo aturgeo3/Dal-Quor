@@ -144,7 +144,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 		loc[0] = (world.rand.nextDouble() * (teleportationBox.maxX - teleportationBox.minX)) + teleportationBox.minX;
 		loc[1] = teleportationBox.maxY;
 		loc[2] = (world.rand.nextDouble() * (teleportationBox.maxZ - teleportationBox.minZ)) + teleportationBox.minZ;
-		while (world.isAirBlock(new BlockPos(getPosition().xCoord + loc[0], getPosition().yCoord + loc[1], getPosition().zCoord + loc[2]))) {
+		while (world.isAirBlock(new BlockPos(getPosition().x + loc[0], getPosition().y + loc[1], getPosition().z + loc[2]))) {
 			loc[1] -= 1.0D;
 		}
 		return loc;

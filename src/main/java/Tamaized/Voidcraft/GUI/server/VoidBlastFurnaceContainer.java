@@ -56,17 +56,17 @@ public class VoidBlastFurnaceContainer extends Container {
 
 			if (cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
-				listener.sendProgressBarUpdate(this, 0, cookAmount);
+				listener.sendWindowProperty(this, 0, cookAmount);
 			}
 
 			if (finishTick != te.finishTick) {
 				finishTick = te.finishTick;
-				listener.sendProgressBarUpdate(this, 1, finishTick);
+				listener.sendWindowProperty(this, 1, finishTick);
 			}
 
 			if (powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
-				listener.sendProgressBarUpdate(this, 2, powerAmount);
+				listener.sendWindowProperty(this, 2, powerAmount);
 			}
 		}
 	}

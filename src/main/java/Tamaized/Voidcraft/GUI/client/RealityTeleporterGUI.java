@@ -61,7 +61,6 @@ public class RealityTeleporterGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.func_191948_b(mouseX, mouseY);
 	}
 
 	@Override
@@ -112,23 +111,23 @@ public class RealityTeleporterGUI extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.realityteleporter.title");
-		fontRendererObj.drawString(text, xSize / 2 - fontRendererObj.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
+		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 		BlockPos linkPos = RealityTeleporter.getLink(parent);
 		if (linkPos != null) {
 			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.link") + ":";
-			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
+			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 			text = "{ x: " + linkPos.getX() + ", y:" + linkPos.getY() + ", z:" + linkPos.getZ() + " }";
-			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 60, 0xAAAAAA);
+			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 60, 0xAAAAAA);
 		} else {
 			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.nolink") + ":";
-			fontRendererObj.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
+			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 		}
 		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 70, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 70, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getCurrentPower() + "/";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 60, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 60, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getMaxPower() + "";
-		fontRendererObj.drawString(text, (xSize / 2 - fontRendererObj.getStringWidth(text) / 1) - 55, ySize / 2 - 50, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 50, 0xFF0000);
 	}
 
 	@Override

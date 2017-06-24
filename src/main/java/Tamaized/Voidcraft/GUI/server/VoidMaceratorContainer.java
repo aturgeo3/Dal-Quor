@@ -53,17 +53,17 @@ public class VoidMaceratorContainer extends Container {
 		for (IContainerListener icontainerlistener : listeners) {
 			if (cookAmount != te.cookingTick) {
 				cookAmount = te.cookingTick;
-				icontainerlistener.sendProgressBarUpdate(this, 0, cookAmount);
+				icontainerlistener.sendWindowProperty(this, 0, cookAmount);
 			}
 
 			if (finishTick != te.finishTick) {
 				finishTick = te.finishTick;
-				icontainerlistener.sendProgressBarUpdate(this, 1, finishTick);
+				icontainerlistener.sendWindowProperty(this, 1, finishTick);
 			}
 
 			if (powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
-				icontainerlistener.sendProgressBarUpdate(this, 2, powerAmount);
+				icontainerlistener.sendWindowProperty(this, 2, powerAmount);
 			}
 		}
 	}

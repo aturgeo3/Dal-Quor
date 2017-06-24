@@ -20,7 +20,7 @@ public class ChunkProviderXia implements IChunkGenerator {
 	}
 
 	@Override
-	public Chunk provideChunk(int x, int z) {
+	public Chunk generateChunk(int x, int z) {
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 		Biome[] abiome = this.worldObj.getBiomeProvider().getBiomesForGeneration((Biome[]) null, x * 16, z * 16, 16, 16);
@@ -55,12 +55,12 @@ public class ChunkProviderXia implements IChunkGenerator {
 	}
 
 	@Override
-	public boolean func_193414_a(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
+	public boolean isInsideStructure(World p_193414_1_, String p_193414_2_, BlockPos p_193414_3_) {
 		return false;
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
 		return null;
 	}
 

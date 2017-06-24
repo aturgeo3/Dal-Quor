@@ -52,8 +52,8 @@ public class StarForgeToolEntry extends GUIListElement {
 		worldr.pos(min + 1, slotTop - 1, 0).tex(0, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
 		tess.draw();
 		GlStateManager.enableTexture2D();
-		starforgeGUI.drawString(mc.fontRendererObj, tool.getDisplayName(), x - 160, y + 5, 0xFFFFFF);
-		int i = mc.fontRendererObj.getStringWidth(tool.getDisplayName());
+		starforgeGUI.drawString(mc.fontRenderer, tool.getDisplayName(), x - 160, y + 5, 0xFFFFFF);
+		int i = mc.fontRenderer.getStringWidth(tool.getDisplayName());
 		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 	}

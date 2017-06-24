@@ -4,8 +4,11 @@ import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber
 public class VoidSoundEvents {
 
 	public static class MiscSoundEvents {
@@ -89,35 +92,36 @@ public class VoidSoundEvents {
 		public static SoundEvent ambientSound = null;
 	}
 
-	public static void register() {
-		EntityMobWraithSoundEvents.hurtSound = registerSound("wraith.wraithHurt");
-		EntityMobWraithSoundEvents.deathSound = registerSound("wraith.wraithDeath");
-		EntityMobWraithSoundEvents.ambientSound = registerSound("wraith.wraithLive");
+	@SubscribeEvent
+	public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+		EntityMobWraithSoundEvents.hurtSound = registerSound(event, "wraith.wraithHurt");
+		EntityMobWraithSoundEvents.deathSound = registerSound(event, "wraith.wraithDeath");
+		EntityMobWraithSoundEvents.ambientSound = registerSound(event, "wraith.wraithLive");
 
 		EntityMobLichSoundEvents.hurtSound = EntityMobWraithSoundEvents.hurtSound;
-		EntityMobLichSoundEvents.deathSound = registerSound("lich.lichDeath");
-		EntityMobLichSoundEvents.ambientSound = registerSound("lich.lichLive");
+		EntityMobLichSoundEvents.deathSound = registerSound(event, "lich.lichDeath");
+		EntityMobLichSoundEvents.ambientSound = registerSound(event, "lich.lichLive");
 
 		EntityMobSpectreChainSoundEvents.hurtSound = EntityMobWraithSoundEvents.hurtSound;
 		EntityMobSpectreChainSoundEvents.deathSound = EntityMobWraithSoundEvents.deathSound;
-		EntityMobSpectreChainSoundEvents.ambientSound = registerSound("spectrechain.chainLive");
+		EntityMobSpectreChainSoundEvents.ambientSound = registerSound(event, "spectrechain.chainLive");
 
-		MiscSoundEvents.chain = registerSound("random.chain");
-		
-		MusicSoundEvents.fleshmaker = registerSound("music.fleshmaker");
-		MusicSoundEvents.gop1 = registerSound("music.gop1");
-		MusicSoundEvents.gop2 = registerSound("music.gop2");
-		MusicSoundEvents.inferno = registerSound("music.inferno");
-		MusicSoundEvents.darkness = registerSound("music.darkness");
-		MusicSoundEvents.deathwyrm = registerSound("music.deathwyrm");
-		MusicSoundEvents.titan = registerSound("music.titan");
-		MusicSoundEvents.crystalcove = registerSound("music.crystalcove");
+		MiscSoundEvents.chain = registerSound(event, "random.chain");
 
+		MusicSoundEvents.fleshmaker = registerSound(event, "music.fleshmaker");
+		MusicSoundEvents.gop1 = registerSound(event, "music.gop1");
+		MusicSoundEvents.gop2 = registerSound(event, "music.gop2");
+		MusicSoundEvents.inferno = registerSound(event, "music.inferno");
+		MusicSoundEvents.darkness = registerSound(event, "music.darkness");
+		MusicSoundEvents.deathwyrm = registerSound(event, "music.deathwyrm");
+		MusicSoundEvents.titan = registerSound(event, "music.titan");
+		MusicSoundEvents.crystalcove = registerSound(event, "music.crystalcove");
 	}
 
-	private static SoundEvent registerSound(String soundName) {
-		ResourceLocation soundID = new ResourceLocation(VoidCraft.modid, soundName);
-		return GameRegistry.register(new SoundEvent(soundID).setRegistryName(soundID));
+	private static SoundEvent registerSound(RegistryEvent.Register<SoundEvent> event, String soundName) {
+		SoundEvent sound = new SoundEvent(new ResourceLocation(VoidCraft.modid, soundName)).setRegistryName(soundName);
+		event.getRegistry().register(sound);
+		return sound;
 	}
 
 }

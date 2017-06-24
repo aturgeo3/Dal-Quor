@@ -243,10 +243,10 @@ public class VadeMecumGUI extends GuiScreen {
 		drawTexturedModalRect(vadeX, vadeY, vadeW, vadeH, 0, 0, 256, 192);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		if (canDrawPage()) {
-			entry.render(this, fontRendererObj, mouseX, mouseY, vadeX, vadeY, pageNumber);
+			entry.render(this, fontRenderer, mouseX, mouseY, vadeX, vadeY, pageNumber);
 		}
-		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRendererObj, TranslateHelper.translate("voidcraft.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
-		if (button_credits != null && button_credits.visible) drawCenteredString(fontRendererObj, TranslateHelper.translate("voidcraft.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
+		if (button_entryBack != null && button_entryBack.visible) drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
+		if (button_credits != null && button_credits.visible) drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (playerStats.getCurrentActive() != null) {
 
 		}
@@ -277,9 +277,9 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
-				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+				boolean flag = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.getTextureManager().bindTexture(TEXTURES);
 				int i = 0;
@@ -292,7 +292,7 @@ public class VadeMecumGUI extends GuiScreen {
 				if (!isForward) {
 					j += 13;
 				}
-				drawTexturedModalRect(xPosition, yPosition, i, j, 23, 13);
+				drawTexturedModalRect(x, y, i, j, 23, 13);
 			}
 		}
 	}
@@ -308,9 +308,9 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
-				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+				boolean flag = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.getTextureManager().bindTexture(TEXTURES);
 				int i = 50;
@@ -320,7 +320,7 @@ public class VadeMecumGUI extends GuiScreen {
 					j += 11;
 				}
 
-				drawTexturedModalRect(xPosition, yPosition, i, j, 23, 11);
+				drawTexturedModalRect(x, y, i, j, 23, 11);
 			}
 		}
 	}
@@ -339,9 +339,9 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
-				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+				boolean flag = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.getTextureManager().bindTexture(TEXTURE);
 				int i = 0;
@@ -350,8 +350,8 @@ public class VadeMecumGUI extends GuiScreen {
 				if (flag) {
 					j += 124;
 				}
-				parent.drawTexturedModalRect(xPosition, yPosition, 40, 14, i, j, 255, 124);
-				parent.drawCenteredString(parent.fontRendererObj, displayString, xPosition + (width / 2), yPosition + (height / 2) - (parent.fontRendererObj.FONT_HEIGHT / 2), 0xFFFF00);
+				parent.drawTexturedModalRect(x, y, 40, 14, i, j, 255, 124);
+				parent.drawCenteredString(parent.fontRenderer, displayString, x + (width / 2), y + (height / 2) - (parent.fontRenderer.FONT_HEIGHT / 2), 0xFFFF00);
 			}
 		}
 	}
@@ -372,9 +372,9 @@ public class VadeMecumGUI extends GuiScreen {
 		 * Draws this button to the screen.
 		 */
 		@Override
-		public void func_191745_a(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float p_191745_4_) {
 			if (visible) {
-				boolean flag = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
+				boolean flag = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.getTextureManager().bindTexture(TEXTURE);
 				int i = 0;
@@ -387,7 +387,7 @@ public class VadeMecumGUI extends GuiScreen {
 				if (!isForward) {
 					i += 128;
 				}
-				parent.drawTexturedModalRect(xPosition, yPosition, width, height, i, j, 128, 128);
+				parent.drawTexturedModalRect(x, y, width, height, i, j, 128, 128);
 			}
 		}
 	}
@@ -401,9 +401,9 @@ public class VadeMecumGUI extends GuiScreen {
 			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
 			itemRender.renderItemIntoGUI(stack, x, y);
-			// drawCenteredString(fontRendererObj, ""+stack, x, y, 0xFFFFFF);
+			// drawCenteredString(fontRenderer, ""+stack, x, y, 0xFFFFFF);
 			GlStateManager.disableDepth();
-			if (stack.getCount() > 1) drawString(fontRendererObj, "" + stack.getCount(), x + 11, y + 9, color);
+			if (stack.getCount() > 1) drawString(fontRenderer, "" + stack.getCount(), x + 11, y + 9, color);
 			GlStateManager.enableDepth();
 			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();

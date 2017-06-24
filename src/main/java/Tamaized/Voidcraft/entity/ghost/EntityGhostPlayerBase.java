@@ -187,9 +187,9 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 			double ty = getRuneTarget().posY + (getRuneTarget().height / 2.0F) + ry;
 			double tz = getRuneTarget().posZ + rz;
 			Vec3d vec = getLookVec();
-			double offsetX = (vec.xCoord * 1);
+			double offsetX = (vec.x * 1);
 			double offsetY = 1.5;
-			double offsetZ = (vec.zCoord * 1);
+			double offsetZ = (vec.z * 1);
 			double dx = ox - (tx - offsetX);
 			double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
 			double dz = oz - (tz - offsetZ);

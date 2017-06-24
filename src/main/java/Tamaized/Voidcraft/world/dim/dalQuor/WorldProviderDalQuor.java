@@ -20,7 +20,7 @@ public class WorldProviderDalQuor extends WorldProvider {
 	protected void init() {
 		biomeProvider = new BiomeProviderDalQuor(world);
 		doesWaterVaporize = false;
-		hasNoSky = false;
+		nether = false;
 		hasSkyLight = true;
 	}
 

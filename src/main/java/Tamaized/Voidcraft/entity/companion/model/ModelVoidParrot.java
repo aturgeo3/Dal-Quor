@@ -163,7 +163,7 @@ public class ModelVoidParrot extends ModelBase
 		{
 			EntityVoidParrot parrot = (EntityVoidParrot)entitylivingbaseIn;
 
-			if (parrot.func_192004_dr())
+			if (parrot.isPartying())
 			{
 				this.field_192773_j.rotateAngleZ = -0.34906584F;
 				this.field_192774_k.rotateAngleZ = 0.34906584F;
@@ -188,7 +188,7 @@ public class ModelVoidParrot extends ModelBase
 				++this.field_192774_k.rotateAngleX;
 				this.field_192775_l = ModelVoidParrot.State.SITTING;
 			}
-			else if (parrot.func_192002_a())
+			else if (parrot.isFlying())
 			{
 				this.field_192773_j.rotateAngleX += ((float)Math.PI * 2F / 9F);
 				this.field_192774_k.rotateAngleX += ((float)Math.PI * 2F / 9F);

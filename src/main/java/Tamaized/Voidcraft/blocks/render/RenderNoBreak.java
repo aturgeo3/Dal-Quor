@@ -23,7 +23,7 @@ public class RenderNoBreak extends TileEntitySpecialRenderer<TileEntityNoBreak> 
 	FloatBuffer buffer = GLAllocation.createDirectFloatBuffer(16);
 
 	@Override
-	public void func_192841_a(TileEntityNoBreak te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
+	public void render(TileEntityNoBreak te, double x, double y, double z, float partialTicks, int destroyStage, float p_192841_10_) {
 		GlStateManager.disableLighting();
 		RANDOM.setSeed(31100L);
 		GlStateManager.getFloat(2982, MODELVIEW);

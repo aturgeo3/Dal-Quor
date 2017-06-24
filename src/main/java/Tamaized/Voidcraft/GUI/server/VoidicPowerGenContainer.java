@@ -50,12 +50,12 @@ public class VoidicPowerGenContainer extends Container {
 		for (IContainerListener icontainerlistener : listeners) {
 			if (fluidAmount != te.getFluidAmount()) {
 				fluidAmount = te.getFluidAmount();
-				icontainerlistener.sendProgressBarUpdate(this, 0, fluidAmount);
+				icontainerlistener.sendWindowProperty(this, 0, fluidAmount);
 			}
 
 			if (powerAmount != te.getPowerAmount()) {
 				powerAmount = te.getPowerAmount();
-				icontainerlistener.sendProgressBarUpdate(this, 1, powerAmount);
+				icontainerlistener.sendWindowProperty(this, 1, powerAmount);
 			}
 		}
 	}
