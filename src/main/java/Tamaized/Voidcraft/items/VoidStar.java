@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
@@ -18,7 +19,7 @@ public class VoidStar extends TamItem {
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem) {
 		// Make sure we're even on top of a fakeBedrockBlock before we begin a loop
-		if (entityItem.onGround && entityItem.dimension != VoidCraft.config.getDimensionIdVoid() && entityItem.dimension != VoidCraft.config.getDimensionIdXia() && entityItem.world.getBlockState(new BlockPos(MathHelper.floor(entityItem.posX), MathHelper.floor(entityItem.posY - 1), MathHelper.floor(entityItem.posZ))).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
+		if (entityItem.onGround && entityItem.dimension != ConfigHandler.dimensionIdVoid && entityItem.dimension != ConfigHandler.dimensionIdXia && entityItem.dimension != ConfigHandler.dimensionIdDalQuor && entityItem.world.getBlockState(new BlockPos(MathHelper.floor(entityItem.posX), MathHelper.floor(entityItem.posY - 1), MathHelper.floor(entityItem.posZ))).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
 			for (int x = -1; x < 2; x++) {
 				for (int z = -1; z < 2; z++) {
 					for (int y = -1; y < 1; y++) {

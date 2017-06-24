@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.events;
 
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.boss.dragon.sub.voidic.EntityVoidicDragon;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -19,7 +20,7 @@ public class PlayerRightClickEvent {
 		BlockPos pos = e.getPos();
 		ItemStack stack = e.getItemStack();
 		IBlockState state = world.getBlockState(pos);
-		if (!world.isRemote && state.getBlock() instanceof BlockBed && world.provider.getDimension() != VoidCraft.config.getDimensionIdDalQuor()) {
+		if (!world.isRemote && state.getBlock() instanceof BlockBed && world.provider.getDimension() != ConfigHandler.dimensionIdDalQuor) {
 			if (!stack.isEmpty() && stack.getItem() == VoidCraft.items.quoriFragment) {
 				stack.shrink(1);
 				e.setCanceled(true);

@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public class EmptyObsidianFlask extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (worldIn.provider.getDimension() != VoidCraft.config.getDimensionIdVoid() && player.getPosition().getY() > 6) return ActionResult.newResult(EnumActionResult.FAIL, stack);
+		if (worldIn.provider.getDimension() != ConfigHandler.dimensionIdVoid && player.getPosition().getY() > 6) return ActionResult.newResult(EnumActionResult.FAIL, stack);
 		stack.shrink(1);
 		ItemStack newStack = new ItemStack(VoidCraft.items.obsidianFlask, 1);
 		ItemHandlerHelper.giveItemToPlayer(player, newStack);

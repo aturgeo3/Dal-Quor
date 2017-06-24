@@ -2,6 +2,7 @@ package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlock;
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -62,7 +63,7 @@ public class OreVoidcrystal extends TamBlock {
 				e.printStackTrace();
 			}
 		}
-		return getDefaultState().withProperty(VOID, (dim == VoidCraft.config.getDimensionIdVoid() || dim == VoidCraft.config.getDimensionIdDalQuor()));
+		return getDefaultState().withProperty(VOID, (dim == ConfigHandler.dimensionIdVoid || dim == ConfigHandler.dimensionIdDalQuor));
 	}
 
 	@Override

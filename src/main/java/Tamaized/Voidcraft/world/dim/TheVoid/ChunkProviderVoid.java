@@ -1,9 +1,10 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import Tamaized.Voidcraft.structures.voidCity.MapGenVoidCity;
 import Tamaized.Voidcraft.structures.voidFortress.MapGenVoidFortress;
-import com.google.common.base.Predicate;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -338,18 +339,11 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		ChunkPos chunkpos = new ChunkPos(x, z);
 		this.genFortress.generateStructure(this.world, this.rand, chunkpos);
 		this.genCity.generateStructure(this.world, this.rand, chunkpos);
-		WorldGenMinable worldgenminable = new WorldGenMinable(VoidCraft.blocks.oreVoidcrystal.getDefaultState(), 5, new Predicate<IBlockState>() {
-
-			@Override
-			public boolean apply(IBlockState input) {
-				return (input == VoidCraft.blocks.blockFakeBedrock.getDefaultState());
-			}
-
-		});
+		WorldGenMinable worldgenminable = new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> (input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()));
 		WorldGenEtherealPlants worldGenEtherealPlants = new WorldGenEtherealPlants();
 		int k1;
 
-		if (VoidCraft.config.canGenVoidCrystalOre()) {
+		if (ConfigHandler.generate_VoidOre) {
 			for (k1 = 0; k1 < 16; ++k1) {
 				worldgenminable.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16), this.rand.nextInt(108) + 10, this.rand.nextInt(16)));
 			}

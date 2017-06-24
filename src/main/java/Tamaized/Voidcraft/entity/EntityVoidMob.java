@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.entity;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -50,7 +50,8 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 	}
 
 	protected boolean canAttack(Entity entity) {
-		if (entity instanceof EntityWitherSkeleton) return false;
+		if (entity instanceof EntityWitherSkeleton)
+			return false;
 		return true;
 	}
 
@@ -148,7 +149,8 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 			}
 
 			applyEnchantments(this, entityIn);
-			if (!getHeldItemMainhand().isEmpty() && entityIn instanceof EntityLivingBase) getHeldItemMainhand().getItem().hitEntity(getHeldItemMainhand(), (EntityLivingBase) entityIn, this);
+			if (!getHeldItemMainhand().isEmpty() && entityIn instanceof EntityLivingBase)
+				getHeldItemMainhand().getItem().hitEntity(getHeldItemMainhand(), (EntityLivingBase) entityIn, this);
 		}
 
 		return flag;
@@ -162,7 +164,7 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 	protected boolean isValidLightLevel() {
 		BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
 
-		if (world.provider.getDimension() != VoidCraft.config.getDimensionIdVoid()) {
+		if (world.provider.getDimension() != ConfigHandler.dimensionIdVoid) {
 			return true;
 		} else if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32)) {
 			return false;

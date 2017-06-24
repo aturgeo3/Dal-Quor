@@ -83,7 +83,6 @@ import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -97,10 +96,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 
-import java.io.File;
 import java.util.List;
 
-@Mod(modid = VoidCraft.modid, name = "VoidCraft", guiFactory = "Tamaized.Voidcraft.GUI.client.GUIConfigFactory", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
+@Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class VoidCraft extends TamModBase {
 
 	// public static final boolean isDevBuild = false;
@@ -111,9 +109,6 @@ public class VoidCraft extends TamModBase {
 
 	@Instance(modid)
 	public static VoidCraft instance = new VoidCraft();
-
-	public static File configFile;
-	public static ConfigHandler config;
 
 	public static FMLEventChannel channel;
 
@@ -181,9 +176,6 @@ public class VoidCraft extends TamModBase {
 
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
-
-		configFile = event.getSuggestedConfigurationFile();
-		config = new ConfigHandler(this, configFile, new Configuration(configFile));
 
 		ContributorHandler.start();
 
@@ -284,13 +276,13 @@ public class VoidCraft extends TamModBase {
 		registerEntity(EntitySpellImplosion.class, "EntitySpellImplosion", this, modid, 64, 1, true);
 
 		// Register Dimensions
-		DimensionManager.registerDimension(config.getDimensionIdVoid(), DimensionType.register("The Void", "_void", config.getDimensionIdVoid(), WorldProviderVoid.class, false));
-		DimensionManager.registerDimension(config.getDimensionIdXia(), DimensionType.register("???", "_xia", config.getDimensionIdXia(), WorldProviderXia.class, false));
-		DimensionManager.registerDimension(config.getDimensionIdDalQuor(), DimensionType.register("Dal Quor", "_dalquor", config.getDimensionIdDalQuor(), WorldProviderDalQuor.class, false));
+		DimensionManager.registerDimension(ConfigHandler.dimensionIdVoid, DimensionType.register("The Void", "_void", ConfigHandler.dimensionIdVoid, WorldProviderVoid.class, false));
+		DimensionManager.registerDimension(ConfigHandler.dimensionIdXia, DimensionType.register("???", "_xia", ConfigHandler.dimensionIdXia, WorldProviderXia.class, false));
+		DimensionManager.registerDimension(ConfigHandler.dimensionIdDalQuor, DimensionType.register("Dal Quor", "_dalquor", ConfigHandler.dimensionIdDalQuor, WorldProviderDalQuor.class, false));
 
 		// Register Portals
-		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalVoid, config.getDimensionIdVoid(), TeleporterVoid.class);
-		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalXia, config.getDimensionIdXia(), TeleporterXia.class);
+		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
+		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
 
 		// Register World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);

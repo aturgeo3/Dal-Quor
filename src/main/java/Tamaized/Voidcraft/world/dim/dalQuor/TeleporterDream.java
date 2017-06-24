@@ -1,8 +1,7 @@
 package Tamaized.Voidcraft.world.dim.dalQuor;
 
-import java.util.Random;
-
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -12,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+
+import java.util.Random;
 
 public class TeleporterDream extends Teleporter {
 
@@ -27,7 +28,7 @@ public class TeleporterDream extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		if (entityIn.dimension != VoidCraft.config.getDimensionIdDalQuor()) {
+		if (entityIn.dimension != ConfigHandler.dimensionIdDalQuor) {
 			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
 			while (!worldServerInstance.isAirBlock(bedPos)) {
 				bedPos = bedPos.up();
@@ -38,7 +39,7 @@ public class TeleporterDream extends Teleporter {
 		// if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(VoidCraft.achievements.tooFar, 1);
 		BlockPos pos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : DimensionManager.getWorld(0).getSpawnPoint();
 		pos = new BlockPos(pos.getX(), 45, pos.getZ()).down();
-		if (entityIn.dimension == VoidCraft.config.getDimensionIdDalQuor()) {
+		if (entityIn.dimension == ConfigHandler.dimensionIdDalQuor) {
 			boolean create = true;
 			while (!worldServerInstance.isAirBlock(pos)) {
 				pos = pos.up();

@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.world.dim.TheVoid;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
+import Tamaized.Voidcraft.registry.VoidCraftBiomes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -17,7 +18,7 @@ public class WorldProviderVoid extends WorldProvider {
 	 */
 	@Override
 	protected void init() {
-		this.biomeProvider = new BiomeProviderSingle(VoidCraft.biomes.biomeVoid);
+		this.biomeProvider = new BiomeProviderSingle(VoidCraftBiomes.biomeVoid);
 		this.doesWaterVaporize = false;
 		this.nether = true;
 	}
@@ -112,6 +113,6 @@ public class WorldProviderVoid extends WorldProvider {
 
 	@Override
 	public DimensionType getDimensionType() {
-		return DimensionType.getById(VoidCraft.config.getDimensionIdVoid());
+		return DimensionType.getById(ConfigHandler.dimensionIdVoid);
 	}
 }

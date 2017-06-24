@@ -1,9 +1,7 @@
 package Tamaized.Voidcraft.world;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.blocks.OreVoidcrystal;
-import com.google.common.base.Predicate;
-import net.minecraft.block.state.IBlockState;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,92 +19,57 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 		int id = world.provider.getDimension();
 		if (id == 1)
 			generateEnd(world, random, chunkX * 16, chunkZ * 16);
-		if (id == VoidCraft.config.getDimensionIdVoid())
+		if (id == ConfigHandler.dimensionIdVoid)
 			generateVoid(world, random, chunkX * 16, chunkZ * 16);
-		if (id == VoidCraft.config.getDimensionIdDalQuor())
+		if (id == ConfigHandler.dimensionIdDalQuor)
 			generateDalQuor(world, random, chunkX * 16, chunkZ * 16);
 	}
 
 	private void generateEnd(World world, Random random, int BlockX, int BlockZ) {
-		if (VoidCraft.config.canGenVoidCrystalOre()) {
+		if (ConfigHandler.generate_VoidOre) {
 			for (int i = 0; i < 6; i++) {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(100);
-				new WorldGenMinable(((OreVoidcrystal) VoidCraft.blocks.oreVoidcrystal).getStateVoidFalse(), 5, new Predicate<IBlockState>() {
-
-					@Override
-					public boolean apply(IBlockState input) {
-						return input == Blocks.END_STONE.getDefaultState();
-					}
-
-				}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getStateVoidFalse(), 5, input -> input == Blocks.END_STONE.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
-		if (VoidCraft.config.canGenCosmicMaterial()) {
+		if (ConfigHandler.generate_CosmicOre) {
 			for (int i = 0; i < 6; i++) {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(100);
-				new WorldGenMinable(VoidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
-
-					@Override
-					public boolean apply(IBlockState input) {
-						return input == Blocks.END_STONE.getDefaultState();
-					}
-
-				}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.cosmicMaterial.getDefaultState(), 3, input -> input == Blocks.END_STONE.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
 	}
 
 	private void generateVoid(World world, Random random, int BlockX, int BlockZ) {
-		if (VoidCraft.config.canGenCosmicMaterial()) {
+		if (ConfigHandler.generate_CosmicOre) {
 			for (int i = 0; i < 10; i++) {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(255);
-				new WorldGenMinable(VoidCraft.blocks.cosmicMaterial.getDefaultState(), 3, new Predicate<IBlockState>() {
-
-					@Override
-					public boolean apply(IBlockState input) {
-						return input == VoidCraft.blocks.blockFakeBedrock.getDefaultState();
-					}
-
-				}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.cosmicMaterial.getDefaultState(), 3, input -> input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
 	}
 
 	private void generateDalQuor(World world, Random random, int BlockX, int BlockZ) {
-		if (VoidCraft.config.canGenCosmicMaterial()) {
+		if (ConfigHandler.generate_CosmicOre) {
 			for (int i = 0; i < 16; i++) {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(255);
-				new WorldGenMinable(VoidCraft.blocks.cosmicMaterial.getDefaultState(), 7, new Predicate<IBlockState>() {
-
-					@Override
-					public boolean apply(IBlockState input) {
-						return input != Blocks.AIR.getDefaultState();
-					}
-
-				}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.cosmicMaterial.getDefaultState(), 7, input -> input != Blocks.AIR.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
-		if (VoidCraft.config.canGenVoidCrystalOre()) {
+		if (ConfigHandler.generate_VoidOre) {
 			for (int i = 0; i < 10; i++) {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(255);
-				new WorldGenMinable(((OreVoidcrystal) VoidCraft.blocks.oreVoidcrystal).getDefaultState(), 5, new Predicate<IBlockState>() {
-
-					@Override
-					public boolean apply(IBlockState input) {
-						return input == VoidCraft.blocks.blockFakeBedrock.getDefaultState();
-					}
-
-				}).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
 	}

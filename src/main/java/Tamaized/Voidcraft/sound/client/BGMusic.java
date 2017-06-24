@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.sound.client;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.helper.MusicTickerStopper;
 import Tamaized.Voidcraft.sound.BossMusicPlayer;
 import Tamaized.Voidcraft.sound.VoidSoundEvents;
@@ -46,7 +46,7 @@ public class BGMusic {
 
 	@SubscribeEvent
 	public void PlaySoundEvent(PlaySoundEvent e) {
-		if(!VoidCraft.config.canPlayMusic()) return;
+		if(!ConfigHandler.music) return;
 		if (sound != null && e.getSound().getCategory() == SoundCategory.MUSIC) {
 			if (e.getResultSound() == sound) return;
 			e.setResultSound(null);
@@ -55,13 +55,13 @@ public class BGMusic {
 		World world = Minecraft.getMinecraft().world;
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (e.getSound().getCategory() == SoundCategory.MUSIC && world != null && world.provider != null) {
-			if (world.provider.getDimension() == VoidCraft.config.getDimensionIdVoid()) {
+			if (world.provider.getDimension() == ConfigHandler.dimensionIdVoid) {
 				if (isPlaying(sound)) e.setResultSound(null);
 				else e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicVoid[world.rand.nextInt(musicVoid.length)]));
-			} else if (world.provider.getDimension() == VoidCraft.config.getDimensionIdDalQuor()) {
+			} else if (world.provider.getDimension() == ConfigHandler.dimensionIdDalQuor) {
 				if (isPlaying(sound)) e.setResultSound(null);
 				else e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicDalQuor[world.rand.nextInt(musicDalQuor.length)]));
-			} else if (world.provider.getDimension() == VoidCraft.config.getDimensionIdXia()) {
+			} else if (world.provider.getDimension() == ConfigHandler.dimensionIdXia) {
 				if (isPlaying(sound)) e.setResultSound(null);
 			}
 		}
@@ -69,7 +69,7 @@ public class BGMusic {
 
 	@SubscribeEvent
 	public void tick(ClientTickEvent e) {
-		if(!VoidCraft.config.canPlayMusic()) return;
+		if(!ConfigHandler.music) return;
 		if (e.phase == Phase.END && !Minecraft.getMinecraft().isGamePaused()) {
 			World world = Minecraft.getMinecraft().world;
 			boolean boss = BossMusicPlayer.update(sound);
@@ -83,7 +83,7 @@ public class BGMusic {
 				}
 			} else if (world != null && world.provider != null) { // This is to loop music if needed while in a specific DIM
 				if (!boss) { // Check if Boss Music isn't playing, if so then play our track
-					if (world.provider.getDimension() == VoidCraft.config.getDimensionIdXia() && !isPlaying(sound)) {
+					if (world.provider.getDimension() == ConfigHandler.dimensionIdXia && !isPlaying(sound)) {
 						PlayMusic(VoidSoundEvents.MusicSoundEvents.deathwyrm);
 					}
 				}
@@ -92,7 +92,7 @@ public class BGMusic {
 	}
 
 	private static boolean isNotInDims(int dim) {
-		return dim != VoidCraft.config.getDimensionIdXia() && dim != VoidCraft.config.getDimensionIdVoid() && dim != VoidCraft.config.getDimensionIdDalQuor();
+		return dim != ConfigHandler.dimensionIdXia && dim != ConfigHandler.dimensionIdVoid && dim != ConfigHandler.dimensionIdDalQuor;
 	}
 
 	public static boolean isPlaying(ISound sound) {
@@ -105,7 +105,7 @@ public class BGMusic {
 	}
 
 	public static void PlayMusic(ISound s) {
-		if(!VoidCraft.config.canPlayMusic()) return;
+		if(!ConfigHandler.music) return;
 		StopMusic();
 		sound = s;
 		Minecraft.getMinecraft().getSoundHandler().playSound(sound);

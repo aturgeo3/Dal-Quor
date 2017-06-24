@@ -1,6 +1,7 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
 import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.xiaCastle.logic.XiaCastleLogicHandler;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -143,6 +144,6 @@ public class WorldProviderXia extends WorldProvider {
 
 	@Override
 	public DimensionType getDimensionType() {
-		return DimensionType.getById(VoidCraft.config.getDimensionIdXia());
+		return DimensionType.getById(ConfigHandler.dimensionIdXia);
 	}
 }

@@ -3,6 +3,7 @@ package Tamaized.Voidcraft.events;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.handlers.XiaFlightHandler;
 import Tamaized.Voidcraft.world.dim.TheVoid.ChunkProviderVoid;
 import Tamaized.Voidcraft.world.dim.Xia.TeleporterXia;
@@ -38,7 +39,7 @@ public class VoidTickEvent {
 	public static void dream(EntityPlayer player) {
 		if (player instanceof EntityPlayerMP) {
 			EntityPlayerMP p = (EntityPlayerMP) player;
-			int dim = (p.dimension == VoidCraft.config.getDimensionIdDalQuor() ? 0 : VoidCraft.config.getDimensionIdDalQuor());
+			int dim = (p.dimension == ConfigHandler.dimensionIdDalQuor ? 0 : ConfigHandler.dimensionIdDalQuor);
 			transferPlayerToDimension(p.mcServer, p, dim, new TeleportLoc(new TeleporterDream(p.mcServer.getWorld(dim))));
 		}
 	}
@@ -133,19 +134,19 @@ public class VoidTickEvent {
 			}
 		}
 
-		if (e.player.world.provider.getDimension() == VoidCraft.config.getDimensionIdVoid()) {
+		if (e.player.world.provider.getDimension() == ConfigHandler.dimensionIdVoid) {
 			if (e.player.getPosition().getY() >= 127)
 				e.player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 4.0F);
-		} else if (e.player.world.provider.getDimension() != VoidCraft.config.getDimensionIdXia() && e.player.world.provider.getDimension() != VoidCraft.config.getDimensionIdDalQuor()) {
-			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256 && VoidCraft.config.voidYLevelTeleport()) {
+		} else if (e.player.world.provider.getDimension() != ConfigHandler.dimensionIdXia && e.player.world.provider.getDimension() != ConfigHandler.dimensionIdDalQuor) {
+			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256 && ConfigHandler.voidTeleport) {
 				EntityPlayerMP player = (EntityPlayerMP) e.player;
-				transferPlayerToDimension(player.mcServer, player, VoidCraft.config.getDimensionIdVoid(), new TeleportLoc(player.getPosition().add(0, 256 * 2, 0)));
+				transferPlayerToDimension(player.mcServer, player, ConfigHandler.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256 * 2, 0)));
 			}
 		}
 
 		if (e.player instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) e.player;
-			if (player.dimension == VoidCraft.config.getDimensionIdXia()) {
+			if (player.dimension == ConfigHandler.dimensionIdXia) {
 
 				// Prevent players from flying in Xia DIM
 				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (XiaFlightHandler.shouldPlayerHaveFlight(player) ? !(player.world.provider instanceof WorldProviderXia && ((WorldProviderXia) player.world.provider).getXiaCastleHandler().canPlayersFly()) : true)) {

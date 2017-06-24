@@ -11,7 +11,11 @@ import Tamaized.Voidcraft.damageSources.DamageSourceVoidicInfusion;
 import Tamaized.Voidcraft.entity.EntityVoidMob;
 import Tamaized.Voidcraft.entity.EntityVoidNPC;
 import Tamaized.Voidcraft.entity.companion.EntityVoidParrot;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
+import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import Tamaized.Voidcraft.registry.VoidCraftItems;
+import Tamaized.Voidcraft.registry.VoidCraftPotions;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -76,30 +80,30 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		boolean override = false;
 		ItemStack mainHand = entity.getHeldItemMainhand();
 		ItemStack offHand = entity.getHeldItemOffhand();
-		if (entity.getActivePotionEffect(VoidCraft.potions.voidicInfusion) != null) {
+		if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusion) != null) {
 			override = true;
 			flag = true;
 			gain = 20;
 		}
-		if ((!mainHand.isEmpty() && mainHand.getItem() == VoidCraft.items.voidicSuppressor)) {
+		if ((!mainHand.isEmpty() && mainHand.getItem() == VoidCraftItems.voidicSuppressor)) {
 			IVoidicPowerCapability cap = entity.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap != null && cap.getCurrentPower() > 0) {
 				cap.drain(1);
 				cap.sendUpdates(null, 0, entity.getHeldItemMainhand());
 				flag = false;
 			}
-		} else if (!offHand.isEmpty() && offHand.getItem() == VoidCraft.items.voidicSuppressor) {
+		} else if (!offHand.isEmpty() && offHand.getItem() == VoidCraftItems.voidicSuppressor) {
 			IVoidicPowerCapability cap = entity.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap != null && cap.getCurrentPower() > 0) {
 				cap.drain(1);
 				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
 				flag = false;
 			}
-		} else if (entity.getActivePotionEffect(VoidCraft.potions.voidicInfusionImmunity) != null) {
+		} else if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusionImmunity) != null) {
 			flag = false;
 		}
-		if ((entity.world.provider.getDimension() == VoidCraft.config.getDimensionIdVoid() || override) && flag) {
-			if (entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraft.blocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraft.blocks.blockVoidBrickDoubleSlab)) {
+		if ((entity.world.provider.getDimension() == ConfigHandler.dimensionIdVoid || override) && flag) {
+			if (entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraftBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickDoubleSlab)) {
 
 			} else {
 				infusion += gain;
@@ -157,7 +161,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 					cap.addCategory(entity, IVadeMecumCapability.Category.VoidicControl);
 					entity.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.voice.VoidicControl"));
 				}
-				if (cap.hasCategory(IVadeMecumCapability.Category.Empowerment) && !cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && entity.world.provider.getDimension() != VoidCraft.config.getDimensionIdVoid()) {
+				if (cap.hasCategory(IVadeMecumCapability.Category.Empowerment) && !cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && entity.world.provider.getDimension() != ConfigHandler.dimensionIdVoid) {
 					kill = false;
 					infusion = 0;
 					cap.addCategory(entity, IVadeMecumCapability.Category.Tolerance);

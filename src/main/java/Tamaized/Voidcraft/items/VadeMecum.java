@@ -1,10 +1,10 @@
 package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.capabilities.CapabilityList;
 import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAlchemy;
 import Tamaized.Voidcraft.registry.VoidCraftBlocks;
 import Tamaized.Voidcraft.vadeMecum.progression.VadeMecumRitualHandler;
@@ -127,7 +127,7 @@ public class VadeMecum extends TamItem {
 			IVadeMecumCapability playerCap = living.getCapability(CapabilityList.VADEMECUM, null);
 			IVadeMecumItemCapability itemCap = stack.getCapability(CapabilityList.VADEMECUMITEM, null);
 			if ((playerCap != null && playerCap.isBookActive()) || (itemCap != null && itemCap.getBookState())) {
-				if (VoidCraft.config.getRenderThirdPersonParticles()) {
+				if (ConfigHandler.renderVadeMecumParticles) {
 					particles(world, living);
 				}
 			}

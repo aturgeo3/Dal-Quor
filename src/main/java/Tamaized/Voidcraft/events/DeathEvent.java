@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.events;
 
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.mob.EntityMobSpectreChain;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -13,7 +13,7 @@ public class DeathEvent {
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent e) {
 		EntityLivingBase target = e.getEntityLiving();
-		if (target instanceof EntityPlayer && target.world.provider.getDimension() == VoidCraft.config.getDimensionIdDalQuor()) {
+		if (target instanceof EntityPlayer && target.world.provider.getDimension() == ConfigHandler.dimensionIdDalQuor) {
 			target.setHealth(target.getMaxHealth());
 			e.setCanceled(true);
 			target.fallDistance = 0;

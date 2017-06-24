@@ -1,9 +1,9 @@
 package Tamaized.Voidcraft.blocks;
 
 import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.entity.EntityVoidBoss;
 import Tamaized.Voidcraft.entity.boss.render.bossBar.RenderAlternateBossBars.IAlternateBoss;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -43,13 +43,13 @@ public class BlockRealityHole extends TamBlock {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
-				if (entityIn.dimension == VoidCraft.config.getDimensionIdXia()) {
+				if (entityIn.dimension == ConfigHandler.dimensionIdXia) {
 					entityIn.setPositionAndUpdate(52.5, 61, 4.5);
 				} else {
-					if (VoidCraft.config.getRealityWhiteList().size() > 0) {
+					if (ConfigHandler.realityWhitelist.length > 0) {
 						Random rand = worldIn.rand;
-						int i = rand.nextInt(VoidCraft.config.getRealityWhiteList().size());
-						int dim = VoidCraft.config.getRealityWhiteList().get(i);
+						int i = rand.nextInt(ConfigHandler.realityWhitelist.length);
+						int dim =ConfigHandler.realityWhitelist[i];
 						if (player.mcServer.getWorld(dim) != null) {
 							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.getWorld(dim), player.getPosition()));
 						}

@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.world.dim.Xia;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.world.SchematicLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class TeleporterXia extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		if (entityIn.dimension != VoidCraft.config.getDimensionIdXia()) {
+		if (entityIn.dimension != ConfigHandler.dimensionIdXia) {
 			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
 			while(!worldServerInstance.isAirBlock(bedPos)){
 				bedPos = bedPos.up();
@@ -60,7 +60,7 @@ public class TeleporterXia extends Teleporter {
 		int j = MathHelper.floor(e.posY);
 		int k = MathHelper.floor(e.posZ);
 
-		if (e.dimension == VoidCraft.config.getDimensionIdXia()) {
+		if (e.dimension == ConfigHandler.dimensionIdXia) {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
 			SchematicLoader loader = new SchematicLoader();

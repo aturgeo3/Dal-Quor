@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.sound;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.Entity;
@@ -35,7 +35,7 @@ public class BossMusicPlayer {
 	}
 
 	public static void PlayMusic(Entity entity, SoundEvent sound) {
-		if(!VoidCraft.config.canPlayMusic()) return;
+		if(!ConfigHandler.music) return;
 		boss = entity;
 		music = BGMusic.PlayMusic(sound);
 	}

@@ -1,6 +1,6 @@
 package Tamaized.Voidcraft.world.dim.dalQuor;
 
-import Tamaized.Voidcraft.VoidCraft;
+import Tamaized.Voidcraft.handlers.ConfigHandler;
 import Tamaized.Voidcraft.world.BiomeProviderDalQuor;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -89,6 +89,6 @@ public class WorldProviderDalQuor extends WorldProvider {
 
 	@Override
 	public DimensionType getDimensionType() {
-		return DimensionType.getById(VoidCraft.config.getDimensionIdDalQuor());
+		return DimensionType.getById(ConfigHandler.dimensionIdDalQuor);
 	}
 }
