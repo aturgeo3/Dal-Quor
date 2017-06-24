@@ -4,7 +4,6 @@ import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
 import Tamaized.Voidcraft.events.DamageEvent;
@@ -16,6 +15,7 @@ import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelDynBucket;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -140,8 +140,8 @@ public class VoidCraftItems {
 		DamageEvent.shieldRegistry.add(voidCrystalShield);
 
 		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
-		soilList.add(VoidCraft.blocks.blockFakeBedrockFarmland);
-		modelList.add(etherealSeed = new TamItemSeed(VoidCraftCreativeTabs.tabVoid, "etherealseed", 64, VoidCraft.blocks.etherealPlant, soilList));
+		soilList.add(VoidCraftBlocks.blockFakeBedrockFarmland);
+		modelList.add(etherealSeed = new TamItemSeed(VoidCraftCreativeTabs.tabVoid, "etherealseed", 64, VoidCraftBlocks.etherealPlant, soilList));
 		modelList.add(etherealFruit = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.NORMAL, VoidCraftCreativeTabs.tabVoid, "etherealfruit", 64, 2, false));
 		modelList.add(etherealFruit_redstone = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.REDSTONE, VoidCraftCreativeTabs.tabVoid, "etherealfruit_redstone", 64, 2, false));
 		modelList.add(etherealFruit_lapis = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.LAPIS, VoidCraftCreativeTabs.tabVoid, "etherealfruit_lapis", 64, 2, false));
@@ -203,11 +203,6 @@ public class VoidCraftItems {
 //		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
 	}*/
 
-	@SideOnly(Side.CLIENT)
-	public static void clientInit() {
-		net.minecraft.client.Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(creativeVoidBucket, 0, ModelDynBucket.LOCATION);
-	}
-
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		for (ITamRegistry b : modelList)
@@ -218,6 +213,7 @@ public class VoidCraftItems {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		for (ITamRegistry b : modelList)
 			b.registerItem(event);
+		event.getRegistry().register(creativeVoidBucket);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -225,6 +221,7 @@ public class VoidCraftItems {
 	public static void registerModels(ModelRegistryEvent event) {
 		for (ITamRegistry b : modelList)
 			b.registerModel(event);
+		ModelLoader.setCustomModelResourceLocation(creativeVoidBucket, 0, ModelDynBucket.LOCATION);
 	}
 
 }

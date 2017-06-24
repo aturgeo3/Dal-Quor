@@ -68,7 +68,6 @@ import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicAnchor;
 import Tamaized.Voidcraft.machina.tileentity.TileEntityVoidicCharger;
 import Tamaized.Voidcraft.network.ClientPacketHandler;
 import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
 import Tamaized.Voidcraft.sound.client.BGMusic;
 import Tamaized.Voidcraft.vadeMecum.contents.VadeMecumMainEntry;
 import net.minecraft.client.Minecraft;
@@ -157,7 +156,6 @@ public class ClientProxy extends AbstractProxy {
 
 	@Override
 	public void init() {
-		VoidCraftItems.clientInit();
 		VoidCraftBlocks.clientInit();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, new RenderNoBreak());
