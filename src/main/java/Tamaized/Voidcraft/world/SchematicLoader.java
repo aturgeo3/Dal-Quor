@@ -1,9 +1,5 @@
 package Tamaized.Voidcraft.world;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,11 +7,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 public class SchematicLoader {
 
 	public Schematic get(String schemname) {
 		try {
-			InputStream is = this.getClass().getClassLoader().getResourceAsStream("assets/voidcraft/Schematics/" + schemname);
+			InputStream is = this.getClass().getClassLoader().getResourceAsStream("assets/voidcraft/schematics/" + schemname);
 			NBTTagCompound nbtdata = CompressedStreamTools.readCompressed(is);
 
 			short width = nbtdata.getShort("Width");

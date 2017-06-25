@@ -1,39 +1,27 @@
 package Tamaized.Voidcraft.handlers;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.io.FileUtils;
-
+import Tamaized.Voidcraft.VoidCraft;
 import com.google.common.io.Resources;
 import com.google.gson.stream.JsonReader;
 import com.mojang.authlib.GameProfile;
-
-import Tamaized.Voidcraft.VoidCraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.io.FileUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class SkinHandler {
 
@@ -49,7 +37,7 @@ public class SkinHandler {
 	private static final String idUrl = "https://api.mojang.com/profiles/";
 	private static final String baseLoc = (System.getenv("APPDATA") == null || System.getenv("APPDATA").contains("null")) ? "./.minecraft/" : (System.getenv("APPDATA")) + "/.minecraft/" + VoidCraft.modid + "/";
 	private static final String loc = baseLoc + "assets/" + VoidCraft.modid + "/skins/";
-	private static final String skinZip = "/assets/" + VoidCraft.modid + "/skinHandler/skins.zip";
+	private static final String skinZip = "/assets/" + VoidCraft.modid + "/skinhandler/skins.zip";
 
 	// Perm
 	private static volatile Map<UUID, GameProfile> uuidProfile = new HashMap<UUID, GameProfile>();
