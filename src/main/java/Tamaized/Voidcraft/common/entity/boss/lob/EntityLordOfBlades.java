@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.common.entity.boss.lob;
 
 import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.client.entity.boss.ModelLordOfBlades;
+import Tamaized.Voidcraft.client.entity.boss.model.ModelLordOfBlades;
 import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
 import Tamaized.Voidcraft.client.entity.animation.IAnimation;
 import Tamaized.Voidcraft.network.IVoidBossAIPacket;

@@ -8,7 +8,7 @@ import Tamaized.Voidcraft.common.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
 import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.common.events.CustomElytraHandler;
-import Tamaized.Voidcraft.client.helper.GUIListElement;
+import Tamaized.Voidcraft.client.gui.element.GUIListElement;
 import Tamaized.Voidcraft.common.items.RealityTeleporter;
 import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidBox;
 import Tamaized.Voidcraft.registry.VoidCraftBlocks;

@@ -1,7 +1,6 @@
 package Tamaized.Voidcraft.client.sound;
 
 import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.client.helper.MusicTickerStopper;
 import Tamaized.Voidcraft.common.sound.BossMusicPlayer;
 import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.client.Minecraft;

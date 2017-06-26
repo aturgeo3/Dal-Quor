@@ -1,7 +1,7 @@
 package Tamaized.Voidcraft.client.entity.boss.extra;
 
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.boss.ModelVoidBoss;
+import Tamaized.Voidcraft.client.entity.boss.model.ModelVoidBoss;
 import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 import net.minecraft.client.renderer.GlStateManager;

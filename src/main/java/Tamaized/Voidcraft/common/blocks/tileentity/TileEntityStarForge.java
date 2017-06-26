@@ -4,7 +4,7 @@ import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import Tamaized.Voidcraft.VoidCraft;
 import Tamaized.Voidcraft.common.capabilities.CapabilityList;
 import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.client.helper.GUIListElement;
+import Tamaized.Voidcraft.client.gui.element.GUIListElement;
 import Tamaized.Voidcraft.registry.VoidCraftTools;
 import Tamaized.Voidcraft.common.starforge.IStarForgeTool;
 import Tamaized.Voidcraft.common.starforge.StarForgeEffectEntry;

@@ -1,9 +1,14 @@
-package Tamaized.Voidcraft.client.entity.mob;
+package Tamaized.Voidcraft.client.entity.boss.render;
 
+import java.util.Random;
+
+import Tamaized.TamModized.particles.FX.ParticleFluff;
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.mob.model.ModelEtherealGuardian;
-import Tamaized.Voidcraft.common.entity.mob.EntityMobEtherealGuardian;
+import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
+import Tamaized.Voidcraft.client.entity.boss.model.ModelXia2;
+import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -15,24 +20,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardian> {
+public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/etherealguardian.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/xiaform2.png");
 
-	public RenderEtherealGuardian(RenderManager manager, float par2) {
-		super(manager, new ModelEtherealGuardian(), par2);
+	public RenderXia2(RenderManager manager, ModelBase par1ModelBase, float par2) {
+		super(manager, par1ModelBase, par2);
 		addLayer(new LayerBipedArmor(this));
 	}
 
 	@Override
-	public void doRender(EntityMobEtherealGuardian entity, double x, double y, double z, float yaw, float ticks) {
+	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
+			if (entity.shouldSphereRender()) renderSphere(entity.world, entity, 1, 10);
 			// if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
 			ItemStack itemstack = entity.getHeldItemMainhand();
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
@@ -68,16 +75,18 @@ public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardi
 				renderHeldItem(entity, itemstack1, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, EnumHandSide.LEFT);
 				GlStateManager.popMatrix();
 			}
-			// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
-			Minecraft mc = Minecraft.getMinecraft();
-			World world = mc.world;
-			if (!mc.isGamePaused() && ticks != 1.0F) {
-				for (int i = 0; i < 10; i++) {
-					Double dX = (world.rand.nextDouble() * 1.0) - 0.5D;
-					Double dZ = (world.rand.nextDouble() * 1.0) - 0.5D;
-					world.spawnParticle(EnumParticleTypes.FLAME, entity.posX + dX, entity.posY + 0.75, entity.posZ + dZ, 0, -0.04, 0);
-					// world.spawnParticle(EnumParticleTypes.FLAME, entity.posX, entity.posY + 0.25, entity.posZ, 0, 0, 0);
-				}
+			renderLabel(entity, x, y, z);
+			RenderBossHeathBar.setCurrentBoss(entity);
+		}
+		// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
+		Minecraft mc = Minecraft.getMinecraft();
+		World world = mc.world;
+		if (!mc.isGamePaused() && ticks != 1.0F) {
+			for (int i = 0; i < 10; i++) {
+				Double dX = (world.rand.nextDouble() * 1.0) - 0.5D;
+				Double dZ = (world.rand.nextDouble() * 1.0) - 0.5D;
+				// world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX + dX, entity.posY, entity.posZ + dZ, 0, 0, 0);
+				world.spawnParticle(EnumParticleTypes.PORTAL, entity.posX, entity.posY + 0.25, entity.posZ, dX, 0, dZ);
 			}
 		}
 		GlStateManager.popMatrix();
@@ -102,14 +111,29 @@ public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardi
 		}
 	}
 
+	private void renderSphere(World world, T entity, double radius, int amount) {
+		if (world == null || Minecraft.getMinecraft().isGamePaused()) return;
+		Random rand = world.rand;
+		for (int index = 0; index < amount; index++) {
+			float speed = 0.08F;
+			Vec3d vec = new Vec3d(0, radius, 0).rotatePitch(rand.nextInt(360)).rotateYaw(rand.nextInt(360));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, entity.getPositionVector().addVector(0, entity.getEyeHeight(), 0).add(vec), Vec3d.ZERO, rand.nextInt(6) + 2, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
+		}
+	}
+
 	@Override
-	protected ResourceLocation getEntityTexture(EntityMobEtherealGuardian entity) {
+	protected ResourceLocation getEntityTexture(T entity) {
 		return TEXTURE;
 	}
 
 	@Override
-	public ModelEtherealGuardian getMainModel() {
-		return (ModelEtherealGuardian) super.getMainModel();
+	public ModelXia2 getMainModel() {
+		return (ModelXia2) super.getMainModel();
+	}
+
+	protected void renderLabel(T entity, double x, double y, double z) {
+		// y += (double)((float)getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * z);
+		renderLivingLabel(entity, entity.getDisplayName().getFormattedText(), x, y, z, 32);
 	}
 
 }
