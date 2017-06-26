@@ -4,10 +4,10 @@ import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.blocks.tileentity.TileEntityFakeBedrockFarmland;
-import Tamaized.Voidcraft.entity.nonliving.EntityObsidianFlask;
-import Tamaized.Voidcraft.events.DamageEvent;
-import Tamaized.Voidcraft.items.*;
+import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import Tamaized.Voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import Tamaized.Voidcraft.common.events.DamageEvent;
+import Tamaized.Voidcraft.common.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -200,7 +200,7 @@ public class VoidCraftItems {
 
 /*	public void clientPreInit() {
 //		VadeMecumMeshDefinition.preRegister();
-//		ModelLoader.setCustomMeshDefinition(vadeMecum, new VadeMecumMeshDefinition());
+//		ModelLoader.setCustomMeshDefinition(vademecum, new VadeMecumMeshDefinition());
 	}*/
 
 	@SubscribeEvent

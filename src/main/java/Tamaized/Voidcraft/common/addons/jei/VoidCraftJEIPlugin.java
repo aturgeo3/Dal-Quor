@@ -1,0 +1,57 @@
+package Tamaized.Voidcraft.common.addons.jei;
+
+import Tamaized.Voidcraft.common.addons.jei.alchemy.AlchemyRecipeCategory;
+import Tamaized.Voidcraft.common.addons.jei.alchemy.AlchemyRecipeHandler;
+import Tamaized.Voidcraft.common.addons.jei.alchemy.AlchemyRecipeMaker;
+import Tamaized.Voidcraft.common.addons.jei.blastfurnace.BlastFurnaceRecipeCategory;
+import Tamaized.Voidcraft.common.addons.jei.blastfurnace.BlastFurnaceRecipeHandler;
+import Tamaized.Voidcraft.common.addons.jei.blastfurnace.BlastFurnaceRecipeMaker;
+import Tamaized.Voidcraft.common.addons.jei.infuser.InfuserRecipeCategory;
+import Tamaized.Voidcraft.common.addons.jei.infuser.InfuserRecipeHandler;
+import Tamaized.Voidcraft.common.addons.jei.infuser.InfuserRecipeMaker;
+import Tamaized.Voidcraft.common.addons.jei.macerator.MaceratorRecipeCategory;
+import Tamaized.Voidcraft.common.addons.jei.macerator.MaceratorRecipeHandler;
+import Tamaized.Voidcraft.common.addons.jei.macerator.MaceratorRecipeMaker;
+import Tamaized.Voidcraft.VoidCraft;
+import mezz.jei.api.BlankModPlugin;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientRegistry;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+
+@JEIPlugin
+public class VoidCraftJEIPlugin extends BlankModPlugin {
+
+	public static IJeiHelpers jeiHelpers;
+
+	@Override
+	public void register(@Nonnull IModRegistry registry) {
+		VoidCraft.instance.logger.info("jei detected, loading VoidCraft jei Plugin");
+		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
+		jeiHelpers = registry.getJeiHelpers();
+
+		registry.addIngredientInfo(new ItemStack(VoidCraft.items.vadeMecum), ItemStack.class, "Toss a book into Void Fire created from an Obsidian Flask");
+		registry.addIngredientInfo(new ItemStack(VoidCraft.items.obsidianFlask), ItemStack.class, "While at Y level 5 and below, Right Click with an Empty Obsidian Flask in hand");
+
+		registry.addRecipeCategories(new InfuserRecipeCategory(), new MaceratorRecipeCategory(), new AlchemyRecipeCategory(), new BlastFurnaceRecipeCategory());
+
+		registry.addRecipes(InfuserRecipeMaker.getRecipes());
+		registry.addRecipes(MaceratorRecipeMaker.getRecipes());
+		registry.addRecipes(AlchemyRecipeMaker.getRecipes());
+		registry.addRecipes(BlastFurnaceRecipeMaker.getRecipes());
+
+		registry.addRecipeHandlers(new InfuserRecipeHandler(), new MaceratorRecipeHandler(), new AlchemyRecipeHandler(), new BlastFurnaceRecipeHandler());
+
+		registry.addRecipeCategoryCraftingItem(new ItemStack(VoidCraft.blocks.voidInfuser), "voidcraft_JEI_recipeCategory_Infuser");
+		registry.addRecipeCategoryCraftingItem(new ItemStack(VoidCraft.blocks.voidMacerator), "voidcraft_JEI_recipeCategory_Macerator");
+		registry.addRecipeCategoryCraftingItem(new ItemStack(VoidCraft.blocks.voidicAlchemyTable), "voidcraft_JEI_recipeCategory_Alchemy");
+		registry.addRecipeCategoryCraftingItem(new ItemStack(VoidCraft.blocks.voidBlastFurnace), "voidcraft_JEI_recipeCategory_BlastFurnace");
+		
+		registry.addAdvancedGuiHandlers(new VadeMecumSpellAdvancedGuiHandler());
+
+	}
+
+}

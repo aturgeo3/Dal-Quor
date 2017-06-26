@@ -1,9 +1,9 @@
 package Tamaized.Voidcraft.registry;
 
-import Tamaized.Voidcraft.potion.PotionSheathe;
-import Tamaized.Voidcraft.potion.PotionVoidImmunity;
-import Tamaized.Voidcraft.potion.PotionVoidicInfusion;
-import Tamaized.Voidcraft.potion.PotionVoidicInfusionImmunity;
+import Tamaized.Voidcraft.common.potion.PotionSheathe;
+import Tamaized.Voidcraft.common.potion.PotionVoidImmunity;
+import Tamaized.Voidcraft.common.potion.PotionVoidicInfusion;
+import Tamaized.Voidcraft.common.potion.PotionVoidicInfusionImmunity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;

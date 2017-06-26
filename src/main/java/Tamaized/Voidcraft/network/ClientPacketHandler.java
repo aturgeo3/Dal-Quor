@@ -1,14 +1,14 @@
 package Tamaized.Voidcraft.network;
 
 import Tamaized.TamModized.helper.MotionHelper;
-import Tamaized.Voidcraft.api.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.capabilities.voidicPower.IVoidicPowerCapability;
-import Tamaized.Voidcraft.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.entity.client.animation.IAnimation;
-import Tamaized.Voidcraft.entity.ghost.EntityGhostPlayerBase;
+import Tamaized.Voidcraft.common.voidicpower.VoidicPowerItem;
+import Tamaized.Voidcraft.common.capabilities.CapabilityList;
+import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import Tamaized.Voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
+import Tamaized.Voidcraft.client.entity.animation.IAnimation;
+import Tamaized.Voidcraft.common.entity.ghost.EntityGhostPlayerBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.Minecraft;

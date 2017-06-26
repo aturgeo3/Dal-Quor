@@ -1,11 +1,11 @@
 package Tamaized.Voidcraft.registry;
 
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.machina.addons.TERecipeInfuser;
-import Tamaized.Voidcraft.machina.addons.TERecipesAlchemy;
-import Tamaized.Voidcraft.machina.addons.TERecipesBlastFurnace;
-import Tamaized.Voidcraft.machina.addons.TERecipesMacerator;
+import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import Tamaized.Voidcraft.common.machina.addons.TERecipeInfuser;
+import Tamaized.Voidcraft.common.machina.addons.TERecipesAlchemy;
+import Tamaized.Voidcraft.common.machina.addons.TERecipesBlastFurnace;
+import Tamaized.Voidcraft.common.machina.addons.TERecipesMacerator;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,8 @@
 package Tamaized.Voidcraft.registry;
 
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.capabilities.CapabilityList;
-import Tamaized.Voidcraft.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import Tamaized.Voidcraft.common.capabilities.CapabilityList;
+import Tamaized.Voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,10 +15,10 @@ public class VadeMecumMeshDefinition implements ItemMeshDefinition {
 	private static final ModelResourceLocation open = new ModelResourceLocation(new ResourceLocation(VoidCraft.modid, "items/vademecum_open"),  "inventory");
 	
 	public static void preRegister(){
-		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vadeMecum, 0, closed);
-		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vadeMecum, 0, open);
+		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vademecum, 0, closed);
+		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vademecum, 0, open);
 		ModelBakery.registerItemVariants(VoidCraft.items.vadeMecum, closed, open);
-		//ModelBakery.registerItemVariants(voidCraft.items.vadeMecum, open);
+		//ModelBakery.registerItemVariants(voidCraft.items.vademecum, open);
 	}
 	
 	public static void register(){

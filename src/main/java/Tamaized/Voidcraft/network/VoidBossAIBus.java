@@ -2,7 +2,7 @@ package Tamaized.Voidcraft.network;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.xiaCastle.logic.battle.EntityVoidNPCAIBase;
+import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 
 public class VoidBossAIBus {
 

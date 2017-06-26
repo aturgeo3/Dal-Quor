@@ -1,11 +1,11 @@
 package Tamaized.Voidcraft.registry;
 
-import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.item.ItemStack;
 
 public class VoidCraftAchievements { // TODO
 
-	/*public static Achievement vadeMecum;
+	/*public static Achievement vademecum;
 	public static Achievement theVoice;
 	public static Achievement anchor; // Require Voice
 	public static Achievement stabilization; // Require Voice
@@ -48,9 +48,9 @@ public class VoidCraftAchievements { // TODO
 		/*familiarity = new Achievement("achievement.familiarity", "familiarity", -2, 12, Blocks.TNT, (Achievement) null);
 		familiarity.setSpecial().registerStat();
 		
-		vadeMecum = new Achievement("achievement.vadeMecum", "vadeMecum", 0, 12, VoidCraft.items.vadeMecum, (Achievement) null);
-		vadeMecum.setSpecial().registerStat();
-		theVoice = new Achievement("achievement.theVoice", "theVoice", 2, 12, activeVade, vadeMecum);
+		vademecum = new Achievement("achievement.vademecum", "vademecum", 0, 12, VoidCraft.items.vademecum, (Achievement) null);
+		vademecum.setSpecial().registerStat();
+		theVoice = new Achievement("achievement.theVoice", "theVoice", 2, 12, activeVade, vademecum);
 		theVoice.setSpecial().registerStat();
 		anchor = new Achievement("achievement.anchor", "anchor", 1, 13, VoidCraft.items.voidcrystal, theVoice);
 		anchor.registerStat();
@@ -116,7 +116,7 @@ public class VoidCraftAchievements { // TODO
 
 				familiarity,
 				
-				vadeMecum, theVoice, anchor, stabilization, empowerment, tolerance, totalControl, nightmare,
+				vademecum, theVoice, anchor, stabilization, empowerment, tolerance, totalControl, nightmare,
 				
 				voidCrystal, enterVoid, demonsCall, artifact, godsSleep, tooFar, Ascension, worldsEnd,
 

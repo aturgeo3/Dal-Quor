@@ -3,7 +3,7 @@ package Tamaized.Voidcraft.registry;
 import Tamaized.TamModized.armors.TamArmor;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.armor.XiaArmor;
+import Tamaized.Voidcraft.common.armor.XiaArmor;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
