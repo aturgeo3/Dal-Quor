@@ -4,7 +4,6 @@ import Tamaized.TamModized.TamModBase;
 import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.proxy.AbstractProxy;
 import Tamaized.TamModized.registry.PortalHandlerRegistry;
-import Tamaized.Voidcraft.Addons.thaumcraft.VoidCraftThaum;
 import Tamaized.Voidcraft.GUI.GuiHandler;
 import Tamaized.Voidcraft.blocks.TileEntityNoBreak;
 import Tamaized.Voidcraft.blocks.spell.tileentity.TileEntitySpellIceSpike;
@@ -83,7 +82,6 @@ import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -117,7 +115,6 @@ public class VoidCraft extends TamModBase {
 
 	public static RitualList ritualList;
 
-	public static VoidCraftThaum thaumcraftIntegration;
 	public static boolean isAetherLoaded = false;
 
 	public static final VoidCraftMaterials materials = new VoidCraftMaterials();
@@ -181,20 +178,6 @@ public class VoidCraft extends TamModBase {
 
 		// Initialize Network
 		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
-
-		// API Loader
-		if (Loader.isModLoaded("Thaumcraft")) {
-			// logger.info("Thaumcraft Detected. Attempting to load API");
-			try {
-				// thaumcraftIntegration = new VoidCraftThaum();
-				// logger.info("Loaded ThaumcraftAPI into VoidCraft");
-			} catch (Exception e1) {
-				logger.info("Error while adding ThaumcraftAPI into VoidCraft");
-				e1.printStackTrace(System.err);
-			}
-		}
-
-		// if(thaumcraftIntegration != null) thaumcraftIntegration.preInit();
 
 		// Register Capabilities
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
@@ -326,8 +309,6 @@ public class VoidCraft extends TamModBase {
 		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 
-		// if(thaumcraftIntegration != null) thaumcraftIntegration.init();
-
 	}
 
 	@Override
@@ -351,8 +332,6 @@ public class VoidCraft extends TamModBase {
 
 		// Register Network
 		channel.register(new ServerPacketHandler());
-
-		// if(thaumcraftIntegration != null) thaumcraftIntegration.postInit();
 
 	}
 
