@@ -1,8 +1,9 @@
 package Tamaized.Voidcraft.items;
 
 import Tamaized.TamModized.items.TamItem;
+import Tamaized.Voidcraft.capabilities.CapabilityList;
+import Tamaized.Voidcraft.capabilities.vadeMecum.IVadeMecumCapability;
 import Tamaized.Voidcraft.world.SchematicLoader;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -81,10 +82,10 @@ public class Debugger extends TamItem {
 
 		// VoidCraft.instance.VoidTickEvent.dream(player);
 
-		// IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		// cap.clearCategories();
-		// for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
-		// cap.addCategory(player, cat);
+		 IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
+		 cap.clearCategories();
+		 for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
+		 cap.addCategory(player, cat);
 		// cap.removeCategory(IVadeMecumCapability.Category.TotalControl);
 		// cap.removeCategory(IVadeMecumCapability.Category.Dreams);
 
@@ -118,7 +119,7 @@ public class Debugger extends TamItem {
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
 
-		System.out.println(new ModelResourceLocation(getRegistryName(), "inventory"));
+//		System.out.println(new ModelResourceLocation(getRegistryName(), "inventory"));
 
 		return super.onItemRightClick(world, player, hand);
 
