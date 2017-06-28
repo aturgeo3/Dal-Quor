@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 

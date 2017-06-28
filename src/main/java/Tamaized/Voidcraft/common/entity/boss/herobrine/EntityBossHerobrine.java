@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.entity.boss.herobrine;
+package tamaized.voidcraft.common.entity.boss.herobrine;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;

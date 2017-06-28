@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.entity.boss.bossbar;
+package tamaized.voidcraft.client.entity.boss.bossbar;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.profiler.Profiler;

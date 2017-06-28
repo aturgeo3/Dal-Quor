@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.voidicpower;
+package tamaized.voidcraft.common.voidicpower;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

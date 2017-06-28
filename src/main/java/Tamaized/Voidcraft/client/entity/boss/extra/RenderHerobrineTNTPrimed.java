@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;

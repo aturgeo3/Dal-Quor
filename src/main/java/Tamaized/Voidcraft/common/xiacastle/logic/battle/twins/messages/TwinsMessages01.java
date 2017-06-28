@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.twins.messages;
+package tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages;
 
-import Tamaized.Voidcraft.common.entity.boss.twins.EntityBossDol;
-import Tamaized.Voidcraft.common.entity.boss.twins.EntityBossZol;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;

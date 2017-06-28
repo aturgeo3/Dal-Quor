@@ -1,17 +1,17 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2.phases;
+package tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
-import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
-import Tamaized.Voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;

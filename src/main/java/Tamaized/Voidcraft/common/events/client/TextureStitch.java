@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.events.client;
+package tamaized.voidcraft.common.events.client;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;

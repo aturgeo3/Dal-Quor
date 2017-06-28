@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.ai;
+package tamaized.voidcraft.common.entity.ai;
 
 import net.minecraft.entity.EntityLivingBase;
 

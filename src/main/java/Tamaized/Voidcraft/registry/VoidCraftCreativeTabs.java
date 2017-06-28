@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

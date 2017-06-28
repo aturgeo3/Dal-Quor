@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

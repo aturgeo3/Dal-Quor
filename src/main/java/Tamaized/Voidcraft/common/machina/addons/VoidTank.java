@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.machina.addons;
+package tamaized.voidcraft.common.machina.addons;
 
 import javax.annotation.Nullable;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;

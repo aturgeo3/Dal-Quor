@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
-import Tamaized.Voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.netty.buffer.ByteBuf;
@@ -333,7 +333,6 @@ public class EntityAcidBall extends EntityArrow implements IProjectile, IEntityA
     
     @SideOnly(Side.CLIENT)
     private void particles(){
-    	//Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.client.particles.AcidFX(this.worldObj, this.posX, this.posY, this.posZ));
     }
 
     /**

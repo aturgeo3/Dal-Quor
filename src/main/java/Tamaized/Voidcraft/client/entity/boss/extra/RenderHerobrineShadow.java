@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;

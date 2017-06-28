@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.companion;
+package tamaized.voidcraft.common.entity.companion;
 
 import net.minecraft.world.World;
 

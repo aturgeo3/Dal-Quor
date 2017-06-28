@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

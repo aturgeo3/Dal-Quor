@@ -1,16 +1,16 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks;
+package tamaized.voidcraft.common.vademecum.contents.documentation.blocks;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.cosmicMaterial.VadeMecumPageListCosmicMaterial;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.realityhole.VadeMecumPageListRealityHole;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.ritual.VadeMecumPageListRitualBlock;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.softbedrock.VadeMecumPageListSoftBedrock;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.voidbrick.VadeMecumPageListVoidBrick;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalblock.VadeMecumPageListVoidCrystalBlock;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalore.VadeMecumPageListVoidCrystalOre;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.cosmicMaterial.VadeMecumPageListCosmicMaterial;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.realityhole.VadeMecumPageListRealityHole;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.ritual.VadeMecumPageListRitualBlock;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.softbedrock.VadeMecumPageListSoftBedrock;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidbrick.VadeMecumPageListVoidBrick;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalblock.VadeMecumPageListVoidCrystalBlock;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalore.VadeMecumPageListVoidCrystalOre;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumBlocksEntry extends VadeMecumEntry {

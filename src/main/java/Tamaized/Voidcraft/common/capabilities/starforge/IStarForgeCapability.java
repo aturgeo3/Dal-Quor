@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.starforge;
+package tamaized.voidcraft.common.capabilities.starforge;
 
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

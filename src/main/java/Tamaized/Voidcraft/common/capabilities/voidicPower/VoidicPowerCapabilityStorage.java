@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.voidicPower;
+package tamaized.voidcraft.common.capabilities.voidicPower;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

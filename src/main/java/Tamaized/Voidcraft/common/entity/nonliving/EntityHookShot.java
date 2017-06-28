@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
 public class EntityHookShot{/* extends EntityFishHook implements IProjectile, IEntityAdditionalSpawnData  {
 

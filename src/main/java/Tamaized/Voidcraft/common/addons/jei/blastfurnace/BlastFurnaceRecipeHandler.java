@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.jei.blastfurnace;
+package tamaized.voidcraft.common.addons.jei.blastfurnace;
 
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

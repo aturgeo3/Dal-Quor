@@ -1,19 +1,19 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.phases;
+package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.common.handlers.SkinHandler;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

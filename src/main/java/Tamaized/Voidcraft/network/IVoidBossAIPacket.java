@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.network;
+package tamaized.voidcraft.network;
 
 public interface IVoidBossAIPacket {
 

@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine;
+package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

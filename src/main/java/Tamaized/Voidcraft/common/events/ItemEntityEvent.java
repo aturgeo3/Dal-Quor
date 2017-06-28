@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;

@@ -1,19 +1,19 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.xia.phases;
+package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
 import java.util.ArrayList;
 
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
-import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
-import Tamaized.Voidcraft.common.entity.mob.lich.EntityLichInferno;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.client.particles.network.XiaLaserPacketHandler;
-import Tamaized.Voidcraft.client.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler;
+import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;

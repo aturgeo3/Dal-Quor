@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.vademecum.progression;
+package tamaized.voidcraft.common.vademecum.progression;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

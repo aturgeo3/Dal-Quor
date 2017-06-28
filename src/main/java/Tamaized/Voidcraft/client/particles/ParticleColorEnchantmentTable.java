@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.particles;
+package tamaized.voidcraft.client.particles;
 
 import net.minecraft.client.particle.ParticleEnchantmentTable;
 import net.minecraft.world.World;

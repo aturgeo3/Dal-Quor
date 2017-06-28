@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.vademecum.progression;
+package tamaized.voidcraft.common.vademecum.progression;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.entity.companion.model;
+package tamaized.voidcraft.client.entity.companion.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

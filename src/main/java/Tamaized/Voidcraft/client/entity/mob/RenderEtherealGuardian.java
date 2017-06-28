@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.mob;
+package tamaized.voidcraft.client.entity.mob;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.mob.model.ModelEtherealGuardian;
-import Tamaized.Voidcraft.common.entity.mob.EntityMobEtherealGuardian;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.mob.model.ModelEtherealGuardian;
+import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;

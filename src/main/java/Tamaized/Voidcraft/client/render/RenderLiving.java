@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.render;
+package tamaized.voidcraft.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.client.event.RenderLivingEvent;

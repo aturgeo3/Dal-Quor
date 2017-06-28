@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.world.dim.xia;
+package tamaized.voidcraft.common.world.dim.xia;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;

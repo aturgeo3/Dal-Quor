@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.entity.nonliving;
+package tamaized.voidcraft.client.entity.nonliving;
 
 import Tamaized.TamModized.particles.FX.ParticleFluff;
-import Tamaized.Voidcraft.common.entity.nonliving.EntitySpellImplosion;
+import tamaized.voidcraft.common.entity.nonliving.EntitySpellImplosion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

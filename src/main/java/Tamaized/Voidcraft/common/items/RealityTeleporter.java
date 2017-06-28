@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.helper.RayTraceHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.GuiHandler;
-import Tamaized.Voidcraft.common.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import Tamaized.Voidcraft.common.items.inventory.InventoryItem;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.common.items.inventory.InventoryItem;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

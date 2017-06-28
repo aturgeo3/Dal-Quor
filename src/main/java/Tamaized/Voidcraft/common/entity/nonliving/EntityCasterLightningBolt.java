@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;

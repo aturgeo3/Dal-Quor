@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.sound;
+package tamaized.voidcraft.common.sound;
 
 import java.util.HashMap;
 import java.util.Map;

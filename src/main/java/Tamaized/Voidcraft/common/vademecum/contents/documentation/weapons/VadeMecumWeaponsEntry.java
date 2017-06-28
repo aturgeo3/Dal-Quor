@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons;
+package tamaized.voidcraft.common.vademecum.contents.documentation.weapons;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.angelicsword.VadeMecumPageListAngelicSword;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.archangelicsword.VadeMecumPageListArchSword;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.bindsword.VadeMecumPageListBindSword;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.demonsword.VadeMecumPageListDemonSword;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.moltensword.VadeMecumPageListMoltenSword;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.voidsword.VadeMecumPageListVoidSword;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.angelicsword.VadeMecumPageListAngelicSword;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.archangelicsword.VadeMecumPageListArchSword;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.bindsword.VadeMecumPageListBindSword;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.demonsword.VadeMecumPageListDemonSword;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.moltensword.VadeMecumPageListMoltenSword;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.voidsword.VadeMecumPageListVoidSword;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumWeaponsEntry extends VadeMecumEntry {

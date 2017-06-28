@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.common.fluids.IFaceFluidHandler;
-import Tamaized.Voidcraft.common.machina.addons.TERecipeInfuser.InfuserRecipe;
-import Tamaized.Voidcraft.common.machina.addons.VoidTank;
-import Tamaized.Voidcraft.registry.*;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.TERecipeInfuser.InfuserRecipe;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.registry.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

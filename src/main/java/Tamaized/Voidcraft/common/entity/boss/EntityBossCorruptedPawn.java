@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.entity.boss;
+package tamaized.voidcraft.common.entity.boss;
 
 import Tamaized.TamModized.entity.dragon.EntityDragonOld;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;

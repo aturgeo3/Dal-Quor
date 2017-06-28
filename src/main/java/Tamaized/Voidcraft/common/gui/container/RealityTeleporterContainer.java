@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotCantRemove;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import Tamaized.Voidcraft.common.items.RealityTeleporter;
-import Tamaized.Voidcraft.common.items.inventory.InventoryItem;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.common.gui.slots.SlotCantRemove;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.common.items.RealityTeleporter;
+import tamaized.voidcraft.common.items.inventory.InventoryItem;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

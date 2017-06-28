@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
 import Tamaized.TamModized.blocks.TamBlockFarmland;
 import Tamaized.TamModized.items.TamItem;
 import Tamaized.TamModized.items.TamItemSeed;
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
-import Tamaized.Voidcraft.common.entity.nonliving.EntityObsidianFlask;
-import Tamaized.Voidcraft.common.events.DamageEvent;
-import Tamaized.Voidcraft.common.items.*;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.voidcraft.common.events.DamageEvent;
+import tamaized.voidcraft.common.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

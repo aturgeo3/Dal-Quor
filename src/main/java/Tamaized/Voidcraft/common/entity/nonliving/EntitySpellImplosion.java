@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
-import Tamaized.Voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

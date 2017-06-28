@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;

@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.entity.nonliving;
+package tamaized.voidcraft.client.entity.nonliving;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;

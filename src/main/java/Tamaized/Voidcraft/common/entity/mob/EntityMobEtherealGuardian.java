@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.common.entity.mob;
+package tamaized.voidcraft.common.entity.mob;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.network.ClientPacketHandler;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.common.starforge.effects.StarForgeEffectList;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.network.ClientPacketHandler;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;

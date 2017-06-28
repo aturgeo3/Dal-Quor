@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.gui.slots;
+package tamaized.voidcraft.common.gui.slots;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
 import net.minecraft.entity.player.EntityPlayer;

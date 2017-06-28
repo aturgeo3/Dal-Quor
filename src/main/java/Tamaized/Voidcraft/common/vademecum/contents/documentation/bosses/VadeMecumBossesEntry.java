@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses;
+package tamaized.voidcraft.common.vademecum.contents.documentation.bosses;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.herobrine.VadeMecumPageListHerobrine;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.pawn.VadeMecumPageListCorruptedPawn;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.twins.VadeMecumPageListTwins;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.voidicDragon.VadeMecumPageListVoidicDragon;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.xia.VadeMecumPageListXia;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.herobrine.VadeMecumPageListHerobrine;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.pawn.VadeMecumPageListCorruptedPawn;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.twins.VadeMecumPageListTwins;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.voidicDragon.VadeMecumPageListVoidicDragon;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.xia.VadeMecumPageListXia;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 

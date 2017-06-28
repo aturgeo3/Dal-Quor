@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.layer;
+package tamaized.voidcraft.client.layer;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.model.ModelCustomElytra;
-import Tamaized.Voidcraft.common.armor.ArmorCustomElytra;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.model.ModelCustomElytra;
+import tamaized.voidcraft.common.armor.ArmorCustomElytra;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;

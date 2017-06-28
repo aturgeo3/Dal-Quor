@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.container.VoidBlastFurnaceContainer;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidBlastFurnaceContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

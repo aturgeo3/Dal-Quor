@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.entity.boss.herobrine.extra;
+package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
 import javax.annotation.Nullable;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.ai.EntityAIHerobrineCreeperSwell;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.ai.EntityAIHerobrineCreeperSwell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;

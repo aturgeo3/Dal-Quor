@@ -1,20 +1,20 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.tools;
+package tamaized.voidcraft.common.vademecum.contents.documentation.tools;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.realityTeleporter.VadeMecumPageListRealityTeleporter;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.spectreaxe.VadeMecumPageListSpectreAxe;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.spectrehoe.VadeMecumPageListSpectreHoe;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.spectrepick.VadeMecumPageListSpectrePick;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.spectreshovel.VadeMecumPageListSpectreShovel;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidShield.VadeMecumPageListVoidShield;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidaxe.VadeMecumPageListVoidAxe;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidhoe.VadeMecumPageListVoidHoe;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidicdrill.VadeMecumPageListVoidicDrill;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidpick.VadeMecumPageListVoidPick;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.voidspade.VadeMecumPageListVoidSpade;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.realityTeleporter.VadeMecumPageListRealityTeleporter;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectreaxe.VadeMecumPageListSpectreAxe;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectrehoe.VadeMecumPageListSpectreHoe;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectrepick.VadeMecumPageListSpectrePick;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectreshovel.VadeMecumPageListSpectreShovel;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidShield.VadeMecumPageListVoidShield;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidaxe.VadeMecumPageListVoidAxe;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidhoe.VadeMecumPageListVoidHoe;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidicdrill.VadeMecumPageListVoidicDrill;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidpick.VadeMecumPageListVoidPick;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidspade.VadeMecumPageListVoidSpade;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumToolsEntry extends VadeMecumEntry {

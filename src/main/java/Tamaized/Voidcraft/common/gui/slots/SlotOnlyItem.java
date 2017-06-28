@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.gui.slots;
+package tamaized.voidcraft.common.gui.slots;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

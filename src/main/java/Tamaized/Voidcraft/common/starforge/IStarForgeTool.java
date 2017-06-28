@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.starforge;
+package tamaized.voidcraft.common.starforge;
 
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public interface IStarForgeTool {
 	

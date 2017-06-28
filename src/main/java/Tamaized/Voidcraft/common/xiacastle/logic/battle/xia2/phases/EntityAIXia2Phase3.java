@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2.phases;
+package tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityDragonXia;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
-import Tamaized.Voidcraft.client.entity.boss.extra.EntityDolXia;
-import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityDragonXia;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
+import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;

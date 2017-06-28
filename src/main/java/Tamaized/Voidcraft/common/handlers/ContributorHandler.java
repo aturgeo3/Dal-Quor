@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.handlers;
+package tamaized.voidcraft.common.handlers;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.EnumDyeColor;
 
 import java.io.IOException;

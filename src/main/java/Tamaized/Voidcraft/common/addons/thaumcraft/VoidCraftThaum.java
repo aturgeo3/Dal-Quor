@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.thaumcraft;
+package tamaized.voidcraft.common.addons.thaumcraft;
 
 
 public class VoidCraftThaum{/*

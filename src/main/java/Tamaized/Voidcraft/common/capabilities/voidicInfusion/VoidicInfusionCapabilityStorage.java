@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.voidicInfusion;
+package tamaized.voidcraft.common.capabilities.voidicInfusion;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

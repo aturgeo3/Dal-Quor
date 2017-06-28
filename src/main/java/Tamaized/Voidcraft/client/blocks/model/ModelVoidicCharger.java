@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.blocks.model;
+package tamaized.voidcraft.client.blocks.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

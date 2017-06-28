@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.addons.jei.blastfurnace;
+package tamaized.voidcraft.common.addons.jei.blastfurnace;
 
-import Tamaized.Voidcraft.common.addons.jei.VoidCraftJEIPlugin;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.common.addons.jei.VoidCraftJEIPlugin;
+import tamaized.voidcraft.VoidCraft;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;

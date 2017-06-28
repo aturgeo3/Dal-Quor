@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.blocks.spell.tileentity;
+package tamaized.voidcraft.common.blocks.spell.tileentity;
 
-import Tamaized.Voidcraft.common.damagesources.DamageSourceFrost;
+import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;

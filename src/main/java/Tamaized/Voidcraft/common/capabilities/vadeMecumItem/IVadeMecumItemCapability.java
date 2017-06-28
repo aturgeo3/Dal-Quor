@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.capabilities.vadeMecumItem;
+package tamaized.voidcraft.common.capabilities.vadeMecumItem;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

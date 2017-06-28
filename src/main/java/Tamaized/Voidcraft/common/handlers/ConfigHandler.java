@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.handlers;
+package tamaized.voidcraft.common.handlers;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;

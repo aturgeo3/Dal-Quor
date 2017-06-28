@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.world.dim.dalquor;
+package tamaized.voidcraft.common.world.dim.dalquor;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

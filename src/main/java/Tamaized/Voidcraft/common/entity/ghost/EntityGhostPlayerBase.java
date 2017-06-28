@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.entity.ghost;
+package tamaized.voidcraft.common.entity.ghost;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.handlers.SkinHandler;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import com.mojang.authlib.GameProfile;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
@@ -193,7 +193,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 			double dx = ox - (tx - offsetX);
 			double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
 			double dz = oz - (tz - offsetZ);
-			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.client.particles.ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
+			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.voidcraft.client.particles.ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
 		}
 	}
 

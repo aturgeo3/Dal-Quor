@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.tools.chain;
+package tamaized.voidcraft.common.tools.chain;
 
 import Tamaized.TamModized.tools.TamSword;
 import net.minecraft.creativetab.CreativeTabs;

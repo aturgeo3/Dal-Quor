@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.elytraFlying;
+package tamaized.voidcraft.common.capabilities.elytraFlying;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.util.ResourceLocation;
 
 public class ElytraFlyingCapabilityHandler implements IElytraFlyingCapability {

@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.world.dim.dalquor;
+package tamaized.voidcraft.common.world.dim.dalquor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
-import Tamaized.Voidcraft.common.entity.mob.dalquor.EntityHashalaq;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
+import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;

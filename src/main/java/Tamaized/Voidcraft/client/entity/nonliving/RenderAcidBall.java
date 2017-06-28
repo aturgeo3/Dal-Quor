@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.nonliving;
+package tamaized.voidcraft.client.entity.nonliving;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

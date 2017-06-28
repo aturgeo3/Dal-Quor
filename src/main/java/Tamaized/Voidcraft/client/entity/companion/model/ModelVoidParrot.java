@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.companion.model;
+package tamaized.voidcraft.client.entity.companion.model;
 
-import Tamaized.Voidcraft.common.entity.companion.EntityVoidParrot;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

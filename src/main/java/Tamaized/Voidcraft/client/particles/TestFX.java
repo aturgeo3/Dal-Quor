@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.particles;
+package tamaized.voidcraft.client.particles;
 
 
 public class TestFX{/* extends EntityFX{

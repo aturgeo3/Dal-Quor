@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.boss.model.ModelVoidBoss;
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.entity.boss.twins.EntityBossDol;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.model.ModelVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

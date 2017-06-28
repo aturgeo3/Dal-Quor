@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.capabilities.voidicPower;
+package tamaized.voidcraft.common.capabilities.voidicPower;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

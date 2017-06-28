@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.capabilities.elytraFlying;
+package tamaized.voidcraft.common.capabilities.elytraFlying;
 
 public interface IElytraFlyingCapability {
 

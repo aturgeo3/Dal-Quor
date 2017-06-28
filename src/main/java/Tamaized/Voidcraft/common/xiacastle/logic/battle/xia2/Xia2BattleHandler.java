@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2;
+package tamaized.voidcraft.common.xiacastle.logic.battle.xia2;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;

@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.gui.container.RealityTeleporterContainer;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import Tamaized.Voidcraft.common.items.RealityTeleporter;
-import Tamaized.Voidcraft.common.items.inventory.InventoryItem;
-import Tamaized.Voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.common.gui.container.RealityTeleporterContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.common.items.RealityTeleporter;
+import tamaized.voidcraft.common.items.inventory.InventoryItem;
+import tamaized.voidcraft.network.ServerPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;

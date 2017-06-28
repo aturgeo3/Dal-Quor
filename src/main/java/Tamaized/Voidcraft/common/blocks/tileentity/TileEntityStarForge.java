@@ -1,16 +1,16 @@
-package Tamaized.Voidcraft.common.blocks.tileentity;
+package tamaized.voidcraft.common.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.client.gui.element.GUIListElement;
-import Tamaized.Voidcraft.registry.VoidCraftTools;
-import Tamaized.Voidcraft.common.starforge.IStarForgeTool;
-import Tamaized.Voidcraft.common.starforge.StarForgeEffectEntry;
-import Tamaized.Voidcraft.common.starforge.StarForgeEffectRecipeList;
-import Tamaized.Voidcraft.common.starforge.StarForgeToolEntry;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.client.gui.element.GUIListElement;
+import tamaized.voidcraft.registry.VoidCraftTools;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.common.starforge.StarForgeEffectEntry;
+import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
+import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

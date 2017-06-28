@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.render;
+package tamaized.voidcraft.client.render;
 
 import Tamaized.TamModized.particles.FX.ParticleFluff;
-import Tamaized.Voidcraft.common.events.client.TextureStitch;
-import Tamaized.Voidcraft.common.helper.SheatheHelper;
+import tamaized.voidcraft.common.events.client.TextureStitch;
+import tamaized.voidcraft.common.helper.SheatheHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

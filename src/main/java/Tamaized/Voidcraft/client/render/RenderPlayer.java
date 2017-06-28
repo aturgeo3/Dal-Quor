@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.render;
+package tamaized.voidcraft.client.render;
 
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.events.CustomElytraHandler;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.events.CustomElytraHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;

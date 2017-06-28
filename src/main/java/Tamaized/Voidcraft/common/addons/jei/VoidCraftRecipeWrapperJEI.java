@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.jei;
+package tamaized.voidcraft.common.addons.jei;
 
 import java.util.Arrays;
 import java.util.List;

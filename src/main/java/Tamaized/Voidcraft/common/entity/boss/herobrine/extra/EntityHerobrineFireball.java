@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.entity.boss.herobrine.extra;
+package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
-import Tamaized.Voidcraft.common.blocks.AIBlock;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.blocks.AIBlock;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.entity.nonliving;
+package tamaized.voidcraft.client.entity.nonliving;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

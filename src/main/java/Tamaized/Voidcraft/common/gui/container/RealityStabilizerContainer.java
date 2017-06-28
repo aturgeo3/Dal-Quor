@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotCantPlace;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityRealityStabilizer;
+import tamaized.voidcraft.common.gui.slots.SlotCantPlace;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityStabilizer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

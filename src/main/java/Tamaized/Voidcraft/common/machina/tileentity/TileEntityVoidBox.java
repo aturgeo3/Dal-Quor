@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.sound.OggLength;
-import Tamaized.Voidcraft.common.sound.VanillaRecordLengths;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.OggLength;
+import tamaized.voidcraft.common.sound.VanillaRecordLengths;
 import com.google.gson.stream.JsonReader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

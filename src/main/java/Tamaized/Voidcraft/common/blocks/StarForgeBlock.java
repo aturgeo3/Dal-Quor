@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.GuiHandler;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityStarForge;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

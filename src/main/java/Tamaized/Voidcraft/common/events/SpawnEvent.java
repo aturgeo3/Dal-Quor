@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.entity.boss.EntityBossCorruptedPawn;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.common.entity.companion.EntityVoidParrot;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.world.dim.dalquor.BiomeGenDream;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.world.dim.dalquor.BiomeGenDream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.player.EntityPlayer;

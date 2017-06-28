@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.addons.jei.alchemy;
+package tamaized.voidcraft.common.addons.jei.alchemy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 
 public class AlchemyRecipeMaker {
 

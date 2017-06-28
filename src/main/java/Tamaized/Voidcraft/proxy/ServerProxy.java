@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.proxy;
+package tamaized.voidcraft.proxy;
 
 import Tamaized.TamModized.proxy.AbstractProxy;
 

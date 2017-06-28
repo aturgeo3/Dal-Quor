@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.jei.macerator;
+package tamaized.voidcraft.common.addons.jei.macerator;
 
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

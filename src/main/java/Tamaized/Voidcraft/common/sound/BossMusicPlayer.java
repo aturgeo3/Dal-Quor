@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.sound;
+package tamaized.voidcraft.common.sound;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.client.sound.BGMusic;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.client.sound.BGMusic;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;

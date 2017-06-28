@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.blocks.tileentity;
+package tamaized.voidcraft.common.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.blocks.AIBlock;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.AIBlock;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

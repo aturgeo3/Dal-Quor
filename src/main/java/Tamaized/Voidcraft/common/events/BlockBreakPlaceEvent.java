@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

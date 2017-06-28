@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.starforge.effects.tool.tier2;
+package tamaized.voidcraft.common.starforge.effects.tool.tier2;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

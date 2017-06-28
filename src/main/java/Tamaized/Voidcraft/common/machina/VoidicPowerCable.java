@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.machina;
+package tamaized.voidcraft.common.machina;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.common.voidicpower.IVoidicPower;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicPowerCable;
+import tamaized.voidcraft.common.voidicpower.IVoidicPower;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerCable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;

@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.common.starforge;
+package tamaized.voidcraft.common.starforge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
-import Tamaized.Voidcraft.common.starforge.effects.StarForgeEffectList;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import net.minecraft.item.ItemStack;
 
 public final class StarForgeEffectRecipeList {

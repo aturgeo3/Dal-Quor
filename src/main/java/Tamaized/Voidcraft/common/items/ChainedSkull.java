@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import java.util.List;
 
 import Tamaized.TamModized.helper.TranslateHelper;
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.common.entity.boss.EntityBossCorruptedPawn;
+import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

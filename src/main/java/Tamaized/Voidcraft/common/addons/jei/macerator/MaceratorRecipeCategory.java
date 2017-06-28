@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.addons.jei.macerator;
+package tamaized.voidcraft.common.addons.jei.macerator;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.addons.jei.VoidCraftJEIPlugin;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.addons.jei.VoidCraftJEIPlugin;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;

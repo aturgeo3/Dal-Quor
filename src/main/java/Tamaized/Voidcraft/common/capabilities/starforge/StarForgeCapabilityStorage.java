@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.capabilities.starforge;
+package tamaized.voidcraft.common.capabilities.starforge;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import Tamaized.Voidcraft.common.starforge.effects.StarForgeEffectList;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

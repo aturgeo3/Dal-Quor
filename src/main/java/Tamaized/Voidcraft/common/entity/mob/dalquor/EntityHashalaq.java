@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.entity.mob.dalquor;
+package tamaized.voidcraft.common.entity.mob.dalquor;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;

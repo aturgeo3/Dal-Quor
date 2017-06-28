@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.items.inventory;
+package tamaized.voidcraft.common.items.inventory;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

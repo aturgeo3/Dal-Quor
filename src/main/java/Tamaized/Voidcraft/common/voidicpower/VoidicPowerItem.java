@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.voidicpower;
+package tamaized.voidcraft.common.voidicpower;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

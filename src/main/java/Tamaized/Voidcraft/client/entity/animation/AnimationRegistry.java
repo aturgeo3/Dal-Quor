@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.client.entity.animation;
+package tamaized.voidcraft.client.entity.animation;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import io.netty.buffer.ByteBufInputStream;
 
 public class AnimationRegistry {

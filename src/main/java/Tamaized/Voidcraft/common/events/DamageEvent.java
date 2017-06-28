@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
 import Tamaized.TamModized.helper.FloatyTextHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.common.helper.SheatheHelper;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.helper.SheatheHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

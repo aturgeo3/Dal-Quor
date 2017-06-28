@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.client.blocks.render;
+package tamaized.voidcraft.client.blocks.render;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.blocks.model.ModelVoidicCharger;
-import Tamaized.Voidcraft.client.event.ClientRenderTicker;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.blocks.model.ModelVoidicCharger;
+import tamaized.voidcraft.client.event.ClientRenderTicker;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

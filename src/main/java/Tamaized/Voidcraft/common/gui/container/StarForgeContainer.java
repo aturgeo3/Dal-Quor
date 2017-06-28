@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotOnlyClass;
-import Tamaized.Voidcraft.common.gui.slots.SlotOnlyItem;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityStarForge;
-import Tamaized.Voidcraft.common.events.client.TextureStitch;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
-import Tamaized.Voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyClass;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
+import tamaized.voidcraft.common.events.client.TextureStitch;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

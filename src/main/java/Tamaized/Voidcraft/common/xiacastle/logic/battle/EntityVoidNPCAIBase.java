@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle;
+package tamaized.voidcraft.common.xiacastle.logic.battle;
 
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;

@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.machina.addons;
+package tamaized.voidcraft.common.machina.addons;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 
 public class TERecipesBlastFurnace extends TamTileEntityRecipeList<TERecipesBlastFurnace.BlastFurnaceRecipe> {

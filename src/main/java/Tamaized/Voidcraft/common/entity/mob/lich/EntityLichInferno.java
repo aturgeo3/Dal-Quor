@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.entity.mob.lich;
+package tamaized.voidcraft.common.entity.mob.lich;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.blocks.FireVoid;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.FireVoid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

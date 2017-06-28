@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.common.machina.VoidMacerator;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.machina.VoidMacerator;
+import tamaized.voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

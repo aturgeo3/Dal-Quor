@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.world.dim.xia;
+package tamaized.voidcraft.common.world.dim.xia;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;

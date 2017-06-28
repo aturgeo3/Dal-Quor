@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.helper;
+package tamaized.voidcraft.common.helper;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;

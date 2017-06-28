@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

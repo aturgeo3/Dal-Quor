@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.structures.voidfortress;
+package tamaized.voidcraft.common.structures.voidfortress;
 
 import java.util.List;
 import java.util.Random;
@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

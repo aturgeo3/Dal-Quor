@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import java.util.HashSet;
 
 import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.voidicpower.VoidicPowerItem;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;

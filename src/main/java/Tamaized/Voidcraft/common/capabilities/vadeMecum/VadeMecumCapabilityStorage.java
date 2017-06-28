@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.vadeMecum;
+package tamaized.voidcraft.common.capabilities.vadeMecum;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

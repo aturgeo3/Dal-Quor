@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

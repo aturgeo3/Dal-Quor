@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

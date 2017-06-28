@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.event;
+package tamaized.voidcraft.client.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

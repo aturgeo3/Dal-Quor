@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;

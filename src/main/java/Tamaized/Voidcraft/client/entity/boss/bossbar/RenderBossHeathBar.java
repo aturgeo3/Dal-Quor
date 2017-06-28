@@ -5,10 +5,10 @@
  * 
  * This is a custom version of it therefore I wont claim this file truly as my own.
  */
-package Tamaized.Voidcraft.client.entity.boss.bossbar;
+package tamaized.voidcraft.client.entity.boss.bossbar;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.IVoidBossData;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.IVoidBossData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;

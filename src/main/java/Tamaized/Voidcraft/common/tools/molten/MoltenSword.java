@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.tools.molten;
+package tamaized.voidcraft.common.tools.molten;
 
 import Tamaized.TamModized.tools.TamSword;
 import net.minecraft.creativetab.CreativeTabs;

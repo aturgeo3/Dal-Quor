@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.network.ServerPacketHandler;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

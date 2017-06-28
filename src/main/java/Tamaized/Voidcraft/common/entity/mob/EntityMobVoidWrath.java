@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.entity.mob;
+package tamaized.voidcraft.common.entity.mob;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;

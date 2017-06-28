@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.sound;
+package tamaized.voidcraft.common.sound;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

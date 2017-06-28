@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.world.dim.thevoid;
+package tamaized.voidcraft.common.world.dim.thevoid;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.common.structures.voidcity.MapGenVoidCity;
-import Tamaized.Voidcraft.common.structures.voidfortress.MapGenVoidFortress;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.common.structures.voidcity.MapGenVoidCity;
+import tamaized.voidcraft.common.structures.voidfortress.MapGenVoidFortress;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

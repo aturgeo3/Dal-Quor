@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.fluids;
+package tamaized.voidcraft.common.fluids;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

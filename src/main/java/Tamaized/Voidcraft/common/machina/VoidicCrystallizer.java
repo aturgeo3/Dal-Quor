@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.machina;
+package tamaized.voidcraft.common.machina;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.common.gui.GuiHandler;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicCrystallizer;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCrystallizer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

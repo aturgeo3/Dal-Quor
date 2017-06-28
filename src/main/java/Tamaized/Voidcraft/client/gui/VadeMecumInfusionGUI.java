@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

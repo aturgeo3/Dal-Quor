@@ -1,20 +1,20 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation;
+package tamaized.voidcraft.common.vademecum.contents.documentation;
 
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.armor.VadeMecumArmorEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.blocks.VadeMecumBlocksEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.bosses.VadeMecumBossesEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.fruit.VadeMecumPageListFruit;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.items.VadeMecumItemsEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.VadeMecumMachinesEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.VadeMecumMobsEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.quori.VadeMecumPageListQuori;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.starforge.VadeMecumPageListStarForge;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.thevoid.VadeMecumPageListVoid;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.VadeMecumToolsEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.voidicinfusion.VadeMecumPageListVoidicInfusion;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.weapons.VadeMecumWeaponsEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.xia.VadeMecumPageListXia;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.armor.VadeMecumArmorEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.VadeMecumBlocksEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.bosses.VadeMecumBossesEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.fruit.VadeMecumPageListFruit;
+import tamaized.voidcraft.common.vademecum.contents.documentation.items.VadeMecumItemsEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.VadeMecumMachinesEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.VadeMecumMobsEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.quori.VadeMecumPageListQuori;
+import tamaized.voidcraft.common.vademecum.contents.documentation.starforge.VadeMecumPageListStarForge;
+import tamaized.voidcraft.common.vademecum.contents.documentation.thevoid.VadeMecumPageListVoid;
+import tamaized.voidcraft.common.vademecum.contents.documentation.tools.VadeMecumToolsEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.voidicinfusion.VadeMecumPageListVoidicInfusion;
+import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.VadeMecumWeaponsEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.xia.VadeMecumPageListXia;
 
 public class VadeMecumDocumentationEntryList {
 

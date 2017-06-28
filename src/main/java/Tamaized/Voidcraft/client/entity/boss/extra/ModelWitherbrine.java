@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

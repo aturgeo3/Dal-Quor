@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.credits;
+package tamaized.voidcraft.common.vademecum.contents.documentation.credits;
 
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPage;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPage;
+import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 
 public class VadeMecumPageListCredits {
 

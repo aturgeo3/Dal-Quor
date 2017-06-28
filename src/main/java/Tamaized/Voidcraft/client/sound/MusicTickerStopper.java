@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.sound;
+package tamaized.voidcraft.client.sound;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;

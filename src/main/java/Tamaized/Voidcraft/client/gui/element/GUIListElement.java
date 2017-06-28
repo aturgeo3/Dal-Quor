@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.gui.element;
+package tamaized.voidcraft.client.gui.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

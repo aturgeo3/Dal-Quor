@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.network;
+package tamaized.voidcraft.network;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;

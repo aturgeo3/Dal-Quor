@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.thaumcraft.items;
+package tamaized.voidcraft.common.addons.thaumcraft.items;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

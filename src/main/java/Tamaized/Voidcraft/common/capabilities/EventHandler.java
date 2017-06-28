@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.capabilities;
+package tamaized.voidcraft.common.capabilities;
 
-import Tamaized.Voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
-import Tamaized.Voidcraft.common.capabilities.elytraFlying.IElytraFlyingCapability;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
-import Tamaized.Voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.elytraFlying.IElytraFlyingCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

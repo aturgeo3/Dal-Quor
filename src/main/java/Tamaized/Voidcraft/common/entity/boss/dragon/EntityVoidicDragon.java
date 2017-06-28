@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity.boss.dragon;
+package tamaized.voidcraft.common.entity.boss.dragon;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;

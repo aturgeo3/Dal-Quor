@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.particles.network;
+package tamaized.voidcraft.client.particles.network;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.TamModized.particles.ParticlePacketBase;
 import Tamaized.TamModized.particles.TamParticle;
-import Tamaized.Voidcraft.client.particles.XiaLaser;
+import tamaized.voidcraft.client.particles.XiaLaser;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;

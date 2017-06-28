@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.sound;
+package tamaized.voidcraft.client.sound;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.sound.BossMusicPlayer;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.sound.BossMusicPlayer;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.fluids;
+package tamaized.voidcraft.common.fluids;
 
 import Tamaized.TamModized.fluids.TamFluidBlock;
 import net.minecraft.block.material.Material;

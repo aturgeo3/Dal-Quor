@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
 import Tamaized.TamModized.fluids.TamFluidBlock;
 import Tamaized.TamModized.registry.ITamRegistry;
 import Tamaized.TamModized.registry.RegistryHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceAcid;
-import Tamaized.Voidcraft.common.fluids.ArcaneSludgeFluidBlock;
-import Tamaized.Voidcraft.common.fluids.TamFluidFiniteBlock;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.fluids.ArcaneSludgeFluidBlock;
+import tamaized.voidcraft.common.fluids.TamFluidFiniteBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

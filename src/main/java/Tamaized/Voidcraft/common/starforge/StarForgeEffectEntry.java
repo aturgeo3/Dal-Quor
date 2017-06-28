@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.starforge;
+package tamaized.voidcraft.common.starforge;
 
-import Tamaized.Voidcraft.client.gui.StarForgeGUI;
-import Tamaized.Voidcraft.client.gui.element.GUIListElement;
+import tamaized.voidcraft.client.gui.StarForgeGUI;
+import tamaized.voidcraft.client.gui.element.GUIListElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BufferBuilder;

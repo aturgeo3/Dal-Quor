@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.voidicpower;
+package tamaized.voidcraft.common.voidicpower;
 
 import java.util.ArrayList;
 

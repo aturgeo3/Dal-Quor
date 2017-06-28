@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.common.voidicpower.VoidicPowerHandler;
-import Tamaized.Voidcraft.common.fluids.IFaceFluidHandler;
-import Tamaized.Voidcraft.common.machina.addons.VoidTank;
-import Tamaized.Voidcraft.registry.VoidCraftFluids;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerHandler;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

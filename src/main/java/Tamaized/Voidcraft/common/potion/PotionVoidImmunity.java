@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.potion;
+package tamaized.voidcraft.common.potion;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Potion;

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.vademecum;
+package tamaized.voidcraft.common.vademecum;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;

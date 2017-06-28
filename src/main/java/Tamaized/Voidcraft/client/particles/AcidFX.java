@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.particles;
+package tamaized.voidcraft.client.particles;
 
 import org.lwjgl.opengl.GL11;
 
 import Tamaized.TamModized.particles.TamParticle;
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

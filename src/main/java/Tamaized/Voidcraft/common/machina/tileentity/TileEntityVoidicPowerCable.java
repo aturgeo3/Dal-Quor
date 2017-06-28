@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPower;
-import Tamaized.Voidcraft.common.voidicpower.VoidicPowerHandler;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPower;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 

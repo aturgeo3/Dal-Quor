@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.boss;
+package tamaized.voidcraft.common.entity.boss;
 
 import net.minecraft.util.text.ITextComponent;
 

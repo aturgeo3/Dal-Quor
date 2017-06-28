@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.common.machina.VoidMacerator;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
-import Tamaized.Voidcraft.registry.VoidCraftTERecipes;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.machina.VoidMacerator;
+import tamaized.voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
+import tamaized.voidcraft.registry.VoidCraftTERecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

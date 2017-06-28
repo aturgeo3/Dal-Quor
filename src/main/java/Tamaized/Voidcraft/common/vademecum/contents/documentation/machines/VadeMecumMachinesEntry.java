@@ -1,22 +1,22 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.machines;
+package tamaized.voidcraft.common.vademecum.contents.documentation.machines;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.alchemy.VadeMecumPageListAlchemy;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.anchor.VadeMecumPageListAnchor;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.blastfurnace.VadeMecumPageListBlastFurnace;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.cable.VadeMecumPageListCable;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.charger.VadeMecumPageListCharger;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.crystallizer.VadeMecumPageListCrystallizer;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.generator.VadeMecumPageListGenerator;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.heimdall.VadeMecumPageListHeimdall;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.infusionAltar.VadeMecumPageListInfusionAltar;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.macerator.VadeMecumPageListMacerator;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.musicbox.VadeMecumPageListMusicBox;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.stabilizer.VadeMecumPageListStabilizer;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.machines.teleporter.VadeMecumPageListTeleporter;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.alchemy.VadeMecumPageListAlchemy;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.anchor.VadeMecumPageListAnchor;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.blastfurnace.VadeMecumPageListBlastFurnace;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.cable.VadeMecumPageListCable;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.charger.VadeMecumPageListCharger;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.crystallizer.VadeMecumPageListCrystallizer;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.generator.VadeMecumPageListGenerator;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.heimdall.VadeMecumPageListHeimdall;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.infusionAltar.VadeMecumPageListInfusionAltar;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.macerator.VadeMecumPageListMacerator;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.musicbox.VadeMecumPageListMusicBox;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.stabilizer.VadeMecumPageListStabilizer;
+import tamaized.voidcraft.common.vademecum.contents.documentation.machines.teleporter.VadeMecumPageListTeleporter;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumMachinesEntry extends VadeMecumEntry {

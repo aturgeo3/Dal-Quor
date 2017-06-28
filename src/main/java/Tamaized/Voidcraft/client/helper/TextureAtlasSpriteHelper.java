@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.helper;
+package tamaized.voidcraft.client.helper;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;

@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.entity.boss.dragon;
+package tamaized.voidcraft.common.entity.boss.dragon;
 
 import Tamaized.TamModized.entity.dragon.EntityDragonOld;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;

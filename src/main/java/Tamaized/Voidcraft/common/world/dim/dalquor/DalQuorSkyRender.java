@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.world.dim.dalquor;
+package tamaized.voidcraft.common.world.dim.dalquor;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;

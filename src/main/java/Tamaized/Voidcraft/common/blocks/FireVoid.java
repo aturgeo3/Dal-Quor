@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import Tamaized.TamModized.blocks.TamBlockFire;
 import Tamaized.TamModized.blocks.TamBlockPortal;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;

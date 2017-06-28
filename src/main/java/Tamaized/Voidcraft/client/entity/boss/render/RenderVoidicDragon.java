@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 

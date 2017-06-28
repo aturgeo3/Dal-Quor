@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.capabilities.voidicInfusion;
+package tamaized.voidcraft.common.capabilities.voidicInfusion;
 
 import java.io.IOException;
 

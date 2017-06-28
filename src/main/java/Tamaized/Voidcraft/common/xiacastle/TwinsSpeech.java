@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.xiacastle;
+package tamaized.voidcraft.common.xiacastle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 

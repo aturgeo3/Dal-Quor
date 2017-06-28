@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.item.ItemStack;
 
 public class VoidCraftAchievements { // TODO

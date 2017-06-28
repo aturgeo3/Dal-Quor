@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.world.dim.dalquor;
+package tamaized.voidcraft.common.world.dim.dalquor;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;

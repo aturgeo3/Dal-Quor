@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.client.particles.network;
+package tamaized.voidcraft.client.particles.network;
 
 import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
 import Tamaized.TamModized.particles.ParticlePacketBase;
 import Tamaized.TamModized.particles.TamParticle;
-import Tamaized.Voidcraft.common.items.VoidicDrill.VoidDrillParticleData;
-import Tamaized.Voidcraft.client.particles.VoidicDrillLaser;
+import tamaized.voidcraft.common.items.VoidicDrill.VoidDrillParticleData;
+import tamaized.voidcraft.client.particles.VoidicDrillLaser;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;

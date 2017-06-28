@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.container.VadeMecumSpellsContainer;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VadeMecumSpellsContainer;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.companion.render;
+package tamaized.voidcraft.client.entity.companion.render;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.companion.model.ModelVoidParrot;
-import Tamaized.Voidcraft.common.entity.companion.EntityVoidParrot;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.companion.model.ModelVoidParrot;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

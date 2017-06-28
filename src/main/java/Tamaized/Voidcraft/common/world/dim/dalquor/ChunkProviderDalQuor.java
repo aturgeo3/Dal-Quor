@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.world.dim.dalquor;
+package tamaized.voidcraft.common.world.dim.dalquor;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.addons.jei.alchemy;
+package tamaized.voidcraft.common.addons.jei.alchemy;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
+import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import net.minecraft.client.Minecraft;
 

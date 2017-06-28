@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import Tamaized.TamModized.TamModized;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceAcid;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceFrost;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceLit;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
+import tamaized.voidcraft.common.damagesources.DamageSourceLit;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

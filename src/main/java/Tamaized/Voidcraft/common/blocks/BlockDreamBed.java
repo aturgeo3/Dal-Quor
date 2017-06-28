@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.Voidcraft.common.events.VoidTickEvent;
+import tamaized.voidcraft.common.events.VoidTickEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;

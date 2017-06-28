@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity.boss.herobrine.extra.ai;
+package tamaized.voidcraft.common.entity.boss.herobrine.extra.ai;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 

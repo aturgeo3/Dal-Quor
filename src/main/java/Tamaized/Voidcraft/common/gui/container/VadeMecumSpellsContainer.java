@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotVadeMecumSpell;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.common.gui.slots.SlotVadeMecumSpell;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.ghost;
+package tamaized.voidcraft.common.entity.ghost;
 
 import java.util.UUID;
 

@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.client.entity.companion.render;
+package tamaized.voidcraft.client.entity.companion.render;
 
-import Tamaized.Voidcraft.client.entity.companion.model.ModelFireElementalCompanion;
+import tamaized.voidcraft.client.entity.companion.model.ModelFireElementalCompanion;
 import org.lwjgl.opengl.GL11;
 
 import Tamaized.TamModized.particles.FX.ParticleFluff;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.companion.EntityCompanionFireElemental;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

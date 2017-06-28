@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
-import Tamaized.Voidcraft.client.entity.boss.model.ModelVoidBossOverlay;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
+import tamaized.voidcraft.client.entity.boss.model.ModelVoidBossOverlay;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;

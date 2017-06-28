@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.render;
+package tamaized.voidcraft.client.render;
 
 import org.lwjgl.opengl.GL11;
 

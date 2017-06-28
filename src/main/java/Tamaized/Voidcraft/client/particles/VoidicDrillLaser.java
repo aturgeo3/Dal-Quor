@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.particles;
+package tamaized.voidcraft.client.particles;
 
 import Tamaized.TamModized.particles.TamParticle;
 import net.minecraft.client.Minecraft;

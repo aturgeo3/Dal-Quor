@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.world.dim.thevoid;
+package tamaized.voidcraft.common.world.dim.thevoid;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.blocks.BlockPortalVoid;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.BlockPortalVoid;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.block.BlockPortal;

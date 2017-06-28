@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.common.entity.nonliving.EntityCasterLightningBolt;
+import tamaized.voidcraft.common.entity.nonliving.EntityCasterLightningBolt;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.armor.ArmorCustomElytra;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.armor.ArmorCustomElytra;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.network.ServerPacketHandler;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

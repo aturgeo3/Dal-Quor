@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.structures.voidcity;
+package tamaized.voidcraft.common.structures.voidcity;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.mob.EntityMobEtherealGuardian;
-import Tamaized.Voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
+import tamaized.voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;

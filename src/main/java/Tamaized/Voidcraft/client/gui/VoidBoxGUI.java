@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.gui.container.VoidBoxContainer;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidBox;
-import Tamaized.Voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.common.gui.container.VoidBoxContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
+import tamaized.voidcraft.network.ServerPacketHandler;
 import com.sun.javafx.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

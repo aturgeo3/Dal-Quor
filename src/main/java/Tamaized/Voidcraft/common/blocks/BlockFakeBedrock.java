@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import Tamaized.TamModized.blocks.TamBlock;
 import net.minecraft.block.SoundType;

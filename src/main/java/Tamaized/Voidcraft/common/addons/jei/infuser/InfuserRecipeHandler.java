@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.jei.infuser;
+package tamaized.voidcraft.common.addons.jei.infuser;
 
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

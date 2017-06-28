@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.entity.nonliving;
+package tamaized.voidcraft.client.entity.nonliving;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.nonliving.EntityVoidChain;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.nonliving.EntityVoidChain;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.BufferBuilder;

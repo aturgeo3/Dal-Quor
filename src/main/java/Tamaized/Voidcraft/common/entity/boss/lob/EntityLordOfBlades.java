@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.entity.boss.lob;
+package tamaized.voidcraft.common.entity.boss.lob;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.client.entity.boss.model.ModelLordOfBlades;
-import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
-import Tamaized.Voidcraft.client.entity.animation.IAnimation;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.entity.animation.IAnimation;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

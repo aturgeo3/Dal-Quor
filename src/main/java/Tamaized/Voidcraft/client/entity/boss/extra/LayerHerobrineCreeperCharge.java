@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

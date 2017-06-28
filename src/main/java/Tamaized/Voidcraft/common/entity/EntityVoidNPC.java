@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.common.entity;
+package tamaized.voidcraft.common.entity;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.entity.animation.AnimatableModel;
-import Tamaized.Voidcraft.client.entity.animation.AnimationRegistry;
-import Tamaized.Voidcraft.client.entity.animation.IAnimation;
-import Tamaized.Voidcraft.network.ClientPacketHandler;
-import Tamaized.Voidcraft.network.IEntitySync;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.entity.animation.IAnimation;
+import tamaized.voidcraft.network.ClientPacketHandler;
+import tamaized.voidcraft.network.IEntitySync;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

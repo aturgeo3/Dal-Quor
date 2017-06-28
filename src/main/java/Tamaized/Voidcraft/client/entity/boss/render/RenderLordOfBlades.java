@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
-import Tamaized.Voidcraft.client.entity.boss.model.ModelLordOfBlades;
-import Tamaized.Voidcraft.common.entity.boss.lob.EntityLordOfBlades;
+import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
+import tamaized.voidcraft.common.entity.boss.lob.EntityLordOfBlades;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

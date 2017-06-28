@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

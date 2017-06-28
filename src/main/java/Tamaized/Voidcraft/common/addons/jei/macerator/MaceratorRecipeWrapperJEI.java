@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.addons.jei.macerator;
+package tamaized.voidcraft.common.addons.jei.macerator;
 
 import java.util.Arrays;
 
-import Tamaized.Voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
+import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
+import tamaized.voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 
 public class MaceratorRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<MaceratorRecipe> {

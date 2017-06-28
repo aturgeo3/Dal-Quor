@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle;
+package tamaized.voidcraft.common.xiacastle.logic.battle;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

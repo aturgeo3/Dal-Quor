@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.thaumcraft.spells;
+package tamaized.voidcraft.common.addons.thaumcraft.spells;
 
 
 public abstract class VoidSpellFocus{/* extends ItemFocusBasic {

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.world.dim.xia;
+package tamaized.voidcraft.common.world.dim.xia;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.xiacastle.logic.XiaCastleLogicHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.xiacastle.logic.XiaCastleLogicHandler;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;

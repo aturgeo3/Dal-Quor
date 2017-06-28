@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotAdjustedMaxSize;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
+import tamaized.voidcraft.common.gui.slots.SlotAdjustedMaxSize;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

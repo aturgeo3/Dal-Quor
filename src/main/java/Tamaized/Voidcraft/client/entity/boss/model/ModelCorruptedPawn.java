@@ -4,7 +4,7 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-package Tamaized.Voidcraft.client.entity.boss.model;
+package tamaized.voidcraft.client.entity.boss.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

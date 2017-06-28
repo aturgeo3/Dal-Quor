@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.blocks.render;
+package tamaized.voidcraft.client.blocks.render;
 
-import Tamaized.Voidcraft.common.blocks.TileEntityNoBreak;
+import tamaized.voidcraft.common.blocks.TileEntityNoBreak;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GLAllocation;

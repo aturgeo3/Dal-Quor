@@ -1,16 +1,16 @@
-package Tamaized.Voidcraft.common.vademecum.progression;
+package tamaized.voidcraft.common.vademecum.progression;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.GuiHandler;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.network.ClientPacketHandler;
-import Tamaized.Voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.network.ClientPacketHandler;
+import tamaized.voidcraft.network.ServerPacketHandler;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

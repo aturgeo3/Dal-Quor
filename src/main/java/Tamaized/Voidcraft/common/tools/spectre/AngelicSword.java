@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.tools.spectre;
+package tamaized.voidcraft.common.tools.spectre;
 
 import java.util.List;
 
 import Tamaized.TamModized.tools.TamSword;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.boss.EntityBossCorruptedPawn;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

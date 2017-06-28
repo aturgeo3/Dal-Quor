@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.entity;
+package tamaized.voidcraft.common.entity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.IVoidBossData;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.network.VoidBossAIBus;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.IVoidBossData;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.network.VoidBossAIBus;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;

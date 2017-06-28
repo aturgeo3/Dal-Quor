@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.gui.element;
+package tamaized.voidcraft.client.gui.element;
 
 import java.util.ArrayList;
 

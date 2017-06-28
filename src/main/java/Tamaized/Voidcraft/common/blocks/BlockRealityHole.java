@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

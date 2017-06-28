@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.entity.boss.extra;
+package tamaized.voidcraft.client.entity.boss.extra;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
-import Tamaized.Voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
+import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;

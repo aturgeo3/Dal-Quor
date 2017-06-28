@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.vademecum.contents;
+package tamaized.voidcraft.common.vademecum.contents;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.VadeMecumDocumentationEntryList;
-import Tamaized.Voidcraft.common.vademecum.contents.progression.VadeMecumProgressionEntryList;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.VadeMecumDocumentationEntryList;
+import tamaized.voidcraft.common.vademecum.contents.progression.VadeMecumProgressionEntryList;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumMainEntry extends VadeMecumEntry {

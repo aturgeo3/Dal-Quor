@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.gui.container;
+package tamaized.voidcraft.common.gui.container;
 
-import Tamaized.Voidcraft.common.gui.slots.SlotOnlyItem;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

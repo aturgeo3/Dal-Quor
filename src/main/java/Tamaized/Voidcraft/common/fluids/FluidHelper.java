@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.fluids;
+package tamaized.voidcraft.common.fluids;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

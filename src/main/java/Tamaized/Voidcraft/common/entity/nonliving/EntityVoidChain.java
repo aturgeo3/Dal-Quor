@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -31,26 +31,32 @@ import javax.annotation.Nullable;
 
 public class EntityVoidChain extends EntityArrow implements IProjectile, IEntityAdditionalSpawnData {
 
-	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(new Predicate[] { EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>() {
+	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(new Predicate[]{EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>() {
 		public boolean apply(@Nullable Entity p_apply_1_) {
 			return p_apply_1_.canBeCollidedWith();
 		}
-	} });
+	}});
+	/**
+	 * Seems to be some sort of timer for animating an arrow.
+	 */
+	public int arrowShake;
+	/**
+	 * The owner of this arrow.
+	 */
+	public Entity shootingEntity;
+	protected boolean inGround;
+	protected int timeInGround;
 	private int xTile;
 	private int yTile;
 	private int zTile;
 	private Block inTile;
 	private int inData;
-	protected boolean inGround;
-	protected int timeInGround;
-	/** Seems to be some sort of timer for animating an arrow. */
-	public int arrowShake;
-	/** The owner of this arrow. */
-	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir;
 	private double damage;
-	/** The amount of knockback an arrow applies when it hits a mob. */
+	/**
+	 * The amount of knockback an arrow applies when it hits a mob.
+	 */
 	private int knockbackStrength;
 
 	private double speed = 1.0D;
@@ -100,13 +106,13 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 	}
 
 	@Override
-	public void setIsCritical(boolean critical) {
-
+	public boolean getIsCritical() {
+		return false;
 	}
 
 	@Override
-	public boolean getIsCritical() {
-		return false;
+	public void setIsCritical(boolean critical) {
+
 	}
 
 	/**
@@ -241,7 +247,8 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 			this.doBlockCollisions();
 		}
 
-		if (this.world.isRemote) particles();
+		if (this.world.isRemote)
+			particles();
 	}
 
 	@Override
@@ -249,7 +256,8 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 		Entity entity = raytraceResultIn.entityHit;
 
 		if (entity != null) {
-			if (entity == shootingEntity) return;
+			if (entity == shootingEntity)
+				return;
 			float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 			int i = MathHelper.ceil((double) f * this.damage);
 
@@ -346,7 +354,6 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 
 	@SideOnly(Side.CLIENT)
 	private void particles() {
-		// Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.Voidcraft.client.particles.AcidFX(this.worldObj, this.posX, this.posY, this.posZ));
 	}
 
 	/**

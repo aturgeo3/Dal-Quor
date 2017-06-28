@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.blocks.spell.tileentity;
+package tamaized.voidcraft.common.blocks.spell.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
 

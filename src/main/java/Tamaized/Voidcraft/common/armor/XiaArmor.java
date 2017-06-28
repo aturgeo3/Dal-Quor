@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.armor;
+package tamaized.voidcraft.common.armor;
 
 import Tamaized.TamModized.armors.TamArmor;
 import net.minecraft.creativetab.CreativeTabs;

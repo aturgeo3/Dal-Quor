@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.fluids;
+package tamaized.voidcraft.common.fluids;
 
 import Tamaized.TamModized.client.MeshDefinitionFix;
 import Tamaized.TamModized.registry.ITamRegistry;

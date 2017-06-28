@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.entity.mob.model;
+package tamaized.voidcraft.client.entity.mob.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;

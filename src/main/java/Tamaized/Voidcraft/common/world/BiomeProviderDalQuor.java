@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.world;
+package tamaized.voidcraft.common.world;
 
 import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import Tamaized.Voidcraft.common.world.dim.dalquor.DalQuorGen;
+import tamaized.voidcraft.common.world.dim.dalquor.DalQuorGen;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;

@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.blocks.render;
+package tamaized.voidcraft.client.blocks.render;
 
-import Tamaized.Voidcraft.common.blocks.TileEntityNoBreak;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityHeimdall;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.common.blocks.TileEntityNoBreak;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityHeimdall;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;

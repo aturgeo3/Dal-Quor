@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.addons.jei.infuser;
+package tamaized.voidcraft.common.addons.jei.infuser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.machina.addons.TERecipeInfuser.InfuserRecipe;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.addons.TERecipeInfuser.InfuserRecipe;
 
 public class InfuserRecipeMaker {
 

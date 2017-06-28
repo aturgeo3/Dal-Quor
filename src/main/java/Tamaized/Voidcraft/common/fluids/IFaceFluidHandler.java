@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.fluids;
+package tamaized.voidcraft.common.fluids;
 
 import java.util.List;
 

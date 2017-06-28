@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import javax.annotation.Nullable;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.fluids.UniversalBucketCapWrapper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.fluids.UniversalBucketCapWrapper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

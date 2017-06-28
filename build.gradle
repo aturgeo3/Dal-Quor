@@ -19,7 +19,7 @@ repositories {
 }
 
 version = "${project.minecraftVersion}-${modVersion}${modVersionValue}"
-group= "tamaized.voidCraft"
+group= "tamaized.voidcraft"
 archivesBaseName = "VoidCraft"
 
 sourceCompatibility = targetCompatibility = '1.8'

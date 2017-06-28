@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity;
+package tamaized.voidcraft.common.entity;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;

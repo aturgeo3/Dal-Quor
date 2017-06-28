@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.entity.animation;
+package tamaized.voidcraft.client.entity.animation;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

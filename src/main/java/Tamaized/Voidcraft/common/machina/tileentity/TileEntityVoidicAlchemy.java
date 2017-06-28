@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
-import Tamaized.Voidcraft.common.machina.VoidMacerator;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
+import tamaized.voidcraft.common.machina.VoidMacerator;
+import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

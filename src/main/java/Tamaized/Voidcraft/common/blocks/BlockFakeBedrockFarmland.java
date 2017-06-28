@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.blocks;
+package tamaized.voidcraft.common.blocks;
 
 import java.util.ArrayList;
 
 import Tamaized.TamModized.blocks.TamBlockFarmland;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

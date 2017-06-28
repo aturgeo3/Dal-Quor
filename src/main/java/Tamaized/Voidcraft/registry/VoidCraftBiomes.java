@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.registry;
+package tamaized.voidcraft.registry;
 
-import Tamaized.Voidcraft.common.entity.mob.EntityMobWraith;
-import Tamaized.Voidcraft.common.world.dim.thevoid.BiomeGenVoid;
-import Tamaized.Voidcraft.common.world.dim.xia.BiomeGenXia;
-import Tamaized.Voidcraft.common.world.dim.dalquor.BiomeGenDream;
+import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
+import tamaized.voidcraft.common.world.dim.thevoid.BiomeGenVoid;
+import tamaized.voidcraft.common.world.dim.xia.BiomeGenXia;
+import tamaized.voidcraft.common.world.dim.dalquor.BiomeGenDream;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;

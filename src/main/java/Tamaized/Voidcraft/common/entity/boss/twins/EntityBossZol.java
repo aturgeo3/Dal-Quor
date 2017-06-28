@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.entity.boss.twins;
+package tamaized.voidcraft.common.entity.boss.twins;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

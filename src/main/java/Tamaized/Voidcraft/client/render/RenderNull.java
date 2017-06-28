@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.render;
+package tamaized.voidcraft.client.render;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

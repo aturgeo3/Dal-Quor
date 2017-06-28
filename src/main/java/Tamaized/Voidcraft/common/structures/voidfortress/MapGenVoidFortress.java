@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.structures.voidfortress;
+package tamaized.voidcraft.common.structures.voidfortress;
 
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import Tamaized.Voidcraft.common.entity.mob.EntityMobVoidWrath;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.mob.EntityMobVoidWrath;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.starforge;
+package tamaized.voidcraft.common.vademecum.contents.documentation.starforge;
 
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.common.starforge.StarForgeEffectRecipeList;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPage;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 

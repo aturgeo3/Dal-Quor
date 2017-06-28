@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.client.blocks.render;
+package tamaized.voidcraft.client.blocks.render;
 
 import Tamaized.TamModized.particles.FX.ParticleFluff;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.blocks.model.ModelVoidicCharger;
-import Tamaized.Voidcraft.client.event.ClientRenderTicker;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.blocks.model.ModelVoidicCharger;
+import tamaized.voidcraft.client.event.ClientRenderTicker;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

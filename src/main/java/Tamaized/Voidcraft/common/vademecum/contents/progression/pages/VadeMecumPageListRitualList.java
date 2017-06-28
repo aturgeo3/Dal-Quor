@@ -1,15 +1,15 @@
-package Tamaized.Voidcraft.common.vademecum.contents.progression.pages;
+package tamaized.voidcraft.common.vademecum.contents.progression.pages;
 
 import java.util.ArrayList;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPageProvider;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPageMultiBlock;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPage;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPageProvider;
+import tamaized.voidcraft.common.vademecum.VadeMecumPage;
+import tamaized.voidcraft.common.vademecum.VadeMecumPageMultiBlock;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 
 public class VadeMecumPageListRitualList implements IVadeMecumPageProvider {
 

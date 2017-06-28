@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.addons.jei.blastfurnace;
+package tamaized.voidcraft.common.addons.jei.blastfurnace;
 
-import Tamaized.Voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
+import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
+import tamaized.voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 
 import java.util.Arrays;

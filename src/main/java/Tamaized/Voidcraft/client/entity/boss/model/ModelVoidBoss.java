@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.boss.model;
+package tamaized.voidcraft.client.entity.boss.model;
 
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
-import Tamaized.Voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

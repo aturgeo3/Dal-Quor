@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.entity.boss.herobrine.extra;
+package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

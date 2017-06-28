@@ -1,17 +1,17 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs;
+package tamaized.voidcraft.common.vademecum.contents.documentation.mobs;
 
-import Tamaized.Voidcraft.client.gui.VadeMecumGUI;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.proxy.ClientProxy;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumEntry;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.etherealGuardian.VadeMecumPageListEtherealGuardian;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.lich.VadeMecumPageListLich;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.spectre.VadeMecumPageListSpectreChain;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.voidicParrot.VadeMecumPageListVoidicParrot;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.wraith.VadeMecumPageListVoidWraith;
-import Tamaized.Voidcraft.common.vademecum.contents.documentation.mobs.wrath.VadeMecumPageListVoidWrath;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.etherealGuardian.VadeMecumPageListEtherealGuardian;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.lich.VadeMecumPageListLich;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.spectre.VadeMecumPageListSpectreChain;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.voidicParrot.VadeMecumPageListVoidicParrot;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.wraith.VadeMecumPageListVoidWraith;
+import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.wrath.VadeMecumPageListVoidWrath;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 

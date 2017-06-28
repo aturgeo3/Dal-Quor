@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.blocks.spell;
+package tamaized.voidcraft.common.blocks.spell;
 
-import Tamaized.Voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
-import Tamaized.Voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
+import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
+import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;

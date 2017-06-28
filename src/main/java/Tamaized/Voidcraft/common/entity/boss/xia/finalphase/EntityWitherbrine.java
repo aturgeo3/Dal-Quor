@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.entity.boss.xia.finalphase;
+package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
 import Tamaized.TamModized.entity.dragon.EntityDragonOld;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.EntityVoidBoss;
-import Tamaized.Voidcraft.common.entity.EntityVoidNPC;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import net.minecraft.block.Block;

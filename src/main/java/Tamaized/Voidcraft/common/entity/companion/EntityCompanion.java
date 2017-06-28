@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.entity.companion;
+package tamaized.voidcraft.common.entity.companion;
 
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;

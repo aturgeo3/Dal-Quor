@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.starforge.tools;
+package tamaized.voidcraft.common.starforge.tools;
 
 import Tamaized.TamModized.tools.TamSpade;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import Tamaized.Voidcraft.common.starforge.IStarForgeTool;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect.Type;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

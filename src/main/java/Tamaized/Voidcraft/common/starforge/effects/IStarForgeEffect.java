@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.starforge.effects;
+package tamaized.voidcraft.common.starforge.effects;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

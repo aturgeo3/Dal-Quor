@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.entity.mob;
+package tamaized.voidcraft.common.entity.mob;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.entity.EntityVoidMob;
-import Tamaized.Voidcraft.common.entity.ai.ISpellAttackMob;
-import Tamaized.Voidcraft.common.sound.VoidSoundEvents;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.ai.ISpellAttackMob;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.entity.companion;
+package tamaized.voidcraft.common.entity.companion;
 
-import Tamaized.Voidcraft.registry.VoidCraftBlocks;
-import Tamaized.Voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;

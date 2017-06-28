@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.container.VoidicCrystallizerContainer;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicCrystallizer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidicCrystallizerContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCrystallizer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

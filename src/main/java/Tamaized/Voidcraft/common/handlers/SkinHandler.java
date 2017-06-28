@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.handlers;
+package tamaized.voidcraft.common.handlers;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import com.google.common.io.Resources;
 import com.google.gson.stream.JsonReader;
 import com.mojang.authlib.GameProfile;

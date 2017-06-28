@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.addons.thaumcraft.research;
+package tamaized.voidcraft.common.addons.thaumcraft.research;
 
 
 public class VoidCrystalResearch {/*extends ResearchItem {

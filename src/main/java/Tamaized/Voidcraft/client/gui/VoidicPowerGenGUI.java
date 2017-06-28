@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.client.gui;
+package tamaized.voidcraft.client.gui;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.container.VoidicPowerGenContainer;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidicPowerGenContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;

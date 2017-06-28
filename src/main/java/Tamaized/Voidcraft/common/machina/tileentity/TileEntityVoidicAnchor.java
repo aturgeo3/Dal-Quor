@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.machina.tileentity;
+package tamaized.voidcraft.common.machina.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import Tamaized.Voidcraft.common.fluids.FluidHelper;
-import Tamaized.Voidcraft.common.fluids.IFaceFluidHandler;
-import Tamaized.Voidcraft.common.machina.addons.VoidTank;
-import Tamaized.Voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.fluids.FluidHelper;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.registry.VoidCraftFluids;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

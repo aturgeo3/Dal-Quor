@@ -1,14 +1,14 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import Tamaized.TamModized.items.TamItem;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
-import Tamaized.Voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

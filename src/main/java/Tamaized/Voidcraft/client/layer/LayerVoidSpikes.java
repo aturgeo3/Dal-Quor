@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.layer;
+package tamaized.voidcraft.client.layer;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.client.model.ModelVoidSpikes;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.model.ModelVoidSpikes;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;

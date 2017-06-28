@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.blocks.spell;
+package tamaized.voidcraft.common.blocks.spell;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
+import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

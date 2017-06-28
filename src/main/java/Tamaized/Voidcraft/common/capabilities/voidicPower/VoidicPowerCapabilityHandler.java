@@ -1,9 +1,9 @@
-package Tamaized.Voidcraft.common.capabilities.voidicPower;
+package tamaized.voidcraft.common.capabilities.voidicPower;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.client.entity.animation;
+package tamaized.voidcraft.client.entity.animation;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.boss.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
 import Tamaized.TamModized.entity.dragon.render.RenderDragonOld;
-import Tamaized.Voidcraft.common.entity.boss.dragon.EntityAbstractDragonOld;
-import Tamaized.Voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityAbstractDragonOld;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import net.minecraft.client.renderer.entity.RenderManager;
 
 public class RenderDragonOldWithBar<T extends EntityAbstractDragonOld> extends RenderDragonOld<T> {

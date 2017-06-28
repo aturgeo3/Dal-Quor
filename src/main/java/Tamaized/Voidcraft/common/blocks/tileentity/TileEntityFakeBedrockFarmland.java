@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.blocks.tileentity;
+package tamaized.voidcraft.common.blocks.tileentity;
 
 import Tamaized.TamModized.tileentity.TamTileEntity;
 import net.minecraft.nbt.NBTTagCompound;

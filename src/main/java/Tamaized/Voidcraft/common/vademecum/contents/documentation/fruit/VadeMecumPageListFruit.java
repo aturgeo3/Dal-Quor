@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.fruit;
+package tamaized.voidcraft.common.vademecum.contents.documentation.fruit;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPageProvider;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumCraftingAlchemy;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPageCrafting;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPage;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPageProvider;
+import tamaized.voidcraft.common.vademecum.VadeMecumCraftingAlchemy;
+import tamaized.voidcraft.common.vademecum.VadeMecumPage;
+import tamaized.voidcraft.common.vademecum.VadeMecumPageCrafting;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;

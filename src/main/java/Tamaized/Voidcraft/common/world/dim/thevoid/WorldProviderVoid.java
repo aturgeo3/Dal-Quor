@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.world.dim.thevoid;
+package tamaized.voidcraft.common.world.dim.thevoid;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.registry.VoidCraftBiomes;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.registry.VoidCraftBiomes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;

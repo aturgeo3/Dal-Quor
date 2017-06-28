@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.capabilities.elytraFlying;
+package tamaized.voidcraft.common.capabilities.elytraFlying;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

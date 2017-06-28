@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.sound;
+package tamaized.voidcraft.common.sound;
 
 import java.io.InputStream;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 
 public class OggLength {
 

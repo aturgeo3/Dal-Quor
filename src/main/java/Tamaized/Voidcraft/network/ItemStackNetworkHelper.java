@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.network;
+package tamaized.voidcraft.network;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

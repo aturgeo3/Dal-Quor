@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.damagesources;
+package tamaized.voidcraft.common.damagesources;
 
 import net.minecraft.util.DamageSource;
 

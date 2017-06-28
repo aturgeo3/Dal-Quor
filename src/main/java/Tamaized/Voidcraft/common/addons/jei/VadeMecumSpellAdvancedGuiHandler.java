@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.addons.jei;
+package tamaized.voidcraft.common.addons.jei;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.client.gui.VadeMecumSpellsGUI;
+import tamaized.voidcraft.client.gui.VadeMecumSpellsGUI;
 import mezz.jei.api.gui.IAdvancedGuiHandler;
 
 public class VadeMecumSpellAdvancedGuiHandler implements IAdvancedGuiHandler<VadeMecumSpellsGUI> {

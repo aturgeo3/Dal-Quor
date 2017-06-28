@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.machina;
+package tamaized.voidcraft.common.machina;
 
 import java.util.Random;
 
 import Tamaized.TamModized.blocks.TamBlockContainer;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.gui.GuiHandler;
-import Tamaized.Voidcraft.common.machina.tileentity.TileEntityVoidBox;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

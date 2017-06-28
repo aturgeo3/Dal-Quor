@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.capabilities.vadeMecum;
+package tamaized.voidcraft.common.capabilities.vadeMecum;
 
-import Tamaized.Voidcraft.common.entity.companion.EntityCompanion;
-import Tamaized.Voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.common.entity.companion.EntityCompanion;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;

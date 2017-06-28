@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.client.model;
+package tamaized.voidcraft.client.model;
 
-import Tamaized.Voidcraft.common.events.CustomElytraHandler;
+import tamaized.voidcraft.common.events.CustomElytraHandler;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

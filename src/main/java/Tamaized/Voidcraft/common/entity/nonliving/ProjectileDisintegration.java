@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.entity.nonliving;
+package tamaized.voidcraft.common.entity.nonliving;
 
-import Tamaized.Voidcraft.common.damagesources.DamageSourceAcid;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia;
-import Tamaized.Voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.netty.buffer.ByteBuf;

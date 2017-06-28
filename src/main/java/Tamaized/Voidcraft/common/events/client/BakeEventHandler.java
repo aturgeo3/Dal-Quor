@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.events.client;
+package tamaized.voidcraft.common.events.client;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

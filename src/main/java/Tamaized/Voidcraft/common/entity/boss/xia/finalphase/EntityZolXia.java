@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.entity.boss.xia.finalphase;
+package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;

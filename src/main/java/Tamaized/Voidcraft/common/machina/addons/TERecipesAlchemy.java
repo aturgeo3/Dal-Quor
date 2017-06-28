@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.common.machina.addons;
+package tamaized.voidcraft.common.machina.addons;
 
 import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.item.ItemStack;
 
 public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.AlchemyRecipe> {

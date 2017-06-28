@@ -1,16 +1,16 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.herobrine.phases;
+package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.blocks.AIBlock;
-import Tamaized.Voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import Tamaized.Voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import Tamaized.Voidcraft.network.IVoidBossAIPacket;
-import Tamaized.Voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.AIBlock;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

@@ -1,12 +1,12 @@
-package Tamaized.Voidcraft.common.addons.jei.macerator;
+package tamaized.voidcraft.common.addons.jei.macerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.addons.TERecipesMacerator.MaceratorRecipe;
 
 public class MaceratorRecipeMaker {
 

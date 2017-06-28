@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.common.entity.mob.EntityMobSpectreChain;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

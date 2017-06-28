@@ -1,22 +1,22 @@
-package Tamaized.Voidcraft.common.starforge.effects;
+package tamaized.voidcraft.common.starforge.effects;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Tamaized.Voidcraft.common.starforge.effects.tool.tier1.StarForgeEffectHaste;
-import Tamaized.Voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectFortune;
-import Tamaized.Voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectSilkTouch;
-import Tamaized.Voidcraft.common.starforge.effects.tool.tier3.StarForgeEffectThreeByThree;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectBlindingFear;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectFirstDegreeBurns;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectVoidTouch;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectSecondDegreeBurns;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectVoidWrath;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectXiaBlessing;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectMortalFear;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectThirdDegreeBurns;
-import Tamaized.Voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectVorpal;
+import tamaized.voidcraft.common.starforge.effects.tool.tier1.StarForgeEffectHaste;
+import tamaized.voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectFortune;
+import tamaized.voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectSilkTouch;
+import tamaized.voidcraft.common.starforge.effects.tool.tier3.StarForgeEffectThreeByThree;
+import tamaized.voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectBlindingFear;
+import tamaized.voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectFirstDegreeBurns;
+import tamaized.voidcraft.common.starforge.effects.wep.tier1.StarForgeEffectVoidTouch;
+import tamaized.voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectSecondDegreeBurns;
+import tamaized.voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectVoidWrath;
+import tamaized.voidcraft.common.starforge.effects.wep.tier2.StarForgeEffectXiaBlessing;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectMortalFear;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectThirdDegreeBurns;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectVorpal;
 
 public final class StarForgeEffectList {
 

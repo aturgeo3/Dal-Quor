@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.world;
+package tamaized.voidcraft.common.world;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.CompressedStreamTools;

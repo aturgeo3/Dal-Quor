@@ -1,8 +1,8 @@
-package Tamaized.Voidcraft.client.entity.ghost;
+package tamaized.voidcraft.client.entity.ghost;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import Tamaized.Voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBiped.ArmPose;
 import net.minecraft.client.model.ModelPlayer;

@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.items;
+package tamaized.voidcraft.common.items;
 
 import Tamaized.TamModized.items.TamItem;
 import net.minecraft.block.BlockDispenser;

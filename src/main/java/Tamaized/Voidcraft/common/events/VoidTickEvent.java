@@ -1,13 +1,13 @@
-package Tamaized.Voidcraft.common.events;
+package tamaized.voidcraft.common.events;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.CapabilityList;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
-import Tamaized.Voidcraft.common.world.dim.xia.TeleporterXia;
-import Tamaized.Voidcraft.common.world.dim.xia.WorldProviderXia;
-import Tamaized.Voidcraft.common.world.dim.dalquor.TeleporterDream;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
+import tamaized.voidcraft.common.world.dim.xia.TeleporterXia;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
+import tamaized.voidcraft.common.world.dim.dalquor.TeleporterDream;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

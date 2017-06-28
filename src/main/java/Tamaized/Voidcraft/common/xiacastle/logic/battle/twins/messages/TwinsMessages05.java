@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.xiacastle.logic.battle.twins.messages;
+package tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;

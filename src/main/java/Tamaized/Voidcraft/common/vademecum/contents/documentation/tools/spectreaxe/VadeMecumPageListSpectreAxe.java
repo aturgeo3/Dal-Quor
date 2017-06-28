@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.vademecum.contents.documentation.tools.spectreaxe;
+package tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectreaxe;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPage;
-import Tamaized.Voidcraft.common.vademecum.IVadeMecumPageProvider;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumCraftingNormal;
-import Tamaized.Voidcraft.common.vademecum.VadeMecumPageCrafting;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPage;
+import tamaized.voidcraft.common.vademecum.IVadeMecumPageProvider;
+import tamaized.voidcraft.common.vademecum.VadeMecumCraftingNormal;
+import tamaized.voidcraft.common.vademecum.VadeMecumPageCrafting;
 import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageListSpectreAxe implements IVadeMecumPageProvider {

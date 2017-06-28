@@ -1,4 +1,4 @@
-package Tamaized.Voidcraft.common.world.dim.xia;
+package tamaized.voidcraft.common.world.dim.xia;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;

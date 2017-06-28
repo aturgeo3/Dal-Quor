@@ -1,11 +1,11 @@
-package Tamaized.Voidcraft.common.helper;
+package tamaized.voidcraft.common.helper;
 
-import Tamaized.Voidcraft.VoidCraft;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceAcid;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceFrost;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceLit;
-import Tamaized.Voidcraft.common.damagesources.DamageSourceVoidicInfusion;
-import Tamaized.Voidcraft.common.potion.PotionSheathe;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
+import tamaized.voidcraft.common.damagesources.DamageSourceLit;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.potion.PotionSheathe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;

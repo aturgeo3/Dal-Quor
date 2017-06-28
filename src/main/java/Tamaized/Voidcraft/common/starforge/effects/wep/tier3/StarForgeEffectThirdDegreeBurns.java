@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.starforge.effects.wep.tier3;
+package tamaized.voidcraft.common.starforge.effects.wep.tier3;
 
 import Tamaized.TamModized.helper.TranslateHelper;
-import Tamaized.Voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

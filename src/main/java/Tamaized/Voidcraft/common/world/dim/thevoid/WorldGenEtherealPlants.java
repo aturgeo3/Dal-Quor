@@ -1,10 +1,10 @@
-package Tamaized.Voidcraft.common.world.dim.thevoid;
+package tamaized.voidcraft.common.world.dim.thevoid;
 
 import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import Tamaized.Voidcraft.VoidCraft;
+import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;

@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.gui.slots;
+package tamaized.voidcraft.common.gui.slots;
 
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;

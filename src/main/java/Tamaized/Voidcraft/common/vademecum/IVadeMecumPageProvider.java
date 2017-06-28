@@ -1,6 +1,6 @@
-package Tamaized.Voidcraft.common.vademecum;
+package tamaized.voidcraft.common.vademecum;
 
-import Tamaized.Voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 
 public interface IVadeMecumPageProvider {
 	

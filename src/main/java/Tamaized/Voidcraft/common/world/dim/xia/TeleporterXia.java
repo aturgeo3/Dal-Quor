@@ -1,7 +1,7 @@
-package Tamaized.Voidcraft.common.world.dim.xia;
+package tamaized.voidcraft.common.world.dim.xia;
 
-import Tamaized.Voidcraft.common.handlers.ConfigHandler;
-import Tamaized.Voidcraft.common.world.SchematicLoader;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.world.SchematicLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
