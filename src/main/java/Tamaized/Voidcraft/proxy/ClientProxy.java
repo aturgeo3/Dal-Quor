@@ -110,6 +110,15 @@ public class ClientProxy extends AbstractProxy {
 
 	@Override
 	public void preInit() {
+		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
+		MinecraftForge.EVENT_BUS.register(new BGMusic());
+		MinecraftForge.EVENT_BUS.register(new DebugEvent());
+		MinecraftForge.EVENT_BUS.register(new ClientInfusionOverlayRender());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.render.RenderPlayer());
+		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.render.RenderLiving());
+		MinecraftForge.EVENT_BUS.register(new RenderSheathe());
+		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
+		MinecraftForge.EVENT_BUS.register(new TextureStitch());
 		MinecraftForge.EVENT_BUS.register(SkinHandler.instance);
 		vadeMecumEntryList = new VadeMecumMainEntry();
 		vadeMecumEntryList.preLoadObject();
@@ -173,16 +182,6 @@ public class ClientProxy extends AbstractProxy {
 
 	@Override
 	public void postInit() {
-		// Events
-		MinecraftForge.EVENT_BUS.register(new BossBarOverlay());
-		MinecraftForge.EVENT_BUS.register(new BGMusic());
-		MinecraftForge.EVENT_BUS.register(new DebugEvent());
-		MinecraftForge.EVENT_BUS.register(new ClientInfusionOverlayRender());
-		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.render.RenderPlayer());
-		MinecraftForge.EVENT_BUS.register(new Tamaized.Voidcraft.client.render.RenderLiving());
-		MinecraftForge.EVENT_BUS.register(new RenderSheathe());
-		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
-		MinecraftForge.EVENT_BUS.register(new TextureStitch());
 
 		RenderPlayer playerRenderer = (Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default"));
 		try {
