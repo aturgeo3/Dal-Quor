@@ -23,7 +23,7 @@ import tamaized.voidcraft.client.entity.boss.extra.ModelHerobrineShadow;
 import tamaized.voidcraft.client.entity.boss.extra.RenderHerobrineCreeper;
 import tamaized.voidcraft.client.entity.boss.extra.RenderHerobrineShadow;
 import tamaized.voidcraft.client.entity.boss.extra.RenderHerobrineTNTPrimed;
-import tamaized.voidcraft.common.entity.boss.herobrine.render.RenderHerobrine;
+import tamaized.voidcraft.client.entity.boss.render.RenderHerobrine;
 import tamaized.voidcraft.common.entity.boss.lob.EntityLordOfBlades;
 import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
 import tamaized.voidcraft.client.entity.boss.render.RenderLordOfBlades;

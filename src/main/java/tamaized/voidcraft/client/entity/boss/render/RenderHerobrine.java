@@ -1,4 +1,4 @@
-package tamaized.voidcraft.common.entity.boss.herobrine.render;
+package tamaized.voidcraft.client.entity.boss.render;
 
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
