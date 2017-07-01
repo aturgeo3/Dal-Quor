@@ -1,18 +1,7 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import Tamaized.TamModized.helper.MotionHelper;
 import Tamaized.TamModized.particles.ParticleHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -26,6 +15,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
+import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
 
@@ -205,7 +205,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private void watchNew() {
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for (Class c : watchedClass) {
-			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
+			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().grow((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
 		Random rand = world.rand;
 		closestEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;

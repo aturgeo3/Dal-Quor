@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,6 +10,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,10 +26,6 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private boolean isTeleporting = false;
 
 	private Action currAction = Action.IDLE;
-
-	public static enum Action {
-		IDLE, FOLLOW
-	}
 
 	public EntityAIXiaPhase2(T entityBoss, ArrayList<Class> c) {
 		super(entityBoss, c);
@@ -54,6 +50,10 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	@Override
 	protected void update() {
 		updateLook();
+		if (closestEntity == null) {
+			currAction = Action.IDLE;
+			return;
+		}
 		switch (currAction) {
 			case FOLLOW:
 				updateMotion();
@@ -64,7 +64,8 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 				if (getEntity().posZ >= ezMin && getEntity().posZ <= ezMax && getEntity().posX >= exMin && getEntity().posX <= exMax) {
 					closestEntity.attackEntityFrom(DamageSource.causeMobDamage(getEntity()), 60);
 					ItemStack stack = getEntity().getHeldItem(EnumHand.MAIN_HAND);
-					if (!stack.isEmpty() && closestEntity instanceof EntityLivingBase) stack.getItem().hitEntity(stack, (EntityLivingBase) closestEntity, getEntity());
+					if (!stack.isEmpty() && closestEntity instanceof EntityLivingBase)
+						stack.getItem().hitEntity(stack, (EntityLivingBase) closestEntity, getEntity());
 					getEntity().swingArm(EnumHand.MAIN_HAND);
 					doTeleport();
 					currAction = Action.IDLE;
@@ -106,26 +107,36 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		boolean xPos;
 		boolean zPos;
 
-		if (px > x) xPos = true;
-		else xPos = false;
+		if (px > x)
+			xPos = true;
+		else
+			xPos = false;
 
-		if (pz > z) zPos = true;
-		else zPos = false;
+		if (pz > z)
+			zPos = true;
+		else
+			zPos = false;
 
-		if (x < px) dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-		else if (x == px) dx = 0;
+		if (x < px)
+			dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+		else if (x == px)
+			dx = 0;
 		else if (!xPos && (x - px) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dx = 0;
 			getEntity().posX = px;
 		} else if (xPos && (px - x) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dx = 0;
 			getEntity().posX = px;
-		} else if (px < x) dx = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+		} else if (px < x)
+			dx = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
-		if (y < py) dy = 0.2;
-		else if (y == py) dy = 0.0;
+		if (y < py)
+			dy = 0.2;
+		else if (y == py)
+			dy = 0.0;
 		else {
-			if (Math.abs(y - py) < 0.2) getEntity().posY = py;
+			if (Math.abs(y - py) < 0.2)
+				getEntity().posY = py;
 			dy = -0.2;
 		}
 
@@ -134,15 +145,18 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		double exMin = closestEntity.getEntityBoundingBox().minX;
 		double exMax = closestEntity.getEntityBoundingBox().maxX;
 
-		if (z < pz) dz = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-		else if (z == pz) dz = 0;
+		if (z < pz)
+			dz = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+		else if (z == pz)
+			dz = 0;
 		else if (!zPos && (z - pz) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dz = 0;
 			getEntity().posZ = pz;
 		} else if (zPos && (pz - z) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dz = 0;
 			getEntity().posZ = pz;
-		} else if (pz < z) dz = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+		} else if (pz < z)
+			dz = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
 		getEntity().posX += dx;
 		getEntity().posZ += dz;
@@ -180,7 +194,8 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 	private void watchNewAndTeleport() {
 		watchNew();
-		if (closestEntity == null) return;
+		if (closestEntity == null)
+			return;
 		Vec3d vecA = new Vec3d(getEntity().posX, getEntity().posY, getEntity().posZ);
 		Vec3d vecB = new Vec3d(closestEntity.posX, closestEntity.posY, closestEntity.posZ);
 
@@ -197,7 +212,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private void watchNew() {
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for (Class c : watchedClass) {
-			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().expand((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
+			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().grow((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
 		Random rand = world.rand;
 		closestEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;
@@ -210,7 +225,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private Double[] getNextTeleportLocation() {
-		Double[] loc = { 0.0D, 0.0D, 0.0D };
+		Double[] loc = {0.0D, 0.0D, 0.0D};
 		loc[0] = (world.rand.nextDouble() * (teleportationBox.maxX - teleportationBox.minX)) + teleportationBox.minX;
 		loc[1] = teleportationBox.maxY;
 		loc[2] = (world.rand.nextDouble() * (teleportationBox.maxZ - teleportationBox.minZ)) + teleportationBox.minZ;
@@ -218,6 +233,10 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 			loc[1] -= 1.0D;
 		}
 		return loc;
+	}
+
+	public static enum Action {
+		IDLE, FOLLOW
 	}
 
 }

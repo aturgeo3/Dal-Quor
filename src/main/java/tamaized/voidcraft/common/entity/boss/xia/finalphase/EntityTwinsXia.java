@@ -1,22 +1,7 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import Tamaized.TamModized.helper.PacketHelper;
 import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
-import tamaized.voidcraft.network.ClientPacketHandler;
-import tamaized.voidcraft.network.IEntitySync;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,6 +15,21 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.network.ClientPacketHandler;
+import tamaized.voidcraft.network.IEntitySync;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySync, IAlternateBoss {
 
@@ -193,7 +193,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	private void watchNew() {
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for (Class c : watchedClass) {
-			list.addAll(world.getEntitiesWithinAABB(c, getEntityBoundingBox().expand(maxWatchDistance, 64.0D, maxWatchDistance)));
+			list.addAll(world.getEntitiesWithinAABB(c, getEntityBoundingBox().grow(maxWatchDistance, 64.0D, maxWatchDistance)));
 		}
 		Random rand = world.rand;
 		watchedEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;
