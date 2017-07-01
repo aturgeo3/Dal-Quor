@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:tnt"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.familiarity.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.familiarity.description"
+        },
+        "frame": "challenge",
+		"hidden": true
+    },
+    "parent": "voidcraft:root",
+    "criteria": {
+        "familiarity": {
+            "trigger": "voidcraft:familiarity"
+        }
+    }
+}

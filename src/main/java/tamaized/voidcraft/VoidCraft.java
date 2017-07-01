@@ -126,7 +126,7 @@ public class VoidCraft extends TamModBase {
 	public static final VoidCraftFluids fluids = new VoidCraftFluids();
 	public static final VoidCraftBlocks blocks = new VoidCraftBlocks();
 	public static final VoidCraftBiomes biomes = new VoidCraftBiomes();
-	public static final VoidCraftAchievements achievements = new VoidCraftAchievements();
+	public static final VoidCraftAdvancements advancements = new VoidCraftAdvancements();
 	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
 	public static final VoidCraftTERecipes teRecipes = new VoidCraftTERecipes();
 	public static final VoidCraftParticles particles = new VoidCraftParticles();
@@ -174,6 +174,8 @@ public class VoidCraft extends TamModBase {
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 		logger.info("Starting VoidCraft PreInit");
 
+		VoidCraftAdvancements.register();
+
 		ContributorHandler.start();
 
 		// Initialize Network
@@ -196,7 +198,6 @@ public class VoidCraft extends TamModBase {
 
 		VoidCraftFluids.init();
 		VoidCraftItems.init();
-		VoidCraftAchievements.init();
 		VoidCraftTERecipes.init();
 		VoidCraftBiomes.init();
 
@@ -315,7 +316,6 @@ public class VoidCraft extends TamModBase {
 	public void postInit(FMLPostInitializationEvent e) {
 		logger.info("Starting VoidCraft PostInit");
 
-		VoidCraftAchievements.postInit();
 		VoidCraftLootTables.postInit();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new LoadingCallback() {

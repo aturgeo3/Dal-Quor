@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.root.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.root.description"
+        },
+        "background": "voidcraft:textures/gui/advancements/backgrounds/voidbrick.png",
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+	"criteria": {
+        "vademecum": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "voidcraft:items/vademecum"
+                    }
+                ]
+            }
+        }
+    }
+}

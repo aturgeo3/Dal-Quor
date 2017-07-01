@@ -6,6 +6,27 @@ import Tamaized.TamModized.helper.RayTraceHelper;
 import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
 import Tamaized.TamModized.particles.ParticleHelper;
 import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.*;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
 import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
@@ -25,26 +46,7 @@ import tamaized.voidcraft.common.entity.nonliving.EntitySpellRune;
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.voidcraft.common.helper.SheatheHelper;
 import tamaized.voidcraft.common.potion.PotionSheathe;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.*;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
+import tamaized.voidcraft.registry.VoidCraftAdvancements;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -136,7 +138,8 @@ public class VadeMecumWordsOfPower {
 					if (rand <= cap.getFailureChance()) {
 						ExplosionDamageHelper.explode(null, world, world.newExplosion(null, caster.posX, caster.posY, caster.posZ, 7.0F, true, true), 7.0F, caster.posX, caster.posY, caster.posZ);
 						world.playBroadcastSound(1023, caster.getPosition(), 0);
-						//						caster.addStat(VoidCraft.achievements.familiarity, 1); TODO
+						if (caster instanceof EntityPlayerMP)
+							VoidCraftAdvancements.familiarity.trigger((EntityPlayerMP) caster);
 						useCharge = true;
 					} else {
 						doCast = true;

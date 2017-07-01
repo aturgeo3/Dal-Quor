@@ -1,13 +1,15 @@
 package tamaized.voidcraft.common.capabilities.vadeMecum;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.companion.EntityCompanion;
-import tamaized.voidcraft.network.ItemStackNetworkHelper;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.companion.EntityCompanion;
+import tamaized.voidcraft.network.ItemStackNetworkHelper;
+import tamaized.voidcraft.registry.VoidCraftAdvancements;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -109,34 +111,34 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	public void addCategory(EntityLivingBase entity, Category category) {
 		if (!categoryList.contains(category)) {
 			categoryList.add(category);
-			/*if (entity instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) entity;
+			if (entity instanceof EntityPlayerMP) {
+				EntityPlayerMP player = (EntityPlayerMP) entity;
 				switch (category) {
 					case Voice:
-						player.addStat(VoidCraft.achievements.theVoice, 1);
+						VoidCraftAdvancements.voice.trigger(player);
 						break;
 					case VoidicControl:
-						player.addStat(VoidCraft.achievements.anchor, 1);
+						VoidCraftAdvancements.anchor.trigger(player);
 						break;
 					case ImprovedCasting:
-						player.addStat(VoidCraft.achievements.stabilization, 1);
+						VoidCraftAdvancements.stabilization.trigger(player);
 						break;
 					case Empowerment:
-						player.addStat(VoidCraft.achievements.empowerment, 1);
+						VoidCraftAdvancements.empowerment.trigger(player);
 						break;
 					case Tolerance:
-						player.addStat(VoidCraft.achievements.tolerance, 1);
+						VoidCraftAdvancements.tolerance.trigger(player);
 						break;
 					case TotalControl:
-						player.addStat(VoidCraft.achievements.totalControl, 1);
+						VoidCraftAdvancements.totalcontrol.trigger(player);
 						break;
 					case Dreams:
-						player.addStat(VoidCraft.achievements.nightmare, 1);
+						VoidCraftAdvancements.nightmare.trigger(player);
 						break;
 					default:
 						break;
 				}
-			}TODO*/
+			}
 		}
 		markDirty();
 	}

@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.empowerment.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.empowerment.description"
+        },
+        "frame": "task"
+    },
+    "parent": "voidcraft:stabilization",
+    "criteria": {
+        "empowerment": {
+            "trigger": "voidcraft:empowerment"
+        }
+    }
+}

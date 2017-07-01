@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.anchor.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.anchor.description"
+        },
+        "frame": "task"
+    },
+    "parent": "voidcraft:voice",
+    "criteria": {
+        "anchor": {
+            "trigger": "voidcraft:anchor"
+        }
+    }
+}

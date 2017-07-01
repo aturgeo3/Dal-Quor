@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.totalcontrol.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.totalcontrol.description"
+        },
+        "frame": "task"
+    },
+    "parent": "voidcraft:tolerance",
+    "criteria": {
+        "totalControl": {
+            "trigger": "voidcraft:totalcontrol"
+        }
+    }
+}

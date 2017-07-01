@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.stabilization.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.stabilization.description"
+        },
+        "frame": "task"
+    },
+    "parent": "voidcraft:anchor",
+    "criteria": {
+        "stabilization": {
+            "trigger": "voidcraft:stabilization"
+        }
+    }
+}

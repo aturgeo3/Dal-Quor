@@ -70,7 +70,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 							addButton(gui, getEntryID(Entry.Tolerance), "voidcraft.VadeMecum.progression.title.tolerance", new ItemStack(VoidCraft.items.etherealFruit_gold));
 						} else {
 							if (!gui.getPlayerStats().hasCategory(IVadeMecumCapability.Category.TotalControl)) {
-								addButton(gui, getEntryID(Entry.TotalControl), "voidcraft.VadeMecum.progression.title.totalControl", activeVade);
+								addButton(gui, getEntryID(Entry.TotalControl), "voidcraft.VadeMecum.progression.title.totalcontrol", activeVade);
 							} else {
 								if (!gui.getPlayerStats().hasCategory(IVadeMecumCapability.Category.Dreams)) {
 									addButton(gui, getEntryID(Entry.Dreams), "voidcraft.VadeMecum.progression.title.dreams", new ItemStack(VoidCraft.items.quoriFragment));

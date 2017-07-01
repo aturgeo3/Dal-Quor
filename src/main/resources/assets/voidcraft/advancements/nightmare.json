@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/quorifragment"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.nightmare.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.nightmare.description"
+        },
+        "frame": "challenge"
+    },
+    "parent": "voidcraft:totalcontrol",
+    "criteria": {
+        "nightmare": {
+            "trigger": "voidcraft:nightmare"
+        }
+    }
+}

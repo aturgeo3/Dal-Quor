@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "voidcraft:items/vademecum"
+        },
+        "title": {
+            "translate": "advancements.voidcraft.tolerance.title"
+        },
+        "description": {
+            "translate": "advancements.voidcraft.tolerance.description"
+        },
+        "frame": "task"
+    },
+    "parent": "voidcraft:empowerment",
+    "criteria": {
+        "tolerance": {
+            "trigger": "voidcraft:tolerance"
+        }
+    }
+}
