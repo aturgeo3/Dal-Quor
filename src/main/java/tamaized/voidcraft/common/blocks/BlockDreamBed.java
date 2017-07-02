@@ -3,15 +3,14 @@ package tamaized.voidcraft.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -33,7 +32,7 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 		name = n;
 		setUnlocalizedName(name);
 		setLightLevel(1.0F);
-		setRegistryName(getModelDir() + "/" + name);
+		setRegistryName(name);
 		this.setCreativeTab(tab);
 	}
 
@@ -48,12 +47,17 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 
 	@Override
 	public void registerItem(RegistryEvent.Register<Item> e) {
-		e.getRegistry().register(new ItemBlock(this).setRegistryName(getModelDir() + "/" + name));
+
 	}
 
 	@Override
 	public void registerModel(ModelRegistryEvent e) {
-		ModelLoader.registerItemVariants(new ItemBlock(this), getRegistryName());
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), getModelDir() + "/" + getRegistryName().getResourcePath()), "inventory"));
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return null;
 	}
 
 	@Override
@@ -65,6 +69,11 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
