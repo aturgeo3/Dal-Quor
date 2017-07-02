@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/blockvoidfence",
+    "item": "voidcraft:blockvoidfence",
     "count": 6
   },
   "pattern": [
@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:blocks/blockvoidbrick"
+      "item": "voidcraft:blockvoidbrick"
     }
   }
 }

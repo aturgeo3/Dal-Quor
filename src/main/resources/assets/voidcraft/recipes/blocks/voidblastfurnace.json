@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/voidblastfurnace"
+    "item": "voidcraft:voidblastfurnace"
   },
   "pattern": [
     "CBC",
@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "voidcraft:blocks/blockvoidbrick"
+      "item": "voidcraft:blockvoidbrick"
     },
     "C": {
-      "item": "voidcraft:items/voidcloth"
+      "item": "voidcraft:voidcloth"
     },
     "M": {
-      "item": "voidcraft:items/moltenvoidchainpart"
+      "item": "voidcraft:moltenvoidchainpart"
     }
   }
 }

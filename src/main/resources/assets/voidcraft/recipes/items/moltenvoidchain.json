@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:items/moltenvoidchain"
+    "item": "voidcraft:moltenvoidchain"
   },
   "pattern": [
     "XYX",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:items/burnbone"
+      "item": "voidcraft:burnbone"
     },
     "Y": {
-      "item": "voidcraft:items/moltenvoidchainpart"
+      "item": "voidcraft:moltenvoidchainpart"
     }
   }
 }

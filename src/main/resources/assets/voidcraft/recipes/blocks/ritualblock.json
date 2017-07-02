@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/ritualblock",
+    "item": "voidcraft:ritualblock",
     "count": 8
   },
   "pattern": [
@@ -15,7 +15,7 @@
       "data": 0
     },
     "Y": {
-      "item": "voidcraft:items/voidcrystal"
+      "item": "voidcraft:voidcrystal"
     }
   }
 }

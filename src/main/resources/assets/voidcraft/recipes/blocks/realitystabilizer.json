@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/realitystabilizer"
+    "item": "voidcraft:realitystabilizer"
   },
   "pattern": [
     "IDI",
@@ -10,16 +10,16 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "C": {
-      "item": "voidcraft:blocks/voidiccharger"
+      "item": "voidcraft:voidiccharger"
     },
     "S": {
-      "item": "voidcraft:items/voidstar"
+      "item": "voidcraft:voidstar"
     },
     "D": {
-      "item": "voidcraft:items/diamonddust"
+      "item": "voidcraft:diamonddust"
     },
     "I": {
-      "item": "voidcraft:items/voidicsteel"
+      "item": "voidcraft:voidicsteel"
     }
   }
 }

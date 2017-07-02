@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:tools/spectrepickaxe"
+    "item": "voidcraft:spectrepickaxe"
   },
   "pattern": [
     " X ",
@@ -10,14 +10,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "voidcraft:tools/voidpickaxe",
+      "item": "voidcraft:voidpickaxe",
       "data": 32767
     },
     "X": {
-      "item": "voidcraft:items/ectoplasm"
+      "item": "voidcraft:ectoplasm"
     },
     "I": {
-      "item": "voidcraft:items/voidicsteel"
+      "item": "voidcraft:voidicsteel"
     }
   }
 }

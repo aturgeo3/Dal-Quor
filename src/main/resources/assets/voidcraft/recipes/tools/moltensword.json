@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:tools/moltensword"
+    "item": "voidcraft:moltensword"
   },
   "pattern": [
     " X ",
@@ -10,14 +10,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "voidcraft:tools/chainsword",
+      "item": "voidcraft:chainsword",
       "data": 32767
     },
     "X": {
-      "item": "voidcraft:items/moltenvoidchain"
+      "item": "voidcraft:moltenvoidchain"
     },
     "I": {
-      "item": "voidcraft:items/voidicsteel"
+      "item": "voidcraft:voidicsteel"
     }
   }
 }

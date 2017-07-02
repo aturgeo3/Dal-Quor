@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/blockfakebedrockhalfslab",
+    "item": "voidcraft:blockfakebedrockhalfslab",
     "data": 0,
     "count": 6
   },
@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:blocks/blockfakebedrock"
+      "item": "voidcraft:blockfakebedrock"
     }
   }
 }

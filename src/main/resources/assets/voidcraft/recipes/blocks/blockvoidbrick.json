@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/blockvoidbrick"
+    "item": "voidcraft:blockvoidbrick"
   },
   "pattern": [
     "XX",
@@ -9,7 +9,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:blocks/blockvoidcrystal"
+      "item": "voidcraft:blockvoidcrystal"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:tools/voidsword"
+    "item": "voidcraft:voidsword"
   },
   "pattern": [
     " X ",
@@ -13,7 +13,7 @@
       "item": "minecraft:diamond"
     },
     "X": {
-      "item": "voidcraft:items/voidcrystal"
+      "item": "voidcraft:voidcrystal"
     },
     "O": {
       "item": "minecraft:obsidian"

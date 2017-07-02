@@ -1,10 +1,10 @@
 {
   "result": {
-    "item": "voidcraft:items/voidicsuppressor"
+    "item": "voidcraft:voidicsuppressor"
   },
   "ingredients": [
     {
-      "item": "voidcraft:items/voidcrystal"
+      "item": "voidcraft:voidcrystal"
     },
     {
       "item": "minecraft:compass"
@@ -13,7 +13,7 @@
       "item": "minecraft:redstone"
     },
     {
-      "item": "voidcraft:items/voidcloth"
+      "item": "voidcraft:voidcloth"
     }
   ],
   "type": "minecraft:crafting_shapeless"

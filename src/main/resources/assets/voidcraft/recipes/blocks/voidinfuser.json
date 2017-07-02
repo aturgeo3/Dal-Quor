@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "voidcraft:blocks/voidinfuser"
+    "item": "voidcraft:voidinfuser"
   },
   "ingredients": [
     {
-      "item": "voidcraft:blocks/voidinfuserinert"
+      "item": "voidcraft:voidinfuserinert"
     },
     {
-      "item": "voidcraft:items/voidstar"
+      "item": "voidcraft:voidstar"
     }
   ],
   "type": "minecraft:crafting_shapeless"

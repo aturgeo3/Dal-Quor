@@ -1,11 +1,11 @@
 {
   "result": {
-    "item": "voidcraft:items/voidcrystal",
+    "item": "voidcraft:voidcrystal",
     "count": 9
   },
   "ingredients": [
     {
-      "item": "voidcraft:blocks/blockvoidcrystal"
+      "item": "voidcraft:blockvoidcrystal"
     }
   ],
   "type": "minecraft:crafting_shapeless"

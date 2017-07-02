@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blocks/voidiccharger"
+    "item": "voidcraft:voidiccharger"
   },
   "pattern": [
     "DSD",
@@ -10,16 +10,16 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "P": {
-      "item": "voidcraft:blocks/voidiccable"
+      "item": "voidcraft:voidiccable"
     },
     "S": {
-      "item": "voidcraft:items/voidstar"
+      "item": "voidcraft:voidstar"
     },
     "C": {
-      "item": "voidcraft:items/voidcloth"
+      "item": "voidcraft:voidcloth"
     },
     "D": {
-      "item": "voidcraft:items/diamonddust"
+      "item": "voidcraft:diamonddust"
     },
     "Z": {
       "item": "minecraft:end_crystal"

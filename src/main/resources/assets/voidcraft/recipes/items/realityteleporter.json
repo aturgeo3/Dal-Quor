@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:items/realityteleporter"
+    "item": "voidcraft:realityteleporter"
   },
   "pattern": [
     "BEZ",
@@ -10,19 +10,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "voidcraft:items/voidicsteel"
+      "item": "voidcraft:voidicsteel"
     },
     "C": {
-      "item": "voidcraft:items/moltenvoidchain"
+      "item": "voidcraft:moltenvoidchain"
     },
     "E": {
-      "item": "voidcraft:items/emeralddust"
+      "item": "voidcraft:emeralddust"
     },
     "H": {
-      "item": "voidcraft:blocks/blockrealityhole"
+      "item": "voidcraft:blockrealityhole"
     },
     "Z": {
-      "item": "voidcraft:blocks/voidiccharger"
+      "item": "voidcraft:voidiccharger"
     }
   }
 }
