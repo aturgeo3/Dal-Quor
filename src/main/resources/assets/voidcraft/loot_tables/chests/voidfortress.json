@@ -79,7 +79,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:items/ectoplasm",
+                    "name": "voidcraft:ectoplasm",
                     "weight": 15,
                     "functions": [
                         {
@@ -93,7 +93,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:items/MoltenvoidChain",
+                    "name": "voidcraft:moltenvoidchain",
                     "weight": 5,
                     "functions": [
                         {
