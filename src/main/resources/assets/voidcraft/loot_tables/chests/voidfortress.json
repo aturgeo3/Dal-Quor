@@ -51,7 +51,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:items/voidCloth",
+                    "name": "voidcraft:voidcloth",
                     "weight": 15,
                     "functions": [
                         {
@@ -65,7 +65,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:items/voidcrystal",
+                    "name": "voidcraft:voidcrystal",
                     "weight": 15,
                     "functions": [
                         {
