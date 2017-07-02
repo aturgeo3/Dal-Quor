@@ -1,10 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +11,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import javax.annotation.Nullable;
 import java.util.List;

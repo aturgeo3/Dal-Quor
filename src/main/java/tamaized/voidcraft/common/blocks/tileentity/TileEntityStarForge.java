@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks.tileentity;
 
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;

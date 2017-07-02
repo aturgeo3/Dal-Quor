@@ -2,9 +2,9 @@ package tamaized.voidcraft.common.items;
 
 import java.util.HashSet;
 
-import Tamaized.TamModized.helper.RayTraceHelper;
-import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
+import tamaized.tammodized.common.helper.RayTraceHelper;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;

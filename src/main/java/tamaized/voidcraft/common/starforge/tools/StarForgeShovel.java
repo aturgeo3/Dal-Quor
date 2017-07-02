@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.starforge.tools;
 
-import Tamaized.TamModized.tools.TamSpade;
+import tamaized.tammodized.common.tools.TamSpade;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.voidcraft.common.starforge.IStarForgeTool;

@@ -1,14 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
-import tamaized.voidcraft.common.machina.VoidMacerator;
-import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,6 +11,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
+import tamaized.voidcraft.common.machina.VoidMacerator;
+import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
 
 import javax.annotation.Nullable;
 import java.util.UUID;

@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.voidicpower;
 
 import java.util.ArrayList;
 
-import Tamaized.TamModized.tileentity.TamTileEntity;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 

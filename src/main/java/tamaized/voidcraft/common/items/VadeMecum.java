@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.items;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
@@ -143,7 +143,7 @@ public class VadeMecum extends TamItem {
 		double xOffset = living.isSneaking() ? (sneakRange * -Math.cos(yaw)) : (range * -Math.cos(yaw));
 		double yOffset = living.isSneaking() ? -0.5D : 0.0D;
 		double zOffset = living.isSneaking() ? (sneakRange * -Math.sin(yaw)) : (range * -Math.sin(yaw));
-		net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new Tamaized.TamModized.particles.FX.ParticleFluff(world, new Vec3d(living.posX + xOffset, living.posY + yOffset + 0.785D, living.posZ + zOffset), new Vec3d(0, 0, 0), 20 * 2, 0.05F, world.rand.nextFloat() * 0.9F + 0.1F, 0x7700FFFF));
+		net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.tammodized.client.particles.ParticleFluff(world, new Vec3d(living.posX + xOffset, living.posY + yOffset + 0.785D, living.posZ + zOffset), new Vec3d(0, 0, 0), 20 * 2, 0.05F, world.rand.nextFloat() * 0.9F + 0.1F, 0x7700FFFF));
 	}
 
 }

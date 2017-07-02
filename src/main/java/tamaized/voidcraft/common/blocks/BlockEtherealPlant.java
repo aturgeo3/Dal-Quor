@@ -3,7 +3,7 @@ package tamaized.voidcraft.common.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Tamaized.TamModized.blocks.TamBlockCrops;
+import tamaized.tammodized.common.blocks.TamBlockCrops;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import tamaized.voidcraft.common.items.EtherealFruit;

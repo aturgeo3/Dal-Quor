@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.items;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.render;
 
-import Tamaized.TamModized.particles.FX.ParticleFluff;
-import tamaized.voidcraft.common.events.client.TextureStitch;
-import tamaized.voidcraft.common.helper.SheatheHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,6 +13,9 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import tamaized.tammodized.client.particles.ParticleFluff;
+import tamaized.voidcraft.common.events.client.TextureStitch;
+import tamaized.voidcraft.common.helper.SheatheHelper;
 
 import java.nio.FloatBuffer;
 import java.util.Random;

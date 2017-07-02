@@ -1,13 +1,5 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.blocks.TamBlockFarmland;
-import Tamaized.TamModized.items.TamItem;
-import Tamaized.TamModized.items.TamItemSeed;
-import Tamaized.TamModized.registry.ITamRegistry;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
-import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
-import tamaized.voidcraft.common.events.DamageEvent;
-import tamaized.voidcraft.common.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,6 +15,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import tamaized.tammodized.common.blocks.TamBlockFarmland;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.tammodized.common.items.TamItemSeed;
+import tamaized.tammodized.registry.ITamRegistry;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.voidcraft.common.events.DamageEvent;
+import tamaized.voidcraft.common.items.*;
 
 import java.util.ArrayList;
 

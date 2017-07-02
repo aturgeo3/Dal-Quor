@@ -1,17 +1,6 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
-import Tamaized.TamModized.TamModized;
-import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
-import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
-import tamaized.voidcraft.common.damagesources.DamageSourceLit;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +16,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import tamaized.tammodized.TamModized;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
+import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
+import tamaized.voidcraft.common.damagesources.DamageSourceLit;
+
+import java.util.List;
 
 public class EntitySpellRune extends Entity implements IEntityAdditionalSpawnData {
 

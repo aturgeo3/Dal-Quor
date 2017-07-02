@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.machina;
 
-import Tamaized.TamModized.blocks.TamBlockContainer;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
 import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;

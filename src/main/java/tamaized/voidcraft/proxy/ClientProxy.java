@@ -1,6 +1,5 @@
 package tamaized.voidcraft.proxy;
 
-import Tamaized.TamModized.proxy.AbstractProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelParrot;
@@ -16,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import tamaized.tammodized.proxy.AbstractProxy;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.blocks.render.RenderNoBreak;
 import tamaized.voidcraft.client.blocks.render.RenderVoidicAnchor;

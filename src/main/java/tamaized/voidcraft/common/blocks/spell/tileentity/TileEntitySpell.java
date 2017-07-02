@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks.spell.tileentity;
 
-import Tamaized.TamModized.tileentity.TamTileEntity;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
 
 public abstract class TileEntitySpell extends TamTileEntity {
 

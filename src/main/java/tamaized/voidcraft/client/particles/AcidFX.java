@@ -2,7 +2,7 @@ package tamaized.voidcraft.client.particles;
 
 import org.lwjgl.opengl.GL11;
 
-import Tamaized.TamModized.particles.TamParticle;
+import tamaized.tammodized.common.particles.TamParticle;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

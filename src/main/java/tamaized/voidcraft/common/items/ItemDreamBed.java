@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.items;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

@@ -1,7 +1,15 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.TamModized.tools.*;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.tools.*;
+import tamaized.tammodized.registry.ITamRegistry;
 import tamaized.voidcraft.common.starforge.tools.StarForgeAxe;
 import tamaized.voidcraft.common.starforge.tools.StarForgePickaxe;
 import tamaized.voidcraft.common.starforge.tools.StarForgeShovel;
@@ -12,14 +20,6 @@ import tamaized.voidcraft.common.tools.chain.ChainSword;
 import tamaized.voidcraft.common.tools.demon.DemonSword;
 import tamaized.voidcraft.common.tools.molten.MoltenSword;
 import tamaized.voidcraft.common.tools.spectre.AngelicSword;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;

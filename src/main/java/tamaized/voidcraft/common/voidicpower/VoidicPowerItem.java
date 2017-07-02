@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.voidicpower;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;

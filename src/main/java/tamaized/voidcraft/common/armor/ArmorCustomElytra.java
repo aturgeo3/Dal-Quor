@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.armor;
 
-import Tamaized.TamModized.armors.TamArmor;
+import tamaized.tammodized.common.armors.TamArmor;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;

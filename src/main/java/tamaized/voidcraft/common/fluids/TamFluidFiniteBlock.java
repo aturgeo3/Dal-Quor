@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.fluids;
 
-import Tamaized.TamModized.client.MeshDefinitionFix;
-import Tamaized.TamModized.registry.ITamRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +18,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
+import tamaized.tammodized.client.MeshDefinitionFix;
+import tamaized.tammodized.registry.ITamRegistry;
 
 import java.util.Random;
 

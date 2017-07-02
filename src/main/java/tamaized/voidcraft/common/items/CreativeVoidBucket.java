@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.items;
 
 import javax.annotation.Nullable;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.fluids.UniversalBucketCapWrapper;
 import net.minecraft.creativetab.CreativeTabs;

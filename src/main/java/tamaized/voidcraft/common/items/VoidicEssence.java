@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import Tamaized.TamModized.items.TamItem;
+import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;

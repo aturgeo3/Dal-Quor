@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.entity.nonliving;
 
 import java.util.List;
 
-import Tamaized.TamModized.helper.MotionHelper;
+import tamaized.tammodized.common.helper.MotionHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import io.netty.buffer.ByteBuf;

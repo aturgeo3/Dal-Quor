@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.blocks;
 
 import java.util.Random;
 
-import Tamaized.TamModized.blocks.TamBlock;
+import tamaized.tammodized.common.blocks.TamBlock;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

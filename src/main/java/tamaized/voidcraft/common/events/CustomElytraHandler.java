@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.events;
 
-import Tamaized.TamModized.helper.PacketHelper;
-import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
+import tamaized.tammodized.common.helper.PacketHelper;
+import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.armor.ArmorCustomElytra;
 import tamaized.voidcraft.common.capabilities.CapabilityList;

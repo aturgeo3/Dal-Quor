@@ -1,6 +1,6 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
+import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
 import tamaized.voidcraft.client.particles.network.VoidicDrillLaserPacketHandler;
 import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler;
 

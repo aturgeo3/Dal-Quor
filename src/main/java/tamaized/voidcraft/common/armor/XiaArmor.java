@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.armor;
 
-import Tamaized.TamModized.armors.TamArmor;
+import tamaized.tammodized.common.armors.TamArmor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
 

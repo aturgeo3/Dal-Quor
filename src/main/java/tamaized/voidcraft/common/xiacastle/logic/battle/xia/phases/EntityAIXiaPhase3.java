@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
-import Tamaized.TamModized.helper.MotionHelper;
-import Tamaized.TamModized.particles.ParticleHelper;
+import tamaized.tammodized.common.helper.MotionHelper;
+import tamaized.tammodized.common.particles.ParticleHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;

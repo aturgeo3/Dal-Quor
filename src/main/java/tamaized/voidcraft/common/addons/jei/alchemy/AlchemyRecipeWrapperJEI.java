@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.addons.jei.alchemy;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
 import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;

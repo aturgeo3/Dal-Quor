@@ -1,8 +1,8 @@
 package tamaized.voidcraft.client.gui;
 
-import Tamaized.TamModized.helper.PacketHelper;
-import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.PacketHelper;
+import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;

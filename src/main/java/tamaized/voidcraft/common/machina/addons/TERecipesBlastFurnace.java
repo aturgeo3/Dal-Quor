@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.machina.addons;
 
-import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
+import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 

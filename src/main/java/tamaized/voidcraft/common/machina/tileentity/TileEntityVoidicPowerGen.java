@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
 import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
 import tamaized.voidcraft.common.voidicpower.VoidicPowerHandler;
 import tamaized.voidcraft.common.fluids.IFaceFluidHandler;

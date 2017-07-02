@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import Tamaized.TamModized.registry.ITamRegistry;
-import tamaized.voidcraft.common.events.VoidTickEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +19,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.registry.ITamRegistry;
+import tamaized.voidcraft.common.events.VoidTickEvent;
 
 import java.util.Random;
 

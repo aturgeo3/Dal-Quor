@@ -1,9 +1,5 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.armors.TamArmor;
-import Tamaized.TamModized.registry.ITamRegistry;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.armor.XiaArmor;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -13,6 +9,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.armors.TamArmor;
+import tamaized.tammodized.registry.ITamRegistry;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.armor.XiaArmor;
 
 import java.util.ArrayList;
 import java.util.List;

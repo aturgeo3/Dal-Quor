@@ -1,12 +1,5 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.fluids.TamFluidBlock;
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.TamModized.registry.RegistryHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
-import tamaized.voidcraft.common.fluids.ArcaneSludgeFluidBlock;
-import tamaized.voidcraft.common.fluids.TamFluidFiniteBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -22,6 +15,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.fluids.TamFluidBlock;
+import tamaized.tammodized.registry.ITamRegistry;
+import tamaized.tammodized.registry.RegistryHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.fluids.ArcaneSludgeFluidBlock;
+import tamaized.voidcraft.common.fluids.TamFluidFiniteBlock;
 
 import java.util.ArrayList;
 import java.util.List;

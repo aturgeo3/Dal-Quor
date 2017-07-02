@@ -3,8 +3,8 @@ package tamaized.voidcraft.common.vademecum.progression;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import Tamaized.TamModized.helper.PacketHelper;
-import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
+import tamaized.tammodized.common.helper.PacketHelper;
+import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.capabilities.CapabilityList;

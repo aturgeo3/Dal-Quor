@@ -1,10 +1,5 @@
 package tamaized.voidcraft.client.blocks.render;
 
-import Tamaized.TamModized.particles.FX.ParticleFluff;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.blocks.model.ModelVoidicCharger;
-import tamaized.voidcraft.client.event.ClientRenderTicker;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,6 +8,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
+import tamaized.tammodized.client.particles.ParticleFluff;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.blocks.model.ModelVoidicCharger;
+import tamaized.voidcraft.client.event.ClientRenderTicker;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 
 import java.util.Random;
 

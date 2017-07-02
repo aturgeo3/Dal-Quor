@@ -1,13 +1,13 @@
 package tamaized.voidcraft.client.entity.nonliving;
 
-import Tamaized.TamModized.particles.FX.ParticleFluff;
-import tamaized.voidcraft.common.entity.nonliving.EntitySpellImplosion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import tamaized.tammodized.client.particles.ParticleFluff;
+import tamaized.voidcraft.common.entity.nonliving.EntitySpellImplosion;
 
 import java.util.Random;
 

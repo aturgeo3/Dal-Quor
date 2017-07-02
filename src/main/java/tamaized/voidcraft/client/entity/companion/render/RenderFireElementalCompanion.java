@@ -1,11 +1,5 @@
 package tamaized.voidcraft.client.entity.companion.render;
 
-import tamaized.voidcraft.client.entity.companion.model.ModelFireElementalCompanion;
-import org.lwjgl.opengl.GL11;
-
-import Tamaized.TamModized.particles.FX.ParticleFluff;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,6 +9,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+import tamaized.tammodized.client.particles.ParticleFluff;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.companion.model.ModelFireElementalCompanion;
+import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 
 public class RenderFireElementalCompanion extends RenderLiving<EntityCompanionFireElemental> {
 

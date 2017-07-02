@@ -1,8 +1,8 @@
 package tamaized.voidcraft.client.particles.network;
 
-import Tamaized.TamModized.particles.ParticleHelper.IParticlePacketData;
-import Tamaized.TamModized.particles.ParticlePacketBase;
-import Tamaized.TamModized.particles.TamParticle;
+import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
+import tamaized.tammodized.common.particles.ParticlePacketBase;
+import tamaized.tammodized.common.particles.TamParticle;
 import tamaized.voidcraft.common.items.VoidicDrill.VoidDrillParticleData;
 import tamaized.voidcraft.client.particles.VoidicDrillLaser;
 import io.netty.buffer.ByteBufInputStream;

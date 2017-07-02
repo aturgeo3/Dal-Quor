@@ -3,7 +3,7 @@ package tamaized.voidcraft.common.addons.jei;
 import java.util.Arrays;
 import java.util.List;
 
-import Tamaized.TamModized.tileentity.TamTileEntityRecipeList;
+import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;

@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks;
 
-import Tamaized.TamModized.blocks.TamBlock;
+import tamaized.tammodized.common.blocks.TamBlock;
 import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.voidcraft.common.handlers.ConfigHandler;

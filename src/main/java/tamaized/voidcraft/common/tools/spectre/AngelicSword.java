@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.tools.spectre;
 
 import java.util.List;
 
-import Tamaized.TamModized.tools.TamSword;
+import tamaized.tammodized.common.tools.TamSword;
 import tamaized.voidcraft.common.entity.EntityVoidMob;
 import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
 import net.minecraft.creativetab.CreativeTabs;

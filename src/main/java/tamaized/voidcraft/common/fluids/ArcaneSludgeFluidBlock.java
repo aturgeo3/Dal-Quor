@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.fluids;
 
-import Tamaized.TamModized.fluids.TamFluidBlock;
+import tamaized.tammodized.common.fluids.TamFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;

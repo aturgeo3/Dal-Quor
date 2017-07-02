@@ -2,8 +2,8 @@ package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
 import java.util.ArrayList;
 
-import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;

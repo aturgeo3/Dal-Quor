@@ -1,6 +1,6 @@
 package tamaized.voidcraft.client.gui;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidMaceratorContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidMacerator;

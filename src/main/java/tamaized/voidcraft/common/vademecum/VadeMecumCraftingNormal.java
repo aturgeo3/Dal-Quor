@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.vademecum;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.helper.RecipeHelper;

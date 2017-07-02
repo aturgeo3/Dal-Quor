@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks;
 
-import Tamaized.TamModized.blocks.TamBlockContainer;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

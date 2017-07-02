@@ -1,6 +1,6 @@
 package tamaized.voidcraft.proxy;
 
-import Tamaized.TamModized.proxy.AbstractProxy;
+import tamaized.tammodized.proxy.AbstractProxy;
 
 public class ServerProxy extends AbstractProxy {
 

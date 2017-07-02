@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.google.common.cache.LoadingCache;
 
-import Tamaized.TamModized.blocks.TamBlockPortal;
+import tamaized.tammodized.common.blocks.TamBlockPortal;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

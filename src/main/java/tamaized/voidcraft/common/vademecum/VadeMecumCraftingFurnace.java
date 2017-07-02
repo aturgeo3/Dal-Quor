@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.vademecum;
 
 import java.util.List;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.common.helper.RecipeHelper;

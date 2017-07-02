@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.TamModized.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.common.fluids.FluidHelper;
-import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
-import tamaized.voidcraft.common.machina.addons.VoidTank;
-import tamaized.voidcraft.registry.VoidCraftFluids;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,6 +14,13 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.common.fluids.FluidHelper;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

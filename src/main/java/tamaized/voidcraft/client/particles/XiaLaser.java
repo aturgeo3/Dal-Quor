@@ -1,6 +1,6 @@
 package tamaized.voidcraft.client.particles;
 
-import Tamaized.TamModized.particles.TamParticle;
+import tamaized.tammodized.common.particles.TamParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

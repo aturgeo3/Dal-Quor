@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.entity.boss.dragon;
 
-import Tamaized.TamModized.entity.dragon.EntityDragonOld;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
+import tamaized.tammodized.common.entity.EntityDragonOld;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 
 public abstract class EntityAbstractDragonOld extends EntityDragonOld implements IAlternateBoss {
 

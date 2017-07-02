@@ -3,8 +3,8 @@ package tamaized.voidcraft.network;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import Tamaized.TamModized.helper.PacketHelper;
-import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
+import tamaized.tammodized.common.helper.PacketHelper;
+import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
 import tamaized.voidcraft.VoidCraft;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;

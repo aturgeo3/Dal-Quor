@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.entity;
 
-import Tamaized.TamModized.helper.PacketHelper;
-import Tamaized.TamModized.helper.PacketHelper.PacketWrapper;
+import tamaized.tammodized.common.helper.PacketHelper;
+import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.entity.animation.AnimatableModel;
 import tamaized.voidcraft.client.entity.animation.AnimationRegistry;

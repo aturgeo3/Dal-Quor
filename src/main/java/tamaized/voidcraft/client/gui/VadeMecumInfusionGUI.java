@@ -1,6 +1,6 @@
 package tamaized.voidcraft.client.gui;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
 import net.minecraft.client.Minecraft;

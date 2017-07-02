@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks.tileentity;
 
-import Tamaized.TamModized.tileentity.TamTileEntity;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.AIBlock;
 import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;

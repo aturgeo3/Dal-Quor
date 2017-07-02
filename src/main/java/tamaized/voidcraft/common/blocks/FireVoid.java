@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.blocks;
 
-import Tamaized.TamModized.blocks.TamBlockFire;
-import Tamaized.TamModized.blocks.TamBlockPortal;
+import tamaized.tammodized.common.blocks.TamBlockFire;
+import tamaized.tammodized.common.blocks.TamBlockPortal;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.EntityVoidMob;
 import net.minecraft.block.Block;

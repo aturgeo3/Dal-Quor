@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.blocks;
 
-import Tamaized.TamModized.blocks.TamBlock;
+import tamaized.tammodized.common.blocks.TamBlock;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;

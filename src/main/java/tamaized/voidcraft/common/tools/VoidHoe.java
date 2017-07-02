@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.tools;
 
-import Tamaized.TamModized.tools.TamHoe;
+import tamaized.tammodized.common.tools.TamHoe;
 import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

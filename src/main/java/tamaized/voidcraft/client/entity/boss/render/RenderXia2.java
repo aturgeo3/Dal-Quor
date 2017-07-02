@@ -1,12 +1,5 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import java.util.Random;
-
-import Tamaized.TamModized.particles.FX.ParticleFluff;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
-import tamaized.voidcraft.client.entity.boss.model.ModelXia2;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -24,6 +17,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.client.particles.ParticleFluff;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
+import tamaized.voidcraft.client.entity.boss.model.ModelXia2;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {

@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.entity.boss;
 
-import Tamaized.TamModized.entity.dragon.EntityDragonOld;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -26,6 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.entity.EntityDragonOld;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 import javax.annotation.Nullable;
 

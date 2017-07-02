@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.items;
 
-import Tamaized.TamModized.helper.RayTraceHelper;
+import tamaized.tammodized.common.helper.RayTraceHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;

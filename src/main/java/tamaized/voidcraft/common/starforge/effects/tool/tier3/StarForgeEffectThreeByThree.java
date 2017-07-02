@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.starforge.effects.tool.tier3;
 
-import Tamaized.TamModized.helper.TranslateHelper;
+import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;

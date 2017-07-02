@@ -1,16 +1,5 @@
 package tamaized.voidcraft.registry;
 
-import Tamaized.TamModized.blocks.TamBlock;
-import Tamaized.TamModized.blocks.TamBlockFence;
-import Tamaized.TamModized.blocks.TamBlockStairs;
-import Tamaized.TamModized.blocks.slab.TamBlockSlabDouble;
-import Tamaized.TamModized.blocks.slab.TamBlockSlabHalf;
-import Tamaized.TamModized.registry.ITamRegistry;
-import Tamaized.TamModized.registry.TamColorRegistry;
-import tamaized.voidcraft.common.blocks.*;
-import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
-import tamaized.voidcraft.common.machina.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -24,6 +13,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlock;
+import tamaized.tammodized.common.blocks.TamBlockFence;
+import tamaized.tammodized.common.blocks.TamBlockStairs;
+import tamaized.tammodized.common.blocks.slab.TamBlockSlabDouble;
+import tamaized.tammodized.common.blocks.slab.TamBlockSlabHalf;
+import tamaized.tammodized.registry.ITamRegistry;
+import tamaized.tammodized.registry.TamColorRegistry;
+import tamaized.voidcraft.common.blocks.*;
+import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import tamaized.voidcraft.common.machina.*;
 
 import java.util.ArrayList;
 import java.util.List;

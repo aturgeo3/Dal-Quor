@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.blocks;
 
 import java.util.ArrayList;
 
-import Tamaized.TamModized.blocks.TamBlockFarmland;
+import tamaized.tammodized.common.blocks.TamBlockFarmland;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.block.Block;

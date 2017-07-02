@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.machina;
 
 import java.util.Random;
 
-import Tamaized.TamModized.blocks.TamBlockContainer;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;

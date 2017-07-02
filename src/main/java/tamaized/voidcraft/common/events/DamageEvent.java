@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.events;
 
-import Tamaized.TamModized.helper.FloatyTextHelper;
+import tamaized.tammodized.common.helper.FloatyTextHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;

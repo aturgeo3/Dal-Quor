@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.tools.molten;
 
-import Tamaized.TamModized.tools.TamSword;
+import tamaized.tammodized.common.tools.TamSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

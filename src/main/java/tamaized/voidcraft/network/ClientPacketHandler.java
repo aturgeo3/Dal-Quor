@@ -1,6 +1,6 @@
 package tamaized.voidcraft.network;
 
-import Tamaized.TamModized.helper.MotionHelper;
+import tamaized.tammodized.common.helper.MotionHelper;
 import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;

@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.items;
 
-import Tamaized.TamModized.items.TamItemFood;
+import tamaized.tammodized.common.items.TamItemFood;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.creativetab.CreativeTabs;

@@ -1,11 +1,5 @@
 package tamaized.voidcraft.common.vademecum.progression;
 
-import Tamaized.TamModized.TamModized;
-import Tamaized.TamModized.helper.ExplosionDamageHelper;
-import Tamaized.TamModized.helper.RayTraceHelper;
-import Tamaized.TamModized.particles.FX.network.ParticleFluffPacketHandler;
-import Tamaized.TamModized.particles.ParticleHelper;
-import Tamaized.TamModized.particles.ParticlePacketHandlerRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -27,6 +21,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.tammodized.TamModized;
+import tamaized.tammodized.common.helper.ExplosionDamageHelper;
+import tamaized.tammodized.common.helper.RayTraceHelper;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
+import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
 import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
