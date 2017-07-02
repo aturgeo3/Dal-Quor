@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.handlers;
 
-import tamaized.voidcraft.VoidCraft;
 import com.google.common.io.Resources;
 import com.google.gson.stream.JsonReader;
 import com.mojang.authlib.GameProfile;
@@ -11,6 +10,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.io.FileUtils;
+import tamaized.voidcraft.VoidCraft;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,27 +26,25 @@ import java.util.zip.ZipInputStream;
 public class SkinHandler {
 
 	public static final SkinHandler instance = new SkinHandler();
-
-	private SkinHandler() {
-	}
-
 	private static final String SESSION_SERVER = "https://sessionserver.mojang.com";
 	private static final String profileUrl = SESSION_SERVER + "/session/minecraft/profile/";
 	private static final String nameUrl = "https://api.mojang.com/user/profiles/";
 	private static final String skinUrl = "http://skins.minecraft.net/MinecraftSkins/";
 	private static final String idUrl = "https://api.mojang.com/profiles/";
-	private static final String baseLoc = (System.getenv("APPDATA") == null || System.getenv("APPDATA").contains("null")) ? "./.minecraft/" : (System.getenv("APPDATA")) + "/.minecraft/" + VoidCraft.modid + "/";
+	private static final String baseLoc = VoidCraft.modid + "/";
 	private static final String loc = baseLoc + "assets/" + VoidCraft.modid + "/skins/";
 	private static final String skinZip = "/assets/" + VoidCraft.modid + "/skinhandler/skins.zip";
-
 	// Perm
 	private static volatile Map<UUID, GameProfile> uuidProfile = new HashMap<UUID, GameProfile>();
 	private static volatile Map<UUID, ResourceLocation> uuidSkin = new HashMap<UUID, ResourceLocation>();
 	private static volatile Map<UUID, Boolean> uuidBiped = new HashMap<UUID, Boolean>();
 	private static volatile Map<String, UUID> uuidNames = new HashMap<String, UUID>();
-
 	// Temp
 	private static volatile ArrayList<UUID> blacklist = new ArrayList<UUID>();
+	private static volatile List<ImgWrapper> bimgQueue = new ArrayList<ImgWrapper>();
+
+	private SkinHandler() {
+	}
 
 	public static synchronized UUID getUUID(String name) {
 		return uuidNames.get(name);
@@ -138,8 +136,8 @@ public class SkinHandler {
 			if (!uuidNames.containsKey(fileName)) {
 				VoidCraft.instance.logger.info("Deleting: " + fileName);
 				f.delete();
-			}
-			else list.add(fileName);
+			} else
+				list.add(fileName);
 		}
 		for (String name : uuidNames.keySet()) {
 			if (!list.contains(name)) {
@@ -298,9 +296,11 @@ public class SkinHandler {
 		uuidProfile.put(id, new GameProfile(id, name));
 		try {
 			File file = new File(loc + name + ".png");
-			if (!file.exists()) throw new IOException("File doesnt exist! (" + file.getAbsolutePath() + ")");
+			if (!file.exists())
+				throw new IOException("File doesnt exist! (" + file.getAbsolutePath() + ")");
 			BufferedImage bimg = ImageIO.read(file);
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) bimgQueue.add(new ImgWrapper(bimg, name, id));
+			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+				bimgQueue.add(new ImgWrapper(bimg, name, id));
 			uuidBiped.put(id, bimg.getHeight() == 32);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -320,8 +320,6 @@ public class SkinHandler {
 		}
 		return false;
 	}
-
-	private static volatile List<ImgWrapper> bimgQueue = new ArrayList<ImgWrapper>();
 
 	@SubscribeEvent
 	public void handleQueue(TickEvent.ClientTickEvent e) {
