@@ -164,6 +164,7 @@ public class VoidCraftItems {
 	}
 
 	public static void init() {
+		OreDictionary.registerOre("ingotVoidSteel", voidicSteel);
 		OreDictionary.registerOre("ingotSteel", voidicSteel);
 
 		OreDictionary.registerOre("dustQuartz", quartzDust);
