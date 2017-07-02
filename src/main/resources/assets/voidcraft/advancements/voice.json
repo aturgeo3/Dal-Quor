@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:items/vademecum"
+            "item": "voidcraft:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.voice.title"

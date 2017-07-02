@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:items/quorifragment"
+            "item": "voidcraft:quorifragment"
         },
         "title": {
             "translate": "advancements.voidcraft.nightmare.title"

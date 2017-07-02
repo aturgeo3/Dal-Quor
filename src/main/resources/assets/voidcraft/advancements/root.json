@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:items/vademecum"
+            "item": "voidcraft:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.root.title"
@@ -19,7 +19,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "voidcraft:items/vademecum"
+                        "item": "voidcraft:vademecum"
                     }
                 ]
             }
