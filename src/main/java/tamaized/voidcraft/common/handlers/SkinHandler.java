@@ -118,8 +118,9 @@ public class SkinHandler {
 	}
 
 	private static boolean isOnline() {
+		HttpURLConnection connection = null;
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(SESSION_SERVER).openConnection();
+			connection = (HttpURLConnection) new URL(SESSION_SERVER).openConnection();
 			connection.setRequestMethod("GET");
 			int responseCode = connection.getResponseCode();
 			if (responseCode == 200) {
@@ -127,6 +128,15 @@ public class SkinHandler {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.getInputStream().close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				connection.disconnect();
+			}
 		}
 		return false;
 	}
