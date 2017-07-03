@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.io.Resources;
 import com.google.gson.stream.JsonReader;
 import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -143,7 +144,7 @@ public class SkinHandler {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getMinecraftSessionService().fillProfileProperties(gameProfile, false);
 			else
 				net.minecraft.client.Minecraft.getMinecraft().getSessionService().fillProfileProperties(gameProfile, false);
-			getSkin(); // Lets preload the skin here so we get the correct model on the first initial spawn
+			loadPlayerTextures(); // Lets preload the skin here so we get the correct model on the first initial spawn
 
 		}
 
@@ -165,21 +166,28 @@ public class SkinHandler {
 			synchronized (this) {
 				if (!this.playerTexturesLoaded) {
 					this.playerTexturesLoaded = true;
-					net.minecraft.client.Minecraft.getMinecraft().getSkinManager().loadProfileTextures(this.gameProfile, (typeIn, location, profileTexture) -> {
-						switch (typeIn) {
-							case SKIN:
-								PlayerSkinInfoWrapper.this.skin = location;
-								PlayerSkinInfoWrapper.this.skinType = profileTexture.getMetadata("model");
-
-								if (PlayerSkinInfoWrapper.this.skinType == null) {
-									PlayerSkinInfoWrapper.this.skinType = "default";
-								}
-
-								break;
-							default:
-								break;
+					if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+						MinecraftProfileTexture tex = FMLCommonHandler.instance().getMinecraftServerInstance().getMinecraftSessionService().getTextures(gameProfile, false).get(MinecraftProfileTexture.Type.SKIN);
+						if (tex != null) {
+							skin = new ResourceLocation("skins/" + tex.getHash());
+							skinType = tex.getMetadata("model");
+							if (PlayerSkinInfoWrapper.this.skinType == null)
+								PlayerSkinInfoWrapper.this.skinType = "default";
 						}
-					}, false);
+					} else {
+						net.minecraft.client.Minecraft.getMinecraft().getSkinManager().loadProfileTextures(this.gameProfile, (typeIn, location, profileTexture) -> {
+							switch (typeIn) {
+								case SKIN:
+									PlayerSkinInfoWrapper.this.skin = location;
+									PlayerSkinInfoWrapper.this.skinType = profileTexture.getMetadata("model");
+									if (PlayerSkinInfoWrapper.this.skinType == null)
+										PlayerSkinInfoWrapper.this.skinType = "default";
+									break;
+								default:
+									break;
+							}
+						}, false);
+					}
 				}
 			}
 		}
