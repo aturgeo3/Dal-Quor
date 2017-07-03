@@ -1,9 +1,7 @@
 package tamaized.voidcraft.proxy;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelParrot;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.layers.LayerEntityOnShoulder;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -55,15 +53,14 @@ import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
 import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostBiped;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerSlim;
 import tamaized.voidcraft.common.entity.mob.*;
 import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
 import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
 import tamaized.voidcraft.common.entity.nonliving.*;
 import tamaized.voidcraft.common.events.client.DebugEvent;
 import tamaized.voidcraft.common.events.client.TextureStitch;
-import tamaized.voidcraft.common.handlers.SkinHandler;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
 import tamaized.voidcraft.common.vademecum.contents.VadeMecumMainEntry;
@@ -97,7 +94,6 @@ public class ClientProxy extends AbstractProxy {
 		MinecraftForge.EVENT_BUS.register(new RenderSheathe());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderTicker());
 		MinecraftForge.EVENT_BUS.register(new TextureStitch());
-		MinecraftForge.EVENT_BUS.register(SkinHandler.instance);
 		vadeMecumEntryList = new VadeMecumMainEntry();
 		vadeMecumEntryList.preLoadObject();
 
@@ -117,8 +113,8 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossZol.class, manager -> new RenderZol(manager, new ModelVoidBoss<EntityBossZol>(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia.class, manager -> new RenderXia(manager, new ModelVoidBossOverlay<EntityBossXia>(), shadowSize));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBossXia2.class, manager -> new RenderXia2(manager, new ModelXia2<EntityBossXia2>(), shadowSize));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, manager -> new RenderGhostPlayer(manager, new ModelPlayer(0.0F, false)));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGhostBiped.class, manager -> new RenderGhostPlayer(manager, new ModelBiped(0.0F)));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayer.class, manager -> new RenderGhostPlayer(manager, false));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhostPlayerSlim.class, manager -> new RenderGhostPlayer(manager, true));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineCreeper.class, RenderHerobrineCreeper::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineWitherSkull.class, RenderWitherSkull::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHerobrineTNTPrimed.class, RenderHerobrineTNTPrimed::new);

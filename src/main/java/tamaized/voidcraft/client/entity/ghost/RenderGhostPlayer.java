@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.entity.ghost;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import tamaized.voidcraft.common.handlers.SkinHandler;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBiped.ArmPose;
 import net.minecraft.client.model.ModelPlayer;
@@ -17,6 +14,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
 
 import java.util.Random;
 
@@ -25,15 +25,8 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 
 	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(VoidCraft.modid, "textures/entity/rune.png");
 
-	private final boolean playerModel;
-
-	private enum DirectionState {
-		POS, NEG, STILL
-	}
-
-	public RenderGhostPlayer(RenderManager manager, ModelBiped model) {
-		super(manager, model, 0.5F);
-		playerModel = model instanceof ModelPlayer;
+	public RenderGhostPlayer(RenderManager manager, boolean slim) {
+		super(manager, new ModelPlayer(0.0F, slim), 0.5F);
 	}
 
 	/**
@@ -41,16 +34,18 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 	 */
 	@Override
 	public void doRender(T entity, double x, double y, double z, float yaw, float partialTicks) {
-		if (playerModel) setModelVisibilities(entity);
+		this.setModelVisibilities(entity);
 		GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
-		GlStateManager.pushMatrix();
 		ModelBiped model = (ModelBiped) getMainModel();
+		GlStateManager.pushMatrix();
 		{
-			if (entity.isInteractable()) renderInteractable(entity, model);
+			if (entity.isInteractable())
+				renderInteractable(entity, model);
 			GlStateManager.pushMatrix();
 			{
 				GlStateManager.translate(x, y + 2F, z);
-				if (entity.hasRuneState()) renderRuneState(entity, model);
+				if (entity.hasRuneState())
+					renderRuneState(entity, model);
 			}
 			GlStateManager.popMatrix();
 		}
@@ -138,7 +133,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 	private void setModelVisibilities(T entity) {
 		ModelPlayer modelplayer = (ModelPlayer) this.getMainModel();
 
-		modelplayer.setVisible(false);
+		modelplayer.setVisible(true);
 		modelplayer.bipedHead.showModel = true;
 		modelplayer.bipedHeadwear.showModel = true;// entity.isWearing(EnumPlayerModelParts.HAT);
 		modelplayer.bipedBodyWear.showModel = true;// entity.isWearing(EnumPlayerModelParts.JACKET);
@@ -177,5 +172,9 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return SkinHandler.getSkinResource(entity.getUUID());
+	}
+
+	private enum DirectionState {
+		POS, NEG, STILL
 	}
 }

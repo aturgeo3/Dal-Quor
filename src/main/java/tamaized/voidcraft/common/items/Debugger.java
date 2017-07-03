@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,8 +12,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.ContributorHandler;
+import tamaized.voidcraft.common.handlers.SkinHandler;
 import tamaized.voidcraft.common.world.SchematicLoader;
-import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 
 import java.util.List;
 
@@ -75,19 +78,19 @@ public class Debugger extends TamItem {
 		// worldIn.spawnEntity(dol);
 		// EntityZolXia entity = new EntityZolXia(worldIn);
 		// EntityLordOfBlades entity = new EntityLordOfBlades(world);
-		// entity.setPositionAndUpdate(player.posX, player.posY + 20, player.posZ);
-		// world.spawnEntity(entity);
+		//		 entity.setPositionAndUpdate(player.posX, player.posY + 20, player.posZ);
+		//		 world.spawnEntity(entity);
 		// entity.start();
 
 		// VoidCraft.instance.VoidTickEvent.dream(player);
 
-//		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-//		cap.clearCategories();
-//		cap.addCategory(player, IVadeMecumCapability.Category.Shock);
-//		cap.addCategory(player, IVadeMecumCapability.Category.Freeze);
-//		cap.addCategory(player, IVadeMecumCapability.Category.AcidSpray);
-//		cap.addCategory(player, IVadeMecumCapability.Category.Flame);
-//		cap.addCategory(player, IVadeMecumCapability.Category.Voice);
+		//		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
+		//		cap.clearCategories();
+		//		cap.addCategory(player, IVadeMecumCapability.Category.Shock);
+		//		cap.addCategory(player, IVadeMecumCapability.Category.Freeze);
+		//		cap.addCategory(player, IVadeMecumCapability.Category.AcidSpray);
+		//		cap.addCategory(player, IVadeMecumCapability.Category.Flame);
+		//		cap.addCategory(player, IVadeMecumCapability.Category.Voice);
 		//		 for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
 		//		 cap.addCategory(player, cat);
 		//		 cap.removeCategory(IVadeMecumCapability.Category.TotalControl);
@@ -96,8 +99,8 @@ public class Debugger extends TamItem {
 		// IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
 		// cap.setInfusion(5999);
 		// if (cap != null) cap.setXiaDefeats(0);
-				if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
-				if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+		//				if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
+		//				if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
 		// FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 
 		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
@@ -116,9 +119,14 @@ public class Debugger extends TamItem {
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
-		// EntityGhostPlayer entity = new EntityGhostPlayer(worldIn, PlayerNameAlias.Cpw11);
-		// entity.setPositionAndUpdate(playerIn.getPosition().getX(), playerIn.getPosition().getX(), playerIn.getPosition().getX());
-		// worldIn.spawnEntity(entity);
+//		EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(11), false);
+//		entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+				for (int i = 0; i <= ContributorHandler.skinList.size(); i++) {
+					if(i == 1) continue;
+					EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
+					entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i) - (i > 0 ? 2 : 0), player.getPosition().getY(), player.getPosition().getZ());
+		world.spawnEntity(entity);
+				}
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);

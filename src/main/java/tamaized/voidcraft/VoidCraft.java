@@ -67,7 +67,7 @@ import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
 import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostBiped;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerSlim;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
 import tamaized.voidcraft.common.entity.mob.*;
 import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
@@ -295,7 +295,7 @@ public class VoidCraft extends TamModBase {
 		registerEntity(EntityBossXia.class, "xia", this, modid, 64, 1, true);
 		registerEntity(EntityBossXia2.class, "xia2", this, modid, 250, 1, true);
 		registerEntity(EntityGhostPlayer.class, "GhostPlayer", this, modid, 64, 1, true);
-		registerEntity(EntityGhostBiped.class, "GhostBiped", this, modid, 64, 1, true);
+		registerEntity(EntityGhostPlayerSlim.class, "GhostPlayerSlim", this, modid, 64, 1, true);
 		registerEntityWithEgg(EntityHerobrineCreeper.class, "HerobrineCreeper", this, modid, 64, 1, true, 0xFF0000, 0x000000);
 		registerEntity(EntityWitherbrine.class, "Witherbrine", this, modid, 250, 1, true);
 		registerEntity(EntityDragonXia.class, "DragonXia", this, modid, 250, 1, true);

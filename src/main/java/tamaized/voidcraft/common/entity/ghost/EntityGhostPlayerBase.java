@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.entity.ghost;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.handlers.SkinHandler;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import com.mojang.authlib.GameProfile;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
@@ -21,6 +17,9 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,7 +27,7 @@ import java.util.UUID;
 
 public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAdditionalSpawnData {
 
-	private GameProfile profile;
+	private String name;
 	private UUID id;
 
 	private boolean canInteract = false;
@@ -60,14 +59,14 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable) {
 		this(world);
-		profile = SkinHandler.getGameProfile(id);
+		name = SkinHandler.getGhostInfo(id).getName();
 		this.id = id;
 		canInteract = interactable;
 	}
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable, Entity target, int length) {
 		this(world);
-		profile = SkinHandler.getGameProfile(id);
+		name = SkinHandler.getGhostInfo(id).getName();
 		this.id = id;
 		canInteract = interactable;
 		rune = true;
@@ -124,7 +123,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		id = UUID.fromString(ByteBufUtils.readUTF8String(additionalData));
-		profile = SkinHandler.getGameProfile(id);
+		name = SkinHandler.getGhostInfo(id).getName();
 		canInteract = additionalData.readBoolean();
 		rune = additionalData.readBoolean();
 		if (rune) {
@@ -149,10 +148,6 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (!world.isRemote) {
-			if (profile == null) {
-				this.setDead();
-				return;
-			}
 			if (running) {
 				if (rune && runeState < maxRuneState) runeState++;
 			}
@@ -287,15 +282,15 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ITextComponent getDisplayName() {
-		return new TextComponentString(profile == null ? "null" : profile.getName() == null ? "null" : profile.getName());
+		return new TextComponentString(name);
 	}
 
 	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable) {
-		return SkinHandler.isBipedModel(id) ? new EntityGhostBiped(world, id, interactable) : new EntityGhostPlayer(world, id, interactable);
+		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable) : new EntityGhostPlayer(world, id, interactable);
 	}
 
 	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable, Entity target, int length) {
-		return SkinHandler.isBipedModel(id) ? new EntityGhostBiped(world, id, interactable, target, length) : new EntityGhostPlayer(world, id, interactable, target, length);
+		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable, target, length) : new EntityGhostPlayer(world, id, interactable, target, length);
 	}
 
 }
