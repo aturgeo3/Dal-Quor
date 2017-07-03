@@ -16,12 +16,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.fluids.TamFluidBlock;
+import tamaized.tammodized.common.fluids.TamFluidFiniteBlock;
 import tamaized.tammodized.registry.ITamRegistry;
 import tamaized.tammodized.registry.RegistryHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
 import tamaized.voidcraft.common.fluids.ArcaneSludgeFluidBlock;
-import tamaized.voidcraft.common.fluids.TamFluidFiniteBlock;
 
 import java.util.ArrayList;
 import java.util.List;
