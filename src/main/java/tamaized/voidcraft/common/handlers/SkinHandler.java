@@ -143,7 +143,7 @@ public class SkinHandler {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getMinecraftSessionService().fillProfileProperties(gameProfile, false);
 			else
 				net.minecraft.client.Minecraft.getMinecraft().getSessionService().fillProfileProperties(gameProfile, false);
-			getSkin(); // Lets preload the skin here so we get the correct model on the first inital spawn
+			getSkin(); // Lets preload the skin here so we get the correct model on the first initial spawn
 
 		}
 

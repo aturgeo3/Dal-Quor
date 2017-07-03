@@ -119,14 +119,13 @@ public class Debugger extends TamItem {
 		// Vec3d vec = playerIn.getLook(1.0f);
 		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
-//		EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(11), false);
-//		entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-				for (int i = 0; i <= ContributorHandler.skinList.size(); i++) {
-					if(i == 1) continue;
-					EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
-					entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i) - (i > 0 ? 2 : 0), player.getPosition().getY(), player.getPosition().getZ());
-		world.spawnEntity(entity);
-				}
+		//		EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(11), false);
+		//		entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+		for (int i = 0; i < ContributorHandler.skinList.size(); i++) {
+			EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
+			entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i), player.getPosition().getY(), player.getPosition().getZ());
+			world.spawnEntity(entity);
+		}
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
