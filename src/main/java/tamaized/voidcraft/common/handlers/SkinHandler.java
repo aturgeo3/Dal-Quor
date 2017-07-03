@@ -106,6 +106,7 @@ public class SkinHandler {
 					}
 					json.endObject();
 				}
+				json.endArray();
 				json.close();
 				tempMap.put(name, id);
 				VoidCraft.instance.logger.info("Mapped " + name + " -> " + id);
