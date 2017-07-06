@@ -71,7 +71,6 @@ import java.util.List;
 
 public class ClientProxy extends AbstractProxy {
 
-	private static final ResourceLocation WHITESPACE = new ResourceLocation(VoidCraft.modid, "textures/entity/whitespace.png");
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
 
@@ -141,6 +140,7 @@ public class ClientProxy extends AbstractProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidParrot.class, RenderVoidParrot::new);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void init() {
 		VoidCraftBlocks.clientInit();

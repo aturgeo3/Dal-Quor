@@ -1,15 +1,15 @@
 package tamaized.voidcraft.common.structures.voidcity;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
-import tamaized.voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -18,16 +18,17 @@ import java.util.Random;
 public class MapGenVoidCity extends MapGenStructure {
 	private final int citySpacing = 20;
 	private final int minCitySeparation = 11;
-	private final ChunkProviderVoid worldProvider;
+	private final IChunkGenerator worldProvider;
 
 	private final List<Biome.SpawnListEntry> spawnList = Lists.<Biome.SpawnListEntry> newArrayList();
 
-	public MapGenVoidCity(ChunkProviderVoid p_i46665_1_) {
+	public MapGenVoidCity(IChunkGenerator p_i46665_1_) {
 		this.worldProvider = p_i46665_1_;
 		
 		spawnList.add(new Biome.SpawnListEntry(EntityMobEtherealGuardian.class, 1, 1, 3));
 	}
 
+	@Override
 	public String getStructureName() {
 		return VoidCraft.modid + "EndCity";
 	}
@@ -43,6 +44,7 @@ public class MapGenVoidCity extends MapGenStructure {
 		return this.spawnList;
 	}
 
+	@Override
 	protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) {
 		int i = chunkX;
 		int j = chunkZ;
@@ -71,6 +73,7 @@ public class MapGenVoidCity extends MapGenStructure {
 		}
 	}
 
+	@Override
 	protected StructureStart getStructureStart(int chunkX, int chunkZ) {
 		return new MapGenVoidCity.Start(this.world, this.worldProvider, this.rand, chunkX, chunkZ);
 	}
@@ -80,7 +83,7 @@ public class MapGenVoidCity extends MapGenStructure {
 		return findNearestStructurePosBySpacing(worldIn, this, pos, 20, 11, 10387313, true, 100, p_180706_3_);
 	}
 
-	private static int getYPosForStructure(int p_191070_0_, int p_191070_1_, ChunkProviderVoid p_191070_2_) {
+	private static int getYPosForStructure(int p_191070_0_, int p_191070_1_, IChunkGenerator p_191070_2_) {
 		return 128;
 	}
 
@@ -90,12 +93,12 @@ public class MapGenVoidCity extends MapGenStructure {
 		public Start() {
 		}
 
-		public Start(World worldIn, ChunkProviderVoid chunkProvider, Random random, int chunkX, int chunkZ) {
+		public Start(World worldIn, IChunkGenerator chunkProvider, Random random, int chunkX, int chunkZ) {
 			super(chunkX, chunkZ);
 			this.create(worldIn, chunkProvider, random, chunkX, chunkZ);
 		}
 
-		private void create(World worldIn, ChunkProviderVoid chunkProvider, Random rnd, int chunkX, int chunkZ) {
+		private void create(World worldIn, IChunkGenerator chunkProvider, Random rnd, int chunkX, int chunkZ) {
 			Random random = new Random((long) (chunkX + chunkZ * 10387313));
 			Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
 			int i = MapGenVoidCity.getYPosForStructure(chunkX, chunkZ, chunkProvider);
@@ -113,6 +116,7 @@ public class MapGenVoidCity extends MapGenStructure {
 		/**
 		 * currently only defined for Villages, returns true if Village has more than 2 non-road components
 		 */
+		@Override
 		public boolean isSizeableStructure() {
 			return this.isSizeable;
 		}

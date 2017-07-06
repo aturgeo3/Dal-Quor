@@ -1,35 +1,22 @@
 package tamaized.voidcraft.common.entity.mob;
 
-import tamaized.voidcraft.common.entity.nonliving.EntityVoidChain;
 import com.google.common.base.Predicate;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.nonliving.EntityVoidChain;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttackMob {
 
@@ -52,14 +39,13 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
 			/**
 			 * Return whether the specified entity is applicable to this filter.
 			 */
-			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntityWitherSkeleton) return false;
-				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker) return false;
-				else return true;
+			boolean apply(Entity p_82704_1_) {
+				return !(p_82704_1_ instanceof EntityWitherSkeleton) && !(p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker);
 			}
 
+			@Override
 			public boolean apply(Object p_apply_1_) {
-				return p_apply_1_ instanceof Entity ? apply((Entity) p_apply_1_) : false;
+				return p_apply_1_ instanceof Entity && apply((Entity) p_apply_1_);
 			}
 		};
 
@@ -99,12 +85,13 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.voidChain;
+		return VoidCraftItems.voidChain;
 	}
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float par2) {
-		if (!canAttack(target)) return;
+		if (!canAttack(target))
+			return;
 		EntityVoidChain entityarrow = new EntityVoidChain(world, this, target, (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
 		playSound(VoidSoundEvents.MiscSoundEvents.chain, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(entityarrow);

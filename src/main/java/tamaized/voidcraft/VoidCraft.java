@@ -10,7 +10,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -67,8 +66,8 @@ import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
 import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerSlim;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerSlim;
 import tamaized.voidcraft.common.entity.mob.*;
 import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
 import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
@@ -95,8 +94,6 @@ import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.network.ServerPacketHandler;
 import tamaized.voidcraft.registry.*;
 
-import java.util.List;
-
 @Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class VoidCraft extends TamModBase {
 
@@ -105,23 +102,12 @@ public class VoidCraft extends TamModBase {
 	public static final String version = "${version}";
 	public static final String modid = "voidcraft";
 	public static final String networkChannelName = "VoidCraft";
-
-	@Instance(modid)
-	public static VoidCraft instance = new VoidCraft();
-
-	public static FMLEventChannel channel;
-
-	@SidedProxy(clientSide = "tamaized.voidcraft.proxy.ClientProxy", serverSide = "tamaized.voidcraft.proxy.ServerProxy")
-	public static AbstractProxy proxy;
-
-	public static RitualList ritualList;
-
-	public static boolean isAetherLoaded = false;
-
 	public static final VoidCraftMaterials materials = new VoidCraftMaterials();
 	public static final VoidCraftCreativeTabs tabs = new VoidCraftCreativeTabs();
 	public static final VoidCraftTools tools = new VoidCraftTools();
 	public static final VoidCraftItems items = new VoidCraftItems();
+
+	//	public static boolean isAetherLoaded = false;
 	public static final VoidCraftPotions potions = new VoidCraftPotions();
 	public static final VoidCraftArmors armors = new VoidCraftArmors();
 	public static final VoidCraftFluids fluids = new VoidCraftFluids();
@@ -131,6 +117,12 @@ public class VoidCraft extends TamModBase {
 	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
 	public static final VoidCraftTERecipes teRecipes = new VoidCraftTERecipes();
 	public static final VoidCraftParticles particles = new VoidCraftParticles();
+	@Instance(modid)
+	public static VoidCraft instance = new VoidCraft();
+	public static FMLEventChannel channel;
+	@SidedProxy(clientSide = "tamaized.voidcraft.proxy.ClientProxy", serverSide = "tamaized.voidcraft.proxy.ServerProxy")
+	public static AbstractProxy proxy;
+	public static RitualList ritualList;
 
 	public static String getVersion() {
 		return version;
@@ -277,6 +269,12 @@ public class VoidCraft extends TamModBase {
 				return new ChunkProviderVoid(world, true, world.getSeed());
 			}
 		};
+		/*new WorldType("noisetest") {
+			@Override
+			public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
+				return new ChunkGenTest(world, true, world.getSeed());
+			}
+		};*/
 
 		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
 		MapGenStructureIO.registerStructure(MapGenVoidCity.Start.class, "VoidCity");
@@ -319,12 +317,9 @@ public class VoidCraft extends TamModBase {
 
 		VoidCraftLootTables.postInit();
 
-		ForgeChunkManager.setForcedChunkLoadingCallback(this, new LoadingCallback() {
-			@Override
-			public void ticketsLoaded(List<Ticket> tickets, World world) {
-				for (Ticket ticket : tickets) {
-					ForgeChunkManager.releaseTicket(ticket);
-				}
+		ForgeChunkManager.setForcedChunkLoadingCallback(this, (tickets, world) -> {
+			for (Ticket ticket : tickets) {
+				ForgeChunkManager.releaseTicket(ticket);
 			}
 		});
 

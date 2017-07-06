@@ -1,15 +1,15 @@
 package tamaized.voidcraft.common.addons.jei;
 
+import mezz.jei.api.gui.IGuiIngredientGroup;
+import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.item.ItemStack;
+import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
+
 import java.util.Arrays;
 import java.util.List;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
-import mezz.jei.api.gui.IGuiIngredientGroup;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
-import net.minecraft.item.ItemStack;
-
-public abstract class VoidCraftRecipeWrapperJEI<T extends TamTileEntityRecipeList.TamTERecipe> extends BlankRecipeWrapper {
+public abstract class VoidCraftRecipeWrapperJEI<T extends TamTileEntityRecipeList.TamTERecipe> implements IRecipeWrapper {
 
 	private final T recipe;
 

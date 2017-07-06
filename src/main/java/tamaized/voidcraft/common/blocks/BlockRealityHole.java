@@ -30,6 +30,7 @@ public class BlockRealityHole extends TamBlock {
 	/**
 	 * Triggered whenever an entity collides with this block (enters into the block)
 	 */
+	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		/*
 		 * if(!worldIn.isRemote){ if(entityIn instanceof EntityPlayerMP){ EntityPlayerMP player = ((EntityPlayerMP) entityIn); player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new RealityTeleporter(player.mcServer.worldServerForDimension(0), player.getPosition())); } else entityIn.setDead(); }
@@ -39,10 +40,12 @@ public class BlockRealityHole extends TamBlock {
 	/**
 	 * Called When an Entity Collided with the Block
 	 */
+	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
+				if(entityIn.dimension == 0) return;
 				if (entityIn.dimension == ConfigHandler.dimensionIdXia) {
 					entityIn.setPositionAndUpdate(52.5, 61, 4.5);
 				} else {
@@ -78,6 +81,7 @@ public class BlockRealityHole extends TamBlock {
 			z = pos.getZ();
 		}
 
+		@Override
 		public void placeInPortal(Entity entityIn, float rotationYaw) {
 			World w = entityIn.world;
 			x += (w.rand.nextInt(400) - 200);

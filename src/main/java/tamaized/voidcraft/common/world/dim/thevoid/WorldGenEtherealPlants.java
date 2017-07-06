@@ -1,16 +1,16 @@
 package tamaized.voidcraft.common.world.dim.thevoid;
 
-import java.util.Random;
-
 import com.google.common.base.Predicate;
-
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+
+import java.util.Random;
 
 public class WorldGenEtherealPlants extends WorldGenMinable {
 
@@ -18,8 +18,8 @@ public class WorldGenEtherealPlants extends WorldGenMinable {
 	private final Predicate<IBlockState> predicate;
 
 	public WorldGenEtherealPlants() {
-		super(VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), numberOfBlocks);
-		predicate = BlockMatcher.forBlock(VoidCraft.blocks.blockFakeBedrock);
+		super(VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), numberOfBlocks);
+		predicate = BlockMatcher.forBlock(VoidCraftBlocks.blockFakeBedrock);
 	}
 
 	@Override
@@ -63,27 +63,26 @@ public class WorldGenEtherealPlants extends WorldGenMinable {
 									BlockPos blockpos = new BlockPos(l1, i2, j2);
 									IBlockState state = worldIn.getBlockState(blockpos);
 									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
-										//System.out.println("ding: "+blockpos);
-										worldIn.setBlockState(blockpos, VoidCraft.fluids.voidFluidBlock.getDefaultState());
+										worldIn.setBlockState(blockpos, VoidCraftFluids.voidFluidBlock.getDefaultState());
 										if(worldIn.rand.nextInt(4) == 0){
 											if (worldIn.isAirBlock(blockpos.north().up())) {
-												worldIn.setBlockState(blockpos.north(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.north().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.north(), VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.north().up(), VoidCraftBlocks.etherealPlant.withAge(VoidCraftBlocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.south().up())) {
-												worldIn.setBlockState(blockpos.south(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.south().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.south(), VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.south().up(), VoidCraftBlocks.etherealPlant.withAge(VoidCraftBlocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.east().up())) {
-												worldIn.setBlockState(blockpos.east(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.east().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.east(), VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.east().up(), VoidCraftBlocks.etherealPlant.withAge(VoidCraftBlocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											if (worldIn.isAirBlock(blockpos.west().up())) {
-												worldIn.setBlockState(blockpos.west(), VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState(), 2);
-												worldIn.setBlockState(blockpos.west().up(), VoidCraft.blocks.etherealPlant.withAge(VoidCraft.blocks.etherealPlant.getMaxAge()), 2);
+												worldIn.setBlockState(blockpos.west(), VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), 2);
+												worldIn.setBlockState(blockpos.west().up(), VoidCraftBlocks.etherealPlant.withAge(VoidCraftBlocks.etherealPlant.getMaxAge()), 2);
 												return true;
 											}
 											return true;
