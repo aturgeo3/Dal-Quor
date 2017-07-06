@@ -1,21 +1,26 @@
 package tamaized.voidcraft.common.blocks.spell;
 
-import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
-import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
+import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
 
 public class BlockSpellIceSpike extends BlockSpell {
 
@@ -101,4 +106,8 @@ public class BlockSpellIceSpike extends BlockSpell {
 		return false;
 	}
 
+	@Override
+	public void registerModel(ModelRegistryEvent e) {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), getRegistryName().getResourcePath()), "inventory"));
+	}
 }

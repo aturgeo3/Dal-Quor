@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.machina;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.common.voidicpower.IVoidicPower;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerCable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -19,6 +16,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.*;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerCable;
+import tamaized.voidcraft.common.voidicpower.IVoidicPower;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
