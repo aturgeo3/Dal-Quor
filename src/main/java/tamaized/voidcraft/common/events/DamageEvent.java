@@ -1,14 +1,5 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.tammodized.common.helper.FloatyTextHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
-import tamaized.voidcraft.common.helper.SheatheHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +13,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.tammodized.common.helper.FloatyTextHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.helper.SheatheHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,8 @@ public class DamageEvent {
 			if (living.hasCapability(CapabilityList.VOIDICINFUSION, null) && living.getCapability(CapabilityList.VOIDICINFUSION, null).getInfusionPerc() >= 0.50f) {
 				if (Math.floor(Math.random() * 5) == 0 && isWhiteListed(e.getSource(), true)) { // 0-4; 25%
 					e.setCanceled(true);
-					if (living instanceof EntityPlayer) FloatyTextHelper.sendText((EntityPlayer) living, "Incorporeal");
+					if (living instanceof EntityPlayer)
+						FloatyTextHelper.sendText((EntityPlayer) living, "Incorporeal");
 					return;
 				}
 			}
@@ -137,10 +138,13 @@ public class DamageEvent {
 		Entity e = source.getTrueSource();
 		if (e != null && e instanceof EntityLivingBase) {
 			EntityLivingBase living = (EntityLivingBase) e;
-			IStarForgeCapability cap = living.getHeldItemMainhand().getCapability(CapabilityList.STARFORGE, null);
-			if (cap != null) {
-				IStarForgeEffect effect = cap.getEffect(Tier.THREE);
-				if (effect != null && effect instanceof StarForgeEffectCripplingVoid) return false;
+			if (living.getHeldItemMainhand().hasCapability(CapabilityList.STARFORGE, null)) {
+				IStarForgeCapability cap = living.getHeldItemMainhand().getCapability(CapabilityList.STARFORGE, null);
+				if (cap != null) {
+					IStarForgeEffect effect = cap.getEffect(Tier.THREE);
+					if (effect != null && effect instanceof StarForgeEffectCripplingVoid)
+						return false;
+				}
 			}
 		}
 		return source.damageType.equals("generic") || source.damageType.equals("mob") || source.damageType.equals("player") || source.damageType.equals("arrow") || source.damageType.equals("thrown");
