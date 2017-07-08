@@ -13,12 +13,14 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
 import tamaized.voidcraft.common.structures.voidcity.MapGenVoidCity;
 import tamaized.voidcraft.common.structures.voidfortress.MapGenVoidFortress;
 import tamaized.voidcraft.common.world.dim.thevoid.WorldGenEtherealPlants;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftFluids;
 
 import java.util.List;
 import java.util.Random;
@@ -68,12 +70,12 @@ public class ChunkGenTest implements IChunkGenerator {
 
 	private void generateHeightmap(int xOffset, int yOffset, int zOffset) {
 		final double coordinateScale = 684.412F;
-		final double heightScale = 684.412F;
+		final double heightScale = 400;
 		final double mainNoiseScaleX = 80.0F;
 		final double mainNoiseScaleY = 1;
 		final double mainNoiseScaleZ = 80.0F;
 		final double baseSize = 8.5F;
-		final double stretchY = 0.75F;
+		final double stretchY = 0.5F;
 		final float biomeDepthWeight = 0.0F;
 		final float biomeDepthOffset = 0.0F;
 		final float biomeScaleWeight = 0.0F;
@@ -222,7 +224,7 @@ public class ChunkGenTest implements IChunkGenerator {
 							double lvt_45_1_ = d10 - d16;
 
 							for (int l2 = 0; l2 < 4; ++l2) {
-								if ((lvt_45_1_ += d16) > 0.0D) {
+								if ((lvt_45_1_ += d16) > 0.0D && i2 * 8 + j2 < 128) {
 									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, (flag) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockFakeBedrock.getDefaultState());
 								} else if (i2 * 8 + j2 < seaLevel) {
 									//primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.AIR.getDefaultState());
@@ -248,6 +250,7 @@ public class ChunkGenTest implements IChunkGenerator {
 		rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		setBlocksInChunk(x, z, chunkprimer);
+		genCity.setPrimer(chunkprimer);
 		genCity.generate(world, x, z, chunkprimer);
 		genFortress.generate(world, x, z, chunkprimer);
 		Chunk chunk = new Chunk(world, chunkprimer, x, z);
@@ -275,11 +278,16 @@ public class ChunkGenTest implements IChunkGenerator {
 				genCrystalOre.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(200) + 50, rand.nextInt(16)));
 			}
 		}
-		//		if (rand.nextInt(16) == 0)
-		//			new WorldGenLakes(VoidCraftBlocks.realityHole).generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(200) + 50, rand.nextInt(16)));
+		new WorldGenLakes(VoidCraftFluids.arcaneSludgeFluidBlock).generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(200) + 50, rand.nextInt(16) + 8));
+		new WorldGenLakes(VoidCraftBlocks.realityHole).generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(100) + 20, rand.nextInt(16) + 8));
 		WorldGenEtherealPlants genPlantAndLiquid = new WorldGenEtherealPlants();
 		for (k1 = 0; k1 < 16; ++k1) {
-			genPlantAndLiquid.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(200) + 50, rand.nextInt(16)));
+			genPlantAndLiquid.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(100) + 20, rand.nextInt(16)));
+		}
+		{
+			BlockPos pos = blockpos.add(rand.nextInt(16), rand.nextInt(100) + 20, rand.nextInt(16));
+			if (world.getBlockState(pos).getBlock() == VoidCraftBlocks.blockFakeBedrock)
+				world.setBlockState(pos, VoidCraftFluids.arcaneSludgeFluidBlock.getDefaultState());
 		}
 		BlockFalling.fallInstantly = false;
 	}

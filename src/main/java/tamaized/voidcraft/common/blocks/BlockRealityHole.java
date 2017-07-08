@@ -45,7 +45,6 @@ public class BlockRealityHole extends TamBlock {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
-				if(entityIn.dimension == 0) return;
 				if (entityIn.dimension == ConfigHandler.dimensionIdXia) {
 					entityIn.setPositionAndUpdate(52.5, 61, 4.5);
 				} else {
