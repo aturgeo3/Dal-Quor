@@ -13,10 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import tamaized.voidcraft.common.handlers.ContributorHandler;
-import tamaized.voidcraft.common.handlers.SkinHandler;
 import tamaized.voidcraft.common.world.SchematicLoader;
 
 import java.util.List;
@@ -121,11 +117,15 @@ public class Debugger extends TamItem {
 		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
 		//		EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(11), false);
 		//		entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-		for (int i = 0; i < ContributorHandler.skinList.size(); i++) {
-			EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
-			entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i), player.getPosition().getY(), player.getPosition().getZ());
-			world.spawnEntity(entity);
-		}
+		//		for (int i = 0; i < ContributorHandler.skinList.size(); i++) {
+		//			EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
+		//			entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i), player.getPosition().getY(), player.getPosition().getZ());
+		//			world.spawnEntity(entity);
+		//		}
+		//		for (int y = 255; y >= 0; y--)
+		//			for (int x = 15; x >= 0; x--)
+		//				for (int z = 15; z >= 0; z--)
+		//					world.setBlockToAir(new BlockPos(x, y, z).add(player.posX, 0, player.posZ));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
 		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
 		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
