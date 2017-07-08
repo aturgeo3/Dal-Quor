@@ -84,6 +84,7 @@ import tamaized.voidcraft.common.structures.voidcity.StructureVoidCityPieces;
 import tamaized.voidcraft.common.structures.voidfortress.MapGenVoidFortress;
 import tamaized.voidcraft.common.structures.voidfortress.StructureVoidFortressPieces;
 import tamaized.voidcraft.common.vademecum.progression.RitualList;
+import tamaized.voidcraft.common.world.ChunkGenTest;
 import tamaized.voidcraft.common.world.WorldGeneratorVoid;
 import tamaized.voidcraft.common.world.dim.dalquor.WorldProviderDalQuor;
 import tamaized.voidcraft.common.world.dim.thevoid.ChunkProviderVoid;
@@ -92,6 +93,7 @@ import tamaized.voidcraft.common.world.dim.thevoid.WorldProviderVoid;
 import tamaized.voidcraft.common.world.dim.xia.TeleporterXia;
 import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.proxy.CommonProxy;
 import tamaized.voidcraft.registry.*;
 
 @Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
@@ -121,7 +123,7 @@ public class VoidCraft extends TamModBase {
 	public static VoidCraft instance = new VoidCraft();
 	public static FMLEventChannel channel;
 	@SidedProxy(clientSide = "tamaized.voidcraft.proxy.ClientProxy", serverSide = "tamaized.voidcraft.proxy.ServerProxy")
-	public static AbstractProxy proxy;
+	public static CommonProxy proxy;
 	public static RitualList ritualList;
 
 	public static String getVersion() {
@@ -269,12 +271,12 @@ public class VoidCraft extends TamModBase {
 				return new ChunkProviderVoid(world, true, world.getSeed());
 			}
 		};
-		/*new WorldType("noisetest") {
+		new WorldType("noisetest") {
 			@Override
 			public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
 				return new ChunkGenTest(world, true, world.getSeed());
 			}
-		};*/
+		};
 
 		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
 		MapGenStructureIO.registerStructure(MapGenVoidCity.Start.class, "VoidCity");

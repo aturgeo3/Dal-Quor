@@ -1,8 +1,9 @@
 package tamaized.voidcraft.proxy;
 
-import tamaized.tammodized.proxy.AbstractProxy;
+import com.mojang.authlib.GameProfile;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class ServerProxy extends AbstractProxy {
+public class ServerProxy extends CommonProxy {
 
 	public ServerProxy() {
 		super(Side.SERVER);
@@ -28,4 +29,8 @@ public class ServerProxy extends AbstractProxy {
 		
 	}
 
+	@Override
+	public void fillProfileProperties(GameProfile profile, boolean verify) {
+		FMLCommonHandler.instance().getMinecraftServerInstance().getMinecraftSessionService().fillProfileProperties(profile, verify);
+	}
 }

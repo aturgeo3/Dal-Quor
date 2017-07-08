@@ -1,5 +1,6 @@
 package tamaized.voidcraft.proxy;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelParrot;
 import net.minecraft.client.renderer.entity.*;
@@ -13,7 +14,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import tamaized.tammodized.proxy.AbstractProxy;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.blocks.render.RenderNoBreak;
 import tamaized.voidcraft.client.blocks.render.RenderVoidicAnchor;
@@ -69,7 +69,7 @@ import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import java.util.List;
 
-public class ClientProxy extends AbstractProxy {
+public class ClientProxy extends CommonProxy {
 
 	public static VadeMecumGUI vadeMecum;
 	public static VadeMecumMainEntry vadeMecumEntryList;
@@ -203,4 +203,8 @@ public class ClientProxy extends AbstractProxy {
 
 	}
 
+	@Override
+	public void fillProfileProperties(GameProfile profile, boolean verify) {
+		net.minecraft.client.Minecraft.getMinecraft().getSessionService().fillProfileProperties(profile, verify);
+	}
 }

@@ -151,10 +151,7 @@ public class SkinHandler {
 
 		public PlayerSkinInfoWrapper(String name, UUID uuid) {
 			gameProfile = new GameProfile(uuid, name);
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
-				FMLCommonHandler.instance().getMinecraftServerInstance().getMinecraftSessionService().fillProfileProperties(gameProfile, false);
-			else
-				net.minecraft.client.Minecraft.getMinecraft().getSessionService().fillProfileProperties(gameProfile, false);
+			VoidCraft.proxy.fillProfileProperties(gameProfile, false);
 			loadPlayerTextures(); // Lets preload the skin here so we get the correct model on the first initial spawn
 
 		}
