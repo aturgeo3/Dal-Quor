@@ -1,10 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlockFire;
-import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,18 +11,21 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.blocks.TamBlockFire;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import java.util.Random;
 
-public class FireVoid extends TamBlockFire {
+public class BlockVoidFire extends TamBlockFire {
 
-	public FireVoid(CreativeTabs tab, String n) {
+	public BlockVoidFire(CreativeTabs tab, String n) {
 		super(tab, n, SoundType.CLOTH);
 	}
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != VoidCraft.blocks.blockVoidcrystal || !((TamBlockPortal) VoidCraft.blocks.blockPortalVoid).tryToCreatePortal(world, pos)) {
+		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != VoidCraftBlocks.blockVoidcrystal || !VoidCraftBlocks.blockPortalVoid.tryToCreatePortal(world, pos)) {
 			if (!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(world, pos)) {
 				world.setBlockToAir(pos);
 			} else {
@@ -63,7 +61,17 @@ public class FireVoid extends TamBlockFire {
 	}
 
 	@Override
-	protected boolean canBeOnBlock(Block block) {
-		return !(block instanceof BlockVoidcrystal);
+	protected boolean canBeOnBlock(IBlockState state) {
+		return state.getBlock() == VoidCraftBlocks.blockVoidcrystal;
+	}
+
+	@Override
+	protected boolean isFireSource(IBlockState state) {
+		return state.getBlock() == VoidCraftBlocks.blockVoidbrick;
+	}
+
+	@Override
+	protected boolean isVanillaSource() {
+		return false;
 	}
 }

@@ -21,7 +21,7 @@ public class ItemEntityEvent {
 		try {
 			for (EntityItem entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
 				ItemStack stack = entity.getItem();
-				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == VoidCraftBlocks.fireVoid) {
+				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == VoidCraftBlocks.blockVoidFire) {
 					e.world.setBlockToAir(entity.getPosition());
 					e.world.addWeatherEffect(new EntityLightningBolt(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), true));
 					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(VoidCraft.items.vadeMecum)));

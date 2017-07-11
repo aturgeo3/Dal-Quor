@@ -322,7 +322,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 		}
 
 		protected boolean isEmptyBlock(Block blockIn) {
-			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == VoidCraft.blocks.fireVoid || blockIn == VoidCraft.blocks.blockPortalVoid;
+			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == VoidCraft.blocks.blockVoidFire || blockIn == VoidCraft.blocks.blockPortalVoid;
 		}
 
 		public boolean isValid() {

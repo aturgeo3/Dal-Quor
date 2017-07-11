@@ -47,7 +47,7 @@ public class VoidCraftBlocks {
 	public static TamBlockSlabHalf blockVoidBrickHalfSlab;
 	public static BlockPortalVoid blockPortalVoid;
 	public static BlockPortalXia blockPortalXia;
-	public static FireVoid fireVoid;
+	public static BlockVoidFire blockVoidFire;
 	public static BlockRealityHole realityHole;
 	public static TamBlock ritualBlock;
 	public static VoidBox voidBox;
@@ -101,7 +101,7 @@ public class VoidCraftBlocks {
 
 		modelList.add(blockPortalVoid = new BlockPortalVoid(VoidCraftCreativeTabs.tabVoid, "blockportalvoid"));
 		modelList.add(blockPortalXia = new BlockPortalXia(VoidCraftCreativeTabs.tabVoid, "blockportalxia"));
-		modelList.add(fireVoid = new FireVoid(VoidCraftCreativeTabs.tabVoid, "firevoid"));
+		modelList.add(blockVoidFire = new BlockVoidFire(VoidCraftCreativeTabs.tabVoid, "firevoid"));
 
 		modelList.add(voidMacerator = new VoidMacerator(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "voidmacerator", 3.5F));
 		modelList.add(voidBlastFurnace = new VoidBlastFurnace(VoidCraftCreativeTabs.tabVoid, Material.IRON, "voidblastfurnace", 7.0F));

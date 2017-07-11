@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.entity.mob.lich;
 
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.FireVoid;
+import tamaized.voidcraft.common.blocks.BlockVoidFire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -66,7 +66,7 @@ public class EntityLichInferno extends Entity {
 					int y = getLowY(getPosition().add(x, 0, z), 4);
 					BlockPos pos = getPosition().add(x, y < 4 ? y - 1 : 3, z);
 					IBlockState state = world.getBlockState(pos);
-					if (state != null && state.getBlock() instanceof FireVoid) {
+					if (state != null && state.getBlock() instanceof BlockVoidFire) {
 						world.setBlockToAir(pos);
 					}
 				}
@@ -94,7 +94,7 @@ public class EntityLichInferno extends Entity {
 	private void placeFireAt(BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
 		if (state == null || state.getBlock().isReplaceable(world, pos)) {
-			world.setBlockState(pos, VoidCraft.blocks.fireVoid.getDefaultState());
+			world.setBlockState(pos, VoidCraft.blocks.blockVoidFire.getDefaultState());
 		}
 	}
 

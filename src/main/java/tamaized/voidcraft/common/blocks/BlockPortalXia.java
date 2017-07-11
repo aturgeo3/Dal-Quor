@@ -108,7 +108,7 @@ public class BlockPortalXia extends TamBlockPortal {
 							if (j1 != VoidCraft.blocks.blockFakeBedrock) {
 								return false;
 							}
-						} else if (!isAirBlock && j1 != VoidCraft.blocks.fireVoid) {
+						} else if (!isAirBlock && j1 != VoidCraft.blocks.blockVoidFire) {
 							return false;
 						}
 					}

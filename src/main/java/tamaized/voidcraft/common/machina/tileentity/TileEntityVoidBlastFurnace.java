@@ -128,7 +128,7 @@ public class TileEntityVoidBlastFurnace extends TileEntityVoidicPowerInventory {
 	}
 
 	private boolean canCook() {
-		if (SLOT_INPUT_IRON.getStackInSlot(0).isEmpty() || SLOT_INPUT_COAL.getStackInSlot(0).isEmpty() || world.getBlockState(getPos().down()) == null || world.getBlockState(getPos().down()).getBlock() != VoidCraftBlocks.fireVoid)
+		if (SLOT_INPUT_IRON.getStackInSlot(0).isEmpty() || SLOT_INPUT_COAL.getStackInSlot(0).isEmpty() || world.getBlockState(getPos().down()) == null || world.getBlockState(getPos().down()).getBlock() != VoidCraftBlocks.blockVoidFire)
 			return false;
 		recipe = VoidCraft.teRecipes.blastFurnace.getRecipe(new ItemStack[]{SLOT_INPUT_IRON.getStackInSlot(0), SLOT_INPUT_COAL.getStackInSlot(0)});
 		if (recipe == null)
