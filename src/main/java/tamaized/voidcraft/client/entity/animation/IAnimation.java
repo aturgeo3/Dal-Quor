@@ -1,12 +1,9 @@
 package tamaized.voidcraft.client.entity.animation;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 
 public interface IAnimation<T extends EntityVoidNPC, E extends AnimatableModel> {
 
@@ -18,8 +15,8 @@ public interface IAnimation<T extends EntityVoidNPC, E extends AnimatableModel> 
 	@SideOnly(Side.CLIENT)
 	void render(T e, E model);
 
-	void encodePacket(DataOutputStream stream) throws IOException;
+	void encodePacket(ByteBuf stream);
 
-	void decodePacket(ByteBufInputStream stream) throws IOException;
+	void decodePacket(ByteBuf stream);
 	
 }

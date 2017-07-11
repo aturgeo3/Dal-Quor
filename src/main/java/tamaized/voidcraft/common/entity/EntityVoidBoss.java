@@ -1,14 +1,5 @@
 package tamaized.voidcraft.common.entity;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.IVoidBossData;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.network.VoidBossAIBus;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -23,6 +14,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.IVoidBossData;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.network.VoidBossAIBus;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoidNPC implements IVoidBossData {
 
@@ -321,7 +322,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	protected abstract void updatePhase(int phase);
 
-	protected abstract ArrayList<Class> getFilters();
+	protected abstract List<Class> getFilters();
 
 	protected abstract boolean immuneToFire();
 

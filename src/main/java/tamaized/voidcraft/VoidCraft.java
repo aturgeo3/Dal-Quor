@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import tamaized.tammodized.TamModBase;
@@ -91,7 +92,7 @@ import tamaized.voidcraft.common.world.dim.thevoid.TeleporterVoid;
 import tamaized.voidcraft.common.world.dim.thevoid.WorldProviderVoid;
 import tamaized.voidcraft.common.world.dim.xia.TeleporterXia;
 import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
-import tamaized.voidcraft.network.ServerPacketHandler;
+import tamaized.voidcraft.network.NetworkMessages;
 import tamaized.voidcraft.proxy.CommonProxy;
 import tamaized.voidcraft.registry.*;
 
@@ -102,7 +103,6 @@ public class VoidCraft extends TamModBase {
 
 	public static final String version = "${version}";
 	public static final String modid = "voidcraft";
-	public static final String networkChannelName = "VoidCraft";
 	public static final VoidCraftMaterials materials = new VoidCraftMaterials();
 	public static final VoidCraftCreativeTabs tabs = new VoidCraftCreativeTabs();
 	public static final VoidCraftTools tools = new VoidCraftTools();
@@ -121,6 +121,7 @@ public class VoidCraft extends TamModBase {
 	@Instance(modid)
 	public static VoidCraft instance = new VoidCraft();
 	public static FMLEventChannel channel;
+	public static SimpleNetworkWrapper network;
 	@SidedProxy(clientSide = "tamaized.voidcraft.proxy.ClientProxy", serverSide = "tamaized.voidcraft.proxy.ServerProxy")
 	public static CommonProxy proxy;
 	public static RitualList ritualList;
@@ -172,10 +173,9 @@ public class VoidCraft extends TamModBase {
 
 		ContributorHandler.start();
 
-		// Initialize Network
-		channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(networkChannelName);
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(modid);
+		NetworkMessages.register(network);
 
-		// Register Capabilities
 		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
 		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler.class);
@@ -195,11 +195,9 @@ public class VoidCraft extends TamModBase {
 		VoidCraftTERecipes.init();
 		VoidCraftBiomes.init();
 
-		// Register StarForge Effects
 		StarForgeEffectList.register();
 		StarForgeEffectRecipeList.instance.register();
 
-		// Tile Entities
 		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
 		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
 		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
@@ -219,10 +217,8 @@ public class VoidCraft extends TamModBase {
 		GameRegistry.registerTileEntity(TileEntityVoidicAnchor.class, "tileEntityVoidicAnchor");
 		GameRegistry.registerTileEntity(TileEntityVoidicCrystallizer.class, "tileEntityVoidicCrystallizer");
 
-		// gui Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-		// Register Events
 		MinecraftForge.EVENT_BUS.register(new VoidTickEvent());
 		MinecraftForge.EVENT_BUS.register(new PickUpEvent());
 		MinecraftForge.EVENT_BUS.register(new SpawnEvent());
@@ -238,7 +234,6 @@ public class VoidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new PlayerRightClickEvent());
 		MinecraftForge.EVENT_BUS.register(new LitStrikeEvent());
 
-		// Register Projectiles and other misc entities
 		registerEntity(EntityVoidChain.class, "EntityVoidChain", this, modid, 128, 1, true);
 		registerEntity(EntityAcidBall.class, "EntityAcidBall", this, modid, 128, 1, true);
 		// registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
@@ -253,16 +248,13 @@ public class VoidCraft extends TamModBase {
 		registerEntity(EntityCasterLightningBolt.class, "EntityCasterLightningBolt", this, modid, 64, 1, true);
 		registerEntity(EntitySpellImplosion.class, "EntitySpellImplosion", this, modid, 64, 1, true);
 
-		// Register Dimensions
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdVoid, DimensionType.register("The Void", "_void", ConfigHandler.dimensionIdVoid, WorldProviderVoid.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdXia, DimensionType.register("???", "_xia", ConfigHandler.dimensionIdXia, WorldProviderXia.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdDalQuor, DimensionType.register("Dal Quor", "_dalquor", ConfigHandler.dimensionIdDalQuor, WorldProviderDalQuor.class, false));
 
-		// Register Portals
 		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
 		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
 
-		// Register World Gen
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		new WorldType(modid + "_void") {
 			@Override
@@ -276,7 +268,6 @@ public class VoidCraft extends TamModBase {
 		StructureVoidFortressPieces.registerNetherFortressPieces();
 		StructureVoidCityPieces.registerPieces();
 
-		// Register Mobs
 		registerEntityWithEgg(EntityMobWraith.class, "Wraith", this, modid, 64, 1, true, 0xFFFFFF, 0x000000);
 		registerEntityWithEgg(EntityMobSpectreChain.class, "SpectreChain", this, modid, 64, 1, true, 0xFFFFFF, 0xAA0077);
 		registerEntityWithEgg(EntityMobVoidWrath.class, "VoidWrath", this, modid, 64, 1, true, 0xFF0000, 0x000000);
@@ -301,7 +292,6 @@ public class VoidCraft extends TamModBase {
 		registerEntityWithEgg(EntityLordOfBlades.class, "LordOfBlades", this, modid, 250, 1, true, 0x777777, 0x000000);
 		registerEntityWithEgg(EntityVoidParrot.class, "VoidParrot", this, modid, 250, 1, true, 0x7700FF, 0x000000);
 
-		// Register Biomes
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 
 	}
@@ -318,11 +308,7 @@ public class VoidCraft extends TamModBase {
 			}
 		});
 
-		// Load Rituals
 		reloadRitualList();
-
-		// Register Network
-		channel.register(new ServerPacketHandler());
 
 	}
 

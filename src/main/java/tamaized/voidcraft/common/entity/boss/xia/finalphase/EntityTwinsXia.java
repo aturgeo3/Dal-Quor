@@ -1,8 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -21,25 +19,21 @@ import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.Alt
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
-import tamaized.voidcraft.network.ClientPacketHandler;
 import tamaized.voidcraft.network.IEntitySync;
+import tamaized.voidcraft.network.client.ClientPacketHandlerSheathe;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySync, IAlternateBoss {
 
+	public final AlternateBossBarWrapper bossBarWrapper;
 	protected Entity watchedEntity;
-	protected ArrayList<Class> watchedClass = new ArrayList<Class>();
+	protected List<Class> watchedClass = new ArrayList<>();
 	private boolean frozen = false;
 	private double maxWatchDistance = 16 * 8;
-
-	public final AlternateBossBarWrapper bossBarWrapper;
-
 	private EntityAIXia2Phase3 ai;
 
 	public EntityTwinsXia(World worldIn) {
@@ -82,12 +76,12 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	}
 
 	@Override
-	public void encodePacketData(DataOutputStream stream) throws IOException {
+	public void encodePacketData(ByteBuf stream) {
 		stream.writeBoolean(frozen);
 	}
 
 	@Override
-	public void decodePacketData(ByteBufInputStream stream) throws IOException {
+	public void decodePacketData(ByteBuf stream) {
 		frozen = stream.readBoolean();
 		System.out.println(this);
 	}
@@ -95,19 +89,11 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot != VoidCraft.potions.fireSheathe && pot != VoidCraft.potions.frostSheathe && pot != VoidCraft.potions.litSheathe && pot != VoidCraft.potions.acidSheathe) return;
+		if (pot != VoidCraftPotions.fireSheathe && pot != VoidCraftPotions.frostSheathe && pot != VoidCraftPotions.litSheathe && pot != VoidCraftPotions.acidSheathe)
+			return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			try {
-				PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-				DataOutputStream stream = packet.getStream();
-				stream.writeInt(getEntityId());
-				stream.writeInt(Potion.getIdFromPotion(pot));
-				stream.writeInt(potioneffectIn.getDuration());
-				packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 		}
 	}
 
@@ -125,13 +111,15 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3) setDead();
+			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3)
+				setDead();
 		}
 		if (!frozen) {
 			update();
 			if (!world.isRemote) {
 				updateMotion();
-				if (ticksExisted % 20 == 0) watchNew();
+				if (ticksExisted % 20 == 0)
+					watchNew();
 				updateLook();
 				// collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
 				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
@@ -152,14 +140,11 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 
 	protected abstract void update();
 
-	private void collideWithEntities(List p_70970_1_) {
+	private void collideWithEntities(List<Entity> p_70970_1_) {
 		double d0 = (getEntityBoundingBox().minX + getEntityBoundingBox().maxX) / 2.0D;
 		double d1 = (getEntityBoundingBox().minZ + getEntityBoundingBox().maxZ) / 2.0D;
-		Iterator iterator = p_70970_1_.iterator();
 
-		while (iterator.hasNext()) {
-			Entity entity = (Entity) iterator.next();
-
+		for (Entity entity : p_70970_1_) {
 			if (entity instanceof EntityLivingBase && !(entity instanceof EntityVoidNPC) && !(entity instanceof EntityWitherbrine)) {
 				double d2 = entity.posX - d0;
 				double d3 = entity.posZ - d1;
@@ -169,10 +154,8 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 		}
 	}
 
-	private void attackEntitiesInList(List p_70971_1_) {
-		for (int i = 0; i < p_70971_1_.size(); ++i) {
-			Entity entity = (Entity) p_70971_1_.get(i);
-
+	private void attackEntitiesInList(List<Entity> p_70971_1_) {
+		for (Entity entity : p_70971_1_) {
 			if (entity instanceof EntityLivingBase && !(entity instanceof EntityVoidNPC)) {
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
 			}
@@ -191,7 +174,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	}
 
 	private void watchNew() {
-		ArrayList<Entity> list = new ArrayList<Entity>();
+		List<Entity> list = new ArrayList<>();
 		for (Class c : watchedClass) {
 			list.addAll(world.getEntitiesWithinAABB(c, getEntityBoundingBox().grow(maxWatchDistance, 64.0D, maxWatchDistance)));
 		}
@@ -200,7 +183,8 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	}
 
 	private void updateMotion() {
-		if (watchedEntity == null) return;
+		if (watchedEntity == null)
+			return;
 		double x = posX;
 		double y = posY;
 		double z = posZ;
@@ -209,9 +193,9 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 		double py = watchedEntity.posY;
 		double pz = watchedEntity.posZ;
 
-		double dx = 0;
-		double dy = 0;
-		double dz = 0;
+		double dx;
+		double dy;
+		double dz;
 
 		double moveSpeed = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
 

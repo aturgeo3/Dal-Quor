@@ -1,15 +1,8 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.VadeMecumSpellsContainer;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -17,23 +10,25 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.gui.container.VadeMecumSpellsContainer;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
 
 public class VadeMecumSpellsGUI extends GuiContainer {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/generic.png");
-
-	private int page;
-
-	private final InventoryPlayer inv;
-	private final IVadeMecumCapability capability;
-
-	private ItemStack renderStackHover = ItemStack.EMPTY;
-
 	private static final int BUTTON_CLOSE = 0;
 	private static final int BUTTON_BACK = 1;
 	private static final int BUTTON_SPELL = 2;
 	private static final int BUTTON_ARROW_NEXT = 3;
 	private static final int BUTTON_ARROW_BACK = 4;
+	private final InventoryPlayer inv;
+	private final IVadeMecumCapability capability;
+	private int page;
+	private ItemStack renderStackHover = ItemStack.EMPTY;
 
 	public VadeMecumSpellsGUI(InventoryPlayer inventory, IVadeMecumCapability cap) {
 		super(new VadeMecumSpellsContainer(inventory, cap));
@@ -64,7 +59,8 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 		int yLoc = 28;
 
 		for (int index = 15 * page; index < (15 * (page + 1)); index++) {
-			if (index > capability.getAvailableActivePowers().size() - 1) break;
+			if (index > capability.getAvailableActivePowers().size() - 1)
+				break;
 			IVadeMecumCapability.Category spell = capability.getAvailableActivePowers().get(index);
 			buttonList.add(new SpellButton(capability, BUTTON_SPELL, xLoc + (135 * ((int) Math.floor((index - (15 * page)) / 5))), yLoc + (25 * ((index - (15 * page)) % 5)), spell));
 		}
@@ -75,19 +71,20 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 		if (button.enabled) {
 			switch (button.id) {
 				case BUTTON_CLOSE:
-					mc.displayGuiScreen((GuiScreen) null);
+					mc.displayGuiScreen(null);
 					break;
 				case BUTTON_BACK:
 					mc.displayGuiScreen(new VadeMecumGUI(mc.player));
 					break;
 				case BUTTON_ARROW_NEXT:
-					VadeMecumPacketHandler.ClientToServerRequest(VadeMecumPacketHandler.RequestType.SPELLS_PAGE, page + 1);
+					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page + 1));
 					break;
 				case BUTTON_ARROW_BACK:
-					VadeMecumPacketHandler.ClientToServerRequest(VadeMecumPacketHandler.RequestType.SPELLS_PAGE, page - 1);
+					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page - 1));
 					break;
 				case BUTTON_SPELL:
-					if (button instanceof SpellButton) sendPacket(((SpellButton) button).getSpell());
+					if (button instanceof SpellButton)
+						sendPacket(((SpellButton) button).getSpell());
 					break;
 				default:
 					break;
@@ -96,7 +93,8 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 	}
 
 	private void sendPacket(IVadeMecumCapability.Category spell) {
-		if (IVadeMecumCapability.isActivePower(spell)) VadeMecumPacketHandler.ClientToServerRequest(VadeMecumPacketHandler.RequestType.ACTIVE_SET, IVadeMecumCapability.getCategoryID(spell));
+		if (IVadeMecumCapability.isActivePower(spell))
+			VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.ACTIVE_SET, IVadeMecumCapability.getCategoryID(spell)));
 	}
 
 	@Override
@@ -112,8 +110,10 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 	@Override
 	public void updateScreen() {
 		for (GuiButton button : buttonList) {
-			if (button.id == BUTTON_ARROW_NEXT) button.enabled = page < Math.floor(capability.getAvailableActivePowers().size() / 15);
-			else if (button.id == BUTTON_ARROW_BACK) button.enabled = page > 0;
+			if (button.id == BUTTON_ARROW_NEXT)
+				button.enabled = page < Math.floor(capability.getAvailableActivePowers().size() / 15);
+			else if (button.id == BUTTON_ARROW_BACK)
+				button.enabled = page > 0;
 		}
 	}
 
@@ -127,7 +127,8 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 		int xLoc = 0;
 		int yLoc = 21;
 		for (int index = 15 * page; index < (15 * (page + 1)); index++) {
-			if (capability.getAvailableActivePowers().size() - 1 < index) break;
+			if (capability.getAvailableActivePowers().size() - 1 < index)
+				break;
 			IVadeMecumCapability.Category spell = capability.getAvailableActivePowers().get(index);
 			drawTexturedModalRect(xLoc + (135 * ((int) Math.floor((index - (15 * page)) / 5))), yLoc + (25 * ((index - (15 * page)) % 5)), 0, ySize, 32, 32);
 		}
@@ -154,9 +155,11 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 			itemRender.renderItemIntoGUI(stack, x, y);
 			// drawCenteredString(fontRenderer, ""+stack.stackSize, x, y, 0xFFFFFF);
 			GlStateManager.disableDepth();
-			if (stack.getCount() > 1) drawString(fontRenderer, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
+			if (stack.getCount() > 1)
+				drawString(fontRenderer, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
 			GlStateManager.enableDepth();
-			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
+			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16)
+				renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();
 		}
 	}
@@ -203,7 +206,8 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 				drawRect(x, y, x + width, y + height, j);
 				GlStateManager.pushMatrix();
 				ItemStack stack = VadeMecumWordsOfPower.getCategoryData(spell).getStack();
-				if (stack != null) renderItemStack(stack, x, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2) - 4, mouseX, mouseY);
+				if (stack != null)
+					renderItemStack(stack, x, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2) - 4, mouseX, mouseY);
 				fontrenderer.drawString(I18n.format(VadeMecumWordsOfPower.getCategoryData(spell).getName(), new Object[0]).trim().substring(I18n.format("voidcraft.ritual.def.word", new Object[0]).trim().length() + 3), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
 				GlStateManager.popMatrix();
 			}

@@ -1,12 +1,8 @@
 package tamaized.voidcraft.network;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import javax.annotation.Nullable;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
 import io.netty.handler.codec.EncoderException;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,12 +10,15 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class ItemStackNetworkHelper {
+import javax.annotation.Nullable;
+import java.io.IOException;
+
+public class ItemStackNetworkHelper { // TODO: TamModized
 
 	private ItemStackNetworkHelper() {
 	}
 
-	public static void encodeStack(ItemStack stack, DataOutputStream stream) throws IOException {
+	public static void encodeStack(ItemStack stack, ByteBuf stream) {
 		if (stack.isEmpty()) {
 			stream.writeShort(-1);
 		} else {
@@ -36,7 +35,7 @@ public class ItemStackNetworkHelper {
 		}
 	}
 
-	public static ItemStack decodeStack(ByteBuf buf, ByteBufInputStream stream) throws IOException {
+	public static ItemStack decodeStack(ByteBuf stream){
 		ItemStack itemstack = ItemStack.EMPTY;
 		int i = stream.readShort();
 
@@ -44,18 +43,18 @@ public class ItemStackNetworkHelper {
 			int j = stream.readByte();
 			int k = stream.readShort();
 			itemstack = new ItemStack(Item.getItemById(i), j, k);
-			itemstack.setTagCompound(readNBTTagCompoundFromBuffer(buf));
+			itemstack.setTagCompound(readNBTTagCompoundFromBuffer(stream));
 		}
 
 		return itemstack;
 	}
 
-	public static void writeNBTTagCompoundToBuffer(@Nullable NBTTagCompound nbt, DataOutputStream stream) throws IOException {
+	public static void writeNBTTagCompoundToBuffer(@Nullable NBTTagCompound nbt, ByteBuf stream) {
 		if (nbt == null) {
 			stream.writeByte(0);
 		} else {
 			try {
-				CompressedStreamTools.write(nbt, stream);
+				CompressedStreamTools.write(nbt, new ByteBufOutputStream(stream));
 			} catch (IOException ioexception) {
 				throw new EncoderException(ioexception);
 			}
@@ -63,7 +62,7 @@ public class ItemStackNetworkHelper {
 	}
 
 	@Nullable
-	public static NBTTagCompound readNBTTagCompoundFromBuffer(ByteBuf buf) throws IOException {
+	public static NBTTagCompound readNBTTagCompoundFromBuffer(ByteBuf buf) {
 		int i = buf.readerIndex();
 		byte b0 = buf.readByte();
 

@@ -1,0 +1,38 @@
+package tamaized.voidcraft.network;
+
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import tamaized.voidcraft.network.client.*;
+import tamaized.voidcraft.network.server.*;
+
+public class NetworkMessages {
+
+	private static int index = 0;
+
+	public static void register(SimpleNetworkWrapper network) {
+		// Server
+		registerMessage(network, ServerPacketHandlerCustomElytra.class, ServerPacketHandlerCustomElytra.Packet.class, Side.SERVER);
+		registerMessage(network, ServerPacketHandlerLinkClear.class, ServerPacketHandlerLinkClear.Packet.class, Side.SERVER);
+		registerMessage(network, ServerPacketHandlerStarforgeCraft.class, ServerPacketHandlerStarforgeCraft.Packet.class, Side.SERVER);
+		registerMessage(network, ServerPacketHandlerVadeMecum.class, ServerPacketHandlerVadeMecum.Packet.class, Side.SERVER);
+		registerMessage(network, ServerPacketHandlerVadeMecumLastEntry.class, ServerPacketHandlerVadeMecumLastEntry.Packet.class, Side.SERVER);
+		registerMessage(network, ServerPacketHandlerVoidBox.class, ServerPacketHandlerVoidBox.Packet.class, Side.SERVER);
+
+		// Client
+		registerMessage(network, ClientPacketHandlerAnimation.class, ClientPacketHandlerAnimation.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerEntitySync.class, ClientPacketHandlerEntitySync.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerHealth.class, ClientPacketHandlerHealth.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerInfusion.class, ClientPacketHandlerInfusion.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerPowerItem.class, ClientPacketHandlerPowerItem.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerSheathe.class, ClientPacketHandlerSheathe.Packet.class, Side.CLIENT);
+		registerMessage(network, ClientPacketHandlerVadeMecumUpdate.class, ClientPacketHandlerVadeMecumUpdate.Packet.class, Side.CLIENT);
+	}
+
+	private static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(SimpleNetworkWrapper network, Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Class<REQ> requestMessageType, Side side) {
+		network.registerMessage(messageHandler, requestMessageType, index, side);
+		index++;
+	}
+
+}

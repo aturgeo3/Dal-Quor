@@ -1,19 +1,19 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases;
 
-import java.util.ArrayList;
-
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityDragonXia;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
-import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityDragonXia;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityZolXia;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+
+import java.util.List;
 
 public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 
@@ -25,7 +25,7 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	private EntityDragonXia dragon;
 	private EntityWitherbrine wither;
 
-	public EntityAIXia2Phase3(EntityBossXia2 entityBoss, ArrayList<Class> c) {
+	public EntityAIXia2Phase3(EntityBossXia2 entityBoss, List<Class> c) {
 		super(entityBoss, c);
 		litBox = new AxisAlignedBB(entityBoss.getPosition().add(-5, 0, -5), entityBoss.getPosition().add(5, 1, 5));
 	}

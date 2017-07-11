@@ -64,7 +64,6 @@ import tamaized.voidcraft.common.events.client.TextureStitch;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
 import tamaized.voidcraft.common.vademecum.contents.VadeMecumMainEntry;
-import tamaized.voidcraft.network.ClientPacketHandler;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import java.util.List;
@@ -198,8 +197,6 @@ public class ClientProxy extends CommonProxy {
 		playerRendererSlim.addLayer(new LayerCustomElytra(playerRendererSlim));
 		playerRendererSlim.addLayer(new LayerVoidParrotShoulder(playerRendererSlim.getRenderManager()));
 		// playerRendererSlim.addLayer(new LayerSheath(playerRendererSlim));
-
-		VoidCraft.channel.register(new ClientPacketHandler());
 
 	}
 

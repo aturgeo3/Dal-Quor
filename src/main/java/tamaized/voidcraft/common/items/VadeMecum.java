@@ -1,15 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -27,6 +17,17 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 public class VadeMecum extends TamItem {
 
@@ -118,7 +119,7 @@ public class VadeMecum extends TamItem {
 
 	@SideOnly(Side.CLIENT)
 	private void openBook(EntityPlayer player, World world, BlockPos pos) {
-		net.minecraft.client.Minecraft.getMinecraft().displayGuiScreen(new VadeMecumGUI(player));
+		VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.OPEN, 0));
 	}
 
 	@Override

@@ -1,19 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.UUID;
-
-import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import tamaized.voidcraft.common.handlers.SkinHandler;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,6 +7,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.*;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends EntityVoidNPCAIBase<T> {
 
@@ -34,10 +31,10 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 
 	private EntityGhostPlayerBase currGhost;
 
-	private ArrayList<UUID> alreadyUsed = new ArrayList<UUID>();
-	private ArrayList<Integer> usedLocs = new ArrayList<Integer>();
+	private List<UUID> alreadyUsed = new ArrayList<>();
+	private List<Integer> usedLocs = new ArrayList<>();
 
-	public EntityAIHerobrinePhase3(T entityBoss, ArrayList<Class> c) {
+	public EntityAIHerobrinePhase3(T entityBoss, List<Class> c) {
 		super(entityBoss, c);
 	}
 
@@ -101,7 +98,7 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	}
 
 	private void setRandomGhost(int j) {
-		int i = 0;
+		int i;
 		if (j == 0) i = (int) Math.floor(Math.random() * 3);
 		else i = j;
 		if (i > 3) i = 0;
@@ -144,7 +141,7 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	}
 
 	private UUID getRandomUnusedUUID(int j) {
-		int i = 0;
+		int i;
 		if (j == 0) i = (int) Math.floor(Math.random() * SkinHandler.getSize());
 		else i = j;
 		if (i >= SkinHandler.getSize()) i = 0;
@@ -154,7 +151,7 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	private void updateMotion() {
 		double y = getEntity().posY;
 		double py = loc.getY();
-		double dy = 0;
+		double dy;
 
 		if (y < py) dy = 0.2;
 		else if (y == py) dy = 0.0;

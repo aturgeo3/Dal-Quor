@@ -16,6 +16,7 @@ import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.voidcraft.network.IVoidBossAIPacket;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
@@ -27,7 +28,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 	private Action currAction = Action.IDLE;
 
-	public EntityAIXiaPhase2(T entityBoss, ArrayList<Class> c) {
+	public EntityAIXiaPhase2(T entityBoss, List<Class> c) {
 		super(entityBoss, c);
 		watchNew();
 	}
@@ -101,21 +102,15 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		double pz = closestEntity.posZ;
 
 		double dx = 0;
-		double dy = 0;
+		double dy;
 		double dz = 0;
 
 		boolean xPos;
 		boolean zPos;
 
-		if (px > x)
-			xPos = true;
-		else
-			xPos = false;
+		xPos = px > x;
 
-		if (pz > z)
-			zPos = true;
-		else
-			zPos = false;
+		zPos = pz > z;
 
 		if (x < px)
 			dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
@@ -210,7 +205,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private void watchNew() {
-		ArrayList<Entity> list = new ArrayList<Entity>();
+		List<Entity> list = new ArrayList<>();
 		for (Class c : watchedClass) {
 			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().grow((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}
@@ -235,7 +230,7 @@ public class EntityAIXiaPhase2<T extends EntityBossXia> extends EntityVoidNPCAIB
 		return loc;
 	}
 
-	public static enum Action {
+	public enum Action {
 		IDLE, FOLLOW
 	}
 

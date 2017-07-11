@@ -1,11 +1,8 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 
 public class AIBlock extends TamBlockContainer {
 
@@ -31,7 +30,7 @@ public class AIBlock extends TamBlockContainer {
 	public static TileEntityAIBlock getMyTileEntity(World world, BlockPos pos) {
 		Block b = world.getBlockState(pos.add(0, -1, 0)).getBlock();
 		if (b instanceof AIBlock) {
-			return ((AIBlock) b).getMyTileEntity(world, pos.add(0, -1, 0));
+			return getMyTileEntity(world, pos.add(0, -1, 0));
 		}
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof TileEntityAIBlock) return (TileEntityAIBlock) te;
@@ -95,7 +94,7 @@ public class AIBlock extends TamBlockContainer {
 	 */
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { STATE });
+		return new BlockStateContainer(this, STATE);
 	}
 
 }

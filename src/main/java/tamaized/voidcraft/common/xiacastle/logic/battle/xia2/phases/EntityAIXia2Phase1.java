@@ -1,15 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases;
 
-import java.util.ArrayList;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +8,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
+import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+
+import java.util.List;
 
 public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 
@@ -31,7 +31,7 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	private static final int ACTION_DISINT = 2;
 	private static final int ACTION_VOIDICINFUSION = 3;
 
-	public EntityAIXia2Phase1(EntityBossXia2 entityBoss, ArrayList<Class> c) {
+	public EntityAIXia2Phase1(EntityBossXia2 entityBoss, List<Class> c) {
 		super(entityBoss, c);
 		litBox = new AxisAlignedBB(entityBoss.getPosition().add(-5, 0, -5), entityBoss.getPosition().add(5, 1, 5));
 	}

@@ -1,17 +1,13 @@
 package tamaized.voidcraft.common.events;
 
-import java.io.DataOutputStream;
-
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.network.ClientPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.network.client.ClientPacketHandlerVadeMecumUpdate;
 
 public class CapabilitySyncEvent {
 
@@ -20,20 +16,9 @@ public class CapabilitySyncEvent {
 		if (e.phase == TickEvent.Phase.END && e.side == Side.SERVER && e.player instanceof EntityPlayerMP) {
 			IVadeMecumCapability cap = e.player.getCapability(CapabilityList.VADEMECUM, null);
 			if (cap != null && cap.isDirty()) {
-				sendPacketUpdates((EntityPlayerMP) e.player, cap);
+				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(cap, ClientPacketHandlerVadeMecumUpdate.Type.NULL), (EntityPlayerMP)e.player);
 				cap.resetDirty();
 			}
-		}
-	}
-
-	private void sendPacketUpdates(EntityPlayerMP player, IVadeMecumCapability cap) {
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.VADEMECUM_UPDATE));
-			DataOutputStream stream = packet.getStream();
-			cap.encodePacket(stream);
-			packet.sendPacket(player);
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
 	}
 

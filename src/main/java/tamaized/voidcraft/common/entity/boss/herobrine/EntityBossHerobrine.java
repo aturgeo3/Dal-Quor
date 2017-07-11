@@ -1,12 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.herobrine;
 
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -15,10 +9,15 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> {
 
@@ -56,7 +55,7 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	@Override
 	protected void initPhase(int phase) {
 		if (phase == 1) {
-			/**
+			/*
 			 * Cycle: - Herobrine shoots fireballs. - Pillars need to get hit with fireball, cycle through textures of green wool, yellow, red. 4th hit will damage herobrine. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time
 			 */
 			isFlying = true;
@@ -67,7 +66,7 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 
 			addAI(new EntityAIHerobrinePhase1(this, getFilters()));
 		} else if (phase == 2) {
-			/**
+			/*
 			 * Cycle: - Herobrine chases the player. - On touching a player, deal damage. - Herobrine must run through a pillar to be dealt damage. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time - Increase his speed everytime he is hurt
 			 */
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
@@ -76,7 +75,7 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 
 			addAI(new EntityAIHerobrinePhase2(this, getFilters()));
 		} else if (phase == 3) {
-			/**
+			/*
 			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
 			 */
 			isFlying = true;
@@ -125,8 +124,8 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	}
 
 	@Override
-	protected ArrayList<Class> getFilters() {
-		ArrayList<Class> filter = new ArrayList<Class>();
+	protected List<Class> getFilters() {
+		List<Class> filter = new ArrayList<>();
 		filter.add(EntityPlayer.class);
 		return filter;
 	}
@@ -152,12 +151,12 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	}
 
 	@Override
-	protected void encodePacketData(DataOutputStream stream) throws IOException {
+	protected void encodePacketData(ByteBuf stream) {
 		
 	}
 
 	@Override
-	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+	protected void decodePacketData(ByteBuf stream) {
 		
 	}
 

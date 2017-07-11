@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.entity.ghost;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +20,6 @@ import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.handlers.SkinHandler;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.UUID;
 
 public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAdditionalSpawnData {
@@ -193,7 +190,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	}
 
 	@Override
-	protected void encodePacketData(DataOutputStream stream) throws IOException {
+	protected void encodePacketData(ByteBuf stream) {
 		stream.writeBoolean(running);
 		stream.writeBoolean(hasInteracted);
 		stream.writeBoolean(rune);
@@ -205,7 +202,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	}
 
 	@Override
-	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+	protected void decodePacketData(ByteBuf stream) {
 		running = stream.readBoolean();
 		hasInteracted = stream.readBoolean();
 		rune = stream.readBoolean();

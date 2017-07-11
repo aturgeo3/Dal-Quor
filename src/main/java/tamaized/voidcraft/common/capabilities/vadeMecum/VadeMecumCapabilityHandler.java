@@ -1,31 +1,25 @@
 package tamaized.voidcraft.common.capabilities.vadeMecum;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.companion.EntityCompanion;
-import tamaized.voidcraft.network.ItemStackNetworkHelper;
 import tamaized.voidcraft.registry.VoidCraftAdvancements;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
 	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VadeMecumCapabilityHandler");
-	private final List<Passive> passiveList = new ArrayList<Passive>();
+	private final List<Passive> passiveList = new ArrayList<>();
 	private boolean markDirty = false;
 	private boolean hasLoaded = false;
-	private ArrayList<IVadeMecumCapability.Category> categoryList = new ArrayList<IVadeMecumCapability.Category>();
+	private List<IVadeMecumCapability.Category> categoryList = new ArrayList<>();
 	private Category currActivePower;
 	private String lastEntry = "null";
 	private int page = 0;
@@ -96,12 +90,12 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
-	public ArrayList<Category> getObtainedCategories() {
+	public List<Category> getObtainedCategories() {
 		return categoryList;
 	}
 
 	@Override
-	public void setObtainedCategories(ArrayList<Category> list) {
+	public void setObtainedCategories(List<Category> list) {
 		categoryList.clear();
 		categoryList.addAll(list);
 		markDirty();
@@ -163,8 +157,8 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 	}
 
 	@Override
-	public ArrayList<Category> getAvailableActivePowers() {
-		ArrayList<Category> activeList = new ArrayList<>();
+	public List<Category> getAvailableActivePowers() {
+		List<Category> activeList = new ArrayList<>();
 		for (Category cat : categoryList)
 			if (IVadeMecumCapability.isActivePower(cat))
 				activeList.add(cat);
@@ -327,57 +321,6 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 		setPage(cap.getPage());
 		setLoaded();
 		markDirty();
-	}
-
-	@Override
-	public void decodePacket(ByteBuf buf, ByteBufInputStream stream) throws IOException {
-		setBookActive(stream.readBoolean());
-		setLastEntry(stream.readUTF());
-		setPage(stream.readInt());
-		{
-			clearCategories();
-			int l = stream.readInt();
-			for (int i = 0; i < l; i++) {
-				addCategory(null, IVadeMecumCapability.getCategoryFromID(stream.readInt()));
-			}
-		}
-		{
-			passiveList.clear();
-			int l = stream.readInt();
-			for (int i = 0; i < l; i++) {
-				addPassive(IVadeMecumCapability.getPassiveFromID(stream.readInt()));
-			}
-		}
-		{
-			clearComponents();
-			int l = stream.readInt();
-			for (int i = 0; i < l; i++) {
-				spellComponents.put(IVadeMecumCapability.getCategoryFromID(stream.readInt()), ItemStackNetworkHelper.decodeStack(buf, stream));
-			}
-		}
-		setCurrentActive(IVadeMecumCapability.getCategoryFromID(stream.readInt()));
-	}
-
-	@Override
-	public void encodePacket(DataOutputStream stream) throws IOException {
-		stream.writeBoolean(bookActive);
-		stream.writeUTF(getLastEntry());
-		stream.writeInt(getPage());
-		// Do Arrays last
-		stream.writeInt(getObtainedCategories().size());
-		for (Category cat : getObtainedCategories()) {
-			stream.writeInt(IVadeMecumCapability.getCategoryID(cat));
-		}
-		stream.writeInt(getActivePassiveList().size());
-		for (Passive passive : getActivePassiveList()) {
-			stream.writeInt(IVadeMecumCapability.getPassiveID(passive));
-		}
-		stream.writeInt(spellComponents.size());
-		for (Entry<Category, ItemStack> entry : spellComponents.entrySet()) {
-			stream.writeInt(IVadeMecumCapability.getCategoryID(entry.getKey()));
-			ItemStackNetworkHelper.encodeStack(entry.getValue(), stream);
-		}
-		stream.writeInt(IVadeMecumCapability.getCategoryID(getCurrentActive()));
 	}
 
 }

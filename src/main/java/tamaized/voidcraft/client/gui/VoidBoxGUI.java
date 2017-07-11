@@ -1,12 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.gui.container.VoidBoxContainer;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
-import tamaized.voidcraft.network.ServerPacketHandler;
 import com.sun.javafx.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -14,8 +7,11 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
-
-import java.io.DataOutputStream;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidBoxContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
+import tamaized.voidcraft.network.server.ServerPacketHandlerVoidBox;
 
 public class VoidBoxGUI extends GuiContainer {
 
@@ -67,35 +63,19 @@ public class VoidBoxGUI extends GuiContainer {
 	public void actionPerformed(GuiButton button) {
 		switch (button.id) {
 			case BUTTON_PLAY:
-				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_PLAY);
+				VoidCraft.network.sendToServer(new ServerPacketHandlerVoidBox.Packet(ServerPacketHandlerVoidBox.RequestType.PLAY, te.getPos()));
 				break;
 			case BUTTON_STOP:
-				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_STOP);
+				VoidCraft.network.sendToServer(new ServerPacketHandlerVoidBox.Packet(ServerPacketHandlerVoidBox.RequestType.STOP, te.getPos()));
 				break;
 			case BUTTON_LOOP:
-				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_LOOP);
+				VoidCraft.network.sendToServer(new ServerPacketHandlerVoidBox.Packet(ServerPacketHandlerVoidBox.RequestType.LOOP, te.getPos()));
 				break;
 			case BUTTON_AUTO:
-				sendPacket(ServerPacketHandler.PacketType.VOIDBOX_AUTO);
+				VoidCraft.network.sendToServer(new ServerPacketHandlerVoidBox.Packet(ServerPacketHandlerVoidBox.RequestType.AUTO, te.getPos()));
 				break;
 			default:
 				break;
-		}
-	}
-
-	private void sendPacket(ServerPacketHandler.PacketType type) {
-		int xcoord = te.getPos().getX();
-		int ycoord = te.getPos().getY();
-		int zcoord = te.getPos().getZ();
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
-			DataOutputStream stream = packet.getStream();
-			stream.writeInt(xcoord);
-			stream.writeInt(ycoord);
-			stream.writeInt(zcoord);
-			packet.sendPacketToServer();
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
 	}
 

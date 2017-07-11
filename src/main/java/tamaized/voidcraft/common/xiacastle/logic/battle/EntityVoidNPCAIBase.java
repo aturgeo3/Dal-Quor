@@ -10,6 +10,7 @@ import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import tamaized.voidcraft.network.IVoidBossAIPacket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends EntityAIBase {
 
@@ -22,7 +23,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 	protected Entity closestEntity;
 	/** This is the Maximum distance that the AI will look for the Entity */
 	protected float maxDistanceForPlayer = 30;
-	protected ArrayList<Class> watchedClass = new ArrayList<Class>();
+	protected List<Class> watchedClass = new ArrayList<>();
 
 	private double[] spawnLoc = new double[3];
 	private Vec3d pos;
@@ -30,8 +31,8 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 	protected int tick = 1;
 	private int tick_updateClosestEntity = 2 * 20;
 	
-	public EntityVoidNPCAIBase(T entityBoss, ArrayList<Class> c) {
-		watchedClass = new ArrayList<Class>();
+	public EntityVoidNPCAIBase(T entityBoss, List<Class> c) {
+		watchedClass = new ArrayList<>();
 		watchedClass.addAll(c);
 		entity = entityBoss;
 		pos = new Vec3d(entity.posX, entity.posY, entity.posZ);

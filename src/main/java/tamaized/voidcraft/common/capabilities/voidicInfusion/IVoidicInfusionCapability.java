@@ -1,38 +1,33 @@
 package tamaized.voidcraft.common.capabilities.voidicInfusion;
 
-import java.io.IOException;
-
-import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
 
 public interface IVoidicInfusionCapability {
 
-	public boolean hasLoaded();
+	boolean hasLoaded();
 
-	public void load(EntityLivingBase living);
+	void load(EntityLivingBase living);
 
-	public void update(EntityLivingBase player);
+	void update(EntityLivingBase player);
 	
-	public int getInfusion();
+	int getInfusion();
 
-	public void addInfusion(int amount);
+	void addInfusion(int amount);
 
-	public void setInfusion(int i);
+	void setInfusion(int i);
 
-	public int getMaxInfusion();
+	int getMaxInfusion();
 
-	public void setMaxInfusion(int i);
+	void setMaxInfusion(int i);
 
-	public float getInfusionPerc();
+	float getInfusionPerc();
 
-	public boolean canFly(EntityLivingBase entity);
+	boolean canFly(EntityLivingBase entity);
 	
-	public int getXiaDefeats();
+	int getXiaDefeats();
 	
-	public void setXiaDefeats(int amount);
+	void setXiaDefeats(int amount);
 
-	public void copyFrom(IVoidicInfusionCapability cap);
-
-	public void decodePacket(ByteBufInputStream stream) throws IOException;
+	void copyFrom(IVoidicInfusionCapability cap);
 
 }

@@ -1,13 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.lob;
 
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.client.entity.animation.IAnimation;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -15,9 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.entity.animation.IAnimation;
+import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
@@ -90,7 +88,7 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 		}
 
 		@Override
-		public void encodePacket(DataOutputStream stream) throws IOException {
+		public void encodePacket(ByteBuf stream) {
 			stream.writeFloat(leftArmYaw);
 			stream.writeFloat(leftArmPitch);
 			stream.writeFloat(rightArmYaw);
@@ -98,7 +96,7 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 		}
 
 		@Override
-		public void decodePacket(ByteBufInputStream stream) throws IOException {
+		public void decodePacket(ByteBuf stream) {
 			leftArmYaw = stream.readFloat();
 			leftArmPitch = stream.readFloat();
 			rightArmYaw = stream.readFloat();
@@ -236,13 +234,13 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 	}
 
 	@Override
-	protected void encodePacketData(DataOutputStream stream) throws IOException {
+	protected void encodePacketData(ByteBuf stream) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+	protected void decodePacketData(ByteBuf stream) {
 		// TODO Auto-generated method stub
 
 	}

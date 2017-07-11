@@ -1,9 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.twins;
 
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -11,10 +8,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EntityBossZol extends EntityVoidBoss<TwinsBattleHandler> {
 
@@ -60,8 +59,8 @@ public class EntityBossZol extends EntityVoidBoss<TwinsBattleHandler> {
 	}
 
 	@Override
-	protected ArrayList<Class> getFilters() {
-		ArrayList<Class> filter = new ArrayList<Class>();
+	protected List<Class> getFilters() {
+		List<Class> filter = new ArrayList<>();
 		filter.add(EntityPlayer.class);
 		return filter;
 	}
@@ -112,12 +111,12 @@ public class EntityBossZol extends EntityVoidBoss<TwinsBattleHandler> {
 	}
 
 	@Override
-	protected void encodePacketData(DataOutputStream stream) throws IOException {
+	protected void encodePacketData(ByteBuf stream) {
 		
 	}
 
 	@Override
-	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+	protected void decodePacketData(ByteBuf stream) {
 		
 	}
 

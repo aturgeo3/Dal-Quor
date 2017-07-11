@@ -1,52 +1,39 @@
 package tamaized.voidcraft.common.capabilities.voidicPower;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-
 public interface IVoidicPowerCapability {
 
-	public void setInUse(boolean state);
+	void setInUse(boolean state);
 
-	public boolean isInUse();
+	boolean isInUse();
 
-	public void setValues(int curr, int max);
+	void setValues(int curr, int max);
 
-	public void setCurrentPower(int curr);
+	void setCurrentPower(int curr);
 
-	public void setMaxPower(int max);
+	void setMaxPower(int max);
 
-	public int getCurrentPower();
+	int getCurrentPower();
 
-	public int getMaxPower();
+	int getMaxPower();
 
-	public float getAmountPerc();
+	float getAmountPerc();
 
-	public int fill(int amount);
+	int fill(int amount);
 
-	public int drain(int amount);
+	int drain(int amount);
 
-	public boolean isDefault();
+	boolean isDefault();
 
-	public void setDefault(boolean state);
+	void setDefault(boolean state);
 
-	public boolean hasLoaded();
+	boolean hasLoaded();
 
-	public void setLoaded();
+	void setLoaded();
 	
-	public void markDirty();
+	void markDirty();
 	
-	public boolean isDirty();
+	boolean isDirty();
 
-	public void copyFrom(IVoidicPowerCapability cap);
-
-	public void sendUpdates(EntityPlayer player, int slot, ItemStack stack);
-
-	public void decodePacket(ByteBufInputStream stream) throws IOException;
-
-	public void encodePacket(DataOutputStream stream) throws IOException;
+	void copyFrom(IVoidicPowerCapability cap);
 
 }

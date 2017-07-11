@@ -25,11 +25,12 @@ import tamaized.voidcraft.common.events.DamageEvent;
 import tamaized.voidcraft.common.items.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber
 public class VoidCraftItems {
 
-	public static ArrayList<ItemRecord> voidDiscs;
+	public static List<ItemRecord> voidDiscs;
 	public static VadeMecum vadeMecum;
 	public static TamItem ectoplasm;
 	public static TamItem voidcrystal;
@@ -139,7 +140,7 @@ public class VoidCraftItems {
 		modelList.add(voidCrystalShield = new VoidCrystalShield(VoidCraftCreativeTabs.tabVoid, "voidcrystalshield"));
 		DamageEvent.shieldRegistry.add(voidCrystalShield);
 
-		ArrayList<TamBlockFarmland> soilList = new ArrayList<TamBlockFarmland>();
+		ArrayList<TamBlockFarmland> soilList = new ArrayList<>();
 		soilList.add(VoidCraftBlocks.blockFakeBedrockFarmland);
 		modelList.add(etherealSeed = new TamItemSeed(VoidCraftCreativeTabs.tabVoid, "etherealseed", 64, VoidCraftBlocks.etherealPlant, soilList));
 		modelList.add(etherealFruit = new EtherealFruit(TileEntityFakeBedrockFarmland.Alteration.NORMAL, VoidCraftCreativeTabs.tabVoid, "etherealfruit", 64, 2, false));
@@ -156,7 +157,7 @@ public class VoidCraftItems {
 		// modelList.add(record_stringsAttached = new VoidRecord("Approaching Nirvana - Strings Attached", VoidSoundEvents.MusicDiscSoundEvents.Strings_Attached, "voidDisc3"));
 		// modelList.add(record_running = new VoidRecord("Approaching Nirvana - Running", VoidSoundEvents.MusicDiscSoundEvents.Running, "voidDisc4"));
 
-		voidDiscs = new ArrayList<ItemRecord>();
+		voidDiscs = new ArrayList<>();
 		// voidDiscs.add(record_noStrings);
 		// voidDiscs.add(record_bleedingThrough);
 		// voidDiscs.add(record_stringsAttached);
@@ -185,13 +186,13 @@ public class VoidCraftItems {
 		GameRegistry.addSmelting(ironDust, new ItemStack(Items.IRON_INGOT), 0);
 		GameRegistry.addSmelting(goldDust, new ItemStack(Items.GOLD_INGOT), 0);
 		GameRegistry.addSmelting(diamondDust, new ItemStack(Items.DIAMOND), 0);
-		addPreSmelting(copperDust, "ingotCopper");
-		addPreSmelting(tinDust, "ingotTin");
-		addPreSmelting(leadDust, "ingotLead");
+		addOreSmelting(copperDust, "ingotCopper");
+		addOreSmelting(tinDust, "ingotTin");
+		addOreSmelting(leadDust, "ingotLead");
 
 	}
 
-	private static void addPreSmelting(Item i, String s) {
+	private static void addOreSmelting(Item i, String s) {
 		for (ItemStack ore : OreDictionary.getOres(s)) {
 			if (!ore.isEmpty()) {
 				GameRegistry.addSmelting(i, ore, ore.getItemDamage());

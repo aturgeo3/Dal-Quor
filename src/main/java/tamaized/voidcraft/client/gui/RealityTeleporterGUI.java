@@ -1,15 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.gui.container.RealityTeleporterContainer;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import tamaized.voidcraft.common.items.RealityTeleporter;
-import tamaized.voidcraft.common.items.inventory.InventoryItem;
-import tamaized.voidcraft.network.ServerPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -20,8 +10,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.io.DataOutputStream;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.common.gui.container.RealityTeleporterContainer;
+import tamaized.voidcraft.common.items.RealityTeleporter;
+import tamaized.voidcraft.common.items.inventory.InventoryItem;
+import tamaized.voidcraft.network.server.ServerPacketHandlerLinkClear;
 
 @SideOnly(Side.CLIENT)
 public class RealityTeleporterGUI extends GuiContainer {
@@ -89,22 +85,11 @@ public class RealityTeleporterGUI extends GuiContainer {
 	public void actionPerformed(GuiButton button) {
 		switch (button.id) {
 			case BUTTON_LINK_CLEAR:
-				sendPacket(ServerPacketHandler.PacketType.LINK_CLEAR);
+				VoidCraft.network.sendToServer(new ServerPacketHandlerLinkClear.Packet(slotID));
 				RealityTeleporter.clearLink(parent);
 				break;
 			default:
 				break;
-		}
-	}
-
-	private void sendPacket(ServerPacketHandler.PacketType type) {
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(type));
-			DataOutputStream stream = packet.getStream();
-			stream.writeInt(slotID);
-			packet.sendPacketToServer();
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
 	}
 

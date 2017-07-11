@@ -1,20 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.xia;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import tamaized.voidcraft.network.ClientPacketHandler;
-import tamaized.voidcraft.network.IEntitySync;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase1;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase2;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -26,9 +12,20 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase1;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase2;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.network.IEntitySync;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.network.client.ClientPacketHandlerSheathe;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 
 	private boolean sphereState = false;
 
-	private List<EntityGhostPlayerBase> ghostList = new ArrayList<EntityGhostPlayerBase>();
+	private List<EntityGhostPlayerBase> ghostList = new ArrayList<>();
 
 	public EntityBossXia2(World par1World) {
 		super(par1World);
@@ -58,12 +55,12 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	}
 
 	@Override
-	protected void encodePacketData(DataOutputStream stream) throws IOException {
+	protected void encodePacketData(ByteBuf stream) {
 		stream.writeBoolean(sphereState);
 	}
 
 	@Override
-	protected void decodePacketData(ByteBufInputStream stream) throws IOException {
+	protected void decodePacketData(ByteBuf stream) {
 		setSphereState(stream.readBoolean());
 	}
 
@@ -84,18 +81,9 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == VoidCraft.potions.fireSheathe || pot == VoidCraft.potions.frostSheathe || pot == VoidCraft.potions.litSheathe || pot == VoidCraft.potions.acidSheathe) super.addPotionEffect(potioneffectIn);
+		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe) super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			try {
-				PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-				DataOutputStream stream = packet.getStream();
-				stream.writeInt(getEntityId());
-				stream.writeInt(Potion.getIdFromPotion(pot));
-				stream.writeInt(potioneffectIn.getDuration());
-				packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 		}
 	}
 
@@ -189,8 +177,8 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	}
 
 	@Override
-	protected ArrayList<Class> getFilters() {
-		ArrayList<Class> filter = new ArrayList<Class>();
+	protected List<Class> getFilters() {
+		List<Class> filter = new ArrayList<>();
 		filter.add(EntityPlayer.class);
 		return filter;
 	}

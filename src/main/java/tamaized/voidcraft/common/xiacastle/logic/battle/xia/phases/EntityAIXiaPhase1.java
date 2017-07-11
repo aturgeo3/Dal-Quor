@@ -1,25 +1,26 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
-import java.util.ArrayList;
-
-import tamaized.tammodized.common.particles.ParticleHelper;
-import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler;
-import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler;
+import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler.XiaLaserParticleData;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePacket;
+import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.registry.VoidCraftPotions;
+
+import java.util.List;
 
 public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
 
@@ -32,7 +33,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 	private boolean isTeleporting = false;
 
-	public EntityAIXiaPhase1(T entityBoss, ArrayList<Class> c) {
+	public EntityAIXiaPhase1(T entityBoss, List<Class> c) {
 		super(entityBoss, c);
 	}
 
@@ -99,7 +100,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) closestEntity;
-						player.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 10));
+						player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
 					}
 				}
 					break;

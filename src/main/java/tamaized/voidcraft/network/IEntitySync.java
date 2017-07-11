@@ -1,32 +1,22 @@
 package tamaized.voidcraft.network;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.network.client.ClientPacketHandlerEntitySync;
 
 public interface IEntitySync {
 
 	default void sendPacketUpdates(Entity entity) {
-		if (entity.world.isRemote) return;
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.ENTITY_UPDATES));
-			DataOutputStream stream = packet.getStream();
-			stream.writeInt(entity.getEntityId());
-			encodePacket(stream);
-			packet.sendPacket(new TargetPoint(entity.world.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 64));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (!entity.world.isRemote) {
+			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(entity.world.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 64);
+			VoidCraft.network.sendToAllAround(new ClientPacketHandlerEntitySync.Packet(this, entity.getEntityId()), point);
 		}
 	}
 
-	void encodePacket(DataOutputStream stream) throws IOException;
+	void encodePacket(ByteBuf stream);
 
-	void decodePacket(ByteBufInputStream stream) throws IOException;
+	void decodePacket(ByteBuf stream);
 
 }

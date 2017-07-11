@@ -1,15 +1,7 @@
 package tamaized.voidcraft.common.capabilities.voidicPower;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import tamaized.voidcraft.VoidCraft;
-import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
 
 public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
@@ -130,34 +122,6 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 		setValues(cap.getCurrentPower(), cap.getMaxPower());
 		setDefault(cap.isDefault());
 		setLoaded();
-	}
-
-	@Override
-	public void sendUpdates(EntityPlayer player, int slot, ItemStack stack) {
-		//if (player instanceof EntityPlayerMP) sendPacketUpdates((EntityPlayerMP) player, slot, stack, this);
-		sendPacketUpdates(null, 0, stack, this);
-		dirty = false;
-	}
-
-	@Override
-	public void decodePacket(ByteBufInputStream stream) throws IOException {
-		currPower = stream.readInt();
-		maxPower = stream.readInt();
-	}
-
-	@Override
-	public void encodePacket(DataOutputStream stream) throws IOException {
-		stream.writeInt(currPower);
-		stream.writeInt(maxPower);
-	}
-
-	private void sendPacketUpdates(EntityPlayerMP player, int slot, ItemStack stack, IVoidicPowerCapability cap) {
-		NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
-		nbt.setInteger("currPower", cap.getCurrentPower());
-		nbt.setInteger("maxPower", cap.getMaxPower());
-		/*
-		 * ByteBufOutputStream bos = new ByteBufOutputStream(Unpooled.buffer()); DataOutputStream outputStream = new DataOutputStream(bos); try { outputStream.writeInt(ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.VOIDICPOWERITEM)); outputStream.writeInt(slot); ItemStackNetworkHelper.encodeStack(stack, outputStream); cap.encodePacket(outputStream); FMLProxyPacket packet = new FMLProxyPacket(new PacketBuffer(bos.buffer()), voidCraft.networkChannelName); if (voidCraft.channel != null && packet != null) voidCraft.channel.sendTo(packet, player); bos.close(); } catch (Exception ex) { ex.printStackTrace(); }
-		 */
 	}
 
 }

@@ -1,16 +1,14 @@
 package tamaized.voidcraft.client.entity.animation;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import io.netty.buffer.ByteBuf;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import io.netty.buffer.ByteBufInputStream;
-
 public class AnimationRegistry {
 
-	private static List<Class<? extends IAnimation>> REGISTRY = new ArrayList<Class<? extends IAnimation>>();
+	private static List<Class<? extends IAnimation>> REGISTRY = new ArrayList<>();
 
 	public static int limbs = register(AnimationLimbs.class);
 
@@ -51,7 +49,7 @@ public class AnimationRegistry {
 		}
 
 		@Override
-		public void encodePacket(DataOutputStream stream) throws IOException {
+		public void encodePacket(ByteBuf stream) {
 			stream.writeFloat(leftArmYaw);
 			stream.writeFloat(leftArmPitch);
 			stream.writeFloat(rightArmYaw);
@@ -59,7 +57,7 @@ public class AnimationRegistry {
 		}
 
 		@Override
-		public void decodePacket(ByteBufInputStream stream) throws IOException {
+		public void decodePacket(ByteBuf stream) {
 			leftArmYaw = stream.readFloat();
 			leftArmPitch = stream.readFloat();
 			rightArmYaw = stream.readFloat();

@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.capabilities.voidicInfusion;
 
-import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -10,12 +9,11 @@ import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.tammodized.common.entity.EntityDragonOld;
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
@@ -25,13 +23,12 @@ import tamaized.voidcraft.common.entity.EntityVoidMob;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.network.ClientPacketHandler;
+import tamaized.voidcraft.network.client.ClientPacketHandlerHealth;
+import tamaized.voidcraft.network.client.ClientPacketHandlerInfusion;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 import tamaized.voidcraft.registry.VoidCraftItems;
 import tamaized.voidcraft.registry.VoidCraftPotions;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Iterator;
 
 public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapability {
@@ -48,13 +45,22 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	private int tick = 1;
 
+	public static void uWotM8(ItemStack stack, IVoidicPowerCapability cap) { // TODO item caps suck yo
+		NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
+		nbt.setInteger("currPower", cap.getCurrentPower());
+		nbt.setInteger("maxPower", cap.getMaxPower());
+	}
+
 	@Override
 	public void update(EntityLivingBase entity) {
-		if (entity.world == null || entity.world.isRemote || entity == null || entity instanceof EntityVoidParrot || entity instanceof EntityVoidMob || entity instanceof EntityVoidNPC || entity instanceof EntityWither || entity instanceof EntityDragon || entity instanceof EntityDragonOld) return;
+		if (entity.world == null || entity.world.isRemote || entity == null || entity instanceof EntityVoidParrot || entity instanceof EntityVoidMob || entity instanceof EntityVoidNPC || entity instanceof EntityWither || entity instanceof EntityDragon || entity instanceof EntityDragonOld)
+			return;
 		handleInfusionGain(entity);
-		if (tick % 10 == 0) doHealthChecks(entity);
+		if (tick % 10 == 0)
+			doHealthChecks(entity);
 		handleEffects(entity);
-		if (tick % 20 == 0) sendPacketUpdates(entity);
+		if (tick % 20 == 0)
+			sendPacketUpdates(entity);
 		tick++;
 		if (infusion >= 3000 && entity.hasCapability(CapabilityList.VADEMECUM, null)) {
 			IVadeMecumCapability cap = entity.getCapability(CapabilityList.VADEMECUM, null);
@@ -85,18 +91,20 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			flag = true;
 			gain = 20;
 		}
-		if ((!mainHand.isEmpty() && mainHand.getItem() == VoidCraftItems.voidicSuppressor)) {
-			IVoidicPowerCapability cap = entity.getHeldItemMainhand().getCapability(CapabilityList.VOIDICPOWER, null);
-			if (cap != null && cap.getCurrentPower() > 0) {
+		if (!mainHand.isEmpty() && mainHand.getItem() == VoidCraftItems.voidicSuppressor && mainHand.hasCapability(CapabilityList.VOIDICPOWER, null)) {
+			IVoidicPowerCapability cap = mainHand.getCapability(CapabilityList.VOIDICPOWER, null);
+			if (cap.getCurrentPower() > 0) {
 				cap.drain(1);
-				cap.sendUpdates(null, 0, entity.getHeldItemMainhand());
+				uWotM8(mainHand, cap);
+				//				cap.sendUpdates(null, 0, entity.getHeldItemMainhand());
 				flag = false;
 			}
-		} else if (!offHand.isEmpty() && offHand.getItem() == VoidCraftItems.voidicSuppressor) {
-			IVoidicPowerCapability cap = entity.getHeldItemOffhand().getCapability(CapabilityList.VOIDICPOWER, null);
-			if (cap != null && cap.getCurrentPower() > 0) {
+		} else if (!offHand.isEmpty() && offHand.getItem() == VoidCraftItems.voidicSuppressor && offHand.hasCapability(CapabilityList.VOIDICPOWER, null)) {
+			IVoidicPowerCapability cap = offHand.getCapability(CapabilityList.VOIDICPOWER, null);
+			if (cap.getCurrentPower() > 0) {
 				cap.drain(1);
-				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
+				uWotM8(offHand, cap);
+				//				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
 				flag = false;
 			}
 		} else if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusionImmunity) != null) {
@@ -110,13 +118,16 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			}
 		} else {
 			infusion -= (vade != null && vade.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 10 : 5);
-			if (infusion < 0) infusion = 0;
+			if (infusion < 0)
+				infusion = 0;
 		}
-		if (infusion > maxInfusion) infusion = maxInfusion;
+		if (infusion > maxInfusion)
+			infusion = maxInfusion;
 	}
 
 	private void doHealthChecks(EntityLivingBase living) {
-		if (living instanceof EntityVoidMob || living instanceof EntityVoidNPC || !living.isNonBoss()) return;
+		if (living instanceof EntityVoidMob || living instanceof EntityVoidNPC || !living.isNonBoss())
+			return;
 		final String name = "Voidic Infusion";
 		for (IAttributeInstance att : living.getAttributeMap().getAllAttributes()) {
 			if (att.getAttribute() == SharedMonsterAttributes.MAX_HEALTH) {
@@ -131,19 +142,14 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		}
 		IVadeMecumCapability cap = living.getCapability(CapabilityList.VADEMECUM, null);
 		float value = getInfusionPerc() * ((cap == null) ? 1.0F : cap.hasPassive(IVadeMecumCapability.Passive.Anchor) ? cap.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 0.5F : 2.0F : 1.0F);
-		if (value == 0) return;
+		if (value == 0)
+			return;
 		float min = 1F - (0.5F / living.getMaxHealth());
 		living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier(name, Math.min(value, min) * ((cap != null && cap.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 1 : -1)), 2));
 		if (living.getHealth() > living.getMaxHealth()) {
 			if (living instanceof EntityPlayerMP) {
 				EntityPlayerMP player = (EntityPlayerMP) living;
-				try {
-					PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.CLIENT_HEALTH));
-					packet.getStream().writeFloat(player.getMaxHealth());
-					packet.sendPacket(player);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				VoidCraft.network.sendTo(new ClientPacketHandlerHealth.Packet(player.getMaxHealth()), player);
 			}
 			living.setHealth(living.getMaxHealth());
 		}
@@ -154,7 +160,8 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			boolean kill = true;
 			if (entity.hasCapability(CapabilityList.VADEMECUM, null)) {
 				IVadeMecumCapability cap = entity.getCapability(CapabilityList.VADEMECUM, null);
-				if (cap.hasPassive(IVadeMecumCapability.Passive.Anchor)) kill = false;
+				if (cap.hasPassive(IVadeMecumCapability.Passive.Anchor))
+					kill = false;
 				if (cap.hasCategory(IVadeMecumCapability.Category.Voice) && !cap.hasCategory(IVadeMecumCapability.Category.VoidicControl)) {
 					kill = false;
 					infusion = 0;
@@ -202,8 +209,10 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 						entity.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(new AttributeModifier(name, value, 2));
 					}
 				}
-				if (cap.hasPassive(IVadeMecumCapability.Passive.Tolerance)) maxInfusion = 12000;
-				else maxInfusion = 6000;
+				if (cap.hasPassive(IVadeMecumCapability.Passive.Tolerance))
+					maxInfusion = 12000;
+				else
+					maxInfusion = 6000;
 
 			}
 		}
@@ -233,13 +242,13 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	}
 
 	@Override
-	public void addInfusion(int amount) {
-		infusion += amount;
+	public void setInfusion(int i) {
+		infusion = i;
 	}
 
 	@Override
-	public void setInfusion(int i) {
-		infusion = i;
+	public void addInfusion(int amount) {
+		infusion += amount;
 	}
 
 	@Override
@@ -280,7 +289,8 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 
 	@Override
 	public void load(EntityLivingBase living) {
-		if (maxInfusion < 6000) maxInfusion = 6000;
+		if (maxInfusion < 6000)
+			maxInfusion = 6000;
 		hasLoaded = true;
 	}
 
@@ -291,26 +301,10 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		setXiaDefeats(cap.getXiaDefeats());
 	}
 
-	@Override
-	public void decodePacket(ByteBufInputStream stream) throws IOException {
-		setInfusion(stream.readInt());
-		setMaxInfusion(stream.readInt());
-		setXiaDefeats(stream.readInt());
-	}
-
 	private void sendPacketUpdates(EntityLivingBase living) {
-		if (living == null || living.world.isRemote) return;
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.INFUSION_UPDATE));
-			DataOutputStream stream = packet.getStream();
-			stream.writeInt(living.getEntityId());
-			stream.writeInt(infusion);
-			stream.writeInt(maxInfusion);
-			stream.writeFloat(xiaDefeats);
-			packet.sendPacket(new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		tick = 0;
+		if (living != null && !living.world.isRemote)
+			VoidCraft.network.sendToAllAround(new ClientPacketHandlerInfusion.Packet(living.getEntityId(), infusion, maxInfusion, xiaDefeats), new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
 	}
 
 }

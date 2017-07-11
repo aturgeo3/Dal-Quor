@@ -1,15 +1,5 @@
 package tamaized.voidcraft.common.entity.mob;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import tamaized.voidcraft.network.ClientPacketHandler;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,16 +16,24 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
+import tamaized.voidcraft.network.client.ClientPacketHandlerSheathe;
+import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.registry.VoidCraftPotions;
+import tamaized.voidcraft.registry.VoidCraftTools;
 
 public class EntityMobEtherealGuardian extends EntityVoidMob {
 
 	public EntityMobEtherealGuardian(World p_i1738_1_) {
 		super(p_i1738_1_);
 		isImmuneToFire = true;
-		ItemStack stack = new ItemStack(VoidCraft.tools.starforgedSword);
+		ItemStack stack = new ItemStack(VoidCraftTools.starforgedSword);
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
 		if (cap != null) {
 			cap.addEffect(StarForgeEffectList.firstDegreeBurns);
@@ -57,13 +55,12 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 		Predicate ies = new Predicate() {
 
 			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntityWitherSkeleton) return false;
-				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker) return false;
-				else return true;
+				return !(p_82704_1_ instanceof EntityWitherSkeleton) && !(p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker);
 			}
 
+			@Override
 			public boolean apply(Object p_apply_1_) {
-				return p_apply_1_ instanceof Entity ? this.apply((Entity) p_apply_1_) : false;
+				return p_apply_1_ instanceof Entity && this.apply((Entity) p_apply_1_);
 			}
 		};
 
@@ -85,21 +82,12 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(VoidCraft.potions.fireSheathe) == null) {
+			if (getActivePotionEffect(VoidCraftPotions.fireSheathe) == null) {
 				clearActivePotions();
-				Potion potion = VoidCraft.potions.fireSheathe;
+				Potion potion = VoidCraftPotions.fireSheathe;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
-				try {
-					PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.SHEATHE));
-					DataOutputStream stream = packet.getStream();
-					stream.writeInt(getEntityId());
-					stream.writeInt(Potion.getIdFromPotion(potion));
-					stream.writeInt(effect.getDuration());
-					packet.sendPacket(new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(potion), effect.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			}
 		}
 		super.onLivingUpdate();
@@ -127,7 +115,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.voidicPhlogiston;
+		return VoidCraftItems.voidicPhlogiston;
 	}
 
 	/**

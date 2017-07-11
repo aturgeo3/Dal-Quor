@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia.phases;
 
-import tamaized.tammodized.common.helper.MotionHelper;
-import tamaized.tammodized.common.particles.ParticleHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -15,7 +13,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import tamaized.voidcraft.VoidCraft;
+import tamaized.tammodized.common.helper.MotionHelper;
+import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
@@ -23,8 +22,11 @@ import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia.XiaTookDamagePack
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIBase<T> {
@@ -39,7 +41,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private static final int ACTION_DISINT = 3;
 	private static final int ACTION_VOIDICINFUSION = 4;
 
-	public EntityAIXiaPhase3(T entityBoss, ArrayList<Class> c) {
+	public EntityAIXiaPhase3(T entityBoss, List<Class> c) {
 		super(entityBoss, c);
 		rand = world.rand;
 		watchNew();
@@ -104,7 +106,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 				case ACTION_ICESPIKE:
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 180, 180, 0, 0);
 					resetAnimationTick = 20 * 2;
-					if (world.isAirBlock(closestEntity.getPosition())) world.setBlockState(closestEntity.getPosition(), VoidCraft.blocks.iceSpike.getDefaultState());
+					if (world.isAirBlock(closestEntity.getPosition())) world.setBlockState(closestEntity.getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
 					break;
 				case ACTION_DISINT:
 					if (closestEntity instanceof EntityLivingBase) {
@@ -119,7 +121,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) closestEntity;
-						player.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 10));
+						player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
 					}
 					break;
 			}
@@ -131,7 +133,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	private void doBlast() {
 		AnimationRegistry.AnimationLimbs.play(getEntity(), 135, 135, 45, -45);
 		resetAnimationTick = 20 * 2;
-		world.playSound((EntityPlayer) null, getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
+		world.playSound(null, getEntity().posX, getEntity().posY, getEntity().posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
 		ParticleHelper.spawnVanillaParticleOnServer(world, EnumParticleTypes.EXPLOSION_HUGE, getEntity().posX, getEntity().posY, getEntity().posZ, 1.0D, 0.0D, 0.0D);
 
 		for (Entity e : world.getEntitiesWithinAABBExcludingEntity(getEntity(), new AxisAlignedBB(getEntity().posX - 5, getEntity().posY - 5, getEntity().posZ - 5, getEntity().posX + 5, getEntity().posY + 5, getEntity().posZ + 5))) {
@@ -143,15 +145,15 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private boolean hasSheathe() {
-		if (getEntity().getActivePotionEffect(VoidCraft.potions.fireSheathe) != null) {
+		if (getEntity().getActivePotionEffect(VoidCraftPotions.fireSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.frostSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraftPotions.frostSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.litSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraftPotions.litSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.acidSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraftPotions.acidSheathe) != null) {
 			return true;
-		} else if (getEntity().getActivePotionEffect(VoidCraft.potions.voidSheathe) != null) {
+		} else if (getEntity().getActivePotionEffect(VoidCraftPotions.voidSheathe) != null) {
 			return true;
 		}
 		return false;
@@ -161,22 +163,22 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 		AnimationRegistry.AnimationLimbs.play(getEntity(), 180, 0, 0, 0);
 		resetAnimationTick = 20 * 2;
 		getEntity().clearActivePotions();
-		Potion sheathe = VoidCraft.potions.fireSheathe;
+		Potion sheathe = VoidCraftPotions.fireSheathe;
 		switch (rand.nextInt(5)) {
 			case 0:
-				sheathe = VoidCraft.potions.fireSheathe;
+				sheathe = VoidCraftPotions.fireSheathe;
 				break;
 			case 1:
-				sheathe = VoidCraft.potions.frostSheathe;
+				sheathe = VoidCraftPotions.frostSheathe;
 				break;
 			case 2:
-				sheathe = VoidCraft.potions.litSheathe;
+				sheathe = VoidCraftPotions.litSheathe;
 				break;
 			case 3:
-				sheathe = VoidCraft.potions.acidSheathe;
+				sheathe = VoidCraftPotions.acidSheathe;
 				break;
 			case 4:
-				sheathe = VoidCraft.potions.voidSheathe;
+				sheathe = VoidCraftPotions.voidSheathe;
 				break;
 			default:
 				break;
@@ -203,7 +205,7 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private void watchNew() {
-		ArrayList<Entity> list = new ArrayList<Entity>();
+		List<Entity> list = new ArrayList<>();
 		for (Class c : watchedClass) {
 			list.addAll(getEntity().world.getEntitiesWithinAABB(c, getEntity().getEntityBoundingBox().grow((double) maxDistanceForPlayer, 30.0D, (double) maxDistanceForPlayer)));
 		}

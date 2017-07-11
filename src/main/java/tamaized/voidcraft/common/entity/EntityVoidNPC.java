@@ -1,14 +1,6 @@
 package tamaized.voidcraft.common.entity;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.animation.AnimatableModel;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.client.entity.animation.IAnimation;
-import tamaized.voidcraft.network.ClientPacketHandler;
-import tamaized.voidcraft.network.IEntitySync;
-import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -31,17 +23,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel;
+import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
+import tamaized.voidcraft.client.entity.animation.IAnimation;
+import tamaized.voidcraft.network.IEntitySync;
+import tamaized.voidcraft.network.client.ClientPacketHandlerAnimation;
 
 public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEntitySync {
 
-	private boolean invulnerable = false;
 	protected boolean canDie = true;
 	protected boolean canPush = true;
 	protected boolean isFlying = false;
-
+	private boolean invulnerable = false;
 	private int[] spawnLoc;
 	private boolean firstSpawn = true;
 
@@ -77,13 +71,9 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 				}
 			}
 		}
-		if (animationID < 0 && animation != null) animation = null;
+		if (animationID < 0 && animation != null)
+			animation = null;
 		return animation;
-	}
-
-	public void setAnimation(IAnimation a) {
-		animation = a;
-		animationID = AnimationRegistry.getAnimationID(animation);
 	}
 
 	/**
@@ -91,15 +81,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	 */
 	public void playAnimation() {
 		if (!world.isRemote && animationID >= 0 && animation != null) {
-			try {
-				PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ClientPacketHandler.getPacketTypeID(ClientPacketHandler.PacketType.ANIMATIONS));
-				packet.getStream().writeInt(getEntityId());
-				packet.getStream().writeInt(animationID);
-				animation.encodePacket(packet.getStream());
-				packet.sendPacket(new TargetPoint(dimension, posX, posY, posZ, 64));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			VoidCraft.network.sendToAllAround(new ClientPacketHandlerAnimation.Packet(getEntityId(), animationID, animation), new TargetPoint(dimension, posX, posY, posZ, 64));
 			animationID = -1;
 			animation = null;
 		}
@@ -107,6 +89,11 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 
 	public IAnimation getAnimation() {
 		return animation;
+	}
+
+	public void setAnimation(IAnimation a) {
+		animation = a;
+		animationID = AnimationRegistry.getAnimationID(animation);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -118,23 +105,24 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	}
 
 	@Override
-	public final void encodePacket(DataOutputStream stream) throws IOException {
+	public final void encodePacket(ByteBuf stream) {
 		encodePacketData(stream);
 	}
 
-	protected abstract void encodePacketData(DataOutputStream stream) throws IOException;
+	protected abstract void encodePacketData(ByteBuf stream);
 
 	@Override
-	public final void decodePacket(ByteBufInputStream stream) throws IOException {
+	public final void decodePacket(ByteBuf stream) {
 		decodePacketData(stream);
 	}
 
-	protected abstract void decodePacketData(ByteBufInputStream stream) throws IOException;
+	protected abstract void decodePacketData(ByteBuf stream);
 
 	@Override
 	public void onLivingUpdate() {
 		IAnimation a = getAnimation();
-		if (animationID >= 0 && (a == null || a.update(this))) animationID = -1;
+		if (animationID >= 0 && (a == null || a.update(this)))
+			animationID = -1;
 		updateArmSwingProgress();
 		float f = getBrightness();
 		if (f > 0.5F) {
@@ -162,7 +150,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 
 	@Override
 	public boolean isEntityAlive() {
-		return !canDie ? true : !isDead && getHealth() > 0.0F;
+		return !canDie || !isDead && getHealth() > 0.0F;
 	}
 
 	@Override
@@ -195,12 +183,12 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		}
 	}
 
-	public void setInvulnerable(boolean b) {
-		invulnerable = b;
-	}
-
 	public boolean isInvulnerable() {
 		return invulnerable;
+	}
+
+	public void setInvulnerable(boolean b) {
+		invulnerable = b;
 	}
 
 	@Override

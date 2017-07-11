@@ -1,19 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.gui.container.StarForgeContainer;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.client.gui.element.GUIElementList;
-import tamaized.voidcraft.client.gui.element.GUIListElement;
-import tamaized.voidcraft.network.ServerPacketHandler;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
-import tamaized.voidcraft.common.starforge.StarForgeEffectEntry;
-import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -25,26 +11,33 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import org.lwjgl.input.Mouse;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.element.GUIElementList;
+import tamaized.voidcraft.client.gui.element.GUIListElement;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.gui.container.StarForgeContainer;
+import tamaized.voidcraft.common.starforge.StarForgeEffectEntry;
+import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
+import tamaized.voidcraft.network.server.ServerPacketHandlerStarforgeCraft;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class StarForgeGUI extends GuiContainer {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/starforge.png");
-
+	private static final int BUTTON_CRAFT = 0;
 	public TileEntityStarForge te;
+	public int mouseX = 0;
+	public int mouseY = 0;
 	private GUIElementList scroll;
 	private ItemStack dirtyStack = ItemStack.EMPTY;
 	private ItemStack renderStackHover = ItemStack.EMPTY;
-
-	public int mouseX = 0;
-	public int mouseY = 0;
-
 	private GuiButton button_Craft;
-
-	private static final int BUTTON_CRAFT = 0;
 
 	public StarForgeGUI(InventoryPlayer inventoryPlayer, TileEntityStarForge tileEntity) {
 		super(new StarForgeContainer(inventoryPlayer, tileEntity));
@@ -93,17 +86,7 @@ public class StarForgeGUI extends GuiContainer {
 		int zcoord = te.getPos().getZ();
 		switch (button.id) {
 			case BUTTON_CRAFT:
-				try {
-					PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.STARFORGE_CRAFT));
-					DataOutputStream stream = packet.getStream();
-					stream.writeInt(xcoord);
-					stream.writeInt(ycoord);
-					stream.writeInt(zcoord);
-					stream.writeInt(scroll.getSelectedIndex());
-					packet.sendPacketToServer();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+				VoidCraft.network.sendToServer(new ServerPacketHandlerStarforgeCraft.Packet(xcoord, ycoord, zcoord, scroll.getSelectedIndex()));
 				break;
 			default:
 				break;
@@ -135,10 +118,12 @@ public class StarForgeGUI extends GuiContainer {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
 							ItemStackHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
-							if (slot.getStackInSlot(0).getCount() >= checkStack.getCount()) continue;
+							if (slot.getStackInSlot(0).getCount() >= checkStack.getCount())
+								continue;
 							flag = false;
 						}
-						if (flag) enough = true;
+						if (flag)
+							enough = true;
 					}
 				}
 			}
@@ -186,9 +171,11 @@ public class StarForgeGUI extends GuiContainer {
 			itemRender.renderItemIntoGUI(stack, x, y);
 			// drawCenteredString(fontRenderer, ""+stack.stackSize, x, y, 0xFFFFFF);
 			GlStateManager.disableDepth();
-			if (stack.getCount() > 0) drawString(fontRenderer, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
+			if (stack.getCount() > 0)
+				drawString(fontRenderer, "" + stack.getCount(), x + 11 - (6 * (Integer.valueOf(stack.getCount()).toString().length() - 1)), y + 9, 0xFFFFFF);
 			GlStateManager.enableDepth();
-			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16) renderStackHover = stack;
+			if (mx >= x && mx <= x + 16 && my >= y && my <= y + 16)
+				renderStackHover = stack;
 			RenderHelper.disableStandardItemLighting();
 		}
 	}

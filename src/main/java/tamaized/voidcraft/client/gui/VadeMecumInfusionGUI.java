@@ -1,21 +1,21 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
 
 public class VadeMecumInfusionGUI extends GuiScreen {
-
-	private final IVadeMecumCapability capability;
 
 	private static final int BUTTON_CLOSE = 0;
 	private static final int BUTTON_BACK = 1;
 	private static final int BUTTON_ABILITY = 2;
+	private final IVadeMecumCapability capability;
 
 	public VadeMecumInfusionGUI(IVadeMecumCapability cap) {
 		capability = cap;
@@ -33,7 +33,8 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 
 		int index = 0;
 		for (IVadeMecumCapability.Passive passive : IVadeMecumCapability.Passive.values()) {
-			if (capability.canHavePassive(passive)) buttonList.add(new PassiveButton(capability, BUTTON_ABILITY, xLoc, yLoc + (25 * index), passive));
+			if (capability.canHavePassive(passive))
+				buttonList.add(new PassiveButton(capability, BUTTON_ABILITY, xLoc, yLoc + (25 * index), passive));
 			index++;
 		}
 	}
@@ -43,13 +44,14 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 		if (button.enabled) {
 			switch (button.id) {
 				case BUTTON_CLOSE:
-					mc.displayGuiScreen((GuiScreen) null);
+					mc.displayGuiScreen(null);
 					break;
 				case BUTTON_BACK:
 					mc.displayGuiScreen(new VadeMecumGUI(mc.player));
 					break;
 				case BUTTON_ABILITY:
-					if (button instanceof PassiveButton) sendPacket(((PassiveButton) button).getSpell());
+					if (button instanceof PassiveButton)
+						sendPacket(((PassiveButton) button).getSpell());
 					break;
 				default:
 					break;
@@ -58,7 +60,8 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	}
 
 	private void sendPacket(IVadeMecumCapability.Passive spell) {
-		if (capability.hasPassive(spell) || capability.canHavePassive(spell)) VadeMecumPacketHandler.ClientToServerRequest(VadeMecumPacketHandler.RequestType.PASSIVE, IVadeMecumCapability.getPassiveID(spell));
+		if (capability.hasPassive(spell) || capability.canHavePassive(spell))
+			VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.PASSIVE, IVadeMecumCapability.getPassiveID(spell)));
 	}
 
 	@Override

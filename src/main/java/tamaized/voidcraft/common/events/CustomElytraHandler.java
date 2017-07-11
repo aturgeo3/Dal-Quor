@@ -1,11 +1,5 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.tammodized.common.helper.PacketHelper;
-import tamaized.tammodized.common.helper.PacketHelper.PacketWrapper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.armor.ArmorCustomElytra;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.network.ServerPacketHandler;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -18,8 +12,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-
-import java.io.DataOutputStream;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.armor.ArmorCustomElytra;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.network.server.ServerPacketHandlerCustomElytra;
 
 public class CustomElytraHandler {
 
@@ -129,7 +125,7 @@ public class CustomElytraHandler {
 	}
 
 	public static boolean isElytraFlying(EntityPlayer player) {
-		return player.hasCapability(CapabilityList.ELYTRAFLYING, null) ? player.getCapability(CapabilityList.ELYTRAFLYING, null).isElytraFlying() : false;
+		return player.hasCapability(CapabilityList.ELYTRAFLYING, null) && player.getCapability(CapabilityList.ELYTRAFLYING, null).isElytraFlying();
 	}
 
 	public static void setFlying(EntityPlayer player, boolean flag) {
@@ -138,13 +134,7 @@ public class CustomElytraHandler {
 	}
 
 	private static void sendPacketToServer(EntityPlayer sender) {
-		try {
-			PacketWrapper packet = PacketHelper.createPacket(VoidCraft.channel, VoidCraft.networkChannelName, ServerPacketHandler.getPacketTypeID(ServerPacketHandler.PacketType.CUSTOM_ELYTRA));
-			DataOutputStream stream = packet.getStream();
-			packet.sendPacketToServer();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		VoidCraft.network.sendToServer(new ServerPacketHandlerCustomElytra.Packet());
 	}
 
 }

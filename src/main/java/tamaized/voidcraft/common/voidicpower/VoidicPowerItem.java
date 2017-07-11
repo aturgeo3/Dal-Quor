@@ -1,14 +1,11 @@
 package tamaized.voidcraft.common.voidicpower;
 
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -20,6 +17,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -34,7 +36,7 @@ public abstract class VoidicPowerItem extends TamItem {
 	public static final int PLAYER_INV_SLOT_ARMOR_BOOTS = -2;
 	public static final int PLAYER_INV_SLOT_OFFHAND = -1;
 
-	private static final Map<IVoidicPowerCapability, Integer> map = new HashMap<IVoidicPowerCapability, Integer>();
+	private static final Map<IVoidicPowerCapability, Integer> map = new HashMap<>();
 
 	public VoidicPowerItem(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
@@ -53,7 +55,7 @@ public abstract class VoidicPowerItem extends TamItem {
 
 			@Override
 			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-				return capability == CapabilityList.VOIDICPOWER ? CapabilityList.VOIDICPOWER.<T> cast(inst) : null;
+				return capability == CapabilityList.VOIDICPOWER ? CapabilityList.VOIDICPOWER.<T>cast(inst) : null;
 			}
 
 			@Override
@@ -71,7 +73,7 @@ public abstract class VoidicPowerItem extends TamItem {
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return slotChanged ? true : (oldStack.isEmpty() || newStack.isEmpty()) ? true : oldStack.getItem() != newStack.getItem();
+		return slotChanged || ((oldStack.isEmpty() || newStack.isEmpty()) || oldStack.getItem() != newStack.getItem());
 	}
 
 	@Override
@@ -83,34 +85,41 @@ public abstract class VoidicPowerItem extends TamItem {
 					cap.setValues(getDefaultVoidicPower(), getDefaultMaxVoidicPower());
 					cap.setDefault(false);
 				}
-				if (cap.isDirty() && entity instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) entity;
+				if (cap.isDirty() && entity instanceof EntityPlayerMP) {
+					EntityPlayerMP player = (EntityPlayerMP) entity;
 					switch (itemSlot) {
 						case 0:
 							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(0))) {
-								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_HELM, stack);
+								//								VoidCraft.network.sendTo(new ClientPacketHandlerPowerItem.Packet(PLAYER_INV_SLOT_ARMOR_HELM, player.inventory.armorInventory.get(0), cap), player);
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.armorInventory.get(0), cap);
 								break;
 							} else if (ItemStack.areItemStacksEqual(stack, player.inventory.offHandInventory.get(0))) {
-								cap.sendUpdates(player, PLAYER_INV_SLOT_OFFHAND, stack);
+								//								VoidCraft.network.sendTo(new ClientPacketHandlerPowerItem.Packet(PLAYER_INV_SLOT_OFFHAND, player.inventory.offHandInventory.get(0), cap), player);
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.offHandInventory.get(0), cap);
 								break;
 							}
 						case 1:
 							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(1))) {
-								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_CHEST, stack);
+								//								VoidCraft.network.sendTo(new ClientPacketHandlerPowerItem.Packet(PLAYER_INV_SLOT_ARMOR_CHEST, player.inventory.armorInventory.get(1), cap), player);
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.armorInventory.get(1), cap);
 								break;
 							}
 						case 2:
 							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(2))) {
-								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_LEGS, stack);
+								//								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_LEGS, stack);
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.armorInventory.get(2), cap);
 								break;
 							}
 						case 3:
 							if (ItemStack.areItemStacksEqual(stack, player.inventory.armorInventory.get(3))) {
-								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_BOOTS, stack);
+								//								cap.sendUpdates(player, PLAYER_INV_SLOT_ARMOR_BOOTS, stack);
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.armorInventory.get(3), cap);
 								break;
 							}
 						default:
-							if (itemSlot < player.inventory.mainInventory.size() && ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory.get(itemSlot))) cap.sendUpdates(player, itemSlot, stack);
+							if (itemSlot < player.inventory.mainInventory.size() && ItemStack.areItemStacksEqual(stack, player.inventory.mainInventory.get(itemSlot)))
+								VoidicInfusionCapabilityHandler.uWotM8(player.inventory.mainInventory.get(itemSlot), cap);
+							//								cap.sendUpdates(player, itemSlot, stack);
 							break;
 					}
 				}
@@ -122,12 +131,14 @@ public abstract class VoidicPowerItem extends TamItem {
 				if (map.containsKey(cap)) {
 					map.put(cap, map.get(cap) + useAmount());
 					if (map.get(cap) >= cap.getCurrentPower()) {
-						if (entity instanceof EntityLivingBase) onPlayerStoppedUsing(stack, world, (EntityLivingBase) entity, 0);
+						if (entity instanceof EntityLivingBase)
+							onPlayerStoppedUsing(stack, world, (EntityLivingBase) entity, 0);
 					}
 				} else {
 					map.put(cap, useAmount());
 					if (map.get(cap) >= cap.getCurrentPower()) {
-						if (entity instanceof EntityLivingBase) onPlayerStoppedUsing(stack, world, (EntityLivingBase) entity, 0);
+						if (entity instanceof EntityLivingBase)
+							onPlayerStoppedUsing(stack, world, (EntityLivingBase) entity, 0);
 					}
 				}
 			} else {
@@ -136,8 +147,10 @@ public abstract class VoidicPowerItem extends TamItem {
 					map.remove(cap);
 				}
 			}
-			if (cap.getCurrentPower() < 0) cap.setCurrentPower(0);
-			if (cap.getCurrentPower() > cap.getMaxPower()) cap.setCurrentPower(cap.getMaxPower());
+			if (cap.getCurrentPower() < 0)
+				cap.setCurrentPower(0);
+			if (cap.getCurrentPower() > cap.getMaxPower())
+				cap.setCurrentPower(cap.getMaxPower());
 		}
 	}
 
@@ -149,7 +162,7 @@ public abstract class VoidicPowerItem extends TamItem {
 			NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
 			cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		}
-		return cap == null ? false : getAdjustedPerc(cap) < 1.0f;
+		return cap != null && getAdjustedPerc(cap) < 1.0f;
 	}
 
 	@Override
@@ -170,20 +183,23 @@ public abstract class VoidicPowerItem extends TamItem {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World playerIn, List<String> tooltip, ITooltipFlag advanced) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (cap != null) tooltip.add(TextFormatting.DARK_PURPLE + "Power: " + (map.containsKey(cap) ? cap.getCurrentPower() - map.get(cap) : cap.getCurrentPower()) + "/" + cap.getMaxPower());
+		if (cap != null)
+			tooltip.add(TextFormatting.DARK_PURPLE + "Power: " + (map.containsKey(cap) ? cap.getCurrentPower() - map.get(cap) : cap.getCurrentPower()) + "/" + cap.getMaxPower());
 	}
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (cap != null) cap.setInUse(false);
+		if (cap != null)
+			cap.setInUse(false);
 		entityLiving.resetActiveHand();
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (!canBeUsed()) return ActionResult.newResult(EnumActionResult.PASS, stack);
+		if (!canBeUsed())
+			return ActionResult.newResult(EnumActionResult.PASS, stack);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
 		if (cap != null && cap.getCurrentPower() >= useAmount()) {
 			player.setActiveHand(hand);

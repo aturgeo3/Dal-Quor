@@ -1,21 +1,20 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.AIBlock;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import tamaized.voidcraft.network.IVoidBossAIPacket;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
+import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends EntityVoidNPCAIBase<T> {
 
@@ -29,9 +28,9 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 
 	private int pillarAmount = 0;
 	private int maxPillars = 6;
-	private Map<BlockPos, TileEntityAIBlock> pillars = new HashMap<BlockPos, TileEntityAIBlock>();
+	private Map<BlockPos, TileEntityAIBlock> pillars = new HashMap<>();
 
-	public EntityAIHerobrinePhase1(T entityMobHerobrine, ArrayList<Class> c) {
+	public EntityAIHerobrinePhase1(T entityMobHerobrine, List<Class> c) {
 		super(entityMobHerobrine, c);
 	}
 	
@@ -132,9 +131,9 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 		int nY = getBlockPosition().getY();
 		int nZ = (getBlockPosition().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
-			world.setBlockState(new BlockPos(nX, nY, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ((AIBlock) VoidCraft.blocks.AIBlock).getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 1, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 2, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
 			b.setup(this, null);
 			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY + 1, nZ))).setup(null, b);
@@ -156,18 +155,16 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 		double pz = loc[currPath][2];
 
 		double dx = 0;
-		double dy = 0;
+		double dy;
 		double dz = 0;
 
 		if (x == px && y == py && z == pz) {
 			currPath = (int) Math.floor(Math.random() * 7);
 			if (currPath > 7) currPath = 0;
 
-			if (loc[currPath][0] > x) xPos = true;
-			else xPos = false;
+			xPos = loc[currPath][0] > x;
 
-			if (loc[currPath][2] > z) zPos = true;
-			else zPos = false;
+			zPos = loc[currPath][2] > z;
 		}
 
 		if (x < px) dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
