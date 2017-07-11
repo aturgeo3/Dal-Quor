@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.world.dim.dalquor;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.world.BiomeProviderDalQuor;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -9,6 +8,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.world.BiomeProviderDalQuor;
 
 import javax.annotation.Nullable;
 
@@ -22,6 +23,16 @@ public class WorldProviderDalQuor extends WorldProvider {
 		doesWaterVaporize = false;
 		nether = false;
 		hasSkyLight = true;
+	}
+
+	@Override
+	public boolean canSnowAt(BlockPos pos, boolean checkLight) {
+		return false;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk) {
+		return false;
 	}
 
 	@Override

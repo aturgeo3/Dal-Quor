@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.world.dim.thevoid;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.registry.VoidCraftBiomes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -10,6 +9,8 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.registry.VoidCraftBiomes;
 
 public class WorldProviderVoid extends WorldProvider {
 
@@ -23,12 +24,21 @@ public class WorldProviderVoid extends WorldProvider {
 		this.nether = true;
 	}
 
+	@Override
+	public boolean canSnowAt(BlockPos pos, boolean checkLight) {
+		return false;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk) {
+		return false;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	/**
 	 * Return Vec3D with biome specific fog color
-	 */
-	public Vec3d getFogColor(float par1, float par2) {
+	 */ public Vec3d getFogColor(float par1, float par2) {
 		return new Vec3d(0.0D, 0.0D, 0.0D);
 	}
 

@@ -1,8 +1,6 @@
 package tamaized.voidcraft.common.world.dim.xia;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.xiacastle.logic.XiaCastleLogicHandler;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -13,6 +11,9 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.xiacastle.logic.XiaCastleLogicHandler;
 
 public class WorldProviderXia extends WorldProvider {
 
@@ -32,6 +33,16 @@ public class WorldProviderXia extends WorldProvider {
 			xiaCastleHandler = new XiaCastleLogicHandler(world);
 			if (world.getChunkProvider() != null) xiaCastleHandler.start();
 		}
+	}
+
+	@Override
+	public boolean canSnowAt(BlockPos pos, boolean checkLight) {
+		return false;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk) {
+		return false;
 	}
 
 	@Override
