@@ -16,6 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientPacketHandlerSheathe implements IMessageHandler<ClientPacketHandlerSheathe.Packet, IMessage> {
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		Entity entity = world.getEntityByID(message.entityID);
 		if (entity instanceof EntityLivingBase) {

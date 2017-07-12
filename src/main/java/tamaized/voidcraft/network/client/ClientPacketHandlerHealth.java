@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientPacketHandlerHealth implements IMessageHandler<ClientPacketHandlerHealth.Packet, IMessage> {
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		Minecraft.getMinecraft().player.setHealth(message.health);
 	}

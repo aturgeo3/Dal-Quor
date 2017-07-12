@@ -14,6 +14,7 @@ import tamaized.voidcraft.network.IEntitySync;
 
 public class ClientPacketHandlerEntitySync implements IMessageHandler<ClientPacketHandlerEntitySync.Packet, IMessage> {
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		Entity entity = world.getEntityByID(message.entityID);
 		if (entity instanceof IEntitySync)

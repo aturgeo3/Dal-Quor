@@ -34,6 +34,7 @@ public class ClientPacketHandlerVadeMecumUpdate implements IMessageHandler<Clien
 		return id > Type.values().length ? Type.NULL : Type.values()[id];
 	}
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		IVadeMecumCapability cap = Minecraft.getMinecraft().player.getCapability(CapabilityList.VADEMECUM, null);
 		if (cap != null) {

@@ -16,6 +16,7 @@ import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapa
 
 public class ClientPacketHandlerInfusion implements IMessageHandler<ClientPacketHandlerInfusion.Packet, IMessage> {
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		Entity entity = world.getEntityByID(message.entityID);
 		if (entity != null && entity instanceof EntityLivingBase && entity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {

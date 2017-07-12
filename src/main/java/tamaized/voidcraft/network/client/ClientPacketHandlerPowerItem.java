@@ -17,6 +17,7 @@ import tamaized.voidcraft.network.ItemStackNetworkHelper;
 
 public class ClientPacketHandlerPowerItem implements IMessageHandler<ClientPacketHandlerPowerItem.Packet, IMessage> {
 
+	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
 		int slot = message.slot;
 		ItemStack stack = message.stack;
