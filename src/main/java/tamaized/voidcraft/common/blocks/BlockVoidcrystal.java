@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import java.util.Random;
-
-import tamaized.tammodized.common.blocks.TamBlock;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,6 +12,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlock;
+import tamaized.voidcraft.registry.VoidCraftItems;
+
+import java.util.Random;
 
 public class BlockVoidcrystal extends TamBlock {
 
@@ -40,7 +40,7 @@ public class BlockVoidcrystal extends TamBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return VoidCraft.items.voidcrystal;
+		return VoidCraftItems.voidcrystal;
 	}
 
 	@Override
@@ -54,11 +54,12 @@ public class BlockVoidcrystal extends TamBlock {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
-		return block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+		return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
 }

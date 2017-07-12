@@ -95,7 +95,7 @@ public class SkinHandler {
 							case "name":
 								String newName = json.nextString();
 								if (!name.equals(newName)) {
-									VoidCraft.instance.logger.info("Detected Name Change (" + name + ") is now (" + newName + ")");
+									//									VoidCraft.instance.logger.info("Detected Name Change (" + name + ") is now (" + newName + ")");
 									name = newName;
 								}
 								break;
@@ -109,7 +109,7 @@ public class SkinHandler {
 				json.endArray();
 				json.close();
 				tempMap.put(name, id);
-				VoidCraft.instance.logger.info("Mapped " + name + " -> " + id);
+				//				VoidCraft.instance.logger.info("Mapped " + name + " -> " + id);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
