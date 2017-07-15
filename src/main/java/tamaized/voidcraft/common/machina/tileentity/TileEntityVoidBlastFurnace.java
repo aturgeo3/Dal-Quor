@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import tamaized.voidcraft.common.machina.VoidMacerator;
-import tamaized.voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +10,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.machina.VoidMacerator;
+import tamaized.voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import javax.annotation.Nullable;
 

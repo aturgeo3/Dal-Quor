@@ -1,12 +1,12 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 
 public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 
@@ -17,7 +17,7 @@ public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 		super(renderManagerIn, new ModelWitherbrine(0.0F), 1.0F);
 		this.addLayer(new LayerWitherbrineAura(this));
 	}
-	
+
 	@Override
 	public void doRender(EntityWitherbrine entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);

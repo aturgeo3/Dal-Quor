@@ -1,10 +1,10 @@
 package tamaized.voidcraft.registry;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 public class VoidCraftMaterials {
 
@@ -29,8 +29,8 @@ public class VoidCraftMaterials {
 		CosmicTools = EnumHelper.addToolMaterial(VoidCraft.modid + ":cosmic", 9, 14000, 55.0F, 14.0F, 30);
 
 		// 25 = invul
-		voidArmor = EnumHelper.addArmorMaterial( VoidCraft.modid + ":void", VoidCraft.modid + ":void", 120, new int[] { 4, 6, 8, 4 }, 30, VoidSoundEvents.ArmorSoundEvents.voidcrystal, 3.0f); // 22
-		xiaArmor = EnumHelper.addArmorMaterial( VoidCraft.modid + ":xia", VoidCraft.modid + ":xia", 240, new int[] { 4, 6, 10, 4 }, 30, VoidSoundEvents.ArmorSoundEvents.xia, 4.0f); // 24
+		voidArmor = EnumHelper.addArmorMaterial(VoidCraft.modid + ":void", VoidCraft.modid + ":void", 120, new int[]{4, 6, 8, 4}, 30, VoidSoundEvents.ArmorSoundEvents.voidcrystal, 3.0f); // 22
+		xiaArmor = EnumHelper.addArmorMaterial(VoidCraft.modid + ":xia", VoidCraft.modid + ":xia", 240, new int[]{4, 6, 10, 4}, 30, VoidSoundEvents.ArmorSoundEvents.xia, 4.0f); // 24
 	}
 
 }

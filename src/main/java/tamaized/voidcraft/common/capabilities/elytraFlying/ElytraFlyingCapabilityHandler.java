@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.capabilities.elytraFlying;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
 
 public class ElytraFlyingCapabilityHandler implements IElytraFlyingCapability {
 
@@ -9,7 +9,7 @@ public class ElytraFlyingCapabilityHandler implements IElytraFlyingCapability {
 
 	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "ElytraFlyingCapabilityHandler");
 	private boolean hasLoaded = false;
-	
+
 	private boolean isFlying = false;
 	private int flyTime = 0;
 

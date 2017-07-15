@@ -31,15 +31,6 @@ public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacke
 				capability.setPage(message.object);
 				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Spells), player);
 				break;
-			case CATEGORY_ADD:
-				capability.addCategory(player, IVadeMecumCapability.getCategoryFromID(message.object));
-				break;
-			case CATEGORY_REMOVE:
-				capability.removeCategory(IVadeMecumCapability.getCategoryFromID(message.object));
-				break;
-			case CATEGORY_CLEAR:
-				capability.clearCategories();
-				break;
 			case ACTIVE_SET:
 				IVadeMecumCapability.Category category = IVadeMecumCapability.getCategoryFromID(message.object);
 				if (category != null && IVadeMecumCapability.isActivePower(category) && capability.hasCategory(category))
@@ -68,7 +59,7 @@ public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacke
 	}
 
 	public enum RequestType {
-		NULL, OPEN, CATEGORY_ADD, CATEGORY_REMOVE, CATEGORY_CLEAR, ACTIVE_SET, ACTIVE_CLEAR, PASSIVE, SPELLS_PAGE
+		NULL, OPEN, ACTIVE_SET, ACTIVE_CLEAR, PASSIVE, SPELLS_PAGE
 	}
 
 	public static class Packet implements IMessage {

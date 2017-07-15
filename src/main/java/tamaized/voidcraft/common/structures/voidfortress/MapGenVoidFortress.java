@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.structures.voidfortress;
 
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import tamaized.voidcraft.common.entity.mob.EntityMobVoidWrath;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -10,6 +8,8 @@ import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.mob.EntityMobVoidWrath;
 
 import javax.annotation.Nullable;
 import java.util.List;

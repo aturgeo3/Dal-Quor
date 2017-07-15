@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.gui.container;
 
-import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,6 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 public class RealityTeleporterBlockContainer extends Container {
 
@@ -57,7 +57,8 @@ public class RealityTeleporterBlockContainer extends Container {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int i, int v) {
-		if (i == 0 && te != null) te.setPowerAmount(v);
+		if (i == 0 && te != null)
+			te.setPowerAmount(v);
 	}
 
 	@Override

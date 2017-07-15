@@ -9,7 +9,7 @@ public interface IVoidicInfusionCapability {
 	void load(EntityLivingBase living);
 
 	void update(EntityLivingBase player);
-	
+
 	int getInfusion();
 
 	void addInfusion(int amount);
@@ -23,9 +23,9 @@ public interface IVoidicInfusionCapability {
 	float getInfusionPerc();
 
 	boolean canFly(EntityLivingBase entity);
-	
+
 	int getXiaDefeats();
-	
+
 	void setXiaDefeats(int amount);
 
 	void copyFrom(IVoidicInfusionCapability cap);

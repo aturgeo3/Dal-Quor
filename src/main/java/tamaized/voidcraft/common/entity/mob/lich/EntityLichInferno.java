@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.entity.mob.lich;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.BlockVoidFire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.BlockVoidFire;
 
 public class EntityLichInferno extends Entity {
 
@@ -24,7 +24,7 @@ public class EntityLichInferno extends Entity {
 
 	public EntityLichInferno(World world, BlockPos pos) {
 		this(world);
-		setPosition(pos.getX()+0.5, pos.getY(), pos.getZ()+0.5);
+		setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
 	}
 
 	public EntityLichInferno(World world, BlockPos pos, int range) {
@@ -43,7 +43,8 @@ public class EntityLichInferno extends Entity {
 		if (tick % actionTick == 0) {
 			killFire();
 			calcIndex();
-			if (!isDead) spreadFire();
+			if (!isDead)
+				spreadFire();
 			tick = 0;
 		}
 		tick++;
@@ -52,10 +53,12 @@ public class EntityLichInferno extends Entity {
 	private void calcIndex() {
 		if (headBack) {
 			currIndex--;
-			if (currIndex <= 0) setDead();
+			if (currIndex <= 0)
+				setDead();
 		} else {
 			currIndex++;
-			if (currIndex >= range) setDead();// headBack = true;
+			if (currIndex >= range)
+				setDead();// headBack = true;
 		}
 	}
 
@@ -79,16 +82,20 @@ public class EntityLichInferno extends Entity {
 			for (int z = -currIndex; z <= currIndex; z++) {
 				if (Math.abs(x) == currIndex || Math.abs(z) == currIndex) {
 					int y = getLowY(getPosition().add(x, 0, z), 4);
-					if (y < 4) placeFireAt(getPosition().add(x, y, z));
+					if (y < 4)
+						placeFireAt(getPosition().add(x, y, z));
 				}
 			}
 		}
 	}
 
 	private int getLowY(BlockPos pos, int y) {
-		if (y < -4) return 4;
-		if (world.isAirBlock(pos.add(0, y, 0))) return getLowY(pos, y - 1);
-		else return y + 1;
+		if (y < -4)
+			return 4;
+		if (world.isAirBlock(pos.add(0, y, 0)))
+			return getLowY(pos, y - 1);
+		else
+			return y + 1;
 	}
 
 	private void placeFireAt(BlockPos pos) {

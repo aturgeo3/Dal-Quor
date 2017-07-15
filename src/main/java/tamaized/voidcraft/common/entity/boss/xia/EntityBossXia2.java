@@ -47,7 +47,8 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 
 	public void setSphereState(boolean state) {
 		sphereState = state;
-		if (!world.isRemote) sendPacketUpdates(this);
+		if (!world.isRemote)
+			sendPacketUpdates(this);
 	}
 
 	public boolean shouldSphereRender() {
@@ -81,7 +82,8 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe) super.addPotionEffect(potioneffectIn);
+		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe)
+			super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 		}
@@ -113,7 +115,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 				setInvulnerable(false);
 				addAI(new EntityAIXia2Phase1(this, getFilters()));
 			}
-				break;
+			break;
 			case 2: {
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
@@ -121,7 +123,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 				setInvulnerable(false);
 				addAI(new EntityAIXia2Phase2(this, getFilters()));
 			}
-				break;
+			break;
 			case 3: {
 				isFlying = true;
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
@@ -130,7 +132,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 				setInvulnerable(false);
 				addAI(new EntityAIXia2Phase3(this, getFilters()));
 			}
-				break;
+			break;
 			default:
 				break;
 		}

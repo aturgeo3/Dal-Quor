@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.machina.addons;
 
+import net.minecraft.item.ItemStack;
 import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import net.minecraft.item.ItemStack;
 
 public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.AlchemyRecipe> {
 
@@ -18,14 +18,17 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 
 	public ItemStack[] getInput(ItemStack output) {
 		for (AlchemyRecipe recipe : getList()) {
-			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output)) return recipe.getInput();
+			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output))
+				return recipe.getInput();
 		}
-		return new ItemStack[] { ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY };
+		return new ItemStack[]{ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY};
 	}
 
 	public ItemStack getOutput(IVadeMecumCapability cap, ItemStack[] stacks) {
-		loop: for (TERecipesAlchemy.AlchemyRecipe recipe : getList()) {
-			if (recipe.getInput().length != stacks.length || (recipe.getCategory() != null && (cap == null || !cap.hasCategory(recipe.getCategory())))) continue;
+		loop:
+		for (TERecipesAlchemy.AlchemyRecipe recipe : getList()) {
+			if (recipe.getInput().length != stacks.length || (recipe.getCategory() != null && (cap == null || !cap.hasCategory(recipe.getCategory()))))
+				continue;
 			for (ItemStack stack : stacks) {
 				for (ItemStack checkStack : recipe.getInput()) {
 					if (stack.getItem() == checkStack.getItem()) {
@@ -39,8 +42,10 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 	}
 
 	public TERecipesAlchemy.AlchemyRecipe getRecipe(IVadeMecumCapability cap, ItemStack[] stacks) {
-		loop: for (TERecipesAlchemy.AlchemyRecipe recipe : getList()) {
-			if (recipe.getInput().length != stacks.length || (recipe.getCategory() != null && (cap == null || !cap.hasCategory(recipe.getCategory())))) continue;
+		loop:
+		for (TERecipesAlchemy.AlchemyRecipe recipe : getList()) {
+			if (recipe.getInput().length != stacks.length || (recipe.getCategory() != null && (cap == null || !cap.hasCategory(recipe.getCategory()))))
+				continue;
 			for (ItemStack stack : stacks) {
 				boolean flag2 = false;
 				for (ItemStack checkStack : recipe.getInput()) {
@@ -49,7 +54,8 @@ public class TERecipesAlchemy extends TamTileEntityRecipeList<TERecipesAlchemy.A
 						break;
 					}
 				}
-				if (!flag2) continue loop;
+				if (!flag2)
+					continue loop;
 			}
 			return recipe;
 		}

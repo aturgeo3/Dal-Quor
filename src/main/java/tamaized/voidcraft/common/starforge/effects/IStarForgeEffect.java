@@ -14,15 +14,15 @@ public interface IStarForgeEffect {
 	}
 
 	Type getType();
-	
+
 	enum Tier {
 		ONE, TWO, THREE
 	}
-	
+
 	Tier getTier();
-	
+
 	void update(ItemStack stack);
-	
+
 	float getSpeedMod();
 
 	void onEntityHit(Entity entityUser, Entity entityHit);
@@ -32,7 +32,7 @@ public interface IStarForgeEffect {
 	boolean onRightClick(Entity entityUser);
 
 	boolean onRightClickBlock(Entity entityUser, World world, IBlockState state, BlockPos pos, EnumFacing face);
-	
+
 	String getName();
 
 }

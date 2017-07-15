@@ -64,7 +64,7 @@ public class WorldGenEtherealPlants extends WorldGenMinable {
 									IBlockState state = worldIn.getBlockState(blockpos);
 									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
 										worldIn.setBlockState(blockpos, VoidCraftFluids.voidFluidBlock.getDefaultState());
-										if(worldIn.rand.nextInt(4) == 0){
+										if (worldIn.rand.nextInt(4) == 0) {
 											if (worldIn.isAirBlock(blockpos.north().up())) {
 												worldIn.setBlockState(blockpos.north(), VoidCraftBlocks.blockFakeBedrockFarmland.getDefaultState(), 2);
 												worldIn.setBlockState(blockpos.north().up(), VoidCraftBlocks.etherealPlant.withAge(VoidCraftBlocks.etherealPlant.getMaxAge()), 2);

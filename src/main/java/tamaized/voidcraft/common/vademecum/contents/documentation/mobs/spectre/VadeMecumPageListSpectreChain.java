@@ -9,8 +9,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListSpectreChain implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
-				new VadeMecumPage(VoidCraft.modid+".VadeMecum.docs.title.chainedSpectre", VoidCraft.modid+".VadeMecum.docs.desc.chainedSpectre") };
+		return new IVadeMecumPage[]{new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.chainedSpectre", VoidCraft.modid + ".VadeMecum.docs.desc.chainedSpectre")};
 	}
 
 }

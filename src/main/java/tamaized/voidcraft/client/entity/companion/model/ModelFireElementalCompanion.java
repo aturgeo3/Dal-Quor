@@ -87,8 +87,8 @@ public class ModelFireElementalCompanion extends ModelBase {
 		ArmL.rotationPointX = 2.0F;
 		float f = 1.0F;
 
-		ArmR.rotateAngleX = limbSwingAmount*0.25F;//MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
-		ArmL.rotateAngleX = limbSwingAmount*0.25F;//MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
+		ArmR.rotateAngleX = limbSwingAmount * 0.25F;//MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * limbSwingAmount * 0.5F / f;
+		ArmL.rotateAngleX = limbSwingAmount * 0.25F;//MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
 		ArmR.rotateAngleZ = 0.0F;
 		ArmL.rotateAngleZ = 0.0F;
 

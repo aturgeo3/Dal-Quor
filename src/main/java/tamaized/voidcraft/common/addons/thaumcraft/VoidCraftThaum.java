@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.addons.thaumcraft;
 
 
-public class VoidCraftThaum{/*
+public class VoidCraftThaum {/*
 	
 	private ThaumcraftApi instance;
 	public AspectsForItems aspects;

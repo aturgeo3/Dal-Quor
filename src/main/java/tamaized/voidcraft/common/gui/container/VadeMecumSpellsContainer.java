@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.gui.container;
 
-import tamaized.voidcraft.common.gui.slots.SlotVadeMecumSpell;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +7,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.gui.slots.SlotVadeMecumSpell;
+import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 
 public class VadeMecumSpellsContainer extends Container {
 
@@ -33,9 +33,10 @@ public class VadeMecumSpellsContainer extends Container {
 		inventoryItemStacks.clear();
 
 		for (index = 15 * page; index < (15 * (page + 1)); index++) {
-			if (capability.getAvailableActivePowers().size() - 1 < index) break;
+			if (capability.getAvailableActivePowers().size() - 1 < index)
+				break;
 			IVadeMecumCapability.Category cat = capability.getAvailableActivePowers().get(index);
-			addSlotToContainer(new SlotVadeMecumSpell(capability, cat, VadeMecumWordsOfPower.getCategoryData(cat).getStack().getItem(), index, xLoc + (135 * ((int) Math.floor((index - (15*page)) / 5) - 1)), yLoc + (25 * ((index - (15*page)) % 5) - 1)));
+			addSlotToContainer(new SlotVadeMecumSpell(capability, cat, VadeMecumWordsOfPower.getCategoryData(cat).getStack().getItem(), index, xLoc + (135 * ((int) Math.floor((index - (15 * page)) / 5) - 1)), yLoc + (25 * ((index - (15 * page)) % 5) - 1)));
 		}
 
 		int xPos = 32;
@@ -67,7 +68,7 @@ public class VadeMecumSpellsContainer extends Container {
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			final int maxSlots = (index - (15*page));
+			final int maxSlots = (index - (15 * page));
 			if (hoverSlot < maxSlots) {
 				if (!mergeItemStack(itemstack1, maxSlots, maxSlots + 36, true)) {
 					return ItemStack.EMPTY;

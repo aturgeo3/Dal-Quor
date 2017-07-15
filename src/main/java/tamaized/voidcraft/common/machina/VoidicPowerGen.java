@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.machina;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +11,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
 
 public class VoidicPowerGen extends TamBlockContainer {
 
@@ -29,7 +29,8 @@ public class VoidicPowerGen extends TamBlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) FMLNetworkHandler.openGui(playerIn, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VoidicGenerator), worldIn, pos.getX(), pos.getY(), pos.getZ());
+		if (!worldIn.isRemote)
+			FMLNetworkHandler.openGui(playerIn, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VoidicGenerator), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 

@@ -39,14 +39,17 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
-			if (entity.shouldSphereRender()) renderSphere(entity.world, entity, 1, 10);
+			if (entity.shouldSphereRender())
+				renderSphere(entity.world, entity, 1, 10);
 			// if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
 			ItemStack itemstack = entity.getHeldItemMainhand();
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
 			ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
 			ModelBiped.ArmPose modelbiped$armpose1 = ModelBiped.ArmPose.EMPTY;
-			if (!itemstack.isEmpty()) modelbiped$armpose = ModelBiped.ArmPose.ITEM;
-			if (!itemstack1.isEmpty()) modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
+			if (!itemstack.isEmpty())
+				modelbiped$armpose = ModelBiped.ArmPose.ITEM;
+			if (!itemstack1.isEmpty())
+				modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
 			if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
 				getMainModel().rightArmPose = modelbiped$armpose;
 				getMainModel().leftArmPose = modelbiped$armpose1;
@@ -112,7 +115,8 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 	}
 
 	private void renderSphere(World world, T entity, double radius, int amount) {
-		if (world == null || Minecraft.getMinecraft().isGamePaused()) return;
+		if (world == null || Minecraft.getMinecraft().isGamePaused())
+			return;
 		Random rand = world.rand;
 		for (int index = 0; index < amount; index++) {
 			float speed = 0.08F;

@@ -1,15 +1,15 @@
 package tamaized.voidcraft.common.world.dim.dalquor;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
+import tamaized.voidcraft.VoidCraft;
 
 public class DalQuorSkyRender extends IRenderHandler {
 
@@ -54,7 +54,7 @@ public class DalQuorSkyRender extends IRenderHandler {
 			}
 
 			int val = 30;
-			
+
 			vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
 			vertexbuffer.pos(-100.0D, -100.0D, -100.0D).tex(0, 0).color(255, 255, 255, val).endVertex();
 			vertexbuffer.pos(-100.0D, -100.0D, 100.0D).tex(0, dim).color(255, 255, 255, val).endVertex();

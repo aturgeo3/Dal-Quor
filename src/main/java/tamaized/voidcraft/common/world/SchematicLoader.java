@@ -55,7 +55,8 @@ public class SchematicLoader {
 			if (ctMapping != null) {
 				for (String key : ctMapping.getKeySet()) {
 					Block b = Block.getBlockFromName(key);
-					if (b == null) continue;
+					if (b == null)
+						continue;
 					mappings.put(ctMapping.getShort(key), b);
 				}
 			}
@@ -67,7 +68,8 @@ public class SchematicLoader {
 	}
 
 	public static void buildSchematic(String schematicName, SchematicLoader loader, World world, BlockPos pos) {
-		if (world == null) return;
+		if (world == null)
+			return;
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

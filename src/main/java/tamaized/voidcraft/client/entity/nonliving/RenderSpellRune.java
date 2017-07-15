@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.entity.nonliving;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.nonliving.EntitySpellRune;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.nonliving.EntitySpellRune;
 
 public class RenderSpellRune<T extends EntitySpellRune> extends Render<T> {
 

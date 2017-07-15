@@ -1,14 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
-import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
-import tamaized.voidcraft.common.handlers.SkinHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +8,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
+import tamaized.voidcraft.common.handlers.SkinHandler;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class VoidicEssence extends TamItem {
 
@@ -55,9 +55,12 @@ public class VoidicEssence extends TamItem {
 
 	private UUID getRandomUnusedUUID(int j, List<UUID> list) {
 		int i = 0;
-		if (j == 0) i = (int) Math.floor(Math.random() * SkinHandler.getSize());
-		else i = j;
-		if (i >= SkinHandler.getSize()) i = 0;
+		if (j == 0)
+			i = (int) Math.floor(Math.random() * SkinHandler.getSize());
+		else
+			i = j;
+		if (i >= SkinHandler.getSize())
+			i = 0;
 		return list.contains(SkinHandler.getUUID(i)) ? getRandomUnusedUUID(i + 1, list) : SkinHandler.getUUID(i);
 	}
 

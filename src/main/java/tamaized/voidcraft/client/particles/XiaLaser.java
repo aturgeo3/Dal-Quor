@@ -1,16 +1,16 @@
 package tamaized.voidcraft.client.particles;
 
-import tamaized.tammodized.common.particles.TamParticle;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.particles.TamParticle;
 
 public class XiaLaser extends TamParticle {
 
@@ -25,14 +25,15 @@ public class XiaLaser extends TamParticle {
 		this.yaw = yaw;
 		this.pitch = pitch;
 		this.colors = colors;
-		particleMaxAge = 20*3;
+		particleMaxAge = 20 * 3;
 		isExpired = false;
 	}
 
 	@Override
 	public boolean render(BufferBuilder worldRenderer, Entity entity, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
 		Entity e = entity.world.getEntityByID(entityID);
-		if (e == null) return false;
+		if (e == null)
+			return false;
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.disableFog();
 		Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityBeaconRenderer.TEXTURE_BEACON_BEAM);
@@ -43,7 +44,7 @@ public class XiaLaser extends TamParticle {
 		GlStateManager.translate(-distX, -distY, -distZ);
 		GlStateManager.translate(-0.5, 0, 0.5);
 		for (int i = 0; i < 20; i++) {
-			renderBeamSegment(yaw, pitch, 0, 0, 0, partialTicks, 1, entity.world.getWorldTime(), i, 1, new float[] { 1.0f, 1.0f, 1.0f }, 0.2D, 0.25D);
+			renderBeamSegment(yaw, pitch, 0, 0, 0, partialTicks, 1, entity.world.getWorldTime(), i, 1, new float[]{1.0f, 1.0f, 1.0f}, 0.2D, 0.25D);
 		}
 		GlStateManager.popMatrix();
 		GlStateManager.enableFog();
@@ -113,16 +114,13 @@ public class XiaLaser extends TamParticle {
 	 * @param y
 	 * @param z
 	 * @param partialTicks
-	 * @param shouldBeamRender
-	 *            (Value > 0 = true)
+	 * @param shouldBeamRender (Value > 0 = true)
 	 * @param worldTime
 	 * @param segment
 	 * @param height
 	 * @param colors
-	 * @param p_188205_15_
-	 *            (= 0.2D)
-	 * @param p_188205_17_
-	 *            (= 0.25D)
+	 * @param p_188205_15_     (= 0.2D)
+	 * @param p_188205_17_     (= 0.25D)
 	 */
 	public static void renderBeamSegment(float yaw, float pitch, double x, double y, double z, double partialTicks, double shouldBeamRender, double worldTime, int segment, int height, float[] colors, double p_188205_15_, double p_188205_17_) {
 		GlStateManager.pushMatrix();

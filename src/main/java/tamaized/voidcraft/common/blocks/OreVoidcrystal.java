@@ -1,11 +1,7 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlock;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +19,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlock;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -68,7 +67,7 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[]{VOID});
+		return new BlockStateContainer(this, VOID);
 	}
 
 	/**
@@ -81,7 +80,7 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(VOID, meta == 0 ? false : true);
+		return this.getDefaultState().withProperty(VOID, meta != 0);
 	}
 
 	@Override
@@ -89,6 +88,7 @@ public class OreVoidcrystal extends TamBlock {
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
@@ -96,18 +96,17 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return VoidCraft.items.voidcrystal;
+		return VoidCraftItems.voidcrystal;
 	}
 
+	@Override
 	public int quantityDropped(Random random) {
 		return 1 + random.nextInt(3);
 	}
 
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-		if (entity instanceof EntityDragon)
-			return false;
-		return true;
+		return !(entity instanceof EntityDragon);
 	}
 
 	public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {

@@ -1,10 +1,10 @@
 package tamaized.voidcraft.common.gui.slots;
 
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 
 public class SlotVadeMecumSpell extends SlotOnlyItem {
 
@@ -54,7 +54,7 @@ public class SlotVadeMecumSpell extends SlotOnlyItem {
 
 	@Override
 	public boolean isSameInventory(Slot slot) {
-		return slot instanceof SlotVadeMecumSpell ? ((SlotVadeMecumSpell)slot).getCapability() == capability : false;
+		return slot instanceof SlotVadeMecumSpell ? ((SlotVadeMecumSpell) slot).getCapability() == capability : false;
 	}
 
 }

@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +13,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
 
 public class TwinsMessages04 {
 

@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public class VoidStar extends TamItem {
 
@@ -55,7 +55,7 @@ public class VoidStar extends TamItem {
 			entityItem.world.setBlockState(new BlockPos(xCoord, yCoord, zCoord), VoidCraft.blocks.blockPortalXia.getDefaultState());
 			if (entityItem.getThrower() != null) {
 				EntityPlayer entityplayer = entityItem.world.getPlayerEntityByName(entityItem.getThrower());
-//				if (entityplayer != null) entityplayer.addStat(VoidCraft.achievements.godsSleep, 1); TODO
+				//				if (entityplayer != null) entityplayer.addStat(VoidCraft.achievements.godsSleep, 1); TODO
 			}
 			entityItem.setDead();
 			return true;

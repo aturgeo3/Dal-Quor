@@ -20,7 +20,7 @@ import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 import tamaized.voidcraft.registry.VoidCraftItems;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServerPacketHandlerStarforgeCraft implements IMessageHandler<ServerPacketHandlerStarforgeCraft.Packet, IMessage> {
 
@@ -32,7 +32,7 @@ public class ServerPacketHandlerStarforgeCraft implements IMessageHandler<Server
 		if (te instanceof TileEntityStarForge) {
 			TileEntityStarForge tile = (TileEntityStarForge) te;
 			int index = message.index;
-			ArrayList<GUIListElement> list = tile.buildPossibleEffectList();
+			List<GUIListElement> list = tile.buildPossibleEffectList();
 			if (index >= 0 && index < list.size()) {
 				GUIListElement element = list.get(index);
 				if (element instanceof StarForgeToolEntry) {

@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.helper;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
 import tamaized.voidcraft.common.damagesources.DamageSourceFrost;
 import tamaized.voidcraft.common.damagesources.DamageSourceLit;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import tamaized.voidcraft.common.potion.PotionSheathe;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 
 public final class SheatheHelper {
 
@@ -60,15 +60,15 @@ public final class SheatheHelper {
 
 	public static float[] getColor(EntityLivingBase entity) {
 		if (entity.getActivePotionEffect(VoidCraft.potions.fireSheathe) != null) {
-			return new float[] { 1.0f, 0.65f, 0.0f, 1.0f };
+			return new float[]{1.0f, 0.65f, 0.0f, 1.0f};
 		} else if (entity.getActivePotionEffect(VoidCraft.potions.frostSheathe) != null) {
-			return new float[] { 0.0f, 1.0f, 1.0f, 1.0f };
+			return new float[]{0.0f, 1.0f, 1.0f, 1.0f};
 		} else if (entity.getActivePotionEffect(VoidCraft.potions.litSheathe) != null) {
-			return new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
+			return new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 		} else if (entity.getActivePotionEffect(VoidCraft.potions.acidSheathe) != null) {
-			return new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
+			return new float[]{0.0f, 1.0f, 0.0f, 1.0f};
 		} else if (entity.getActivePotionEffect(VoidCraft.potions.voidSheathe) != null) {
-			return new float[] { 0x77 / 255F, 0.0f, 0xFF / 255F, 1.0f };
+			return new float[]{0x77 / 255F, 0.0f, 0xFF / 255F, 1.0f};
 		}
 		return null;
 	}

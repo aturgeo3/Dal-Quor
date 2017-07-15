@@ -65,7 +65,8 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			world.addWeatherEffect(entitylightningbolt);
 		}
 		updateLook();
-		if (tick % (actionTick) == 0 && closestEntity != null) doAction(getBlockPosition());
+		if (tick % (actionTick) == 0 && closestEntity != null)
+			doAction(getBlockPosition());
 		updateSphere();
 	}
 
@@ -84,7 +85,8 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			} else {
 				boolean flag = true;
 				for (EntityGhostPlayerBase ghost : list) {
-					if (ghost.getRuneStatePerc() < 1.0F) flag = false;
+					if (ghost.getRuneStatePerc() < 1.0F)
+						flag = false;
 				}
 				if (flag) {
 					for (EntityGhostPlayerBase ghost : list)

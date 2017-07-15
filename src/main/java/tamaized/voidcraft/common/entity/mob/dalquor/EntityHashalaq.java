@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.entity.mob.dalquor;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -10,6 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 public class EntityHashalaq extends EntityMob {
 
@@ -37,7 +37,7 @@ public class EntityHashalaq extends EntityMob {
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(50.0D);
 	}
-	
+
 	// TODO
 	@Override
 	protected SoundEvent getAmbientSound() {

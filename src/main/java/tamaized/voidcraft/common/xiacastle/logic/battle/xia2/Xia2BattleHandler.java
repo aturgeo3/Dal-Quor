@@ -1,13 +1,13 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia2;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 
 public class Xia2BattleHandler implements IBattleHandler {
 
@@ -46,7 +46,8 @@ public class Xia2BattleHandler implements IBattleHandler {
 		xia = new EntityBossXia2(worldObj, this);
 		xia.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
 		ItemStack vade = new ItemStack(VoidCraft.items.vadeMecum);
-		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
+		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
+			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.MAIN_HAND, vade);
 		worldObj.spawnEntity(xia);
 		xia.start();
@@ -58,7 +59,8 @@ public class Xia2BattleHandler implements IBattleHandler {
 		readyForInput = false;
 		isDone = false;
 		if (xia != null) {
-			if (xia.isDone()) isDone = true;
+			if (xia.isDone())
+				isDone = true;
 			worldObj.removeEntity(xia);
 		}
 		xia = null;

@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.starforge;
 
+import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
-import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
-import net.minecraft.item.ItemStack;
 
 public final class StarForgeEffectRecipeList {
 
@@ -27,7 +27,8 @@ public final class StarForgeEffectRecipeList {
 
 	public Recipe getRecipe(IStarForgeEffect effect) {
 		for (Recipe recipe : recipes)
-			if (recipe.getEffect() == effect) return recipe;
+			if (recipe.getEffect() == effect)
+				return recipe;
 		return null;
 	}
 
@@ -103,7 +104,8 @@ public final class StarForgeEffectRecipeList {
 
 		public boolean isInput(ItemStack stack) {
 			for (ItemStack s : inputs) {
-				if (ItemStack.areItemStacksEqual(s, stack)) return true;
+				if (ItemStack.areItemStacksEqual(s, stack))
+					return true;
 			}
 			return false;
 		}

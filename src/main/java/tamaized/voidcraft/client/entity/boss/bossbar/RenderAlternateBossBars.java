@@ -50,7 +50,7 @@ public class RenderAlternateBossBars {
 			drawTexturedModalRect(x, y, 0, 80 + (wrapper.overlay.ordinal() - 1) * 5 * 2, 182, 5, 0);
 		}
 
-		int i = (int) (wrapper.getHealthPerc() * 183.0F)-1;
+		int i = (int) (wrapper.getHealthPerc() * 183.0F) - 1;
 
 		if (i > 0) {
 			drawTexturedModalRect(x, y, 0, wrapper.color.ordinal() * 5 * 2 + 5, i, 5, 0);

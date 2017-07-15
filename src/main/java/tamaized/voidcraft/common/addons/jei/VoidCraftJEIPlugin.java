@@ -1,5 +1,12 @@
 package tamaized.voidcraft.common.addons.jei;
 
+import mezz.jei.api.BlankModPlugin;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientRegistry;
+import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.addons.jei.alchemy.AlchemyRecipeCategory;
 import tamaized.voidcraft.common.addons.jei.alchemy.AlchemyRecipeHandler;
 import tamaized.voidcraft.common.addons.jei.alchemy.AlchemyRecipeMaker;
@@ -12,13 +19,6 @@ import tamaized.voidcraft.common.addons.jei.infuser.InfuserRecipeMaker;
 import tamaized.voidcraft.common.addons.jei.macerator.MaceratorRecipeCategory;
 import tamaized.voidcraft.common.addons.jei.macerator.MaceratorRecipeHandler;
 import tamaized.voidcraft.common.addons.jei.macerator.MaceratorRecipeMaker;
-import tamaized.voidcraft.VoidCraft;
-import mezz.jei.api.BlankModPlugin;
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.IIngredientRegistry;
-import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 import tamaized.voidcraft.registry.VoidCraftItems;
 

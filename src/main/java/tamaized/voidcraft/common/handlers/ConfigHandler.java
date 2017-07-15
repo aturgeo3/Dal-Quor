@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.handlers;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.VoidCraft;
 
 @Mod.EventBusSubscriber
 @Config(modid = VoidCraft.modid)

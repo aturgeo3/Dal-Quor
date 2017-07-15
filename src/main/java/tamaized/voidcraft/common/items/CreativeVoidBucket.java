@@ -1,10 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import javax.annotation.Nullable;
-
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.fluids.UniversalBucketCapWrapper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,6 +9,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.fluids.UniversalBucketCapWrapper;
+
+import javax.annotation.Nullable;
 
 public class CreativeVoidBucket extends TamItem {
 
@@ -28,27 +28,27 @@ public class CreativeVoidBucket extends TamItem {
 			case UP: {
 				pos = pos.add(0, 1, 0);
 			}
-				break;
+			break;
 			case DOWN: {
 				pos = pos.add(0, -1, 0);
 			}
-				break;
+			break;
 			case NORTH: {
 				pos = pos.add(0, 0, -1);
 			}
-				break;
+			break;
 			case SOUTH: {
 				pos = pos.add(0, 0, 1);
 			}
-				break;
+			break;
 			case EAST: {
 				pos = pos.add(1, 0, 0);
 			}
-				break;
+			break;
 			case WEST: {
 				pos = pos.add(-1, 0, 0);
 			}
-				break;
+			break;
 		}
 		if (worldIn.isAirBlock(pos)) {
 			worldIn.setBlockState(pos, VoidCraft.fluids.voidFluidBlock.getDefaultState());

@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.MobEffects;
@@ -9,6 +8,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
 
 public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 

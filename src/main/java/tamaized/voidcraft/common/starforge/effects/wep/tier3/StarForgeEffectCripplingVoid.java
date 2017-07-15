@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier3;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +8,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 

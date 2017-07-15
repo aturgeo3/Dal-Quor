@@ -1,10 +1,10 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import tamaized.voidcraft.common.entity.boss.dragon.EntityAbstractDragonOld;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityAbstractDragonOld;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 
 public class EntityDragonXia extends EntityAbstractDragonOld {
 
@@ -22,7 +22,8 @@ public class EntityDragonXia extends EntityAbstractDragonOld {
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3) setDead();
+			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3)
+				setDead();
 		}
 		super.onLivingUpdate();
 	}

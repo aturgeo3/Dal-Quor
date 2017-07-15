@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.world.dim.dalquor;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -11,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 import java.util.Random;
 
@@ -53,7 +53,8 @@ public class TeleporterDream extends Teleporter {
 				IBlockState[] states = ChunkProviderDalQuor.getGenBlocks(worldServerInstance.getBiome(pos));
 				for (int x = -1; x <= 1; x++) {
 					for (int z = -1; z <= 1; z++) {
-						if (worldServerInstance.isAirBlock(pos.add(x, -1, z))) worldServerInstance.setBlockState(pos.add(x, -1, z), states[0]);
+						if (worldServerInstance.isAirBlock(pos.add(x, -1, z)))
+							worldServerInstance.setBlockState(pos.add(x, -1, z), states[0]);
 					}
 				}
 				IBlockState iblockstate2 = VoidCraft.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, EnumFacing.NORTH).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);

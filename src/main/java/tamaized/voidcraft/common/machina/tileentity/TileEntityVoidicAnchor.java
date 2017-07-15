@@ -1,14 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import tamaized.voidcraft.common.fluids.FluidHelper;
-import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
-import tamaized.voidcraft.common.machina.addons.VoidTank;
-import tamaized.voidcraft.registry.VoidCraftFluids;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -19,6 +10,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.fluids.FluidHelper;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.registry.VoidCraftFluids;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

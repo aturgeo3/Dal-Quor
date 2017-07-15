@@ -116,7 +116,8 @@ public class EntitySpellRune extends Entity implements IEntityAdditionalSpawnDat
 				case FIRE:
 					for (int x = -1; x <= 1; x++)
 						for (int z = -1; z <= 1; z++)
-							if (world.isAirBlock(getPosition().add(x, 0, z))) world.setBlockState(getPosition().add(x, 0, z), Blocks.FIRE.getDefaultState());
+							if (world.isAirBlock(getPosition().add(x, 0, z)))
+								world.setBlockState(getPosition().add(x, 0, z), Blocks.FIRE.getDefaultState());
 				default:
 					source = DamageSource.ON_FIRE;
 					break;
@@ -144,7 +145,8 @@ public class EntitySpellRune extends Entity implements IEntityAdditionalSpawnDat
 			List<EntityLivingBase> damageList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius));
 			for (EntityLivingBase e : damageList) {
 				e.attackEntityFrom(source, power);
-				if (frost) e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 5, 5));
+				if (frost)
+					e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 5, 5));
 			}
 			for (int index = 0; index < 1000; index++) {
 				ParticleHelper.sendPacketToClients(world, TamModized.particles.fluff, getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModized.particles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModized.particles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, (color << 8) + (0xFF))));

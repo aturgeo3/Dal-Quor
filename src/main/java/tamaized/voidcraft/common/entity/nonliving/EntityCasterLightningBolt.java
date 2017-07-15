@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 public class EntityCasterLightningBolt extends EntityLightningBolt {
 
 	private final EntityLivingBase caster;
-	
-	public EntityCasterLightningBolt(World world){
+
+	public EntityCasterLightningBolt(World world) {
 		super(world, 0, 0, 0, true);
 		caster = null;
 	}

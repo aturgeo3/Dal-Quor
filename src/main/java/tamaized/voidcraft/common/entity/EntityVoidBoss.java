@@ -47,7 +47,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		addDefaultTasks();
 		enablePersistence();
 		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
-		if (chunkLoadTicket != null) chunkLoadTicket.bindEntity(this);
+		if (chunkLoadTicket != null)
+			chunkLoadTicket.bindEntity(this);
 	}
 
 	protected Ticket getChunkloader() {
@@ -58,7 +59,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		this(world);
 		this.handler = handler;
 		bus = new VoidBossAIBus();
-		if (hasIdleTask) tasks.addTask(6, new EntityAILookIdle(this));
+		if (hasIdleTask)
+			tasks.addTask(6, new EntityAILookIdle(this));
 	}
 
 	protected void addDefaultTasks() {
@@ -72,8 +74,10 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	public void start() {
 		isDone = false;
-		if (phase == 0 && bus != null) ready = true;
-		else doDamage((int) getMaxHealth());
+		if (phase == 0 && bus != null)
+			ready = true;
+		else
+			doDamage((int) getMaxHealth());
 		active = true;
 	}
 
@@ -105,7 +109,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		boolean flag = super.attackEntityFrom(source, amount);
-		if (flag) triggerOnDamage(phase, source, amount);
+		if (flag)
+			triggerOnDamage(phase, source, amount);
 		return flag;
 	}
 
@@ -154,7 +159,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	}
 
 	private void updateAI() {
-		if (world.isRemote) return;
+		if (world.isRemote)
+			return;
 
 		if (ready) {
 			phase++;
@@ -173,7 +179,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	}
 
 	private void preInitPhase(int p) {
-		if (bus == null) return;
+		if (bus == null)
+			return;
 		Iterator iter = ai.iterator();
 		while (iter.hasNext()) {
 			Object o = iter.next();
@@ -181,7 +188,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 				EntityVoidNPCAIBase ai = (EntityVoidNPCAIBase) o;
 				ai.kill();
 			}
-			if (o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
+			if (o instanceof EntityAIBase)
+				tasks.removeTask((EntityAIBase) o);
 			iter.remove();
 		}
 		tasks.taskEntries.clear();
@@ -209,7 +217,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	 */
 	@Override
 	public void onDeath(DamageSource p_70645_1_) { // Switch phases when we fake death
-		if (phase >= maxPhases()) deathHook();
+		if (phase >= maxPhases())
+			deathHook();
 		// setHealth(0);
 		// isDead = true;
 		// super.onDeath(p_70645_1_);
@@ -253,7 +262,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	@Override
 	protected void onDeathUpdate() { // Intercept deathUpdate to keep entity alive
-		if (ready) return;
+		if (ready)
+			return;
 		isDead = false;
 		onDeath(DamageSource.GENERIC);
 	}
@@ -267,10 +277,12 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 				EntityVoidNPCAIBase ai = (EntityVoidNPCAIBase) o;
 				ai.kill();
 			}
-			if (o instanceof EntityAIBase) tasks.removeTask((EntityAIBase) o);
+			if (o instanceof EntityAIBase)
+				tasks.removeTask((EntityAIBase) o);
 			iter.remove();
 		}
-		if (bus != null) bus.clearListeners();
+		if (bus != null)
+			bus.clearListeners();
 		phase = 100;
 		setHealth(0);
 		isDead = true;

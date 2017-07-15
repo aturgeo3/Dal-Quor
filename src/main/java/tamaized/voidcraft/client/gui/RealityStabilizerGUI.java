@@ -1,9 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.RealityStabilizerContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityStabilizer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +7,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.RealityStabilizerContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityStabilizer;
 
 @SideOnly(Side.CLIENT)
 public class RealityStabilizerGUI extends GuiContainer {

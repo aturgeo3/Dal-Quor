@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.proxy.ClientProxy;
-import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 public class VadeMecumDocumentationEntry extends VadeMecumEntry {
 

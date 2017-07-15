@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.gui.container;
 
-import tamaized.voidcraft.common.gui.slots.SlotCantPlace;
-import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,6 +8,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.gui.slots.SlotCantPlace;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class VoidBlastFurnaceContainer extends Container {
 
@@ -74,9 +74,12 @@ public class VoidBlastFurnaceContainer extends Container {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int slot, int par2) {
-		if (slot == 0) te.cookingTick = par2;
-		if (slot == 1) te.finishTick = par2;
-		if (slot == 2) te.setPowerAmount(par2);
+		if (slot == 0)
+			te.cookingTick = par2;
+		if (slot == 1)
+			te.finishTick = par2;
+		if (slot == 2)
+			te.setPowerAmount(par2);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -10,6 +8,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 
 public class EntityZolXia extends EntityTwinsXia {
 

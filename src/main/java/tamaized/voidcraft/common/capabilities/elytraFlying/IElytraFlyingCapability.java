@@ -13,11 +13,11 @@ public interface IElytraFlyingCapability {
 	public boolean isElytraFlying();
 
 	public void setElytraFlying(boolean flag);
-	
+
 	public int getElytraTime();
 
 	void setElytraTime(int time);
-	
+
 	public void copyFrom(IElytraFlyingCapability old);
 
 }

@@ -10,7 +10,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListStarForge implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
+		return new IVadeMecumPage[]{
 
 				new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.starforge", VoidCraft.modid + ".VadeMecum.docs.desc.starforge.pg1"),
 

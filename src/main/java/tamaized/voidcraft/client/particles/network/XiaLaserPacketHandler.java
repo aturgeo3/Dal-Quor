@@ -1,23 +1,24 @@
 package tamaized.voidcraft.client.particles.network;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
-import tamaized.tammodized.common.particles.ParticlePacketBase;
-import tamaized.tammodized.common.particles.TamParticle;
-import tamaized.voidcraft.client.particles.XiaLaser;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
+import tamaized.tammodized.common.particles.ParticlePacketBase;
+import tamaized.tammodized.common.particles.TamParticle;
+import tamaized.voidcraft.client.particles.XiaLaser;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class XiaLaserPacketHandler extends ParticlePacketBase {
 
 	@Override
 	public void encode(DataOutputStream packet, IParticlePacketData data) throws IOException {
-		if (!(data instanceof XiaLaserParticleData)) throw new IOException("Incorrect IParticlePacketData type: " + data);
+		if (!(data instanceof XiaLaserParticleData))
+			throw new IOException("Incorrect IParticlePacketData type: " + data);
 		XiaLaserParticleData dat = (XiaLaserParticleData) data;
 		packet.writeInt(dat.entityID);
 		packet.writeInt(dat.yaw);
@@ -31,7 +32,7 @@ public class XiaLaserPacketHandler extends ParticlePacketBase {
 	@Override
 	public TamParticle decode(ByteBufInputStream packet, WorldClient world, Vec3d pos) {
 		try {
-			return new XiaLaser(world, pos, packet.readInt(), packet.readInt(), packet.readInt(), new float[] { packet.readFloat(), packet.readFloat(), packet.readFloat() });
+			return new XiaLaser(world, pos, packet.readInt(), packet.readInt(), packet.readInt(), new float[]{packet.readFloat(), packet.readFloat(), packet.readFloat()});
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

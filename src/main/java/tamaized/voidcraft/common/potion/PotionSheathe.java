@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.potion;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
@@ -9,19 +8,20 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
 
 public class PotionSheathe extends Potion {
-	
+
 	public static enum Type {
 		Fire, Frost, Lit, Acid, Void
 	}
 
 	private final ResourceLocation iconTexture;
 	private final Type type;
-	
+
 	public PotionSheathe(String name, Type type) {
 		super(false, 0x000000);
-		iconTexture = new ResourceLocation(VoidCraft.modid, "textures/potions/"+name+".png");
+		iconTexture = new ResourceLocation(VoidCraft.modid, "textures/potions/" + name + ".png");
 		this.type = type;
 		setRegistryName(VoidCraft.modid, name);
 		setPotionName("effect." + getRegistryName().toString());

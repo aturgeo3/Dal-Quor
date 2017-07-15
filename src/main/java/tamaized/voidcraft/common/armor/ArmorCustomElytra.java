@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.armor;
 
-import tamaized.tammodized.common.armors.TamArmor;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.armors.TamArmor;
+import tamaized.voidcraft.VoidCraft;
 
 import javax.annotation.Nullable;
 
@@ -24,12 +24,12 @@ public class ArmorCustomElytra extends TamArmor {
 		this.maxStackSize = 1;
 		this.setMaxDamage(432);
 		this.addPropertyOverride(new ResourceLocation("broken"), new IItemPropertyGetter() {
-			
+
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				return ItemElytra.isUsable(stack) ? 0.0F : 1.0F;
 			}
-			
+
 		});
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
 	}

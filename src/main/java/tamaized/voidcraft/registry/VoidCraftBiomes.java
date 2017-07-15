@@ -1,9 +1,5 @@
 package tamaized.voidcraft.registry;
 
-import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
-import tamaized.voidcraft.common.world.dim.thevoid.BiomeGenVoid;
-import tamaized.voidcraft.common.world.dim.xia.BiomeGenXia;
-import tamaized.voidcraft.common.world.dim.dalquor.BiomeGenDream;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
@@ -12,22 +8,27 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
+import tamaized.voidcraft.common.world.dim.dalquor.BiomeGenDream;
+import tamaized.voidcraft.common.world.dim.thevoid.BiomeGenVoid;
+import tamaized.voidcraft.common.world.dim.xia.BiomeGenXia;
 
-import static net.minecraft.world.biome.Biome.*;
+import static net.minecraft.world.biome.Biome.BiomeProperties;
+import static net.minecraft.world.biome.Biome.SpawnListEntry;
 
 @Mod.EventBusSubscriber
 public class VoidCraftBiomes {
-	
+
 	public static Biome biomeVoid;
 	public static Biome biomeXia;
-	
+
 	public static Biome biomeDreamOverworld;
 	public static Biome biomeDreamNether;
 	public static Biome biomeDreamEnd;
 	public static Biome biomeDreamVoid;
 
 	@SubscribeEvent
-	public static void register(RegistryEvent.Register<Biome> event){
+	public static void register(RegistryEvent.Register<Biome> event) {
 		float baseHeight = -1F;
 		float heightVariation = 0.1F;
 		BiomeProperties biomeVoidProp = new BiomeProperties("The Void").setBaseBiome("voidcraft_biome_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();

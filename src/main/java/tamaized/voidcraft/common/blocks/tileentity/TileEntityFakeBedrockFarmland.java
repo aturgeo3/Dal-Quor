@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.blocks.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
 
 public class TileEntityFakeBedrockFarmland extends TamTileEntity {
 

@@ -31,7 +31,8 @@ public class WorldProviderXia extends WorldProvider {
 		this.nether = true;
 		if (world instanceof WorldServer) {
 			xiaCastleHandler = new XiaCastleLogicHandler(world);
-			if (world.getChunkProvider() != null) xiaCastleHandler.start();
+			if (world.getChunkProvider() != null)
+				xiaCastleHandler.start();
 		}
 	}
 
@@ -48,7 +49,8 @@ public class WorldProviderXia extends WorldProvider {
 	@Override
 	public void onWorldUpdateEntities() {
 		super.onWorldUpdateEntities();
-		if (xiaCastleHandler != null) xiaCastleHandler.onUpdate();
+		if (xiaCastleHandler != null)
+			xiaCastleHandler.onUpdate();
 	}
 
 	public final XiaCastleLogicHandler getXiaCastleHandler() {

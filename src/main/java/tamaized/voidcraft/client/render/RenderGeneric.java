@@ -1,13 +1,12 @@
 package tamaized.voidcraft.client.render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class RenderGeneric<T extends EntityLiving> extends RenderLiving<T> {
 

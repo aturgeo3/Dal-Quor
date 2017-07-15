@@ -1,9 +1,9 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
 
 public class RenderVoidicDragon<T extends EntityVoidicDragon> extends RenderDragonOldWithBar<T> {
 

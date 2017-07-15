@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItem;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.items.TamItem;
 
 public class VoidCrystalShield extends TamItem {
 

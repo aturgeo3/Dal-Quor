@@ -1,11 +1,11 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 
 public class LayerWitherbrineAura implements LayerRenderer<EntityWitherbrine> {
 	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither_armor.png");

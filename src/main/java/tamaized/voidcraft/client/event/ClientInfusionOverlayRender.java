@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.event;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,6 +10,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 
 public class ClientInfusionOverlayRender {
 
@@ -23,9 +23,11 @@ public class ClientInfusionOverlayRender {
 		if (e.getType() == e.getType().PORTAL) {
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayerSP player = mc.player;
-			if (!player.hasCapability(CapabilityList.VOIDICINFUSION, null)) return;
+			if (!player.hasCapability(CapabilityList.VOIDICINFUSION, null))
+				return;
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
-			if (cap.getInfusion() <= 0) return;
+			if (cap.getInfusion() <= 0)
+				return;
 			ScaledResolution scaledRes = new ScaledResolution(mc);
 			GlStateManager.disableAlpha();
 			GlStateManager.disableDepth();

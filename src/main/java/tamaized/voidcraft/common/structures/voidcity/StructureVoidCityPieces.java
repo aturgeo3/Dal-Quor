@@ -1,11 +1,6 @@
 package tamaized.voidcraft.common.structures.voidcity;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -26,6 +21,10 @@ import net.minecraft.world.gen.structure.StructureComponentTemplate;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import tamaized.voidcraft.VoidCraft;
+
+import java.util.List;
+import java.util.Random;
 
 public class StructureVoidCityPieces {
 	private static final PlacementSettings OVERWRITE = (new PlacementSettings()).setIgnoreEntities(true);
@@ -59,7 +58,7 @@ public class StructureVoidCityPieces {
 			}
 		}
 	};
-	private static final List<Tuple<Rotation, BlockPos>> TOWER_BRIDGES = Lists.<Tuple<Rotation, BlockPos>> newArrayList(new Tuple[] { new Tuple(Rotation.NONE, new BlockPos(1, -1, 0)), new Tuple(Rotation.CLOCKWISE_90, new BlockPos(6, -1, 1)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 5)), new Tuple(Rotation.CLOCKWISE_180, new BlockPos(5, -1, 6)) });
+	private static final List<Tuple<Rotation, BlockPos>> TOWER_BRIDGES = Lists.<Tuple<Rotation, BlockPos>>newArrayList(new Tuple[]{new Tuple(Rotation.NONE, new BlockPos(1, -1, 0)), new Tuple(Rotation.CLOCKWISE_90, new BlockPos(6, -1, 1)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 5)), new Tuple(Rotation.CLOCKWISE_180, new BlockPos(5, -1, 6))});
 	private static final StructureVoidCityPieces.IGenerator TOWER_GENERATOR = new StructureVoidCityPieces.IGenerator() {
 
 		@Override
@@ -143,7 +142,7 @@ public class StructureVoidCityPieces {
 			return true;
 		}
 	};
-	private static final List<Tuple<Rotation, BlockPos>> FAT_TOWER_BRIDGES = Lists.<Tuple<Rotation, BlockPos>> newArrayList(new Tuple[] { new Tuple(Rotation.NONE, new BlockPos(4, -1, 0)), new Tuple(Rotation.CLOCKWISE_90, new BlockPos(12, -1, 4)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 8)), new Tuple(Rotation.CLOCKWISE_180, new BlockPos(8, -1, 12)) });
+	private static final List<Tuple<Rotation, BlockPos>> FAT_TOWER_BRIDGES = Lists.<Tuple<Rotation, BlockPos>>newArrayList(new Tuple[]{new Tuple(Rotation.NONE, new BlockPos(4, -1, 0)), new Tuple(Rotation.CLOCKWISE_90, new BlockPos(12, -1, 4)), new Tuple(Rotation.COUNTERCLOCKWISE_90, new BlockPos(0, -1, 8)), new Tuple(Rotation.CLOCKWISE_180, new BlockPos(8, -1, 12))});
 	private static final StructureVoidCityPieces.IGenerator FAT_TOWER_GENERATOR = new StructureVoidCityPieces.IGenerator() {
 		public void init() {
 		}
@@ -201,14 +200,15 @@ public class StructureVoidCityPieces {
 		if (p_191088_2_ > 8) {
 			return false;
 		} else {
-			List<StructureComponent> list = Lists.<StructureComponent> newArrayList();
+			List<StructureComponent> list = Lists.<StructureComponent>newArrayList();
 
 			if (p_191088_1_.generate(p_191088_0_, p_191088_2_, p_191088_3_, p_191088_4_, list, p_191088_6_)) {
 				boolean flag = false;
 				int i = p_191088_6_.nextInt();
 
 				for (StructureComponent structurecomponent : list) {
-					if(structurecomponent instanceof CityTemplate) ((CityTemplate) structurecomponent).setComponentType(i);
+					if (structurecomponent instanceof CityTemplate)
+						((CityTemplate) structurecomponent).setComponentType(i);
 					StructureComponent structurecomponent1 = StructureComponent.findIntersecting(p_191088_5_, structurecomponent.getBoundingBox());
 
 					if (structurecomponent1 != null && structurecomponent1.getComponentType() != p_191088_3_.getComponentType()) {
@@ -231,11 +231,11 @@ public class StructureVoidCityPieces {
 		private String pieceName;
 		private Rotation rotation;
 		private boolean overwrite;
-		
+
 		public PlacementSettings getPlaceSettings() {
 			return placeSettings;
 		}
-		
+
 		public BlockPos getTemplatePosition() {
 			return templatePosition;
 		}

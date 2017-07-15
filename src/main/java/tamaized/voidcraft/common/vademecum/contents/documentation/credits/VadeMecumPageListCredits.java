@@ -6,8 +6,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListCredits {
 
 	public static final IVadeMecumPage[] getPageList() {
-		return new IVadeMecumPage[] {
-				new VadeMecumPage("", "Credits, Contributors, Misc.") };
+		return new IVadeMecumPage[]{new VadeMecumPage("", "Credits, Contributors, Misc.")};
 	}
 
 }

@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -11,6 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public class PlayerRightClickEvent {
 

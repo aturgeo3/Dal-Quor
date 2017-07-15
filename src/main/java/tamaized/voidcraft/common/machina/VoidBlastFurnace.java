@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.machina;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -24,6 +20,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class VoidBlastFurnace extends TamBlockContainer {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, new IProperty[]{FACING});
 	}
 
 	@Override

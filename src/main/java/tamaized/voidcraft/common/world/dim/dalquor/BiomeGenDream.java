@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.world.dim.dalquor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
-import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
+import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BiomeGenDream extends Biome {
 
@@ -31,7 +31,8 @@ public class BiomeGenDream extends Biome {
 	}
 
 	private void addEntry(SpawnListEntry entry) {
-		if (!allowedEntities.contains(entry.entityClass)) allowedEntities.add(entry.entityClass);
+		if (!allowedEntities.contains(entry.entityClass))
+			allowedEntities.add(entry.entityClass);
 		spawnableMonsterList.add(entry);
 	}
 

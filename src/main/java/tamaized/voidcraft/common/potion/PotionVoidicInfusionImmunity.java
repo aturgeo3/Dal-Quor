@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.potion;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Potion;
@@ -8,6 +7,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
 
 public class PotionVoidicInfusionImmunity extends Potion {
 

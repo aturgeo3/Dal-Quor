@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.tool.tier3;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +12,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectThreeByThree implements IStarForgeEffect {
 
@@ -119,7 +119,8 @@ public class StarForgeEffectThreeByThree implements IStarForgeEffect {
 		Block block = state.getBlock();
 		if (!world.isRemote && block != null && !block.isAir(state, world, pos) && !(block instanceof BlockLiquid) && !(block instanceof IFluidBlock) && block.getPlayerRelativeBlockHardness(state, player, world, pos) > 0) {
 			int neededHarvestLevel = block.getHarvestLevel(state);
-			if (neededHarvestLevel > harvestLevel && (!tool.isEmpty() && !tool.canHarvestBlock(state))) return;
+			if (neededHarvestLevel > harvestLevel && (!tool.isEmpty() && !tool.canHarvestBlock(state)))
+				return;
 
 			BreakEvent event = new BreakEvent(world, pos, state, player);
 			MinecraftForge.EVENT_BUS.post(event);
@@ -129,10 +130,12 @@ public class StarForgeEffectThreeByThree implements IStarForgeEffect {
 						block.onBlockDestroyedByPlayer(world, pos, state);
 						block.harvestBlock(world, player, pos, state, world.getTileEntity(pos), tool);
 					}
-				} else world.setBlockToAir(pos);
+				} else
+					world.setBlockToAir(pos);
 			}
 
-			if (particles) world.playEvent(2001, pos, Block.getStateId(state));
+			if (particles)
+				world.playEvent(2001, pos, Block.getStateId(state));
 		}
 	}
 

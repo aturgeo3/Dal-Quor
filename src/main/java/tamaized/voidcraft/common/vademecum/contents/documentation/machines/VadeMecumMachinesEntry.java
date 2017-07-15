@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.machines;
 
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.proxy.ClientProxy;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.common.vademecum.contents.documentation.machines.alchemy.VadeMecumPageListAlchemy;
 import tamaized.voidcraft.common.vademecum.contents.documentation.machines.anchor.VadeMecumPageListAnchor;
@@ -17,7 +17,7 @@ import tamaized.voidcraft.common.vademecum.contents.documentation.machines.macer
 import tamaized.voidcraft.common.vademecum.contents.documentation.machines.musicbox.VadeMecumPageListMusicBox;
 import tamaized.voidcraft.common.vademecum.contents.documentation.machines.stabilizer.VadeMecumPageListStabilizer;
 import tamaized.voidcraft.common.vademecum.contents.documentation.machines.teleporter.VadeMecumPageListTeleporter;
-import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 public class VadeMecumMachinesEntry extends VadeMecumEntry {
 

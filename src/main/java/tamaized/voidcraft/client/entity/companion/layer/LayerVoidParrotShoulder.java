@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.entity.companion.layer;
 
-import tamaized.voidcraft.client.entity.companion.render.RenderVoidParrot;
-import tamaized.voidcraft.client.entity.companion.model.ModelVoidParrot;
-import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -16,6 +13,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import tamaized.voidcraft.client.entity.companion.model.ModelVoidParrot;
+import tamaized.voidcraft.client.entity.companion.render.RenderVoidParrot;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 
 import javax.annotation.Nullable;
 import java.util.UUID;

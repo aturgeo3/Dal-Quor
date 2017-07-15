@@ -62,7 +62,8 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			world.addWeatherEffect(entitylightningbolt);
 		}
 		updateLook();
-		if (tick % (actionTick) == 0 && closestEntity != null) doAction(getBlockPosition());
+		if (tick % (actionTick) == 0 && closestEntity != null)
+			doAction(getBlockPosition());
 	}
 
 	@Override

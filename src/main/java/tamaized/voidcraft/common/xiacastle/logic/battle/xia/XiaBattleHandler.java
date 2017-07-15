@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.xia;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -11,6 +7,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -78,7 +78,8 @@ public class XiaBattleHandler implements IBattleHandler {
 		xia.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(VoidCraft.armors.xiaBoots));
 		xia.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(VoidCraft.tools.demonSword));
 		ItemStack vade = new ItemStack(VoidCraft.items.vadeMecum);
-		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null)) vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
+		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
+			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.OFF_HAND, vade);
 		worldObj.spawnEntity(xia);
 		checkBB = new AxisAlignedBB(pos.add(-19, -1, -3), pos.add(19, 26, 51));
@@ -93,7 +94,8 @@ public class XiaBattleHandler implements IBattleHandler {
 		readyForInput = false;
 		isDone = false;
 		if (xia != null) {
-			if (xia.isDone()) isDone = true;
+			if (xia.isDone())
+				isDone = true;
 			worldObj.removeEntity(xia);
 		}
 		xia = null;

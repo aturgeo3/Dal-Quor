@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.entity.boss.dragon;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
 
 public class EntityVoidicDragon extends EntityAbstractDragonOld {
 
@@ -28,7 +28,8 @@ public class EntityVoidicDragon extends EntityAbstractDragonOld {
 	@Override
 	protected void dropItemsOnDeath() {
 		entityDropItem(new ItemStack(VoidCraft.items.voidicDragonScale, world.rand.nextInt(2) + 1), 0.0F);
-		if (world.isAirBlock(getPosition())) world.setBlockState(getPosition(), Blocks.DRAGON_EGG.getDefaultState());
+		if (world.isAirBlock(getPosition()))
+			world.setBlockState(getPosition(), Blocks.DRAGON_EGG.getDefaultState());
 	}
 
 	@Override

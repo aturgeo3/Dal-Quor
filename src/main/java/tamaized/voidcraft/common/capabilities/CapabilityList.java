@@ -1,13 +1,13 @@
 package tamaized.voidcraft.common.capabilities;
 
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import tamaized.voidcraft.common.capabilities.elytraFlying.IElytraFlyingCapability;
 import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class CapabilityList {
 

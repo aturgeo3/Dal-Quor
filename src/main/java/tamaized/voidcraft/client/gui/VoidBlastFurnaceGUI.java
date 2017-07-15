@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.VoidBlastFurnaceContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidBlastFurnaceContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBlastFurnace;
 
 public class VoidBlastFurnaceGUI extends GuiContainer {
 
@@ -53,7 +53,7 @@ public class VoidBlastFurnaceGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		String text = TranslateHelper.translate("voidcraft.gui.blastfurnace.title");
 		this.fontRenderer.drawString(text, this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
-		text = TranslateHelper.translate("voidcraft.gui.misc.power")+":";
+		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
 		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 65, 0xFF0000);
 		text = te.getPowerAmount() + "/";
 		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 55, 0xFF0000);

@@ -1,6 +1,6 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
-public class EntityHookShot{/* extends EntityFishHook implements IProjectile, IEntityAdditionalSpawnData  {
+public class EntityHookShot {/* extends EntityFishHook implements IProjectile, IEntityAdditionalSpawnData  {
 
 	public EntityPlayer shootingEntity;
 	private int lastItem;
@@ -47,7 +47,7 @@ public class EntityHookShot{/* extends EntityFishHook implements IProjectile, IE
      *
      * @param buffer The packet data stream
      *//*
-    public void writeSpawnData(ByteBuf buffer){
+	public void writeSpawnData(ByteBuf buffer){
     	if(shootingEntity == null){
     		this.setDead();
     		return;

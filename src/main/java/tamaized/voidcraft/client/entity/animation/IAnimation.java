@@ -18,5 +18,5 @@ public interface IAnimation<T extends EntityVoidNPC, E extends AnimatableModel> 
 	void encodePacket(ByteBuf stream);
 
 	void decodePacket(ByteBuf stream);
-	
+
 }

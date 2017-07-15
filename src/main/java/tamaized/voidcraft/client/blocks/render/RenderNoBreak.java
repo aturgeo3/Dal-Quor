@@ -1,6 +1,5 @@
 package tamaized.voidcraft.client.blocks.render;
 
-import tamaized.voidcraft.common.blocks.TileEntityNoBreak;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GLAllocation;
@@ -9,6 +8,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.common.blocks.TileEntityNoBreak;
 
 import java.nio.FloatBuffer;
 import java.util.Random;

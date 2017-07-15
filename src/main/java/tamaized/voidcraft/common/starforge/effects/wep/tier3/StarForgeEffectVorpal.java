@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier3;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -16,6 +14,8 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectVorpal implements IStarForgeEffect {
 
@@ -44,8 +44,9 @@ public class StarForgeEffectVorpal implements IStarForgeEffect {
 		if (!entityHit.world.isRemote && entityHit.world.rand.nextInt(100) < 5) {
 			if (entityHit instanceof EntityPlayer) {
 				ItemStack stack = new ItemStack(Items.SKULL, 1, 1);
-				if(stack.getTagCompound() == null) stack.setTagCompound(new NBTTagCompound());
-				stack.getTagCompound().setTag("SkullOwner", new NBTTagString(((EntityPlayer)entityHit).getName()));
+				if (stack.getTagCompound() == null)
+					stack.setTagCompound(new NBTTagCompound());
+				stack.getTagCompound().setTag("SkullOwner", new NBTTagString(((EntityPlayer) entityHit).getName()));
 				entityHit.entityDropItem(stack, 0.0F);
 			} else if (entityHit instanceof EntityZombie) {
 				entityHit.entityDropItem(new ItemStack(Items.SKULL, 1, 2), 0.0F);
@@ -55,7 +56,7 @@ public class StarForgeEffectVorpal implements IStarForgeEffect {
 				entityHit.entityDropItem(new ItemStack(Items.SKULL, 1, 0), 0.0F);
 			} else if (entityHit instanceof EntityWitherSkeleton) {
 				entityHit.entityDropItem(new ItemStack(Items.SKULL, 1, 1), 0.0F);
-			}else{
+			} else {
 				return;
 			}
 			entityHit.setDead();

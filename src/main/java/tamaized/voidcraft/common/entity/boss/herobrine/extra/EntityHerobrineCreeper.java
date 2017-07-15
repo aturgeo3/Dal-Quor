@@ -1,18 +1,8 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
-import javax.annotation.Nullable;
-
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.ai.EntityAIHerobrineCreeperSwell;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
@@ -33,19 +23,26 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.ai.EntityAIHerobrineCreeperSwell;
+
+import javax.annotation.Nullable;
 
 public class EntityHerobrineCreeper extends EntityMob {
-	private static final DataParameter<Integer> STATE = EntityDataManager.<Integer> createKey(EntityCreeper.class, DataSerializers.VARINT);
-	private static final DataParameter<Boolean> POWERED = EntityDataManager.<Boolean> createKey(EntityCreeper.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Boolean> IGNITED = EntityDataManager.<Boolean> createKey(EntityCreeper.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> STATE = EntityDataManager.<Integer>createKey(EntityCreeper.class, DataSerializers.VARINT);
+	private static final DataParameter<Boolean> POWERED = EntityDataManager.<Boolean>createKey(EntityCreeper.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> IGNITED = EntityDataManager.<Boolean>createKey(EntityCreeper.class, DataSerializers.BOOLEAN);
 	/**
 	 * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go weird)
 	 */
 	private int lastActiveTime;
-	/** The amount of time since the creeper was close enough to the player to ignite */
+	/**
+	 * The amount of time since the creeper was close enough to the player to ignite
+	 */
 	private int timeSinceIgnited;
 	private int fuseTime = 30;
-	/** Explosion radius for this creeper. */
+	/**
+	 * Explosion radius for this creeper.
+	 */
 	private int explosionRadius = 7;
 	private int droppedSkulls;
 

@@ -1,11 +1,5 @@
 package tamaized.voidcraft.common.capabilities;
 
-import tamaized.voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
-import tamaized.voidcraft.common.capabilities.elytraFlying.IElytraFlyingCapability;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +10,12 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.elytraFlying.IElytraFlyingCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.vadeMecum.VadeMecumCapabilityHandler;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 
 public class EventHandler {
 
@@ -33,7 +33,7 @@ public class EventHandler {
 
 				@Override
 				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-					return capability == CapabilityList.VOIDICINFUSION ? CapabilityList.VOIDICINFUSION.<T> cast(inst) : null;
+					return capability == CapabilityList.VOIDICINFUSION ? CapabilityList.VOIDICINFUSION.<T>cast(inst) : null;
 				}
 
 				@Override
@@ -60,7 +60,7 @@ public class EventHandler {
 
 				@Override
 				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-					return capability == CapabilityList.VADEMECUM ? CapabilityList.VADEMECUM.<T> cast(inst) : null;
+					return capability == CapabilityList.VADEMECUM ? CapabilityList.VADEMECUM.<T>cast(inst) : null;
 				}
 
 				@Override
@@ -85,7 +85,7 @@ public class EventHandler {
 
 				@Override
 				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-					return capability == CapabilityList.ELYTRAFLYING ? CapabilityList.ELYTRAFLYING.<T> cast(inst) : null;
+					return capability == CapabilityList.ELYTRAFLYING ? CapabilityList.ELYTRAFLYING.<T>cast(inst) : null;
 				}
 
 				@Override

@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.tools;
 
-import tamaized.tammodized.common.tools.TamHoe;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,6 +10,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.tools.TamHoe;
+import tamaized.voidcraft.VoidCraft;
 
 public class VoidHoe extends TamHoe {
 
@@ -29,7 +29,8 @@ public class VoidHoe extends TamHoe {
 			return EnumActionResult.FAIL;
 		} else {
 			int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(stack, playerIn, worldIn, pos);
-			if (hook != 0) return hook > 0 ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+			if (hook != 0)
+				return hook > 0 ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 			Block block = iblockstate.getBlock();

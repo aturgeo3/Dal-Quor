@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.items.inventory;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.ITextComponent;
+import tamaized.voidcraft.VoidCraft;
 
 public abstract class InventoryItem implements IInventory {
 
@@ -84,7 +84,8 @@ public abstract class InventoryItem implements IInventory {
 				return itemstack;
 			} else {
 				itemstack = inventory[i].splitStack(count);
-				if (inventory[i].getCount() == 0) inventory[i] = ItemStack.EMPTY;
+				if (inventory[i].getCount() == 0)
+					inventory[i] = ItemStack.EMPTY;
 				return itemstack;
 			}
 		}

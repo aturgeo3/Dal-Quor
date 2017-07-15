@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.entity.mob;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.mob.model.ModelEtherealGuardian;
-import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,6 +15,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.mob.model.ModelEtherealGuardian;
+import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
 
 @SideOnly(Side.CLIENT)
 public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardian> {
@@ -38,8 +38,10 @@ public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardi
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
 			ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
 			ModelBiped.ArmPose modelbiped$armpose1 = ModelBiped.ArmPose.EMPTY;
-			if (!itemstack.isEmpty()) modelbiped$armpose = ModelBiped.ArmPose.ITEM;
-			if (!itemstack1.isEmpty()) modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
+			if (!itemstack.isEmpty())
+				modelbiped$armpose = ModelBiped.ArmPose.ITEM;
+			if (!itemstack1.isEmpty())
+				modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
 			if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
 				getMainModel().rightArmPose = modelbiped$armpose;
 				getMainModel().leftArmPose = modelbiped$armpose1;

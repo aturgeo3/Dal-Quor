@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.entity.boss.model;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
-import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 
 public class ModelVoidBoss<T extends EntityVoidNPC> extends AnimatableModelArms {
 
@@ -94,7 +94,8 @@ public class ModelVoidBoss<T extends EntityVoidNPC> extends AnimatableModelArms 
 	}
 
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
-		if (entity instanceof EntityTwinsXia && ((EntityTwinsXia) entity).isFrozen()) return;
+		if (entity instanceof EntityTwinsXia && ((EntityTwinsXia) entity).isFrozen())
+			return;
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
 		head.rotateAngleX = headPitch / (180F / (float) Math.PI);

@@ -66,7 +66,8 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe) super.addPotionEffect(potioneffectIn);
+		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe)
+			super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 		}

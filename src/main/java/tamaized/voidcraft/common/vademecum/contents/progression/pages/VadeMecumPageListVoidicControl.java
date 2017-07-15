@@ -8,11 +8,11 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListVoidicControl implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
+		return new IVadeMecumPage[]{
 
 				new VadeMecumPage("voidcraft.VadeMecum.progression.title.voidicControl", "voidcraft.VadeMecum.progression.desc.voidicControl.pg1"),
 
-				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.voidicControl.pg2") };
+				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.voidicControl.pg2")};
 	}
 
 }

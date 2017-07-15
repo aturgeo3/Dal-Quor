@@ -1,13 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.helper.RayTraceHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
-import tamaized.voidcraft.common.items.inventory.InventoryItem;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,6 +16,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.RayTraceHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.items.inventory.InventoryItem;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
 
 public class RealityTeleporter extends VoidicPowerItem {
 
@@ -111,7 +111,8 @@ public class RealityTeleporter extends VoidicPowerItem {
 	}
 
 	public static BlockPos getLink(ItemStack stack) {
-		if (!hasLink(stack)) return null;
+		if (!hasLink(stack))
+			return null;
 		NBTTagCompound ct = stack.getOrCreateSubCompound(VoidCraft.modid + "_LinkLoc");
 		int[] loc = ct.getIntArray("link");
 		return new BlockPos(loc[0], loc[1], loc[2]);
@@ -128,14 +129,17 @@ public class RealityTeleporter extends VoidicPowerItem {
 			if (loc.length == 3) {
 				BlockPos newPos = new BlockPos(loc[0], loc[1], loc[2]);
 				if (teleporter.getPos().equals(newPos)) {
-					if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.error"));
+					if (!worldIn.isRemote)
+						playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.error"));
 				} else {
 					teleporter.setLink(newPos);
-					if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.link", loc[0], loc[1], loc[2]));
+					if (!worldIn.isRemote)
+						playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.link", loc[0], loc[1], loc[2]));
 				}
 			} else {
-				ct.setIntArray("link", new int[] { pos.getX(), pos.getY(), pos.getZ() });
-				if (!worldIn.isRemote) playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.save", pos.getX(), pos.getY(), pos.getZ()));
+				ct.setIntArray("link", new int[]{pos.getX(), pos.getY(), pos.getZ()});
+				if (!worldIn.isRemote)
+					playerIn.sendMessage(new TextComponentTranslation("voidcraft.misc.item.teleporter.save", pos.getX(), pos.getY(), pos.getZ()));
 			}
 			return EnumActionResult.SUCCESS;
 		}
@@ -145,7 +149,8 @@ public class RealityTeleporter extends VoidicPowerItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (world.isRemote) return ActionResult.newResult(EnumActionResult.PASS, stack);
+		if (world.isRemote)
+			return ActionResult.newResult(EnumActionResult.PASS, stack);
 		InventoryItem inv = createInventory(stack);
 		ItemStack holes = inv.getStackInSlot(0);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);

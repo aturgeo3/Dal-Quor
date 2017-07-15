@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.tools;
 
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.proxy.ClientProxy;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.common.vademecum.contents.documentation.tools.realityTeleporter.VadeMecumPageListRealityTeleporter;
 import tamaized.voidcraft.common.vademecum.contents.documentation.tools.spectreaxe.VadeMecumPageListSpectreAxe;
@@ -15,7 +15,7 @@ import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidhoe.
 import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidicdrill.VadeMecumPageListVoidicDrill;
 import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidpick.VadeMecumPageListVoidPick;
 import tamaized.voidcraft.common.vademecum.contents.documentation.tools.voidspade.VadeMecumPageListVoidSpade;
-import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 public class VadeMecumToolsEntry extends VadeMecumEntry {
 

@@ -1,11 +1,6 @@
 package tamaized.voidcraft.common.blocks;
 
-import java.util.Random;
-
 import com.google.common.cache.LoadingCache;
-
-import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +17,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlockPortal;
+import tamaized.voidcraft.VoidCraft;
+
+import java.util.Random;
 
 public class BlockPortalVoid extends TamBlockPortal {
 

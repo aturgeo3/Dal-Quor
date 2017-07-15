@@ -12,9 +12,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityHerobrineTNTPrimed extends Entity {
-	private static final DataParameter<Integer> FUSE = EntityDataManager.<Integer> createKey(EntityTNTPrimed.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FUSE = EntityDataManager.<Integer>createKey(EntityTNTPrimed.class, DataSerializers.VARINT);
 	private EntityLivingBase tntPlacedBy;
-	/** How long the fuse is */
+	/**
+	 * How long the fuse is
+	 */
 	private int fuse;
 
 	public EntityHerobrineTNTPrimed(World worldIn) {

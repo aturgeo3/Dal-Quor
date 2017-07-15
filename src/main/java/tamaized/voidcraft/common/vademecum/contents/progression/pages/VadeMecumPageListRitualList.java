@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.vademecum.contents.progression.pages;
 
-import java.util.ArrayList;
-
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.vademecum.IVadeMecumPage;
@@ -10,6 +8,8 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 import tamaized.voidcraft.common.vademecum.VadeMecumPageMultiBlock;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+
+import java.util.ArrayList;
 
 public class VadeMecumPageListRitualList implements IVadeMecumPageProvider {
 

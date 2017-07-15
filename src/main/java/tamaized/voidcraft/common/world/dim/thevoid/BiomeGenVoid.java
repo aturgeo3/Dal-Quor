@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.world.dim.thevoid;
 
-import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
-import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
-import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
+import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
+import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
 
 public class BiomeGenVoid extends Biome {
 

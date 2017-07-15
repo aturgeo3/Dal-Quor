@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.sound.OggLength;
-import tamaized.voidcraft.common.sound.VanillaRecordLengths;
 import com.google.gson.stream.JsonReader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,6 +13,10 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.sound.OggLength;
+import tamaized.voidcraft.common.sound.VanillaRecordLengths;
 
 import javax.annotation.Nullable;
 import java.io.InputStream;

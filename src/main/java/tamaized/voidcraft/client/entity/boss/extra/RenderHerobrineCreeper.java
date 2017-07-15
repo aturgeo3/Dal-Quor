@@ -1,14 +1,13 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import org.lwjgl.opengl.GL11;
-
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 
 public class RenderHerobrineCreeper<T extends EntityHerobrineCreeper> extends RenderLiving<T> {
 	private static final ResourceLocation CREEPER_TEXTURES = new ResourceLocation("textures/entity/creeper/creeper.png");

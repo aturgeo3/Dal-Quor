@@ -29,9 +29,9 @@ public interface IVoidicPowerCapability {
 	boolean hasLoaded();
 
 	void setLoaded();
-	
+
 	void markDirty();
-	
+
 	boolean isDirty();
 
 	void copyFrom(IVoidicPowerCapability cap);

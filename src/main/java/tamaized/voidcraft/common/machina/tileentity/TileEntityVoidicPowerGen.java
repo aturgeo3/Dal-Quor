@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.machina.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
-import tamaized.voidcraft.common.voidicpower.VoidicPowerHandler;
-import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
-import tamaized.voidcraft.common.machina.addons.VoidTank;
-import tamaized.voidcraft.registry.VoidCraftFluids;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +8,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
+import tamaized.voidcraft.common.machina.addons.VoidTank;
+import tamaized.voidcraft.common.voidicpower.TileEntityVoidicPowerInventory;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerHandler;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

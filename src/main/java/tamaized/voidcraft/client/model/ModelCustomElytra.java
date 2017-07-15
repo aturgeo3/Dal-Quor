@@ -1,6 +1,5 @@
 package tamaized.voidcraft.client.model;
 
-import tamaized.voidcraft.common.events.CustomElytraHandler;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,18 +8,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.Vec3d;
+import tamaized.voidcraft.common.events.CustomElytraHandler;
 
 public class ModelCustomElytra extends ModelBase {
 	private final ModelRenderer rightWing;
 	private final ModelRenderer leftWing = new ModelRenderer(this, 22, 0);
 
-	public ModelCustomElytra()
-    {
-        this.leftWing.addBox(-10.0F, 0.0F, 0.0F, 10, 20, 2, 1.0F);
-        this.rightWing = new ModelRenderer(this, 22, 0);
-        this.rightWing.mirror = true;
-        this.rightWing.addBox(0.0F, 0.0F, 0.0F, 10, 20, 2, 1.0F);
-    }
+	public ModelCustomElytra() {
+		this.leftWing.addBox(-10.0F, 0.0F, 0.0F, 10, 20, 2, 1.0F);
+		this.rightWing = new ModelRenderer(this, 22, 0);
+		this.rightWing.mirror = true;
+		this.rightWing.addBox(0.0F, 0.0F, 0.0F, 10, 20, 2, 1.0F);
+	}
 
 	/**
 	 * Sets the models various rotation angles then renders the model.

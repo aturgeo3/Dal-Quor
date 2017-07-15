@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.vademecum;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextFormatting;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
 
 public class VadeMecumPage implements IVadeMecumPage {
 
@@ -17,8 +17,8 @@ public class VadeMecumPage implements IVadeMecumPage {
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my, int offset) {
-		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x+65+offset, y, 0x000000);
-		render.drawSplitString(text, x+offset, y + 20, 140, 0x000000);
+		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65 + offset, y, 0x000000);
+		render.drawSplitString(text, x + offset, y + 20, 140, 0x000000);
 	}
 
 }

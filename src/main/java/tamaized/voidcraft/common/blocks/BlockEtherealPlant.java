@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import tamaized.tammodized.common.blocks.TamBlockCrops;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
-import tamaized.voidcraft.common.items.EtherealFruit;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,10 +15,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
+import tamaized.tammodized.common.blocks.TamBlockCrops;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+import tamaized.voidcraft.common.items.EtherealFruit;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockEtherealPlant extends TamBlockCrops {
 
-	protected static final AxisAlignedBB[] AABB = new AxisAlignedBB[] { new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.125D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.25D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.375D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.5D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.625D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.75D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.875D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D) };
+	protected static final AxisAlignedBB[] AABB = new AxisAlignedBB[]{new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.125D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.25D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.375D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.5D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.625D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.75D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.875D, 0.625D), new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D)};
 	private static final ArrayList<Block> plantableBlocks = new ArrayList<Block>();
 
 	public BlockEtherealPlant(CreativeTabs tab, String n, float hardness) {
@@ -72,7 +72,8 @@ public class BlockEtherealPlant extends TamBlockCrops {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (getAge(state) >= getMaxAge()) {
-			if (worldIn.isRemote) return true;
+			if (worldIn.isRemote)
+				return true;
 			TileEntity tileEntity = worldIn.getTileEntity(pos.down());
 			TileEntityFakeBedrockFarmland.Alteration alteration = TileEntityFakeBedrockFarmland.Alteration.NORMAL;
 			if (tileEntity instanceof TileEntityFakeBedrockFarmland) {

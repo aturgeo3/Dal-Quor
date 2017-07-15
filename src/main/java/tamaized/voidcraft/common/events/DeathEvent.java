@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public class DeathEvent {
 

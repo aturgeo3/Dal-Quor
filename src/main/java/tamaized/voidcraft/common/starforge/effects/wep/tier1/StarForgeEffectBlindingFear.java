@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier1;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +9,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectBlindingFear implements IStarForgeEffect {
 
@@ -23,10 +23,10 @@ public class StarForgeEffectBlindingFear implements IStarForgeEffect {
 	public Tier getTier() {
 		return Tier.ONE;
 	}
-	
+
 	@Override
 	public void update(ItemStack stack) {
-		
+
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.machina.addons;
 
+import net.minecraft.item.ItemStack;
 import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import tamaized.voidcraft.VoidCraft;
-import net.minecraft.item.ItemStack;
 
 public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.InfuserRecipe> {
 
@@ -18,7 +18,8 @@ public class TERecipeInfuser extends TamTileEntityRecipeList<TERecipeInfuser.Inf
 
 	public ItemStack getInput(ItemStack output) {
 		for (InfuserRecipe recipe : getList()) {
-			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output)) return recipe.getInput()[0];
+			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output))
+				return recipe.getInput()[0];
 		}
 		return ItemStack.EMPTY;
 	}

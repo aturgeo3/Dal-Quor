@@ -86,7 +86,7 @@ public class MapGenVoidCity extends MapGenStructure {
 
 	private ChunkPrimer primer;
 
-	public void setPrimer(ChunkPrimer p){
+	public void setPrimer(ChunkPrimer p) {
 		primer = p;
 	}
 
@@ -116,7 +116,7 @@ public class MapGenVoidCity extends MapGenStructure {
 			Rotation rotation = Rotation.values()[random.nextInt(Rotation.values().length)];
 			int i = MapGenVoidCity.getYPosForStructure(chunkX, chunkZ, chunkProvider);
 
-			if (i < 60 || (primer != null && primer.getBlockState(0, i-1, 0).getBlock() == Blocks.AIR)) {
+			if (i < 60 || (primer != null && primer.getBlockState(0, i - 1, 0).getBlock() == Blocks.AIR)) {
 				this.isSizeable = false;
 			} else {
 				BlockPos blockpos = new BlockPos(chunkX * 16 + 8, i, chunkZ * 16 + 8);

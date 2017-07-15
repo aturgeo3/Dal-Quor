@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.entity.companion.render;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.companion.model.ModelVoidParrot;
-import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.companion.model.ModelVoidParrot;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 
 public class RenderVoidParrot extends RenderLiving<EntityVoidParrot> {
 

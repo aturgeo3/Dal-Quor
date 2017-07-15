@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
-import tamaized.voidcraft.common.blocks.AIBlock;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +11,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.blocks.AIBlock;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
 
 public class EntityHerobrineFireball extends EntityFireball {
 

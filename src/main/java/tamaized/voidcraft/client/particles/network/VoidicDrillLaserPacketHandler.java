@@ -1,15 +1,15 @@
 package tamaized.voidcraft.client.particles.network;
 
-import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
-import tamaized.tammodized.common.particles.ParticlePacketBase;
-import tamaized.tammodized.common.particles.TamParticle;
-import tamaized.voidcraft.common.items.VoidicDrill.VoidDrillParticleData;
-import tamaized.voidcraft.client.particles.VoidicDrillLaser;
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
+import tamaized.tammodized.common.particles.ParticlePacketBase;
+import tamaized.tammodized.common.particles.TamParticle;
+import tamaized.voidcraft.client.particles.VoidicDrillLaser;
+import tamaized.voidcraft.common.items.VoidicDrill.VoidDrillParticleData;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,7 +18,8 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 
 	@Override
 	public void encode(DataOutputStream packet, IParticlePacketData data) throws IOException {
-		if (!(data instanceof VoidDrillParticleData)) throw new IOException("Incorrect IParticlePacketData type: " + data);
+		if (!(data instanceof VoidDrillParticleData))
+			throw new IOException("Incorrect IParticlePacketData type: " + data);
 		VoidDrillParticleData dat = (VoidDrillParticleData) data;
 		boolean flag = dat.target != null;
 		packet.writeBoolean(flag);

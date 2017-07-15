@@ -1,10 +1,10 @@
 package tamaized.voidcraft.common.voidicpower;
 
-import java.util.ArrayList;
-
-import tamaized.tammodized.common.tileentity.TamTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
+
+import java.util.ArrayList;
 
 public abstract class TileEntityVoidicPower extends TamTileEntity implements IVoidicPower {
 

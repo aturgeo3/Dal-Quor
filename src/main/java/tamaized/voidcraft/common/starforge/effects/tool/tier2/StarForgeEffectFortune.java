@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.tool.tier2;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -10,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectFortune implements IStarForgeEffect {
 
@@ -25,7 +25,8 @@ public class StarForgeEffectFortune implements IStarForgeEffect {
 
 	@Override
 	public void update(ItemStack stack) {
-		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) < 5) stack.addEnchantment(Enchantments.FORTUNE, 5);
+		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) < 5)
+			stack.addEnchantment(Enchantments.FORTUNE, 5);
 
 	}
 

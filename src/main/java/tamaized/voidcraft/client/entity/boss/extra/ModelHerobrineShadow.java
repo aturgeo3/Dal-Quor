@@ -1,7 +1,5 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
-import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,6 +7,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
+import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 
 public class ModelHerobrineShadow<T extends EntityHerobrineShadow> extends ModelBase {
 
@@ -87,7 +87,7 @@ public class ModelHerobrineShadow<T extends EntityHerobrineShadow> extends Model
 	}
 
 	private void setAnimations(T entity, float partialTickTime) {
-		
+
 	}
 
 	private void setRotation(ModelRenderer model, double x, double y, double z) {
@@ -97,7 +97,8 @@ public class ModelHerobrineShadow<T extends EntityHerobrineShadow> extends Model
 	}
 
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
-		if(entity instanceof EntityTwinsXia && ((EntityTwinsXia)entity).isFrozen()) return;
+		if (entity instanceof EntityTwinsXia && ((EntityTwinsXia) entity).isFrozen())
+			return;
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
 		head.rotateAngleX = headPitch / (180F / (float) Math.PI);

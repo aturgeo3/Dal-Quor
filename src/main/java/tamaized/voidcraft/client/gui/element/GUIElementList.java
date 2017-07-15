@@ -1,20 +1,20 @@
 package tamaized.voidcraft.client.gui.element;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraftforge.fml.client.GuiScrollingList;
 
+import java.util.List;
+
 public class GUIElementList extends GuiScrollingList {
 
 	private Minecraft mc;
 	private GuiContainer parent;
-	private ArrayList<GUIListElement> list;
+	private List<GUIListElement> list;
 	private GUIListElement selected;
 
-	public GUIElementList(GuiContainer gui, ArrayList<GUIListElement> elements, int x, int y, int listWidth, int listHeight, int slotHeight) {
+	public GUIElementList(GuiContainer gui, List<GUIListElement> elements, int x, int y, int listWidth, int listHeight, int slotHeight) {
 		super(gui.mc, listWidth, gui.height, y, listHeight, x, slotHeight, gui.width, gui.height);
 		mc = gui.mc;
 		parent = gui;
@@ -55,7 +55,7 @@ public class GUIElementList extends GuiScrollingList {
 
 	}
 
-	public ArrayList<GUIListElement> getElements() {
+	public List<GUIListElement> getElements() {
 		return list;
 	}
 

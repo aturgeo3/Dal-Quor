@@ -38,12 +38,13 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 
 	@Override
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
-		if (phase == 2) getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
+		if (phase == 2)
+			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
 	}
-	
+
 	@Override
 	protected void deathHook() {
-		
+
 	}
 
 	@Override
@@ -152,12 +153,12 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 
 	@Override
 	protected void encodePacketData(ByteBuf stream) {
-		
+
 	}
 
 	@Override
 	protected void decodePacketData(ByteBuf stream) {
-		
+
 	}
 
 }

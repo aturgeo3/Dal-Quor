@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.sound;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.client.sound.BGMusic;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import tamaized.voidcraft.client.sound.BGMusic;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public class BossMusicPlayer {
 
@@ -18,7 +18,7 @@ public class BossMusicPlayer {
 
 	/**
 	 * This is updated directly from {@link BGMusic#tick(ClientTickEvent)}
-	 * 
+	 *
 	 * @return true if we are playing boss music
 	 */
 	public static boolean update(ISound sound) {
@@ -29,13 +29,15 @@ public class BossMusicPlayer {
 				BGMusic.PlayMusic(music);
 			}
 		} else {
-			if (boss != null) boss = null;
+			if (boss != null)
+				boss = null;
 		}
 		return music != null && boss != null && boss.isEntityAlive();
 	}
 
 	public static void PlayMusic(Entity entity, SoundEvent sound) {
-		if(!ConfigHandler.music) return;
+		if (!ConfigHandler.music)
+			return;
 		boss = entity;
 		music = BGMusic.PlayMusic(sound);
 	}

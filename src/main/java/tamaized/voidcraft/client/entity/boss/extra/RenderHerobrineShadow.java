@@ -1,12 +1,12 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
 
 public class RenderHerobrineShadow<T extends EntityHerobrineShadow> extends Render<T> {
 
@@ -35,22 +35,22 @@ public class RenderHerobrineShadow<T extends EntityHerobrineShadow> extends Rend
 		float f1 = this.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, partialTicks);
 		float f2 = f1 - f;
 		float f7 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-        GlStateManager.translate((float)x, (float)y, (float)z);
+		GlStateManager.translate((float) x, (float) y, (float) z);
 		float f8 = this.handleRotationFloat(entity, partialTicks);
 		float f4 = this.prepareScale(entity, partialTicks);
 		float f5 = 0.0F;
 		float f6 = 0.0F;
-        GlStateManager.enableAlpha();
-        this.mainModel.setRotationAngles(f6, f5, f8, f2, f7, f4, entity);
+		GlStateManager.enableAlpha();
+		this.mainModel.setRotationAngles(f6, f5, f8, f2, f7, f4, entity);
 		GlStateManager.color(0.0f, 0.0f, 0.0f, 1.0f);
-        this.renderManager.renderEngine.bindTexture(Herobrine_Texture);
+		this.renderManager.renderEngine.bindTexture(Herobrine_Texture);
 		mainModel.render(entity, f6, f5, f8, f2, f7, f4);
-        GlStateManager.depthMask(true);
-        GlStateManager.disableRescaleNormal();
-        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GlStateManager.enableTexture2D();
-        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-        GlStateManager.enableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableRescaleNormal();
+		GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+		GlStateManager.enableTexture2D();
+		GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+		GlStateManager.enableCull();
 		GlStateManager.popMatrix();
 		super.doRender(entity, x, y, z, yaw, partialTicks);
 	}

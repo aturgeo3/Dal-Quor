@@ -33,8 +33,10 @@ public class AIBlock extends TamBlockContainer {
 			return getMyTileEntity(world, pos.add(0, -1, 0));
 		}
 		TileEntity te = world.getTileEntity(pos);
-		if (te instanceof TileEntityAIBlock) return (TileEntityAIBlock) te;
-		else return null;
+		if (te instanceof TileEntityAIBlock)
+			return (TileEntityAIBlock) te;
+		else
+			return null;
 	}
 
 	@Override

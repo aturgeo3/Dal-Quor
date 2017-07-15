@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 
 public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData, IMob {
 
-	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer> createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer>createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
 		@Override
 		public boolean apply(@Nullable Entity p_apply_1_) {

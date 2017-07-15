@@ -38,10 +38,10 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
 
 	}
-	
+
 	@Override
 	protected void deathHook() {
-		
+
 	}
 
 	@Override
@@ -119,12 +119,12 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 
 	@Override
 	protected void encodePacketData(ByteBuf stream) {
-		
+
 	}
 
 	@Override
 	protected void decodePacketData(ByteBuf stream) {
-		
+
 	}
 
 }

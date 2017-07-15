@@ -1,34 +1,20 @@
 package tamaized.voidcraft.common.entity.mob;
 
 import com.google.common.base.Predicate;
-
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.EntityVoidMob;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 public class EntityMobVoidWrath extends EntityVoidMob {
 
@@ -54,9 +40,12 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 			 * Return whether the specified entity is applicable to this filter.
 			 */
 			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntityWitherSkeleton) return false;
-				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker) return false;
-				else return true;
+				if (p_82704_1_ instanceof EntityWitherSkeleton)
+					return false;
+				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker)
+					return false;
+				else
+					return true;
 			}
 
 			public boolean apply(Object p_apply_1_) {

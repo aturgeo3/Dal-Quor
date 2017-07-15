@@ -25,8 +25,10 @@ public class VoidicPowerHandler {
 
 	public static int sendPower(IVoidicPower input, int limit) {
 		int amount = input.maxPowerTransfer();
-		if (limit != -1 && input.maxPowerTransfer() > limit) amount = limit;
-		if (input.getPowerAmount() - amount < 0) amount = input.getPowerAmount();
+		if (limit != -1 && input.maxPowerTransfer() > limit)
+			amount = limit;
+		if (input.getPowerAmount() - amount < 0)
+			amount = input.getPowerAmount();
 		input.setPowerAmount(input.getPowerAmount() - amount);
 		return amount;
 	}

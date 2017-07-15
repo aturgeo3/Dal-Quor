@@ -2,13 +2,11 @@
  * Original Class file: BossBarHandler
  * Mod: Botania
  * Author: Vazkii
- * 
+ * <p>
  * This is a custom version of it therefore I wont claim this file truly as my own.
  */
 package tamaized.voidcraft.client.entity.boss.bossbar;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.boss.IVoidBossData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,6 +17,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.boss.IVoidBossData;
 
 import java.awt.*;
 
@@ -42,7 +42,8 @@ public class RenderBossHeathBar {
 	}
 
 	public static void render(ScaledResolution res) {
-		if (voidBoss == null) return;
+		if (voidBoss == null)
+			return;
 
 		Minecraft mc = Minecraft.getMinecraft();
 		String name = voidBoss.getNameForBossBar().getFormattedText();
@@ -112,7 +113,8 @@ public class RenderBossHeathBar {
 
 		Entity e = (Entity) voidBoss;
 		EntityPlayer p = mc.player;
-		if (e.isDead || !p.world.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32) voidBoss = null;
+		if (e.isDead || !p.world.loadedEntityList.contains(e) || pointDistanceSpace(e.posX, e.posY, e.posZ, p.posX, p.posY, p.posZ) > 32)
+			voidBoss = null;
 
 		if (flashTickWait <= 0) {
 			if (flashTickFlag) {

@@ -1,13 +1,13 @@
 package tamaized.voidcraft.client.entity.boss.model;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 
 public class ModelXia2<T extends EntityVoidNPC> extends AnimatableModelArms {
 

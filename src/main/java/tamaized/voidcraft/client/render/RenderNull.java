@@ -10,10 +10,10 @@ public class RenderNull extends Render<Entity> {
 	public RenderNull(RenderManager manager) {
 		super(manager);
 	}
-	
+
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		
+
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.machina.addons;
 
+import net.minecraft.item.ItemStack;
 import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import tamaized.voidcraft.VoidCraft;
-import net.minecraft.item.ItemStack;
 
 public class TERecipesBlastFurnace extends TamTileEntityRecipeList<TERecipesBlastFurnace.BlastFurnaceRecipe> {
 
@@ -18,9 +18,10 @@ public class TERecipesBlastFurnace extends TamTileEntityRecipeList<TERecipesBlas
 
 	public ItemStack[] getInput(ItemStack output) {
 		for (BlastFurnaceRecipe recipe : getList()) {
-			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output)) return recipe.getInput();
+			if (ItemStack.areItemStacksEqual(recipe.getOutput(), output))
+				return recipe.getInput();
 		}
-		return new ItemStack[]{ ItemStack.EMPTY, ItemStack.EMPTY };
+		return new ItemStack[]{ItemStack.EMPTY, ItemStack.EMPTY};
 	}
 
 	public class BlastFurnaceRecipe extends TamTileEntityRecipeList.TamTERecipe {

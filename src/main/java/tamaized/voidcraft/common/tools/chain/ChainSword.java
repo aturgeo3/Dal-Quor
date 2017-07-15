@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.tools.chain;
 
-import tamaized.tammodized.common.tools.TamSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import tamaized.tammodized.common.tools.TamSword;
 
 public class ChainSword extends TamSword {
 

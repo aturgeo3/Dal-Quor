@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.model.ModelVoidBoss;
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.model.ModelVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 
 @SideOnly(Side.CLIENT)
 public class RenderDol<T extends EntityVoidNPC> extends RenderLiving<T> {
@@ -35,7 +35,7 @@ public class RenderDol<T extends EntityVoidNPC> extends RenderLiving<T> {
 	protected ResourceLocation getEntityTexture(T entity) {
 		return TEXTURE;
 	}
-	
+
 	@Override
 	public ModelVoidBoss getMainModel() {
 		return (ModelVoidBoss) super.getMainModel();

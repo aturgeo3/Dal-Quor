@@ -9,8 +9,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListVoidicParrot implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
-				new VadeMecumPage(VoidCraft.modid+".VadeMecum.docs.title.voidicParrot", VoidCraft.modid+".VadeMecum.docs.desc.voidicParrot") };
+		return new IVadeMecumPage[]{new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.voidicParrot", VoidCraft.modid + ".VadeMecum.docs.desc.voidicParrot")};
 	}
 
 }

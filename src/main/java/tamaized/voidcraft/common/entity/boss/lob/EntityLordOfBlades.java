@@ -70,20 +70,22 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 			float laY = (float) Math.toDegrees(model.armLeft.rotateAngleY);
 			float raY = (float) Math.toDegrees(model.armRight.rotateAngleY);
 			model.setAnimations(move(laP, leftArmPitch), move(raP, rightArmPitch), move(laY, leftArmYaw), move(raY, rightArmYaw));
-			if(isDone(model)){
-				
+			if (isDone(model)) {
+
 			}
 		}
 
 		private float move(float o, float r) {
 			float speed = 1;
 			float m = 0;
-			if (o > r) m = -speed;
-			else if (o < r) m = speed;
+			if (o > r)
+				m = -speed;
+			else if (o < r)
+				m = speed;
 			return Math.min(m, m > 0 ? (r - o) : (o - r));
 		}
-		
-		private boolean isDone(ModelLordOfBlades model){
+
+		private boolean isDone(ModelLordOfBlades model) {
 			return model.armLeft.rotateAngleY == leftArmPitch && model.armRight.rotateAngleY == rightArmPitch && model.armLeft.rotateAngleX == leftArmYaw && model.armRight.rotateAngleX == rightArmYaw;
 		}
 

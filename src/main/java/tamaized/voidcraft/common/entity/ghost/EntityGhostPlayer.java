@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.entity.ghost;
 
-import java.util.UUID;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+
+import java.util.UUID;
 
 public class EntityGhostPlayer extends EntityGhostPlayerBase {
 

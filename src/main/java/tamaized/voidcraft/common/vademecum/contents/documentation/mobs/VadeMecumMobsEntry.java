@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.mobs;
 
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.proxy.ClientProxy;
-import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.etherealGuardian.VadeMecumPageListEtherealGuardian;
 import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.herobrinecreeper.VadeMecumPageListHerobrineCreeper;
@@ -12,8 +12,8 @@ import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.spectre.V
 import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.voidicParrot.VadeMecumPageListVoidicParrot;
 import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.wraith.VadeMecumPageListVoidWraith;
 import tamaized.voidcraft.common.vademecum.contents.documentation.mobs.wrath.VadeMecumPageListVoidWrath;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.proxy.ClientProxy;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class VadeMecumMobsEntry extends VadeMecumEntry {
 
@@ -24,6 +24,7 @@ public class VadeMecumMobsEntry extends VadeMecumEntry {
 	public VadeMecumEntry herobrineCreeper;
 	public VadeMecumEntry etherealGuardian;
 	public VadeMecumEntry voidicParrot;
+
 	public VadeMecumMobsEntry(VadeMecumEntry back) {
 		super("docs_Mobs", VoidCraft.modid + ".VadeMecum.docs.title.mobs", back, null);
 	}

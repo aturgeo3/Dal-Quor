@@ -146,13 +146,16 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		super.onLivingUpdate();
 		if (!world.isRemote) {
 			if (running) {
-				if (rune && runeState < maxRuneState) runeState++;
+				if (rune && runeState < maxRuneState)
+					runeState++;
 			}
-			if (tick >= finalTick) hasInteracted = true;
+			if (tick >= finalTick)
+				hasInteracted = true;
 			sendPacketUpdates(this);
 		}
 		runeRotation += (int) Math.ceil(20F * getRuneStatePerc());
-		if (runeRotation >= 360) runeRotation = 0;
+		if (runeRotation >= 360)
+			runeRotation = 0;
 		if (rune) {
 			if (runeTarget != null) {
 				updateLook();
@@ -163,7 +166,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 				setDead();
 			}
 		}
-		if (running) tick++;
+		if (running)
+			tick++;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -224,7 +228,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		if (running || !canInteract) return false;
+		if (running || !canInteract)
+			return false;
 		running = true;
 		sendPacketUpdates(this);
 		return true;

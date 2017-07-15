@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.gui.container;
 
-import tamaized.voidcraft.common.gui.slots.SlotOnlyClass;
-import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
-import tamaized.voidcraft.common.events.client.TextureStitch;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
-import tamaized.voidcraft.common.starforge.IStarForgeTool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -15,6 +8,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
+import tamaized.voidcraft.common.events.client.TextureStitch;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyClass;
+import tamaized.voidcraft.common.gui.slots.SlotOnlyItem;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class StarForgeContainer extends Container {
 

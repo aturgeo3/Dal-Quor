@@ -1,6 +1,5 @@
 package tamaized.voidcraft.client.entity.nonliving;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,6 +12,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
 
 import java.util.Random;
 
@@ -20,7 +20,7 @@ import java.util.Random;
 public class RenderAcidBall<T extends EntityArrow> extends Render<T> {
 
 	private static final ResourceLocation arrowTextures = new ResourceLocation(VoidCraft.modid, "textures/entity/acidball.png");
-	
+
 	private static final Random rand = new Random();
 
 	public RenderAcidBall(RenderManager renderManager) {
@@ -104,8 +104,8 @@ public class RenderAcidBall<T extends EntityArrow> extends Render<T> {
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		Vec3d vec = entity.getLook(1.0F);
 		for (int index = 0; index < 20; index++)
-			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.tammodized.client.particles.ParticleFluff(entity.world, entity.getPositionVector(), new Vec3d(-((0.015*vec.x) + ((rand.nextFloat() * 0.125) - 0.0625)), ((0.015*vec.y) + ((rand.nextFloat() * 0.125) - 0.0625)), -((0.015*vec.z) + ((rand.nextFloat() * 0.125) - 0.0625))), rand.nextInt(10), 0, (rand.nextFloat() * 0.85F) + 0.15F, 0x00FF00FF));
-	
+			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.tammodized.client.particles.ParticleFluff(entity.world, entity.getPositionVector(), new Vec3d(-((0.015 * vec.x) + ((rand.nextFloat() * 0.125) - 0.0625)), ((0.015 * vec.y) + ((rand.nextFloat() * 0.125) - 0.0625)), -((0.015 * vec.z) + ((rand.nextFloat() * 0.125) - 0.0625))), rand.nextInt(10), 0, (rand.nextFloat() * 0.85F) + 0.15F, 0x00FF00FF));
+
 	}
 
 	@Override

@@ -1,9 +1,5 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
-import tamaized.voidcraft.client.entity.boss.model.ModelVoidBossOverlay;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -18,6 +14,10 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
+import tamaized.voidcraft.client.entity.boss.model.ModelVoidBossOverlay;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
 
 @SideOnly(Side.CLIENT)
 public class RenderXia<T extends EntityBossXia> extends RenderLiving<T> {
@@ -33,13 +33,16 @@ public class RenderXia<T extends EntityBossXia> extends RenderLiving<T> {
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
-			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
+			if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z)))
+				return;
 			ItemStack itemstack = entity.getHeldItemMainhand();
 			ItemStack itemstack1 = entity.getHeldItemOffhand();
 			ModelBiped.ArmPose modelbiped$armpose = ModelBiped.ArmPose.EMPTY;
 			ModelBiped.ArmPose modelbiped$armpose1 = ModelBiped.ArmPose.EMPTY;
-			if (!itemstack.isEmpty()) modelbiped$armpose = ModelBiped.ArmPose.ITEM;
-			if (!itemstack1.isEmpty()) modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
+			if (!itemstack.isEmpty())
+				modelbiped$armpose = ModelBiped.ArmPose.ITEM;
+			if (!itemstack1.isEmpty())
+				modelbiped$armpose1 = ModelBiped.ArmPose.ITEM;
 			if (entity.getPrimaryHand() == EnumHandSide.RIGHT) {
 				getMainModel().rightArmPose = modelbiped$armpose;
 				getMainModel().leftArmPose = modelbiped$armpose1;

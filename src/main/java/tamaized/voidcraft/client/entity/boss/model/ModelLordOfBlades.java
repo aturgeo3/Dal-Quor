@@ -1,10 +1,10 @@
 package tamaized.voidcraft.client.entity.boss.model;
 
-import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.client.entity.animation.AnimatableModel.AnimatableModelArms;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 
 public class ModelLordOfBlades extends AnimatableModelArms {
 
@@ -539,7 +539,7 @@ public class ModelLordOfBlades extends AnimatableModelArms {
 		armLeftOverlay.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
 		armRightOverlay.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 		armLeftOverlay.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-		
+
 		((EntityVoidNPC) entity).renderAnimation(this);
 	}
 

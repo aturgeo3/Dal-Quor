@@ -1,7 +1,5 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
-import tamaized.voidcraft.common.entity.boss.lob.EntityLordOfBlades;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -9,6 +7,8 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.client.entity.boss.model.ModelLordOfBlades;
+import tamaized.voidcraft.common.entity.boss.lob.EntityLordOfBlades;
 
 @SideOnly(Side.CLIENT)
 public class RenderLordOfBlades<T extends EntityLordOfBlades> extends RenderLiving<T> {

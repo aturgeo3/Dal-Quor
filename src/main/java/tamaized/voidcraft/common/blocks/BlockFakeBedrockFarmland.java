@@ -1,10 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import java.util.ArrayList;
-
-import tamaized.tammodized.common.blocks.TamBlockFarmland;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,6 +15,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import tamaized.tammodized.common.blocks.TamBlockFarmland;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
+
+import java.util.ArrayList;
 
 public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 
@@ -54,9 +54,11 @@ public class BlockFakeBedrockFarmland extends TamBlockFarmland {
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!stack.isEmpty() && worldIn.isAirBlock(pos.up())) {
 			TileEntity t = worldIn.getTileEntity(pos);
-			if (!(t instanceof TileEntityFakeBedrockFarmland)) return false;
+			if (!(t instanceof TileEntityFakeBedrockFarmland))
+				return false;
 			TileEntityFakeBedrockFarmland te = (TileEntityFakeBedrockFarmland) t;
-			if (te.getAlteration() != TileEntityFakeBedrockFarmland.Alteration.NORMAL) return false;
+			if (te.getAlteration() != TileEntityFakeBedrockFarmland.Alteration.NORMAL)
+				return false;
 			Item item = stack.getItem();
 			if (item == Items.REDSTONE) {
 				setColor(te, TileEntityFakeBedrockFarmland.Alteration.REDSTONE, stack);

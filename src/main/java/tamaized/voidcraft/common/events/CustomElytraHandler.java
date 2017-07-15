@@ -107,7 +107,8 @@ public class CustomElytraHandler {
 	}
 
 	private void doElytraFlyingChecks(EntityPlayer e) {
-		if (!e.hasCapability(CapabilityList.ELYTRAFLYING, null)) return;
+		if (!e.hasCapability(CapabilityList.ELYTRAFLYING, null))
+			return;
 		if (!e.onGround && !e.isRiding()) {
 			ItemStack itemstack = e.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if (!itemstack.isEmpty() && itemstack.getItem() instanceof ArmorCustomElytra && ArmorCustomElytra.isBroken(itemstack)) {
@@ -129,7 +130,8 @@ public class CustomElytraHandler {
 	}
 
 	public static void setFlying(EntityPlayer player, boolean flag) {
-		if (!player.hasCapability(CapabilityList.ELYTRAFLYING, null)) return;
+		if (!player.hasCapability(CapabilityList.ELYTRAFLYING, null))
+			return;
 		player.getCapability(CapabilityList.ELYTRAFLYING, null).setElytraFlying(flag);
 	}
 

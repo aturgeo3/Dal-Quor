@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -21,6 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public abstract class EntityVoidMob extends EntityCreature implements IMob {
 

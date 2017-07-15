@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.capabilities.vadeMecum;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import tamaized.voidcraft.VoidCraft;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -24,8 +24,10 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 			NBTTagCompound comp = new NBTTagCompound();
 			for (Entry<IVadeMecumCapability.Category, ItemStack> entry : instance.getComponents().entrySet()) {
 				NBTTagCompound c = new NBTTagCompound();
-				if (entry.getValue().isEmpty()) c.setBoolean("notnull", false);
-				else c.setBoolean("notnull", true);
+				if (entry.getValue().isEmpty())
+					c.setBoolean("notnull", false);
+				else
+					c.setBoolean("notnull", true);
 				comp.setTag(String.valueOf(IVadeMecumCapability.getCategoryID(entry.getKey())), entry.getValue().isEmpty() ? c : entry.getValue().writeToNBT(new NBTTagCompound()));
 			}
 			compound.setTag("SpellComponents", comp);

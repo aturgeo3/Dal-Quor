@@ -1,11 +1,5 @@
 package tamaized.voidcraft.common.machina;
 
-import java.util.Random;
-
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,6 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
+
+import java.util.Random;
 
 public class VoidBox extends TamBlockContainer {
 

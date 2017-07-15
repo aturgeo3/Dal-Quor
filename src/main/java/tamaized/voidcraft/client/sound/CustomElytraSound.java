@@ -1,11 +1,11 @@
 package tamaized.voidcraft.client.sound;
 
-import tamaized.voidcraft.common.events.CustomElytraHandler;
 import net.minecraft.client.audio.MovingSound;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
+import tamaized.voidcraft.common.events.CustomElytraHandler;
 
 public class CustomElytraSound extends MovingSound {
 	private final EntityPlayerSP player;

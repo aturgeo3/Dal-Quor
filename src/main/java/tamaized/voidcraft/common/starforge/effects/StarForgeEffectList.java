@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tamaized.voidcraft.common.starforge.effects.tool.tier1.StarForgeEffectHaste;
 import tamaized.voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectFortune;
 import tamaized.voidcraft.common.starforge.effects.tool.tier2.StarForgeEffectSilkTouch;
@@ -17,6 +14,9 @@ import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectCrip
 import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectMortalFear;
 import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectThirdDegreeBurns;
 import tamaized.voidcraft.common.starforge.effects.wep.tier3.StarForgeEffectVorpal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class StarForgeEffectList {
 

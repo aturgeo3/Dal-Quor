@@ -1,13 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import java.util.HashSet;
-
-import tamaized.tammodized.common.helper.RayTraceHelper;
-import tamaized.tammodized.common.particles.ParticleHelper;
-import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
-import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
+import tamaized.tammodized.common.helper.RayTraceHelper;
+import tamaized.tammodized.common.particles.ParticleHelper;
+import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
+
+import java.util.HashSet;
 
 public class VoidicDrill extends VoidicPowerItem {
 
@@ -55,8 +55,10 @@ public class VoidicDrill extends VoidicPowerItem {
 
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase entity, int tick) {
-		if (!((tick % 5) == 0)) return;
-		if (!(entity instanceof EntityPlayer)) return;
+		if (!((tick % 5) == 0))
+			return;
+		if (!(entity instanceof EntityPlayer))
+			return;
 		EntityPlayer player = (EntityPlayer) entity;
 		World world = player.world;
 		EnumHand hand = player.getActiveHand();
@@ -130,7 +132,8 @@ public class VoidicDrill extends VoidicPowerItem {
 		Block block = state.getBlock();
 		if (!world.isRemote && block != null && !block.isAir(state, world, pos) && !(block instanceof BlockLiquid) && !(block instanceof IFluidBlock) && block.getPlayerRelativeBlockHardness(state, player, world, pos) > 0) {
 			int neededHarvestLevel = block.getHarvestLevel(state);
-			if (neededHarvestLevel > harvestLevel && (!tool.isEmpty() && !tool.canHarvestBlock(state))) return;
+			if (neededHarvestLevel > harvestLevel && (!tool.isEmpty() && !tool.canHarvestBlock(state)))
+				return;
 
 			BreakEvent event = new BreakEvent(world, pos, state, player);
 			MinecraftForge.EVENT_BUS.post(event);
@@ -140,10 +143,12 @@ public class VoidicDrill extends VoidicPowerItem {
 						block.onBlockDestroyedByPlayer(world, pos, state);
 						block.harvestBlock(world, player, pos, state, world.getTileEntity(pos), tool);
 					}
-				} else world.setBlockToAir(pos);
+				} else
+					world.setBlockToAir(pos);
 			}
 
-			if (particles) world.playEvent(2001, pos, Block.getStateId(state));
+			if (particles)
+				world.playEvent(2001, pos, Block.getStateId(state));
 		}
 	}
 

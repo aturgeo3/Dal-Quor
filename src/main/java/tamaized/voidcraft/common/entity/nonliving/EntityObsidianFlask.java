@@ -1,10 +1,5 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
-import java.util.List;
-
-import tamaized.tammodized.common.helper.MotionHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import tamaized.tammodized.common.helper.MotionHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+
+import java.util.List;
 
 public class EntityObsidianFlask extends EntityThrowable implements IEntityAdditionalSpawnData {
 
@@ -48,7 +48,8 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (world.isRemote) return;
+		if (world.isRemote)
+			return;
 		if (result.entityHit != null) {
 			result.entityHit.attackEntityFrom(type == Type.Fire ? DamageSource.ON_FIRE : (type == Type.Freeze || type == Type.Shock || type == Type.Acid) ? DamageSource.MAGIC : type == Type.Void ? new DamageSourceVoidicInfusion() : DamageSource.OUT_OF_WORLD, 5);
 		} else {
@@ -57,18 +58,21 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 				default:
 				case Normal: {
 					world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 0, true, true);
-					if (world.isAirBlock(pos)) world.setBlockState(pos, VoidCraft.blocks.blockVoidFire.getDefaultState());
+					if (world.isAirBlock(pos))
+						world.setBlockState(pos, VoidCraft.blocks.blockVoidFire.getDefaultState());
 					break;
 				}
 				case Fire: {
 					world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 0, true, true);
 					for (int x = -2; x <= 2; x++) {
 						for (int z = -2; z <= 2; z++) {
-							if (!(x == 0 && z == 0) && world.rand.nextInt(4) != 0) continue;
+							if (!(x == 0 && z == 0) && world.rand.nextInt(4) != 0)
+								continue;
 							int y = -2;
 							while (!world.isAirBlock(pos.add(x, y, z))) {
 								y++;
-								if (y > 2) break;
+								if (y > 2)
+									break;
 							}
 							if (world.isAirBlock(pos.add(x, y, z))) {
 								world.setBlockState(pos.add(x, y, z), Blocks.FIRE.getDefaultState());
@@ -76,7 +80,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 						}
 					}
 				}
-					break;
+				break;
 				case Freeze: {
 					world.playEvent(2002, pos, 0x00FFFF);
 					List<EntityLivingBase> damageList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
@@ -84,7 +88,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 						e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 10, 5));
 					}
 				}
-					break;
+				break;
 				case Shock: {
 					world.playEvent(2002, pos, 0xFFFFFF);
 					List<EntityLivingBase> damageList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
@@ -92,12 +96,13 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 						MotionHelper.addMotion(e, 0, 5, 0);
 					}
 				}
-					break;
+				break;
 				case Acid: {
 					world.playEvent(2002, pos, 0x00FF00);
-					if (world.isAirBlock(pos)) world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
+					if (world.isAirBlock(pos))
+						world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
 				}
-					break;
+				break;
 				case Void: {
 					world.playEvent(2002, pos, 0x7700FF);
 					List<EntityLivingBase> damageList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
@@ -105,7 +110,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 						world.spawnEntity(new EntitySpellImplosion(world, e));
 					}
 				}
-					break;
+				break;
 			}
 		}
 

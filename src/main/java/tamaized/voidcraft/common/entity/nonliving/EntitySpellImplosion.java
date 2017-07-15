@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
-import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 
 public class EntitySpellImplosion extends Entity {
 
@@ -38,14 +38,16 @@ public class EntitySpellImplosion extends Entity {
 
 	@Override
 	public void onUpdate() {
-		if(world.isRemote) return;
+		if (world.isRemote)
+			return;
 		if (target == null || !target.isEntityAlive()) {
 			setDead();
 			return;
 		}
 		setPositionAndUpdate(target.posX, target.posY, target.posZ);
 		tick++;
-		if (tick % (20*5) == 0) target.attackEntityFrom(new DamageSourceVoidicInfusion(), Integer.MAX_VALUE);
+		if (tick % (20 * 5) == 0)
+			target.attackEntityFrom(new DamageSourceVoidicInfusion(), Integer.MAX_VALUE);
 	}
 
 }

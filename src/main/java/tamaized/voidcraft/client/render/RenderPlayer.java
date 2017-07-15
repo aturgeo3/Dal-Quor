@@ -1,7 +1,5 @@
 package tamaized.voidcraft.client.render;
 
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.events.CustomElytraHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
@@ -10,6 +8,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.events.CustomElytraHandler;
 
 public class RenderPlayer {
 

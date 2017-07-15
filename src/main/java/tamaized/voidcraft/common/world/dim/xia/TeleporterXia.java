@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.world.dim.xia;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.world.SchematicLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -9,6 +7,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.world.SchematicLoader;
 
 import java.util.Random;
 
@@ -30,15 +30,16 @@ public class TeleporterXia extends Teleporter {
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
 		if (entityIn.dimension != ConfigHandler.dimensionIdXia) {
 			BlockPos bedPos = entityIn instanceof EntityPlayer && ((EntityPlayer) entityIn).getBedLocation(0) != null ? ((EntityPlayer) entityIn).getBedLocation(0) : worldServerInstance.getSpawnPoint();
-			while(!worldServerInstance.isAirBlock(bedPos)){
+			while (!worldServerInstance.isAirBlock(bedPos)) {
 				bedPos = bedPos.up();
 			}
 			entityIn.setLocationAndAngles((double) bedPos.getX(), (double) bedPos.getY(), (double) bedPos.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
 			return;
 		}
-//		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(VoidCraft.achievements.tooFar, 1); TODO
+		//		if (entityIn instanceof EntityPlayer) ((EntityPlayer) entityIn).addStat(VoidCraft.achievements.tooFar, 1); TODO
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
-		if (!isActive(entityIn)) makePortal(entityIn);
+		if (!isActive(entityIn))
+			makePortal(entityIn);
 		entityIn.setPositionAndUpdate(52.5, 62, 4.5);
 	}
 

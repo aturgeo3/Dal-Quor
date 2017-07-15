@@ -1,18 +1,17 @@
 package tamaized.voidcraft.client.particles;
 
-import org.lwjgl.opengl.GL11;
-
-import tamaized.tammodized.common.particles.TamParticle;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+import tamaized.tammodized.common.particles.TamParticle;
+import tamaized.voidcraft.VoidCraft;
 
 public class AcidFX extends TamParticle {
 

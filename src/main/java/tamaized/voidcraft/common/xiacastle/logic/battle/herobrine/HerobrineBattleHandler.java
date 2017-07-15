@@ -1,10 +1,10 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine;
 
-import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 
 public class HerobrineBattleHandler implements IBattleHandler {
 
@@ -54,11 +54,13 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
-		if (pos == null) return;
+		if (pos == null)
+			return;
 		readyForInput = false;
 		isDone = false;
 		if (herobrine != null) {
-			if (herobrine.isDone()) isDone = true;
+			if (herobrine.isDone())
+				isDone = true;
 			worldObj.removeEntity(herobrine);
 		}
 		herobrine = null;

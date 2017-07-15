@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.addons.jei.infuser;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.addons.jei.VoidCraftJEIPlugin;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -12,6 +10,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.addons.jei.VoidCraftJEIPlugin;
 
 public class InfuserRecipeCategory implements IRecipeCategory {
 

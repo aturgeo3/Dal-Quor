@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.blocks;
 
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.proxy.ClientProxy;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.cosmicMaterial.VadeMecumPageListCosmicMaterial;
 import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.realityhole.VadeMecumPageListRealityHole;
@@ -11,7 +11,7 @@ import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.softbed
 import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidbrick.VadeMecumPageListVoidBrick;
 import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalblock.VadeMecumPageListVoidCrystalBlock;
 import tamaized.voidcraft.common.vademecum.contents.documentation.blocks.voidcrystalore.VadeMecumPageListVoidCrystalOre;
-import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 public class VadeMecumBlocksEntry extends VadeMecumEntry {
 

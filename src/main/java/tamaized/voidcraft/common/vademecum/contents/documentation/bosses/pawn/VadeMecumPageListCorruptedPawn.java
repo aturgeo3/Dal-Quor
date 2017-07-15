@@ -9,8 +9,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListCorruptedPawn implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
-				new VadeMecumPage(VoidCraft.modid+".VadeMecum.docs.title.corruptedPawn", VoidCraft.modid+".VadeMecum.docs.desc.corruptedPawn") };
+		return new IVadeMecumPage[]{new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.corruptedPawn", VoidCraft.modid + ".VadeMecum.docs.desc.corruptedPawn")};
 	}
 
 }

@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.gui.container;
 
-import tamaized.voidcraft.common.gui.slots.SlotCantPlace;
-import tamaized.voidcraft.common.gui.slots.SlotCantPlaceOrRemove;
-import tamaized.voidcraft.common.gui.slots.SlotItemHandlerBypass;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,6 +7,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.gui.slots.SlotCantPlace;
+import tamaized.voidcraft.common.gui.slots.SlotCantPlaceOrRemove;
+import tamaized.voidcraft.common.gui.slots.SlotItemHandlerBypass;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
 
 public class VoidBoxContainer extends Container {
 

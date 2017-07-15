@@ -49,18 +49,20 @@ import java.util.List;
 
 public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IAlternateBoss {
 
-	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[] { FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET };
-	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer> createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[]{FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
+	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private final float[] xRotationHeads = new float[2];
 	private final float[] yRotationHeads = new float[2];
 	private final float[] xRotOHeads = new float[2];
 	private final float[] yRotOHeads = new float[2];
 	private final int[] nextHeadUpdate = new int[2];
 	private final int[] idleHeadUpdates = new int[2];
-	/** Time before the Wither tries to break blocks */
+	/**
+	 * Time before the Wither tries to break blocks
+	 */
 	private int blockBreakCounter;
 	// private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
@@ -91,9 +93,10 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this(world);
 		ai = entityAIXia2Phase3;
 		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
-		if (chunkLoadTicket != null) chunkLoadTicket.bindEntity(this);
+		if (chunkLoadTicket != null)
+			chunkLoadTicket.bindEntity(this);
 	}
-	
+
 	@Override
 	protected boolean canDespawn() {
 		return false;
@@ -175,7 +178,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromChunkCoords((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
 		}
 		if (!world.isRemote) {
-			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3) setDead();
+			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3)
+				setDead();
 		}
 		this.motionY *= 0.6000000238418579D;
 
@@ -321,7 +325,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 							this.updateWatchedTargetId(i, 0);
 						}
 					} else {
-						List<EntityLivingBase> list = this.world.<EntityLivingBase> getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.<EntityLivingBase> and(NOT_UNDEAD, EntitySelectors.NOT_SPECTATING));
+						List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.<EntityLivingBase>and(NOT_UNDEAD, EntitySelectors.NOT_SPECTATING));
 
 						for (int j2 = 0; j2 < 10 && !list.isEmpty(); ++j2) {
 							EntityLivingBase entitylivingbase = (EntityLivingBase) list.get(this.rand.nextInt(list.size()));

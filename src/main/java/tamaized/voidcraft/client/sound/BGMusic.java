@@ -1,8 +1,5 @@
 package tamaized.voidcraft.client.sound;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.sound.BossMusicPlayer;
-import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -14,10 +11,13 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
+import tamaized.voidcraft.common.sound.BossMusicPlayer;
+import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 public class BGMusic {
 
-	private static final SoundEvent[] musicVoid = new SoundEvent[] {
+	private static final SoundEvent[] musicVoid = new SoundEvent[]{
 
 			VoidSoundEvents.MusicSoundEvents.mcMusic_end,
 
@@ -27,7 +27,7 @@ public class BGMusic {
 
 	};
 
-	private static final SoundEvent[] musicDalQuor = new SoundEvent[] {
+	private static final SoundEvent[] musicDalQuor = new SoundEvent[]{
 
 			VoidSoundEvents.MusicSoundEvents.mcMusic_end,
 
@@ -45,9 +45,11 @@ public class BGMusic {
 
 	@SubscribeEvent
 	public void PlaySoundEvent(PlaySoundEvent e) {
-		if(!ConfigHandler.music) return;
+		if (!ConfigHandler.music)
+			return;
 		if (sound != null && e.getSound().getCategory() == SoundCategory.MUSIC) {
-			if (e.getResultSound() == sound) return;
+			if (e.getResultSound() == sound)
+				return;
 			e.setResultSound(null);
 			return;
 		}
@@ -55,20 +57,26 @@ public class BGMusic {
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (e.getSound().getCategory() == SoundCategory.MUSIC && world != null && world.provider != null) {
 			if (world.provider.getDimension() == ConfigHandler.dimensionIdVoid) {
-				if (isPlaying(sound)) e.setResultSound(null);
-				else e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicVoid[world.rand.nextInt(musicVoid.length)]));
+				if (isPlaying(sound))
+					e.setResultSound(null);
+				else
+					e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicVoid[world.rand.nextInt(musicVoid.length)]));
 			} else if (world.provider.getDimension() == ConfigHandler.dimensionIdDalQuor) {
-				if (isPlaying(sound)) e.setResultSound(null);
-				else e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicDalQuor[world.rand.nextInt(musicDalQuor.length)]));
+				if (isPlaying(sound))
+					e.setResultSound(null);
+				else
+					e.setResultSound(sound = PositionedSoundRecord.getMusicRecord(musicDalQuor[world.rand.nextInt(musicDalQuor.length)]));
 			} else if (world.provider.getDimension() == ConfigHandler.dimensionIdXia) {
-				if (isPlaying(sound)) e.setResultSound(null);
+				if (isPlaying(sound))
+					e.setResultSound(null);
 			}
 		}
 	}
 
 	@SubscribeEvent
 	public void tick(ClientTickEvent e) {
-		if(!ConfigHandler.music) return;
+		if (!ConfigHandler.music)
+			return;
 		if (e.phase == Phase.END && !Minecraft.getMinecraft().isGamePaused()) {
 			World world = Minecraft.getMinecraft().world;
 			boolean boss = BossMusicPlayer.update(sound);
@@ -104,14 +112,16 @@ public class BGMusic {
 	}
 
 	public static void PlayMusic(ISound s) {
-		if(!ConfigHandler.music) return;
+		if (!ConfigHandler.music)
+			return;
 		StopMusic();
 		sound = s;
 		Minecraft.getMinecraft().getSoundHandler().playSound(sound);
 	}
 
 	public static void StopMusic() {
-		if (isPlaying(sound)) Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
+		if (isPlaying(sound))
+			Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
 		sound = null;
 		MusicTickerStopper.stop(0);
 	}

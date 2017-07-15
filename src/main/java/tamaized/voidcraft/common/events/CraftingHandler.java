@@ -5,9 +5,9 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
 
 public class CraftingHandler {
-	
+
 	@SubscribeEvent
-	public void SomethingCrafted(ItemCraftedEvent event){ // TODO
+	public void SomethingCrafted(ItemCraftedEvent event) { // TODO
 		/*if (event.crafting.getItem() == VoidCraft.tools.voidSword) {
 			event.player.addStat(VoidCraft.achievements.betterThanDiamond, 1);
 		}
@@ -39,9 +39,9 @@ public class CraftingHandler {
 			event.player.addStat(VoidCraft.achievements.suppressor, 1);
 		}*/
 	}
-	
+
 	@SubscribeEvent
-	public void MachineCrafted(ItemSmeltedEvent event){ // TODO
+	public void MachineCrafted(ItemSmeltedEvent event) { // TODO
 		/*if (event.smelting.getItem() == Item.getItemFromBlock((VoidCraft.blocks.voidMacerator))) {
 			event.player.addStat(VoidCraft.achievements.macerator, 1);
 		}
@@ -52,5 +52,5 @@ public class CraftingHandler {
 			event.player.addStat(VoidCraft.achievements.heimdall, 1);
 		}*/
 	}
-	
+
 }

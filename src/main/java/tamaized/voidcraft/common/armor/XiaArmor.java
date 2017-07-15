@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.armor;
 
-import tamaized.tammodized.common.armors.TamArmor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import tamaized.tammodized.common.armors.TamArmor;
 
 public class XiaArmor extends TamArmor {
 

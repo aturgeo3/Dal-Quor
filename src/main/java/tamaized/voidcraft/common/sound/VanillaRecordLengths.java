@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VanillaRecordLengths {
-	
+
 	private static final Map<String, Integer> times = new HashMap<String, Integer>();
-	
-	static{
+
+	static {
 		times.put("13", 178);
 		times.put("cat", 185);
 		times.put("blocks", 345);
@@ -21,9 +21,9 @@ public class VanillaRecordLengths {
 		times.put("11", 71);
 		times.put("wait", 238);
 	}
-	
-	public static int getLength(String key){
+
+	public static int getLength(String key) {
 		return times.get(key);
 	}
-	
+
 }

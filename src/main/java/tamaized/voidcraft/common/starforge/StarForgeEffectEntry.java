@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge;
 
-import tamaized.voidcraft.client.gui.StarForgeGUI;
-import tamaized.voidcraft.client.gui.element.GUIListElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -11,6 +9,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.client.gui.StarForgeGUI;
+import tamaized.voidcraft.client.gui.element.GUIListElement;
 
 public class StarForgeEffectEntry extends GUIListElement {
 

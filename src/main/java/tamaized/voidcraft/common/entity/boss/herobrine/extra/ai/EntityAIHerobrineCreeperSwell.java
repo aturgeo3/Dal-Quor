@@ -1,13 +1,17 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra.ai;
 
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 
 public class EntityAIHerobrineCreeperSwell extends EntityAIBase {
-	/** The creeper that is swelling. */
+	/**
+	 * The creeper that is swelling.
+	 */
 	EntityHerobrineCreeper swellingCreeper;
-	/** The creeper's attack target. This is used for the changing of the creeper's state. */
+	/**
+	 * The creeper's attack target. This is used for the changing of the creeper's state.
+	 */
 	EntityLivingBase creeperAttackTarget;
 
 	public EntityAIHerobrineCreeperSwell(EntityHerobrineCreeper entitycreeperIn) {

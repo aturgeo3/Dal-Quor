@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.addons.jei.alchemy;
 
+import mezz.jei.api.gui.IGuiIngredientGroup;
+import net.minecraft.client.Minecraft;
 import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
 import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
-import mezz.jei.api.gui.IGuiIngredientGroup;
-import net.minecraft.client.Minecraft;
 
 public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRecipe> {
 

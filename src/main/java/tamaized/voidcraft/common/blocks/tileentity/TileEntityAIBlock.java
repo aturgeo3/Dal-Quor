@@ -1,15 +1,15 @@
 package tamaized.voidcraft.common.blocks.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntity;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.AIBlock;
-import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.tileentity.TamTileEntity;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.AIBlock;
+import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 
 public class TileEntityAIBlock extends TamTileEntity {
 
@@ -55,7 +55,8 @@ public class TileEntityAIBlock extends TamTileEntity {
 		SoundType soundType = SoundType.GLASS;
 		world.playSound(null, getPos().getX(), getPos().getY(), getPos().getZ(), soundType.getBreakSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 		if (ai != null) {
-			if (state < 2) state++;
+			if (state < 2)
+				state++;
 			else {
 				ai.doAction(getPos());
 				setDead();

@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.machina;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityHeimdall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +14,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.GuiHandler;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityHeimdall;
 
 public class Heimdall extends TamBlockContainer {
 

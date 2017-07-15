@@ -1,8 +1,8 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.weapons;
 
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.proxy.ClientProxy;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.angelicsword.VadeMecumPageListAngelicSword;
 import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.archangelicsword.VadeMecumPageListArchSword;
@@ -10,7 +10,7 @@ import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.bindsw
 import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.demonsword.VadeMecumPageListDemonSword;
 import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.moltensword.VadeMecumPageListMoltenSword;
 import tamaized.voidcraft.common.vademecum.contents.documentation.weapons.voidsword.VadeMecumPageListVoidSword;
-import net.minecraft.item.ItemStack;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 public class VadeMecumWeaponsEntry extends VadeMecumEntry {
 

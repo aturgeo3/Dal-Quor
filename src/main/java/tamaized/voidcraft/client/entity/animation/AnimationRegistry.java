@@ -13,8 +13,8 @@ public class AnimationRegistry {
 	public static int limbs = register(AnimationLimbs.class);
 
 	public static class AnimationLimbs implements IAnimation<EntityVoidNPC, AnimatableModel.AnimatableModelArms> {
-		
-		public static void play(EntityVoidNPC entity, float f1, float f2, float f3, float f4){
+
+		public static void play(EntityVoidNPC entity, float f1, float f2, float f3, float f4) {
 			AnimationRegistry.AnimationLimbs animation = ((AnimationRegistry.AnimationLimbs) entity.constructAnimation(AnimationRegistry.limbs));
 			animation.init(f1, f2, f3, f4);
 			entity.setAnimation(animation);

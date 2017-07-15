@@ -29,7 +29,7 @@ public final class RecipeHelper {
 	public static List<ItemStack> getFurnaceRecipe(ItemStack output) {
 		List<ItemStack> list = new ArrayList<>();
 		for (Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet()) {
-			if(ItemStack.areItemsEqual(entry.getValue(), output)){
+			if (ItemStack.areItemsEqual(entry.getValue(), output)) {
 				list.add(new ItemStack(entry.getKey().getItem()));
 			}
 		}

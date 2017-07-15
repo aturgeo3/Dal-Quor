@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.sound;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.VoidCraft;
 
 @Mod.EventBusSubscriber
 public class VoidSoundEvents {

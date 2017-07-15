@@ -16,7 +16,7 @@ public class CapabilitySyncEvent {
 		if (e.phase == TickEvent.Phase.END && e.side == Side.SERVER && e.player instanceof EntityPlayerMP) {
 			IVadeMecumCapability cap = e.player.getCapability(CapabilityList.VADEMECUM, null);
 			if (cap != null && cap.isDirty()) {
-				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(cap, ClientPacketHandlerVadeMecumUpdate.Type.NULL), (EntityPlayerMP)e.player);
+				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(cap, ClientPacketHandlerVadeMecumUpdate.Type.NULL), (EntityPlayerMP) e.player);
 				cap.resetDirty();
 			}
 		}

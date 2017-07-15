@@ -1,17 +1,17 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItemFood;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.items.TamItemFood;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 
 public class EtherealFruit extends TamItemFood {
-	
+
 	private final TileEntityFakeBedrockFarmland.Alteration alteration;
 
 	public EtherealFruit(TileEntityFakeBedrockFarmland.Alteration alter, CreativeTabs tab, String n, int maxStackSize, int hungerAmount, boolean isWolfFood) {
@@ -48,5 +48,5 @@ public class EtherealFruit extends TamItemFood {
 			}
 		}
 	}
-	
+
 }

@@ -1,15 +1,15 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.VoidicPowerGenContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidicPowerGenContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
 
 public class VoidicPowerGenGUI extends GuiContainer {
 

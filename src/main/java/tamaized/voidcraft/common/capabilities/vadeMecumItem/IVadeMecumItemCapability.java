@@ -1,9 +1,9 @@
 package tamaized.voidcraft.common.capabilities.vadeMecumItem;
 
+import io.netty.buffer.ByteBufInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import io.netty.buffer.ByteBufInputStream;
 
 public interface IVadeMecumItemCapability {
 

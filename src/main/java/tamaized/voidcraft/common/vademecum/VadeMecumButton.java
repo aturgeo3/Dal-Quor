@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.vademecum;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
 
 public class VadeMecumButton extends GuiButton {
 

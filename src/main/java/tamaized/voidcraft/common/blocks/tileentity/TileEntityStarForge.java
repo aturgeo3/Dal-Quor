@@ -1,23 +1,24 @@
 package tamaized.voidcraft.common.blocks.tileentity;
 
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import tamaized.voidcraft.client.gui.element.GUIListElement;
-import tamaized.voidcraft.registry.VoidCraftTools;
-import tamaized.voidcraft.common.starforge.IStarForgeTool;
-import tamaized.voidcraft.common.starforge.StarForgeEffectEntry;
-import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
-import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.element.GUIListElement;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.common.starforge.StarForgeEffectEntry;
+import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
+import tamaized.voidcraft.common.starforge.StarForgeToolEntry;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.registry.VoidCraftTools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityStarForge extends TamTileEntityInventory {
 
@@ -60,8 +61,8 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 		return nbt;
 	}
 
-	public ArrayList<GUIListElement> buildPossibleEffectList() {
-		ArrayList<GUIListElement> list = new ArrayList<GUIListElement>();
+	public List<GUIListElement> buildPossibleEffectList() {
+		List<GUIListElement> list = new ArrayList<>();
 		IStarForgeEffect.Type type = null;
 		ItemStack stack = SLOT_INPUT_TOOL.getStackInSlot(0);
 		if (stack.isEmpty()) {

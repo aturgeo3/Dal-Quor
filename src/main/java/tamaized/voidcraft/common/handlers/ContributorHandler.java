@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.handlers;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.item.EnumDyeColor;
+import tamaized.voidcraft.VoidCraft;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +36,8 @@ public class ContributorHandler {
 			String value = props.getProperty(s);
 			try {
 				int i = Integer.parseInt(value);
-				if (i < 0 || i >= EnumDyeColor.values().length) throw new NumberFormatException();
+				if (i < 0 || i >= EnumDyeColor.values().length)
+					throw new NumberFormatException();
 				VoidCraft.instance.logger.info(key + " -> " + i);
 				elementalColor.put(key, EnumDyeColor.values()[i]);
 			} catch (NumberFormatException e) {
@@ -55,7 +56,7 @@ public class ContributorHandler {
 	}
 
 	private static class ThreadContributor extends Thread {
-		
+
 		public ThreadContributor() {
 			setName("VoidCraft Contributor Loader");
 			setDaemon(true);

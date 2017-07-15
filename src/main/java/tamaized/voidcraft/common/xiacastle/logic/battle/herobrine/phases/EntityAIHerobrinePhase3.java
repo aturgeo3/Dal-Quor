@@ -48,7 +48,8 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 		loc = getEntity().getPosition().add(0, 10, 0);
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
-				if ((x == 0 && z == 0) || Math.floor(Math.random() * 10) != 0) continue;
+				if ((x == 0 && z == 0) || Math.floor(Math.random() * 10) != 0)
+					continue;
 				world.setBlockState(getBlockPosition().add(x, -1, z), Blocks.LAVA.getDefaultState());
 			}
 		}
@@ -60,7 +61,8 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	@Override
 	public void kill() {
 		super.kill();
-		if (currGhost != null) currGhost.setDead();
+		if (currGhost != null)
+			currGhost.setDead();
 		currGhost = null;
 	}
 
@@ -77,15 +79,18 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 	@Override
 	public void update() {
 		updateLook();
-		if (tick % tick_doAction == 0) updateAction();
+		if (tick % tick_doAction == 0)
+			updateAction();
 		updateMotion();
 
 		if (getEntity() == null) {
-			if (currGhost != null) currGhost.setDead();
+			if (currGhost != null)
+				currGhost.setDead();
 			currGhost = null;
 		}
 
-		if (tick % tick_Spawn == 0 && spawns < maxSpawns) setRandomGhost(0);
+		if (tick % tick_Spawn == 0 && spawns < maxSpawns)
+			setRandomGhost(0);
 
 		if (currGhost != null) {
 			if (currGhost.hasInteracted()) {
@@ -99,9 +104,12 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 
 	private void setRandomGhost(int j) {
 		int i;
-		if (j == 0) i = (int) Math.floor(Math.random() * 3);
-		else i = j;
-		if (i > 3) i = 0;
+		if (j == 0)
+			i = (int) Math.floor(Math.random() * 3);
+		else
+			i = j;
+		if (i > 3)
+			i = 0;
 		if (usedLocs.contains(0) && usedLocs.contains(1) && usedLocs.contains(2) && usedLocs.contains(3)) {
 			i = 0;
 		} else if (usedLocs.contains(i)) {
@@ -142,9 +150,12 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 
 	private UUID getRandomUnusedUUID(int j) {
 		int i;
-		if (j == 0) i = (int) Math.floor(Math.random() * SkinHandler.getSize());
-		else i = j;
-		if (i >= SkinHandler.getSize()) i = 0;
+		if (j == 0)
+			i = (int) Math.floor(Math.random() * SkinHandler.getSize());
+		else
+			i = j;
+		if (i >= SkinHandler.getSize())
+			i = 0;
 		return alreadyUsed.contains(SkinHandler.getUUID(i)) ? getRandomUnusedUUID(i + 1) : SkinHandler.getUUID(i);
 	}
 
@@ -153,8 +164,10 @@ public class EntityAIHerobrinePhase3<T extends EntityBossHerobrine> extends Enti
 		double py = loc.getY();
 		double dy;
 
-		if (y < py) dy = 0.2;
-		else if (y == py) dy = 0.0;
+		if (y < py)
+			dy = 0.2;
+		else if (y == py)
+			dy = 0.0;
 		else {
 			getEntity().posY = py;
 			dy = 0;

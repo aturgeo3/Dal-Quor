@@ -1,10 +1,10 @@
 package tamaized.voidcraft.common.events.client;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.VoidCraft;
 
 public class TextureStitch {
 

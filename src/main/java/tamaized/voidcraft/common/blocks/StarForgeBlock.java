@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.GuiHandler;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,6 +20,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
+import tamaized.voidcraft.common.gui.GuiHandler;
 
 public class StarForgeBlock extends TamBlockContainer {
 
@@ -41,7 +41,7 @@ public class StarForgeBlock extends TamBlockContainer {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, new IProperty[]{FACING});
 	}
 
 	@Override

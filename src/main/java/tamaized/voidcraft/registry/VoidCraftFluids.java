@@ -65,7 +65,7 @@ public class VoidCraftFluids {
 		modelList.add(arcaneSludgeFluidBlock = new ArcaneSludgeFluidBlock(VoidCraftCreativeTabs.tabVoid, arcaneSludgeFluid, Material.WATER, "blockarcanesludgefluid"));
 	}
 
-	public static void init(){
+	public static void init() {
 		voidBucket = new BucketWrapper(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, voidFluid));
 	}
 

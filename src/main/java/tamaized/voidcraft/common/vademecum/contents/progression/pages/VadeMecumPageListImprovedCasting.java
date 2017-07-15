@@ -8,11 +8,11 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListImprovedCasting implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
+		return new IVadeMecumPage[]{
 
 				new VadeMecumPage("voidcraft.VadeMecum.progression.title.improvedCasting", "voidcraft.VadeMecum.progression.desc.improvedCasting.pg1"),
 
-				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.improvedCasting.pg2") };
+				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.improvedCasting.pg2")};
 	}
 
 }

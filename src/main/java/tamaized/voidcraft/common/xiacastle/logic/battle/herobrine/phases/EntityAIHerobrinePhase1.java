@@ -33,10 +33,10 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 	public EntityAIHerobrinePhase1(T entityMobHerobrine, List<Class> c) {
 		super(entityMobHerobrine, c);
 	}
-	
+
 	@Override
 	protected void preInit() {
-		
+
 	}
 
 	@Override
@@ -75,7 +75,8 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
-				if (x == 0 && z == 0) continue;
+				if (x == 0 && z == 0)
+					continue;
 				world.setBlockState(getBlockPosition().add(x, -1, z), Blocks.NETHER_BRICK.getDefaultState());
 			}
 		}
@@ -110,9 +111,11 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 	public void update() {
 		updateLook();
 		updateMotion();
-		if (tick % tick_spawnFireball == 0) spawnFireball();
+		if (tick % tick_spawnFireball == 0)
+			spawnFireball();
 
-		if (getEntity() == null) clearPillars();
+		if (getEntity() == null)
+			clearPillars();
 
 		pillarAmount = pillars.size();
 
@@ -160,25 +163,31 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 
 		if (x == px && y == py && z == pz) {
 			currPath = (int) Math.floor(Math.random() * 7);
-			if (currPath > 7) currPath = 0;
+			if (currPath > 7)
+				currPath = 0;
 
 			xPos = loc[currPath][0] > x;
 
 			zPos = loc[currPath][2] > z;
 		}
 
-		if (x < px) dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-		else if (x == px) dx = 0;
+		if (x < px)
+			dx = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+		else if (x == px)
+			dx = 0;
 		else if (!xPos && (x - px) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dx = 0;
 			getEntity().posX = px;
 		} else if (xPos && (px - x) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dx = 0;
 			getEntity().posX = px;
-		} else if (px < x) dx = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+		} else if (px < x)
+			dx = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
-		if (y < py) dy = 0.2;
-		else if (y == py) dy = 0.0;
+		if (y < py)
+			dy = 0.2;
+		else if (y == py)
+			dy = 0.0;
 		else {
 			getEntity().posY = py;
 			dy = 0;
@@ -188,15 +197,18 @@ public class EntityAIHerobrinePhase1<T extends EntityBossHerobrine> extends Enti
 		 * if(zPos){ if(z < pz) dz = entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue(); else if(z==pz) dz = 0; else dz = -(z-pz); }else{ if(pz < z) dz = -entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue(); else if(z==pz) dz = 0; else dz = (pz-z); }
 		 */
 
-		if (z < pz) dz = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-		else if (z == pz) dz = 0;
+		if (z < pz)
+			dz = getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+		else if (z == pz)
+			dz = 0;
 		else if (!zPos && (z - pz) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dz = 0;
 			getEntity().posZ = pz;
 		} else if (zPos && (pz - z) < getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()) {
 			dz = 0;
 			getEntity().posZ = pz;
-		} else if (pz < z) dz = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+		} else if (pz < z)
+			dz = -(getEntity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
 		// entity.setVelocity(0, dy, 0);
 		// entity.velocityChanged = true;

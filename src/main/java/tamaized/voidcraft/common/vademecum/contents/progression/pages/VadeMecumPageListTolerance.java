@@ -8,7 +8,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListTolerance implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
+		return new IVadeMecumPage[]{
 
 				new VadeMecumPage("voidcraft.VadeMecum.progression.title.tolerance", "voidcraft.VadeMecum.progression.desc.tolerance.pg1"),
 

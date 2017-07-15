@@ -1,12 +1,5 @@
 package tamaized.voidcraft.common.starforge.tools;
 
-import tamaized.tammodized.common.tools.TamPickaxe;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
-import tamaized.voidcraft.common.starforge.IStarForgeTool;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Type;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,6 +21,13 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.tools.TamPickaxe;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.starforge.IStarForgeCapability;
+import tamaized.voidcraft.common.starforge.IStarForgeTool;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Type;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -56,7 +56,7 @@ public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 
 			@Override
 			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-				return capability == CapabilityList.STARFORGE ? CapabilityList.STARFORGE.<T> cast(inst) : null;
+				return capability == CapabilityList.STARFORGE ? CapabilityList.STARFORGE.<T>cast(inst) : null;
 			}
 
 			@Override
@@ -96,7 +96,8 @@ public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-		if (cap != null) cap.update(worldIn, stack);
+		if (cap != null)
+			cap.update(worldIn, stack);
 	}
 
 	@Override
@@ -108,7 +109,8 @@ public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-		if (cap != null) cap.onEntityHit(attacker, target);
+		if (cap != null)
+			cap.onEntityHit(attacker, target);
 		return true;
 	}
 
@@ -116,7 +118,7 @@ public class StarForgePickaxe extends TamPickaxe implements IStarForgeTool {
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
 		if (entityLiving instanceof EntityPlayer) {
 			IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
-			if (cap != null){
+			if (cap != null) {
 				RayTraceResult ray = rayTrace(worldIn, (EntityPlayer) entityLiving, false);
 				cap.onBlockBreak(entityLiving, worldIn, state, pos, ray == null ? null : ray.sideHit);
 			}

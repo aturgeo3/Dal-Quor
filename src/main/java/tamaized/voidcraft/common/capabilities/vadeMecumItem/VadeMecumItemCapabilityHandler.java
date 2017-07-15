@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.capabilities.vadeMecumItem;
 
+import io.netty.buffer.ByteBufInputStream;
+import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import tamaized.voidcraft.VoidCraft;
-import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.util.ResourceLocation;
-
 public class VadeMecumItemCapabilityHandler implements IVadeMecumItemCapability {
-	
+
 	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VadeMecumItemCapabilityHandler");
 
 	private boolean markDirty = false;

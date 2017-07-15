@@ -1,9 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.VoidicAnchorContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +7,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidicAnchorContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 
 @SideOnly(Side.CLIENT)
 public class VoidicAnchorGUI extends GuiContainer {
@@ -35,7 +35,7 @@ public class VoidicAnchorGUI extends GuiContainer {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-//		this.renderToolTip(mouseX, mouseY); TODO ?
+		//		this.renderToolTip(mouseX, mouseY); TODO ?
 	}
 
 	@Override

@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.xiacastle;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TwinsSpeech {
 
@@ -38,8 +38,10 @@ public class TwinsSpeech {
 				}
 			}
 		}
-		if (!speech1.done()) speech1.update(list1);
-		if (!speech2.done()) speech2.update(list2);
+		if (!speech1.done())
+			speech1.update(list1);
+		if (!speech2.done())
+			speech2.update(list2);
 		list1.clear();
 		list2.clear();
 	}

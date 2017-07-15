@@ -9,11 +9,11 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListDreams implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] {
+		return new IVadeMecumPage[]{
 
-				new VadeMecumPage(VoidCraft.modid+".VadeMecum.progression.title.dreams", VoidCraft.modid+".VadeMecum.progression.desc.dreams.pg1"),
+				new VadeMecumPage(VoidCraft.modid + ".VadeMecum.progression.title.dreams", VoidCraft.modid + ".VadeMecum.progression.desc.dreams.pg1"),
 
-				new VadeMecumPage("", VoidCraft.modid+".VadeMecum.progression.desc.dreams.pg2")
+				new VadeMecumPage("", VoidCraft.modid + ".VadeMecum.progression.desc.dreams.pg2")
 
 		};
 	}

@@ -35,7 +35,7 @@ public class ItemStackNetworkHelper { // TODO: TamModized
 		}
 	}
 
-	public static ItemStack decodeStack(ByteBuf stream){
+	public static ItemStack decodeStack(ByteBuf stream) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		int i = stream.readShort();
 

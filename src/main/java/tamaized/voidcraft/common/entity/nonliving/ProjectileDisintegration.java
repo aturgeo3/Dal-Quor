@@ -1,8 +1,5 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
-import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
-import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import io.netty.buffer.ByteBuf;
@@ -29,16 +26,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.damagesources.DamageSourceAcid;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 
 import javax.annotation.Nullable;
 
 public class ProjectileDisintegration extends EntityArrow implements IProjectile, IEntityAdditionalSpawnData {
 
-	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(new Predicate[] { EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>() {
+	private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(new Predicate[]{EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>() {
 		public boolean apply(@Nullable Entity p_apply_1_) {
 			return p_apply_1_.canBeCollidedWith();
 		}
-	} });
+	}});
 	private int xTile;
 	private int yTile;
 	private int zTile;
@@ -46,14 +46,20 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 	private int inData;
 	protected boolean inGround;
 	protected int timeInGround;
-	/** Seems to be some sort of timer for animating an arrow. */
+	/**
+	 * Seems to be some sort of timer for animating an arrow.
+	 */
 	public int arrowShake;
-	/** The owner of this arrow. */
+	/**
+	 * The owner of this arrow.
+	 */
 	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir;
 	private double damage;
-	/** The amount of knockback an arrow applies when it hits a mob. */
+	/**
+	 * The amount of knockback an arrow applies when it hits a mob.
+	 */
 	private int knockbackStrength;
 
 	private double speed = 0.5D;
@@ -187,7 +193,8 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		} else { // Traveling
 			timeInGround = 0;
 			++ticksInAir;
-			if (ticksInAir > 20 * 10) setDead();
+			if (ticksInAir > 20 * 10)
+				setDead();
 			Vec3d vec3d1 = new Vec3d(posX, posY, posZ);
 			Vec3d vec3d = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 			RayTraceResult raytraceresult = world.rayTraceBlocks(vec3d1, vec3d, false, true, false);
@@ -270,7 +277,8 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 			doBlockCollisions();
 		}
 
-		if (world.isRemote) particles();
+		if (world.isRemote)
+			particles();
 	}
 
 	@Override
@@ -278,7 +286,8 @@ public class ProjectileDisintegration extends EntityArrow implements IProjectile
 		Entity entity = raytraceResultIn.entityHit;
 
 		if (entity != null) {
-			if (entity == shootingEntity || entity instanceof EntityBossXia || entity instanceof EntityBossXia2) return;
+			if (entity == shootingEntity || entity instanceof EntityBossXia || entity instanceof EntityBossXia2)
+				return;
 			float f = MathHelper.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
 			int i = MathHelper.ceil((double) f * damage);
 

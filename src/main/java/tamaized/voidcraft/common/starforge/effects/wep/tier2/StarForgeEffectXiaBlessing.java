@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier2;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectXiaBlessing implements IStarForgeEffect {
 
@@ -35,7 +35,8 @@ public class StarForgeEffectXiaBlessing implements IStarForgeEffect {
 	@Override
 	public void onEntityHit(Entity entityUser, Entity entityHit) {
 		if (entityUser.world.rand.nextInt(100) < 20) {
-			if (entityUser instanceof EntityLivingBase) ((EntityLivingBase) entityUser).heal(10.0F);
+			if (entityUser instanceof EntityLivingBase)
+				((EntityLivingBase) entityUser).heal(10.0F);
 		}
 	}
 

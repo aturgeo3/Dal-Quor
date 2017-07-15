@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier3;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectMortalFear implements IStarForgeEffect {
 
@@ -35,7 +35,7 @@ public class StarForgeEffectMortalFear implements IStarForgeEffect {
 	@Override
 	public void onEntityHit(Entity entityUser, Entity entityHit) {
 		if (entityHit.world.rand.nextInt(100) < 20) {
-			if (entityHit instanceof EntityLivingBase){
+			if (entityHit instanceof EntityLivingBase) {
 				EntityLivingBase livingHit = (EntityLivingBase) entityHit;
 				float f = livingHit.getHealth() / 2.0F;
 				livingHit.setHealth(f);

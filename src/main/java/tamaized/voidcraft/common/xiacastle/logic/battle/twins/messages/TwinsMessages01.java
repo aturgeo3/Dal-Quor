@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages;
 
-import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
-import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,20 +13,22 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
 
 public class TwinsMessages01 {
-	
+
 	public static int tick = 1;
 	public static int childPhase = 0;
-	public static int childPhaseModulate = 20*5;
-	
-	public static boolean run(World worldObj, BlockPos pos,EntityBossDol dol, EntityBossZol zol){
-		if(tick % childPhaseModulate == 0){
-			for(EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))){
-				switch(childPhase){
+	public static int childPhaseModulate = 20 * 5;
+
+	public static boolean run(World worldObj, BlockPos pos, EntityBossDol dol, EntityBossZol zol) {
+		if (tick % childPhaseModulate == 0) {
+			for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) {
+				switch (childPhase) {
 					case 0:
 						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.1.1", p.getGameProfile().getName()));
-						childPhaseModulate = 20*5;
+						childPhaseModulate = 20 * 5;
 						break;
 					case 1:
 						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.1.2"));
@@ -50,11 +50,11 @@ public class TwinsMessages01 {
 						break;
 					case 7:
 						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.1.8"));
-						childPhaseModulate = 20*7;
+						childPhaseModulate = 20 * 7;
 						break;
 					case 8:
 						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.1.9"));
-						childPhaseModulate = 20*5;
+						childPhaseModulate = 20 * 5;
 						break;
 					case 9:
 						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.1.10"));

@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.layer;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.model.ModelVoidSpikes;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.model.ModelVoidSpikes;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
 
 public class LayerVoidSpikes implements LayerRenderer {
 

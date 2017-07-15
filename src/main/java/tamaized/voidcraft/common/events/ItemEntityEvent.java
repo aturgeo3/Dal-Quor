@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
@@ -10,6 +8,8 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import java.util.ConcurrentModificationException;
 
@@ -17,7 +17,8 @@ public class ItemEntityEvent {
 
 	@SubscribeEvent
 	public void tick(WorldTickEvent e) {
-		if (e.phase == Phase.END || e.world == null || e.world.isRemote) return;
+		if (e.phase == Phase.END || e.world == null || e.world.isRemote)
+			return;
 		try {
 			for (EntityItem entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
 				ItemStack stack = entity.getItem();

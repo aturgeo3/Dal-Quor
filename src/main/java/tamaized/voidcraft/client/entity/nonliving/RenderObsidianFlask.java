@@ -1,7 +1,5 @@
 package tamaized.voidcraft.client.entity.nonliving;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 
 @SideOnly(Side.CLIENT)
 public class RenderObsidianFlask<T extends EntityObsidianFlask> extends Render<T> {

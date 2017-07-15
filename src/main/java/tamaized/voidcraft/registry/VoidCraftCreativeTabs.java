@@ -10,7 +10,8 @@ public class VoidCraftCreativeTabs {
 		public ItemStack getTabIconItem() {
 			return new ItemStack(VoidCraftBlocks.blockPortalVoid);
 		}
-	};;
+	};
+	;
 	public static CreativeTabs tForge;
 
 }

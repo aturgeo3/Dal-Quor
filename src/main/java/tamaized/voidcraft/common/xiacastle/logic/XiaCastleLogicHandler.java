@@ -1,17 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
-import tamaized.voidcraft.common.world.SchematicLoader;
-import tamaized.voidcraft.common.xiacastle.TwinsSpeech;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia.XiaBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,6 +12,18 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
+import tamaized.voidcraft.common.world.SchematicLoader;
+import tamaized.voidcraft.common.xiacastle.TwinsSpeech;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia.XiaBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
 
 import java.util.List;
 
@@ -58,13 +58,20 @@ public class XiaCastleLogicHandler {
 			validateInstance();
 			if (running) {
 				doHandlerStartChecks();
-				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone()) openDoor();
-				if (twins.isRunning()) twins.update();
-				if (herobrine.isRunning()) herobrine.update();
-				if (xia.isRunning()) xia.update();
-				if (xia2.isRunning()) xia2.update();
-				if (!hasFinished && xia2.isDone()) finish();
-				if (hasFinished && !twinsSpeech.done()) twinsSpeech.update(world.playerEntities);
+				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone())
+					openDoor();
+				if (twins.isRunning())
+					twins.update();
+				if (herobrine.isRunning())
+					herobrine.update();
+				if (xia.isRunning())
+					xia.update();
+				if (xia2.isRunning())
+					xia2.update();
+				if (!hasFinished && xia2.isDone())
+					finish();
+				if (hasFinished && !twinsSpeech.done())
+					twinsSpeech.update(world.playerEntities);
 				handleProgressVisual();
 			}
 		}
@@ -78,15 +85,18 @@ public class XiaCastleLogicHandler {
 			List<EntityPlayer> list;
 			if (!twins.isRunning() && !twins.isDone()) {
 				list = world.getEntitiesWithinAABB(EntityPlayer.class, twinsBB);
-				if (!list.isEmpty()) twins.start(world, twinsLoc);
+				if (!list.isEmpty())
+					twins.start(world, twinsLoc);
 			}
 			if (!herobrine.isRunning() && !herobrine.isDone()) {
 				list = world.getEntitiesWithinAABB(EntityPlayer.class, herobrineBB);
-				if (!list.isEmpty()) herobrine.start(world, herobrineLoc);
+				if (!list.isEmpty())
+					herobrine.start(world, herobrineLoc);
 			}
 			if (!xia.isRunning() && !xia.isDone() && xiaDoorOpen) {
 				list = world.getEntitiesWithinAABB(EntityPlayer.class, xiaBB);
-				if (!list.isEmpty()) xia.start(world, xiaLoc);
+				if (!list.isEmpty())
+					xia.start(world, xiaLoc);
 			}
 			if (!xia2.isRunning() && !xia2.isDone() && xia.isDone()) {
 				xia2.start(world, xia2Loc);
@@ -108,8 +118,11 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void validateInstance() {
-		if (world != null) if (running && ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone() && xia2.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone() && !xia2.isDone()))) || xia2Loc == null || xiaLoc == null || twinsLoc == null | herobrineLoc == null)) stop();
-		if (!running && world != null && !world.playerEntities.isEmpty()) start();
+		if (world != null)
+			if (running && ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone() && xia2.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone() && !xia2.isDone()))) || xia2Loc == null || xiaLoc == null || twinsLoc == null | herobrineLoc == null))
+				stop();
+		if (!running && world != null && !world.playerEntities.isEmpty())
+			start();
 	}
 
 	private void handleProgressVisual() {
@@ -136,8 +149,10 @@ public class XiaCastleLogicHandler {
 		if (running) {
 			int state1 = herobrine.isDone() ? 1 : 0;
 			int state2 = twins.isDone() ? 1 : 0;
-			if (ai1 != null && ai1.getState() != state1) ai1.setState(state1);
-			if (ai2 != null && ai2.getState() != state2) ai2.setState(state2);
+			if (ai1 != null && ai1.getState() != state1)
+				ai1.setState(state1);
+			if (ai2 != null && ai2.getState() != state2)
+				ai2.setState(state2);
 		}
 	}
 
@@ -150,8 +165,9 @@ public class XiaCastleLogicHandler {
 			i++;
 			player.setPositionAndUpdate(pos.getX() + 23.5, pos.getY() + 8.5, pos.getZ() + 13.5);
 			IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
-			if (cap != null) cap.setXiaDefeats(cap.getXiaDefeats() + 1);
-//			player.addStat(VoidCraft.achievements.Ascension, 1); TODO
+			if (cap != null)
+				cap.setXiaDefeats(cap.getXiaDefeats() + 1);
+			//			player.addStat(VoidCraft.achievements.Ascension, 1); TODO
 			if (player.hasCapability(CapabilityList.VADEMECUM, null)) {
 				IVadeMecumCapability vade = player.getCapability(CapabilityList.VADEMECUM, null);
 				if (vade.hasCategory(IVadeMecumCapability.Category.TotalControl) && !vade.hasCategory(IVadeMecumCapability.Category.Dreams)) {
@@ -171,7 +187,8 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void start() {
-		if (world == null) return;
+		if (world == null)
+			return;
 		stop();
 		setupPos();
 		twinsSpeech.reset();

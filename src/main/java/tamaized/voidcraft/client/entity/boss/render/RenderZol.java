@@ -1,6 +1,5 @@
 package tamaized.voidcraft.client.entity.boss.render;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -8,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.VoidCraft;
 
 @SideOnly(Side.CLIENT)
 public class RenderZol<T extends EntityLiving> extends RenderLiving<T> {

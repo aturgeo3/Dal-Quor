@@ -71,7 +71,8 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 			resetAnimationTick--;
 		}
 		updateLook();
-		if (tick % (actionTick) == 0 && closestEntity != null) doAction(getBlockPosition());
+		if (tick % (actionTick) == 0 && closestEntity != null)
+			doAction(getBlockPosition());
 	}
 
 	@Override
@@ -106,7 +107,8 @@ public class EntityAIXiaPhase3<T extends EntityBossXia> extends EntityVoidNPCAIB
 				case ACTION_ICESPIKE:
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 180, 180, 0, 0);
 					resetAnimationTick = 20 * 2;
-					if (world.isAirBlock(closestEntity.getPosition())) world.setBlockState(closestEntity.getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
+					if (world.isAirBlock(closestEntity.getPosition()))
+						world.setBlockState(closestEntity.getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
 					break;
 				case ACTION_DISINT:
 					if (closestEntity instanceof EntityLivingBase) {

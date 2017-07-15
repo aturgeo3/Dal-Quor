@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.capabilities.voidicPower;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import tamaized.voidcraft.VoidCraft;
 
 public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapability> {
 
@@ -29,5 +29,5 @@ public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapabi
 		instance.setDefault(compound.getBoolean("isDefault"));
 		instance.setLoaded();
 	}
-	
+
 }

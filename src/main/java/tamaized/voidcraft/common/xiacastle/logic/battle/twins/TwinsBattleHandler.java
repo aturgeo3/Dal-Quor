@@ -1,13 +1,5 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.twins;
 
-import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
-import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages01;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages02;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages03;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages04;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages05;
 import net.minecraft.block.BlockLever;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
+import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
+import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.*;
 
 public class TwinsBattleHandler implements IBattleHandler {
 
@@ -51,13 +47,15 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign != null) {
 									boolean flag1 = false;
 									for (ITextComponent t : sign.signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.1.a").getUnformattedComponentText())) flag1 = true;
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.1.a").getUnformattedComponentText()))
+											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te != null) te.clear();
+										if (te != null)
+											te.clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -85,13 +83,15 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign != null) {
 									boolean flag1 = false;
 									for (ITextComponent t : sign.signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.2.a").getUnformattedComponentText())) flag1 = true;
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.2.a").getUnformattedComponentText()))
+											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te != null) te.clear();
+										if (te != null)
+											te.clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -119,13 +119,15 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign != null) {
 									boolean flag1 = false;
 									for (ITextComponent t : sign.signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.3.a").getUnformattedComponentText())) flag1 = true;
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.3.a").getUnformattedComponentText()))
+											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te != null) te.clear();
+										if (te != null)
+											te.clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -153,7 +155,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign != null) {
 									boolean flag1 = false;
 									for (ITextComponent t : sign.signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.4.a").getUnformattedComponentText())) flag1 = true;
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.4.a").getUnformattedComponentText()))
+											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
@@ -161,7 +164,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 										worldObj.setBlockState(pos.add(3, 1, -1), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
-										if (te != null) te.clear();
+										if (te != null)
+											te.clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, -1), Blocks.AIR.getDefaultState());
@@ -229,12 +233,15 @@ public class TwinsBattleHandler implements IBattleHandler {
 	}
 
 	public void stop() {
-		if (pos == null) return;
+		if (pos == null)
+			return;
 		readyForInput = false;
 		isDone = false;
-		if (dol != null) worldObj.removeEntity(dol);
+		if (dol != null)
+			worldObj.removeEntity(dol);
 		dol = null;
-		if (zol != null) worldObj.removeEntity(zol);
+		if (zol != null)
+			worldObj.removeEntity(zol);
 		zol = null;
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			worldObj.removeEntity(e);
@@ -251,7 +258,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 		worldObj.setBlockState(pos.add(3, 1, 1), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 		TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
-		if (te != null) te.clear();
+		if (te != null)
+			te.clear();
 		worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 0, -1), Blocks.AIR.getDefaultState());

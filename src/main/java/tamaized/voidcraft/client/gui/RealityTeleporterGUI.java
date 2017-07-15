@@ -48,7 +48,8 @@ public class RealityTeleporterGUI extends GuiContainer {
 			}
 		}
 		if (temp == -2) {
-			if (ItemStack.areItemStacksEqual(parent, inventoryPlayer.offHandInventory.get(0))) temp = -1;
+			if (ItemStack.areItemStacksEqual(parent, inventoryPlayer.offHandInventory.get(0)))
+				temp = -1;
 		}
 		slotID = temp;
 	}

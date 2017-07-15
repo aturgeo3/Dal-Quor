@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -8,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.blocks.TamBlockContainer;
 
 public class BlockNoBreak extends TamBlockContainer {
 

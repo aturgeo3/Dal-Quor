@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.entity.companion;
 
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -35,6 +33,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

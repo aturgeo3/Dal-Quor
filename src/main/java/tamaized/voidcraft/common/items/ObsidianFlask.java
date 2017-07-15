@@ -1,7 +1,5 @@
 package tamaized.voidcraft.common.items;
 
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -11,11 +9,13 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
 
 public class ObsidianFlask extends TamItem {
 
 	private final EntityObsidianFlask.Type type;
-	
+
 	public ObsidianFlask(EntityObsidianFlask.Type t, CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
 		type = t;

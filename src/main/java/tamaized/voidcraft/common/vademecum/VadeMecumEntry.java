@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.vademecum;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.proxy.ClientProxy;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.proxy.ClientProxy;
 
 import java.io.IOException;
 import java.util.*;
@@ -22,7 +22,8 @@ public class VadeMecumEntry {
 
 	public final static String getEntry(VadeMecumEntry entry) {
 		for (Entry<String, VadeMecumEntry> e : map.entrySet()) {
-			if (e.getValue() == entry) return e.getKey();
+			if (e.getValue() == entry)
+				return e.getKey();
 		}
 		return null;
 	}
@@ -124,7 +125,8 @@ public class VadeMecumEntry {
 		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
 		if (pageList != null && pageList.length > page) {
 			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
-			if (page + 1 < getPageLength(gui)) pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
+			if (page + 1 < getPageLength(gui))
+				pageList[page + 1].render(gui, render, x + 285, y + 20, mX, mY, -70);
 		}
 	}
 

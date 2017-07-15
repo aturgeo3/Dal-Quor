@@ -1,11 +1,6 @@
 package tamaized.voidcraft.common.world;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
-import tamaized.voidcraft.common.world.dim.dalquor.DalQuorGen;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;
@@ -19,15 +14,25 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.world.dim.dalquor.DalQuorGen;
+
+import java.util.List;
+import java.util.Random;
 
 public class BiomeProviderDalQuor extends BiomeProvider {
 
 	private GenLayer genBiomes;
-	/** A GenLayer containing the indices into Biome.biomeList[] */
+	/**
+	 * A GenLayer containing the indices into Biome.biomeList[]
+	 */
 	private GenLayer biomeIndexLayer;
-	/** The BiomeCache object for this world. */
+	/**
+	 * The BiomeCache object for this world.
+	 */
 	private BiomeCache biomeCache;
-	/** A list of biomes that the player can spawn in. */
+	/**
+	 * A list of biomes that the player can spawn in.
+	 */
 	private List<Biome> biomesToSpawnIn;
 
 	public BiomeProviderDalQuor() {

@@ -83,7 +83,8 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
 	@Override
 	public int fill(int amount) {
-		if (amount < 0) return amount;
+		if (amount < 0)
+			return amount;
 		markDirty();
 		if (getCurrentPower() + amount > getMaxPower()) {
 			setCurrentPower(getMaxPower());
@@ -96,7 +97,8 @@ public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
 	@Override
 	public int drain(int amount) {
-		if (amount < 0) return amount;
+		if (amount < 0)
+			return amount;
 		markDirty();
 		if (getCurrentPower() - amount < 0) {
 			setCurrentPower(0);

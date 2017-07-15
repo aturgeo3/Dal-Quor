@@ -1,14 +1,14 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.VoidMaceratorContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidMacerator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.VoidMaceratorContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidMacerator;
 
 public class VoidMaceratorGUI extends GuiContainer {
 

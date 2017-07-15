@@ -1,6 +1,5 @@
 package tamaized.voidcraft.client.entity.companion.model;
 
-import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -8,9 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 
-public class ModelVoidParrot extends ModelBase
-{
+public class ModelVoidParrot extends ModelBase {
 	ModelRenderer field_192764_a;
 	ModelRenderer field_192765_b;
 	ModelRenderer field_192766_c;
@@ -24,8 +23,7 @@ public class ModelVoidParrot extends ModelBase
 	ModelRenderer field_192774_k;
 	private ModelVoidParrot.State field_192775_l = ModelVoidParrot.State.STANDING;
 
-	public ModelVoidParrot()
-	{
+	public ModelVoidParrot() {
 		this.textureWidth = 32;
 		this.textureHeight = 32;
 		this.field_192764_a = new ModelRenderer(this, 2, 8);
@@ -70,8 +68,7 @@ public class ModelVoidParrot extends ModelBase
 	/**
 	 * Sets the models various rotation angles then renders the model.
 	 */
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-	{
+	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		this.field_192764_a.render(scale);
 		this.field_192766_c.render(scale);
 		this.field_192767_d.render(scale);
@@ -86,8 +83,7 @@ public class ModelVoidParrot extends ModelBase
 	 * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
 	 * "far" arms and legs can swing at most.
 	 */
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
 		float f = ageInTicks * 0.3F;
 		this.field_192768_e.rotateAngleX = headPitch * 0.017453292F;
 		this.field_192768_e.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -97,22 +93,19 @@ public class ModelVoidParrot extends ModelBase
 		this.field_192765_b.rotationPointX = 0.0F;
 		this.field_192767_d.rotationPointX = -1.5F;
 		this.field_192766_c.rotationPointX = 1.5F;
-		if (this.field_192775_l != ModelVoidParrot.State.FLYING)
-		{
-			if (this.field_192775_l == ModelVoidParrot.State.SITTING)
-			{
+		if (this.field_192775_l != ModelVoidParrot.State.FLYING) {
+			if (this.field_192775_l == ModelVoidParrot.State.SITTING) {
 				return;
 			}
 
-			if (this.field_192775_l == ModelVoidParrot.State.PARTY)
-			{
-				float f1 = MathHelper.cos((float)entityIn.ticksExisted);
-				float f2 = MathHelper.sin((float)entityIn.ticksExisted);
+			if (this.field_192775_l == ModelVoidParrot.State.PARTY) {
+				float f1 = MathHelper.cos((float) entityIn.ticksExisted);
+				float f2 = MathHelper.sin((float) entityIn.ticksExisted);
 				this.field_192768_e.rotationPointX = f1;
 				this.field_192768_e.rotationPointY = 15.69F + f2;
 				this.field_192768_e.rotateAngleX = 0.0F;
 				this.field_192768_e.rotateAngleY = 0.0F;
-				this.field_192768_e.rotateAngleZ = MathHelper.sin((float)entityIn.ticksExisted) * 0.4F;
+				this.field_192768_e.rotateAngleZ = MathHelper.sin((float) entityIn.ticksExisted) * 0.4F;
 				this.field_192764_a.rotationPointX = f1;
 				this.field_192764_a.rotationPointY = 16.5F + f2;
 				this.field_192766_c.rotateAngleZ = -0.0873F - ageInTicks;
@@ -127,7 +120,7 @@ public class ModelVoidParrot extends ModelBase
 			}
 
 			this.field_192773_j.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-			this.field_192774_k.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			this.field_192774_k.rotateAngleX += MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 		}
 
 		this.field_192768_e.rotationPointY = 15.69F + f;
@@ -146,33 +139,29 @@ public class ModelVoidParrot extends ModelBase
 	 * Used for easily adding entity-dependent animations. The second and third float params here are the same second
 	 * and third as in the setRotationAngles method.
 	 */
-	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
-	{
+	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
 		this.field_192772_i.rotateAngleX = -0.2214F;
 		this.field_192764_a.rotateAngleX = 0.4937F;
-		this.field_192766_c.rotateAngleX = -((float)Math.PI * 2F / 9F);
-		this.field_192766_c.rotateAngleY = -(float)Math.PI;
-		this.field_192767_d.rotateAngleX = -((float)Math.PI * 2F / 9F);
-		this.field_192767_d.rotateAngleY = -(float)Math.PI;
+		this.field_192766_c.rotateAngleX = -((float) Math.PI * 2F / 9F);
+		this.field_192766_c.rotateAngleY = -(float) Math.PI;
+		this.field_192767_d.rotateAngleX = -((float) Math.PI * 2F / 9F);
+		this.field_192767_d.rotateAngleY = -(float) Math.PI;
 		this.field_192773_j.rotateAngleX = -0.0299F;
 		this.field_192774_k.rotateAngleX = -0.0299F;
 		this.field_192773_j.rotationPointY = 22.0F;
 		this.field_192774_k.rotationPointY = 22.0F;
 
-		if (entitylivingbaseIn instanceof EntityVoidParrot)
-		{
-			EntityVoidParrot parrot = (EntityVoidParrot)entitylivingbaseIn;
+		if (entitylivingbaseIn instanceof EntityVoidParrot) {
+			EntityVoidParrot parrot = (EntityVoidParrot) entitylivingbaseIn;
 
-			if (parrot.isPartying())
-			{
+			if (parrot.isPartying()) {
 				this.field_192773_j.rotateAngleZ = -0.34906584F;
 				this.field_192774_k.rotateAngleZ = 0.34906584F;
 				this.field_192775_l = ModelVoidParrot.State.PARTY;
 				return;
 			}
 
-			if (parrot.isSitting())
-			{
+			if (parrot.isSitting()) {
 				float f = 1.9F;
 				this.field_192768_e.rotationPointY = 17.59F;
 				this.field_192765_b.rotateAngleX = 1.5388988F;
@@ -187,15 +176,11 @@ public class ModelVoidParrot extends ModelBase
 				++this.field_192773_j.rotateAngleX;
 				++this.field_192774_k.rotateAngleX;
 				this.field_192775_l = ModelVoidParrot.State.SITTING;
-			}
-			else if (parrot.isFlying())
-			{
-				this.field_192773_j.rotateAngleX += ((float)Math.PI * 2F / 9F);
-				this.field_192774_k.rotateAngleX += ((float)Math.PI * 2F / 9F);
+			} else if (parrot.isFlying()) {
+				this.field_192773_j.rotateAngleX += ((float) Math.PI * 2F / 9F);
+				this.field_192774_k.rotateAngleX += ((float) Math.PI * 2F / 9F);
 				this.field_192775_l = ModelVoidParrot.State.FLYING;
-			}
-			else
-			{
+			} else {
 				this.field_192775_l = ModelVoidParrot.State.STANDING;
 			}
 
@@ -205,11 +190,7 @@ public class ModelVoidParrot extends ModelBase
 	}
 
 	@SideOnly(Side.CLIENT)
-	static enum State
-	{
-		FLYING,
-		STANDING,
-		SITTING,
-		PARTY;
+	static enum State {
+		FLYING, STANDING, SITTING, PARTY;
 	}
 }

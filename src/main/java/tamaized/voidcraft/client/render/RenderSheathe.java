@@ -46,7 +46,8 @@ public class RenderSheathe {
 	private void render(net.minecraft.client.renderer.entity.RenderLivingBase render, EntityLivingBase entity, double x, double y, double z, float partialTicks) {
 
 		float[] colors = SheatheHelper.getColor(entity);
-		if (colors == null) return;
+		if (colors == null)
+			return;
 		Random rand = entity.world.rand;
 		double dx = (rand.nextFloat() * 1.0f) - 0.5f;
 		double dz = (rand.nextFloat() * 1.0f) - 0.5f;
@@ -55,7 +56,8 @@ public class RenderSheathe {
 		hexColor += ((int) (colors[1] * 255f) << 16);
 		hexColor += ((int) (colors[2] * 255f) << 8);
 		hexColor += ((int) (colors[3] * 255f));
-		if (!Minecraft.getMinecraft().isGamePaused()) Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(entity.world, new Vec3d(entity.posX + dx, entity.posY + 1, entity.posZ + dz), new Vec3d(0, 0, 0), 20 * 2, -(rand.nextFloat() * 0.05f) - 0.01f, rand.nextFloat(), hexColor));
+		if (!Minecraft.getMinecraft().isGamePaused())
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(entity.world, new Vec3d(entity.posX + dx, entity.posY + 1, entity.posZ + dz), new Vec3d(0, 0, 0), 20 * 2, -(rand.nextFloat() * 0.05f) - 0.01f, rand.nextFloat(), hexColor));
 		GlStateManager.disableLighting();
 		TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
 		TextureAtlasSprite textureatlassprite = TextureStitch.colorFire_layer_0;

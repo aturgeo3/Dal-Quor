@@ -1,19 +1,10 @@
 package tamaized.voidcraft.common.entity.companion;
 
-import tamaized.voidcraft.common.capabilities.CapabilityList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.AbstractHorse;
@@ -30,11 +21,12 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
 
 public abstract class EntityCompanion extends EntityTameable {
 
-	private static final DataParameter<Float> DATA_HEALTH_ID = EntityDataManager.<Float> createKey(EntityCompanion.class, DataSerializers.FLOAT);
-	private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer> createKey(EntityCompanion.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> DATA_HEALTH_ID = EntityDataManager.<Float>createKey(EntityCompanion.class, DataSerializers.FLOAT);
+	private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityCompanion.class, DataSerializers.VARINT);
 
 	public EntityCompanion(World worldIn) {
 		super(worldIn);
@@ -69,8 +61,10 @@ public abstract class EntityCompanion extends EntityTameable {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getDefaultMoveSpeed(isTamed()));
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getDefaultMaxHealth(isTamed()));
 		heal(getMaxHealth());
-		if (getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null) getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
-		else getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
+		if (getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) == null)
+			getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
+		else
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getDefaultDamage(isTamed()));
 	}
 
 	@Override
@@ -111,7 +105,8 @@ public abstract class EntityCompanion extends EntityTameable {
 		if (!world.isRemote && getOwner() != null) {
 			if (!getOwner().hasCapability(CapabilityList.VADEMECUM, null) || getOwner().getCapability(CapabilityList.VADEMECUM, null).getCompanion() != this) {
 				setDead();
-			} else if (ticksExisted % (20 * 5) == 0) heal(1.0F);
+			} else if (ticksExisted % (20 * 5) == 0)
+				heal(1.0F);
 		}
 	}
 
@@ -180,7 +175,8 @@ public abstract class EntityCompanion extends EntityTameable {
 
 	public void tame(EntityPlayer player) {
 		setOwnerId(player.getGameProfile().getId());
-		if (player.getGameProfile().getName().toLowerCase().equals("tamaized")) setColor(EnumDyeColor.PINK);
+		if (player.getGameProfile().getName().toLowerCase().equals("tamaized"))
+			setColor(EnumDyeColor.PINK);
 		setTamed(true);
 	}
 

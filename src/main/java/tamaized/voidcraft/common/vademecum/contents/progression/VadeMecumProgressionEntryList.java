@@ -1,18 +1,7 @@
 package tamaized.voidcraft.common.vademecum.contents.progression;
 
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListDreams;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListEmpowerment;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListImprovedCasting;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListInfusionControl;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListPotions;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListRitualBlock;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListRitualList;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListTolerance;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListTome;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListTotalControl;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListVoice;
-import tamaized.voidcraft.common.vademecum.contents.progression.pages.VadeMecumPageListVoidicControl;
+import tamaized.voidcraft.common.vademecum.contents.progression.pages.*;
 
 public class VadeMecumProgressionEntryList {
 

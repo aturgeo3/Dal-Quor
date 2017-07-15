@@ -1,12 +1,12 @@
 package tamaized.voidcraft.common.events;
 
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 public class BlockBreakPlaceEvent {
 
@@ -16,7 +16,8 @@ public class BlockBreakPlaceEvent {
 		World world = player.world;
 		if (world.provider.getDimension() == ConfigHandler.dimensionIdXia && !player.capabilities.isCreativeMode && (e.getState().getBlock() != Blocks.STANDING_SIGN && e.getState().getBlock() != Blocks.WALL_SIGN)) {
 			e.setCanceled(true);
-			if(player instanceof EntityPlayerMP) ((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+			if (player instanceof EntityPlayerMP)
+				((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
 		}
 	}
 
@@ -26,7 +27,8 @@ public class BlockBreakPlaceEvent {
 		World world = player.world;
 		if (world.provider.getDimension() == ConfigHandler.dimensionIdXia && !player.capabilities.isCreativeMode && (e.getState().getBlock() != Blocks.STANDING_SIGN && e.getState().getBlock() != Blocks.WALL_SIGN)) {
 			e.setCanceled(true);
-			if(player instanceof EntityPlayerMP) ((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+			if (player instanceof EntityPlayerMP)
+				((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
 		}
 	}
 

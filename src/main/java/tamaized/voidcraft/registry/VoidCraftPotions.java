@@ -1,15 +1,15 @@
 package tamaized.voidcraft.registry;
 
-import tamaized.voidcraft.common.potion.PotionSheathe;
-import tamaized.voidcraft.common.potion.PotionVoidImmunity;
-import tamaized.voidcraft.common.potion.PotionVoidicInfusion;
-import tamaized.voidcraft.common.potion.PotionVoidicInfusionImmunity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tamaized.voidcraft.common.potion.PotionSheathe;
+import tamaized.voidcraft.common.potion.PotionVoidImmunity;
+import tamaized.voidcraft.common.potion.PotionVoidicInfusion;
+import tamaized.voidcraft.common.potion.PotionVoidicInfusionImmunity;
 
 import java.util.ArrayList;
 import java.util.List;

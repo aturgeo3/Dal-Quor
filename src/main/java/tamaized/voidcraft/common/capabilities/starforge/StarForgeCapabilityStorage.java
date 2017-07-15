@@ -1,13 +1,13 @@
 package tamaized.voidcraft.common.capabilities.starforge;
 
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
-import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect.Tier;
+import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 
 public class StarForgeCapabilityStorage implements IStorage<IStarForgeCapability> {
 
@@ -31,5 +31,5 @@ public class StarForgeCapabilityStorage implements IStorage<IStarForgeCapability
 		instance.addEffect(StarForgeEffectList.getEffect(compound.getInteger("tier2")));
 		instance.addEffect(StarForgeEffectList.getEffect(compound.getInteger("tier3")));
 	}
-	
+
 }

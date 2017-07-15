@@ -1,7 +1,7 @@
 package tamaized.voidcraft.common.addons.thaumcraft.spells;
 
 
-public abstract class VoidSpellFocus{/* extends ItemFocusBasic {
+public abstract class VoidSpellFocus {/* extends ItemFocusBasic {
 
 	//public abstract void registerIcons(IIconRegister p_94581_1_);
 	

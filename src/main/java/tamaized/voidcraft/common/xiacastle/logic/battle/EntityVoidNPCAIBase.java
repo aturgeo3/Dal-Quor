@@ -19,9 +19,13 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 	private T entity;
 	protected World world;
 
-	/** The closest entity which is being watched by this one. */
+	/**
+	 * The closest entity which is being watched by this one.
+	 */
 	protected Entity closestEntity;
-	/** This is the Maximum distance that the AI will look for the Entity */
+	/**
+	 * This is the Maximum distance that the AI will look for the Entity
+	 */
 	protected float maxDistanceForPlayer = 30;
 	protected List<Class> watchedClass = new ArrayList<>();
 
@@ -30,7 +34,7 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 
 	protected int tick = 1;
 	private int tick_updateClosestEntity = 2 * 20;
-	
+
 	public EntityVoidNPCAIBase(T entityBoss, List<Class> c) {
 		watchedClass = new ArrayList<>();
 		watchedClass.addAll(c);
@@ -67,8 +71,10 @@ public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends Enti
 
 	@Override
 	public final void updateTask() {
-		if (!shouldExecute() || world.isRemote) return;
-		if (tick % tick_updateClosestEntity == 0) updateClosest();
+		if (!shouldExecute() || world.isRemote)
+			return;
+		if (tick % tick_updateClosestEntity == 0)
+			updateClosest();
 		update();
 		tick++;
 	}

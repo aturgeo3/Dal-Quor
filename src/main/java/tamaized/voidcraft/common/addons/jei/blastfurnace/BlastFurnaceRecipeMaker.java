@@ -1,12 +1,11 @@
 package tamaized.voidcraft.common.addons.jei.blastfurnace;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.machina.addons.TERecipesBlastFurnace.BlastFurnaceRecipe;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlastFurnaceRecipeMaker {
 

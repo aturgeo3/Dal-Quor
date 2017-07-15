@@ -4,7 +4,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderHook{/* extends Render {
+public class RenderHook {/* extends Render {
 
 	public RenderHook(RenderManager renderManager) {
 		super(renderManager);

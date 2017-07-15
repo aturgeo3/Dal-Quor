@@ -1,9 +1,5 @@
 package tamaized.voidcraft.common.blocks;
 
-import tamaized.tammodized.common.blocks.TamBlock;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
-import tamaized.voidcraft.common.handlers.ConfigHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +12,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import tamaized.tammodized.common.blocks.TamBlock;
+import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.handlers.ConfigHandler;
 
 import java.util.Random;
 
@@ -51,14 +51,15 @@ public class BlockRealityHole extends TamBlock {
 					if (ConfigHandler.realityWhitelist.length > 0) {
 						Random rand = worldIn.rand;
 						int i = rand.nextInt(ConfigHandler.realityWhitelist.length);
-						int dim =ConfigHandler.realityWhitelist[i];
+						int dim = ConfigHandler.realityWhitelist[i];
 						if (player.mcServer.getWorld(dim) != null) {
 							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.getWorld(dim), player.getPosition()));
 						}
 						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}
 				}
-			} else if (!(entityIn instanceof EntityVoidBoss) && !(entityIn instanceof IAlternateBoss) && (entityIn.isNonBoss())) entityIn.setDead();
+			} else if (!(entityIn instanceof EntityVoidBoss) && !(entityIn instanceof IAlternateBoss) && (entityIn.isNonBoss()))
+				entityIn.setDead();
 		}
 	}
 

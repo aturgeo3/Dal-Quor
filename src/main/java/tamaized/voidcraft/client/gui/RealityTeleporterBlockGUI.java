@@ -1,9 +1,5 @@
 package tamaized.voidcraft.client.gui;
 
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.gui.container.RealityTeleporterBlockContainer;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,6 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.common.gui.container.RealityTeleporterBlockContainer;
+import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
 
 @SideOnly(Side.CLIENT)
 public class RealityTeleporterBlockGUI extends GuiContainer {

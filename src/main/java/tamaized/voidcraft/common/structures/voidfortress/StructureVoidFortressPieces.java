@@ -1,13 +1,6 @@
 package tamaized.voidcraft.common.structures.voidfortress;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -19,11 +12,16 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import tamaized.voidcraft.VoidCraft;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class StructureVoidFortressPieces {
 
-	private static final StructureVoidFortressPieces.PieceWeight[] PRIMARY_COMPONENTS = new StructureVoidFortressPieces.PieceWeight[] { new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Straight.class, 30, 0, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing3.class, 10, 4), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing.class, 10, 4), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Stairs.class, 10, 3), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Throne.class, 5, 2), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Entrance.class, 5, 1) };
-	private static final StructureVoidFortressPieces.PieceWeight[] SECONDARY_COMPONENTS = new StructureVoidFortressPieces.PieceWeight[] { new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor5.class, 25, 0, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing2.class, 15, 5), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor2.class, 5, 10), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor.class, 5, 10), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor3.class, 10, 3, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor4.class, 7, 2), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.NetherStalkRoom.class, 5, 2) };
+	private static final StructureVoidFortressPieces.PieceWeight[] PRIMARY_COMPONENTS = new StructureVoidFortressPieces.PieceWeight[]{new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Straight.class, 30, 0, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing3.class, 10, 4), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing.class, 10, 4), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Stairs.class, 10, 3), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Throne.class, 5, 2), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Entrance.class, 5, 1)};
+	private static final StructureVoidFortressPieces.PieceWeight[] SECONDARY_COMPONENTS = new StructureVoidFortressPieces.PieceWeight[]{new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor5.class, 25, 0, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Crossing2.class, 15, 5), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor2.class, 5, 10), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor.class, 5, 10), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor3.class, 10, 3, true), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.Corridor4.class, 7, 2), new StructureVoidFortressPieces.PieceWeight(StructureVoidFortressPieces.NetherStalkRoom.class, 5, 2)};
 
 	public static void registerNetherFortressPieces() {
 		MapGenStructureIO.registerStructureComponent(StructureVoidFortressPieces.Crossing3.class, "VFNeBCr");
@@ -1202,25 +1200,27 @@ public class StructureVoidFortressPieces {
 	}
 
 	public static class Start extends StructureVoidFortressPieces.Crossing3 {
-		/** Instance of StructureNetherBridgePieceWeight. */
+		/**
+		 * Instance of StructureNetherBridgePieceWeight.
+		 */
 		public StructureVoidFortressPieces.PieceWeight theNetherBridgePieceWeight;
 		public List<StructureVoidFortressPieces.PieceWeight> primaryWeights;
 		public List<StructureVoidFortressPieces.PieceWeight> secondaryWeights;
-		public List<StructureComponent> pendingChildren = Lists.<StructureComponent> newArrayList();
+		public List<StructureComponent> pendingChildren = Lists.<StructureComponent>newArrayList();
 
 		public Start() {
 		}
 
 		public Start(Random p_i2059_1_, int p_i2059_2_, int p_i2059_3_) {
 			super(p_i2059_1_, p_i2059_2_, p_i2059_3_);
-			this.primaryWeights = Lists.<StructureVoidFortressPieces.PieceWeight> newArrayList();
+			this.primaryWeights = Lists.<StructureVoidFortressPieces.PieceWeight>newArrayList();
 
 			for (StructureVoidFortressPieces.PieceWeight structurenetherbridgepieces$pieceweight : StructureVoidFortressPieces.PRIMARY_COMPONENTS) {
 				structurenetherbridgepieces$pieceweight.placeCount = 0;
 				this.primaryWeights.add(structurenetherbridgepieces$pieceweight);
 			}
 
-			this.secondaryWeights = Lists.<StructureVoidFortressPieces.PieceWeight> newArrayList();
+			this.secondaryWeights = Lists.<StructureVoidFortressPieces.PieceWeight>newArrayList();
 
 			for (StructureVoidFortressPieces.PieceWeight structurenetherbridgepieces$pieceweight1 : StructureVoidFortressPieces.SECONDARY_COMPONENTS) {
 				structurenetherbridgepieces$pieceweight1.placeCount = 0;

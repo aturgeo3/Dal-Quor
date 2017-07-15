@@ -1,16 +1,16 @@
 package tamaized.voidcraft.common.vademecum;
 
-import java.util.List;
-
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.gui.VadeMecumGUI;
-import tamaized.voidcraft.common.helper.RecipeHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import tamaized.tammodized.common.helper.TranslateHelper;
+import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.common.helper.RecipeHelper;
+
+import java.util.List;
 
 public class VadeMecumCraftingFurnace implements IVadeMecumCrafting {
 

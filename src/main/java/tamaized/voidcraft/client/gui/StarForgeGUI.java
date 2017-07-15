@@ -25,7 +25,7 @@ import tamaized.voidcraft.registry.VoidCraftBlocks;
 import tamaized.voidcraft.registry.VoidCraftItems;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class StarForgeGUI extends GuiContainer {
 
@@ -105,7 +105,7 @@ public class StarForgeGUI extends GuiContainer {
 		boolean enough = false;
 		if (hasSel) {
 			int index = scroll.getSelectedIndex();
-			ArrayList<GUIListElement> list = scroll.getElements();
+			List<GUIListElement> list = scroll.getElements();
 			if (index >= 0 && index < list.size()) {
 				GUIListElement element = list.get(index);
 				if (element instanceof StarForgeToolEntry) {

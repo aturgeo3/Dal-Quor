@@ -61,16 +61,26 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	@Override
 	protected void update() {
 		if (!world.isRemote) {
-			if (dol == null || zol == null || dragon == null || wither == null) return;
-			if (!(dol instanceof EntityDolXia) || !(zol instanceof EntityZolXia) || !(dragon instanceof EntityDragonXia) || !(wither instanceof EntityWitherbrine)) return;
-			if (zol.getDistanceToEntity(getEntity()) >= 100) zol.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
-			if (dol.getDistanceToEntity(getEntity()) >= 100) dol.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
-			if (dragon.getDistanceToEntity(getEntity()) >= 100) dragon.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
-			if (wither.getDistanceToEntity(getEntity()) >= 100) wither.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
-			if (!world.loadedEntityList.contains(dol) && !dol.isFrozen() && !dol.isDead) world.spawnEntity(dol);
-			if (!world.loadedEntityList.contains(zol) && !zol.isFrozen() && !zol.isDead) world.spawnEntity(zol);
-			if (!world.loadedEntityList.contains(wither) && !wither.isDead) world.spawnEntity(wither);
-			if (!world.loadedEntityList.contains(dragon) && !dragon.isDead) world.spawnEntity(dragon);
+			if (dol == null || zol == null || dragon == null || wither == null)
+				return;
+			if (!(dol instanceof EntityDolXia) || !(zol instanceof EntityZolXia) || !(dragon instanceof EntityDragonXia) || !(wither instanceof EntityWitherbrine))
+				return;
+			if (zol.getDistanceToEntity(getEntity()) >= 100)
+				zol.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
+			if (dol.getDistanceToEntity(getEntity()) >= 100)
+				dol.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
+			if (dragon.getDistanceToEntity(getEntity()) >= 100)
+				dragon.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
+			if (wither.getDistanceToEntity(getEntity()) >= 100)
+				wither.setPositionAndUpdate(getEntity().posX, getEntity().posY, getEntity().posZ);
+			if (!world.loadedEntityList.contains(dol) && !dol.isFrozen() && !dol.isDead)
+				world.spawnEntity(dol);
+			if (!world.loadedEntityList.contains(zol) && !zol.isFrozen() && !zol.isDead)
+				world.spawnEntity(zol);
+			if (!world.loadedEntityList.contains(wither) && !wither.isDead)
+				world.spawnEntity(wither);
+			if (!world.loadedEntityList.contains(dragon) && !dragon.isDead)
+				world.spawnEntity(dragon);
 			if (tick % litStrikeTick == 0) {
 				int lx = (int) ((world.rand.nextDouble() * (litBox.maxX - litBox.minX)) + litBox.minX);
 				int ly = 70;
@@ -84,7 +94,8 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	}
 
 	private void updateSphere() {
-		if (world.isRemote) return;
+		if (world.isRemote)
+			return;
 		if (getEntity().shouldSphereRender()) {
 			if (zol.isFrozen() && dol.isFrozen() && wither.isDead && dragon.isDead) {
 				getEntity().setSphereState(false);

@@ -10,7 +10,8 @@ public class ClientRenderTicker {
 
 	@SubscribeEvent
 	public void update(TickEvent.RenderTickEvent e) {
-		if (e.phase == e.phase.END && e.type == e.type.RENDER && !Minecraft.getMinecraft().isGamePaused()) tick++;
+		if (e.phase == e.phase.END && e.type == e.type.RENDER && !Minecraft.getMinecraft().isGamePaused())
+			tick++;
 	}
 
 }

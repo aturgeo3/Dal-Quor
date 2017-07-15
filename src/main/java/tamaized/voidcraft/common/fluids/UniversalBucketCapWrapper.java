@@ -12,7 +12,7 @@ public abstract class UniversalBucketCapWrapper extends FluidBucketWrapper { // 
 	public UniversalBucketCapWrapper(ItemStack container) {
 		super(container);
 	}
-	
-    public abstract FluidStack getFluid();
+
+	public abstract FluidStack getFluid();
 
 }

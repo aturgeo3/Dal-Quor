@@ -49,7 +49,8 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 
 	@Override
 	public void readPacket(IVoidBossAIPacket packet) {
-		if (packet instanceof XiaTookDamagePacket) doTeleport();
+		if (packet instanceof XiaTookDamagePacket)
+			doTeleport();
 	}
 
 	@Override
@@ -71,31 +72,34 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 					resetAnimationTick = 20 * 4;
 					actionTeleport();
 				}
-					break;
+				break;
 				case 1: { // Voidic Fire (Same as Lich)
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 180, 0, 0, 0);
 					resetAnimationTick = 20 * 4;
 					getEntity().world.spawnEntity(new EntityLichInferno(getEntity().world, getEntity().getPosition(), 10, 10));
 				}
-					break;
+				break;
 				case 2: { // Use the force luke :P some sort of choke mechanic idk
-					if (closestEntity == null) break;
+					if (closestEntity == null)
+						break;
 					resetAnimationTick = 20 * 4;
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 90, 90, 0, 0);
 					closestEntity.attackEntityFrom(new DamageSourceVoidicInfusion(), 8.0f);
 				}
-					break;
+				break;
 				case 3: { // litBolt
-					if (closestEntity == null) break;
+					if (closestEntity == null)
+						break;
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 90, 0.0f, 0, 0);
 					resetAnimationTick = 20 * 2;
 					EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, closestEntity.posX, closestEntity.posY, closestEntity.posZ, false);
 					entitylightningbolt.setLocationAndAngles(closestEntity.posX, closestEntity.posY + 1 + entitylightningbolt.getYOffset(), closestEntity.posZ, closestEntity.rotationYaw, closestEntity.rotationPitch);
 					world.addWeatherEffect(entitylightningbolt);
 				}
-					break;
+				break;
 				case 4: { // Give less than 1 of the max voidic infusion to the player
-					if (closestEntity == null) break;
+					if (closestEntity == null)
+						break;
 					AnimationRegistry.AnimationLimbs.play(getEntity(), 0, 90, 0, 0);
 					resetAnimationTick = 20 * 2;
 					if (closestEntity instanceof EntityPlayer) {
@@ -103,7 +107,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 						player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
 					}
 				}
-					break;
+				break;
 				default:
 					actionTeleport();
 					break;
@@ -125,7 +129,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 	}
 
 	private void spawnLaser() {
-		XiaLaserParticleData data = ((XiaLaserPacketHandler) ParticlePacketHandlerRegistry.getHandler(VoidCraft.particles.xiaTeleportHandler)).new XiaLaserParticleData(getEntity().getEntityId(), 0, -90, new float[] { 1.0f, 1.0f, 1.0f });
+		XiaLaserParticleData data = ((XiaLaserPacketHandler) ParticlePacketHandlerRegistry.getHandler(VoidCraft.particles.xiaTeleportHandler)).new XiaLaserParticleData(getEntity().getEntityId(), 0, -90, new float[]{1.0f, 1.0f, 1.0f});
 		ParticleHelper.sendPacketToClients(world, VoidCraft.particles.xiaTeleportHandler, new Vec3d(getEntity().posX, getEntity().posY, getEntity().posZ), 64, new ParticleHelper.ParticlePacketHelper(VoidCraft.particles.xiaTeleportHandler, data));
 	}
 
@@ -140,7 +144,7 @@ public class EntityAIXiaPhase1<T extends EntityBossXia> extends EntityVoidNPCAIB
 		// Double[] loc = teleportLocations.get(i > 0 ? i : 0);
 		// if (Arrays.equals(loc, currLoc)) loc = getNextTeleportLocation();
 		// currLoc = loc;
-		Double[] loc = { 0.0D, 0.0D, 0.0D };
+		Double[] loc = {0.0D, 0.0D, 0.0D};
 		loc[0] = (world.rand.nextDouble() * (teleportationBox.maxX - teleportationBox.minX)) + teleportationBox.minX;
 		loc[1] = teleportationBox.maxY;
 		loc[2] = (world.rand.nextDouble() * (teleportationBox.maxZ - teleportationBox.minZ)) + teleportationBox.minZ;

@@ -1,14 +1,14 @@
 package tamaized.voidcraft.common.machina.addons;
 
-import javax.annotation.Nullable;
-
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import tamaized.voidcraft.VoidCraft;
+
+import javax.annotation.Nullable;
 
 public class VoidTank extends FluidTank implements IFluidTank, IFluidHandler {
 

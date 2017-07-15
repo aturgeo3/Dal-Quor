@@ -1,7 +1,7 @@
 package tamaized.voidcraft.client.particles;
 
 
-public class TestFX{/* extends EntityFX{
+public class TestFX {/* extends EntityFX{
 
 	private static final ResourceLocation texture = new ResourceLocation("VoidCraft:textures/particle/Portal.png");
 	

@@ -1,11 +1,11 @@
 package tamaized.voidcraft.common.vademecum.contents.documentation.starforge;
 
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 import tamaized.voidcraft.common.vademecum.VadeMecumPage;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.item.ItemStack;
 
 public class VadeMecumPageStarForgeEffect extends VadeMecumPage {
 

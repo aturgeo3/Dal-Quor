@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.world.dim.dalquor;
 
-import tamaized.voidcraft.VoidCraft;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +15,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import tamaized.voidcraft.VoidCraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -57,6 +57,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	// temporary variables used during event handling
 	private int chunkX = 0;
 	private int chunkZ = 0;
+
 	public ChunkProviderDalQuor(World p_i47241_1_, boolean p_i47241_2_, long p_i47241_3_, BlockPos p_i47241_5_) {
 		this.world = p_i47241_1_;
 		this.rand = new Random(p_i47241_3_);

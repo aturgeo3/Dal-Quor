@@ -1,20 +1,24 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.EntityVoidBoss;
 
 public class EntityHerobrineShadow extends EntityHerobrineFireball {
 
 	public float prevRenderYawOffset;
 	public float renderYawOffset;
-	/** Entity head rotation yaw */
+	/**
+	 * Entity head rotation yaw
+	 */
 	public float rotationYawHead;
-	/** Entity head rotation yaw at previous tick */
+	/**
+	 * Entity head rotation yaw at previous tick
+	 */
 	public float prevRotationYawHead;
 
 	public EntityHerobrineShadow(World p_i1767_1_) {

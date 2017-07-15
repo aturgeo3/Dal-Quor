@@ -9,7 +9,7 @@ import tamaized.voidcraft.common.vademecum.VadeMecumPage;
 public class VadeMecumPageListXiaArmor implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
-		return new IVadeMecumPage[] { new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.xiaArmor", VoidCraft.modid + ".VadeMecum.docs.desc.xiaArmor") };
+		return new IVadeMecumPage[]{new VadeMecumPage(VoidCraft.modid + ".VadeMecum.docs.title.xiaArmor", VoidCraft.modid + ".VadeMecum.docs.desc.xiaArmor")};
 	}
 
 }
