@@ -5,16 +5,16 @@ import net.minecraft.world.World;
 
 public interface IBattleHandler {
 
-	public void update();
+	void update();
 
-	public void start(World worldObj, BlockPos pos);
+	void start(World worldObj, BlockPos pos);
 
-	public void stop();
+	void stop();
 
-	public boolean isRunning();
+	boolean isRunning();
 
-	public boolean isDone();
+	boolean isDone();
 
-	public void setDone();
+	void setDone();
 
 }

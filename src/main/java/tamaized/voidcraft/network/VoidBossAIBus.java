@@ -10,6 +10,7 @@ import java.util.List;
  * This is used to notify each attached {@link EntityVoidNPCAIBase} of some event that occurs in the entity
  * which allows each and every single one to act accordingly
  */
+@Deprecated
 public class VoidBossAIBus {
 
 	private List<EntityVoidNPCAIBase> listeners = new ArrayList<>();

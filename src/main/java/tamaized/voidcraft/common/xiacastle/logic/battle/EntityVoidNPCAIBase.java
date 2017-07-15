@@ -12,6 +12,7 @@ import tamaized.voidcraft.network.IVoidBossAIPacket;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public abstract class EntityVoidNPCAIBase<T extends EntityVoidBoss> extends EntityAIBase {
 
 	private boolean execute = false;

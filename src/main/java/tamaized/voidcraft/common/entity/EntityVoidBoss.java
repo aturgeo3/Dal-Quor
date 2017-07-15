@@ -28,14 +28,20 @@ import java.util.List;
 public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoidNPC implements IVoidBossData {
 
 	private T handler;
+	@Deprecated
 	private VoidBossAIBus bus;
 
+	@Deprecated
 	private int phase = 0;
+	@Deprecated
 	private boolean ready = false;
+	@Deprecated
 	private boolean active = false;
+	@Deprecated
 	private boolean isDone = false;
 
-	private ArrayList<EntityAIBase> ai = new ArrayList<EntityAIBase>();
+	@Deprecated
+	private List<EntityAIBase> ai = new ArrayList<>();
 
 	private Ticket chunkLoadTicket;
 
@@ -72,6 +78,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		return handler;
 	}
 
+	@Deprecated
 	public void start() {
 		isDone = false;
 		if (phase == 0 && bus != null)
@@ -81,22 +88,27 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		active = true;
 	}
 
+	@Deprecated
 	public boolean hasStartedFight() {
 		return phase > 0;
 	}
 
+	@Deprecated
 	public int getCurrentPhase() {
 		return phase;
 	}
 
+	@Deprecated
 	public boolean isActive() {
 		return active;
 	}
 
+	@Deprecated
 	public boolean isDone() {
 		return isDone;
 	}
 
+	@Deprecated
 	public boolean displayBossMode() {
 		return (maxPhases() >= phase && phase > 0);
 	}
@@ -154,10 +166,12 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		}
 	}
 
+	@Deprecated
 	protected void sendPacketToBus(IVoidBossAIPacket packet) {
 		bus.sendPacket(packet);
 	}
 
+	@Deprecated
 	private void updateAI() {
 		if (world.isRemote)
 			return;
@@ -178,6 +192,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		}
 	}
 
+	@Deprecated
 	private void preInitPhase(int p) {
 		if (bus == null)
 			return;
@@ -205,6 +220,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		}
 	}
 
+	@Deprecated
 	protected void addAI(EntityVoidNPCAIBase<? extends EntityVoidBoss> newAi) {
 		ai.add(newAi);
 		newAi.Init();
@@ -293,6 +309,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 	 * Checks whether target entity is alive.
 	 */
 	@Override
+	@Deprecated
 	public boolean isEntityAlive() {
 		return maxPhases() >= phase;
 	}
@@ -330,10 +347,13 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(999.0D);
 	}
 
+	@Deprecated
 	protected abstract void initPhase(int phase);
 
+	@Deprecated
 	protected abstract void updatePhase(int phase);
 
+	@Deprecated
 	protected abstract List<Class> getFilters();
 
 	protected abstract boolean immuneToFire();
@@ -346,8 +366,10 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	protected abstract void triggerOnDamage(int phase, DamageSource source, float amount);
 
+	@Override
 	public abstract ITextComponent getDisplayName();
 
+	@Override
 	public ITextComponent getNameForBossBar() {
 		return getDisplayName();
 	}

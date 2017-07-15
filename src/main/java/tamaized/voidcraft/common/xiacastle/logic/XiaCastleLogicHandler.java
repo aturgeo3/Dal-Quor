@@ -12,7 +12,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
@@ -24,26 +23,23 @@ import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattl
 import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia.XiaBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import java.util.List;
 
 public class XiaCastleLogicHandler {
 
+	private static final BlockPos LOCATION = new BlockPos(52, 55, 4);
 	private final World world;
-
-	public static final BlockPos LOCATION = new BlockPos(52, 55, 4);
-
-	private boolean running = false;
-	private boolean xiaDoorOpen = false;
-	private boolean hasFinished = false;
-
 	private final IBattleHandler twins = new TwinsBattleHandler();
 	private final IBattleHandler herobrine = new HerobrineBattleHandler();
 	private final IBattleHandler xia = new XiaBattleHandler();
 	private final IBattleHandler xia2 = new Xia2BattleHandler();
-
 	private final TwinsSpeech twinsSpeech = new TwinsSpeech();
-
+	private boolean running = false;
+	private boolean xiaDoorOpen = false;
+	private boolean hasFinished = false;
 	private BlockPos twinsLoc;
 	private BlockPos herobrineLoc;
 	private BlockPos xiaLoc;
@@ -130,17 +126,17 @@ public class XiaCastleLogicHandler {
 		BlockPos pos2 = new BlockPos(56, 79, 82);
 		TileEntity te1 = world.getTileEntity(pos1);
 		TileEntity te2 = world.getTileEntity(pos2);
-		TileEntityAIBlock ai1 = null;
-		TileEntityAIBlock ai2 = null;
+		TileEntityAIBlock ai1;
+		TileEntityAIBlock ai2;
 		if (!(te1 instanceof TileEntityAIBlock)) {
-			world.setBlockState(pos1, VoidCraft.blocks.AIBlock.getDefaultState());
+			world.setBlockState(pos1, VoidCraftBlocks.AIBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
 		} else {
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
-			world.setBlockState(pos2, VoidCraft.blocks.AIBlock.getDefaultState());
+			world.setBlockState(pos2, VoidCraftBlocks.AIBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
 		} else {
@@ -181,7 +177,7 @@ public class XiaCastleLogicHandler {
 		TileEntity te = world.getTileEntity(chestPos);
 		if (te instanceof TileEntityChest) {
 			TileEntityChest chest = (TileEntityChest) te;
-			chest.setInventorySlotContents(0, new ItemStack(VoidCraft.items.quoriFragment, i));
+			chest.setInventorySlotContents(0, new ItemStack(VoidCraftItems.quoriFragment, i));
 		}
 		hasFinished = true;
 	}
@@ -206,7 +202,7 @@ public class XiaCastleLogicHandler {
 	private void setupPos() {
 		twinsLoc = LOCATION.add(93 - 52, 71 - 55, 70 - 4);
 		herobrineLoc = LOCATION.add(12 - 52, 71 - 55, 70 - 4);
-		xiaLoc = LOCATION.add(52 - 52, 75 - 55, 85 - 4);
+		xiaLoc = LOCATION.add(0, 75 - 55, 85 - 4);
 		xia2Loc = LOCATION.add(0, 70, 170);
 	}
 
@@ -223,7 +219,7 @@ public class XiaCastleLogicHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? VoidCraft.blocks.realityHole.getDefaultState() : VoidCraft.blocks.blockNoBreak.getDefaultState());
+				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockNoBreak.getDefaultState());
 			}
 		}
 		xiaDoorOpen = false;
