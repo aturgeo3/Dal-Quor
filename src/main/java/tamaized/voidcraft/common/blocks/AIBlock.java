@@ -27,6 +27,7 @@ public class AIBlock extends TamBlockContainer {
 		setDefaultState(this.blockState.getBaseState().withProperty(STATE, 0));
 	}
 
+	@Deprecated
 	public static TileEntityAIBlock getMyTileEntity(World world, BlockPos pos) {
 		Block b = world.getBlockState(pos.add(0, -1, 0)).getBlock();
 		if (b instanceof AIBlock) {

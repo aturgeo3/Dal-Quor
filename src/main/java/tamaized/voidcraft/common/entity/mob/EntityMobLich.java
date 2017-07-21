@@ -14,19 +14,19 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.entity.EntityVoidMob;
 import tamaized.voidcraft.common.entity.ai.ISpellAttackMob;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
 
-	public static final List<IVadeMecumCapability.Category> spells = new ArrayList<IVadeMecumCapability.Category>();
+	public static final List<IVadeMecumCapability.Category> spells = new ArrayList<>();
 
 	static {
 		spells.add(IVadeMecumCapability.Category.Flame);
@@ -59,14 +59,12 @@ public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
 
 		Predicate ies = new Predicate() {
 			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntityWitherSkeleton)
-					return false;
-				else
-					return true;
+				return !(p_82704_1_ instanceof EntityWitherSkeleton);
 			}
 
+			@Override
 			public boolean apply(Object p_apply_1_) {
-				return p_apply_1_ instanceof Entity ? apply((Entity) p_apply_1_) : false;
+				return p_apply_1_ instanceof Entity && apply((Entity) p_apply_1_);
 			}
 		};
 
@@ -109,7 +107,7 @@ public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.voidCloth;
+		return VoidCraftItems.voidCloth;
 	}
 
 	@Override

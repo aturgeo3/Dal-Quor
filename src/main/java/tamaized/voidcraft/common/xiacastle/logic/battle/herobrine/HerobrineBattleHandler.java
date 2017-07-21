@@ -25,9 +25,8 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	@Override
 	public void update() {
 		if (worldObj != null && !worldObj.isRemote && running) {
-			if (herobrine == null || !herobrine.isActive()) {
+			if (herobrine == null || herobrine.isDead) {
 				stop();
-				return;
 			}
 		}
 	}
@@ -45,10 +44,9 @@ public class HerobrineBattleHandler implements IBattleHandler {
 				world.setBlockState(p.add(11, y, z), Blocks.NETHER_BRICK.getDefaultState());
 			}
 		}
-		herobrine = new EntityBossHerobrine(worldObj, this);
+		herobrine = new EntityBossHerobrine(worldObj);
 		herobrine.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 		worldObj.spawnEntity(herobrine);
-		herobrine.start();
 		running = true;
 	}
 
@@ -59,11 +57,10 @@ public class HerobrineBattleHandler implements IBattleHandler {
 		readyForInput = false;
 		isDone = false;
 		if (herobrine != null) {
-			if (herobrine.isDone())
-				isDone = true;
-			worldObj.removeEntity(herobrine);
+			herobrine.setDead();
+			isDone = true;
+			herobrine = null;
 		}
-		herobrine = null;
 		for (int z = -2; z <= 2; z++) {
 			for (int y = 5; y > 0; y--) {
 				worldObj.setBlockToAir(pos.add(11, y, z));

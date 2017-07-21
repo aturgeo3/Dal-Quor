@@ -6,12 +6,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.*;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.gui.container.*;
 import tamaized.voidcraft.common.machina.tileentity.*;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -88,9 +88,9 @@ public class GuiHandler implements IGuiHandler {
 				else
 					return null;
 			case RealityTeleporter:
-				if (!main.isEmpty() && main.getItem() == VoidCraft.items.realityTeleporter)
+				if (!main.isEmpty() && main.getItem() == VoidCraftItems.realityTeleporter)
 					return new RealityTeleporterContainer(player.inventory, main);
-				else if (!off.isEmpty() && off.getItem() == VoidCraft.items.realityTeleporter)
+				else if (!off.isEmpty() && off.getItem() == VoidCraftItems.realityTeleporter)
 					return new RealityTeleporterContainer(player.inventory, off);
 				else
 					return null;
@@ -178,9 +178,9 @@ public class GuiHandler implements IGuiHandler {
 				else
 					return null;
 			case RealityTeleporter:
-				if (!main.isEmpty() && main.getItem() == VoidCraft.items.realityTeleporter)
+				if (!main.isEmpty() && main.getItem() == VoidCraftItems.realityTeleporter)
 					return new RealityTeleporterGUI(player.inventory, main);
-				else if (!off.isEmpty() && off.getItem() == VoidCraft.items.realityTeleporter)
+				else if (!off.isEmpty() && off.getItem() == VoidCraftItems.realityTeleporter)
 					return new RealityTeleporterGUI(player.inventory, off);
 				else
 					return null;

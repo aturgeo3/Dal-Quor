@@ -1,92 +1,140 @@
 package tamaized.voidcraft.common.entity.boss.herobrine;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestPlayerNoSight;
+import tamaized.voidcraft.common.entity.boss.IVoidBossData;
+import tamaized.voidcraft.common.entity.boss.herobrine.ai.EntityAIHerobrinePhase1;
+import tamaized.voidcraft.common.entity.boss.herobrine.ai.EntityAIHerobrinePhase2;
+import tamaized.voidcraft.common.entity.boss.herobrine.ai.EntityAIHerobrinePhase3;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase1;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase2;
-import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.phases.EntityAIHerobrinePhase3;
 
-import java.util.ArrayList;
-import java.util.List;
+public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData {
 
-public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> {
+	private int phase = 0;
+	private BlockPos initialPos;
+	private boolean cantUpdatePos = false;
 
-	public EntityBossHerobrine(World par1World) {
-		super(par1World);
-		this.setInvulnerable(true);
-	}
-
-	public EntityBossHerobrine(World world, HerobrineBattleHandler handler) {
-		super(world, handler, false);
-		this.setInvulnerable(true);
+	public EntityBossHerobrine(World world) {
+		super(world);
+		noClip = true;
+		setInvulnerable(true);
+		setSize(0.6F, 1.8F);
+		moveHelper = new HerobrineMoveHelper(this);
+		setupStats();
 	}
 
 	@Override
-	protected void addDefaultTasks() {
+	protected void initEntityAI() {
+		tasks.addTask(1, new EntityAIHerobrinePhase1(this));
+		tasks.addTask(1, new EntityAIHerobrinePhase2(this));
+		tasks.addTask(1, new EntityAIHerobrinePhase3(this));
+		tasks.addTask(7, new EntityBossHerobrine.AILookAround(this));
+
+		targetTasks.addTask(1, new EntityAIFindEntityNearestPlayerNoSight(this));
+	}
+
+	@Override
+	protected void collideWithEntity(Entity entityIn) {
+		entityIn.attackEntityFrom(DamageSource.WITHER, 5.0F);
+		if (entityIn instanceof EntityLivingBase)
+			((EntityLivingBase) entityIn).knockBack(this, 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+		else
+			entityIn.addVelocity((double) (-MathHelper.sin(this.rotationYaw * 0.017453292F) * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * 0.017453292F) * 0.5F));
+
+	}
+
+	public final BlockPos getInitialPos() {
+		return initialPos;
+	}
+
+	public final void updateInitialPos() {
+		if (!cantUpdatePos)
+			initialPos = getPosition();
+		cantUpdatePos = true;
+	}
+
+	public final void setPositionAndUpdate(BlockPos pos) {
+		setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
+	}
+
+	public final int getPhase() {
+		return phase;
+	}
+
+	@Override
+	protected void encodePacketData(ByteBuf stream) {
 
 	}
 
 	@Override
-	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
-		if (phase == 2)
-			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
-	}
-
-	@Override
-	protected void deathHook() {
+	protected void decodePacketData(ByteBuf stream) {
 
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		// start();
-		return super.processInteract(player, hand);
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		compound.setInteger("phase", phase);
+		compound.setBoolean("cantUpdatePos", cantUpdatePos);
+		compound.setIntArray("initialPos", new int[]{initialPos.getX(), initialPos.getY(), initialPos.getZ()});
+		return super.writeToNBT(compound);
 	}
 
 	@Override
-	protected void initPhase(int phase) {
-		if (phase == 1) {
-			/*
-			 * Cycle: - Herobrine shoots fireballs. - Pillars need to get hit with fireball, cycle through textures of green wool, yellow, red. 4th hit will damage herobrine. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time
-			 */
-			isFlying = true;
-			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-			this.setHealth(this.getMaxHealth());
-			// BossMusicManager.PlayTheSound(this.worldObj, this, new ItemStack(voidCraft.items.voidDiscs.get(10)), new int[]{(int) this.posX, (int) this.posY, (int) this.posZ}, true);
+	public void readFromNBT(NBTTagCompound compound) {
+		phase = compound.getInteger("phase");
+		cantUpdatePos = compound.getBoolean("cantUpdatePos");
+		int[] array = compound.getIntArray("initialPos");
+		if (array.length == 3)
+			initialPos = new BlockPos(array[0], array[1], array[2]);
+		super.readFromNBT(compound);
+	}
 
-			addAI(new EntityAIHerobrinePhase1(this, getFilters()));
-		} else if (phase == 2) {
-			/*
-			 * Cycle: - Herobrine chases the player. - On touching a player, deal damage. - Herobrine must run through a pillar to be dealt damage. - Pillars Spawn every 5 seconds - Max of 6 Pillars at a time - Increase his speed everytime he is hurt
-			 */
-			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
-			this.setHealth(this.getMaxHealth());
-
-			addAI(new EntityAIHerobrinePhase2(this, getFilters()));
-		} else if (phase == 3) {
-			/*
-			 * Cycle: - Herobrine floats in the air standstill. - Does various attacks. - 4 Npcs spawn at random and must be interacted with by the player, deals 25 hp to herobrine. - npcs spawn every 30s - Max of 1 npc at a time and timer doesnt move while an npc is active
-			 */
-			isFlying = true;
-			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-			this.setHealth(this.getMaxHealth());
-
-			addAI(new EntityAIHerobrinePhase3(this, getFilters()));
-
+	private void setupStats() {
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40);
+		setInvulnerable(true);
+		switch (phase) {
+			default:
+			case 0:
+				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+				break;
+			case 1:
+				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.025D);
+				break;
+			case 2:
+				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
+				break;
 		}
+		setHealth(getMaxHealth());
+		if(phase > 2) setDead();
+	}
+
+	public final void doDamage(int a) {
+		if (getHealth() <= a) {
+			phase++;
+			setupStats();
+			return;
+		}
+		setHealth(getHealth() - a);
+		if (phase == 1)
+			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() + 0.025D);
+
 	}
 
 	@Override
@@ -110,55 +158,90 @@ public class EntityBossHerobrine extends EntityVoidBoss<HerobrineBattleHandler> 
 	}
 
 	@Override
-	protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
-
-	}
-
-	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString("Avatar of Herobrine");
+		return new TextComponentTranslation("entity.voidcraft.Herobrine.name");
 	}
 
 	@Override
-	protected void updatePhase(int phase) {
-
+	public float getMaxHealthForBossBar() {
+		return getMaxHealth();
 	}
 
 	@Override
-	protected List<Class> getFilters() {
-		List<Class> filter = new ArrayList<>();
-		filter.add(EntityPlayer.class);
-		return filter;
+	public float getHealthForBossBar() {
+		return getHealth();
 	}
 
 	@Override
-	protected boolean immuneToFire() {
-		return true;
+	public float getPercentHPForBossBar() {
+		return getHealth() / getMaxHealth();
 	}
 
 	@Override
-	protected float sizeWidth() {
-		return 0.6F;
+	public ITextComponent getNameForBossBar() {
+		return getDisplayName();
 	}
 
-	@Override
-	protected float sizeHeight() {
-		return 1.8F;
+	static class HerobrineMoveHelper extends EntityMoveHelper {
+		private final EntityBossHerobrine parentEntity;
+		private int courseChangeCooldown;
+
+		HerobrineMoveHelper(EntityBossHerobrine herobrine) {
+			super(herobrine);
+			this.parentEntity = herobrine;
+		}
+
+		@Override
+		public void onUpdateMoveHelper() {
+			if (this.action == EntityMoveHelper.Action.MOVE_TO) {
+				double d0 = this.posX - this.parentEntity.posX;
+				double d1 = this.posY - this.parentEntity.posY;
+				double d2 = this.posZ - this.parentEntity.posZ;
+				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+
+				if (this.courseChangeCooldown-- <= 0) {
+					this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
+					d3 = (double) MathHelper.sqrt(d3);
+					double movementSpeed = parentEntity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+					this.parentEntity.motionX += d0 / d3 * (movementSpeed * speed);
+					this.parentEntity.motionY += d1 / d3 * (movementSpeed * speed);
+					this.parentEntity.motionZ += d2 / d3 * (movementSpeed * speed);
+				}
+			}
+		}
+
 	}
 
-	@Override
-	protected int maxPhases() {
-		return 3;
-	}
+	static class AILookAround extends EntityAIBase {
+		private final EntityVoidNPC parentEntity;
 
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
+		AILookAround(EntityVoidNPC ghast) {
+			this.parentEntity = ghast;
+			this.setMutexBits(2);
+		}
 
-	}
+		@Override
+		public boolean shouldExecute() {
+			return true;
+		}
 
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
+		@Override
+		public void updateTask() {
+			if (this.parentEntity.getAttackTarget() == null) {
+				this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
+				this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
+			} else {
+				EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
+				double d0 = 64.0D;
 
+				if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D) {
+					double d1 = entitylivingbase.posX - this.parentEntity.posX;
+					double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
+					this.parentEntity.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float) Math.PI);
+					this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
+				}
+			}
+		}
 	}
 
 }

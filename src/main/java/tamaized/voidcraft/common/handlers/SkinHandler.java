@@ -22,7 +22,7 @@ import java.util.Map.Entry;
 public class SkinHandler {
 
 	private static final String SESSION_SERVER = "https://sessionserver.mojang.com";
-	private static final String nameUrl = "https://api.mojang.com/user/profiles/";
+	private static final String NAME_URL = "https://api.mojang.com/user/profiles/";
 	private static volatile List<UUID> uuidList = new ArrayList<>();
 	private static volatile Map<UUID, PlayerSkinInfoWrapper> uuidProfile = new HashMap<>();
 	private static volatile Map<String, UUID> uuidNames = new HashMap<>(); // This becomes empty after SkinHandler finishes loading
@@ -84,7 +84,7 @@ public class SkinHandler {
 			String name = entry.getKey();
 			UUID id = entry.getValue();
 			try {
-				URL url = new URL(nameUrl + id.toString().replace("-", "") + "/names");
+				URL url = new URL(NAME_URL + id.toString().replace("-", "") + "/names");
 				BufferedReader reader = Resources.asCharSource(url, StandardCharsets.UTF_8).openBufferedStream();
 				JsonReader json = new JsonReader(reader);
 				json.beginArray();

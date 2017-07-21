@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Deprecated
 public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoidNPC implements IVoidBossData {
 
 	private T handler;
@@ -69,6 +70,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 			tasks.addTask(6, new EntityAILookIdle(this));
 	}
 
+	@Deprecated
 	protected void addDefaultTasks() {
 		for (Class c : getFilters())
 			tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));

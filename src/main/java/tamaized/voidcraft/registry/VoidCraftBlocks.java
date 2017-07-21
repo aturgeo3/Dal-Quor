@@ -20,6 +20,7 @@ import tamaized.tammodized.common.blocks.slab.TamBlockSlabDouble;
 import tamaized.tammodized.common.blocks.slab.TamBlockSlabHalf;
 import tamaized.tammodized.registry.ITamRegistry;
 import tamaized.tammodized.registry.TamColorRegistry;
+import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.blocks.*;
 import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
@@ -28,7 +29,7 @@ import tamaized.voidcraft.common.machina.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = VoidCraft.modid)
 public class VoidCraftBlocks {
 
 	public static BlockVoidcrystal blockVoidcrystal;

@@ -10,15 +10,12 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumHandSide;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
 import tamaized.voidcraft.common.handlers.SkinHandler;
-
-import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
@@ -39,57 +36,17 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		ModelBiped model = (ModelBiped) getMainModel();
 		GlStateManager.pushMatrix();
 		{
-			if (entity.isInteractable())
-				renderInteractable(entity, model);
-			GlStateManager.pushMatrix();
-			{
-				GlStateManager.translate(x, y + 2F, z);
-				if (entity.hasRuneState())
-					renderRuneState(entity, model);
-			}
-			GlStateManager.popMatrix();
+			GlStateManager.translate(x, y + 2F, z);
+			if (entity.hasRuneState())
+				renderRuneState(entity, model);
 		}
+		GlStateManager.popMatrix();
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.5f);
 		super.doRender(entity, x, y, z, yaw, partialTicks); // Entity texture is bound here, we're free to bind whatever we want before this and not care
 		model.leftArmPose = ArmPose.EMPTY;
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		GlStateManager.popMatrix();
 		GlStateManager.disableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
 		this.renderLabel(entity, x, y, z);
-	}
-
-	private void renderInteractable(T entity, ModelBiped model) {
-		if (entity.isRunning()) {
-			model.leftArmPose = ArmPose.BOW_AND_ARROW;
-			DirectionState stateX = DirectionState.STILL;
-			DirectionState stateZ = DirectionState.STILL;
-			switch ((int) entity.renderYawOffset + 180) {
-				case 0:
-					stateZ = DirectionState.NEG;
-					break;
-				case 90:
-					stateX = DirectionState.POS;
-					break;
-				case 180:
-					stateZ = DirectionState.POS;
-					break;
-				case 270:
-					stateX = DirectionState.NEG;
-					break;
-				default:
-					break;
-			}
-			double dxPos = stateX == DirectionState.NEG ? -7.5D : stateX == DirectionState.POS ? 8.5D : 0.5D;
-			double dyPos = 10.5D;
-			double dzPos = stateZ == DirectionState.NEG ? -7.5D : stateZ == DirectionState.POS ? 8.5D : 0.5D;
-			double dxPos2 = stateX == DirectionState.NEG ? 0D : stateX == DirectionState.POS ? 1D : 0.5D;
-			double dzPos2 = stateZ == DirectionState.NEG ? 0D : stateZ == DirectionState.POS ? 1D : 0.5D;
-			Random rand = new Random();
-			dxPos = dxPos + (rand.nextFloat() - 0.5);
-			dyPos = dyPos + (rand.nextFloat() - 0.5);
-			dzPos = dzPos + (rand.nextFloat() - 0.5);
-			entity.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, entity.getPosition().getX() + dxPos, entity.getPosition().getY() + dyPos + 2, entity.getPosition().getZ() + dzPos, -dxPos + dxPos2, -dyPos - 0.5, -dzPos + dzPos2);
-		}
 	}
 
 	private void renderRuneState(T entity, ModelBiped model) {
@@ -124,10 +81,9 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		tess.draw();
 	}
 
-	protected void renderLabel(T yourentityLiving, double par2, double par4, double par6) {
+	private void renderLabel(T yourentityLiving, double par2, double par4, double par6) {
 		int distanceToEntity = 32;
 		this.renderLivingLabel(yourentityLiving, yourentityLiving.getDisplayName().getFormattedText(), par2, par4, par6, distanceToEntity);
-		par4 += (double) ((float) this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par6);
 	}
 
 	private void setModelVisibilities(T entity) {

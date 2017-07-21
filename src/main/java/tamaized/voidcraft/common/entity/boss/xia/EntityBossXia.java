@@ -85,7 +85,6 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 			/*
 			 * Cycle: - Teleports around, does various attacks, can be hit directly
 			 */
-			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());
@@ -105,7 +104,6 @@ public class EntityBossXia extends EntityVoidBoss<XiaBattleHandler> {
 			/*
 			 * Cycle: - Stands still at his throne, various attacks, can take direct hits, upon taking a hit cause a massive blast that throws everyone back His attacks may involve the Vade Mecum spells
 			 */
-			isFlying = true;
 			this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			this.setHealth(this.getMaxHealth());

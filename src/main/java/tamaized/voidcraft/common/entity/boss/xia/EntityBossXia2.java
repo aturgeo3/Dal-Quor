@@ -107,7 +107,6 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 		clearGhosts();
 		switch (phase) {
 			case 1: {
-				isFlying = true;
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 				setHealth(getMaxHealth());
@@ -125,7 +124,6 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 			}
 			break;
 			case 3: {
-				isFlying = true;
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 				setHealth(getMaxHealth());

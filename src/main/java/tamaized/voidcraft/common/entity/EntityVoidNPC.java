@@ -3,7 +3,7 @@ package tamaized.voidcraft.common.entity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
@@ -16,7 +16,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -30,20 +29,17 @@ import tamaized.voidcraft.client.entity.animation.IAnimation;
 import tamaized.voidcraft.network.IEntitySync;
 import tamaized.voidcraft.network.client.ClientPacketHandlerAnimation;
 
-public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEntitySync {
+public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntitySync {
 
 	protected boolean canDie = true;
 	protected boolean canPush = true;
-	protected boolean isFlying = false;
 	private boolean invulnerable = false;
-	private int[] spawnLoc;
-	private boolean firstSpawn = true;
 
 	private int animationID;
 	private IAnimation animation;
 
-	public EntityVoidNPC(World p_i1738_1_) {
-		super(p_i1738_1_);
+	public EntityVoidNPC(World world) {
+		super(world);
 		experienceValue = 10;
 		ignoreFrustumCheck = true;
 		enablePersistence();
@@ -52,11 +48,17 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
+		nbt.setBoolean("canDie", canDie);
+		nbt.setBoolean("canPush", canPush);
+		nbt.setBoolean("invulnerable", invulnerable);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
+		canDie = nbt.getBoolean("canDie");
+		canPush = nbt.getBoolean("canPush");
+		invulnerable = nbt.getBoolean("invulnerable");
 	}
 
 	public IAnimation constructAnimation(int a) {
@@ -131,10 +133,6 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		super.onLivingUpdate();
 	}
 
-	public boolean isEntityFlying() {
-		return isFlying;
-	}
-
 	@Override
 	public boolean canBePushed() {
 		return canPush;
@@ -153,7 +151,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 		return !canDie || !isDead && getHealth() > 0.0F;
 	}
 
-	@Override
+	/*@Override
 	public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 		prevLimbSwingAmount = limbSwingAmount;
 		double d0 = posX - prevPosX;
@@ -166,7 +164,7 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 
 		limbSwingAmount += (f6 - limbSwingAmount) * 0.4F;
 		limbSwing += limbSwingAmount;
-	}
+	}*/
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -265,11 +263,6 @@ public abstract class EntityVoidNPC extends EntityCreature implements IMob, IEnt
 			applyEnchantments(this, entityIn);
 		}
 		return flag;
-	}
-
-	@Override
-	public float getBlockPathWeight(BlockPos pos) {
-		return 0.5F - world.getLightBrightness(pos);
 	}
 
 	protected boolean isValidLightLevel() {

@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.entity.boss.herobrine.extra;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,11 +12,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.voidcraft.common.blocks.AIBlock;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
 
 public class EntityHerobrineFireball extends EntityFireball {
 
-	public int field_92057_e = 1;
+	private int field_92057_e = 1;
 
 	public EntityHerobrineFireball(World p_i1767_1_) {
 		super(p_i1767_1_);
@@ -37,20 +36,20 @@ public class EntityHerobrineFireball extends EntityFireball {
 	 */
 	@Override
 	protected void onImpact(RayTraceResult p_70227_1_) {
-		if (!this.world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityVoidBoss)) {
+		if (!this.world.isRemote && !(p_70227_1_.entityHit != null && p_70227_1_.entityHit instanceof EntityBossHerobrine)) {
 			if (p_70227_1_.entityHit != null) {
 				p_70227_1_.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 45.0F);
 			} else if (p_70227_1_.typeOfHit == RayTraceResult.Type.BLOCK) {
 				Block b = world.getBlockState(p_70227_1_.getBlockPos()).getBlock();
 				if (b instanceof AIBlock) {
-					TileEntity te = ((AIBlock) b).getMyTileEntity(this.world, p_70227_1_.getBlockPos());
+					TileEntity te = AIBlock.getMyTileEntity(this.world, p_70227_1_.getBlockPos());
 					if (te instanceof TileEntityAIBlock) {
-						((TileEntityAIBlock) te).boom();
+						((TileEntityAIBlock) te).updateState();
 					}
 				}
 			}
 
-			this.world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, (float) this.field_92057_e, true, false);
+			this.world.newExplosion(null, this.posX, this.posY, this.posZ, (float) this.field_92057_e, true, false);
 			this.setDead();
 		}
 	}

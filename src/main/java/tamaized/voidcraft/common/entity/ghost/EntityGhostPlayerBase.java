@@ -2,11 +2,13 @@ package tamaized.voidcraft.common.entity.ghost;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
@@ -27,6 +29,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	private String name;
 	private UUID id;
 
+	private boolean shouldDie = true;
 	private boolean canInteract = false;
 	private boolean hasInteracted = false;
 	private boolean running = false;
@@ -51,6 +54,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		// this.tasks.addTask(6, new EntityAILookIdle(this));
 		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		this.setInvulnerable(true);
+		if (!world.isRemote && shouldDie)
+			setDead();
 
 	}
 
@@ -59,6 +64,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		name = SkinHandler.getGhostInfo(id).getName();
 		this.id = id;
 		canInteract = interactable;
+		shouldDie = false;
 	}
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable, Entity target, int length) {
@@ -70,8 +76,50 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		runeTarget = target;
 		runeState = 0;
 		maxRuneState = length;
-		running = true;
+		running = !interactable;
 		tick = 0;
+		shouldDie = false;
+	}
+
+	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable) {
+		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable) : new EntityGhostPlayer(world, id, interactable);
+	}
+
+	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable, Entity target, int length) {
+		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable, target, length) : new EntityGhostPlayer(world, id, interactable, target, length);
+	}
+
+	@Override
+	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+
+	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setVelocity(double x, double y, double z) {
+
+	}
+
+	@Override
+	public void addVelocity(double x, double y, double z) {
+
+	}
+
+	@Override
+	public void move(MoverType type, double x, double y, double z) {
+	}
+
+	@Override
+	public void moveRelative(float strafe, float up, float forward, float friction) {
+	}
+
+	@Override
+	public void moveToBlockPosAndAngles(BlockPos pos, float rotationYawIn, float rotationPitchIn) {
 	}
 
 	public boolean isInteractable() {
@@ -285,14 +333,6 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@SideOnly(Side.CLIENT)
 	public ITextComponent getDisplayName() {
 		return new TextComponentString(name);
-	}
-
-	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable) {
-		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable) : new EntityGhostPlayer(world, id, interactable);
-	}
-
-	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable, Entity target, int length) {
-		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable, target, length) : new EntityGhostPlayer(world, id, interactable, target, length);
 	}
 
 }

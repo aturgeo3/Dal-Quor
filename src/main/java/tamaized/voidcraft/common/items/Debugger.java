@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 import tamaized.voidcraft.common.world.SchematicLoader;
 
 import java.util.List;
@@ -50,7 +51,9 @@ public class Debugger extends TamItem {
 			// worldIn.spawnEntity(entity);
 			// voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
 			// worldIn.setBlockState(pos.up(), VoidCraft.blocks.AIBlock.getDefaultState());
-			// ((TileEntityAIBlock) worldIn.getTileEntity(pos.up())).setFake();
+			//			 ((TileEntityAIBlock) worldIn.getTileEntity(pos.up())).setFake();
+			if (worldIn.getTileEntity(pos) instanceof TileEntityAIBlock)
+				((TileEntityAIBlock) (worldIn.getTileEntity(pos))).updateState();
 		}
 		return EnumActionResult.PASS;
 	}

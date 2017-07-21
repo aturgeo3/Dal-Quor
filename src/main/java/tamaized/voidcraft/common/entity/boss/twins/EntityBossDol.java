@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -29,9 +28,8 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 	}
 
 	@Override
-	protected void addDefaultTasks() {
-		for (Class c : getFilters())
-			this.tasks.addTask(6, new EntityAIWatchClosest(this, c, 64.0F));
+	protected void initEntityAI() {
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 64.0F));
 	}
 
 	@Override
@@ -42,12 +40,6 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 	@Override
 	protected void deathHook() {
 
-	}
-
-	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		// start();
-		return super.processInteract(player, hand);
 	}
 
 	@Override
@@ -67,9 +59,7 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 
 	@Override
 	protected List<Class> getFilters() {
-		List<Class> filter = new ArrayList<>();
-		filter.add(EntityPlayer.class);
-		return filter;
+		return new ArrayList<>();
 	}
 
 	@Override
