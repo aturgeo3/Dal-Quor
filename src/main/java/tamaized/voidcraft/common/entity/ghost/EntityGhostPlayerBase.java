@@ -2,13 +2,11 @@ package tamaized.voidcraft.common.entity.ghost;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
@@ -49,7 +47,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		this.isImmuneToFire = true;
 		this.hurtResistantTime = 10;
 		this.setSize(0.6F, 1.8F);
-
+		canMove = false;
 		// this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F));
 		// this.tasks.addTask(6, new EntityAILookIdle(this));
 		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -97,29 +95,6 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void setVelocity(double x, double y, double z) {
-
-	}
-
-	@Override
-	public void addVelocity(double x, double y, double z) {
-
-	}
-
-	@Override
-	public void move(MoverType type, double x, double y, double z) {
-	}
-
-	@Override
-	public void moveRelative(float strafe, float up, float forward, float friction) {
-	}
-
-	@Override
-	public void moveToBlockPosAndAngles(BlockPos pos, float rotationYawIn, float rotationPitchIn) {
 	}
 
 	public boolean isInteractable() {

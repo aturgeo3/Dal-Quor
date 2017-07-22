@@ -2,10 +2,7 @@ package tamaized.voidcraft.common.entity;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -16,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -33,6 +31,7 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 
 	protected boolean canDie = true;
 	protected boolean canPush = true;
+	protected boolean canMove = true;
 	private boolean invulnerable = false;
 
 	private int animationID;
@@ -131,6 +130,37 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 			idleTime += 2;
 		}
 		super.onLivingUpdate();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setVelocity(double x, double y, double z) {
+		if (canMove)
+			super.setVelocity(x, y, z);
+	}
+
+	@Override
+	public void addVelocity(double x, double y, double z) {
+		if (canMove)
+			super.addVelocity(x, y, z);
+	}
+
+	@Override
+	public void move(MoverType type, double x, double y, double z) {
+		if (canMove)
+			super.move(type, x, y, z);
+	}
+
+	@Override
+	public void moveRelative(float strafe, float up, float forward, float friction) {
+		if (canMove)
+			super.moveRelative(strafe, up, forward, friction);
+	}
+
+	@Override
+	public void moveToBlockPosAndAngles(BlockPos pos, float rotationYawIn, float rotationPitchIn) {
+		if (canMove)
+			moveToBlockPosAndAngles(pos, rotationYawIn, rotationPitchIn);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 	public void update() {
 		if (worldObj != null && !worldObj.isRemote) {
 			if (running) {
-				if (zol == null || dol == null || !zol.isActive() || !dol.isActive()) {
+				if (zol == null || dol == null || !zol.isDead || !dol.isDead) {
 					stop();
 					return;
 				}
@@ -201,6 +201,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 		}
 	}
 
+	@Override
 	public void start(World world, BlockPos p) {
 		worldObj = world;
 		pos = p.add(0, 1, 0);
@@ -222,31 +223,29 @@ public class TwinsBattleHandler implements IBattleHandler {
 		TwinsMessages04.childPhase = 0;
 		TwinsMessages05.childPhase = 0;
 
-		dol = new EntityBossDol(worldObj, this);
-		zol = new EntityBossZol(worldObj, this);
+		dol = new EntityBossDol(worldObj);
+		zol = new EntityBossZol(worldObj);
 		dol.setPosition(pos.getX() + 5 + .5, pos.getY() + 4, pos.getZ() - 3 + .5);
 		zol.setPosition(pos.getX() + 5 + .5, pos.getY() + 4, pos.getZ() + 3 + .5);
-		dol.start();
-		zol.start();
-		// phase = 3;
 		running = true;
 	}
 
+	@Override
 	public void stop() {
 		if (pos == null)
 			return;
 		readyForInput = false;
 		isDone = false;
 		if (dol != null)
-			worldObj.removeEntity(dol);
-		dol = null;
+			dol.setDead();
 		if (zol != null)
-			worldObj.removeEntity(zol);
+			zol.setDead();
+		dol = null;
 		zol = null;
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-			worldObj.removeEntity(e);
+			e.setDead();
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-			worldObj.removeEntity(e);
+			e.setDead();
 		for (int z = pos.getZ() - 2; z <= pos.getZ() + 2; z++) {
 			for (int y = pos.getY(); y <= pos.getY() + 4; y++) {
 				int x = pos.getX() - 12;

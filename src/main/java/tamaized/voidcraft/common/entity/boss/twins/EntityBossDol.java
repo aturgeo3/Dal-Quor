@@ -6,25 +6,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
+import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
+public class EntityBossDol extends EntityVoidNPC {
 
 	public EntityBossDol(World par1World) {
 		super(par1World);
 		this.setInvulnerable(true);
-	}
-
-	public EntityBossDol(World world, TwinsBattleHandler handler) {
-		super(world, handler, true);
-		this.setInvulnerable(true);
+		isImmuneToFire = true;
+		canMove = false;
+		setSize(0.6F, 1.8F);
 	}
 
 	@Override
@@ -33,53 +27,8 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 	}
 
 	@Override
-	protected void triggerOnDamage(int phase, DamageSource source, float amount) {
-
-	}
-
-	@Override
-	protected void deathHook() {
-
-	}
-
-	@Override
-	protected void initPhase(int phase) {
-
-	}
-
-	@Override
 	protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
 
-	}
-
-	@Override
-	protected void updatePhase(int phase) {
-
-	}
-
-	@Override
-	protected List<Class> getFilters() {
-		return new ArrayList<>();
-	}
-
-	@Override
-	protected boolean immuneToFire() {
-		return true;
-	}
-
-	@Override
-	protected float sizeWidth() {
-		return 0.6F;
-	}
-
-	@Override
-	protected float sizeHeight() {
-		return 1.8F;
-	}
-
-	@Override
-	protected int maxPhases() {
-		return 3;
 	}
 
 	@Override
@@ -104,7 +53,7 @@ public class EntityBossDol extends EntityVoidBoss<TwinsBattleHandler> {
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString("Dol");
+		return new TextComponentTranslation("entity.voidcraft.Dol");
 	}
 
 	@Override
