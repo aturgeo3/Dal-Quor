@@ -52,8 +52,6 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		// this.tasks.addTask(6, new EntityAILookIdle(this));
 		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		this.setInvulnerable(true);
-		if (!world.isRemote && shouldDie)
-			setDead();
 
 	}
 
@@ -132,6 +130,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
 		ByteBufUtils.writeUTF8String(buffer, id == null ? SkinHandler.getUUID(0).toString() : id.toString());
+		buffer.writeBoolean(shouldDie);
 		buffer.writeBoolean(canInteract);
 		buffer.writeBoolean(rune);
 		if (rune) {
@@ -144,6 +143,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public void readSpawnData(ByteBuf additionalData) {
 		id = UUID.fromString(ByteBufUtils.readUTF8String(additionalData));
 		name = SkinHandler.getGhostInfo(id).getName();
+		shouldDie = additionalData.readBoolean();
 		canInteract = additionalData.readBoolean();
 		rune = additionalData.readBoolean();
 		if (rune) {
@@ -168,6 +168,10 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (!world.isRemote) {
+			if (shouldDie) {
+				setDead();
+				return;
+			}
 			if (running) {
 				if (rune && runeState < maxRuneState)
 					runeState++;

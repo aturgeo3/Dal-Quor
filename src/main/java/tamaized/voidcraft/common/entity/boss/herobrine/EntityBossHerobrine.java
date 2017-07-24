@@ -4,8 +4,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -33,8 +31,8 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 		noClip = true;
 		setInvulnerable(true);
 		setSize(0.6F, 1.8F);
-		moveHelper = new HerobrineMoveHelper(this);
-		setupStats();
+		moveHelper = new EntityVoidNPC.BossFlyNoclipMoveHelper(this);
+		updateStats();
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 		tasks.addTask(1, new EntityAIHerobrinePhase1(this));
 		tasks.addTask(1, new EntityAIHerobrinePhase2(this));
 		tasks.addTask(1, new EntityAIHerobrinePhase3(this));
-		tasks.addTask(7, new EntityBossHerobrine.AILookAround(this));
+		tasks.addTask(7, new EntityVoidNPC.AILookAround(this));
 
 		targetTasks.addTask(1, new EntityAIFindEntityNearestPlayerNoSight(this));
 	}
@@ -82,7 +80,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 
 	@Override
 	protected void decodePacketData(ByteBuf stream) {
-
+		
 	}
 
 	@Override
@@ -103,7 +101,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 		super.readFromNBT(compound);
 	}
 
-	private void setupStats() {
+	private void updateStats() {
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40);
 		setInvulnerable(true);
 		switch (phase) {
@@ -128,7 +126,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 	public final void doDamage(int a) {
 		if (getHealth() <= a) {
 			phase++;
-			setupStats();
+			updateStats();
 			return;
 		}
 		setHealth(getHealth() - a);
@@ -180,68 +178,6 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 	@Override
 	public ITextComponent getNameForBossBar() {
 		return getDisplayName();
-	}
-
-	static class HerobrineMoveHelper extends EntityMoveHelper {
-		private final EntityBossHerobrine parentEntity;
-		private int courseChangeCooldown;
-
-		HerobrineMoveHelper(EntityBossHerobrine herobrine) {
-			super(herobrine);
-			this.parentEntity = herobrine;
-		}
-
-		@Override
-		public void onUpdateMoveHelper() {
-			if (this.action == EntityMoveHelper.Action.MOVE_TO) {
-				double d0 = this.posX - this.parentEntity.posX;
-				double d1 = this.posY - this.parentEntity.posY;
-				double d2 = this.posZ - this.parentEntity.posZ;
-				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-
-				if (this.courseChangeCooldown-- <= 0) {
-					this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-					d3 = (double) MathHelper.sqrt(d3);
-					double movementSpeed = parentEntity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-					this.parentEntity.motionX += d0 / d3 * (movementSpeed * speed);
-					this.parentEntity.motionY += d1 / d3 * (movementSpeed * speed);
-					this.parentEntity.motionZ += d2 / d3 * (movementSpeed * speed);
-				}
-			}
-		}
-
-	}
-
-	static class AILookAround extends EntityAIBase {
-		private final EntityVoidNPC parentEntity;
-
-		AILookAround(EntityVoidNPC ghast) {
-			this.parentEntity = ghast;
-			this.setMutexBits(2);
-		}
-
-		@Override
-		public boolean shouldExecute() {
-			return true;
-		}
-
-		@Override
-		public void updateTask() {
-			if (this.parentEntity.getAttackTarget() == null) {
-				this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
-				this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
-			} else {
-				EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
-				double d0 = 64.0D;
-
-				if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D) {
-					double d1 = entitylivingbase.posX - this.parentEntity.posX;
-					double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
-					this.parentEntity.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float) Math.PI);
-					this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
-				}
-			}
-		}
 	}
 
 }

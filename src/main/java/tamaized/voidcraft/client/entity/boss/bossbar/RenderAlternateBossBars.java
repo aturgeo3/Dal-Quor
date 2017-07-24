@@ -19,7 +19,7 @@ public class RenderAlternateBossBars {
 	private static final ResourceLocation GUI_BARS_TEXTURES = new ResourceLocation("textures/gui/bars.png");
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
-	private static final List<AlternateBossBarWrapper> wrapperList = new ArrayList<AlternateBossBarWrapper>();
+	private static final List<AlternateBossBarWrapper> wrapperList = new ArrayList<>();
 
 	public static void addBoss(AlternateBossBarWrapper boss) {
 		wrapperList.add(boss);

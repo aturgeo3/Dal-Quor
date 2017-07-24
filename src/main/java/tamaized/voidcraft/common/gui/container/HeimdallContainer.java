@@ -35,7 +35,6 @@ public class HeimdallContainer extends Container {
 		}
 
 		addSlotToContainer(new Slot(inventory, inventory.getSizeInventory() - 1, 230, 127) {
-
 			@SideOnly(Side.CLIENT)
 			@Override
 			public String getSlotTexture() {
@@ -48,8 +47,7 @@ public class HeimdallContainer extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < listeners.size(); ++i) {
-			IContainerListener icontainerlistener = (IContainerListener) listeners.get(i);
+		for (IContainerListener icontainerlistener : listeners) {
 			if (fluidAmount != te.getFluidAmount())
 				icontainerlistener.sendWindowProperty(this, 0, te.getFluidAmount());
 			if (powerAmount != te.getEnergyStored())

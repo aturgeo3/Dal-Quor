@@ -18,7 +18,6 @@ import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import tamaized.voidcraft.common.world.SchematicLoader;
 import tamaized.voidcraft.common.xiacastle.TwinsSpeech;
-import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia.XiaBattleHandler;
@@ -32,10 +31,10 @@ public class XiaCastleLogicHandler {
 
 	private static final BlockPos LOCATION = new BlockPos(52, 55, 4);
 	private final World world;
-	private final IBattleHandler twins = new TwinsBattleHandler();
-	private final IBattleHandler herobrine = new HerobrineBattleHandler();
-	private final IBattleHandler xia = new XiaBattleHandler();
-	private final IBattleHandler xia2 = new Xia2BattleHandler();
+	private final TwinsBattleHandler twins = new TwinsBattleHandler();
+	private final HerobrineBattleHandler herobrine = new HerobrineBattleHandler();
+	private final XiaBattleHandler xia = new XiaBattleHandler();
+	private final Xia2BattleHandler xia2 = new Xia2BattleHandler();
 	private final TwinsSpeech twinsSpeech = new TwinsSpeech();
 	private boolean running = false;
 	private boolean xiaDoorOpen = false;
@@ -47,6 +46,22 @@ public class XiaCastleLogicHandler {
 
 	public XiaCastleLogicHandler(World world) {
 		this.world = world;
+	}
+
+	public final TwinsBattleHandler getHandlerTwins() {
+		return twins;
+	}
+
+	public final HerobrineBattleHandler getHandlerHerobrine() {
+		return herobrine;
+	}
+
+	public final XiaBattleHandler getHandlerXia1() {
+		return xia;
+	}
+
+	public final Xia2BattleHandler getHandlerXia2() {
+		return xia2;
 	}
 
 	public void onUpdate() {

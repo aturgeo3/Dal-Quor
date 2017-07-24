@@ -3,6 +3,8 @@ package tamaized.voidcraft.common.entity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -323,6 +325,68 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 	@Override
 	protected boolean canDespawn() {
 		return false;
+	}
+
+	protected static class AILookAround extends EntityAIBase {
+		private final EntityVoidNPC parentEntity;
+
+		public AILookAround(EntityVoidNPC ghast) {
+			this.parentEntity = ghast;
+			this.setMutexBits(2);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return true;
+		}
+
+		@Override
+		public void updateTask() {
+			if (this.parentEntity.getAttackTarget() == null) {
+				this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
+				this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
+			} else {
+				EntityLivingBase entitylivingbase = this.parentEntity.getAttackTarget();
+				double d0 = 64.0D;
+
+				if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D) {
+					double d1 = entitylivingbase.posX - this.parentEntity.posX;
+					double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
+					this.parentEntity.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float) Math.PI);
+					this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
+				}
+			}
+		}
+	}
+
+	public static class BossFlyNoclipMoveHelper extends EntityMoveHelper {
+		private final EntityVoidNPC parentEntity;
+		private int courseChangeCooldown;
+
+		public BossFlyNoclipMoveHelper(EntityVoidNPC herobrine) {
+			super(herobrine);
+			this.parentEntity = herobrine;
+		}
+
+		@Override
+		public void onUpdateMoveHelper() {
+			if (this.action == EntityMoveHelper.Action.MOVE_TO) {
+				double d0 = this.posX - this.parentEntity.posX;
+				double d1 = this.posY - this.parentEntity.posY;
+				double d2 = this.posZ - this.parentEntity.posZ;
+				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+
+				if (this.courseChangeCooldown-- <= 0) {
+					this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
+					d3 = (double) MathHelper.sqrt(d3);
+					double movementSpeed = parentEntity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+					this.parentEntity.motionX += d0 / d3 * (movementSpeed * speed);
+					this.parentEntity.motionY += d1 / d3 * (movementSpeed * speed);
+					this.parentEntity.motionZ += d2 / d3 * (movementSpeed * speed);
+				}
+			}
+		}
+
 	}
 
 }
