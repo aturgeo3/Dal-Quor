@@ -27,17 +27,10 @@ import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
-import javax.annotation.Nullable;
-
 public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData, IMob {
 
-	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer>createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
-	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
-		@Override
-		public boolean apply(@Nullable Entity p_apply_1_) {
-			return !(p_apply_1_ instanceof EntityBossCorruptedPawn) && !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
-		}
-	};
+	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
+	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityBossCorruptedPawn) && !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
 
 	public EntityBossCorruptedPawn(World p_i1738_1_) {
 		super(p_i1738_1_);
@@ -57,15 +50,9 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, NOT_UNDEAD));
-		// this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, true)); //IronGolem and Snowman extend this
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, true)); //Normal Minecraft mobs
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, true)); //Passive animals
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, true)); //Slime extends living so need to add it manually
+
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, NOT_UNDEAD));
 
 	}
 
