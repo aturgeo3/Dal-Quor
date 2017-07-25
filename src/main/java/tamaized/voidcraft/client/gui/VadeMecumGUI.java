@@ -16,7 +16,6 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
@@ -250,14 +249,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		GlStateManager.disableTexture2D();
-		GL11.glBegin(GL11.GL_TRIANGLES);
-		GL11.glColor4f(0, 0, 0, 1);
-		GL11.glVertex3f(0, 0, .99f);
-		GL11.glVertex3f(500, 0, .99f);
-		GL11.glVertex3f(500, 500, .99f);
-		GL11.glEnd();
-		/*GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(TEXTURES);
 		drawTexturedModalRect(vadeX, vadeY, vadeW, vadeH, 0, 0, 256, 192);
 		super.drawScreen(mouseX, mouseY, partialTicks);
@@ -271,7 +263,7 @@ public class VadeMecumGUI extends GuiScreen {
 		if (!renderStackHover.isEmpty()) {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = ItemStack.EMPTY;
-		}*/
+		}
 	}
 
 	private boolean canDrawPage() {
