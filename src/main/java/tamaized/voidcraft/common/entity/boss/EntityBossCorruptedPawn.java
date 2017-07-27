@@ -1,174 +1,127 @@
 package tamaized.voidcraft.common.entity.boss;
 
 import com.google.common.base.Predicate;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.entity.EntityDragonOld;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
-import tamaized.voidcraft.common.entity.EntityVoidMob;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
+import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
-public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossData, IMob {
+public class EntityBossCorruptedPawn extends EntityVoidNPC implements IVoidBossData, IMob {
 
-	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.createKey(EntityBossCorruptedPawn.class, DataSerializers.VARINT);
-	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityBossCorruptedPawn) && !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
+	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityBossCorruptedPawn) && !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidNPC) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
 
-	public EntityBossCorruptedPawn(World p_i1738_1_) {
-		super(p_i1738_1_);
-		this.setHealth(this.getMaxHealth());
-		this.setSize(0.9F, 3.0F);
-		this.isImmuneToFire = true;
-		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
-		this.experienceValue = 50;
+	private static final DataParameter<Boolean> ATTACK_SKULLS = EntityDataManager.createKey(EntityBossCorruptedPawn.class, DataSerializers.BOOLEAN);
+
+	public EntityBossCorruptedPawn(World world) {
+		super(world);
+		setHealth(getMaxHealth());
+		setSize(1.5F, 2.0F);
+		isImmuneToFire = true;
+		experienceValue = 50;
 		enablePersistence();
+		moveHelper = new BossFlyNoclipMoveHelper(this);
+	}
+
+	@Override
+	protected void encodePacketData(ByteBuf stream) {
+
+	}
+
+	@Override
+	protected void decodePacketData(ByteBuf stream) {
+
 	}
 
 	@Override
 	protected void initEntityAI() {
-		this.tasks.addTask(0, new EntityBossCorruptedPawn.AIDoNothing());
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(0, new AIShootSkulls(this));
+		tasks.addTask(1, new EntityVoidNPC.AILookAround(this));
+		tasks.addTask(2, new EntityVoidNPC.AIChaseTarget(this, true));
 
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, NOT_UNDEAD));
-
-	}
-
-	class AIDoNothing extends EntityAIBase {
-		public AIDoNothing() {
-			this.setMutexBits(7);
-		}
-
-		/**
-		 * Returns whether the EntityAIBase should begin execution.
-		 */
-		@Override
-		public boolean shouldExecute() {
-			return EntityBossCorruptedPawn.this.getInvulTime() > 0;
-		}
+		targetTasks.addTask(1, new EntityAIFindEntityNearestEntityNoSight(this, EntityLivingBase.class));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(INVULNERABILITY_TIME, Integer.valueOf(0));
+		dataManager.register(ATTACK_SKULLS, false);
 	}
 
-	public static void registerFixesWither(DataFixer fixer) {
-		EntityLiving.registerFixesMob(fixer, EntityBossCorruptedPawn.class);
+	public final boolean getSkullState() {
+		return dataManager.get(ATTACK_SKULLS);
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-		super.writeEntityToNBT(p_70014_1_);
-		p_70014_1_.setInteger("Invul", this.getInvulTime());
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-		super.readEntityFromNBT(p_70037_1_);
-		this.setInvulTime(p_70037_1_.getInteger("Invul"));
+	public final void setSkullState(boolean b) {
+		dataManager.set(ATTACK_SKULLS, b);
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		setStats();
-	}
-
-	private void setStats() {
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.50000000298023224D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.15D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		if (!world.isRemote)
+			destroyBlocks();
+		if (getAttackTarget() == this)
+			setAttackTarget(null);
 	}
 
-	@Override
-	protected void updateAITasks() {
-		if (this.getInvulTime() > 0) {
-			int j1 = this.getInvulTime() - 1;
-
-			if (j1 <= 0) {
-				this.world.newExplosion(this, this.posX, this.posY + (double) this.getEyeHeight(), this.posZ, 7.0F, false, this.world.getGameRules().getBoolean("mobGriefing"));
-				this.world.playBroadcastSound(1023, new BlockPos(this), 0);
+	private void destroyBlocks() {
+		AxisAlignedBB box = getEntityBoundingBox();
+		for (BlockPos pos : BlockPos.getAllInBox(new BlockPos(box.minX, box.minY, box.minZ), new BlockPos(box.maxX, box.maxY, box.maxZ))) {
+			IBlockState state = world.getBlockState(pos);
+			if (!state.getBlock().isAir(state, world, pos) && state.getBlock() != Blocks.OBSIDIAN && state.getBlock() != Blocks.END_STONE && state.getBlock() != Blocks.BEDROCK) {
+				world.destroyBlock(pos, false);
 			}
-
-			this.setInvulTime(j1);
-
-			if (this.ticksExisted % 10 == 0) {
-				this.heal(20.0F);
-			}
-		} else {
-			super.updateAITasks();
 		}
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (this.isEntityInvulnerable(source)) {
+		if (isEntityInvulnerable(source)) {
 			return false;
 		} else if (source != DamageSource.DROWN && !(source.getTrueSource() instanceof EntityWitherbrine)) {
-			if (this.getInvulTime() > 0 && source != DamageSource.OUT_OF_WORLD) {
-				return false;
-			} else {
-				if (this.isArmored()) {
-					Entity entity = source.getImmediateSource();
-
-					if (entity instanceof EntityArrow) {
-						return false;
-					}
-				}
-
-				Entity entity1 = source.getTrueSource();
-
-				if (entity1 != null && !(entity1 instanceof EntityPlayer) && entity1 instanceof EntityLivingBase && ((EntityLivingBase) entity1).getCreatureAttribute() == this.getCreatureAttribute()) {
+			if (isArmored())
+				if (source.getImmediateSource() instanceof EntityArrow)
 					return false;
-				} else {
-					return super.attackEntityFrom(source, amount);
-				}
-			}
+			Entity entity1 = source.getTrueSource();
+			return !(entity1 != null && !(entity1 instanceof EntityPlayer) && entity1 instanceof EntityLivingBase && ((EntityLivingBase) entity1).getCreatureAttribute() == getCreatureAttribute()) && super.attackEntityFrom(source, amount);
 		} else {
 			return false;
 		}
-	}
-
-	public void ignite() {
-		setStats();
-		this.setInvulTime(200);
-		this.setHealth(this.getMaxHealth() / 3.0F);
 	}
 
 	@Override
@@ -177,15 +130,7 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 	}
 
 	public boolean isArmored() {
-		return this.getHealth() <= this.getMaxHealth() / 2.0F;
-	}
-
-	public int getInvulTime() {
-		return ((Integer) this.dataManager.get(INVULNERABILITY_TIME)).intValue();
-	}
-
-	public void setInvulTime(int time) {
-		this.dataManager.set(INVULNERABILITY_TIME, Integer.valueOf(time));
+		return getHealth() <= getMaxHealth() / 2.0F;
 	}
 
 	@Override
@@ -210,17 +155,17 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.voidStar;
+		return VoidCraftItems.voidStar;
 	}
 
 	@Override
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
-		this.dropItem(getDropItem(), 1);
+		dropItem(getDropItem(), 1);
 	}
 
 	@Override
 	public float getPercentHPForBossBar() {
-		return this.getHealth() / this.getMaxHealth();
+		return getHealth() / getMaxHealth();
 	}
 
 	@Override
@@ -236,6 +181,57 @@ public class EntityBossCorruptedPawn extends EntityVoidMob implements IVoidBossD
 	@Override
 	public float getHealthForBossBar() {
 		return getHealth();
+	}
+
+	static class AIShootSkulls extends EntityAIBase {
+
+		private final EntityBossCorruptedPawn boss;
+		private int ticksLeft = 0;
+
+		public AIShootSkulls(EntityBossCorruptedPawn entity) {
+			boss = entity;
+			setMutexBits(3);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return boss.getAttackTarget() != null && boss.getRNG().nextInt(50) == 0;
+		}
+
+		@Override
+		public boolean shouldContinueExecuting() {
+			return ticksLeft > 0 && boss.getAttackTarget() != null;
+		}
+
+		@Override
+		public void startExecuting() {
+			ticksLeft = boss.getRNG().nextInt(200) + 100;
+			boss.setSkullState(true);
+			boss.moveHelper.setMoveTo(boss.posX, boss.posY, boss.posZ, 0);
+			boss.moveHelper.action = EntityMoveHelper.Action.WAIT;
+			boss.motionX *= 0.1F;
+			boss.motionY *= 0.1F;
+			boss.motionZ *= 0.1F;
+		}
+
+		@Override
+		public void resetTask() {
+			boss.setSkullState(false);
+		}
+
+		@Override
+		public void updateTask() {
+			Entity target = boss.getAttackTarget();
+			if (target != null) {
+				boss.getLookHelper().setLookPositionWithEntity(target, 30, 30);
+				if (ticksLeft-- % 5 == 0) {
+					EntityHerobrineWitherSkull skull = new EntityHerobrineWitherSkull(boss.world, boss, (target.posX + (1.5F - boss.getRNG().nextFloat() * 3F)) - boss.posX, (target.posY-1) - boss.posY, (target.posZ + (1.5F - boss.getRNG().nextFloat() * 3F)) - boss.posZ);
+					skull.setPositionAndUpdate(boss.posX, boss.posY + 1, boss.posZ);
+					boss.world.spawnEntity(skull);
+				}
+
+			}
+		}
 	}
 
 }

@@ -25,7 +25,7 @@ import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestPlayerNoSight;
+import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
 import tamaized.voidcraft.common.entity.boss.IVoidBossData;
 import tamaized.voidcraft.common.entity.boss.xia.ai.EntityAIXia1Phase1;
 import tamaized.voidcraft.common.entity.boss.xia.ai.EntityAIXia1Phase2;
@@ -81,7 +81,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 		tasks.addTask(1, addAI(new EntityAIXia1Phase3(this)));
 		tasks.addTask(7, new EntityVoidNPC.AILookAround(this));
 
-		targetTasks.addTask(1, new EntityAIFindEntityNearestPlayerNoSight(this));
+		targetTasks.addTask(1, new EntityAIFindEntityNearestEntityNoSight(this, EntityPlayer.class));
 	}
 
 	public final BlockPos getInitialPos() {

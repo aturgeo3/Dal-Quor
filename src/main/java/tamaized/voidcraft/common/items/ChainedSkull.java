@@ -8,13 +8,12 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
+import tamaized.voidcraft.common.entity.nonliving.EntityChainedSkull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -31,11 +30,9 @@ public class ChainedSkull extends TamItem {
 		if (world.isRemote) {
 			return EnumActionResult.PASS;
 		} else {
-			EntityBossCorruptedPawn pawn = new EntityBossCorruptedPawn(world);
-			pawn.ignite();
-			pawn.setPositionAndUpdate(pos.getX() + 0.5f, pos.getY() + 1, pos.getZ() + 0.5f);
-			world.spawnEntity(pawn);
-			player.sendMessage(new TextComponentTranslation("voidcraft.misc.pawn.summon"));
+			EntityChainedSkull entity = new EntityChainedSkull(world);
+			entity.setPositionAndUpdate(pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F);
+			world.spawnEntity(entity);
 			stack.shrink(1);
 			return EnumActionResult.SUCCESS;
 		}

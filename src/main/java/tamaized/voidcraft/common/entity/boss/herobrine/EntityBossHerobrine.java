@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -13,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestPlayerNoSight;
+import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
 import tamaized.voidcraft.common.entity.boss.IVoidBossData;
 import tamaized.voidcraft.common.entity.boss.herobrine.ai.EntityAIHerobrinePhase1;
 import tamaized.voidcraft.common.entity.boss.herobrine.ai.EntityAIHerobrinePhase2;
@@ -42,7 +43,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 		tasks.addTask(1, new EntityAIHerobrinePhase3(this));
 		tasks.addTask(7, new EntityVoidNPC.AILookAround(this));
 
-		targetTasks.addTask(1, new EntityAIFindEntityNearestPlayerNoSight(this));
+		targetTasks.addTask(1, new EntityAIFindEntityNearestEntityNoSight(this, EntityPlayer.class));
 	}
 
 	@Override

@@ -330,8 +330,8 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 	protected static class AILookAround extends EntityAIBase {
 		private final EntityVoidNPC parentEntity;
 
-		public AILookAround(EntityVoidNPC ghast) {
-			this.parentEntity = ghast;
+		public AILookAround(EntityVoidNPC entity) {
+			this.parentEntity = entity;
 			this.setMutexBits(2);
 		}
 
@@ -350,12 +350,46 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 				double d0 = 64.0D;
 
 				if (entitylivingbase.getDistanceSqToEntity(this.parentEntity) < 4096.0D) {
-					double d1 = entitylivingbase.posX - this.parentEntity.posX;
-					double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
-					this.parentEntity.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float) Math.PI);
-					this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
+					parentEntity.getLookHelper().setLookPositionWithEntity(parentEntity.getAttackTarget(), 30, 30);
+					//					double d1 = entitylivingbase.posX - this.parentEntity.posX;
+					//					double d2 = entitylivingbase.posZ - this.parentEntity.posZ;
+					//					this.parentEntity.rotationYaw = -((float) MathHelper.atan2(d1, d2)) * (180F / (float) Math.PI);
+					//					this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
 				}
 			}
+		}
+	}
+
+	protected static class AIChaseTarget extends EntityAIBase {
+		private final EntityVoidNPC parentEntity;
+		private final boolean doDamage;
+
+		public AIChaseTarget(EntityVoidNPC entity, boolean damage) {
+			this.parentEntity = entity;
+			doDamage = damage;
+			setMutexBits(1);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return parentEntity.getAttackTarget() != null;
+		}
+
+		@Override
+		public void updateTask() {
+			if (parentEntity.getAttackTarget() != null) {
+				Entity target = parentEntity.getAttackTarget();
+				parentEntity.moveHelper.setMoveTo(target.posX, target.posY, target.posZ, 1);
+				if (doDamage && (parentEntity.getDistanceSq(target.posX, target.getEntityBoundingBox().minY, target.posZ)) <= getAttackReachSqr(parentEntity.getAttackTarget()))
+					parentEntity.attackEntityAsMob(target);
+				parentEntity.getLookHelper().setLookPositionWithEntity(parentEntity.getAttackTarget(), 30, 30);
+			} else {
+				parentEntity.moveHelper.setMoveTo(parentEntity.posX, parentEntity.posY, parentEntity.posZ, 0);
+			}
+		}
+
+		private double getAttackReachSqr(EntityLivingBase attackTarget) {
+			return (double) (this.parentEntity.width * 2.0F * this.parentEntity.width * 2.0F + attackTarget.width);
 		}
 	}
 
@@ -363,9 +397,9 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 		private final EntityVoidNPC parentEntity;
 		private int courseChangeCooldown;
 
-		public BossFlyNoclipMoveHelper(EntityVoidNPC herobrine) {
-			super(herobrine);
-			this.parentEntity = herobrine;
+		public BossFlyNoclipMoveHelper(EntityVoidNPC boss) {
+			super(boss);
+			this.parentEntity = boss;
 		}
 
 		@Override
@@ -375,6 +409,8 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 				double d1 = this.posY - this.parentEntity.posY;
 				double d2 = this.posZ - this.parentEntity.posZ;
 				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+				if (d3 <= 1)
+					action = Action.WAIT;
 
 				if (this.courseChangeCooldown-- <= 0) {
 					this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
@@ -384,6 +420,8 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 					this.parentEntity.motionY += d1 / d3 * (movementSpeed * speed);
 					this.parentEntity.motionZ += d2 / d3 * (movementSpeed * speed);
 				}
+				this.parentEntity.rotationYaw = -((float)MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float)Math.PI);
+				this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
 			}
 		}
 

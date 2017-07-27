@@ -2,17 +2,23 @@ package tamaized.voidcraft.common.entity.nonliving;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
 
 public class EntityChainedSkull extends Entity {
 
-	private int tick = 1;
+	private int tick = 0;
+
 
 	public EntityChainedSkull(World worldIn) {
 		super(worldIn);
+		ignoreFrustumCheck = true;
 	}
 
 	@Override
@@ -47,14 +53,29 @@ public class EntityChainedSkull extends Entity {
 
 	@Override
 	public void onUpdate() {
-		if (!world.isRemote) {
-			if (tick >= 180) {
+		if (tick++ >= maxTick()) {
+			if (!world.isRemote) {
+				world.newExplosion(this, posX, posY + (double) getEyeHeight(), posZ, 7.0F, false, world.getGameRules().getBoolean("mobGriefing"));
+				EntityBossCorruptedPawn boss = new EntityBossCorruptedPawn(world);
+				boss.setPositionAndUpdate(posX, posY, posZ);
+				world.spawnEntity(boss);
+				world.playBroadcastSound(1023, new BlockPos(this), 0);
+				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().grow(50, 16, 50)))
+					player.sendMessage(new TextComponentTranslation("voidcraft.misc.pawn.summon"));
 				setDead();
-				return;
 			}
-			move(MoverType.SELF, 0, 0.05F, 0);
+			return;
 		}
-		tick++;
+		if (!world.isRemote)
+			move(MoverType.SELF, 0, 0.025F, 0);
+	}
+
+	public int maxTick() {
+		return 20 * 30;
+	}
+
+	public int getTicks() {
+		return tick;
 	}
 
 	@Override

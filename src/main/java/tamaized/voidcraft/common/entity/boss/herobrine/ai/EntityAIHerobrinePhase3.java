@@ -149,7 +149,7 @@ public class EntityAIHerobrinePhase3 extends EntityAIBase {
 					entityHerobrineShadow.rotationYawHead = boss.rotationYawHead - 180;
 					boss.world.spawnEntity(entityHerobrineShadow);
 					break;
-				case 4: // Wither Skeleton Spawns with EntityWitherSkulls from the walls
+				case 4: // Wither Skeleton Spawns with EntityWitherSkulls from the walls (TODO: Currently fires from Herobrine, look into what we want to do here)
 					for (int i = 0; i < 4; i++) {
 						EntityWitherSkeleton skele = new EntityWitherSkeleton(boss.world);
 						skele.setPosition(boss.getPosition().getX() + rand.nextInt(18) - 8, boss.getPosition().getY() - 6, boss.getPosition().getZ() + rand.nextInt(18) - 8);

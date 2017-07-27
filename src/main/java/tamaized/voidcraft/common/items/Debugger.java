@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
 import tamaized.voidcraft.common.world.SchematicLoader;
 
 import java.util.List;
@@ -47,14 +46,15 @@ public class Debugger extends TamItem {
 			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
 			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
 			// EntitySpellImplosion entity = new EntitySpellImplosion(worldIn);
-//			EntityBossXia entity = new EntityBossXia(worldIn);
-//			 entity.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
-//			 worldIn.spawnEntity(entity);
+			//			EntityBossXia entity = new EntityBossXia(worldIn);
+			//			EntityChainedSkull entity = new EntityChainedSkull(worldIn);
+			//			entity.setPositionAndUpdate(pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F);
+			//			worldIn.spawnEntity(entity);
 			// voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
 			// worldIn.setBlockState(pos.up(), VoidCraft.blocks.AIBlock.getDefaultState());
 			//			 ((TileEntityAIBlock) worldIn.getTileEntity(pos.up())).setFake();
-			if (worldIn.getTileEntity(pos) instanceof TileEntityAIBlock)
-				((TileEntityAIBlock) (worldIn.getTileEntity(pos))).updateState();
+			//			if (worldIn.getTileEntity(pos) instanceof TileEntityAIBlock)
+			//				((TileEntityAIBlock) (worldIn.getTileEntity(pos))).updateState();
 		}
 		return EnumActionResult.PASS;
 	}

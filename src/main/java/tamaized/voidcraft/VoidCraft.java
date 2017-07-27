@@ -165,9 +165,7 @@ public class VoidCraft extends TamModBase {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = LogManager.getLogger("VoidCraft");
-
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
-		logger.info("Starting VoidCraft PreInit");
 
 		VoidCraftAdvancements.register();
 
@@ -188,8 +186,6 @@ public class VoidCraft extends TamModBase {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		logger.info("Starting VoidCraft Init");
-
 		VoidCraftFluids.init();
 		VoidCraftItems.init();
 		VoidCraftTERecipes.init();
@@ -234,20 +230,6 @@ public class VoidCraft extends TamModBase {
 		MinecraftForge.EVENT_BUS.register(new PlayerRightClickEvent());
 		MinecraftForge.EVENT_BUS.register(new LitStrikeEvent());
 
-		registerEntity(EntityVoidChain.class, "EntityVoidChain", this, modid, 128, 1, true);
-		registerEntity(EntityAcidBall.class, "EntityAcidBall", this, modid, 128, 1, true);
-		// registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
-		registerEntity(EntityHerobrineFireball.class, "HerobrineFireball", this, modid, 128, 1, true);
-		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, modid, 128, 1, true);
-		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, modid, 128, 1, true);
-		registerEntity(EntityHerobrineTNTPrimed.class, "HerobrineTNTPrimed", this, modid, 128, 1, true);
-		registerEntity(EntityHerobrineShadow.class, "HerobrineShadow", this, modid, 128, 1, true);
-		registerEntity(EntityLichInferno.class, "LichInferno", this, modid, 128, 1, true);
-		registerEntity(ProjectileDisintegration.class, "ProjectileDisintegration", this, modid, 128, 1, true);
-		registerEntity(EntitySpellRune.class, "EntitySpellRune", this, modid, 64, 1, true);
-		registerEntity(EntityCasterLightningBolt.class, "EntityCasterLightningBolt", this, modid, 64, 1, true);
-		registerEntity(EntitySpellImplosion.class, "EntitySpellImplosion", this, modid, 64, 1, true);
-
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdVoid, DimensionType.register("The Void", "_void", ConfigHandler.dimensionIdVoid, WorldProviderVoid.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdXia, DimensionType.register("???", "_xia", ConfigHandler.dimensionIdXia, WorldProviderXia.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdDalQuor, DimensionType.register("Dal Quor", "_dalquor", ConfigHandler.dimensionIdDalQuor, WorldProviderDalQuor.class, false));
@@ -268,6 +250,19 @@ public class VoidCraft extends TamModBase {
 		StructureVoidFortressPieces.registerNetherFortressPieces();
 		StructureVoidCityPieces.registerPieces();
 
+		registerEntity(EntityVoidChain.class, "EntityVoidChain", this, modid, 128, 1, true);
+		registerEntity(EntityAcidBall.class, "EntityAcidBall", this, modid, 128, 1, true);
+		// registerEntity(EntityHookShot.class, "HookShot", this, 128, 1, true);
+		registerEntity(EntityHerobrineFireball.class, "HerobrineFireball", this, modid, 128, 1, true);
+		registerEntity(EntityObsidianFlask.class, "EntityObsidianFlask", this, modid, 128, 1, true);
+		registerEntity(EntityHerobrineWitherSkull.class, "HerobrineWitherSkull", this, modid, 128, 1, true);
+		registerEntity(EntityHerobrineTNTPrimed.class, "HerobrineTNTPrimed", this, modid, 128, 1, true);
+		registerEntity(EntityHerobrineShadow.class, "HerobrineShadow", this, modid, 128, 1, true);
+		registerEntity(EntityLichInferno.class, "LichInferno", this, modid, 128, 1, true);
+		registerEntity(ProjectileDisintegration.class, "ProjectileDisintegration", this, modid, 128, 1, true);
+		registerEntity(EntitySpellRune.class, "EntitySpellRune", this, modid, 64, 1, true);
+		registerEntity(EntityCasterLightningBolt.class, "EntityCasterLightningBolt", this, modid, 64, 1, true);
+		registerEntity(EntitySpellImplosion.class, "EntitySpellImplosion", this, modid, 64, 1, true);
 		registerEntityWithEgg(EntityMobWraith.class, "Wraith", this, modid, 64, 1, true, 0xFFFFFF, 0x000000);
 		registerEntityWithEgg(EntityMobSpectreChain.class, "SpectreChain", this, modid, 64, 1, true, 0xFFFFFF, 0xAA0077);
 		registerEntityWithEgg(EntityMobVoidWrath.class, "VoidWrath", this, modid, 64, 1, true, 0xFF0000, 0x000000);
@@ -291,6 +286,7 @@ public class VoidCraft extends TamModBase {
 		registerEntityWithEgg(EntityHashalaq.class, "Hashalaq", this, modid, 64, 1, true, 0x000000, 0x00FFFF);
 		registerEntityWithEgg(EntityLordOfBlades.class, "LordOfBlades", this, modid, 250, 1, true, 0x777777, 0x000000);
 		registerEntityWithEgg(EntityVoidParrot.class, "VoidParrot", this, modid, 250, 1, true, 0x7700FF, 0x000000);
+		registerEntity(EntityChainedSkull.class, "ChainedSkull", this, modid, 250, 1, true);
 
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 
@@ -298,8 +294,6 @@ public class VoidCraft extends TamModBase {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
-		logger.info("Starting VoidCraft PostInit");
-
 		VoidCraftLootTables.postInit();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, (tickets, world) -> {

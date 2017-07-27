@@ -8,7 +8,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
 
 public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 
@@ -21,19 +20,13 @@ public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 		setSize(0.3125F, 0.3125F);
 	}
 
-	/**
-	 * Called when this EntityFireball hits a block or entity.
-	 */
+	@Override
 	protected void onImpact(RayTraceResult result) {
-		if (!world.isRemote && !(result.entityHit != null && result.entityHit instanceof EntityVoidBoss)) {
-			if (result.entityHit != null) {
+		if (!world.isRemote) {
+			if (result.entityHit != null && result.entityHit != shootingEntity) {
 				if (shootingEntity != null) {
 					if (result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(shootingEntity), 8.0F)) {
-						if (result.entityHit.isEntityAlive()) {
-							applyEnchantments(shootingEntity, result.entityHit);
-						} else {
-							shootingEntity.heal(5.0F);
-						}
+						shootingEntity.heal(5.0F);
 					}
 				} else {
 					result.entityHit.attackEntityFrom(DamageSource.MAGIC, 8.0F);
@@ -47,6 +40,7 @@ public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 					} else if (world.getDifficulty() == EnumDifficulty.HARD) {
 						i = 40;
 					}
+					System.out.println(world.getDifficulty());
 
 					if (i > 0) {
 						((EntityLivingBase) result.entityHit).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * i, 2));
