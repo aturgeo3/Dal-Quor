@@ -58,7 +58,7 @@ public class XiaBattleHandler implements IBattleHandler {
 	@Override
 	public void stop() {
 		players.clear();
-		isDone = xia != null || xia.isDead;
+		isDone = xia == null || xia.isDead;
 		xia = null;
 		if (worldObj != null) {
 			BlockPos doorPos = new BlockPos(54, 76, 82);
