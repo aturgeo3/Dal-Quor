@@ -3,12 +3,14 @@ package tamaized.voidcraft.network.server;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.network.client.ClientPacketHandlerVadeMecumUpdate;
 
 public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacketHandlerVadeMecum.Packet, IMessage> {
@@ -28,8 +30,9 @@ public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacke
 				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Normal), player);
 				break;
 			case SPELLS_PAGE:
-				capability.setPage(message.object);
-				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Spells), player);
+				// TODO: look into what we were doing here
+//				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Spells), player);
+				FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), player.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 				break;
 			case ACTIVE_SET:
 				IVadeMecumCapability.Category category = IVadeMecumCapability.getCategoryFromID(message.object);

@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -20,8 +19,8 @@ import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
-import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
+import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
 import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecumLastEntry;
 import tamaized.voidcraft.proxy.ClientProxy;
 
@@ -223,7 +222,7 @@ public class VadeMecumGUI extends GuiScreen {
 					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case WordsOfPower:
-					FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), player.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, 0));
 					break;
 				case Infusion:
 					mc.displayGuiScreen(new VadeMecumInfusionGUI(playerStats));

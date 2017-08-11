@@ -54,7 +54,7 @@ public class SlotVadeMecumSpell extends SlotOnlyItem {
 
 	@Override
 	public boolean isSameInventory(Slot slot) {
-		return slot instanceof SlotVadeMecumSpell ? ((SlotVadeMecumSpell) slot).getCapability() == capability : false;
+		return slot instanceof SlotVadeMecumSpell && ((SlotVadeMecumSpell) slot).getCapability() == capability;
 	}
 
 }

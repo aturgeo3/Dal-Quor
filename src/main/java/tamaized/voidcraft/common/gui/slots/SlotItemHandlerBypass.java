@@ -20,7 +20,7 @@ public class SlotItemHandlerBypass extends SlotItemHandler { // TODO TamModized
 	@Override
 	public boolean canTakeStack(EntityPlayer playerIn) {
 		IItemHandler handler = getItemHandler();
-		return handler instanceof TamTileEntityInventory.ItemStackFilterHandler ? !((TamTileEntityInventory.ItemStackFilterHandler) handler).extractBypass(i, 1, true).isEmpty() : !handler.extractItem(i, 1, true).isEmpty();
+		return handler != null && (handler instanceof TamTileEntityInventory.ItemStackFilterHandler ? !((TamTileEntityInventory.ItemStackFilterHandler) handler).extractBypass(i, 1, true).isEmpty() : !handler.extractItem(i, 1, true).isEmpty());
 	}
 
 	@Override
