@@ -20,17 +20,6 @@ public class EntityAIHerobrinePhase1 extends EntityAIBase {
 	private static final int maxPillars = 6;
 	private static final List<BlockPos> locations = new ArrayList<>();
 
-	static {
-		locations.add(new BlockPos(10, 10, 0));
-		locations.add(new BlockPos(5, 10, 5));
-		locations.add(new BlockPos(0, 10, 10));
-		locations.add(new BlockPos(-5, 10, 5));
-		locations.add(new BlockPos(-10, 10, 0));
-		locations.add(new BlockPos(-5, 10, -5));
-		locations.add(new BlockPos(0, 10, -10));
-		locations.add(new BlockPos(5, 10, -5));
-	}
-
 	private final EntityBossHerobrine boss;
 	private int tick = 1;
 	private Map<BlockPos, TileEntityAIBlock> pillars = new HashMap<>();
@@ -52,6 +41,15 @@ public class EntityAIHerobrinePhase1 extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
+		locations.clear();
+		locations.add(new BlockPos(8, 8, 0));
+		locations.add(new BlockPos(5, 8, 5));
+		locations.add(new BlockPos(0, 8, 8));
+		locations.add(new BlockPos(-5, 8, 5));
+		locations.add(new BlockPos(-8, 8, 0));
+		locations.add(new BlockPos(-5, 8, -5));
+		locations.add(new BlockPos(0, 8, -8));
+		locations.add(new BlockPos(5, 8, -5));
 		boss.updateInitialPos();
 		for (int x = -10; x <= 10; x++) {
 			for (int z = -10; z <= 10; z++) {
@@ -88,7 +86,7 @@ public class EntityAIHerobrinePhase1 extends EntityAIBase {
 	private void updateMotion() {
 		EntityMoveHelper moveHelper = boss.getMoveHelper();
 		BlockPos pos = locations.get(boss.getRNG().nextInt(locations.size())).add(boss.getInitialPos());
-		while (pos.getX() == moveHelper.getX() && pos.getY() == moveHelper.getY() && pos.getZ() == moveHelper.getZ())
+		while (locations.size() > 1 && pos.getX() == moveHelper.getX() && pos.getY() == moveHelper.getY() && pos.getZ() == moveHelper.getZ())
 			pos = locations.get(boss.getRNG().nextInt(locations.size())).add(boss.getInitialPos());
 		moveHelper.setMoveTo(pos.getX(), pos.getY(), pos.getZ(), 1);
 	}

@@ -66,6 +66,8 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
 			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		setHeldItem(EnumHand.OFF_HAND, vade);
+		if (!world.isRemote && world.provider instanceof WorldProviderXia &&!((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerXia1().isRunning())
+			setDead();
 	}
 
 	private <T extends EntityAIBase & IDamageListener> EntityAIBase addAI(T ai) {
@@ -162,6 +164,11 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 			((EntityLivingBase) entity).knockBack(this, 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(this.rotationYaw * 0.017453292F)));
 		else
 			entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * 0.017453292F) * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * 0.017453292F) * 0.5F));
+
+	}
+
+	@Override
+	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
 
 	}
 

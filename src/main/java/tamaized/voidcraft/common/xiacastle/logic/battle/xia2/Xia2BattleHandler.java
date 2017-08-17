@@ -4,10 +4,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
+import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class Xia2BattleHandler implements IBattleHandler {
 
@@ -17,7 +17,7 @@ public class Xia2BattleHandler implements IBattleHandler {
 	private int childPhaseModulate = 20;
 	private boolean readyForInput = false;
 
-	private boolean running;
+	private boolean running = false;
 	private boolean isDone = false;
 
 	private World worldObj;
@@ -45,7 +45,7 @@ public class Xia2BattleHandler implements IBattleHandler {
 		readyForInput = false;
 		xia = new EntityBossXia2(worldObj, this);
 		xia.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
-		ItemStack vade = new ItemStack(VoidCraft.items.vadeMecum);
+		ItemStack vade = new ItemStack(VoidCraftItems.vadeMecum);
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
 			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.MAIN_HAND, vade);

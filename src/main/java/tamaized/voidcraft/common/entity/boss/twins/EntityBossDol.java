@@ -53,7 +53,7 @@ public class EntityBossDol extends EntityVoidNPC {
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentTranslation("entity.voidcraft.Dol");
+		return new TextComponentTranslation("entity.voidcraft.Dol.name");
 	}
 
 	@Override

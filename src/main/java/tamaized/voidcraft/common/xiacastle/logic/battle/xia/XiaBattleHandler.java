@@ -13,7 +13,7 @@ import java.util.List;
 
 public class XiaBattleHandler implements IBattleHandler {
 
-	private boolean running;
+	private boolean running = false;
 	private boolean isDone = false;
 
 	private World worldObj;
@@ -31,8 +31,10 @@ public class XiaBattleHandler implements IBattleHandler {
 		if (worldObj != null && !worldObj.isRemote && running) {
 			if (checkBB != null)
 				players.removeIf(player -> !checkBB.contains(player.getPositionVector()));
-			if (xia == null || xia.isDead || players.isEmpty())
+			if(players.isEmpty())
 				stop();
+			if (xia == null || xia.isDead)
+				setDone();
 		}
 	}
 
@@ -47,19 +49,22 @@ public class XiaBattleHandler implements IBattleHandler {
 			}
 		}
 		isDone = false;
+		running = true;
 		xia = new EntityBossXia(worldObj);
 		xia.setPositionAndUpdate(p.getX() + 0.5, p.getY() + 17.5, p.getZ() + 43.5);
 		worldObj.spawnEntity(xia);
 		checkBB = new AxisAlignedBB(p.add(-19, -1, -3), p.add(19, 26, 51));
 		players.addAll(worldObj.getEntitiesWithinAABB(EntityPlayer.class, checkBB));
-		running = true;
 	}
 
 	@Override
 	public void stop() {
 		players.clear();
-		isDone = xia == null || xia.isDead;
-		xia = null;
+		isDone = false;
+		if(xia != null) {
+			xia.setDead();
+			xia = null;
+		}
 		if (worldObj != null) {
 			BlockPos doorPos = new BlockPos(54, 76, 82);
 			for (int x = 0; x > -5; x--) {

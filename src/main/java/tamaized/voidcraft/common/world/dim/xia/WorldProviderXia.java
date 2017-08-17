@@ -11,29 +11,37 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
 import tamaized.voidcraft.common.xiacastle.logic.XiaCastleLogicHandler;
+import tamaized.voidcraft.registry.VoidCraftBiomes;
 
 public class WorldProviderXia extends WorldProvider {
 
 	private static final XiaSkyRender skyRender = new XiaSkyRender();
 
 	private XiaCastleLogicHandler xiaCastleHandler;
+	private WorldDataXia data;
+	private boolean hasLoaded = false;
 
 	/**
 	 * creates a new world chunk manager for WorldProvider
 	 */
 	@Override
 	protected void init() {
-		this.biomeProvider = new BiomeProviderSingle(VoidCraft.biomes.biomeXia);
-		this.doesWaterVaporize = false;
-		this.nether = true;
+		biomeProvider = new BiomeProviderSingle(VoidCraftBiomes.biomeXia);
+		doesWaterVaporize = false;
+		nether = true;
 		if (world instanceof WorldServer) {
 			xiaCastleHandler = new XiaCastleLogicHandler(world);
 			if (world.getChunkProvider() != null)
 				xiaCastleHandler.start();
+			hasLoaded = false;
 		}
+	}
+
+	@Override
+	public void onWorldSave() {
+		data.markDirty();
 	}
 
 	@Override
@@ -49,8 +57,16 @@ public class WorldProviderXia extends WorldProvider {
 	@Override
 	public void onWorldUpdateEntities() {
 		super.onWorldUpdateEntities();
-		if (xiaCastleHandler != null)
+		if (xiaCastleHandler != null) {
+			if (!hasLoaded) {
+				data = WorldDataXia.get(world);
+				data.setProvider(this);
+				if (data.getNBT() != null)
+					xiaCastleHandler.readNBT(data.getNBT());
+				hasLoaded = true;
+			}
 			xiaCastleHandler.onUpdate();
+		}
 	}
 
 	public final XiaCastleLogicHandler getXiaCastleHandler() {
@@ -80,7 +96,7 @@ public class WorldProviderXia extends WorldProvider {
 
 		for (int i = 0; i <= 15; ++i) {
 			float f1 = 1.0F - (float) i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
 	}
 
@@ -159,4 +175,5 @@ public class WorldProviderXia extends WorldProvider {
 	public DimensionType getDimensionType() {
 		return DimensionType.getById(ConfigHandler.dimensionIdXia);
 	}
+
 }

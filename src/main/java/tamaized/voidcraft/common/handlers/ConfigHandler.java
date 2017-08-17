@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tamaized.voidcraft.VoidCraft;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = VoidCraft.modid)
 @Config(modid = VoidCraft.modid)
 public class ConfigHandler {
 

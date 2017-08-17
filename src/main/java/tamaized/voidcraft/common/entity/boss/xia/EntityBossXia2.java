@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.entity.boss.xia;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -53,6 +54,11 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 
 	public boolean shouldSphereRender() {
 		return sphereState;
+	}
+
+	@Override
+	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+
 	}
 
 	@Override

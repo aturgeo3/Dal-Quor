@@ -90,8 +90,8 @@ public class XiaCastleLogicHandler {
 
 	private void doHandlerStartChecks() {
 		if (twinsLoc != null && herobrineLoc != null && xiaLoc != null && xia2Loc != null) {
-			AxisAlignedBB twinsBB = new AxisAlignedBB(twinsLoc.add(-5, 0, 0), twinsLoc.add(5, 2, -6));
-			AxisAlignedBB herobrineBB = new AxisAlignedBB(herobrineLoc.add(0, 0, -10), herobrineLoc.add(8, 2, 10));
+			AxisAlignedBB twinsBB = new AxisAlignedBB(twinsLoc.add(-10, 0, -10), twinsLoc.add(10, 2, 10));
+			AxisAlignedBB herobrineBB = new AxisAlignedBB(herobrineLoc.add(-10, 0, -10), herobrineLoc.add(10, 2, 10));
 			AxisAlignedBB xiaBB = new AxisAlignedBB(xiaLoc.add(-18, 0, 7), xiaLoc.add(18, 10, 15));
 			List<EntityPlayer> list;
 			if (!twins.isRunning() && !twins.isDone()) {
@@ -208,10 +208,12 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void debug() {
+		twins.stop();
+		herobrine.stop();
+		xia.stop();
+		xia2.stop();
 		twins.setDone();
 		herobrine.setDone();
-		// xia.setDone();
-		// xia2.setDone();
 	}
 
 	private void setupPos() {
@@ -251,9 +253,26 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void readNBT(NBTTagCompound nbt) {
+		if (twins != null && herobrine != null && xia != null) {
+			if (nbt.getBoolean("herobrine"))
+				herobrine.setDone();
+			if (nbt.getBoolean("twins"))
+				twins.setDone();
+			if (nbt.getBoolean("xia"))
+				xia.setDone();
+		}
 	}
 
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
+		if (twins == null || herobrine == null || xia == null || xia2 == null || xia2.isDone()) {
+			nbt.setBoolean("herobrine", false);
+			nbt.setBoolean("twins", false);
+			nbt.setBoolean("xia", false);
+		} else {
+			nbt.setBoolean("herobrine", herobrine.isDone());
+			nbt.setBoolean("twins", twins.isDone());
+			nbt.setBoolean("xia", xia.isDone());
+		}
 		return nbt;
 	}
 

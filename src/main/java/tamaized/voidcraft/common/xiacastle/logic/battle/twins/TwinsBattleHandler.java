@@ -21,7 +21,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 	private int phase = 0;
 	private boolean readyForInput = false;
 
-	private boolean running;
+	private boolean running = false;
 	private boolean isDone = false;
 
 	private World worldObj;
@@ -34,7 +34,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 	public void update() {
 		if (worldObj != null && !worldObj.isRemote) {
 			if (running) {
-				if (zol == null || dol == null || !zol.isDead || !dol.isDead) {
+				if (zol == null || dol == null || zol.isDead || dol.isDead) {
 					stop();
 					return;
 				}
@@ -189,10 +189,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 						break;
 					case 4:
 						boolean flag = TwinsMessages05.run(worldObj, pos);
-						if (flag) {
-							stop();
-							isDone = true;
-						}
+						if (flag)
+							setDone();
 						break;
 					default:
 						break;
@@ -236,12 +234,14 @@ public class TwinsBattleHandler implements IBattleHandler {
 			return;
 		readyForInput = false;
 		isDone = false;
-		if (dol != null)
+		if (dol != null) {
 			dol.setDead();
-		if (zol != null)
+			dol = null;
+		}
+		if (zol != null) {
 			zol.setDead();
-		dol = null;
-		zol = null;
+			zol = null;
+		}
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			e.setDead();
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))

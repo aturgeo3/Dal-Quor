@@ -58,16 +58,16 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 			chunkLoadTicket.bindEntity(this);
 	}
 
-	protected Ticket getChunkloader() {
-		return chunkLoadTicket;
-	}
-
 	public EntityVoidBoss(World world, T handler, boolean hasIdleTask) {
 		this(world);
 		this.handler = handler;
 		bus = new VoidBossAIBus();
 		if (hasIdleTask)
 			tasks.addTask(6, new EntityAILookIdle(this));
+	}
+
+	protected Ticket getChunkloader() {
+		return chunkLoadTicket;
 	}
 
 	@Deprecated
@@ -170,7 +170,8 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 
 	@Deprecated
 	protected void sendPacketToBus(IVoidBossAIPacket packet) {
-		bus.sendPacket(packet);
+		if (bus != null)
+			bus.sendPacket(packet);
 	}
 
 	@Deprecated

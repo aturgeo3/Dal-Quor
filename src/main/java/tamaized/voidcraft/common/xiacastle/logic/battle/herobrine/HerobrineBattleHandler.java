@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.herobrine;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
@@ -14,7 +15,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	private int childPhaseModulate = 20;
 	private boolean readyForInput = false;
 
-	private boolean running;
+	private boolean running = false;
 	private boolean isDone = false;
 
 	private World worldObj;
@@ -26,7 +27,7 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	public void update() {
 		if (worldObj != null && !worldObj.isRemote && running) {
 			if (herobrine == null || herobrine.isDead) {
-				stop();
+				setDone();
 			}
 		}
 	}
@@ -58,14 +59,19 @@ public class HerobrineBattleHandler implements IBattleHandler {
 		isDone = false;
 		if (herobrine != null) {
 			herobrine.setDead();
-			isDone = true;
 			herobrine = null;
 		}
+		for (EntityBossHerobrine boss : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
+			boss.setDead();
 		for (int z = -2; z <= 2; z++) {
 			for (int y = 5; y > 0; y--) {
 				worldObj.setBlockToAir(pos.add(11, y, z));
 			}
 		}
+		for (int x = -10; x <= 10; x++)
+			for (int z = -10; z <= 10; z++)
+				for (int y = 1; y <= 3; y++)
+					worldObj.setBlockToAir(pos.add(x, y, z));
 		running = false;
 	}
 

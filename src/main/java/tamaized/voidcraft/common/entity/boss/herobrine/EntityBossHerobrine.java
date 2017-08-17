@@ -56,6 +56,11 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 
 	}
 
+	@Override
+	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
+
+	}
+
 	public final BlockPos getInitialPos() {
 		return initialPos;
 	}

@@ -23,6 +23,11 @@ public class EntityAIXia1Phase2 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	@Override
+	public void startExecuting() {
+		boss.setPositionAndUpdate(boss.getInitialPos().getX() + 0.5F, boss.getInitialPos().getY() - 0.5F, boss.getInitialPos().getZ() + 0.5F);
+	}
+
+	@Override
 	public void onTakeDamage() {
 		doTeleport();
 	}
