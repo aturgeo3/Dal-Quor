@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import tamaized.voidcraft.registry.VoidCraftItems;
 
@@ -81,6 +82,8 @@ public class Xia2BattleHandler implements IBattleHandler {
 	public void setDone() {
 		stop();
 		isDone = true;
+		if (worldObj != null && worldObj.provider instanceof WorldProviderXia)
+			worldObj.provider.onWorldSave();
 	}
 
 }

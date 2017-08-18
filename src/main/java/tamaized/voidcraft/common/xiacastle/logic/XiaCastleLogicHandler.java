@@ -17,6 +17,7 @@ import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 import tamaized.voidcraft.common.world.SchematicLoader;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.TwinsSpeech;
 import tamaized.voidcraft.common.xiacastle.logic.battle.herobrine.HerobrineBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
@@ -68,21 +69,23 @@ public class XiaCastleLogicHandler {
 		if (world != null && !world.isRemote) {
 			validateInstance();
 			if (running) {
-				doHandlerStartChecks();
-				if (!xiaDoorOpen && twins.isDone() && herobrine.isDone())
-					openDoor();
-				if (twins.isRunning())
-					twins.update();
-				if (herobrine.isRunning())
-					herobrine.update();
-				if (xia.isRunning())
-					xia.update();
-				if (xia2.isRunning())
-					xia2.update();
-				if (!hasFinished && xia2.isDone())
-					finish();
 				if (hasFinished && !twinsSpeech.done())
 					twinsSpeech.update(world.playerEntities);
+				else {
+					doHandlerStartChecks();
+					if (!xiaDoorOpen && twins.isDone() && herobrine.isDone())
+						openDoor();
+					if (twins.isRunning())
+						twins.update();
+					if (herobrine.isRunning())
+						herobrine.update();
+					if (xia.isRunning())
+						xia.update();
+					if (xia2.isRunning())
+						xia2.update();
+					if (!hasFinished && xia2.isDone())
+						finish();
+				}
 				handleProgressVisual();
 			}
 		}
@@ -132,6 +135,8 @@ public class XiaCastleLogicHandler {
 		if (world != null)
 			if (running && ((world.playerEntities.isEmpty() && ((twins.isDone() && herobrine.isDone() && xia.isDone() && xia2.isDone()) || (!twins.isDone() && !herobrine.isDone() && !xia.isDone() && !xia2.isDone()))) || xia2Loc == null || xiaLoc == null || twinsLoc == null | herobrineLoc == null))
 				stop();
+		if (running && hasFinished && (twinsSpeech.done() || world.playerEntities.isEmpty()))
+			stop();
 		if (!running && world != null && !world.playerEntities.isEmpty())
 			start();
 	}
@@ -144,6 +149,7 @@ public class XiaCastleLogicHandler {
 		TileEntityAIBlock ai1;
 		TileEntityAIBlock ai2;
 		if (!(te1 instanceof TileEntityAIBlock)) {
+			world.setBlockToAir(pos1);
 			world.setBlockState(pos1, VoidCraftBlocks.AIBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
@@ -151,6 +157,7 @@ public class XiaCastleLogicHandler {
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
+			world.setBlockToAir(pos2);
 			world.setBlockState(pos2, VoidCraftBlocks.AIBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
@@ -168,6 +175,8 @@ public class XiaCastleLogicHandler {
 	}
 
 	private void finish() {
+		stop();
+		running = true;
 		SchematicLoader loader = new SchematicLoader();
 		BlockPos pos = new BlockPos(5000, 100, 5000);
 		SchematicLoader.buildSchematic("starforge.schematic", loader, world, pos);
@@ -195,6 +204,8 @@ public class XiaCastleLogicHandler {
 			chest.setInventorySlotContents(0, new ItemStack(VoidCraftItems.quoriFragment, i));
 		}
 		hasFinished = true;
+		if (world != null && world.provider instanceof WorldProviderXia)
+			world.provider.onWorldSave();
 	}
 
 	public void start() {
@@ -208,10 +219,6 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void debug() {
-		twins.stop();
-		herobrine.stop();
-		xia.stop();
-		xia2.stop();
 		twins.setDone();
 		herobrine.setDone();
 	}

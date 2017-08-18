@@ -13,6 +13,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.*;
 
@@ -230,8 +231,6 @@ public class TwinsBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
-		if (pos == null)
-			return;
 		readyForInput = false;
 		isDone = false;
 		if (dol != null) {
@@ -242,6 +241,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 			zol.setDead();
 			zol = null;
 		}
+		if (pos == null)
+			return;
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			e.setDead();
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
@@ -280,6 +281,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 	public void setDone() {
 		stop();
 		isDone = true;
+		if (worldObj != null && worldObj.provider instanceof WorldProviderXia)
+			worldObj.provider.onWorldSave();
 	}
 
 }

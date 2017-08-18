@@ -83,7 +83,6 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	public void decodePacketData(ByteBuf stream) {
 		frozen = stream.readBoolean();
-		System.out.println(this);
 	}
 
 	@Override

@@ -32,16 +32,16 @@ public class WorldProviderXia extends WorldProvider {
 		doesWaterVaporize = false;
 		nether = true;
 		if (world instanceof WorldServer) {
-			xiaCastleHandler = new XiaCastleLogicHandler(world);
-			if (world.getChunkProvider() != null)
-				xiaCastleHandler.start();
-			hasLoaded = false;
+			if (xiaCastleHandler == null)
+				xiaCastleHandler = new XiaCastleLogicHandler(world);
+			hasLoaded = xiaCastleHandler.hasFinished();
 		}
 	}
 
 	@Override
 	public void onWorldSave() {
-		data.markDirty();
+		if (data != null)
+			data.markDirty();
 	}
 
 	@Override
@@ -61,6 +61,7 @@ public class WorldProviderXia extends WorldProvider {
 			if (!hasLoaded) {
 				data = WorldDataXia.get(world);
 				data.setProvider(this);
+				xiaCastleHandler.start();
 				if (data.getNBT() != null)
 					xiaCastleHandler.readNBT(data.getNBT());
 				hasLoaded = true;

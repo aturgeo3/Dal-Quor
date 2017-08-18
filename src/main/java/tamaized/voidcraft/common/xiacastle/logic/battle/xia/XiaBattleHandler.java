@@ -5,6 +5,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 
@@ -31,7 +32,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		if (worldObj != null && !worldObj.isRemote && running) {
 			if (checkBB != null)
 				players.removeIf(player -> !checkBB.contains(player.getPositionVector()));
-			if(players.isEmpty())
+			if (players.isEmpty())
 				stop();
 			if (xia == null || xia.isDead)
 				setDone();
@@ -61,7 +62,7 @@ public class XiaBattleHandler implements IBattleHandler {
 	public void stop() {
 		players.clear();
 		isDone = false;
-		if(xia != null) {
+		if (xia != null) {
 			xia.setDead();
 			xia = null;
 		}
@@ -90,6 +91,8 @@ public class XiaBattleHandler implements IBattleHandler {
 	public void setDone() {
 		stop();
 		isDone = true;
+		if (worldObj != null && worldObj.provider instanceof WorldProviderXia)
+			worldObj.provider.onWorldSave();
 	}
 
 }

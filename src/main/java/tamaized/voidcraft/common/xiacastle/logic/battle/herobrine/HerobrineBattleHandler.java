@@ -5,6 +5,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
+import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
 
 public class HerobrineBattleHandler implements IBattleHandler {
@@ -53,14 +54,14 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
-		if (pos == null)
-			return;
 		readyForInput = false;
 		isDone = false;
 		if (herobrine != null) {
 			herobrine.setDead();
 			herobrine = null;
 		}
+		if (pos == null)
+			return;
 		for (EntityBossHerobrine boss : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			boss.setDead();
 		for (int z = -2; z <= 2; z++) {
@@ -89,6 +90,8 @@ public class HerobrineBattleHandler implements IBattleHandler {
 	public void setDone() {
 		stop();
 		isDone = true;
+		if (worldObj != null && worldObj.provider instanceof WorldProviderXia)
+			worldObj.provider.onWorldSave();
 	}
 
 }
