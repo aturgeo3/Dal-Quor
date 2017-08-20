@@ -57,7 +57,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable) {
 		this(world);
-		name = SkinHandler.getGhostInfo(id).getName();
+		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
+		name = info == null ? "null" : info.getName();
 		this.id = id;
 		canInteract = interactable;
 		shouldDie = false;
@@ -65,7 +66,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable, Entity target, int length) {
 		this(world);
-		name = SkinHandler.getGhostInfo(id).getName();
+		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
+		name = info == null ? "null" : info.getName();
 		this.id = id;
 		canInteract = interactable;
 		rune = true;
@@ -142,7 +144,8 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		id = UUID.fromString(ByteBufUtils.readUTF8String(additionalData));
-		name = SkinHandler.getGhostInfo(id).getName();
+		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
+		name = info == null ? "null" : info.getName();
 		shouldDie = additionalData.readBoolean();
 		canInteract = additionalData.readBoolean();
 		rune = additionalData.readBoolean();
