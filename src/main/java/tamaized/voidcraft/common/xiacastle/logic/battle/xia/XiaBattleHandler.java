@@ -32,8 +32,10 @@ public class XiaBattleHandler implements IBattleHandler {
 		if (worldObj != null && !worldObj.isRemote && running) {
 			if (checkBB != null)
 				players.removeIf(player -> !checkBB.contains(player.getPositionVector()));
-			if (players.isEmpty())
+			if (players.isEmpty()) {
 				stop();
+				return;
+			}
 			if (xia == null || xia.isDead)
 				setDone();
 		}

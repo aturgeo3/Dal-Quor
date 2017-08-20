@@ -219,6 +219,8 @@ public class XiaCastleLogicHandler {
 	}
 
 	public void debug() {
+		stop();
+		start();
 		twins.setDone();
 		herobrine.setDone();
 	}
