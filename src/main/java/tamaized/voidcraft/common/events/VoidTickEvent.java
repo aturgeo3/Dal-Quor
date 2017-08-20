@@ -148,7 +148,7 @@ public class VoidTickEvent {
 			if (player.dimension == ConfigHandler.dimensionIdXia) {
 
 				// Prevent players from flying in xia DIM
-				if (!player.capabilities.isCreativeMode && player.capabilities.isFlying && (!XiaFlightHandler.shouldPlayerHaveFlight(player) || !(player.world.provider instanceof WorldProviderXia && ((WorldProviderXia) player.world.provider).getXiaCastleHandler().canPlayersFly()))) {
+				if (!player.isCreative() && !player.isSpectator() && player.capabilities.isFlying && (!XiaFlightHandler.shouldPlayerHaveFlight(player) || !(player.world.provider instanceof WorldProviderXia && ((WorldProviderXia) player.world.provider).getXiaCastleHandler().canPlayersFly()))) {
 					player.capabilities.allowFlying = false;
 					player.capabilities.isFlying = false;
 					player.capabilities.disableDamage = false;
