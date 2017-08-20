@@ -13,8 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
+import tamaized.voidcraft.common.capabilities.CapabilityList;
+import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.world.SchematicLoader;
-import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 
 import java.util.List;
 
@@ -85,15 +86,15 @@ public class Debugger extends TamItem {
 
 		// VoidCraft.instance.VoidTickEvent.dream(player);
 
-		//		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		//		cap.clearCategories();
+				IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
+				cap.clearCategories();
 		//		cap.addCategory(player, IVadeMecumCapability.Category.Shock);
 		//		cap.addCategory(player, IVadeMecumCapability.Category.Freeze);
 		//		cap.addCategory(player, IVadeMecumCapability.Category.AcidSpray);
 		//		cap.addCategory(player, IVadeMecumCapability.Category.Flame);
 		//		cap.addCategory(player, IVadeMecumCapability.Category.Voice);
-		//		 for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
-		//		 cap.addCategory(player, cat);
+				 for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
+				 cap.addCategory(player, cat);
 		//		 cap.removeCategory(IVadeMecumCapability.Category.TotalControl);
 		//		 cap.removeCategory(IVadeMecumCapability.Category.Dreams);
 
@@ -101,8 +102,8 @@ public class Debugger extends TamItem {
 		// cap.setInfusion(5999);
 		// if (cap != null) cap.setXiaDefeats(0);
 		//						if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
-		if (world.provider instanceof WorldProviderXia)
-			((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+//		if (world.provider instanceof WorldProviderXia)
+//			((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
 		// FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 
 		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);

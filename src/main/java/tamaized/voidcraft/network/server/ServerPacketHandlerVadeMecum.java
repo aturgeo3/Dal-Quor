@@ -30,8 +30,8 @@ public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacke
 				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Normal), player);
 				break;
 			case SPELLS_PAGE:
-				// TODO: look into what we were doing here
-//				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Spells), player);
+				capability.setPage(message.object);
+				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.NULL), player);
 				FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), player.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 				break;
 			case ACTIVE_SET:

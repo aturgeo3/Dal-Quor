@@ -31,7 +31,7 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
+		TileEntity tileEntity = world.isBlockLoaded(new BlockPos(x, y, z)) ? world.getTileEntity(new BlockPos(x, y, z)) : null;
 		ItemStack main = player.getHeldItemMainhand();
 		ItemStack off = player.getHeldItemOffhand();
 		switch (getTypeFromID(id)) {
