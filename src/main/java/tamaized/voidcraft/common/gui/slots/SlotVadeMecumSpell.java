@@ -1,10 +1,13 @@
 package tamaized.voidcraft.common.gui.slots;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
+
+import javax.annotation.Nonnull;
 
 public class SlotVadeMecumSpell extends SlotOnlyItem {
 
@@ -35,6 +38,16 @@ public class SlotVadeMecumSpell extends SlotOnlyItem {
 	@Override
 	public void onSlotChanged() {
 
+	}
+
+	@Override
+	public int getItemStackLimit(@Nonnull ItemStack stack) {
+		return Math.min(stack.getItem().getItemStackLimit(stack), getSlotStackLimit());
+	}
+
+	@Override
+	public boolean canTakeStack(EntityPlayer playerIn) {
+		return true;
 	}
 
 	@Override

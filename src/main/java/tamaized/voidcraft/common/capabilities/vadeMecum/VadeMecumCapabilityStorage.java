@@ -9,6 +9,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import tamaized.voidcraft.VoidCraft;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability> {
@@ -28,20 +29,21 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 					c.setBoolean("notnull", false);
 				else
 					c.setBoolean("notnull", true);
-				comp.setTag(String.valueOf(IVadeMecumCapability.getCategoryID(entry.getKey())), entry.getValue().isEmpty() ? c : entry.getValue().writeToNBT(new NBTTagCompound()));
+				if(!entry.getValue().isEmpty())
+				comp.setTag(String.valueOf(IVadeMecumCapability.getCategoryID(entry.getKey())), entry.getValue().writeToNBT(c));
 			}
 			compound.setTag("SpellComponents", comp);
 
 		}
 		{
-			ArrayList<Integer> array = new ArrayList<Integer>();
+			List<Integer> array = new ArrayList<>();
 			for (IVadeMecumCapability.Category category : instance.getObtainedCategories()) {
 				array.add(IVadeMecumCapability.getCategoryID(category));
 			}
 			compound.setIntArray("category", array.stream().mapToInt(i -> i).toArray());
 		}
 		{
-			ArrayList<Integer> array = new ArrayList<Integer>();
+			List<Integer> array = new ArrayList<>();
 			for (IVadeMecumCapability.Passive passive : instance.getActivePassiveList()) {
 				array.add(IVadeMecumCapability.getPassiveID(passive));
 			}
@@ -67,10 +69,10 @@ public class VadeMecumCapabilityStorage implements IStorage<IVadeMecumCapability
 		}
 		{
 			int[] array;
-			ArrayList<IVadeMecumCapability.Category> list = new ArrayList<IVadeMecumCapability.Category>();
+			List<IVadeMecumCapability.Category> list = new ArrayList<>();
 			array = compound.getIntArray("category");
-			for (int i = 0; i < array.length; i++) {
-				list.add(IVadeMecumCapability.getCategoryFromID(array[i]));
+			for (int anArray : array) {
+				list.add(IVadeMecumCapability.getCategoryFromID(anArray));
 			}
 			instance.setObtainedCategories(list);
 		}
