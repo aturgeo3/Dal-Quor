@@ -28,6 +28,11 @@ public class EntityAIXia1Phase2 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	@Override
+	public boolean execute() {
+		return shouldExecute();
+	}
+
+	@Override
 	public void onTakeDamage() {
 		doTeleport();
 	}
@@ -43,6 +48,8 @@ public class EntityAIXia1Phase2 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	private BlockPos getNextTeleportLocation() {
+		if (boss.getInitialPos() == null)
+			return boss.getPosition();
 		double x = (boss.world.rand.nextDouble() * (teleportationBox.maxX - teleportationBox.minX)) + teleportationBox.minX;
 		double y = teleportationBox.maxY;
 		double z = (boss.world.rand.nextDouble() * (teleportationBox.maxZ - teleportationBox.minZ)) + teleportationBox.minZ;

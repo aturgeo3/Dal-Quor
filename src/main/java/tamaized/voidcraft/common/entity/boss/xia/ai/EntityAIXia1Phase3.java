@@ -40,6 +40,11 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	@Override
+	public boolean execute() {
+		return shouldExecute();
+	}
+
+	@Override
 	public void startExecuting() {
 		boss.setPositionAndUpdate(boss.getInitialPos().getX() + 0.5F, boss.getInitialPos().getY() - 0.5F, boss.getInitialPos().getZ() + 0.5F);
 	}

@@ -144,7 +144,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 				}
 			} else
 				for (IDamageListener listener : aiList)
-					if (listener.shouldExecute())
+					if (listener.execute())
 						listener.onTakeDamage();
 		}
 		return flag;
@@ -158,7 +158,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 			stack.getItem().hitEntity(stack, (EntityLivingBase) entity, this);
 		swingArm(EnumHand.MAIN_HAND);
 		for (IDamageListener listener : aiList)
-			if (listener.shouldExecute())
+			if (listener.execute())
 				listener.onDoDamage(entity);
 		if (entity instanceof EntityLivingBase)
 			((EntityLivingBase) entity).knockBack(this, 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(this.rotationYaw * 0.017453292F)));
@@ -264,7 +264,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 	}
 
 	public interface IDamageListener {
-		boolean shouldExecute();
+		boolean execute();
 
 		void onTakeDamage();
 
