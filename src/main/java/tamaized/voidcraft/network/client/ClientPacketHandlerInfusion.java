@@ -18,6 +18,8 @@ public class ClientPacketHandlerInfusion implements IMessageHandler<ClientPacket
 
 	@SideOnly(Side.CLIENT)
 	private static void processPacket(Packet message, EntityPlayer player, World world) {
+		if (world == null)
+			return;
 		Entity entity = world.getEntityByID(message.entityID);
 		if (entity != null && entity instanceof EntityLivingBase && entity.hasCapability(CapabilityList.VOIDICINFUSION, null)) {
 			IVoidicInfusionCapability cap = entity.getCapability(CapabilityList.VOIDICINFUSION, null);
