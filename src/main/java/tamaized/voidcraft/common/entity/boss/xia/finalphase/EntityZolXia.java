@@ -4,18 +4,56 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import tamaized.voidcraft.registry.VoidCraftPotions;
 
 public class EntityZolXia extends EntityTwinsXia {
 
+	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), Color.WHITE, BossInfo.Overlay.PROGRESS);
+
 	public EntityZolXia(World worldIn) {
 		super(worldIn);
 		ignoreFrustumCheck = true;
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		super.setCustomNameTag(name);
+		this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+		this.bossInfo.addPlayer(player);
+	}
+
+	@Override
+	public void removeTrackingPlayer(EntityPlayerMP player) {
+		super.removeTrackingPlayer(player);
+		this.bossInfo.removePlayer(player);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+		super.readEntityFromNBT(nbttagcompound);
+		if (this.hasCustomName())
+			this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		if (!world.isRemote)
+			bossInfo.setPercent(getHealth() / getMaxHealth());
+		super.onLivingUpdate();
 	}
 
 	@Override

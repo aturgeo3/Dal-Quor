@@ -12,8 +12,6 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
@@ -24,14 +22,12 @@ import tamaized.voidcraft.registry.VoidCraftPotions;
 public abstract class EntityTwinsXia extends EntityVoidNPC implements IAlternateBoss {
 
 	private static final DataParameter<Boolean> FROZEN = EntityDataManager.createKey(EntityTwinsXia.class, DataSerializers.BOOLEAN);
-	public final AlternateBossBarWrapper bossBarWrapper;
 	private EntityBossXia2 parent;
 
 	public EntityTwinsXia(World worldIn) {
 		super(worldIn);
 		isImmuneToFire = true;
 		canPush = false;
-		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, getBossBarColor(), BossInfo.Overlay.PROGRESS);
 		moveHelper = new BossFlyNoclipMoveHelper(this) {
 			@Override
 			public void onUpdateMoveHelper() {

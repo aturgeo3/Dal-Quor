@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import tamaized.voidcraft.client.entity.boss.model.ModelVoidBoss;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 
@@ -23,7 +22,6 @@ public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
 
 	@Override
 	public void doRender(EntityTwinsXia entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}

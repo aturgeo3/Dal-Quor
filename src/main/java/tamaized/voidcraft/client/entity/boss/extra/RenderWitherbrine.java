@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityWitherbrine;
 
 public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
@@ -20,13 +19,13 @@ public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 
 	@Override
 	public void doRender(EntityWitherbrine entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		RenderAlternateBossBars.addBoss(entity.bossBarWrapper);
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(EntityWitherbrine entity) {
 		int i = entity.getInvulTime();
 		return i > 0 && (i > 80 || i / 5 % 2 != 1) ? INVULNERABLE_WITHER_TEXTURES : WITHER_TEXTURES;
@@ -35,6 +34,7 @@ public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 	/**
 	 * Allows the render to do state modifications necessary before the model is rendered.
 	 */
+	@Override
 	protected void preRenderCallback(EntityWitherbrine entitylivingbaseIn, float partialTickTime) {
 		float f = 2.0F;
 		int i = entitylivingbaseIn.getInvulTime();

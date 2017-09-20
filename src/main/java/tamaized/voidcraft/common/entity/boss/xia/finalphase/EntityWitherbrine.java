@@ -3,8 +3,20 @@ package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,6 +39,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -36,8 +49,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.entity.EntityDragonOld;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
@@ -51,6 +62,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[]{FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
 	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
+	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 	private final float[] xRotationHeads = new float[2];
 	private final float[] yRotationHeads = new float[2];
 	private final int[] nextHeadUpdate = new int[2];
@@ -59,11 +72,6 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 * Time before the Wither tries to break blocks
 	 */
 	private int blockBreakCounter;
-	// private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
-	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
-
-	public final AlternateBossBarWrapper bossBarWrapper;
-
 	private Ticket chunkLoadTicket;
 
 	public EntityWitherbrine(World worldIn) {
@@ -74,10 +82,23 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
 		this.experienceValue = 50;
 		enablePersistence();
-		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 	}
 
-	public final void setKeepLoaded(){
+	public static void registerFixesWither(DataFixer fixer) {
+		EntityLiving.registerFixesMob(fixer, EntityWitherbrine.class);
+	}
+
+	public static boolean canDestroyBlock(Block blockIn) {
+		return false;
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		super.setCustomNameTag(name);
+		this.bossInfo.setName(this.getDisplayName());
+	}
+
+	public final void setKeepLoaded() {
 		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
 		if (chunkLoadTicket != null)
 			chunkLoadTicket.bindEntity(this);
@@ -109,10 +130,6 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.dataManager.register(INVULNERABILITY_TIME, 0);
 	}
 
-	public static void registerFixesWither(DataFixer fixer) {
-		EntityLiving.registerFixesMob(fixer, EntityWitherbrine.class);
-	}
-
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
@@ -130,9 +147,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		super.readEntityFromNBT(compound);
 		this.setInvulTime(compound.getInteger("Invul"));
 
-		/*if (this.hasCustomName()) {
-			// this.bossInfo.setName(this.getDisplayName());
-		}*/
+		if (this.hasCustomName())
+			this.bossInfo.setName(this.getDisplayName());
 	}
 
 	@Override
@@ -155,6 +171,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 */
 	@Override
 	public void onLivingUpdate() {
+		if (!world.isRemote)
+			bossInfo.setPercent(getHealth() / getMaxHealth());
 		if (chunkLoadTicket != null) {
 			for (ChunkPos pos : chunkLoadTicket.getChunkList()) {
 				ForgeChunkManager.unforceChunk(chunkLoadTicket, pos);
@@ -340,12 +358,8 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 				this.heal(1.0F);
 			}
 
-			// this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+			this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		}
-	}
-
-	public static boolean canDestroyBlock(Block blockIn) {
-		return false;
 	}
 
 	/**
@@ -369,7 +383,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	@Override
 	public void addTrackingPlayer(EntityPlayerMP player) {
 		super.addTrackingPlayer(player);
-		// this.bossInfo.addPlayer(player);
+		this.bossInfo.addPlayer(player);
 	}
 
 	/**
@@ -378,7 +392,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	@Override
 	public void removeTrackingPlayer(EntityPlayerMP player) {
 		super.removeTrackingPlayer(player);
-		// this.bossInfo.removePlayer(player);
+		this.bossInfo.removePlayer(player);
 	}
 
 	private double getHeadX(int p_82214_1_) {
@@ -601,6 +615,16 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		return false;
 	}
 
+	@Override
+	public float getHealthPerc() {
+		return getHealth() / getMaxHealth();
+	}
+
+	@Override
+	public ITextComponent getAlternateBossName() {
+		return new TextComponentString("Witherbrine");
+	}
+
 	class AIDoNothing extends EntityAIBase {
 		AIDoNothing() {
 			this.setMutexBits(7);
@@ -613,15 +637,5 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		public boolean shouldExecute() {
 			return EntityWitherbrine.this.getInvulTime() > 0;
 		}
-	}
-
-	@Override
-	public float getHealthPerc() {
-		return getHealth() / getMaxHealth();
-	}
-
-	@Override
-	public ITextComponent getAlternateBossName() {
-		return new TextComponentString("Witherbrine");
 	}
 }

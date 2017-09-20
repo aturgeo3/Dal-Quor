@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -11,6 +13,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.voidcraft.VoidCraft;
@@ -30,7 +34,10 @@ import tamaized.voidcraft.registry.VoidCraftPotions;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements IEntitySync {
+
+	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 
 	private boolean sphereState = false;
 
@@ -46,6 +53,38 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 		super(world, handler, false);
 		this.setInvulnerable(true);
 		canMove = false;
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		super.setCustomNameTag(name);
+		this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+		this.bossInfo.addPlayer(player);
+	}
+
+	@Override
+	public void removeTrackingPlayer(EntityPlayerMP player) {
+		super.removeTrackingPlayer(player);
+		this.bossInfo.removePlayer(player);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+		super.readEntityFromNBT(nbttagcompound);
+		if (this.hasCustomName())
+			this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		if (!world.isRemote)
+			bossInfo.setPercent(getHealth() / getMaxHealth());
+		super.onLivingUpdate();
 	}
 
 	public void setSphereState(boolean state) {
@@ -171,7 +210,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString("xia");
+		return new TextComponentString("Xia");
 	}
 
 	@Override

@@ -74,6 +74,7 @@ public class RenderAlternateBossBars {
 		tessellator.draw();
 	}
 
+	@Deprecated
 	public static final class AlternateBossBarWrapper {
 
 		public final IAlternateBoss entity;

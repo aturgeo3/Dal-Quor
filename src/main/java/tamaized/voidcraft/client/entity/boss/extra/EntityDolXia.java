@@ -5,12 +5,16 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
 import tamaized.voidcraft.common.entity.nonliving.EntityBlockSpell;
@@ -21,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityDolXia extends EntityTwinsXia {
+
+	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), Color.GREEN, BossInfo.Overlay.PROGRESS);
 
 	private static final List<IBlockState> BLOCKSTATES = Lists.newArrayList(
 
@@ -43,6 +49,38 @@ public class EntityDolXia extends EntityTwinsXia {
 	public EntityDolXia(World worldIn) {
 		super(worldIn);
 		ignoreFrustumCheck = true;
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		super.setCustomNameTag(name);
+		this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+			this.bossInfo.addPlayer(player);
+	}
+
+	@Override
+	public void removeTrackingPlayer(EntityPlayerMP player) {
+		super.removeTrackingPlayer(player);
+		this.bossInfo.removePlayer(player);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+		super.readEntityFromNBT(nbttagcompound);
+		if (this.hasCustomName())
+			this.bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		if (!world.isRemote)
+			bossInfo.setPercent(getHealth() / getMaxHealth());
+		super.onLivingUpdate();
 	}
 
 	@Override

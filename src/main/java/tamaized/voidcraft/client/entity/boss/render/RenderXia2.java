@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.client.particles.ParticleFluff;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.boss.bossbar.RenderBossHeathBar;
 import tamaized.voidcraft.client.entity.boss.model.ModelXia2;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 
@@ -79,7 +78,6 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 				GlStateManager.popMatrix();
 			}
 			renderLabel(entity, x, y, z);
-			RenderBossHeathBar.setCurrentBoss(entity);
 		}
 		// net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post(entity, this, x, y, z));
 		Minecraft mc = Minecraft.getMinecraft();
