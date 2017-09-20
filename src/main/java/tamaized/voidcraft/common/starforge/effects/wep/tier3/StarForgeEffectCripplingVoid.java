@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier3;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -8,9 +9,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.tammodized.common.helper.TranslateHelper;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
 public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 
@@ -39,7 +39,7 @@ public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 		if (entityHit.world.rand.nextInt(100) < 20) {
 			if (entityHit instanceof EntityLivingBase) {
 				EntityLivingBase livingHit = (EntityLivingBase) entityHit;
-				livingHit.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 15));
+				livingHit.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 15));
 			}
 		}
 	}
@@ -61,7 +61,7 @@ public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return TranslateHelper.translate("voidcraft.VadeMecum.docs.title.starforge.effect.voidCripple");
+		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.voidCripple");
 	}
 
 }

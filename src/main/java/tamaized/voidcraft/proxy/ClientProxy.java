@@ -134,6 +134,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpellImplosion.class, RenderSpellImplosion::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidParrot.class, RenderVoidParrot::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityChainedSkull.class, RenderChainedSkull::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlockSpell.class, RenderBlockSpell::new);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -1,5 +1,6 @@
 package tamaized.voidcraft.common.items;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.common.entity.nonliving.EntityChainedSkull;
 
@@ -41,7 +41,7 @@ public class ChainedSkull extends TamItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(TranslateHelper.translate("voidcraft.misc.pawn.desc"));
+		tooltip.add(I18n.format("voidcraft.misc.pawn.desc"));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

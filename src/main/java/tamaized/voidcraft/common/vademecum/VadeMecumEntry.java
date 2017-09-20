@@ -1,26 +1,29 @@
 package tamaized.voidcraft.common.vademecum;
 
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.proxy.ClientProxy;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class VadeMecumEntry {
 
-	private final static Map<String, VadeMecumEntry> map = new HashMap<String, VadeMecumEntry>();
+	private final static Map<String, VadeMecumEntry> map = new HashMap<>();
 
-	public final static VadeMecumEntry getEntry(String entry) {
+	public static VadeMecumEntry getEntry(String entry) {
 		return map.get(entry);
 	}
 
-	public final static String getEntry(VadeMecumEntry entry) {
+	public static String getEntry(VadeMecumEntry entry) {
 		for (Entry<String, VadeMecumEntry> e : map.entrySet()) {
 			if (e.getValue() == entry)
 				return e.getKey();
@@ -30,12 +33,12 @@ public class VadeMecumEntry {
 
 	private final String title;
 	private final IVadeMecumPageProvider pages;
-	private final Map<Integer, List<VadeMecumButton>> buttons = new HashMap<Integer, List<VadeMecumButton>>();
+	private final Map<Integer, List<VadeMecumButton>> buttons = new HashMap<>();
 	private final VadeMecumEntry backPage;
 
 	public VadeMecumEntry(String registryName, String title, VadeMecumEntry back, IVadeMecumPageProvider pageList) {
 		map.put(registryName, this);
-		this.title = TranslateHelper.translate(title);
+		this.title = I18n.format(title);
 		pages = pageList;
 		backPage = back;
 		initObjects();
@@ -68,24 +71,22 @@ public class VadeMecumEntry {
 				return;
 			}
 			if (buttons.get(page).size() >= 6) {
-				buttons.put(page + 1, new ArrayList<VadeMecumButton>());
-				buttons.get(page + 1).add(new VadeMecumButton(gui, buttonId, xPad + (xMulti * ((page + 1) % 2)), yPad + (yMulti * 0), 100, 20, buttonText, stack));
+				buttons.put(page + 1, new ArrayList<>());
+				buttons.get(page + 1).add(new VadeMecumButton(gui, buttonId, xPad + (xMulti * ((page + 1) % 2)), yPad, 100, 20, buttonText, stack));
 			} else {
 				int size = buttons.get(page).size();
 				buttons.get(page).add(new VadeMecumButton(gui, buttonId, xPad + (xMulti * (page % 2)), yPad + (yMulti * (size % 6)), 100, 20, buttonText, stack));
 			}
 		} else {
-			buttons.put(0, new ArrayList<VadeMecumButton>());
-			buttons.get(0).add(new VadeMecumButton(gui, buttonId, xPad + (xMulti * 0), yPad + (yMulti * 0), 100, 20, buttonText, stack));
+			buttons.put(0, new ArrayList<>());
+			buttons.get(0).add(new VadeMecumButton(gui, buttonId, xPad, yPad, 100, 20, buttonText, stack));
 		}
 	}
 
 	public final void mouseClicked(VadeMecumGUI gui, int pageNumber, int mouseX, int mouseY, int mouseButton) throws IOException {
 		if (mouseButton == 0) {
 			if (buttons.containsKey(pageNumber)) {
-				Iterator<VadeMecumButton> iter = buttons.get(pageNumber).iterator();
-				while (iter.hasNext()) {
-					VadeMecumButton button = iter.next();
+				for (VadeMecumButton button : buttons.get(pageNumber)) {
 					if (button.mousePressed(gui.mc, mouseX, mouseY)) {
 						button.playPressSound(gui.mc.getSoundHandler());
 						actionPerformed(gui, button.id, mouseButton);
@@ -93,9 +94,7 @@ public class VadeMecumEntry {
 				}
 			}
 			if (buttons.containsKey(pageNumber + 1)) {
-				Iterator<VadeMecumButton> iter = buttons.get(pageNumber + 1).iterator();
-				while (iter.hasNext()) {
-					VadeMecumButton button = iter.next();
+				for (VadeMecumButton button : buttons.get(pageNumber + 1)) {
 					if (button.mousePressed(gui.mc, mouseX, mouseY)) {
 						button.playPressSound(gui.mc.getSoundHandler());
 						actionPerformed(gui, button.id, mouseButton);
@@ -116,12 +115,12 @@ public class VadeMecumEntry {
 	}
 
 	public final void render(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
-		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 198, y + 15, 0x000000);
+		VadeMecumGUI.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 198, y + 15, 0x000000);
 		renderPages(gui, render, mX, mY, x, y, page);
 		renderButtons(gui, render, mX, mY, x, y, page);
 	}
 
-	protected final void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
+	private void renderPages(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		IVadeMecumPage[] pageList = pages == null ? null : pages.getPageList(gui.getPlayerStats());
 		if (pageList != null && pageList.length > page) {
 			pageList[page].render(gui, render, x + 50, y + 20, mX, mY, 0);
@@ -130,7 +129,7 @@ public class VadeMecumEntry {
 		}
 	}
 
-	protected final void renderButtons(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
+	private void renderButtons(VadeMecumGUI gui, FontRenderer render, int mX, int mY, int x, int y, int page) {
 		if (buttons.containsKey(page)) {
 			for (VadeMecumButton button : buttons.get(page)) {
 				button.drawButton(gui.mc, mX, mY, 0);

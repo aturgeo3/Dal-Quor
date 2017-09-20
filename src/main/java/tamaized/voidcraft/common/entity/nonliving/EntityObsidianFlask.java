@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.entity.nonliving;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
@@ -11,19 +10,17 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import tamaized.tammodized.common.helper.MotionHelper;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftFluids;
 
 import java.util.List;
 
 public class EntityObsidianFlask extends EntityThrowable implements IEntityAdditionalSpawnData {
-
-	public static enum Type {
-		Normal, Fire, Freeze, Shock, Acid, Void
-	}
 
 	private Type type;
 
@@ -57,13 +54,13 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 			switch (type) {
 				default:
 				case Normal: {
-					world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 0, true, true);
+					world.newExplosion(null, this.posX, this.posY, this.posZ, 0, true, true);
 					if (world.isAirBlock(pos))
-						world.setBlockState(pos, VoidCraft.blocks.blockVoidFire.getDefaultState());
+						world.setBlockState(pos, VoidCraftBlocks.blockVoidFire.getDefaultState());
 					break;
 				}
 				case Fire: {
-					world.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 0, true, true);
+					world.newExplosion(null, this.posX, this.posY, this.posZ, 0, true, true);
 					for (int x = -2; x <= 2; x++) {
 						for (int z = -2; z <= 2; z++) {
 							if (!(x == 0 && z == 0) && world.rand.nextInt(4) != 0)
@@ -93,14 +90,14 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 					world.playEvent(2002, pos, 0xFFFFFF);
 					List<EntityLivingBase> damageList = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.add(-5, -5, -5), pos.add(5, 5, 5)));
 					for (EntityLivingBase e : damageList) {
-						MotionHelper.addMotion(e, 0, 5, 0);
+						MotionHelper.addMotion(e, new Vec3d(0, 5, 0));
 					}
 				}
 				break;
 				case Acid: {
 					world.playEvent(2002, pos, 0x00FF00);
 					if (world.isAirBlock(pos))
-						world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
+						world.setBlockState(pos, VoidCraftFluids.acidFluidBlock.getDefaultState());
 				}
 				break;
 				case Void: {
@@ -127,6 +124,10 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		type = Type.values()[additionalData.readInt()];
+	}
+
+	public enum Type {
+		Normal, Fire, Freeze, Shock, Acid, Void
 	}
 
 }

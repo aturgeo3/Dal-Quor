@@ -3,6 +3,7 @@ package tamaized.voidcraft.common.starforge.effects.tool.tier3;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fluids.IFluidBlock;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectThreeByThree implements IStarForgeEffect {
@@ -86,7 +86,7 @@ public class StarForgeEffectThreeByThree implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return TranslateHelper.translate("voidcraft.VadeMecum.docs.title.starforge.effect.threeByThree");
+		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.threeByThree");
 	}
 
 	private void caseY(EntityPlayer player, World world, ItemStack tool, BlockPos pos) {

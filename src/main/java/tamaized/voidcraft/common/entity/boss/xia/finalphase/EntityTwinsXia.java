@@ -1,15 +1,13 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -18,35 +16,57 @@ import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
-import tamaized.voidcraft.network.IEntitySync;
+import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
+import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import tamaized.voidcraft.network.client.ClientPacketHandlerSheathe;
 import tamaized.voidcraft.registry.VoidCraftPotions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+public abstract class EntityTwinsXia extends EntityVoidNPC implements IAlternateBoss {
 
-public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySync, IAlternateBoss {
-
+	private static final DataParameter<Boolean> FROZEN = EntityDataManager.createKey(EntityTwinsXia.class, DataSerializers.BOOLEAN);
 	public final AlternateBossBarWrapper bossBarWrapper;
-	protected Entity watchedEntity;
-	protected List<Class> watchedClass = new ArrayList<>();
-	private boolean frozen = false;
-	private double maxWatchDistance = 16 * 8;
-	private EntityAIXia2Phase3 ai;
+	private EntityBossXia2 parent;
 
 	public EntityTwinsXia(World worldIn) {
 		super(worldIn);
 		isImmuneToFire = true;
+		canPush = false;
 		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, getBossBarColor(), BossInfo.Overlay.PROGRESS);
-		watchedClass.add(EntityPlayer.class);
-		watchNew();
+		moveHelper = new BossFlyNoclipMoveHelper(this) {
+			@Override
+			public void onUpdateMoveHelper() {
+				if (isFrozen()) {
+					setMoveTo(posX, posY, posZ, 0);
+					action = Action.WAIT;
+					motionX = 0;
+					motionY = 0;
+					motionZ = 0;
+				} else
+					super.onUpdateMoveHelper();
+			}
+		};
 	}
 
-	public EntityTwinsXia(World worldIn, EntityAIXia2Phase3 xiaAI) {
-		this(worldIn);
-		ai = xiaAI;
+	public final void setParent(EntityBossXia2 boss) {
+		parent = boss;
+	}
+
+	@Override
+	protected void initEntityAI() {
+		tasks.addTask(0, new AIChaseTarget(this, true) {
+			@Override
+			public boolean shouldExecute() {
+				return !isFrozen() && super.shouldExecute();
+			}
+		});
+
+		targetTasks.addTask(0, new EntityAIFindEntityNearestEntityNoSight(this, EntityPlayer.class));
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(FROZEN, false);
 	}
 
 	protected abstract BossInfo.Color getBossBarColor();
@@ -64,25 +84,14 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 		return getHealth() / getMaxHealth();
 	}
 
-	public boolean isFrozen() {
-		return frozen;
+	public final boolean isFrozen() {
+		return dataManager.get(FROZEN);
 	}
 
-	protected void setFrozen() {
+	private void setFrozen() {
 		setInvulnerable(true);
-		frozen = true;
+		dataManager.set(FROZEN, true);
 		setHealth(0);
-		sendPacketUpdates(this);
-	}
-
-	@Override
-	public void encodePacketData(ByteBuf stream) {
-		stream.writeBoolean(frozen);
-	}
-
-	@Override
-	public void decodePacketData(ByteBuf stream) {
-		frozen = stream.readBoolean();
 	}
 
 	@Override
@@ -99,118 +108,44 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IEntitySyn
 	@Override
 	protected void onDeathUpdate() {
 		if (!this.world.isRemote) {
-			if (ai != null && ai.getEntity() != null && ai.getEntity().getCurrentPhase() == 3) {
-				setFrozen();
-			} else {
+			if (parent == null || !parent.displayBossMode()) // Hacky yes, but I don't feel like dealing with this rn, will fix it later
 				setDead();
-			}
+			else if (!isFrozen())
+				setFrozen();
 		}
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3)
-				setDead();
-		}
-		if (!frozen) {
-			update();
-			if (!world.isRemote) {
-				updateMotion();
-				if (ticksExisted % 20 == 0)
-					watchNew();
-				updateLook();
-				// collideWithEntities(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
-				attackEntitiesInList(world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()));
-			}
-		} else {
-			if (!world.isRemote) {
+			if (isFrozen()) {
 				setHealth(getHealth() + 0.25F);
 				if (getHealth() >= getMaxHealth()) {
 					setHealth(getMaxHealth());
 					setInvulnerable(false);
-					frozen = false;
-					sendPacketUpdates(this);
+					dataManager.set(FROZEN, false);
 				}
+			} else {
+				update();
 			}
 		}
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		if (!isFrozen() && nbt.getBoolean("isFrozen"))
+			setFrozen();
+
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setBoolean("isFrozen", isFrozen());
+	}
+
 	protected abstract void update();
-
-	private void collideWithEntities(List<Entity> p_70970_1_) {
-		double d0 = (getEntityBoundingBox().minX + getEntityBoundingBox().maxX) / 2.0D;
-		double d1 = (getEntityBoundingBox().minZ + getEntityBoundingBox().maxZ) / 2.0D;
-
-		for (Entity entity : p_70970_1_) {
-			if (entity instanceof EntityLivingBase && !(entity instanceof EntityVoidNPC) && !(entity instanceof EntityWitherbrine)) {
-				double d2 = entity.posX - d0;
-				double d3 = entity.posZ - d1;
-				double d4 = d2 * d2 + d3 * d3;
-				entity.addVelocity(d2 / d4 * 4.0D, 0.20000000298023224D, d3 / d4 * 4.0D);
-			}
-		}
-	}
-
-	private void attackEntitiesInList(List<Entity> p_70971_1_) {
-		for (Entity entity : p_70971_1_) {
-			if (entity instanceof EntityLivingBase && !(entity instanceof EntityVoidNPC)) {
-				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
-			}
-		}
-	}
-
-	private void updateLook() {
-		if (watchedEntity != null) {
-			getLookHelper().setLookPosition(watchedEntity.posX, watchedEntity.posY + (double) watchedEntity.getEyeHeight(), watchedEntity.posZ, 10.0F, (float) getVerticalFaceSpeed());
-			double d0 = watchedEntity.posX - posX;
-			double d2 = watchedEntity.posZ - posZ;
-			float f = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-			float f3 = MathHelper.wrapDegrees(f - rotationYaw);
-			rotationYaw = rotationYaw + f3;
-		}
-	}
-
-	private void watchNew() {
-		List<Entity> list = new ArrayList<>();
-		for (Class c : watchedClass) {
-			list.addAll(world.getEntitiesWithinAABB(c, getEntityBoundingBox().grow(maxWatchDistance, 64.0D, maxWatchDistance)));
-		}
-		Random rand = world.rand;
-		watchedEntity = list.size() > 0 ? list.get(rand.nextInt(list.size())) : null;
-	}
-
-	private void updateMotion() {
-		if (watchedEntity == null)
-			return;
-		double x = posX;
-		double y = posY;
-		double z = posZ;
-
-		double px = watchedEntity.posX;
-		double py = watchedEntity.posY;
-		double pz = watchedEntity.posZ;
-
-		double dx;
-		double dy;
-		double dz;
-
-		double moveSpeed = getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-
-		dx = px - x;
-		dx = dx > moveSpeed ? moveSpeed : dx;
-		dx = dx < -moveSpeed ? -moveSpeed : dx;
-
-		dy = py - y;
-		dy = dy > moveSpeed ? moveSpeed : dy;
-		dy = dy < -moveSpeed ? -moveSpeed : dy;
-
-		dz = pz - z;
-		dz = dz > moveSpeed ? moveSpeed : dz;
-		dz = dz < -moveSpeed ? -moveSpeed : dz;
-
-		move(MoverType.SELF, dx, dy, dz);
-	}
 
 }

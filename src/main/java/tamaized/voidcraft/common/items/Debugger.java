@@ -1,5 +1,6 @@
 package tamaized.voidcraft.common.items;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,12 +11,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
 import tamaized.voidcraft.common.world.SchematicLoader;
 import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class Debugger extends TamItem {
@@ -26,125 +26,31 @@ public class Debugger extends TamItem {
 		super(tab, n, maxStackSize);
 	}
 
-	/**
-	 * Called when a Block is right-clicked with this Item
-	 */
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			// EntityCompanionFireElemental fireElemental = new EntityCompanionFireElemental(worldIn);
-			// fireElemental.setPositionAndUpdate(pos.getX(), pos.getY() + 1, pos.getZ());
-			// fireElemental.tame(playerIn);
-			// worldIn.spawnEntity(fireElemental);
-			// worldIn.spawnEntityInWorld(new EntityLichInferno(worldIn, pos, 6));
-			// EntityPig pig = new EntityPig(worldIn);
-			// pig.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-			// worldIn.spawnEntity(pig);
-			// EntityGhostPlayerBase entity = EntityGhostPlayerBase.newInstance(worldIn, PlayerNameAlias.Soaryn, false, playerIn, 20*30);
-			// EntityHerobrineCreeper entity = new EntityHerobrineCreeper(worldIn);
-			// entity.setPositionAndRotation(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
-			// entity.rotationYawHead = entity.rotationYaw = entity.prevRotationYaw = entity.prevRotationYawHead = entity.prevRenderYawOffset = entity.renderYawOffset = 90;
-			// EntityBossXia2 entity = new EntityBossXia2(worldIn, new Xia2BattleHandler());
-			// entity.setPositionAndUpdate(playerIn.posX, playerIn.posY + 5, playerIn.posZ);
-			// EntitySpellImplosion entity = new EntitySpellImplosion(worldIn);
-			//			EntityBossXia entity = new EntityBossXia(worldIn);
-			//			EntityChainedSkull entity = new EntityChainedSkull(worldIn);
-			//			entity.setPositionAndUpdate(pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F);
-			//			worldIn.spawnEntity(entity);
-			// voidCraft.fluids.acidFluidBlock.place(worldIn, pos.up(), new FluidStack(voidCraft.fluids.acidFluid, Fluid.BUCKET_VOLUME), true);
-			// worldIn.setBlockState(pos.up(), VoidCraft.blocks.AIBlock.getDefaultState());
-			//			 ((TileEntityAIBlock) worldIn.getTileEntity(pos.up())).setFake();
-			//			if (worldIn.getTileEntity(pos) instanceof TileEntityAIBlock)
-			//				((TileEntityAIBlock) (worldIn.getTileEntity(pos))).updateState();
+			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-		if (world.isRemote) {
-			// BGMusic.StopMusic();
-			// Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMusicRecord(VoidSoundEvents.MusicSoundEvents.mcMusic_end));
-			return super.onItemRightClick(world, player, hand);
+		if (!world.isRemote) {
+			/*EntityDolXia entity = new EntityDolXia(world);
+			entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+			world.spawnEntity(entity);
+			new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand));*/
+			if (world.provider instanceof WorldProviderXia)
+				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
 		}
-		// EntityWitherbrine wither = new EntityWitherbrine(worldIn);
-		// wither.setPositionAndUpdate(playerIn.posX, playerIn.posY, playerIn.posZ);
-		// wither.ignite();
-		// worldIn.spawnEntity(wither);
-		// EntityDragonXia dragon = new EntityDragonXia(worldIn);
-		// dragon.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
-		// worldIn.spawnEntity(dragon);
-		// EntityDolXia dol = new EntityDolXia(worldIn);
-		// dol.setPositionAndUpdate(playerIn.posX, playerIn.posY + 20, playerIn.posZ);
-		// worldIn.spawnEntity(dol);
-		// EntityZolXia entity = new EntityZolXia(worldIn);
-		// EntityLordOfBlades entity = new EntityLordOfBlades(world);
-		//		 entity.setPositionAndUpdate(player.posX, player.posY + 20, player.posZ);
-		//		 world.spawnEntity(entity);
-		// entity.start();
-
-		// VoidCraft.instance.VoidTickEvent.dream(player);
-
-//				IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-//				cap.clearCategories();
-		//		cap.addCategory(player, IVadeMecumCapability.Category.Shock);
-		//		cap.addCategory(player, IVadeMecumCapability.Category.Freeze);
-		//		cap.addCategory(player, IVadeMecumCapability.Category.AcidSpray);
-		//		cap.addCategory(player, IVadeMecumCapability.Category.Flame);
-		//		cap.addCategory(player, IVadeMecumCapability.Category.Voice);
-//				 for (IVadeMecumCapability.Category cat : IVadeMecumCapability.Category.values())
-//				 cap.addCategory(player, cat);
-		//		 cap.removeCategory(IVadeMecumCapability.Category.TotalControl);
-		//		 cap.removeCategory(IVadeMecumCapability.Category.Dreams);
-
-		// IVoidicInfusionCapability cap = player.getCapability(CapabilityList.VOIDICINFUSION, null);
-		// cap.setInfusion(5999);
-		// if (cap != null) cap.setXiaDefeats(0);
-		//						if (world.provider instanceof WorldProviderXia) ((WorldProviderXia) world.provider).getXiaCastleHandler().start();
-//		if (world.provider instanceof WorldProviderXia)
-			((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
-		// FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-
-		// ItemStack newStack = new ItemStack(voidCraft.tools.starforgedPickaxe);
-		// IStarForgeCapability cap = newStack.getCapability(CapabilityList.STARFORGE, null);
-		// cap.addEffect(StarForgeEffectList.haste);
-		// cap.addEffect(StarForgeEffectList.fortune);
-		// cap.addEffect(StarForgeEffectList.threeByThree);
-		// playerIn.inventory.addItemStackToInventory(newStack);
-
-		// VoidCraft.reloadRitualList();
-		// IVadeMecumCapability cap = playerIn.getCapability(CapabilityList.VADEMECUM, null);
-		// if (cap != null) cap.clearCategories();
-
-		// playerIn.clearActivePotions();
-		// playerIn.addPotionEffect(new PotionEffect(voidCraft.potions.frostSheathe, 20 * 90));
-		// Vec3d vec = playerIn.getLook(1.0f);
-		// EntityHerobrineFireball entity = new EntityHerobrineFireball(worldIn, playerIn, vec.xCoord, vec.yCoord, vec.zCoord);
-		// ProjectileDisintegration entity = new ProjectileDisintegration(worldIn, playerIn, playerIn.posX, playerIn.posY, playerIn.posZ);
-		//		EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(11), false);
-		//		entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-//				for (int i = 0; i < ContributorHandler.skinList.size(); i++) {
-//					EntityGhostPlayerBase entity = EntityGhostPlayer.newInstance(world, SkinHandler.getUUID(i), false);
-//					entity.setPositionAndUpdate(player.getPosition().getX() + (2 * i), player.getPosition().getY(), player.getPosition().getZ());
-//					world.spawnEntity(entity);
-//				}
-		//		for (int y = 255; y >= 0; y--)
-		//			for (int x = 15; x >= 0; x--)
-		//				for (int z = 15; z >= 0; z--)
-		//					world.setBlockToAir(new BlockPos(x, y, z).add(player.posX, 0, player.posZ));
-		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()+1);
-		// playerIn.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20 * 20));
-		// playerIn.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(playerIn.getMaxHealth()-20);
-
-		//		System.out.println(new ModelResourceLocation(getRegistryName(), "inventory"));
-
 		return super.onItemRightClick(world, player, hand);
 
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack p_77624_1_, EntityPlayer p_77624_2_, List p_77624_3_, boolean p_77624_4_) {
-		p_77624_3_.add(TextFormatting.DARK_PURPLE + "Debug Tool");
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(TextFormatting.DARK_PURPLE + "Dev Tool");
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
-
 }

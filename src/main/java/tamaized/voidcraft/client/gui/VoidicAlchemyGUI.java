@@ -3,9 +3,9 @@ package tamaized.voidcraft.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidicAlchemyContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
@@ -51,17 +51,17 @@ public class VoidicAlchemyGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.alchemy.title");
+		String text = I18n.format("voidcraft.gui.alchemy.title");
 		this.fontRenderer.drawString(text, this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
-		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
-		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 65, 0xFF0000);
+		text = I18n.format("voidcraft.gui.misc.power") + ":";
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text)) - 60, this.ySize / 2 - 65, 0xFF0000);
 		text = te.getPowerAmount() + "/";
-		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 55, 0xFF0000);
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text)) - 60, this.ySize / 2 - 55, 0xFF0000);
 		text = "" + te.getMaxPower();
-		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text) / 1) - 60, this.ySize / 2 - 45, 0xFF0000);
-		text = TranslateHelper.translate("voidcraft.gui.misc.owner") + ":";
+		this.fontRenderer.drawString(text, (this.xSize / 2 - this.fontRenderer.getStringWidth(text)) - 60, this.ySize / 2 - 45, 0xFF0000);
+		text = I18n.format("voidcraft.gui.misc.owner") + ":";
 		this.fontRenderer.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 65, 0xFF0000);
-		text = te.getOwnerName().isEmpty() ? TranslateHelper.translate("voidcraft.gui.misc.none") : te.getOwnerName();
+		text = te.getOwnerName().isEmpty() ? I18n.format("voidcraft.gui.misc.none") : te.getOwnerName();
 		this.fontRenderer.drawString(text, (xSize / 2) + 60, this.ySize / 2 - 55, 0xFF0000);
 	}
 

@@ -9,13 +9,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class VadeMecumGUI extends GuiScreen {
 
-	public static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/VadeMecum.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/VadeMecum.png");
 	private final EntityPlayer player;
 	private int vadeW;
 	private int vadeH;
@@ -114,8 +114,8 @@ public class VadeMecumGUI extends GuiScreen {
 		button_entryBack = addButton(new OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = addButton(new OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
 		button_largeBack = addButton(new LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY + vadeH - 2/* vadeY + 10 */));
-		button_spells = addButton(new FullButton(this, TranslateHelper.translate("voidcraft.gui.misc.spells"), getButtonID(Button.WordsOfPower), vadeX + 42, vadeY + vadeH - 3));
-		button_infusion = addButton(new FullButton(this, TranslateHelper.translate("voidcraft.gui.misc.infusion"), getButtonID(Button.Infusion), vadeX + 82, vadeY + vadeH - 3));
+		button_spells = addButton(new FullButton(this, I18n.format("voidcraft.gui.misc.spells"), getButtonID(Button.WordsOfPower), vadeX + 42, vadeY + vadeH - 3));
+		button_infusion = addButton(new FullButton(this, I18n.format("voidcraft.gui.misc.infusion"), getButtonID(Button.Infusion), vadeX + 82, vadeY + vadeH - 3));
 		updateButtons();
 	}
 
@@ -150,7 +150,7 @@ public class VadeMecumGUI extends GuiScreen {
 			sendLastEntryPacket(eName + ":" + pageNumber);
 	}
 
-	public void nextPage() {
+	private void nextPage() {
 		if (pageNumber + 2 < entry.getPageLength(this)) {
 			pageNumber += 2;
 			if (pageNumber >= entry.getPageLength(this))
@@ -159,7 +159,7 @@ public class VadeMecumGUI extends GuiScreen {
 		}
 	}
 
-	public void prevPage() {
+	private void prevPage() {
 		if (pageNumber > 0) {
 			pageNumber -= 2;
 			if (pageNumber < 0)
@@ -256,9 +256,9 @@ public class VadeMecumGUI extends GuiScreen {
 			entry.render(this, fontRenderer, mouseX, mouseY, vadeX, vadeY, pageNumber);
 		}
 		if (button_entryBack != null && button_entryBack.visible)
-			drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
+			drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
 		if (button_credits != null && button_credits.visible)
-			drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
+			drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (!renderStackHover.isEmpty()) {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = ItemStack.EMPTY;
@@ -317,7 +317,7 @@ public class VadeMecumGUI extends GuiScreen {
 	static class ArrowButton extends GuiButton {
 		private final boolean isForward;
 
-		public ArrowButton(int id, int x, int y, boolean forward) {
+		ArrowButton(int id, int x, int y, boolean forward) {
 			super(id, x, y, 23, 13, "");
 			isForward = forward;
 		}
@@ -349,7 +349,7 @@ public class VadeMecumGUI extends GuiScreen {
 	@SideOnly(Side.CLIENT)
 	static class LargeArrowButton extends GuiButton {
 
-		public LargeArrowButton(int id, int x, int y) {
+		LargeArrowButton(int id, int x, int y) {
 			super(id, x, y, 23, 13, "");
 		}
 
@@ -379,7 +379,7 @@ public class VadeMecumGUI extends GuiScreen {
 		public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/button_full.png");
 		private final VadeMecumGUI parent;
 
-		public FullButton(VadeMecumGUI gui, String text, int id, int x, int y) {
+		FullButton(VadeMecumGUI gui, String text, int id, int x, int y) {
 			super(id, x, y, 40, 14, text);
 			parent = gui;
 		}
@@ -411,7 +411,7 @@ public class VadeMecumGUI extends GuiScreen {
 		private final boolean isForward;
 		private final VadeMecumGUI parent;
 
-		public OverlayButton(VadeMecumGUI gui, int id, int x, int y, boolean forward) {
+		OverlayButton(VadeMecumGUI gui, int id, int x, int y, boolean forward) {
 			super(id, x, y, 20, 198, "");
 			parent = gui;
 			isForward = forward;

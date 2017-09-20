@@ -3,20 +3,17 @@ package tamaized.voidcraft.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidicAnchorContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
 
 @SideOnly(Side.CLIENT)
 public class VoidicAnchorGUI extends GuiContainer {
-
-	public static int gleft;
-	public static int gtop;
 
 	public TileEntityVoidicAnchor te;
 
@@ -27,8 +24,6 @@ public class VoidicAnchorGUI extends GuiContainer {
 		te = tileEntity;
 		xSize = 347;
 		ySize = 320;
-		gleft = guiLeft;
-		gtop = guiTop;
 	}
 
 	@Override
@@ -58,17 +53,17 @@ public class VoidicAnchorGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.anchor.title");
+		String text = I18n.format("voidcraft.gui.anchor.title");
 		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 
-		text = TranslateHelper.translate("voidcraft.gui.misc.fluid") + ":";
+		text = I18n.format("voidcraft.gui.misc.fluid") + ":";
 		fontRenderer.drawString(text, (xSize) - 132, ySize - 230, 0x7700FF);
 		text = te.getFluidAmount() + "";
 		fontRenderer.drawString(text, (xSize) - 132, ySize - 220, 0x7700FF);
 		text = "/" + te.getMaxFluidAmount() + "mb";
 		fontRenderer.drawString(text, (xSize) - 132, ySize - 210, 0x7700FF);
 
-		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
+		text = I18n.format("voidcraft.gui.misc.power") + ":";
 		fontRenderer.drawString(text, (xSize - fontRenderer.getStringWidth(text)) - 226, ySize - 230, 0xFF0000);
 		text = te.getPowerAmount() + "";
 		fontRenderer.drawString(text, ((xSize) - (fontRenderer.getStringWidth(text))) - 226, ySize - 220, 0xFF0000);

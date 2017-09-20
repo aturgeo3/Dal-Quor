@@ -2,12 +2,13 @@ package tamaized.voidcraft.common.vademecum;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
+import tamaized.voidcraft.registry.VoidCraftTERecipes;
 
 public class VadeMecumCraftingAlchemy implements IVadeMecumCrafting {
 
@@ -18,14 +19,14 @@ public class VadeMecumCraftingAlchemy implements IVadeMecumCrafting {
 	private final ItemStack output;
 
 	public VadeMecumCraftingAlchemy(String title, ItemStack output) {
-		this.title = TranslateHelper.translate(title);
-		input = VoidCraft.teRecipes.alchemy.getInput(output);
+		this.title = I18n.format(title);
+		input = VoidCraftTERecipes.alchemy.getInput(output);
 		this.output = output;
 	}
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my) {
-		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65, y, 0x000000);
+		VadeMecumGUI.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65, y, 0x000000);
 		GlStateManager.color(1, 1, 1, 1);
 		gui.mc.getTextureManager().bindTexture(TEXTURE);
 		gui.drawTexturedModalRect(x, y + 35, 128, 128, 0, 0, 256, 256);

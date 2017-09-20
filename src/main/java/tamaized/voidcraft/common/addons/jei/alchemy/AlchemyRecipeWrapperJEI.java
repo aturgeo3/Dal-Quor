@@ -2,7 +2,7 @@ package tamaized.voidcraft.common.addons.jei.alchemy;
 
 import mezz.jei.api.gui.IGuiIngredientGroup;
 import net.minecraft.client.Minecraft;
-import tamaized.tammodized.common.helper.TranslateHelper;
+import net.minecraft.client.resources.I18n;
 import tamaized.voidcraft.common.addons.jei.VoidCraftRecipeWrapperJEI;
 import tamaized.voidcraft.common.machina.addons.TERecipesAlchemy.AlchemyRecipe;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
@@ -15,8 +15,8 @@ public class AlchemyRecipeWrapperJEI extends VoidCraftRecipeWrapperJEI<AlchemyRe
 
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		minecraft.fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.jei.alch.research"), -40, 0, 0x000000);
-		minecraft.fontRenderer.drawString(getRecipe().getCategory() == null ? TranslateHelper.translate("voidcraft.gui.misc.none") : TranslateHelper.translate(VadeMecumWordsOfPower.getCategoryData(getRecipe().getCategory()).getName()), -40, 10, 0x000000);
+		minecraft.fontRenderer.drawString(I18n.format("voidcraft.gui.jei.alch.research"), -40, 0, 0x000000);
+		minecraft.fontRenderer.drawString(getRecipe().getCategory() == null ? I18n.format("voidcraft.gui.misc.none") : I18n.format(VadeMecumWordsOfPower.getCategoryData(getRecipe().getCategory()).getName()), -40, 10, 0x000000);
 		super.drawInfo(minecraft, recipeWidth, recipeHeight, mouseX, mouseY);
 	}
 

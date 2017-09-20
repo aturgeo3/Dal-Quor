@@ -135,6 +135,11 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 	}
 
 	@Override
+	public boolean isImmuneToExplosions() {
+		return true;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setVelocity(double x, double y, double z) {
 		if (canMove)

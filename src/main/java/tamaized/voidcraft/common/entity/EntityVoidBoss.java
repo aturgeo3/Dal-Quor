@@ -70,6 +70,11 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		return chunkLoadTicket;
 	}
 
+	@Override
+	public boolean isImmuneToExplosions() {
+		return true;
+	}
+
 	@Deprecated
 	protected void addDefaultTasks() {
 		for (Class c : getFilters())

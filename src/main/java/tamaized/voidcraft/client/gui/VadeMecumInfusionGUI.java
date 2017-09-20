@@ -5,7 +5,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import tamaized.tammodized.common.helper.TranslateHelper;
+import net.minecraft.client.resources.I18n;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
@@ -17,7 +17,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	private static final int BUTTON_ABILITY = 2;
 	private final IVadeMecumCapability capability;
 
-	public VadeMecumInfusionGUI(IVadeMecumCapability cap) {
+	VadeMecumInfusionGUI(IVadeMecumCapability cap) {
 		capability = cap;
 	}
 
@@ -25,8 +25,8 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 
-		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, TranslateHelper.translate("voidcraft.gui.misc.back")));
-		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, TranslateHelper.translate("voidcraft.gui.misc.close")));
+		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, I18n.format("voidcraft.gui.misc.back")));
+		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, I18n.format("voidcraft.gui.misc.close")));
 
 		int xLoc = (width / 2) - 55;
 		int yLoc = 28;
@@ -78,7 +78,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
+		drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
 	}
 
 	public class PassiveButton extends GuiButton {
@@ -86,7 +86,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 		private final IVadeMecumCapability.Passive passive;
 		private final IVadeMecumCapability data;
 
-		public PassiveButton(IVadeMecumCapability cap, int buttonId, int x, int y, IVadeMecumCapability.Passive thePassive) {
+		PassiveButton(IVadeMecumCapability cap, int buttonId, int x, int y, IVadeMecumCapability.Passive thePassive) {
 			super(buttonId, x, y, 110, 18, "");
 			data = cap;
 			passive = thePassive;
@@ -122,7 +122,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 
 				drawRect(x, y, x + width, y + height, j);
 				GlStateManager.pushMatrix();
-				fontrenderer.drawString(TranslateHelper.translate(IVadeMecumCapability.getPassiveName(passive)), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
+				fontrenderer.drawString(I18n.format(IVadeMecumCapability.getPassiveName(passive)), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
 				GlStateManager.popMatrix();
 			}
 		}

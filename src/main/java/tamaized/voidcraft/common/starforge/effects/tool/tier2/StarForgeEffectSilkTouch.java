@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.starforge.effects.tool.tier2;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Enchantments;
@@ -8,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectSilkTouch implements IStarForgeEffect {
@@ -56,7 +56,7 @@ public class StarForgeEffectSilkTouch implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return TranslateHelper.translate("voidcraft.VadeMecum.docs.title.starforge.effect.silkTouch");
+		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.silkTouch");
 	}
 
 }

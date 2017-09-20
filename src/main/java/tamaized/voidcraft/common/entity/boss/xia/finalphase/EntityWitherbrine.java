@@ -39,25 +39,20 @@ import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.AlternateBossBarWrapper;
 import tamaized.voidcraft.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
-import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IAlternateBoss {
 
-	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[]{FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
-	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.<Integer>createKey(EntityWitherbrine.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> INVULNERABILITY_TIME = EntityDataManager.createKey(EntityWitherbrine.class, DataSerializers.VARINT);
 	private final float[] xRotationHeads = new float[2];
 	private final float[] yRotationHeads = new float[2];
-	private final float[] xRotOHeads = new float[2];
-	private final float[] yRotOHeads = new float[2];
 	private final int[] nextHeadUpdate = new int[2];
 	private final int[] idleHeadUpdates = new int[2];
 	/**
@@ -65,16 +60,9 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 */
 	private int blockBreakCounter;
 	// private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
-	private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>() {
-		@Override
-		public boolean apply(@Nullable Entity p_apply_1_) {
-			return !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidBoss) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
-		}
-	};
+	private static final Predicate<Entity> NOT_UNDEAD = p_apply_1_ -> !(p_apply_1_ instanceof EntityDragonOld) && !(p_apply_1_ instanceof EntityVoidNPC) && p_apply_1_ instanceof EntityLivingBase && ((EntityLivingBase) p_apply_1_).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && ((EntityLivingBase) p_apply_1_).attackable();
 
 	public final AlternateBossBarWrapper bossBarWrapper;
-
-	private EntityAIXia2Phase3 ai;
 
 	private Ticket chunkLoadTicket;
 
@@ -89,9 +77,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		bossBarWrapper = new RenderAlternateBossBars.AlternateBossBarWrapper(this, BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 	}
 
-	public EntityWitherbrine(World world, EntityAIXia2Phase3 entityAIXia2Phase3) {
-		this(world);
-		ai = entityAIXia2Phase3;
+	public final void setKeepLoaded(){
 		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
 		if (chunkLoadTicket != null)
 			chunkLoadTicket.bindEntity(this);
@@ -110,17 +96,17 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, false, false, NOT_UNDEAD));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(FIRST_HEAD_TARGET, Integer.valueOf(0));
-		this.dataManager.register(SECOND_HEAD_TARGET, Integer.valueOf(0));
-		this.dataManager.register(THIRD_HEAD_TARGET, Integer.valueOf(0));
-		this.dataManager.register(INVULNERABILITY_TIME, Integer.valueOf(0));
+		this.dataManager.register(FIRST_HEAD_TARGET, 0);
+		this.dataManager.register(SECOND_HEAD_TARGET, 0);
+		this.dataManager.register(THIRD_HEAD_TARGET, 0);
+		this.dataManager.register(INVULNERABILITY_TIME, 0);
 	}
 
 	public static void registerFixesWither(DataFixer fixer) {
@@ -144,9 +130,9 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 		super.readEntityFromNBT(compound);
 		this.setInvulTime(compound.getInteger("Invul"));
 
-		if (this.hasCustomName()) {
+		/*if (this.hasCustomName()) {
 			// this.bossInfo.setName(this.getDisplayName());
-		}
+		}*/
 	}
 
 	@Override
@@ -176,10 +162,6 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 			for (int x = -1; x <= 1; x++)
 				for (int z = -1; z <= 1; z++)
 					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromChunkCoords((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
-		}
-		if (!world.isRemote) {
-			if (ai == null || ai.getEntity() == null || ai.getEntity().getCurrentPhase() != 3)
-				setDead();
 		}
 		this.motionY *= 0.6000000238418579D;
 
@@ -219,11 +201,6 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 
 		super.onLivingUpdate();
 
-		for (int i = 0; i < 2; ++i) {
-			this.yRotOHeads[i] = this.yRotationHeads[i];
-			this.xRotOHeads[i] = this.xRotationHeads[i];
-		}
-
 		for (int j = 0; j < 2; ++j) {
 			int k = this.getWatchedTargetId(j + 1);
 			Entity entity1 = null;
@@ -255,17 +232,17 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 			double d10 = this.getHeadX(l);
 			double d2 = this.getHeadY(l);
 			double d4 = this.getHeadZ(l);
-			this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d10 + this.rand.nextGaussian() * 0.30000001192092896D, d2 + this.rand.nextGaussian() * 0.30000001192092896D, d4 + this.rand.nextGaussian() * 0.30000001192092896D, 0.0D, 0.0D, 0.0D, new int[0]);
+			this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d10 + this.rand.nextGaussian() * 0.30000001192092896D, d2 + this.rand.nextGaussian() * 0.30000001192092896D, d4 + this.rand.nextGaussian() * 0.30000001192092896D, 0.0D, 0.0D, 0.0D);
 
 			if (flag && this.world.rand.nextInt(4) == 0) {
-				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, d10 + this.rand.nextGaussian() * 0.30000001192092896D, d2 + this.rand.nextGaussian() * 0.30000001192092896D, d4 + this.rand.nextGaussian() * 0.30000001192092896D, 0.699999988079071D, 0.699999988079071D, 0.5D, new int[0]);
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, d10 + this.rand.nextGaussian() * 0.30000001192092896D, d2 + this.rand.nextGaussian() * 0.30000001192092896D, d4 + this.rand.nextGaussian() * 0.30000001192092896D, 0.699999988079071D, 0.699999988079071D, 0.5D);
 			}
 		}
 
 		if (this.getInvulTime() > 0) {
 			motionY = 0;
 			for (int i1 = 0; i1 < 3; ++i1) {
-				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + this.rand.nextGaussian(), this.posY + (double) (this.rand.nextFloat() * 3.3F), this.posZ + this.rand.nextGaussian(), 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D, new int[0]);
+				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + this.rand.nextGaussian(), this.posY + (double) (this.rand.nextFloat() * 3.3F), this.posZ + this.rand.nextGaussian(), 0.699999988079071D, 0.699999988079071D, 0.8999999761581421D);
 			}
 		}
 	}
@@ -325,10 +302,10 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 							this.updateWatchedTargetId(i, 0);
 						}
 					} else {
-						List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.<EntityLivingBase>and(NOT_UNDEAD, EntitySelectors.NOT_SPECTATING));
+						List<EntityLivingBase> list = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(20.0D, 8.0D, 20.0D), Predicates.and(NOT_UNDEAD, EntitySelectors.NOT_SPECTATING));
 
 						for (int j2 = 0; j2 < 10 && !list.isEmpty(); ++j2) {
-							EntityLivingBase entitylivingbase = (EntityLivingBase) list.get(this.rand.nextInt(list.size()));
+							EntityLivingBase entitylivingbase = list.get(this.rand.nextInt(list.size()));
 
 							if (entitylivingbase != this && entitylivingbase.isEntityAlive() && this.canEntityBeSeen(entitylivingbase)) {
 								if (entitylivingbase instanceof EntityPlayer) {
@@ -357,11 +334,6 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 			if (this.blockBreakCounter > 0) {
 				--this.blockBreakCounter;
 
-				if (this.blockBreakCounter == 0 && this.world.getGameRules().getBoolean("mobGriefing")) {
-					/*
-					 * int i1 = MathHelper.floor(this.posY); int l1 = MathHelper.floor(this.posX); int i2 = MathHelper.floor(this.posZ); boolean flag = false; for (int k2 = -1; k2 <= 1; ++k2) { for (int l2 = -1; l2 <= 1; ++l2) { for (int j = 0; j <= 3; ++j) { int i3 = l1 + k2; int k = i1 + j; int l = i2 + l2; BlockPos blockpos = new BlockPos(i3, k, l); IBlockState iblockstate = this.world.getBlockState(blockpos); Block block = iblockstate.getBlock(); if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this)) { flag = this.world.destroyBlock(blockpos, true) || flag; } } } } if (flag) { this.world.playEvent((EntityPlayer) null, 1022, new BlockPos(this), 0); }
-					 */
-				}
 			}
 
 			if (this.ticksExisted % 20 == 0) {
@@ -387,6 +359,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	/**
 	 * Sets the Entity inside a web block.
 	 */
+	@Override
 	public void setInWeb() {
 	}
 
@@ -454,7 +427,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	 * Launches a Wither skull toward (par2, par4, par6)
 	 */
 	private void launchWitherSkullToCoords(int p_82209_1_, double x, double y, double z, boolean invulnerable) {
-		this.world.playEvent((EntityPlayer) null, 1024, new BlockPos(this), 0);
+		this.world.playEvent(null, 1024, new BlockPos(this), 0);
 		double d0 = this.getHeadX(p_82209_1_);
 		double d1 = this.getHeadY(p_82209_1_);
 		double d2 = this.getHeadZ(p_82209_1_);
@@ -579,25 +552,25 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	}
 
 	public int getInvulTime() {
-		return ((Integer) this.dataManager.get(INVULNERABILITY_TIME)).intValue();
+		return this.dataManager.get(INVULNERABILITY_TIME);
 	}
 
 	public void setInvulTime(int time) {
-		this.dataManager.set(INVULNERABILITY_TIME, Integer.valueOf(time));
+		this.dataManager.set(INVULNERABILITY_TIME, time);
 	}
 
 	/**
 	 * Returns the target entity ID if present, or -1 if not @param par1 The target offset, should be from 0-2
 	 */
 	public int getWatchedTargetId(int head) {
-		return ((Integer) this.dataManager.get(HEAD_TARGETS[head])).intValue();
+		return this.dataManager.get(HEAD_TARGETS[head]);
 	}
 
 	/**
 	 * Updates the target entity ID
 	 */
 	public void updateWatchedTargetId(int targetOffset, int newId) {
-		this.dataManager.set(HEAD_TARGETS[targetOffset], Integer.valueOf(newId));
+		this.dataManager.set(HEAD_TARGETS[targetOffset], newId);
 	}
 
 	/**
@@ -629,7 +602,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	}
 
 	class AIDoNothing extends EntityAIBase {
-		public AIDoNothing() {
+		AIDoNothing() {
 			this.setMutexBits(7);
 		}
 

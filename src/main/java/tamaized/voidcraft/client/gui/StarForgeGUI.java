@@ -5,13 +5,13 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import org.lwjgl.input.Mouse;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.element.GUIElementList;
 import tamaized.voidcraft.client.gui.element.GUIListElement;
@@ -54,15 +54,10 @@ public class StarForgeGUI extends GuiContainer {
 		setupScroll();
 
 		buttonList.clear();
-		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, guiLeft + (xSize / 2) + 10, height - 102, 170, 20, TranslateHelper.translate("voidcraft.gui.misc.button.forge")));
+		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, guiLeft + (xSize / 2) + 10, height - 102, 170, 20, I18n.format("voidcraft.gui.misc.button.forge")));
 	}
 
 	private void setupScroll() {
-		// scroll = new GUIElementList(list, mc, 200, height, 32, height - 55 + 4, 36);
-		// scroll = new GUIElementList(list, mc, 100, 225, 10, 35, 25);
-		// scroll.setSlotXBoundsFromLeft(width - 190);
-		// scroll.registerScrollButtons(7, 8);
-		// height - 88 + 4
 		scroll = new GUIElementList(this, te.buildPossibleEffectList(), guiLeft + (xSize / 2) + 10, 40, 170, height - 110, 22);
 
 	}
@@ -146,7 +141,7 @@ public class StarForgeGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.starforge.title");
+		String text = I18n.format("voidcraft.gui.starforge.title");
 		this.fontRenderer.drawString(text, this.xSize / 3 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 	}
 

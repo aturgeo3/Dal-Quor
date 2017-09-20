@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import tamaized.voidcraft.common.entity.boss.dragon.EntityAbstractDragonOld;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 
+@Deprecated
 public class EntityDragonXia extends EntityAbstractDragonOld {
 
 	private EntityAIXia2Phase3 ai;

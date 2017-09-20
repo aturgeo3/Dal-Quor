@@ -39,11 +39,13 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	public EntityBossXia2(World par1World) {
 		super(par1World);
 		this.setInvulnerable(true);
+		canMove = false;
 	}
 
 	public EntityBossXia2(World world, Xia2BattleHandler handler) {
 		super(world, handler, false);
 		this.setInvulnerable(true);
+		canMove = false;
 	}
 
 	public void setSphereState(boolean state) {

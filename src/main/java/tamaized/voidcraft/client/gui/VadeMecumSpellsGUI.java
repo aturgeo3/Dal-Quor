@@ -10,7 +10,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.gui.container.VadeMecumSpellsContainer;
@@ -25,14 +24,12 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 	private static final int BUTTON_SPELL = 2;
 	private static final int BUTTON_ARROW_NEXT = 3;
 	private static final int BUTTON_ARROW_BACK = 4;
-	private final InventoryPlayer inv;
 	private final IVadeMecumCapability capability;
 	private int page;
 	private ItemStack renderStackHover = ItemStack.EMPTY;
 
 	public VadeMecumSpellsGUI(InventoryPlayer inventory, IVadeMecumCapability cap) {
 		super(new VadeMecumSpellsContainer(inventory, cap));
-		inv = inventory;
 		capability = cap;
 		page = cap.getPage();
 	}
@@ -121,7 +118,7 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		int i = this.guiLeft;
 		int j = this.guiTop;
-		drawCenteredString(fontRenderer, TranslateHelper.translate("voidcraft.gui.wordsofpower.title"), width / 2, 15, 16777215);
+		drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.wordsofpower.title"), width / 2, 15, 16777215);
 		this.mc.getTextureManager().bindTexture(TEXTURE);
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 		int xLoc = 0;
@@ -169,7 +166,7 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 		private final IVadeMecumCapability.Category spell;
 		private IVadeMecumCapability data;
 
-		public SpellButton(IVadeMecumCapability cap, int buttonId, int x, int y, IVadeMecumCapability.Category theSpell) {
+		SpellButton(IVadeMecumCapability cap, int buttonId, int x, int y, IVadeMecumCapability.Category theSpell) {
 			super(buttonId, x, y, 110, 18, "");
 			data = cap;
 			spell = theSpell;

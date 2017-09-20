@@ -1,55 +1,95 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import net.minecraft.entity.EntityLivingBase;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.World;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
 public class EntityZolXia extends EntityTwinsXia {
-
-	private int actionTick = 20 * 3;
 
 	public EntityZolXia(World worldIn) {
 		super(worldIn);
 		ignoreFrustumCheck = true;
 	}
 
-	public EntityZolXia(World world, EntityAIXia2Phase3 entityAIXia2Phase3) {
-		super(world, entityAIXia2Phase3);
+	@Override
+	protected void encodePacketData(ByteBuf stream) {
+
+	}
+
+	@Override
+	protected void decodePacketData(ByteBuf stream) {
+
+	}
+
+	@Override
+	protected void initEntityAI() {
+		super.initEntityAI();
+		tasks.addTask(1, new EntityZolXia.AICastLitBolt(this));
+	}
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
 	}
 
 	@Override
 	protected void update() {
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000000298023224D);
 		if (!world.isRemote) {
-			if (getActivePotionEffect(VoidCraft.potions.litSheathe) == null) {
+			if (getActivePotionEffect(VoidCraftPotions.litSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(VoidCraft.potions.litSheathe, 100));
-			}
-			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
-				double x = watchedEntity.posX;
-				double y = watchedEntity.posY;
-				double z = watchedEntity.posZ;
-				EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, x, y, z, false);
-				world.addWeatherEffect(entitylightningbolt);
+				addPotionEffect(new PotionEffect(VoidCraftPotions.litSheathe, 100));
 			}
 		}
 	}
 
 	@Override
 	public ITextComponent getAlternateBossName() {
-		return new TextComponentString("Zol");
+		return new TextComponentTranslation("entity.voidcraft.ZolXia.name");
 	}
 
 	@Override
 	protected Color getBossBarColor() {
 		return Color.WHITE;
+	}
+
+	static class AICastLitBolt extends EntityAIBase {
+
+		private final EntityZolXia boss;
+		private int tick = 0;
+
+		AICastLitBolt(EntityZolXia entity) {
+			boss = entity;
+			setMutexBits(2);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return tick > 0 && boss.getAttackTarget() != null && !boss.isFrozen();
+		}
+
+		@Override
+		public void startExecuting() {
+			tick = 20 + boss.getRNG().nextInt(60);
+		}
+
+		@Override
+		public void updateTask() {
+			if (boss.getAttackTarget() != null && tick-- <= 0) {
+				double x = boss.getAttackTarget().posX;
+				double y = boss.getAttackTarget().posY;
+				double z = boss.getAttackTarget().posZ;
+				EntityLightningBolt entitylightningbolt = new EntityLightningBolt(boss.world, x, y, z, false);
+				boss.world.addWeatherEffect(entitylightningbolt);
+			}
+		}
 	}
 
 }

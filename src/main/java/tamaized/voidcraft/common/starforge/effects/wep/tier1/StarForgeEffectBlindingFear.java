@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier1;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -9,7 +10,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectBlindingFear implements IStarForgeEffect {
@@ -59,7 +59,7 @@ public class StarForgeEffectBlindingFear implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return TranslateHelper.translate("voidcraft.VadeMecum.docs.title.starforge.effect.blindingFear");
+		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.blindingFear");
 	}
 
 }

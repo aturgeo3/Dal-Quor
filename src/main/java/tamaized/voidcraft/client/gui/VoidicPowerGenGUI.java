@@ -4,9 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidicPowerGenContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicPowerGen;
@@ -48,21 +48,22 @@ public class VoidicPowerGenGUI extends GuiContainer {
 		super.updateScreen();
 	}
 
+	@Override
 	public void actionPerformed(GuiButton button) {
 
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.gen.title");
+		String text = I18n.format("voidcraft.gui.gen.title");
 		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
-		text = TranslateHelper.translate("voidcraft.gui.misc.fluid") + ":";
+		text = I18n.format("voidcraft.gui.misc.fluid") + ":";
 		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 2) - 100, ySize / 2 - 65, 0x7700FF);
 		text = te.getFluidAmount() + "/";
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 55, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 85, ySize / 2 - 55, 0x7700FF);
 		text = "" + te.getMaxFluidAmount();
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 45, 0x7700FF);
-		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 85, ySize / 2 - 45, 0x7700FF);
+		text = I18n.format("voidcraft.gui.misc.power") + ":";
 		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 2) + 70, ySize / 2 - 65, 0xFF0000);
 		text = te.getPowerAmount() + "/";
 		fontRenderer.drawString(text, (xSize / 2) + 38, ySize / 2 - 55, 0xFF0000);

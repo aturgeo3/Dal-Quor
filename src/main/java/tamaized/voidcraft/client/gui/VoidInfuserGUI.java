@@ -3,20 +3,17 @@ package tamaized.voidcraft.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidInfuserContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidInfuser;
 
 @SideOnly(Side.CLIENT)
 public class VoidInfuserGUI extends GuiContainer {
-
-	public static int gleft;
-	public static int gtop;
 
 	public TileEntityVoidInfuser te;
 
@@ -27,8 +24,6 @@ public class VoidInfuserGUI extends GuiContainer {
 		te = tileEntity;
 		xSize = 347;
 		ySize = 320;
-		gleft = guiLeft;
-		gtop = guiTop;
 	}
 
 	@Override
@@ -57,14 +52,14 @@ public class VoidInfuserGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.infuser.title");
+		String text = I18n.format("voidcraft.gui.infuser.title");
 		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
-		text = TranslateHelper.translate("voidcraft.gui.misc.fluid") + ":";
+		text = I18n.format("voidcraft.gui.misc.fluid") + ":";
 		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 2) - 100, ySize / 2 - 65, 0x7700FF);
 		text = te.getFluidAmount() + "/";
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 55, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 85, ySize / 2 - 55, 0x7700FF);
 		text = "" + te.getMaxFluidAmount();
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 85, ySize / 2 - 45, 0x7700FF);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 85, ySize / 2 - 45, 0x7700FF);
 	}
 
 	@Override

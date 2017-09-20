@@ -287,6 +287,7 @@ public class VoidCraft extends TamModBase {
 		registerEntityWithEgg(EntityLordOfBlades.class, "LordOfBlades", this, modid, 250, 1, true, 0x777777, 0x000000);
 		registerEntityWithEgg(EntityVoidParrot.class, "VoidParrot", this, modid, 250, 1, true, 0x7700FF, 0x000000);
 		registerEntity(EntityChainedSkull.class, "ChainedSkull", this, modid, 250, 1, true);
+		registerEntity(EntityBlockSpell.class, "BlockSpell", this, modid, 250, 1, true);
 
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 

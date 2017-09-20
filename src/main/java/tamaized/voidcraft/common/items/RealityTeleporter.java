@@ -24,6 +24,7 @@ import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.items.inventory.InventoryItem;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityRealityTeleporter;
 import tamaized.voidcraft.common.voidicpower.VoidicPowerItem;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 public class RealityTeleporter extends VoidicPowerItem {
 
@@ -89,7 +90,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 
 			@Override
 			public boolean isItemValidForSlot(int index, ItemStack stack) {
-				return stack.isEmpty() ? false : stack.getItem() == Item.getItemFromBlock(VoidCraft.blocks.realityHole);
+				return !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.realityHole);
 			}
 
 			@Override
@@ -154,7 +155,7 @@ public class RealityTeleporter extends VoidicPowerItem {
 		InventoryItem inv = createInventory(stack);
 		ItemStack holes = inv.getStackInSlot(0);
 		IVoidicPowerCapability cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && !holes.isEmpty() && holes.getItem() == Item.getItemFromBlock(VoidCraft.blocks.realityHole)) {
+		if (!player.isSneaking() && cap != null && cap.getCurrentPower() >= useAmount() && !holes.isEmpty() && holes.getItem() == Item.getItemFromBlock(VoidCraftBlocks.realityHole)) {
 			activate(stack, player);
 			cap.drain(useAmount());
 			holes.shrink(1);

@@ -79,7 +79,7 @@ public class RenderChainedSkull extends Render<EntityChainedSkull> {
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder vertexbuffer = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
-			float f = Math.min(((float) entity.getTicks() + partialTicks) / (float)entity.maxTick(), 1);
+			float perc = Math.min(((float) entity.getTicks() + partialTicks) / (float) entity.maxTick(), 1);
 
 			Random random = new Random(432L);
 			GlStateManager.disableTexture2D();
@@ -91,17 +91,17 @@ public class RenderChainedSkull extends Render<EntityChainedSkull> {
 			GlStateManager.depthMask(false);
 			GlStateManager.pushMatrix();
 
-			for (int i = 0; (float) i < (f + f * f) / 2.0F * 60.0F; ++i) {
+			for (int i = 0; (float) i < (perc + perc * perc) / 2.0F * 60.0F; ++i) {
 				GlStateManager.rotate(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
 				GlStateManager.rotate(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
 				GlStateManager.rotate(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
 				GlStateManager.rotate(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
 				GlStateManager.rotate(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GlStateManager.rotate(random.nextFloat() * 360.0F + f * 90.0F, 0.0F, 0.0F, 1.0F);
-				float f2 = random.nextFloat() * 0.1F + 5.0F + (f * 10.0F);
-				float f3 = random.nextFloat() * 0.1F + 1.0F + (f * 10.0F);
+				GlStateManager.rotate(random.nextFloat() * 360.0F + perc * 90.0F, 0.0F, 0.0F, 1.0F);
+				float f2 = random.nextFloat() * 0.1F + 5.0F + (perc * 10.0F);
+				float f3 = random.nextFloat() * 0.1F + 1.0F + (perc * 10.0F);
 				vertexbuffer.begin(6, DefaultVertexFormats.POSITION_COLOR);
-				vertexbuffer.pos(0.0D, 0.0D, 0.0D).color(0, 0, 0, (int) (255.0F * (f))).endVertex();
+				vertexbuffer.pos(0.0D, 0.0D, 0.0D).color(0, 0, 0, (int) (255.0F * (perc))).endVertex();
 				vertexbuffer.pos(-0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(255, 0, 0, 0).endVertex();
 				vertexbuffer.pos(0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(255, 0, 0, 0).endVertex();
 				vertexbuffer.pos(0.0D, (double) f2, (double) (1.0F * f3)).color(255, 0, 0, 0).endVertex();

@@ -1,13 +1,13 @@
 package tamaized.voidcraft.common.starforge.effects.wep.tier2;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.common.starforge.effects.IStarForgeEffect;
 
 public class StarForgeEffectXiaBlessing implements IStarForgeEffect {
@@ -57,7 +57,7 @@ public class StarForgeEffectXiaBlessing implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return TranslateHelper.translate("voidcraft.VadeMecum.docs.title.starforge.effect.xiaBlessing");
+		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.xiaBlessing");
 	}
 
 }

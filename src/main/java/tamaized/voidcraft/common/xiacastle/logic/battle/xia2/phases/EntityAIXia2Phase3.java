@@ -38,11 +38,14 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	@Override
 	protected void postInit() {
 		if (!world.isRemote) {
-			dol = new EntityDolXia(world, this);
-			zol = new EntityZolXia(world, this);
+			dol = new EntityDolXia(world);
+			zol = new EntityZolXia(world);
 			dragon = new EntityDragonXia(world, this);
-			wither = new EntityWitherbrine(world, this);
+			wither = new EntityWitherbrine(world);
 			wither.ignite();
+
+			dol.setParent(getEntity());
+			zol.setParent(getEntity());
 
 			dol.setPositionAndUpdate(getEntity().posX - 15, getEntity().posY, getEntity().posZ);
 			zol.setPositionAndUpdate(getEntity().posX + 15, getEntity().posY, getEntity().posZ);

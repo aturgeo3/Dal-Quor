@@ -223,6 +223,7 @@ public class XiaCastleLogicHandler {
 		start();
 		twins.setDone();
 		herobrine.setDone();
+		xia.setDone();
 	}
 
 	private void setupPos() {

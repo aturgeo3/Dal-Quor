@@ -4,19 +4,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.voidicPower.IVoidicPowerCapability;
 import tamaized.voidcraft.common.gui.container.RealityTeleporterContainer;
 import tamaized.voidcraft.common.items.RealityTeleporter;
-import tamaized.voidcraft.common.items.inventory.InventoryItem;
 import tamaized.voidcraft.network.server.ServerPacketHandlerLinkClear;
 
 @SideOnly(Side.CLIENT)
@@ -26,7 +25,6 @@ public class RealityTeleporterGUI extends GuiContainer {
 
 	private final ItemStack parent;
 	private final int slotID;
-	private final InventoryItem itemInventory;
 	private final IVoidicPowerCapability cap;
 
 	private GuiButton button_clearLink;
@@ -36,7 +34,6 @@ public class RealityTeleporterGUI extends GuiContainer {
 	public RealityTeleporterGUI(InventoryPlayer inventoryPlayer, ItemStack host) {
 		super(new RealityTeleporterContainer(inventoryPlayer, host));
 		parent = host;
-		itemInventory = RealityTeleporter.createInventory(parent);
 		cap = parent.hasCapability(CapabilityList.VOIDICPOWER, null) ? parent.getCapability(CapabilityList.VOIDICPOWER, null) : null;
 		xSize = 347;
 		ySize = 320;
@@ -65,7 +62,7 @@ public class RealityTeleporterGUI extends GuiContainer {
 		super.initGui();
 
 		buttonList.clear();
-		buttonList.add(button_clearLink = new GuiButton(BUTTON_LINK_CLEAR, guiLeft + 170, guiTop + 122, 56, 20, TranslateHelper.translate("voidcraft.gui.misc.button.clearlink")));
+		buttonList.add(button_clearLink = new GuiButton(BUTTON_LINK_CLEAR, guiLeft + 170, guiTop + 122, 56, 20, I18n.format("voidcraft.gui.misc.button.clearlink")));
 	}
 
 	@Override
@@ -96,24 +93,24 @@ public class RealityTeleporterGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = TranslateHelper.translate("voidcraft.gui.realityteleporter.title");
+		String text = I18n.format("voidcraft.gui.realityteleporter.title");
 		fontRenderer.drawString(text, xSize / 2 - fontRenderer.getStringWidth(text) / 2, ySize - 260, 0xAAAAAA);
 		BlockPos linkPos = RealityTeleporter.getLink(parent);
 		if (linkPos != null) {
-			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.link") + ":";
+			text = I18n.format("voidcraft.gui.realityteleporterblock.link") + ":";
 			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 			text = "{ x: " + linkPos.getX() + ", y:" + linkPos.getY() + ", z:" + linkPos.getZ() + " }";
 			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 60, 0xAAAAAA);
 		} else {
-			text = TranslateHelper.translate("voidcraft.gui.realityteleporterblock.nolink") + ":";
+			text = I18n.format("voidcraft.gui.realityteleporterblock.nolink") + ":";
 			fontRenderer.drawString(text, (xSize / 2) + 30, ySize / 2 - 70, 0xAAAAAA);
 		}
-		text = TranslateHelper.translate("voidcraft.gui.misc.power") + ":";
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 70, 0xFF0000);
+		text = I18n.format("voidcraft.gui.misc.power") + ":";
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 55, ySize / 2 - 70, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getCurrentPower() + "/";
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 60, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 55, ySize / 2 - 60, 0xFF0000);
 		text = cap == null ? "N/A" : cap.getMaxPower() + "";
-		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text) / 1) - 55, ySize / 2 - 50, 0xFF0000);
+		fontRenderer.drawString(text, (xSize / 2 - fontRenderer.getStringWidth(text)) - 55, ySize / 2 - 50, 0xFF0000);
 	}
 
 	@Override

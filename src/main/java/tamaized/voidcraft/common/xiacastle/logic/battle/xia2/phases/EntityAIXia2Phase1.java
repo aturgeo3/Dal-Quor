@@ -8,7 +8,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
@@ -16,6 +15,7 @@ import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePa
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.voidcraft.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.voidcraft.network.IVoidBossAIPacket;
+import tamaized.voidcraft.registry.VoidCraftPotions;
 
 import java.util.List;
 
@@ -107,7 +107,7 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 				resetAnimationTick = 20 * 2;
 				if (closestEntity instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) closestEntity;
-					player.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 5));
+					player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 5));
 				}
 				break;
 		}
@@ -118,7 +118,7 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 		if (packet instanceof Xia2TookDamagePacket) {
 			AnimationRegistry.AnimationLimbs.play(getEntity(), 135, 135, 45, -45);
 			resetAnimationTick = 20 * 2;
-			world.newExplosion(getEntity(), getEntity().posX, getEntity().posY + (double) getEntity().getEyeHeight(), getEntity().posZ, 14.0F, false, true);
+			world.newExplosion(getEntity(), getEntity().posX, getEntity().posY + (double) getEntity().getEyeHeight(), getEntity().posZ, 2.0F, false, true);
 			world.playBroadcastSound(1023, getBlockPosition(), 0);
 		}
 	}

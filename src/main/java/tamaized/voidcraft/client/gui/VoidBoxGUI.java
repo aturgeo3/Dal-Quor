@@ -4,10 +4,10 @@ import com.sun.javafx.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.gui.container.VoidBoxContainer;
 import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidBox;
@@ -44,10 +44,10 @@ public class VoidBoxGUI extends GuiContainer {
 		super.initGui();
 
 		buttonList.clear();
-		buttonList.add(btnPlay = new GuiButton(BUTTON_PLAY, guiLeft + 200, guiTop + 113, 33, 20, TranslateHelper.translate("voidcraft.gui.misc.play")));
-		buttonList.add(btnStop = new GuiButton(BUTTON_STOP, guiLeft + 100, guiTop + 113, 33, 20, TranslateHelper.translate("voidcraft.gui.misc.stop")));
-		buttonList.add(new GuiButton(BUTTON_LOOP, guiLeft + 240, guiTop + 113, 33, 20, TranslateHelper.translate("voidcraft.gui.misc.loop")));
-		buttonList.add(new GuiButton(BUTTON_AUTO, guiLeft + 25, guiTop + 113, 66, 20, TranslateHelper.translate("voidcraft.gui.misc.auto")));
+		buttonList.add(btnPlay = new GuiButton(BUTTON_PLAY, guiLeft + 200, guiTop + 113, 33, 20, I18n.format("voidcraft.gui.misc.play")));
+		buttonList.add(btnStop = new GuiButton(BUTTON_STOP, guiLeft + 100, guiTop + 113, 33, 20, I18n.format("voidcraft.gui.misc.stop")));
+		buttonList.add(new GuiButton(BUTTON_LOOP, guiLeft + 240, guiTop + 113, 33, 20, I18n.format("voidcraft.gui.misc.loop")));
+		buttonList.add(new GuiButton(BUTTON_AUTO, guiLeft + 25, guiTop + 113, 66, 20, I18n.format("voidcraft.gui.misc.auto")));
 	}
 
 	@Override
@@ -81,15 +81,15 @@ public class VoidBoxGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String name = TranslateHelper.translate("voidcraft.gui.musicbox.title");
+		String name = I18n.format("voidcraft.gui.musicbox.title");
 		this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, this.ySize - 260, 0x7700FF);
-		name = TranslateHelper.translate("voidcraft.gui.musicbox.curr") + ":";
+		name = I18n.format("voidcraft.gui.musicbox.curr") + ":";
 		this.fontRenderer.drawString(name, (this.xSize / 12 - this.fontRenderer.getStringWidth(name) / 12) - 5, this.ySize - 240, 0xFF0000);
 		if (te.isPlaying() && !te.SLOT_CURRENT.getStackInSlot(0).isEmpty()) {
 			fontRenderer.drawString(((ItemRecord) te.SLOT_CURRENT.getStackInSlot(0).getItem()).getRecordNameLocal(), (xSize / 12) - 13 - (fontRenderer.getStringWidth(name) / 12) + 102, (ySize / 12) + 54, getColor(System.currentTimeMillis() / 10));
 		}
-		fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.misc.loop") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getLoopState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 220, ySize - 220, te.getLoopState() ? 0x00FF00 : 0xFF0000);
-		fontRenderer.drawString(TranslateHelper.translate("voidcraft.gui.misc.auto") + ": " + TranslateHelper.translate("voidcraft.gui.misc." + (te.getAutoState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 7, ySize - 180, te.getAutoState() ? 0x00FF00 : 0xFF0000);
+		fontRenderer.drawString(I18n.format("voidcraft.gui.misc.loop") + ": " + I18n.format("voidcraft.gui.misc." + (te.getLoopState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 220, ySize - 220, te.getLoopState() ? 0x00FF00 : 0xFF0000);
+		fontRenderer.drawString(I18n.format("voidcraft.gui.misc.auto") + ": " + I18n.format("voidcraft.gui.misc." + (te.getAutoState() ? "on" : "off")), (xSize / 12) - (fontRenderer.getStringWidth(name) / 12) + 7, ySize - 180, te.getAutoState() ? 0x00FF00 : 0xFF0000);
 		if (te.isPlaying())
 			fontRenderer.drawString(getTimeInMinutes(te.getSongLength() - te.getSongTimeLeft()) + "/" + getTimeInMinutes(te.getSongLength()), (xSize / 12) + (fontRenderer.getStringWidth(name) / 12), ySize - 220, 0xFFFF00);
 	}

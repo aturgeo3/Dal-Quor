@@ -1,51 +1,155 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
-import net.minecraft.entity.EntityLivingBase;
+import com.google.common.collect.Lists;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.World;
-import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityTwinsXia;
+import tamaized.voidcraft.common.entity.nonliving.EntityBlockSpell;
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
+import tamaized.voidcraft.registry.VoidCraftPotions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityDolXia extends EntityTwinsXia {
 
-	private int actionTick = 20 * 3;
+	private static final List<IBlockState> BLOCKSTATES = Lists.newArrayList(
+
+			Blocks.STONE.getDefaultState(),
+
+			Blocks.MOSSY_COBBLESTONE.getDefaultState(),
+
+			Blocks.COBBLESTONE.getDefaultState(),
+
+			Blocks.DIRT.getDefaultState(),
+
+			Blocks.GRASS.getDefaultState()
+
+	);
+	private static final Vec3d vector = new Vec3d(0, 0.5D, 0);
+	private List<EntityBlockSpell> blocks = new ArrayList<>();
+	private int blockCheckTick = 20 * 3;
+	private int ticks = 0;
 
 	public EntityDolXia(World worldIn) {
 		super(worldIn);
 		ignoreFrustumCheck = true;
 	}
 
-	public EntityDolXia(World world, EntityAIXia2Phase3 entityAIXia2Phase3) {
-		super(world, entityAIXia2Phase3);
+	@Override
+	protected void collideWithEntity(Entity entityIn) {
+
+	}
+
+	@Override
+	protected void encodePacketData(ByteBuf stream) {
+
+	}
+
+	@Override
+	protected void decodePacketData(ByteBuf stream) {
+
+	}
+
+	@Override
+	protected void initEntityAI() {
+		super.initEntityAI();
+		tasks.addTask(1, new AICastDisint(this));
 	}
 
 	@Override
 	protected void update() {
-		if (!world.isRemote) {
-			if (getActivePotionEffect(VoidCraft.potions.acidSheathe) == null) {
-				clearActivePotions();
-				addPotionEffect(new PotionEffect(VoidCraft.potions.acidSheathe, 100));
+		if (getActivePotionEffect(VoidCraftPotions.acidSheathe) == null) {
+			clearActivePotions();
+			addPotionEffect(new PotionEffect(VoidCraftPotions.acidSheathe, 100));
+		}
+		if (blockCheckTick-- <= 0) {
+			checkAndSpawnBlocks();
+			blockCheckTick = 140 + getRNG().nextInt(60);
+		}
+		if (world.getTotalWorldTime() % 2 == 0)
+			updateBlockMotion();
+	}
+
+	private void updateBlockMotion() {
+		ticks++;
+		double f = ticks;
+		for (EntityBlockSpell block : blocks) {
+			f += 2;
+			switch (block.getMode()) {
+				default:
+				case IDLE:
+					block.setMoveTo(new Vec3d(posX + 2.0F * Math.sin(f), posY + (Math.cos((double) ticks / 4D) + 0.75F), posZ + 2.0F * Math.cos(f)));
+					if (getRNG().nextInt(100) == 0)
+						block.setMode(EntityBlockSpell.Mode.ATTACKING);
+					break;
+				case ATTACKING:
+					if (getAttackTarget() != null)
+						block.setMoveTo(getAttackTarget().getPositionVector().addVector(getAttackTarget().motionX  + 2.0F * Math.sin(f), getAttackTarget().motionY + (Math.cos((double) ticks / 4D) + 0.75F), getAttackTarget().motionZ + 2.0F * Math.cos(f)));
+					else
+						block.setMode(EntityBlockSpell.Mode.IDLE);
+					break;
 			}
-			if (ticksExisted % actionTick == 0 && watchedEntity != null && watchedEntity instanceof EntityLivingBase) {
-				ProjectileDisintegration disint = new ProjectileDisintegration(world, this, (EntityLivingBase) watchedEntity, 6.0F);
-				world.spawnEntity(disint);
-			}
+		}
+	}
+
+	private void checkAndSpawnBlocks() {
+		blocks.removeIf(block -> block.isDead);
+		if (blocks.size() < 3) {
+			EntityBlockSpell block = new EntityBlockSpell(world, this);
+			block.setState(BLOCKSTATES.get(getRNG().nextInt(BLOCKSTATES.size())));
+			block.setPositionAndUpdate(posX + getRNG().nextFloat() * 2F - 1F, posY + 0.5F, posZ + getRNG().nextFloat() * 2F - 1F);
+			world.spawnEntity(block);
+			blocks.add(block);
 		}
 	}
 
 	@Override
 	public ITextComponent getAlternateBossName() {
-		return new TextComponentString("Dol");
+		return new TextComponentTranslation("entity.voidcraft.DolXia.name");
 	}
 
 	@Override
 	protected Color getBossBarColor() {
 		return Color.GREEN;
+	}
+
+	static class AICastDisint extends EntityAIBase {
+
+		private final EntityDolXia boss;
+		private int tick = 0;
+
+		AICastDisint(EntityDolXia entity) {
+			boss = entity;
+			setMutexBits(2);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			return tick > 0 && boss.getAttackTarget() != null && !boss.isFrozen();
+		}
+
+		@Override
+		public void startExecuting() {
+			tick = 20 + boss.getRNG().nextInt(60);
+		}
+
+		@Override
+		public void updateTask() {
+			if (boss.getAttackTarget() != null && tick-- <= 0) {
+				ProjectileDisintegration disint = new ProjectileDisintegration(boss.world, boss, boss.getAttackTarget(), 6.0F);
+				boss.world.spawnEntity(disint);
+			}
+		}
 	}
 
 }

@@ -4,20 +4,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 
 public class VadeMecumButton extends GuiButton {
 
-	public static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/vademecum/vademecumbutton.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/vademecum/vademecumbutton.png");
 	private final ItemStack stackToRender;
 	private final VadeMecumGUI gui;
 
-	public VadeMecumButton(VadeMecumGUI gui, int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, ItemStack stack) {
-		super(buttonId, x, y, widthIn, heightIn, TranslateHelper.translate(buttonText));
+	VadeMecumButton(VadeMecumGUI gui, int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, ItemStack stack) {
+		super(buttonId, x, y, widthIn, heightIn, I18n.format(buttonText));
 		stackToRender = stack;
 		this.gui = gui;
 	}

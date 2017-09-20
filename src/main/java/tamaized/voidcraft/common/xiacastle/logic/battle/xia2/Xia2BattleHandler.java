@@ -36,6 +36,10 @@ public class Xia2BattleHandler implements IBattleHandler {
 		}
 	}
 
+	public EntityBossXia2 getBoss(){
+		return xia;
+	}
+
 	@Override
 	public void start(World world, BlockPos p) {
 		worldObj = world;

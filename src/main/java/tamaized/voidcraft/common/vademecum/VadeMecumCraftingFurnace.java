@@ -2,10 +2,10 @@ package tamaized.voidcraft.common.vademecum;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import tamaized.tammodized.common.helper.TranslateHelper;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.common.helper.RecipeHelper;
@@ -21,7 +21,7 @@ public class VadeMecumCraftingFurnace implements IVadeMecumCrafting {
 	private final ItemStack output;
 
 	public VadeMecumCraftingFurnace(String title, ItemStack output) {
-		this.title = TranslateHelper.translate(title);
+		this.title = I18n.format(title);
 		ItemStack result = ItemStack.EMPTY;
 		List<ItemStack> list = RecipeHelper.getFurnaceRecipe(output);
 		input = list.size() > 0 ? list.get(0) : ItemStack.EMPTY;
@@ -30,7 +30,7 @@ public class VadeMecumCraftingFurnace implements IVadeMecumCrafting {
 
 	@Override
 	public void render(VadeMecumGUI gui, FontRenderer render, int x, int y, int mx, int my) {
-		gui.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65, y, 0x000000);
+		VadeMecumGUI.drawCenteredStringNoShadow(render, TextFormatting.UNDERLINE + title, x + 65, y, 0x000000);
 		GlStateManager.color(1, 1, 1, 1);
 		gui.mc.getTextureManager().bindTexture(TEXTURE);
 		gui.drawTexturedModalRect(x, y + 35, 128, 128, 0, 0, 256, 256);

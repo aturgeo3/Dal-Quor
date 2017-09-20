@@ -68,7 +68,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 			double mX = 0;
 			double mY = 1;
 			double mZ = -5;
-			MotionHelper.addMotion(e, mX, mY, mZ);
+			MotionHelper.addMotion(e, new Vec3d(mX, mY, mZ));
 		}
 	}
 
