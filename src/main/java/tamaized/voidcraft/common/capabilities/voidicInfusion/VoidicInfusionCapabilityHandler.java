@@ -111,11 +111,8 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			flag = false;
 		}
 		if ((entity.world.provider.getDimension() == ConfigHandler.dimensionIdVoid || override) && flag) {
-			if (entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraftBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickDoubleSlab)) {
-
-			} else {
+			if (!(entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraftBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickDoubleSlab)))
 				infusion += gain;
-			}
 		} else {
 			infusion -= (vade != null && vade.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 10 : 5);
 			if (infusion < 0)
