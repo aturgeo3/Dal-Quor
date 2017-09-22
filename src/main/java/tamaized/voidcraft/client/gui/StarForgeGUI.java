@@ -131,6 +131,7 @@ public class StarForgeGUI extends GuiContainer {
 		updateMouseValues();
 		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		renderHoveredToolTip(mouseX, mouseY);
 		GlStateManager.disableLighting();
 		scroll.drawScreen(mouseX, mouseY, partialTicks);
 		if (!renderStackHover.isEmpty()) {
