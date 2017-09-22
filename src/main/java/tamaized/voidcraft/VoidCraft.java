@@ -96,7 +96,7 @@ import tamaized.voidcraft.network.NetworkMessages;
 import tamaized.voidcraft.proxy.CommonProxy;
 import tamaized.voidcraft.registry.*;
 
-@Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
+@Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class VoidCraft extends TamModBase {
 
 	// public static final boolean isDevBuild = false;
