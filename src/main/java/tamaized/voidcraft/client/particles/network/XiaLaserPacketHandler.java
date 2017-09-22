@@ -3,6 +3,8 @@ package tamaized.voidcraft.client.particles.network;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
 import tamaized.tammodized.common.particles.ParticlePacketBase;
 import tamaized.tammodized.common.particles.TamParticle;
@@ -30,6 +32,7 @@ public class XiaLaserPacketHandler extends ParticlePacketBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public TamParticle decode(ByteBuf packet, WorldClient world, Vec3d pos) {
 		return new XiaLaser(world, pos, packet.readInt(), packet.readInt(), packet.readInt(), new float[]{packet.readFloat(), packet.readFloat(), packet.readFloat()});
 	}

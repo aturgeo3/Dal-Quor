@@ -3,6 +3,8 @@ package tamaized.voidcraft.client.particles.network;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.particles.ParticleHelper.IParticlePacketData;
 import tamaized.tammodized.common.particles.ParticlePacketBase;
 import tamaized.tammodized.common.particles.TamParticle;
@@ -34,6 +36,7 @@ public class VoidicDrillLaserPacketHandler extends ParticlePacketBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public TamParticle decode(ByteBuf packet, WorldClient world, Vec3d pos) {
 		return new VoidicDrillLaser(world, pos, packet.readBoolean() ? new Vec3d(packet.readDouble(), packet.readDouble(), packet.readDouble()) : null, packet.readInt(), packet.readBoolean());
 	}
