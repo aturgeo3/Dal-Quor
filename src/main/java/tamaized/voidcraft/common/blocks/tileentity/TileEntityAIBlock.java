@@ -105,7 +105,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 		state = nbt.getInteger("state");
 		hasEntity = nbt.getBoolean("hasEntity");
 		final int id = nbt.getInteger("entityID");
-		entity = id >= 0 ? world.getEntityByID(id) : null;
+		entity = world == null ? null : id >= 0 ? world.getEntityByID(id) : null;
 	}
 
 	@Override
