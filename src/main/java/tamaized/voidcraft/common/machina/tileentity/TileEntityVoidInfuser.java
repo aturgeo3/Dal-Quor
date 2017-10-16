@@ -5,7 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -14,7 +16,11 @@ import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
 import tamaized.voidcraft.common.fluids.IFaceFluidHandler;
 import tamaized.voidcraft.common.machina.addons.TERecipeInfuser.InfuserRecipe;
 import tamaized.voidcraft.common.machina.addons.VoidTank;
-import tamaized.voidcraft.registry.*;
+import tamaized.voidcraft.registry.VoidCraftArmors;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.registry.VoidCraftTERecipes;
+import tamaized.voidcraft.registry.VoidCraftTools;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -63,6 +69,16 @@ public class TileEntityVoidInfuser extends TamTileEntityInventory implements IFa
 	@Override
 	protected IItemHandler getCap(EnumFacing face) {
 		return new CombinedInvWrapper(SLOT_BUCKET, SLOT_INPUT, SLOT_OUTPUT);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing enumFacing) {
+		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY ? (T) this : super.getCapability(capability, enumFacing);
 	}
 
 	@Override
