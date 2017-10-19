@@ -1,13 +1,13 @@
 package tamaized.voidcraft.common.blocks.spell;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -21,6 +21,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpell;
 import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
+
+import java.util.Random;
 
 public class BlockSpellIceSpike extends BlockSpell {
 
@@ -38,7 +40,7 @@ public class BlockSpellIceSpike extends BlockSpell {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[]{FACING});
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override
@@ -54,8 +56,7 @@ public class BlockSpellIceSpike extends BlockSpell {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		int meta = ((EnumFacing) state.getValue(FACING)).getIndex();
-		return meta;
+		return state.getValue(FACING).getIndex();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -70,7 +71,7 @@ public class BlockSpellIceSpike extends BlockSpell {
 			IBlockState iblockstate1 = world.getBlockState(pos.south());
 			IBlockState iblockstate2 = world.getBlockState(pos.west());
 			IBlockState iblockstate3 = world.getBlockState(pos.east());
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+			EnumFacing enumfacing = state.getValue(FACING);
 
 			if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
 				enumfacing = EnumFacing.SOUTH;
@@ -95,8 +96,8 @@ public class BlockSpellIceSpike extends BlockSpell {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
@@ -109,5 +110,10 @@ public class BlockSpellIceSpike extends BlockSpell {
 	@Override
 	public void registerModel(ModelRegistryEvent e) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), getRegistryName().getResourcePath()), "inventory"));
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Items.AIR;
 	}
 }
