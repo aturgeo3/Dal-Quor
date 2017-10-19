@@ -1,6 +1,7 @@
 package tamaized.voidcraft.common.xiacastle.logic.battle.twins;
 
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -42,7 +43,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 				switch (phase) {
 					case 0:
 						if (readyForInput) {
-							boolean flag = worldObj.getBlockState(pos.add(3, 0, 1)).getValue(BlockLever.POWERED);
+							IBlockState lever = worldObj.getBlockState(pos.add(3, 0, 1));
+							boolean flag = lever.getBlock() instanceof BlockLever && lever.getValue(BlockLever.POWERED);
 							if (flag) {
 								TileEntitySign sign = (TileEntitySign) worldObj.getTileEntity(pos.add(2, 0, 0));
 								if (sign != null) {
