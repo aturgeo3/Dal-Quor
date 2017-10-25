@@ -1,8 +1,12 @@
 package tamaized.voidcraft.common.world.dim.xia;
 
+import com.google.common.collect.Lists;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BiomeGenXia extends Biome {
 
@@ -13,10 +17,14 @@ public class BiomeGenXia extends Biome {
 		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableCaveCreatureList.clear();
-		// this.topBlock = voidCraft.blockFakeBedrock;
-		// this.fillerBlock = voidCraft.blockFakeBedrock;
 	}
 
+	@Override
+	public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
+		return Lists.newArrayList();
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1) {
 		return 0;
@@ -27,4 +35,8 @@ public class BiomeGenXia extends Biome {
 		return false;
 	}
 
+	@Override
+	public boolean getEnableSnow() {
+		return false;
+	}
 }

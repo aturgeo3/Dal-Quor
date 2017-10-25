@@ -49,6 +49,11 @@ public abstract class EntityVoidMob extends EntityCreature implements IMob {
 		}
 	}
 
+	@Override
+	public int getMaxSpawnedInChunk() {
+		return 1;
+	}
+
 	protected boolean canAttack(Entity entity) {
 		if (entity instanceof EntityWitherSkeleton)
 			return false;
