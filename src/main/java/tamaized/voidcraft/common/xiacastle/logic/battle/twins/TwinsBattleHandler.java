@@ -5,6 +5,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -16,7 +17,11 @@ import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
 import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.common.xiacastle.logic.battle.IBattleHandler;
-import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.*;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages01;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages02;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages03;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages04;
+import tamaized.voidcraft.common.xiacastle.logic.battle.twins.messages.TwinsMessages05;
 
 public class TwinsBattleHandler implements IBattleHandler {
 
@@ -46,19 +51,19 @@ public class TwinsBattleHandler implements IBattleHandler {
 							IBlockState lever = worldObj.getBlockState(pos.add(3, 0, 1));
 							boolean flag = lever.getBlock() instanceof BlockLever && lever.getValue(BlockLever.POWERED);
 							if (flag) {
-								TileEntitySign sign = (TileEntitySign) worldObj.getTileEntity(pos.add(2, 0, 0));
-								if (sign != null) {
+								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
+								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : sign.signText) {
+									for (ITextComponent t : ((TileEntitySign)sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.1.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te != null)
-											te.clear();
+										TileEntity te = worldObj.getTileEntity(pos.add(3, 0, 0));
+										if (te instanceof TileEntityChest)
+											((TileEntityChest)te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -82,19 +87,19 @@ public class TwinsBattleHandler implements IBattleHandler {
 						if (readyForInput) {
 							boolean flag = worldObj.getBlockState(pos.add(3, 0, 1)).getValue(BlockLever.POWERED);
 							if (flag) {
-								TileEntitySign sign = (TileEntitySign) worldObj.getTileEntity(pos.add(2, 0, 0));
-								if (sign != null) {
+								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
+								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : sign.signText) {
+									for (ITextComponent t : ((TileEntitySign)sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.2.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te != null)
-											te.clear();
+										TileEntity te = worldObj.getTileEntity(pos.add(3, 0, 0));
+										if (te instanceof TileEntityChest)
+											((TileEntityChest)te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -118,19 +123,19 @@ public class TwinsBattleHandler implements IBattleHandler {
 						if (readyForInput) {
 							boolean flag = worldObj.getBlockState(pos.add(3, 0, 1)).getValue(BlockLever.POWERED);
 							if (flag) {
-								TileEntitySign sign = (TileEntitySign) worldObj.getTileEntity(pos.add(2, 0, 0));
-								if (sign != null) {
+								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
+								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : sign.signText) {
+									for (ITextComponent t : ((TileEntitySign)sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.3.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
+										TileEntity te =  worldObj.getTileEntity(pos.add(3, 0, 0));
 										if (te != null)
-											te.clear();
+											((TileEntityChest)te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -154,10 +159,10 @@ public class TwinsBattleHandler implements IBattleHandler {
 						if (readyForInput) {
 							boolean flag = worldObj.getBlockState(pos.add(2, 0, 1)).getValue(BlockLever.POWERED);
 							if (flag) {
-								TileEntitySign sign = (TileEntitySign) worldObj.getTileEntity(pos.add(2, 0, 0));
-								if (sign != null) {
+								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
+								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : sign.signText) {
+									for (ITextComponent t : ((TileEntitySign) sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.4.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
@@ -166,9 +171,9 @@ public class TwinsBattleHandler implements IBattleHandler {
 										worldObj.setBlockState(pos.add(3, 1, 1), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 1, -1), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
-										if (te != null)
-											te.clear();
+										TileEntity te = worldObj.getTileEntity(pos.add(0, 0, -3));
+										if (te instanceof TileEntityChest)
+											((TileEntityChest) te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, -1), Blocks.AIR.getDefaultState());
@@ -259,9 +264,9 @@ public class TwinsBattleHandler implements IBattleHandler {
 		worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 1, 1), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-		TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(0, 0, -3));
-		if (te != null)
-			te.clear();
+		TileEntity te = worldObj.getTileEntity(pos.add(0, 0, -3));
+		if (te instanceof TileEntityChest)
+			((TileEntityChest) te).clear();
 		worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 0, -1), Blocks.AIR.getDefaultState());
