@@ -86,14 +86,15 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 
 	@Override
 	protected void decodePacketData(ByteBuf stream) {
-		
+
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setInteger("phase", phase);
 		compound.setBoolean("cantUpdatePos", cantUpdatePos);
-		compound.setIntArray("initialPos", new int[]{initialPos.getX(), initialPos.getY(), initialPos.getZ()});
+		if (initialPos != null)
+			compound.setIntArray("initialPos", new int[]{initialPos.getX(), initialPos.getY(), initialPos.getZ()});
 		return super.writeToNBT(compound);
 	}
 
@@ -126,7 +127,8 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 				break;
 		}
 		setHealth(getMaxHealth());
-		if(phase > 2) setDead();
+		if (phase > 2)
+			setDead();
 	}
 
 	public final void doDamage(int a) {
