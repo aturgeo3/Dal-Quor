@@ -56,7 +56,7 @@ public class DamageEvent {
 				if (Math.floor(Math.random() * 5) == 0 && isWhiteListed(e.getSource(), true)) { // 0-4; 25%
 					e.setCanceled(true);
 					if (living instanceof EntityPlayer)
-						FloatyTextHelper.sendText((EntityPlayer) living, "Incorporeal");
+						FloatyTextHelper.sendText((EntityPlayer) living, "Incorporeal"); // TODO
 					return;
 				}
 			}
@@ -117,7 +117,7 @@ public class DamageEvent {
 	}
 
 	private boolean canBlockDamageSource(EntityPlayer player, DamageSource damageSourceIn) {
-		if (!damageSourceIn.isUnblockable() && player.isActiveItemStackBlocking()) {
+		if (!damageSourceIn.isUnblockable() && player.isActiveItemStackBlocking() && shieldRegistry.contains(player.getActiveItemStack().getItem())) {
 			Vec3d vec3d = damageSourceIn.getDamageLocation();
 
 			if (vec3d != null) {
