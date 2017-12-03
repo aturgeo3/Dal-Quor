@@ -37,7 +37,7 @@ public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLi
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(x, y + 2F, z);
-			if (entity.hasRuneState())
+			if (entity.getRune())
 				renderRuneState(entity, model);
 		}
 		GlStateManager.popMatrix();

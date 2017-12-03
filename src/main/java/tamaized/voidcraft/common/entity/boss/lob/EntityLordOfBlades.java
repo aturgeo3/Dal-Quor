@@ -235,16 +235,4 @@ public class EntityLordOfBlades extends EntityVoidBoss<IBattleHandler> {
 		return new TextComponentTranslation("null");
 	}
 
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

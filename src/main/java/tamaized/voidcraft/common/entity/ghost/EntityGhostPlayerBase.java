@@ -1,9 +1,11 @@
 package tamaized.voidcraft.common.entity.ghost;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
@@ -12,8 +14,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
@@ -22,23 +22,19 @@ import tamaized.voidcraft.common.sound.VoidSoundEvents;
 
 import java.util.UUID;
 
-public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAdditionalSpawnData {
+public class EntityGhostPlayerBase extends EntityVoidNPC {
 
-	private String name;
-	private UUID id;
-
-	private boolean shouldDie = true;
+	private static final DataParameter<Boolean> SHOULD_DIE = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> RUNNING = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> RUNE = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> RUNE_TARGET = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> RUNE_STATE = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> MAX_RUNE_STATE = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.FLOAT);
+	private static final DataParameter<String> NAME = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.STRING);
+	private static final DataParameter<String> ID = EntityDataManager.createKey(EntityGhostPlayerBase.class, DataSerializers.STRING);
 	private boolean canInteract = false;
-	private boolean hasInteracted = false;
-	private boolean running = false;
 	private int tick = 0;
 	private int finalTick = 20 * 6;
-
-	private boolean rune = false;
-	private Entity runeTarget;
-	private int runeState = 0;
-	private int maxRuneState = 100;
-
 	private int runeRotation = 0;
 
 	public EntityGhostPlayerBase(World par1World) {
@@ -58,25 +54,25 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable) {
 		this(world);
 		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
-		name = info == null ? "null" : info.getName();
-		this.id = id;
+		setGhostName(info == null ? "null" : info.getName());
+		setUUID(id);
 		canInteract = interactable;
-		shouldDie = false;
+		setShouldDie(false);
 	}
 
 	protected EntityGhostPlayerBase(World world, UUID id, boolean interactable, Entity target, int length) {
 		this(world);
 		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
-		name = info == null ? "null" : info.getName();
-		this.id = id;
+		setGhostName(info == null ? "null" : info.getName());
+		setUUID(id);
 		canInteract = interactable;
-		rune = true;
-		runeTarget = target;
-		runeState = 0;
-		maxRuneState = length;
-		running = !interactable;
+		setRune(true);
+		setRuneTarget(target.getEntityId());
+		setRuneState(0);
+		setMaxRuneState(length);
+		setRunning(!interactable);
 		tick = 0;
-		shouldDie = false;
+		setShouldDie(false);
 	}
 
 	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable) {
@@ -85,6 +81,83 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	public static EntityGhostPlayerBase newInstance(World world, UUID id, boolean interactable, Entity target, int length) {
 		return SkinHandler.isSlimModel(id) ? new EntityGhostPlayerSlim(world, id, interactable, target, length) : new EntityGhostPlayer(world, id, interactable, target, length);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(SHOULD_DIE, true);
+		dataManager.register(RUNNING, false);
+		dataManager.register(RUNE, false);
+		dataManager.register(RUNE_TARGET, 0);
+		dataManager.register(RUNE_STATE, 0.0F);
+		dataManager.register(MAX_RUNE_STATE, 100.0F);
+		dataManager.register(NAME, "Steve");
+		dataManager.register(ID, "00000000-0000-0000-0000-000000000000");
+	}
+
+	public boolean getShouldDie() {
+		return dataManager.get(SHOULD_DIE);
+	}
+
+	public void setShouldDie(boolean die) {
+		dataManager.set(SHOULD_DIE, die);
+	}
+
+	public boolean getRunning() {
+		return dataManager.get(RUNNING);
+	}
+
+	public void setRunning(boolean running) {
+		dataManager.set(RUNNING, running);
+	}
+
+	public void setGhostName(String name) {
+		dataManager.set(NAME, name);
+	}
+
+	public String getGhostName() {
+		return dataManager.get(NAME);
+	}
+
+	public void setUUID(UUID id) {
+		dataManager.set(ID, id.toString());
+	}
+
+	public UUID getUUID() {
+		return UUID.fromString(dataManager.get(ID));
+	}
+
+	public boolean getRune() {
+		return dataManager.get(RUNE);
+	}
+
+	public void setRune(boolean rune) {
+		dataManager.set(RUNE, rune);
+	}
+
+	public int getRuneTarget() {
+		return dataManager.get(RUNE_TARGET);
+	}
+
+	public void setRuneTarget(int entityID) {
+		dataManager.set(RUNE_TARGET, entityID);
+	}
+
+	public float getRuneState() {
+		return dataManager.get(RUNE_STATE);
+	}
+
+	public void setRuneState(float state) {
+		dataManager.set(RUNE_STATE, state);
+	}
+
+	public float getMaxRuneState() {
+		return dataManager.get(MAX_RUNE_STATE);
+	}
+
+	public void setMaxRuneState(float state) {
+		dataManager.set(MAX_RUNE_STATE, state);
 	}
 
 	@Override
@@ -101,28 +174,12 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 		return canInteract;
 	}
 
-	public boolean hasRuneState() {
-		return rune;
-	}
-
-	public int getRuneState() {
-		return runeState;
-	}
-
-	public int getMaxRuneState() {
-		return maxRuneState;
-	}
-
 	public float getRuneStatePerc() {
-		return (float) runeState / (float) maxRuneState;
+		return getRuneState() / getMaxRuneState();
 	}
 
 	public boolean isRuneCharged() {
 		return getRuneStatePerc() >= 1.0F;
-	}
-
-	public Entity getRuneTarget() {
-		return runeTarget;
 	}
 
 	public int getRuneRotationForRender() {
@@ -130,64 +187,23 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	}
 
 	@Override
-	public void writeSpawnData(ByteBuf buffer) {
-		ByteBufUtils.writeUTF8String(buffer, id == null ? SkinHandler.getUUID(0).toString() : id.toString());
-		buffer.writeBoolean(shouldDie);
-		buffer.writeBoolean(canInteract);
-		buffer.writeBoolean(rune);
-		if (rune) {
-			buffer.writeInt(runeTarget.getEntityId());
-			buffer.writeInt(maxRuneState);
-		}
-	}
-
-	@Override
-	public void readSpawnData(ByteBuf additionalData) {
-		id = UUID.fromString(ByteBufUtils.readUTF8String(additionalData));
-		SkinHandler.PlayerSkinInfoWrapper info = SkinHandler.getGhostInfo(id);
-		name = info == null ? "null" : info.getName();
-		shouldDie = additionalData.readBoolean();
-		canInteract = additionalData.readBoolean();
-		rune = additionalData.readBoolean();
-		if (rune) {
-			runeTarget = world.getEntityByID(additionalData.readInt());
-			maxRuneState = additionalData.readInt();
-		}
-	}
-
-	public UUID getUUID() {
-		return id;
-	}
-
-	public boolean hasInteracted() {
-		return hasInteracted;
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (!world.isRemote) {
-			if (shouldDie) {
+			if (getShouldDie()) {
 				setDead();
 				return;
 			}
-			if (running) {
-				if (rune && runeState < maxRuneState)
-					runeState++;
+			if (getRunning()) {
+				if (getRune() && getRuneState() < getMaxRuneState())
+					setRuneState(getRuneState() + 1F);
 			}
-			if (tick >= finalTick)
-				hasInteracted = true;
-			sendPacketUpdates(this);
 		}
 		runeRotation += (int) Math.ceil(20F * getRuneStatePerc());
 		if (runeRotation >= 360)
 			runeRotation = 0;
-		if (rune) {
-			if (runeTarget != null) {
+		if (getRune()) {
+			if (world.getEntityByID(getRuneTarget()) != null) {
 				updateLook();
 				if (world.isRemote && isRuneCharged()) {
 					spawnParticles();
@@ -196,7 +212,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 				setDead();
 			}
 		}
-		if (running)
+		if (getRunning())
 			tick++;
 	}
 
@@ -209,45 +225,23 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 			double ox = posX;
 			double oy = posY;
 			double oz = posZ;
-			double tx = getRuneTarget().posX + rx;
-			double ty = getRuneTarget().posY + (getRuneTarget().height / 2.0F) + ry;
-			double tz = getRuneTarget().posZ + rz;
+			Entity target = world.getEntityByID(getRuneTarget());
+			double tx = target.posX + rx;
+			double ty = target.posY + (target.height / 2.0F) + ry;
+			double tz = target.posZ + rz;
 			Vec3d vec = getLookVec();
 			double offsetX = (vec.x * 1);
 			double offsetY = 1.5;
 			double offsetZ = (vec.z * 1);
 			double dx = ox - (tx - offsetX);
-			double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (getRuneTarget().height / 2.0F)));
+			double dy = getEntityBoundingBox().minY + (double) (height / 2.0F) - (((ty - offsetY) + (double) (target.height / 2.0F)));
 			double dz = oz - (tz - offsetZ);
-			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.voidcraft.client.particles.ParticleColorEnchantmentTable(world, tx, ty + (getRuneTarget().height / 2F), tz, dx, dy, dz));
-		}
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-		stream.writeBoolean(running);
-		stream.writeBoolean(hasInteracted);
-		stream.writeBoolean(rune);
-		if (rune) {
-			stream.writeInt(runeTarget.getEntityId());
-			stream.writeInt(runeState);
-			stream.writeInt(maxRuneState);
-		}
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-		running = stream.readBoolean();
-		hasInteracted = stream.readBoolean();
-		rune = stream.readBoolean();
-		if (rune) {
-			runeTarget = world.getEntityByID(stream.readInt());
-			runeState = stream.readInt();
-			maxRuneState = stream.readInt();
+			net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(new tamaized.voidcraft.client.particles.ParticleColorEnchantmentTable(world, tx, ty + (target.height / 2F), tz, dx, dy, dz));
 		}
 	}
 
 	private void updateLook() {
+		Entity runeTarget = world.getEntityByID(getRuneTarget());
 		getLookHelper().setLookPosition(runeTarget.posX, runeTarget.posY + (double) runeTarget.getEyeHeight(), runeTarget.posZ, 10.0F, (float) getVerticalFaceSpeed());
 		double d0 = runeTarget.posX - posX;
 		double d2 = runeTarget.posZ - posZ;
@@ -258,10 +252,9 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		if (running || !canInteract)
+		if (getRunning() || !canInteract)
 			return false;
-		running = true;
-		sendPacketUpdates(this);
+		setRunning(true);
 		return true;
 	}
 
@@ -314,7 +307,7 @@ public class EntityGhostPlayerBase extends EntityVoidNPC implements IEntityAddit
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ITextComponent getDisplayName() {
-		return new TextComponentString(name);
+		return new TextComponentString(getGhostName());
 	}
 
 }

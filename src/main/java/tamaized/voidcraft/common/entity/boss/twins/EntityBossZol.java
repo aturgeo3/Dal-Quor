@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.twins;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -54,16 +53,6 @@ public class EntityBossZol extends EntityVoidNPC {
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TextComponentTranslation("entity.voidcraft.Zol.name");
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
 	}
 
 }

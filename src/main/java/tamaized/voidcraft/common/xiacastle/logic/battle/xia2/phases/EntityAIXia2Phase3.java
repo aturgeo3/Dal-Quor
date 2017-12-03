@@ -99,7 +99,7 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 	private void updateSphere() {
 		if (world.isRemote)
 			return;
-		if (getEntity().shouldSphereRender()) {
+		if (getEntity().getSphereState()) {
 			if (zol.isFrozen() && dol.isFrozen() && wither.isDead && dragon.isDead) {
 				getEntity().setSphereState(false);
 				getEntity().setInvulnerable(false);

@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.xia.finalphase;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -54,16 +53,6 @@ public class EntityZolXia extends EntityTwinsXia {
 		if (!world.isRemote)
 			bossInfo.setPercent(getHealth() / getMaxHealth());
 		super.onLivingUpdate();
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
 	}
 
 	@Override

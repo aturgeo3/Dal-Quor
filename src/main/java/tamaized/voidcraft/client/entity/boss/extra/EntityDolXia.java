@@ -1,7 +1,6 @@
 package tamaized.voidcraft.client.entity.boss.extra;
 
 import com.google.common.collect.Lists;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -85,16 +84,6 @@ public class EntityDolXia extends EntityTwinsXia {
 
 	@Override
 	protected void collideWithEntity(Entity entityIn) {
-
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
 
 	}
 

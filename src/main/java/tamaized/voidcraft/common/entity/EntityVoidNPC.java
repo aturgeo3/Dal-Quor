@@ -1,8 +1,11 @@
 package tamaized.voidcraft.common.entity;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
@@ -26,10 +29,9 @@ import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.entity.animation.AnimatableModel;
 import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.client.entity.animation.IAnimation;
-import tamaized.voidcraft.network.IEntitySync;
 import tamaized.voidcraft.network.client.ClientPacketHandlerAnimation;
 
-public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntitySync {
+public abstract class EntityVoidNPC extends EntityFlying implements IMob {
 
 	protected boolean canDie = true;
 	protected boolean canPush = true;
@@ -106,20 +108,6 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 			a.render(this, model);
 		}
 	}
-
-	@Override
-	public final void encodePacket(ByteBuf stream) {
-		encodePacketData(stream);
-	}
-
-	protected abstract void encodePacketData(ByteBuf stream);
-
-	@Override
-	public final void decodePacket(ByteBuf stream) {
-		decodePacketData(stream);
-	}
-
-	protected abstract void decodePacketData(ByteBuf stream);
 
 	@Override
 	public void onLivingUpdate() {
@@ -425,7 +413,7 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob, IEntit
 					this.parentEntity.motionY += d1 / d3 * (movementSpeed * speed);
 					this.parentEntity.motionZ += d2 / d3 * (movementSpeed * speed);
 				}
-				this.parentEntity.rotationYaw = -((float)MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float)Math.PI);
+				this.parentEntity.rotationYaw = -((float) MathHelper.atan2(this.parentEntity.motionX, this.parentEntity.motionZ)) * (180F / (float) Math.PI);
 				this.parentEntity.renderYawOffset = this.parentEntity.rotationYaw;
 			}
 		}

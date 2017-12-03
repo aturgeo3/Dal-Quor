@@ -1,7 +1,6 @@
 package tamaized.voidcraft.common.entity.boss;
 
 import com.google.common.base.Predicate;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,16 +45,6 @@ public class EntityBossCorruptedPawn extends EntityVoidNPC implements IVoidBossD
 		experienceValue = 50;
 		enablePersistence();
 		moveHelper = new BossFlyNoclipMoveHelper(this);
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
 	}
 
 	@Override

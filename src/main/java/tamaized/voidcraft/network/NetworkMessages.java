@@ -22,7 +22,6 @@ public class NetworkMessages {
 
 		// Client
 		registerMessage(network, ClientPacketHandlerAnimation.class, ClientPacketHandlerAnimation.Packet.class, Side.CLIENT);
-		registerMessage(network, ClientPacketHandlerEntitySync.class, ClientPacketHandlerEntitySync.Packet.class, Side.CLIENT);
 		registerMessage(network, ClientPacketHandlerHealth.class, ClientPacketHandlerHealth.Packet.class, Side.CLIENT);
 		registerMessage(network, ClientPacketHandlerInfusion.class, ClientPacketHandlerInfusion.Packet.class, Side.CLIENT);
 		registerMessage(network, ClientPacketHandlerPowerItem.class, ClientPacketHandlerPowerItem.Packet.class, Side.CLIENT);

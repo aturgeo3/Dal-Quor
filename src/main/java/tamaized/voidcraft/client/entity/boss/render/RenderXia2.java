@@ -38,7 +38,7 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 	public void doRender(T entity, double x, double y, double z, float yaw, float ticks) {
 		GlStateManager.pushMatrix();
 		{
-			if (entity.shouldSphereRender())
+			if (entity.getSphereState())
 				renderSphere(entity.world, entity, 1, 10);
 			// if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre(entity, this, x, y, z))) return;
 			ItemStack itemstack = entity.getHeldItemMainhand();

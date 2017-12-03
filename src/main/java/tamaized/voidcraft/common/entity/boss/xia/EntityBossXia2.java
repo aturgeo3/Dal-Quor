@@ -1,11 +1,13 @@
 package tamaized.voidcraft.common.entity.boss.xia;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -26,7 +28,6 @@ import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase1;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase2;
 import tamaized.voidcraft.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
-import tamaized.voidcraft.network.IEntitySync;
 import tamaized.voidcraft.network.IVoidBossAIPacket;
 import tamaized.voidcraft.network.client.ClientPacketHandlerSheathe;
 import tamaized.voidcraft.registry.VoidCraftPotions;
@@ -35,11 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements IEntitySync {
+public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 
 	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 
-	private boolean sphereState = false;
+	private static final DataParameter<Boolean> SPHERE_STATE = EntityDataManager.createKey(EntityBossXia2.class, DataSerializers.BOOLEAN);
 
 	private List<EntityGhostPlayerBase> ghostList = new ArrayList<>();
 
@@ -53,6 +54,20 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 		super(world, handler, false);
 		this.setInvulnerable(true);
 		canMove = false;
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(SPHERE_STATE, false);
+	}
+
+	public boolean getSphereState() {
+		return dataManager.get(SPHERE_STATE);
+	}
+
+	public void setSphereState(boolean state) {
+		dataManager.set(SPHERE_STATE, state);
 	}
 
 	@Override
@@ -87,29 +102,9 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 		super.onLivingUpdate();
 	}
 
-	public void setSphereState(boolean state) {
-		sphereState = state;
-		if (!world.isRemote)
-			sendPacketUpdates(this);
-	}
-
-	public boolean shouldSphereRender() {
-		return sphereState;
-	}
-
 	@Override
 	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio) {
 
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-		stream.writeBoolean(sphereState);
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-		setSphereState(stream.readBoolean());
 	}
 
 	@Override
@@ -119,10 +114,6 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 
 	@Override
 	protected void deathHook() {
-
-	}
-
-	public class Xia2TookDamagePacket implements IVoidBossAIPacket {
 
 	}
 
@@ -248,6 +239,10 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> implements
 	@Override
 	protected int maxPhases() {
 		return 3;
+	}
+
+	public class Xia2TookDamagePacket implements IVoidBossAIPacket {
+
 	}
 
 }

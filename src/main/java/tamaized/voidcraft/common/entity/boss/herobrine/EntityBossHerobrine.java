@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.herobrine;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -77,16 +76,6 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 
 	public final int getPhase() {
 		return phase;
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
 	}
 
 	@Override

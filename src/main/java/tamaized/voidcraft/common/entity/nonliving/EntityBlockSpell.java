@@ -128,16 +128,6 @@ public class EntityBlockSpell extends EntityVoidNPC implements IEntityAdditional
 	}
 
 	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("state", Block.getStateId(state));

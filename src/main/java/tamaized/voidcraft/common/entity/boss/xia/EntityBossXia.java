@@ -1,6 +1,5 @@
 package tamaized.voidcraft.common.entity.boss.xia;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -231,16 +230,6 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 	@Override
 	public ITextComponent getDisplayName() {
 		return new TextComponentTranslation("entity.voidcraft.Xia.name");
-	}
-
-	@Override
-	protected void encodePacketData(ByteBuf stream) {
-
-	}
-
-	@Override
-	protected void decodePacketData(ByteBuf stream) {
-
 	}
 
 	@Override
