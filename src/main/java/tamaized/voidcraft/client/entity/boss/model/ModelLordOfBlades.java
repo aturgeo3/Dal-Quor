@@ -472,6 +472,7 @@ public class ModelLordOfBlades extends AnimatableModelArms {
 		modelRenderer.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
@@ -540,7 +541,10 @@ public class ModelLordOfBlades extends AnimatableModelArms {
 		armRightOverlay.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 		armLeftOverlay.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 
-		((EntityVoidNPC) entity).renderAnimation(this);
+		if (entity instanceof EntityVoidNPC){
+			EntityVoidNPC npc = ((EntityVoidNPC) entity);
+			setAnimations(npc.getLeftArmYaw(), npc.getLeftArmPitch(), npc.getRightArmYaw(), npc.getRightArmPitch());
+		}
 	}
 
 	@Override

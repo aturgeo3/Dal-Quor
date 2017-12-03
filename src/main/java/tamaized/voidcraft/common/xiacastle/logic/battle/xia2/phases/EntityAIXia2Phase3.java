@@ -4,7 +4,6 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia2;
 import tamaized.voidcraft.common.entity.boss.xia.finalphase.EntityDragonXia;
@@ -57,7 +56,7 @@ public class EntityAIXia2Phase3 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			world.spawnEntity(dragon);
 			world.spawnEntity(wither);
 
-			AnimationRegistry.AnimationLimbs.play(getEntity(), 135, 135, 45, -45);
+			getEntity().setLimbRotations(135, 135, 45, -45);
 		}
 	}
 

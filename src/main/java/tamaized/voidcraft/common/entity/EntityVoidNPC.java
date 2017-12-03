@@ -15,6 +15,9 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -22,16 +25,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.animation.AnimatableModel;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
-import tamaized.voidcraft.client.entity.animation.IAnimation;
-import tamaized.voidcraft.network.client.ClientPacketHandlerAnimation;
 
 public abstract class EntityVoidNPC extends EntityFlying implements IMob {
+
+	private static final DataParameter<Float> LEFT_ARM_YAW = EntityDataManager.createKey(EntityVoidNPC.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> LEFT_ARM_PITCH = EntityDataManager.createKey(EntityVoidNPC.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> RIGHT_ARM_YAW = EntityDataManager.createKey(EntityVoidNPC.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> RIGHT_ARM_PITCH = EntityDataManager.createKey(EntityVoidNPC.class, DataSerializers.FLOAT);
 
 	protected boolean canDie = true;
 	protected boolean canPush = true;
@@ -39,13 +41,44 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob {
 	private boolean invulnerable = false;
 
 	private int animationID;
-	private IAnimation animation;
 
 	public EntityVoidNPC(World world) {
 		super(world);
 		experienceValue = 10;
 		ignoreFrustumCheck = true;
 		enablePersistence();
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(LEFT_ARM_YAW, 0.0F);
+		dataManager.register(LEFT_ARM_PITCH, 0.0F);
+		dataManager.register(RIGHT_ARM_YAW, 0.0F);
+		dataManager.register(RIGHT_ARM_PITCH, 0.0F);
+	}
+
+	public void setLimbRotations(float ly, float lp, float ry, float rp) {
+		dataManager.set(LEFT_ARM_YAW, ly);
+		dataManager.set(LEFT_ARM_PITCH, lp);
+		dataManager.set(RIGHT_ARM_YAW, ry);
+		dataManager.set(RIGHT_ARM_PITCH, rp);
+	}
+
+	public float getLeftArmYaw() {
+		return dataManager.get(LEFT_ARM_YAW);
+	}
+
+	public float getLeftArmPitch() {
+		return dataManager.get(LEFT_ARM_PITCH);
+	}
+
+	public float getRightArmYaw() {
+		return dataManager.get(RIGHT_ARM_YAW);
+	}
+
+	public float getRightArmPitch() {
+		return dataManager.get(RIGHT_ARM_PITCH);
 	}
 
 	@Override
@@ -64,56 +97,8 @@ public abstract class EntityVoidNPC extends EntityFlying implements IMob {
 		invulnerable = nbt.getBoolean("invulnerable");
 	}
 
-	public IAnimation constructAnimation(int a) {
-		animationID = a;
-		if (animation == null && animationID >= 0) {
-			Class<? extends IAnimation> ani = AnimationRegistry.getAnimation(animationID);
-			if (ani != null) {
-				try {
-					animation = ani.newInstance();
-				} catch (InstantiationException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		if (animationID < 0 && animation != null)
-			animation = null;
-		return animation;
-	}
-
-	/**
-	 * Call this (on the container) after calling {@link #constructAnimation(int)} to play the animation
-	 */
-	public void playAnimation() {
-		if (!world.isRemote && animationID >= 0 && animation != null) {
-			VoidCraft.network.sendToAllAround(new ClientPacketHandlerAnimation.Packet(getEntityId(), animationID, animation), new TargetPoint(dimension, posX, posY, posZ, 64));
-			animationID = -1;
-			animation = null;
-		}
-	}
-
-	public IAnimation getAnimation() {
-		return animation;
-	}
-
-	public void setAnimation(IAnimation a) {
-		animation = a;
-		animationID = AnimationRegistry.getAnimationID(animation);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void renderAnimation(AnimatableModel model) {
-		IAnimation a = getAnimation();
-		if (a != null) {
-			a.render(this, model);
-		}
-	}
-
 	@Override
 	public void onLivingUpdate() {
-		IAnimation a = getAnimation();
-		if (animationID >= 0 && (a == null || a.update(this)))
-			animationID = -1;
 		updateArmSwingProgress();
 		float f = getBrightness();
 		if (f > 0.5F) {

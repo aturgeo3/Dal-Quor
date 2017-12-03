@@ -115,7 +115,10 @@ public class ModelVoidBossOverlay<T extends EntityVoidNPC> extends AnimatableMod
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		((EntityVoidNPC) entity).renderAnimation(this);
+		if (entity instanceof EntityVoidNPC){
+			EntityVoidNPC npc = ((EntityVoidNPC) entity);
+			setAnimations(npc.getLeftArmYaw(), npc.getLeftArmPitch(), npc.getRightArmYaw(), npc.getRightArmPitch());
+		}
 		head.render(f5);
 		body.render(f5);
 		rightarm.render(f5);
@@ -135,6 +138,7 @@ public class ModelVoidBossOverlay<T extends EntityVoidNPC> extends AnimatableMod
 		// setAnimations((EntityBossXia) entitylivingbaseIn, partialTickTime);
 	}
 
+	@Override
 	public void setAnimations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw) {
 		setRotation(leftarm, Math.toRadians(leftArmPitch), Math.toRadians(leftArmYaw), 0.0F);
 		setRotation(rightarm, Math.toRadians(rightArmPitch), Math.toRadians(rightArmYaw), 0.0F);

@@ -14,7 +14,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import tamaized.tammodized.common.helper.MotionHelper;
 import tamaized.tammodized.common.particles.ParticleHelper;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
@@ -59,7 +58,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	private void doBlast() {
-		AnimationRegistry.AnimationLimbs.play(boss, 135, 135, 45, -45);
+		boss.setLimbRotations(135, 135, 45, -45);
 		resetAnimationTick = 20 * 2;
 		boss.world.playSound(null, boss.posX, boss.posY, boss.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (boss.world.rand.nextFloat() - boss.world.rand.nextFloat()) * 0.2F) * 0.7F);
 		ParticleHelper.spawnVanillaParticleOnServer(boss.world, EnumParticleTypes.EXPLOSION_HUGE, boss.posX, boss.posY, boss.posZ, 1.0D, 0.0D, 0.0D);
@@ -80,7 +79,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 	public void updateTask() {
 		if (resetAnimationTick == 0) {
 			resetAnimationTick--;
-			AnimationRegistry.AnimationLimbs.play(boss, 0, 0, 0, 0);
+			boss.setLimbRotations(0, 0, 0, 0);
 		} else if (resetAnimationTick >= 0) {
 			resetAnimationTick--;
 		}
@@ -96,7 +95,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 			switch (boss.getRNG().nextInt(5)) {
 				default:
 				case 0: // Fireball
-					AnimationRegistry.AnimationLimbs.play(boss, 90, 0, 0, 0);
+					boss.setLimbRotations(90, 0, 0, 0);
 					resetAnimationTick = 20 * 2;
 					double d5 = boss.getAttackTarget().posX - boss.posX;
 					double d6 = boss.getAttackTarget().getEntityBoundingBox().minY + (double) (boss.getAttackTarget().height / 2.0F) - (boss.posY + (double) (boss.height / 2.0F));
@@ -110,7 +109,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 					boss.world.spawnEntity(entitylargefireball);
 					break;
 				case 1: // Lit Strike
-					AnimationRegistry.AnimationLimbs.play(boss, 0, 180, 0, 0);
+					boss.setLimbRotations(0, 180, 0, 0);
 					resetAnimationTick = 20 * 2;
 					double x = boss.getAttackTarget().posX;
 					double y = boss.getAttackTarget().posY;
@@ -120,21 +119,21 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 					boss.world.addWeatherEffect(entitylightningbolt);
 					break;
 				case 2: // Ice Spike
-					AnimationRegistry.AnimationLimbs.play(boss, 180, 180, 0, 0);
+					boss.setLimbRotations(180, 180, 0, 0);
 					resetAnimationTick = 20 * 2;
 					if (boss.world.isAirBlock(boss.getAttackTarget().getPosition()))
 						boss.world.setBlockState(boss.getAttackTarget().getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
 					break;
 				case 3: // Disint
 					if (boss.getAttackTarget() instanceof EntityLivingBase) {
-						AnimationRegistry.AnimationLimbs.play(boss, 0, 90, 0, 0);
+						boss.setLimbRotations(0, 90, 0, 0);
 						resetAnimationTick = 20 * 2;
 						ProjectileDisintegration disint = new ProjectileDisintegration(boss.world, boss, boss.getAttackTarget(), 10.0F);
 						boss.world.spawnEntity(disint);
 					}
 					break;
 				case 4: // Voidic Infusion
-					AnimationRegistry.AnimationLimbs.play(boss, 90, 90, 45, -45);
+					boss.setLimbRotations(90, 90, 45, -45);
 					resetAnimationTick = 20 * 2;
 					if (boss.getAttackTarget() instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) boss.getAttackTarget();
@@ -148,7 +147,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	private void castSheathe() {
-		AnimationRegistry.AnimationLimbs.play(boss, 180, 0, 0, 0);
+		boss.setLimbRotations(180, 0, 0, 0);
 		resetAnimationTick = 20 * 2;
 		boss.clearActivePotions();
 		Potion sheathe;

@@ -21,7 +21,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.entity.EntityVoidNPC;
 import tamaized.voidcraft.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
@@ -65,7 +64,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
 			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		setHeldItem(EnumHand.OFF_HAND, vade);
-		if (!world.isRemote && world.provider instanceof WorldProviderXia &&!((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerXia1().isRunning())
+		if (!world.isRemote && world.provider instanceof WorldProviderXia && !((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerXia1().isRunning())
 			setDead();
 	}
 
@@ -199,7 +198,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 				canMove = false;
 				break;
 		}
-		AnimationRegistry.AnimationLimbs.play(this, 0, 0, 0, 0);
+		setLimbRotations(0, 0, 0, 0);
 		setHealth(getMaxHealth());
 	}
 

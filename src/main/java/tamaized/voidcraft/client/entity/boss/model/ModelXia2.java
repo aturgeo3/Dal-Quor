@@ -49,13 +49,17 @@ public class ModelXia2<T extends EntityVoidNPC> extends AnimatableModelArms {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		((EntityVoidNPC) entity).renderAnimation(this);
+		if (entity instanceof EntityVoidNPC){
+			EntityVoidNPC npc = ((EntityVoidNPC) entity);
+			setAnimations(npc.getLeftArmYaw(), npc.getLeftArmPitch(), npc.getRightArmYaw(), npc.getRightArmPitch());
+		}
 		this.LeftArm.render(f5);
 		this.Head.render(f5);
 		this.RightArm.render(f5);
 		this.Body.render(f5);
 	}
 
+	@Override
 	public void setAnimations(float leftArmPitch, float rightArmPitch, float leftArmYaw, float rightArmYaw) {
 		setRotation(LeftArm, Math.toRadians(leftArmPitch), Math.toRadians(leftArmYaw), 0.0F);
 		setRotation(RightArm, Math.toRadians(rightArmPitch), Math.toRadians(rightArmYaw), 0.0F);
@@ -70,6 +74,7 @@ public class ModelXia2<T extends EntityVoidNPC> extends AnimatableModelArms {
 		modelRenderer.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 

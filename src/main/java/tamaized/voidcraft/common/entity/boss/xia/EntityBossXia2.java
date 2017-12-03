@@ -20,7 +20,6 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.common.entity.EntityVoidBoss;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerBase;
 import tamaized.voidcraft.common.sound.VoidSoundEvents;
@@ -38,10 +37,8 @@ import java.util.List;
 @Deprecated
 public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 
-	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
-
 	private static final DataParameter<Boolean> SPHERE_STATE = EntityDataManager.createKey(EntityBossXia2.class, DataSerializers.BOOLEAN);
-
+	private final BossInfoServer bossInfo = new BossInfoServer(getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 	private List<EntityGhostPlayerBase> ghostList = new ArrayList<>();
 
 	public EntityBossXia2(World par1World) {
@@ -173,10 +170,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 				break;
 		}
 
-		AnimationRegistry.AnimationLimbs animation = ((AnimationRegistry.AnimationLimbs) constructAnimation(AnimationRegistry.limbs));
-		animation.init(0, 0, 0, 0);
-		setAnimation(animation);
-		playAnimation();
+		setLimbRotations(0, 0, 0, 0);
 	}
 
 	@Override

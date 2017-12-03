@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
-import tamaized.voidcraft.client.entity.animation.AnimationRegistry;
 import tamaized.voidcraft.client.particles.network.XiaLaserPacketHandler;
 import tamaized.voidcraft.common.damagesources.DamageSourceVoidicInfusion;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
@@ -90,10 +89,7 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 	public void updateTask() {
 		if (resetAnimationTick == 0) {
 			resetAnimationTick--;
-			AnimationRegistry.AnimationLimbs animation = ((AnimationRegistry.AnimationLimbs) boss.constructAnimation(AnimationRegistry.limbs));
-			animation.init(0, 0, 0, 0);
-			boss.setAnimation(animation);
-			boss.playAnimation();
+			boss.setLimbRotations(0, 0, 0, 0);
 		} else if (resetAnimationTick >= 0) {
 			resetAnimationTick--;
 		}
@@ -103,13 +99,13 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 			switch (boss.getRNG().nextInt(5)) {
 				default:
 				case 0: {
-					AnimationRegistry.AnimationLimbs.play(boss, 180, 180, 0, 0);
+					boss.setLimbRotations(180, 180, 0, 0);
 					resetAnimationTick = 20 * 4;
 					actionTeleport();
 				}
 				break;
 				case 1: { // Ring of Voidic Fire
-					AnimationRegistry.AnimationLimbs.play(boss, 180, 0, 0, 0);
+					boss.setLimbRotations(180, 0, 0, 0);
 					resetAnimationTick = 20 * 4;
 					boss.world.spawnEntity(new EntityLichInferno(boss.world, boss.getPosition(), 10, 10));
 				}
@@ -118,14 +114,14 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 					if (boss.getAttackTarget() == null)
 						break;
 					resetAnimationTick = 20 * 4;
-					AnimationRegistry.AnimationLimbs.play(boss, 90, 90, 0, 0);
+					boss.setLimbRotations(90, 90, 0, 0);
 					boss.getAttackTarget().attackEntityFrom(new DamageSourceVoidicInfusion(), 8.0f);
 				}
 				break;
 				case 3: { // litBolt
 					if (boss.getAttackTarget() == null)
 						break;
-					AnimationRegistry.AnimationLimbs.play(boss, 90, 0.0f, 0, 0);
+					boss.setLimbRotations(90, 0.0f, 0, 0);
 					resetAnimationTick = 20 * 2;
 					EntityLightningBolt entitylightningbolt = new EntityLightningBolt(boss.world, boss.getAttackTarget().posX, boss.getAttackTarget().posY, boss.getAttackTarget().posZ, false);
 					entitylightningbolt.setLocationAndAngles(boss.getAttackTarget().posX, boss.getAttackTarget().posY + 1 + entitylightningbolt.getYOffset(), boss.getAttackTarget().posZ, boss.getAttackTarget().rotationYaw, boss.getAttackTarget().rotationPitch);
@@ -135,7 +131,7 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 				case 4: { // Give Voidic Infusion to the player
 					if (boss.getAttackTarget() == null)
 						break;
-					AnimationRegistry.AnimationLimbs.play(boss, 0, 90, 0, 0);
+					boss.setLimbRotations(0, 90, 0, 0);
 					resetAnimationTick = 20 * 2;
 					if (boss.getAttackTarget() instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) boss.getAttackTarget();
