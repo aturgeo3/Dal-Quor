@@ -14,8 +14,13 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
 	maven {
+        name 'progwm\'s maven' // JEI
 		url = "http://dvs1.progwml6.com/files/maven"
 	}
+    maven {
+        name 'tterrag\'s maven' // CTM
+        url 'http://maven.tterrag.com/'
+    }
 }
 
 version = "1.12-${modVersion}${modVersionValue}"
@@ -39,8 +44,9 @@ minecraft {
 }
 
 dependencies {
-	deobfCompile "mezz.jei:${project.jeiVersion}:api"
+    compile  "mezz.jei:${project.jeiVersion}"
 	runtime "mezz.jei:${project.jeiVersion}"
+    compile "team.chisel.ctm:CTM:MC1.12-${project.ctmVersion}"
 }
 
 processResources {
