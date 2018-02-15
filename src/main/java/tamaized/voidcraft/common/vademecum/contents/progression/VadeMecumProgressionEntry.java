@@ -1,11 +1,9 @@
 package tamaized.voidcraft.common.vademecum.contents.progression;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.gui.VadeMecumGUI;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
-import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.vademecum.VadeMecumEntry;
 import tamaized.voidcraft.proxy.ClientProxy;
 
@@ -32,9 +30,9 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 	}
 
 	@Override
-	public void init(VadeMecumGUI gui) {
+	public void init(VadeMecumGUI gui) { // TODO
 		clearButtons();
-		addButton(gui, getEntryID(Entry.RitualBlocks), "voidcraft.VadeMecum.progression.title.ritualBlock", new ItemStack(Item.getItemFromBlock(VoidCraft.blocks.ritualBlock)));
+		/*addButton(gui, getEntryID(Entry.RitualBlocks), "voidcraft.VadeMecum.progression.title.ritualBlock", new ItemStack(Item.getItemFromBlock(VoidCraft.blocks.ritualBlock)));
 		if (gui.getPlayerStats().hasCategory(IVadeMecumCapability.Category.INTRO)) {
 			addButton(gui, getEntryID(Entry.RitualList), "voidcraft.VadeMecum.progression.title.ritualList", new ItemStack(VoidCraft.blocks.ritualBlock));
 			if (gui.getPlayerStats().hasCategory(IVadeMecumCapability.Category.TOME)) {
@@ -90,7 +88,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	@Override

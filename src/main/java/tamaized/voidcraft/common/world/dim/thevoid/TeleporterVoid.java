@@ -298,7 +298,7 @@ public class TeleporterVoid extends Teleporter {
 			for (int z = (l6 != 0 ? -2 : -3); z <= 2; z++) {
 				BlockPos pos = new BlockPos(i6 + x, k2 - 1, k6 + z);
 				if ((worldServerInstance.isAirBlock(pos) || worldServerInstance.getBlockState(pos).getBlock() == VoidCraftBlocks.realityHole) && ((l6 == 0) ? !(x == 0 && (z == -1 || z == 0)) : !(z == 0 && (x == -1 || x == 0))))
-					worldServerInstance.setBlockState(pos, ((z == -1 || z == ((l6 != 0) ? 1 : 0)) && (x == -1 || x == ((l6 != 0) ? 0 : 1))) ? VoidCraftBlocks.blockVoidcrystal.getDefaultState() : VoidCraftBlocks.blockFakeBedrock.getDefaultState());
+					worldServerInstance.setBlockState(pos, ((z == -1 || z == ((l6 != 0) ? 1 : 0)) && (x == -1 || x == ((l6 != 0) ? 0 : 1))) ? VoidCraftBlocks.blockVoidcrystal.getDefaultState() : VoidCraftBlocks.blockVoidcrystal.getDefaultState());
 			}
 		}
 

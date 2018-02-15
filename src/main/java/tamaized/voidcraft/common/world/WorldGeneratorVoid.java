@@ -50,7 +50,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(255);
-				new WorldGenMinable(VoidCraftBlocks.cosmicMaterial.getDefaultState(), 3, input -> input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.cosmicMaterial.getDefaultState(), 3, input -> input == VoidCraftBlocks.blockVoidcrystal.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
 	}
@@ -69,7 +69,7 @@ public class WorldGeneratorVoid implements IWorldGenerator {
 				int Xcoord = BlockX + random.nextInt(16);
 				int Zcoord = BlockZ + random.nextInt(16);
 				int Ycoord = random.nextInt(255);
-				new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
+				new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> input == VoidCraftBlocks.blockVoidcrystal.getDefaultState()).generate(world, random, new BlockPos(Xcoord, Ycoord, Zcoord));
 			}
 		}
 	}

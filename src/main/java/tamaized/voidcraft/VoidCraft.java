@@ -31,9 +31,7 @@ import tamaized.tammodized.proxy.AbstractProxy;
 import tamaized.tammodized.registry.PortalHandlerRegistry;
 import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
 import tamaized.voidcraft.common.blocks.TileEntityNoBreak;
-import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityAIBlock;
-import tamaized.voidcraft.common.blocks.tileentity.TileEntityFakeBedrockFarmland;
 import tamaized.voidcraft.common.blocks.tileentity.TileEntityStarForge;
 import tamaized.voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityHandler;
 import tamaized.voidcraft.common.capabilities.elytraFlying.ElytraFlyingCapabilityStorage;
@@ -56,7 +54,11 @@ import tamaized.voidcraft.common.capabilities.voidicPower.VoidicPowerCapabilityS
 import tamaized.voidcraft.common.entity.boss.EntityBossCorruptedPawn;
 import tamaized.voidcraft.common.entity.boss.dragon.EntityVoidicDragon;
 import tamaized.voidcraft.common.entity.boss.herobrine.EntityBossHerobrine;
-import tamaized.voidcraft.common.entity.boss.herobrine.extra.*;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineTNTPrimed;
+import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
 import tamaized.voidcraft.common.entity.boss.lob.EntityLordOfBlades;
 import tamaized.voidcraft.common.entity.boss.twins.EntityBossDol;
 import tamaized.voidcraft.common.entity.boss.twins.EntityBossZol;
@@ -69,15 +71,38 @@ import tamaized.voidcraft.common.entity.companion.EntityCompanionFireElemental;
 import tamaized.voidcraft.common.entity.companion.EntityVoidParrot;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayer;
 import tamaized.voidcraft.common.entity.ghost.EntityGhostPlayerSlim;
-import tamaized.voidcraft.common.entity.mob.*;
+import tamaized.voidcraft.common.entity.mob.EntityMobEtherealGuardian;
+import tamaized.voidcraft.common.entity.mob.EntityMobLich;
+import tamaized.voidcraft.common.entity.mob.EntityMobSpectreChain;
+import tamaized.voidcraft.common.entity.mob.EntityMobVoidWrath;
+import tamaized.voidcraft.common.entity.mob.EntityMobWraith;
 import tamaized.voidcraft.common.entity.mob.dalquor.EntityHashalaq;
 import tamaized.voidcraft.common.entity.mob.lich.EntityLichInferno;
-import tamaized.voidcraft.common.entity.nonliving.*;
-import tamaized.voidcraft.common.events.*;
+import tamaized.voidcraft.common.entity.nonliving.EntityAcidBall;
+import tamaized.voidcraft.common.entity.nonliving.EntityBlockSpell;
+import tamaized.voidcraft.common.entity.nonliving.EntityCasterLightningBolt;
+import tamaized.voidcraft.common.entity.nonliving.EntityChainedSkull;
+import tamaized.voidcraft.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.voidcraft.common.entity.nonliving.EntitySpellImplosion;
+import tamaized.voidcraft.common.entity.nonliving.EntitySpellRune;
+import tamaized.voidcraft.common.entity.nonliving.EntityVoidChain;
+import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
+import tamaized.voidcraft.common.events.BlockBreakPlaceEvent;
+import tamaized.voidcraft.common.events.CapabilitySyncEvent;
+import tamaized.voidcraft.common.events.CraftingHandler;
+import tamaized.voidcraft.common.events.DamageEvent;
+import tamaized.voidcraft.common.events.DeathEvent;
+import tamaized.voidcraft.common.events.ItemEntityEvent;
+import tamaized.voidcraft.common.events.LitStrikeEvent;
+import tamaized.voidcraft.common.events.PickUpEvent;
+import tamaized.voidcraft.common.events.PlayerRightClickEvent;
+import tamaized.voidcraft.common.events.SpawnEvent;
+import tamaized.voidcraft.common.events.VoidTickEvent;
+import tamaized.voidcraft.common.events.VoidicInfusionHandler;
+import tamaized.voidcraft.common.events.XiaFlightHandler;
 import tamaized.voidcraft.common.gui.GuiHandler;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
 import tamaized.voidcraft.common.handlers.ContributorHandler;
-import tamaized.voidcraft.common.machina.tileentity.*;
 import tamaized.voidcraft.common.starforge.StarForgeEffectRecipeList;
 import tamaized.voidcraft.common.starforge.effects.StarForgeEffectList;
 import tamaized.voidcraft.common.structures.voidcity.MapGenVoidCity;
@@ -94,7 +119,18 @@ import tamaized.voidcraft.common.world.dim.xia.TeleporterXia;
 import tamaized.voidcraft.common.world.dim.xia.WorldProviderXia;
 import tamaized.voidcraft.network.NetworkMessages;
 import tamaized.voidcraft.proxy.CommonProxy;
-import tamaized.voidcraft.registry.*;
+import tamaized.voidcraft.registry.VoidCraftAdvancements;
+import tamaized.voidcraft.registry.VoidCraftArmors;
+import tamaized.voidcraft.registry.VoidCraftBiomes;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
+import tamaized.voidcraft.registry.VoidCraftCreativeTabs;
+import tamaized.voidcraft.registry.VoidCraftFluids;
+import tamaized.voidcraft.registry.VoidCraftItems;
+import tamaized.voidcraft.registry.VoidCraftLootTables;
+import tamaized.voidcraft.registry.VoidCraftMaterials;
+import tamaized.voidcraft.registry.VoidCraftParticles;
+import tamaized.voidcraft.registry.VoidCraftPotions;
+import tamaized.voidcraft.registry.VoidCraftTools;
 
 @Mod(modid = VoidCraft.modid, name = "VoidCraft", version = VoidCraft.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class VoidCraft extends TamModBase {
@@ -116,7 +152,6 @@ public class VoidCraft extends TamModBase {
 	public static final VoidCraftBiomes biomes = new VoidCraftBiomes();
 	public static final VoidCraftAdvancements advancements = new VoidCraftAdvancements();
 	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
-	public static final VoidCraftTERecipes teRecipes = new VoidCraftTERecipes();
 	public static final VoidCraftParticles particles = new VoidCraftParticles();
 	@Instance(modid)
 	public static VoidCraft instance = new VoidCraft();
@@ -188,30 +223,14 @@ public class VoidCraft extends TamModBase {
 	public void init(FMLInitializationEvent event) {
 		VoidCraftFluids.init();
 		VoidCraftItems.init();
-		VoidCraftTERecipes.init();
 		VoidCraftBiomes.init();
 
 		StarForgeEffectList.register();
 		StarForgeEffectRecipeList.instance.register();
 
-		GameRegistry.registerTileEntity(TileEntityVoidMacerator.class, "tileEntityVoidMacerator");
-		GameRegistry.registerTileEntity(TileEntityVoidBox.class, "tileEntityVoidBox");
-		GameRegistry.registerTileEntity(TileEntityVoidInfuser.class, "tileEntityVoidInfuser");
-		GameRegistry.registerTileEntity(TileEntityHeimdall.class, "tileEntityHeimdall");
 		GameRegistry.registerTileEntity(TileEntityNoBreak.class, "tileEntityNoBreak");
 		GameRegistry.registerTileEntity(TileEntityAIBlock.class, "tileEntityAIBlock");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerGen.class, "tileEntityVoidicPowerGen");
-		GameRegistry.registerTileEntity(TileEntityVoidicPowerCable.class, "tileEntityVoidicPowerCable");
-		GameRegistry.registerTileEntity(TileEntityVoidicCharger.class, "tileEntityVoidicCharger");
-		GameRegistry.registerTileEntity(TileEntityRealityStabilizer.class, "tileEntityRealityStabilizer");
-		GameRegistry.registerTileEntity(TileEntityFakeBedrockFarmland.class, "tileEntityFakeBedrockFarmland");
-		GameRegistry.registerTileEntity(TileEntityVoidicAlchemy.class, "tileEntityVoidicAlchemy");
-		GameRegistry.registerTileEntity(TileEntityRealityTeleporter.class, "tileEntityRealityTeleporter");
-		GameRegistry.registerTileEntity(TileEntitySpellIceSpike.class, "tileEntitySpellIceSpike");
 		GameRegistry.registerTileEntity(TileEntityStarForge.class, "tileEntityStarForge");
-		GameRegistry.registerTileEntity(TileEntityVoidBlastFurnace.class, "tileEntityVoidBlastFurnace");
-		GameRegistry.registerTileEntity(TileEntityVoidicAnchor.class, "tileEntityVoidicAnchor");
-		GameRegistry.registerTileEntity(TileEntityVoidicCrystallizer.class, "tileEntityVoidicCrystallizer");
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 

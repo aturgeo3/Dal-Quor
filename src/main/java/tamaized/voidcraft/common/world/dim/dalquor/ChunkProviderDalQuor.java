@@ -15,7 +15,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.registry.VoidCraftBiomes;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -78,15 +79,15 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	}
 
 	public static IBlockState[] getGenBlocks(Biome biome) {
-		if (biome == VoidCraft.biomes.biomeDreamOverworld)
+		if (biome == VoidCraftBiomes.biomeDreamOverworld)
 			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
-		if (biome == VoidCraft.biomes.biomeDreamNether)
+		if (biome == VoidCraftBiomes.biomeDreamNether)
 			return new IBlockState[]{Blocks.NETHERRACK.getDefaultState(), Blocks.MAGMA.getDefaultState(), Blocks.MAGMA.getDefaultState()};
-		if (biome == VoidCraft.biomes.biomeDreamEnd)
+		if (biome == VoidCraftBiomes.biomeDreamEnd)
 			return new IBlockState[]{Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()};
-		if (biome == VoidCraft.biomes.biomeDreamVoid)
-			return new IBlockState[]{VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState(), VoidCraft.blocks.blockFakeBedrock.getDefaultState()};
-		else
+		if (biome == VoidCraftBiomes.biomeDreamVoid) {
+			return new IBlockState[]{VoidCraftBlocks.blockVoidcrystal.getDefaultState(), VoidCraftBlocks.blockVoidcrystal.getDefaultState(), VoidCraftBlocks.blockVoidcrystal.getDefaultState()};
+		} else
 			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
 	}
 
@@ -335,6 +336,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		return p_185963_1_;
 	}
 
+	@Override
 	public void populate(int x, int z) {
 		BlockFalling.fallInstantly = true;
 		BlockPos blockpos = new BlockPos(x * 16, 0, z * 16);
@@ -358,10 +360,12 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		BlockFalling.fallInstantly = false;
 	}
 
+	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 		return false;
 	}
 
+	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		return this.world.getBiome(pos).getSpawnableList(creatureType);
 	}
@@ -372,6 +376,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		return null;
 	}
 
+	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
 
 	}
@@ -382,6 +387,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	}
 
 	private class WorldGenIsland extends WorldGenerator {
+		@Override
 		public boolean generate(World worldIn, Random rand, BlockPos position) {
 			float f = (float) (rand.nextInt(3) + 4);
 

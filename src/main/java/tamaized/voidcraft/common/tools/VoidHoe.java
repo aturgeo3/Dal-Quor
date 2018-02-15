@@ -11,7 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.tools.TamHoe;
-import tamaized.voidcraft.VoidCraft;
 
 public class VoidHoe extends TamHoe {
 
@@ -35,10 +34,10 @@ public class VoidHoe extends TamHoe {
 			IBlockState iblockstate = worldIn.getBlockState(pos);
 			Block block = iblockstate.getBlock();
 
-			if (block == VoidCraft.blocks.blockFakeBedrock && facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) {
+			/*if (block == VoidCraft.blocks.blockFakeBedrock && facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) { // TODO
 				this.setBlock(stack, playerIn, worldIn, pos, VoidCraft.blocks.blockFakeBedrockFarmland.getDefaultState());
 				return EnumActionResult.SUCCESS;
-			}
+			}*/
 			return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 		}
 	}

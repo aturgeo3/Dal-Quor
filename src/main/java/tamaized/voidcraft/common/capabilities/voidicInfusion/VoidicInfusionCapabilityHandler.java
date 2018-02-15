@@ -26,7 +26,6 @@ import tamaized.voidcraft.common.handlers.ConfigHandler;
 import tamaized.voidcraft.network.client.ClientPacketHandlerHealth;
 import tamaized.voidcraft.network.client.ClientPacketHandlerInfusion;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
 import tamaized.voidcraft.registry.VoidCraftPotions;
 
 import java.util.Iterator;
@@ -91,7 +90,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			flag = true;
 			gain = 20;
 		}
-		if (!mainHand.isEmpty() && mainHand.getItem() == VoidCraftItems.voidicSuppressor && mainHand.hasCapability(CapabilityList.VOIDICPOWER, null)) {
+		/*TODO if (!mainHand.isEmpty() && mainHand.getItem() == VoidCraftItems.voidicSuppressor && mainHand.hasCapability(CapabilityList.VOIDICPOWER, null)) {
 			IVoidicPowerCapability cap = mainHand.getCapability(CapabilityList.VOIDICPOWER, null);
 			if (cap.getCurrentPower() > 0) {
 				cap.drain(1);
@@ -107,7 +106,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 				//				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
 				flag = false;
 			}
-		} else if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusionImmunity) != null) {
+		} else*/ if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusionImmunity) != null) {
 			flag = false;
 		}
 		if ((entity.world.provider.getDimension() == ConfigHandler.dimensionIdVoid || override) && flag) {

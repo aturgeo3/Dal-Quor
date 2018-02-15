@@ -17,7 +17,6 @@ import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.voidcraft.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.voidcraft.common.entity.boss.xia.EntityBossXia;
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
 import tamaized.voidcraft.registry.VoidCraftPotions;
 
 public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.IDamageListener {
@@ -121,8 +120,8 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 				case 2: // Ice Spike
 					boss.setLimbRotations(180, 180, 0, 0);
 					resetAnimationTick = 20 * 2;
-					if (boss.world.isAirBlock(boss.getAttackTarget().getPosition()))
-						boss.world.setBlockState(boss.getAttackTarget().getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
+//					if (boss.world.isAirBlock(boss.getAttackTarget().getPosition())) TODO
+//						boss.world.setBlockState(boss.getAttackTarget().getPosition(), VoidCraftBlocks.iceSpike.getDefaultState());
 					break;
 				case 3: // Disint
 					if (boss.getAttackTarget() instanceof EntityLivingBase) {

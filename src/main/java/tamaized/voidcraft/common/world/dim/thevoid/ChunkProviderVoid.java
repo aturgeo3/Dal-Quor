@@ -224,7 +224,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 							for (int l2 = 0; l2 < 4; ++l2) {
 								if ((lvt_45_1_ += d16) > 0.0D && i2 * 8 + j2 < 128) {
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, (flag) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockFakeBedrock.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, (flag) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockVoidcrystal.getDefaultState());
 								} else if (i2 * 8 + j2 < seaLevel) {
 									//primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.AIR.getDefaultState());
 								}
@@ -271,7 +271,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		genFortress.generateStructure(world, rand, chunkpos);
 		genCity.generateStructure(world, rand, chunkpos);
 		int k1;
-		WorldGenMinable genCrystalOre = new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> (input == VoidCraftBlocks.blockFakeBedrock.getDefaultState()));
+		WorldGenMinable genCrystalOre = new WorldGenMinable(VoidCraftBlocks.oreVoidcrystal.getDefaultState(), 5, input -> (input == VoidCraftBlocks.blockVoidcrystal.getDefaultState()));
 		if (ConfigHandler.generate_VoidOre) {
 			for (k1 = 0; k1 < 16; ++k1) {
 				genCrystalOre.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(200) + 50, rand.nextInt(16)));
@@ -279,13 +279,9 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		}
 		new WorldGenLakes(VoidCraftFluids.arcaneSludgeFluidBlock).generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(200) + 50, rand.nextInt(16) + 8));
 		new WorldGenLakes(VoidCraftBlocks.realityHole).generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(100) + 20, rand.nextInt(16) + 8));
-		WorldGenEtherealPlants genPlantAndLiquid = new WorldGenEtherealPlants();
-		for (k1 = 0; k1 < 16; ++k1) {
-			genPlantAndLiquid.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(100) + 20, rand.nextInt(16)));
-		}
 		{
 			BlockPos pos = blockpos.add(rand.nextInt(16) + 8, rand.nextInt(100) + 20, rand.nextInt(16) + 8);
-			if (world.getBlockState(pos).getBlock() == VoidCraftBlocks.blockFakeBedrock)
+			if (world.getBlockState(pos).getBlock() == VoidCraftBlocks.blockVoidcrystal)
 				world.setBlockState(pos, VoidCraftFluids.arcaneSludgeFluidBlock.getDefaultState(), 2);
 		}
 		BlockFalling.fallInstantly = false;

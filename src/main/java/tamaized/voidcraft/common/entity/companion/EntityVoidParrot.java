@@ -5,8 +5,20 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollow;
+import net.minecraft.entity.ai.EntityAIFollowOwnerFlying;
+import net.minecraft.entity.ai.EntityAILandOnOwnersShoulder;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISit;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.*;
@@ -16,6 +28,7 @@ import net.minecraft.entity.passive.EntityShoulderRiding;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,7 +38,11 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateFlying;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -33,8 +50,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.voidcraft.registry.VoidCraftBlocks;
-import tamaized.voidcraft.registry.VoidCraftItems;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -44,7 +59,7 @@ import java.util.Set;
 
 public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlying {
 
-	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(VoidCraftItems.etherealSeed);
+	private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS); // TODO
 	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityVoidParrot.class, DataSerializers.VARINT);
 	private static final java.util.Map<Class<? extends Entity>, SoundEvent> MIMIC_SOUNDS = Maps.newHashMapWithExpectedSize(32);
 	private static final Predicate<EntityLiving> CAN_MIMIC = p_apply_1_ -> p_apply_1_ != null && MIMIC_SOUNDS.containsKey(p_apply_1_.getClass());
@@ -173,15 +188,15 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		for (int x = -15; x <= 15; x++)
+	public boolean getCanSpawnHere() { // TODO
+		/*for (int x = -15; x <= 15; x++)
 			for (int z = -15; z <= 15; z++)
 				for (int y = -5; y <= 5; y++) {
 					BlockPos pos = new BlockPos(MathHelper.floor(this.posX + x), MathHelper.floor(this.getEntityBoundingBox().minY + y), MathHelper.floor(this.posZ + z));
 					IBlockState state = world.getBlockState(pos);
 					if (state.getBlock() == VoidCraftBlocks.etherealPlant)
 						return true;
-				}
+				}*/
 		return false;
 
 	}
@@ -190,12 +205,14 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	 * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
 	 * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
 	 */
+	@Override
 	@Nullable
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
 		this.setVariant(this.rand.nextInt(5));
 		return super.onInitialSpawn(difficulty, livingdata);
 	}
 
+	@Override
 	protected void initEntityAI() {
 		this.aiSit = new EntityAISit(this);
 		this.tasks.addTask(0, new EntityAIPanic(this, 1.25D));
@@ -208,6 +225,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 		this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
@@ -219,6 +237,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	/**
 	 * Returns new PathNavigateGround instance
 	 */
+	@Override
 	protected PathNavigate createNavigator(World worldIn) {
 		PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
 		pathnavigateflying.setCanOpenDoors(false);
@@ -227,6 +246,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 		return pathnavigateflying;
 	}
 
+	@Override
 	public float getEyeHeight() {
 		return this.height * 0.6F;
 	}
@@ -235,6 +255,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate() {
 		playMimicSound(this.world, this);
 
@@ -247,6 +268,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 		this.calculateFlapping();
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setPartying(BlockPos pos, boolean p_191987_2_) {
 		this.jukeboxPosition = pos;
@@ -281,54 +303,66 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	 * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
 	 * the animal type)
 	 */
+	@Override
 	public boolean isBreedingItem(ItemStack stack) {
 		return false;
 	}
 
+	@Override
 	public void fall(float distance, float damageMultiplier) {
 	}
 
+	@Override
 	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
 	}
 
 	/**
 	 * Returns true if the mob is currently able to mate with the specified mob.
 	 */
+	@Override
 	public boolean canMateWith(EntityAnimal otherAnimal) {
 		return false;
 	}
 
+	@Override
 	@Nullable
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return null;
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity entityIn) {
 		return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
 	}
 
+	@Override
 	@Nullable
 	public SoundEvent getAmbientSound() {
 		return getAmbientSound(this.rand);
 	}
 
+	@Override
 	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
 		return SoundEvents.ENTITY_PARROT_HURT;
 	}
 
+	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.ENTITY_PARROT_DEATH;
 	}
 
+	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn) {
 		this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
 	}
 
+	@Override
 	protected float playFlySound(float p_191954_1_) {
 		this.playSound(SoundEvents.ENTITY_PARROT_FLY, 0.15F, 1.0F);
 		return p_191954_1_ + this.flapSpeed / 2.0F;
 	}
 
+	@Override
 	protected boolean makeFlySound() {
 		return true;
 	}
@@ -336,10 +370,12 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	/**
 	 * Gets the pitch of living sounds in living entities.
 	 */
+	@Override
 	protected float getSoundPitch() {
 		return getPitch(this.rand);
 	}
 
+	@Override
 	public SoundCategory getSoundCategory() {
 		return SoundCategory.NEUTRAL;
 	}
@@ -347,10 +383,12 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	/**
 	 * Returns true if this entity should push and be pushed by other entities when colliding.
 	 */
+	@Override
 	public boolean canBePushed() {
 		return true;
 	}
 
+	@Override
 	protected void collideWithEntity(Entity entityIn) {
 		if (!(entityIn instanceof EntityPlayer)) {
 			super.collideWithEntity(entityIn);
@@ -360,6 +398,7 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isEntityInvulnerable(source)) {
 			return false;
@@ -373,21 +412,23 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	}
 
 	public int getVariant() {
-		return MathHelper.clamp(((Integer) this.dataManager.get(VARIANT)).intValue(), 0, 4);
+		return MathHelper.clamp(this.dataManager.get(VARIANT), 0, 4);
 	}
 
 	public void setVariant(int p_191997_1_) {
-		this.dataManager.set(VARIANT, Integer.valueOf(p_191997_1_));
+		this.dataManager.set(VARIANT, p_191997_1_);
 	}
 
+	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(VARIANT, Integer.valueOf(0));
+		this.dataManager.register(VARIANT, 0);
 	}
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("Variant", this.getVariant());
@@ -396,12 +437,14 @@ public class EntityVoidParrot extends EntityShoulderRiding implements EntityFlyi
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setVariant(compound.getInteger("Variant"));
 	}
 
 	@Nullable
+	@Override
 	protected ResourceLocation getLootTable() {
 		return LootTableList.ENTITIES_PARROT;
 	}

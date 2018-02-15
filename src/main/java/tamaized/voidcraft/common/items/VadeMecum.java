@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,7 +22,6 @@ import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
 import tamaized.voidcraft.common.handlers.ConfigHandler;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAlchemy;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumRitualHandler;
 import tamaized.voidcraft.common.vademecum.progression.VadeMecumWordsOfPower;
 import tamaized.voidcraft.network.server.ServerPacketHandlerVadeMecum;
@@ -76,15 +74,6 @@ public class VadeMecum extends TamItem {
 			if (state.getBlock() == VoidCraftBlocks.ritualBlock) {
 				if (!world.isRemote)
 					VadeMecumRitualHandler.invokeRitual(player, world, pos);
-				return EnumActionResult.SUCCESS;
-			} else if (state.getBlock() == VoidCraftBlocks.voidicAlchemyTable) {
-				if (!world.isRemote) {
-					TileEntity te = world.getTileEntity(pos);
-					if (te instanceof TileEntityVoidicAlchemy) {
-						TileEntityVoidicAlchemy tile = (TileEntityVoidicAlchemy) te;
-						tile.setOwner(player);
-					}
-				}
 				return EnumActionResult.SUCCESS;
 			}
 		}

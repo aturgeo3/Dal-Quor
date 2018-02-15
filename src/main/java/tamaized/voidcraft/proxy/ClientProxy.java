@@ -22,8 +22,6 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import tamaized.tammodized.client.entity.render.RenderDragonOld;
 import tamaized.voidcraft.VoidCraft;
 import tamaized.voidcraft.client.blocks.render.RenderNoBreak;
-import tamaized.voidcraft.client.blocks.render.RenderVoidicAnchor;
-import tamaized.voidcraft.client.blocks.render.RenderVoidicCharger;
 import tamaized.voidcraft.client.entity.boss.bossbar.BossBarOverlay;
 import tamaized.voidcraft.client.entity.boss.extra.EntityDolXia;
 import tamaized.voidcraft.client.entity.boss.extra.ModelHerobrineShadow;
@@ -110,8 +108,6 @@ import tamaized.voidcraft.common.entity.nonliving.EntityVoidChain;
 import tamaized.voidcraft.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.voidcraft.common.events.client.DebugEvent;
 import tamaized.voidcraft.common.events.client.TextureStitch;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicAnchor;
-import tamaized.voidcraft.common.machina.tileentity.TileEntityVoidicCharger;
 import tamaized.voidcraft.common.vademecum.contents.VadeMecumMainEntry;
 import tamaized.voidcraft.registry.VoidCraftBlocks;
 
@@ -192,12 +188,8 @@ public class ClientProxy extends CommonProxy {
 		VoidCraftBlocks.clientInit();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, new RenderNoBreak());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoidicCharger.class, new RenderVoidicCharger());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoidicAnchor.class, new RenderVoidicAnchor());
 
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraftBlocks.blockNoBreak), 0, TileEntityNoBreak.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraftBlocks.voidicCharger), 0, TileEntityVoidicCharger.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraftBlocks.voidicAnchor), 0, TileEntityVoidicAnchor.class);
 
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 	}

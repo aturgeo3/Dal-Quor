@@ -7,8 +7,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import tamaized.voidcraft.common.items.RealityTeleporter;
-import tamaized.voidcraft.registry.VoidCraftItems;
 
 public class ServerPacketHandlerLinkClear implements IMessageHandler<ServerPacketHandlerLinkClear.Packet, IMessage> {
 
@@ -19,9 +17,6 @@ public class ServerPacketHandlerLinkClear implements IMessageHandler<ServerPacke
 			stack = player.inventory.mainInventory.get(slot);
 		else if (slot == -1)
 			stack = player.inventory.offHandInventory.get(0);
-		if (!stack.isEmpty() && stack.getItem() == VoidCraftItems.realityTeleporter) {
-			RealityTeleporter.clearLink(stack);
-		}
 	}
 
 	@Override

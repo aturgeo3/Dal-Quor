@@ -2,7 +2,6 @@ package tamaized.voidcraft.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.voidcraft.VoidCraft;
+import tamaized.voidcraft.registry.VoidCraftBlocks;
 
 import java.util.Random;
 
@@ -51,7 +50,7 @@ public class BlockPortalXia extends TamBlockPortal {
 	 */
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[0]);
+		return new BlockStateContainer(this);
 	}
 
 	@Override
@@ -61,14 +60,15 @@ public class BlockPortalXia extends TamBlockPortal {
 			for (int z = -1; z <= 1; z++) {
 				for (int y = -1; y <= 0; y++) {
 					BlockPos newPos = pos.add(x, y, z);
-					if (worldIn.getBlockState(newPos).getBlock() == VoidCraft.blocks.blockNoBreak) {
-						worldIn.setBlockState(newPos, VoidCraft.blocks.blockFakeBedrock.getDefaultState());
+					if (worldIn.getBlockState(newPos).getBlock() == VoidCraftBlocks.blockNoBreak) {
+						worldIn.setBlockState(newPos, VoidCraftBlocks.blockVoidcrystal.getDefaultState());
 					}
 				}
 			}
 		}
 	}
 
+	@Override
 	public boolean tryToCreatePortal(World par1World, BlockPos pos) {
 		byte b0 = 0;
 		byte b1 = 0;
@@ -77,11 +77,11 @@ public class BlockPortalXia extends TamBlockPortal {
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
+		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
 			b0 = 1;
 		}
 
-		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == VoidCraft.blocks.blockFakeBedrock || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
+		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == VoidCraftBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
 			b1 = 1;
 		}
 
@@ -105,10 +105,10 @@ public class BlockPortalXia extends TamBlockPortal {
 						boolean isAirBlock = par1World.isAirBlock(new BlockPos(x + b0 * l, y + i1, z + b1 * l));
 
 						if (flag) {
-							if (j1 != VoidCraft.blocks.blockFakeBedrock) {
+							if (j1 != VoidCraftBlocks.blockVoidcrystal) {
 								return false;
 							}
-						} else if (!isAirBlock && j1 != VoidCraft.blocks.blockVoidFire) {
+						} else if (!isAirBlock && j1 != VoidCraftBlocks.blockVoidFire) {
 							return false;
 						}
 					}
@@ -117,7 +117,7 @@ public class BlockPortalXia extends TamBlockPortal {
 
 			for (l = 0; l < 2; ++l) {
 				for (i1 = 0; i1 < 3; ++i1) {
-					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), VoidCraft.blocks.blockPortalXia.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), VoidCraftBlocks.blockPortalXia.getDefaultState(), 2);
 				}
 			}
 
@@ -141,7 +141,7 @@ public class BlockPortalXia extends TamBlockPortal {
 			;
 		}
 
-		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != VoidCraft.blocks.blockFakeBedrock) {
+		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != VoidCraftBlocks.blockVoidcrystal) {
 			world.setBlockToAir(pos);
 		} else {
 			int j1;
@@ -150,14 +150,14 @@ public class BlockPortalXia extends TamBlockPortal {
 				;
 			}
 
-			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == VoidCraft.blocks.blockFakeBedrock) {
+			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
 				boolean flag = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
 				boolean flag1 = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this || world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
 
 				if (flag && flag1) {
 					world.setBlockToAir(pos);
 				} else {
-					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != VoidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != VoidCraft.blocks.blockFakeBedrock || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
+					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != VoidCraftBlocks.blockVoidcrystal || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != VoidCraftBlocks.blockVoidcrystal || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
 						world.setBlockToAir(pos);
 					}
 				}

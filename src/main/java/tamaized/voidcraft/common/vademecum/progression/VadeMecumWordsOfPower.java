@@ -16,9 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tamaized.tammodized.TamModized;
@@ -28,8 +30,6 @@ import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
 import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
 import tamaized.voidcraft.VoidCraft;
-import tamaized.voidcraft.common.blocks.spell.BlockSpellIceSpike;
-import tamaized.voidcraft.common.blocks.spell.tileentity.TileEntitySpellIceSpike;
 import tamaized.voidcraft.common.capabilities.CapabilityList;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.voidcraft.common.capabilities.vadeMecum.IVadeMecumCapability.Category;
@@ -314,31 +314,31 @@ public class VadeMecumWordsOfPower {
 						useCharge = true;
 					}
 					break;
-					case IceSpike: {
+					case IceSpike: { // TODO
 						exclude.add(caster);
 						result = RayTraceHelper.tracePath(world, caster, 32, 1, exclude);
 						if (result != null) {
 							if (result.entityHit != null) {
 								BlockPos pos = result.entityHit.getPosition();
 								if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-									world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
-									TileEntity te = world.getTileEntity(pos);
-									if (te instanceof TileEntitySpellIceSpike)
-										((TileEntitySpellIceSpike) te).setCaster(caster);
+//									world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+//									TileEntity te = world.getTileEntity(pos);
+//									if (te instanceof TileEntitySpellIceSpike)
+//										((TileEntitySpellIceSpike) te).setCaster(caster);
 								}
 							} else {
 								BlockPos bp = result.getBlockPos();
 								if (bp != null) {
 									if (world.getBlockState(bp).getBlock().isReplaceable(world, bp)) {
-										world.setBlockState(bp, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
-										TileEntity te = world.getTileEntity(bp);
-										if (te instanceof TileEntitySpellIceSpike)
-											((TileEntitySpellIceSpike) te).setCaster(caster);
+//										world.setBlockState(bp, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+//										TileEntity te = world.getTileEntity(bp);
+//										if (te instanceof TileEntitySpellIceSpike)
+//											((TileEntitySpellIceSpike) te).setCaster(caster);
 									} else if ((world.isAirBlock(bp.up()) || world.getBlockState(bp.up()).getBlock().isReplaceable(world, bp.up())) && (!world.isAirBlock(bp) && world.getBlockState(bp).isFullCube())) {
-										world.setBlockState(bp.up(), VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
-										TileEntity te = world.getTileEntity(bp.up());
-										if (te instanceof TileEntitySpellIceSpike)
-											((TileEntitySpellIceSpike) te).setCaster(caster);
+//										world.setBlockState(bp.up(), VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+//										TileEntity te = world.getTileEntity(bp.up());
+//										if (te instanceof TileEntitySpellIceSpike)
+//											((TileEntitySpellIceSpike) te).setCaster(caster);
 									}
 								}
 							}
@@ -364,13 +364,13 @@ public class VadeMecumWordsOfPower {
 						useCharge = true;
 					}
 					break;
-					case RingOfFrost: {
+					case RingOfFrost: { // TODO
 						for (BlockPos pos : createCircle(caster.getPosition()))
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-								world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
-								TileEntity te = world.getTileEntity(pos);
-								if (te instanceof TileEntitySpellIceSpike)
-									((TileEntitySpellIceSpike) te).setCaster(caster);
+//								world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+//								TileEntity te = world.getTileEntity(pos);
+//								if (te instanceof TileEntitySpellIceSpike)
+//									((TileEntitySpellIceSpike) te).setCaster(caster);
 							}
 						useCharge = true;
 					}
@@ -567,13 +567,13 @@ public class VadeMecumWordsOfPower {
 					SheatheHelper.castSheathe(caster, PotionSheathe.Type.Frost, 20 * 90);
 				}
 				break;
-				case IceSpike: {
+				case IceSpike: { // TODO
 					BlockPos pos = target.getPosition();
 					if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-						world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
-						TileEntity te = world.getTileEntity(pos);
-						if (te instanceof TileEntitySpellIceSpike)
-							((TileEntitySpellIceSpike) te).setCaster(caster);
+//						world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+//						TileEntity te = world.getTileEntity(pos);
+//						if (te instanceof TileEntitySpellIceSpike)
+//							((TileEntitySpellIceSpike) te).setCaster(caster);
 					}
 				}
 				break;
@@ -594,14 +594,14 @@ public class VadeMecumWordsOfPower {
 					}
 				}
 				break;
-				case RingOfFrost: {
-					for (BlockPos pos : createCircle(caster.getPosition()))
+				case RingOfFrost: { // TODO
+					/*for (BlockPos pos : createCircle(caster.getPosition()))
 						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
 							world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
 							TileEntity te = world.getTileEntity(pos);
 							if (te instanceof TileEntitySpellIceSpike)
 								((TileEntitySpellIceSpike) te).setCaster(caster);
-						}
+						}*/
 				}
 				break;
 				case AcidSpray: {

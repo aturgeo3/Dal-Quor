@@ -18,7 +18,6 @@ public class NetworkMessages {
 		registerMessage(network, ServerPacketHandlerStarforgeCraft.class, ServerPacketHandlerStarforgeCraft.Packet.class, Side.SERVER);
 		registerMessage(network, ServerPacketHandlerVadeMecum.class, ServerPacketHandlerVadeMecum.Packet.class, Side.SERVER);
 		registerMessage(network, ServerPacketHandlerVadeMecumLastEntry.class, ServerPacketHandlerVadeMecumLastEntry.Packet.class, Side.SERVER);
-		registerMessage(network, ServerPacketHandlerVoidBox.class, ServerPacketHandlerVoidBox.Packet.class, Side.SERVER);
 
 		// Client
 		registerMessage(network, ClientPacketHandlerHealth.class, ClientPacketHandlerHealth.Packet.class, Side.CLIENT);
