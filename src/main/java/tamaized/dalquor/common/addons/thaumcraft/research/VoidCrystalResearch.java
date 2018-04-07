@@ -10,7 +10,7 @@ public class VoidCrystalResearch {/*extends ResearchItem {
 
 	public VoidCrystalResearch(VoidCraftThaumRecipes recipes) {
 		
-		super("vc.VoidCrystal", "VoidCraft", aspects, 2, 1, 1, new ResourceLocation("VoidCraft:textures/items/voidcrystal.png")); 
+		super("vc.VoidCrystal", "VoidCraft", aspects, 2, 1, 1, new ResourceLocation(VoidCraft.modid, "textures/items/voidcrystal.png"));
 		
 		this.setHidden();
 		this.setItemTriggers(new ItemStack(voidCraft.items.voidcrystal));

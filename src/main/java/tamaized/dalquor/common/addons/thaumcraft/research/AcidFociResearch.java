@@ -11,7 +11,7 @@ public class AcidFociResearch {/*extends ResearchItem {
 
 	public AcidFociResearch(VoidCraftThaumRecipes recipes) {
 		
-		super("vc.FociAcid", "VoidCraft", aspects, 4, 2, 3, new ResourceLocation("VoidCraft:textures/items/Thaumcraft/spells/Acid.png"));
+		super("vc.FociAcid", "VoidCraft", aspects, 4, 2, 3, new ResourceLocation(VoidCraft.modid, "textures/items/Thaumcraft/spells/Acid.png"));
 		
 		this.setParents("vc.VoidCrystal");
 		

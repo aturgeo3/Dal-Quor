@@ -10,7 +10,7 @@ public class RenderHook {/* extends Render {
 		super(renderManager);
 	}
 
-	private static final ResourceLocation hookTexture = new ResourceLocation("VoidCraft:textures/entity/voidHook.png");
+	private static final ResourceLocation hookTexture = new ResourceLocation(VoidCraft.modid, "textures/entity/voidHook.png");
 
 	public void renderArrow(EntityHookShot hook, double par2, double par4, double par6, float par8, float par9) {
 		this.bindEntityTexture(hook);

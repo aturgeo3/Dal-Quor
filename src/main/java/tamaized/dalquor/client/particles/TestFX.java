@@ -3,7 +3,7 @@ package tamaized.dalquor.client.particles;
 
 public class TestFX {/* extends EntityFX{
 
-	private static final ResourceLocation texture = new ResourceLocation("VoidCraft:textures/particle/Portal.png");
+	private static final ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/particle/Portal.png");
 	
 	public TestFX(World par1World, double x, double y, double z) {
 		super(par1World, x, y, z);

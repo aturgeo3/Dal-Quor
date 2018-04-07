@@ -15,7 +15,7 @@ public class SchematicLoader {
 
 	public Schematic get(String schemname) {
 		try {
-			InputStream is = this.getClass().getClassLoader().getResourceAsStream("assets/voidcraft/schematics/" + schemname);
+			InputStream is = this.getClass().getClassLoader().getResourceAsStream("assets/dalquor/schematics/" + schemname);
 			NBTTagCompound nbtdata = CompressedStreamTools.readCompressed(is);
 
 			short width = nbtdata.getShort("Width");

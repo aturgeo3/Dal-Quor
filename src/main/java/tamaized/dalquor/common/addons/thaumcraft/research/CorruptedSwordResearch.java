@@ -10,7 +10,7 @@ public class CorruptedSwordResearch {/*extends ResearchItem {
 
 	public CorruptedSwordResearch(VoidCraftThaumRecipes recipes) {
 		
-		super("vc.CorruptedSword", "VoidCraft", aspects, 0, 0, 1, new ResourceLocation("VoidCraft:textures/items/Thaumcraft/corruptedSword.png")); 
+		super("vc.CorruptedSword", "VoidCraft", aspects, 0, 0, 1, new ResourceLocation(VoidCraft.modid, "textures/items/Thaumcraft/corruptedSword.png"));
 		
 		this.setParents("vc.VoidCrystal");
 		
