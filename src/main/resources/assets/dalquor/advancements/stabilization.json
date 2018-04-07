@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.stabilization.title"
@@ -11,10 +11,10 @@
         },
         "frame": "task"
     },
-    "parent": "voidcraft:anchor",
+    "parent": "dalquor:anchor",
     "criteria": {
         "stabilization": {
-            "trigger": "voidcraft:stabilization"
+            "trigger": "dalquor:stabilization"
         }
     }
 }

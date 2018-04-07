@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/voidiccrystallizer",
+    "parent": "dalquor:block/voidiccrystallizer",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

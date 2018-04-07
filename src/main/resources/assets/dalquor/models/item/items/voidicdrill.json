@@ -1,7 +1,7 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "voidcraft:items/Laser_Drill"
+        "layer0": "dalquor:items/Laser_Drill"
     },
     "display": {
 		"thirdperson_righthand": {

@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidiccable",
+    "item": "dalquor:voidiccable",
     "count": 8
   },
   "pattern": [
@@ -14,7 +14,7 @@
       "item": "minecraft:redstone"
     },
     "Y": {
-      "item": "voidcraft:blockvoidcrystal"
+      "item": "dalquor:blockvoidcrystal"
     }
   }
 }

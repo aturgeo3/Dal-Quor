@@ -1,10 +1,10 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "0": "voidcraft:blocks/machina/voidiccrystallizer/side",
-        "1": "voidcraft:blocks/machina/voidiccrystallizer/top",
-        "2": "voidcraft:blocks/machina/voidiccrystallizer/crystal",
-        "particle": "voidcraft:blocks/machina/voidiccrystallizer/side"
+        "0": "dalquor:blocks/machina/voidiccrystallizer/side",
+        "1": "dalquor:blocks/machina/voidiccrystallizer/top",
+        "2": "dalquor:blocks/machina/voidiccrystallizer/crystal",
+        "particle": "dalquor:blocks/machina/voidiccrystallizer/side"
     },
     "elements": [
         {

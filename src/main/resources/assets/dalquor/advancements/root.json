@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.root.title"
@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancements.voidcraft.root.description"
         },
-        "background": "voidcraft:textures/gui/advancements/backgrounds/voidbrick.png",
+        "background": "dalquor:textures/gui/advancements/backgrounds/voidbrick.png",
         "show_toast": true,
         "announce_to_chat": true
     },
@@ -19,7 +19,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "voidcraft:vademecum"
+                        "item": "dalquor:vademecum"
                     }
                 ]
             }

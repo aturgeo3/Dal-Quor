@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:archsword"
+    "item": "dalquor:archsword"
   },
   "pattern": [
     "SSS",
@@ -10,18 +10,18 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "voidcraft:moltenvoidchain"
+      "item": "dalquor:moltenvoidchain"
     },
     "X": {
-      "item": "voidcraft:chainsword",
+      "item": "dalquor:chainsword",
       "data": 32767
     },
     "Y": {
-      "item": "voidcraft:angelicsword",
+      "item": "dalquor:angelicsword",
       "data": 32767
     },
     "Z": {
-      "item": "voidcraft:moltensword",
+      "item": "dalquor:moltensword",
       "data": 32767
     }
   }

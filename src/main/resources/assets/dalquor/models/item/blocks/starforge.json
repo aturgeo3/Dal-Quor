@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/starforge",
+    "parent": "dalquor:block/starforge",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

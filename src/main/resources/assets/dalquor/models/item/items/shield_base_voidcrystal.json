@@ -2,9 +2,9 @@
     "__createdwith": "opl's Model Creator",
     "ambientocclusion": false,
     "textures": {
-        "texture": "voidcraft:models/shield/voidcrystal_back",
-        "particle": "voidcraft:models/shield/voidcrystal_back",
-        "texture2": "voidcraft:models/shield/voidcrystal_base"
+        "texture": "dalquor:models/shield/voidcrystal_back",
+        "particle": "dalquor:models/shield/voidcrystal_back",
+        "texture2": "dalquor:models/shield/voidcrystal_base"
     },
     "display": {
         "gui": {

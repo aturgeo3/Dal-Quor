@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.totalcontrol.title"
@@ -11,10 +11,10 @@
         },
         "frame": "task"
     },
-    "parent": "voidcraft:tolerance",
+    "parent": "dalquor:tolerance",
     "criteria": {
         "totalControl": {
-            "trigger": "voidcraft:totalcontrol"
+            "trigger": "dalquor:totalcontrol"
         }
     }
 }

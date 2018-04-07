@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidicalchemytable"
+    "item": "dalquor:voidicalchemytable"
   },
   "pattern": [
     "BCB",
@@ -10,16 +10,16 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "voidcraft:blockvoidbrick"
+      "item": "dalquor:blockvoidbrick"
     },
     "C": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     },
     "S": {
       "item": "minecraft:brewing_stand"
     },
     "I": {
-      "item": "voidcraft:voidinfuserinert"
+      "item": "dalquor:voidinfuserinert"
     }
   }
 }

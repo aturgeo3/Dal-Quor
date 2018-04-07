@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "voidcraft:creationforge_ray" }
+        "normal": { "model": "dalquor:creationforge_ray" }
     }
 }

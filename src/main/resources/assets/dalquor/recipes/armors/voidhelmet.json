@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidhelmet"
+    "item": "dalquor:voidhelmet"
   },
   "pattern": [
     "XXX",
@@ -9,7 +9,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:voidcrystal"
+      "item": "dalquor:voidcrystal"
     }
   }
 }

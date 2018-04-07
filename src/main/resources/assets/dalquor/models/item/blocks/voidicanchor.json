@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/voidicanchor",
+    "parent": "dalquor:block/voidicanchor",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

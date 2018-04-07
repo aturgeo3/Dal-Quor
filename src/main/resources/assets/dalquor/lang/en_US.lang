@@ -54,7 +54,7 @@ item.voidcrystalshield.name=Void Crystal Shield
 item.voidicsteel.name=Voidic Steel
 
 # Blocks
-tile.voidcraft:blockvoidfluid.name=Liquid Void
+tile.dalquor:blockvoidfluid.name=Liquid Void
 tile.blockvoidcrystal.name=Void Crystal Block
 tile.blockfakebedrock.name=Soft Bedrock
 tile.blockfakebedrockfence.name=Soft Bedrock Fence
@@ -92,14 +92,14 @@ tile.voidicanchor.name=Voidic Anchor
 tile.voidiccrystallizer.name=Voidic Crystallizer
 
 # Potion
-effect.voidcraft:voidicinfusionimmunity=Voidic Immunity
-effect.voidcraft:voidimmunity=Plenum
-effect.voidcraft:potionsheathelit=Sheathe: Shock
-effect.voidcraft:potionsheathefrost=Sheathe: Frost
-effect.voidcraft:potionsheathefire=Sheathe: Flame
-effect.voidcraft:potionsheatheacid=Sheathe: Acid
-effect.voidcraft:potionsheathevoid=Sheathe: Void
-effect.voidcraft:voidicinfusion=Voidic Infusion
+effect.dalquor:voidicinfusionimmunity=Voidic Immunity
+effect.dalquor:voidimmunity=Plenum
+effect.dalquor:potionsheathelit=Sheathe: Shock
+effect.dalquor:potionsheathefrost=Sheathe: Frost
+effect.dalquor:potionsheathefire=Sheathe: Flame
+effect.dalquor:potionsheatheacid=Sheathe: Acid
+effect.dalquor:potionsheathevoid=Sheathe: Void
+effect.dalquor:voidicinfusion=Voidic Infusion
 potion.effect.voidimmunity=Potion of Plenum
 
 # Death

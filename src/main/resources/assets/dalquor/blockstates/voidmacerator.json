@@ -1,21 +1,21 @@
 {
     "variants": {
 		"active=true,facing=north": {
-			"model": "voidcraft:voidMaceratorOn"
+			"model": "dalquor:voidMaceratorOn"
 		},"active=false,facing=north": {
-			"model": "voidcraft:voidMaceratorOff"
+			"model": "dalquor:voidMaceratorOff"
 		},"active=true,facing=south": {
-			"model": "voidcraft:voidMaceratorOn", "y": 180
+			"model": "dalquor:voidMaceratorOn", "y": 180
 		},"active=false,facing=south": {
-			"model": "voidcraft:voidMaceratorOff", "y": 180
+			"model": "dalquor:voidMaceratorOff", "y": 180
 		},"active=true,facing=west": {
-			"model": "voidcraft:voidMaceratorOn", "y": 270
+			"model": "dalquor:voidMaceratorOn", "y": 270
 		},"active=false,facing=west": {
-			"model": "voidcraft:voidMaceratorOff", "y": 270
+			"model": "dalquor:voidMaceratorOff", "y": 270
 		},"active=true,facing=east": {
-			"model": "voidcraft:voidMaceratorOn", "y": 90
+			"model": "dalquor:voidMaceratorOn", "y": 90
 		},"active=false,facing=east": {
-			"model": "voidcraft:voidMaceratorOff", "y": 90
+			"model": "dalquor:voidMaceratorOff", "y": 90
 		}
 	}
 }

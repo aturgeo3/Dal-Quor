@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidicdrill"
+    "item": "dalquor:voidicdrill"
   },
   "pattern": [
     "BHB",
@@ -10,22 +10,22 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     },
     "C": {
-      "item": "voidcraft:voidcloth"
+      "item": "dalquor:voidcloth"
     },
     "S": {
-      "item": "voidcraft:voidstar"
+      "item": "dalquor:voidstar"
     },
     "E": {
-      "item": "voidcraft:ectoplasm"
+      "item": "dalquor:ectoplasm"
     },
     "H": {
-      "item": "voidcraft:blockrealityhole"
+      "item": "dalquor:blockrealityhole"
     },
     "Z": {
-      "item": "voidcraft:voidiccharger"
+      "item": "dalquor:voidiccharger"
     }
   }
 }

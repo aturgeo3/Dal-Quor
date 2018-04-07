@@ -51,7 +51,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:voidcloth",
+                    "name": "dalquor:voidcloth",
                     "weight": 15,
                     "functions": [
                         {
@@ -65,7 +65,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:voidcrystal",
+                    "name": "dalquor:voidcrystal",
                     "weight": 15,
                     "functions": [
                         {
@@ -79,7 +79,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:ectoplasm",
+                    "name": "dalquor:ectoplasm",
                     "weight": 15,
                     "functions": [
                         {
@@ -93,7 +93,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "voidcraft:moltenvoidchain",
+                    "name": "dalquor:moltenvoidchain",
                     "weight": 5,
                     "functions": [
                         {

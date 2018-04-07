@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidbox"
+    "item": "dalquor:voidbox"
   },
   "pattern": [
     "XXX",
@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:voidcloth"
+      "item": "dalquor:voidcloth"
     },
     "Y": {
       "item": "minecraft:jukebox"
     },
     "Z": {
-      "item": "voidcraft:voidstar"
+      "item": "dalquor:voidstar"
     }
   }
 }

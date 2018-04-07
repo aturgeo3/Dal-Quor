@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/creationforge_ray",
+    "parent": "dalquor:block/creationforge_ray",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

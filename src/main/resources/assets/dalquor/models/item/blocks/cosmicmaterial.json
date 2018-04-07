@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/cosmicmaterial",
+    "parent": "dalquor:block/cosmicmaterial",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

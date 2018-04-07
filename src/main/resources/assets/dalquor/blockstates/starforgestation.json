@@ -1,13 +1,13 @@
 {
     "variants": {
 		"facing=north": {
-			"model": "voidcraft:starforgestation"
+			"model": "dalquor:starforgestation"
 		},"facing=south": {
-			"model": "voidcraft:starforgestation", "y": 180
+			"model": "dalquor:starforgestation", "y": 180
 		},"facing=west": {
-			"model": "voidcraft:starforgestation", "y": 270
+			"model": "dalquor:starforgestation", "y": 270
 		},"facing=east": {
-			"model": "voidcraft:starforgestation", "y": 90
+			"model": "dalquor:starforgestation", "y": 90
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/Heimdall",
+    "parent": "dalquor:block/Heimdall",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

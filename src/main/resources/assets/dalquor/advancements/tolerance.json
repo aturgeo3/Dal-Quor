@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.tolerance.title"
@@ -11,10 +11,10 @@
         },
         "frame": "task"
     },
-    "parent": "voidcraft:empowerment",
+    "parent": "dalquor:empowerment",
     "criteria": {
         "tolerance": {
-            "trigger": "voidcraft:tolerance"
+            "trigger": "dalquor:tolerance"
         }
     }
 }

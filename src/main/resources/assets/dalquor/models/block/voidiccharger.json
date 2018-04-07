@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"0": "voidcraft:models/blocks/voidicChargerFixedAspect"
+		"0": "dalquor:models/blocks/voidicChargerFixedAspect"
 	},
 	"elements": [
         {

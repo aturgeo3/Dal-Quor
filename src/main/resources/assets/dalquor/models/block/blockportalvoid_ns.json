@@ -1,8 +1,8 @@
 {
 	"parent": "block/cube_all",
     "textures": {
-        "particle": "voidcraft:blocks/blockportalvoid",
-        "portal": "voidcraft:blocks/blockportalvoid"
+        "particle": "dalquor:blocks/blockportalvoid",
+        "portal": "dalquor:blocks/blockportalvoid"
     },
 	"elements": [
 		{

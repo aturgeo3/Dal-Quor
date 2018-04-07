@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:spectrespade"
+    "item": "dalquor:spectrespade"
   },
   "pattern": [
     " X ",
@@ -10,14 +10,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "voidcraft:voidshovel",
+      "item": "dalquor:voidshovel",
       "data": 32767
     },
     "X": {
-      "item": "voidcraft:ectoplasm"
+      "item": "dalquor:ectoplasm"
     },
     "I": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     }
   }
 }

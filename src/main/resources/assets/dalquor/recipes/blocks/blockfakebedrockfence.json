@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blockfakebedrockfence",
+    "item": "dalquor:blockfakebedrockfence",
     "count": 6
   },
   "pattern": [
@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:blockfakebedrock"
+      "item": "dalquor:blockfakebedrock"
     }
   }
 }

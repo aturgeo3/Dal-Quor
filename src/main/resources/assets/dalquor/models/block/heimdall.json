@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"0": "voidcraft:models/blocks/Heimdall"
+		"0": "dalquor:models/blocks/Heimdall"
 	},
 	"elements": [
         {

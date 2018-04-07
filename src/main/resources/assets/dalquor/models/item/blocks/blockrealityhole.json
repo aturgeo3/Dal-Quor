@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/blockRealityHole",
+    "parent": "dalquor:block/blockRealityHole",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

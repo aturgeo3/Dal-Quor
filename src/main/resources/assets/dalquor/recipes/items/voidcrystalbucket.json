@@ -1,10 +1,10 @@
 {
   "result": {
-    "item": "voidcraft:voidcrystalbucket"
+    "item": "dalquor:voidcrystalbucket"
   },
   "ingredients": [
     {
-      "item": "voidcraft:voidcrystal"
+      "item": "dalquor:voidcrystal"
     },
     {
       "item": "minecraft:bucket"

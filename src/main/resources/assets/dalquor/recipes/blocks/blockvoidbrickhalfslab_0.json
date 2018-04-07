@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:blockvoidbrickhalfslab",
+    "item": "dalquor:blockvoidbrickhalfslab",
     "data": 0,
     "count": 6
   },
@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "X": {
-      "item": "voidcraft:blockvoidbrick"
+      "item": "dalquor:blockvoidbrick"
     }
   }
 }

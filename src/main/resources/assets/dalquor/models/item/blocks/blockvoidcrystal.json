@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/blockVoidcrystal",
+    "parent": "dalquor:block/blockVoidcrystal",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

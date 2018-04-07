@@ -1,8 +1,8 @@
 {
     "parent": "block/inner_stairs",
     "textures": {
-        "bottom": "voidcraft:blocks/VoidBrick",
-        "top": "voidcraft:blocks/VoidBrick",
-        "side": "voidcraft:blocks/VoidBrick"
+        "bottom": "dalquor:blocks/VoidBrick",
+        "top": "dalquor:blocks/VoidBrick",
+        "side": "dalquor:blocks/VoidBrick"
     }
 }

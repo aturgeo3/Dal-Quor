@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.empowerment.title"
@@ -11,10 +11,10 @@
         },
         "frame": "task"
     },
-    "parent": "voidcraft:stabilization",
+    "parent": "dalquor:stabilization",
     "criteria": {
         "empowerment": {
-            "trigger": "voidcraft:empowerment"
+            "trigger": "dalquor:empowerment"
         }
     }
 }

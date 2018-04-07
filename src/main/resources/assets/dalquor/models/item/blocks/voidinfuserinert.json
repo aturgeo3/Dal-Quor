@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/voidInfuserInert",
+    "parent": "dalquor:block/voidInfuserInert",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

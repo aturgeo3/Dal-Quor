@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:realityteleporterblock"
+    "item": "dalquor:realityteleporterblock"
   },
   "pattern": [
     "BEB",
@@ -10,19 +10,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     },
     "C": {
-      "item": "voidcraft:voidiccharger"
+      "item": "dalquor:voidiccharger"
     },
     "E": {
-      "item": "voidcraft:emeralddust"
+      "item": "dalquor:emeralddust"
     },
     "H": {
-      "item": "voidcraft:blockrealityhole"
+      "item": "dalquor:blockrealityhole"
     },
     "L": {
-      "item": "voidcraft:voidcloth"
+      "item": "dalquor:voidcloth"
     }
   }
 }

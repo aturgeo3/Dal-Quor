@@ -1,7 +1,7 @@
 {
     "textures": {
-        "particle": "voidcraft:blocks/blockportalxia",
-        "portal": "voidcraft:blocks/blockportalxia"
+        "particle": "dalquor:blocks/blockportalxia",
+        "portal": "dalquor:blocks/blockportalxia"
     },
     "elements": [
         {   "from": [ 0, 4.8, 0 ],

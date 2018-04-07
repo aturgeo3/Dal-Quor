@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidiccrystallizer"
+    "item": "dalquor:voidiccrystallizer"
   },
   "pattern": [
     "SCS",
@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     },
     "C": {
-      "item": "voidcraft:voidchain"
+      "item": "dalquor:voidchain"
     },
     "E": {
-      "item": "voidcraft:ectoplasm"
+      "item": "dalquor:ectoplasm"
     }
   }
 }

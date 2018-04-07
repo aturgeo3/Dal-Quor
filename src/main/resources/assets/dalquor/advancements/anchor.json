@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.anchor.title"
@@ -11,10 +11,10 @@
         },
         "frame": "task"
     },
-    "parent": "voidcraft:voice",
+    "parent": "dalquor:voice",
     "criteria": {
         "anchor": {
-            "trigger": "voidcraft:anchor"
+            "trigger": "dalquor:anchor"
         }
     }
 }

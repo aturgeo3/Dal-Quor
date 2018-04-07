@@ -1,9 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "voidcraft:blocks/machina/RealityTeleporter/top",
-        "side": "voidcraft:blocks/machina/RealityTeleporter/side",
-        "front": "voidcraft:blocks/machina/RealityTeleporter/side",
-        "bottom": "voidcraft:blocks/machina/RealityTeleporter/bottom"
+        "top": "dalquor:blocks/machina/RealityTeleporter/top",
+        "side": "dalquor:blocks/machina/RealityTeleporter/side",
+        "front": "dalquor:blocks/machina/RealityTeleporter/side",
+        "bottom": "dalquor:blocks/machina/RealityTeleporter/bottom"
     }
 }

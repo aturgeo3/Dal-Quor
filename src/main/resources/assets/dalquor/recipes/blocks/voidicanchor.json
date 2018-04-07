@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidicanchor"
+    "item": "dalquor:voidicanchor"
   },
   "pattern": [
     "DSD",
@@ -10,19 +10,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "P": {
-      "item": "voidcraft:voidiccharger"
+      "item": "dalquor:voidiccharger"
     },
     "S": {
-      "item": "voidcraft:voidstar"
+      "item": "dalquor:voidstar"
     },
     "C": {
-      "item": "voidcraft:voidcloth"
+      "item": "dalquor:voidcloth"
     },
     "D": {
-      "item": "voidcraft:diamonddust"
+      "item": "dalquor:diamonddust"
     },
     "X": {
-      "item": "voidcraft:voidicsteel"
+      "item": "dalquor:voidicsteel"
     },
     "Z": {
       "item": "minecraft:end_crystal"

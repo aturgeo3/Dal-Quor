@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "voidcraft:blocks/machina/voidInfuser/voidInfuser"
+        "all": "dalquor:blocks/machina/voidInfuser/voidInfuser"
     }
 }

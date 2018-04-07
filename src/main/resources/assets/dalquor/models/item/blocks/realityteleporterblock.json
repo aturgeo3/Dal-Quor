@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/realityTeleporterBlock",
+    "parent": "dalquor:block/realityTeleporterBlock",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

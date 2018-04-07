@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:vademecum"
+            "item": "dalquor:vademecum"
         },
         "title": {
             "translate": "advancements.voidcraft.voice.title"
@@ -11,10 +11,10 @@
         },
         "frame": "challenge"
     },
-    "parent": "voidcraft:root",
+    "parent": "dalquor:root",
     "criteria": {
         "voice": {
-            "trigger": "voidcraft:voice"
+            "trigger": "dalquor:voice"
         }
     }
 }

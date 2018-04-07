@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"0": "voidcraft:models/blocks/voidicchargerfixedaspect"
+		"0": "dalquor:models/blocks/voidicchargerfixedaspect"
 	},
 	"elements": [
         {

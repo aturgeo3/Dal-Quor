@@ -12,10 +12,10 @@
         "frame": "challenge",
 		"hidden": true
     },
-    "parent": "voidcraft:root",
+    "parent": "dalquor:root",
     "criteria": {
         "familiarity": {
-            "trigger": "voidcraft:familiarity"
+            "trigger": "dalquor:familiarity"
         }
     }
 }

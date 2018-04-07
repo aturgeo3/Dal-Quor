@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "voidcraft:quorifragment"
+            "item": "dalquor:quorifragment"
         },
         "title": {
             "translate": "advancements.voidcraft.nightmare.title"
@@ -11,10 +11,10 @@
         },
         "frame": "challenge"
     },
-    "parent": "voidcraft:totalcontrol",
+    "parent": "dalquor:totalcontrol",
     "criteria": {
         "nightmare": {
-            "trigger": "voidcraft:nightmare"
+            "trigger": "dalquor:nightmare"
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "voidcraft:block/blockPortalVoid_NS",
+    "parent": "dalquor:block/blockPortalVoid_NS",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

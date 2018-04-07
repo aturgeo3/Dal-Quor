@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "voidcraft:voidicgen"
+    "item": "dalquor:voidicgen"
   },
   "pattern": [
     "XXX",
@@ -13,7 +13,7 @@
       "item": "minecraft:redstone"
     },
     "Y": {
-      "item": "voidcraft:voidinfuser"
+      "item": "dalquor:voidinfuser"
     }
   }
 }
