@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlock;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class BlockVoidcrystal extends TamBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return VoidCraftItems.voidcrystal;
+		return ModItems.voidcrystal;
 	}
 
 	@Override

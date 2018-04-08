@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class VoidCraftPotions {
+public class ModPotions {
 
 	public static Potion voidicInfusion;
 	public static Potion voidicInfusionImmunity;

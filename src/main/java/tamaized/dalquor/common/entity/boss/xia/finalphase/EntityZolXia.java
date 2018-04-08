@@ -12,7 +12,7 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 public class EntityZolXia extends EntityTwinsXia {
 
@@ -70,9 +70,9 @@ public class EntityZolXia extends EntityTwinsXia {
 	@Override
 	protected void update() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(VoidCraftPotions.litSheathe) == null) {
+			if (getActivePotionEffect(ModPotions.litSheathe) == null) {
 				clearActivePotions();
-				addPotionEffect(new PotionEffect(VoidCraftPotions.litSheathe, 100));
+				addPotionEffect(new PotionEffect(ModPotions.litSheathe, 100));
 			}
 		}
 	}

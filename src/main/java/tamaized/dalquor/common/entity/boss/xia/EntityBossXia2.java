@@ -29,7 +29,7 @@ import tamaized.dalquor.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Ph
 import tamaized.dalquor.common.xiacastle.logic.battle.xia2.phases.EntityAIXia2Phase3;
 import tamaized.dalquor.network.IVoidBossAIPacket;
 import tamaized.dalquor.network.client.ClientPacketHandlerSheathe;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +117,7 @@ public class EntityBossXia2 extends EntityVoidBoss<Xia2BattleHandler> {
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe)
+		if (pot == ModPotions.fireSheathe || pot == ModPotions.frostSheathe || pot == ModPotions.litSheathe || pot == ModPotions.acidSheathe)
 			super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			DalQuor.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));

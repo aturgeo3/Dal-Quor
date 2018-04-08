@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import tamaized.dalquor.DalQuor;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.ConcurrentModificationException;
 
@@ -22,7 +22,7 @@ public class ItemEntityEvent {
 		try {
 			for (EntityItem entity : e.world.getEntities(EntityItem.class, EntitySelectors.NOT_SPECTATING)) {
 				ItemStack stack = entity.getItem();
-				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == VoidCraftBlocks.blockVoidFire) {
+				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == ModBlocks.blockVoidFire) {
 					e.world.setBlockToAir(entity.getPosition());
 					e.world.addWeatherEffect(new EntityLightningBolt(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), true));
 					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(DalQuor.items.vadeMecum)));

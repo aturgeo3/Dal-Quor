@@ -17,7 +17,7 @@ import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
 import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.IDamageListener {
 
@@ -71,7 +71,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	private boolean hasSheathe() {
-		return boss.getActivePotionEffect(VoidCraftPotions.fireSheathe) != null || boss.getActivePotionEffect(VoidCraftPotions.frostSheathe) != null || boss.getActivePotionEffect(VoidCraftPotions.litSheathe) != null || boss.getActivePotionEffect(VoidCraftPotions.acidSheathe) != null || boss.getActivePotionEffect(VoidCraftPotions.voidSheathe) != null;
+		return boss.getActivePotionEffect(ModPotions.fireSheathe) != null || boss.getActivePotionEffect(ModPotions.frostSheathe) != null || boss.getActivePotionEffect(ModPotions.litSheathe) != null || boss.getActivePotionEffect(ModPotions.acidSheathe) != null || boss.getActivePotionEffect(ModPotions.voidSheathe) != null;
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 					resetAnimationTick = 20 * 2;
 					if (boss.getAttackTarget() instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) boss.getAttackTarget();
-						player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
+						player.addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 10));
 					}
 					break;
 			}
@@ -153,19 +153,19 @@ public class EntityAIXia1Phase3 extends EntityAIBase implements EntityBossXia.ID
 		switch (boss.getRNG().nextInt(5)) {
 			default:
 			case 0:
-				sheathe = VoidCraftPotions.fireSheathe;
+				sheathe = ModPotions.fireSheathe;
 				break;
 			case 1:
-				sheathe = VoidCraftPotions.frostSheathe;
+				sheathe = ModPotions.frostSheathe;
 				break;
 			case 2:
-				sheathe = VoidCraftPotions.litSheathe;
+				sheathe = ModPotions.litSheathe;
 				break;
 			case 3:
-				sheathe = VoidCraftPotions.acidSheathe;
+				sheathe = ModPotions.acidSheathe;
 				break;
 			case 4:
-				sheathe = VoidCraftPotions.voidSheathe;
+				sheathe = ModPotions.voidSheathe;
 				break;
 		}
 		boss.addPotionEffect(new PotionEffect(sheathe, 20 * 30));

@@ -19,7 +19,7 @@ import tamaized.dalquor.common.entity.EntityVoidMob;
 import tamaized.dalquor.common.entity.ai.ISpellAttackMob;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
 import tamaized.dalquor.common.vademecum.progression.VadeMecumWordsOfPower;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class EntityMobLich extends EntityVoidMob implements ISpellAttackMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraftItems.voidCloth;
+		return ModItems.voidCloth;
 	}
 
 	@Override

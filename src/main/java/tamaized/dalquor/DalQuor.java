@@ -119,18 +119,18 @@ import tamaized.dalquor.common.world.dim.xia.TeleporterXia;
 import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
 import tamaized.dalquor.network.NetworkMessages;
 import tamaized.dalquor.proxy.CommonProxy;
-import tamaized.dalquor.registry.VoidCraftAdvancements;
-import tamaized.dalquor.registry.VoidCraftArmors;
-import tamaized.dalquor.registry.VoidCraftBiomes;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftCreativeTabs;
-import tamaized.dalquor.registry.VoidCraftFluids;
-import tamaized.dalquor.registry.VoidCraftItems;
-import tamaized.dalquor.registry.VoidCraftLootTables;
-import tamaized.dalquor.registry.VoidCraftMaterials;
-import tamaized.dalquor.registry.VoidCraftParticles;
-import tamaized.dalquor.registry.VoidCraftPotions;
-import tamaized.dalquor.registry.VoidCraftTools;
+import tamaized.dalquor.registry.ModAdvancements;
+import tamaized.dalquor.registry.ModArmors;
+import tamaized.dalquor.registry.ModBiomes;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModCreativeTabs;
+import tamaized.dalquor.registry.ModFluids;
+import tamaized.dalquor.registry.ModItems;
+import tamaized.dalquor.registry.ModLootTables;
+import tamaized.dalquor.registry.ModMaterials;
+import tamaized.dalquor.registry.ModParticles;
+import tamaized.dalquor.registry.ModPotions;
+import tamaized.dalquor.registry.ModTools;
 
 @Mod(modid = DalQuor.modid, name = "Dal Quor", version = DalQuor.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class DalQuor extends TamModBase {
@@ -139,20 +139,20 @@ public class DalQuor extends TamModBase {
 
 	public static final String version = "${version}";
 	public static final String modid = "dalquor";
-	public static final VoidCraftMaterials materials = new VoidCraftMaterials();
-	public static final VoidCraftCreativeTabs tabs = new VoidCraftCreativeTabs();
-	public static final VoidCraftTools tools = new VoidCraftTools();
-	public static final VoidCraftItems items = new VoidCraftItems();
+	public static final ModMaterials materials = new ModMaterials();
+	public static final ModCreativeTabs tabs = new ModCreativeTabs();
+	public static final ModTools tools = new ModTools();
+	public static final ModItems items = new ModItems();
 
 	//	public static boolean isAetherLoaded = false;
-	public static final VoidCraftPotions potions = new VoidCraftPotions();
-	public static final VoidCraftArmors armors = new VoidCraftArmors();
-	public static final VoidCraftFluids fluids = new VoidCraftFluids();
-	public static final VoidCraftBlocks blocks = new VoidCraftBlocks();
-	public static final VoidCraftBiomes biomes = new VoidCraftBiomes();
-	public static final VoidCraftAdvancements advancements = new VoidCraftAdvancements();
-	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
-	public static final VoidCraftParticles particles = new VoidCraftParticles();
+	public static final ModPotions potions = new ModPotions();
+	public static final ModArmors armors = new ModArmors();
+	public static final ModFluids fluids = new ModFluids();
+	public static final ModBlocks blocks = new ModBlocks();
+	public static final ModBiomes biomes = new ModBiomes();
+	public static final ModAdvancements advancements = new ModAdvancements();
+	public static final ModLootTables lootTables = new ModLootTables();
+	public static final ModParticles particles = new ModParticles();
 	@Instance(modid)
 	public static DalQuor instance = new DalQuor();
 	public static FMLEventChannel channel;
@@ -202,7 +202,7 @@ public class DalQuor extends TamModBase {
 		logger = LogManager.getLogger("Dal Quor");
 		logger.info("Uh oh, I guess we need to open a portal to the Void");
 
-		VoidCraftAdvancements.register();
+		ModAdvancements.register();
 
 		ContributorHandler.start();
 
@@ -221,9 +221,9 @@ public class DalQuor extends TamModBase {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		VoidCraftFluids.init();
-		VoidCraftItems.init();
-		VoidCraftBiomes.init();
+		ModFluids.init();
+		ModItems.init();
+		ModBiomes.init();
 
 		StarForgeEffectList.register();
 		StarForgeEffectRecipeList.instance.register();
@@ -253,8 +253,8 @@ public class DalQuor extends TamModBase {
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdXia, DimensionType.register("???", "_xia", ConfigHandler.dimensionIdXia, WorldProviderXia.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdDalQuor, DimensionType.register("Dal Quor", "_dalquor", ConfigHandler.dimensionIdDalQuor, WorldProviderDalQuor.class, false));
 
-		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
-		PortalHandlerRegistry.register(VoidCraftBlocks.blockPortalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
+		PortalHandlerRegistry.register(ModBlocks.blockPortalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
+		PortalHandlerRegistry.register(ModBlocks.blockPortalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		new WorldType(modid + "_void") {
@@ -314,7 +314,7 @@ public class DalQuor extends TamModBase {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
-		VoidCraftLootTables.postInit();
+		ModLootTables.postInit();
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, (tickets, world) -> {
 			for (Ticket ticket : tickets) {

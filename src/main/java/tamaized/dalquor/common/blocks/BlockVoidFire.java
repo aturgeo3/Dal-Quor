@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.blocks.TamBlockFire;
 import tamaized.dalquor.common.entity.EntityVoidMob;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class BlockVoidFire extends TamBlockFire {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != VoidCraftBlocks.blockVoidcrystal || !VoidCraftBlocks.blockPortalVoid.tryToCreatePortal(world, pos)) {
+		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != ModBlocks.blockVoidcrystal || !ModBlocks.blockPortalVoid.tryToCreatePortal(world, pos)) {
 			if (!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(world, pos)) {
 				world.setBlockToAir(pos);
 			} else {
@@ -62,12 +62,12 @@ public class BlockVoidFire extends TamBlockFire {
 
 	@Override
 	protected boolean canBeOnBlock(IBlockState state) {
-		return state.getBlock() == VoidCraftBlocks.blockVoidcrystal;
+		return state.getBlock() == ModBlocks.blockVoidcrystal;
 	}
 
 	@Override
 	protected boolean isFireSource(IBlockState state) {
-		return state.getBlock() == VoidCraftBlocks.blockVoidbrick;
+		return state.getBlock() == ModBlocks.blockVoidbrick;
 	}
 
 	@Override

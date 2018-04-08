@@ -25,7 +25,7 @@ import tamaized.dalquor.common.handlers.ConfigHandler;
 import tamaized.dalquor.common.vademecum.progression.VadeMecumRitualHandler;
 import tamaized.dalquor.common.vademecum.progression.VadeMecumWordsOfPower;
 import tamaized.dalquor.network.server.ServerPacketHandlerVadeMecum;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 public class VadeMecum extends TamItem {
 
@@ -71,7 +71,7 @@ public class VadeMecum extends TamItem {
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		IBlockState state = world.getBlockState(pos);
 		if (state != null) {
-			if (state.getBlock() == VoidCraftBlocks.ritualBlock) {
+			if (state.getBlock() == ModBlocks.ritualBlock) {
 				if (!world.isRemote)
 					VadeMecumRitualHandler.invokeRitual(player, world, pos);
 				return EnumActionResult.SUCCESS;

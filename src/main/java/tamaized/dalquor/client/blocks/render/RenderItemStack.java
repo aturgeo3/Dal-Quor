@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import tamaized.dalquor.common.blocks.TileEntityNoBreak;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 public class RenderItemStack extends TileEntityItemStackRenderer {
 
@@ -14,7 +14,7 @@ public class RenderItemStack extends TileEntityItemStackRenderer {
 	@Override
 	public void renderByItem(ItemStack itemStack) {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
-		if (block == VoidCraftBlocks.blockNoBreak) {
+		if (block == ModBlocks.blockNoBreak) {
 			TileEntityRendererDispatcher.instance.render(noBreakInstance, 0.0D, 0.0D, 0.0D, 0.0F);
 		} else {
 			super.renderByItem(itemStack);

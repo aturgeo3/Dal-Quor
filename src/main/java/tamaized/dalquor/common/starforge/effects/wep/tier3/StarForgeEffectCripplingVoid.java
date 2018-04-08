@@ -10,7 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 
@@ -39,7 +39,7 @@ public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 		if (entityHit.world.rand.nextInt(100) < 20) {
 			if (entityHit instanceof EntityLivingBase) {
 				EntityLivingBase livingHit = (EntityLivingBase) entityHit;
-				livingHit.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 15));
+				livingHit.addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 15));
 			}
 		}
 	}

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import tamaized.dalquor.common.blocks.tileentity.TileEntityAIBlock;
 import tamaized.dalquor.common.entity.boss.herobrine.EntityBossHerobrine;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.*;
 
@@ -107,9 +107,9 @@ public class EntityAIHerobrinePhase1 extends EntityAIBase {
 		int nY = boss.getInitialPos().getY();
 		int nZ = (boss.getInitialPos().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
-			world.setBlockState(new BlockPos(nX, nY, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 1, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 2, nZ), VoidCraftBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY, nZ), ModBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ModBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ModBlocks.AIBlock.getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
 			b.setup(null);
 			((TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY + 1, nZ))).setup(b);

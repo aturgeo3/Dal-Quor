@@ -17,7 +17,7 @@ import tamaized.dalquor.common.entity.EntityVoidNPC;
 import tamaized.dalquor.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 import tamaized.dalquor.network.client.ClientPacketHandlerSheathe;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 public abstract class EntityTwinsXia extends EntityVoidNPC implements IAlternateBoss {
 
@@ -93,7 +93,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IAlternate
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot != VoidCraftPotions.fireSheathe && pot != VoidCraftPotions.frostSheathe && pot != VoidCraftPotions.litSheathe && pot != VoidCraftPotions.acidSheathe)
+		if (pot != ModPotions.fireSheathe && pot != ModPotions.frostSheathe && pot != ModPotions.litSheathe && pot != ModPotions.acidSheathe)
 			return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {

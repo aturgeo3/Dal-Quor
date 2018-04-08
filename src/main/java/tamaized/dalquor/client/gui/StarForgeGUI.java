@@ -21,8 +21,8 @@ import tamaized.dalquor.common.gui.container.StarForgeContainer;
 import tamaized.dalquor.common.starforge.StarForgeEffectEntry;
 import tamaized.dalquor.common.starforge.StarForgeToolEntry;
 import tamaized.dalquor.network.server.ServerPacketHandlerStarforgeCraft;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 
 import java.io.IOException;
 import java.util.List;
@@ -112,7 +112,7 @@ public class StarForgeGUI extends GuiContainer {
 					if (!te.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && te.SLOT_INPUT_TOOL.getStackInSlot(0).hasCapability(CapabilityList.STARFORGE, null)) {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-							ItemStackHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
+							ItemStackHandler slot = checkStack.getItem() == Item.getItemFromBlock(ModBlocks.cosmicMaterial) ? te.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == ModItems.voidicDragonScale ? te.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == ModItems.quoriFragment ? te.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == ModItems.astralEssence ? te.SLOT_INPUT_ASTRALESSENCE : te.SLOT_INPUT_VOIDICPHLOG;
 							if (slot.getStackInSlot(0).getCount() >= checkStack.getCount())
 								continue;
 							flag = false;

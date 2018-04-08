@@ -14,8 +14,8 @@ import tamaized.dalquor.client.particles.network.XiaLaserPacketHandler;
 import tamaized.dalquor.common.damagesources.DamageSourceVoidicInfusion;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
 import tamaized.dalquor.common.entity.mob.lich.EntityLichInferno;
-import tamaized.dalquor.registry.VoidCraftParticles;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModParticles;
+import tamaized.dalquor.registry.ModPotions;
 
 public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.IDamageListener {
 
@@ -63,8 +63,8 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 	}
 
 	private void spawnLaser() {
-		XiaLaserPacketHandler.XiaLaserParticleData data = ((XiaLaserPacketHandler) ParticlePacketHandlerRegistry.getHandler(VoidCraftParticles.xiaTeleportHandler)).new XiaLaserParticleData(boss.getEntityId(), 0, -90, new float[]{1.0f, 1.0f, 1.0f});
-		ParticleHelper.sendPacketToClients(boss.world, VoidCraftParticles.xiaTeleportHandler, new Vec3d(boss.posX, boss.posY, boss.posZ), 64, new ParticleHelper.ParticlePacketHelper(VoidCraftParticles.xiaTeleportHandler, data));
+		XiaLaserPacketHandler.XiaLaserParticleData data = ((XiaLaserPacketHandler) ParticlePacketHandlerRegistry.getHandler(ModParticles.xiaTeleportHandler)).new XiaLaserParticleData(boss.getEntityId(), 0, -90, new float[]{1.0f, 1.0f, 1.0f});
+		ParticleHelper.sendPacketToClients(boss.world, ModParticles.xiaTeleportHandler, new Vec3d(boss.posX, boss.posY, boss.posZ), 64, new ParticleHelper.ParticlePacketHelper(ModParticles.xiaTeleportHandler, data));
 	}
 
 	private void doTeleport() {
@@ -135,7 +135,7 @@ public class EntityAIXia1Phase1 extends EntityAIBase implements EntityBossXia.ID
 					resetAnimationTick = 20 * 2;
 					if (boss.getAttackTarget() instanceof EntityPlayer) {
 						EntityPlayer player = (EntityPlayer) boss.getAttackTarget();
-						player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
+						player.addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 10));
 					}
 				}
 				break;

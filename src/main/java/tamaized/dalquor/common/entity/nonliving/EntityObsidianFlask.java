@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import tamaized.tammodized.common.helper.MotionHelper;
 import tamaized.dalquor.common.damagesources.DamageSourceVoidicInfusion;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftFluids;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModFluids;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 				case Normal: {
 					world.newExplosion(null, this.posX, this.posY, this.posZ, 0, true, true);
 					if (world.isAirBlock(pos))
-						world.setBlockState(pos, VoidCraftBlocks.blockVoidFire.getDefaultState());
+						world.setBlockState(pos, ModBlocks.blockVoidFire.getDefaultState());
 					break;
 				}
 				case Fire: {
@@ -97,7 +97,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 				case Acid: {
 					world.playEvent(2002, pos, 0x00FF00);
 					if (world.isAirBlock(pos))
-						world.setBlockState(pos, VoidCraftFluids.acidFluidBlock.getDefaultState());
+						world.setBlockState(pos, ModFluids.acidFluidBlock.getDefaultState());
 				}
 				break;
 				case Void: {

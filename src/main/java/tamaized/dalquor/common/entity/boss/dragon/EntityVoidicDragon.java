@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityVoidicDragon extends EntityAbstractDragonOld {
 
@@ -27,7 +27,7 @@ public class EntityVoidicDragon extends EntityAbstractDragonOld {
 
 	@Override
 	protected void dropItemsOnDeath() {
-		entityDropItem(new ItemStack(VoidCraftItems.voidicDragonScale, world.rand.nextInt(2) + 1), 0.0F);
+		entityDropItem(new ItemStack(ModItems.voidicDragonScale, world.rand.nextInt(2) + 1), 0.0F);
 		if (world.isAirBlock(getPosition()))
 			world.setBlockState(getPosition(), Blocks.DRAGON_EGG.getDefaultState());
 	}

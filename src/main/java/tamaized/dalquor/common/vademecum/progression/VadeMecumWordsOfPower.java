@@ -46,7 +46,7 @@ import tamaized.dalquor.common.entity.nonliving.EntitySpellRune;
 import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.dalquor.common.helper.SheatheHelper;
 import tamaized.dalquor.common.potion.PotionSheathe;
-import tamaized.dalquor.registry.VoidCraftAdvancements;
+import tamaized.dalquor.registry.ModAdvancements;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -139,7 +139,7 @@ public class VadeMecumWordsOfPower {
 						ExplosionDamageHelper.explode(null, world, world.newExplosion(null, caster.posX, caster.posY, caster.posZ, 7.0F, true, true), 7.0F, caster.posX, caster.posY, caster.posZ);
 						world.playBroadcastSound(1023, caster.getPosition(), 0);
 						if (caster instanceof EntityPlayerMP)
-							VoidCraftAdvancements.familiarity.trigger((EntityPlayerMP) caster);
+							ModAdvancements.familiarity.trigger((EntityPlayerMP) caster);
 						useCharge = true;
 					} else {
 						doCast = true;

@@ -13,8 +13,8 @@ import tamaized.dalquor.common.events.client.TextureStitch;
 import tamaized.dalquor.common.gui.slots.SlotOnlyClass;
 import tamaized.dalquor.common.gui.slots.SlotOnlyItem;
 import tamaized.dalquor.common.starforge.IStarForgeTool;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 
 public class StarForgeContainer extends Container {
 
@@ -31,7 +31,7 @@ public class StarForgeContainer extends Container {
 				}
 			});
 
-			addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial), te.SLOT_INPUT_COSMICMATERIAL, 0, 37, 105) {
+			addSlotToContainer(new SlotOnlyItem(Item.getItemFromBlock(ModBlocks.cosmicMaterial), te.SLOT_INPUT_COSMICMATERIAL, 0, 37, 105) {
 				@SideOnly(Side.CLIENT)
 				@Override
 				public String getSlotTexture() {
@@ -39,7 +39,7 @@ public class StarForgeContainer extends Container {
 				}
 			});
 
-			addSlotToContainer(new SlotOnlyItem(VoidCraftItems.voidicDragonScale, te.SLOT_INPUT_DRAGONSCALE, 0, 59, 105) {
+			addSlotToContainer(new SlotOnlyItem(ModItems.voidicDragonScale, te.SLOT_INPUT_DRAGONSCALE, 0, 59, 105) {
 				@SideOnly(Side.CLIENT)
 				@Override
 				public String getSlotTexture() {
@@ -47,7 +47,7 @@ public class StarForgeContainer extends Container {
 				}
 			});
 
-			addSlotToContainer(new SlotOnlyItem(VoidCraftItems.quoriFragment, te.SLOT_INPUT_QUORIFRAGMENT, 0, 81, 105) {
+			addSlotToContainer(new SlotOnlyItem(ModItems.quoriFragment, te.SLOT_INPUT_QUORIFRAGMENT, 0, 81, 105) {
 				@SideOnly(Side.CLIENT)
 				@Override
 				public String getSlotTexture() {
@@ -55,7 +55,7 @@ public class StarForgeContainer extends Container {
 				}
 			});
 
-			addSlotToContainer(new SlotOnlyItem(VoidCraftItems.astralEssence, te.SLOT_INPUT_ASTRALESSENCE, 0, 103, 105) {
+			addSlotToContainer(new SlotOnlyItem(ModItems.astralEssence, te.SLOT_INPUT_ASTRALESSENCE, 0, 103, 105) {
 				@SideOnly(Side.CLIENT)
 				@Override
 				public String getSlotTexture() {
@@ -63,7 +63,7 @@ public class StarForgeContainer extends Container {
 				}
 			});
 
-			addSlotToContainer(new SlotOnlyItem(VoidCraftItems.voidicPhlogiston, te.SLOT_INPUT_VOIDICPHLOG, 0, 125, 105) {
+			addSlotToContainer(new SlotOnlyItem(ModItems.voidicPhlogiston, te.SLOT_INPUT_VOIDICPHLOG, 0, 125, 105) {
 				@SideOnly(Side.CLIENT)
 				@Override
 				public String getSlotTexture() {

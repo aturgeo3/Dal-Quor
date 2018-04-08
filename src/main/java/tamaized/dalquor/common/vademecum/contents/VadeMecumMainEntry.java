@@ -5,8 +5,8 @@ import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.common.vademecum.VadeMecumEntry;
 import tamaized.dalquor.common.vademecum.contents.progression.VadeMecumProgressionEntryList;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 
 import static tamaized.dalquor.common.vademecum.contents.VadeMecumMainEntry.Entry.Docs;
 
@@ -27,15 +27,15 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	public final VadeMecumProgressionEntryList Progression;
 
 	public VadeMecumMainEntry() {
-		super("mainEntry", new ItemStack(VoidCraftItems.vadeMecum).getDisplayName(), null, null);
+		super("mainEntry", new ItemStack(ModItems.vadeMecum).getDisplayName(), null, null);
 		Progression = new VadeMecumProgressionEntryList();
 	}
 
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(gui, getEntryID(Entry.Progression), "voidcraft.VadeMecum.title.progression", new ItemStack(VoidCraftBlocks.ritualBlock));
-		addButton(gui, getEntryID(Docs), "voidcraft.VadeMecum.title.docs", new ItemStack(VoidCraftItems.voidcrystal));
+		addButton(gui, getEntryID(Entry.Progression), "voidcraft.VadeMecum.title.progression", new ItemStack(ModBlocks.ritualBlock));
+		addButton(gui, getEntryID(Docs), "voidcraft.VadeMecum.title.docs", new ItemStack(ModItems.voidcrystal));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.companion.EntityCompanion;
-import tamaized.dalquor.registry.VoidCraftAdvancements;
+import tamaized.dalquor.registry.ModAdvancements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,25 +109,25 @@ public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 				EntityPlayerMP player = (EntityPlayerMP) entity;
 				switch (category) {
 					case Voice:
-						VoidCraftAdvancements.voice.trigger(player);
+						ModAdvancements.voice.trigger(player);
 						break;
 					case VoidicControl:
-						VoidCraftAdvancements.anchor.trigger(player);
+						ModAdvancements.anchor.trigger(player);
 						break;
 					case ImprovedCasting:
-						VoidCraftAdvancements.stabilization.trigger(player);
+						ModAdvancements.stabilization.trigger(player);
 						break;
 					case Empowerment:
-						VoidCraftAdvancements.empowerment.trigger(player);
+						ModAdvancements.empowerment.trigger(player);
 						break;
 					case Tolerance:
-						VoidCraftAdvancements.tolerance.trigger(player);
+						ModAdvancements.tolerance.trigger(player);
 						break;
 					case TotalControl:
-						VoidCraftAdvancements.totalcontrol.trigger(player);
+						ModAdvancements.totalcontrol.trigger(player);
 						break;
 					case Dreams:
-						VoidCraftAdvancements.nightmare.trigger(player);
+						ModAdvancements.nightmare.trigger(player);
 						break;
 					default:
 						break;

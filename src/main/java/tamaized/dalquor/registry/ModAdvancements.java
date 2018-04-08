@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class VoidCraftAdvancements { // TODO
+public class ModAdvancements { // TODO
 
 	public static final ModTrigger voice = new ModTrigger(new ResourceLocation(DalQuor.modid, "voice"));
 	public static final ModTrigger anchor = new ModTrigger(new ResourceLocation(DalQuor.modid, "anchor"));

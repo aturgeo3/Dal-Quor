@@ -16,7 +16,7 @@ import tamaized.dalquor.common.entity.EntityVoidMob;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import tamaized.dalquor.common.entity.nonliving.EntityVoidChain;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttackMob {
 
@@ -85,7 +85,7 @@ public class EntityMobSpectreChain extends EntityVoidMob implements IRangedAttac
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraftItems.voidChain;
+		return ModItems.voidChain;
 	}
 
 	@Override

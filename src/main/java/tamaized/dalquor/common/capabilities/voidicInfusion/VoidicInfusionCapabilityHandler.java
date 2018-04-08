@@ -25,8 +25,8 @@ import tamaized.dalquor.common.entity.companion.EntityVoidParrot;
 import tamaized.dalquor.common.handlers.ConfigHandler;
 import tamaized.dalquor.network.client.ClientPacketHandlerHealth;
 import tamaized.dalquor.network.client.ClientPacketHandlerInfusion;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModPotions;
 
 import java.util.Iterator;
 
@@ -85,7 +85,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		boolean override = false;
 		ItemStack mainHand = entity.getHeldItemMainhand();
 		ItemStack offHand = entity.getHeldItemOffhand();
-		if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusion) != null) {
+		if (entity.getActivePotionEffect(ModPotions.voidicInfusion) != null) {
 			override = true;
 			flag = true;
 			gain = 20;
@@ -106,11 +106,11 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 				//				cap.sendUpdates(null, 0, entity.getHeldItemOffhand());
 				flag = false;
 			}
-		} else*/ if (entity.getActivePotionEffect(VoidCraftPotions.voidicInfusionImmunity) != null) {
+		} else*/ if (entity.getActivePotionEffect(ModPotions.voidicInfusionImmunity) != null) {
 			flag = false;
 		}
 		if ((entity.world.provider.getDimension() == ConfigHandler.dimensionIdVoid || override) && flag) {
-			if (!(entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == VoidCraftBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == VoidCraftBlocks.blockVoidBrickDoubleSlab)))
+			if (!(entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == ModBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidBrickDoubleSlab)))
 				infusion += gain;
 		} else {
 			infusion -= (vade != null && vade.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 10 : 5);

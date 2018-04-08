@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlock;
 import tamaized.dalquor.common.handlers.ConfigHandler;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -96,7 +96,7 @@ public class OreVoidcrystal extends TamBlock {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return VoidCraftItems.voidcrystal;
+		return ModItems.voidcrystal;
 	}
 
 	@Override

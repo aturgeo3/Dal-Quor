@@ -17,7 +17,7 @@ import static net.minecraft.world.biome.Biome.BiomeProperties;
 import static net.minecraft.world.biome.Biome.SpawnListEntry;
 
 @Mod.EventBusSubscriber
-public class VoidCraftBiomes {
+public class ModBiomes {
 
 	public static Biome biomeVoid;
 	public static Biome biomeXia;

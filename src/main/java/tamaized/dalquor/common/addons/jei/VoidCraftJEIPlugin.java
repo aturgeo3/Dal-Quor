@@ -7,7 +7,7 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import net.minecraft.item.ItemStack;
 import tamaized.dalquor.DalQuor;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 import javax.annotation.Nonnull;
 
@@ -22,8 +22,8 @@ public class VoidCraftJEIPlugin implements IModPlugin {
 		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
 		jeiHelpers = registry.getJeiHelpers();
 
-		registry.addIngredientInfo(new ItemStack(VoidCraftItems.vadeMecum), ItemStack.class, "Toss a book into Void Fire created from an Obsidian Flask");
-		registry.addIngredientInfo(new ItemStack(VoidCraftItems.obsidianFlask), ItemStack.class, "While at Y level 5 and below, Right Click with an Empty Obsidian Flask in hand");
+		registry.addIngredientInfo(new ItemStack(ModItems.vadeMecum), ItemStack.class, "Toss a book into Void Fire created from an Obsidian Flask");
+		registry.addIngredientInfo(new ItemStack(ModItems.obsidianFlask), ItemStack.class, "While at Y level 5 and below, Right Click with an Empty Obsidian Flask in hand");
 
 		registry.addAdvancedGuiHandlers(new VadeMecumSpellAdvancedGuiHandler());
 

@@ -18,8 +18,8 @@ import tamaized.dalquor.common.entity.ghost.EntityGhostPlayerBase;
 import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.dalquor.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.dalquor.network.IVoidBossAIPacket;
-import tamaized.dalquor.registry.VoidCraftItems;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModItems;
+import tamaized.dalquor.registry.ModPotions;
 
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			List<EntityGhostPlayerBase> list = getEntity().getGhostList();
 			if (list.size() < 3) {
 				if (tick % (actionTick) == 0) {
-					ItemStack stack = new ItemStack(VoidCraftItems.voidicEssence);
+					ItemStack stack = new ItemStack(ModItems.voidicEssence);
 					stack.getOrCreateSubCompound(DalQuor.modid).setInteger("xia", getEntity().getEntityId());
 					stack.getOrCreateSubCompound(DalQuor.modid).setInteger("phase", 2);
 					EntityItem item = new EntityItem(world, getEntity().posX, getEntity().posY, getEntity().posZ, stack);
@@ -140,7 +140,7 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 				resetAnimationTick = 20 * 2;
 				if (closestEntity instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) closestEntity;
-					player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 10));
+					player.addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 10));
 				}
 				break;
 		}

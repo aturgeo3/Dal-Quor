@@ -15,7 +15,7 @@ import tamaized.dalquor.common.starforge.StarForgeEffectEntry;
 import tamaized.dalquor.common.starforge.StarForgeEffectRecipeList;
 import tamaized.dalquor.common.starforge.StarForgeToolEntry;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
-import tamaized.dalquor.registry.VoidCraftTools;
+import tamaized.dalquor.registry.ModTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,10 +67,10 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 		ItemStack stack = SLOT_INPUT_TOOL.getStackInSlot(0);
 		if (stack.isEmpty()) {
 			try {
-				list.add(new StarForgeToolEntry(new ItemStack(VoidCraftTools.starforgedSword)));
-				list.add(new StarForgeToolEntry(new ItemStack(VoidCraftTools.starforgedPickaxe)));
-				list.add(new StarForgeToolEntry(new ItemStack(VoidCraftTools.starforgedAxe)));
-				list.add(new StarForgeToolEntry(new ItemStack(VoidCraftTools.starforgedSpade)));
+				list.add(new StarForgeToolEntry(new ItemStack(ModTools.starforgedSword)));
+				list.add(new StarForgeToolEntry(new ItemStack(ModTools.starforgedPickaxe)));
+				list.add(new StarForgeToolEntry(new ItemStack(ModTools.starforgedAxe)));
+				list.add(new StarForgeToolEntry(new ItemStack(ModTools.starforgedSpade)));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

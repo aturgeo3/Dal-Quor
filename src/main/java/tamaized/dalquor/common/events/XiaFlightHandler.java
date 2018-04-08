@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import tamaized.dalquor.registry.VoidCraftArmors;
+import tamaized.dalquor.registry.ModArmors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +54,13 @@ public class XiaFlightHandler { // Thanks to Vazkii's Botania Mod Source for thi
 		ItemStack chest = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 		ItemStack leg = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
 		ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		if (!helm.isEmpty() && helm.getItem() == VoidCraftArmors.xiaHelmet)
+		if (!helm.isEmpty() && helm.getItem() == ModArmors.xiaHelmet)
 			return true;
-		if (!chest.isEmpty() && chest.getItem() == VoidCraftArmors.xiaChest)
+		if (!chest.isEmpty() && chest.getItem() == ModArmors.xiaChest)
 			return true;
-		if (!leg.isEmpty() && leg.getItem() == VoidCraftArmors.xiaLegs)
+		if (!leg.isEmpty() && leg.getItem() == ModArmors.xiaLegs)
 			return true;
-		if (!boots.isEmpty() && boots.getItem() == VoidCraftArmors.xiaBoots)
+		if (!boots.isEmpty() && boots.getItem() == ModArmors.xiaBoots)
 			return true;
 		return false;
 	}

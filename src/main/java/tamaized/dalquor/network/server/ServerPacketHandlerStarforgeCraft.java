@@ -17,8 +17,8 @@ import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.dalquor.common.starforge.StarForgeEffectEntry;
 import tamaized.dalquor.common.starforge.StarForgeToolEntry;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class ServerPacketHandlerStarforgeCraft implements IMessageHandler<Server
 					if (!tile.SLOT_INPUT_TOOL.getStackInSlot(0).isEmpty() && tile.SLOT_INPUT_TOOL.getStackInSlot(0).hasCapability(CapabilityList.STARFORGE, null)) {
 						boolean flag = true;
 						for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-							IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+							IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(ModBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == ModItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == ModItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == ModItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
 							if (slot.getStackInSlot(0).getCount() >= checkStack.getCount())
 								continue;
 							flag = false;
@@ -57,7 +57,7 @@ public class ServerPacketHandlerStarforgeCraft implements IMessageHandler<Server
 							IStarForgeCapability cap = tool.getCapability(CapabilityList.STARFORGE, null);
 							if (cap != null && cap.getEffect(entry.getRecipe().getEffect().getTier()) == null) {
 								for (ItemStack checkStack : entry.getRecipe().getInputs()) {
-									IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(VoidCraftBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == VoidCraftItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == VoidCraftItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == VoidCraftItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
+									IItemHandler slot = checkStack.getItem() == Item.getItemFromBlock(ModBlocks.cosmicMaterial) ? tile.SLOT_INPUT_COSMICMATERIAL : checkStack.getItem() == ModItems.voidicDragonScale ? tile.SLOT_INPUT_DRAGONSCALE : checkStack.getItem() == ModItems.quoriFragment ? tile.SLOT_INPUT_QUORIFRAGMENT : checkStack.getItem() == ModItems.astralEssence ? tile.SLOT_INPUT_ASTRALESSENCE : tile.SLOT_INPUT_VOIDICPHLOG;
 									slot.getStackInSlot(0).shrink(checkStack.getCount());
 								}
 								cap.addEffect(entry.getRecipe().getEffect());

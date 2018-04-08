@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
 
-public class VoidCraftMaterials {
+public class ModMaterials {
 
 	public static ToolMaterial voidTools;
 	public static ToolMaterial spectreTools;

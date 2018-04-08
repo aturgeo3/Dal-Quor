@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.Random;
 
@@ -60,8 +60,8 @@ public class BlockPortalXia extends TamBlockPortal {
 			for (int z = -1; z <= 1; z++) {
 				for (int y = -1; y <= 0; y++) {
 					BlockPos newPos = pos.add(x, y, z);
-					if (worldIn.getBlockState(newPos).getBlock() == VoidCraftBlocks.blockNoBreak) {
-						worldIn.setBlockState(newPos, VoidCraftBlocks.blockVoidcrystal.getDefaultState());
+					if (worldIn.getBlockState(newPos).getBlock() == ModBlocks.blockNoBreak) {
+						worldIn.setBlockState(newPos, ModBlocks.blockVoidcrystal.getDefaultState());
 					}
 				}
 			}
@@ -77,11 +77,11 @@ public class BlockPortalXia extends TamBlockPortal {
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
+		if (par1World.getBlockState(pos.add(-1, 0, 0)).getBlock() == ModBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(1, 0, 0)).getBlock() == ModBlocks.blockVoidcrystal) {
 			b0 = 1;
 		}
 
-		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == VoidCraftBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
+		if (par1World.getBlockState(pos.add(0, 0, -1)).getBlock() == ModBlocks.blockVoidcrystal || par1World.getBlockState(pos.add(0, 0, 1)).getBlock() == ModBlocks.blockVoidcrystal) {
 			b1 = 1;
 		}
 
@@ -105,10 +105,10 @@ public class BlockPortalXia extends TamBlockPortal {
 						boolean isAirBlock = par1World.isAirBlock(new BlockPos(x + b0 * l, y + i1, z + b1 * l));
 
 						if (flag) {
-							if (j1 != VoidCraftBlocks.blockVoidcrystal) {
+							if (j1 != ModBlocks.blockVoidcrystal) {
 								return false;
 							}
-						} else if (!isAirBlock && j1 != VoidCraftBlocks.blockVoidFire) {
+						} else if (!isAirBlock && j1 != ModBlocks.blockVoidFire) {
 							return false;
 						}
 					}
@@ -117,7 +117,7 @@ public class BlockPortalXia extends TamBlockPortal {
 
 			for (l = 0; l < 2; ++l) {
 				for (i1 = 0; i1 < 3; ++i1) {
-					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), VoidCraftBlocks.blockPortalXia.getDefaultState(), 2);
+					par1World.setBlockState(new BlockPos(x + b0 * l, y + i1, z + b1 * l), ModBlocks.blockPortalXia.getDefaultState(), 2);
 				}
 			}
 
@@ -141,7 +141,7 @@ public class BlockPortalXia extends TamBlockPortal {
 			;
 		}
 
-		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != VoidCraftBlocks.blockVoidcrystal) {
+		if (world.getBlockState(pos.add(0, i1 - 1, 0)).getBlock() != ModBlocks.blockVoidcrystal) {
 			world.setBlockToAir(pos);
 		} else {
 			int j1;
@@ -150,14 +150,14 @@ public class BlockPortalXia extends TamBlockPortal {
 				;
 			}
 
-			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == VoidCraftBlocks.blockVoidcrystal) {
+			if (j1 == 3 && world.getBlockState(pos.add(0, i1 + j1, 0)).getBlock() == ModBlocks.blockVoidcrystal) {
 				boolean flag = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this || world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
 				boolean flag1 = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this || world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
 
 				if (flag && flag1) {
 					world.setBlockToAir(pos);
 				} else {
-					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != VoidCraftBlocks.blockVoidcrystal || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != VoidCraftBlocks.blockVoidcrystal || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
+					if ((world.getBlockState(pos.add(b0, 0, b1)).getBlock() != ModBlocks.blockVoidcrystal || world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != this) && (world.getBlockState(pos.add(-b0, 0, -b1)).getBlock() != ModBlocks.blockVoidcrystal || world.getBlockState(pos.add(b0, 0, b1)).getBlock() != this)) {
 						world.setBlockToAir(pos);
 					}
 				}

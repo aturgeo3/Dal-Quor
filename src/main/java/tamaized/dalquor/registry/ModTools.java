@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class VoidCraftTools {
+public class ModTools {
 
 	public static List<ITamRegistry> modelList;
 
@@ -56,32 +56,32 @@ public class VoidCraftTools {
 		// Axe: -3; Pick: -2.8; Spade: -3;
 		// Tools
 		// void
-		modelList.add(voidPickaxe = new TamPickaxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.voidTools, "voidpickaxe"));
-		modelList.add(voidSpade = new TamSpade(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.voidTools, "voidshovel"));
-		modelList.add(voidAxe = new TamAxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.voidTools, "voidaxe"));
-		modelList.add(voidSword = new TamSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.voidTools, "voidsword"));
-		modelList.add(voidHoe = new VoidHoe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.voidTools, "voidhoe"));
+		modelList.add(voidPickaxe = new TamPickaxe(ModCreativeTabs.tabVoid, ModMaterials.voidTools, "voidpickaxe"));
+		modelList.add(voidSpade = new TamSpade(ModCreativeTabs.tabVoid, ModMaterials.voidTools, "voidshovel"));
+		modelList.add(voidAxe = new TamAxe(ModCreativeTabs.tabVoid, ModMaterials.voidTools, "voidaxe"));
+		modelList.add(voidSword = new TamSword(ModCreativeTabs.tabVoid, ModMaterials.voidTools, "voidsword"));
+		modelList.add(voidHoe = new VoidHoe(ModCreativeTabs.tabVoid, ModMaterials.voidTools, "voidhoe"));
 
 		// spectre
-		modelList.add(angelicSword = new AngelicSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.spectreTools, "angelicsword"));
-		modelList.add(spectrePickaxe = new TamPickaxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.spectreTools, "spectrepickaxe"));
-		modelList.add(spectreAxe = new TamAxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.spectreTools, "spectreaxe"));
-		modelList.add(spectreSpade = new TamSpade(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.spectreTools, "spectrespade"));
-		modelList.add(spectreHoe = new VoidHoe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.spectreTools, "spectrehoe"));
+		modelList.add(angelicSword = new AngelicSword(ModCreativeTabs.tabVoid, ModMaterials.spectreTools, "angelicsword"));
+		modelList.add(spectrePickaxe = new TamPickaxe(ModCreativeTabs.tabVoid, ModMaterials.spectreTools, "spectrepickaxe"));
+		modelList.add(spectreAxe = new TamAxe(ModCreativeTabs.tabVoid, ModMaterials.spectreTools, "spectreaxe"));
+		modelList.add(spectreSpade = new TamSpade(ModCreativeTabs.tabVoid, ModMaterials.spectreTools, "spectrespade"));
+		modelList.add(spectreHoe = new VoidHoe(ModCreativeTabs.tabVoid, ModMaterials.spectreTools, "spectrehoe"));
 		// chain
-		modelList.add(chainSword = new ChainSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.chainTools, "chainsword"));
+		modelList.add(chainSword = new ChainSword(ModCreativeTabs.tabVoid, ModMaterials.chainTools, "chainsword"));
 		// molten
-		modelList.add(moltenSword = new MoltenSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.MoltenTools, "moltensword"));
+		modelList.add(moltenSword = new MoltenSword(ModCreativeTabs.tabVoid, ModMaterials.MoltenTools, "moltensword"));
 		// arch
-		modelList.add(archSword = new ArchSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.ArchTools, "archsword"));
+		modelList.add(archSword = new ArchSword(ModCreativeTabs.tabVoid, ModMaterials.ArchTools, "archsword"));
 		// demon
-		modelList.add(demonSword = new DemonSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.DemonTools, "demonsword"));
+		modelList.add(demonSword = new DemonSword(ModCreativeTabs.tabVoid, ModMaterials.DemonTools, "demonsword"));
 
 		// Cosmic
-		modelList.add(starforgedSword = new StarForgeSword(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.CosmicTools, "starforgedsword"));
-		modelList.add(starforgedPickaxe = new StarForgePickaxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.CosmicTools, "starforgedpickaxe"));
-		modelList.add(starforgedAxe = new StarForgeAxe(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.CosmicTools, "starforgedaxe"));
-		modelList.add(starforgedSpade = new StarForgeShovel(VoidCraftCreativeTabs.tabVoid, VoidCraftMaterials.CosmicTools, "starforgedshovel"));
+		modelList.add(starforgedSword = new StarForgeSword(ModCreativeTabs.tabVoid, ModMaterials.CosmicTools, "starforgedsword"));
+		modelList.add(starforgedPickaxe = new StarForgePickaxe(ModCreativeTabs.tabVoid, ModMaterials.CosmicTools, "starforgedpickaxe"));
+		modelList.add(starforgedAxe = new StarForgeAxe(ModCreativeTabs.tabVoid, ModMaterials.CosmicTools, "starforgedaxe"));
+		modelList.add(starforgedSpade = new StarForgeShovel(ModCreativeTabs.tabVoid, ModMaterials.CosmicTools, "starforgedshovel"));
 	}
 
 	@SubscribeEvent

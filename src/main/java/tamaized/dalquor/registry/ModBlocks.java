@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = DalQuor.modid)
-public class VoidCraftBlocks {
+public class ModBlocks {
 
 	public static BlockVoidcrystal blockVoidcrystal;
 	public static OreVoidcrystal oreVoidcrystal;
@@ -61,28 +61,28 @@ public class VoidCraftBlocks {
 	static {
 		modelList = new ArrayList<>();
 
-		modelList.add(blockVoidcrystal = new BlockVoidcrystal(VoidCraftCreativeTabs.tabVoid, Material.GLASS, "blockvoidcrystal", 7.0F));
-		modelList.add(oreVoidcrystal = new OreVoidcrystal(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "orevoidcrystal", 3.0F));
-		modelList.add(blockNoBreak = new BlockNoBreak(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "blocknobreak", -1F));
-		modelList.add(blockVoidbrick = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrick", 30.0F, SoundType.STONE));
-		modelList.add(blockVoidfence = new TamBlockFence(VoidCraftCreativeTabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockvoidfence", SoundType.STONE));
-		modelList.add(blockVoidstairs = new TamBlockStairs(VoidCraftCreativeTabs.tabVoid, blockVoidbrick.getDefaultState(), "blockvoidstairs", SoundType.STONE));
-		modelList.add(blockVoidBrickDoubleSlab = new TamBlockSlabDouble(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrickdoubleslab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
-		modelList.add(blockVoidBrickHalfSlab = new TamBlockSlabHalf(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrickhalfslab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
+		modelList.add(blockVoidcrystal = new BlockVoidcrystal(ModCreativeTabs.tabVoid, Material.GLASS, "blockvoidcrystal", 7.0F));
+		modelList.add(oreVoidcrystal = new OreVoidcrystal(ModCreativeTabs.tabVoid, Material.ROCK, "orevoidcrystal", 3.0F));
+		modelList.add(blockNoBreak = new BlockNoBreak(ModCreativeTabs.tabVoid, Material.ROCK, "blocknobreak", -1F));
+		modelList.add(blockVoidbrick = new TamBlock(ModCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrick", 30.0F, SoundType.STONE));
+		modelList.add(blockVoidfence = new TamBlockFence(ModCreativeTabs.tabVoid, Material.ROCK, MapColor.OBSIDIAN, "blockvoidfence", SoundType.STONE));
+		modelList.add(blockVoidstairs = new TamBlockStairs(ModCreativeTabs.tabVoid, blockVoidbrick.getDefaultState(), "blockvoidstairs", SoundType.STONE));
+		modelList.add(blockVoidBrickDoubleSlab = new TamBlockSlabDouble(ModCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrickdoubleslab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
+		modelList.add(blockVoidBrickHalfSlab = new TamBlockSlabHalf(ModCreativeTabs.tabVoid, Material.ROCK, "blockvoidbrickhalfslab", Item.getItemFromBlock(blockVoidBrickHalfSlab)));
 		modelList.add(AIBlock = new AIBlock("aiblock"));
-		modelList.add(realityHole = new BlockRealityHole(VoidCraftCreativeTabs.tabVoid, Material.CLOTH, "blockrealityhole", -1F));
-		modelList.add(ritualBlock = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.IRON, "ritualblock", 3.0F, SoundType.STONE));
-		modelList.add(cosmicMaterial = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.ROCK, "cosmicmaterial", 30.0F, SoundType.STONE));
-		modelList.add(starforge = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.IRON, "starforge", -1.0F, SoundType.METAL));
-		modelList.add(starforgeStation = new StarForgeBlock(VoidCraftCreativeTabs.tabVoid, Material.IRON, "starforgestation", -1.0F));
+		modelList.add(realityHole = new BlockRealityHole(ModCreativeTabs.tabVoid, Material.CLOTH, "blockrealityhole", -1F));
+		modelList.add(ritualBlock = new TamBlock(ModCreativeTabs.tabVoid, Material.IRON, "ritualblock", 3.0F, SoundType.STONE));
+		modelList.add(cosmicMaterial = new TamBlock(ModCreativeTabs.tabVoid, Material.ROCK, "cosmicmaterial", 30.0F, SoundType.STONE));
+		modelList.add(starforge = new TamBlock(ModCreativeTabs.tabVoid, Material.IRON, "starforge", -1.0F, SoundType.METAL));
+		modelList.add(starforgeStation = new StarForgeBlock(ModCreativeTabs.tabVoid, Material.IRON, "starforgestation", -1.0F));
 
-		modelList.add(blockPortalVoid = new BlockPortalVoid(VoidCraftCreativeTabs.tabVoid, "blockportalvoid"));
-		modelList.add(blockPortalXia = new BlockPortalXia(VoidCraftCreativeTabs.tabVoid, "blockportalxia"));
-		modelList.add(blockVoidFire = new BlockVoidFire(VoidCraftCreativeTabs.tabVoid, "firevoid"));
+		modelList.add(blockPortalVoid = new BlockPortalVoid(ModCreativeTabs.tabVoid, "blockportalvoid"));
+		modelList.add(blockPortalXia = new BlockPortalXia(ModCreativeTabs.tabVoid, "blockportalxia"));
+		modelList.add(blockVoidFire = new BlockVoidFire(ModCreativeTabs.tabVoid, "firevoid"));
 
-		modelList.add(dreamBed = new BlockDreamBed(VoidCraftCreativeTabs.tabVoid, "dreambed"));
-		modelList.add(creationforge = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.IRON, "creationforge", -1.0F, SoundType.METAL));
-		modelList.add(creationforge_ray = new TamBlock(VoidCraftCreativeTabs.tabVoid, Material.IRON, "creationforge_ray", -1.0F, SoundType.METAL));
+		modelList.add(dreamBed = new BlockDreamBed(ModCreativeTabs.tabVoid, "dreambed"));
+		modelList.add(creationforge = new TamBlock(ModCreativeTabs.tabVoid, Material.IRON, "creationforge", -1.0F, SoundType.METAL));
+		modelList.add(creationforge_ray = new TamBlock(ModCreativeTabs.tabVoid, Material.IRON, "creationforge_ray", -1.0F, SoundType.METAL));
 
 	}
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class VoidCraftItems {
+public class ModItems {
 
 	public static VadeMecum vadeMecum;
 	public static TamItem ectoplasm;
@@ -55,39 +55,39 @@ public class VoidCraftItems {
 	static {
 		modelList = new ArrayList<>();
 
-		modelList.add(vadeMecum = new VadeMecum(VoidCraftCreativeTabs.tabVoid, "vademecum", 1));
+		modelList.add(vadeMecum = new VadeMecum(ModCreativeTabs.tabVoid, "vademecum", 1));
 
-		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(VoidCraftCreativeTabs.tabVoid, "emptyobsidianflask", 16));
-		modelList.add(obsidianFlask = new ObsidianFlask(EntityObsidianFlask.Type.Normal, VoidCraftCreativeTabs.tabVoid, "obsidianflask", 16));
-		modelList.add(obsidianFlaskFire = new ObsidianFlask(EntityObsidianFlask.Type.Fire, VoidCraftCreativeTabs.tabVoid, "flask_fire", 16));
-		modelList.add(obsidianFlaskFreeze = new ObsidianFlask(EntityObsidianFlask.Type.Freeze, VoidCraftCreativeTabs.tabVoid, "flask_freeze", 16));
-		modelList.add(obsidianFlaskShock = new ObsidianFlask(EntityObsidianFlask.Type.Shock, VoidCraftCreativeTabs.tabVoid, "flask_shock", 16));
-		modelList.add(obsidianFlaskAcid = new ObsidianFlask(EntityObsidianFlask.Type.Acid, VoidCraftCreativeTabs.tabVoid, "flask_acid", 16));
-		modelList.add(obsidianFlaskVoid = new ObsidianFlask(EntityObsidianFlask.Type.Void, VoidCraftCreativeTabs.tabVoid, "flask_void", 16));
-		modelList.add(ectoplasm = new TamItem(VoidCraftCreativeTabs.tabVoid, "ectoplasm", 64));
-		modelList.add(voidcrystal = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcrystal", 64));
-		modelList.add(voidChain = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidchain", 64));
-		modelList.add(MoltenvoidChain = new TamItem(VoidCraftCreativeTabs.tabVoid, "moltenvoidchain", 64));
-		modelList.add(MoltenvoidChainPart = new TamItem(VoidCraftCreativeTabs.tabVoid, "moltenvoidchainpart", 64));
-		modelList.add(burnBone = new TamItem(VoidCraftCreativeTabs.tabVoid, "burnbone", 64));
-		modelList.add(voidStar = new VoidStar(VoidCraftCreativeTabs.tabVoid, "voidstar", 1));
-		modelList.add(ChainedSkull = new ChainedSkull(VoidCraftCreativeTabs.tabVoid, "chainedskull", 1));
-		modelList.add(voidCloth = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcloth", 64));
-		modelList.add(voidCrystalBucket = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidcrystalbucket", 1));
-		modelList.add(voidicEssence = new VoidicEssence(VoidCraftCreativeTabs.tabVoid, "voidicessence", 1));
-		modelList.add(voidicPhlogiston = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicphlogiston", 64));
-		modelList.add(voidicDragonScale = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicdragonscale", 64));
-		modelList.add(astralEssence = new TamItem(VoidCraftCreativeTabs.tabVoid, "astralessence", 64));
-		modelList.add(quoriFragment = new TamItem(VoidCraftCreativeTabs.tabVoid, "quorifragment", 64));
+		modelList.add(emptyObsidianFlask = new EmptyObsidianFlask(ModCreativeTabs.tabVoid, "emptyobsidianflask", 16));
+		modelList.add(obsidianFlask = new ObsidianFlask(EntityObsidianFlask.Type.Normal, ModCreativeTabs.tabVoid, "obsidianflask", 16));
+		modelList.add(obsidianFlaskFire = new ObsidianFlask(EntityObsidianFlask.Type.Fire, ModCreativeTabs.tabVoid, "flask_fire", 16));
+		modelList.add(obsidianFlaskFreeze = new ObsidianFlask(EntityObsidianFlask.Type.Freeze, ModCreativeTabs.tabVoid, "flask_freeze", 16));
+		modelList.add(obsidianFlaskShock = new ObsidianFlask(EntityObsidianFlask.Type.Shock, ModCreativeTabs.tabVoid, "flask_shock", 16));
+		modelList.add(obsidianFlaskAcid = new ObsidianFlask(EntityObsidianFlask.Type.Acid, ModCreativeTabs.tabVoid, "flask_acid", 16));
+		modelList.add(obsidianFlaskVoid = new ObsidianFlask(EntityObsidianFlask.Type.Void, ModCreativeTabs.tabVoid, "flask_void", 16));
+		modelList.add(ectoplasm = new TamItem(ModCreativeTabs.tabVoid, "ectoplasm", 64));
+		modelList.add(voidcrystal = new TamItem(ModCreativeTabs.tabVoid, "voidcrystal", 64));
+		modelList.add(voidChain = new TamItem(ModCreativeTabs.tabVoid, "voidchain", 64));
+		modelList.add(MoltenvoidChain = new TamItem(ModCreativeTabs.tabVoid, "moltenvoidchain", 64));
+		modelList.add(MoltenvoidChainPart = new TamItem(ModCreativeTabs.tabVoid, "moltenvoidchainpart", 64));
+		modelList.add(burnBone = new TamItem(ModCreativeTabs.tabVoid, "burnbone", 64));
+		modelList.add(voidStar = new VoidStar(ModCreativeTabs.tabVoid, "voidstar", 1));
+		modelList.add(ChainedSkull = new ChainedSkull(ModCreativeTabs.tabVoid, "chainedskull", 1));
+		modelList.add(voidCloth = new TamItem(ModCreativeTabs.tabVoid, "voidcloth", 64));
+		modelList.add(voidCrystalBucket = new TamItem(ModCreativeTabs.tabVoid, "voidcrystalbucket", 1));
+		modelList.add(voidicEssence = new VoidicEssence(ModCreativeTabs.tabVoid, "voidicessence", 1));
+		modelList.add(voidicPhlogiston = new TamItem(ModCreativeTabs.tabVoid, "voidicphlogiston", 64));
+		modelList.add(voidicDragonScale = new TamItem(ModCreativeTabs.tabVoid, "voidicdragonscale", 64));
+		modelList.add(astralEssence = new TamItem(ModCreativeTabs.tabVoid, "astralessence", 64));
+		modelList.add(quoriFragment = new TamItem(ModCreativeTabs.tabVoid, "quorifragment", 64));
 
-		modelList.add(voidicSteel = new TamItem(VoidCraftCreativeTabs.tabVoid, "voidicsteel", 64));
+		modelList.add(voidicSteel = new TamItem(ModCreativeTabs.tabVoid, "voidicsteel", 64));
 
-		modelList.add(debugger = new Debugger(VoidCraftCreativeTabs.tabVoid, "debugger", 1));
+		modelList.add(debugger = new Debugger(ModCreativeTabs.tabVoid, "debugger", 1));
 
-		modelList.add(voidCrystalShield = new VoidCrystalShield(VoidCraftCreativeTabs.tabVoid, "voidcrystalshield"));
+		modelList.add(voidCrystalShield = new VoidCrystalShield(ModCreativeTabs.tabVoid, "voidcrystalshield"));
 		DamageEvent.shieldRegistry.add(voidCrystalShield);
 
-		modelList.add(dreamBed = new ItemDreamBed(VoidCraftCreativeTabs.tabVoid, "dreambed"));
+		modelList.add(dreamBed = new ItemDreamBed(ModCreativeTabs.tabVoid, "dreambed"));
 
 	}
 
@@ -95,9 +95,9 @@ public class VoidCraftItems {
 		OreDictionary.registerOre("ingotVoidSteel", voidicSteel);
 		OreDictionary.registerOre("ingotSteel", voidicSteel);
 
-		GameRegistry.addSmelting(VoidCraftBlocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
+		GameRegistry.addSmelting(ModBlocks.oreVoidcrystal, new ItemStack(voidcrystal), 0.1F);
 		GameRegistry.addSmelting(voidChain, new ItemStack(MoltenvoidChainPart), 0.1F);
-		GameRegistry.addSmelting(voidCrystalBucket, VoidCraftFluids.voidBucket.getBucket(), 0.1F);
+		GameRegistry.addSmelting(voidCrystalBucket, ModFluids.voidBucket.getBucket(), 0.1F);
 	}
 
 	private static void addOreSmelting(Item i, String s) {

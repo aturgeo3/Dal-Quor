@@ -8,7 +8,7 @@ import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
 import tamaized.dalquor.common.xiacastle.logic.battle.IBattleHandler;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 public class Xia2BattleHandler implements IBattleHandler {
 
@@ -50,7 +50,7 @@ public class Xia2BattleHandler implements IBattleHandler {
 		readyForInput = false;
 		xia = new EntityBossXia2(worldObj, this);
 		xia.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
-		ItemStack vade = new ItemStack(VoidCraftItems.vadeMecum);
+		ItemStack vade = new ItemStack(ModItems.vadeMecum);
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
 			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		xia.setHeldItem(EnumHand.MAIN_HAND, vade);

@@ -10,7 +10,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.dalquor.common.handlers.ConfigHandler;
-import tamaized.dalquor.registry.VoidCraftBiomes;
+import tamaized.dalquor.registry.ModBiomes;
 
 public class WorldProviderVoid extends WorldProvider {
 
@@ -19,7 +19,7 @@ public class WorldProviderVoid extends WorldProvider {
 	 */
 	@Override
 	protected void init() {
-		this.biomeProvider = new BiomeProviderSingle(VoidCraftBiomes.biomeVoid);
+		this.biomeProvider = new BiomeProviderSingle(ModBiomes.biomeVoid);
 		this.doesWaterVaporize = false;
 		this.nether = true;
 	}

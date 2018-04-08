@@ -31,10 +31,10 @@ import tamaized.dalquor.common.entity.boss.xia.ai.EntityAIXia1Phase3;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
 import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
 import tamaized.dalquor.network.client.ClientPacketHandlerSheathe;
-import tamaized.dalquor.registry.VoidCraftArmors;
-import tamaized.dalquor.registry.VoidCraftItems;
-import tamaized.dalquor.registry.VoidCraftPotions;
-import tamaized.dalquor.registry.VoidCraftTools;
+import tamaized.dalquor.registry.ModArmors;
+import tamaized.dalquor.registry.ModItems;
+import tamaized.dalquor.registry.ModPotions;
+import tamaized.dalquor.registry.ModTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +55,12 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 		noClip = true;
 		moveHelper = new EntityVoidNPC.BossFlyNoclipMoveHelper(this);
 		updateStats();
-		setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(VoidCraftArmors.xiaHelmet));
-		setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(VoidCraftArmors.xiaChest));
-		setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(VoidCraftArmors.xiaLegs));
-		setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(VoidCraftArmors.xiaBoots));
-		setHeldItem(EnumHand.MAIN_HAND, new ItemStack(VoidCraftTools.demonSword));
-		ItemStack vade = new ItemStack(VoidCraftItems.vadeMecum);
+		setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ModArmors.xiaHelmet));
+		setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ModArmors.xiaChest));
+		setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ModArmors.xiaLegs));
+		setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ModArmors.xiaBoots));
+		setHeldItem(EnumHand.MAIN_HAND, new ItemStack(ModTools.demonSword));
+		ItemStack vade = new ItemStack(ModItems.vadeMecum);
 		if (vade.hasCapability(CapabilityList.VADEMECUMITEM, null))
 			vade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 		setHeldItem(EnumHand.OFF_HAND, vade);
@@ -129,10 +129,10 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 				updateStats();
 				isDead = false;
 				if (phase > 2) {
-					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraftArmors.xiaHelmet)));
-					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraftArmors.xiaChest)));
-					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraftArmors.xiaLegs)));
-					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(VoidCraftArmors.xiaBoots)));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ModArmors.xiaHelmet)));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ModArmors.xiaChest)));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ModArmors.xiaLegs)));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ModArmors.xiaBoots)));
 					if (world.provider instanceof WorldProviderXia) {
 						for (EntityPlayer player : ((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerXia1().getPlayers()) {
 							player.sendMessage(new TextComponentTranslation("voidcraft.misc.xia.death"));
@@ -173,7 +173,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 	@Override
 	public void addPotionEffect(PotionEffect potioneffectIn) {
 		Potion pot = potioneffectIn.getPotion();
-		if (pot == VoidCraftPotions.fireSheathe || pot == VoidCraftPotions.frostSheathe || pot == VoidCraftPotions.litSheathe || pot == VoidCraftPotions.acidSheathe)
+		if (pot == ModPotions.fireSheathe || pot == ModPotions.frostSheathe || pot == ModPotions.litSheathe || pot == ModPotions.acidSheathe)
 			super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
 			DalQuor.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));

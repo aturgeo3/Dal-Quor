@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityTwinsXia;
 import tamaized.dalquor.common.entity.nonliving.EntityBlockSpell;
 import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,9 +95,9 @@ public class EntityDolXia extends EntityTwinsXia {
 
 	@Override
 	protected void update() {
-		if (getActivePotionEffect(VoidCraftPotions.acidSheathe) == null) {
+		if (getActivePotionEffect(ModPotions.acidSheathe) == null) {
 			clearActivePotions();
-			addPotionEffect(new PotionEffect(VoidCraftPotions.acidSheathe, 100));
+			addPotionEffect(new PotionEffect(ModPotions.acidSheathe, 100));
 		}
 		if (blockCheckTick-- <= 0) {
 			checkAndSpawnBlocks();

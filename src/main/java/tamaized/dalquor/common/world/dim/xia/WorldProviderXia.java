@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.dalquor.common.handlers.ConfigHandler;
 import tamaized.dalquor.common.xiacastle.logic.XiaCastleLogicHandler;
-import tamaized.dalquor.registry.VoidCraftBiomes;
+import tamaized.dalquor.registry.ModBiomes;
 
 public class WorldProviderXia extends WorldProvider {
 
@@ -28,7 +28,7 @@ public class WorldProviderXia extends WorldProvider {
 	 */
 	@Override
 	protected void init() {
-		biomeProvider = new BiomeProviderSingle(VoidCraftBiomes.biomeXia);
+		biomeProvider = new BiomeProviderSingle(ModBiomes.biomeXia);
 		doesWaterVaporize = false;
 		nether = true;
 		if (world instanceof WorldServer) {

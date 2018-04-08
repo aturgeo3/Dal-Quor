@@ -23,8 +23,8 @@ import tamaized.dalquor.common.xiacastle.logic.battle.herobrine.HerobrineBattleH
 import tamaized.dalquor.common.xiacastle.logic.battle.twins.TwinsBattleHandler;
 import tamaized.dalquor.common.xiacastle.logic.battle.xia.XiaBattleHandler;
 import tamaized.dalquor.common.xiacastle.logic.battle.xia2.Xia2BattleHandler;
-import tamaized.dalquor.registry.VoidCraftBlocks;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 
 import java.util.List;
 
@@ -150,7 +150,7 @@ public class XiaCastleLogicHandler {
 		TileEntityAIBlock ai2;
 		if (!(te1 instanceof TileEntityAIBlock)) {
 			world.setBlockToAir(pos1);
-			world.setBlockState(pos1, VoidCraftBlocks.AIBlock.getDefaultState());
+			world.setBlockState(pos1, ModBlocks.AIBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
 		} else {
@@ -158,7 +158,7 @@ public class XiaCastleLogicHandler {
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
 			world.setBlockToAir(pos2);
-			world.setBlockState(pos2, VoidCraftBlocks.AIBlock.getDefaultState());
+			world.setBlockState(pos2, ModBlocks.AIBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
 		} else {
@@ -201,7 +201,7 @@ public class XiaCastleLogicHandler {
 		TileEntity te = world.getTileEntity(chestPos);
 		if (te instanceof TileEntityChest) {
 			TileEntityChest chest = (TileEntityChest) te;
-			chest.setInventorySlotContents(0, new ItemStack(VoidCraftItems.quoriFragment, i));
+			chest.setInventorySlotContents(0, new ItemStack(ModItems.quoriFragment, i));
 		}
 		hasFinished = true;
 		if (world != null && world.provider instanceof WorldProviderXia)
@@ -246,7 +246,7 @@ public class XiaCastleLogicHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockNoBreak.getDefaultState());
+				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.blockNoBreak.getDefaultState());
 			}
 		}
 		xiaDoorOpen = false;

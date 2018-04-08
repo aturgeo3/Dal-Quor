@@ -15,8 +15,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import tamaized.dalquor.registry.VoidCraftBiomes;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBiomes;
+import tamaized.dalquor.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -79,14 +79,14 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 	}
 
 	public static IBlockState[] getGenBlocks(Biome biome) {
-		if (biome == VoidCraftBiomes.biomeDreamOverworld)
+		if (biome == ModBiomes.biomeDreamOverworld)
 			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
-		if (biome == VoidCraftBiomes.biomeDreamNether)
+		if (biome == ModBiomes.biomeDreamNether)
 			return new IBlockState[]{Blocks.NETHERRACK.getDefaultState(), Blocks.MAGMA.getDefaultState(), Blocks.MAGMA.getDefaultState()};
-		if (biome == VoidCraftBiomes.biomeDreamEnd)
+		if (biome == ModBiomes.biomeDreamEnd)
 			return new IBlockState[]{Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()};
-		if (biome == VoidCraftBiomes.biomeDreamVoid) {
-			return new IBlockState[]{VoidCraftBlocks.blockVoidcrystal.getDefaultState(), VoidCraftBlocks.blockVoidcrystal.getDefaultState(), VoidCraftBlocks.blockVoidcrystal.getDefaultState()};
+		if (biome == ModBiomes.biomeDreamVoid) {
+			return new IBlockState[]{ModBlocks.blockVoidcrystal.getDefaultState(), ModBlocks.blockVoidcrystal.getDefaultState(), ModBlocks.blockVoidcrystal.getDefaultState()};
 		} else
 			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
 	}

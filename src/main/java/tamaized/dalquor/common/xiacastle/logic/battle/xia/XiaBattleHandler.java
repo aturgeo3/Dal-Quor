@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
 import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
 import tamaized.dalquor.common.xiacastle.logic.battle.IBattleHandler;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				worldObj.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? VoidCraftBlocks.realityHole.getDefaultState() : VoidCraftBlocks.blockNoBreak.getDefaultState());
+				worldObj.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.blockNoBreak.getDefaultState());
 			}
 		}
 		isDone = false;

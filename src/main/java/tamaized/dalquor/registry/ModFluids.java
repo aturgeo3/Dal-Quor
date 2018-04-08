@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class VoidCraftFluids {
+public class ModFluids {
 
 	public static Fluid voidFluid;
 	public static Fluid acidFluid;
@@ -60,9 +60,9 @@ public class VoidCraftFluids {
 		acidMaterialLiquid = new MaterialLiquid(MapColor.GREEN);
 		arcaneSludgeMaterialLiquid = new MaterialLiquid(MapColor.CYAN);
 
-		modelList.add(voidFluidBlock = new TamFluidBlock(VoidCraftCreativeTabs.tabVoid, voidFluid, Material.WATER, "blockvoidfluid"));
-		modelList.add(acidFluidBlock = new TamFluidFiniteBlock(VoidCraftCreativeTabs.tabVoid, acidFluid, Material.WATER, "blockacidfluid", new DamageSourceAcid(), 5));
-		modelList.add(arcaneSludgeFluidBlock = new ArcaneSludgeFluidBlock(VoidCraftCreativeTabs.tabVoid, arcaneSludgeFluid, Material.WATER, "blockarcanesludgefluid"));
+		modelList.add(voidFluidBlock = new TamFluidBlock(ModCreativeTabs.tabVoid, voidFluid, Material.WATER, "blockvoidfluid"));
+		modelList.add(acidFluidBlock = new TamFluidFiniteBlock(ModCreativeTabs.tabVoid, acidFluid, Material.WATER, "blockacidfluid", new DamageSourceAcid(), 5));
+		modelList.add(arcaneSludgeFluidBlock = new ArcaneSludgeFluidBlock(ModCreativeTabs.tabVoid, arcaneSludgeFluid, Material.WATER, "blockarcanesludgefluid"));
 	}
 
 	public static void init() {

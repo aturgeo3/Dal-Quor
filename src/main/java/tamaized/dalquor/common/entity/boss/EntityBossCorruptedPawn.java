@@ -29,7 +29,7 @@ import tamaized.dalquor.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityWitherbrine;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
-import tamaized.dalquor.registry.VoidCraftItems;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityBossCorruptedPawn extends EntityVoidNPC implements IVoidBossData, IMob {
 
@@ -144,7 +144,7 @@ public class EntityBossCorruptedPawn extends EntityVoidNPC implements IVoidBossD
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraftItems.voidStar;
+		return ModItems.voidStar;
 	}
 
 	@Override

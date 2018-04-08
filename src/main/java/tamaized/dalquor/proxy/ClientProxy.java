@@ -109,7 +109,7 @@ import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.dalquor.common.events.client.DebugEvent;
 import tamaized.dalquor.common.events.client.TextureStitch;
 import tamaized.dalquor.common.vademecum.contents.VadeMecumMainEntry;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.List;
 
@@ -185,11 +185,11 @@ public class ClientProxy extends CommonProxy {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void init() {
-		VoidCraftBlocks.clientInit();
+		ModBlocks.clientInit();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, new RenderNoBreak());
 
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(VoidCraftBlocks.blockNoBreak), 0, TileEntityNoBreak.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.blockNoBreak), 0, TileEntityNoBreak.class);
 
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 	}

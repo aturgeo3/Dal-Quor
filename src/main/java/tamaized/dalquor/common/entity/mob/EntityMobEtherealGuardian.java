@@ -24,16 +24,16 @@ import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineCreepe
 import tamaized.dalquor.common.sound.VoidSoundEvents;
 import tamaized.dalquor.common.starforge.effects.StarForgeEffectList;
 import tamaized.dalquor.network.client.ClientPacketHandlerSheathe;
-import tamaized.dalquor.registry.VoidCraftItems;
-import tamaized.dalquor.registry.VoidCraftPotions;
-import tamaized.dalquor.registry.VoidCraftTools;
+import tamaized.dalquor.registry.ModItems;
+import tamaized.dalquor.registry.ModPotions;
+import tamaized.dalquor.registry.ModTools;
 
 public class EntityMobEtherealGuardian extends EntityVoidMob {
 
 	public EntityMobEtherealGuardian(World p_i1738_1_) {
 		super(p_i1738_1_);
 		isImmuneToFire = true;
-		ItemStack stack = new ItemStack(VoidCraftTools.starforgedSword);
+		ItemStack stack = new ItemStack(ModTools.starforgedSword);
 		IStarForgeCapability cap = stack.getCapability(CapabilityList.STARFORGE, null);
 		if (cap != null) {
 			cap.addEffect(StarForgeEffectList.firstDegreeBurns);
@@ -82,9 +82,9 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 	@Override
 	public void onLivingUpdate() {
 		if (!world.isRemote) {
-			if (getActivePotionEffect(VoidCraftPotions.fireSheathe) == null) {
+			if (getActivePotionEffect(ModPotions.fireSheathe) == null) {
 				clearActivePotions();
-				Potion potion = VoidCraftPotions.fireSheathe;
+				Potion potion = ModPotions.fireSheathe;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
 				DalQuor.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(potion), effect.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
@@ -115,7 +115,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraftItems.voidicPhlogiston;
+		return ModItems.voidicPhlogiston;
 	}
 
 	/**

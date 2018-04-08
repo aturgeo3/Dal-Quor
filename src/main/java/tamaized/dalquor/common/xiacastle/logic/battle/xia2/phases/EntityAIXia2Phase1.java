@@ -14,7 +14,7 @@ import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePack
 import tamaized.dalquor.common.entity.nonliving.ProjectileDisintegration;
 import tamaized.dalquor.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.dalquor.network.IVoidBossAIPacket;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 import java.util.List;
 
@@ -105,7 +105,7 @@ public class EntityAIXia2Phase1 extends EntityVoidNPCAIBase<EntityBossXia2> {
 				resetAnimationTick = 20 * 2;
 				if (closestEntity instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) closestEntity;
-					player.addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 5));
+					player.addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 5));
 				}
 				break;
 		}

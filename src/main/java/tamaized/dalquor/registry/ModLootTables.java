@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 import tamaized.dalquor.DalQuor;
 
-public class VoidCraftLootTables {
+public class ModLootTables {
 
 	public static final ResourceLocation chest_voidFortress = new ResourceLocation(DalQuor.modid, "chests/voidfortress");
 	public static final ResourceLocation chest_voidCity = new ResourceLocation(DalQuor.modid, "chests/voidcity");

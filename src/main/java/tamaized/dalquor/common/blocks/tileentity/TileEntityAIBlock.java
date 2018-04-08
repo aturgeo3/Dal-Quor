@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.tileentity.TamTileEntity;
 import tamaized.dalquor.common.blocks.AIBlock;
-import tamaized.dalquor.registry.VoidCraftBlocks;
+import tamaized.dalquor.registry.ModBlocks;
 
 public class TileEntityAIBlock extends TamTileEntity {
 
@@ -95,7 +95,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 			}
 			if (oldState != state) {
 				oldState = state;
-				world.setBlockState(pos, VoidCraftBlocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
+				world.setBlockState(pos, ModBlocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
 			}
 		}
 	}

@@ -10,7 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
-import tamaized.dalquor.registry.VoidCraftPotions;
+import tamaized.dalquor.registry.ModPotions;
 
 public class StarForgeEffectVoidTouch implements IStarForgeEffect {
 
@@ -37,7 +37,7 @@ public class StarForgeEffectVoidTouch implements IStarForgeEffect {
 	@Override
 	public void onEntityHit(Entity entityUser, Entity entityHit) {
 		if (entityHit instanceof EntityLivingBase) {
-			((EntityLivingBase) entityHit).addPotionEffect(new PotionEffect(VoidCraftPotions.voidicInfusion, 20 * 3));
+			((EntityLivingBase) entityHit).addPotionEffect(new PotionEffect(ModPotions.voidicInfusion, 20 * 3));
 		}
 	}
 
