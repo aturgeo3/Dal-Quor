@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.addons.thaumcraft;
 
 
-public class VoidCraftResearch {/*
+public class Research {/*
 	
 	private VoidCraftThaumRecipes recipes;
 	

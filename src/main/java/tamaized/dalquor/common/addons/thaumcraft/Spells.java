@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.addons.thaumcraft;
 
 
-public class VoidCraftSpells {/*
+public class Spells {/*
 	
 	private ThaumcraftApi instance;
 	

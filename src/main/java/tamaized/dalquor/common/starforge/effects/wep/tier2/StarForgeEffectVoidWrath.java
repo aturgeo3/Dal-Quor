@@ -54,7 +54,7 @@ public class StarForgeEffectVoidWrath implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.voidWrath");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.voidWrath");
 	}
 
 }

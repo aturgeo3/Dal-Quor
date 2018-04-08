@@ -135,7 +135,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 					world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ModArmors.xiaBoots)));
 					if (world.provider instanceof WorldProviderXia) {
 						for (EntityPlayer player : ((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerXia1().getPlayers()) {
-							player.sendMessage(new TextComponentTranslation("voidcraft.misc.xia.death"));
+							player.sendMessage(new TextComponentTranslation("dalquor.misc.xia.death"));
 						}
 					}
 					setDead();
@@ -228,7 +228,7 @@ public class EntityBossXia extends EntityVoidNPC implements IVoidBossData {
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentTranslation("entity.voidcraft.Xia.name");
+		return new TextComponentTranslation("entity.dalquor.Xia.name");
 	}
 
 	@Override

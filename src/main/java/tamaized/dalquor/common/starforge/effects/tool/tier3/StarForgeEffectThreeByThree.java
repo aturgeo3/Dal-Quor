@@ -86,7 +86,7 @@ public class StarForgeEffectThreeByThree implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.threeByThree");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.threeByThree");
 	}
 
 	private void caseY(EntityPlayer player, World world, ItemStack tool, BlockPos pos) {

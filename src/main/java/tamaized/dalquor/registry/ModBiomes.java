@@ -31,13 +31,13 @@ public class ModBiomes {
 	public static void register(RegistryEvent.Register<Biome> event) {
 		float baseHeight = -1F;
 		float heightVariation = 0.1F;
-		BiomeProperties biomeVoidProp = new BiomeProperties("The Void").setBaseBiome("voidcraft_biome_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
-		BiomeProperties biomeXiaProp = new BiomeProperties("???").setBaseBiome("voidcraft_biome_xia").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeVoidProp = new BiomeProperties("The Void").setBaseBiome("dalquor.biome_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeXiaProp = new BiomeProperties("???").setBaseBiome("dalquor.biome_xia").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
 
-		BiomeProperties biomeDreamOverworldProp = new BiomeProperties("Dream Overworld").setBaseBiome("voidcraft_biome_dream_overworld").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
-		BiomeProperties biomeDreamNetherProp = new BiomeProperties("Dream Nether").setBaseBiome("voidcraft_biome_dream_nether").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
-		BiomeProperties biomeDreamEndProp = new BiomeProperties("Dream End").setBaseBiome("voidcraft_biome_dream_end").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
-		BiomeProperties biomeDreamVoidProp = new BiomeProperties("Dream Void").setBaseBiome("voidcraft_biome_dream_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeDreamOverworldProp = new BiomeProperties("Dream Overworld").setBaseBiome("dalquor.biome_dream_overworld").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeDreamNetherProp = new BiomeProperties("Dream Nether").setBaseBiome("dalquor.biome_dream_nether").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeDreamEndProp = new BiomeProperties("Dream End").setBaseBiome("dalquor.biome_dream_end").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
+		BiomeProperties biomeDreamVoidProp = new BiomeProperties("Dream Void").setBaseBiome("dalquor.biome_dream_void").setBaseHeight(baseHeight).setHeightVariation(heightVariation).setTemperature(0.21F).setRainfall(0.0F).setRainDisabled();
 
 		biomeVoid = new BiomeGenVoid(biomeVoidProp);
 		biomeXia = new BiomeGenXia(biomeXiaProp);
@@ -47,13 +47,13 @@ public class ModBiomes {
 		biomeDreamEnd = new BiomeGenDream(biomeDreamEndProp, new SpawnListEntry(EntityEnderman.class, 100, 0, 1));
 		biomeDreamVoid = new BiomeGenDream(biomeDreamVoidProp, new SpawnListEntry(EntityMobWraith.class, 100, 0, 1));
 
-		biomeVoid.setRegistryName("voidcraft_biome_void");
-		biomeXia.setRegistryName("voidcraft_biome_xia");
+		biomeVoid.setRegistryName("dalquor.biome_void");
+		biomeXia.setRegistryName("dalquor.biome_xia");
 
-		biomeDreamOverworld.setRegistryName("voidcraft_biome_dream_overworld");
-		biomeDreamNether.setRegistryName("voidcraft_biome_dream_nether");
-		biomeDreamEnd.setRegistryName("voidcraft_biome_dream_end");
-		biomeDreamVoid.setRegistryName("voidcraft_biome_dream_void");
+		biomeDreamOverworld.setRegistryName("dalquor.biome_dream_overworld");
+		biomeDreamNether.setRegistryName("dalquor.biome_dream_nether");
+		biomeDreamEnd.setRegistryName("dalquor.biome_dream_end");
+		biomeDreamVoid.setRegistryName("dalquor.biome_dream_void");
 
 		event.getRegistry().register(biomeVoid);
 		event.getRegistry().register(biomeXia);

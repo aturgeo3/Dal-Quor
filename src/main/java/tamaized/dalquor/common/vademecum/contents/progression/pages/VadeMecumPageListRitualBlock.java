@@ -10,9 +10,9 @@ public class VadeMecumPageListRitualBlock implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[]{
 
-				new VadeMecumPage("voidcraft.VadeMecum.progression.title.ritualBlock", "voidcraft.VadeMecum.progression.desc.ritualBlock"),
+				new VadeMecumPage("dalquor.VadeMecum.progression.title.ritualBlock", "dalquor.VadeMecum.progression.desc.ritualBlock"),
 
-				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("voidcraft.VadeMecum.recipe.normal", new ItemStack(DalQuor.blocks.ritualBlock)))
+				new VadeMecumPageCrafting(new VadeMecumCraftingNormal("dalquor.VadeMecum.recipe.normal", new ItemStack(DalQuor.blocks.ritualBlock)))
 
 		};
 	}

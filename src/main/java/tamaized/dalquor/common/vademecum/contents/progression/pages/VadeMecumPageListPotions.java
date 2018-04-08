@@ -13,7 +13,7 @@ public class VadeMecumPageListPotions implements IVadeMecumPageProvider {
 	@Override
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) { // TODO
 		List<IVadeMecumPage> pages = new ArrayList<>();
-		pages.add(new VadeMecumPage("voidcraft.VadeMecum.progression.title.potions", "voidcraft.VadeMecum.progression.desc.potions"));
+		pages.add(new VadeMecumPage("dalquor.VadeMecum.progression.title.potions", "dalquor.VadeMecum.progression.desc.potions"));
 		/*if (cap.hasCategory(IVadeMecumCapability.Category.Flame))
 			pages.add(new VadeMecumPageCrafting(new VadeMecumCraftingAlchemy(VoidCraft.modid + ".VadeMecum.recipe.alchemy", new ItemStack(VoidCraft.items.obsidianFlaskFire))));
 		if (cap.hasCategory(IVadeMecumCapability.Category.Freeze))

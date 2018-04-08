@@ -29,15 +29,15 @@ public interface IVadeMecumCapability {
 	static String getPassiveName(Passive passive) {
 		switch (passive) {
 			case Anchor:
-				return "voidcraft.VadeMecum.passive.Anchor";
+				return "dalquor.VadeMecum.passive.Anchor";
 			case Empowerment:
-				return "voidcraft.VadeMecum.passive.Empowerment";
+				return "dalquor.VadeMecum.passive.Empowerment";
 			case Tolerance:
-				return "voidcraft.VadeMecum.passive.Tolerance";
+				return "dalquor.VadeMecum.passive.Tolerance";
 			case Flight:
-				return "voidcraft.VadeMecum.passive.Flight";
+				return "dalquor.VadeMecum.passive.Flight";
 			case Vigor:
-				return "voidcraft.VadeMecum.passive.Vigor";
+				return "dalquor.VadeMecum.passive.Vigor";
 			default:
 				return "null";
 		}

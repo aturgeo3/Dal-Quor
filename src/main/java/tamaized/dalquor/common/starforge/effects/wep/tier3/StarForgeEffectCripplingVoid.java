@@ -61,7 +61,7 @@ public class StarForgeEffectCripplingVoid implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.voidCripple");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.voidCripple");
 	}
 
 }

@@ -10,9 +10,9 @@ public class VadeMecumPageListVoice implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[]{
 
-				new VadeMecumPage("voidcraft.VadeMecum.progression.title.voice", "voidcraft.VadeMecum.progression.desc.voice.pg1"),
+				new VadeMecumPage("dalquor.VadeMecum.progression.title.voice", "dalquor.VadeMecum.progression.desc.voice.pg1"),
 
-				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.voice.pg2")};
+				new VadeMecumPage("", "dalquor.VadeMecum.progression.desc.voice.pg2")};
 	}
 
 }

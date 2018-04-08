@@ -25,13 +25,13 @@ public class TwinsMessages02 {
 			for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) {
 				switch (childPhase) {
 					case 0:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.2.1", p.getGameProfile().getName()));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.2.1", p.getGameProfile().getName()));
 						break;
 					case 1:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.2.2"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.2.2"));
 						break;
 					case 2:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.2.3", p.getGameProfile().getName()));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.2.3", p.getGameProfile().getName()));
 						break;
 					case 3:
 						worldObj.setBlockState(pos.add(3, 0, 0), Blocks.CHEST.getDefaultState().withProperty(Blocks.CHEST.FACING, EnumFacing.WEST));
@@ -40,10 +40,10 @@ public class TwinsMessages02 {
 						worldObj.setBlockState(pos.add(3, 0, 1), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
 						worldObj.setBlockState(pos.add(3, 1, 0), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
 						TileEntitySign s = (TileEntitySign) worldObj.getTileEntity(pos.add(3, 1, 0));
-						s.signText[0] = new TextComponentTranslation("voidcraft.twins.riddle.2.1");
-						s.signText[1] = new TextComponentTranslation("voidcraft.twins.riddle.2.2");
-						s.signText[2] = new TextComponentTranslation("voidcraft.twins.riddle.2.3");
-						s.signText[3] = new TextComponentTranslation("voidcraft.twins.riddle.2.4");
+						s.signText[0] = new TextComponentTranslation("dalquor.twins.riddle.2.1");
+						s.signText[1] = new TextComponentTranslation("dalquor.twins.riddle.2.2");
+						s.signText[2] = new TextComponentTranslation("dalquor.twins.riddle.2.3");
+						s.signText[3] = new TextComponentTranslation("dalquor.twins.riddle.2.4");
 						return true;
 					default:
 						break;

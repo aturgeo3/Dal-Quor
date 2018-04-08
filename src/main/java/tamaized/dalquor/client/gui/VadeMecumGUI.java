@@ -114,8 +114,8 @@ public class VadeMecumGUI extends GuiScreen {
 		button_entryBack = addButton(new OverlayButton(this, getButtonID(Button.EntryBack), vadeX + 18, vadeY + 8, true));
 		button_credits = addButton(new OverlayButton(this, getButtonID(Button.Credits), vadeX + 358, vadeY + 8, false));
 		button_largeBack = addButton(new LargeArrowButton(getButtonID(Button.LargeBack), vadeX + 17, vadeY + vadeH - 2/* vadeY + 10 */));
-		button_spells = addButton(new FullButton(this, I18n.format("voidcraft.gui.misc.spells"), getButtonID(Button.WordsOfPower), vadeX + 42, vadeY + vadeH - 3));
-		button_infusion = addButton(new FullButton(this, I18n.format("voidcraft.gui.misc.infusion"), getButtonID(Button.Infusion), vadeX + 82, vadeY + vadeH - 3));
+		button_spells = addButton(new FullButton(this, I18n.format("dalquor.gui.misc.spells"), getButtonID(Button.WordsOfPower), vadeX + 42, vadeY + vadeH - 3));
+		button_infusion = addButton(new FullButton(this, I18n.format("dalquor.gui.misc.infusion"), getButtonID(Button.Infusion), vadeX + 82, vadeY + vadeH - 3));
 		updateButtons();
 	}
 
@@ -256,9 +256,9 @@ public class VadeMecumGUI extends GuiScreen {
 			entry.render(this, fontRenderer, mouseX, mouseY, vadeX, vadeY, pageNumber);
 		}
 		if (button_entryBack != null && button_entryBack.visible)
-			drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
+			drawCenteredString(fontRenderer, I18n.format("dalquor.gui.misc.main"), vadeX + 30, vadeY + vadeH - 24, 0xFFFF00);
 		if (button_credits != null && button_credits.visible)
-			drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
+			drawCenteredString(fontRenderer, I18n.format("dalquor.gui.misc.credits"), vadeX + 360, vadeY + 12, 0xFFFF00);
 		if (!renderStackHover.isEmpty()) {
 			renderToolTip(renderStackHover, mouseX, mouseY);
 			renderStackHover = ItemStack.EMPTY;

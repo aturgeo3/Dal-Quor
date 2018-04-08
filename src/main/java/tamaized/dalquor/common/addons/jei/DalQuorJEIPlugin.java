@@ -12,13 +12,13 @@ import tamaized.dalquor.registry.ModItems;
 import javax.annotation.Nonnull;
 
 @JEIPlugin
-public class VoidCraftJEIPlugin implements IModPlugin {
+public class DalQuorJEIPlugin implements IModPlugin {
 
 	public static IJeiHelpers jeiHelpers;
 
 	@Override
 	public void register(@Nonnull IModRegistry registry) {
-		DalQuor.instance.logger.info("jei detected, loading VoidCraft jei Plugin");
+		DalQuor.instance.logger.info("JEI detected, loading DalQuor JEI Plugin");
 		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
 		jeiHelpers = registry.getJeiHelpers();
 

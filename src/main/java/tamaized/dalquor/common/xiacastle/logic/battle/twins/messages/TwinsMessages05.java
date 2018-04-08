@@ -17,34 +17,34 @@ public class TwinsMessages05 {
 			for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50)))) {
 				switch (childPhase) {
 					case 0:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.1"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.1"));
 						childPhaseModulate = 20 * 5;
 						break;
 					case 1:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.2"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.2"));
 						childPhaseModulate = 20 * 7;
 						break;
 					case 2:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.3"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.3"));
 						break;
 					case 3:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.4"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.4"));
 						childPhaseModulate = 20 * 8;
 						break;
 					case 4:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.5"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.5"));
 						childPhaseModulate = 20 * 5;
 						break;
 					case 5:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.6"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.6"));
 						childPhaseModulate = 20 * 7;
 						break;
 					case 6:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.7"));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.7"));
 						childPhaseModulate = 20 * 8;
 						break;
 					case 7:
-						p.sendMessage(new TextComponentTranslation("voidcraft.twins.speech.riddle.5.8", p.getGameProfile().getName()));
+						p.sendMessage(new TextComponentTranslation("dalquor.twins.speech.riddle.5.8", p.getGameProfile().getName()));
 						childPhaseModulate = 20 * 5;
 						break;
 					case 8:

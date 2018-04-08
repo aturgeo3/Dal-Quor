@@ -10,9 +10,9 @@ public class VadeMecumPageListTolerance implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[]{
 
-				new VadeMecumPage("voidcraft.VadeMecum.progression.title.tolerance", "voidcraft.VadeMecum.progression.desc.tolerance.pg1"),
+				new VadeMecumPage("dalquor.VadeMecum.progression.title.tolerance", "dalquor.VadeMecum.progression.desc.tolerance.pg1"),
 
-				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.tolerance.pg2")
+				new VadeMecumPage("", "dalquor.VadeMecum.progression.desc.tolerance.pg2")
 
 		};
 	}

@@ -59,7 +59,7 @@ public class StarForgeEffectSecondDegreeBurns implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.secondDegreeBurns");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.secondDegreeBurns");
 	}
 
 }

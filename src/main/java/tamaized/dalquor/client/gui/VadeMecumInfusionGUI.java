@@ -25,8 +25,8 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 
-		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, I18n.format("voidcraft.gui.misc.back")));
-		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, I18n.format("voidcraft.gui.misc.close")));
+		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, I18n.format("dalquor.gui.misc.back")));
+		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, I18n.format("dalquor.gui.misc.close")));
 
 		int xLoc = (width / 2) - 55;
 		int yLoc = 28;
@@ -78,7 +78,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
+		drawCenteredString(fontRenderer, I18n.format("dalquor.gui.voidicInfusionControl.title"), width / 2, 15, 16777215);
 	}
 
 	public class PassiveButton extends GuiButton {

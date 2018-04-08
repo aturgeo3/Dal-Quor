@@ -54,7 +54,7 @@ public class StarForgeGUI extends GuiContainer {
 		setupScroll();
 
 		buttonList.clear();
-		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, guiLeft + (xSize / 2) + 10, height - 102, 170, 20, I18n.format("voidcraft.gui.misc.button.forge")));
+		buttonList.add(button_Craft = new GuiButton(BUTTON_CRAFT, guiLeft + (xSize / 2) + 10, height - 102, 170, 20, I18n.format("dalquor.gui.misc.button.forge")));
 	}
 
 	private void setupScroll() {
@@ -142,7 +142,7 @@ public class StarForgeGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		String text = I18n.format("voidcraft.gui.starforge.title");
+		String text = I18n.format("dalquor.gui.starforge.title");
 		this.fontRenderer.drawString(text, this.xSize / 3 - this.fontRenderer.getStringWidth(text) / 2, this.ySize - 260, 0xAAAAAA);
 	}
 

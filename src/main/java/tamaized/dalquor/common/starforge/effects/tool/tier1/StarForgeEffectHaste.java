@@ -53,7 +53,7 @@ public class StarForgeEffectHaste implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.haste");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.haste");
 	}
 
 }

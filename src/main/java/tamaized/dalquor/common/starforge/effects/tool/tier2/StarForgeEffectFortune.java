@@ -57,7 +57,7 @@ public class StarForgeEffectFortune implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.fortune");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.fortune");
 	}
 
 }

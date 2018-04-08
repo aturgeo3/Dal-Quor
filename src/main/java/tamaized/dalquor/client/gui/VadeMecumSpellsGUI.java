@@ -47,8 +47,8 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 			((VadeMecumSpellsContainer) inventorySlots).initSlots(guiLeft, guiTop);
 		}
 
-		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, I18n.format("voidcraft.gui.misc.back", new Object[0]).trim()));
-		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, I18n.format("voidcraft.gui.misc.close", new Object[0]).trim()));
+		buttonList.add(new GuiButton(BUTTON_BACK, 5, height - 50, 80, 20, I18n.format("dalquor.gui.misc.back", new Object[0]).trim()));
+		buttonList.add(new GuiButton(BUTTON_CLOSE, 5, height - 25, 80, 20, I18n.format("dalquor.gui.misc.close", new Object[0]).trim()));
 		buttonList.add(new GuiButton(BUTTON_ARROW_NEXT, 45, 5, 30, 20, "->"));
 		buttonList.add(new GuiButton(BUTTON_ARROW_BACK, 5, 5, 30, 20, "<-"));
 
@@ -118,7 +118,7 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		int i = this.guiLeft;
 		int j = this.guiTop;
-		drawCenteredString(fontRenderer, I18n.format("voidcraft.gui.wordsofpower.title"), width / 2, 15, 16777215);
+		drawCenteredString(fontRenderer, I18n.format("dalquor.gui.wordsofpower.title"), width / 2, 15, 16777215);
 		this.mc.getTextureManager().bindTexture(TEXTURE);
 		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 		int xLoc = 0;
@@ -206,7 +206,7 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 				ItemStack stack = VadeMecumWordsOfPower.getCategoryData(spell).getStack();
 				if (stack != null)
 					renderItemStack(stack, x, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2) - 4, mouseX, mouseY);
-				fontrenderer.drawString(I18n.format(VadeMecumWordsOfPower.getCategoryData(spell).getName(), new Object[0]).trim().substring(I18n.format("voidcraft.ritual.def.word", new Object[0]).trim().length() + 3), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
+				fontrenderer.drawString(I18n.format(VadeMecumWordsOfPower.getCategoryData(spell).getName(), new Object[0]).trim().substring(I18n.format("dalquor.ritual.def.word", new Object[0]).trim().length() + 3), x + 18, y + (height / 2) - (mc.fontRenderer.FONT_HEIGHT / 2), 0x7700FF);
 				GlStateManager.popMatrix();
 			}
 		}

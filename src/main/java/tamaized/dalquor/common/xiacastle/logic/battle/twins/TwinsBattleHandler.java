@@ -55,7 +55,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
 									for (ITextComponent t : ((TileEntitySign)sign).signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.1.a").getUnformattedComponentText()))
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.1.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
@@ -91,7 +91,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
 									for (ITextComponent t : ((TileEntitySign)sign).signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.2.a").getUnformattedComponentText()))
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.2.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
@@ -127,7 +127,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
 									for (ITextComponent t : ((TileEntitySign)sign).signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.3.a").getUnformattedComponentText()))
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.3.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
@@ -163,7 +163,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
 									for (ITextComponent t : ((TileEntitySign) sign).signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("voidcraft.twins.riddle.4.a").getUnformattedComponentText()))
+										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.4.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {

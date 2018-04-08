@@ -10,9 +10,9 @@ public class VadeMecumPageListVoidicControl implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[]{
 
-				new VadeMecumPage("voidcraft.VadeMecum.progression.title.voidicControl", "voidcraft.VadeMecum.progression.desc.voidicControl.pg1"),
+				new VadeMecumPage("dalquor.VadeMecum.progression.title.voidicControl", "dalquor.VadeMecum.progression.desc.voidicControl.pg1"),
 
-				new VadeMecumPage("", "voidcraft.VadeMecum.progression.desc.voidicControl.pg2")};
+				new VadeMecumPage("", "dalquor.VadeMecum.progression.desc.voidicControl.pg2")};
 	}
 
 }

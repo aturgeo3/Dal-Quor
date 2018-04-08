@@ -41,7 +41,7 @@ public class ChainedSkull extends TamItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("voidcraft.misc.pawn.desc"));
+		tooltip.add(I18n.format("dalquor.misc.pawn.desc"));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

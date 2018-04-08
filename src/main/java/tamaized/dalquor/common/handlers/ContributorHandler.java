@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class ContributorHandler {
 
-	private static final String URL_ELEMENTALCOLOR = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.12/contributors/companion.properties";
-	private static final String URL_SKINLIST = "https://raw.githubusercontent.com/Tamaized/VoidCraft/1.12/contributors/ghost.properties";
+	private static final String URL_ELEMENTALCOLOR = "https://raw.githubusercontent.com/Tamaized/Dal-Quor/1.12/contributors/companion.properties";
+	private static final String URL_SKINLIST = "https://raw.githubusercontent.com/Tamaized/Dal-Quor/1.12/contributors/ghost.properties";
 
 	public static volatile Map<UUID, EnumDyeColor> elementalColor = new HashMap<>();
 	public static volatile Map<String, UUID> skinList = new HashMap<>();
@@ -58,7 +58,7 @@ public class ContributorHandler {
 	private static class ThreadContributor extends Thread {
 
 		public ThreadContributor() {
-			setName("VoidCraft Contributor Loader");
+			setName("DalQuor Contributor Loader");
 			setDaemon(true);
 			start();
 		}

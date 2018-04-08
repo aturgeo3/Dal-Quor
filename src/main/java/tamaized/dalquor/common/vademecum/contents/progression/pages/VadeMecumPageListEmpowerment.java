@@ -10,7 +10,7 @@ public class VadeMecumPageListEmpowerment implements IVadeMecumPageProvider {
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		return new IVadeMecumPage[]{
 
-				new VadeMecumPage("voidcraft.VadeMecum.progression.title.empowerment", "voidcraft.VadeMecum.progression.desc.empowerment")
+				new VadeMecumPage("dalquor.VadeMecum.progression.title.empowerment", "dalquor.VadeMecum.progression.desc.empowerment")
 
 		};
 	}

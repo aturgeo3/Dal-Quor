@@ -58,7 +58,7 @@ public class StarForgeEffectVoidTouch implements IStarForgeEffect {
 
 	@Override
 	public String getName() {
-		return I18n.format("voidcraft.VadeMecum.docs.title.starforge.effect.voidTouch");
+		return I18n.format("dalquor.VadeMecum.docs.title.starforge.effect.voidTouch");
 	}
 
 }

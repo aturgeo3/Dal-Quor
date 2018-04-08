@@ -142,7 +142,7 @@ public class EntityDolXia extends EntityTwinsXia {
 
 	@Override
 	public ITextComponent getAlternateBossName() {
-		return new TextComponentTranslation("entity.voidcraft.DolXia.name");
+		return new TextComponentTranslation("entity.dalquor.DolXia.name");
 	}
 
 	@Override

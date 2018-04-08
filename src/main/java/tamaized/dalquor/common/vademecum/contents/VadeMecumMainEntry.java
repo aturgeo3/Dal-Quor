@@ -34,8 +34,8 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	@Override
 	public void init(VadeMecumGUI gui) {
 		clearButtons();
-		addButton(gui, getEntryID(Entry.Progression), "voidcraft.VadeMecum.title.progression", new ItemStack(ModBlocks.ritualBlock));
-		addButton(gui, getEntryID(Docs), "voidcraft.VadeMecum.title.docs", new ItemStack(ModItems.voidcrystal));
+		addButton(gui, getEntryID(Entry.Progression), "dalquor.VadeMecum.title.progression", new ItemStack(ModBlocks.ritualBlock));
+		addButton(gui, getEntryID(Docs), "dalquor.VadeMecum.title.docs", new ItemStack(ModItems.voidcrystal));
 	}
 
 	@Override

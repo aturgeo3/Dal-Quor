@@ -69,7 +69,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 						if (cap.hasCategory(IVadeMecumCapability.Category.AcidSpray)) {
 							if (cap.hasCategory(IVadeMecumCapability.Category.Shock)) {
 								cap.addCategory(entity, IVadeMecumCapability.Category.Voice);
-								entity.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.voice.Voice"));
+								entity.sendMessage(new TextComponentTranslation("dalquor.VadeMecum.voice.Voice"));
 							}
 						}
 					}
@@ -162,13 +162,13 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 					kill = false;
 					infusion = 0;
 					cap.addCategory(entity, IVadeMecumCapability.Category.VoidicControl);
-					entity.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.voice.VoidicControl"));
+					entity.sendMessage(new TextComponentTranslation("dalquor.VadeMecum.voice.VoidicControl"));
 				}
 				if (cap.hasCategory(IVadeMecumCapability.Category.Empowerment) && !cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && entity.world.provider.getDimension() != ConfigHandler.dimensionIdVoid) {
 					kill = false;
 					infusion = 0;
 					cap.addCategory(entity, IVadeMecumCapability.Category.Tolerance);
-					entity.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.voice.Tolerance"));
+					entity.sendMessage(new TextComponentTranslation("dalquor.VadeMecum.voice.Tolerance"));
 				}
 			}
 			if (kill) {

@@ -154,7 +154,7 @@ public class EntityBossHerobrine extends EntityVoidNPC implements IVoidBossData 
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentTranslation("entity.voidcraft.Herobrine.name");
+		return new TextComponentTranslation("entity.dalquor.Herobrine.name");
 	}
 
 	@Override

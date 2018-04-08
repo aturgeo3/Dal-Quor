@@ -23,7 +23,7 @@ public class VadeMecumRitualHandler {
 			return;
 		IVadeMecumCapability.Category category = getRitual(cap, world, pos, true);
 		if (category == null || category == IVadeMecumCapability.Category.NULL) {
-			player.sendMessage(new TextComponentTranslation("voidcraft.ritual.error"));
+			player.sendMessage(new TextComponentTranslation("dalquor.ritual.error"));
 		} else {
 			player.sendMessage(new TextComponentTranslation(VadeMecumWordsOfPower.getCategoryData(category).getName()));
 			cap.addCategory(player, category);

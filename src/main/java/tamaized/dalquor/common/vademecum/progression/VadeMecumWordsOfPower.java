@@ -59,51 +59,51 @@ public class VadeMecumWordsOfPower {
 	private static final CategoryDataWrapper NullWrapper = new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "null", ItemStack.EMPTY);
 
 	static {
-		categoryMap.put(IVadeMecumCapability.Category.INTRO, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.INTRO", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.TOME, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.TOME", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.INTRO, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.INTRO", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.TOME, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.TOME", ItemStack.EMPTY));
 
-		categoryMap.put(IVadeMecumCapability.Category.Flame, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.Flame", new ItemStack(Items.FLINT)));
-		categoryMap.put(IVadeMecumCapability.Category.FireSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.FireSheathe", new ItemStack(Items.MAGMA_CREAM)));
-		categoryMap.put(IVadeMecumCapability.Category.Fireball, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.Fireball", new ItemStack(Items.FIRE_CHARGE)));
-		categoryMap.put(IVadeMecumCapability.Category.FireTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.FireTrap", new ItemStack(Blocks.MAGMA)));
-		categoryMap.put(IVadeMecumCapability.Category.ExplosionFire, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.ExplosionFire", new ItemStack(Blocks.TNT)));
-		categoryMap.put(IVadeMecumCapability.Category.RingOfFire, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.RingOfFire", new ItemStack(Items.GUNPOWDER)));
+		categoryMap.put(IVadeMecumCapability.Category.Flame, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.Flame", new ItemStack(Items.FLINT)));
+		categoryMap.put(IVadeMecumCapability.Category.FireSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.FireSheathe", new ItemStack(Items.MAGMA_CREAM)));
+		categoryMap.put(IVadeMecumCapability.Category.Fireball, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.Fireball", new ItemStack(Items.FIRE_CHARGE)));
+		categoryMap.put(IVadeMecumCapability.Category.FireTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.FireTrap", new ItemStack(Blocks.MAGMA)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionFire, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.ExplosionFire", new ItemStack(Blocks.TNT)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfFire, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.RingOfFire", new ItemStack(Items.GUNPOWDER)));
 
-		categoryMap.put(IVadeMecumCapability.Category.Shock, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.Shock", new ItemStack(Items.FEATHER)));
-		categoryMap.put(IVadeMecumCapability.Category.ShockSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.ShockSheathe", new ItemStack(Blocks.CARPET)));
-		categoryMap.put(IVadeMecumCapability.Category.LitStrike, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.LitStrike", new ItemStack(Blocks.END_ROD)));
-		categoryMap.put(IVadeMecumCapability.Category.LitTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.LitTrap", new ItemStack(Items.GHAST_TEAR)));
-		categoryMap.put(IVadeMecumCapability.Category.ExplosionLit, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.ExplosionLit", new ItemStack(Items.CHORUS_FRUIT_POPPED)));
-		categoryMap.put(IVadeMecumCapability.Category.RingOfLit, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "voidcraft.ritual.RingOfLit", new ItemStack(Blocks.GLOWSTONE)));
+		categoryMap.put(IVadeMecumCapability.Category.Shock, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.Shock", new ItemStack(Items.FEATHER)));
+		categoryMap.put(IVadeMecumCapability.Category.ShockSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.ShockSheathe", new ItemStack(Blocks.CARPET)));
+		categoryMap.put(IVadeMecumCapability.Category.LitStrike, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.LitStrike", new ItemStack(Blocks.END_ROD)));
+		categoryMap.put(IVadeMecumCapability.Category.LitTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.LitTrap", new ItemStack(Items.GHAST_TEAR)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionLit, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.ExplosionLit", new ItemStack(Items.CHORUS_FRUIT_POPPED)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfLit, new CategoryDataWrapper(CategoryDataWrapper.Element.AIR, "dalquor.ritual.RingOfLit", new ItemStack(Blocks.GLOWSTONE)));
 
-		categoryMap.put(IVadeMecumCapability.Category.Freeze, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.Freeze", new ItemStack(Items.SNOWBALL)));
-		categoryMap.put(IVadeMecumCapability.Category.FrostSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.FrostSheathe", new ItemStack(Blocks.SNOW)));
-		categoryMap.put(IVadeMecumCapability.Category.IceSpike, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.IceSpike", new ItemStack(Blocks.ICE)));
-		categoryMap.put(IVadeMecumCapability.Category.FrostTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.FrostTrap", new ItemStack(Blocks.PRISMARINE)));
-		categoryMap.put(IVadeMecumCapability.Category.ExplosionFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.ExplosionFrost", PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionType.getPotionTypeForName("water"))));
-		categoryMap.put(IVadeMecumCapability.Category.RingOfFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "voidcraft.ritual.RingOfFrost", new ItemStack(Items.PRISMARINE_CRYSTALS)));
+		categoryMap.put(IVadeMecumCapability.Category.Freeze, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.Freeze", new ItemStack(Items.SNOWBALL)));
+		categoryMap.put(IVadeMecumCapability.Category.FrostSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.FrostSheathe", new ItemStack(Blocks.SNOW)));
+		categoryMap.put(IVadeMecumCapability.Category.IceSpike, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.IceSpike", new ItemStack(Blocks.ICE)));
+		categoryMap.put(IVadeMecumCapability.Category.FrostTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.FrostTrap", new ItemStack(Blocks.PRISMARINE)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.ExplosionFrost", PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionType.getPotionTypeForName("water"))));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfFrost, new CategoryDataWrapper(CategoryDataWrapper.Element.WATER, "dalquor.ritual.RingOfFrost", new ItemStack(Items.PRISMARINE_CRYSTALS)));
 
-		categoryMap.put(IVadeMecumCapability.Category.AcidSpray, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.AcidSpray", new ItemStack(Blocks.DIRT)));
-		categoryMap.put(IVadeMecumCapability.Category.AcidSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.AcidSheathe", new ItemStack(Items.SLIME_BALL)));
-		categoryMap.put(IVadeMecumCapability.Category.Disint, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.Disint", new ItemStack(Blocks.MOSSY_COBBLESTONE)));
-		categoryMap.put(IVadeMecumCapability.Category.AcidTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.AcidTrap", new ItemStack(Blocks.SLIME_BLOCK)));
-		categoryMap.put(IVadeMecumCapability.Category.ExplosionAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.ExplosionAcid", new ItemStack(Items.POISONOUS_POTATO)));
-		categoryMap.put(IVadeMecumCapability.Category.RingOfAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.RingOfAcid", new ItemStack(Items.FISH, 1, 3)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidSpray, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.AcidSpray", new ItemStack(Blocks.DIRT)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.AcidSheathe", new ItemStack(Items.SLIME_BALL)));
+		categoryMap.put(IVadeMecumCapability.Category.Disint, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.Disint", new ItemStack(Blocks.MOSSY_COBBLESTONE)));
+		categoryMap.put(IVadeMecumCapability.Category.AcidTrap, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.AcidTrap", new ItemStack(Blocks.SLIME_BLOCK)));
+		categoryMap.put(IVadeMecumCapability.Category.ExplosionAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.ExplosionAcid", new ItemStack(Items.POISONOUS_POTATO)));
+		categoryMap.put(IVadeMecumCapability.Category.RingOfAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "dalquor.ritual.RingOfAcid", new ItemStack(Items.FISH, 1, 3)));
 
-		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicTouch", new ItemStack(DalQuor.items.voidcrystal)));
-		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicSheathe", new ItemStack(DalQuor.blocks.blockVoidbrick)));
-		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Implosion", new ItemStack(DalQuor.blocks.realityHole)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "dalquor.ritual.VoidicTouch", new ItemStack(DalQuor.items.voidcrystal)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "dalquor.ritual.VoidicSheathe", new ItemStack(DalQuor.blocks.blockVoidbrick)));
+		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "dalquor.ritual.Implosion", new ItemStack(DalQuor.blocks.realityHole)));
 
-		categoryMap.put(IVadeMecumCapability.Category.Invoke, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Invoke", new ItemStack(DalQuor.blocks.blockVoidcrystal)));
-		categoryMap.put(IVadeMecumCapability.Category.SummonFireElemental, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.SummonFireElemental", new ItemStack(Items.FLINT_AND_STEEL)));
+		categoryMap.put(IVadeMecumCapability.Category.Invoke, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "dalquor.ritual.Invoke", new ItemStack(DalQuor.blocks.blockVoidcrystal)));
+		categoryMap.put(IVadeMecumCapability.Category.SummonFireElemental, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "dalquor.ritual.SummonFireElemental", new ItemStack(Items.FLINT_AND_STEEL)));
 
-		categoryMap.put(IVadeMecumCapability.Category.Voice, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.Voice", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.VoidicControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.VoidicControl", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.ImprovedCasting, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.ImprovedCasting", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.Empowerment, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.Empowerment", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.Tolerance, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.Tolerance", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.TotalControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.TotalControl", ItemStack.EMPTY));
-		categoryMap.put(IVadeMecumCapability.Category.Dreams, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.Dreams", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Voice, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.Voice", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.VoidicControl", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.ImprovedCasting, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.ImprovedCasting", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Empowerment, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.Empowerment", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Tolerance, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.Tolerance", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.TotalControl, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.TotalControl", ItemStack.EMPTY));
+		categoryMap.put(IVadeMecumCapability.Category.Dreams, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "dalquor.ritual.Dreams", ItemStack.EMPTY));
 
 	}
 
@@ -124,7 +124,7 @@ public class VadeMecumWordsOfPower {
 		if (power == null || !IVadeMecumCapability.isActivePower(power) || !cap.hasCategory(power))
 			return;
 		if ((cap.getStackInSlot(power).isEmpty() || cap.getStackInSlot(power).getCount() <= 0) && !caster.inventory.hasItemStack(getCategoryData(power).getStack())) {
-			caster.sendMessage(new TextComponentTranslation("voidcraft.VadeMecum.spells.nomats", I18n.format(getCategoryData(power).getName(), new Object[0]).toString().trim()));
+			caster.sendMessage(new TextComponentTranslation("dalquor.VadeMecum.spells.nomats", I18n.format(getCategoryData(power).getName(), new Object[0]).toString().trim()));
 			return;
 		}
 		boolean useCharge = false;

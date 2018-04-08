@@ -9,11 +9,11 @@ import tamaized.tammodized.common.tileentity.TamTileEntityRecipeList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class VoidCraftRecipeWrapperJEI<T extends TamTileEntityRecipeList.TamTERecipe> implements IRecipeWrapper {
+public abstract class DalQuorRecipeWrapperJEI<T extends TamTileEntityRecipeList.TamTERecipe> implements IRecipeWrapper {
 
 	private final T recipe;
 
-	public VoidCraftRecipeWrapperJEI(T r) {
+	public DalQuorRecipeWrapperJEI(T r) {
 		recipe = r;
 	}
 

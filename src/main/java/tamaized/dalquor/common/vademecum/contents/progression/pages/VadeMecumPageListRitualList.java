@@ -15,7 +15,7 @@ public class VadeMecumPageListRitualList implements IVadeMecumPageProvider {
 
 	public IVadeMecumPage[] getPageList(IVadeMecumCapability cap) {
 		ArrayList<IVadeMecumPage> pages = new ArrayList<IVadeMecumPage>();
-		pages.add(new VadeMecumPage("voidcraft.VadeMecum.progression.title.ritualList", "voidcraft.VadeMecum.progression.desc.ritualList"));
+		pages.add(new VadeMecumPage("dalquor.VadeMecum.progression.title.ritualList", "dalquor.VadeMecum.progression.desc.ritualList"));
 		for (IVadeMecumCapability.Category category : VadeMecumRitualHandler.getAvailiableRituals(cap))
 			pages.add(new VadeMecumPageMultiBlock(VadeMecumWordsOfPower.getCategoryData(category).getName(), DalQuor.ritualList.getRitual(category)));
 		return pages.toArray(new IVadeMecumPage[pages.size()]);

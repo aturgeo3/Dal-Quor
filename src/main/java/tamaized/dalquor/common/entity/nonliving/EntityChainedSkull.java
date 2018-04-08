@@ -61,7 +61,7 @@ public class EntityChainedSkull extends Entity {
 				world.spawnEntity(boss);
 				world.playBroadcastSound(1023, new BlockPos(this), 0);
 				for (EntityPlayer player : world.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().grow(50, 16, 50)))
-					player.sendMessage(new TextComponentTranslation("voidcraft.misc.pawn.summon"));
+					player.sendMessage(new TextComponentTranslation("dalquor.misc.pawn.summon"));
 				setDead();
 			}
 			return;

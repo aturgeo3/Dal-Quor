@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.addons.thaumcraft;
 
 
-public class VoidCraftThaumRecipes {/*
+public class Recipes {/*
 
 	private ThaumcraftApi instance;
 	
