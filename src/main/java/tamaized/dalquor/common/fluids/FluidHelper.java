@@ -5,7 +5,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class FluidHelper {
 
@@ -16,8 +16,8 @@ public class FluidHelper {
 			TileEntity te = world.getTileEntity(pos.offset(face));
 			if (te instanceof IFaceFluidHandler) {
 				IFaceFluidHandler fte = ((IFaceFluidHandler) te);
-				if (fte.inputFaces().contains(face.getOpposite()) && fte.fill(new FluidStack(VoidCraft.fluids.voidFluid, amount), true) > 0) {
-					source.drain(new FluidStack(VoidCraft.fluids.voidFluid, amount), true);
+				if (fte.inputFaces().contains(face.getOpposite()) && fte.fill(new FluidStack(DalQuor.fluids.voidFluid, amount), true) > 0) {
+					source.drain(new FluidStack(DalQuor.fluids.voidFluid, amount), true);
 				}
 			}
 		}

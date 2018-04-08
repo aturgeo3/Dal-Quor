@@ -5,14 +5,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect.Tier;
 import tamaized.dalquor.common.starforge.effects.StarForgeEffectList;
 
 public class StarForgeCapabilityStorage implements IStorage<IStarForgeCapability> {
 
 	public StarForgeCapabilityStorage() {
-		VoidCraft.instance.logger.info("StarForgeCapabilityStorage Registered");
+		DalQuor.instance.logger.info("StarForgeCapabilityStorage Registered");
 	}
 
 	@Override

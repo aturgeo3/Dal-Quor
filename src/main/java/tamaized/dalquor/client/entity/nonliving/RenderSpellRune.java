@@ -7,12 +7,12 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.nonliving.EntitySpellRune;
 
 public class RenderSpellRune<T extends EntitySpellRune> extends Render<T> {
 
-	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(VoidCraft.modid, "textures/entity/rune.png");
+	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(DalQuor.modid, "textures/entity/rune.png");
 
 	public RenderSpellRune(RenderManager renderManager) {
 		super(renderManager);

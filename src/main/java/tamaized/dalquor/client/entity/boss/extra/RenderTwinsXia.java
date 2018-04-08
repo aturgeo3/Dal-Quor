@@ -4,14 +4,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.model.ModelVoidBoss;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityTwinsXia;
 
 public class RenderTwinsXia extends RenderLiving<EntityTwinsXia> {
 
-	public static final ResourceLocation TEXTURE_DOL = new ResourceLocation(VoidCraft.modid, "textures/entity/dol.png");
-	public static final ResourceLocation TEXTURE_ZOL = new ResourceLocation(VoidCraft.modid, "textures/entity/zol.png");
+	public static final ResourceLocation TEXTURE_DOL = new ResourceLocation(DalQuor.modid, "textures/entity/dol.png");
+	public static final ResourceLocation TEXTURE_ZOL = new ResourceLocation(DalQuor.modid, "textures/entity/zol.png");
 
 	private final ResourceLocation TEXTURE;
 

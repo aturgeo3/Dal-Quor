@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.dragon.EntityVoidicDragon;
 import tamaized.dalquor.common.handlers.ConfigHandler;
 
@@ -21,13 +21,13 @@ public class PlayerRightClickEvent {
 		ItemStack stack = e.getItemStack();
 		IBlockState state = world.getBlockState(pos);
 		if (!world.isRemote && state.getBlock() instanceof BlockBed && world.provider.getDimension() != ConfigHandler.dimensionIdDalQuor) {
-			if (!stack.isEmpty() && stack.getItem() == VoidCraft.items.quoriFragment) {
+			if (!stack.isEmpty() && stack.getItem() == DalQuor.items.quoriFragment) {
 				stack.shrink(1);
 				e.setCanceled(true);
 				VoidTickEvent.dream(e.getEntityPlayer());
 			}
 		}
-		if (state != null && state.getBlock() == Blocks.DRAGON_EGG && !stack.isEmpty() && stack.getItem() == VoidCraft.items.voidStar) {
+		if (state != null && state.getBlock() == Blocks.DRAGON_EGG && !stack.isEmpty() && stack.getItem() == DalQuor.items.voidStar) {
 			if (!world.isRemote) {
 				world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0, true);
 				world.setBlockToAir(pos);

@@ -7,12 +7,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 @SideOnly(Side.CLIENT)
 public class RenderZol<T extends EntityLiving> extends RenderLiving<T> {
 
-	private static final ResourceLocation Herobrine_Texture = new ResourceLocation(VoidCraft.modid, "textures/entity/zol.png");
+	private static final ResourceLocation Herobrine_Texture = new ResourceLocation(DalQuor.modid, "textures/entity/zol.png");
 
 	public RenderZol(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

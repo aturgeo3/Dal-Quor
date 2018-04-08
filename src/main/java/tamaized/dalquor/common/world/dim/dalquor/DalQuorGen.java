@@ -3,7 +3,7 @@ package tamaized.dalquor.common.world.dim.dalquor;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.*;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class DalQuorGen {
 
@@ -67,13 +67,13 @@ public class DalQuorGen {
 
 		public static final Biome[] allowedBiomes = {
 
-				VoidCraft.biomes.biomeDreamOverworld,
+				DalQuor.biomes.biomeDreamOverworld,
 
-				VoidCraft.biomes.biomeDreamNether,
+				DalQuor.biomes.biomeDreamNether,
 
-				VoidCraft.biomes.biomeDreamEnd,
+				DalQuor.biomes.biomeDreamEnd,
 
-				VoidCraft.biomes.biomeDreamVoid
+				DalQuor.biomes.biomeDreamVoid
 
 		};
 

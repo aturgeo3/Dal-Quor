@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.network.server.ServerPacketHandlerVadeMecum;
 
@@ -61,7 +61,7 @@ public class VadeMecumInfusionGUI extends GuiScreen {
 
 	private void sendPacket(IVadeMecumCapability.Passive spell) {
 		if (capability.hasPassive(spell) || capability.canHavePassive(spell))
-			VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.PASSIVE, IVadeMecumCapability.getPassiveID(spell)));
+			DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.PASSIVE, IVadeMecumCapability.getPassiveID(spell)));
 	}
 
 	@Override

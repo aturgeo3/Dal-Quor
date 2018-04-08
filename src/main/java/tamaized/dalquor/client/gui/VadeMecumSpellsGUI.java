@@ -10,7 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.gui.container.VadeMecumSpellsContainer;
 import tamaized.dalquor.common.vademecum.progression.VadeMecumWordsOfPower;
@@ -18,7 +18,7 @@ import tamaized.dalquor.network.server.ServerPacketHandlerVadeMecum;
 
 public class VadeMecumSpellsGUI extends GuiContainer {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/generic.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/gui/generic.png");
 	private static final int BUTTON_CLOSE = 0;
 	private static final int BUTTON_BACK = 1;
 	private static final int BUTTON_SPELL = 2;
@@ -74,10 +74,10 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 					mc.displayGuiScreen(new VadeMecumGUI(mc.player));
 					break;
 				case BUTTON_ARROW_NEXT:
-					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page + 1));
+					DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page + 1));
 					break;
 				case BUTTON_ARROW_BACK:
-					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page - 1));
+					DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, page - 1));
 					break;
 				case BUTTON_SPELL:
 					if (button instanceof SpellButton)
@@ -91,7 +91,7 @@ public class VadeMecumSpellsGUI extends GuiContainer {
 
 	private void sendPacket(IVadeMecumCapability.Category spell) {
 		if (IVadeMecumCapability.isActivePower(spell))
-			VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.ACTIVE_SET, IVadeMecumCapability.getCategoryID(spell)));
+			DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.ACTIVE_SET, IVadeMecumCapability.getCategoryID(spell)));
 	}
 
 	@Override

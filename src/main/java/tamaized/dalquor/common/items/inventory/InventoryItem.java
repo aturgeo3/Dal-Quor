@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.ITextComponent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public abstract class InventoryItem implements IInventory {
 
@@ -18,11 +18,11 @@ public abstract class InventoryItem implements IInventory {
 		inventory = new ItemStack[slots];
 		for (int index = 0; index < inventory.length; index++)
 			inventory[index] = ItemStack.EMPTY;
-		readFromNBT(parent.getOrCreateSubCompound(VoidCraft.modid + "_InventoryItem"));
+		readFromNBT(parent.getOrCreateSubCompound(DalQuor.modid + "_InventoryItem"));
 	}
 
 	public void saveData() {
-		writeToNBT(parent.getOrCreateSubCompound(VoidCraft.modid + "_InventoryItem"));
+		writeToNBT(parent.getOrCreateSubCompound(DalQuor.modid + "_InventoryItem"));
 	}
 
 	protected void readFromNBT(NBTTagCompound nbt) {

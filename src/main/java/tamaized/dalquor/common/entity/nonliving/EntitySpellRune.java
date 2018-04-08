@@ -20,7 +20,7 @@ import tamaized.tammodized.TamModized;
 import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
 import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.damagesources.DamageSourceAcid;
 import tamaized.dalquor.common.damagesources.DamageSourceFrost;
 import tamaized.dalquor.common.damagesources.DamageSourceLit;
@@ -130,7 +130,7 @@ public class EntitySpellRune extends Entity implements IEntityAdditionalSpawnDat
 						for (int z = -1; z <= 1; z++) {
 							BlockPos pos = new BlockPos(getPosition().add(x, 0, z));
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-								world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
+								world.setBlockState(pos, DalQuor.fluids.acidFluidBlock.getDefaultState());
 							}
 						}
 					}

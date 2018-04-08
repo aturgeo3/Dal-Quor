@@ -48,7 +48,7 @@ import net.minecraftforge.common.ForgeChunkManager.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.entity.EntityDragonOld;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.dalquor.common.entity.EntityVoidNPC;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineWitherSkull;
@@ -99,7 +99,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 	}
 
 	public final void setKeepLoaded() {
-		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
+		chunkLoadTicket = ForgeChunkManager.requestTicket(DalQuor.instance, world, Type.ENTITY);
 		if (chunkLoadTicket != null)
 			chunkLoadTicket.bindEntity(this);
 	}

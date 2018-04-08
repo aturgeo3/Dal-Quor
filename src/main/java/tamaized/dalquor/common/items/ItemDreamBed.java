@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class ItemDreamBed extends TamItem {
 
@@ -49,7 +49,7 @@ public class ItemDreamBed extends TamItem {
 				boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
 
 				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isTopSolid() && worldIn.getBlockState(blockpos.down()).isTopSolid()) {
-					IBlockState iblockstate2 = VoidCraft.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+					IBlockState iblockstate2 = DalQuor.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 					worldIn.setBlockState(pos, iblockstate2, 10);
 					worldIn.setBlockState(blockpos, iblockstate2.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
 					worldIn.notifyNeighborsRespectDebug(pos, block, false);

@@ -1,13 +1,13 @@
 package tamaized.dalquor.common.sound;
 
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.io.InputStream;
 
 public class OggLength {
 
 	public static int getLengthInSeconds(String filePath) throws Exception {
-		InputStream inStream = VoidCraft.instance.getClass().getResourceAsStream(filePath);
+		InputStream inStream = DalQuor.instance.getClass().getResourceAsStream(filePath);
 		long dataLength = inStream.available();
 		int duration = handleData(inStream, dataLength);
 		inStream.close();

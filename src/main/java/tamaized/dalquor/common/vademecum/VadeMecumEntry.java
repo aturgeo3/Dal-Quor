@@ -4,7 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.proxy.ClientProxy;
 
@@ -67,7 +67,7 @@ public class VadeMecumEntry {
 		if (page >= 0) {
 			if (!buttons.containsKey(page)) {
 				// Something when very wrong, spit out map contents and don't add the button.
-				VoidCraft.instance.logger.error("A null page was recieved from a Vade Mecum Button List (" + page + "): " + buttons.entrySet());
+				DalQuor.instance.logger.error("A null page was recieved from a Vade Mecum Button List (" + page + "): " + buttons.entrySet());
 				return;
 			}
 			if (buttons.get(page).size() >= 6) {

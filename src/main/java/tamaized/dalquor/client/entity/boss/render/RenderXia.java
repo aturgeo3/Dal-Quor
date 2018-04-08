@@ -14,7 +14,7 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.bossbar.RenderBossHeathBar;
 import tamaized.dalquor.client.entity.boss.model.ModelVoidBossOverlay;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
@@ -22,7 +22,7 @@ import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
 @SideOnly(Side.CLIENT)
 public class RenderXia<T extends EntityBossXia> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/xia.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/xia.png");
 
 	public RenderXia(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

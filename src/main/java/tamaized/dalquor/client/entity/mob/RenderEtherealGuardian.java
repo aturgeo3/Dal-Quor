@@ -15,14 +15,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.mob.model.ModelEtherealGuardian;
 import tamaized.dalquor.common.entity.mob.EntityMobEtherealGuardian;
 
 @SideOnly(Side.CLIENT)
 public class RenderEtherealGuardian extends RenderLiving<EntityMobEtherealGuardian> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/etherealguardian.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/etherealguardian.png");
 
 	public RenderEtherealGuardian(RenderManager manager, float par2) {
 		super(manager, new ModelEtherealGuardian(), par2);

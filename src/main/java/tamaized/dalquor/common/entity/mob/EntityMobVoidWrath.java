@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.EntityVoidMob;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
@@ -90,6 +90,6 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.burnBone;
+		return DalQuor.items.burnBone;
 	}
 }

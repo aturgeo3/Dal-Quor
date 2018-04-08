@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
 
 public class EntityHashalaq extends EntityMob {
@@ -63,7 +63,7 @@ public class EntityHashalaq extends EntityMob {
 
 	@Override
 	protected Item getDropItem() {
-		return VoidCraft.items.quoriFragment;
+		return DalQuor.items.quoriFragment;
 	}
 
 }

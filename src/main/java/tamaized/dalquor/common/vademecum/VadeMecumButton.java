@@ -7,12 +7,12 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 
 public class VadeMecumButton extends GuiButton {
 
-	private static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/vademecum/vademecumbutton.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(DalQuor.modid, "textures/gui/vademecum/vademecumbutton.png");
 	private final ItemStack stackToRender;
 	private final VadeMecumGUI gui;
 

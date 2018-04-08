@@ -22,7 +22,7 @@ import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.handlers.ConfigHandler;
@@ -109,7 +109,7 @@ public class VoidTickEvent {
 			IVadeMecumCapability cap = e.player.getCapability(CapabilityList.VADEMECUM, null);
 
 			if (cap.hasCategory(IVadeMecumCapability.Category.VoidicControl) && cap.hasCategory(IVadeMecumCapability.Category.ImprovedCasting) && !cap.hasCategory(IVadeMecumCapability.Category.Empowerment)) {
-				if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == VoidCraft.items.voidStar) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == VoidCraft.items.voidStar)) {
+				if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == DalQuor.items.voidStar) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == DalQuor.items.voidStar)) {
 					cap.addCategory(e.player, IVadeMecumCapability.Category.Empowerment);
 					cap.addCategory(e.player, IVadeMecumCapability.Category.Invoke);
 				}
@@ -125,7 +125,7 @@ public class VoidTickEvent {
 						}
 					}
 					if (cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && !cap.hasCategory(IVadeMecumCapability.Category.TotalControl)) {
-						if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == VoidCraft.items.astralEssence) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == VoidCraft.items.astralEssence)) {
+						if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == DalQuor.items.astralEssence) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == DalQuor.items.astralEssence)) {
 							cap.addCategory(e.player, IVadeMecumCapability.Category.TotalControl);
 						}
 					}

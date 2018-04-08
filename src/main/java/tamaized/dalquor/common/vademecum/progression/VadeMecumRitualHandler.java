@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 
@@ -19,7 +19,7 @@ public class VadeMecumRitualHandler {
 
 	public static void invokeRitual(EntityPlayer player, World world, BlockPos pos) {
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap == null || world.getBlockState(pos).getBlock() != VoidCraft.blocks.ritualBlock)
+		if (cap == null || world.getBlockState(pos).getBlock() != DalQuor.blocks.ritualBlock)
 			return;
 		IVadeMecumCapability.Category category = getRitual(cap, world, pos, true);
 		if (category == null || category == IVadeMecumCapability.Category.NULL) {
@@ -175,7 +175,7 @@ public class VadeMecumRitualHandler {
 	}
 
 	public static boolean doChecks(IVadeMecumCapability.Category ritual, World world, BlockPos oPos, boolean clear) {
-		ItemStack[] ritualStacks = VoidCraft.ritualList.getRitual(ritual);
+		ItemStack[] ritualStacks = DalQuor.ritualList.getRitual(ritual);
 		if (ritualStacks == null || ritualStacks.length <= 0)
 			return false;
 		for (int yPos = 0; yPos >= -2; yPos--) {

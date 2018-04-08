@@ -12,14 +12,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderAcidBall<T extends EntityArrow> extends Render<T> {
 
-	private static final ResourceLocation arrowTextures = new ResourceLocation(VoidCraft.modid, "textures/entity/acidball.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation(DalQuor.modid, "textures/entity/acidball.png");
 
 	private static final Random rand = new Random();
 

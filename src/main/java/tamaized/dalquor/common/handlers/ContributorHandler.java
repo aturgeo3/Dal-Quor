@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.handlers;
 
 import net.minecraft.item.EnumDyeColor;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +23,7 @@ public class ContributorHandler {
 
 	public static void start() {
 		if (!started) {
-			VoidCraft.instance.logger.info("Starting Contributor Handler");
+			DalQuor.instance.logger.info("Starting Contributor Handler");
 			started = true;
 			new ThreadContributor();
 		}
@@ -38,10 +38,10 @@ public class ContributorHandler {
 				int i = Integer.parseInt(value);
 				if (i < 0 || i >= EnumDyeColor.values().length)
 					throw new NumberFormatException();
-				VoidCraft.instance.logger.info(key + " -> " + i);
+				DalQuor.instance.logger.info(key + " -> " + i);
 				elementalColor.put(key, EnumDyeColor.values()[i]);
 			} catch (NumberFormatException e) {
-				VoidCraft.instance.logger.error("Error loading Elemental Color: " + value);
+				DalQuor.instance.logger.error("Error loading Elemental Color: " + value);
 			}
 		}
 	}
@@ -50,7 +50,7 @@ public class ContributorHandler {
 		skinList.clear();
 		for (String key : props.stringPropertyNames()) {
 			UUID value = UUID.fromString(props.getProperty(key));
-			VoidCraft.instance.logger.info(key + " -> " + value);
+			DalQuor.instance.logger.info(key + " -> " + value);
 			skinList.put(key, value);
 		}
 	}
@@ -67,7 +67,7 @@ public class ContributorHandler {
 		public void run() {
 			try {
 				{
-					VoidCraft.instance.logger.info("Loading Elemental Color Properties");
+					DalQuor.instance.logger.info("Loading Elemental Color Properties");
 					URL url = new URL(URL_ELEMENTALCOLOR);
 					Properties props = new Properties();
 					InputStreamReader reader = new InputStreamReader(url.openStream());
@@ -75,7 +75,7 @@ public class ContributorHandler {
 					loadElementalColors(props);
 				}
 				{
-					VoidCraft.instance.logger.info("Loading Skin List Properties");
+					DalQuor.instance.logger.info("Loading Skin List Properties");
 					URL url = new URL(URL_SKINLIST);
 					Properties props = new Properties();
 					InputStreamReader reader = new InputStreamReader(url.openStream());
@@ -84,7 +84,7 @@ public class ContributorHandler {
 
 				}
 			} catch (IOException e) {
-				VoidCraft.instance.logger.error("Could not load contributors");
+				DalQuor.instance.logger.error("Could not load contributors");
 			}
 			SkinHandler.run();
 		}

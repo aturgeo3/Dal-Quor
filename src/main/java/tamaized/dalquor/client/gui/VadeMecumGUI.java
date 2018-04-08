@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.vademecum.VadeMecumEntry;
@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class VadeMecumGUI extends GuiScreen {
 
-	private static final ResourceLocation TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/VadeMecum.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(DalQuor.modid, "textures/gui/VadeMecum/VadeMecum.png");
 	private final EntityPlayer player;
 	private int vadeW;
 	private int vadeH;
@@ -101,7 +101,7 @@ public class VadeMecumGUI extends GuiScreen {
 	@Override
 	public void initGui() {
 		initPosSize();
-		VoidCraft.reloadRitualList();
+		DalQuor.reloadRitualList();
 		ClientProxy.vadeMecum = this;
 		playerStats = player.getCapability(CapabilityList.VADEMECUM, null);
 		if (playerStats != null && playerStats.getLastEntry() != null && !playerStats.getLastEntry().equals("null") && playerStats.getLastEntry().contains(":"))
@@ -222,7 +222,7 @@ public class VadeMecumGUI extends GuiScreen {
 					// setEntry(ClientProxy.vadeMecumEntryList.Docs.MAIN, 0);
 					break;
 				case WordsOfPower:
-					VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, 0));
+					DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.SPELLS_PAGE, 0));
 					break;
 				case Infusion:
 					mc.displayGuiScreen(new VadeMecumInfusionGUI(playerStats));
@@ -306,7 +306,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	private void sendLastEntryPacket(String entry) {
 		if (!entry.equals(""))
-			VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecumLastEntry.Packet(entry));
+			DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecumLastEntry.Packet(entry));
 	}
 
 	private enum Button {
@@ -376,7 +376,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	@SideOnly(Side.CLIENT)
 	static class FullButton extends GuiButton {
-		public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/button_full.png");
+		public static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/gui/VadeMecum/button_full.png");
 		private final VadeMecumGUI parent;
 
 		FullButton(VadeMecumGUI gui, String text, int id, int x, int y) {
@@ -407,7 +407,7 @@ public class VadeMecumGUI extends GuiScreen {
 
 	@SideOnly(Side.CLIENT)
 	static class OverlayButton extends GuiButton {
-		public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/VadeMecum/edgeButton.png");
+		public static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/gui/VadeMecum/edgeButton.png");
 		private final boolean isForward;
 		private final VadeMecumGUI parent;
 

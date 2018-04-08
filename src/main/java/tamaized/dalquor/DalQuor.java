@@ -132,8 +132,8 @@ import tamaized.dalquor.registry.VoidCraftParticles;
 import tamaized.dalquor.registry.VoidCraftPotions;
 import tamaized.dalquor.registry.VoidCraftTools;
 
-@Mod(modid = VoidCraft.modid, name = "Dal Quor", version = VoidCraft.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
-public class VoidCraft extends TamModBase {
+@Mod(modid = DalQuor.modid, name = "Dal Quor", version = DalQuor.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
+public class DalQuor extends TamModBase {
 
 	// public static final boolean isDevBuild = false;
 
@@ -154,7 +154,7 @@ public class VoidCraft extends TamModBase {
 	public static final VoidCraftLootTables lootTables = new VoidCraftLootTables();
 	public static final VoidCraftParticles particles = new VoidCraftParticles();
 	@Instance(modid)
-	public static VoidCraft instance = new VoidCraft();
+	public static DalQuor instance = new DalQuor();
 	public static FMLEventChannel channel;
 	public static SimpleNetworkWrapper network;
 	@SidedProxy(clientSide = "tamaized.dalquor.proxy.ClientProxy", serverSide = "tamaized.dalquor.proxy.ServerProxy")

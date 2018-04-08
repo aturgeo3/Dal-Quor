@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.armors.TamArmor;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import javax.annotation.Nullable;
 
@@ -42,7 +42,7 @@ public class ArmorCustomElytra extends TamArmor {
 	 * Return whether this item is repairable in an anvil.
 	 */
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == VoidCraft.items.voidcrystal;
+		return repair.getItem() == DalQuor.items.voidcrystal;
 	}
 
 }

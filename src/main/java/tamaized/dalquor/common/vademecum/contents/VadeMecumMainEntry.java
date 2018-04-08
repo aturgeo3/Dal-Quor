@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.vademecum.contents;
 
 import net.minecraft.item.ItemStack;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.common.vademecum.VadeMecumEntry;
 import tamaized.dalquor.common.vademecum.contents.progression.VadeMecumProgressionEntryList;
@@ -52,7 +52,7 @@ public class VadeMecumMainEntry extends VadeMecumEntry {
 	}
 
 	public void preLoadObject() {
-		VoidCraft.instance.logger.info("Preloading Vade Mecum Entry Objects");
+		DalQuor.instance.logger.info("Preloading Vade Mecum Entry Objects");
 		Progression.preLoadObjects();
 	}
 

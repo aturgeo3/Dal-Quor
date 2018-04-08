@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import org.lwjgl.input.Mouse;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.element.GUIElementList;
 import tamaized.dalquor.client.gui.element.GUIListElement;
 import tamaized.dalquor.common.blocks.tileentity.TileEntityStarForge;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class StarForgeGUI extends GuiContainer {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/starforge.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/gui/starforge.png");
 	private static final int BUTTON_CRAFT = 0;
 	public TileEntityStarForge te;
 	public int mouseX = 0;
@@ -81,7 +81,7 @@ public class StarForgeGUI extends GuiContainer {
 		int zcoord = te.getPos().getZ();
 		switch (button.id) {
 			case BUTTON_CRAFT:
-				VoidCraft.network.sendToServer(new ServerPacketHandlerStarforgeCraft.Packet(xcoord, ycoord, zcoord, scroll.getSelectedIndex()));
+				DalQuor.network.sendToServer(new ServerPacketHandlerStarforgeCraft.Packet(xcoord, ycoord, zcoord, scroll.getSelectedIndex()));
 				break;
 			default:
 				break;

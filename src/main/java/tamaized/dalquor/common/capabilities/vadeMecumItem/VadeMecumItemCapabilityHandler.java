@@ -2,14 +2,14 @@ package tamaized.dalquor.common.capabilities.vadeMecumItem;
 
 import io.netty.buffer.ByteBufInputStream;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class VadeMecumItemCapabilityHandler implements IVadeMecumItemCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VadeMecumItemCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "VadeMecumItemCapabilityHandler");
 
 	private boolean markDirty = false;
 	private boolean hasLoaded = false;

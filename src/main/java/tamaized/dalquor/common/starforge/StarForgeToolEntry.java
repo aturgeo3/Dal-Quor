@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.StarForgeGUI;
 import tamaized.dalquor.client.gui.element.GUIListElement;
 
@@ -54,8 +54,8 @@ public class StarForgeToolEntry extends GUIListElement {
 		GlStateManager.enableTexture2D();
 		starforgeGUI.drawString(mc.fontRenderer, tool.getDisplayName(), x - 160, y + 5, 0xFFFFFF);
 		int i = mc.fontRenderer.getStringWidth(tool.getDisplayName());
-		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
-		starforgeGUI.renderItemStack(new ItemStack(VoidCraft.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(DalQuor.blocks.cosmicMaterial, 4), (x - 160) + i + 5, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
+		starforgeGUI.renderItemStack(new ItemStack(DalQuor.items.quoriFragment, 1), (x - 160) + i + 5 + 20, y, starforgeGUI.mouseX, starforgeGUI.mouseY);
 	}
 
 }

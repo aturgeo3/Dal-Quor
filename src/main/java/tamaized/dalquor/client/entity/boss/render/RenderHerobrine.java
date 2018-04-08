@@ -6,14 +6,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.bossbar.RenderBossHeathBar;
 import tamaized.dalquor.common.entity.boss.herobrine.EntityBossHerobrine;
 
 @SideOnly(Side.CLIENT)
 public class RenderHerobrine<T extends EntityBossHerobrine> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/herobrine.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/herobrine.png");
 
 	public RenderHerobrine(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

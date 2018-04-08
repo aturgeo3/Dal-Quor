@@ -4,13 +4,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityWitherbrine;
 
 public class RenderWitherbrine extends RenderLiving<EntityWitherbrine> {
 
-	private static final ResourceLocation INVULNERABLE_WITHER_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither_invulnerable.png");
-	private static final ResourceLocation WITHER_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither.png");
+	private static final ResourceLocation INVULNERABLE_WITHER_TEXTURES = new ResourceLocation(DalQuor.modid, "textures/entity/witherbrine/wither_invulnerable.png");
+	private static final ResourceLocation WITHER_TEXTURES = new ResourceLocation(DalQuor.modid, "textures/entity/witherbrine/wither.png");
 
 	public RenderWitherbrine(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelWitherbrine(0.0F), 1.0F);

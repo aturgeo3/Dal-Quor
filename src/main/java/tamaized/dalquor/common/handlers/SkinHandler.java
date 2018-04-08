@@ -9,7 +9,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,13 +53,13 @@ public class SkinHandler {
 	}
 
 	public static synchronized void run() {
-		VoidCraft.instance.logger.info("Running SkinHandler");
+		DalQuor.instance.logger.info("Running SkinHandler");
 		fillNames();
 		if (isOnline()) {
-			VoidCraft.instance.logger.info("Able to Connect to Mojang Servers, validating names");
+			DalQuor.instance.logger.info("Able to Connect to Mojang Servers, validating names");
 			validateNames();
 		} else {
-			VoidCraft.instance.logger.info("Unable to Connect to Mojang Servers");
+			DalQuor.instance.logger.info("Unable to Connect to Mojang Servers");
 		}
 		for (Entry<String, UUID> entry : uuidNames.entrySet())
 			uuidProfile.put(entry.getValue(), new PlayerSkinInfoWrapper(entry.getKey(), entry.getValue()));
@@ -78,7 +78,7 @@ public class SkinHandler {
 	}
 
 	private static void validateNames() {
-		VoidCraft.instance.logger.info("Validating Names to UUIDs");
+		DalQuor.instance.logger.info("Validating Names to UUIDs");
 		Map<String, UUID> tempMap = new HashMap<>();
 		for (Entry<String, UUID> entry : uuidNames.entrySet()) {
 			String name = entry.getKey();
@@ -151,7 +151,7 @@ public class SkinHandler {
 
 		public PlayerSkinInfoWrapper(String name, UUID uuid) {
 			gameProfile = new GameProfile(uuid, name);
-			VoidCraft.proxy.fillProfileProperties(gameProfile, false);
+			DalQuor.proxy.fillProfileProperties(gameProfile, false);
 			loadPlayerTextures(); // Lets preload the skin here so we get the correct model on the first initial spawn
 
 		}

@@ -5,12 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class ElytraFlyingCapabilityStorage implements IStorage<IElytraFlyingCapability> {
 
 	public ElytraFlyingCapabilityStorage() {
-		VoidCraft.instance.logger.info("ElytraFlyingCapabilityStorage Registered");
+		DalQuor.instance.logger.info("ElytraFlyingCapabilityStorage Registered");
 	}
 
 	@Override

@@ -17,7 +17,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.capabilities.vadeMecumItem.IVadeMecumItemCapability;
@@ -108,7 +108,7 @@ public class VadeMecum extends TamItem {
 
 	@SideOnly(Side.CLIENT)
 	private void openBook(EntityPlayer player, World world, BlockPos pos) {
-		VoidCraft.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.OPEN, 0));
+		DalQuor.network.sendToServer(new ServerPacketHandlerVadeMecum.Packet(ServerPacketHandlerVadeMecum.RequestType.OPEN, 0));
 	}
 
 	@Override

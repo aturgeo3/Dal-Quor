@@ -5,10 +5,10 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
-@Mod.EventBusSubscriber(modid = VoidCraft.modid)
-@Config(modid = VoidCraft.modid)
+@Mod.EventBusSubscriber(modid = DalQuor.modid)
+@Config(modid = DalQuor.modid)
 public class ConfigHandler {
 
 	@Config.Comment("Enable VoidCrystal Ore Gen")
@@ -32,8 +32,8 @@ public class ConfigHandler {
 
 	@SubscribeEvent
 	public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (event.getModID().equals(VoidCraft.modid)) {
-			ConfigManager.sync(VoidCraft.modid, Config.Type.INSTANCE);
+		if (event.getModID().equals(DalQuor.modid)) {
+			ConfigManager.sync(DalQuor.modid, Config.Type.INSTANCE);
 		}
 	}
 

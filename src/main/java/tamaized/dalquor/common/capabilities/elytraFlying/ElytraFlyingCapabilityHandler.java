@@ -1,13 +1,13 @@
 package tamaized.dalquor.common.capabilities.elytraFlying;
 
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class ElytraFlyingCapabilityHandler implements IElytraFlyingCapability {
 
 	private boolean markDirty = false;
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "ElytraFlyingCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "ElytraFlyingCapabilityHandler");
 	private boolean hasLoaded = false;
 
 	private boolean isFlying = false;

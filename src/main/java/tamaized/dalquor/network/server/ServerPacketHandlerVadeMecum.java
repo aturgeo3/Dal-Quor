@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.gui.GuiHandler;
@@ -27,12 +27,12 @@ public class ServerPacketHandlerVadeMecum implements IMessageHandler<ServerPacke
 		IVadeMecumCapability capability = player.getCapability(CapabilityList.VADEMECUM, null);
 		switch (getRequestFromID(message.request)) {
 			case OPEN:
-				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Normal), player);
+				DalQuor.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.Normal), player);
 				break;
 			case SPELLS_PAGE:
 				capability.setPage(message.object);
-				VoidCraft.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.NULL), player);
-				FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), player.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+				DalQuor.network.sendTo(new ClientPacketHandlerVadeMecumUpdate.Packet(capability, ClientPacketHandlerVadeMecumUpdate.Type.NULL), player);
+				FMLNetworkHandler.openGui(player, DalQuor.instance, GuiHandler.getTypeID(GuiHandler.Type.VadeMecumSpells), player.world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 				break;
 			case ACTIVE_SET:
 				IVadeMecumCapability.Category category = IVadeMecumCapability.getCategoryFromID(message.object);

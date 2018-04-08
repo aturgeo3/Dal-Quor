@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.handlers.ConfigHandler;
 
 import java.util.Random;
@@ -43,7 +43,7 @@ public class TeleporterDream extends Teleporter {
 			boolean create = true;
 			while (!worldServerInstance.isAirBlock(pos)) {
 				pos = pos.up();
-				if (worldServerInstance.getBlockState(pos).getBlock() == VoidCraft.blocks.dreamBed) {
+				if (worldServerInstance.getBlockState(pos).getBlock() == DalQuor.blocks.dreamBed) {
 					create = false;
 					break;
 				}
@@ -57,7 +57,7 @@ public class TeleporterDream extends Teleporter {
 							worldServerInstance.setBlockState(pos.add(x, -1, z), states[0]);
 					}
 				}
-				IBlockState iblockstate2 = VoidCraft.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, EnumFacing.NORTH).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+				IBlockState iblockstate2 = DalQuor.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, EnumFacing.NORTH).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 				worldServerInstance.setBlockState(pos, iblockstate2, 10);
 				worldServerInstance.setBlockState(pos.offset(EnumFacing.NORTH), iblockstate2.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
 			}

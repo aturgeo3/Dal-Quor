@@ -4,11 +4,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityWitherbrine;
 
 public class LayerWitherbrineAura implements LayerRenderer<EntityWitherbrine> {
-	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(VoidCraft.modid, "textures/entity/witherbrine/wither_armor.png");
+	private static final ResourceLocation WITHER_ARMOR = new ResourceLocation(DalQuor.modid, "textures/entity/witherbrine/wither_armor.png");
 	private final RenderWitherbrine witherRenderer;
 	private final ModelWitherbrine witherModel = new ModelWitherbrine(0.5F);
 

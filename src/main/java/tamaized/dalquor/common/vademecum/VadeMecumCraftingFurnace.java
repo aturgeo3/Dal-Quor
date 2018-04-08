@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.common.helper.RecipeHelper;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class VadeMecumCraftingFurnace implements IVadeMecumCrafting {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/gui/vademecum/crafting_furnace.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/gui/vademecum/crafting_furnace.png");
 
 	private final String title;
 	private final ItemStack input;

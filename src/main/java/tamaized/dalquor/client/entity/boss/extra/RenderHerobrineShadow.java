@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineShadow;
 
 public class RenderHerobrineShadow<T extends EntityHerobrineShadow> extends Render<T> {
 
-	private static final ResourceLocation Herobrine_Texture = new ResourceLocation(VoidCraft.modid, "textures/entity/herobrine.png"); // refers to:assets/yourmod/textures/entity/yourtexture.png
+	private static final ResourceLocation Herobrine_Texture = new ResourceLocation(DalQuor.modid, "textures/entity/herobrine.png"); // refers to:assets/yourmod/textures/entity/yourtexture.png
 	protected ModelBase mainModel;
 
 	public RenderHerobrineShadow(RenderManager manager, ModelBase par1ModelBase) {

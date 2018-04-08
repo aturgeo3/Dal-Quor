@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.client.particles.ParticleFluff;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.model.ModelXia2;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 
@@ -27,7 +27,7 @@ import java.util.Random;
 @SideOnly(Side.CLIENT)
 public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/xiaform2.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/xiaform2.png");
 
 	public RenderXia2(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

@@ -21,7 +21,7 @@ import net.minecraft.world.gen.structure.StructureComponentTemplate;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.util.List;
 import java.util.Random;
@@ -169,7 +169,7 @@ public class StructureVoidCityPieces {
 	};
 
 	public static void registerPieces() {
-		MapGenStructureIO.registerStructureComponent(StructureVoidCityPieces.CityTemplate.class, VoidCraft.modid + "VCP");
+		MapGenStructureIO.registerStructureComponent(StructureVoidCityPieces.CityTemplate.class, DalQuor.modid + "VCP");
 	}
 
 	private static StructureVoidCityPieces.CityTemplate addPiece(TemplateManager p_191090_0_, StructureVoidCityPieces.CityTemplate p_191090_1_, BlockPos p_191090_2_, String p_191090_3_, Rotation p_191090_4_, boolean p_191090_5_) {
@@ -261,7 +261,7 @@ public class StructureVoidCityPieces {
 		}
 
 		private void loadTemplate(TemplateManager p_191085_1_) {
-			Template template = p_191085_1_.getTemplate((MinecraftServer) null, new ResourceLocation(VoidCraft.modid, "voidcity/" + this.pieceName));
+			Template template = p_191085_1_.getTemplate((MinecraftServer) null, new ResourceLocation(DalQuor.modid, "voidcity/" + this.pieceName));
 			PlacementSettings placementsettings = (this.overwrite ? StructureVoidCityPieces.OVERWRITE : StructureVoidCityPieces.INSERT).copy().setRotation(this.rotation);
 			this.setup(template, this.templatePosition, placementsettings);
 		}
@@ -295,7 +295,7 @@ public class StructureVoidCityPieces {
 					TileEntity tileentity = p_186175_3_.getTileEntity(blockpos);
 
 					if (tileentity instanceof TileEntityChest) {
-						((TileEntityChest) tileentity).setLootTable(VoidCraft.lootTables.chest_voidCity, p_186175_4_.nextLong());
+						((TileEntityChest) tileentity).setLootTable(DalQuor.lootTables.chest_voidCity, p_186175_4_.nextLong());
 					}
 				}
 			} else if (p_186175_1_.startsWith("Sentry")) {
@@ -305,7 +305,7 @@ public class StructureVoidCityPieces {
 				//p_186175_3_.spawnEntity(entityshulker);
 			} else if (p_186175_1_.startsWith("Elytra")) {
 				EntityItemFrame entityitemframe = new EntityItemFrame(p_186175_3_, p_186175_2_, this.rotation.rotate(EnumFacing.SOUTH));
-				entityitemframe.setDisplayedItem(new ItemStack(VoidCraft.items.astralEssence));
+				entityitemframe.setDisplayedItem(new ItemStack(DalQuor.items.astralEssence));
 				p_186175_3_.spawnEntity(entityitemframe);
 			}
 		}

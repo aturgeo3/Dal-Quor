@@ -6,7 +6,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 @Mod.EventBusSubscriber
 public class VoidSoundEvents {
@@ -119,7 +119,7 @@ public class VoidSoundEvents {
 	}
 
 	private static SoundEvent registerSound(RegistryEvent.Register<SoundEvent> event, String soundName) {
-		SoundEvent sound = new SoundEvent(new ResourceLocation(VoidCraft.modid, soundName)).setRegistryName(soundName);
+		SoundEvent sound = new SoundEvent(new ResourceLocation(DalQuor.modid, soundName)).setRegistryName(soundName);
 		event.getRegistry().register(sound);
 		return sound;
 	}

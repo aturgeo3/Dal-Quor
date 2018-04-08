@@ -12,7 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.armor.ArmorCustomElytra;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.network.server.ServerPacketHandlerCustomElytra;
@@ -136,7 +136,7 @@ public class CustomElytraHandler {
 	}
 
 	private static void sendPacketToServer(EntityPlayer sender) {
-		VoidCraft.network.sendToServer(new ServerPacketHandlerCustomElytra.Packet());
+		DalQuor.network.sendToServer(new ServerPacketHandlerCustomElytra.Packet());
 	}
 
 }

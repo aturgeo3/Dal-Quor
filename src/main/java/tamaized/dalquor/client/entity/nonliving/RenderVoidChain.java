@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.nonliving.EntityVoidChain;
 
 @SideOnly(Side.CLIENT)
@@ -20,7 +20,7 @@ public class RenderVoidChain extends Render<EntityVoidChain> {
 		super(renderManager);
 	}
 
-	private static final ResourceLocation arrowTextures = new ResourceLocation(VoidCraft.modid, "textures/entity/voidchain.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation(DalQuor.modid, "textures/entity/voidchain.png");
 
 	public void renderArrow(EntityVoidChain entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		this.bindEntityTexture(entity);

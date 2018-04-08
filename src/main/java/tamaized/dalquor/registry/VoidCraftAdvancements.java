@@ -12,7 +12,7 @@ import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,14 +22,14 @@ import java.util.Set;
 
 public class VoidCraftAdvancements { // TODO
 
-	public static final ModTrigger voice = new ModTrigger(new ResourceLocation(VoidCraft.modid, "voice"));
-	public static final ModTrigger anchor = new ModTrigger(new ResourceLocation(VoidCraft.modid, "anchor"));
-	public static final ModTrigger stabilization = new ModTrigger(new ResourceLocation(VoidCraft.modid, "stabilization"));
-	public static final ModTrigger empowerment = new ModTrigger(new ResourceLocation(VoidCraft.modid, "empowerment"));
-	public static final ModTrigger tolerance = new ModTrigger(new ResourceLocation(VoidCraft.modid, "tolerance"));
-	public static final ModTrigger totalcontrol = new ModTrigger(new ResourceLocation(VoidCraft.modid, "totalcontrol"));
-	public static final ModTrigger nightmare = new ModTrigger(new ResourceLocation(VoidCraft.modid, "nightmare"));
-	public static final ModTrigger familiarity = new ModTrigger(new ResourceLocation(VoidCraft.modid, "familiarity"));
+	public static final ModTrigger voice = new ModTrigger(new ResourceLocation(DalQuor.modid, "voice"));
+	public static final ModTrigger anchor = new ModTrigger(new ResourceLocation(DalQuor.modid, "anchor"));
+	public static final ModTrigger stabilization = new ModTrigger(new ResourceLocation(DalQuor.modid, "stabilization"));
+	public static final ModTrigger empowerment = new ModTrigger(new ResourceLocation(DalQuor.modid, "empowerment"));
+	public static final ModTrigger tolerance = new ModTrigger(new ResourceLocation(DalQuor.modid, "tolerance"));
+	public static final ModTrigger totalcontrol = new ModTrigger(new ResourceLocation(DalQuor.modid, "totalcontrol"));
+	public static final ModTrigger nightmare = new ModTrigger(new ResourceLocation(DalQuor.modid, "nightmare"));
+	public static final ModTrigger familiarity = new ModTrigger(new ResourceLocation(DalQuor.modid, "familiarity"));
 
 
 	public static void register() {

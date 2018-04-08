@@ -6,7 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.element.GUIListElement;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
@@ -39,15 +39,15 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 
 				SLOT_INPUT_TOOL = new ItemStackFilterHandler(new Class[]{IStarForgeTool.class}, true, new Class[]{}, false),
 
-				SLOT_INPUT_COSMICMATERIAL = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraft.blocks.cosmicMaterial)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_COSMICMATERIAL = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.blocks.cosmicMaterial)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_DRAGONSCALE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraft.items.voidicDragonScale)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_DRAGONSCALE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.voidicDragonScale)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_QUORIFRAGMENT = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraft.items.quoriFragment)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_QUORIFRAGMENT = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.quoriFragment)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_ASTRALESSENCE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraft.items.astralEssence)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_ASTRALESSENCE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.astralEssence)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_VOIDICPHLOG = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(VoidCraft.items.voidicPhlogiston)}, true, new ItemStack[]{}, false)
+				SLOT_INPUT_VOIDICPHLOG = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.voidicPhlogiston)}, true, new ItemStack[]{}, false)
 
 		};
 	}

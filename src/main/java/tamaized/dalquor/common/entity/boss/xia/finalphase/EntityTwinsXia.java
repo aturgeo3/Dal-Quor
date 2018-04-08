@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.bossbar.RenderAlternateBossBars.IAlternateBoss;
 import tamaized.dalquor.common.entity.EntityVoidNPC;
 import tamaized.dalquor.common.entity.ai.EntityAIFindEntityNearestEntityNoSight;
@@ -97,7 +97,7 @@ public abstract class EntityTwinsXia extends EntityVoidNPC implements IAlternate
 			return;
 		super.addPotionEffect(potioneffectIn);
 		if (!world.isRemote) {
-			VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+			DalQuor.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(pot), potioneffectIn.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 		}
 	}
 

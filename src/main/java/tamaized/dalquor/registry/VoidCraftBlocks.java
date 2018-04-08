@@ -18,7 +18,7 @@ import tamaized.tammodized.common.blocks.TamBlockStairs;
 import tamaized.tammodized.common.blocks.slab.TamBlockSlabDouble;
 import tamaized.tammodized.common.blocks.slab.TamBlockSlabHalf;
 import tamaized.tammodized.registry.ITamRegistry;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.blocks.AIBlock;
 import tamaized.dalquor.common.blocks.BlockDreamBed;
 import tamaized.dalquor.common.blocks.BlockNoBreak;
@@ -33,7 +33,7 @@ import tamaized.dalquor.common.blocks.StarForgeBlock;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = VoidCraft.modid)
+@Mod.EventBusSubscriber(modid = DalQuor.modid)
 public class VoidCraftBlocks {
 
 	public static BlockVoidcrystal blockVoidcrystal;

@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.companion.EntityCompanion;
 import tamaized.dalquor.registry.VoidCraftAdvancements;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class VadeMecumCapabilityHandler implements IVadeMecumCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VadeMecumCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "VadeMecumCapabilityHandler");
 	private final List<Passive> passiveList = new ArrayList<>();
 	private boolean markDirty = false;
 	private boolean hasLoaded = false;

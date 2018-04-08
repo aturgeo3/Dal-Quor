@@ -16,7 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.dalquor.common.entity.EntityVoidMob;
@@ -87,7 +87,7 @@ public class EntityMobEtherealGuardian extends EntityVoidMob {
 				Potion potion = VoidCraftPotions.fireSheathe;
 				PotionEffect effect = new PotionEffect(potion, 100);
 				addPotionEffect(effect);
-				VoidCraft.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(potion), effect.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
+				DalQuor.network.sendToAllAround(new ClientPacketHandlerSheathe.Packet(getEntityId(), Potion.getIdFromPotion(potion), effect.getDuration()), new TargetPoint(world.provider.getDimension(), posX, posY, posZ, 64));
 			}
 		}
 		super.onLivingUpdate();

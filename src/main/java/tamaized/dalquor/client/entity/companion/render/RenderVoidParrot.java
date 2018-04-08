@@ -6,13 +6,13 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.companion.model.ModelVoidParrot;
 import tamaized.dalquor.common.entity.companion.EntityVoidParrot;
 
 public class RenderVoidParrot extends RenderLiving<EntityVoidParrot> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/voidparrot.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/voidparrot.png");
 
 	public RenderVoidParrot(RenderManager p_i47375_1_) {
 		super(p_i47375_1_, new ModelVoidParrot(), 0.3F);

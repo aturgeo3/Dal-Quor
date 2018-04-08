@@ -1,7 +1,7 @@
 package tamaized.dalquor.common.vademecum.contents.progression;
 
 import net.minecraft.item.ItemStack;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.vademecum.VadeMecumEntry;
@@ -25,7 +25,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 
 	public VadeMecumProgressionEntry() {
 		super("progressionMainEntry", "voidcraft.VadeMecum.title.progression", null, null);
-		activeVade = new ItemStack(VoidCraft.items.vadeMecum);
+		activeVade = new ItemStack(DalQuor.items.vadeMecum);
 		activeVade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 	}
 

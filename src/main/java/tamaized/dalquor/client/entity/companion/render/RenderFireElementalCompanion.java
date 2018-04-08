@@ -11,13 +11,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import tamaized.tammodized.client.particles.ParticleFluff;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.companion.model.ModelFireElementalCompanion;
 import tamaized.dalquor.common.entity.companion.EntityCompanionFireElemental;
 
 public class RenderFireElementalCompanion extends RenderLiving<EntityCompanionFireElemental> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/elemental_fire.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/elemental_fire.png");
 
 	public RenderFireElementalCompanion(RenderManager manager, float par2) {
 		super(manager, new ModelFireElementalCompanion(), par2);

@@ -8,7 +8,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class PotionSheathe extends Potion {
 
@@ -21,9 +21,9 @@ public class PotionSheathe extends Potion {
 
 	public PotionSheathe(String name, Type type) {
 		super(false, 0x000000);
-		iconTexture = new ResourceLocation(VoidCraft.modid, "textures/potions/" + name + ".png");
+		iconTexture = new ResourceLocation(DalQuor.modid, "textures/potions/" + name + ".png");
 		this.type = type;
-		setRegistryName(VoidCraft.modid, name);
+		setRegistryName(DalQuor.modid, name);
 		setPotionName("effect." + getRegistryName().toString());
 	}
 

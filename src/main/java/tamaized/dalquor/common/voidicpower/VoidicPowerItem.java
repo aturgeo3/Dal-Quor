@@ -18,7 +18,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.voidicInfusion.VoidicInfusionCapabilityHandler;
 import tamaized.dalquor.common.capabilities.voidicPower.IVoidicPowerCapability;
@@ -124,7 +124,7 @@ public abstract class VoidicPowerItem extends TamItem {
 					}
 				}
 			} else {
-				NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
+				NBTTagCompound nbt = stack.getOrCreateSubCompound(DalQuor.modid);
 				cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 			}
 			if (cap.isInUse()) {
@@ -159,7 +159,7 @@ public abstract class VoidicPowerItem extends TamItem {
 		IVoidicPowerCapability cap = null;
 		if (stack.hasCapability(CapabilityList.VOIDICPOWER, null)) {
 			cap = stack.getCapability(CapabilityList.VOIDICPOWER, null);
-			NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
+			NBTTagCompound nbt = stack.getOrCreateSubCompound(DalQuor.modid);
 			cap.setValues(nbt.getInteger("currPower"), nbt.getInteger("maxPower"));
 		}
 		return cap != null && getAdjustedPerc(cap) < 1.0f;

@@ -6,13 +6,13 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.model.ModelVoidSpikes;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 
 public class LayerVoidSpikes implements LayerRenderer {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/voidspikes.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/voidspikes.png");
 	private final ModelVoidSpikes model;
 	private final RenderPlayer renderer;
 

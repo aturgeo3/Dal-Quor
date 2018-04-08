@@ -29,7 +29,7 @@ import tamaized.tammodized.common.helper.RayTraceHelper;
 import tamaized.tammodized.common.particles.ParticleHelper;
 import tamaized.tammodized.common.particles.ParticlePacketHandlerRegistry;
 import tamaized.tammodized.common.particles.network.ParticleFluffPacketHandler;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability.Category;
@@ -90,11 +90,11 @@ public class VadeMecumWordsOfPower {
 		categoryMap.put(IVadeMecumCapability.Category.ExplosionAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.ExplosionAcid", new ItemStack(Items.POISONOUS_POTATO)));
 		categoryMap.put(IVadeMecumCapability.Category.RingOfAcid, new CategoryDataWrapper(CategoryDataWrapper.Element.EARTH, "voidcraft.ritual.RingOfAcid", new ItemStack(Items.FISH, 1, 3)));
 
-		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicTouch", new ItemStack(VoidCraft.items.voidcrystal)));
-		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicSheathe", new ItemStack(VoidCraft.blocks.blockVoidbrick)));
-		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Implosion", new ItemStack(VoidCraft.blocks.realityHole)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicTouch, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicTouch", new ItemStack(DalQuor.items.voidcrystal)));
+		categoryMap.put(IVadeMecumCapability.Category.VoidicSheathe, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.VoidicSheathe", new ItemStack(DalQuor.blocks.blockVoidbrick)));
+		categoryMap.put(IVadeMecumCapability.Category.Implosion, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Implosion", new ItemStack(DalQuor.blocks.realityHole)));
 
-		categoryMap.put(IVadeMecumCapability.Category.Invoke, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Invoke", new ItemStack(VoidCraft.blocks.blockVoidcrystal)));
+		categoryMap.put(IVadeMecumCapability.Category.Invoke, new CategoryDataWrapper(CategoryDataWrapper.Element.VOID, "voidcraft.ritual.Invoke", new ItemStack(DalQuor.blocks.blockVoidcrystal)));
 		categoryMap.put(IVadeMecumCapability.Category.SummonFireElemental, new CategoryDataWrapper(CategoryDataWrapper.Element.FIRE, "voidcraft.ritual.SummonFireElemental", new ItemStack(Items.FLINT_AND_STEEL)));
 
 		categoryMap.put(IVadeMecumCapability.Category.Voice, new CategoryDataWrapper(CategoryDataWrapper.Element.NULL, "voidcraft.ritual.Voice", ItemStack.EMPTY));
@@ -420,7 +420,7 @@ public class VadeMecumWordsOfPower {
 					case RingOfAcid: {
 						for (BlockPos pos : createCircle(caster.getPosition()))
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-								world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
+								world.setBlockState(pos, DalQuor.fluids.acidFluidBlock.getDefaultState());
 							}
 						useCharge = true;
 					}
@@ -430,7 +430,7 @@ public class VadeMecumWordsOfPower {
 						RayTraceResult ray = RayTraceHelper.tracePath(world, caster, 2, 1, exclude);
 						if (ray != null && ray.entityHit != null && ray.entityHit instanceof EntityLivingBase) {
 							((EntityLivingBase) ray.entityHit).attackEntityFrom(new DamageSourceVoidicInfusion(), 5);
-							((EntityLivingBase) ray.entityHit).addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 3));
+							((EntityLivingBase) ray.entityHit).addPotionEffect(new PotionEffect(DalQuor.potions.voidicInfusion, 20 * 3));
 							useCharge = true;
 						}
 					}
@@ -451,7 +451,7 @@ public class VadeMecumWordsOfPower {
 					}
 					break;
 					case Invoke: {
-						caster.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 5));
+						caster.addPotionEffect(new PotionEffect(DalQuor.potions.voidicInfusion, 20 * 5));
 						useCharge = true;
 					}
 					break;
@@ -645,13 +645,13 @@ public class VadeMecumWordsOfPower {
 				case RingOfAcid: {
 					for (BlockPos pos : createCircle(caster.getPosition()))
 						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-							world.setBlockState(pos, VoidCraft.fluids.acidFluidBlock.getDefaultState());
+							world.setBlockState(pos, DalQuor.fluids.acidFluidBlock.getDefaultState());
 						}
 				}
 				break;
 				case VoidicTouch: {
 					target.attackEntityFrom(new DamageSourceVoidicInfusion(), 5);
-					target.addPotionEffect(new PotionEffect(VoidCraft.potions.voidicInfusion, 20 * 3));
+					target.addPotionEffect(new PotionEffect(DalQuor.potions.voidicInfusion, 20 * 3));
 				}
 				break;
 				case VoidicSheathe: {

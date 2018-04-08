@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 import java.util.Random;
 
@@ -254,13 +254,13 @@ public class BlockPortalVoid extends TamBlockPortal {
 			for (i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != VoidCraft.blocks.blockVoidcrystal) {
+				if (!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != DalQuor.blocks.blockVoidcrystal) {
 					break;
 				}
 			}
 
 			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == VoidCraft.blocks.blockVoidcrystal ? i : 0;
+			return block == DalQuor.blocks.blockVoidcrystal ? i : 0;
 		}
 
 		public int func_181100_a() {
@@ -283,20 +283,20 @@ public class BlockPortalVoid extends TamBlockPortal {
 						break label24;
 					}
 
-					if (block == VoidCraft.blocks.blockPortalVoid) {
+					if (block == DalQuor.blocks.blockPortalVoid) {
 						++portalBlockCount;
 					}
 
 					if (i == 0) {
 						block = world.getBlockState(blockpos.offset(leftDir)).getBlock();
 
-						if (block != VoidCraft.blocks.blockVoidcrystal) {
+						if (block != DalQuor.blocks.blockVoidcrystal) {
 							break label24;
 						}
 					} else if (i == width - 1) {
 						block = world.getBlockState(blockpos.offset(rightDir)).getBlock();
 
-						if (block != VoidCraft.blocks.blockVoidcrystal) {
+						if (block != DalQuor.blocks.blockVoidcrystal) {
 							break label24;
 						}
 					}
@@ -304,7 +304,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 			}
 
 			for (int j = 0; j < width; ++j) {
-				if (world.getBlockState(bottomLeft.offset(rightDir, j).up(height)).getBlock() != VoidCraft.blocks.blockVoidcrystal) {
+				if (world.getBlockState(bottomLeft.offset(rightDir, j).up(height)).getBlock() != DalQuor.blocks.blockVoidcrystal) {
 					height = 0;
 					break;
 				}
@@ -321,7 +321,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 		}
 
 		protected boolean isEmptyBlock(Block blockIn) {
-			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == VoidCraft.blocks.blockVoidFire || blockIn == VoidCraft.blocks.blockPortalVoid;
+			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == DalQuor.blocks.blockVoidFire || blockIn == DalQuor.blocks.blockPortalVoid;
 		}
 
 		public boolean isValid() {
@@ -333,7 +333,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 				BlockPos blockpos = bottomLeft.offset(rightDir, i);
 
 				for (int j = 0; j < height; ++j) {
-					world.setBlockState(blockpos.up(j), VoidCraft.blocks.blockPortalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), DalQuor.blocks.blockPortalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, axis), 2);
 				}
 			}
 		}

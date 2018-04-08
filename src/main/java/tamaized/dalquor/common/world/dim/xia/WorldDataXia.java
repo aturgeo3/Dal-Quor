@@ -4,11 +4,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class WorldDataXia extends WorldSavedData {
 
-	private static final String NAME = VoidCraft.modid + "_XiaCastle";
+	private static final String NAME = DalQuor.modid + "_XiaCastle";
 	private WorldProviderXia xia;
 	private NBTTagCompound nbt;
 

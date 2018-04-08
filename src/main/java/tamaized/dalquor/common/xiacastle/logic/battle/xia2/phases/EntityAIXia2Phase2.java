@@ -10,7 +10,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineFireball;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2.Xia2TookDamagePacket;
@@ -76,8 +76,8 @@ public class EntityAIXia2Phase2 extends EntityVoidNPCAIBase<EntityBossXia2> {
 			if (list.size() < 3) {
 				if (tick % (actionTick) == 0) {
 					ItemStack stack = new ItemStack(VoidCraftItems.voidicEssence);
-					stack.getOrCreateSubCompound(VoidCraft.modid).setInteger("xia", getEntity().getEntityId());
-					stack.getOrCreateSubCompound(VoidCraft.modid).setInteger("phase", 2);
+					stack.getOrCreateSubCompound(DalQuor.modid).setInteger("xia", getEntity().getEntityId());
+					stack.getOrCreateSubCompound(DalQuor.modid).setInteger("phase", 2);
 					EntityItem item = new EntityItem(world, getEntity().posX, getEntity().posY, getEntity().posZ, stack);
 					item.addVelocity((world.rand.nextDouble() * 1) - 0.5, 0.5, (world.rand.nextDouble() * 1) - 0.5);
 					world.spawnEntity(item);

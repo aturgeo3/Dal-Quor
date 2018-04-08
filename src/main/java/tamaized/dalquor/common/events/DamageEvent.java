@@ -14,7 +14,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tamaized.tammodized.common.helper.FloatyTextHelper;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.dalquor.common.damagesources.DamageSourceVoidicInfusion;
@@ -34,7 +34,7 @@ public class DamageEvent {
 	public void entityDamaged(LivingAttackEvent e) {
 
 		// Vanilla Void
-		if (e.getSource().damageType.equals("outOfWorld") && e.getEntity() != null && e.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) e.getEntity()).getActivePotionEffect(VoidCraft.potions.voidImmunity) != null) {
+		if (e.getSource().damageType.equals("outOfWorld") && e.getEntity() != null && e.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) e.getEntity()).getActivePotionEffect(DalQuor.potions.voidImmunity) != null) {
 			e.setCanceled(true);
 			return;
 		}

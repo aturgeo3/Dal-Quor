@@ -11,11 +11,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import tamaized.tammodized.common.particles.TamParticle;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class AcidFX extends TamParticle {
 
-	private static final ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/particle/acidfx.png");
+	private static final ResourceLocation texture = new ResourceLocation(DalQuor.modid, "textures/particle/acidfx.png");
 
 	public AcidFX(World par1World, double x, double y, double z) {
 		super(par1World, new Vec3d(x, y, z));

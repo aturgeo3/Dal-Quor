@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlockContainer;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.blocks.tileentity.TileEntityStarForge;
 import tamaized.dalquor.common.gui.GuiHandler;
 
@@ -116,7 +116,7 @@ public class StarForgeBlock extends TamBlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, VoidCraft.instance, GuiHandler.getTypeID(GuiHandler.Type.StarForge), world, pos.getX(), pos.getY(), pos.getZ());
+			FMLNetworkHandler.openGui(player, DalQuor.instance, GuiHandler.getTypeID(GuiHandler.Type.StarForge), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

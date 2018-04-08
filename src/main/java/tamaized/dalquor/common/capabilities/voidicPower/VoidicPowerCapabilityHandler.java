@@ -1,11 +1,11 @@
 package tamaized.dalquor.common.capabilities.voidicPower;
 
 import net.minecraft.util.ResourceLocation;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class VoidicPowerCapabilityHandler implements IVoidicPowerCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VoidicPowerCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "VoidicPowerCapabilityHandler");
 
 	private int currPower = 0;
 	private int maxPower = 0;

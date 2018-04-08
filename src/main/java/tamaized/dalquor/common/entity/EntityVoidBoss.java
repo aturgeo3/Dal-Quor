@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import net.minecraftforge.common.ForgeChunkManager.Type;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.IVoidBossData;
 import tamaized.dalquor.common.xiacastle.logic.battle.EntityVoidNPCAIBase;
 import tamaized.dalquor.common.xiacastle.logic.battle.IBattleHandler;
@@ -53,7 +53,7 @@ public abstract class EntityVoidBoss<T extends IBattleHandler> extends EntityVoi
 		setSize(sizeWidth(), sizeHeight());
 		addDefaultTasks();
 		enablePersistence();
-		chunkLoadTicket = ForgeChunkManager.requestTicket(VoidCraft.instance, world, Type.ENTITY);
+		chunkLoadTicket = ForgeChunkManager.requestTicket(DalQuor.instance, world, Type.ENTITY);
 		if (chunkLoadTicket != null)
 			chunkLoadTicket.bindEntity(this);
 	}

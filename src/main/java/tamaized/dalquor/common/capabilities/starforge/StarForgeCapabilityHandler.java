@@ -8,13 +8,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
 import tamaized.dalquor.common.starforge.effects.StarForgeEffectList;
 
 public class StarForgeCapabilityHandler implements IStarForgeCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "StarForgeCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "StarForgeCapabilityHandler");
 
 	private IStarForgeEffect tier1;
 	private IStarForgeEffect tier2;
@@ -148,7 +148,7 @@ public class StarForgeCapabilityHandler implements IStarForgeCapability {
 	}
 
 	private void sendClientUpdates(ItemStack stack) {
-		NBTTagCompound ct = stack.getOrCreateSubCompound(VoidCraft.modid);
+		NBTTagCompound ct = stack.getOrCreateSubCompound(DalQuor.modid);
 		NBTTagCompound starforgeCompound = new NBTTagCompound();
 		starforgeCompound.setInteger("tier1", StarForgeEffectList.getEffectID(tier1));
 		starforgeCompound.setInteger("tier2", StarForgeEffectList.getEffectID(tier2));
@@ -157,7 +157,7 @@ public class StarForgeCapabilityHandler implements IStarForgeCapability {
 	}
 
 	private void updateClient(ItemStack stack) {
-		NBTTagCompound ct = stack.getOrCreateSubCompound(VoidCraft.modid);
+		NBTTagCompound ct = stack.getOrCreateSubCompound(DalQuor.modid);
 		NBTTagCompound starforgeCompound = ct.getCompoundTag("StarForge_Client");
 		setEffect(IStarForgeEffect.Tier.ONE, StarForgeEffectList.getEffect(starforgeCompound.getInteger("tier1")));
 		setEffect(IStarForgeEffect.Tier.TWO, StarForgeEffectList.getEffect(starforgeCompound.getInteger("tier2")));

@@ -9,7 +9,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 import tamaized.dalquor.common.entity.ghost.EntityGhostPlayerBase;
 import tamaized.dalquor.common.handlers.SkinHandler;
@@ -28,7 +28,7 @@ public class VoidicEssence extends TamItem {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
 			ItemStack stack = player.getHeldItem(hand);
-			NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
+			NBTTagCompound nbt = stack.getOrCreateSubCompound(DalQuor.modid);
 			int id = nbt.getInteger("xia");
 			int phase = nbt.getInteger("phase");
 			if (id > 0) {

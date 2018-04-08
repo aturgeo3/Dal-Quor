@@ -10,13 +10,13 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.voidicInfusion.IVoidicInfusionCapability;
 
 public class ClientInfusionOverlayRender {
 
-	private static ResourceLocation texture = new ResourceLocation(VoidCraft.modid, "textures/gui/voidicinfusion.png");
+	private static ResourceLocation texture = new ResourceLocation(DalQuor.modid, "textures/gui/voidicinfusion.png");
 
 	@SubscribeEvent
 	public void InGameOverlay(RenderGameOverlayEvent e) {

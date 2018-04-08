@@ -7,14 +7,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.entity.boss.bossbar.RenderBossHeathBar;
 import tamaized.dalquor.common.entity.boss.EntityBossCorruptedPawn;
 
 @SideOnly(Side.CLIENT)
 public class RenderCorruptedPawn<T extends EntityLiving> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(VoidCraft.modid, "textures/entity/corruptedpawn.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(DalQuor.modid, "textures/entity/corruptedpawn.png");
 
 	public RenderCorruptedPawn(RenderManager manager, ModelBase par1ModelBase, float par2) {
 		super(manager, par1ModelBase, par2);

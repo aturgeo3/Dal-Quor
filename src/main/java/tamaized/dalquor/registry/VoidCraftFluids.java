@@ -19,7 +19,7 @@ import tamaized.tammodized.common.fluids.TamFluidBlock;
 import tamaized.tammodized.common.fluids.TamFluidFiniteBlock;
 import tamaized.tammodized.registry.ITamRegistry;
 import tamaized.tammodized.registry.RegistryHelper;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.damagesources.DamageSourceAcid;
 import tamaized.dalquor.common.fluids.ArcaneSludgeFluidBlock;
 
@@ -48,9 +48,9 @@ public class VoidCraftFluids {
 	static {
 		modelList = new ArrayList<>();
 
-		voidFluid = RegistryHelper.createFluid(VoidCraft.modid, "void", "fluids/void/fluid", true, true);
-		acidFluid = RegistryHelper.createFluid(VoidCraft.modid, "acid", "fluids/acid/fluid", true, false);
-		arcaneSludgeFluid = RegistryHelper.createFluid(VoidCraft.modid, "arcanesludge", "fluids/arcanesludge/fluid", true, false);
+		voidFluid = RegistryHelper.createFluid(DalQuor.modid, "void", "fluids/void/fluid", true, true);
+		acidFluid = RegistryHelper.createFluid(DalQuor.modid, "acid", "fluids/acid/fluid", true, false);
+		arcaneSludgeFluid = RegistryHelper.createFluid(DalQuor.modid, "arcanesludge", "fluids/arcanesludge/fluid", true, false);
 
 		voidFluid.setLuminosity(3).setDensity(-400).setViscosity(1500).setGaseous(true);
 		acidFluid.setLuminosity(7).setDensity(2).setViscosity(500).setGaseous(false);

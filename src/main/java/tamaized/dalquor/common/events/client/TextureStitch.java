@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class TextureStitch {
 
@@ -20,15 +20,15 @@ public class TextureStitch {
 
 	@SubscribeEvent
 	public void stitchTexture(TextureStitchEvent.Pre e) {
-		colorFire_layer_0 = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "layer/fire_layer_0"));
-		colorFire_layer_1 = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "layer/fire_layer_1"));
+		colorFire_layer_0 = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "layer/fire_layer_0"));
+		colorFire_layer_1 = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "layer/fire_layer_1"));
 
-		guiSlot_Tool = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/tool"));
-		guiSlot_Block = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/block"));
-		guiSlot_Dragonscale = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/dragonscale"));
-		guiSlot_QuoriFragment = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/quorifragment"));
-		guiSlot_AstralEsssence = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/astralessence"));
-		guiSlot_VoidicPhlog = e.getMap().registerSprite(new ResourceLocation(VoidCraft.modid, "gui/icons/voidicphlog"));
+		guiSlot_Tool = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/tool"));
+		guiSlot_Block = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/block"));
+		guiSlot_Dragonscale = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/dragonscale"));
+		guiSlot_QuoriFragment = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/quorifragment"));
+		guiSlot_AstralEsssence = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/astralessence"));
+		guiSlot_VoidicPhlog = e.getMap().registerSprite(new ResourceLocation(DalQuor.modid, "gui/icons/voidicphlog"));
 	}
 
 }

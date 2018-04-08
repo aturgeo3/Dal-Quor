@@ -5,12 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class VoidicPowerCapabilityStorage implements IStorage<IVoidicPowerCapability> {
 
 	public VoidicPowerCapabilityStorage() {
-		VoidCraft.instance.logger.info("VoidicPowerCapabilityStorage Registered");
+		DalQuor.instance.logger.info("VoidicPowerCapabilityStorage Registered");
 	}
 
 	@Override

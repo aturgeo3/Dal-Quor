@@ -5,12 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class VadeMecumItemCapabilityStorage implements IStorage<IVadeMecumItemCapability> {
 
 	public VadeMecumItemCapabilityStorage() {
-		VoidCraft.instance.logger.info("VadeMecumItemCapabilityStorage Registered");
+		DalQuor.instance.logger.info("VadeMecumItemCapabilityStorage Registered");
 	}
 
 	@Override

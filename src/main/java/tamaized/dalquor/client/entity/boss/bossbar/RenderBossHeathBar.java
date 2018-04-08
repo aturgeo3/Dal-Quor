@@ -17,16 +17,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.boss.IVoidBossData;
 
 import java.awt.*;
 
 public class RenderBossHeathBar {
 
-	public static final ResourceLocation whitespace = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/Whitespace.png");
-	public static final ResourceLocation bar = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/bar.png");
-	public static final ResourceLocation bg = new ResourceLocation(VoidCraft.modid, "textures/gui/bossbar/bg.png");
+	public static final ResourceLocation whitespace = new ResourceLocation(DalQuor.modid, "textures/gui/bossbar/Whitespace.png");
+	public static final ResourceLocation bar = new ResourceLocation(DalQuor.modid, "textures/gui/bossbar/bar.png");
+	public static final ResourceLocation bg = new ResourceLocation(DalQuor.modid, "textures/gui/bossbar/bg.png");
 
 	private static IVoidBossData voidBoss;
 

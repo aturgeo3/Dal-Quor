@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import tamaized.tammodized.common.entity.EntityDragonOld;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.capabilities.voidicPower.IVoidicPowerCapability;
@@ -32,7 +32,7 @@ import java.util.Iterator;
 
 public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapability {
 
-	public static final ResourceLocation ID = new ResourceLocation(VoidCraft.modid, "VoidicInfusionCapabilityHandler");
+	public static final ResourceLocation ID = new ResourceLocation(DalQuor.modid, "VoidicInfusionCapabilityHandler");
 
 	private int infusion = 0;
 	private int maxInfusion = 6000;
@@ -45,7 +45,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	private int tick = 1;
 
 	public static void uWotM8(ItemStack stack, IVoidicPowerCapability cap) { // TODO item caps suck yo
-		NBTTagCompound nbt = stack.getOrCreateSubCompound(VoidCraft.modid);
+		NBTTagCompound nbt = stack.getOrCreateSubCompound(DalQuor.modid);
 		nbt.setInteger("currPower", cap.getCurrentPower());
 		nbt.setInteger("maxPower", cap.getMaxPower());
 	}
@@ -145,7 +145,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 		if (living.getHealth() > living.getMaxHealth()) {
 			if (living instanceof EntityPlayerMP) {
 				EntityPlayerMP player = (EntityPlayerMP) living;
-				VoidCraft.network.sendTo(new ClientPacketHandlerHealth.Packet(player.getMaxHealth()), player);
+				DalQuor.network.sendTo(new ClientPacketHandlerHealth.Packet(player.getMaxHealth()), player);
 			}
 			living.setHealth(living.getMaxHealth());
 		}
@@ -300,7 +300,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 	private void sendPacketUpdates(EntityLivingBase living) {
 		tick = 0;
 		if (living != null && !living.world.isRemote)
-			VoidCraft.network.sendToAllAround(new ClientPacketHandlerInfusion.Packet(living.getEntityId(), infusion, maxInfusion, xiaDefeats), new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
+			DalQuor.network.sendToAllAround(new ClientPacketHandlerInfusion.Packet(living.getEntityId(), infusion, maxInfusion, xiaDefeats), new TargetPoint(living.dimension, living.posX, living.posY, living.posZ, 16 * 8));
 	}
 
 }

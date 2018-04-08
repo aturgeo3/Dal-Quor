@@ -13,7 +13,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class TwinsMessages04 {
 
@@ -36,8 +36,8 @@ public class TwinsMessages04 {
 						TileEntityChest te = (TileEntityChest) worldObj.getTileEntity(pos.add(3, 0, 0));
 						te.setInventorySlotContents(0, new ItemStack(Items.SIGN));
 						worldObj.setBlockState(pos.add(2, 0, 1), Blocks.LEVER.getDefaultState().withProperty(BlockLever.FACING, BlockLever.EnumOrientation.UP_X));
-						worldObj.setBlockState(pos.add(3, 0, 1), VoidCraft.blocks.blockNoBreak.getDefaultState());
-						worldObj.setBlockState(pos.add(3, 0, -1), VoidCraft.blocks.blockNoBreak.getDefaultState());
+						worldObj.setBlockState(pos.add(3, 0, 1), DalQuor.blocks.blockNoBreak.getDefaultState());
+						worldObj.setBlockState(pos.add(3, 0, -1), DalQuor.blocks.blockNoBreak.getDefaultState());
 						worldObj.setBlockState(pos.add(3, 1, 0), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
 						worldObj.setBlockState(pos.add(3, 1, 1), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));
 						worldObj.setBlockState(pos.add(3, 1, -1), Blocks.STANDING_SIGN.getDefaultState().withProperty(BlockStandingSign.ROTATION, 4));

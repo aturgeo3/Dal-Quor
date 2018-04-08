@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.model.ModelCustomElytra;
 import tamaized.dalquor.common.armor.ArmorCustomElytra;
 
@@ -19,7 +19,7 @@ public class LayerCustomElytra implements LayerRenderer<AbstractClientPlayer> {
 	/**
 	 * The basic Elytra texture.
 	 */
-	private static final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation(VoidCraft.modid, "textures/models/armor/elytra.png");
+	private static final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation(DalQuor.modid, "textures/models/armor/elytra.png");
 	/**
 	 * Instance of the player renderer.
 	 */

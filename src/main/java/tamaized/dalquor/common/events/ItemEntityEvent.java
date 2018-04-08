@@ -8,7 +8,7 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.registry.VoidCraftBlocks;
 
 import java.util.ConcurrentModificationException;
@@ -25,12 +25,12 @@ public class ItemEntityEvent {
 				if (!stack.isEmpty() && stack.getItem() == Items.BOOK && e.world.getBlockState(entity.getPosition()).getBlock() == VoidCraftBlocks.blockVoidFire) {
 					e.world.setBlockToAir(entity.getPosition());
 					e.world.addWeatherEffect(new EntityLightningBolt(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), true));
-					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(VoidCraft.items.vadeMecum)));
+					e.world.spawnEntity(new EntityItem(e.world, entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), new ItemStack(DalQuor.items.vadeMecum)));
 					entity.setDead();
 				}
 			}
 		} catch (ConcurrentModificationException stacktrace) {
-			VoidCraft.instance.logger.error("Something went very wrong while trying to retrieve the loadedEntityList from the world!");
+			DalQuor.instance.logger.error("Something went very wrong while trying to retrieve the loadedEntityList from the world!");
 			stacktrace.printStackTrace();
 		}
 	}

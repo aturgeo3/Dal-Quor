@@ -13,14 +13,14 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.ghost.EntityGhostPlayerBase;
 import tamaized.dalquor.common.handlers.SkinHandler;
 
 @SideOnly(Side.CLIENT)
 public class RenderGhostPlayer<T extends EntityGhostPlayerBase> extends RenderLiving<T> {
 
-	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(VoidCraft.modid, "textures/entity/rune.png");
+	private static final ResourceLocation TEXTURE_RUNE = new ResourceLocation(DalQuor.modid, "textures/entity/rune.png");
 
 	public RenderGhostPlayer(RenderManager manager, boolean slim) {
 		super(manager, new ModelPlayer(0.0F, slim), 0.5F);

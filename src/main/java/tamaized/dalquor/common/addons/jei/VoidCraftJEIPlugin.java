@@ -6,7 +6,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import net.minecraft.item.ItemStack;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.registry.VoidCraftItems;
 
 import javax.annotation.Nonnull;
@@ -18,7 +18,7 @@ public class VoidCraftJEIPlugin implements IModPlugin {
 
 	@Override
 	public void register(@Nonnull IModRegistry registry) {
-		VoidCraft.instance.logger.info("jei detected, loading VoidCraft jei Plugin");
+		DalQuor.instance.logger.info("jei detected, loading VoidCraft jei Plugin");
 		IIngredientRegistry itemRegistry = registry.getIngredientRegistry();
 		jeiHelpers = registry.getJeiHelpers();
 

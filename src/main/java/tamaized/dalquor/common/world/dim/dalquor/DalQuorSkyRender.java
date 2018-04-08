@@ -9,11 +9,11 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 
 public class DalQuorSkyRender extends IRenderHandler {
 
-	private static final ResourceLocation SKY_TEXTURES = new ResourceLocation(VoidCraft.modid, "textures/environment/dal_quor.png");
+	private static final ResourceLocation SKY_TEXTURES = new ResourceLocation(DalQuor.modid, "textures/environment/dal_quor.png");
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {

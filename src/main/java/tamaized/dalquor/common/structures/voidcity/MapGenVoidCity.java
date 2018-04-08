@@ -10,7 +10,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.MapGenStructure;
 import net.minecraft.world.gen.structure.StructureStart;
-import tamaized.dalquor.VoidCraft;
+import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.mob.EntityMobEtherealGuardian;
 
 import javax.annotation.Nullable;
@@ -41,7 +41,7 @@ public class MapGenVoidCity extends MapGenStructure {
 
 	@Override
 	public String getStructureName() {
-		return VoidCraft.modid + "EndCity";
+		return DalQuor.modid + "EndCity";
 	}
 
 	@Nullable
