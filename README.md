@@ -1,4 +1,4 @@
-# VoidCraft
+# Dal Quor
 
 ## About
 The mod is our interpretation of what lurks deep within the one of Minecraft's oldest, yet mostly untouched environments: The infinitely expansive Void.
@@ -12,8 +12,6 @@ After stepping through the portal, you'll be in the Void, a black abyss where on
 ## Downloads
 Latest: [Can be found here](https://minecraft.curseforge.com/projects/voidcraft)
 
-There are also [Legacy Builds](http://tamaized.tk/website/VoidCraft/mod/) that go as far back as Minecraft 1.6.4 (Note: This link may not always be up as it's my home webserver; Also: These are very old builds that are no longer maintained, do NOT report any bugs found as you are stuck with what you have if you use one of these builds.)
-
 ## Modpacks
 * Sure, provide a link to this github or [here](https://minecraft.curseforge.com/projects/voidcraft) or [here](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2746403-voidcraft) up to you.
  
@@ -23,6 +21,7 @@ This mod currently has integrations with:
 * Planned:
     * Aether II
     * Thaumcraft
+    * CTM
 * 1.9.4 - 1.12
     * JEI
     * Void Fog
