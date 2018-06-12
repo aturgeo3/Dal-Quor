@@ -11,7 +11,5 @@ public class ModCreativeTabs {
 			return new ItemStack(ModBlocks.blockPortalVoid);
 		}
 	};
-	;
-	public static CreativeTabs tForge;
 
 }
