@@ -25,10 +25,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
-import tamaized.tammodized.TamModBase;
-import tamaized.tammodized.TamModized;
-import tamaized.tammodized.proxy.AbstractProxy;
-import tamaized.tammodized.registry.PortalHandlerRegistry;
 import tamaized.dalquor.client.entity.boss.extra.EntityDolXia;
 import tamaized.dalquor.common.blocks.TileEntityNoBreak;
 import tamaized.dalquor.common.blocks.tileentity.TileEntityAIBlock;
@@ -131,11 +127,13 @@ import tamaized.dalquor.registry.ModMaterials;
 import tamaized.dalquor.registry.ModParticles;
 import tamaized.dalquor.registry.ModPotions;
 import tamaized.dalquor.registry.ModTools;
+import tamaized.tammodized.TamModBase;
+import tamaized.tammodized.TamModized;
+import tamaized.tammodized.proxy.AbstractProxy;
+import tamaized.tammodized.registry.PortalHandlerRegistry;
 
 @Mod(modid = DalQuor.modid, name = "Dal Quor", version = DalQuor.version, acceptedMinecraftVersions = "[1.12,)", dependencies = "required-before:" + TamModized.modid + "@[${tamversion},)")
 public class DalQuor extends TamModBase {
-
-	// public static final boolean isDevBuild = false;
 
 	public static final String version = "${version}";
 	public static final String modid = "dalquor";
@@ -143,8 +141,6 @@ public class DalQuor extends TamModBase {
 	public static final ModCreativeTabs tabs = new ModCreativeTabs();
 	public static final ModTools tools = new ModTools();
 	public static final ModItems items = new ModItems();
-
-	//	public static boolean isAetherLoaded = false;
 	public static final ModPotions potions = new ModPotions();
 	public static final ModArmors armors = new ModArmors();
 	public static final ModFluids fluids = new ModFluids();
