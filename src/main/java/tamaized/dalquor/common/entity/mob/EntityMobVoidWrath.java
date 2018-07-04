@@ -3,18 +3,31 @@ package tamaized.dalquor.common.entity.mob;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBreakDoor;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityShulker;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.EntityVoidMob;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityMobVoidWrath extends EntityVoidMob {
 
@@ -36,21 +49,16 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 
 		Predicate ies = new Predicate() {
-			/**
-			 * Return whether the specified entity is applicable to this filter.
-			 */
-			public boolean apply(Entity p_82704_1_) {
-				if (p_82704_1_ instanceof EntityWitherSkeleton)
-					return false;
-				else if (p_82704_1_ instanceof EntityHerobrineCreeper || p_82704_1_ instanceof EntityShulker)
-					return false;
-				else
-					return true;
+
+			boolean apply(Entity p_82704_1_) {
+				return !(p_82704_1_ instanceof EntityWitherSkeleton) && !(p_82704_1_ instanceof EntityHerobrineCreeper) && !(p_82704_1_ instanceof EntityShulker);
 			}
 
+			@Override
 			public boolean apply(Object p_apply_1_) {
-				return p_apply_1_ instanceof Entity ? this.apply((Entity) p_apply_1_) : false;
+				return p_apply_1_ instanceof Entity && this.apply((Entity) p_apply_1_);
 			}
+
 		};
 
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true, false, ies));
@@ -90,6 +98,6 @@ public class EntityMobVoidWrath extends EntityVoidMob {
 
 	@Override
 	protected Item getDropItem() {
-		return DalQuor.items.burnBone;
+		return ModItems.burnBone;
 	}
 }

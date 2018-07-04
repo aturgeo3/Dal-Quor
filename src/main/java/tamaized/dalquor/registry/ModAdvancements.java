@@ -61,9 +61,9 @@ public class ModAdvancements { // TODO
 		demonsCall.registerStat();
 		artifact = new Achievement("achievement.artifact", "artifact", 0, 9, VoidCraft.items.voidStar, demonsCall);
 		artifact.setSpecial().registerStat();
-		godsSleep = new Achievement("achievement.godsSleep", "godsSleep", 2, 9, VoidCraft.blocks.blockNoBreak, artifact);
+		godsSleep = new Achievement("achievement.godsSleep", "godsSleep", 2, 9, VoidCraft.blocks.noBreak, artifact);
 		godsSleep.registerStat();
-		tooFar = new Achievement("achievement.tooFar", "tooFar", 4, 9, VoidCraft.blocks.blockPortalXia, godsSleep);
+		tooFar = new Achievement("achievement.tooFar", "tooFar", 4, 9, VoidCraft.blocks.portalXia, godsSleep);
 		tooFar.registerStat();
 		Ascension = new Achievement("achievement.Ascension", "Ascension", 6, 9, VoidCraft.armors.xiaHelmet, tooFar);
 		Ascension.setSpecial().registerStat();

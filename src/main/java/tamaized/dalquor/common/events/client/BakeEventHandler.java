@@ -18,7 +18,7 @@ public class BakeEventHandler {
 	public void onModelBakeEvent(ModelBakeEvent event) {
 		DalQuor.instance.logger.info("Baking TESR Blocks");
 //		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(VoidCraft.blocks.Heimdall);
-		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockNoBreak);
+		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.noBreak);
 //		event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(VoidCraft.blocks.voidicCharger);
 	}
 

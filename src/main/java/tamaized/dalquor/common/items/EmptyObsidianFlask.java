@@ -8,9 +8,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
-import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.handlers.ConfigHandler;
+import tamaized.dalquor.registry.ModItems;
+import tamaized.tammodized.common.items.TamItem;
 
 public class EmptyObsidianFlask extends TamItem {
 
@@ -24,7 +24,7 @@ public class EmptyObsidianFlask extends TamItem {
 		if (worldIn.provider.getDimension() != ConfigHandler.dimensionIdVoid && player.getPosition().getY() > 6)
 			return ActionResult.newResult(EnumActionResult.FAIL, stack);
 		stack.shrink(1);
-		ItemStack newStack = new ItemStack(DalQuor.items.obsidianFlask, 1);
+		ItemStack newStack = new ItemStack(ModItems.obsidianFlask, 1);
 		ItemHandlerHelper.giveItemToPlayer(player, newStack);
 		return ActionResult.newResult(EnumActionResult.PASS, stack);
 	}

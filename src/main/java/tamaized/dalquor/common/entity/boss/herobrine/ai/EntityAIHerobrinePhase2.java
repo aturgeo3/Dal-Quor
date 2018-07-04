@@ -98,9 +98,9 @@ public class EntityAIHerobrinePhase2 extends EntityAIBase {
 		int nY = boss.getInitialPos().getY();
 		int nZ = (boss.getInitialPos().getZ() - 8) + randZ;
 		if (world.getTileEntity(new BlockPos(nX, nY, nZ)) == null) {
-			world.setBlockState(new BlockPos(nX, nY, nZ), ModBlocks.AIBlock.getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ModBlocks.AIBlock.getDefaultState());
-			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ModBlocks.AIBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY, nZ), ModBlocks.aiBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 1, nZ), ModBlocks.aiBlock.getDefaultState());
+			world.setBlockState(new BlockPos(nX, nY + 2, nZ), ModBlocks.aiBlock.getDefaultState());
 			TileEntityAIBlock b = (TileEntityAIBlock) world.getTileEntity(new BlockPos(nX, nY, nZ));
 			b.setup(null);
 			b.setEntity(boss);

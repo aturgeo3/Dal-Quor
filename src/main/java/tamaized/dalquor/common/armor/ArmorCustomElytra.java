@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.dalquor.registry.ModItems;
 import tamaized.tammodized.common.armors.TamArmor;
-import tamaized.dalquor.DalQuor;
 
 import javax.annotation.Nullable;
 
@@ -25,6 +25,7 @@ public class ArmorCustomElytra extends TamArmor {
 		this.setMaxDamage(432);
 		this.addPropertyOverride(new ResourceLocation("broken"), new IItemPropertyGetter() {
 
+			@Override
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				return ItemElytra.isUsable(stack) ? 0.0F : 1.0F;
@@ -38,11 +39,9 @@ public class ArmorCustomElytra extends TamArmor {
 		return stack.getItemDamage() < stack.getMaxDamage() - 1;
 	}
 
-	/**
-	 * Return whether this item is repairable in an anvil.
-	 */
+	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == DalQuor.items.voidcrystal;
+		return repair.getItem() == ModItems.voidcrystal;
 	}
 
 }

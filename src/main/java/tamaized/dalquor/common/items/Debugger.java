@@ -11,9 +11,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import tamaized.tammodized.common.items.TamItem;
 import tamaized.dalquor.common.world.SchematicLoader;
-import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
+import tamaized.tammodized.common.items.TamItem;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,8 +40,9 @@ public class Debugger extends TamItem {
 			entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
 			world.spawnEntity(entity);
 			new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand));*/
-			if (world.provider instanceof WorldProviderXia)
-				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+//			if (world.provider instanceof WorldProviderXia)
+//				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", sut, world, player.getPosition());
 		}
 		return super.onItemRightClick(world, player, hand);
 

@@ -3,8 +3,8 @@ package tamaized.dalquor.common.vademecum.progression;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +21,12 @@ public class RitualList {
 	}
 
 	public RitualList() {
-		map = new HashMap<IVadeMecumCapability.Category, ItemStack[]>();
+		map = new HashMap<>();
 		map.put(IVadeMecumCapability.Category.INTRO, new ItemStack[]{
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.ritualBlock), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ritualBlock), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
@@ -49,7 +49,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.MAGMA), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.COAL_BLOCK), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.GLOWSTONE),
+				new ItemStack(Blocks.COAL_BLOCK), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.GLOWSTONE),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.PRISMARINE, 1, 1), ItemStack.EMPTY,
 
@@ -72,7 +72,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.NETHERRACK), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.NETHERRACK),
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				new ItemStack(Blocks.NETHERRACK), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.NETHERRACK),
 
@@ -103,7 +103,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.MAGMA), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.MAGMA), ItemStack.EMPTY,
 
@@ -118,7 +118,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.ritualBlock), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ritualBlock), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
@@ -141,7 +141,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
@@ -164,7 +164,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
@@ -187,7 +187,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
-				new ItemStack(Blocks.MAGMA), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.MAGMA),
+				new ItemStack(Blocks.MAGMA), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.MAGMA),
 
 				new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA), new ItemStack(Blocks.MAGMA),
 
@@ -210,7 +210,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.SNOW), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.SNOW),
+				new ItemStack(Blocks.SNOW), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.SNOW),
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.SNOW), new ItemStack(Blocks.ICE),
 
@@ -241,7 +241,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.SNOW), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.SNOW), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.SNOW),
+				new ItemStack(Blocks.SNOW), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.SNOW),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.SNOW), ItemStack.EMPTY,
 
@@ -258,7 +258,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(DalQuor.blocks.ritualBlock),
+				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(ModBlocks.ritualBlock),
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
@@ -279,7 +279,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.ICE), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.ICE),
+				new ItemStack(Blocks.ICE), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.ICE),
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
@@ -302,7 +302,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.ICE), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.ICE),
+				new ItemStack(Blocks.ICE), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.ICE),
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
@@ -325,7 +325,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
-				new ItemStack(Blocks.ICE), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.ICE),
+				new ItemStack(Blocks.ICE), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.ICE),
 
 				new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE), new ItemStack(Blocks.ICE),
 
@@ -348,7 +348,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_BRICKS),
 
-				new ItemStack(Blocks.END_STONE), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_STONE),
+				new ItemStack(Blocks.END_STONE), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_STONE),
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.END_BRICKS),
 
@@ -379,7 +379,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.END_BRICKS), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.END_BRICKS), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
+				new ItemStack(Blocks.END_BRICKS), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.END_BRICKS), ItemStack.EMPTY,
 
@@ -394,7 +394,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.END_BRICKS), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.END_BRICKS), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
+				new ItemStack(Blocks.END_BRICKS), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.END_BRICKS), ItemStack.EMPTY,
 
@@ -417,7 +417,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
-				new ItemStack(Blocks.END_BRICKS), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
+				new ItemStack(Blocks.END_BRICKS), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
@@ -440,7 +440,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
-				new ItemStack(Blocks.END_BRICKS), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
+				new ItemStack(Blocks.END_BRICKS), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
@@ -463,7 +463,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
-				new ItemStack(Blocks.END_BRICKS), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
+				new ItemStack(Blocks.END_BRICKS), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.END_BRICKS),
 
 				new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS), new ItemStack(Blocks.END_BRICKS),
 
@@ -486,7 +486,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.STONE), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.STONE),
 
-				new ItemStack(Blocks.DIRT), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.DIRT),
+				new ItemStack(Blocks.DIRT), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.DIRT),
 
 				new ItemStack(Blocks.STONE), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.STONE),
 
@@ -517,7 +517,7 @@ public class RitualList {
 
 				ItemStack.EMPTY, new ItemStack(Blocks.STONE), ItemStack.EMPTY,
 
-				new ItemStack(Blocks.STONE), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.STONE),
+				new ItemStack(Blocks.STONE), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.STONE),
 
 				ItemStack.EMPTY, new ItemStack(Blocks.STONE), ItemStack.EMPTY,
 
@@ -532,7 +532,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.SLIME_BLOCK), ItemStack.EMPTY, new ItemStack(Blocks.SLIME_BLOCK),
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.ritualBlock), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ritualBlock), ItemStack.EMPTY,
 
 				new ItemStack(Blocks.SLIME_BLOCK), ItemStack.EMPTY, new ItemStack(Blocks.SLIME_BLOCK),
 
@@ -555,7 +555,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
-				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
+				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
@@ -578,7 +578,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
-				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
+				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
@@ -601,7 +601,7 @@ public class RitualList {
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
-				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
+				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(ModBlocks.ritualBlock), new ItemStack(Blocks.SLIME_BLOCK),
 
 				new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK), new ItemStack(Blocks.SLIME_BLOCK),
 
@@ -622,11 +622,11 @@ public class RitualList {
 				ItemStack.EMPTY, new ItemStack(Blocks.SLIME_BLOCK), ItemStack.EMPTY});
 		map.put(IVadeMecumCapability.Category.VoidicTouch, new ItemStack[]{
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
-				new ItemStack(DalQuor.blocks.blockVoidcrystal), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(DalQuor.blocks.blockVoidcrystal),
+				new ItemStack(ModBlocks.ethericPlatform), new ItemStack(ModBlocks.ritualBlock), new ItemStack(ModBlocks.ethericPlatform),
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
@@ -647,69 +647,69 @@ public class RitualList {
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
-				new ItemStack(DalQuor.blocks.blockVoidcrystal), new ItemStack(DalQuor.blocks.ritualBlock), new ItemStack(DalQuor.blocks.blockVoidcrystal),
+				new ItemStack(ModBlocks.ethericPlatform), new ItemStack(ModBlocks.ritualBlock), new ItemStack(ModBlocks.ethericPlatform),
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal),
+				new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform),
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal)});
+				new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform)});
 		map.put(IVadeMecumCapability.Category.Implosion, new ItemStack[]{
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY,
 
-				new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole),
+				new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole),
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY,
-
-				//////////////////////////////////////////////////////////////////////////////////////////
-
-				new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole),
-
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.ritualBlock), ItemStack.EMPTY,
-
-				new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole),
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY,
+				new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole),
 
-				new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole),
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ritualBlock), ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY});
+				new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole),
+
+				//////////////////////////////////////////////////////////////////////////////////////////
+
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY,
+
+				new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole),
+
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY});
 		map.put(IVadeMecumCapability.Category.SummonFireElemental, new ItemStack[]{
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.ritualBlock), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ritualBlock), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY,
 
-				new ItemStack(DalQuor.blocks.realityHole), new ItemStack(Items.LAVA_BUCKET), new ItemStack(DalQuor.blocks.realityHole),
+				new ItemStack(ModBlocks.realityHole), new ItemStack(Items.LAVA_BUCKET), new ItemStack(ModBlocks.realityHole),
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.realityHole), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.realityHole), ItemStack.EMPTY,
 
 				//////////////////////////////////////////////////////////////////////////////////////////
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY,
 
-				ItemStack.EMPTY, new ItemStack(DalQuor.blocks.blockVoidcrystal), ItemStack.EMPTY,
+				ItemStack.EMPTY, new ItemStack(ModBlocks.ethericPlatform), ItemStack.EMPTY,
 
 				ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY});
 	}

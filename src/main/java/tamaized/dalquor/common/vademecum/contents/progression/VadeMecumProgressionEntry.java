@@ -1,15 +1,15 @@
 package tamaized.dalquor.common.vademecum.contents.progression;
 
 import net.minecraft.item.ItemStack;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.VadeMecumGUI;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.vademecum.VadeMecumEntry;
 import tamaized.dalquor.proxy.ClientProxy;
+import tamaized.dalquor.registry.ModItems;
 
 public class VadeMecumProgressionEntry extends VadeMecumEntry {
 
-	public static enum Entry {
+	public enum Entry {
 		RitualBlocks, RitualList, Tome, InfusionControl, Potions, Voice, VoidicControl, ImprovedCasting, Empowerment, Tolerance, TotalControl, Dreams
 	}
 
@@ -25,7 +25,7 @@ public class VadeMecumProgressionEntry extends VadeMecumEntry {
 
 	public VadeMecumProgressionEntry() {
 		super("progressionMainEntry", "dalquor.VadeMecum.title.progression", null, null);
-		activeVade = new ItemStack(DalQuor.items.vadeMecum);
+		activeVade = new ItemStack(ModItems.vadeMecum);
 		activeVade.getCapability(CapabilityList.VADEMECUMITEM, null).setBookState(true);
 	}
 

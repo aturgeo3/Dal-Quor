@@ -110,7 +110,7 @@ public class VoidicInfusionCapabilityHandler implements IVoidicInfusionCapabilit
 			flag = false;
 		}
 		if ((entity.world.provider.getDimension() == ConfigHandler.dimensionIdVoid || override) && flag) {
-			if (!(entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == ModBlocks.blockVoidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.blockVoidBrickDoubleSlab)))
+			if (!(entity.onGround && (entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.voidbrick || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.voidBrickHalfSlab || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.voidstairs || entity.world.getBlockState(entity.getPosition().down(2)).getBlock() == ModBlocks.voidfence || entity.world.getBlockState(entity.getPosition().down()).getBlock() == ModBlocks.voidBrickDoubleSlab)))
 				infusion += gain;
 		} else {
 			infusion -= (vade != null && vade.hasPassive(IVadeMecumCapability.Passive.Vigor) ? 10 : 5);

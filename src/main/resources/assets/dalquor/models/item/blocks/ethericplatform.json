@@ -1,5 +1,5 @@
 {
-    "parent": "dalquor:block/blockVoidcrystal",
+    "parent": "dalquor:block/ethericplatform",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

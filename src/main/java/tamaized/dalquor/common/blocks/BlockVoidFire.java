@@ -25,7 +25,7 @@ public class BlockVoidFire extends TamBlockFire {
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != ModBlocks.blockVoidcrystal || !ModBlocks.blockPortalVoid.tryToCreatePortal(world, pos)) {
+		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() != ModBlocks.ethericPlatform || !ModBlocks.portalVoid.tryToCreatePortal(world, pos)) {
 			if (!world.isSideSolid(pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(world, pos)) {
 				world.setBlockToAir(pos);
 			} else {
@@ -62,12 +62,12 @@ public class BlockVoidFire extends TamBlockFire {
 
 	@Override
 	protected boolean canBeOnBlock(IBlockState state) {
-		return state.getBlock() == ModBlocks.blockVoidcrystal;
+		return state.getBlock() == ModBlocks.ethericPlatform;
 	}
 
 	@Override
 	protected boolean isFireSource(IBlockState state) {
-		return state.getBlock() == ModBlocks.blockVoidbrick;
+		return state.getBlock() == ModBlocks.voidbrick;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class ModCreativeTabs {
 	public static CreativeTabs tabVoid = new CreativeTabs("tabVoid") {
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ModBlocks.blockPortalVoid);
+			return new ItemStack(ModBlocks.portalVoid);
 		}
 	};
 

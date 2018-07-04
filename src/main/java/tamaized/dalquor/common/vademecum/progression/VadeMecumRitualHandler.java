@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class VadeMecumRitualHandler {
 
 	public static void invokeRitual(EntityPlayer player, World world, BlockPos pos) {
 		IVadeMecumCapability cap = player.getCapability(CapabilityList.VADEMECUM, null);
-		if (cap == null || world.getBlockState(pos).getBlock() != DalQuor.blocks.ritualBlock)
+		if (cap == null || world.getBlockState(pos).getBlock() != ModBlocks.ritualBlock)
 			return;
 		IVadeMecumCapability.Category category = getRitual(cap, world, pos, true);
 		if (category == null || category == IVadeMecumCapability.Category.NULL) {
@@ -39,7 +40,7 @@ public class VadeMecumRitualHandler {
 	}
 
 	public static ArrayList<IVadeMecumCapability.Category> getAvailiableRituals(IVadeMecumCapability cap) {
-		ArrayList<IVadeMecumCapability.Category> list = new ArrayList<IVadeMecumCapability.Category>();
+		ArrayList<IVadeMecumCapability.Category> list = new ArrayList<>();
 		if (cap.getObtainedCategories().isEmpty()) {
 			list.add(IVadeMecumCapability.Category.INTRO);
 		} else {

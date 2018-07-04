@@ -17,7 +17,7 @@ public class VadeMecumMeshDefinition implements ItemMeshDefinition {
 	public static void preRegister() {
 		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vademecum, 0, closed);
 		//ModelLoader.setCustomModelResourceLocation(voidCraft.items.vademecum, 0, open);
-		ModelBakery.registerItemVariants(DalQuor.items.vadeMecum, closed, open);
+		ModelBakery.registerItemVariants(ModItems.vadeMecum, closed, open);
 		//ModelBakery.registerItemVariants(voidCraft.items.vademecum, open);
 	}
 

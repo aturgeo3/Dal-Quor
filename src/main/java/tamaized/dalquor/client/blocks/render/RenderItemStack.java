@@ -14,7 +14,7 @@ public class RenderItemStack extends TileEntityItemStackRenderer {
 	@Override
 	public void renderByItem(ItemStack itemStack) {
 		Block block = Block.getBlockFromItem(itemStack.getItem());
-		if (block == ModBlocks.blockNoBreak) {
+		if (block == ModBlocks.noBreak) {
 			TileEntityRendererDispatcher.instance.render(noBreakInstance, 0.0D, 0.0D, 0.0D, 0.0F);
 		} else {
 			super.renderByItem(itemStack);

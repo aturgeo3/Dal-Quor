@@ -95,7 +95,7 @@ public class TileEntityAIBlock extends TamTileEntity {
 			}
 			if (oldState != state) {
 				oldState = state;
-				world.setBlockState(pos, ModBlocks.AIBlock.getDefaultState().withProperty(AIBlock.STATE, state));
+				world.setBlockState(pos, ModBlocks.aiBlock.getDefaultState().withProperty(AIBlock.STATE, state));
 			}
 		}
 	}

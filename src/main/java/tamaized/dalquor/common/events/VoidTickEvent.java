@@ -1,5 +1,6 @@
 package tamaized.dalquor.common.events;
 
+import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +23,6 @@ import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.vadeMecum.IVadeMecumCapability;
 import tamaized.dalquor.common.handlers.ConfigHandler;
@@ -30,8 +30,9 @@ import tamaized.dalquor.common.world.dim.dalquor.TeleporterDream;
 import tamaized.dalquor.common.world.dim.thevoid.ChunkProviderVoid;
 import tamaized.dalquor.common.world.dim.xia.TeleporterXia;
 import tamaized.dalquor.common.world.dim.xia.WorldProviderXia;
+import tamaized.dalquor.registry.ModItems;
 
-import java.util.Iterator;
+import java.util.List;
 
 public class VoidTickEvent {
 
@@ -59,9 +60,8 @@ public class VoidTickEvent {
 		player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
 		mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
 		mcServer.getPlayerList().syncPlayerInventory(player);
-		Iterator iterator = player.getActivePotionEffects().iterator();
-		while (iterator.hasNext()) {
-			PotionEffect potioneffect = (PotionEffect) iterator.next();
+		List<PotionEffect> snapshot = Lists.newArrayList(player.getActivePotionEffects());
+		for (PotionEffect potioneffect : snapshot) {
 			player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
 		}
 		FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, j, dimId);
@@ -100,7 +100,7 @@ public class VoidTickEvent {
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent e) {
 
-		if (e.phase == e.phase.END)
+		if (e.phase == TickEvent.Phase.END)
 			return;
 
 		World world = e.player.world;
@@ -109,7 +109,7 @@ public class VoidTickEvent {
 			IVadeMecumCapability cap = e.player.getCapability(CapabilityList.VADEMECUM, null);
 
 			if (cap.hasCategory(IVadeMecumCapability.Category.VoidicControl) && cap.hasCategory(IVadeMecumCapability.Category.ImprovedCasting) && !cap.hasCategory(IVadeMecumCapability.Category.Empowerment)) {
-				if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == DalQuor.items.voidStar) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == DalQuor.items.voidStar)) {
+				if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.voidStar) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == ModItems.voidStar)) {
 					cap.addCategory(e.player, IVadeMecumCapability.Category.Empowerment);
 					cap.addCategory(e.player, IVadeMecumCapability.Category.Invoke);
 				}
@@ -125,7 +125,7 @@ public class VoidTickEvent {
 						}
 					}
 					if (cap.hasCategory(IVadeMecumCapability.Category.Tolerance) && !cap.hasCategory(IVadeMecumCapability.Category.TotalControl)) {
-						if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == DalQuor.items.astralEssence) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == DalQuor.items.astralEssence)) {
+						if ((!e.player.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && e.player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.astralEssence) || (!e.player.getHeldItem(EnumHand.OFF_HAND).isEmpty() && e.player.getHeldItem(EnumHand.OFF_HAND).getItem() == ModItems.astralEssence)) {
 							cap.addCategory(e.player, IVadeMecumCapability.Category.TotalControl);
 						}
 					}
@@ -168,7 +168,7 @@ public class VoidTickEvent {
 
 	}
 
-	public void forcePlayerTeleportFromXia(EntityPlayerMP player) {
+	private void forcePlayerTeleportFromXia(EntityPlayerMP player) {
 		transferPlayerToDimension(player.mcServer, player, 0, new TeleportLoc(new TeleporterXia(player.mcServer.getWorld(0))));
 	}
 
@@ -177,12 +177,12 @@ public class VoidTickEvent {
 		public final Teleporter teleporter;
 		public final BlockPos pos;
 
-		public TeleportLoc(Teleporter tele) {
+		TeleportLoc(Teleporter tele) {
 			pos = null;
 			teleporter = tele;
 		}
 
-		public TeleportLoc(BlockPos p) {
+		TeleportLoc(BlockPos p) {
 			teleporter = null;
 			pos = p;
 		}

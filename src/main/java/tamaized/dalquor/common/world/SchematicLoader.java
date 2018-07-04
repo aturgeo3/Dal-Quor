@@ -1,6 +1,7 @@
 package tamaized.dalquor.common.world;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class SchematicLoader {
 
 	public Schematic get(String schemname) {
@@ -30,7 +32,7 @@ public class SchematicLoader {
 
 			boolean extra = false;
 			byte extraBlocks[] = null;
-			byte extraBlocksNibble[] = null;
+			byte extraBlocksNibble[];
 			if (nbtdata.hasKey("AddBlocks")) {
 				extra = true;
 				extraBlocksNibble = nbtdata.getByteArray("AddBlocks");
@@ -50,11 +52,11 @@ public class SchematicLoader {
 			NBTTagList tileentities = nbtdata.getTagList("TileEntities", 10);
 			is.close();
 
-			Map<Short, Block> mappings = new HashMap<Short, Block>();
+			Map<Short, Block> mappings = new HashMap<>();
 
 			if (ctMapping != null) {
 				for (String key : ctMapping.getKeySet()) {
-					Block b = Block.getBlockFromName(key);
+					Block b = key.equals("dalquor:fakebedrock") ? Blocks.BEDROCK : Block.getBlockFromName(key);
 					if (b == null)
 						continue;
 					mappings.put(ctMapping.getShort(key), b);
@@ -85,7 +87,7 @@ public class SchematicLoader {
 						// System.out.println(id+" : "+b+" : "+meta+" : "+(cx + x + 1)+":"+(cy + y)+":"+(cz + z + 1));
 						world.setBlockState(new BlockPos(cx + x + 1, cy + y, cz + z + 1), b.getStateFromMeta(meta), 2);
 					} else {
-						world.setBlockToAir(new BlockPos(cx + x + 1, cy + y, cz + z + 1));
+//						world.setBlockToAir(new BlockPos(cx + x + 1, cy + y, cz + z + 1));
 					}
 					i++;
 				}
@@ -95,7 +97,7 @@ public class SchematicLoader {
 
 	public class Schematic {
 
-		private final Map<Short, Block> blockMap = new HashMap<Short, Block>();
+		private final Map<Short, Block> blockMap = new HashMap<>();
 		public final NBTTagList tileentities;
 		public final short width;
 		public final short height;

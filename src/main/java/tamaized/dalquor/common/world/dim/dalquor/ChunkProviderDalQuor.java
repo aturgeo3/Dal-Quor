@@ -86,7 +86,7 @@ public class ChunkProviderDalQuor implements IChunkGenerator {
 		if (biome == ModBiomes.biomeDreamEnd)
 			return new IBlockState[]{Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState(), Blocks.END_STONE.getDefaultState()};
 		if (biome == ModBiomes.biomeDreamVoid) {
-			return new IBlockState[]{ModBlocks.blockVoidcrystal.getDefaultState(), ModBlocks.blockVoidcrystal.getDefaultState(), ModBlocks.blockVoidcrystal.getDefaultState()};
+			return new IBlockState[]{ModBlocks.ethericPlatform.getDefaultState(), ModBlocks.ethericPlatform.getDefaultState(), ModBlocks.ethericPlatform.getDefaultState()};
 		} else
 			return new IBlockState[]{Blocks.GRASS.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.STONE.getDefaultState()};
 	}

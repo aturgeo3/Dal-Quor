@@ -189,7 +189,7 @@ public class ClientProxy extends CommonProxy {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNoBreak.class, new RenderNoBreak());
 
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.blockNoBreak), 0, TileEntityNoBreak.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.noBreak), 0, TileEntityNoBreak.class);
 
 		MinecraftForge.EVENT_BUS.register(new BGMusic());
 	}

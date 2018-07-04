@@ -205,12 +205,12 @@ public class DalQuor extends TamModBase {
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(modid);
 		NetworkMessages.register(network);
 
-		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler.class);
-		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler.class);
-		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler.class);
-		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler.class);
-		CapabilityManager.INSTANCE.register(IVoidicPowerCapability.class, new VoidicPowerCapabilityStorage(), VoidicPowerCapabilityHandler.class);
-		CapabilityManager.INSTANCE.register(IStarForgeCapability.class, new StarForgeCapabilityStorage(), StarForgeCapabilityHandler.class);
+		CapabilityManager.INSTANCE.register(IVoidicInfusionCapability.class, new VoidicInfusionCapabilityStorage(), VoidicInfusionCapabilityHandler::new);
+		CapabilityManager.INSTANCE.register(IVadeMecumCapability.class, new VadeMecumCapabilityStorage(), VadeMecumCapabilityHandler::new);
+		CapabilityManager.INSTANCE.register(IVadeMecumItemCapability.class, new VadeMecumItemCapabilityStorage(), VadeMecumItemCapabilityHandler::new);
+		CapabilityManager.INSTANCE.register(IElytraFlyingCapability.class, new ElytraFlyingCapabilityStorage(), ElytraFlyingCapabilityHandler::new);
+		CapabilityManager.INSTANCE.register(IVoidicPowerCapability.class, new VoidicPowerCapabilityStorage(), VoidicPowerCapabilityHandler::new);
+		CapabilityManager.INSTANCE.register(IStarForgeCapability.class, new StarForgeCapabilityStorage(), StarForgeCapabilityHandler::new);
 		MinecraftForge.EVENT_BUS.register(new tamaized.dalquor.common.capabilities.EventHandler());
 
 	}
@@ -249,8 +249,8 @@ public class DalQuor extends TamModBase {
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdXia, DimensionType.register("???", "_xia", ConfigHandler.dimensionIdXia, WorldProviderXia.class, false));
 		DimensionManager.registerDimension(ConfigHandler.dimensionIdDalQuor, DimensionType.register("Dal Quor", "_dalquor", ConfigHandler.dimensionIdDalQuor, WorldProviderDalQuor.class, false));
 
-		PortalHandlerRegistry.register(ModBlocks.blockPortalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
-		PortalHandlerRegistry.register(ModBlocks.blockPortalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
+		PortalHandlerRegistry.register(ModBlocks.portalVoid, ConfigHandler.dimensionIdVoid, TeleporterVoid.class);
+		PortalHandlerRegistry.register(ModBlocks.portalXia, ConfigHandler.dimensionIdXia, TeleporterXia.class);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorVoid(), 0);
 		new WorldType(modid + "_void") {

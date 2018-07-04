@@ -224,7 +224,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 							for (int l2 = 0; l2 < 4; ++l2) {
 								if ((lvt_45_1_ += d16) > 0.0D && i2 * 8 + j2 < 128) {
-									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, (flag) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.blockVoidcrystal.getDefaultState());
+									primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, (flag) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.ethericPlatform.getDefaultState());
 								} else if (i2 * 8 + j2 < seaLevel) {
 									//primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.AIR.getDefaultState());
 								}
@@ -271,7 +271,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		genFortress.generateStructure(world, rand, chunkpos);
 		genCity.generateStructure(world, rand, chunkpos);
 		int k1;
-		WorldGenMinable genCrystalOre = new WorldGenMinable(ModBlocks.oreVoidcrystal.getDefaultState(), 5, input -> (input == ModBlocks.blockVoidcrystal.getDefaultState()));
+		WorldGenMinable genCrystalOre = new WorldGenMinable(ModBlocks.oreVoidcrystal.getDefaultState(), 5, input -> (input == ModBlocks.ethericPlatform.getDefaultState()));
 		if (ConfigHandler.generate_VoidOre) {
 			for (k1 = 0; k1 < 16; ++k1) {
 				genCrystalOre.generate(world, rand, blockpos.add(rand.nextInt(16), rand.nextInt(200) + 50, rand.nextInt(16)));
@@ -281,7 +281,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		new WorldGenLakes(ModBlocks.realityHole).generate(world, rand, blockpos.add(rand.nextInt(16) + 8, rand.nextInt(100) + 20, rand.nextInt(16) + 8));
 		{
 			BlockPos pos = blockpos.add(rand.nextInt(16) + 8, rand.nextInt(100) + 20, rand.nextInt(16) + 8);
-			if (world.getBlockState(pos).getBlock() == ModBlocks.blockVoidcrystal)
+			if (world.getBlockState(pos).getBlock() == ModBlocks.ethericPlatform)
 				world.setBlockState(pos, ModFluids.arcaneSludgeFluidBlock.getDefaultState(), 2);
 		}
 		BlockFalling.fallInstantly = false;
@@ -301,14 +301,14 @@ public class ChunkProviderVoid implements IChunkGenerator {
 				// if(par1EnumCreatureType == EnumCreatureType.creature) return genTest.getSpawnList();
 			}
 		}
-		if (genFortress.isPositionInStructure(world, pos) && world.getBlockState(pos.down()).getBlock() == ModBlocks.blockVoidbrick) {
+		if (genFortress.isPositionInStructure(world, pos) && world.getBlockState(pos.down()).getBlock() == ModBlocks.voidbrick) {
 			if (Math.floor(Math.random() * 40) == 0)
 				return genFortress.getSpawnList();
 			// if(par1EnumCreatureType == EnumCreatureType.creature) return genTest.getSpawnList();
 		}
 		if (pos.getY() >= 128) {
 			IBlockState state = world.getBlockState(pos.down());
-			if (state != null && state.getBlock() == ModBlocks.blockVoidbrick && world.rand.nextInt(5) == 0) {
+			if (state != null && state.getBlock() == ModBlocks.voidbrick && world.rand.nextInt(5) == 0) {
 				return genCity.getSpawnList();
 			}
 		}

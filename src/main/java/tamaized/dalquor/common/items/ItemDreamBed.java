@@ -14,8 +14,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import tamaized.dalquor.registry.ModBlocks;
 import tamaized.tammodized.common.items.TamItem;
-import tamaized.dalquor.DalQuor;
 
 public class ItemDreamBed extends TamItem {
 
@@ -23,6 +23,7 @@ public class ItemDreamBed extends TamItem {
 		super(tab, n, 1);
 	}
 
+	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (worldIn.isRemote) {
 			return EnumActionResult.SUCCESS;
@@ -48,14 +49,17 @@ public class ItemDreamBed extends TamItem {
 				boolean flag2 = flag || worldIn.isAirBlock(pos);
 				boolean flag3 = flag1 || worldIn.isAirBlock(blockpos);
 
-				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isTopSolid() && worldIn.getBlockState(blockpos.down()).isTopSolid()) {
-					IBlockState iblockstate2 = DalQuor.blocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+				BlockPos posdown = pos.down();
+				BlockPos blockposdown = blockpos.down();
+
+				if (flag2 && flag3 && worldIn.getBlockState(posdown).isSideSolid(worldIn, posdown, EnumFacing.UP) && worldIn.getBlockState(blockposdown).isSideSolid(worldIn, blockposdown, EnumFacing.UP)) {
+					IBlockState iblockstate2 = ModBlocks.dreamBed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 					worldIn.setBlockState(pos, iblockstate2, 10);
 					worldIn.setBlockState(blockpos, iblockstate2.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
 					worldIn.notifyNeighborsRespectDebug(pos, block, false);
 					worldIn.notifyNeighborsRespectDebug(blockpos, iblockstate1.getBlock(), false);
 					SoundType soundtype = iblockstate2.getBlock().getSoundType(iblockstate2, worldIn, pos, player);
-					worldIn.playSound((EntityPlayer) null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+					worldIn.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 					itemstack.shrink(1);
 					return EnumActionResult.SUCCESS;
 				} else {

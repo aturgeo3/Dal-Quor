@@ -5,21 +5,23 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.tammodized.common.blocks.TamBlock;
-import tamaized.dalquor.registry.ModItems;
 
 import java.util.Random;
 
-public class BlockVoidcrystal extends TamBlock {
+public class BlockEthericPlatform extends TamBlock {
 
-	public BlockVoidcrystal(CreativeTabs tab, Material material, String n, float hardness) {
+	public BlockEthericPlatform(CreativeTabs tab, Material material, String n, float hardness) {
 		super(tab, material, n, hardness, SoundType.GLASS);
 	}
 
@@ -34,18 +36,18 @@ public class BlockVoidcrystal extends TamBlock {
 	}
 
 	@Override
-	protected boolean canSilkHarvest() {
-		return true;
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		return false;
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ModItems.voidcrystal;
+		return Items.AIR;
 	}
 
 	@Override
 	public int quantityDropped(Random random) {
-		return 9;
+		return 0;
 	}
 
 	@Override

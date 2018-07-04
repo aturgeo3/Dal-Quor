@@ -17,16 +17,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tamaized.dalquor.registry.ModBlocks;
 import tamaized.tammodized.common.blocks.TamBlockPortal;
-import tamaized.dalquor.DalQuor;
 
 import java.util.Random;
 
 public class BlockPortalVoid extends TamBlockPortal {
 
-	protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
-	protected static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
-	protected static final AxisAlignedBB Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
+	private static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
+	private static final AxisAlignedBB Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
+	private static final AxisAlignedBB Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
 
 	public BlockPortalVoid(CreativeTabs tab, String n) {
 		super(tab, n, true, SoundType.GLASS);
@@ -58,7 +58,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos p_189540_5_) {
-		EnumFacing.Axis enumfacing$axis = (EnumFacing.Axis) state.getValue(AXIS);
+		EnumFacing.Axis enumfacing$axis = state.getValue(AXIS);
 
 		if (enumfacing$axis == EnumFacing.Axis.X) {
 			BlockPortalVoid.Size blockportal$size = new BlockPortalVoid.Size(world, pos, EnumFacing.Axis.X);
@@ -77,7 +77,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		switch ((EnumFacing.Axis) state.getValue(AXIS)) {
+		switch (state.getValue(AXIS)) {
 			case X:
 				return X_AABB;
 			case Y:
@@ -88,13 +88,10 @@ public class BlockPortalVoid extends TamBlockPortal {
 		}
 	}
 
-	/**
-	 * A randomly called display update to be able to add particles or other items for display
-	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		int x = pos.getX();
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) { // TODO
+		/*int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 		for (int l = 0; l < 4; ++l) {
@@ -117,10 +114,9 @@ public class BlockPortalVoid extends TamBlockPortal {
 				d5 = (double) (rand.nextFloat() * 2.0F * (float) i1);
 			}
 
-			// par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
-			// Minecraft.getMinecraft().effectRenderer.addEffect(new
-			// TestFX(par1World, d0, d1, d2));
-		}
+			 par1World.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
+			 Minecraft.getMinecraft().effectRenderer.addEffect(new TestFX(par1World, d0, d1, d2));
+		}*/
 	}
 
 	@Override
@@ -138,7 +134,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 		EnumFacing.Axis enumfacing$axis = null;
 
 		if (blockState.getBlock() == this) {
-			enumfacing$axis = (EnumFacing.Axis) blockState.getValue(AXIS);
+			enumfacing$axis = blockState.getValue(AXIS);
 
 			if (enumfacing$axis == null) {
 				return false;
@@ -159,7 +155,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 		boolean flag3 = blockAccess.getBlockState(pos.south()).getBlock() == this && blockAccess.getBlockState(pos.south(2)).getBlock() != this;
 		boolean flag4 = flag || flag1 || enumfacing$axis == EnumFacing.Axis.X;
 		boolean flag5 = flag2 || flag3 || enumfacing$axis == EnumFacing.Axis.Z;
-		return flag4 && side == EnumFacing.WEST ? true : (flag4 && side == EnumFacing.EAST ? true : (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
+		return flag4 && side == EnumFacing.WEST || (flag4 && side == EnumFacing.EAST || (flag5 && side == EnumFacing.NORTH || flag5 && side == EnumFacing.SOUTH));
 	}
 
 	public BlockPattern.PatternHelper createPatternHelper(World p_181089_1_, BlockPos p_181089_2_) {
@@ -227,8 +223,9 @@ public class BlockPortalVoid extends TamBlockPortal {
 				rightDir = EnumFacing.SOUTH;
 			}
 
-			for (BlockPos blockpos = p_i45694_2_; p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock()); p_i45694_2_ = p_i45694_2_.down()) {
-				;
+			BlockPos blockpos = p_i45694_2_;
+			while (p_i45694_2_.getY() > blockpos.getY() - 21 && p_i45694_2_.getY() > 0 && isEmptyBlock(worldIn.getBlockState(p_i45694_2_.down()).getBlock())) {
+				p_i45694_2_ = p_i45694_2_.down();
 			}
 
 			int i = getDistanceUntilEdge(p_i45694_2_, leftDir) - 1;
@@ -248,30 +245,30 @@ public class BlockPortalVoid extends TamBlockPortal {
 			}
 		}
 
-		protected int getDistanceUntilEdge(BlockPos p_180120_1_, EnumFacing p_180120_2_) {
+		int getDistanceUntilEdge(BlockPos p_180120_1_, EnumFacing p_180120_2_) {
 			int i;
 
 			for (i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
 
-				if (!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != DalQuor.blocks.blockVoidcrystal) {
+				if (!isEmptyBlock(world.getBlockState(blockpos).getBlock()) || world.getBlockState(blockpos.down()).getBlock() != ModBlocks.ethericPlatform) {
 					break;
 				}
 			}
 
 			Block block = world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return block == DalQuor.blocks.blockVoidcrystal ? i : 0;
+			return block == ModBlocks.ethericPlatform ? i : 0;
 		}
 
-		public int func_181100_a() {
+		int func_181100_a() {
 			return height;
 		}
 
-		public int func_181101_b() {
+		int func_181101_b() {
 			return width;
 		}
 
-		protected int func_150858_a() {
+		int func_150858_a() {
 			label24:
 
 			for (height = 0; height < 21; ++height) {
@@ -283,20 +280,20 @@ public class BlockPortalVoid extends TamBlockPortal {
 						break label24;
 					}
 
-					if (block == DalQuor.blocks.blockPortalVoid) {
+					if (block == ModBlocks.portalVoid) {
 						++portalBlockCount;
 					}
 
 					if (i == 0) {
 						block = world.getBlockState(blockpos.offset(leftDir)).getBlock();
 
-						if (block != DalQuor.blocks.blockVoidcrystal) {
+						if (block != ModBlocks.ethericPlatform) {
 							break label24;
 						}
 					} else if (i == width - 1) {
 						block = world.getBlockState(blockpos.offset(rightDir)).getBlock();
 
-						if (block != DalQuor.blocks.blockVoidcrystal) {
+						if (block != ModBlocks.ethericPlatform) {
 							break label24;
 						}
 					}
@@ -304,7 +301,7 @@ public class BlockPortalVoid extends TamBlockPortal {
 			}
 
 			for (int j = 0; j < width; ++j) {
-				if (world.getBlockState(bottomLeft.offset(rightDir, j).up(height)).getBlock() != DalQuor.blocks.blockVoidcrystal) {
+				if (world.getBlockState(bottomLeft.offset(rightDir, j).up(height)).getBlock() != ModBlocks.ethericPlatform) {
 					height = 0;
 					break;
 				}
@@ -320,20 +317,20 @@ public class BlockPortalVoid extends TamBlockPortal {
 			}
 		}
 
-		protected boolean isEmptyBlock(Block blockIn) {
-			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == DalQuor.blocks.blockVoidFire || blockIn == DalQuor.blocks.blockPortalVoid;
+		boolean isEmptyBlock(Block blockIn) {
+			return blockIn.getDefaultState().getMaterial() == Material.AIR || blockIn == ModBlocks.voidFire || blockIn == ModBlocks.portalVoid;
 		}
 
 		public boolean isValid() {
 			return bottomLeft != null && width >= 2 && width <= 21 && height >= 3 && height <= 21;
 		}
 
-		public void placePortalBlocks() {
+		void placePortalBlocks() {
 			for (int i = 0; i < width; ++i) {
 				BlockPos blockpos = bottomLeft.offset(rightDir, i);
 
 				for (int j = 0; j < height; ++j) {
-					world.setBlockState(blockpos.up(j), DalQuor.blocks.blockPortalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, axis), 2);
+					world.setBlockState(blockpos.up(j), ModBlocks.portalVoid.getDefaultState().withProperty(BlockPortalVoid.AXIS, axis), 2);
 				}
 			}
 		}

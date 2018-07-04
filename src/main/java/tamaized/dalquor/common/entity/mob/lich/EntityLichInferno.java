@@ -5,8 +5,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.blocks.BlockVoidFire;
+import tamaized.dalquor.registry.ModBlocks;
 
 public class EntityLichInferno extends Entity {
 
@@ -101,7 +101,7 @@ public class EntityLichInferno extends Entity {
 	private void placeFireAt(BlockPos pos) {
 		IBlockState state = world.getBlockState(pos);
 		if (state == null || state.getBlock().isReplaceable(world, pos)) {
-			world.setBlockState(pos, DalQuor.blocks.blockVoidFire.getDefaultState());
+			world.setBlockState(pos, ModBlocks.voidFire.getDefaultState());
 		}
 	}
 

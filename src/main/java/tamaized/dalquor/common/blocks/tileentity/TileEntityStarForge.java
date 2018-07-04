@@ -5,8 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
-import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.gui.element.GUIListElement;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
@@ -15,7 +13,10 @@ import tamaized.dalquor.common.starforge.StarForgeEffectEntry;
 import tamaized.dalquor.common.starforge.StarForgeEffectRecipeList;
 import tamaized.dalquor.common.starforge.StarForgeToolEntry;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
+import tamaized.dalquor.registry.ModBlocks;
+import tamaized.dalquor.registry.ModItems;
 import tamaized.dalquor.registry.ModTools;
+import tamaized.tammodized.common.tileentity.TamTileEntityInventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +38,17 @@ public class TileEntityStarForge extends TamTileEntityInventory {
 	protected ItemStackFilterHandler[] register() {
 		return new ItemStackFilterHandler[]{
 
-				SLOT_INPUT_TOOL = new ItemStackFilterHandler(new Class[]{IStarForgeTool.class}, true, new Class[]{}, false),
+				SLOT_INPUT_TOOL = new ItemStackFilterHandler(new Class[]{IStarForgeTool.class}, true, new Class[0], false),
 
-				SLOT_INPUT_COSMICMATERIAL = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.blocks.cosmicMaterial)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_COSMICMATERIAL = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(ModBlocks.cosmicMaterial)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_DRAGONSCALE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.voidicDragonScale)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_DRAGONSCALE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(ModItems.voidicDragonScale)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_QUORIFRAGMENT = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.quoriFragment)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_QUORIFRAGMENT = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(ModItems.quoriFragment)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_ASTRALESSENCE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.astralEssence)}, true, new ItemStack[]{}, false),
+				SLOT_INPUT_ASTRALESSENCE = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(ModItems.astralEssence)}, true, new ItemStack[]{}, false),
 
-				SLOT_INPUT_VOIDICPHLOG = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(DalQuor.items.voidicPhlogiston)}, true, new ItemStack[]{}, false)
+				SLOT_INPUT_VOIDICPHLOG = new ItemStackFilterHandler(new ItemStack[]{new ItemStack(ModItems.voidicPhlogiston)}, true, new ItemStack[]{}, false)
 
 		};
 	}

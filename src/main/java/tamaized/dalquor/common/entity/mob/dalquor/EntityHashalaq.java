@@ -2,14 +2,21 @@ package tamaized.dalquor.common.entity.mob.dalquor;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityHashalaq extends EntityMob {
 
@@ -63,7 +70,7 @@ public class EntityHashalaq extends EntityMob {
 
 	@Override
 	protected Item getDropItem() {
-		return DalQuor.items.quoriFragment;
+		return ModItems.quoriFragment;
 	}
 
 }

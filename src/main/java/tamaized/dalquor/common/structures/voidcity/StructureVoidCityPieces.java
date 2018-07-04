@@ -22,6 +22,7 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import tamaized.dalquor.DalQuor;
+import tamaized.dalquor.registry.ModItems;
 
 import java.util.List;
 import java.util.Random;
@@ -305,7 +306,7 @@ public class StructureVoidCityPieces {
 				//p_186175_3_.spawnEntity(entityshulker);
 			} else if (p_186175_1_.startsWith("Elytra")) {
 				EntityItemFrame entityitemframe = new EntityItemFrame(p_186175_3_, p_186175_2_, this.rotation.rotate(EnumFacing.SOUTH));
-				entityitemframe.setDisplayedItem(new ItemStack(DalQuor.items.astralEssence));
+				entityitemframe.setDisplayedItem(new ItemStack(ModItems.astralEssence));
 				p_186175_3_.spawnEntity(entityitemframe);
 			}
 		}

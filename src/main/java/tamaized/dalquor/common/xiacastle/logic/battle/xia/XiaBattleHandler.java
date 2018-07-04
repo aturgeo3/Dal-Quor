@@ -48,7 +48,7 @@ public class XiaBattleHandler implements IBattleHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				worldObj.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.blockNoBreak.getDefaultState());
+				worldObj.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.noBreak.getDefaultState());
 			}
 		}
 		isDone = false;

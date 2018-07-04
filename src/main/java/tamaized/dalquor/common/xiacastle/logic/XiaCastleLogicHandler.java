@@ -150,7 +150,7 @@ public class XiaCastleLogicHandler {
 		TileEntityAIBlock ai2;
 		if (!(te1 instanceof TileEntityAIBlock)) {
 			world.setBlockToAir(pos1);
-			world.setBlockState(pos1, ModBlocks.AIBlock.getDefaultState());
+			world.setBlockState(pos1, ModBlocks.aiBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 			ai1.setFake();
 		} else {
@@ -158,7 +158,7 @@ public class XiaCastleLogicHandler {
 		}
 		if (!(te2 instanceof TileEntityAIBlock)) {
 			world.setBlockToAir(pos2);
-			world.setBlockState(pos2, ModBlocks.AIBlock.getDefaultState());
+			world.setBlockState(pos2, ModBlocks.aiBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 			ai2.setFake();
 		} else {
@@ -246,7 +246,7 @@ public class XiaCastleLogicHandler {
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {
-				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.blockNoBreak.getDefaultState());
+				world.setBlockState(doorPos.add(x, y, 0), (x == 0 || x == -4 || y == 0 || y == 3) ? ModBlocks.realityHole.getDefaultState() : ModBlocks.noBreak.getDefaultState());
 			}
 		}
 		xiaDoorOpen = false;

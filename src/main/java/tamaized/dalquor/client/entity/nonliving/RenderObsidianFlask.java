@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.nonliving.EntityObsidianFlask;
+import tamaized.dalquor.registry.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class RenderObsidianFlask<T extends EntityObsidianFlask> extends Render<T> {
@@ -51,27 +51,27 @@ public class RenderObsidianFlask<T extends EntityObsidianFlask> extends Render<T
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
-	public ItemStack getStackToRender(T e) {
-		Item item = null;
+	private ItemStack getStackToRender(T e) {
+		Item item;
 		switch (e.getType()) {
 			default:
 			case Normal:
-				item = DalQuor.items.obsidianFlask;
+				item = ModItems.obsidianFlask;
 				break;
 			case Fire:
-				item = DalQuor.items.obsidianFlaskFire;
+				item = ModItems.obsidianFlaskFire;
 				break;
 			case Freeze:
-				item = DalQuor.items.obsidianFlaskFreeze;
+				item = ModItems.obsidianFlaskFreeze;
 				break;
 			case Shock:
-				item = DalQuor.items.obsidianFlaskShock;
+				item = ModItems.obsidianFlaskShock;
 				break;
 			case Acid:
-				item = DalQuor.items.obsidianFlaskAcid;
+				item = ModItems.obsidianFlaskAcid;
 				break;
 			case Void:
-				item = DalQuor.items.obsidianFlaskVoid;
+				item = ModItems.obsidianFlaskVoid;
 				break;
 		}
 		return new ItemStack(item);

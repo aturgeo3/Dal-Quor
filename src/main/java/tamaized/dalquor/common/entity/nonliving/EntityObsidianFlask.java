@@ -56,7 +56,7 @@ public class EntityObsidianFlask extends EntityThrowable implements IEntityAddit
 				case Normal: {
 					world.newExplosion(null, this.posX, this.posY, this.posZ, 0, true, true);
 					if (world.isAirBlock(pos))
-						world.setBlockState(pos, ModBlocks.blockVoidFire.getDefaultState());
+						world.setBlockState(pos, ModBlocks.voidFire.getDefaultState());
 					break;
 				}
 				case Fire: {

@@ -3,18 +3,32 @@ package tamaized.dalquor.common.entity.mob;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBreakDoor;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityShulker;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.entity.EntityVoidMob;
 import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineCreeper;
 import tamaized.dalquor.common.sound.VoidSoundEvents;
+import tamaized.dalquor.registry.ModItems;
 
 public class EntityMobWraith extends EntityVoidMob implements IMob {
 
@@ -90,7 +104,7 @@ public class EntityMobWraith extends EntityVoidMob implements IMob {
 
 	@Override
 	protected Item getDropItem() {
-		return DalQuor.items.ectoplasm;
+		return ModItems.ectoplasm;
 	}
 
 }
