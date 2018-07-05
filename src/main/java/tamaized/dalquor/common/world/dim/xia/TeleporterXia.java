@@ -64,8 +64,8 @@ public class TeleporterXia extends Teleporter {
 		if (e.dimension == ConfigHandler.dimensionIdXia) {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
-			SchematicLoader loader = new SchematicLoader();
-			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
+//			SchematicLoader loader = new SchematicLoader();
+//			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
 		}
 
 		return true;

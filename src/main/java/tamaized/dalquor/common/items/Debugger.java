@@ -11,6 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import tamaized.dalquor.common.structures.xia.MapGenXiaCastle;
 import tamaized.dalquor.common.world.SchematicLoader;
 import tamaized.tammodized.common.items.TamItem;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class Debugger extends TamItem {
 
 	SchematicLoader sut = new SchematicLoader();
+	MapGenXiaCastle castle = new MapGenXiaCastle();
 
 	public Debugger(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);
@@ -40,9 +42,23 @@ public class Debugger extends TamItem {
 			entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
 			world.spawnEntity(entity);
 			new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand));*/
-//			if (world.provider instanceof WorldProviderXia)
-//				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
-			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", sut, world, player.getPosition());
+			//			if (world.provider instanceof WorldProviderXia)
+			//				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
+			//			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", sut, world, player.getPosition());
+			/*ChunkPos cpos = new ChunkPos(player.getPosition());
+			ChunkPrimer primer = new ChunkPrimer();
+			castle.generate(world, cpos.x, cpos.z, primer);
+			for (int j = 0; j < 16; ++j) {
+				for (int k = 0; k < 16; ++k) {
+					for (int l = 0; l < 256; ++l) {
+						IBlockState iblockstate = primer.getBlockState(j, l, k);
+						if (iblockstate.getMaterial() != Material.AIR) {
+							world.setBlockState(new BlockPos(j, k, l), iblockstate);
+						}
+					}
+				}
+			}*/
+
 		}
 		return super.onItemRightClick(world, player, hand);
 

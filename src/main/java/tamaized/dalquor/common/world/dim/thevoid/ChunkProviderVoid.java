@@ -341,7 +341,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 
 	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
-		genFortress.generate(world, x, z, (ChunkPrimer) null);
-		genCity.generate(world, x, z, (ChunkPrimer) null);
+		genFortress.generate(world, x, z, null);
+		genCity.generate(world, x, z, null);
 	}
 }

@@ -35,11 +35,6 @@ public class MapGenVoidCity extends MapGenStructure {
 	}
 
 	@Override
-	public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
-		super.generate(worldIn, x, z, primer);
-	}
-
-	@Override
 	public String getStructureName() {
 		return DalQuor.modid + "EndCity";
 	}

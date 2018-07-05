@@ -105,6 +105,8 @@ import tamaized.dalquor.common.structures.voidcity.MapGenVoidCity;
 import tamaized.dalquor.common.structures.voidcity.StructureVoidCityPieces;
 import tamaized.dalquor.common.structures.voidfortress.MapGenVoidFortress;
 import tamaized.dalquor.common.structures.voidfortress.StructureVoidFortressPieces;
+import tamaized.dalquor.common.structures.xia.MapGenXiaCastle;
+import tamaized.dalquor.common.structures.xia.StructureXiaCastlePieces;
 import tamaized.dalquor.common.vademecum.progression.RitualList;
 import tamaized.dalquor.common.world.WorldGeneratorVoid;
 import tamaized.dalquor.common.world.dim.dalquor.WorldProviderDalQuor;
@@ -262,8 +264,10 @@ public class DalQuor extends TamModBase {
 
 		MapGenStructureIO.registerStructure(MapGenVoidFortress.Start.class, "VoidFortress");
 		MapGenStructureIO.registerStructure(MapGenVoidCity.Start.class, "VoidCity");
+		MapGenStructureIO.registerStructure(MapGenXiaCastle.Start.class, "XiaCastle");
 		StructureVoidFortressPieces.registerNetherFortressPieces();
 		StructureVoidCityPieces.registerPieces();
+		StructureXiaCastlePieces.registerPieces();
 
 		registerEntity(EntityVoidChain.class, "EntityVoidChain", this, modid, 128, 1, true);
 		registerEntity(EntityAcidBall.class, "EntityAcidBall", this, modid, 128, 1, true);
