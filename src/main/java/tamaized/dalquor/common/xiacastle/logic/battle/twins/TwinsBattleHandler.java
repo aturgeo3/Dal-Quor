@@ -238,6 +238,8 @@ public class TwinsBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
+		if (pos == null || !worldObj.isAreaLoaded(pos.add(-50, -50, -50), pos.add(50, 50, 50)))
+			return;
 		readyForInput = false;
 		isDone = false;
 		if (dol != null) {
@@ -248,8 +250,6 @@ public class TwinsBattleHandler implements IBattleHandler {
 			zol.setDead();
 			zol = null;
 		}
-		if (pos == null)
-			return;
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossZol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			e.setDead();
 		for (Entity e : worldObj.getEntitiesWithinAABB(EntityBossDol.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))

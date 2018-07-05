@@ -11,7 +11,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import tamaized.dalquor.common.structures.xia.MapGenXiaCastle;
 import tamaized.dalquor.common.world.SchematicLoader;
 import tamaized.tammodized.common.items.TamItem;
 
@@ -21,7 +20,6 @@ import java.util.List;
 public class Debugger extends TamItem {
 
 	SchematicLoader sut = new SchematicLoader();
-	MapGenXiaCastle castle = new MapGenXiaCastle();
 
 	public Debugger(CreativeTabs tab, String n, int maxStackSize) {
 		super(tab, n, maxStackSize);

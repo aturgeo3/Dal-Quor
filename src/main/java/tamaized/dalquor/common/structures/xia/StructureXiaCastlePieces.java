@@ -13,6 +13,7 @@ import net.minecraft.world.gen.structure.StructureComponentTemplate;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import tamaized.dalquor.DalQuor;
 
 import java.util.List;
@@ -28,8 +29,18 @@ public class StructureXiaCastlePieces {
 	}
 
 	public static void start(TemplateManager templateManager, BlockPos blockPos, Rotation rotation, List<StructureComponent> structureComponents, Random random) {
-		StructureXiaCastlePieces.XiaCastleTemplate template = addHelper(structureComponents, new StructureXiaCastlePieces.XiaCastleTemplate(templateManager, "entrance", blockPos, rotation, true));
-		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(-1, 0, -1), "entrancebridge", rotation, false));
+		rotation = rotation.add(Rotation.CLOCKWISE_180);
+		StructureXiaCastlePieces.XiaCastleTemplate template = addHelper(structureComponents, new StructureXiaCastlePieces.XiaCastleTemplate(templateManager, "entrance", blockPos.add(-8, 0, -8), rotation, true));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(0, 3, 28), "entrancebridge", rotation, false));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(-6, -2, 15), "main", rotation, false));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(1, 4, 24), "mainbridge", rotation, false));
+		addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(32, 5, -9), "twins", rotation, false)); // Dont recreate the template, we want to reuse the main bridge
+		StructureXiaCastlePieces.XiaCastleTemplate templateZurvan = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(-18, 0, -4), "zurvanhall", rotation, false));
+		addHelper(structureComponents, addPiece(templateManager, templateZurvan, new BlockPos(-25, 4, -5), "zurvan", rotation, false));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(-10, 10, 15), "xiabr", rotation, false));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(19, 0, 0), "xiabl", rotation, false));
+		template = addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(0, 0, 27), "xiatl", rotation, false));
+		addHelper(structureComponents, addPiece(templateManager, template, new BlockPos(-19, 0, 0), "xiatr", rotation, false));
 	}
 
 	private static StructureXiaCastlePieces.XiaCastleTemplate addHelper(List<StructureComponent> list, StructureXiaCastlePieces.XiaCastleTemplate template) {
@@ -80,7 +91,7 @@ public class StructureXiaCastlePieces {
 		}
 
 		private void loadTemplate(TemplateManager templateManager) {
-			Template template = templateManager.getTemplate(null, new ResourceLocation(DalQuor.modid, "xia/" + this.pieceName));
+			Template template = templateManager.getTemplate(FMLCommonHandler.instance().getMinecraftServerInstance(), new ResourceLocation(DalQuor.modid, "xia/" + this.pieceName));
 			PlacementSettings placementsettings = (this.overwrite ? StructureXiaCastlePieces.OVERWRITE : StructureXiaCastlePieces.INSERT).copy().setRotation(this.rotation);
 			this.setup(template, this.templatePosition, placementsettings);
 		}

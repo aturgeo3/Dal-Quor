@@ -40,7 +40,6 @@ public class EntityHerobrineWitherSkull extends EntityWitherSkull {
 					} else if (world.getDifficulty() == EnumDifficulty.HARD) {
 						i = 40;
 					}
-					System.out.println(world.getDifficulty());
 
 					if (i > 0) {
 						((EntityLivingBase) result.entityHit).addPotionEffect(new PotionEffect(MobEffects.WITHER, 20 * i, 2));

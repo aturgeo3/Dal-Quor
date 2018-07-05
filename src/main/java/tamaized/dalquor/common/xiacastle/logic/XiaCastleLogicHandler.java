@@ -152,7 +152,8 @@ public class XiaCastleLogicHandler {
 			world.setBlockToAir(pos1);
 			world.setBlockState(pos1, ModBlocks.aiBlock.getDefaultState());
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
-			ai1.setFake();
+			if (ai1 != null)
+				ai1.setFake();
 		} else {
 			ai1 = (TileEntityAIBlock) world.getTileEntity(pos1);
 		}
@@ -160,7 +161,8 @@ public class XiaCastleLogicHandler {
 			world.setBlockToAir(pos2);
 			world.setBlockState(pos2, ModBlocks.aiBlock.getDefaultState());
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
-			ai2.setFake();
+			if (ai2 != null)
+				ai2.setFake();
 		} else {
 			ai2 = (TileEntityAIBlock) world.getTileEntity(pos2);
 		}
@@ -243,6 +245,8 @@ public class XiaCastleLogicHandler {
 	}
 
 	private void closeDoor() {
+		if (!world.isBlockLoaded(new BlockPos(54, 76, 82)))
+			return;
 		BlockPos doorPos = new BlockPos(54, 76, 82);
 		for (int x = 0; x > -5; x--) {
 			for (int y = 0; y < 4; y++) {

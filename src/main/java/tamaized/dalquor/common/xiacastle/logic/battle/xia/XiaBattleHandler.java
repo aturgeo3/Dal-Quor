@@ -62,6 +62,8 @@ public class XiaBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
+		if (worldObj == null || !worldObj.isBlockLoaded(new BlockPos(54, 76, 82)))
+			return;
 		players.clear();
 		isDone = false;
 		if (xia != null) {

@@ -18,18 +18,19 @@ import java.util.Random;
 public class ChunkProviderXia implements IChunkGenerator {
 
 	private World world;
-	private MapGenXiaCastle xiaCastle = new MapGenXiaCastle();
-	private Random rand = new Random();
+	private MapGenXiaCastle xiaCastle = new MapGenXiaCastle(this);
+	private Random rand;
 
 	public ChunkProviderXia(World worldIn, boolean p_i45637_2_, long seed) {
 		this.world = worldIn;
+		rand = new Random(seed);
 	}
 
 	@Override
 	public Chunk generateChunk(int x, int z) {
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 
-		xiaCastle.generate(world, x, z, chunkprimer);
+		xiaCastle.setPrimer(chunkprimer).generate(world, x, z, chunkprimer);
 
 		Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
 		Biome[] abiome = this.world.getBiomeProvider().getBiomesForGeneration(null, x * 16, z * 16, 16, 16);

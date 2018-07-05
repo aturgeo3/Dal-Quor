@@ -9,15 +9,15 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import tamaized.dalquor.common.handlers.ConfigHandler;
 import tamaized.dalquor.common.world.SchematicLoader;
+import tamaized.dalquor.registry.ModBlocks;
 
 import java.util.Random;
 
 public class TeleporterXia extends Teleporter {
 
-	private SchematicLoader sut = new SchematicLoader();
-
 	private final WorldServer worldServerInstance;
 	private final Random random;
+	private SchematicLoader sut = new SchematicLoader();
 
 	public TeleporterXia(WorldServer par1WorldServer) {
 		super(par1WorldServer);
@@ -64,8 +64,11 @@ public class TeleporterXia extends Teleporter {
 		if (e.dimension == ConfigHandler.dimensionIdXia) {
 			// doStructure(sut, worldServerInstance, new BlockPos(-11, 59, -4));
 			// worldServerInstance.setBlockState(new BlockPos(0, 0, 58), voidCraft.blocks.xiaBlock.getDefaultState());
-//			SchematicLoader loader = new SchematicLoader();
-//			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
+			//			SchematicLoader loader = new SchematicLoader();
+			//			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", loader, worldServerInstance, new BlockPos(0, 60, 0));
+			for (int x = 51; x <= 53; x++)
+				for (int z = 3; z <= 5; z++)
+					worldServerInstance.setBlockState(new BlockPos(x, 60, z), ModBlocks.noBreak.getDefaultState());
 		}
 
 		return true;

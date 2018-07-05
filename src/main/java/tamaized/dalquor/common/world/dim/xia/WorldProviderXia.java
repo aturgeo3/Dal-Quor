@@ -61,7 +61,6 @@ public class WorldProviderXia extends WorldProvider {
 			if (!hasLoaded) {
 				data = WorldDataXia.get(world);
 				data.setProvider(this);
-				xiaCastleHandler.start();
 				if (data.getNBT() != null)
 					xiaCastleHandler.readNBT(data.getNBT());
 				hasLoaded = true;

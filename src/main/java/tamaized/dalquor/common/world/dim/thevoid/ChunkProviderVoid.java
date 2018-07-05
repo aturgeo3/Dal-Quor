@@ -254,7 +254,7 @@ public class ChunkProviderVoid implements IChunkGenerator {
 		genFortress.generate(world, x, z, chunkprimer);
 		Chunk chunk = new Chunk(world, chunkprimer, x, z);
 		double d0 = 0.03125D;
-		Biome[] abiome = world.getBiomeProvider().getBiomesForGeneration((Biome[]) null, x * 16, z * 16, 16, 16);
+		Biome[] abiome = world.getBiomeProvider().getBiomesForGeneration(null, x * 16, z * 16, 16, 16);
 		byte[] abyte = chunk.getBiomeArray();
 		for (int i = 0; i < abyte.length; ++i) {
 			abyte[i] = (byte) Biome.getIdForBiome(abiome[i]);

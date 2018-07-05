@@ -13,8 +13,16 @@ import java.util.Random;
 
 public class MapGenXiaCastle extends MapGenStructure {
 
-	public MapGenXiaCastle() {
+	private final IChunkGenerator chunkGenerator;
+	private ChunkPrimer primer;
 
+	public MapGenXiaCastle(IChunkGenerator generator) {
+		chunkGenerator = generator;
+	}
+
+	public MapGenXiaCastle setPrimer(ChunkPrimer p) {
+		primer = p;
+		return this;
 	}
 
 	@Override
@@ -30,12 +38,12 @@ public class MapGenXiaCastle extends MapGenStructure {
 
 	@Override
 	protected boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) {
-		return chunkX == 0 && chunkZ == 0;
+		return chunkX == 3 && chunkZ == 0;
 	}
 
 	@Override
 	protected StructureStart getStructureStart(int chunkX, int chunkZ) {
-		return new MapGenXiaCastle.Start();
+		return new MapGenXiaCastle.Start(world, chunkGenerator, rand, chunkX, chunkZ, primer);
 	}
 
 	public static class Start extends StructureStart {
@@ -62,7 +70,6 @@ public class MapGenXiaCastle extends MapGenStructure {
 				this.updateBoundingBox();
 				sizeable = true;
 			}
-
 		}
 
 		@Override

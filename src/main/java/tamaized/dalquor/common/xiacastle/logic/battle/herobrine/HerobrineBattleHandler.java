@@ -54,14 +54,14 @@ public class HerobrineBattleHandler implements IBattleHandler {
 
 	@Override
 	public void stop() {
+		if (pos == null || !worldObj.isAreaLoaded(pos.add(-50, -50, -50), pos.add(50, 50, 50)))
+			return;
 		readyForInput = false;
 		isDone = false;
 		if (herobrine != null) {
 			herobrine.setDead();
 			herobrine = null;
 		}
-		if (pos == null)
-			return;
 		for (EntityBossHerobrine boss : worldObj.getEntitiesWithinAABB(EntityBossHerobrine.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
 			boss.setDead();
 		for (int z = -2; z <= 2; z++) {
