@@ -9,15 +9,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tamaized.dalquor.DalQuor;
 
-public class PotionVoidicInfusion extends Potion {
+public class ModPotion extends Potion {
 
 	private final ResourceLocation iconTexture;
 
-	public PotionVoidicInfusion(String name) {
-		super(false, 0x7700FF);
+	public ModPotion(String name, int color, boolean bad) {
+		super(bad, color);
 		iconTexture = new ResourceLocation(DalQuor.modid, "textures/potions/" + name + ".png");
-		setRegistryName(DalQuor.modid, name);
-		setPotionName("effect." + getRegistryName().toString());
 	}
 
 	@Override

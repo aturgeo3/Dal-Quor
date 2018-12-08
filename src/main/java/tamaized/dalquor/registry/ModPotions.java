@@ -6,60 +6,102 @@ import net.minecraft.potion.PotionType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import tamaized.dalquor.DalQuor;
+import tamaized.dalquor.common.potion.ModPotion;
 import tamaized.dalquor.common.potion.PotionSheathe;
-import tamaized.dalquor.common.potion.PotionVoidImmunity;
-import tamaized.dalquor.common.potion.PotionVoidicInfusion;
-import tamaized.dalquor.common.potion.PotionVoidicInfusionImmunity;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@GameRegistry.ObjectHolder(DalQuor.modid)
 @Mod.EventBusSubscriber
 public class ModPotions {
 
-	public static Potion voidicInfusion;
-	public static Potion voidicInfusionImmunity;
-	public static Potion voidImmunity;
+	@GameRegistry.ObjectHolder("voidicinfusion")
+	public static final Potion voidicInfusion;
+	@GameRegistry.ObjectHolder("voidicinfusionimmunity")
+	public static final Potion voidicInfusionImmunity;
+	@GameRegistry.ObjectHolder("voidimmunity")
+	public static final Potion voidImmunity;
 
-	public static Potion fireSheathe;
-	public static Potion frostSheathe;
-	public static Potion litSheathe;
-	public static Potion acidSheathe;
-	public static Potion voidSheathe;
+	@GameRegistry.ObjectHolder("potionsheathefire")
+	public static final Potion fireSheathe;
+	@GameRegistry.ObjectHolder("potionsheathefrost")
+	public static final Potion frostSheathe;
+	@GameRegistry.ObjectHolder("potionsheathelit")
+	public static final Potion litSheathe;
+	@GameRegistry.ObjectHolder("potionsheatheacid")
+	public static final Potion acidSheathe;
+	@GameRegistry.ObjectHolder("potionsheathevoid")
+	public static final Potion voidSheathe;
 
-	public static PotionType type_voidImmunity;
-
-	private static List<Potion> potionList;
-	private static List<PotionType> typeList;
+	@GameRegistry.ObjectHolder("typevoidimmunity")
+	public static final PotionType type_voidImmunity;
 
 	static {
-		potionList = new ArrayList<>();
-		typeList = new ArrayList<>();
+		voidicInfusion = null;
+		voidicInfusionImmunity = null;
+		voidImmunity = setup("voidimmunity", 0x000000, false, true);
 
-		potionList.add(voidicInfusion = new PotionVoidicInfusion("voidicinfusion"));
-		potionList.add(voidicInfusionImmunity = new PotionVoidicInfusionImmunity("voidicinfusionimmunity"));
-		potionList.add(voidImmunity = new PotionVoidImmunity("voidimmunity"));
+		fireSheathe = null;
+		frostSheathe = null;
+		litSheathe = null;
+		acidSheathe = null;
+		voidSheathe = null;
 
-		potionList.add(fireSheathe = new PotionSheathe("potionsheathefire", PotionSheathe.Type.Fire));
-		potionList.add(frostSheathe = new PotionSheathe("potionsheathefrost", PotionSheathe.Type.Frost));
-		potionList.add(litSheathe = new PotionSheathe("potionsheathelit", PotionSheathe.Type.Lit));
-		potionList.add(acidSheathe = new PotionSheathe("potionsheatheacid", PotionSheathe.Type.Acid));
-		potionList.add(voidSheathe = new PotionSheathe("potionsheathevoid", PotionSheathe.Type.Void));
+		type_voidImmunity = null;
+	}
 
-		typeList.add(type_voidImmunity = new PotionType(new PotionEffect[]{new PotionEffect(voidImmunity, ((60 * 3) + 30) * 20)}).setRegistryName("voidimmunity"));
+	private static Potion setup(String name, int color, boolean bad, boolean beneficial) {
+		return setup(new ModPotion(name, color, bad), name, beneficial);
+	}
+
+	private static Potion setup(String name, PotionSheathe.Type type, int color, boolean bad, boolean beneficial) {
+		return setup(new PotionSheathe(name, type, color, bad), name, beneficial);
+	}
+
+	private static Potion setup(Potion potion, String name, boolean beneficial) {
+		potion.setRegistryName(DalQuor.modid, name);
+		potion.setPotionName("effect." + potion.getRegistryName().getNamespace() + "." + potion.getRegistryName().getPath());
+		if (beneficial)
+			potion.setBeneficial();
+		return potion;
+	}
+
+	private static PotionType setup(Potion potion, String name, int length) {
+		return new PotionType(DalQuor.modid + "." + name, new PotionEffect(potion, length)).setRegistryName(name);
 	}
 
 
 	@SubscribeEvent
 	public static void registerPotions(RegistryEvent.Register<Potion> event) {
-		for (Potion p : potionList)
-			event.getRegistry().register(p);
+		event.getRegistry().registerAll(
+
+				setup("voidicinfusion", 0x7700FF, true, false),
+
+				setup("voidicinfusionimmunity", 0x7700FF, false, true),
+
+				voidImmunity,
+
+				setup("potionsheathefire", PotionSheathe.Type.Fire, 0xFF7700, false, true),
+
+				setup("potionsheathefrost", PotionSheathe.Type.Frost, 0x00FFFF, false, true),
+
+				setup("potionsheathelit", PotionSheathe.Type.Lit, 0xAAAACC, false, true),
+
+				setup("potionsheatheacid", PotionSheathe.Type.Acid, 0x00FF00, false, true),
+
+				setup("potionsheathevoid", PotionSheathe.Type.Void, 0x7700FF, false, true)
+
+
+		);
 	}
 
 	@SubscribeEvent
 	public static void registerPotionTypes(RegistryEvent.Register<PotionType> event) {
-		for (PotionType t : typeList)
-			event.getRegistry().register(t);
+		event.getRegistry().registerAll(
+
+				setup(voidImmunity, "typevoidimmunity", ((60 * 3) + 30) * 20)
+
+		);
 	}
 
 }

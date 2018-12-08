@@ -19,12 +19,10 @@ public class PotionSheathe extends Potion {
 	private final ResourceLocation iconTexture;
 	private final Type type;
 
-	public PotionSheathe(String name, Type type) {
-		super(false, 0x000000);
+	public PotionSheathe(String name, Type type, int color, boolean bad) {
+		super(bad, color);
 		iconTexture = new ResourceLocation(DalQuor.modid, "textures/potions/" + name + ".png");
 		this.type = type;
-		setRegistryName(DalQuor.modid, name);
-		setPotionName("effect." + getRegistryName().toString());
 	}
 
 	@Override
