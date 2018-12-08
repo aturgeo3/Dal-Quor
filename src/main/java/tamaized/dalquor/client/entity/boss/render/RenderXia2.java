@@ -119,7 +119,7 @@ public class RenderXia2<T extends EntityBossXia2> extends RenderLiving<T> {
 		for (int index = 0; index < amount; index++) {
 			float speed = 0.08F;
 			Vec3d vec = new Vec3d(0, radius, 0).rotatePitch(rand.nextInt(360)).rotateYaw(rand.nextInt(360));
-			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, entity.getPositionVector().addVector(0, entity.getEyeHeight(), 0).add(vec), Vec3d.ZERO, rand.nextInt(6) + 2, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleFluff(world, entity.getPositionVector().add(0, entity.getEyeHeight(), 0).add(vec), Vec3d.ZERO, rand.nextInt(6) + 2, 0, rand.nextFloat() * 0.90F + 0.10F, 0x7700FFFF));
 		}
 	}
 

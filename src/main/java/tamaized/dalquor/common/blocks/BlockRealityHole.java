@@ -33,7 +33,7 @@ public class BlockRealityHole extends TamBlock {
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		/*
-		 * if(!worldIn.isRemote){ if(entityIn instanceof EntityPlayerMP){ EntityPlayerMP player = ((EntityPlayerMP) entityIn); player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new RealityTeleporter(player.mcServer.worldServerForDimension(0), player.getPosition())); } else entityIn.setDead(); }
+		 * if(!worldIn.isRemote){ if(entityIn instanceof EntityPlayerMP){ EntityPlayerMP player = ((EntityPlayerMP) entityIn); player.server.getPlayerList().transferPlayerToDimension(player, 0, new RealityTeleporter(player.server.worldServerForDimension(0), player.getPosition())); } else entityIn.setDead(); }
 		 */
 	}
 
@@ -41,7 +41,7 @@ public class BlockRealityHole extends TamBlock {
 	 * Called When an Entity Collided with the Block
 	 */
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!worldIn.isRemote) {
 			if (entityIn instanceof EntityPlayerMP) {
 				EntityPlayerMP player = ((EntityPlayerMP) entityIn);
@@ -52,8 +52,8 @@ public class BlockRealityHole extends TamBlock {
 						Random rand = worldIn.rand;
 						int i = rand.nextInt(ConfigHandler.realityWhitelist.length);
 						int dim = ConfigHandler.realityWhitelist[i];
-						if (player.mcServer.getWorld(dim) != null) {
-							player.mcServer.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.mcServer.getWorld(dim), player.getPosition()));
+						if (player.server.getWorld(dim) != null) {
+							player.server.getPlayerList().transferPlayerToDimension(player, dim, new RealityTeleporter(player.server.getWorld(dim), player.getPosition()));
 						}
 						// else new RealityTeleporter(player.getServerWorld(), player.getPosition()).placeInPortal(player, player.rotationYaw);
 					}

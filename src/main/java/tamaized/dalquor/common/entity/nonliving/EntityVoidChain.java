@@ -85,7 +85,7 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 		double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 3.0F) - posY;
 		double d2 = target.posZ - this.posZ;
 		double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-		setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().getDifficultyId() * 4));
+		shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, (float) (14 - this.world.getDifficulty().getId() * 4));
 	}
 
 	@Override
@@ -347,7 +347,7 @@ public class EntityVoidChain extends EntityArrow implements IProjectile, IEntity
 			// this.setIsCritical(false);
 
 			if (iblockstate.getMaterial() != Material.AIR) {
-				this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
+				this.inTile.onEntityCollision(this.world, blockpos, iblockstate, this);
 			}
 		}
 	}

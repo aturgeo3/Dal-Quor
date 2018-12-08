@@ -7,7 +7,7 @@ public class ModCreativeTabs {
 
 	public static CreativeTabs tabVoid = new CreativeTabs("tabVoid") {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(ModBlocks.portalVoid);
 		}
 	};

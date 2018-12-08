@@ -37,7 +37,7 @@ public class EntityHookShot {/* extends EntityFishHook implements IProjectile, I
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
         this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
-        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, p_i1756_3_ * 1.5F, 1.0F);
+        this.shoot(this.motionX, this.motionY, this.motionZ, p_i1756_3_ * 1.5F, 1.0F);
         //lineCoord = new double[][]{{player.posX, player.posY + (double)player.getEyeHeight(), player.posZ}, {player.posX, player.posY + (double)player.getEyeHeight(), player.posZ}};
     }
     
@@ -211,7 +211,7 @@ public class EntityHookShot {/* extends EntityFishHook implements IProjectile, I
 				this.posZ -= this.motionZ / (double) f2 * 0.05000000074505806D;
 				this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F)); // TODO
 				this.inGround = true;
-				if (this.inBlock.getMaterial() != Material.air) this.inBlock.onEntityCollidedWithBlock(this.worldObj, new BlockPos(this.blockX, this.blockY, this.blockZ), this);
+				if (this.inBlock.getMaterial() != Material.air) this.inBlock.onEntityCollision(this.worldObj, new BlockPos(this.blockX, this.blockY, this.blockZ), this);
 			}
 		
 
@@ -341,7 +341,7 @@ public class EntityHookShot {/* extends EntityFishHook implements IProjectile, I
 		return false;
 	}
 
-	public void setThrowableHeading(double p_70186_1_, double p_70186_3_, double p_70186_5_, float p_70186_7_, float p_70186_8_)
+	public void shoot(double p_70186_1_, double p_70186_3_, double p_70186_5_, float p_70186_7_, float p_70186_8_)
     {
         float f2 = MathHelper.sqrt_double(p_70186_1_ * p_70186_1_ + p_70186_3_ * p_70186_3_ + p_70186_5_ * p_70186_5_);
         p_70186_1_ /= (double)f2;

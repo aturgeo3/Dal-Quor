@@ -27,6 +27,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 
 	private int phase = 0;
 	private boolean readyForInput = false;
+	private boolean subFlag = false;
 
 	private boolean running = false;
 	private boolean isDone = false;
@@ -36,6 +37,17 @@ public class TwinsBattleHandler implements IBattleHandler {
 
 	private EntityBossDol dol;
 	private EntityBossZol zol;
+
+	private void makePlatform(IBlockState state) {
+		BlockPos center = pos.down(40);
+		int r = 14;
+		for (int z = -r + 1; z < r; z++) {
+			int dx = (int) Math.sqrt(r * r - z * z);
+			for (int x = -dx; x <= dx; x++)
+				if (x < r && x > -r)
+					worldObj.setBlockState(center.add(x, 0, z), state);
+		}
+	}
 
 	@Override
 	public void update() {
@@ -48,39 +60,16 @@ public class TwinsBattleHandler implements IBattleHandler {
 				switch (phase) {
 					case 0:
 						if (readyForInput) {
-							IBlockState lever = worldObj.getBlockState(pos.add(3, 0, 1));
-							boolean flag = lever.getBlock() instanceof BlockLever && lever.getValue(BlockLever.POWERED);
-							if (flag) {
-								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
-								if (sign instanceof TileEntitySign) {
-									boolean flag1 = false;
-									for (ITextComponent t : ((TileEntitySign)sign).signText) {
-										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.1.a").getUnformattedComponentText()))
-											flag1 = true;
-									}
-									if (flag1) {
-										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
-										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntity te = worldObj.getTileEntity(pos.add(3, 0, 0));
-										if (te instanceof TileEntityChest)
-											((TileEntityChest)te).clear();
-										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
-										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
-										readyForInput = false;
-										phase++;
-									} else {
-										for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-											p.setHealth(0.0f);
-										stop();
-									}
-								} else {
-									for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
-										p.setHealth(0.0f);
-									stop();
-								}
+							if (subFlag) {
+								subFlag = false;
+								makePlatform(Blocks.GRASS.getDefaultState());
+								for (EntityPlayer p : worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-50, -50, -50), pos.add(50, 50, 50))))
+									p.setPositionAndUpdate(p.posX, 65, pos.getZ());
 							}
 						} else {
 							readyForInput = TwinsMessages01.run(worldObj, pos, dol, zol);
+							if (readyForInput)
+								subFlag = true;
 						}
 						break;
 					case 1:
@@ -90,7 +79,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : ((TileEntitySign)sign).signText) {
+									for (ITextComponent t : ((TileEntitySign) sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.2.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
@@ -99,7 +88,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
 										TileEntity te = worldObj.getTileEntity(pos.add(3, 0, 0));
 										if (te instanceof TileEntityChest)
-											((TileEntityChest)te).clear();
+											((TileEntityChest) te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -126,16 +115,16 @@ public class TwinsBattleHandler implements IBattleHandler {
 								TileEntity sign = worldObj.getTileEntity(pos.add(2, 0, 0));
 								if (sign instanceof TileEntitySign) {
 									boolean flag1 = false;
-									for (ITextComponent t : ((TileEntitySign)sign).signText) {
+									for (ITextComponent t : ((TileEntitySign) sign).signText) {
 										if (t.getUnformattedComponentText().toLowerCase().contains(new TextComponentTranslation("dalquor.twins.riddle.3.a").getUnformattedComponentText()))
 											flag1 = true;
 									}
 									if (flag1) {
 										worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(2, 0, 0), Blocks.AIR.getDefaultState());
-										TileEntity te =  worldObj.getTileEntity(pos.add(3, 0, 0));
+										TileEntity te = worldObj.getTileEntity(pos.add(3, 0, 0));
 										if (te != null)
-											((TileEntityChest)te).clear();
+											((TileEntityChest) te).clear();
 										worldObj.setBlockState(pos.add(3, 0, 0), Blocks.AIR.getDefaultState());
 										worldObj.setBlockState(pos.add(3, 0, 1), Blocks.AIR.getDefaultState());
 										readyForInput = false;
@@ -260,6 +249,7 @@ public class TwinsBattleHandler implements IBattleHandler {
 				worldObj.setBlockState(new BlockPos(x, y, z), Blocks.AIR.getDefaultState());
 			}
 		}
+		makePlatform(Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 1, -1), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 1, 0), Blocks.AIR.getDefaultState());
 		worldObj.setBlockState(pos.add(3, 1, 1), Blocks.AIR.getDefaultState());

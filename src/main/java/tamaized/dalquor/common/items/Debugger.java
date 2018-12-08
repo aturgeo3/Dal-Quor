@@ -2,6 +2,7 @@ package tamaized.dalquor.common.items;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -11,6 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import tamaized.dalquor.common.entity.boss.twins.EntityTwinsTransform;
 import tamaized.dalquor.common.world.SchematicLoader;
 import tamaized.tammodized.common.items.TamItem;
 
@@ -28,6 +30,9 @@ public class Debugger extends TamItem {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
+			Entity e = new EntityTwinsTransform(worldIn);
+			e.setPositionAndUpdate(pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F);
+			worldIn.spawnEntity(e);
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;
@@ -36,10 +41,9 @@ public class Debugger extends TamItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
-			/*EntityDolXia entity = new EntityDolXia(world);
-			entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-			world.spawnEntity(entity);
-			new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(hand));*/
+			//			EntityDolXia entity = new EntityDolXia(world);
+			//			entity.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+			//			world.spawnEntity(entity);
 			//			if (world.provider instanceof WorldProviderXia)
 			//				((WorldProviderXia) world.provider).getXiaCastleHandler().debug();
 			//			SchematicLoader.buildSchematic("xiacastle_new_2.schematic", sut, world, player.getPosition());
@@ -56,7 +60,8 @@ public class Debugger extends TamItem {
 					}
 				}
 			}*/
-
+			/*if (world.provider instanceof WorldProviderXia)
+				((WorldProviderXia) world.provider).getXiaCastleHandler().getHandlerTwins().stop();*/
 		}
 		return super.onItemRightClick(world, player, hand);
 

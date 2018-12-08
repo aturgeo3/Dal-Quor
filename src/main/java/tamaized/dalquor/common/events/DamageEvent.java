@@ -1,5 +1,6 @@
 package tamaized.dalquor.common.events;
 
+import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,25 +14,30 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tamaized.tammodized.common.helper.FloatyTextHelper;
 import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.common.capabilities.CapabilityList;
 import tamaized.dalquor.common.capabilities.starforge.IStarForgeCapability;
 import tamaized.dalquor.common.damagesources.DamageSourceVoidicInfusion;
+import tamaized.dalquor.common.handlers.ConfigHandler;
 import tamaized.dalquor.common.helper.SheatheHelper;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect;
 import tamaized.dalquor.common.starforge.effects.IStarForgeEffect.Tier;
 import tamaized.dalquor.common.starforge.effects.wep.tier3.StarForgeEffectCripplingVoid;
+import tamaized.tammodized.common.helper.FloatyTextHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DamageEvent {
 
-	public static List<Item> shieldRegistry = new ArrayList<Item>(); // Move this into TamModized
+	public static List<Item> shieldRegistry = Lists.newArrayList(); // Move this into TamModized
 
 	@SubscribeEvent
 	public void entityDamaged(LivingAttackEvent e) {
+
+		if (e.getSource().damageType.equals(DamageSource.FALL.damageType) && e.getEntity().getEntityWorld().provider.getDimension() == ConfigHandler.dimensionIdXia) {
+			e.setCanceled(true);
+			return;
+		}
 
 		// Vanilla Void
 		if (e.getSource().damageType.equals("outOfWorld") && e.getEntity() != null && e.getEntity() instanceof EntityLivingBase && ((EntityLivingBase) e.getEntity()).getActivePotionEffect(DalQuor.potions.voidImmunity) != null) {

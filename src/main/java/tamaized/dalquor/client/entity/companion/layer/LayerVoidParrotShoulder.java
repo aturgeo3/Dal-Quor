@@ -37,13 +37,14 @@ public class LayerVoidParrotShoulder implements LayerRenderer<EntityPlayer> {
 		this.renderManager = p_i47370_1_;
 	}
 
+	@Override
 	public void doRenderLayer(EntityPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		if (entitylivingbaseIn.getLeftShoulderEntity() != null || entitylivingbaseIn.getRightShoulderEntity() != null) {
 			GlStateManager.enableRescaleNormal();
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			NBTTagCompound nbttagcompound = entitylivingbaseIn.getLeftShoulderEntity();//ParrotDataManagerHandler.getLeftShoulder(entitylivingbaseIn);
 
-			if (!nbttagcompound.hasNoTags()) {
+			if (!nbttagcompound.isEmpty()) {
 				LayerVoidParrotShoulder.DataHolder LayerVoidParrotShoulder$dataholder = this.func_192864_a(entitylivingbaseIn, this.leftUniqueId, nbttagcompound, this.leftRenderer, this.leftModel, this.leftResource, this.leftEntityClass, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, true);
 				this.leftUniqueId = LayerVoidParrotShoulder$dataholder.entityId;
 				this.leftRenderer = LayerVoidParrotShoulder$dataholder.renderer;
@@ -54,7 +55,7 @@ public class LayerVoidParrotShoulder implements LayerRenderer<EntityPlayer> {
 
 			NBTTagCompound nbttagcompound1 = entitylivingbaseIn.getRightShoulderEntity();//ParrotDataManagerHandler.getRightShoulder(entitylivingbaseIn);
 
-			if (!nbttagcompound1.hasNoTags()) {
+			if (!nbttagcompound1.isEmpty()) {
 				LayerVoidParrotShoulder.DataHolder LayerVoidParrotShoulder$dataholder1 = this.func_192864_a(entitylivingbaseIn, this.rightUniqueId, nbttagcompound1, this.rightRenderer, this.rightModel, this.rightResource, this.rightEntityClass, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, false);
 				this.rightUniqueId = LayerVoidParrotShoulder$dataholder1.entityId;
 				this.rightRenderer = LayerVoidParrotShoulder$dataholder1.renderer;
@@ -104,6 +105,7 @@ public class LayerVoidParrotShoulder implements LayerRenderer<EntityPlayer> {
 		return new LayerVoidParrotShoulder.DataHolder(p_192864_2_, p_192864_4_, p_192864_5_, p_192864_6_, p_192864_7_);
 	}
 
+	@Override
 	public boolean shouldCombineTextures() {
 		return false;
 	}

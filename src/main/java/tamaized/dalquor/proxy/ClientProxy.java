@@ -19,6 +19,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import tamaized.dalquor.client.entity.boss.extra.RenderTwinsTransform;
+import tamaized.dalquor.common.entity.boss.twins.EntityTwinsTransform;
 import tamaized.tammodized.client.entity.render.RenderDragonOld;
 import tamaized.dalquor.DalQuor;
 import tamaized.dalquor.client.blocks.render.RenderNoBreak;
@@ -180,6 +182,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityVoidParrot.class, RenderVoidParrot::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityChainedSkull.class, RenderChainedSkull::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlockSpell.class, RenderBlockSpell::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTwinsTransform.class, RenderTwinsTransform::new);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -55,7 +55,7 @@ public class CustomElytraHandler {
 							float f = entity.rotationPitch * 0.017453292F;
 							double d6 = Math.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z);
 							double d8 = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
-							double d1 = vec3d.lengthVector();
+							double d1 = vec3d.length();
 							float f4 = MathHelper.cos(f);
 							f4 = (float) ((double) f4 * (double) f4 * Math.min(1.0D, d1 / 0.4D));
 							entity.motionY += -0.08D + (double) f4 * 0.06D;
@@ -79,7 +79,7 @@ public class CustomElytraHandler {
 							entity.motionY *= 0.9800000190734863D;
 							entity.motionZ *= 0.9900000095367432D;
 							entity.move(MoverType.SELF, entity.motionX, entity.motionY, entity.motionZ);
-							if (entity.isCollidedHorizontally && !entity.world.isRemote) {
+							if (entity.collidedHorizontally && !entity.world.isRemote) {
 								double d10 = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
 								double d3 = d8 - d10;
 								float f5 = (float) (d3 * 10.0D - 3.0D);

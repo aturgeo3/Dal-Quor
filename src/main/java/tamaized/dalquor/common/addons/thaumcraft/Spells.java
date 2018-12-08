@@ -12,7 +12,7 @@ public class Spells {/*
 	}
 	
 	public void preInit(){
-		acid = new SpellAcid().setUnlocalizedName("voidfociAcid").setCreativeTab(voidCraft.tabs.tabVoid);
+		acid = new SpellAcid().setTranslationKey("voidfociAcid").setCreativeTab(voidCraft.tabs.tabVoid);
 	}
 	
 	public void init(){

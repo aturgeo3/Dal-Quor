@@ -292,7 +292,7 @@ public class VadeMecumWordsOfPower {
 							e.attackEntityFrom(new DamageSourceLit(), 10);
 						}
 						for (int index = 0; index < 1000; index++) {
-							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0xFFFFFFFF)));
+							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0xFFFFFFFF)));
 						}
 						useCharge = true;
 					}
@@ -326,7 +326,7 @@ public class VadeMecumWordsOfPower {
 							if (result.entityHit != null) {
 								BlockPos pos = result.entityHit.getPosition();
 								if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-									world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+									world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 									TileEntity te = world.getTileEntity(pos);
 									if (te instanceof TileEntitySpellIceSpike)
 										((TileEntitySpellIceSpike) te).setCaster(caster);
@@ -335,12 +335,12 @@ public class VadeMecumWordsOfPower {
 								BlockPos bp = result.getBlockPos();
 								if (bp != null) {
 									if (world.getBlockState(bp).getBlock().isReplaceable(world, bp)) {
-										world.setBlockState(bp, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+										world.setBlockState(bp, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 										TileEntity te = world.getTileEntity(bp);
 										if (te instanceof TileEntitySpellIceSpike)
 											((TileEntitySpellIceSpike) te).setCaster(caster);
 									} else if ((world.isAirBlock(bp.up()) || world.getBlockState(bp.up()).getBlock().isReplaceable(world, bp.up())) && (!world.isAirBlock(bp) && world.getBlockState(bp).isFullCube())) {
-										world.setBlockState(bp.up(), VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+										world.setBlockState(bp.up(), VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 										TileEntity te = world.getTileEntity(bp.up());
 										if (te instanceof TileEntitySpellIceSpike)
 											((TileEntitySpellIceSpike) te).setCaster(caster);
@@ -364,7 +364,7 @@ public class VadeMecumWordsOfPower {
 							((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 						}
 						for (int index = 0; index < 1000; index++) {
-							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FFFFFF)));
+							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FFFFFF)));
 						}
 						useCharge = true;
 					}
@@ -372,7 +372,7 @@ public class VadeMecumWordsOfPower {
 					case RingOfFrost: { // TODO
 						/*for (BlockPos pos : createCircle(caster.getPosition()))
 							if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-								world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+								world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 								TileEntity te = world.getTileEntity(pos);
 								if (te instanceof TileEntitySpellIceSpike)
 									((TileEntitySpellIceSpike) te).setCaster(caster);
@@ -388,7 +388,7 @@ public class VadeMecumWordsOfPower {
 							e.attackEntityFrom(new DamageSourceAcid(), 5);
 						}
 						for (int index = 0; index < 300; index++) {
-							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
+							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
 						}
 						useCharge = true;
 					}
@@ -417,7 +417,7 @@ public class VadeMecumWordsOfPower {
 							e.attackEntityFrom(new DamageSourceAcid(), 10);
 						}
 						for (int index = 0; index < 1000; index++) {
-							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
+							ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
 						}
 						useCharge = true;
 					}
@@ -551,7 +551,7 @@ public class VadeMecumWordsOfPower {
 						e.attackEntityFrom(new DamageSourceLit(), 10);
 					}
 					for (int index = 0; index < 1000; index++) {
-						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0xFFFFFFFF)));
+						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0xFFFFFFFF)));
 					}
 				}
 				break;
@@ -575,7 +575,7 @@ public class VadeMecumWordsOfPower {
 				case IceSpike: { // TODO
 					/*BlockPos pos = target.getPosition();
 					if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-						world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+						world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 						TileEntity te = world.getTileEntity(pos);
 						if (te instanceof TileEntitySpellIceSpike)
 							((TileEntitySpellIceSpike) te).setCaster(caster);
@@ -595,14 +595,14 @@ public class VadeMecumWordsOfPower {
 						((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * 7, 5));
 					}
 					for (int index = 0; index < 1000; index++) {
-						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FFFFFF)));
+						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FFFFFF)));
 					}
 				}
 				break;
 				case RingOfFrost: { // TODO
 					/*for (BlockPos pos : createCircle(caster.getPosition()))
 						if ((world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos)) && (!world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).isFullCube())) {
-							world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.getHorizontal(world.rand.nextInt(4))));
+							world.setBlockState(pos, VoidCraft.blocks.iceSpike.getDefaultState().withProperty(BlockSpellIceSpike.FACING, EnumFacing.byHorizontalIndex(world.rand.nextInt(4))));
 							TileEntity te = world.getTileEntity(pos);
 							if (te instanceof TileEntitySpellIceSpike)
 								((TileEntitySpellIceSpike) te).setCaster(caster);
@@ -617,7 +617,7 @@ public class VadeMecumWordsOfPower {
 						e.attackEntityFrom(new DamageSourceAcid(), 5);
 					}
 					for (int index = 0; index < 300; index++) {
-						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
+						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0, 1.5f, 0), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(vec.x * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.y * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05, vec.z * 0.15 + (world.rand.nextFloat() * 0.10) - 0.05), world.rand.nextInt(20 * 3), 0, world.rand.nextFloat() * 0.45f + 0.05f, 0x00FF00FF)));
 					}
 				}
 				break;
@@ -643,7 +643,7 @@ public class VadeMecumWordsOfPower {
 						e.attackEntityFrom(new DamageSourceAcid(), 10);
 					}
 					for (int index = 0; index < 1000; index++) {
-						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().addVector(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
+						ParticleHelper.sendPacketToClients(world, TamModizedParticles.fluff, caster.getPositionVector().add(0.5, 0, 0.5), 64, new ParticleHelper.ParticlePacketHelper(TamModizedParticles.fluff, ((ParticleFluffPacketHandler) ParticlePacketHandlerRegistry.getHandler(TamModizedParticles.fluff)).new ParticleFluffData(new Vec3d(world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D, world.rand.nextDouble() * 0.8D - 0.4D), world.rand.nextInt(20 * 3), -0.10f, world.rand.nextFloat() * 0.95f + 0.05f, 0x00FF00FF)));
 					}
 				}
 				break;

@@ -619,12 +619,11 @@ dalquor.twins.speech.riddle.1.9=§3Let us take a form that is familiar to them, 
 dalquor.twins.speech.riddle.1.10=§2I agree.
 dalquor.twins.speech.riddle.1.11=§2[Dol]: Hello, %s§2.
 dalquor.twins.speech.riddle.1.12=§2[Dol]: As you can tell, you are trapped in here.
-dalquor.twins.speech.riddle.1.13=§3[Zol]: We'd like to have a little battle with you.
-dalquor.twins.speech.riddle.1.14=§2[Dol]: Not just any battle.
-dalquor.twins.speech.riddle.1.15=§3[Zol]: A battle of wits.
-dalquor.twins.speech.riddle.1.16=§2[Dol]: If you pass our little challenge, we'll let you free. If Herobrine is also defeated, Xia's door will be open for you to proceed.
-dalquor.twins.speech.riddle.1.17=§3[Zol]: Now then, shall we begin?
-dalquor.twins.speech.riddle.1.18=§3[Zol]: Place this sign, with your answer, in front of the chest and then flip the lever.
+dalquor.twins.speech.riddle.1.13=§3[Zol]: You shouldn't be here
+dalquor.twins.speech.riddle.1.14=§2[Dol]: Do you know why?
+dalquor.twins.speech.riddle.1.15=§3[Zol]: Of course not.
+dalquor.twins.speech.riddle.1.16=§2[Dol]: Are you ready?
+dalquor.twins.speech.riddle.1.17=§3[Zol]: Here we come.
 ## -- 2
 dalquor.twins.speech.riddle.2.1=§3[Zol]: %s§3 is correct, Dol.
 dalquor.twins.speech.riddle.2.2=§2[Dol]: Yes indeed.

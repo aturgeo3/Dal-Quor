@@ -30,7 +30,7 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 	public BlockDreamBed(CreativeTabs tab, String n) {
 		super();
 		name = n;
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setLightLevel(1.0F);
 		setRegistryName(name);
 		this.setCreativeTab(tab);
@@ -52,7 +52,7 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 
 	@Override
 	public void registerModel(ModelRegistryEvent e) {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(new ResourceLocation(getRegistryName().getResourceDomain(), getModelDir() + "/" + getRegistryName().getResourcePath()), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(new ResourceLocation(getRegistryName().getNamespace(), getModelDir() + "/" + getRegistryName().getPath()), "inventory"));
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class BlockDreamBed extends BlockBed implements ITamRegistry {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 

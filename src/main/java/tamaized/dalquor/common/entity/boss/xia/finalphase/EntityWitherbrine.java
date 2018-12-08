@@ -179,7 +179,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 			}
 			for (int x = -1; x <= 1; x++)
 				for (int z = -1; z <= 1; z++)
-					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromChunkCoords((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
+					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunk((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
 		}
 		this.motionY *= 0.6000000238418579D;
 
@@ -308,7 +308,7 @@ public class EntityWitherbrine extends EntityMob implements IRangedAttackMob, IA
 					if (k1 > 0) {
 						Entity entity = this.world.getEntityByID(k1);
 
-						if (entity != null && entity.isEntityAlive() && this.getDistanceSqToEntity(entity) <= 900.0D && this.canEntityBeSeen(entity)) {
+						if (entity != null && entity.isEntityAlive() && this.getDistanceSq(entity) <= 900.0D && this.canEntityBeSeen(entity)) {
 							if (entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.disableDamage) {
 								this.updateWatchedTargetId(i, 0);
 							} else {

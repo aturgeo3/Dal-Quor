@@ -121,7 +121,7 @@ public class EntityDolXia extends EntityTwinsXia {
 					break;
 				case ATTACKING:
 					if (getAttackTarget() != null)
-						block.setMoveTo(getAttackTarget().getPositionVector().addVector(getAttackTarget().motionX  + 2.0F * Math.sin(f), getAttackTarget().motionY + (Math.cos((double) ticks / 4D) + 0.75F), getAttackTarget().motionZ + 2.0F * Math.cos(f)));
+						block.setMoveTo(getAttackTarget().getPositionVector().add(getAttackTarget().motionX  + 2.0F * Math.sin(f), getAttackTarget().motionY + (Math.cos((double) ticks / 4D) + 0.75F), getAttackTarget().motionZ + 2.0F * Math.cos(f)));
 					else
 						block.setMode(EntityBlockSpell.Mode.IDLE);
 					break;

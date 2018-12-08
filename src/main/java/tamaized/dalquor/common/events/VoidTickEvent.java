@@ -40,26 +40,26 @@ public class VoidTickEvent {
 		if (player instanceof EntityPlayerMP) {
 			EntityPlayerMP p = (EntityPlayerMP) player;
 			int dim = (p.dimension == ConfigHandler.dimensionIdDalQuor ? 0 : ConfigHandler.dimensionIdDalQuor);
-			transferPlayerToDimension(p.mcServer, p, dim, new TeleportLoc(new TeleporterDream(p.mcServer.getWorld(dim))));
+			transferPlayerToDimension(p.server, p, dim, new TeleportLoc(new TeleporterDream(p.server.getWorld(dim))));
 		}
 	}
 
-	private static void transferPlayerToDimension(MinecraftServer mcServer, EntityPlayerMP player, int dimId, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
+	private static void transferPlayerToDimension(MinecraftServer server, EntityPlayerMP player, int dimId, TeleportLoc teleporter) { // Custom Made to handle teleporting to and from The End (DIM 1)
 		int j = player.dimension;
-		WorldServer worldserver = mcServer.getWorld(player.dimension);
+		WorldServer worldserver = server.getWorld(player.dimension);
 		player.dimension = dimId;
-		WorldServer worldserver1 = mcServer.getWorld(player.dimension);
+		WorldServer worldserver1 = server.getWorld(player.dimension);
 		player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType())); // Forge: Use new dimensions information
-		mcServer.getPlayerList().updatePermissionLevel(player);
+		server.getPlayerList().updatePermissionLevel(player);
 		worldserver.removeEntityDangerously(player);
 		player.isDead = false;
 		transferEntityToWorld(player, j, worldserver, worldserver1, teleporter);
-		mcServer.getPlayerList().preparePlayer(player, worldserver);
+		server.getPlayerList().preparePlayer(player, worldserver);
 		player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 		player.interactionManager.setWorld(worldserver1);
 		player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
-		mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
-		mcServer.getPlayerList().syncPlayerInventory(player);
+		server.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
+		server.getPlayerList().syncPlayerInventory(player);
 		List<PotionEffect> snapshot = Lists.newArrayList(player.getActivePotionEffects());
 		for (PotionEffect potioneffect : snapshot) {
 			player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
@@ -139,7 +139,7 @@ public class VoidTickEvent {
 		} else if (e.player.world.provider.getDimension() != ConfigHandler.dimensionIdXia && e.player.world.provider.getDimension() != ConfigHandler.dimensionIdDalQuor) {
 			if (e.player instanceof EntityPlayerMP && e.player.getPosition().getY() <= -256 && ConfigHandler.voidTeleport) {
 				EntityPlayerMP player = (EntityPlayerMP) e.player;
-				transferPlayerToDimension(player.mcServer, player, ConfigHandler.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256 * 2, 0)));
+				transferPlayerToDimension(player.server, player, ConfigHandler.dimensionIdVoid, new TeleportLoc(player.getPosition().add(0, 256 * 2, 0)));
 			}
 		}
 
@@ -169,7 +169,7 @@ public class VoidTickEvent {
 	}
 
 	private void forcePlayerTeleportFromXia(EntityPlayerMP player) {
-		transferPlayerToDimension(player.mcServer, player, 0, new TeleportLoc(new TeleporterXia(player.mcServer.getWorld(0))));
+		transferPlayerToDimension(player.server, player, 0, new TeleportLoc(new TeleporterXia(player.server.getWorld(0))));
 	}
 
 	private static class TeleportLoc {

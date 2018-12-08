@@ -37,7 +37,7 @@ public class BlockVoidFire extends TamBlockFire {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!worldIn.isRemote && entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityVoidMob || entityIn instanceof EntityWitherSkeleton)) {
 			EntityLivingBase e = ((EntityLivingBase) entityIn);
 			if (!e.isPotionActive(MobEffects.NAUSEA) || !e.isPotionActive(MobEffects.WITHER) || !e.isPotionActive(MobEffects.BLINDNESS)) {

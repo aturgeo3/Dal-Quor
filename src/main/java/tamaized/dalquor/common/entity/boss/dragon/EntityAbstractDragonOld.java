@@ -22,7 +22,7 @@ public abstract class EntityAbstractDragonOld extends EntityDragonOld implements
 			for (ChunkPos pos : chunkLoadTicket.getChunkList()) {
 				ForgeChunkManager.unforceChunk(chunkLoadTicket, pos);
 			}
-			ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromBlockCoords(getPosition()).getPos());
+			ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunk(getPosition()).getPos());
 		}
 	}
 
@@ -35,7 +35,7 @@ public abstract class EntityAbstractDragonOld extends EntityDragonOld implements
 			}
 			for (int x = -1; x <= 1; x++)
 				for (int z = -1; z <= 1; z++)
-					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunkFromChunkCoords((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
+					ForgeChunkManager.forceChunk(chunkLoadTicket, world.getChunk((getPosition().getX() >> 4) + x, (getPosition().getZ() >> 4) + z).getPos());
 		}
 	}
 

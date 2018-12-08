@@ -58,6 +58,7 @@ import tamaized.dalquor.common.entity.boss.herobrine.extra.EntityHerobrineWither
 import tamaized.dalquor.common.entity.boss.lob.EntityLordOfBlades;
 import tamaized.dalquor.common.entity.boss.twins.EntityBossDol;
 import tamaized.dalquor.common.entity.boss.twins.EntityBossZol;
+import tamaized.dalquor.common.entity.boss.twins.EntityTwinsTransform;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia;
 import tamaized.dalquor.common.entity.boss.xia.EntityBossXia2;
 import tamaized.dalquor.common.entity.boss.xia.finalphase.EntityDragonXia;
@@ -307,6 +308,7 @@ public class DalQuor extends TamModBase {
 		registerEntityWithEgg(EntityVoidParrot.class, "VoidParrot", this, modid, 250, 1, true, 0x7700FF, 0x000000);
 		registerEntity(EntityChainedSkull.class, "ChainedSkull", this, modid, 250, 1, true);
 		registerEntity(EntityBlockSpell.class, "BlockSpell", this, modid, 250, 1, true);
+		registerEntity(EntityTwinsTransform.class, "ZolDolTransform", this, modid, 64, 1, true);
 
 		Biome.getBiome(6).getSpawnableList(EnumCreatureType.MONSTER).add(new SpawnListEntry(EntityMobLich.class, 10, 0, 1));
 

@@ -12,7 +12,7 @@ public class Items {/*
 	}
 	
 	public void preInit(){
-		corruptedSword = new ItemCorruptedSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setUnlocalizedName("corruptedSword").setTextureName("VoidCraft:Thaumcraft/corruptedSword");
+		corruptedSword = new ItemCorruptedSword(voidCraft.materials.voidTools).setCreativeTab(voidCraft.tabs.tabVoid).setTranslationKey("corruptedSword").setTextureName("VoidCraft:Thaumcraft/corruptedSword");
 	}
 	
 	public void init(){
