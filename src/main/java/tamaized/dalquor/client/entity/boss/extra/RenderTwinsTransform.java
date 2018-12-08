@@ -126,7 +126,7 @@ public class RenderTwinsTransform<T extends EntityTwinsTransform> extends Render
 
 		GlStateManager.popMatrix();
 
-		if (entity.ticksExisted % 2 == 0 && entity.world.rand.nextInt(3) == 0) {
+		if (!Minecraft.getMinecraft().isGamePaused() && entity.ticksExisted % 2 == 0 && entity.world.rand.nextInt(3) == 0) {
 			int bolts = entity.world.rand.nextInt(3) + 1;
 			Vec3d pos = new Vec3d(x, y + 1.0F, z);
 			for (int i = 0; i <= bolts; i++) {
@@ -177,7 +177,7 @@ public class RenderTwinsTransform<T extends EntityTwinsTransform> extends Render
 	}
 
 	private void renderWind(T entity, double x, double y, double z, float partialTicks) {
-		if(entity.ticksExisted % 5 == 0) {
+		if(!Minecraft.getMinecraft().isGamePaused() && entity.ticksExisted % 5 == 0) {
 			ParticleManager effectRenderer = Minecraft.getMinecraft().effectRenderer;
 			Vec3d radial = new Vec3d(1, 0, 0).rotateYaw((float) Math.toRadians(entity.world.rand.nextInt(360)));
 			Vec3d pos = entity.getPositionVector().add(radial);
